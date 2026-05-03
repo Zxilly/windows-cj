@@ -47,6 +47,11 @@ def check_bindgen_py(workspace: Path) -> None:
     check_path_exists(root / "src" / "windows_cj_bindgen" / "__init__.py", "bindgen-py __init__.py")
     check_path_exists(root / "src" / "windows_cj_bindgen" / "cli.py", "bindgen-py cli.py")
     check_path_exists(root / "tests" / "test_smoke.py", "bindgen-py smoke tests")
+    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "__init__.py", "bindgen-py winmd_json package")
+    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "runner.py", "bindgen-py winmd_json/runner.py")
+    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "loader.py", "bindgen-py winmd_json/loader.py")
+    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "schema.py", "bindgen-py winmd_json/schema.py")
+    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "cache.py", "bindgen-py winmd_json/cache.py")
 
 
 def check_cfggen_py(workspace: Path) -> None:
