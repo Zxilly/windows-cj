@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "windows-cj-bindgen"
+version = "1.0.0"
+description = "VPGC bindgen for windows-cj — generates Cangjie projection from WinMD"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    { name = "windows-cj contributors" },
+]
+dependencies = [
+    "dd>=0.6",
+    "tomli-w>=1.0",
+    "click>=8.1",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+    "hypothesis>=6.0",
+    "pytest-xdist>=3.0",
+]
+dev = [
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+windows-cj-bindgen = "windows_cj_bindgen.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/windows_cj_bindgen"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
