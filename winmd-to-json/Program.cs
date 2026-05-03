@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -514,6 +515,112 @@ class JsTypeDefinition
         from h in _td.GetProperties()
         select new JsPropertyDefinition(_reader, _reader.GetPropertyDefinition(h), _gc);
     }
+
+    public IEnumerable<string> SupportedArchitectures
+    {
+        get
+        {
+            foreach (var h in _td.GetCustomAttributes())
+            {
+                var ca = _reader.GetCustomAttribute(h);
+                var ctorMember = ca.Constructor;
+                string? attrTypeName = null;
+                if (ctorMember.Kind == HandleKind.MemberReference)
+                {
+                    var mr = _reader.GetMemberReference((MemberReferenceHandle)ctorMember);
+                    if (mr.Parent.Kind == HandleKind.TypeReference)
+                    {
+                        var tr = _reader.GetTypeReference((TypeReferenceHandle)mr.Parent);
+                        attrTypeName = $"{_reader.GetString(tr.Namespace)}.{_reader.GetString(tr.Name)}";
+                    }
+                }
+                else if (ctorMember.Kind == HandleKind.MethodDefinition)
+                {
+                    var md = _reader.GetMethodDefinition((MethodDefinitionHandle)ctorMember);
+                    var declTd = _reader.GetTypeDefinition(md.GetDeclaringType());
+                    attrTypeName = $"{_reader.GetString(declTd.Namespace)}.{_reader.GetString(declTd.Name)}";
+                }
+                if (attrTypeName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute"
+                    || attrTypeName == "Windows.Win32.Interop.SupportedArchitectureAttribute")
+                {
+                    var value = ca.DecodeValue(new TypeProvider());
+                    if (value.FixedArguments.Length > 0 && value.FixedArguments[0].Value is int archInt)
+                    {
+                        var arch = (Architecture)archInt;
+                        if (arch == Architecture.None)
+                            yield break;
+                        if ((arch & Architecture.X86) != 0) yield return "X86";
+                        if ((arch & Architecture.X64) != 0) yield return "X64";
+                        if ((arch & Architecture.Arm64) != 0) yield return "Arm64";
+                        yield break;
+                    }
+                }
+            }
+            // No SupportedArchitectureAttribute → applies to all archs
+            yield return "X86";
+            yield return "X64";
+            yield return "Arm64";
+        }
+    }
+
+    public string? SupportedOsPlatform
+    {
+        get
+        {
+            foreach (var h in _td.GetCustomAttributes())
+            {
+                var ca = _reader.GetCustomAttribute(h);
+                var ctorMember = ca.Constructor;
+                string? attrTypeName = null;
+                if (ctorMember.Kind == HandleKind.MemberReference)
+                {
+                    var mr = _reader.GetMemberReference((MemberReferenceHandle)ctorMember);
+                    if (mr.Parent.Kind == HandleKind.TypeReference)
+                    {
+                        var tr = _reader.GetTypeReference((TypeReferenceHandle)mr.Parent);
+                        attrTypeName = $"{_reader.GetString(tr.Namespace)}.{_reader.GetString(tr.Name)}";
+                    }
+                }
+                if (attrTypeName == "System.Runtime.Versioning.SupportedOSPlatformAttribute")
+                {
+                    var value = ca.DecodeValue(new TypeProvider());
+                    if (value.FixedArguments.Length > 0 && value.FixedArguments[0].Value is string s)
+                        return s;
+                }
+            }
+            return null;
+        }
+    }
+
+    public bool IsExperimental
+    {
+        get
+        {
+            foreach (var h in _td.GetCustomAttributes())
+            {
+                var ca = _reader.GetCustomAttribute(h);
+                var ctorMember = ca.Constructor;
+                string? attrTypeName = null;
+                if (ctorMember.Kind == HandleKind.MemberReference)
+                {
+                    var mr = _reader.GetMemberReference((MemberReferenceHandle)ctorMember);
+                    if (mr.Parent.Kind == HandleKind.TypeReference)
+                    {
+                        var tr = _reader.GetTypeReference((TypeReferenceHandle)mr.Parent);
+                        attrTypeName = $"{_reader.GetString(tr.Namespace)}.{_reader.GetString(tr.Name)}";
+                    }
+                }
+                if (attrTypeName == "Windows.Foundation.Metadata.ExperimentalAttribute"
+                    || attrTypeName == "Windows.Win32.Foundation.Metadata.ExperimentalAttribute")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    public string SourceSet { get; set; } = "winmd_main";
 }
 
 class JsGenericParameter
@@ -1259,24 +1366,38 @@ class JsPropertyAccessors
 
 class MetadataWriter
 {
+    public const string ToolVersion = "1.0.0";
+    public const string SchemaVersion = "1";
+
     private readonly Stream _stream;
     private readonly Utf8JsonWriter _writer;
+    private readonly string _sourceSet;
 
-    public MetadataWriter(Stream stream)
+    public MetadataWriter(Stream stream, string winmdFile, string winmdSha256, string sourceSet)
     {
         _stream = stream;
+        _sourceSet = sourceSet;
         _writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true });
+        _writer.WriteStartObject();
+        _writer.WriteString("winmd_file", winmdFile);
+        _writer.WriteString("winmd_sha256", winmdSha256);
+        _writer.WriteString("tool_version", ToolVersion);
+        _writer.WriteString("schema_version", SchemaVersion);
+        _writer.WriteString("source_set", sourceSet);
+        _writer.WritePropertyName("types");
         _writer.WriteStartArray();
     }
 
     public void Write(JsTypeDefinition td)
     {
+        td.SourceSet = _sourceSet;
         JsonSerializer.Serialize(_writer, td);
     }
 
     public void Close()
     {
         _writer.WriteEndArray();
+        _writer.WriteEndObject();
         _writer.Dispose();
         _stream.Dispose();
     }
@@ -1287,6 +1408,13 @@ class MetadataPrinter
     public static void usage()
     {
         Console.WriteLine("winmd-printer [-h] [-o output.json] [-d outdir] input.winmd ...");
+    }
+
+    private static string ComputeSha256Hex(string path)
+    {
+        using var stream = File.OpenRead(path);
+        using var sha = SHA256.Create();
+        return Convert.ToHexString(sha.ComputeHash(stream)).ToLowerInvariant();
     }
 
     public static void Main(string[] args)
@@ -1325,14 +1453,27 @@ class MetadataPrinter
             Directory.CreateDirectory(outdir);
         }
 
+        // M1: hardcoded "winmd_main" — M2+ may derive from filename / NuGet metadata.
+        const string sourceSet = "winmd_main";
+
+        // Wrapper requires winmd_file/sha256 metadata up-front. For shared output
+        // (-o or stdout), use the FIRST input's metadata (multi-input merged mode
+        // is unusual — production callers always pass one winmd at a time).
+        var primaryFile = Path.GetFileName(inputs[0]);
+        var primarySha = ComputeSha256Hex(inputs[0]);
+
         MetadataWriter? outputWriter = null;
         if (output is not null)
         {
-            outputWriter = new MetadataWriter(new FileStream(output, FileMode.Create, FileAccess.Write));
+            outputWriter = new MetadataWriter(
+                new FileStream(output, FileMode.Create, FileAccess.Write),
+                primaryFile, primarySha, sourceSet);
         }
         else if (outdir is null)
         {
-            outputWriter = new MetadataWriter(Console.OpenStandardOutput());
+            outputWriter = new MetadataWriter(
+                Console.OpenStandardOutput(),
+                primaryFile, primarySha, sourceSet);
         }
 
 
@@ -1340,6 +1481,11 @@ class MetadataPrinter
 
         foreach (var input in inputs)
         {
+            // Per-input sha256 — used for any per-namespace writer first opened
+            // while processing this input.
+            var inputFile = Path.GetFileName(input);
+            var inputSha = (input == inputs[0]) ? primarySha : ComputeSha256Hex(input);
+
             using var fs = new FileStream(input, FileMode.Open, FileAccess.Read, FileShare.Read);
             using var pe = new PEReader(fs);
             var reader = pe.GetMetadataReader(MetadataReaderOptions.None);
@@ -1361,7 +1507,9 @@ class MetadataPrinter
                 if (!namespaces.ContainsKey(td.Namespace))
                 {
                     var path = Path.Combine(outdir, $"{td.Namespace}.json");
-                    namespaces.Add(td.Namespace, new MetadataWriter(new FileStream(path, FileMode.Create, FileAccess.Write)));
+                    namespaces.Add(td.Namespace, new MetadataWriter(
+                        new FileStream(path, FileMode.Create, FileAccess.Write),
+                        inputFile, inputSha, sourceSet));
                 }
 
                 namespaces[td.Namespace].Write(td);
