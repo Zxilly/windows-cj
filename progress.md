@@ -36,7 +36,7 @@
 
 | ref/windows-rs | windows-cj | 备注 |
 | --- | --- | --- |
-| bindgen | windows-bindgen | union / delegate / import-entry-point warning 待收 |
+| bindgen | windows-bindgen-legacy (archived) / windows-cj-bindgen-py (rewriting, see VPGC 章节) | VPGC 重写 active 自 M0 起 |
 | collections | windows-collections | |
 | core | windows-core | runtime / factory / weak / agile / marshaler 已转绿 |
 | future | windows-future | |
