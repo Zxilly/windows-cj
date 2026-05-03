@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from windows_cj_bindgen.winmd_json import parse_winmd
 from windows_cj_bindgen.winmd_json.exceptions import (
     WinmdParseError,
     WinmdToolNotFoundError,
@@ -16,6 +17,7 @@ from windows_cj_bindgen.winmd_json.runner import (
     locate_tool,
     run_winmd_to_json,
 )
+from windows_cj_bindgen.winmd_json.schema import WinmdFile
 
 
 def test_locate_tool_returns_path_when_found(tmp_path: Path) -> None:
@@ -115,3 +117,57 @@ def test_run_winmd_to_json_raises_on_oserror(tmp_path: Path) -> None:
         pytest.raises(WinmdToolNotFoundError, match="permission denied"),
     ):
         run_winmd_to_json(fake_winmd, workspace_root=tmp_path)
+
+
+# parse_winmd integration tests (still unit-mocked at the subprocess level)
+
+
+def test_parse_winmd_no_cache(tmp_path: Path) -> None:
+    """parse_winmd without cache_dir runs subprocess and returns WinmdFile."""
+    fake_exe = tmp_path / "winmd-to-json" / "bin" / "winmd-to-json.exe"
+    fake_exe.parent.mkdir(parents=True)
+    fake_exe.write_bytes(b"fake")
+    fake_winmd = tmp_path / "test.winmd"
+    fake_winmd.write_bytes(b"abc")
+
+    fake_output = {
+        "winmd_file": "test.winmd",
+        "winmd_sha256": "0" * 64,
+        "tool_version": "1.0.0",
+        "schema_version": "1",
+        "source_set": "winmd_main",
+        "types": [],
+    }
+    mock_result = MagicMock(returncode=0, stdout=json.dumps(fake_output).encode("utf-8"), stderr=b"")
+    with patch("subprocess.run", return_value=mock_result):
+        wf = parse_winmd(fake_winmd, workspace_root=tmp_path)
+    assert isinstance(wf, WinmdFile)
+    assert wf.winmd_file == "test.winmd"
+    assert wf.types == []
+
+
+def test_parse_winmd_cache_hit_skips_subprocess(tmp_path: Path) -> None:
+    """parse_winmd with cache_dir: 2nd call hits cache and skips subprocess."""
+    fake_exe = tmp_path / "winmd-to-json" / "bin" / "winmd-to-json.exe"
+    fake_exe.parent.mkdir(parents=True)
+    fake_exe.write_bytes(b"fake")
+    fake_winmd = tmp_path / "test.winmd"
+    fake_winmd.write_bytes(b"abc")
+    cache_dir = tmp_path / "cache"
+
+    fake_output = {
+        "winmd_file": "test.winmd",
+        "winmd_sha256": "0" * 64,
+        "tool_version": "1.0.0",
+        "schema_version": "1",
+        "source_set": "winmd_main",
+        "types": [],
+    }
+    mock_result = MagicMock(returncode=0, stdout=json.dumps(fake_output).encode("utf-8"), stderr=b"")
+    with patch("subprocess.run", return_value=mock_result) as mock_run:
+        # First call: miss → subprocess
+        wf1 = parse_winmd(fake_winmd, workspace_root=tmp_path, cache_dir=cache_dir)
+        # Second call: hit → no subprocess
+        wf2 = parse_winmd(fake_winmd, workspace_root=tmp_path, cache_dir=cache_dir)
+    assert mock_run.call_count == 1  # subprocess only called once
+    assert wf1.winmd_file == wf2.winmd_file
