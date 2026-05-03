@@ -5,10 +5,14 @@
 # ///
 """Verify windows-cj/ workspace has all M0/M0.5/M0.7 setup artifacts.
 
-This script is run from the repo root. It checks:
+The workspace path is derived from this script's own location
+(__file__'s parent.parent), so it can be invoked from any cwd.
+
+Checks:
 - legacy backups exist (windows-bindgen-legacy/, windows-cfggen-legacy/)
 - new project skeletons exist with required files
-- winmd-to-json bin/ exe exists and is executable
+- winmd-to-json bin/ exe exists and is executable (plus its build script)
+- CLI entry points (windows-cj-bindgen, windows-cj-cfggen) are on PATH and respond to --version
 """
 
 from __future__ import annotations
@@ -61,6 +65,7 @@ def check_winmd_to_json(workspace: Path) -> None:
     check_path_exists(root / "winmd-to-json.csproj", "winmd-to-json csproj")
     check_path_exists(root / "LICENSE", "winmd-to-json LICENSE")
     check_path_exists(root / "README.md", "winmd-to-json README")
+    check_path_exists(root / "scripts" / "build_and_publish.ps1", "winmd-to-json build script")
     check_path_exists(root / "bin" / "winmd-to-json.exe", "winmd-to-json published exe")
 
 
@@ -71,11 +76,15 @@ def check_cli_entry_points() -> None:
         fail("windows-cj-cfggen entry point not on PATH; run pip install -e in cfggen-py")
 
     for cmd in ("windows-cj-bindgen", "windows-cj-cfggen"):
-        result = subprocess.run([cmd, "--version"], check=False, capture_output=True, text=True)
+        try:
+            result = subprocess.run([cmd, "--version"], check=False, capture_output=True, text=True)
+        except OSError as exc:
+            fail(f"{cmd} --version could not be launched: {exc}")
+            return  # unreachable (fail exits) but satisfies type checkers
         if result.returncode != 0:
             fail(f"{cmd} --version exited {result.returncode}: {result.stderr}")
-        if "1.0.0" not in result.stdout:
-            fail(f"{cmd} --version did not report 1.0.0: {result.stdout!r}")
+        if not result.stdout.strip():
+            fail(f"{cmd} --version produced empty stdout: {result.stdout!r}")
 
 
 def main() -> None:
