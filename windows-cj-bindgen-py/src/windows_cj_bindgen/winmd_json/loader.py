@@ -196,7 +196,8 @@ def _load_method_import(d: dict[str, Any] | None) -> MethodImport | None:
 def _load_generic_parameter(d: dict[str, Any]) -> GenericParameter:
     return GenericParameter(
         name=d["Name"],
-        sequence_number=d["SequenceNumber"],
+        # winmd-to-json emits "Index" for generic parameters (not "SequenceNumber")
+        sequence_number=d.get("Index", d.get("SequenceNumber", 0)),
         attributes=list(d.get("Attributes", [])),
         custom_attributes=[_load_custom_attribute(a) for a in d.get("CustomAttributes", [])],
         constraints=list(d.get("Constraints", [])),

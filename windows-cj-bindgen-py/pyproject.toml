@@ -37,3 +37,6 @@ packages = ["src/windows_cj_bindgen"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = [
+    "integration: real winmd-to-json.exe + real winmd files (slow, ~30s each)",
+]
