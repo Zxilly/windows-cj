@@ -4,9 +4,13 @@
 package windows.Win32.NetworkManagement.WNet
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_WNet == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_WNet == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_WNet == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_WNet == "on"]
 import windows_core as windows_core
 
 

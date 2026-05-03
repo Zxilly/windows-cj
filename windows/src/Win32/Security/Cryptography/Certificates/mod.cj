@@ -4,15 +4,27 @@
 package windows.Win32.Security.Cryptography.Certificates
 
 import std.collection.*
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 import windows_core as windows_core
 
 
@@ -7025,7 +7037,7 @@ public type FNCERTSRVRESTOREREGISTERW = CFunc<(CPointer<Unit>, CPointer<UInt16>,
 public type FNCERTSRVSERVERCONTROLW = CFunc<(CPointer<UInt16>, UInt32, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32>
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type FNIMPORTPFXTOPROVIDERFREEDATA = CFunc<(UInt32, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Unit>
+public type FNIMPORTPFXTOPROVIDERFREEDATA = CFunc<(UInt32, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Unit>
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 public struct FULL_RESPONSE_PROPERTY_ID {
@@ -7144,12 +7156,12 @@ extend FULL_RESPONSE_PROPERTY_ID <: windows_core.CopyType & windows_core.Runtime
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBinaryConverterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StringToString: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VariantByteArrayToString: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
+    public var VariantByteArrayToString: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var StringToVariantByteArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var StringToVariantByteArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7186,7 +7198,7 @@ public class IBinaryConverter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBinaryConverter> {
-        return InterfaceDescriptor<IBinaryConverter>("IBinaryConverter", IBinaryConverter.iid(), Win32__impl_l2.IDispatch.iid(), takeIBinaryConverterFromAbi, viewIBinaryConverter)
+        return InterfaceDescriptor<IBinaryConverter>("IBinaryConverter", IBinaryConverter.iid(), Win32_impl_p2.IDispatch.iid(), takeIBinaryConverterFromAbi, viewIBinaryConverter)
     }
 
     public unsafe func vtbl(): IBinaryConverterVtbl {
@@ -7200,14 +7212,14 @@ public class IBinaryConverter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VariantByteArrayToString(pvarByteArray: CPointer<Win32__impl_l2.VARIANTAbi>, Encoding: EncodingTypeAbi, pstrEncoded: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func VariantByteArrayToString(pvarByteArray: CPointer<Win32_impl_p2.VARIANTAbi>, Encoding: EncodingTypeAbi, pstrEncoded: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VariantByteArrayToString(__liveRaw, pvarByteArray, Encoding, pstrEncoded)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func StringToVariantByteArray(strEncoded: CPointer<UInt16>, Encoding: EncodingTypeAbi, pvarByteArray: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func StringToVariantByteArray(strEncoded: CPointer<UInt16>, Encoding: EncodingTypeAbi, pvarByteArray: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StringToVariantByteArray(__liveRaw, strEncoded, Encoding, pvarByteArray)
@@ -7219,9 +7231,9 @@ public class IBinaryConverter <: InterfaceWrapperBase & ComInterface {
 public struct IBinaryConverter2Vtbl {
     public var base_: IBinaryConverterVtbl = IBinaryConverterVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var StringArrayToVariantArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var StringArrayToVariantArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VariantArrayToStringArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var VariantArrayToStringArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -7266,14 +7278,14 @@ public class IBinaryConverter2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func StringArrayToVariantArray(pvarStringArray: CPointer<Win32__impl_l2.VARIANTAbi>, pvarVariantArray: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func StringArrayToVariantArray(pvarStringArray: CPointer<Win32_impl_p2.VARIANTAbi>, pvarVariantArray: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StringArrayToVariantArray(__liveRaw, pvarStringArray, pvarVariantArray)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VariantArrayToStringArray(pvarVariantArray: CPointer<Win32__impl_l2.VARIANTAbi>, pvarStringArray: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func VariantArrayToStringArray(pvarVariantArray: CPointer<Win32_impl_p2.VARIANTAbi>, pvarStringArray: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VariantArrayToStringArray(__liveRaw, pvarVariantArray, pvarStringArray)
@@ -7283,7 +7295,7 @@ public class IBinaryConverter2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICEnrollVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var createFilePKCS10: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var acceptFilePKCS7: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var createPKCS10: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
@@ -7376,7 +7388,7 @@ public class ICEnroll <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICEnroll> {
-        return InterfaceDescriptor<ICEnroll>("ICEnroll", ICEnroll.iid(), Win32__impl_l2.IDispatch.iid(), takeICEnrollFromAbi, viewICEnroll)
+        return InterfaceDescriptor<ICEnroll>("ICEnroll", ICEnroll.iid(), Win32_impl_p2.IDispatch.iid(), takeICEnrollFromAbi, viewICEnroll)
     }
 
     public unsafe func vtbl(): ICEnrollVtbl {
@@ -7959,13 +7971,13 @@ public class ICEnroll3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertAdminVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IsValidCertificate: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetRevocationReason: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RevokeCertificate: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, Float64) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetRequestAttributes: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var SetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var DenyRequest: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public var ResubmitRequest: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var PublishCRL: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float64) -> Int32> = { _, _, _ => 0 }
@@ -8007,7 +8019,7 @@ public class ICertAdmin <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertAdmin> {
-        return InterfaceDescriptor<ICertAdmin>("ICertAdmin", ICertAdmin.iid(), Win32__impl_l2.IDispatch.iid(), takeICertAdminFromAbi, viewICertAdmin)
+        return InterfaceDescriptor<ICertAdmin>("ICertAdmin", ICertAdmin.iid(), Win32_impl_p2.IDispatch.iid(), takeICertAdminFromAbi, viewICertAdmin)
     }
 
     public unsafe func vtbl(): ICertAdminVtbl {
@@ -8039,7 +8051,7 @@ public class ICertAdmin <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCertificateExtension(strConfig: CPointer<UInt16>, RequestId: Int32, strExtensionName: CPointer<UInt16>, Type: CERT_PROPERTY_TYPEAbi, Flags: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetCertificateExtension(strConfig: CPointer<UInt16>, RequestId: Int32, strExtensionName: CPointer<UInt16>, Type: CERT_PROPERTY_TYPEAbi, Flags: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCertificateExtension(__liveRaw, strConfig, RequestId, strExtensionName, Type, Flags, pvarValue)
@@ -8082,16 +8094,16 @@ public struct ICertAdmin2Vtbl {
     public var base_: ICertAdminVtbl = ICertAdminVtbl()
     public var PublishCRLs: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float64, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var GetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CERT_PROPERTY_TYPEAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var SetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CERT_PROPERTY_TYPEAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetCAPropertyFlags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCAPropertyDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetArchivedKey: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetConfigEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetConfigEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetConfigEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetConfigEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var ImportKey: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>, CERT_IMPORT_FLAGSAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetMyRoles: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CERTADMIN_GET_ROLES_FLAGSAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeleteRow: CFunc<(CPointer<Unit>, CPointer<UInt16>, CERT_DELETE_ROW_FLAGSAbi, Float64, CVRC_TABLEAbi, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -8145,14 +8157,14 @@ public class ICertAdmin2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: Int32, Flags: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: Int32, Flags: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCAProperty(__liveRaw, strConfig, PropId, PropIndex, PropType, Flags, pvarPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: CERT_PROPERTY_TYPEAbi, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: CERT_PROPERTY_TYPEAbi, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCAProperty(__liveRaw, strConfig, PropId, PropIndex, PropType, pvarPropertyValue)
@@ -8177,14 +8189,14 @@ public class ICertAdmin2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetConfigEntry(strConfig: CPointer<UInt16>, strNodePath: CPointer<UInt16>, strEntryName: CPointer<UInt16>, pvarEntry: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetConfigEntry(strConfig: CPointer<UInt16>, strNodePath: CPointer<UInt16>, strEntryName: CPointer<UInt16>, pvarEntry: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConfigEntry(__liveRaw, strConfig, strNodePath, strEntryName, pvarEntry)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetConfigEntry(strConfig: CPointer<UInt16>, strNodePath: CPointer<UInt16>, strEntryName: CPointer<UInt16>, pvarEntry: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetConfigEntry(strConfig: CPointer<UInt16>, strNodePath: CPointer<UInt16>, strEntryName: CPointer<UInt16>, pvarEntry: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetConfigEntry(__liveRaw, strConfig, strNodePath, strEntryName, pvarEntry)
@@ -8212,7 +8224,7 @@ public class ICertAdmin2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertConfigVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetField: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -8253,7 +8265,7 @@ public class ICertConfig <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertConfig> {
-        return InterfaceDescriptor<ICertConfig>("ICertConfig", ICertConfig.iid(), Win32__impl_l2.IDispatch.iid(), takeICertConfigFromAbi, viewICertConfig)
+        return InterfaceDescriptor<ICertConfig>("ICertConfig", ICertConfig.iid(), Win32_impl_p2.IDispatch.iid(), takeICertConfigFromAbi, viewICertConfig)
     }
 
     public unsafe func vtbl(): ICertConfigVtbl {
@@ -8343,7 +8355,7 @@ public class ICertConfig2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeAltNameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetNameCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetNameChoice: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -8387,7 +8399,7 @@ public class ICertEncodeAltName <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeAltName> {
-        return InterfaceDescriptor<ICertEncodeAltName>("ICertEncodeAltName", ICertEncodeAltName.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeAltNameFromAbi, viewICertEncodeAltName)
+        return InterfaceDescriptor<ICertEncodeAltName>("ICertEncodeAltName", ICertEncodeAltName.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeAltNameFromAbi, viewICertEncodeAltName)
     }
 
     public unsafe func vtbl(): ICertEncodeAltNameVtbl {
@@ -8516,7 +8528,7 @@ public class ICertEncodeAltName2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeBitStringVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetBitCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetBitString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8557,7 +8569,7 @@ public class ICertEncodeBitString <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeBitString> {
-        return InterfaceDescriptor<ICertEncodeBitString>("ICertEncodeBitString", ICertEncodeBitString.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeBitStringFromAbi, viewICertEncodeBitString)
+        return InterfaceDescriptor<ICertEncodeBitString>("ICertEncodeBitString", ICertEncodeBitString.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeBitStringFromAbi, viewICertEncodeBitString)
     }
 
     public unsafe func vtbl(): ICertEncodeBitStringVtbl {
@@ -8661,7 +8673,7 @@ public class ICertEncodeBitString2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeCRLDistInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetDistPointCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetNameCount: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -8707,7 +8719,7 @@ public class ICertEncodeCRLDistInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeCRLDistInfo> {
-        return InterfaceDescriptor<ICertEncodeCRLDistInfo>("ICertEncodeCRLDistInfo", ICertEncodeCRLDistInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeCRLDistInfoFromAbi, viewICertEncodeCRLDistInfo)
+        return InterfaceDescriptor<ICertEncodeCRLDistInfo>("ICertEncodeCRLDistInfo", ICertEncodeCRLDistInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeCRLDistInfoFromAbi, viewICertEncodeCRLDistInfo)
     }
 
     public unsafe func vtbl(): ICertEncodeCRLDistInfoVtbl {
@@ -8834,7 +8846,7 @@ public class ICertEncodeCRLDistInfo2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeDateArrayVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetValue: CFunc<(CPointer<Unit>, Int32, CPointer<Float64>) -> Int32> = { _, _, _ => 0 }
@@ -8877,7 +8889,7 @@ public class ICertEncodeDateArray <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeDateArray> {
-        return InterfaceDescriptor<ICertEncodeDateArray>("ICertEncodeDateArray", ICertEncodeDateArray.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeDateArrayFromAbi, viewICertEncodeDateArray)
+        return InterfaceDescriptor<ICertEncodeDateArray>("ICertEncodeDateArray", ICertEncodeDateArray.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeDateArrayFromAbi, viewICertEncodeDateArray)
     }
 
     public unsafe func vtbl(): ICertEncodeDateArrayVtbl {
@@ -8986,7 +8998,7 @@ public class ICertEncodeDateArray2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeLongArrayVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetValue: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -9029,7 +9041,7 @@ public class ICertEncodeLongArray <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeLongArray> {
-        return InterfaceDescriptor<ICertEncodeLongArray>("ICertEncodeLongArray", ICertEncodeLongArray.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeLongArrayFromAbi, viewICertEncodeLongArray)
+        return InterfaceDescriptor<ICertEncodeLongArray>("ICertEncodeLongArray", ICertEncodeLongArray.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeLongArrayFromAbi, viewICertEncodeLongArray)
     }
 
     public unsafe func vtbl(): ICertEncodeLongArrayVtbl {
@@ -9138,13 +9150,13 @@ public class ICertEncodeLongArray2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertEncodeStringArrayVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetStringType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetValue: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Reset: CFunc<(CPointer<Unit>, Int32, Win32__impl_l0.CERT_RDN_ATTR_VALUE_TYPEAbi) -> Int32> = { _, _, _ => 0 }
+    public var Reset: CFunc<(CPointer<Unit>, Int32, Win32_impl_p0.CERT_RDN_ATTR_VALUE_TYPEAbi) -> Int32> = { _, _, _ => 0 }
     public var SetValue: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Encode: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -9183,7 +9195,7 @@ public class ICertEncodeStringArray <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertEncodeStringArray> {
-        return InterfaceDescriptor<ICertEncodeStringArray>("ICertEncodeStringArray", ICertEncodeStringArray.iid(), Win32__impl_l2.IDispatch.iid(), takeICertEncodeStringArrayFromAbi, viewICertEncodeStringArray)
+        return InterfaceDescriptor<ICertEncodeStringArray>("ICertEncodeStringArray", ICertEncodeStringArray.iid(), Win32_impl_p2.IDispatch.iid(), takeICertEncodeStringArrayFromAbi, viewICertEncodeStringArray)
     }
 
     public unsafe func vtbl(): ICertEncodeStringArrayVtbl {
@@ -9215,7 +9227,7 @@ public class ICertEncodeStringArray <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Reset(Count: Int32, StringType: Win32__impl_l0.CERT_RDN_ATTR_VALUE_TYPEAbi): Int32 {
+    public unsafe func Reset(Count: Int32, StringType: Win32_impl_p0.CERT_RDN_ATTR_VALUE_TYPEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Reset(__liveRaw, Count, StringType)
@@ -9299,7 +9311,7 @@ public class ICertEncodeStringArray2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertExitVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CERT_EXIT_EVENT_MASKAbi>) -> Int32> = { _, _, _ => 0 }
     public var Notify: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _ => 0 }
     public var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9339,7 +9351,7 @@ public class ICertExit <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertExit> {
-        return InterfaceDescriptor<ICertExit>("ICertExit", ICertExit.iid(), Win32__impl_l2.IDispatch.iid(), takeICertExitFromAbi, viewICertExit)
+        return InterfaceDescriptor<ICertExit>("ICertExit", ICertExit.iid(), Win32_impl_p2.IDispatch.iid(), takeICertExitFromAbi, viewICertExit)
     }
 
     public unsafe func vtbl(): ICertExitVtbl {
@@ -9368,7 +9380,7 @@ public class ICertExit <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertGetConfigVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetConfig: CFunc<(CPointer<Unit>, CERT_GET_CONFIG_FLAGSAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -9406,7 +9418,7 @@ public class ICertGetConfig <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertGetConfig> {
-        return InterfaceDescriptor<ICertGetConfig>("ICertGetConfig", ICertGetConfig.iid(), Win32__impl_l2.IDispatch.iid(), takeICertGetConfigFromAbi, viewICertGetConfig)
+        return InterfaceDescriptor<ICertGetConfig>("ICertGetConfig", ICertGetConfig.iid(), Win32_impl_p2.IDispatch.iid(), takeICertGetConfigFromAbi, viewICertGetConfig)
     }
 
     public unsafe func vtbl(): ICertGetConfigVtbl {
@@ -9423,11 +9435,11 @@ public class ICertGetConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertManageModuleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Configure: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -9465,7 +9477,7 @@ public class ICertManageModule <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertManageModule> {
-        return InterfaceDescriptor<ICertManageModule>("ICertManageModule", ICertManageModule.iid(), Win32__impl_l2.IDispatch.iid(), takeICertManageModuleFromAbi, viewICertManageModule)
+        return InterfaceDescriptor<ICertManageModule>("ICertManageModule", ICertManageModule.iid(), Win32_impl_p2.IDispatch.iid(), takeICertManageModuleFromAbi, viewICertManageModule)
     }
 
     public unsafe func vtbl(): ICertManageModuleVtbl {
@@ -9473,14 +9485,14 @@ public class ICertManageModule <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProperty(strConfig: CPointer<UInt16>, strStorageLocation: CPointer<UInt16>, strPropertyName: CPointer<UInt16>, Flags: Int32, pvarProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProperty(strConfig: CPointer<UInt16>, strStorageLocation: CPointer<UInt16>, strPropertyName: CPointer<UInt16>, Flags: Int32, pvarProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, strConfig, strStorageLocation, strPropertyName, Flags, pvarProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProperty(strConfig: CPointer<UInt16>, strStorageLocation: CPointer<UInt16>, strPropertyName: CPointer<UInt16>, Flags: Int32, pvarProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetProperty(strConfig: CPointer<UInt16>, strStorageLocation: CPointer<UInt16>, strPropertyName: CPointer<UInt16>, Flags: Int32, pvarProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, strConfig, strStorageLocation, strPropertyName, Flags, pvarProperty)
@@ -9496,7 +9508,7 @@ public class ICertManageModule <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertPolicyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var VerifyRequest: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9537,7 +9549,7 @@ public class ICertPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertPolicy> {
-        return InterfaceDescriptor<ICertPolicy>("ICertPolicy", ICertPolicy.iid(), Win32__impl_l2.IDispatch.iid(), takeICertPolicyFromAbi, viewICertPolicy)
+        return InterfaceDescriptor<ICertPolicy>("ICertPolicy", ICertPolicy.iid(), Win32_impl_p2.IDispatch.iid(), takeICertPolicyFromAbi, viewICertPolicy)
     }
 
     public unsafe func vtbl(): ICertPolicyVtbl {
@@ -9627,7 +9639,7 @@ public class ICertPolicy2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeFromCertificate: CFunc<(CPointer<Unit>, Int16, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var InitializeDecode: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var PropertyId: CFunc<(CPointer<Unit>, CPointer<CERTENROLL_PROPERTYIDAbi>) -> Int32> = { _, _ => 0 }
@@ -9671,7 +9683,7 @@ public class ICertProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertProperty> {
-        return InterfaceDescriptor<ICertProperty>("ICertProperty", ICertProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeICertPropertyFromAbi, viewICertProperty)
+        return InterfaceDescriptor<ICertProperty>("ICertProperty", ICertProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeICertPropertyFromAbi, viewICertProperty)
     }
 
     public unsafe func vtbl(): ICertPropertyVtbl {
@@ -10393,7 +10405,7 @@ public class ICertPropertySHA1Hash <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertRequestVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Submit: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RetrievePending: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetLastStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10437,7 +10449,7 @@ public class ICertRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertRequest> {
-        return InterfaceDescriptor<ICertRequest>("ICertRequest", ICertRequest.iid(), Win32__impl_l2.IDispatch.iid(), takeICertRequestFromAbi, viewICertRequest)
+        return InterfaceDescriptor<ICertRequest>("ICertRequest", ICertRequest.iid(), Win32_impl_p2.IDispatch.iid(), takeICertRequestFromAbi, viewICertRequest)
     }
 
     public unsafe func vtbl(): ICertRequestVtbl {
@@ -10494,11 +10506,11 @@ public struct ICertRequest2Vtbl {
     public var GetIssuedCertificate: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>, CPointer<CR_DISPAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetErrorMessageText: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var GetCAProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var GetCAPropertyFlags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCAPropertyDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFullResponseProperty: CFunc<(CPointer<Unit>, FULL_RESPONSE_PROPERTY_IDAbi, Int32, CERT_PROPERTY_TYPEAbi, CERT_REQUEST_OUT_TYPEAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetFullResponseProperty: CFunc<(CPointer<Unit>, FULL_RESPONSE_PROPERTY_IDAbi, Int32, CERT_PROPERTY_TYPEAbi, CERT_REQUEST_OUT_TYPEAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -10555,7 +10567,7 @@ public class ICertRequest2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: Int32, Flags: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCAProperty(strConfig: CPointer<UInt16>, PropId: Int32, PropIndex: Int32, PropType: Int32, Flags: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCAProperty(__liveRaw, strConfig, PropId, PropIndex, PropType, Flags, pvarPropertyValue)
@@ -10574,7 +10586,7 @@ public class ICertRequest2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFullResponseProperty(PropId: FULL_RESPONSE_PROPERTY_IDAbi, PropIndex: Int32, PropType: CERT_PROPERTY_TYPEAbi, Flags: CERT_REQUEST_OUT_TYPEAbi, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFullResponseProperty(PropId: FULL_RESPONSE_PROPERTY_IDAbi, PropIndex: Int32, PropType: CERT_PROPERTY_TYPEAbi, Flags: CERT_REQUEST_OUT_TYPEAbi, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFullResponseProperty(__liveRaw, PropId, PropIndex, PropType, Flags, pvarPropertyValue)
@@ -10729,15 +10741,15 @@ public class ICertRequestD2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertServerExitVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetContext: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetRequestProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetRequestProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetRequestAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCertificateExtensionFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EnumerateExtensionsSetup: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var EnumerateExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -10781,7 +10793,7 @@ public class ICertServerExit <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertServerExit> {
-        return InterfaceDescriptor<ICertServerExit>("ICertServerExit", ICertServerExit.iid(), Win32__impl_l2.IDispatch.iid(), takeICertServerExitFromAbi, viewICertServerExit)
+        return InterfaceDescriptor<ICertServerExit>("ICertServerExit", ICertServerExit.iid(), Win32_impl_p2.IDispatch.iid(), takeICertServerExitFromAbi, viewICertServerExit)
     }
 
     public unsafe func vtbl(): ICertServerExitVtbl {
@@ -10795,7 +10807,7 @@ public class ICertServerExit <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetRequestProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetRequestProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRequestProperty(__liveRaw, strPropertyName, PropertyType, pvarPropertyValue)
@@ -10808,14 +10820,14 @@ public class ICertServerExit <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCertificateProperty(__liveRaw, strPropertyName, PropertyType, pvarPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCertificateExtension(__liveRaw, strExtensionName, Type, pvarValue)
@@ -10867,20 +10879,20 @@ public class ICertServerExit <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertServerPolicyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetContext: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetRequestProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetRequestProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetRequestAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetCertificateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, CERT_PROPERTY_TYPEAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCertificateExtensionFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetCertificateExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var EnumerateExtensionsSetup: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var EnumerateExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var EnumerateExtensionsClose: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -10923,7 +10935,7 @@ public class ICertServerPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertServerPolicy> {
-        return InterfaceDescriptor<ICertServerPolicy>("ICertServerPolicy", ICertServerPolicy.iid(), Win32__impl_l2.IDispatch.iid(), takeICertServerPolicyFromAbi, viewICertServerPolicy)
+        return InterfaceDescriptor<ICertServerPolicy>("ICertServerPolicy", ICertServerPolicy.iid(), Win32_impl_p2.IDispatch.iid(), takeICertServerPolicyFromAbi, viewICertServerPolicy)
     }
 
     public unsafe func vtbl(): ICertServerPolicyVtbl {
@@ -10937,7 +10949,7 @@ public class ICertServerPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetRequestProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetRequestProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRequestProperty(__liveRaw, strPropertyName, PropertyType, pvarPropertyValue)
@@ -10950,21 +10962,21 @@ public class ICertServerPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: CERT_PROPERTY_TYPEAbi, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: CERT_PROPERTY_TYPEAbi, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCertificateProperty(__liveRaw, strPropertyName, PropertyType, pvarPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetCertificateProperty(strPropertyName: CPointer<UInt16>, PropertyType: Int32, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCertificateProperty(__liveRaw, strPropertyName, PropertyType, pvarPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: CERT_PROPERTY_TYPEAbi, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: CERT_PROPERTY_TYPEAbi, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCertificateExtension(__liveRaw, strExtensionName, Type, pvarValue)
@@ -10977,7 +10989,7 @@ public class ICertServerPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: Int32, ExtFlags: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetCertificateExtension(strExtensionName: CPointer<UInt16>, Type: Int32, ExtFlags: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCertificateExtension(__liveRaw, strExtensionName, Type, ExtFlags, pvarValue)
@@ -11023,7 +11035,7 @@ public class ICertServerPolicy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertificateAttestationChallengeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var DecryptChallenge: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var RequestID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -11063,7 +11075,7 @@ public class ICertificateAttestationChallenge <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertificateAttestationChallenge> {
-        return InterfaceDescriptor<ICertificateAttestationChallenge>("ICertificateAttestationChallenge", ICertificateAttestationChallenge.iid(), Win32__impl_l2.IDispatch.iid(), takeICertificateAttestationChallengeFromAbi, viewICertificateAttestationChallenge)
+        return InterfaceDescriptor<ICertificateAttestationChallenge>("ICertificateAttestationChallenge", ICertificateAttestationChallenge.iid(), Win32_impl_p2.IDispatch.iid(), takeICertificateAttestationChallengeFromAbi, viewICertificateAttestationChallenge)
     }
 
     public unsafe func vtbl(): ICertificateAttestationChallengeVtbl {
@@ -11154,9 +11166,9 @@ public class ICertificateAttestationChallenge2 <: InterfaceWrapperBase & ComInte
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertificationAuthorityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentCAPropertyAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentCAPropertyAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -11193,7 +11205,7 @@ public class ICertificationAuthority <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertificationAuthority> {
-        return InterfaceDescriptor<ICertificationAuthority>("ICertificationAuthority", ICertificationAuthority.iid(), Win32__impl_l2.IDispatch.iid(), takeICertificationAuthorityFromAbi, viewICertificationAuthority)
+        return InterfaceDescriptor<ICertificationAuthority>("ICertificationAuthority", ICertificationAuthority.iid(), Win32_impl_p2.IDispatch.iid(), takeICertificationAuthorityFromAbi, viewICertificationAuthority)
     }
 
     public unsafe func vtbl(): ICertificationAuthorityVtbl {
@@ -11201,7 +11213,7 @@ public class ICertificationAuthority <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Property(property: EnrollmentCAPropertyAbi, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Property(property: EnrollmentCAPropertyAbi, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Property(__liveRaw, property, pValue)
@@ -11215,21 +11227,21 @@ public struct IEnrollVtbl {
     public var createFilePKCS10WStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var acceptFilePKCS7WStr: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var createPKCS10WStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var createPKCS10WStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var acceptPKCS7Blob: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
+    public var acceptPKCS7Blob: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getCertContextFromPKCS7: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = { _, _ => CPointer<Win32__impl_l2.CERT_CONTEXTAbi>() }
+    public var getCertContextFromPKCS7: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = { _, _ => CPointer<Win32_impl_p2.CERT_CONTEXTAbi>() }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getMyStore: CFunc<(CPointer<Unit>) -> Win32__impl_l0.HCERTSTORE> = { _ => CPointer<Unit>() }
+    public var getMyStore: CFunc<(CPointer<Unit>) -> Win32_impl_p0.HCERTSTORE> = { _ => CPointer<Unit>() }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getCAStore: CFunc<(CPointer<Unit>) -> Win32__impl_l0.HCERTSTORE> = { _ => CPointer<Unit>() }
+    public var getCAStore: CFunc<(CPointer<Unit>) -> Win32_impl_p0.HCERTSTORE> = { _ => CPointer<Unit>() }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getROOTHStore: CFunc<(CPointer<Unit>) -> Win32__impl_l0.HCERTSTORE> = { _ => CPointer<Unit>() }
+    public var getROOTHStore: CFunc<(CPointer<Unit>) -> Win32_impl_p0.HCERTSTORE> = { _ => CPointer<Unit>() }
     public var enumProvidersWStr: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var enumContainersWStr: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var freeRequestInfoBlob: CFunc<(CPointer<Unit>, Win32__impl_l0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
+    public var freeRequestInfoBlob: CFunc<(CPointer<Unit>, Win32_impl_p0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
     public var MyStoreNameWStr: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMyStoreNameWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var MyStoreTypeWStr: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -11283,17 +11295,17 @@ public struct IEnrollVtbl {
     public var HashAlgorithmWStr: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetHashAlgorithmWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var RenewalCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
+    public var RenewalCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetRenewalCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetRenewalCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
     public var AddCertTypeToRequestWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var AddNameValuePairToSignatureWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var AddExtensionsToRequest: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.CERT_EXTENSIONSAbi>) -> Int32> = { _, _ => 0 }
+    public var AddExtensionsToRequest: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_EXTENSIONSAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var AddAuthenticatedAttributesToPKCS7Request: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.CRYPT_ATTRIBUTESAbi>) -> Int32> = { _, _ => 0 }
+    public var AddAuthenticatedAttributesToPKCS7Request: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CRYPT_ATTRIBUTESAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var CreatePKCS7RequestFromRequest: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreatePKCS7RequestFromRequest: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -11350,42 +11362,42 @@ public class IEnroll <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func createPKCS10WStr(DNName: CPointer<UInt16>, Usage: CPointer<UInt16>, pPkcs10Blob: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func createPKCS10WStr(DNName: CPointer<UInt16>, Usage: CPointer<UInt16>, pPkcs10Blob: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.createPKCS10WStr(__liveRaw, DNName, Usage, pPkcs10Blob)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func acceptPKCS7Blob(pBlobPKCS7: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func acceptPKCS7Blob(pBlobPKCS7: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.acceptPKCS7Blob(__liveRaw, pBlobPKCS7)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getCertContextFromPKCS7(pBlobPKCS7: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): CPointer<Win32__impl_l2.CERT_CONTEXTAbi> {
+    public unsafe func getCertContextFromPKCS7(pBlobPKCS7: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): CPointer<Win32_impl_p2.CERT_CONTEXTAbi> {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getCertContextFromPKCS7(__liveRaw, pBlobPKCS7)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getMyStore(): Win32__impl_l0.HCERTSTORE {
+    public unsafe func getMyStore(): Win32_impl_p0.HCERTSTORE {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getMyStore(__liveRaw)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getCAStore(): Win32__impl_l0.HCERTSTORE {
+    public unsafe func getCAStore(): Win32_impl_p0.HCERTSTORE {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getCAStore(__liveRaw)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getROOTHStore(): Win32__impl_l0.HCERTSTORE {
+    public unsafe func getROOTHStore(): Win32_impl_p0.HCERTSTORE {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getROOTHStore(__liveRaw)
@@ -11404,7 +11416,7 @@ public class IEnroll <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func freeRequestInfoBlob(pkcs7OrPkcs10: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi): Int32 {
+    public unsafe func freeRequestInfoBlob(pkcs7OrPkcs10: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.freeRequestInfoBlob(__liveRaw, pkcs7OrPkcs10)
@@ -11723,14 +11735,14 @@ public class IEnroll <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func RenewalCertificate(ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+    public unsafe func RenewalCertificate(ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RenewalCertificate(__liveRaw, ppCertContext)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetRenewalCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+    public unsafe func SetRenewalCertificate(pCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetRenewalCertificate(__liveRaw, pCertContext)
@@ -11749,21 +11761,21 @@ public class IEnroll <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func AddExtensionsToRequest(pCertExtensions: CPointer<Win32__impl_l1.CERT_EXTENSIONSAbi>): Int32 {
+    public unsafe func AddExtensionsToRequest(pCertExtensions: CPointer<Win32_impl_p2.CERT_EXTENSIONSAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddExtensionsToRequest(__liveRaw, pCertExtensions)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func AddAuthenticatedAttributesToPKCS7Request(pAttributes: CPointer<Win32__impl_l1.CRYPT_ATTRIBUTESAbi>): Int32 {
+    public unsafe func AddAuthenticatedAttributesToPKCS7Request(pAttributes: CPointer<Win32_impl_p2.CRYPT_ATTRIBUTESAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddAuthenticatedAttributesToPKCS7Request(__liveRaw, pAttributes)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func CreatePKCS7RequestFromRequest(pRequest: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, pSigningCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pPkcs7Blob: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func CreatePKCS7RequestFromRequest(pRequest: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, pSigningCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pPkcs7Blob: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePKCS7RequestFromRequest(__liveRaw, pRequest, pSigningCertContext, pPkcs7Blob)
@@ -11775,7 +11787,7 @@ public class IEnroll <: InterfaceWrapperBase & ComInterface {
 public struct IEnroll2Vtbl {
     public var base_: IEnrollVtbl = IEnrollVtbl()
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var InstallPKCS7Blob: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
+    public var InstallPKCS7Blob: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetSupportedKeySpec: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetKeyLen: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
@@ -11786,13 +11798,13 @@ public struct IEnroll2Vtbl {
     public var SetHashAlgID: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var HashAlgID: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetHStoreMy: CFunc<(CPointer<Unit>, Win32__impl_l0.HCERTSTORE) -> Int32> = { _, _ => 0 }
+    public var SetHStoreMy: CFunc<(CPointer<Unit>, Win32_impl_p0.HCERTSTORE) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetHStoreCA: CFunc<(CPointer<Unit>, Win32__impl_l0.HCERTSTORE) -> Int32> = { _, _ => 0 }
+    public var SetHStoreCA: CFunc<(CPointer<Unit>, Win32_impl_p0.HCERTSTORE) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetHStoreROOT: CFunc<(CPointer<Unit>, Win32__impl_l0.HCERTSTORE) -> Int32> = { _, _ => 0 }
+    public var SetHStoreROOT: CFunc<(CPointer<Unit>, Win32_impl_p0.HCERTSTORE) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetHStoreRequest: CFunc<(CPointer<Unit>, Win32__impl_l0.HCERTSTORE) -> Int32> = { _, _ => 0 }
+    public var SetHStoreRequest: CFunc<(CPointer<Unit>, Win32_impl_p0.HCERTSTORE) -> Int32> = { _, _ => 0 }
     public var SetLimitExchangeKeyToEncipherment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var LimitExchangeKeyToEncipherment: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEnableSMIMECapabilities: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -11841,7 +11853,7 @@ public class IEnroll2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func InstallPKCS7Blob(pBlobPKCS7: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func InstallPKCS7Blob(pBlobPKCS7: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InstallPKCS7Blob(__liveRaw, pBlobPKCS7)
@@ -11902,28 +11914,28 @@ public class IEnroll2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetHStoreMy(hStore: Win32__impl_l0.HCERTSTORE): Int32 {
+    public unsafe func SetHStoreMy(hStore: Win32_impl_p0.HCERTSTORE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHStoreMy(__liveRaw, hStore)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetHStoreCA(hStore: Win32__impl_l0.HCERTSTORE): Int32 {
+    public unsafe func SetHStoreCA(hStore: Win32_impl_p0.HCERTSTORE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHStoreCA(__liveRaw, hStore)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetHStoreROOT(hStore: Win32__impl_l0.HCERTSTORE): Int32 {
+    public unsafe func SetHStoreROOT(hStore: Win32_impl_p0.HCERTSTORE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHStoreROOT(__liveRaw, hStore)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetHStoreRequest(hStore: Win32__impl_l0.HCERTSTORE): Int32 {
+    public unsafe func SetHStoreRequest(hStore: Win32_impl_p0.HCERTSTORE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHStoreRequest(__liveRaw, hStore)
@@ -11957,7 +11969,7 @@ public class IEnroll2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumCERTVIEWATTRIBUTEVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Next: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetValue: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -12000,7 +12012,7 @@ public class IEnumCERTVIEWATTRIBUTE <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumCERTVIEWATTRIBUTE> {
-        return InterfaceDescriptor<IEnumCERTVIEWATTRIBUTE>("IEnumCERTVIEWATTRIBUTE", IEnumCERTVIEWATTRIBUTE.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumCERTVIEWATTRIBUTEFromAbi, viewIEnumCERTVIEWATTRIBUTE)
+        return InterfaceDescriptor<IEnumCERTVIEWATTRIBUTE>("IEnumCERTVIEWATTRIBUTE", IEnumCERTVIEWATTRIBUTE.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumCERTVIEWATTRIBUTEFromAbi, viewIEnumCERTVIEWATTRIBUTE)
     }
 
     public unsafe func vtbl(): IEnumCERTVIEWATTRIBUTEVtbl {
@@ -12047,7 +12059,7 @@ public class IEnumCERTVIEWATTRIBUTE <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumCERTVIEWCOLUMNVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Next: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -12055,7 +12067,7 @@ public struct IEnumCERTVIEWCOLUMNVtbl {
     public var IsIndexed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetMaxLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, ENUM_CERT_COLUMN_VALUE_FLAGSAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, ENUM_CERT_COLUMN_VALUE_FLAGSAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -12095,7 +12107,7 @@ public class IEnumCERTVIEWCOLUMN <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumCERTVIEWCOLUMN> {
-        return InterfaceDescriptor<IEnumCERTVIEWCOLUMN>("IEnumCERTVIEWCOLUMN", IEnumCERTVIEWCOLUMN.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumCERTVIEWCOLUMNFromAbi, viewIEnumCERTVIEWCOLUMN)
+        return InterfaceDescriptor<IEnumCERTVIEWCOLUMN>("IEnumCERTVIEWCOLUMN", IEnumCERTVIEWCOLUMN.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumCERTVIEWCOLUMNFromAbi, viewIEnumCERTVIEWCOLUMN)
     }
 
     public unsafe func vtbl(): IEnumCERTVIEWCOLUMNVtbl {
@@ -12139,7 +12151,7 @@ public class IEnumCERTVIEWCOLUMN <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(Flags: ENUM_CERT_COLUMN_VALUE_FLAGSAbi, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(Flags: ENUM_CERT_COLUMN_VALUE_FLAGSAbi, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, Flags, pvarValue)
@@ -12167,12 +12179,12 @@ public class IEnumCERTVIEWCOLUMN <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumCERTVIEWEXTENSIONVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Next: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CERT_PROPERTY_TYPEAbi, ENUM_CERT_COLUMN_VALUE_FLAGSAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CERT_PROPERTY_TYPEAbi, ENUM_CERT_COLUMN_VALUE_FLAGSAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -12212,7 +12224,7 @@ public class IEnumCERTVIEWEXTENSION <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumCERTVIEWEXTENSION> {
-        return InterfaceDescriptor<IEnumCERTVIEWEXTENSION>("IEnumCERTVIEWEXTENSION", IEnumCERTVIEWEXTENSION.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumCERTVIEWEXTENSIONFromAbi, viewIEnumCERTVIEWEXTENSION)
+        return InterfaceDescriptor<IEnumCERTVIEWEXTENSION>("IEnumCERTVIEWEXTENSION", IEnumCERTVIEWEXTENSION.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumCERTVIEWEXTENSIONFromAbi, viewIEnumCERTVIEWEXTENSION)
     }
 
     public unsafe func vtbl(): IEnumCERTVIEWEXTENSIONVtbl {
@@ -12238,7 +12250,7 @@ public class IEnumCERTVIEWEXTENSION <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(Type: CERT_PROPERTY_TYPEAbi, Flags: ENUM_CERT_COLUMN_VALUE_FLAGSAbi, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(Type: CERT_PROPERTY_TYPEAbi, Flags: ENUM_CERT_COLUMN_VALUE_FLAGSAbi, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, Type, Flags, pvarValue)
@@ -12266,7 +12278,7 @@ public class IEnumCERTVIEWEXTENSION <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumCERTVIEWROWVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Next: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EnumCertViewColumn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnumCertViewAttribute: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -12311,7 +12323,7 @@ public class IEnumCERTVIEWROW <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumCERTVIEWROW> {
-        return InterfaceDescriptor<IEnumCERTVIEWROW>("IEnumCERTVIEWROW", IEnumCERTVIEWROW.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumCERTVIEWROWFromAbi, viewIEnumCERTVIEWROW)
+        return InterfaceDescriptor<IEnumCERTVIEWROW>("IEnumCERTVIEWROW", IEnumCERTVIEWROW.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumCERTVIEWROWFromAbi, viewIEnumCERTVIEWROW)
     }
 
     public unsafe func vtbl(): IEnumCERTVIEWROWVtbl {
@@ -12370,18 +12382,18 @@ public class IEnumCERTVIEWROW <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOCSPCAConfigurationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Identifier: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CACertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CACertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var HashAlgorithm: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetHashAlgorithm: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SigningFlags: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetSigningFlags: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SigningCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SigningCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSigningCertificate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSigningCertificate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var ReminderDuration: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetReminderDuration: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -12390,14 +12402,14 @@ public struct IOCSPCAConfigurationVtbl {
     public var ProviderCLSID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetProviderCLSID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ProviderProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ProviderProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProviderProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetProviderProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Modified: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LocalRevocationInformation: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LocalRevocationInformation: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetLocalRevocationInformation: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetLocalRevocationInformation: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var SigningCertificateTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetSigningCertificateTemplate: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var CAConfig: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -12438,7 +12450,7 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IOCSPCAConfiguration> {
-        return InterfaceDescriptor<IOCSPCAConfiguration>("IOCSPCAConfiguration", IOCSPCAConfiguration.iid(), Win32__impl_l2.IDispatch.iid(), takeIOCSPCAConfigurationFromAbi, viewIOCSPCAConfiguration)
+        return InterfaceDescriptor<IOCSPCAConfiguration>("IOCSPCAConfiguration", IOCSPCAConfiguration.iid(), Win32_impl_p2.IDispatch.iid(), takeIOCSPCAConfigurationFromAbi, viewIOCSPCAConfiguration)
     }
 
     public unsafe func vtbl(): IOCSPCAConfigurationVtbl {
@@ -12452,7 +12464,7 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CACertificate(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CACertificate(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CACertificate(__liveRaw, pVal)
@@ -12483,14 +12495,14 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SigningCertificate(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SigningCertificate(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SigningCertificate(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSigningCertificate(newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSigningCertificate(newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSigningCertificate(__liveRaw, newVal)
@@ -12539,14 +12551,14 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ProviderProperties(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ProviderProperties(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProviderProperties(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProviderProperties(newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetProviderProperties(newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProviderProperties(__liveRaw, newVal)
@@ -12559,14 +12571,14 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LocalRevocationInformation(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LocalRevocationInformation(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LocalRevocationInformation(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetLocalRevocationInformation(newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetLocalRevocationInformation(newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetLocalRevocationInformation(__liveRaw, newVal)
@@ -12600,16 +12612,16 @@ public class IOCSPCAConfiguration <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOCSPCAConfigurationCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_ItemByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_ItemByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateCAConfiguration: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateCAConfiguration: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteCAConfiguration: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -12647,7 +12659,7 @@ public class IOCSPCAConfigurationCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IOCSPCAConfigurationCollection> {
-        return InterfaceDescriptor<IOCSPCAConfigurationCollection>("IOCSPCAConfigurationCollection", IOCSPCAConfigurationCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIOCSPCAConfigurationCollectionFromAbi, viewIOCSPCAConfigurationCollection)
+        return InterfaceDescriptor<IOCSPCAConfigurationCollection>("IOCSPCAConfigurationCollection", IOCSPCAConfigurationCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIOCSPCAConfigurationCollectionFromAbi, viewIOCSPCAConfigurationCollection)
     }
 
     public unsafe func vtbl(): IOCSPCAConfigurationCollectionVtbl {
@@ -12662,7 +12674,7 @@ public class IOCSPCAConfigurationCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(Index: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, pVal)
@@ -12675,14 +12687,14 @@ public class IOCSPCAConfigurationCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_ItemByName(bstrIdentifier: CPointer<UInt16>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_ItemByName(bstrIdentifier: CPointer<UInt16>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_ItemByName(__liveRaw, bstrIdentifier, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateCAConfiguration(bstrIdentifier: CPointer<UInt16>, varCACert: Win32__impl_l2.VARIANTAbi, ppVal: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateCAConfiguration(bstrIdentifier: CPointer<UInt16>, varCACert: Win32_impl_p2.VARIANTAbi, ppVal: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateCAConfiguration(__liveRaw, bstrIdentifier, varCACert, ppVal)
@@ -12698,12 +12710,12 @@ public class IOCSPCAConfigurationCollection <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOCSPPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Modified: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -12741,7 +12753,7 @@ public class IOCSPProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IOCSPProperty> {
-        return InterfaceDescriptor<IOCSPProperty>("IOCSPProperty", IOCSPProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeIOCSPPropertyFromAbi, viewIOCSPProperty)
+        return InterfaceDescriptor<IOCSPProperty>("IOCSPProperty", IOCSPProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeIOCSPPropertyFromAbi, viewIOCSPProperty)
     }
 
     public unsafe func vtbl(): IOCSPPropertyVtbl {
@@ -12755,14 +12767,14 @@ public class IOCSPProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValue(newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, newVal)
@@ -12778,21 +12790,21 @@ public class IOCSPProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOCSPPropertyCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_ItemByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_ItemByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InitializeFromProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var InitializeFromProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAllProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetAllProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12829,7 +12841,7 @@ public class IOCSPPropertyCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IOCSPPropertyCollection> {
-        return InterfaceDescriptor<IOCSPPropertyCollection>("IOCSPPropertyCollection", IOCSPPropertyCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIOCSPPropertyCollectionFromAbi, viewIOCSPPropertyCollection)
+        return InterfaceDescriptor<IOCSPPropertyCollection>("IOCSPPropertyCollection", IOCSPPropertyCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIOCSPPropertyCollectionFromAbi, viewIOCSPPropertyCollection)
     }
 
     public unsafe func vtbl(): IOCSPPropertyCollectionVtbl {
@@ -12844,7 +12856,7 @@ public class IOCSPPropertyCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(Index: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, pVal)
@@ -12857,14 +12869,14 @@ public class IOCSPPropertyCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_ItemByName(bstrPropName: CPointer<UInt16>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_ItemByName(bstrPropName: CPointer<UInt16>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_ItemByName(__liveRaw, bstrPropName, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateProperty(bstrPropName: CPointer<UInt16>, pVarPropValue: CPointer<Win32__impl_l2.VARIANTAbi>, ppVal: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateProperty(bstrPropName: CPointer<UInt16>, pVarPropValue: CPointer<Win32_impl_p2.VARIANTAbi>, ppVal: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateProperty(__liveRaw, bstrPropName, pVarPropValue, ppVal)
@@ -12877,14 +12889,14 @@ public class IOCSPPropertyCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InitializeFromProperties(pVarProperties: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func InitializeFromProperties(pVarProperties: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InitializeFromProperties(__liveRaw, pVarProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAllProperties(pVarProperties: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAllProperties(pVarProperties: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllProperties(__liveRaw, pVarProperties)
@@ -12894,9 +12906,9 @@ public class IOCSPPropertyCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateTemplateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -12933,7 +12945,7 @@ public class IX509CertificateTemplate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateTemplate> {
-        return InterfaceDescriptor<IX509CertificateTemplate>("IX509CertificateTemplate", IX509CertificateTemplate.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateTemplateFromAbi, viewIX509CertificateTemplate)
+        return InterfaceDescriptor<IX509CertificateTemplate>("IX509CertificateTemplate", IX509CertificateTemplate.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateTemplateFromAbi, viewIX509CertificateTemplate)
     }
 
     public unsafe func vtbl(): IX509CertificateTemplateVtbl {
@@ -12941,7 +12953,7 @@ public class IX509CertificateTemplate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Property(property: EnrollmentTemplatePropertyAbi, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Property(property: EnrollmentTemplatePropertyAbi, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Property(__liveRaw, property, pValue)
@@ -12951,13 +12963,13 @@ public class IX509CertificateTemplate <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateTemplateWritableVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Commit: CFunc<(CPointer<Unit>, CommitTemplateFlagsAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var put_Property: CFunc<(CPointer<Unit>, EnrollmentTemplatePropertyAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var Template: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -12995,7 +13007,7 @@ public class IX509CertificateTemplateWritable <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateTemplateWritable> {
-        return InterfaceDescriptor<IX509CertificateTemplateWritable>("IX509CertificateTemplateWritable", IX509CertificateTemplateWritable.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateTemplateWritableFromAbi, viewIX509CertificateTemplateWritable)
+        return InterfaceDescriptor<IX509CertificateTemplateWritable>("IX509CertificateTemplateWritable", IX509CertificateTemplateWritable.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateTemplateWritableFromAbi, viewIX509CertificateTemplateWritable)
     }
 
     public unsafe func vtbl(): IX509CertificateTemplateWritableVtbl {
@@ -13015,14 +13027,14 @@ public class IX509CertificateTemplateWritable <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Property(property: EnrollmentTemplatePropertyAbi, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Property(property: EnrollmentTemplatePropertyAbi, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Property(__liveRaw, property, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Property(property: EnrollmentTemplatePropertyAbi, value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func put_Property(property: EnrollmentTemplatePropertyAbi, value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Property(__liveRaw, property, value)
@@ -13038,7 +13050,7 @@ public class IX509CertificateTemplateWritable <: InterfaceWrapperBase & ComInter
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EnrollmentStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AppendText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -13087,7 +13099,7 @@ public class IX509EnrollmentStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509EnrollmentStatus> {
-        return InterfaceDescriptor<IX509EnrollmentStatus>("IX509EnrollmentStatus", IX509EnrollmentStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EnrollmentStatusFromAbi, viewIX509EnrollmentStatus)
+        return InterfaceDescriptor<IX509EnrollmentStatus>("IX509EnrollmentStatus", IX509EnrollmentStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EnrollmentStatusFromAbi, viewIX509EnrollmentStatus)
     }
 
     public unsafe func vtbl(): IX509EnrollmentStatusVtbl {
@@ -13170,7 +13182,7 @@ public class IX509EnrollmentStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EnrollmentWebClassFactoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var CreateObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -13209,7 +13221,7 @@ public class IX509EnrollmentWebClassFactory <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509EnrollmentWebClassFactory> {
-        return InterfaceDescriptor<IX509EnrollmentWebClassFactory>("IX509EnrollmentWebClassFactory", IX509EnrollmentWebClassFactory.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EnrollmentWebClassFactoryFromAbi, viewIX509EnrollmentWebClassFactory)
+        return InterfaceDescriptor<IX509EnrollmentWebClassFactory>("IX509EnrollmentWebClassFactory", IX509EnrollmentWebClassFactory.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EnrollmentWebClassFactoryFromAbi, viewIX509EnrollmentWebClassFactory)
     }
 
     public unsafe func vtbl(): IX509EnrollmentWebClassFactoryVtbl {
@@ -13227,7 +13239,7 @@ public class IX509EnrollmentWebClassFactory <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509NameValuePairVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -13267,7 +13279,7 @@ public class IX509NameValuePair <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509NameValuePair> {
-        return InterfaceDescriptor<IX509NameValuePair>("IX509NameValuePair", IX509NameValuePair.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509NameValuePairFromAbi, viewIX509NameValuePair)
+        return InterfaceDescriptor<IX509NameValuePair>("IX509NameValuePair", IX509NameValuePair.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509NameValuePairFromAbi, viewIX509NameValuePair)
     }
 
     public unsafe func vtbl(): IX509NameValuePairVtbl {
@@ -13296,7 +13308,7 @@ public class IX509NameValuePair <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509NameValuePairsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -13340,7 +13352,7 @@ public class IX509NameValuePairs <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509NameValuePairs> {
-        return InterfaceDescriptor<IX509NameValuePairs>("IX509NameValuePairs", IX509NameValuePairs.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509NameValuePairsFromAbi, viewIX509NameValuePairs)
+        return InterfaceDescriptor<IX509NameValuePairs>("IX509NameValuePairs", IX509NameValuePairs.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509NameValuePairsFromAbi, viewIX509NameValuePairs)
     }
 
     public unsafe func vtbl(): IX509NameValuePairsVtbl {
@@ -16650,43 +16662,43 @@ public unsafe func Windows_CertSrvServerControlW(pwszServerName: CPointer<UInt16
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstAcquirePrivateKey == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func PstAcquirePrivateKey(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32
+    func PstAcquirePrivateKey(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstAcquirePrivateKey == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstAcquirePrivateKey(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+public unsafe func Windows_PstAcquirePrivateKey(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
     return PstAcquirePrivateKey(pCert)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificateChain == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func PstGetCertificateChain(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, ppCertChainContext: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>): Int32
+    func PstGetCertificateChain(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, ppCertChainContext: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificateChain == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstGetCertificateChain(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, ppCertChainContext: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>): Int32 {
+public unsafe func Windows_PstGetCertificateChain(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, ppCertChainContext: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>): Int32 {
     return PstGetCertificateChain(pCert, pTrustedIssuers, ppCertChainContext)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificates == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: rgpCriteria len=param[1] optional
-    func PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>>): Int32
+    func PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificates == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>>): Int32 {
+public unsafe func Windows_PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>>): Int32 {
     return PstGetCertificates(pTargetName, cCriteria, rgpCriteria, bIsClient, pdwCertChainContextCount, ppCertChainContexts)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchors == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: rgpCriteria len=param[1] optional
-    func PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32
+    func PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchors == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32 {
+public unsafe func Windows_PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32 {
     return PstGetTrustAnchors(pTargetName, cCriteria, rgpCriteria, ppTrustedIssuers)
 }
 
@@ -16694,31 +16706,31 @@ public unsafe func Windows_PstGetTrustAnchors(pTargetName: CPointer<Win32_Founda
 foreign {
     // param-hint: rgpCriteria len=param[1] optional
     // param-hint: pCertContext optional
-    func PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32
+    func PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, pCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchorsEx == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIAAbi>, pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32 {
+public unsafe func Windows_PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, cCriteria: UInt32, rgpCriteria: CPointer<Win32_impl_p1.CERT_SELECT_CRITERIAAbi>, pCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>>): Int32 {
     return PstGetTrustAnchorsEx(pTargetName, cCriteria, rgpCriteria, pCertContext, ppTrustedIssuers)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetUserNameForCertificate == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func PstGetUserNameForCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, UserName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+    func PstGetUserNameForCertificate(pCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, UserName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetUserNameForCertificate == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstGetUserNameForCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, UserName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+public unsafe func Windows_PstGetUserNameForCertificate(pCertContext: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, UserName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
     return PstGetUserNameForCertificate(pCertContext, UserName)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstMapCertificate == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func PstMapCertificate(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pTokenInformationType: CPointer<Win32_Security_Authentication_Identity.LSA_TOKEN_INFORMATION_TYPEAbi>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32
+    func PstMapCertificate(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pTokenInformationType: CPointer<Win32_Security_Authentication_Identity.LSA_TOKEN_INFORMATION_TYPEAbi>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstMapCertificate == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstMapCertificate(pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pTokenInformationType: CPointer<Win32_Security_Authentication_Identity.LSA_TOKEN_INFORMATION_TYPEAbi>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_PstMapCertificate(pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pTokenInformationType: CPointer<Win32_Security_Authentication_Identity.LSA_TOKEN_INFORMATION_TYPEAbi>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32 {
     return PstMapCertificate(pCert, pTokenInformationType, ppTokenInformation)
 }
 
@@ -16728,11 +16740,11 @@ foreign {
     // param-hint: pRequestedIssuancePolicy optional
     // param-hint: phAdditionalCertStore optional
     // param-hint: pProvGUID optional
-    func PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32__impl_l1.CERT_USAGE_MATCHAbi>, phAdditionalCertStore: CPointer<Win32__impl_l0.HCERTSTORE>, pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pProvGUID: CPointer<GUID>): Int32
+    func PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32_impl_p1.CERT_USAGE_MATCHAbi>, phAdditionalCertStore: CPointer<Win32_impl_p0.HCERTSTORE>, pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pProvGUID: CPointer<GUID>): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstValidate == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32__impl_l1.CERT_USAGE_MATCHAbi>, phAdditionalCertStore: CPointer<Win32__impl_l0.HCERTSTORE>, pCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pProvGUID: CPointer<GUID>): Int32 {
+public unsafe func Windows_PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32_impl_p1.CERT_USAGE_MATCHAbi>, phAdditionalCertStore: CPointer<Win32_impl_p0.HCERTSTORE>, pCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pProvGUID: CPointer<GUID>): Int32 {
     return PstValidate(pTargetName, bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
 }
 
@@ -18811,7 +18823,7 @@ extend CAINFO <: windows_core.CopyType & windows_core.RuntimeType & windows_core
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type FNIMPORTPFXTOPROVIDER = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, ImportPFXFlagsAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>>) -> Int32>
+public type FNIMPORTPFXTOPROVIDER = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, ImportPFXFlagsAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>>) -> Int32>
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on"]
 @C
@@ -18838,7 +18850,7 @@ public struct ICEnroll4Vtbl {
     public var createFilePFX: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var setPendingRequestInfo: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var enumPendingRequest: CFunc<(CPointer<Unit>, Int32, PENDING_REQUEST_DESIRED_PROPERTYAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var enumPendingRequest: CFunc<(CPointer<Unit>, Int32, PENDING_REQUEST_DESIRED_PROPERTYAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var removePendingRequest: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetKeyLenEx: CFunc<(CPointer<Unit>, XEKL_KEYSIZEAbi, XEKL_KEYSPECAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var InstallPKCS7Ex: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -19015,7 +19027,7 @@ public class ICEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func enumPendingRequest(lIndex: Int32, lDesiredProperty: PENDING_REQUEST_DESIRED_PROPERTYAbi, pvarProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func enumPendingRequest(lIndex: Int32, lDesiredProperty: PENDING_REQUEST_DESIRED_PROPERTYAbi, pvarProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.enumPendingRequest(__liveRaw, lIndex, lDesiredProperty, pvarProperty)
@@ -19152,7 +19164,7 @@ public class ICertExit2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertPropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -19197,7 +19209,7 @@ public class ICertProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertProperties> {
-        return InterfaceDescriptor<ICertProperties>("ICertProperties", ICertProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeICertPropertiesFromAbi, viewICertProperties)
+        return InterfaceDescriptor<ICertProperties>("ICertProperties", ICertProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeICertPropertiesFromAbi, viewICertProperties)
     }
 
     public unsafe func vtbl(): ICertPropertiesVtbl {
@@ -19438,7 +19450,7 @@ public class ICertRequest3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertViewVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OpenConnection: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var EnumCertViewColumn: CFunc<(CPointer<Unit>, CVRC_COLUMNAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetColumnCount: CFunc<(CPointer<Unit>, CVRC_COLUMNAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -19446,7 +19458,7 @@ public struct ICertViewVtbl {
     public var SetResultColumnCount: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetResultColumn: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetRestriction: CFunc<(CPointer<Unit>, CERT_VIEW_COLUMN_INDEXAbi, CERT_VIEW_SEEK_OPERATOR_FLAGSAbi, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetRestriction: CFunc<(CPointer<Unit>, CERT_VIEW_COLUMN_INDEXAbi, CERT_VIEW_SEEK_OPERATOR_FLAGSAbi, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var OpenView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -19484,7 +19496,7 @@ public class ICertView <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertView> {
-        return InterfaceDescriptor<ICertView>("ICertView", ICertView.iid(), Win32__impl_l2.IDispatch.iid(), takeICertViewFromAbi, viewICertView)
+        return InterfaceDescriptor<ICertView>("ICertView", ICertView.iid(), Win32_impl_p2.IDispatch.iid(), takeICertViewFromAbi, viewICertView)
     }
 
     public unsafe func vtbl(): ICertViewVtbl {
@@ -19528,7 +19540,7 @@ public class ICertView <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetRestriction(ColumnIndex: CERT_VIEW_COLUMN_INDEXAbi, SeekOperator: CERT_VIEW_SEEK_OPERATOR_FLAGSAbi, SortOrder: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetRestriction(ColumnIndex: CERT_VIEW_COLUMN_INDEXAbi, SeekOperator: CERT_VIEW_SEEK_OPERATOR_FLAGSAbi, SortOrder: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetRestriction(__liveRaw, ColumnIndex, SeekOperator, SortOrder, pvarValue)
@@ -19599,7 +19611,7 @@ public class ICertView2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertificationAuthoritiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -19645,7 +19657,7 @@ public class ICertificationAuthorities <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertificationAuthorities> {
-        return InterfaceDescriptor<ICertificationAuthorities>("ICertificationAuthorities", ICertificationAuthorities.iid(), Win32__impl_l2.IDispatch.iid(), takeICertificationAuthoritiesFromAbi, viewICertificationAuthorities)
+        return InterfaceDescriptor<ICertificationAuthorities>("ICertificationAuthorities", ICertificationAuthorities.iid(), Win32_impl_p2.IDispatch.iid(), takeICertificationAuthoritiesFromAbi, viewICertificationAuthorities)
     }
 
     public unsafe func vtbl(): ICertificationAuthoritiesVtbl {
@@ -19707,50 +19719,50 @@ public class ICertificationAuthorities <: InterfaceWrapperBase & ComInterface {
 public struct IEnroll4Vtbl {
     public var base_: IEnroll2Vtbl = IEnroll2Vtbl()
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetThumbPrintWStr: CFunc<(CPointer<Unit>, Win32__impl_l0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
+    public var SetThumbPrintWStr: CFunc<(CPointer<Unit>, Win32_impl_p0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var ThumbPrintWStr: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
+    public var ThumbPrintWStr: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetPrivateKeyArchiveCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetPrivateKeyArchiveCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var GetPrivateKeyArchiveCertificate: CFunc<(CPointer<Unit>) -> CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = { _ => CPointer<Win32__impl_l2.CERT_CONTEXTAbi>() }
+    public var GetPrivateKeyArchiveCertificate: CFunc<(CPointer<Unit>) -> CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = { _ => CPointer<Win32_impl_p2.CERT_CONTEXTAbi>() }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var binaryBlobToString: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
+    public var binaryBlobToString: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var stringToBinaryBlob: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var stringToBinaryBlob: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var addExtensionToRequestWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var addExtensionToRequestWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var addAttributeToRequestWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var addAttributeToRequestWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var addNameValuePairToRequestWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var resetExtensions: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var resetAttributes: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var createRequestWStr: CFunc<(CPointer<Unit>, CERT_CREATE_REQUEST_FLAGSAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var createRequestWStr: CFunc<(CPointer<Unit>, CERT_CREATE_REQUEST_FLAGSAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var createFileRequestWStr: CFunc<(CPointer<Unit>, CERT_CREATE_REQUEST_FLAGSAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var acceptResponseBlob: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
+    public var acceptResponseBlob: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _ => 0 }
     public var acceptFileResponseWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getCertContextFromResponseBlob: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var getCertContextFromResponseBlob: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var getCertContextFromFileResponseWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var getCertContextFromFileResponseWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var createPFXWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _ => 0 }
+    public var createPFXWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _ => 0 }
     public var createFilePFXWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var setPendingRequestInfoWStr: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var enumPendingRequestWStr: CFunc<(CPointer<Unit>, Int32, PENDING_REQUEST_DESIRED_PROPERTYAbi, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var removePendingRequestWStr: CFunc<(CPointer<Unit>, Win32__impl_l0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
+    public var removePendingRequestWStr: CFunc<(CPointer<Unit>, Win32_impl_p0.CRYPT_INTEGER_BLOBAbi) -> Int32> = { _, _ => 0 }
     public var GetKeyLenEx: CFunc<(CPointer<Unit>, XEKL_KEYSIZEAbi, XEKL_KEYSPECAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var InstallPKCS7BlobEx: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    public var InstallPKCS7BlobEx: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var AddCertTypeToRequestWStrEx: CFunc<(CPointer<Unit>, ADDED_CERT_TYPEAbi, CPointer<UInt16>, Int32, Int32, Int32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var getProviderTypeWStr: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var addBlobPropertyToCertificateWStr: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var addBlobPropertyToCertificateWStr: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var SetSignerCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetSignerCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
     public var SetClientId: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ClientId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetIncludeSubjectKeyID: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -19799,56 +19811,56 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetThumbPrintWStr(thumbPrintBlob: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi): Int32 {
+    public unsafe func SetThumbPrintWStr(thumbPrintBlob: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetThumbPrintWStr(__liveRaw, thumbPrintBlob)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func ThumbPrintWStr(thumbPrintBlob: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func ThumbPrintWStr(thumbPrintBlob: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ThumbPrintWStr(__liveRaw, thumbPrintBlob)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetPrivateKeyArchiveCertificate(pPrivateKeyArchiveCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+    public unsafe func SetPrivateKeyArchiveCertificate(pPrivateKeyArchiveCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPrivateKeyArchiveCertificate(__liveRaw, pPrivateKeyArchiveCert)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func GetPrivateKeyArchiveCertificate(): CPointer<Win32__impl_l2.CERT_CONTEXTAbi> {
+    public unsafe func GetPrivateKeyArchiveCertificate(): CPointer<Win32_impl_p2.CERT_CONTEXTAbi> {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPrivateKeyArchiveCertificate(__liveRaw)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func binaryBlobToString(Flags: Int32, pblobBinary: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, ppwszString: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func binaryBlobToString(Flags: Int32, pblobBinary: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, ppwszString: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.binaryBlobToString(__liveRaw, Flags, pblobBinary, ppwszString)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func stringToBinaryBlob(Flags: Int32, pwszString: CPointer<UInt16>, pblobBinary: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, pdwSkip: CPointer<Int32>, pdwFlags: CPointer<Int32>): Int32 {
+    public unsafe func stringToBinaryBlob(Flags: Int32, pwszString: CPointer<UInt16>, pblobBinary: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, pdwSkip: CPointer<Int32>, pdwFlags: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.stringToBinaryBlob(__liveRaw, Flags, pwszString, pblobBinary, pdwSkip, pdwFlags)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func addExtensionToRequestWStr(Flags: Int32, pwszName: CPointer<UInt16>, pblobValue: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func addExtensionToRequestWStr(Flags: Int32, pwszName: CPointer<UInt16>, pblobValue: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.addExtensionToRequestWStr(__liveRaw, Flags, pwszName, pblobValue)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func addAttributeToRequestWStr(Flags: Int32, pwszName: CPointer<UInt16>, pblobValue: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func addAttributeToRequestWStr(Flags: Int32, pwszName: CPointer<UInt16>, pblobValue: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.addAttributeToRequestWStr(__liveRaw, Flags, pwszName, pblobValue)
@@ -19873,7 +19885,7 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func createRequestWStr(Flags: CERT_CREATE_REQUEST_FLAGSAbi, pwszDNName: CPointer<UInt16>, pwszUsage: CPointer<UInt16>, pblobRequest: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func createRequestWStr(Flags: CERT_CREATE_REQUEST_FLAGSAbi, pwszDNName: CPointer<UInt16>, pwszUsage: CPointer<UInt16>, pblobRequest: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.createRequestWStr(__liveRaw, Flags, pwszDNName, pwszUsage, pblobRequest)
@@ -19886,7 +19898,7 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func acceptResponseBlob(pblobResponse: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func acceptResponseBlob(pblobResponse: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.acceptResponseBlob(__liveRaw, pblobResponse)
@@ -19899,21 +19911,21 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getCertContextFromResponseBlob(pblobResponse: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+    public unsafe func getCertContextFromResponseBlob(pblobResponse: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getCertContextFromResponseBlob(__liveRaw, pblobResponse, ppCertContext)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func getCertContextFromFileResponseWStr(pwszResponseFileName: CPointer<UInt16>, ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+    public unsafe func getCertContextFromFileResponseWStr(pwszResponseFileName: CPointer<UInt16>, ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getCertContextFromFileResponseWStr(__liveRaw, pwszResponseFileName, ppCertContext)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func createPFXWStr(pwszPassword: CPointer<UInt16>, pblobPFX: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func createPFXWStr(pwszPassword: CPointer<UInt16>, pblobPFX: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.createPFXWStr(__liveRaw, pwszPassword, pblobPFX)
@@ -19938,7 +19950,7 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func removePendingRequestWStr(thumbPrintBlob: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi): Int32 {
+    public unsafe func removePendingRequestWStr(thumbPrintBlob: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.removePendingRequestWStr(__liveRaw, thumbPrintBlob)
@@ -19951,7 +19963,7 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func InstallPKCS7BlobEx(pBlobPKCS7: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>, plCertInstalled: CPointer<Int32>): Int32 {
+    public unsafe func InstallPKCS7BlobEx(pBlobPKCS7: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>, plCertInstalled: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InstallPKCS7BlobEx(__liveRaw, pBlobPKCS7, plCertInstalled)
@@ -19970,14 +19982,14 @@ public class IEnroll4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func addBlobPropertyToCertificateWStr(lPropertyId: Int32, lReserved: Int32, pBlobProperty: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>): Int32 {
+    public unsafe func addBlobPropertyToCertificateWStr(lPropertyId: Int32, lReserved: Int32, pBlobProperty: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.addBlobPropertyToCertificateWStr(__liveRaw, lPropertyId, lReserved, pBlobProperty)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func SetSignerCertificate(pSignerCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+    public unsafe func SetSignerCertificate(pSignerCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSignerCertificate(__liveRaw, pSignerCert)
@@ -20094,7 +20106,7 @@ public class INDESPolicy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOCSPAdminVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OCSPServiceProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OCSPCAConfigurationCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConfiguration: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16) -> Int32> = { _, _, _ => 0 }
@@ -20104,9 +20116,9 @@ public struct IOCSPAdminVtbl {
     public var SetSecurity: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var GetSecurity: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetSigningCertificates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetSigningCertificates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetHashAlgorithms: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetHashAlgorithms: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -20143,7 +20155,7 @@ public class IOCSPAdmin <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IOCSPAdmin> {
-        return InterfaceDescriptor<IOCSPAdmin>("IOCSPAdmin", IOCSPAdmin.iid(), Win32__impl_l2.IDispatch.iid(), takeIOCSPAdminFromAbi, viewIOCSPAdmin)
+        return InterfaceDescriptor<IOCSPAdmin>("IOCSPAdmin", IOCSPAdmin.iid(), Win32_impl_p2.IDispatch.iid(), takeIOCSPAdminFromAbi, viewIOCSPAdmin)
     }
 
     public unsafe func vtbl(): IOCSPAdminVtbl {
@@ -20199,14 +20211,14 @@ public class IOCSPAdmin <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetSigningCertificates(bstrServerName: CPointer<UInt16>, pCACertVar: CPointer<Win32__impl_l2.VARIANTAbi>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetSigningCertificates(bstrServerName: CPointer<UInt16>, pCACertVar: CPointer<Win32_impl_p2.VARIANTAbi>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSigningCertificates(__liveRaw, bstrServerName, pCACertVar, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetHashAlgorithms(bstrServerName: CPointer<UInt16>, bstrCAId: CPointer<UInt16>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetHashAlgorithms(bstrServerName: CPointer<UInt16>, bstrCAId: CPointer<UInt16>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetHashAlgorithms(__liveRaw, bstrServerName, bstrCAId, pVal)
@@ -20216,7 +20228,7 @@ public class IOCSPAdmin <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IObjectIdVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeFromName: CFunc<(CPointer<Unit>, CERTENROLL_OBJECTIDAbi) -> Int32> = { _, _ => 0 }
     public var InitializeFromValue: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var InitializeFromAlgorithmName: CFunc<(CPointer<Unit>, ObjectIdGroupIdAbi, ObjectIdPublicKeyFlagsAbi, AlgorithmFlagsAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -20261,7 +20273,7 @@ public class IObjectId <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IObjectId> {
-        return InterfaceDescriptor<IObjectId>("IObjectId", IObjectId.iid(), Win32__impl_l2.IDispatch.iid(), takeIObjectIdFromAbi, viewIObjectId)
+        return InterfaceDescriptor<IObjectId>("IObjectId", IObjectId.iid(), Win32_impl_p2.IDispatch.iid(), takeIObjectIdFromAbi, viewIObjectId)
     }
 
     public unsafe func vtbl(): IObjectIdVtbl {
@@ -20320,7 +20332,7 @@ public class IObjectId <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IObjectIdsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -20365,7 +20377,7 @@ public class IObjectIds <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IObjectIds> {
-        return InterfaceDescriptor<IObjectIds>("IObjectIds", IObjectIds.iid(), Win32__impl_l2.IDispatch.iid(), takeIObjectIdsFromAbi, viewIObjectIds)
+        return InterfaceDescriptor<IObjectIds>("IObjectIds", IObjectIds.iid(), Win32_impl_p2.IDispatch.iid(), takeIObjectIdsFromAbi, viewIObjectIds)
     }
 
     public unsafe func vtbl(): IObjectIdsVtbl {
@@ -20419,7 +20431,7 @@ public class IObjectIds <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPolicyQualifierVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeEncode: CFunc<(CPointer<Unit>, CPointer<UInt16>, PolicyQualifierTypeAbi) -> Int32> = { _, _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Qualifier: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -20461,7 +20473,7 @@ public class IPolicyQualifier <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPolicyQualifier> {
-        return InterfaceDescriptor<IPolicyQualifier>("IPolicyQualifier", IPolicyQualifier.iid(), Win32__impl_l2.IDispatch.iid(), takeIPolicyQualifierFromAbi, viewIPolicyQualifier)
+        return InterfaceDescriptor<IPolicyQualifier>("IPolicyQualifier", IPolicyQualifier.iid(), Win32_impl_p2.IDispatch.iid(), takeIPolicyQualifierFromAbi, viewIPolicyQualifier)
     }
 
     public unsafe func vtbl(): IPolicyQualifierVtbl {
@@ -20502,7 +20514,7 @@ public class IPolicyQualifier <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPolicyQualifiersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -20546,7 +20558,7 @@ public class IPolicyQualifiers <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPolicyQualifiers> {
-        return InterfaceDescriptor<IPolicyQualifiers>("IPolicyQualifiers", IPolicyQualifiers.iid(), Win32__impl_l2.IDispatch.iid(), takeIPolicyQualifiersFromAbi, viewIPolicyQualifiers)
+        return InterfaceDescriptor<IPolicyQualifiers>("IPolicyQualifiers", IPolicyQualifiers.iid(), Win32_impl_p2.IDispatch.iid(), takeIPolicyQualifiersFromAbi, viewIPolicyQualifiers)
     }
 
     public unsafe func vtbl(): IPolicyQualifiersVtbl {
@@ -20594,7 +20606,7 @@ public class IPolicyQualifiers <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISmimeCapabilityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var BitCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -20634,7 +20646,7 @@ public class ISmimeCapability <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISmimeCapability> {
-        return InterfaceDescriptor<ISmimeCapability>("ISmimeCapability", ISmimeCapability.iid(), Win32__impl_l2.IDispatch.iid(), takeISmimeCapabilityFromAbi, viewISmimeCapability)
+        return InterfaceDescriptor<ISmimeCapability>("ISmimeCapability", ISmimeCapability.iid(), Win32_impl_p2.IDispatch.iid(), takeISmimeCapabilityFromAbi, viewISmimeCapability)
     }
 
     public unsafe func vtbl(): ISmimeCapabilityVtbl {
@@ -20663,7 +20675,7 @@ public class ISmimeCapability <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX500DistinguishedNameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Decode: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi, X500NameFlagsAbi) -> Int32> = { _, _, _, _ => 0 }
     public var Encode: CFunc<(CPointer<Unit>, CPointer<UInt16>, X500NameFlagsAbi) -> Int32> = { _, _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -20704,7 +20716,7 @@ public class IX500DistinguishedName <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX500DistinguishedName> {
-        return InterfaceDescriptor<IX500DistinguishedName>("IX500DistinguishedName", IX500DistinguishedName.iid(), Win32__impl_l2.IDispatch.iid(), takeIX500DistinguishedNameFromAbi, viewIX500DistinguishedName)
+        return InterfaceDescriptor<IX500DistinguishedName>("IX500DistinguishedName", IX500DistinguishedName.iid(), Win32_impl_p2.IDispatch.iid(), takeIX500DistinguishedNameFromAbi, viewIX500DistinguishedName)
     }
 
     public unsafe func vtbl(): IX500DistinguishedNameVtbl {
@@ -20739,7 +20751,7 @@ public class IX500DistinguishedName <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509AttributeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_RawData: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -20779,7 +20791,7 @@ public class IX509Attribute <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509Attribute> {
-        return InterfaceDescriptor<IX509Attribute>("IX509Attribute", IX509Attribute.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509AttributeFromAbi, viewIX509Attribute)
+        return InterfaceDescriptor<IX509Attribute>("IX509Attribute", IX509Attribute.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509AttributeFromAbi, viewIX509Attribute)
     }
 
     public unsafe func vtbl(): IX509AttributeVtbl {
@@ -21188,7 +21200,7 @@ public class IX509AttributeRenewalCertificate <: InterfaceWrapperBase & ComInter
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509AttributesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -21232,7 +21244,7 @@ public class IX509Attributes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509Attributes> {
-        return InterfaceDescriptor<IX509Attributes>("IX509Attributes", IX509Attributes.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509AttributesFromAbi, viewIX509Attributes)
+        return InterfaceDescriptor<IX509Attributes>("IX509Attributes", IX509Attributes.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509AttributesFromAbi, viewIX509Attributes)
     }
 
     public unsafe func vtbl(): IX509AttributesVtbl {
@@ -21280,7 +21292,7 @@ public class IX509Attributes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateTemplatesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -21326,7 +21338,7 @@ public class IX509CertificateTemplates <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateTemplates> {
-        return InterfaceDescriptor<IX509CertificateTemplates>("IX509CertificateTemplates", IX509CertificateTemplates.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateTemplatesFromAbi, viewIX509CertificateTemplates)
+        return InterfaceDescriptor<IX509CertificateTemplates>("IX509CertificateTemplates", IX509CertificateTemplates.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateTemplatesFromAbi, viewIX509CertificateTemplates)
     }
 
     public unsafe func vtbl(): IX509CertificateTemplatesVtbl {
@@ -21386,7 +21398,7 @@ public class IX509CertificateTemplates <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EnrollmentHelperVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddPolicyServer: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, PolicyServerUrlFlagsAbi, X509EnrollmentAuthFlagsAbi, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var AddEnrollmentServer: CFunc<(CPointer<Unit>, CPointer<UInt16>, X509EnrollmentAuthFlagsAbi, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Enroll: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, EncodingTypeAbi, WebEnrollmentFlagsAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -21427,7 +21439,7 @@ public class IX509EnrollmentHelper <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509EnrollmentHelper> {
-        return InterfaceDescriptor<IX509EnrollmentHelper>("IX509EnrollmentHelper", IX509EnrollmentHelper.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EnrollmentHelperFromAbi, viewIX509EnrollmentHelper)
+        return InterfaceDescriptor<IX509EnrollmentHelper>("IX509EnrollmentHelper", IX509EnrollmentHelper.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EnrollmentHelperFromAbi, viewIX509EnrollmentHelper)
     }
 
     public unsafe func vtbl(): IX509EnrollmentHelperVtbl {
@@ -21462,7 +21474,7 @@ public class IX509EnrollmentHelper <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EnrollmentPolicyServerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, X509EnrollmentAuthFlagsAbi, Int16, X509CertificateEnrollmentContextAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var LoadPolicy: CFunc<(CPointer<Unit>, X509EnrollmentPolicyLoadOptionAbi) -> Int32> = { _, _ => 0 }
     public var GetTemplates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -21484,9 +21496,9 @@ public struct IX509EnrollmentPolicyServerVtbl {
     public var SetCredential: CFunc<(CPointer<Unit>, Int32, X509EnrollmentAuthFlagsAbi, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var QueryChanges: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InitializeImport: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var InitializeImport: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Export: CFunc<(CPointer<Unit>, X509EnrollmentPolicyExportFlagsAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Export: CFunc<(CPointer<Unit>, X509EnrollmentPolicyExportFlagsAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Cost: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetCost: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -21525,7 +21537,7 @@ public class IX509EnrollmentPolicyServer <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509EnrollmentPolicyServer> {
-        return InterfaceDescriptor<IX509EnrollmentPolicyServer>("IX509EnrollmentPolicyServer", IX509EnrollmentPolicyServer.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EnrollmentPolicyServerFromAbi, viewIX509EnrollmentPolicyServer)
+        return InterfaceDescriptor<IX509EnrollmentPolicyServer>("IX509EnrollmentPolicyServer", IX509EnrollmentPolicyServer.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EnrollmentPolicyServerFromAbi, viewIX509EnrollmentPolicyServer)
     }
 
     public unsafe func vtbl(): IX509EnrollmentPolicyServerVtbl {
@@ -21653,14 +21665,14 @@ public class IX509EnrollmentPolicyServer <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InitializeImport(val: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func InitializeImport(val: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InitializeImport(__liveRaw, val)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Export(exportFlags: X509EnrollmentPolicyExportFlagsAbi, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Export(exportFlags: X509EnrollmentPolicyExportFlagsAbi, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Export(__liveRaw, exportFlags, pVal)
@@ -21682,7 +21694,7 @@ public class IX509EnrollmentPolicyServer <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509ExtensionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_RawData: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -21724,7 +21736,7 @@ public class IX509Extension <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509Extension> {
-        return InterfaceDescriptor<IX509Extension>("IX509Extension", IX509Extension.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509ExtensionFromAbi, viewIX509Extension)
+        return InterfaceDescriptor<IX509Extension>("IX509Extension", IX509Extension.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509ExtensionFromAbi, viewIX509Extension)
     }
 
     public unsafe func vtbl(): IX509ExtensionVtbl {
@@ -22269,7 +22281,7 @@ public class IX509ExtensionTemplateName <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509ExtensionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -22315,7 +22327,7 @@ public class IX509Extensions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509Extensions> {
-        return InterfaceDescriptor<IX509Extensions>("IX509Extensions", IX509Extensions.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509ExtensionsFromAbi, viewIX509Extensions)
+        return InterfaceDescriptor<IX509Extensions>("IX509Extensions", IX509Extensions.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509ExtensionsFromAbi, viewIX509Extensions)
     }
 
     public unsafe func vtbl(): IX509ExtensionsVtbl {
@@ -22375,7 +22387,7 @@ public class IX509Extensions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509MachineEnrollmentFactoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -22413,7 +22425,7 @@ public class IX509MachineEnrollmentFactory <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509MachineEnrollmentFactory> {
-        return InterfaceDescriptor<IX509MachineEnrollmentFactory>("IX509MachineEnrollmentFactory", IX509MachineEnrollmentFactory.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509MachineEnrollmentFactoryFromAbi, viewIX509MachineEnrollmentFactory)
+        return InterfaceDescriptor<IX509MachineEnrollmentFactory>("IX509MachineEnrollmentFactory", IX509MachineEnrollmentFactory.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509MachineEnrollmentFactoryFromAbi, viewIX509MachineEnrollmentFactory)
     }
 
     public unsafe func vtbl(): IX509MachineEnrollmentFactoryVtbl {
@@ -22430,7 +22442,7 @@ public class IX509MachineEnrollmentFactory <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509PolicyServerUrlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, X509CertificateEnrollmentContextAbi) -> Int32> = { _, _ => 0 }
     public var Url: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetUrl: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -22482,7 +22494,7 @@ public class IX509PolicyServerUrl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509PolicyServerUrl> {
-        return InterfaceDescriptor<IX509PolicyServerUrl>("IX509PolicyServerUrl", IX509PolicyServerUrl.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509PolicyServerUrlFromAbi, viewIX509PolicyServerUrl)
+        return InterfaceDescriptor<IX509PolicyServerUrl>("IX509PolicyServerUrl", IX509PolicyServerUrl.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509PolicyServerUrlFromAbi, viewIX509PolicyServerUrl)
     }
 
     public unsafe func vtbl(): IX509PolicyServerUrlVtbl {
@@ -22583,7 +22595,7 @@ public class IX509PolicyServerUrl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509PublicKeyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, EncodingTypeAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var InitializeFromEncodedPublicKeyInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi) -> Int32> = { _, _, _ => 0 }
     public var Algorithm: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -22627,7 +22639,7 @@ public class IX509PublicKey <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509PublicKey> {
-        return InterfaceDescriptor<IX509PublicKey>("IX509PublicKey", IX509PublicKey.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509PublicKeyFromAbi, viewIX509PublicKey)
+        return InterfaceDescriptor<IX509PublicKey>("IX509PublicKey", IX509PublicKey.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509PublicKeyFromAbi, viewIX509PublicKey)
     }
 
     public unsafe func vtbl(): IX509PublicKeyVtbl {
@@ -22680,7 +22692,7 @@ public class IX509PublicKey <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509SignatureInformationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HashAlgorithm: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetHashAlgorithm: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var PublicKeyAlgorithm: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -22730,7 +22742,7 @@ public class IX509SignatureInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509SignatureInformation> {
-        return InterfaceDescriptor<IX509SignatureInformation>("IX509SignatureInformation", IX509SignatureInformation.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509SignatureInformationFromAbi, viewIX509SignatureInformation)
+        return InterfaceDescriptor<IX509SignatureInformation>("IX509SignatureInformation", IX509SignatureInformation.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509SignatureInformationFromAbi, viewIX509SignatureInformation)
     }
 
     public unsafe func vtbl(): IX509SignatureInformationVtbl {
@@ -22819,7 +22831,7 @@ public class IX509SignatureInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAlternativeNameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeFromString: CFunc<(CPointer<Unit>, AlternativeNameTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var InitializeFromRawData: CFunc<(CPointer<Unit>, AlternativeNameTypeAbi, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var InitializeFromOtherName: CFunc<(CPointer<Unit>, CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>, Int16) -> Int32> = { _, _, _, _, _ => 0 }
@@ -22863,7 +22875,7 @@ public class IAlternativeName <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAlternativeName> {
-        return InterfaceDescriptor<IAlternativeName>("IAlternativeName", IAlternativeName.iid(), Win32__impl_l2.IDispatch.iid(), takeIAlternativeNameFromAbi, viewIAlternativeName)
+        return InterfaceDescriptor<IAlternativeName>("IAlternativeName", IAlternativeName.iid(), Win32_impl_p2.IDispatch.iid(), takeIAlternativeNameFromAbi, viewIAlternativeName)
     }
 
     public unsafe func vtbl(): IAlternativeNameVtbl {
@@ -22916,7 +22928,7 @@ public class IAlternativeName <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAlternativeNamesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -22960,7 +22972,7 @@ public class IAlternativeNames <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAlternativeNames> {
-        return InterfaceDescriptor<IAlternativeNames>("IAlternativeNames", IAlternativeNames.iid(), Win32__impl_l2.IDispatch.iid(), takeIAlternativeNamesFromAbi, viewIAlternativeNames)
+        return InterfaceDescriptor<IAlternativeNames>("IAlternativeNames", IAlternativeNames.iid(), Win32_impl_p2.IDispatch.iid(), takeIAlternativeNamesFromAbi, viewIAlternativeNames)
     }
 
     public unsafe func vtbl(): IAlternativeNamesVtbl {
@@ -23008,7 +23020,7 @@ public class IAlternativeNames <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertificatePolicyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PolicyQualifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -23048,7 +23060,7 @@ public class ICertificatePolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertificatePolicy> {
-        return InterfaceDescriptor<ICertificatePolicy>("ICertificatePolicy", ICertificatePolicy.iid(), Win32__impl_l2.IDispatch.iid(), takeICertificatePolicyFromAbi, viewICertificatePolicy)
+        return InterfaceDescriptor<ICertificatePolicy>("ICertificatePolicy", ICertificatePolicy.iid(), Win32_impl_p2.IDispatch.iid(), takeICertificatePolicyFromAbi, viewICertificatePolicy)
     }
 
     public unsafe func vtbl(): ICertificatePolicyVtbl {
@@ -23077,7 +23089,7 @@ public class ICertificatePolicy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICryptAttributeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeFromObjectId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var InitializeFromValues: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ObjectId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -23118,7 +23130,7 @@ public class ICryptAttribute <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICryptAttribute> {
-        return InterfaceDescriptor<ICryptAttribute>("ICryptAttribute", ICryptAttribute.iid(), Win32__impl_l2.IDispatch.iid(), takeICryptAttributeFromAbi, viewICryptAttribute)
+        return InterfaceDescriptor<ICryptAttribute>("ICryptAttribute", ICryptAttribute.iid(), Win32_impl_p2.IDispatch.iid(), takeICryptAttributeFromAbi, viewICryptAttribute)
     }
 
     public unsafe func vtbl(): ICryptAttributeVtbl {
@@ -23153,7 +23165,7 @@ public class ICryptAttribute <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICryptAttributesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23199,7 +23211,7 @@ public class ICryptAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICryptAttributes> {
-        return InterfaceDescriptor<ICryptAttributes>("ICryptAttributes", ICryptAttributes.iid(), Win32__impl_l2.IDispatch.iid(), takeICryptAttributesFromAbi, viewICryptAttributes)
+        return InterfaceDescriptor<ICryptAttributes>("ICryptAttributes", ICryptAttributes.iid(), Win32_impl_p2.IDispatch.iid(), takeICryptAttributesFromAbi, viewICryptAttributes)
     }
 
     public unsafe func vtbl(): ICryptAttributesVtbl {
@@ -23259,7 +23271,7 @@ public class ICryptAttributes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspAlgorithmVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetAlgorithmOid: CFunc<(CPointer<Unit>, Int32, AlgorithmFlagsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DefaultLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var IncrementLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -23306,7 +23318,7 @@ public class ICspAlgorithm <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspAlgorithm> {
-        return InterfaceDescriptor<ICspAlgorithm>("ICspAlgorithm", ICspAlgorithm.iid(), Win32__impl_l2.IDispatch.iid(), takeICspAlgorithmFromAbi, viewICspAlgorithm)
+        return InterfaceDescriptor<ICspAlgorithm>("ICspAlgorithm", ICspAlgorithm.iid(), Win32_impl_p2.IDispatch.iid(), takeICspAlgorithmFromAbi, viewICspAlgorithm)
     }
 
     public unsafe func vtbl(): ICspAlgorithmVtbl {
@@ -23377,7 +23389,7 @@ public class ICspAlgorithm <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspAlgorithmsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23423,7 +23435,7 @@ public class ICspAlgorithms <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspAlgorithms> {
-        return InterfaceDescriptor<ICspAlgorithms>("ICspAlgorithms", ICspAlgorithms.iid(), Win32__impl_l2.IDispatch.iid(), takeICspAlgorithmsFromAbi, viewICspAlgorithms)
+        return InterfaceDescriptor<ICspAlgorithms>("ICspAlgorithms", ICspAlgorithms.iid(), Win32_impl_p2.IDispatch.iid(), takeICspAlgorithmsFromAbi, viewICspAlgorithms)
     }
 
     public unsafe func vtbl(): ICspAlgorithmsVtbl {
@@ -23552,7 +23564,7 @@ public class IX509AttributeExtensions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateRevocationListEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<UInt16>, Float64) -> Int32> = { _, _, _, _ => 0 }
     public var get_SerialNumber: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var RevocationDate: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -23596,7 +23608,7 @@ public class IX509CertificateRevocationListEntry <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateRevocationListEntry> {
-        return InterfaceDescriptor<IX509CertificateRevocationListEntry>("IX509CertificateRevocationListEntry", IX509CertificateRevocationListEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateRevocationListEntryFromAbi, viewIX509CertificateRevocationListEntry)
+        return InterfaceDescriptor<IX509CertificateRevocationListEntry>("IX509CertificateRevocationListEntry", IX509CertificateRevocationListEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateRevocationListEntryFromAbi, viewIX509CertificateRevocationListEntry)
     }
 
     public unsafe func vtbl(): IX509CertificateRevocationListEntryVtbl {
@@ -23649,7 +23661,7 @@ public class IX509CertificateRevocationListEntry <: InterfaceWrapperBase & ComIn
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EndorsementKeyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ProviderName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetProviderName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Length: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -23697,7 +23709,7 @@ public class IX509EndorsementKey <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509EndorsementKey> {
-        return InterfaceDescriptor<IX509EndorsementKey>("IX509EndorsementKey", IX509EndorsementKey.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EndorsementKeyFromAbi, viewIX509EndorsementKey)
+        return InterfaceDescriptor<IX509EndorsementKey>("IX509EndorsementKey", IX509EndorsementKey.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EndorsementKeyFromAbi, viewIX509EndorsementKey)
     }
 
     public unsafe func vtbl(): IX509EndorsementKeyVtbl {
@@ -23843,7 +23855,7 @@ public class IX509ExtensionAlternativeNames <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509PolicyServerListManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23888,7 +23900,7 @@ public class IX509PolicyServerListManager <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509PolicyServerListManager> {
-        return InterfaceDescriptor<IX509PolicyServerListManager>("IX509PolicyServerListManager", IX509PolicyServerListManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509PolicyServerListManagerFromAbi, viewIX509PolicyServerListManager)
+        return InterfaceDescriptor<IX509PolicyServerListManager>("IX509PolicyServerListManager", IX509PolicyServerListManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509PolicyServerListManagerFromAbi, viewIX509PolicyServerListManager)
     }
 
     public unsafe func vtbl(): IX509PolicyServerListManagerVtbl {
@@ -23942,7 +23954,7 @@ public class IX509PolicyServerListManager <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICertificatePoliciesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23986,7 +23998,7 @@ public class ICertificatePolicies <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICertificatePolicies> {
-        return InterfaceDescriptor<ICertificatePolicies>("ICertificatePolicies", ICertificatePolicies.iid(), Win32__impl_l2.IDispatch.iid(), takeICertificatePoliciesFromAbi, viewICertificatePolicies)
+        return InterfaceDescriptor<ICertificatePolicies>("ICertificatePolicies", ICertificatePolicies.iid(), Win32_impl_p2.IDispatch.iid(), takeICertificatePoliciesFromAbi, viewICertificatePolicies)
     }
 
     public unsafe func vtbl(): ICertificatePoliciesVtbl {
@@ -24034,7 +24046,7 @@ public class ICertificatePolicies <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateRevocationListEntriesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -24080,7 +24092,7 @@ public class IX509CertificateRevocationListEntries <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateRevocationListEntries> {
-        return InterfaceDescriptor<IX509CertificateRevocationListEntries>("IX509CertificateRevocationListEntries", IX509CertificateRevocationListEntries.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateRevocationListEntriesFromAbi, viewIX509CertificateRevocationListEntries)
+        return InterfaceDescriptor<IX509CertificateRevocationListEntries>("IX509CertificateRevocationListEntries", IX509CertificateRevocationListEntries.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateRevocationListEntriesFromAbi, viewIX509CertificateRevocationListEntries)
     }
 
     public unsafe func vtbl(): IX509CertificateRevocationListEntriesVtbl {
@@ -24340,7 +24352,7 @@ public class ICertPropertyKeyProvInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspInformationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitializeFromName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var InitializeFromType: CFunc<(CPointer<Unit>, X509ProviderTypeAbi, CPointer<Unit>, Int16) -> Int32> = { _, _, _, _ => 0 }
     public var CspAlgorithms: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -24394,7 +24406,7 @@ public class ICspInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspInformation> {
-        return InterfaceDescriptor<ICspInformation>("ICspInformation", ICspInformation.iid(), Win32__impl_l2.IDispatch.iid(), takeICspInformationFromAbi, viewICspInformation)
+        return InterfaceDescriptor<ICspInformation>("ICspInformation", ICspInformation.iid(), Win32_impl_p2.IDispatch.iid(), takeICspInformationFromAbi, viewICspInformation)
     }
 
     public unsafe func vtbl(): ICspInformationVtbl {
@@ -24507,7 +24519,7 @@ public class ICspInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspInformationsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -24557,7 +24569,7 @@ public class ICspInformations <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspInformations> {
-        return InterfaceDescriptor<ICspInformations>("ICspInformations", ICspInformations.iid(), Win32__impl_l2.IDispatch.iid(), takeICspInformationsFromAbi, viewICspInformations)
+        return InterfaceDescriptor<ICspInformations>("ICspInformations", ICspInformations.iid(), Win32_impl_p2.IDispatch.iid(), takeICspInformationsFromAbi, viewICspInformations)
     }
 
     public unsafe func vtbl(): ICspInformationsVtbl {
@@ -24641,7 +24653,7 @@ public class ICspInformations <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var Ordinal: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetOrdinal: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -24685,7 +24697,7 @@ public class ICspStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspStatus> {
-        return InterfaceDescriptor<ICspStatus>("ICspStatus", ICspStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeICspStatusFromAbi, viewICspStatus)
+        return InterfaceDescriptor<ICspStatus>("ICspStatus", ICspStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeICspStatusFromAbi, viewICspStatus)
     }
 
     public unsafe func vtbl(): ICspStatusVtbl {
@@ -24738,7 +24750,7 @@ public class ICspStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICspStatusesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -24786,7 +24798,7 @@ public class ICspStatuses <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICspStatuses> {
-        return InterfaceDescriptor<ICspStatuses>("ICspStatuses", ICspStatuses.iid(), Win32__impl_l2.IDispatch.iid(), takeICspStatusesFromAbi, viewICspStatuses)
+        return InterfaceDescriptor<ICspStatuses>("ICspStatuses", ICspStatuses.iid(), Win32_impl_p2.IDispatch.iid(), takeICspStatusesFromAbi, viewICspStatuses)
     }
 
     public unsafe func vtbl(): ICspStatusesVtbl {
@@ -24858,7 +24870,7 @@ public class ICspStatuses <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISignerCertificateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, Int16, X509PrivateKeyVerifyAbi, EncodingTypeAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var get_Certificate: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var PrivateKey: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -24906,7 +24918,7 @@ public class ISignerCertificate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISignerCertificate> {
-        return InterfaceDescriptor<ISignerCertificate>("ISignerCertificate", ISignerCertificate.iid(), Win32__impl_l2.IDispatch.iid(), takeISignerCertificateFromAbi, viewISignerCertificate)
+        return InterfaceDescriptor<ISignerCertificate>("ISignerCertificate", ISignerCertificate.iid(), Win32_impl_p2.IDispatch.iid(), takeISignerCertificateFromAbi, viewISignerCertificate)
     }
 
     public unsafe func vtbl(): ISignerCertificateVtbl {
@@ -24983,7 +24995,7 @@ public class ISignerCertificate <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISignerCertificatesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -25028,7 +25040,7 @@ public class ISignerCertificates <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISignerCertificates> {
-        return InterfaceDescriptor<ISignerCertificates>("ISignerCertificates", ISignerCertificates.iid(), Win32__impl_l2.IDispatch.iid(), takeISignerCertificatesFromAbi, viewISignerCertificates)
+        return InterfaceDescriptor<ISignerCertificates>("ISignerCertificates", ISignerCertificates.iid(), Win32_impl_p2.IDispatch.iid(), takeISignerCertificatesFromAbi, viewISignerCertificates)
     }
 
     public unsafe func vtbl(): ISignerCertificatesVtbl {
@@ -25082,7 +25094,7 @@ public class ISignerCertificates <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISmimeCapabilitiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_ItemByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -25128,7 +25140,7 @@ public class ISmimeCapabilities <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISmimeCapabilities> {
-        return InterfaceDescriptor<ISmimeCapabilities>("ISmimeCapabilities", ISmimeCapabilities.iid(), Win32__impl_l2.IDispatch.iid(), takeISmimeCapabilitiesFromAbi, viewISmimeCapabilities)
+        return InterfaceDescriptor<ISmimeCapabilities>("ISmimeCapabilities", ISmimeCapabilities.iid(), Win32_impl_p2.IDispatch.iid(), takeISmimeCapabilitiesFromAbi, viewISmimeCapabilities)
     }
 
     public unsafe func vtbl(): ISmimeCapabilitiesVtbl {
@@ -25271,7 +25283,7 @@ public class IX509AttributeArchiveKey <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateRequestVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, X509CertificateEnrollmentContextAbi) -> Int32> = { _, _ => 0 }
     public var Encode: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ResetForEncode: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -25333,7 +25345,7 @@ public class IX509CertificateRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateRequest> {
-        return InterfaceDescriptor<IX509CertificateRequest>("IX509CertificateRequest", IX509CertificateRequest.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateRequestFromAbi, viewIX509CertificateRequest)
+        return InterfaceDescriptor<IX509CertificateRequest>("IX509CertificateRequest", IX509CertificateRequest.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateRequestFromAbi, viewIX509CertificateRequest)
     }
 
     public unsafe func vtbl(): IX509CertificateRequestVtbl {
@@ -26702,7 +26714,7 @@ public class IX509CertificateRequestPkcs7V2 <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509CertificateRevocationListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var InitializeDecode: CFunc<(CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi) -> Int32> = { _, _, _ => 0 }
     public var Encode: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -26770,7 +26782,7 @@ public class IX509CertificateRevocationList <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509CertificateRevocationList> {
-        return InterfaceDescriptor<IX509CertificateRevocationList>("IX509CertificateRevocationList", IX509CertificateRevocationList.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509CertificateRevocationListFromAbi, viewIX509CertificateRevocationList)
+        return InterfaceDescriptor<IX509CertificateRevocationList>("IX509CertificateRevocationList", IX509CertificateRevocationList.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509CertificateRevocationListFromAbi, viewIX509CertificateRevocationList)
     }
 
     public unsafe func vtbl(): IX509CertificateRevocationListVtbl {
@@ -26967,7 +26979,7 @@ public class IX509CertificateRevocationList <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509EnrollmentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, X509CertificateEnrollmentContextAbi) -> Int32> = { _, _ => 0 }
     public var InitializeFromTemplateName: CFunc<(CPointer<Unit>, X509CertificateEnrollmentContextAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var InitializeFromRequest: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -27027,7 +27039,7 @@ public class IX509Enrollment <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509Enrollment> {
-        return InterfaceDescriptor<IX509Enrollment>("IX509Enrollment", IX509Enrollment.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509EnrollmentFromAbi, viewIX509Enrollment)
+        return InterfaceDescriptor<IX509Enrollment>("IX509Enrollment", IX509Enrollment.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509EnrollmentFromAbi, viewIX509Enrollment)
     }
 
     public unsafe func vtbl(): IX509EnrollmentVtbl {
@@ -27328,7 +27340,7 @@ public class IX509ExtensionSmimeCapabilities <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509PrivateKeyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Open: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Create: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -27423,7 +27435,7 @@ public class IX509PrivateKey <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509PrivateKey> {
-        return InterfaceDescriptor<IX509PrivateKey>("IX509PrivateKey", IX509PrivateKey.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509PrivateKeyFromAbi, viewIX509PrivateKey)
+        return InterfaceDescriptor<IX509PrivateKey>("IX509PrivateKey", IX509PrivateKey.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509PrivateKeyFromAbi, viewIX509PrivateKey)
     }
 
     public unsafe func vtbl(): IX509PrivateKeyVtbl {
@@ -27900,7 +27912,7 @@ public class IX509PrivateKey2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509SCEPEnrollmentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, EncodingTypeAbi, CPointer<UInt16>, EncodingTypeAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var InitializeForPending: CFunc<(CPointer<Unit>, X509CertificateEnrollmentContextAbi) -> Int32> = { _, _ => 0 }
     public var CreateRequestMessage: CFunc<(CPointer<Unit>, EncodingTypeAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -27959,7 +27971,7 @@ public class IX509SCEPEnrollment <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509SCEPEnrollment> {
-        return InterfaceDescriptor<IX509SCEPEnrollment>("IX509SCEPEnrollment", IX509SCEPEnrollment.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509SCEPEnrollmentFromAbi, viewIX509SCEPEnrollment)
+        return InterfaceDescriptor<IX509SCEPEnrollment>("IX509SCEPEnrollment", IX509SCEPEnrollment.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509SCEPEnrollmentFromAbi, viewIX509SCEPEnrollment)
     }
 
     public unsafe func vtbl(): IX509SCEPEnrollmentVtbl {
@@ -28192,7 +28204,7 @@ public class IX509SCEPEnrollment2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Cryptography_Certificates == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IX509SCEPEnrollmentHelperVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var InitializeForPending: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, X509CertificateEnrollmentContextAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Enroll: CFunc<(CPointer<Unit>, X509SCEPProcessMessageFlagsAbi, CPointer<X509SCEPDispositionAbi>) -> Int32> = { _, _, _ => 0 }
@@ -28235,7 +28247,7 @@ public class IX509SCEPEnrollmentHelper <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IX509SCEPEnrollmentHelper> {
-        return InterfaceDescriptor<IX509SCEPEnrollmentHelper>("IX509SCEPEnrollmentHelper", IX509SCEPEnrollmentHelper.iid(), Win32__impl_l2.IDispatch.iid(), takeIX509SCEPEnrollmentHelperFromAbi, viewIX509SCEPEnrollmentHelper)
+        return InterfaceDescriptor<IX509SCEPEnrollmentHelper>("IX509SCEPEnrollmentHelper", IX509SCEPEnrollmentHelper.iid(), Win32_impl_p2.IDispatch.iid(), takeIX509SCEPEnrollmentHelperFromAbi, viewIX509SCEPEnrollmentHelper)
     }
 
     public unsafe func vtbl(): IX509SCEPEnrollmentHelperVtbl {

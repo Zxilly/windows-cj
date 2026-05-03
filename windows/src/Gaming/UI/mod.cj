@@ -4,15 +4,25 @@
 package windows.Gaming.UI
 
 import std.collection.*
+@When[Windows_Gaming_UI == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Gaming_UI == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_UI == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_UI == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_UI == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_UI == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Gaming_UI == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Gaming_UI == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Gaming_UI == "on"]
 import windows_collections as windows_collections
+@When[Windows_Gaming_UI == "on"]
 import windows_future as windows_future
 
 
@@ -591,7 +601,7 @@ public class IGameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInte
         if (iid == IGameUIProviderActivatedEventArgs.iid()) {
             return true
         }
-        for (ancestor in [_impl_l0.IActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p0.IActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -600,13 +610,13 @@ public class IGameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<IGameUIProviderActivatedEventArgs> {
-        var descriptor = InterfaceDescriptor<IGameUIProviderActivatedEventArgs>("IGameUIProviderActivatedEventArgs", IGameUIProviderActivatedEventArgs.iid(), IInspectable.descriptor(), [_impl_l0.IActivatedEventArgs.iid()], { raw => IGameUIProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => IGameUIProviderActivatedEventArgs.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IGameUIProviderActivatedEventArgs>("IGameUIProviderActivatedEventArgs", IGameUIProviderActivatedEventArgs.iid(), IInspectable.descriptor(), [impl_p0.IActivatedEventArgs.iid()], { raw => IGameUIProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => IGameUIProviderActivatedEventArgs.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IGameUIProviderActivatedEventArgs.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameUIProviderActivatedEventArgs", IGameUIProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.descriptorSchema(), ["IActivatedEventArgs"], [_impl_l0.IActivatedEventArgs.iid()], "IGameUIProviderActivatedEventArgsVtbl", "IGameUIProviderActivatedEventArgs", "IGameUIProviderActivatedEventArgs_Impl", [InterfaceMethodSchema("GameUIArgs", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.ValueSet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompleted", 10, [InterfaceParameterSchema("results", "CPointer<Unit>", "InParam<windows_collections.ValueSet>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameUIProviderActivatedEventArgs", IGameUIProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.descriptorSchema(), ["IActivatedEventArgs"], [impl_p0.IActivatedEventArgs.iid()], "IGameUIProviderActivatedEventArgsVtbl", "IGameUIProviderActivatedEventArgs", "IGameUIProviderActivatedEventArgs_Impl", [InterfaceMethodSchema("GameUIArgs", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.ValueSet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompleted", 10, [InterfaceParameterSchema("results", "CPointer<Unit>", "InParam<windows_collections.ValueSet>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IGameUIProviderActivatedEventArgs.runtimeType())
         return schema
     }
@@ -631,8 +641,8 @@ public class IGameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInte
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query<_impl_l0.IActivatedEventArgs>(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query<impl_p0.IActivatedEventArgs>(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIActivatedEventArgs: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -876,7 +886,7 @@ public class GameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<GameUIProviderActivatedEventArgs> {
-        let ancestors = [IGameUIProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IGameUIProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<GameUIProviderActivatedEventArgs>("GameUIProviderActivatedEventArgs", IGameUIProviderActivatedEventArgs.iid(), ancestors, { raw => GameUIProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => GameUIProviderActivatedEventArgs.viewOf(raw) })
     }
 
@@ -918,8 +928,8 @@ public class GameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInter
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -935,15 +945,15 @@ public class GameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInter
         defaultInterface().ReportCompleted(results)
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 }

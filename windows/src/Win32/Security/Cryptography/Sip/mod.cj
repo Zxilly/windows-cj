@@ -2,36 +2,34 @@
 package windows.Win32.Security.Cryptography.Sip
 
 @When[Windows_Win32_Security_Cryptography_Sip == "on"]
-public import windows.Win32._impl_l2.{MSSIP_ADDINFO_BLOB, MSSIP_ADDINFO_CATMEMBER, MSSIP_ADDINFO_DETACHEDSIG, MSSIP_ADDINFO_FLAT, MSSIP_ADDINFO_NONE, MSSIP_ADDINFO_NONMSSIP, MSSIP_FLAGS_MULTI_HASH, MSSIP_FLAGS_PROHIBIT_RESIZE_ON_CREATE, MSSIP_FLAGS_USE_CATALOG, SIP_CAP_FLAG_SEALING, SIP_CAP_SET_CUR_VER, SIP_CAP_SET_VERSION_2, SIP_CAP_SET_VERSION_3, SIP_MAX_MAGIC_NUMBER, SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS, SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG, SPC_RELAXED_PE_MARKER_CHECK}
+public import windows.Win32.impl.p3.{MSSIP_ADDINFO_BLOB, MSSIP_ADDINFO_CATMEMBER, MSSIP_ADDINFO_DETACHEDSIG, MSSIP_ADDINFO_FLAT, MSSIP_ADDINFO_NONE, MSSIP_ADDINFO_NONMSSIP, MSSIP_FLAGS_MULTI_HASH, MSSIP_FLAGS_PROHIBIT_RESIZE_ON_CREATE, MSSIP_FLAGS_USE_CATALOG, SIP_CAP_FLAG_SEALING, SIP_CAP_SET_CUR_VER, SIP_CAP_SET_VERSION_2, SIP_CAP_SET_VERSION_3, SIP_MAX_MAGIC_NUMBER, SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS, SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG, SPC_RELAXED_PE_MARKER_CHECK}
 @When[Windows_Win32_Security_Cryptography_Sip == "on"]
-public import windows.Win32._impl_l0.{MS_ADDINFO_BLOB, MS_ADDINFO_BLOBAbi, MS_ADDINFO_DETACHEDSIG, MS_ADDINFO_DETACHEDSIGAbi, SIP_ADD_NEWPROVIDER, SIP_ADD_NEWPROVIDERAbi, SIP_CAP_SET_V2, SIP_CAP_SET_V2Abi, SIP_CAP_SET_V3, SIP_CAP_SET_V3Abi, pfnIsFileSupported, pfnIsFileSupportedName}
+public import windows.Win32.impl.p0.{MS_ADDINFO_BLOB, MS_ADDINFO_BLOBAbi, MS_ADDINFO_DETACHEDSIG, MS_ADDINFO_DETACHEDSIGAbi, SIP_ADD_NEWPROVIDER, SIP_ADD_NEWPROVIDERAbi, SIP_CAP_SET_V2, SIP_CAP_SET_V2Abi, SIP_CAP_SET_V3, SIP_CAP_SET_V3Abi, pfnIsFileSupported, pfnIsFileSupportedName}
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on"]
-public import windows.Win32._impl_l2.{MS_ADDINFO_FLAT, MS_ADDINFO_FLATAbi}
+public import windows.Win32.impl.p2.{MS_ADDINFO_FLAT, MS_ADDINFO_FLATAbi, SIP_INDIRECT_DATA, SIP_INDIRECT_DATAAbi}
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on")]
-public import windows.Win32._impl_l2.{SIP_DISPATCH_INFO, SIP_DISPATCH_INFOAbi, SIP_SUBJECTINFO, SIP_SUBJECTINFOAbi, pCryptSIPCreateIndirectData, pCryptSIPGetCaps, pCryptSIPGetSealedDigest, pCryptSIPGetSignedDataMsg, pCryptSIPPutSignedDataMsg, pCryptSIPRemoveSignedDataMsg, pCryptSIPVerifyIndirectData}
-@When[Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on"]
-public import windows.Win32._impl_l1.{SIP_INDIRECT_DATA, SIP_INDIRECT_DATAAbi}
+public import windows.Win32.impl.p3.{SIP_DISPATCH_INFO, SIP_DISPATCH_INFOAbi, SIP_SUBJECTINFO, SIP_SUBJECTINFOAbi, pCryptSIPCreateIndirectData, pCryptSIPGetCaps, pCryptSIPGetSealedDigest, pCryptSIPGetSignedDataMsg, pCryptSIPPutSignedDataMsg, pCryptSIPRemoveSignedDataMsg, pCryptSIPVerifyIndirectData}
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPAddProvider == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPAddProvider
+public import windows.Win32.impl.p3.Windows_CryptSIPAddProvider
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPCreateIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPCreateIndirectData
+public import windows.Win32.impl.p3.Windows_CryptSIPCreateIndirectData
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetCaps == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPGetCaps
+public import windows.Win32.impl.p3.Windows_CryptSIPGetCaps
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSealedDigest == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPGetSealedDigest
+public import windows.Win32.impl.p3.Windows_CryptSIPGetSealedDigest
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPGetSignedDataMsg
+public import windows.Win32.impl.p3.Windows_CryptSIPGetSignedDataMsg
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPLoad == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPLoad
+public import windows.Win32.impl.p3.Windows_CryptSIPLoad
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPPutSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPPutSignedDataMsg
+public import windows.Win32.impl.p3.Windows_CryptSIPPutSignedDataMsg
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveProvider == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPRemoveProvider
+public import windows.Win32.impl.p3.Windows_CryptSIPRemoveProvider
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPRemoveSignedDataMsg
+public import windows.Win32.impl.p3.Windows_CryptSIPRemoveSignedDataMsg
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuid == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPRetrieveSubjectGuid
+public import windows.Win32.impl.p3.Windows_CryptSIPRetrieveSubjectGuid
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuidForCatalogFile == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPRetrieveSubjectGuidForCatalogFile
+public import windows.Win32.impl.p3.Windows_CryptSIPRetrieveSubjectGuidForCatalogFile
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPVerifyIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l2.Windows_CryptSIPVerifyIndirectData
+public import windows.Win32.impl.p3.Windows_CryptSIPVerifyIndirectData

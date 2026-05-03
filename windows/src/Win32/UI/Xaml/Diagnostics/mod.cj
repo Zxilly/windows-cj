@@ -4,15 +4,24 @@
 package windows.Win32.UI.Xaml.Diagnostics
 
 import std.collection.*
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_UI_Xaml_Diagnostics == "on" && WINDOWS_UI_XAML == "on" && Windows_Win32_UI_Xaml_Diagnostics_InitializeXamlDiagnostic == "on"]
@@ -228,8 +237,8 @@ extend CollectionElementValue <: windows_core.CopyType & windows_core.RuntimeTyp
 @When[Windows_Win32_UI_Xaml_Diagnostics == "on" && Windows_Win32_System_Com == "on"]
 public struct EnumType {
     public var Name: CPointer<UInt16> = CPointer<UInt16>()
-    public var ValueInts: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
-    public var ValueStrings: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var ValueInts: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
+    public var ValueStrings: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public init() {}
 }
 
@@ -237,8 +246,8 @@ public struct EnumType {
 @C
 public struct EnumTypeAbi {
     public var Name: CPointer<UInt16> = CPointer<UInt16>()
-    public var ValueInts: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
-    public var ValueStrings: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var ValueInts: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
+    public var ValueStrings: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public init() {}
 }
 

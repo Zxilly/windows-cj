@@ -4,14 +4,20 @@
 package windows.Win32.System.SettingsManagementInfrastructure
 
 import std.collection.*
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_SettingsManagementInfrastructure == "on"]
@@ -144,7 +150,7 @@ public let WCM_E_UNKNOWNRESULT: Int32 = -2145251325i32
 public struct IItemEnumeratorVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Current: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Current: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -191,7 +197,7 @@ public class IItemEnumerator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Current(Item: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Current(Item: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Current(__liveRaw, Item)
@@ -839,9 +845,9 @@ public struct ISettingsItemVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var GetSettingType: CFunc<(CPointer<Unit>, CPointer<WcmSettingTypeAbi>) -> Int32> = { _, _ => 0 }
     public var GetDataType: CFunc<(CPointer<Unit>, CPointer<WcmDataTypeAbi>) -> Int32> = { _, _ => 0 }
     public var GetValueRaw: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
@@ -854,17 +860,17 @@ public struct ISettingsItemVtbl {
     public var RemoveSettingByPath: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetListKeyInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<WcmDataTypeAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateListElement: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateListElement: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RemoveListElement: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetRestrictionFacets: CFunc<(CPointer<Unit>, CPointer<WcmRestrictionFacetsAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetRestriction: CFunc<(CPointer<Unit>, WcmRestrictionFacetsAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetRestriction: CFunc<(CPointer<Unit>, WcmRestrictionFacetsAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetKeyValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetKeyValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -915,14 +921,14 @@ public class ISettingsItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, Value)
@@ -995,7 +1001,7 @@ public class ISettingsItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateListElement(KeyData: CPointer<Win32__impl_l2.VARIANTAbi>, Child: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateListElement(KeyData: CPointer<Win32_impl_p2.VARIANTAbi>, Child: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateListElement(__liveRaw, KeyData, Child)
@@ -1014,7 +1020,7 @@ public class ISettingsItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttribute(Name: CPointer<UInt16>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttribute(Name: CPointer<UInt16>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttribute(__liveRaw, Name, Value)
@@ -1033,14 +1039,14 @@ public class ISettingsItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetRestriction(RestrictionFacet: WcmRestrictionFacetsAbi, FacetData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetRestriction(RestrictionFacet: WcmRestrictionFacetsAbi, FacetData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRestriction(__liveRaw, RestrictionFacet, FacetData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetKeyValue(Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetKeyValue(Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetKeyValue(__liveRaw, Value)
@@ -1058,7 +1064,7 @@ public struct ISettingsNamespaceVtbl {
     public var CreateSettingByPath: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSettingByPath: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -1139,7 +1145,7 @@ public class ISettingsNamespace <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttribute(Name: CPointer<UInt16>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttribute(Name: CPointer<UInt16>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttribute(__liveRaw, Name, Value)
@@ -1454,7 +1460,7 @@ public struct ISettingsEngineVtbl {
     public var LoadStore: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var UnloadStore: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RegisterNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var RegisterNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var UnregisterNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var CreateTargetInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTargetInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1549,7 +1555,7 @@ public class ISettingsEngine <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RegisterNamespace(SettingsID: CPointer<Unit>, Stream: CPointer<Unit>, PushSettings: Int32, Results: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RegisterNamespace(SettingsID: CPointer<Unit>, Stream: CPointer<Unit>, PushSettings: Int32, Results: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegisterNamespace(__liveRaw, SettingsID, Stream, PushSettings, Results)

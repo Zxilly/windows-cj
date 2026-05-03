@@ -4,17 +4,27 @@
 package windows.ApplicationModel.Store.Preview
 
 import std.collection.*
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Store_Preview == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_ApplicationModel_Store_Preview == "on"]
+import windows.UI.Xaml.impl.p1 as UI_Xaml_impl_p1
+@When[Windows_ApplicationModel_Store_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Store_Preview == "on"]
 import windows_future as windows_future
 
 
@@ -387,7 +397,7 @@ public class IStoreConfigurationStatics4 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics4", IStoreConfigurationStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics4Vtbl", "IStoreConfigurationStatics4", "IStoreConfigurationStatics4_Impl", [InterfaceMethodSchema("GetStoreWebAccountId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreWebAccountIdForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetEnterpriseStoreWebAccountId", 8, [InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetEnterpriseStoreWebAccountIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetEnterpriseStoreWebAccountId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetEnterpriseStoreWebAccountIdForUser", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShouldRestrictToEnterpriseStoreOnly", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShouldRestrictToEnterpriseStoreOnlyForUser", 13, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics4", IStoreConfigurationStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics4Vtbl", "IStoreConfigurationStatics4", "IStoreConfigurationStatics4_Impl", [InterfaceMethodSchema("GetStoreWebAccountId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreWebAccountIdForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetEnterpriseStoreWebAccountId", 8, [InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetEnterpriseStoreWebAccountIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetEnterpriseStoreWebAccountId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetEnterpriseStoreWebAccountIdForUser", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShouldRestrictToEnterpriseStoreOnly", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShouldRestrictToEnterpriseStoreOnlyForUser", 13, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreConfigurationStatics4.runtimeType())
         return schema
     }
@@ -425,7 +435,7 @@ public class IStoreConfigurationStatics4 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetStoreWebAccountIdForUser(user: _impl_l1.User): windows_core.HString {
+    public unsafe func GetStoreWebAccountIdForUser(user: impl_p1.User): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetStoreWebAccountIdForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -440,7 +450,7 @@ public class IStoreConfigurationStatics4 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func SetEnterpriseStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Unit {
+    public unsafe func SetEnterpriseStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.SetEnterpriseStoreWebAccountIdForUser(asRaw(), user.asRaw(), webAccountId.asRaw())
         HRESULT(hr).ok()
@@ -455,7 +465,7 @@ public class IStoreConfigurationStatics4 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetEnterpriseStoreWebAccountIdForUser(user: _impl_l1.User): windows_core.HString {
+    public unsafe func GetEnterpriseStoreWebAccountIdForUser(user: impl_p1.User): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetEnterpriseStoreWebAccountIdForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -472,7 +482,7 @@ public class IStoreConfigurationStatics4 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func ShouldRestrictToEnterpriseStoreOnlyForUser(user: _impl_l1.User): Bool {
+    public unsafe func ShouldRestrictToEnterpriseStoreOnlyForUser(user: impl_p1.User): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.ShouldRestrictToEnterpriseStoreOnlyForUser(asRaw(), user.asRaw(), CPointer<Bool>(inout result__))
@@ -535,7 +545,7 @@ public class IStoreConfigurationStatics5 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics5", IStoreConfigurationStatics5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics5Vtbl", "IStoreConfigurationStatics5", "IStoreConfigurationStatics5_Impl", [InterfaceMethodSchema("IsPinToDesktopSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinToTaskbarSupported", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinToStartSupported", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PinToDesktop", 9, [InterfaceParameterSchema("appPackageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PinToDesktopForUser", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("appPackageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics5", IStoreConfigurationStatics5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics5Vtbl", "IStoreConfigurationStatics5", "IStoreConfigurationStatics5_Impl", [InterfaceMethodSchema("IsPinToDesktopSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinToTaskbarSupported", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinToStartSupported", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PinToDesktop", 9, [InterfaceParameterSchema("appPackageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PinToDesktopForUser", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("appPackageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreConfigurationStatics5.runtimeType())
         return schema
     }
@@ -595,7 +605,7 @@ public class IStoreConfigurationStatics5 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func PinToDesktopForUser(user: _impl_l1.User, appPackageFamilyName: windows_core.HString): Unit {
+    public unsafe func PinToDesktopForUser(user: impl_p1.User, appPackageFamilyName: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.PinToDesktopForUser(asRaw(), user.asRaw(), appPackageFamilyName.asRaw())
         HRESULT(hr).ok()
@@ -925,7 +935,7 @@ public class IWebAuthenticationCoreManagerHelper <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebAuthenticationCoreManagerHelper", IWebAuthenticationCoreManagerHelper.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAuthenticationCoreManagerHelperVtbl", "IWebAuthenticationCoreManagerHelper", "IWebAuthenticationCoreManagerHelper_Impl", [InterfaceMethodSchema("RequestTokenWithUIElementHostingAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l1.WebTokenRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("uiElement", "CPointer<Unit>", "InParam<UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestTokenWithUIElementHostingAndWebAccountAsync", 7, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l1.WebTokenRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("uiElement", "CPointer<Unit>", "InParam<UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebAuthenticationCoreManagerHelper", IWebAuthenticationCoreManagerHelper.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAuthenticationCoreManagerHelperVtbl", "IWebAuthenticationCoreManagerHelper", "IWebAuthenticationCoreManagerHelper_Impl", [InterfaceMethodSchema("RequestTokenWithUIElementHostingAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p1.WebTokenRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("uiElement", "CPointer<Unit>", "InParam<UI_Xaml_impl_p1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestTokenWithUIElementHostingAndWebAccountAsync", 7, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p1.WebTokenRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<impl_p1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("uiElement", "CPointer<Unit>", "InParam<UI_Xaml_impl_p1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebAuthenticationCoreManagerHelper.runtimeType())
         return schema
     }
@@ -955,21 +965,21 @@ public class IWebAuthenticationCoreManagerHelper <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Security_Authentication_Web_Core == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func RequestTokenWithUIElementHostingAsync(request: _impl_l1.WebTokenRequest, uiElement: UI_Xaml__impl_l1.UIElement): windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult> {
+    public unsafe func RequestTokenWithUIElementHostingAsync(request: impl_p1.WebTokenRequest, uiElement: UI_Xaml_impl_p1.UIElement): windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestTokenWithUIElementHostingAsync(asRaw(), request.asRaw(), uiElement.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Authentication_Web_Core == "on" && Windows_Security_Credentials == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func RequestTokenWithUIElementHostingAndWebAccountAsync(request: _impl_l1.WebTokenRequest, webAccount: _impl_l1.WebAccount, uiElement: UI_Xaml__impl_l1.UIElement): windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult> {
+    public unsafe func RequestTokenWithUIElementHostingAndWebAccountAsync(request: impl_p1.WebTokenRequest, webAccount: impl_p1.WebAccount, uiElement: UI_Xaml_impl_p1.UIElement): windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestTokenWithUIElementHostingAndWebAccountAsync(asRaw(), request.asRaw(), webAccount.asRaw(), uiElement.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>.fromAbiTake(result__)
     }
 }
 
@@ -1506,8 +1516,8 @@ public class WebAuthenticationCoreManagerHelper <: windows_interface.RuntimeName
     }
 
     @When[Windows_Security_Authentication_Web_Core == "on" && Windows_UI_Xaml == "on"]
-    public static unsafe func RequestTokenWithUIElementHostingAsync(request: _impl_l1.WebTokenRequest, uiElement: UI_Xaml__impl_l1.UIElement): windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>> = Option<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>>.None
+    public static unsafe func RequestTokenWithUIElementHostingAsync(request: impl_p1.WebTokenRequest, uiElement: UI_Xaml_impl_p1.UIElement): windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>> = Option<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>>.None
         try (factory__ = windows_core.factory<WebAuthenticationCoreManagerHelper, IWebAuthenticationCoreManagerHelper>().unwrap()) {
             result__ = Some(factory__.RequestTokenWithUIElementHostingAsync(request, uiElement))
         }
@@ -1518,8 +1528,8 @@ public class WebAuthenticationCoreManagerHelper <: windows_interface.RuntimeName
     }
 
     @When[Windows_Security_Authentication_Web_Core == "on" && Windows_Security_Credentials == "on" && Windows_UI_Xaml == "on"]
-    public static unsafe func RequestTokenWithUIElementHostingAndWebAccountAsync(request: _impl_l1.WebTokenRequest, webAccount: _impl_l1.WebAccount, uiElement: UI_Xaml__impl_l1.UIElement): windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>> = Option<windows_future.IAsyncOperation<_impl_l2.WebTokenRequestResult>>.None
+    public static unsafe func RequestTokenWithUIElementHostingAndWebAccountAsync(request: impl_p1.WebTokenRequest, webAccount: impl_p1.WebAccount, uiElement: UI_Xaml_impl_p1.UIElement): windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>> = Option<windows_future.IAsyncOperation<impl_p1.WebTokenRequestResult>>.None
         try (factory__ = windows_core.factory<WebAuthenticationCoreManagerHelper, IWebAuthenticationCoreManagerHelper>().unwrap()) {
             result__ = Some(factory__.RequestTokenWithUIElementHostingAndWebAccountAsync(request, webAccount, uiElement))
         }
@@ -1726,7 +1736,7 @@ public class IStoreConfigurationStatics3 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics3", IStoreConfigurationStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics3Vtbl", "IStoreConfigurationStatics3", "IStoreConfigurationStatics3_Impl", [InterfaceMethodSchema("HasStoreWebAccount", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasStoreWebAccountForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreLogDataAsync", 8, [InterfaceParameterSchema("options", "StoreLogOptionsAbi", "StoreLogOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStoreWebAccountIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsStoreWebAccountIdForUser", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPurchasePromptingPolicyForUser", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPurchasePromptingPolicyForUser", 12, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreConfigurationStatics3", IStoreConfigurationStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreConfigurationStatics3Vtbl", "IStoreConfigurationStatics3", "IStoreConfigurationStatics3_Impl", [InterfaceMethodSchema("HasStoreWebAccount", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasStoreWebAccountForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreLogDataAsync", 8, [InterfaceParameterSchema("options", "StoreLogOptionsAbi", "StoreLogOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStoreWebAccountIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsStoreWebAccountIdForUser", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("webAccountId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPurchasePromptingPolicyForUser", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPurchasePromptingPolicyForUser", 12, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreConfigurationStatics3.runtimeType())
         return schema
     }
@@ -1764,7 +1774,7 @@ public class IStoreConfigurationStatics3 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func HasStoreWebAccountForUser(user: _impl_l1.User): Bool {
+    public unsafe func HasStoreWebAccountForUser(user: impl_p1.User): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.HasStoreWebAccountForUser(asRaw(), user.asRaw(), CPointer<Bool>(inout result__))
@@ -1773,23 +1783,23 @@ public class IStoreConfigurationStatics3 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetStoreLogDataAsync(options: StoreLogOptions): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference> {
+    public unsafe func GetStoreLogDataAsync(options: StoreLogOptions): windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetStoreLogDataAsync(asRaw(), windows_core.projectTypedAbi(options, windows_core.typeMarker<StoreLogOptions>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference>.fromAbiTake(result__)
     }
 
     @When[Windows_System == "on"]
-    public unsafe func SetStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Unit {
+    public unsafe func SetStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.SetStoreWebAccountIdForUser(asRaw(), user.asRaw(), webAccountId.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Bool {
+    public unsafe func IsStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.IsStoreWebAccountIdForUser(asRaw(), user.asRaw(), webAccountId.asRaw(), CPointer<Bool>(inout result__))
@@ -1798,7 +1808,7 @@ public class IStoreConfigurationStatics3 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetPurchasePromptingPolicyForUser(user: _impl_l1.User): Foundation.IReference<UInt32> {
+    public unsafe func GetPurchasePromptingPolicyForUser(user: impl_p1.User): Foundation.IReference<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPurchasePromptingPolicyForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1807,7 +1817,7 @@ public class IStoreConfigurationStatics3 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func SetPurchasePromptingPolicyForUser(user: _impl_l1.User, value: Foundation.IReference<UInt32>): Unit {
+    public unsafe func SetPurchasePromptingPolicyForUser(user: impl_p1.User, value: Foundation.IReference<UInt32>): Unit {
         let v = vtbl()
         let hr = v.SetPurchasePromptingPolicyForUser(asRaw(), user.asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2161,7 +2171,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func PinToDesktopForUser(user: _impl_l1.User, appPackageFamilyName: windows_core.HString): Unit {
+    public static unsafe func PinToDesktopForUser(user: impl_p1.User, appPackageFamilyName: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics5>().unwrap()) {
             factory__.PinToDesktopForUser(user, appPackageFamilyName)
         }
@@ -2180,7 +2190,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func HasStoreWebAccountForUser(user: _impl_l1.User): Bool {
+    public static unsafe func HasStoreWebAccountForUser(user: impl_p1.User): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             result__ = Some(factory__.HasStoreWebAccountForUser(user))
@@ -2192,8 +2202,8 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func GetStoreLogDataAsync(options: StoreLogOptions): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference>> = Option<windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamReference>>.None
+    public static unsafe func GetStoreLogDataAsync(options: StoreLogOptions): windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference>> = Option<windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamReference>>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             result__ = Some(factory__.GetStoreLogDataAsync(options))
         }
@@ -2204,7 +2214,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func SetStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Unit {
+    public static unsafe func SetStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             factory__.SetStoreWebAccountIdForUser(user, webAccountId)
         }
@@ -2212,7 +2222,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func IsStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Bool {
+    public static unsafe func IsStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             result__ = Some(factory__.IsStoreWebAccountIdForUser(user, webAccountId))
@@ -2224,7 +2234,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetPurchasePromptingPolicyForUser(user: _impl_l1.User): Foundation.IReference<UInt32> {
+    public static unsafe func GetPurchasePromptingPolicyForUser(user: impl_p1.User): Foundation.IReference<UInt32> {
         var result__: Option<Foundation.IReference<UInt32>> = Option<Foundation.IReference<UInt32>>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             result__ = Some(factory__.GetPurchasePromptingPolicyForUser(user))
@@ -2236,7 +2246,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func SetPurchasePromptingPolicyForUser(user: _impl_l1.User, value: Foundation.IReference<UInt32>): Unit {
+    public static unsafe func SetPurchasePromptingPolicyForUser(user: impl_p1.User, value: Foundation.IReference<UInt32>): Unit {
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics3>().unwrap()) {
             factory__.SetPurchasePromptingPolicyForUser(user, value)
         }
@@ -2255,7 +2265,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetStoreWebAccountIdForUser(user: _impl_l1.User): windows_core.HString {
+    public static unsafe func GetStoreWebAccountIdForUser(user: impl_p1.User): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics4>().unwrap()) {
             result__ = Some(factory__.GetStoreWebAccountIdForUser(user))
@@ -2274,7 +2284,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func SetEnterpriseStoreWebAccountIdForUser(user: _impl_l1.User, webAccountId: windows_core.HString): Unit {
+    public static unsafe func SetEnterpriseStoreWebAccountIdForUser(user: impl_p1.User, webAccountId: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics4>().unwrap()) {
             factory__.SetEnterpriseStoreWebAccountIdForUser(user, webAccountId)
         }
@@ -2293,7 +2303,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetEnterpriseStoreWebAccountIdForUser(user: _impl_l1.User): windows_core.HString {
+    public static unsafe func GetEnterpriseStoreWebAccountIdForUser(user: impl_p1.User): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics4>().unwrap()) {
             result__ = Some(factory__.GetEnterpriseStoreWebAccountIdForUser(user))
@@ -2316,7 +2326,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func ShouldRestrictToEnterpriseStoreOnlyForUser(user: _impl_l1.User): Bool {
+    public static unsafe func ShouldRestrictToEnterpriseStoreOnlyForUser(user: impl_p1.User): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics4>().unwrap()) {
             result__ = Some(factory__.ShouldRestrictToEnterpriseStoreOnlyForUser(user))

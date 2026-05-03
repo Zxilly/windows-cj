@@ -4,16 +4,27 @@
 package windows.Devices
 
 import std.collection.*
+@When[Windows_Devices == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices == "on"]
 import windows_core as windows_core
+@When[Windows_Devices == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices == "on" && Windows_Devices_Adc_Provider == "on"]
 import windows.Devices.Adc.Provider as Devices_Adc_Provider
+@When[Windows_Devices == "on" && Windows_Devices_Gpio_Provider == "on"]
 import windows.Devices.Gpio.Provider as Devices_Gpio_Provider
+@When[Windows_Devices == "on" && Windows_Devices_I2c_Provider == "on"]
 import windows.Devices.I2c.Provider as Devices_I2c_Provider
+@When[Windows_Devices == "on" && Windows_Devices_Pwm_Provider == "on"]
 import windows.Devices.Pwm.Provider as Devices_Pwm_Provider
+@When[Windows_Devices == "on" && Windows_Devices_Spi_Provider == "on"]
 import windows.Devices.Spi.Provider as Devices_Spi_Provider
 
 

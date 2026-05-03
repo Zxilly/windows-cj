@@ -4,12 +4,19 @@
 package windows.System.Threading
 
 import std.collection.*
+@When[Windows_System_Threading == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_System_Threading == "on"]
 import windows_core as windows_core
+@When[Windows_System_Threading == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Threading == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Threading == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Threading == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Threading == "on"]
 import windows_future as windows_future
 
 
@@ -191,19 +198,15 @@ public class WorkItemHandler <: InterfaceWrapperBase & ComInterface & windows_in
 extend WorkItemHandler <: windows_core.Interface<WorkItemHandler> {}
 
 @When[Windows_System_Threading == "on"]
-private open class WorkItemHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface WorkItemHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_System_Threading == "on"]
-private open class WorkItemHandlerInvoker <: WorkItemHandlerInvokerErased {
-    public open func Invoke(operation: InParam<windows_future.IAsyncAction>): Unit {
-        ()
-    }
+private interface WorkItemHandlerInvoker <: WorkItemHandlerInvokerErased {
+    public func Invoke(operation: InParam<windows_future.IAsyncAction>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<windows_future.IAsyncAction>(windows_future.IAsyncAction.viewOf(arg0)))
         return S_OK.value
     }
@@ -223,7 +226,7 @@ private class WorkItemHandlerBox <: WorkItemHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(operation: InParam<windows_future.IAsyncAction>): Unit {
+    public func Invoke(operation: InParam<windows_future.IAsyncAction>): Unit {
         invoke_(operation)
     }
 }
@@ -858,19 +861,15 @@ public class TimerDestroyedHandler <: InterfaceWrapperBase & ComInterface & wind
 extend TimerDestroyedHandler <: windows_core.Interface<TimerDestroyedHandler> {}
 
 @When[Windows_System_Threading == "on"]
-private open class TimerDestroyedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface TimerDestroyedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_System_Threading == "on"]
-private open class TimerDestroyedHandlerInvoker <: TimerDestroyedHandlerInvokerErased {
-    public open func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
-        ()
-    }
+private interface TimerDestroyedHandlerInvoker <: TimerDestroyedHandlerInvokerErased {
+    public func Invoke(timer: InParam<ThreadPoolTimer>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<ThreadPoolTimer>(ThreadPoolTimer.viewOf(arg0)))
         return S_OK.value
     }
@@ -890,7 +889,7 @@ private class TimerDestroyedHandlerBox <: TimerDestroyedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
+    public func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
         invoke_(timer)
     }
 }
@@ -987,19 +986,15 @@ public class TimerElapsedHandler <: InterfaceWrapperBase & ComInterface & window
 extend TimerElapsedHandler <: windows_core.Interface<TimerElapsedHandler> {}
 
 @When[Windows_System_Threading == "on"]
-private open class TimerElapsedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface TimerElapsedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_System_Threading == "on"]
-private open class TimerElapsedHandlerInvoker <: TimerElapsedHandlerInvokerErased {
-    public open func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
-        ()
-    }
+private interface TimerElapsedHandlerInvoker <: TimerElapsedHandlerInvokerErased {
+    public func Invoke(timer: InParam<ThreadPoolTimer>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<ThreadPoolTimer>(ThreadPoolTimer.viewOf(arg0)))
         return S_OK.value
     }
@@ -1019,7 +1014,7 @@ private class TimerElapsedHandlerBox <: TimerElapsedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
+    public func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
         invoke_(timer)
     }
 }

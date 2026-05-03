@@ -4,11 +4,17 @@
 package windows.Win32.System.WinRT.AllJoyn
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_AllJoyn == "on"]
 import windows_core.{RuntimeType}
+@When[Windows_Win32_System_WinRT_AllJoyn == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_AllJoyn == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
+@When[Windows_Win32_System_WinRT_AllJoyn == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_AllJoyn == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_AllJoyn == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 
 

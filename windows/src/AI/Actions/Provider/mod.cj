@@ -4,13 +4,21 @@
 package windows.AI.Actions.Provider
 
 import std.collection.*
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_polyfill as windows_polyfill
-import windows.AI.Actions._impl_l0 as AI_Actions__impl_l0
+@When[Windows_AI_Actions_Provider == "on"]
+import windows.AI.Actions.impl.p0 as AI_Actions_impl_p0
+@When[Windows_AI_Actions_Provider == "on"]
 import windows_future as windows_future
 
 
@@ -67,13 +75,13 @@ public interface IActionFeedbackHandler_ImplErased {
 
 @When[Windows_AI_Actions_Provider == "on" && Windows_AI_Actions == "on"]
 public interface IActionFeedbackHandler_Impl <: IActionFeedbackHandler_ImplErased {
-    public func ProcessFeedbackAsync(context: InParam<AI_Actions__impl_l0.ActionInvocationContext>, feedback: InParam<AI_Actions__impl_l0.ActionFeedback>): windows_core.Result<windows_future.IAsyncAction>
+    public func ProcessFeedbackAsync(context: InParam<AI_Actions_impl_p0.ActionInvocationContext>, feedback: InParam<AI_Actions_impl_p0.ActionFeedback>): windows_core.Result<windows_future.IAsyncAction>
 
     public func __winrtThunk_ProcessFeedbackAsync(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.ProcessFeedbackAsync(InParam<AI_Actions__impl_l0.ActionInvocationContext>(AI_Actions__impl_l0.ActionInvocationContext.viewOf(arg0)), InParam<AI_Actions__impl_l0.ActionFeedback>(AI_Actions__impl_l0.ActionFeedback.viewOf(arg1)))) {
+        match (this.ProcessFeedbackAsync(InParam<AI_Actions_impl_p0.ActionInvocationContext>(AI_Actions_impl_p0.ActionInvocationContext.viewOf(arg0)), InParam<AI_Actions_impl_p0.ActionFeedback>(AI_Actions_impl_p0.ActionFeedback.viewOf(arg1)))) {
             case Result<windows_future.IAsyncAction>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -124,7 +132,7 @@ public class IActionFeedbackHandler <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IActionFeedbackHandler", IActionFeedbackHandler.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IActionFeedbackHandlerVtbl", "IActionFeedbackHandler", "IActionFeedbackHandler_Impl", [InterfaceMethodSchema("ProcessFeedbackAsync", 6, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<AI_Actions__impl_l0.ActionInvocationContext>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("feedback", "CPointer<Unit>", "InParam<AI_Actions__impl_l0.ActionFeedback>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IActionFeedbackHandler", IActionFeedbackHandler.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IActionFeedbackHandlerVtbl", "IActionFeedbackHandler", "IActionFeedbackHandler_Impl", [InterfaceMethodSchema("ProcessFeedbackAsync", 6, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<AI_Actions_impl_p0.ActionInvocationContext>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("feedback", "CPointer<Unit>", "InParam<AI_Actions_impl_p0.ActionFeedback>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IActionFeedbackHandler.runtimeType())
         return schema
     }
@@ -154,7 +162,7 @@ public class IActionFeedbackHandler <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_AI_Actions == "on"]
-    public unsafe func ProcessFeedbackAsync(context: AI_Actions__impl_l0.ActionInvocationContext, feedback: AI_Actions__impl_l0.ActionFeedback): windows_future.IAsyncAction {
+    public unsafe func ProcessFeedbackAsync(context: AI_Actions_impl_p0.ActionInvocationContext, feedback: AI_Actions_impl_p0.ActionFeedback): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProcessFeedbackAsync(asRaw(), context.asRaw(), feedback.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -219,13 +227,13 @@ public interface IActionProvider_ImplErased {
 
 @When[Windows_AI_Actions_Provider == "on" && Windows_AI_Actions == "on"]
 public interface IActionProvider_Impl <: IActionProvider_ImplErased {
-    public func InvokeAsync(context: InParam<AI_Actions__impl_l0.ActionInvocationContext>): windows_core.Result<windows_future.IAsyncAction>
+    public func InvokeAsync(context: InParam<AI_Actions_impl_p0.ActionInvocationContext>): windows_core.Result<windows_future.IAsyncAction>
 
     public func __winrtThunk_InvokeAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.InvokeAsync(InParam<AI_Actions__impl_l0.ActionInvocationContext>(AI_Actions__impl_l0.ActionInvocationContext.viewOf(arg0)))) {
+        match (this.InvokeAsync(InParam<AI_Actions_impl_p0.ActionInvocationContext>(AI_Actions_impl_p0.ActionInvocationContext.viewOf(arg0)))) {
             case Result<windows_future.IAsyncAction>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -276,7 +284,7 @@ public class IActionProvider <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IActionProvider", IActionProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IActionProviderVtbl", "IActionProvider", "IActionProvider_Impl", [InterfaceMethodSchema("InvokeAsync", 6, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<AI_Actions__impl_l0.ActionInvocationContext>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IActionProvider", IActionProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IActionProviderVtbl", "IActionProvider", "IActionProvider_Impl", [InterfaceMethodSchema("InvokeAsync", 6, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<AI_Actions_impl_p0.ActionInvocationContext>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IActionProvider.runtimeType())
         return schema
     }
@@ -306,7 +314,7 @@ public class IActionProvider <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_AI_Actions == "on"]
-    public unsafe func InvokeAsync(context: AI_Actions__impl_l0.ActionInvocationContext): windows_future.IAsyncAction {
+    public unsafe func InvokeAsync(context: AI_Actions_impl_p0.ActionInvocationContext): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.InvokeAsync(asRaw(), context.asRaw(), CPointer<CPointer<Unit>>(inout result__))

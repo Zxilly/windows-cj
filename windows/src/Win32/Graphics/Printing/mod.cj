@@ -4,24 +4,44 @@
 package windows.Win32.Graphics.Printing
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_libloading
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_polyfill.{packedReadUInt32, packedReadValue, packedWriteUInt32, packedWriteValue, unionReadFloat32, unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt8, unionWriteFloat32, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt8}
+@When[Windows_Win32_Graphics_Printing == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Devices_Communication == "on"]
 import windows.Win32.Devices.Communication as Win32_Devices_Communication
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Devices_Display == "on"]
 import windows.Win32.Devices.Display as Win32_Devices_Display
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Graphics_Imaging == "on"]
 import windows.Win32.Graphics.Imaging as Win32_Graphics_Imaging
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_Storage_Xps == "on"]
 import windows.Win32.Storage.Xps as Win32_Storage_Xps
+@When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Graphics_Printing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Printing == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Graphics_Printing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Graphics_Printing == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Graphics_Printing == "on"]
@@ -1362,7 +1382,7 @@ extend DEVQUERYPRINT_INFO <: windows_core.CopyType & windows_core.RuntimeType & 
 public struct DLGPAGE {
     public var cbSize: UInt16 = 0u16
     public var Flags: UInt16 = 0u16
-    public var DlgProc: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var DlgProc: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var pTabName: CPointer<Int8> = CPointer<Int8>()
     public var IconID: UIntNative = 0
     public var Anonymous: DLGPAGE__Anonymous_e__Union = DLGPAGE__Anonymous_e__Union()
@@ -1374,7 +1394,7 @@ public struct DLGPAGE {
 public struct DLGPAGEAbi {
     public var cbSize: UInt16 = 0u16
     public var Flags: UInt16 = 0u16
-    public var DlgProc: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var DlgProc: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var pTabName: CPointer<Int8> = CPointer<Int8>()
     public var IconID: UIntNative = 0
     public var Anonymous: DLGPAGE__Anonymous_e__Union = DLGPAGE__Anonymous_e__Union()
@@ -3676,13 +3696,13 @@ extend EXTPUSH <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
 public struct EXTPUSH__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop dlgProc: Win32__impl_l0.DLGPROC {
+    public mut prop dlgProc: Win32_impl_p1.DLGPROC {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.DLGPROC>(p)
+                let ptr = CPointer<Win32_impl_p1.DLGPROC>(p)
                 return ptr.read()
             }
         }
@@ -3691,7 +3711,7 @@ public struct EXTPUSH__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.DLGPROC>(p)
+                let ptr = CPointer<Win32_impl_p1.DLGPROC>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -5442,9 +5462,9 @@ public class IPrintPipelineProgressReport <: InterfaceWrapperBase & ComInterface
 public struct IPrintPipelinePropertyBagVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var AddProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeleteProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5490,14 +5510,14 @@ public class IPrintPipelinePropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddProperty(pszName: CPointer<UInt16>, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AddProperty(pszName: CPointer<UInt16>, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddProperty(__liveRaw, pszName, pVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProperty(pszName: CPointer<UInt16>, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProperty(pszName: CPointer<UInt16>, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, pszName, pVar)
@@ -5630,7 +5650,7 @@ public class IPrintReadStreamFactory <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintSchemaAsyncOperationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Cancel: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -5669,7 +5689,7 @@ public class IPrintSchemaAsyncOperation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintSchemaAsyncOperation> {
-        return InterfaceDescriptor<IPrintSchemaAsyncOperation>("IPrintSchemaAsyncOperation", IPrintSchemaAsyncOperation.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintSchemaAsyncOperationFromAbi, viewIPrintSchemaAsyncOperation)
+        return InterfaceDescriptor<IPrintSchemaAsyncOperation>("IPrintSchemaAsyncOperation", IPrintSchemaAsyncOperation.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintSchemaAsyncOperationFromAbi, viewIPrintSchemaAsyncOperation)
     }
 
     public unsafe func vtbl(): IPrintSchemaAsyncOperationVtbl {
@@ -5692,7 +5712,7 @@ public class IPrintSchemaAsyncOperation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintSchemaElementVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var XmlNode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5733,7 +5753,7 @@ public class IPrintSchemaElement <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintSchemaElement> {
-        return InterfaceDescriptor<IPrintSchemaElement>("IPrintSchemaElement", IPrintSchemaElement.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintSchemaElementFromAbi, viewIPrintSchemaElement)
+        return InterfaceDescriptor<IPrintSchemaElement>("IPrintSchemaElement", IPrintSchemaElement.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintSchemaElementFromAbi, viewIPrintSchemaElement)
     }
 
     public unsafe func vtbl(): IPrintSchemaElementVtbl {
@@ -5855,9 +5875,9 @@ public class IPrintSchemaPageImageableSize <: InterfaceWrapperBase & ComInterfac
 public struct IPrintSchemaParameterInitializerVtbl {
     public var base_: IPrintSchemaElementVtbl = IPrintSchemaElementVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5902,14 +5922,14 @@ public class IPrintSchemaParameterInitializer <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, pVar)
@@ -6208,7 +6228,7 @@ public class IPrinterExtensionManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterExtensionRequestVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Cancel: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Complete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -6247,7 +6267,7 @@ public class IPrinterExtensionRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterExtensionRequest> {
-        return InterfaceDescriptor<IPrinterExtensionRequest>("IPrinterExtensionRequest", IPrinterExtensionRequest.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterExtensionRequestFromAbi, viewIPrinterExtensionRequest)
+        return InterfaceDescriptor<IPrinterExtensionRequest>("IPrinterExtensionRequest", IPrinterExtensionRequest.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterExtensionRequestFromAbi, viewIPrinterExtensionRequest)
     }
 
     public unsafe func vtbl(): IPrinterExtensionRequestVtbl {
@@ -6270,7 +6290,7 @@ public class IPrinterExtensionRequest <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterPropertyBagVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetBool: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetBool: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public var GetInt32: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -6319,7 +6339,7 @@ public class IPrinterPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterPropertyBag> {
-        return InterfaceDescriptor<IPrinterPropertyBag>("IPrinterPropertyBag", IPrinterPropertyBag.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterPropertyBagFromAbi, viewIPrinterPropertyBag)
+        return InterfaceDescriptor<IPrinterPropertyBag>("IPrinterPropertyBag", IPrinterPropertyBag.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterPropertyBagFromAbi, viewIPrinterPropertyBag)
     }
 
     public unsafe func vtbl(): IPrinterPropertyBagVtbl {
@@ -6392,7 +6412,7 @@ public class IPrinterPropertyBag <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterQueueEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnBidiResponseReceived: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -6430,7 +6450,7 @@ public class IPrinterQueueEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterQueueEvent> {
-        return InterfaceDescriptor<IPrinterQueueEvent>("IPrinterQueueEvent", IPrinterQueueEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterQueueEventFromAbi, viewIPrinterQueueEvent)
+        return InterfaceDescriptor<IPrinterQueueEvent>("IPrinterQueueEvent", IPrinterQueueEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterQueueEventFromAbi, viewIPrinterQueueEvent)
     }
 
     public unsafe func vtbl(): IPrinterQueueEventVtbl {
@@ -6447,7 +6467,7 @@ public class IPrinterQueueEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterQueueViewVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetViewRange: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -6485,7 +6505,7 @@ public class IPrinterQueueView <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterQueueView> {
-        return InterfaceDescriptor<IPrinterQueueView>("IPrinterQueueView", IPrinterQueueView.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterQueueViewFromAbi, viewIPrinterQueueView)
+        return InterfaceDescriptor<IPrinterQueueView>("IPrinterQueueView", IPrinterQueueView.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterQueueViewFromAbi, viewIPrinterQueueView)
     }
 
     public unsafe func vtbl(): IPrinterQueueViewVtbl {
@@ -6502,7 +6522,7 @@ public class IPrinterQueueView <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterScriptableSequentialStreamVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Read: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -6543,7 +6563,7 @@ public class IPrinterScriptableSequentialStream <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterScriptableSequentialStream> {
-        return InterfaceDescriptor<IPrinterScriptableSequentialStream>("IPrinterScriptableSequentialStream", IPrinterScriptableSequentialStream.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterScriptableSequentialStreamFromAbi, viewIPrinterScriptableSequentialStream)
+        return InterfaceDescriptor<IPrinterScriptableSequentialStream>("IPrinterScriptableSequentialStream", IPrinterScriptableSequentialStream.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterScriptableSequentialStreamFromAbi, viewIPrinterScriptableSequentialStream)
     }
 
     public unsafe func vtbl(): IPrinterScriptableSequentialStreamVtbl {
@@ -6571,7 +6591,7 @@ public struct IPrinterScriptableStreamVtbl {
     public var base_: IPrinterScriptableSequentialStreamVtbl = IPrinterScriptableSequentialStreamVtbl()
     public var Commit: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Seek: CFunc<(CPointer<Unit>, Int32, Win32__impl_l0.STREAM_SEEKAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Seek: CFunc<(CPointer<Unit>, Int32, Win32_impl_p0.STREAM_SEEKAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var SetSize: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6623,7 +6643,7 @@ public class IPrinterScriptableStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Seek(lOffset: Int32, streamSeek: Win32__impl_l0.STREAM_SEEKAbi, plPosition: CPointer<Int32>): Int32 {
+    public unsafe func Seek(lOffset: Int32, streamSeek: Win32_impl_p0.STREAM_SEEKAbi, plPosition: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Seek(__liveRaw, lOffset, streamSeek, plPosition)
@@ -9102,7 +9122,7 @@ public type PFN_PRINTING_OPENPORT = CFunc<(CPointer<UInt16>, CPointer<CPointer<U
 public type PFN_PRINTING_OPENPORT2 = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Power == "on"]
-public type PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.POWERBROADCAST_SETTINGAbi>) -> UInt32>
+public type PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.POWERBROADCAST_SETTINGAbi>) -> UInt32>
 
 @When[Windows_Win32_Graphics_Printing == "on"]
 public type PFN_PRINTING_READPORT = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>
@@ -12364,7 +12384,7 @@ public struct PROPSHEETUI_GETICON_INFO {
     public var Flags: UInt16 = 0u16
     public var cxIcon: UInt16 = 0u16
     public var cyIcon: UInt16 = 0u16
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public init() {}
 }
 
@@ -12375,7 +12395,7 @@ public struct PROPSHEETUI_GETICON_INFOAbi {
     public var Flags: UInt16 = 0u16
     public var cxIcon: UInt16 = 0u16
     public var cyIcon: UInt16 = 0u16
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public init() {}
 }
 
@@ -12538,13 +12558,13 @@ extend PROPSHEETUI_INFO_HEADER <: windows_core.CopyType & windows_core.RuntimeTy
 public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop hIcon: Win32__impl_l0.HICON {
+    public mut prop hIcon: Win32_impl_p1.HICON {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.HICON>(p)
+                let ptr = CPointer<Win32_impl_p1.HICON>(p)
                 return ptr.read()
             }
         }
@@ -12553,7 +12573,7 @@ public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.HICON>(p)
+                let ptr = CPointer<Win32_impl_p1.HICON>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -15605,7 +15625,7 @@ public class IAsyncGetSendNotificationCookie <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Ole == "on"]
 @C
 public struct IImgCreateErrorInfoVtbl {
-    public var base_: Win32__impl_l1.ICreateErrorInfoVtbl = Win32__impl_l1.ICreateErrorInfoVtbl()
+    public var base_: Win32_impl_p2.ICreateErrorInfoVtbl = Win32_impl_p2.ICreateErrorInfoVtbl()
     public var AttachToErrorInfo: CFunc<(CPointer<Unit>, CPointer<ImgErrorInfoAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -15643,7 +15663,7 @@ public class IImgCreateErrorInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IImgCreateErrorInfo> {
-        return InterfaceDescriptor<IImgCreateErrorInfo>("IImgCreateErrorInfo", IImgCreateErrorInfo.iid(), Win32__impl_l1.ICreateErrorInfo.iid(), takeIImgCreateErrorInfoFromAbi, viewIImgCreateErrorInfo)
+        return InterfaceDescriptor<IImgCreateErrorInfo>("IImgCreateErrorInfo", IImgCreateErrorInfo.iid(), Win32_impl_p2.ICreateErrorInfo.iid(), takeIImgCreateErrorInfoFromAbi, viewIImgCreateErrorInfo)
     }
 
     public unsafe func vtbl(): IImgCreateErrorInfoVtbl {
@@ -15660,7 +15680,7 @@ public class IImgCreateErrorInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IImgErrorInfoVtbl {
-    public var base_: Win32__impl_l1.IErrorInfoVtbl = Win32__impl_l1.IErrorInfoVtbl()
+    public var base_: Win32_impl_p2.IErrorInfoVtbl = Win32_impl_p2.IErrorInfoVtbl()
     public var GetDeveloperDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetUserErrorId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetUserParameterCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -15704,7 +15724,7 @@ public class IImgErrorInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IImgErrorInfo> {
-        return InterfaceDescriptor<IImgErrorInfo>("IImgErrorInfo", IImgErrorInfo.iid(), Win32__impl_l1.IErrorInfo.iid(), takeIImgErrorInfoFromAbi, viewIImgErrorInfo)
+        return InterfaceDescriptor<IImgErrorInfo>("IImgErrorInfo", IImgErrorInfo.iid(), Win32_impl_p2.IErrorInfo.iid(), takeIImgErrorInfoFromAbi, viewIImgErrorInfo)
     }
 
     public unsafe func vtbl(): IImgErrorInfoVtbl {
@@ -16697,7 +16717,7 @@ public class IPrintJob <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintJobCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16738,7 +16758,7 @@ public class IPrintJobCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintJobCollection> {
-        return InterfaceDescriptor<IPrintJobCollection>("IPrintJobCollection", IPrintJobCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintJobCollectionFromAbi, viewIPrintJobCollection)
+        return InterfaceDescriptor<IPrintJobCollection>("IPrintJobCollection", IPrintJobCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintJobCollectionFromAbi, viewIPrintJobCollection)
     }
 
     public unsafe func vtbl(): IPrintJobCollectionVtbl {
@@ -17166,7 +17186,7 @@ public class IPrintSchemaOption <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintSchemaOptionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -17207,7 +17227,7 @@ public class IPrintSchemaOptionCollection <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintSchemaOptionCollection> {
-        return InterfaceDescriptor<IPrintSchemaOptionCollection>("IPrintSchemaOptionCollection", IPrintSchemaOptionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintSchemaOptionCollectionFromAbi, viewIPrintSchemaOptionCollection)
+        return InterfaceDescriptor<IPrintSchemaOptionCollection>("IPrintSchemaOptionCollection", IPrintSchemaOptionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintSchemaOptionCollectionFromAbi, viewIPrintSchemaOptionCollection)
     }
 
     public unsafe func vtbl(): IPrintSchemaOptionCollectionVtbl {
@@ -17608,7 +17628,7 @@ public class IPrintUnidiAsyncNotifyRegistration <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Handle: CFunc<(CPointer<Unit>, CPointer<PRINTER_HANDLE>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SendBidiQuery: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -17649,7 +17669,7 @@ public class IPrinterQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterQueue> {
-        return InterfaceDescriptor<IPrinterQueue>("IPrinterQueue", IPrinterQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterQueueFromAbi, viewIPrinterQueue)
+        return InterfaceDescriptor<IPrinterQueue>("IPrinterQueue", IPrinterQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterQueueFromAbi, viewIPrinterQueue)
     }
 
     public unsafe func vtbl(): IPrinterQueueVtbl {
@@ -17746,7 +17766,7 @@ public class IPrinterQueue2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterQueueViewEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -17784,7 +17804,7 @@ public class IPrinterQueueViewEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterQueueViewEvent> {
-        return InterfaceDescriptor<IPrinterQueueViewEvent>("IPrinterQueueViewEvent", IPrinterQueueViewEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterQueueViewEventFromAbi, viewIPrinterQueueViewEvent)
+        return InterfaceDescriptor<IPrinterQueueViewEvent>("IPrinterQueueViewEvent", IPrinterQueueViewEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterQueueViewEventFromAbi, viewIPrinterQueueViewEvent)
     }
 
     public unsafe func vtbl(): IPrinterQueueViewEventVtbl {
@@ -17801,7 +17821,7 @@ public class IPrinterQueueViewEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterScriptablePropertyBagVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetBool: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetBool: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public var GetInt32: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -17850,7 +17870,7 @@ public class IPrinterScriptablePropertyBag <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterScriptablePropertyBag> {
-        return InterfaceDescriptor<IPrinterScriptablePropertyBag>("IPrinterScriptablePropertyBag", IPrinterScriptablePropertyBag.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterScriptablePropertyBagFromAbi, viewIPrinterScriptablePropertyBag)
+        return InterfaceDescriptor<IPrinterScriptablePropertyBag>("IPrinterScriptablePropertyBag", IPrinterScriptablePropertyBag.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterScriptablePropertyBagFromAbi, viewIPrinterScriptablePropertyBag)
     }
 
     public unsafe func vtbl(): IPrinterScriptablePropertyBagVtbl {
@@ -19669,7 +19689,7 @@ public class IPrintSchemaNUpOption <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterScriptContextVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DriverProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var QueueProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var UserProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -19709,7 +19729,7 @@ public class IPrinterScriptContext <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterScriptContext> {
-        return InterfaceDescriptor<IPrinterScriptContext>("IPrinterScriptContext", IPrinterScriptContext.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterScriptContextFromAbi, viewIPrinterScriptContext)
+        return InterfaceDescriptor<IPrinterScriptContext>("IPrinterScriptContext", IPrinterScriptContext.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterScriptContextFromAbi, viewIPrinterScriptContext)
     }
 
     public unsafe func vtbl(): IPrinterScriptContextVtbl {
@@ -26021,7 +26041,7 @@ public class IPrintSchemaTicket2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterExtensionContextVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var PrinterQueue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrintSchemaTicket: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DriverProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -26062,7 +26082,7 @@ public class IPrinterExtensionContext <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterExtensionContext> {
-        return InterfaceDescriptor<IPrinterExtensionContext>("IPrinterExtensionContext", IPrinterExtensionContext.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterExtensionContextFromAbi, viewIPrinterExtensionContext)
+        return InterfaceDescriptor<IPrinterExtensionContext>("IPrinterExtensionContext", IPrinterExtensionContext.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterExtensionContextFromAbi, viewIPrinterExtensionContext)
     }
 
     public unsafe func vtbl(): IPrinterExtensionContextVtbl {
@@ -26097,7 +26117,7 @@ public class IPrinterExtensionContext <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterExtensionContextCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -26138,7 +26158,7 @@ public class IPrinterExtensionContextCollection <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterExtensionContextCollection> {
-        return InterfaceDescriptor<IPrinterExtensionContextCollection>("IPrinterExtensionContextCollection", IPrinterExtensionContextCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterExtensionContextCollectionFromAbi, viewIPrinterExtensionContextCollection)
+        return InterfaceDescriptor<IPrinterExtensionContextCollection>("IPrinterExtensionContextCollection", IPrinterExtensionContextCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterExtensionContextCollectionFromAbi, viewIPrinterExtensionContextCollection)
     }
 
     public unsafe func vtbl(): IPrinterExtensionContextCollectionVtbl {
@@ -26265,7 +26285,7 @@ public class IPrinterExtensionEventArgs <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintSchemaAsyncOperationEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Completed: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -26303,7 +26323,7 @@ public class IPrintSchemaAsyncOperationEvent <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintSchemaAsyncOperationEvent> {
-        return InterfaceDescriptor<IPrintSchemaAsyncOperationEvent>("IPrintSchemaAsyncOperationEvent", IPrintSchemaAsyncOperationEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintSchemaAsyncOperationEventFromAbi, viewIPrintSchemaAsyncOperationEvent)
+        return InterfaceDescriptor<IPrintSchemaAsyncOperationEvent>("IPrintSchemaAsyncOperationEvent", IPrintSchemaAsyncOperationEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintSchemaAsyncOperationEventFromAbi, viewIPrintSchemaAsyncOperationEvent)
     }
 
     public unsafe func vtbl(): IPrintSchemaAsyncOperationEventVtbl {
@@ -26320,7 +26340,7 @@ public class IPrintSchemaAsyncOperationEvent <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Graphics_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrinterExtensionEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnDriverEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var OnPrinterQueuesEnumerated: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -26359,7 +26379,7 @@ public class IPrinterExtensionEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrinterExtensionEvent> {
-        return InterfaceDescriptor<IPrinterExtensionEvent>("IPrinterExtensionEvent", IPrinterExtensionEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrinterExtensionEventFromAbi, viewIPrinterExtensionEvent)
+        return InterfaceDescriptor<IPrinterExtensionEvent>("IPrinterExtensionEvent", IPrinterExtensionEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrinterExtensionEventFromAbi, viewIPrinterExtensionEvent)
     }
 
     public unsafe func vtbl(): IPrinterExtensionEventVtbl {
@@ -26717,7 +26737,7 @@ public struct MONITOR2 {
     public var pfnSendRecvBidiDataFromPort: PFN_PRINTING_SENDRECVBIDIDATAFROMPORT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<BIDI_REQUEST_CONTAINERAbi>, CPointer<CPointer<BIDI_RESPONSE_CONTAINERAbi>>) -> UInt32>(CPointer<Unit>())
     public var pfnNotifyUsedPorts: PFN_PRINTING_NOTIFYUSEDPORTS2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> UInt32>(CPointer<Unit>())
     public var pfnNotifyUnusedPorts: PFN_PRINTING_NOTIFYUNUSEDPORTS2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> UInt32>(CPointer<Unit>())
-    public var pfnPowerEvent: PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.POWERBROADCAST_SETTINGAbi>) -> UInt32>(CPointer<Unit>())
+    public var pfnPowerEvent: PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.POWERBROADCAST_SETTINGAbi>) -> UInt32>(CPointer<Unit>())
     public init() {}
 }
 
@@ -26746,7 +26766,7 @@ public struct MONITOR2Abi {
     public var pfnSendRecvBidiDataFromPort: PFN_PRINTING_SENDRECVBIDIDATAFROMPORT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<BIDI_REQUEST_CONTAINERAbi>, CPointer<CPointer<BIDI_RESPONSE_CONTAINERAbi>>) -> UInt32>(CPointer<Unit>())
     public var pfnNotifyUsedPorts: PFN_PRINTING_NOTIFYUSEDPORTS2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> UInt32>(CPointer<Unit>())
     public var pfnNotifyUnusedPorts: PFN_PRINTING_NOTIFYUNUSEDPORTS2 = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> UInt32>(CPointer<Unit>())
-    public var pfnPowerEvent: PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.POWERBROADCAST_SETTINGAbi>) -> UInt32>(CPointer<Unit>())
+    public var pfnPowerEvent: PFN_PRINTING_POWEREVENT2 = CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.POWERBROADCAST_SETTINGAbi>) -> UInt32>(CPointer<Unit>())
     public init() {}
 }
 

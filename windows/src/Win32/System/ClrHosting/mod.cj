@@ -4,16 +4,26 @@
 package windows.Win32.System.ClrHosting
 
 import std.collection.*
+@When[Windows_Win32_System_ClrHosting == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_ClrHosting == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_ClrHosting == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_ClrHosting == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_ClrHosting == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_ClrHosting == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_ClrHosting == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_ClrHosting == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_ClrHosting == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_ClrHosting == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_ClrHosting == "on"]
@@ -3926,18 +3936,18 @@ public class ICatalogServices <: InterfaceWrapperBase & ComInterface {
 public struct ICorThreadpoolVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Threading == "on"]
-    public var CorRegisterWaitForSingleObject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Unit>, Win32__impl_l0.WAITORTIMERCALLBACK, CPointer<Unit>, UInt32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CorRegisterWaitForSingleObject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Unit>, Win32_impl_p1.WAITORTIMERCALLBACK, CPointer<Unit>, UInt32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var CorUnregisterWait: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Threading == "on"]
-    public var CorQueueUserWorkItem: CFunc<(CPointer<Unit>, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CorQueueUserWorkItem: CFunc<(CPointer<Unit>, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Threading == "on"]
-    public var CorCreateTimer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Win32__impl_l0.WAITORTIMERCALLBACK, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var CorCreateTimer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Win32_impl_p1.WAITORTIMERCALLBACK, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var CorChangeTimer: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CorDeleteTimer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_IO == "on"]
     public var CorBindIoCompletionCallback: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_System_IO.LPOVERLAPPED_COMPLETION_ROUTINE) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Threading == "on"]
-    public var CorCallOrQueueUserWorkItem: CFunc<(CPointer<Unit>, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var CorCallOrQueueUserWorkItem: CFunc<(CPointer<Unit>, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var CorSetMaxThreads: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public var CorGetMaxThreads: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var CorGetAvailableThreads: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
@@ -3985,7 +3995,7 @@ public class ICorThreadpool <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func CorRegisterWaitForSingleObject(phNewWaitObject: CPointer<CPointer<Unit>>, hWaitObject: CPointer<Unit>, Callback: Win32__impl_l0.WAITORTIMERCALLBACK, Context: CPointer<Unit>, timeout: UInt32, executeOnlyOnce: Int32, result: CPointer<Int32>): Int32 {
+    public unsafe func CorRegisterWaitForSingleObject(phNewWaitObject: CPointer<CPointer<Unit>>, hWaitObject: CPointer<Unit>, Callback: Win32_impl_p1.WAITORTIMERCALLBACK, Context: CPointer<Unit>, timeout: UInt32, executeOnlyOnce: Int32, result: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorRegisterWaitForSingleObject(__liveRaw, phNewWaitObject, hWaitObject, Callback, Context, timeout, executeOnlyOnce, result)
@@ -3998,14 +4008,14 @@ public class ICorThreadpool <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func CorQueueUserWorkItem(Function: Win32__impl_l0.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, executeOnlyOnce: Int32, result: CPointer<Int32>): Int32 {
+    public unsafe func CorQueueUserWorkItem(Function: Win32_impl_p1.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, executeOnlyOnce: Int32, result: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorQueueUserWorkItem(__liveRaw, Function, Context, executeOnlyOnce, result)
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func CorCreateTimer(phNewTimer: CPointer<CPointer<Unit>>, Callback: Win32__impl_l0.WAITORTIMERCALLBACK, Parameter: CPointer<Unit>, DueTime: UInt32, Period: UInt32, result: CPointer<Int32>): Int32 {
+    public unsafe func CorCreateTimer(phNewTimer: CPointer<CPointer<Unit>>, Callback: Win32_impl_p1.WAITORTIMERCALLBACK, Parameter: CPointer<Unit>, DueTime: UInt32, Period: UInt32, result: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorCreateTimer(__liveRaw, phNewTimer, Callback, Parameter, DueTime, Period, result)
@@ -4031,7 +4041,7 @@ public class ICorThreadpool <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func CorCallOrQueueUserWorkItem(Function: Win32__impl_l0.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, result: CPointer<Int32>): Int32 {
+    public unsafe func CorCallOrQueueUserWorkItem(Function: Win32_impl_p1.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, result: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorCallOrQueueUserWorkItem(__liveRaw, Function, Context, result)
@@ -5466,7 +5476,7 @@ public struct IHostTaskManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetCurrentTask: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Threading == "on"]
-    public var CreateTask: CFunc<(CPointer<Unit>, UInt32, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateTask: CFunc<(CPointer<Unit>, UInt32, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Sleep: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public var SwitchToTask: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var SetUILocale: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -5533,7 +5543,7 @@ public class IHostTaskManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func CreateTask(dwStackSize: UInt32, pStartAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pParameter: CPointer<Unit>, ppTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateTask(dwStackSize: UInt32, pStartAddress: Win32_impl_p1.LPTHREAD_START_ROUTINE, pParameter: CPointer<Unit>, ppTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTask(__liveRaw, dwStackSize, pStartAddress, pParameter, ppTask)
@@ -5641,7 +5651,7 @@ public class IHostTaskManager <: InterfaceWrapperBase & ComInterface {
 public struct IHostThreadpoolManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Threading == "on"]
-    public var QueueUserWorkItem: CFunc<(CPointer<Unit>, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var QueueUserWorkItem: CFunc<(CPointer<Unit>, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var SetMaxThreads: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var GetMaxThreads: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetAvailableThreads: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -5691,7 +5701,7 @@ public class IHostThreadpoolManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Threading == "on"]
-    public unsafe func QueueUserWorkItem(Function: Win32__impl_l0.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, Flags: UInt32): Int32 {
+    public unsafe func QueueUserWorkItem(Function: Win32_impl_p1.LPTHREAD_START_ROUTINE, Context: CPointer<Unit>, Flags: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueueUserWorkItem(__liveRaw, Function, Context, Flags)
@@ -5795,7 +5805,7 @@ public class IManagedObject <: InterfaceWrapperBase & ComInterface {
 public struct IObjectHandleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Unwrap: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Unwrap: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5840,7 +5850,7 @@ public class IObjectHandle <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Unwrap(ppv: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Unwrap(ppv: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Unwrap(__liveRaw, ppv)
@@ -6821,11 +6831,11 @@ public unsafe func Windows_CorExitProcess(exitCode: Int32): Unit {
 
 @When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorLaunchApplication == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
-    func CorLaunchApplication(dwClickOnceHost: HOST_TYPEAbi, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32__impl_l0.PROCESS_INFORMATIONAbi>): Int32
+    func CorLaunchApplication(dwClickOnceHost: HOST_TYPEAbi, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32_impl_p1.PROCESS_INFORMATIONAbi>): Int32
 }
 
 @When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorLaunchApplication == "on" && Windows_Win32_System_Threading == "on"]
-public unsafe func Windows_CorLaunchApplication(dwClickOnceHost: HOST_TYPEAbi, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32__impl_l0.PROCESS_INFORMATIONAbi>): Int32 {
+public unsafe func Windows_CorLaunchApplication(dwClickOnceHost: HOST_TYPEAbi, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32_impl_p1.PROCESS_INFORMATIONAbi>): Int32 {
     return CorLaunchApplication(dwClickOnceHost, pwzAppFullName, dwManifestPaths, ppwzManifestPaths, dwActivationData, ppwzActivationData, lpProcessInformation)
 }
 
@@ -8235,7 +8245,7 @@ public class IHostSyncManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ClrHosting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 public struct StackOverflowInfo {
     public var soType: StackOverflowType = StackOverflowType()
-    public var pExceptionInfo: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi> = CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>()
+    public var pExceptionInfo: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi> = CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>()
     public init() {}
 }
 
@@ -8243,7 +8253,7 @@ public struct StackOverflowInfo {
 @C
 public struct StackOverflowInfoAbi {
     public var soType: StackOverflowTypeAbi = StackOverflowTypeAbi()
-    public var pExceptionInfo: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi> = CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>()
+    public var pExceptionInfo: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi> = CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>()
     public init() {}
 }
 

@@ -4,11 +4,16 @@
 package windows.Win32.UI.InteractionContext
 
 import std.collection.*
+@When[Windows_Win32_UI_InteractionContext == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_InteractionContext == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_InteractionContext == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_UI_InteractionContext == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_InteractionContext == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_UI_InteractionContext == "on"]
@@ -1247,7 +1252,7 @@ extend INTERACTION_CONTEXT_CONFIGURATION <: windows_core.CopyType & windows_core
 public struct INTERACTION_CONTEXT_OUTPUT {
     public var interactionId: INTERACTION_ID = INTERACTION_ID()
     public var interactionFlags: INTERACTION_FLAGS = INTERACTION_FLAGS()
-    public var inputType: Win32__impl_l0.POINTER_INPUT_TYPE = Win32__impl_l0.POINTER_INPUT_TYPE()
+    public var inputType: Win32_impl_p1.POINTER_INPUT_TYPE = Win32_impl_p1.POINTER_INPUT_TYPE()
     public var x: Float32 = 0.0f32
     public var y: Float32 = 0.0f32
     public var arguments: INTERACTION_CONTEXT_OUTPUT__arguments_e__Union = INTERACTION_CONTEXT_OUTPUT__arguments_e__Union()
@@ -1259,7 +1264,7 @@ public struct INTERACTION_CONTEXT_OUTPUT {
 public struct INTERACTION_CONTEXT_OUTPUTAbi {
     public var interactionId: INTERACTION_IDAbi = INTERACTION_IDAbi()
     public var interactionFlags: INTERACTION_FLAGSAbi = INTERACTION_FLAGSAbi()
-    public var inputType: Win32__impl_l0.POINTER_INPUT_TYPEAbi = Win32__impl_l0.POINTER_INPUT_TYPEAbi()
+    public var inputType: Win32_impl_p1.POINTER_INPUT_TYPEAbi = Win32_impl_p1.POINTER_INPUT_TYPEAbi()
     public var x: Float32 = 0.0f32
     public var y: Float32 = 0.0f32
     public var arguments: INTERACTION_CONTEXT_OUTPUT__arguments_e__Union = INTERACTION_CONTEXT_OUTPUT__arguments_e__Union()
@@ -1275,7 +1280,7 @@ extend INTERACTION_CONTEXT_OUTPUT <: windows_core.CopyType & windows_core.Runtim
         var abi = INTERACTION_CONTEXT_OUTPUTAbi()
         abi.interactionId = INTERACTION_ID.projectAbi(value.interactionId)
         abi.interactionFlags = INTERACTION_FLAGS.projectAbi(value.interactionFlags)
-        abi.inputType = windows_core.projectTypedAbi(value.inputType, windows_core.typeMarker<Win32__impl_l0.POINTER_INPUT_TYPE>())
+        abi.inputType = windows_core.projectTypedAbi(value.inputType, windows_core.typeMarker<Win32_impl_p1.POINTER_INPUT_TYPE>())
         abi.x = value.x
         abi.y = value.y
         abi.arguments = value.arguments
@@ -1285,7 +1290,7 @@ extend INTERACTION_CONTEXT_OUTPUT <: windows_core.CopyType & windows_core.Runtim
         var value = INTERACTION_CONTEXT_OUTPUT()
         value.interactionId = INTERACTION_ID.assumeInitRef(abi.interactionId)
         value.interactionFlags = INTERACTION_FLAGS.assumeInitRef(abi.interactionFlags)
-        value.inputType = windows_core.fromTypedAbi(abi.inputType, windows_core.typeMarker<Win32__impl_l0.POINTER_INPUT_TYPE>()).unwrap()
+        value.inputType = windows_core.fromTypedAbi(abi.inputType, windows_core.typeMarker<Win32_impl_p1.POINTER_INPUT_TYPE>()).unwrap()
         value.x = abi.x
         value.y = abi.y
         value.arguments = abi.arguments
@@ -1380,7 +1385,7 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
 public struct INTERACTION_CONTEXT_OUTPUT2 {
     public var interactionId: INTERACTION_ID = INTERACTION_ID()
     public var interactionFlags: INTERACTION_FLAGS = INTERACTION_FLAGS()
-    public var inputType: Win32__impl_l0.POINTER_INPUT_TYPE = Win32__impl_l0.POINTER_INPUT_TYPE()
+    public var inputType: Win32_impl_p1.POINTER_INPUT_TYPE = Win32_impl_p1.POINTER_INPUT_TYPE()
     public var contactCount: UInt32 = 0u32
     public var currentContactCount: UInt32 = 0u32
     public var x: Float32 = 0.0f32
@@ -1394,7 +1399,7 @@ public struct INTERACTION_CONTEXT_OUTPUT2 {
 public struct INTERACTION_CONTEXT_OUTPUT2Abi {
     public var interactionId: INTERACTION_IDAbi = INTERACTION_IDAbi()
     public var interactionFlags: INTERACTION_FLAGSAbi = INTERACTION_FLAGSAbi()
-    public var inputType: Win32__impl_l0.POINTER_INPUT_TYPEAbi = Win32__impl_l0.POINTER_INPUT_TYPEAbi()
+    public var inputType: Win32_impl_p1.POINTER_INPUT_TYPEAbi = Win32_impl_p1.POINTER_INPUT_TYPEAbi()
     public var contactCount: UInt32 = 0u32
     public var currentContactCount: UInt32 = 0u32
     public var x: Float32 = 0.0f32
@@ -1412,7 +1417,7 @@ extend INTERACTION_CONTEXT_OUTPUT2 <: windows_core.CopyType & windows_core.Runti
         var abi = INTERACTION_CONTEXT_OUTPUT2Abi()
         abi.interactionId = INTERACTION_ID.projectAbi(value.interactionId)
         abi.interactionFlags = INTERACTION_FLAGS.projectAbi(value.interactionFlags)
-        abi.inputType = windows_core.projectTypedAbi(value.inputType, windows_core.typeMarker<Win32__impl_l0.POINTER_INPUT_TYPE>())
+        abi.inputType = windows_core.projectTypedAbi(value.inputType, windows_core.typeMarker<Win32_impl_p1.POINTER_INPUT_TYPE>())
         abi.contactCount = value.contactCount
         abi.currentContactCount = value.currentContactCount
         abi.x = value.x
@@ -1424,7 +1429,7 @@ extend INTERACTION_CONTEXT_OUTPUT2 <: windows_core.CopyType & windows_core.Runti
         var value = INTERACTION_CONTEXT_OUTPUT2()
         value.interactionId = INTERACTION_ID.assumeInitRef(abi.interactionId)
         value.interactionFlags = INTERACTION_FLAGS.assumeInitRef(abi.interactionFlags)
-        value.inputType = windows_core.fromTypedAbi(abi.inputType, windows_core.typeMarker<Win32__impl_l0.POINTER_INPUT_TYPE>()).unwrap()
+        value.inputType = windows_core.fromTypedAbi(abi.inputType, windows_core.typeMarker<Win32_impl_p1.POINTER_INPUT_TYPE>()).unwrap()
         value.contactCount = abi.contactCount
         value.currentContactCount = abi.currentContactCount
         value.x = abi.x
@@ -1536,11 +1541,11 @@ public unsafe func Windows_AddPointerInteractionContext(interactionContext: HINT
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_BufferPointerPacketsInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: pointerInfo len=param[1]
-    func BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32
+    func BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>): Int32
 }
 
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_BufferPointerPacketsInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32 {
+public unsafe func Windows_BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>): Int32 {
     return BufferPointerPacketsInteractionContext(interactionContext, entriesCount, pointerInfo)
 }
 
@@ -1628,11 +1633,11 @@ public unsafe func Windows_GetPropertyInteractionContext(interactionContext: HIN
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetStateInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: pointerInfo optional
-    func GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32
+    func GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32
 }
 
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetStateInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32 {
+public unsafe func Windows_GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32 {
     return GetStateInteractionContext(interactionContext, pointerInfo, state)
 }
 
@@ -1678,11 +1683,11 @@ public unsafe func Windows_ProcessInertiaInteractionContext(interactionContext: 
 
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessPointerFramesInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32
+    func ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>): Int32
 }
 
 @When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessPointerFramesInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32 {
+public unsafe func Windows_ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>): Int32 {
     return ProcessPointerFramesInteractionContext(interactionContext, entriesCount, pointerCount, pointerInfo)
 }
 

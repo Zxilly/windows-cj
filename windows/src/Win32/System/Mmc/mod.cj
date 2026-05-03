@@ -4,17 +4,30 @@
 package windows.Win32.System.Mmc
 
 import std.collection.*
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_System_Mmc == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_Mmc == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Mmc == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Mmc == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Mmc == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_Mmc == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_Mmc == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_Mmc == "on"]
@@ -197,7 +210,7 @@ public let MMC_ITEM_STATE_MASK: UInt32 = 255u32
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct AppEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -234,7 +247,7 @@ public class AppEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<AppEvents> {
-        return InterfaceDescriptor<AppEvents>("AppEvents", AppEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeAppEventsFromAbi, viewAppEvents)
+        return InterfaceDescriptor<AppEvents>("AppEvents", AppEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeAppEventsFromAbi, viewAppEvents)
     }
 
     public unsafe func vtbl(): AppEventsVtbl {
@@ -782,7 +795,7 @@ extend DATA_OBJECT_TYPES <: windows_core.CopyType & windows_core.RuntimeType & w
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct FrameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Maximize: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Minimize: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Restore: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -830,7 +843,7 @@ public class Frame <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Frame> {
-        return InterfaceDescriptor<Frame>("Frame", Frame.iid(), Win32__impl_l2.IDispatch.iid(), takeFrameFromAbi, viewFrame)
+        return InterfaceDescriptor<Frame>("Frame", Frame.iid(), Win32_impl_p2.IDispatch.iid(), takeFrameFromAbi, viewFrame)
     }
 
     public unsafe func vtbl(): FrameVtbl {
@@ -1601,9 +1614,9 @@ public class INodeProperties <: InterfaceWrapperBase & ComInterface {
 public struct IPropertySheetCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_UI_Controls == "on"]
-    public var AddPage: CFunc<(CPointer<Unit>, Win32__impl_l0.HPROPSHEETPAGE) -> Int32> = { _, _ => 0 }
+    public var AddPage: CFunc<(CPointer<Unit>, Win32_impl_p1.HPROPSHEETPAGE) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_Controls == "on"]
-    public var RemovePage: CFunc<(CPointer<Unit>, Win32__impl_l0.HPROPSHEETPAGE) -> Int32> = { _, _ => 0 }
+    public var RemovePage: CFunc<(CPointer<Unit>, Win32_impl_p1.HPROPSHEETPAGE) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1648,14 +1661,14 @@ public class IPropertySheetCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func AddPage(hPage: Win32__impl_l0.HPROPSHEETPAGE): Int32 {
+    public unsafe func AddPage(hPage: Win32_impl_p1.HPROPSHEETPAGE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPage(__liveRaw, hPage)
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func RemovePage(hPage: Win32__impl_l0.HPROPSHEETPAGE): Int32 {
+    public unsafe func RemovePage(hPage: Win32_impl_p1.HPROPSHEETPAGE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemovePage(__liveRaw, hPage)
@@ -1794,7 +1807,7 @@ public struct ISnapinAboutVtbl {
     public var GetProvider: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetSnapinVersion: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetSnapinImage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _ => 0 }
+    public var GetSnapinImage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on"]
     public var GetStaticFolderImage: CFunc<(CPointer<Unit>, CPointer<Win32_Graphics_Gdi.HBITMAP>, CPointer<Win32_Graphics_Gdi.HBITMAP>, CPointer<Win32_Graphics_Gdi.HBITMAP>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
@@ -1859,7 +1872,7 @@ public class ISnapinAbout <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetSnapinImage(hAppIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func GetSnapinImage(hAppIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSnapinImage(__liveRaw, hAppIcon)
@@ -3414,7 +3427,7 @@ extend MMC_SCOPE_ITEM_STATE <: windows_core.CopyType & windows_core.RuntimeType 
 @When[Windows_Win32_System_Mmc == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public struct MMC_SNAPIN_PROPERTY {
     public var pszPropName: CPointer<UInt16> = CPointer<UInt16>()
-    public var varValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var varValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public var eAction: MMC_PROPERTY_ACTION = MMC_PROPERTY_ACTION()
     public init() {}
 }
@@ -3423,7 +3436,7 @@ public struct MMC_SNAPIN_PROPERTY {
 @C
 public struct MMC_SNAPIN_PROPERTYAbi {
     public var pszPropName: CPointer<UInt16> = CPointer<UInt16>()
-    public var varValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var varValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public var eAction: MMC_PROPERTY_ACTIONAbi = MMC_PROPERTY_ACTIONAbi()
     public init() {}
 }
@@ -3436,14 +3449,14 @@ extend MMC_SNAPIN_PROPERTY <: windows_core.CopyType & windows_core.RuntimeType &
     public static func projectAbi(value: MMC_SNAPIN_PROPERTY): MMC_SNAPIN_PROPERTYAbi {
         var abi = MMC_SNAPIN_PROPERTYAbi()
         abi.pszPropName = value.pszPropName
-        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         abi.eAction = MMC_PROPERTY_ACTION.projectAbi(value.eAction)
         return abi
     }
     public static func assumeInitRef(abi: MMC_SNAPIN_PROPERTYAbi): MMC_SNAPIN_PROPERTY {
         var value = MMC_SNAPIN_PROPERTY()
         value.pszPropName = abi.pszPropName
-        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         value.eAction = MMC_PROPERTY_ACTION.assumeInitRef(abi.eAction)
         return value
     }
@@ -3784,7 +3797,7 @@ extend MMC_VISIBLE_COLUMNS <: windows_core.CopyType & windows_core.RuntimeType &
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct MenuItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var LanguageIndependentName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3827,7 +3840,7 @@ public class MenuItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<MenuItem> {
-        return InterfaceDescriptor<MenuItem>("MenuItem", MenuItem.iid(), Win32__impl_l2.IDispatch.iid(), takeMenuItemFromAbi, viewMenuItem)
+        return InterfaceDescriptor<MenuItem>("MenuItem", MenuItem.iid(), Win32_impl_p2.IDispatch.iid(), takeMenuItemFromAbi, viewMenuItem)
     }
 
     public unsafe func vtbl(): MenuItemVtbl {
@@ -3874,7 +3887,7 @@ public class MenuItem <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct NodeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var get_Property: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Bookmark: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3916,7 +3929,7 @@ public class Node <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Node> {
-        return InterfaceDescriptor<Node>("Node", Node.iid(), Win32__impl_l2.IDispatch.iid(), takeNodeFromAbi, viewNode)
+        return InterfaceDescriptor<Node>("Node", Node.iid(), Win32_impl_p2.IDispatch.iid(), takeNodeFromAbi, viewNode)
     }
 
     public unsafe func vtbl(): NodeVtbl {
@@ -3957,7 +3970,7 @@ public class Node <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct NodesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3998,7 +4011,7 @@ public class Nodes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Nodes> {
-        return InterfaceDescriptor<Nodes>("Nodes", Nodes.iid(), Win32__impl_l2.IDispatch.iid(), takeNodesFromAbi, viewNodes)
+        return InterfaceDescriptor<Nodes>("Nodes", Nodes.iid(), Win32_impl_p2.IDispatch.iid(), takeNodesFromAbi, viewNodes)
     }
 
     public unsafe func vtbl(): NodesVtbl {
@@ -4028,11 +4041,11 @@ public class Nodes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct PropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4070,7 +4083,7 @@ public class Property <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Property> {
-        return InterfaceDescriptor<Property>("Property", Property.iid(), Win32__impl_l2.IDispatch.iid(), takePropertyFromAbi, viewProperty)
+        return InterfaceDescriptor<Property>("Property", Property.iid(), Win32_impl_p2.IDispatch.iid(), takePropertyFromAbi, viewProperty)
     }
 
     public unsafe func vtbl(): PropertyVtbl {
@@ -4078,14 +4091,14 @@ public class Property <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(Value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValue(Value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, Value)
@@ -4417,7 +4430,7 @@ extend RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous1_e__Struct <: window
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 public struct RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct {
     public var dwOCXOptions: UInt32 = 0u32
-    public var pUnkControl: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pUnkControl: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -4443,7 +4456,7 @@ extend RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct <: window
     public static func assumeInitRef(abi: RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__StructAbi): RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct {
         var value = RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct()
         value.dwOCXOptions = abi.dwOCXOptions
-        value.pUnkControl = Win32__impl_l0.IUnknown.fromAbiTake(abi.pUnkControl)
+        value.pUnkControl = Win32_impl_p0.IUnknown.fromAbiTake(abi.pUnkControl)
         return value
     }
     public static func fromAbi(abi: RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__StructAbi): Result<RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct> { Result<RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct>.Ok(RESULT_VIEW_TYPE_INFO__Anonymous_e__Union__Anonymous2_e__Struct.assumeInitRef(abi)) }
@@ -4726,7 +4739,7 @@ extend SNodeID2 <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ScopeNamespaceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetParent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetChild: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetNext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -4768,7 +4781,7 @@ public class ScopeNamespace <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ScopeNamespace> {
-        return InterfaceDescriptor<ScopeNamespace>("ScopeNamespace", ScopeNamespace.iid(), Win32__impl_l2.IDispatch.iid(), takeScopeNamespaceFromAbi, viewScopeNamespace)
+        return InterfaceDescriptor<ScopeNamespace>("ScopeNamespace", ScopeNamespace.iid(), Win32_impl_p2.IDispatch.iid(), takeScopeNamespaceFromAbi, viewScopeNamespace)
     }
 
     public unsafe func vtbl(): ScopeNamespaceVtbl {
@@ -5109,7 +5122,7 @@ extend _ViewOptions <: windows_core.CopyType & windows_core.RuntimeType & window
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ColumnVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Width: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetWidth: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -5155,7 +5168,7 @@ public class Column <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Column> {
-        return InterfaceDescriptor<Column>("Column", Column.iid(), Win32__impl_l2.IDispatch.iid(), takeColumnFromAbi, viewColumn)
+        return InterfaceDescriptor<Column>("Column", Column.iid(), Win32_impl_p2.IDispatch.iid(), takeColumnFromAbi, viewColumn)
     }
 
     public unsafe func vtbl(): ColumnVtbl {
@@ -5220,7 +5233,7 @@ public class Column <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ColumnsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -5261,7 +5274,7 @@ public class Columns <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Columns> {
-        return InterfaceDescriptor<Columns>("Columns", Columns.iid(), Win32__impl_l2.IDispatch.iid(), takeColumnsFromAbi, viewColumns)
+        return InterfaceDescriptor<Columns>("Columns", Columns.iid(), Win32_impl_p2.IDispatch.iid(), takeColumnsFromAbi, viewColumns)
     }
 
     public unsafe func vtbl(): ColumnsVtbl {
@@ -5291,11 +5304,11 @@ public class Columns <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ContextMenuVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5333,7 +5346,7 @@ public class ContextMenu <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ContextMenu> {
-        return InterfaceDescriptor<ContextMenu>("ContextMenu", ContextMenu.iid(), Win32__impl_l2.IDispatch.iid(), takeContextMenuFromAbi, viewContextMenu)
+        return InterfaceDescriptor<ContextMenu>("ContextMenu", ContextMenu.iid(), Win32_impl_p2.IDispatch.iid(), takeContextMenuFromAbi, viewContextMenu)
     }
 
     public unsafe func vtbl(): ContextMenuVtbl {
@@ -5348,7 +5361,7 @@ public class ContextMenu <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(IndexOrPath: Win32__impl_l2.VARIANTAbi, MenuItem: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(IndexOrPath: Win32_impl_p2.VARIANTAbi, MenuItem: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, IndexOrPath, MenuItem)
@@ -6530,7 +6543,7 @@ public struct MMC_TASK_DISPLAY_OBJECT__Anonymous_e__Union {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct PropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -6572,7 +6585,7 @@ public class Properties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Properties> {
-        return InterfaceDescriptor<Properties>("Properties", Properties.iid(), Win32__impl_l2.IDispatch.iid(), takePropertiesFromAbi, viewProperties)
+        return InterfaceDescriptor<Properties>("Properties", Properties.iid(), Win32_impl_p2.IDispatch.iid(), takePropertiesFromAbi, viewProperties)
     }
 
     public unsafe func vtbl(): PropertiesVtbl {
@@ -7643,7 +7656,7 @@ public class IEnumTASK <: InterfaceWrapperBase & ComInterface {
 public struct IExtendTaskPadVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TaskNotify: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var TaskNotify: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var EnumTasks: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetTitle: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -7694,7 +7707,7 @@ public class IExtendTaskPad <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TaskNotify(pdo: CPointer<Unit>, arg: CPointer<Win32__impl_l2.VARIANTAbi>, param2: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TaskNotify(pdo: CPointer<Unit>, arg: CPointer<Win32_impl_p2.VARIANTAbi>, param2: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TaskNotify(__liveRaw, pdo, arg, param2)
@@ -7824,7 +7837,7 @@ public class IPropertySheetProvider <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DocumentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Save: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SaveAs: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -7877,7 +7890,7 @@ public class Document <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Document> {
-        return InterfaceDescriptor<Document>("Document", Document.iid(), Win32__impl_l2.IDispatch.iid(), takeDocumentFromAbi, viewDocument)
+        return InterfaceDescriptor<Document>("Document", Document.iid(), Win32_impl_p2.IDispatch.iid(), takeDocumentFromAbi, viewDocument)
     }
 
     public unsafe func vtbl(): DocumentVtbl {
@@ -7984,7 +7997,7 @@ public class Document <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ExtensionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Vendor: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8028,7 +8041,7 @@ public class Extension <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Extension> {
-        return InterfaceDescriptor<Extension>("Extension", Extension.iid(), Win32__impl_l2.IDispatch.iid(), takeExtensionFromAbi, viewExtension)
+        return InterfaceDescriptor<Extension>("Extension", Extension.iid(), Win32_impl_p2.IDispatch.iid(), takeExtensionFromAbi, viewExtension)
     }
 
     public unsafe func vtbl(): ExtensionVtbl {
@@ -8081,7 +8094,7 @@ public class Extension <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ExtensionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8122,7 +8135,7 @@ public class Extensions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Extensions> {
-        return InterfaceDescriptor<Extensions>("Extensions", Extensions.iid(), Win32__impl_l2.IDispatch.iid(), takeExtensionsFromAbi, viewExtensions)
+        return InterfaceDescriptor<Extensions>("Extensions", Extensions.iid(), Win32_impl_p2.IDispatch.iid(), takeExtensionsFromAbi, viewExtensions)
     }
 
     public unsafe func vtbl(): ExtensionsVtbl {
@@ -8289,7 +8302,7 @@ public class IExtendControlbar <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct SnapInVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Vendor: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8333,7 +8346,7 @@ public class SnapIn <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<SnapIn> {
-        return InterfaceDescriptor<SnapIn>("SnapIn", SnapIn.iid(), Win32__impl_l2.IDispatch.iid(), takeSnapInFromAbi, viewSnapIn)
+        return InterfaceDescriptor<SnapIn>("SnapIn", SnapIn.iid(), Win32_impl_p2.IDispatch.iid(), takeSnapInFromAbi, viewSnapIn)
     }
 
     public unsafe func vtbl(): SnapInVtbl {
@@ -8386,13 +8399,13 @@ public class SnapIn <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct SnapInsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -8430,7 +8443,7 @@ public class SnapIns <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<SnapIns> {
-        return InterfaceDescriptor<SnapIns>("SnapIns", SnapIns.iid(), Win32__impl_l2.IDispatch.iid(), takeSnapInsFromAbi, viewSnapIns)
+        return InterfaceDescriptor<SnapIns>("SnapIns", SnapIns.iid(), Win32_impl_p2.IDispatch.iid(), takeSnapInsFromAbi, viewSnapIns)
     }
 
     public unsafe func vtbl(): SnapInsVtbl {
@@ -8457,7 +8470,7 @@ public class SnapIns <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(SnapinNameOrCLSID: CPointer<UInt16>, ParentSnapin: Win32__impl_l2.VARIANTAbi, Properties: Win32__impl_l2.VARIANTAbi, SnapIn: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Add(SnapinNameOrCLSID: CPointer<UInt16>, ParentSnapin: Win32_impl_p2.VARIANTAbi, Properties: Win32_impl_p2.VARIANTAbi, SnapIn: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, SnapinNameOrCLSID, ParentSnapin, Properties, SnapIn)
@@ -8473,13 +8486,13 @@ public class SnapIns <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ViewVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ActiveScopeNode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetActiveScopeNode: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Selection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ListItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SnapinScopeObject: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var SnapinScopeObject: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var SnapinSelectionObject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Is: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
@@ -8489,26 +8502,26 @@ public struct ViewVtbl {
     public var Deselect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsSelected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DisplayScopeNodePropertySheet: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DisplayScopeNodePropertySheet: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var DisplaySelectionPropertySheet: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CopyScopeNode: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var CopyScopeNode: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var CopySelection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteScopeNode: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteScopeNode: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var DeleteSelection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RenameScopeNode: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var RenameScopeNode: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var RenameSelectedItem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_ScopeNodeContextMenu: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_ScopeNodeContextMenu: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SelectionContextMenu: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RefreshScopeNode: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RefreshScopeNode: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var RefreshSelection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ExecuteSelectionMenuItem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExecuteScopeNodeMenuItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var ExecuteScopeNodeMenuItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var ExecuteShellCommand: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -8562,7 +8575,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<View> {
-        return InterfaceDescriptor<View>("View", View.iid(), Win32__impl_l2.IDispatch.iid(), takeViewFromAbi, viewView)
+        return InterfaceDescriptor<View>("View", View.iid(), Win32_impl_p2.IDispatch.iid(), takeViewFromAbi, viewView)
     }
 
     public unsafe func vtbl(): ViewVtbl {
@@ -8594,7 +8607,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SnapinScopeObject(ScopeNode: Win32__impl_l2.VARIANTAbi, ScopeNodeObject: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func SnapinScopeObject(ScopeNode: Win32_impl_p2.VARIANTAbi, ScopeNodeObject: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SnapinScopeObject(__liveRaw, ScopeNode, ScopeNodeObject)
@@ -8644,7 +8657,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DisplayScopeNodePropertySheet(ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DisplayScopeNodePropertySheet(ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayScopeNodePropertySheet(__liveRaw, ScopeNode)
@@ -8657,7 +8670,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CopyScopeNode(ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func CopyScopeNode(ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyScopeNode(__liveRaw, ScopeNode)
@@ -8670,7 +8683,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteScopeNode(ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteScopeNode(ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteScopeNode(__liveRaw, ScopeNode)
@@ -8683,7 +8696,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RenameScopeNode(NewName: CPointer<UInt16>, ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RenameScopeNode(NewName: CPointer<UInt16>, ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RenameScopeNode(__liveRaw, NewName, ScopeNode)
@@ -8696,7 +8709,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_ScopeNodeContextMenu(ScopeNode: Win32__impl_l2.VARIANTAbi, ContextMenu: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_ScopeNodeContextMenu(ScopeNode: Win32_impl_p2.VARIANTAbi, ContextMenu: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_ScopeNodeContextMenu(__liveRaw, ScopeNode, ContextMenu)
@@ -8709,7 +8722,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RefreshScopeNode(ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RefreshScopeNode(ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RefreshScopeNode(__liveRaw, ScopeNode)
@@ -8728,7 +8741,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExecuteScopeNodeMenuItem(MenuItemPath: CPointer<UInt16>, ScopeNode: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ExecuteScopeNodeMenuItem(MenuItemPath: CPointer<UInt16>, ScopeNode: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExecuteScopeNodeMenuItem(__liveRaw, MenuItemPath, ScopeNode)
@@ -8835,7 +8848,7 @@ public class View <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ViewsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, _ViewOptionsAbi) -> Int32> = { _, _, _ => 0 }
@@ -8877,7 +8890,7 @@ public class Views <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Views> {
-        return InterfaceDescriptor<Views>("Views", Views.iid(), Win32__impl_l2.IDispatch.iid(), takeViewsFromAbi, viewViews)
+        return InterfaceDescriptor<Views>("Views", Views.iid(), Win32_impl_p2.IDispatch.iid(), takeViewsFromAbi, viewViews)
     }
 
     public unsafe func vtbl(): ViewsVtbl {
@@ -8913,7 +8926,7 @@ public class Views <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _AppEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnQuit: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var OnDocumentOpen: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var OnDocumentClose: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -8962,7 +8975,7 @@ public class _AppEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_AppEvents> {
-        return InterfaceDescriptor<_AppEvents>("_AppEvents", _AppEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_AppEventsFromAbi, view_AppEvents)
+        return InterfaceDescriptor<_AppEvents>("_AppEvents", _AppEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_AppEventsFromAbi, view_AppEvents)
     }
 
     public unsafe func vtbl(): _AppEventsVtbl {
@@ -9045,7 +9058,7 @@ public class _AppEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Help: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var Quit: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var Document: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -9094,7 +9107,7 @@ public class _Application <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_Application> {
-        return InterfaceDescriptor<_Application>("_Application", _Application.iid(), Win32__impl_l2.IDispatch.iid(), take_ApplicationFromAbi, view_Application)
+        return InterfaceDescriptor<_Application>("_Application", _Application.iid(), Win32_impl_p2.IDispatch.iid(), take_ApplicationFromAbi, view_Application)
     }
 
     public unsafe func vtbl(): _ApplicationVtbl {
@@ -9177,7 +9190,7 @@ public class _Application <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Mmc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _EventConnectorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ConnectTo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Disconnect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -9216,7 +9229,7 @@ public class _EventConnector <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_EventConnector> {
-        return InterfaceDescriptor<_EventConnector>("_EventConnector", _EventConnector.iid(), Win32__impl_l2.IDispatch.iid(), take_EventConnectorFromAbi, view_EventConnector)
+        return InterfaceDescriptor<_EventConnector>("_EventConnector", _EventConnector.iid(), Win32_impl_p2.IDispatch.iid(), take_EventConnectorFromAbi, view_EventConnector)
     }
 
     public unsafe func vtbl(): _EventConnectorVtbl {

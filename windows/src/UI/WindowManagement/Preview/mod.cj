@@ -4,13 +4,21 @@
 package windows.UI.WindowManagement.Preview
 
 import std.collection.*
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_WindowManagement_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_WindowManagement_Preview == "on"]
 import windows_future as windows_future
 
 
@@ -137,7 +145,7 @@ public class IWindowManagementPreviewStatics <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWindowManagementPreviewStatics", IWindowManagementPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowManagementPreviewStaticsVtbl", "IWindowManagementPreviewStatics", "IWindowManagementPreviewStatics_Impl", [InterfaceMethodSchema("SetPreferredMinSize", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<_impl_l1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("preferredFrameMinSize", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWindowManagementPreviewStatics", IWindowManagementPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowManagementPreviewStaticsVtbl", "IWindowManagementPreviewStatics", "IWindowManagementPreviewStatics_Impl", [InterfaceMethodSchema("SetPreferredMinSize", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<impl_p1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("preferredFrameMinSize", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IWindowManagementPreviewStatics.runtimeType())
         return schema
     }
@@ -167,7 +175,7 @@ public class IWindowManagementPreviewStatics <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_UI_WindowManagement == "on"]
-    public unsafe func SetPreferredMinSize(window: _impl_l1.AppWindow, preferredFrameMinSize: windows_future.Size): Unit {
+    public unsafe func SetPreferredMinSize(window: impl_p1.AppWindow, preferredFrameMinSize: windows_future.Size): Unit {
         let v = vtbl()
         let hr = v.SetPreferredMinSize(asRaw(), window.asRaw(), windows_core.projectTypedAbi(preferredFrameMinSize, windows_core.typeMarker<windows_future.Size>()))
         HRESULT(hr).ok()
@@ -247,7 +255,7 @@ public class WindowManagementPreview <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_UI_WindowManagement == "on"]
-    public static unsafe func SetPreferredMinSize(window: _impl_l1.AppWindow, preferredFrameMinSize: windows_future.Size): Unit {
+    public static unsafe func SetPreferredMinSize(window: impl_p1.AppWindow, preferredFrameMinSize: windows_future.Size): Unit {
         try (factory__ = windows_core.factory<WindowManagementPreview, IWindowManagementPreviewStatics>().unwrap()) {
             factory__.SetPreferredMinSize(window, preferredFrameMinSize)
         }

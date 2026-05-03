@@ -4,24 +4,44 @@
 package windows.Win32.Media.DirectShow
 
 import std.collection.*
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt32, unionWriteInt32}
+@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows.Win32.Media.Audio.DirectSound as Win32_Media_Audio_DirectSound
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows.Win32.Media.WindowsMediaFormat as Win32_Media_WindowsMediaFormat
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
+@When[Windows_Win32_Media_DirectShow == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Diagnostics_Etw == "on"]
 import windows.Win32.System.Diagnostics.Etw as Win32_System_Diagnostics_Etw
+@When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_DirectShow == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_DirectShow == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Media_DirectShow == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_DirectShow == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_DirectShow == "on"]
@@ -1290,8 +1310,8 @@ public struct AMVACompBufferInfo {
     public var dwWidthToCreate: UInt32 = 0u32
     public var dwHeightToCreate: UInt32 = 0u32
     public var dwBytesToAllocate: UInt32 = 0u32
-    public var ddCompCaps: Win32__impl_l0.DDSCAPS2 = Win32__impl_l0.DDSCAPS2()
-    public var ddPixelFormat: Win32__impl_l0.DDPIXELFORMAT = Win32__impl_l0.DDPIXELFORMAT()
+    public var ddCompCaps: Win32_impl_p0.DDSCAPS2 = Win32_impl_p0.DDSCAPS2()
+    public var ddPixelFormat: Win32_impl_p0.DDPIXELFORMAT = Win32_impl_p0.DDPIXELFORMAT()
     public init() {}
 }
 
@@ -1302,8 +1322,8 @@ public struct AMVACompBufferInfoAbi {
     public var dwWidthToCreate: UInt32 = 0u32
     public var dwHeightToCreate: UInt32 = 0u32
     public var dwBytesToAllocate: UInt32 = 0u32
-    public var ddCompCaps: Win32__impl_l0.DDSCAPS2Abi = Win32__impl_l0.DDSCAPS2Abi()
-    public var ddPixelFormat: Win32__impl_l0.DDPIXELFORMATAbi = Win32__impl_l0.DDPIXELFORMATAbi()
+    public var ddCompCaps: Win32_impl_p0.DDSCAPS2Abi = Win32_impl_p0.DDSCAPS2Abi()
+    public var ddPixelFormat: Win32_impl_p0.DDPIXELFORMATAbi = Win32_impl_p0.DDPIXELFORMATAbi()
     public init() {}
 }
 
@@ -1318,8 +1338,8 @@ extend AMVACompBufferInfo <: windows_core.CopyType & windows_core.RuntimeType & 
         abi.dwWidthToCreate = value.dwWidthToCreate
         abi.dwHeightToCreate = value.dwHeightToCreate
         abi.dwBytesToAllocate = value.dwBytesToAllocate
-        abi.ddCompCaps = windows_core.projectTypedAbi(value.ddCompCaps, windows_core.typeMarker<Win32__impl_l0.DDSCAPS2>())
-        abi.ddPixelFormat = windows_core.projectTypedAbi(value.ddPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>())
+        abi.ddCompCaps = windows_core.projectTypedAbi(value.ddCompCaps, windows_core.typeMarker<Win32_impl_p0.DDSCAPS2>())
+        abi.ddPixelFormat = windows_core.projectTypedAbi(value.ddPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>())
         return abi
     }
     public static func assumeInitRef(abi: AMVACompBufferInfoAbi): AMVACompBufferInfo {
@@ -1328,8 +1348,8 @@ extend AMVACompBufferInfo <: windows_core.CopyType & windows_core.RuntimeType & 
         value.dwWidthToCreate = abi.dwWidthToCreate
         value.dwHeightToCreate = abi.dwHeightToCreate
         value.dwBytesToAllocate = abi.dwBytesToAllocate
-        value.ddCompCaps = windows_core.fromTypedAbi(abi.ddCompCaps, windows_core.typeMarker<Win32__impl_l0.DDSCAPS2>()).unwrap()
-        value.ddPixelFormat = windows_core.fromTypedAbi(abi.ddPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>()).unwrap()
+        value.ddCompCaps = windows_core.fromTypedAbi(abi.ddCompCaps, windows_core.typeMarker<Win32_impl_p0.DDSCAPS2>()).unwrap()
+        value.ddPixelFormat = windows_core.fromTypedAbi(abi.ddPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: AMVACompBufferInfoAbi): Result<AMVACompBufferInfo> { Result<AMVACompBufferInfo>.Ok(AMVACompBufferInfo.assumeInitRef(abi)) }
@@ -1417,7 +1437,7 @@ extend AMVAInternalMemInfo <: windows_core.CopyType & windows_core.RuntimeType &
 public struct AMVAUncompBufferInfo {
     public var dwMinNumSurfaces: UInt32 = 0u32
     public var dwMaxNumSurfaces: UInt32 = 0u32
-    public var ddUncompPixelFormat: Win32__impl_l0.DDPIXELFORMAT = Win32__impl_l0.DDPIXELFORMAT()
+    public var ddUncompPixelFormat: Win32_impl_p0.DDPIXELFORMAT = Win32_impl_p0.DDPIXELFORMAT()
     public init() {}
 }
 
@@ -1426,7 +1446,7 @@ public struct AMVAUncompBufferInfo {
 public struct AMVAUncompBufferInfoAbi {
     public var dwMinNumSurfaces: UInt32 = 0u32
     public var dwMaxNumSurfaces: UInt32 = 0u32
-    public var ddUncompPixelFormat: Win32__impl_l0.DDPIXELFORMATAbi = Win32__impl_l0.DDPIXELFORMATAbi()
+    public var ddUncompPixelFormat: Win32_impl_p0.DDPIXELFORMATAbi = Win32_impl_p0.DDPIXELFORMATAbi()
     public init() {}
 }
 
@@ -1439,14 +1459,14 @@ extend AMVAUncompBufferInfo <: windows_core.CopyType & windows_core.RuntimeType 
         var abi = AMVAUncompBufferInfoAbi()
         abi.dwMinNumSurfaces = value.dwMinNumSurfaces
         abi.dwMaxNumSurfaces = value.dwMaxNumSurfaces
-        abi.ddUncompPixelFormat = windows_core.projectTypedAbi(value.ddUncompPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>())
+        abi.ddUncompPixelFormat = windows_core.projectTypedAbi(value.ddUncompPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>())
         return abi
     }
     public static func assumeInitRef(abi: AMVAUncompBufferInfoAbi): AMVAUncompBufferInfo {
         var value = AMVAUncompBufferInfo()
         value.dwMinNumSurfaces = abi.dwMinNumSurfaces
         value.dwMaxNumSurfaces = abi.dwMaxNumSurfaces
-        value.ddUncompPixelFormat = windows_core.fromTypedAbi(abi.ddUncompPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>()).unwrap()
+        value.ddUncompPixelFormat = windows_core.fromTypedAbi(abi.ddUncompPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: AMVAUncompBufferInfoAbi): Result<AMVAUncompBufferInfo> { Result<AMVAUncompBufferInfo>.Ok(AMVAUncompBufferInfo.assumeInitRef(abi)) }
@@ -1460,7 +1480,7 @@ extend AMVAUncompBufferInfo <: windows_core.CopyType & windows_core.RuntimeType 
 public struct AMVAUncompDataInfo {
     public var dwUncompWidth: UInt32 = 0u32
     public var dwUncompHeight: UInt32 = 0u32
-    public var ddUncompPixelFormat: Win32__impl_l0.DDPIXELFORMAT = Win32__impl_l0.DDPIXELFORMAT()
+    public var ddUncompPixelFormat: Win32_impl_p0.DDPIXELFORMAT = Win32_impl_p0.DDPIXELFORMAT()
     public init() {}
 }
 
@@ -1469,7 +1489,7 @@ public struct AMVAUncompDataInfo {
 public struct AMVAUncompDataInfoAbi {
     public var dwUncompWidth: UInt32 = 0u32
     public var dwUncompHeight: UInt32 = 0u32
-    public var ddUncompPixelFormat: Win32__impl_l0.DDPIXELFORMATAbi = Win32__impl_l0.DDPIXELFORMATAbi()
+    public var ddUncompPixelFormat: Win32_impl_p0.DDPIXELFORMATAbi = Win32_impl_p0.DDPIXELFORMATAbi()
     public init() {}
 }
 
@@ -1482,14 +1502,14 @@ extend AMVAUncompDataInfo <: windows_core.CopyType & windows_core.RuntimeType & 
         var abi = AMVAUncompDataInfoAbi()
         abi.dwUncompWidth = value.dwUncompWidth
         abi.dwUncompHeight = value.dwUncompHeight
-        abi.ddUncompPixelFormat = windows_core.projectTypedAbi(value.ddUncompPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>())
+        abi.ddUncompPixelFormat = windows_core.projectTypedAbi(value.ddUncompPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>())
         return abi
     }
     public static func assumeInitRef(abi: AMVAUncompDataInfoAbi): AMVAUncompDataInfo {
         var value = AMVAUncompDataInfo()
         value.dwUncompWidth = abi.dwUncompWidth
         value.dwUncompHeight = abi.dwUncompHeight
-        value.ddUncompPixelFormat = windows_core.fromTypedAbi(abi.ddUncompPixelFormat, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>()).unwrap()
+        value.ddUncompPixelFormat = windows_core.fromTypedAbi(abi.ddUncompPixelFormat, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: AMVAUncompDataInfoAbi): Result<AMVAUncompDataInfo> { Result<AMVAUncompDataInfo>.Ok(AMVAUncompDataInfo.assumeInitRef(abi)) }
@@ -6834,13 +6854,13 @@ public struct AVITCDLINDEX_ENTRY {
         }
     }
 
-    public mut prop time: Win32_Media__impl_l0.TIMECODE {
+    public mut prop time: Win32_Media_impl_p0.TIMECODE {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.TIMECODE = Win32_Media__impl_l0.TIMECODE()
-                return packedReadValue<Win32_Media__impl_l0.TIMECODE>(base, 4, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.TIMECODE = Win32_Media_impl_p0.TIMECODE()
+                return packedReadValue<Win32_Media_impl_p0.TIMECODE>(base, 4, defaultValue)
             }
         }
         set(val) {
@@ -16962,13 +16982,13 @@ extend GuardInterval <: windows_core.CopyType & windows_core.RuntimeType & windo
 public struct HEAACWAVEINFO {
     public var _raw: VArray<UInt8, $30> = VArray<UInt8, $30>(repeat: 0u8)
 
-    public mut prop wfx: Win32_Media__impl_l0.WAVEFORMATEX {
+    public mut prop wfx: Win32_Media_impl_p0.WAVEFORMATEX {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
-                return packedReadValue<Win32_Media__impl_l0.WAVEFORMATEX>(base, 0, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
+                return packedReadValue<Win32_Media_impl_p0.WAVEFORMATEX>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -17834,7 +17854,7 @@ public class IAMCertifiedOutputProtection <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMChannelInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ChannelName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ChannelDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ChannelURL: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -17877,7 +17897,7 @@ public class IAMChannelInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMChannelInfo> {
-        return InterfaceDescriptor<IAMChannelInfo>("IAMChannelInfo", IAMChannelInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMChannelInfoFromAbi, viewIAMChannelInfo)
+        return InterfaceDescriptor<IAMChannelInfo>("IAMChannelInfo", IAMChannelInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMChannelInfoFromAbi, viewIAMChannelInfo)
     }
 
     public unsafe func vtbl(): IAMChannelInfoVtbl {
@@ -18041,7 +18061,7 @@ public class IAMClockSlave <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -18083,7 +18103,7 @@ public class IAMCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMCollection> {
-        return InterfaceDescriptor<IAMCollection>("IAMCollection", IAMCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMCollectionFromAbi, viewIAMCollection)
+        return InterfaceDescriptor<IAMCollection>("IAMCollection", IAMCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMCollectionFromAbi, viewIAMCollection)
     }
 
     public unsafe func vtbl(): IAMCollectionVtbl {
@@ -19070,7 +19090,7 @@ public class IAMExtTransport <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMExtendedErrorInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HasError: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ErrorDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -19110,7 +19130,7 @@ public class IAMExtendedErrorInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMExtendedErrorInfo> {
-        return InterfaceDescriptor<IAMExtendedErrorInfo>("IAMExtendedErrorInfo", IAMExtendedErrorInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMExtendedErrorInfoFromAbi, viewIAMExtendedErrorInfo)
+        return InterfaceDescriptor<IAMExtendedErrorInfo>("IAMExtendedErrorInfo", IAMExtendedErrorInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMExtendedErrorInfoFromAbi, viewIAMExtendedErrorInfo)
     }
 
     public unsafe func vtbl(): IAMExtendedErrorInfoVtbl {
@@ -19139,7 +19159,7 @@ public class IAMExtendedErrorInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMExtendedSeekingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ExSeekCapabilities: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var MarkerCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentMarker: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -19183,7 +19203,7 @@ public class IAMExtendedSeeking <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMExtendedSeeking> {
-        return InterfaceDescriptor<IAMExtendedSeeking>("IAMExtendedSeeking", IAMExtendedSeeking.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMExtendedSeekingFromAbi, viewIAMExtendedSeeking)
+        return InterfaceDescriptor<IAMExtendedSeeking>("IAMExtendedSeeking", IAMExtendedSeeking.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMExtendedSeekingFromAbi, viewIAMExtendedSeeking)
     }
 
     public unsafe func vtbl(): IAMExtendedSeekingVtbl {
@@ -19489,7 +19509,7 @@ public class IAMLine21Decoder <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMMediaContentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AuthorName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Rating: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -19539,7 +19559,7 @@ public class IAMMediaContent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMMediaContent> {
-        return InterfaceDescriptor<IAMMediaContent>("IAMMediaContent", IAMMediaContent.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMMediaContentFromAbi, viewIAMMediaContent)
+        return InterfaceDescriptor<IAMMediaContent>("IAMMediaContent", IAMMediaContent.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMMediaContentFromAbi, viewIAMMediaContent)
     }
 
     public unsafe func vtbl(): IAMMediaContentVtbl {
@@ -19628,7 +19648,7 @@ public class IAMMediaContent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMMediaContent2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_MediaParameter: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var get_MediaParameterName: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var PlaylistCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -19668,7 +19688,7 @@ public class IAMMediaContent2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMMediaContent2> {
-        return InterfaceDescriptor<IAMMediaContent2>("IAMMediaContent2", IAMMediaContent2.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMMediaContent2FromAbi, viewIAMMediaContent2)
+        return InterfaceDescriptor<IAMMediaContent2>("IAMMediaContent2", IAMMediaContent2.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMMediaContent2FromAbi, viewIAMMediaContent2)
     }
 
     public unsafe func vtbl(): IAMMediaContent2Vtbl {
@@ -19697,7 +19717,7 @@ public class IAMMediaContent2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMNetShowConfigVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BufferingTime: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetBufferingTime: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
     public var UseFixedUDPPort: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -19756,7 +19776,7 @@ public class IAMNetShowConfig <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMNetShowConfig> {
-        return InterfaceDescriptor<IAMNetShowConfig>("IAMNetShowConfig", IAMNetShowConfig.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMNetShowConfigFromAbi, viewIAMNetShowConfig)
+        return InterfaceDescriptor<IAMNetShowConfig>("IAMNetShowConfig", IAMNetShowConfig.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMNetShowConfigFromAbi, viewIAMNetShowConfig)
     }
 
     public unsafe func vtbl(): IAMNetShowConfigVtbl {
@@ -19899,7 +19919,7 @@ public class IAMNetShowConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMNetShowExPropsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SourceProtocol: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Bandwidth: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ErrorCorrection: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -19945,7 +19965,7 @@ public class IAMNetShowExProps <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMNetShowExProps> {
-        return InterfaceDescriptor<IAMNetShowExProps>("IAMNetShowExProps", IAMNetShowExProps.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMNetShowExPropsFromAbi, viewIAMNetShowExProps)
+        return InterfaceDescriptor<IAMNetShowExProps>("IAMNetShowExProps", IAMNetShowExProps.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMNetShowExPropsFromAbi, viewIAMNetShowExProps)
     }
 
     public unsafe func vtbl(): IAMNetShowExPropsVtbl {
@@ -20010,7 +20030,7 @@ public class IAMNetShowExProps <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMNetShowPrerollVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetPreroll: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Preroll: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -20049,7 +20069,7 @@ public class IAMNetShowPreroll <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMNetShowPreroll> {
-        return InterfaceDescriptor<IAMNetShowPreroll>("IAMNetShowPreroll", IAMNetShowPreroll.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMNetShowPrerollFromAbi, viewIAMNetShowPreroll)
+        return InterfaceDescriptor<IAMNetShowPreroll>("IAMNetShowPreroll", IAMNetShowPreroll.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMNetShowPrerollFromAbi, viewIAMNetShowPreroll)
     }
 
     public unsafe func vtbl(): IAMNetShowPrerollVtbl {
@@ -20072,7 +20092,7 @@ public class IAMNetShowPreroll <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMNetworkStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ReceivedPackets: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RecoveredPackets: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LostPackets: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -20116,7 +20136,7 @@ public class IAMNetworkStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMNetworkStatus> {
-        return InterfaceDescriptor<IAMNetworkStatus>("IAMNetworkStatus", IAMNetworkStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMNetworkStatusFromAbi, viewIAMNetworkStatus)
+        return InterfaceDescriptor<IAMNetworkStatus>("IAMNetworkStatus", IAMNetworkStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMNetworkStatusFromAbi, viewIAMNetworkStatus)
     }
 
     public unsafe func vtbl(): IAMNetworkStatusVtbl {
@@ -20846,7 +20866,7 @@ public class IAMResourceControl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAMStatsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetValueByIndex: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<Float64>, CPointer<Float64>, CPointer<Float64>, CPointer<Float64>, CPointer<Float64>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
@@ -20889,7 +20909,7 @@ public class IAMStats <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAMStats> {
-        return InterfaceDescriptor<IAMStats>("IAMStats", IAMStats.iid(), Win32__impl_l2.IDispatch.iid(), takeIAMStatsFromAbi, viewIAMStats)
+        return InterfaceDescriptor<IAMStats>("IAMStats", IAMStats.iid(), Win32_impl_p2.IDispatch.iid(), takeIAMStatsFromAbi, viewIAMStats)
     }
 
     public unsafe func vtbl(): IAMStatsVtbl {
@@ -21295,9 +21315,9 @@ public struct IAMTimecodeGeneratorVtbl {
     public var SetVITCLine: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var VITCLine: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media == "on"]
-    public var SetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
+    public var SetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media == "on"]
-    public var GetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
+    public var GetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -21366,14 +21386,14 @@ public class IAMTimecodeGenerator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media == "on"]
-    public unsafe func SetTimecode(pTimecodeSample: CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>): Int32 {
+    public unsafe func SetTimecode(pTimecodeSample: CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTimecode(__liveRaw, pTimecodeSample)
     }
 
     @When[Windows_Win32_Media == "on"]
-    public unsafe func GetTimecode(pTimecodeSample: CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>): Int32 {
+    public unsafe func GetTimecode(pTimecodeSample: CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTimecode(__liveRaw, pTimecodeSample)
@@ -21389,7 +21409,7 @@ public struct IAMTimecodeReaderVtbl {
     public var SetVITCLine: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var VITCLine: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media == "on"]
-    public var GetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
+    public var GetTimecode: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -21458,7 +21478,7 @@ public class IAMTimecodeReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media == "on"]
-    public unsafe func GetTimecode(pTimecodeSample: CPointer<Win32_Media__impl_l0.TIMECODE_SAMPLEAbi>): Int32 {
+    public unsafe func GetTimecode(pTimecodeSample: CPointer<Win32_Media_impl_p0.TIMECODE_SAMPLEAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTimecode(__liveRaw, pTimecodeSample)
@@ -22870,7 +22890,7 @@ public class IBDA_DeviceControl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 @C
 public struct IBDA_DiagnosticPropertiesVtbl {
-    public var base_: Win32__impl_l2.IPropertyBagVtbl = Win32__impl_l2.IPropertyBagVtbl()
+    public var base_: Win32_impl_p3.IPropertyBagVtbl = Win32_impl_p3.IPropertyBagVtbl()
     public init() {}
 }
 
@@ -22907,7 +22927,7 @@ public class IBDA_DiagnosticProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBDA_DiagnosticProperties> {
-        return InterfaceDescriptor<IBDA_DiagnosticProperties>("IBDA_DiagnosticProperties", IBDA_DiagnosticProperties.iid(), Win32__impl_l2.IPropertyBag.iid(), takeIBDA_DiagnosticPropertiesFromAbi, viewIBDA_DiagnosticProperties)
+        return InterfaceDescriptor<IBDA_DiagnosticProperties>("IBDA_DiagnosticProperties", IBDA_DiagnosticProperties.iid(), Win32_impl_p3.IPropertyBag.iid(), takeIBDA_DiagnosticPropertiesFromAbi, viewIBDA_DiagnosticProperties)
     }
 
     public unsafe func vtbl(): IBDA_DiagnosticPropertiesVtbl {
@@ -24961,7 +24981,7 @@ public class IBaseVideoMixer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBasicAudioVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetVolume: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Volume: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetBalance: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -25002,7 +25022,7 @@ public class IBasicAudio <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBasicAudio> {
-        return InterfaceDescriptor<IBasicAudio>("IBasicAudio", IBasicAudio.iid(), Win32__impl_l2.IDispatch.iid(), takeIBasicAudioFromAbi, viewIBasicAudio)
+        return InterfaceDescriptor<IBasicAudio>("IBasicAudio", IBasicAudio.iid(), Win32_impl_p2.IDispatch.iid(), takeIBasicAudioFromAbi, viewIBasicAudio)
     }
 
     public unsafe func vtbl(): IBasicAudioVtbl {
@@ -25037,7 +25057,7 @@ public class IBasicAudio <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBasicVideoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AvgTimePerFrame: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var BitRate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var BitErrorRate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -25106,7 +25126,7 @@ public class IBasicVideo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBasicVideo> {
-        return InterfaceDescriptor<IBasicVideo>("IBasicVideo", IBasicVideo.iid(), Win32__impl_l2.IDispatch.iid(), takeIBasicVideoFromAbi, viewIBasicVideo)
+        return InterfaceDescriptor<IBasicVideo>("IBasicVideo", IBasicVideo.iid(), Win32_impl_p2.IDispatch.iid(), takeIBasicVideoFromAbi, viewIBasicVideo)
     }
 
     public unsafe func vtbl(): IBasicVideoVtbl {
@@ -26865,11 +26885,11 @@ public struct IDirectDrawVideoVtbl {
     public var GetSwitches: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetSwitches: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetCaps: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.DDCAPS_DX7Abi>) -> Int32> = { _, _ => 0 }
+    public var GetCaps: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.DDCAPS_DX7Abi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetEmulatedCaps: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.DDCAPS_DX7Abi>) -> Int32> = { _, _ => 0 }
+    public var GetEmulatedCaps: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.DDCAPS_DX7Abi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetSurfaceDesc: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.DDSURFACEDESCAbi>) -> Int32> = { _, _ => 0 }
+    public var GetSurfaceDesc: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.DDSURFACEDESCAbi>) -> Int32> = { _, _ => 0 }
     public var GetFourCCCodes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
     public var SetDirectDraw: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -26939,21 +26959,21 @@ public class IDirectDrawVideo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetCaps(pCaps: CPointer<Win32__impl_l1.DDCAPS_DX7Abi>): Int32 {
+    public unsafe func GetCaps(pCaps: CPointer<Win32_impl_p1.DDCAPS_DX7Abi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCaps(__liveRaw, pCaps)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetEmulatedCaps(pCaps: CPointer<Win32__impl_l1.DDCAPS_DX7Abi>): Int32 {
+    public unsafe func GetEmulatedCaps(pCaps: CPointer<Win32_impl_p1.DDCAPS_DX7Abi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEmulatedCaps(__liveRaw, pCaps)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetSurfaceDesc(pSurfaceDesc: CPointer<Win32__impl_l1.DDSURFACEDESCAbi>): Int32 {
+    public unsafe func GetSurfaceDesc(pSurfaceDesc: CPointer<Win32_impl_p1.DDSURFACEDESCAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSurfaceDesc(__liveRaw, pSurfaceDesc)
@@ -27818,7 +27838,7 @@ public struct IESEventVtbl {
     public var GetEventType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var SetCompletionStatus: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetStringData: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -27882,7 +27902,7 @@ public class IESEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetData(pbData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetData(pbData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetData(__liveRaw, pbData)
@@ -27957,15 +27977,15 @@ public struct IEncoderAPIVtbl {
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var IsAvailable: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetParameterRange: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetParameterRange: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetParameterValues: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32__impl_l2.VARIANTAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetParameterValues: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_impl_p2.VARIANTAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetDefaultValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetDefaultValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -28022,35 +28042,35 @@ public class IEncoderAPI <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetParameterRange(Api: CPointer<GUID>, ValueMin: CPointer<Win32__impl_l2.VARIANTAbi>, ValueMax: CPointer<Win32__impl_l2.VARIANTAbi>, SteppingDelta: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetParameterRange(Api: CPointer<GUID>, ValueMin: CPointer<Win32_impl_p2.VARIANTAbi>, ValueMax: CPointer<Win32_impl_p2.VARIANTAbi>, SteppingDelta: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetParameterRange(__liveRaw, Api, ValueMin, ValueMax, SteppingDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetParameterValues(Api: CPointer<GUID>, Values: CPointer<CPointer<Win32__impl_l2.VARIANTAbi>>, ValuesCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetParameterValues(Api: CPointer<GUID>, Values: CPointer<CPointer<Win32_impl_p2.VARIANTAbi>>, ValuesCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetParameterValues(__liveRaw, Api, Values, ValuesCount)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetDefaultValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetDefaultValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultValue(__liveRaw, Api, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, Api, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, Api, Value)
@@ -28398,7 +28418,7 @@ public class IFileSourceFilter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFilterInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var FindPin: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -28446,7 +28466,7 @@ public class IFilterInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFilterInfo> {
-        return InterfaceDescriptor<IFilterInfo>("IFilterInfo", IFilterInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIFilterInfoFromAbi, viewIFilterInfo)
+        return InterfaceDescriptor<IFilterInfo>("IFilterInfo", IFilterInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIFilterInfoFromAbi, viewIFilterInfo)
     }
 
     public unsafe func vtbl(): IFilterInfoVtbl {
@@ -28767,9 +28787,9 @@ public class IFullScreenVideo <: InterfaceWrapperBase & ComInterface {
 public struct IFullScreenVideoExVtbl {
     public var base_: IFullScreenVideoVtbl = IFullScreenVideoVtbl()
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetAcceleratorTable: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.HACCEL) -> Int32> = { _, _, _ => 0 }
+    public var SetAcceleratorTable: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p1.HACCEL) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetAcceleratorTable: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Win32__impl_l0.HACCEL>) -> Int32> = { _, _, _ => 0 }
+    public var GetAcceleratorTable: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Win32_impl_p1.HACCEL>) -> Int32> = { _, _, _ => 0 }
     public var KeepPixelAspectRatio: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsKeepPixelAspectRatio: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -28816,14 +28836,14 @@ public class IFullScreenVideoEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetAcceleratorTable(hwnd: CPointer<Unit>, hAccel: Win32__impl_l0.HACCEL): Int32 {
+    public unsafe func SetAcceleratorTable(hwnd: CPointer<Unit>, hAccel: Win32_impl_p1.HACCEL): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAcceleratorTable(__liveRaw, hwnd, hAccel)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetAcceleratorTable(phwnd: CPointer<CPointer<Unit>>, phAccel: CPointer<Win32__impl_l0.HACCEL>): Int32 {
+    public unsafe func GetAcceleratorTable(phwnd: CPointer<CPointer<Unit>>, phAccel: CPointer<Win32_impl_p1.HACCEL>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAcceleratorTable(__liveRaw, phwnd, phAccel)
@@ -29074,7 +29094,7 @@ public class IIPDVDec <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMediaControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Run: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -29123,7 +29143,7 @@ public class IMediaControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaControl> {
-        return InterfaceDescriptor<IMediaControl>("IMediaControl", IMediaControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIMediaControlFromAbi, viewIMediaControl)
+        return InterfaceDescriptor<IMediaControl>("IMediaControl", IMediaControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIMediaControlFromAbi, viewIMediaControl)
     }
 
     public unsafe func vtbl(): IMediaControlVtbl {
@@ -29191,7 +29211,7 @@ public class IMediaControl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMediaEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetEventHandle: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var GetEvent: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<IntNative>, CPointer<IntNative>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public var WaitForCompletion: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -29234,7 +29254,7 @@ public class IMediaEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaEvent> {
-        return InterfaceDescriptor<IMediaEvent>("IMediaEvent", IMediaEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIMediaEventFromAbi, viewIMediaEvent)
+        return InterfaceDescriptor<IMediaEvent>("IMediaEvent", IMediaEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIMediaEventFromAbi, viewIMediaEvent)
     }
 
     public unsafe func vtbl(): IMediaEventVtbl {
@@ -29405,7 +29425,7 @@ public class IMediaEventSink <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMediaFilterVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Run: CFunc<(CPointer<Unit>, Int64) -> Int32> = { _, _ => 0 }
@@ -29450,7 +29470,7 @@ public class IMediaFilter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaFilter> {
-        return InterfaceDescriptor<IMediaFilter>("IMediaFilter", IMediaFilter.iid(), Win32__impl_l1.IPersist.iid(), takeIMediaFilterFromAbi, viewIMediaFilter)
+        return InterfaceDescriptor<IMediaFilter>("IMediaFilter", IMediaFilter.iid(), Win32_impl_p2.IPersist.iid(), takeIMediaFilterFromAbi, viewIMediaFilter)
     }
 
     public unsafe func vtbl(): IMediaFilterVtbl {
@@ -29499,7 +29519,7 @@ public class IMediaFilter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMediaPositionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetCurrentPosition: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
     public var CurrentPosition: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -29547,7 +29567,7 @@ public class IMediaPosition <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaPosition> {
-        return InterfaceDescriptor<IMediaPosition>("IMediaPosition", IMediaPosition.iid(), Win32__impl_l2.IDispatch.iid(), takeIMediaPositionFromAbi, viewIMediaPosition)
+        return InterfaceDescriptor<IMediaPosition>("IMediaPosition", IMediaPosition.iid(), Win32_impl_p2.IDispatch.iid(), takeIMediaPositionFromAbi, viewIMediaPosition)
     }
 
     public unsafe func vtbl(): IMediaPositionVtbl {
@@ -29624,9 +29644,9 @@ public class IMediaPosition <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 @C
 public struct IMediaPropertyBagVtbl {
-    public var base_: Win32__impl_l2.IPropertyBagVtbl = Win32__impl_l2.IPropertyBagVtbl()
+    public var base_: Win32_impl_p3.IPropertyBagVtbl = Win32_impl_p3.IPropertyBagVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnumProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnumProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -29663,7 +29683,7 @@ public class IMediaPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaPropertyBag> {
-        return InterfaceDescriptor<IMediaPropertyBag>("IMediaPropertyBag", IMediaPropertyBag.iid(), Win32__impl_l2.IPropertyBag.iid(), takeIMediaPropertyBagFromAbi, viewIMediaPropertyBag)
+        return InterfaceDescriptor<IMediaPropertyBag>("IMediaPropertyBag", IMediaPropertyBag.iid(), Win32_impl_p3.IPropertyBag.iid(), takeIMediaPropertyBagFromAbi, viewIMediaPropertyBag)
     }
 
     public unsafe func vtbl(): IMediaPropertyBagVtbl {
@@ -29671,7 +29691,7 @@ public class IMediaPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnumProperty(iProperty: UInt32, pvarPropertyName: CPointer<Win32__impl_l2.VARIANTAbi>, pvarPropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnumProperty(iProperty: UInt32, pvarPropertyName: CPointer<Win32_impl_p2.VARIANTAbi>, pvarPropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumProperty(__liveRaw, iProperty, pvarPropertyName, pvarPropertyValue)
@@ -30131,7 +30151,7 @@ public class IMediaSeeking <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMediaTypeInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Subtype: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -30170,7 +30190,7 @@ public class IMediaTypeInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMediaTypeInfo> {
-        return InterfaceDescriptor<IMediaTypeInfo>("IMediaTypeInfo", IMediaTypeInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIMediaTypeInfoFromAbi, viewIMediaTypeInfo)
+        return InterfaceDescriptor<IMediaTypeInfo>("IMediaTypeInfo", IMediaTypeInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIMediaTypeInfoFromAbi, viewIMediaTypeInfo)
     }
 
     public unsafe func vtbl(): IMediaTypeInfoVtbl {
@@ -30700,9 +30720,9 @@ public class IMixerPinConfig <: InterfaceWrapperBase & ComInterface {
 public struct IMixerPinConfig2Vtbl {
     public var base_: IMixerPinConfigVtbl = IMixerPinConfigVtbl()
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var SetOverlaySurfaceColorControls: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.DDCOLORCONTROLAbi>) -> Int32> = { _, _ => 0 }
+    public var SetOverlaySurfaceColorControls: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.DDCOLORCONTROLAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetOverlaySurfaceColorControls: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.DDCOLORCONTROLAbi>) -> Int32> = { _, _ => 0 }
+    public var GetOverlaySurfaceColorControls: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.DDCOLORCONTROLAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -30747,14 +30767,14 @@ public class IMixerPinConfig2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func SetOverlaySurfaceColorControls(pColorControl: CPointer<Win32__impl_l0.DDCOLORCONTROLAbi>): Int32 {
+    public unsafe func SetOverlaySurfaceColorControls(pColorControl: CPointer<Win32_impl_p0.DDCOLORCONTROLAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOverlaySurfaceColorControls(__liveRaw, pColorControl)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetOverlaySurfaceColorControls(pColorControl: CPointer<Win32__impl_l0.DDCOLORCONTROLAbi>): Int32 {
+    public unsafe func GetOverlaySurfaceColorControls(pColorControl: CPointer<Win32_impl_p0.DDCOLORCONTROLAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetOverlaySurfaceColorControls(__liveRaw, pColorControl)
@@ -30901,7 +30921,7 @@ public class IOverlayNotify2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPersistMediaPropertyBagVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     public var InitNew: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Load: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -30942,7 +30962,7 @@ public class IPersistMediaPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPersistMediaPropertyBag> {
-        return InterfaceDescriptor<IPersistMediaPropertyBag>("IPersistMediaPropertyBag", IPersistMediaPropertyBag.iid(), Win32__impl_l1.IPersist.iid(), takeIPersistMediaPropertyBagFromAbi, viewIPersistMediaPropertyBag)
+        return InterfaceDescriptor<IPersistMediaPropertyBag>("IPersistMediaPropertyBag", IPersistMediaPropertyBag.iid(), Win32_impl_p2.IPersist.iid(), takeIPersistMediaPropertyBagFromAbi, viewIPersistMediaPropertyBag)
     }
 
     public unsafe func vtbl(): IPersistMediaPropertyBagVtbl {
@@ -31105,7 +31125,7 @@ public class IPinFlowControl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPinInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Pin: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -31163,7 +31183,7 @@ public class IPinInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPinInfo> {
-        return InterfaceDescriptor<IPinInfo>("IPinInfo", IPinInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIPinInfoFromAbi, viewIPinInfo)
+        return InterfaceDescriptor<IPinInfo>("IPinInfo", IPinInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIPinInfoFromAbi, viewIPinInfo)
     }
 
     public unsafe func vtbl(): IPinInfoVtbl {
@@ -31352,9 +31372,9 @@ public class IQualProp <: InterfaceWrapperBase & ComInterface {
 public struct IQueueCommandVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InvokeAtStreamTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Float64, CPointer<GUID>, Int32, Int16, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var InvokeAtStreamTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Float64, CPointer<GUID>, Int32, Int16, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InvokeAtPresentationTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Float64, CPointer<GUID>, Int32, Int16, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var InvokeAtPresentationTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Float64, CPointer<GUID>, Int32, Int16, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -31399,14 +31419,14 @@ public class IQueueCommand <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InvokeAtStreamTime(pCmd: CPointer<CPointer<Unit>>, time: Float64, iid: CPointer<GUID>, dispidMethod: Int32, wFlags: Int16, cArgs: Int32, pDispParams: CPointer<Win32__impl_l2.VARIANTAbi>, pvarResult: CPointer<Win32__impl_l2.VARIANTAbi>, puArgErr: CPointer<Int16>): Int32 {
+    public unsafe func InvokeAtStreamTime(pCmd: CPointer<CPointer<Unit>>, time: Float64, iid: CPointer<GUID>, dispidMethod: Int32, wFlags: Int16, cArgs: Int32, pDispParams: CPointer<Win32_impl_p2.VARIANTAbi>, pvarResult: CPointer<Win32_impl_p2.VARIANTAbi>, puArgErr: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InvokeAtStreamTime(__liveRaw, pCmd, time, iid, dispidMethod, wFlags, cArgs, pDispParams, pvarResult, puArgErr)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InvokeAtPresentationTime(pCmd: CPointer<CPointer<Unit>>, time: Float64, iid: CPointer<GUID>, dispidMethod: Int32, wFlags: Int16, cArgs: Int32, pDispParams: CPointer<Win32__impl_l2.VARIANTAbi>, pvarResult: CPointer<Win32__impl_l2.VARIANTAbi>, puArgErr: CPointer<Int16>): Int32 {
+    public unsafe func InvokeAtPresentationTime(pCmd: CPointer<CPointer<Unit>>, time: Float64, iid: CPointer<GUID>, dispidMethod: Int32, wFlags: Int16, cArgs: Int32, pDispParams: CPointer<Win32_impl_p2.VARIANTAbi>, pvarResult: CPointer<Win32_impl_p2.VARIANTAbi>, puArgErr: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InvokeAtPresentationTime(__liveRaw, pCmd, time, iid, dispidMethod, wFlags, cArgs, pDispParams, pvarResult, puArgErr)
@@ -31416,7 +31436,7 @@ public class IQueueCommand <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRegFilterInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Filter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -31456,7 +31476,7 @@ public class IRegFilterInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRegFilterInfo> {
-        return InterfaceDescriptor<IRegFilterInfo>("IRegFilterInfo", IRegFilterInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIRegFilterInfoFromAbi, viewIRegFilterInfo)
+        return InterfaceDescriptor<IRegFilterInfo>("IRegFilterInfo", IRegFilterInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIRegFilterInfoFromAbi, viewIRegFilterInfo)
     }
 
     public unsafe func vtbl(): IRegFilterInfoVtbl {
@@ -31834,7 +31854,7 @@ public class ISelector <: InterfaceWrapperBase & ComInterface {
 public struct ISpecifyParticularPagesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Ole == "on"]
-    public var GetPages: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l0.CAUUIDAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPages: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p0.CAUUIDAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -31879,7 +31899,7 @@ public class ISpecifyParticularPages <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Ole == "on"]
-    public unsafe func GetPages(guidWhatPages: CPointer<GUID>, pPages: CPointer<Win32__impl_l0.CAUUIDAbi>): Int32 {
+    public unsafe func GetPages(guidWhatPages: CPointer<GUID>, pPages: CPointer<Win32_impl_p0.CAUUIDAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPages(__liveRaw, guidWhatPages, pPages)
@@ -32361,9 +32381,9 @@ public class IVMRSurface9 <: InterfaceWrapperBase & ComInterface {
 public struct IVMRVideoStreamControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var SetColorKey: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.DDCOLORKEYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetColorKey: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.DDCOLORKEYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetColorKey: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.DDCOLORKEYAbi>) -> Int32> = { _, _ => 0 }
+    public var GetColorKey: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.DDCOLORKEYAbi>) -> Int32> = { _, _ => 0 }
     public var SetStreamActiveState: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var GetStreamActiveState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -32410,14 +32430,14 @@ public class IVMRVideoStreamControl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func SetColorKey(lpClrKey: CPointer<Win32__impl_l0.DDCOLORKEYAbi>): Int32 {
+    public unsafe func SetColorKey(lpClrKey: CPointer<Win32_impl_p0.DDCOLORKEYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetColorKey(__liveRaw, lpClrKey)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetColorKey(lpClrKey: CPointer<Win32__impl_l0.DDCOLORKEYAbi>): Int32 {
+    public unsafe func GetColorKey(lpClrKey: CPointer<Win32_impl_p0.DDCOLORKEYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetColorKey(__liveRaw, lpClrKey)
@@ -33968,13 +33988,13 @@ extend MMSSF_GET_INFORMATION_FLAGS <: windows_core.CopyType & windows_core.Runti
 public struct MPEG1WAVEFORMAT {
     public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
 
-    public mut prop wfx: Win32_Media__impl_l0.WAVEFORMATEX {
+    public mut prop wfx: Win32_Media_impl_p0.WAVEFORMATEX {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
-                return packedReadValue<Win32_Media__impl_l0.WAVEFORMATEX>(base, 0, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
+                return packedReadValue<Win32_Media_impl_p0.WAVEFORMATEX>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -36592,13 +36612,13 @@ extend SpectralInversion <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct TIMECODEDATA {
     public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
 
-    public mut prop time: Win32_Media__impl_l0.TIMECODE {
+    public mut prop time: Win32_Media_impl_p0.TIMECODE {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.TIMECODE = Win32_Media__impl_l0.TIMECODE()
-                return packedReadValue<Win32_Media__impl_l0.TIMECODE>(base, 0, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.TIMECODE = Win32_Media_impl_p0.TIMECODE()
+                return packedReadValue<Win32_Media_impl_p0.TIMECODE>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -38570,7 +38590,7 @@ extend VMR9_SampleFormat <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct VMRALLOCATIONINFO {
     public var dwFlags: UInt32 = 0u32
     public var lpHdr: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi> = CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>()
-    public var lpPixFmt: CPointer<Win32__impl_l0.DDPIXELFORMATAbi> = CPointer<Win32__impl_l0.DDPIXELFORMATAbi>()
+    public var lpPixFmt: CPointer<Win32_impl_p0.DDPIXELFORMATAbi> = CPointer<Win32_impl_p0.DDPIXELFORMATAbi>()
     public var szAspectRatio: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
     public var dwMinBuffers: UInt32 = 0u32
     public var dwMaxBuffers: UInt32 = 0u32
@@ -38584,7 +38604,7 @@ public struct VMRALLOCATIONINFO {
 public struct VMRALLOCATIONINFOAbi {
     public var dwFlags: UInt32 = 0u32
     public var lpHdr: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi> = CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>()
-    public var lpPixFmt: CPointer<Win32__impl_l0.DDPIXELFORMATAbi> = CPointer<Win32__impl_l0.DDPIXELFORMATAbi>()
+    public var lpPixFmt: CPointer<Win32_impl_p0.DDPIXELFORMATAbi> = CPointer<Win32_impl_p0.DDPIXELFORMATAbi>()
     public var szAspectRatio: Win32_Foundation.SIZEAbi = Win32_Foundation.SIZEAbi()
     public var dwMinBuffers: UInt32 = 0u32
     public var dwMaxBuffers: UInt32 = 0u32
@@ -38633,7 +38653,7 @@ extend VMRALLOCATIONINFO <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct VMRALPHABITMAP {
     public var dwFlags: UInt32 = 0u32
     public var hdc: Win32_Graphics_Gdi.HDC = CPointer<Unit>()
-    public var pDDS: Win32__impl_l2.IDirectDrawSurface7 = Win32__impl_l2.IDirectDrawSurface7(CPointer<Unit>())
+    public var pDDS: Win32_impl_p2.IDirectDrawSurface7 = Win32_impl_p2.IDirectDrawSurface7(CPointer<Unit>())
     public var rSrc: Win32_Foundation.RECT = Win32_Foundation.RECT()
     public var rDest: NORMALIZEDRECT = NORMALIZEDRECT()
     public var fAlpha: Float32 = 0.0f32
@@ -38674,7 +38694,7 @@ extend VMRALPHABITMAP <: windows_core.CopyType & windows_core.RuntimeType & wind
         var value = VMRALPHABITMAP()
         value.dwFlags = abi.dwFlags
         value.hdc = abi.hdc
-        value.pDDS = Win32__impl_l2.IDirectDrawSurface7.fromAbiTake(abi.pDDS)
+        value.pDDS = Win32_impl_p2.IDirectDrawSurface7.fromAbiTake(abi.pDDS)
         value.rSrc = windows_core.fromTypedAbi(abi.rSrc, windows_core.typeMarker<Win32_Foundation.RECT>()).unwrap()
         value.rDest = NORMALIZEDRECT.assumeInitRef(abi.rDest)
         value.fAlpha = abi.fAlpha
@@ -39141,7 +39161,7 @@ extend VMRMode <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
 public struct VMRPRESENTATIONINFO {
     public var dwFlags: UInt32 = 0u32
-    public var lpSurf: Win32__impl_l2.IDirectDrawSurface7 = Win32__impl_l2.IDirectDrawSurface7(CPointer<Unit>())
+    public var lpSurf: Win32_impl_p2.IDirectDrawSurface7 = Win32_impl_p2.IDirectDrawSurface7(CPointer<Unit>())
     public var rtStart: Int64 = 0i64
     public var rtEnd: Int64 = 0i64
     public var szAspectRatio: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
@@ -39188,7 +39208,7 @@ extend VMRPRESENTATIONINFO <: windows_core.CopyType & windows_core.RuntimeType &
     public static func assumeInitRef(abi: VMRPRESENTATIONINFOAbi): VMRPRESENTATIONINFO {
         var value = VMRPRESENTATIONINFO()
         value.dwFlags = abi.dwFlags
-        value.lpSurf = Win32__impl_l2.IDirectDrawSurface7.fromAbiTake(abi.lpSurf)
+        value.lpSurf = Win32_impl_p2.IDirectDrawSurface7.fromAbiTake(abi.lpSurf)
         value.rtStart = abi.rtStart
         value.rtEnd = abi.rtEnd
         value.szAspectRatio = windows_core.fromTypedAbi(abi.szAspectRatio, windows_core.typeMarker<Win32_Foundation.SIZE>()).unwrap()
@@ -39411,12 +39431,12 @@ extend VMRSurfaceAllocationFlags <: windows_core.CopyType & windows_core.Runtime
 
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
 public struct VMRVIDEOSTREAMINFO {
-    public var pddsVideoSurface: Win32__impl_l2.IDirectDrawSurface7 = Win32__impl_l2.IDirectDrawSurface7(CPointer<Unit>())
+    public var pddsVideoSurface: Win32_impl_p2.IDirectDrawSurface7 = Win32_impl_p2.IDirectDrawSurface7(CPointer<Unit>())
     public var dwWidth: UInt32 = 0u32
     public var dwHeight: UInt32 = 0u32
     public var dwStrmID: UInt32 = 0u32
     public var fAlpha: Float32 = 0.0f32
-    public var ddClrKey: Win32__impl_l0.DDCOLORKEY = Win32__impl_l0.DDCOLORKEY()
+    public var ddClrKey: Win32_impl_p0.DDCOLORKEY = Win32_impl_p0.DDCOLORKEY()
     public var rNormal: NORMALIZEDRECT = NORMALIZEDRECT()
     public init() {}
 }
@@ -39429,7 +39449,7 @@ public struct VMRVIDEOSTREAMINFOAbi {
     public var dwHeight: UInt32 = 0u32
     public var dwStrmID: UInt32 = 0u32
     public var fAlpha: Float32 = 0.0f32
-    public var ddClrKey: Win32__impl_l0.DDCOLORKEYAbi = Win32__impl_l0.DDCOLORKEYAbi()
+    public var ddClrKey: Win32_impl_p0.DDCOLORKEYAbi = Win32_impl_p0.DDCOLORKEYAbi()
     public var rNormal: NORMALIZEDRECTAbi = NORMALIZEDRECTAbi()
     public init() {}
 }
@@ -39446,18 +39466,18 @@ extend VMRVIDEOSTREAMINFO <: windows_core.CopyType & windows_core.RuntimeType & 
         abi.dwHeight = value.dwHeight
         abi.dwStrmID = value.dwStrmID
         abi.fAlpha = value.fAlpha
-        abi.ddClrKey = windows_core.projectTypedAbi(value.ddClrKey, windows_core.typeMarker<Win32__impl_l0.DDCOLORKEY>())
+        abi.ddClrKey = windows_core.projectTypedAbi(value.ddClrKey, windows_core.typeMarker<Win32_impl_p0.DDCOLORKEY>())
         abi.rNormal = NORMALIZEDRECT.projectAbi(value.rNormal)
         return abi
     }
     public static func assumeInitRef(abi: VMRVIDEOSTREAMINFOAbi): VMRVIDEOSTREAMINFO {
         var value = VMRVIDEOSTREAMINFO()
-        value.pddsVideoSurface = Win32__impl_l2.IDirectDrawSurface7.fromAbiTake(abi.pddsVideoSurface)
+        value.pddsVideoSurface = Win32_impl_p2.IDirectDrawSurface7.fromAbiTake(abi.pddsVideoSurface)
         value.dwWidth = abi.dwWidth
         value.dwHeight = abi.dwHeight
         value.dwStrmID = abi.dwStrmID
         value.fAlpha = abi.fAlpha
-        value.ddClrKey = windows_core.fromTypedAbi(abi.ddClrKey, windows_core.typeMarker<Win32__impl_l0.DDCOLORKEY>()).unwrap()
+        value.ddClrKey = windows_core.fromTypedAbi(abi.ddClrKey, windows_core.typeMarker<Win32_impl_p0.DDCOLORKEY>()).unwrap()
         value.rNormal = NORMALIZEDRECT.assumeInitRef(abi.rNormal)
         return value
     }
@@ -42486,7 +42506,7 @@ public struct IAMVideoAcceleratorVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetVideoAcceleratorGUIDs: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<GUID>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetUncompFormatsSupported: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<UInt32>, CPointer<Win32__impl_l0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetUncompFormatsSupported: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<UInt32>, CPointer<Win32_impl_p0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
     public var GetInternalMemInfo: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<AMVAUncompDataInfoAbi>, CPointer<AMVAInternalMemInfoAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
@@ -42550,7 +42570,7 @@ public class IAMVideoAccelerator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetUncompFormatsSupported(pGuid: CPointer<GUID>, pdwNumFormatsSupported: CPointer<UInt32>, pFormatsSupported: CPointer<Win32__impl_l0.DDPIXELFORMATAbi>): Int32 {
+    public unsafe func GetUncompFormatsSupported(pGuid: CPointer<GUID>, pdwNumFormatsSupported: CPointer<UInt32>, pFormatsSupported: CPointer<Win32_impl_p0.DDPIXELFORMATAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUncompFormatsSupported(__liveRaw, pGuid, pdwNumFormatsSupported, pFormatsSupported)
@@ -42729,9 +42749,9 @@ public class IAsyncReader <: InterfaceWrapperBase & ComInterface {
 public struct IAudioDataVtbl {
     public var base_: IMemoryDataVtbl = IMemoryDataVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -42776,14 +42796,14 @@ public class IAudioData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pWaveFormatCurrent: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func GetFormat(pWaveFormatCurrent: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pWaveFormatCurrent)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetFormat(lpWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetFormat(lpWaveFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, lpWaveFormat)
@@ -46175,14 +46195,14 @@ public class IVMRMonitorConfig9 <: InterfaceWrapperBase & ComInterface {
 public struct IVPBaseConfigVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetConnectInfo: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32__impl_l0.DDVIDEOPORTCONNECTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetConnectInfo: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_impl_p0.DDVIDEOPORTCONNECTAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetConnectInfo: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var GetVPDataInfo: CFunc<(CPointer<Unit>, CPointer<AMVPDATAINFOAbi>) -> Int32> = { _, _ => 0 }
     public var GetMaxPixelRate: CFunc<(CPointer<Unit>, CPointer<AMVPSIZEAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var InformVPInputFormats: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _ => 0 }
+    public var InformVPInputFormats: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetVideoFormats: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32__impl_l0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetVideoFormats: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_impl_p0.DDPIXELFORMATAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetVideoFormat: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var SetInvertPolarity: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
@@ -46235,7 +46255,7 @@ public class IVPBaseConfig <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetConnectInfo(pdwNumConnectInfo: CPointer<UInt32>, pddVPConnectInfo: CPointer<Win32__impl_l0.DDVIDEOPORTCONNECTAbi>): Int32 {
+    public unsafe func GetConnectInfo(pdwNumConnectInfo: CPointer<UInt32>, pddVPConnectInfo: CPointer<Win32_impl_p0.DDVIDEOPORTCONNECTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConnectInfo(__liveRaw, pdwNumConnectInfo, pddVPConnectInfo)
@@ -46260,14 +46280,14 @@ public class IVPBaseConfig <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func InformVPInputFormats(dwNumFormats: UInt32, pDDPixelFormats: CPointer<Win32__impl_l0.DDPIXELFORMATAbi>): Int32 {
+    public unsafe func InformVPInputFormats(dwNumFormats: UInt32, pDDPixelFormats: CPointer<Win32_impl_p0.DDPIXELFORMATAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InformVPInputFormats(__liveRaw, dwNumFormats, pDDPixelFormats)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetVideoFormats(pdwNumFormats: CPointer<UInt32>, pddPixelFormats: CPointer<Win32__impl_l0.DDPIXELFORMATAbi>): Int32 {
+    public unsafe func GetVideoFormats(pdwNumFormats: CPointer<UInt32>, pddPixelFormats: CPointer<Win32_impl_p0.DDPIXELFORMATAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVideoFormats(__liveRaw, pdwNumFormats, pddPixelFormats)
@@ -46430,7 +46450,7 @@ public class IVPVBIConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IVideoWindowVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetCaption: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Caption: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetWindowStyle: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -46441,7 +46461,7 @@ public struct IVideoWindowVtbl {
     public var AutoShow: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetWindowState: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var WindowState: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.SHOW_WINDOW_CMDAbi>) -> Int32> = { _, _ => 0 }
+    public var WindowState: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.SHOW_WINDOW_CMDAbi>) -> Int32> = { _, _ => 0 }
     public var SetBackgroundPalette: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var BackgroundPalette: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetVisible: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -46507,7 +46527,7 @@ public class IVideoWindow <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IVideoWindow> {
-        return InterfaceDescriptor<IVideoWindow>("IVideoWindow", IVideoWindow.iid(), Win32__impl_l2.IDispatch.iid(), takeIVideoWindowFromAbi, viewIVideoWindow)
+        return InterfaceDescriptor<IVideoWindow>("IVideoWindow", IVideoWindow.iid(), Win32_impl_p2.IDispatch.iid(), takeIVideoWindowFromAbi, viewIVideoWindow)
     }
 
     public unsafe func vtbl(): IVideoWindowVtbl {
@@ -46569,7 +46589,7 @@ public class IVideoWindow <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func WindowState(WindowState: CPointer<Win32__impl_l0.SHOW_WINDOW_CMDAbi>): Int32 {
+    public unsafe func WindowState(WindowState: CPointer<Win32_impl_p1.SHOW_WINDOW_CMDAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WindowState(__liveRaw, WindowState)
@@ -46895,13 +46915,13 @@ public class IWMCodecVideoAccelerator <: InterfaceWrapperBase & ComInterface {
 public struct MPEGLAYER3WAVEFORMAT {
     public var _raw: VArray<UInt8, $30> = VArray<UInt8, $30>(repeat: 0u8)
 
-    public mut prop wfx: Win32_Media__impl_l0.WAVEFORMATEX {
+    public mut prop wfx: Win32_Media_impl_p0.WAVEFORMATEX {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
-                return packedReadValue<Win32_Media__impl_l0.WAVEFORMATEX>(base, 0, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
+                return packedReadValue<Win32_Media_impl_p0.WAVEFORMATEX>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -49572,9 +49592,9 @@ public class IAMWMBufferPassCallback <: InterfaceWrapperBase & ComInterface {
 public struct IAudioMediaStreamVtbl {
     public var base_: IMediaStreamVtbl = IMediaStreamVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     public var CreateSample: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -49620,14 +49640,14 @@ public class IAudioMediaStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pWaveFormatCurrent: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func GetFormat(pWaveFormatCurrent: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pWaveFormatCurrent)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetFormat(lpWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetFormat(lpWaveFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, lpWaveFormat)
@@ -50080,9 +50100,9 @@ public class IConfigAsfWriter2 <: InterfaceWrapperBase & ComInterface {
 public struct IDirectDrawMediaStreamVtbl {
     public var base_: IMediaStreamVtbl = IMediaStreamVtbl()
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, CPointer<CPointer<Unit>>, CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, CPointer<CPointer<Unit>>, CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
     public var GetDirectDraw: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
@@ -50134,14 +50154,14 @@ public class IDirectDrawMediaStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func GetFormat(pDDSDCurrent: CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, ppDirectDrawPalette: CPointer<CPointer<Unit>>, pDDSDDesired: CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, pdwFlags: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormat(pDDSDCurrent: CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, ppDirectDrawPalette: CPointer<CPointer<Unit>>, pDDSDDesired: CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, pdwFlags: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pDDSDCurrent, ppDirectDrawPalette, pDDSDDesired, pdwFlags)
     }
 
     @When[Windows_Win32_Graphics_DirectDraw == "on"]
-    public unsafe func SetFormat(pDDSurfaceDesc: CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, pDirectDrawPalette: CPointer<Unit>): Int32 {
+    public unsafe func SetFormat(pDDSurfaceDesc: CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, pDirectDrawPalette: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, pDDSurfaceDesc, pDirectDrawPalette)

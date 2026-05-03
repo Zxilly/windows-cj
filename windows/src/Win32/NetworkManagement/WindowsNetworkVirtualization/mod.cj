@@ -4,12 +4,18 @@
 package windows.Win32.NetworkManagement.WindowsNetworkVirtualization
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]
@@ -114,15 +120,15 @@ extend WNV_IP_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType & wind
 public struct WNV_IP_ADDRESS__IP_e__Union {
     public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public mut prop v4: Win32__impl_l0.IN_ADDR {
+    public mut prop v4: Win32_impl_p0.IN_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -130,22 +136,22 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()))
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop v6: Win32__impl_l0.IN6_ADDR {
+    public mut prop v6: Win32_impl_p0.IN6_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -153,8 +159,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()))
                 _raw = rawStorage
             }
         }
@@ -346,8 +352,8 @@ extend WNV_OBJECT_TYPE <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct WNV_POLICY_MISMATCH_PARAM {
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var VirtualSubnetId: UInt32 = 0u32
     public var CA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
     public var PA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
@@ -357,8 +363,8 @@ public struct WNV_POLICY_MISMATCH_PARAM {
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct WNV_POLICY_MISMATCH_PARAMAbi {
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var VirtualSubnetId: UInt32 = 0u32
     public var CA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
     public var PA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
@@ -372,8 +378,8 @@ extend WNV_POLICY_MISMATCH_PARAM <: windows_core.CopyType & windows_core.Runtime
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_POLICY_MISMATCH_PARAM;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);u4;struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union);struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union))" }
     public static func projectAbi(value: WNV_POLICY_MISMATCH_PARAM): WNV_POLICY_MISMATCH_PARAMAbi {
         var abi = WNV_POLICY_MISMATCH_PARAMAbi()
-        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
-        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
+        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.VirtualSubnetId = value.VirtualSubnetId
         abi.CA = WNV_IP_ADDRESS.projectAbi(value.CA)
         abi.PA = WNV_IP_ADDRESS.projectAbi(value.PA)
@@ -381,8 +387,8 @@ extend WNV_POLICY_MISMATCH_PARAM <: windows_core.CopyType & windows_core.Runtime
     }
     public static func assumeInitRef(abi: WNV_POLICY_MISMATCH_PARAMAbi): WNV_POLICY_MISMATCH_PARAM {
         var value = WNV_POLICY_MISMATCH_PARAM()
-        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
-        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
+        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.VirtualSubnetId = abi.VirtualSubnetId
         value.CA = WNV_IP_ADDRESS.assumeInitRef(abi.CA)
         value.PA = WNV_IP_ADDRESS.assumeInitRef(abi.PA)
@@ -397,18 +403,18 @@ extend WNV_POLICY_MISMATCH_PARAM <: windows_core.CopyType & windows_core.Runtime
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var PA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
-    public var AddressState: Win32__impl_l0.NL_DAD_STATE = Win32__impl_l0.NL_DAD_STATE()
+    public var AddressState: Win32_impl_p0.NL_DAD_STATE = Win32_impl_p0.NL_DAD_STATE()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct WNV_PROVIDER_ADDRESS_CHANGE_PARAMAbi {
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var PA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
-    public var AddressState: Win32__impl_l0.NL_DAD_STATEAbi = Win32__impl_l0.NL_DAD_STATEAbi()
+    public var AddressState: Win32_impl_p0.NL_DAD_STATEAbi = Win32_impl_p0.NL_DAD_STATEAbi()
     public init() {}
 }
 
@@ -419,16 +425,16 @@ extend WNV_PROVIDER_ADDRESS_CHANGE_PARAM <: windows_core.CopyType & windows_core
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_PROVIDER_ADDRESS_CHANGE_PARAM;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union);enum(Windows.Win32.Networking.WinSock.NL_DAD_STATE;i4))" }
     public static func projectAbi(value: WNV_PROVIDER_ADDRESS_CHANGE_PARAM): WNV_PROVIDER_ADDRESS_CHANGE_PARAMAbi {
         var abi = WNV_PROVIDER_ADDRESS_CHANGE_PARAMAbi()
-        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.PA = WNV_IP_ADDRESS.projectAbi(value.PA)
-        abi.AddressState = windows_core.projectTypedAbi(value.AddressState, windows_core.typeMarker<Win32__impl_l0.NL_DAD_STATE>())
+        abi.AddressState = windows_core.projectTypedAbi(value.AddressState, windows_core.typeMarker<Win32_impl_p0.NL_DAD_STATE>())
         return abi
     }
     public static func assumeInitRef(abi: WNV_PROVIDER_ADDRESS_CHANGE_PARAMAbi): WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
         var value = WNV_PROVIDER_ADDRESS_CHANGE_PARAM()
-        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.PA = WNV_IP_ADDRESS.assumeInitRef(abi.PA)
-        value.AddressState = windows_core.fromTypedAbi(abi.AddressState, windows_core.typeMarker<Win32__impl_l0.NL_DAD_STATE>()).unwrap()
+        value.AddressState = windows_core.fromTypedAbi(abi.AddressState, windows_core.typeMarker<Win32_impl_p0.NL_DAD_STATE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: WNV_PROVIDER_ADDRESS_CHANGE_PARAMAbi): Result<WNV_PROVIDER_ADDRESS_CHANGE_PARAM> { Result<WNV_PROVIDER_ADDRESS_CHANGE_PARAM>.Ok(WNV_PROVIDER_ADDRESS_CHANGE_PARAM.assumeInitRef(abi)) }
@@ -440,9 +446,9 @@ extend WNV_PROVIDER_ADDRESS_CHANGE_PARAM <: windows_core.CopyType & windows_core
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct WNV_REDIRECT_PARAM {
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
-    public var NewPAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
+    public var NewPAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var VirtualSubnetId: UInt32 = 0u32
     public var CA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
     public var PA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
@@ -453,9 +459,9 @@ public struct WNV_REDIRECT_PARAM {
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct WNV_REDIRECT_PARAMAbi {
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
-    public var NewPAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
+    public var NewPAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var VirtualSubnetId: UInt32 = 0u32
     public var CA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
     public var PA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
@@ -470,9 +476,9 @@ extend WNV_REDIRECT_PARAM <: windows_core.CopyType & windows_core.RuntimeType & 
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);u4;struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union);struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union);struct(Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_IP_ADDRESS;_IP_e__Union))" }
     public static func projectAbi(value: WNV_REDIRECT_PARAM): WNV_REDIRECT_PARAMAbi {
         var abi = WNV_REDIRECT_PARAMAbi()
-        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
-        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
-        abi.NewPAFamily = windows_core.projectTypedAbi(value.NewPAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
+        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
+        abi.NewPAFamily = windows_core.projectTypedAbi(value.NewPAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.VirtualSubnetId = value.VirtualSubnetId
         abi.CA = WNV_IP_ADDRESS.projectAbi(value.CA)
         abi.PA = WNV_IP_ADDRESS.projectAbi(value.PA)
@@ -481,9 +487,9 @@ extend WNV_REDIRECT_PARAM <: windows_core.CopyType & windows_core.RuntimeType & 
     }
     public static func assumeInitRef(abi: WNV_REDIRECT_PARAMAbi): WNV_REDIRECT_PARAM {
         var value = WNV_REDIRECT_PARAM()
-        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
-        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
-        value.NewPAFamily = windows_core.fromTypedAbi(abi.NewPAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
+        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
+        value.NewPAFamily = windows_core.fromTypedAbi(abi.NewPAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.VirtualSubnetId = abi.VirtualSubnetId
         value.CA = WNV_IP_ADDRESS.assumeInitRef(abi.CA)
         value.PA = WNV_IP_ADDRESS.assumeInitRef(abi.PA)
@@ -499,11 +505,11 @@ extend WNV_REDIRECT_PARAM <: windows_core.CopyType & windows_core.RuntimeType & 
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct WNV_CUSTOMER_ADDRESS_CHANGE_PARAM {
-    public var MACAddress: Win32__impl_l1.DL_EUI48 = Win32__impl_l1.DL_EUI48()
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var MACAddress: Win32_impl_p1.DL_EUI48 = Win32_impl_p1.DL_EUI48()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var CA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
     public var VirtualSubnetId: UInt32 = 0u32
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var PA: WNV_IP_ADDRESS = WNV_IP_ADDRESS()
     public var NotificationReason: WNV_CA_NOTIFICATION_TYPE = WNV_CA_NOTIFICATION_TYPE()
     public init() {}
@@ -512,11 +518,11 @@ public struct WNV_CUSTOMER_ADDRESS_CHANGE_PARAM {
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct WNV_CUSTOMER_ADDRESS_CHANGE_PARAMAbi {
-    public var MACAddress: Win32__impl_l1.DL_EUI48 = Win32__impl_l1.DL_EUI48()
-    public var CAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var MACAddress: Win32_impl_p1.DL_EUI48 = Win32_impl_p1.DL_EUI48()
+    public var CAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var CA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
     public var VirtualSubnetId: UInt32 = 0u32
-    public var PAFamily: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var PAFamily: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var PA: WNV_IP_ADDRESSAbi = WNV_IP_ADDRESSAbi()
     public var NotificationReason: WNV_CA_NOTIFICATION_TYPEAbi = WNV_CA_NOTIFICATION_TYPEAbi()
     public init() {}
@@ -530,10 +536,10 @@ extend WNV_CUSTOMER_ADDRESS_CHANGE_PARAM <: windows_core.CopyType & windows_core
     public static func projectAbi(value: WNV_CUSTOMER_ADDRESS_CHANGE_PARAM): WNV_CUSTOMER_ADDRESS_CHANGE_PARAMAbi {
         var abi = WNV_CUSTOMER_ADDRESS_CHANGE_PARAMAbi()
         abi.MACAddress = value.MACAddress
-        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.CAFamily = windows_core.projectTypedAbi(value.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.CA = WNV_IP_ADDRESS.projectAbi(value.CA)
         abi.VirtualSubnetId = value.VirtualSubnetId
-        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.PAFamily = windows_core.projectTypedAbi(value.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.PA = WNV_IP_ADDRESS.projectAbi(value.PA)
         abi.NotificationReason = WNV_CA_NOTIFICATION_TYPE.projectAbi(value.NotificationReason)
         return abi
@@ -541,10 +547,10 @@ extend WNV_CUSTOMER_ADDRESS_CHANGE_PARAM <: windows_core.CopyType & windows_core
     public static func assumeInitRef(abi: WNV_CUSTOMER_ADDRESS_CHANGE_PARAMAbi): WNV_CUSTOMER_ADDRESS_CHANGE_PARAM {
         var value = WNV_CUSTOMER_ADDRESS_CHANGE_PARAM()
         value.MACAddress = abi.MACAddress
-        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.CAFamily = windows_core.fromTypedAbi(abi.CAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.CA = WNV_IP_ADDRESS.assumeInitRef(abi.CA)
         value.VirtualSubnetId = abi.VirtualSubnetId
-        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.PAFamily = windows_core.fromTypedAbi(abi.PAFamily, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.PA = WNV_IP_ADDRESS.assumeInitRef(abi.PA)
         value.NotificationReason = WNV_CA_NOTIFICATION_TYPE.assumeInitRef(abi.NotificationReason)
         return value

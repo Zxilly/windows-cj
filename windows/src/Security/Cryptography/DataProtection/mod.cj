@@ -4,13 +4,21 @@
 package windows.Security.Cryptography.DataProtection
 
 import std.collection.*
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_Security_Cryptography_DataProtection == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Security_Cryptography_DataProtection == "on"]
 import windows_future as windows_future
 
 
@@ -73,7 +81,7 @@ public class IDataProtectionProvider <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDataProtectionProvider", IDataProtectionProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDataProtectionProviderVtbl", "IDataProtectionProvider", "IDataProtectionProvider_Impl", [InterfaceMethodSchema("ProtectAsync", 6, [InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectAsync", 7, [InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProtectStreamAsync", 8, [InterfaceParameterSchema("src", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dest", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectStreamAsync", 9, [InterfaceParameterSchema("src", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dest", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDataProtectionProvider", IDataProtectionProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDataProtectionProviderVtbl", "IDataProtectionProvider", "IDataProtectionProvider_Impl", [InterfaceMethodSchema("ProtectAsync", 6, [InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectAsync", 7, [InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProtectStreamAsync", 8, [InterfaceParameterSchema("src", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dest", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectStreamAsync", 9, [InterfaceParameterSchema("src", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dest", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDataProtectionProvider.runtimeType())
         return schema
     }
@@ -103,25 +111,25 @@ public class IDataProtectionProvider <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectAsync(data: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func ProtectAsync(data: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProtectAsync(asRaw(), data.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectAsync(data: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func UnprotectAsync(data: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UnprotectAsync(asRaw(), data.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectStreamAsync(src: _impl_l0.IInputStream, dest: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func ProtectStreamAsync(src: impl_p0.IInputStream, dest: impl_p0.IOutputStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProtectStreamAsync(asRaw(), src.asRaw(), dest.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -130,7 +138,7 @@ public class IDataProtectionProvider <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectStreamAsync(src: _impl_l0.IInputStream, dest: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func UnprotectStreamAsync(src: impl_p0.IInputStream, dest: impl_p0.IOutputStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UnprotectStreamAsync(asRaw(), src.asRaw(), dest.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -223,22 +231,22 @@ public class DataProtectionProvider <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectAsync(data: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func ProtectAsync(data: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().ProtectAsync(data)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectAsync(data: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func UnprotectAsync(data: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().UnprotectAsync(data)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectStreamAsync(src: _impl_l0.IInputStream, dest: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func ProtectStreamAsync(src: impl_p0.IInputStream, dest: impl_p0.IOutputStream): windows_future.IAsyncAction {
         return defaultInterface().ProtectStreamAsync(src, dest)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectStreamAsync(src: _impl_l0.IInputStream, dest: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func UnprotectStreamAsync(src: impl_p0.IInputStream, dest: impl_p0.IOutputStream): windows_future.IAsyncAction {
         return defaultInterface().UnprotectStreamAsync(src, dest)
     }
 

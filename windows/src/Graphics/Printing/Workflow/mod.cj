@@ -4,18 +4,31 @@
 package windows.Graphics.Printing.Workflow
 
 import std.collection.*
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Printing_Workflow == "on" && Windows_Devices_Printers == "on"]
 import windows.Devices.Printers as Devices_Printers
+@When[Windows_Graphics_Printing_Workflow == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Printing_Workflow == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
 import windows.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Printing_Workflow == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Graphics_Printing_Workflow == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Printing_Workflow == "on"]
 import windows_future as windows_future
 
 
@@ -527,7 +540,7 @@ public class IPrintWorkflowPdlConverter <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter", IPrintWorkflowPdlConverter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverterVtbl", "IPrintWorkflowPdlConverter", "IPrintWorkflowPdlConverter_Impl", [InterfaceMethodSchema("ConvertPdlAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter", IPrintWorkflowPdlConverter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverterVtbl", "IPrintWorkflowPdlConverter", "IPrintWorkflowPdlConverter_Impl", [InterfaceMethodSchema("ConvertPdlAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlConverter.runtimeType())
         return schema
     }
@@ -557,7 +570,7 @@ public class IPrintWorkflowPdlConverter <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Graphics_Printing_PrintTicket == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: _impl_l0.IInputStream, outputStream: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: impl_p0.IInputStream, outputStream: impl_p0.IOutputStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConvertPdlAsync(asRaw(), printTicket.asRaw(), inputStream.asRaw(), outputStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -704,7 +717,7 @@ public class IPrintWorkflowPdlSourceContent <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlSourceContent", IPrintWorkflowPdlSourceContent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlSourceContentVtbl", "IPrintWorkflowPdlSourceContent", "IPrintWorkflowPdlSourceContent_Impl", [InterfaceMethodSchema("ContentType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInputStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetContentFileAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlSourceContent", IPrintWorkflowPdlSourceContent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlSourceContentVtbl", "IPrintWorkflowPdlSourceContent", "IPrintWorkflowPdlSourceContent_Impl", [InterfaceMethodSchema("ContentType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInputStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetContentFileAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlSourceContent.runtimeType())
         return schema
     }
@@ -742,21 +755,21 @@ public class IPrintWorkflowPdlSourceContent <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetInputStream(): _impl_l0.IInputStream {
+    public unsafe func GetInputStream(): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetInputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetContentFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -899,7 +912,7 @@ public class IPrintWorkflowSpoolStreamContent <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowSpoolStreamContent", IPrintWorkflowSpoolStreamContent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowSpoolStreamContentVtbl", "IPrintWorkflowSpoolStreamContent", "IPrintWorkflowSpoolStreamContent_Impl", [InterfaceMethodSchema("GetInputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowSpoolStreamContent", IPrintWorkflowSpoolStreamContent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowSpoolStreamContentVtbl", "IPrintWorkflowSpoolStreamContent", "IPrintWorkflowSpoolStreamContent_Impl", [InterfaceMethodSchema("GetInputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowSpoolStreamContent.runtimeType())
         return schema
     }
@@ -929,12 +942,12 @@ public class IPrintWorkflowSpoolStreamContent <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetInputStream(): _impl_l0.IInputStream {
+    public unsafe func GetInputStream(): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetInputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 }
 
@@ -988,7 +1001,7 @@ public class IPrintWorkflowStreamTarget <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowStreamTarget", IPrintWorkflowStreamTarget.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowStreamTargetVtbl", "IPrintWorkflowStreamTarget", "IPrintWorkflowStreamTarget_Impl", [InterfaceMethodSchema("GetOutputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowStreamTarget", IPrintWorkflowStreamTarget.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowStreamTargetVtbl", "IPrintWorkflowStreamTarget", "IPrintWorkflowStreamTarget_Impl", [InterfaceMethodSchema("GetOutputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowStreamTarget.runtimeType())
         return schema
     }
@@ -1018,12 +1031,12 @@ public class IPrintWorkflowStreamTarget <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetOutputStream(): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetOutputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 }
 
@@ -1600,12 +1613,12 @@ public class PrintWorkflowPdlSourceContent <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetInputStream(): _impl_l0.IInputStream {
+    public unsafe func GetInputStream(): impl_p0.IInputStream {
         return defaultInterface().GetInputStream()
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().GetContentFileAsync()
     }
 }
@@ -1821,7 +1834,7 @@ public class PrintWorkflowSpoolStreamContent <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetInputStream(): _impl_l0.IInputStream {
+    public unsafe func GetInputStream(): impl_p0.IInputStream {
         return defaultInterface().GetInputStream()
     }
 }
@@ -1914,7 +1927,7 @@ public class PrintWorkflowStreamTarget <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetOutputStream(): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStream(): impl_p0.IOutputStream {
         return defaultInterface().GetOutputStream()
     }
 }
@@ -2283,7 +2296,7 @@ public class IPrintWorkflowPdlConverter2 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter2", IPrintWorkflowPdlConverter2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverter2Vtbl", "IPrintWorkflowPdlConverter2", "IPrintWorkflowPdlConverter2_Impl", [InterfaceMethodSchema("ConvertPdlAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostBasedProcessingOperations", "PdlConversionHostBasedProcessingOperationsAbi", "PdlConversionHostBasedProcessingOperations", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter2", IPrintWorkflowPdlConverter2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverter2Vtbl", "IPrintWorkflowPdlConverter2", "IPrintWorkflowPdlConverter2_Impl", [InterfaceMethodSchema("ConvertPdlAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostBasedProcessingOperations", "PdlConversionHostBasedProcessingOperationsAbi", "PdlConversionHostBasedProcessingOperations", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlConverter2.runtimeType())
         return schema
     }
@@ -2313,7 +2326,7 @@ public class IPrintWorkflowPdlConverter2 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Graphics_Printing_PrintTicket == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: _impl_l0.IInputStream, outputStream: _impl_l0.IOutputStream, hostBasedProcessingOperations: PdlConversionHostBasedProcessingOperations): windows_future.IAsyncAction {
+    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: impl_p0.IInputStream, outputStream: impl_p0.IOutputStream, hostBasedProcessingOperations: PdlConversionHostBasedProcessingOperations): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConvertPdlAsync(asRaw(), printTicket.asRaw(), inputStream.asRaw(), outputStream.asRaw(), windows_core.projectTypedAbi(hostBasedProcessingOperations, windows_core.typeMarker<PdlConversionHostBasedProcessingOperations>()), CPointer<CPointer<Unit>>(inout result__))
@@ -2372,7 +2385,7 @@ public class IPrintWorkflowPdlConverter3 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter3", IPrintWorkflowPdlConverter3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverter3Vtbl", "IPrintWorkflowPdlConverter3", "IPrintWorkflowPdlConverter3_Impl", [InterfaceMethodSchema("ConvertPdlFromObjectModelAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("objectModelProvider", "CPointer<Unit>", "InParam<IPrintWorkflowObjectModelProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostBasedProcessingOperations", "PdlConversionHostBasedProcessingOperationsAbi", "PdlConversionHostBasedProcessingOperations", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlConverter3", IPrintWorkflowPdlConverter3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlConverter3Vtbl", "IPrintWorkflowPdlConverter3", "IPrintWorkflowPdlConverter3_Impl", [InterfaceMethodSchema("ConvertPdlFromObjectModelAsync", 6, [InterfaceParameterSchema("printTicket", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("objectModelProvider", "CPointer<Unit>", "InParam<IPrintWorkflowObjectModelProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostBasedProcessingOperations", "PdlConversionHostBasedProcessingOperationsAbi", "PdlConversionHostBasedProcessingOperations", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlConverter3.runtimeType())
         return schema
     }
@@ -2402,7 +2415,7 @@ public class IPrintWorkflowPdlConverter3 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Graphics_Printing_PrintTicket == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ConvertPdlFromObjectModelAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, objectModelProvider: IPrintWorkflowObjectModelProvider, outputStream: _impl_l0.IOutputStream, hostBasedProcessingOperations: PdlConversionHostBasedProcessingOperations): windows_future.IAsyncAction {
+    public unsafe func ConvertPdlFromObjectModelAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, objectModelProvider: IPrintWorkflowObjectModelProvider, outputStream: impl_p0.IOutputStream, hostBasedProcessingOperations: PdlConversionHostBasedProcessingOperations): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConvertPdlFromObjectModelAsync(asRaw(), printTicket.asRaw(), objectModelProvider.asRaw(), outputStream.asRaw(), windows_core.projectTypedAbi(hostBasedProcessingOperations, windows_core.typeMarker<PdlConversionHostBasedProcessingOperations>()), CPointer<CPointer<Unit>>(inout result__))
@@ -2462,7 +2475,7 @@ public class IPrintWorkflowPdlTargetStream <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlTargetStream", IPrintWorkflowPdlTargetStream.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlTargetStreamVtbl", "IPrintWorkflowPdlTargetStream", "IPrintWorkflowPdlTargetStream_Impl", [InterfaceMethodSchema("GetOutputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CompleteStreamSubmission", 7, [InterfaceParameterSchema("status", "PrintWorkflowSubmittedStatusAbi", "PrintWorkflowSubmittedStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlTargetStream", IPrintWorkflowPdlTargetStream.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlTargetStreamVtbl", "IPrintWorkflowPdlTargetStream", "IPrintWorkflowPdlTargetStream_Impl", [InterfaceMethodSchema("GetOutputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CompleteStreamSubmission", 7, [InterfaceParameterSchema("status", "PrintWorkflowSubmittedStatusAbi", "PrintWorkflowSubmittedStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlTargetStream.runtimeType())
         return schema
     }
@@ -2492,12 +2505,12 @@ public class IPrintWorkflowPdlTargetStream <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetOutputStream(): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetOutputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 
     public unsafe func CompleteStreamSubmission(status: PrintWorkflowSubmittedStatus): Unit {
@@ -2579,7 +2592,7 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPrinterJob", IPrintWorkflowPrinterJob.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPrinterJobVtbl", "IPrintWorkflowPrinterJob", "IPrintWorkflowPrinterJob_Impl", [InterfaceMethodSchema("JobId", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Printer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppPrintDevice>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobStatus", 8, [InterfaceParameterSchema("result", "CPointer<PrintWorkflowPrinterJobStatusAbi>", "OutSlot<PrintWorkflowPrinterJobStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobPrintTicket", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobAttributesAsBuffer", 10, [InterfaceParameterSchema("attributeNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobAttributes", 11, [InterfaceParameterSchema("attributeNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, Devices_Printers.IppAttributeValue>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetJobAttributesFromBuffer", 12, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppSetAttributesResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetJobAttributes", 13, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppSetAttributesResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPrinterJob", IPrintWorkflowPrinterJob.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPrinterJobVtbl", "IPrintWorkflowPrinterJob", "IPrintWorkflowPrinterJob_Impl", [InterfaceMethodSchema("JobId", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Printer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppPrintDevice>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobStatus", 8, [InterfaceParameterSchema("result", "CPointer<PrintWorkflowPrinterJobStatusAbi>", "OutSlot<PrintWorkflowPrinterJobStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobPrintTicket", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobAttributesAsBuffer", 10, [InterfaceParameterSchema("attributeNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobAttributes", 11, [InterfaceParameterSchema("attributeNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, Devices_Printers.IppAttributeValue>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetJobAttributesFromBuffer", 12, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppSetAttributesResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetJobAttributes", 13, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppSetAttributesResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPrinterJob.runtimeType())
         return schema
     }
@@ -2643,12 +2656,12 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
+    public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetJobAttributesAsBuffer(asRaw(), attributeNames.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
@@ -2661,7 +2674,7 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Devices_Printers == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SetJobAttributesFromBuffer(jobAttributesBuffer: _impl_l0.IBuffer): Devices_Printers.IppSetAttributesResult {
+    public unsafe func SetJobAttributesFromBuffer(jobAttributesBuffer: impl_p0.IBuffer): Devices_Printers.IppSetAttributesResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetJobAttributesFromBuffer(asRaw(), jobAttributesBuffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3040,7 +3053,7 @@ public class PrintWorkflowPdlConverter <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Graphics_Printing_PrintTicket == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: _impl_l0.IInputStream, outputStream: _impl_l0.IOutputStream): windows_future.IAsyncAction {
+    public unsafe func ConvertPdlAsync(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, inputStream: impl_p0.IInputStream, outputStream: impl_p0.IOutputStream): windows_future.IAsyncAction {
         return defaultInterface().ConvertPdlAsync(printTicket, inputStream, outputStream)
     }
 }
@@ -3133,7 +3146,7 @@ public class PrintWorkflowPdlTargetStream <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetOutputStream(): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStream(): impl_p0.IOutputStream {
         return defaultInterface().GetOutputStream()
     }
 
@@ -3248,7 +3261,7 @@ public class PrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
+    public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): impl_p0.IBuffer {
         return defaultInterface().GetJobAttributesAsBuffer(attributeNames)
     }
 
@@ -3258,7 +3271,7 @@ public class PrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Devices_Printers == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SetJobAttributesFromBuffer(jobAttributesBuffer: _impl_l0.IBuffer): Devices_Printers.IppSetAttributesResult {
+    public unsafe func SetJobAttributesFromBuffer(jobAttributesBuffer: impl_p0.IBuffer): Devices_Printers.IppSetAttributesResult {
         return defaultInterface().SetJobAttributesFromBuffer(jobAttributesBuffer)
     }
 
@@ -4232,7 +4245,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs <: InterfaceWrapper
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlModificationRequestedEventArgs", IPrintWorkflowPdlModificationRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlModificationRequestedEventArgsVtbl", "IPrintWorkflowPdlModificationRequestedEventArgs", "IPrintWorkflowPdlModificationRequestedEventArgs_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrinterJob", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPrinterJob>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceContent", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlSourceContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UILauncher", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowUILauncher>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinter", 10, [InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributes", 11, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributesBuffer", 12, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPdlConverter", 13, [InterfaceParameterSchema("conversionType", "PrintWorkflowPdlConversionTypeAbi", "PrintWorkflowPdlConversionType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlConverter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlModificationRequestedEventArgs", IPrintWorkflowPdlModificationRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlModificationRequestedEventArgsVtbl", "IPrintWorkflowPdlModificationRequestedEventArgs", "IPrintWorkflowPdlModificationRequestedEventArgs_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrinterJob", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPrinterJob>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceContent", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlSourceContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UILauncher", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowUILauncher>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinter", 10, [InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributes", 11, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributesBuffer", 12, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPdlConverter", 13, [InterfaceParameterSchema("conversionType", "PrintWorkflowPdlConversionTypeAbi", "PrintWorkflowPdlConversionType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlConverter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlModificationRequestedEventArgs.runtimeType())
         return schema
     }
@@ -4311,7 +4324,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs <: InterfaceWrapper
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: _impl_l0.IBuffer, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
+    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: impl_p0.IBuffer, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateJobOnPrinterWithAttributesBuffer(asRaw(), jobAttributesBuffer.asRaw(), targetContentType.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4390,7 +4403,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs2 <: InterfaceWrappe
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlModificationRequestedEventArgs2", IPrintWorkflowPdlModificationRequestedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlModificationRequestedEventArgs2Vtbl", "IPrintWorkflowPdlModificationRequestedEventArgs2", "IPrintWorkflowPdlModificationRequestedEventArgs2_Impl", [InterfaceMethodSchema("CreateJobOnPrinterWithAttributes", 6, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operationAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("jobAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributesBuffer", 7, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operationAttributesBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("jobAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowPdlModificationRequestedEventArgs2", IPrintWorkflowPdlModificationRequestedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowPdlModificationRequestedEventArgs2Vtbl", "IPrintWorkflowPdlModificationRequestedEventArgs2", "IPrintWorkflowPdlModificationRequestedEventArgs2_Impl", [InterfaceMethodSchema("CreateJobOnPrinterWithAttributes", 6, [InterfaceParameterSchema("jobAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operationAttributes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("jobAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateJobOnPrinterWithAttributesBuffer", 7, [InterfaceParameterSchema("jobAttributesBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("targetContentType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operationAttributesBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("jobAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationAttributesMergePolicy", "PrintWorkflowAttributesMergePolicyAbi", "PrintWorkflowAttributesMergePolicy", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlTargetStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowPdlModificationRequestedEventArgs2.runtimeType())
         return schema
     }
@@ -4429,7 +4442,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs2 <: InterfaceWrappe
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: _impl_l0.IBuffer, targetContentType: windows_core.HString, operationAttributesBuffer: _impl_l0.IBuffer, jobAttributesMergePolicy: PrintWorkflowAttributesMergePolicy, operationAttributesMergePolicy: PrintWorkflowAttributesMergePolicy): PrintWorkflowPdlTargetStream {
+    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: impl_p0.IBuffer, targetContentType: windows_core.HString, operationAttributesBuffer: impl_p0.IBuffer, jobAttributesMergePolicy: PrintWorkflowAttributesMergePolicy, operationAttributesMergePolicy: PrintWorkflowAttributesMergePolicy): PrintWorkflowPdlTargetStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateJobOnPrinterWithAttributesBuffer(asRaw(), jobAttributesBuffer.asRaw(), targetContentType.asRaw(), operationAttributesBuffer.asRaw(), windows_core.projectTypedAbi(jobAttributesMergePolicy, windows_core.typeMarker<PrintWorkflowAttributesMergePolicy>()), windows_core.projectTypedAbi(operationAttributesMergePolicy, windows_core.typeMarker<PrintWorkflowAttributesMergePolicy>()), CPointer<CPointer<Unit>>(inout result__))
@@ -4600,7 +4613,7 @@ public class IPrintWorkflowVirtualPrinterDataAvailableEventArgs <: InterfaceWrap
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowVirtualPrinterDataAvailableEventArgs", IPrintWorkflowVirtualPrinterDataAvailableEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowVirtualPrinterDataAvailableEventArgsVtbl", "IPrintWorkflowVirtualPrinterDataAvailableEventArgs", "IPrintWorkflowVirtualPrinterDataAvailableEventArgs_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceContent", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlSourceContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UILauncher", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowUILauncher>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobPrintTicket", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPdlConverter", 10, [InterfaceParameterSchema("conversionType", "PrintWorkflowPdlConversionTypeAbi", "PrintWorkflowPdlConversionType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlConverter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetTargetFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CompleteJob", 12, [InterfaceParameterSchema("status", "PrintWorkflowSubmittedStatusAbi", "PrintWorkflowSubmittedStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowVirtualPrinterDataAvailableEventArgs", IPrintWorkflowVirtualPrinterDataAvailableEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowVirtualPrinterDataAvailableEventArgsVtbl", "IPrintWorkflowVirtualPrinterDataAvailableEventArgs", "IPrintWorkflowVirtualPrinterDataAvailableEventArgs_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceContent", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlSourceContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UILauncher", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowUILauncher>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetJobPrintTicket", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPdlConverter", 10, [InterfaceParameterSchema("conversionType", "PrintWorkflowPdlConversionTypeAbi", "PrintWorkflowPdlConversionType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowPdlConverter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetTargetFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CompleteJob", 12, [InterfaceParameterSchema("status", "PrintWorkflowSubmittedStatusAbi", "PrintWorkflowSubmittedStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowVirtualPrinterDataAvailableEventArgs.runtimeType())
         return schema
     }
@@ -4671,12 +4684,12 @@ public class IPrintWorkflowVirtualPrinterDataAvailableEventArgs <: InterfaceWrap
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetTargetFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     public unsafe func CompleteJob(status: PrintWorkflowSubmittedStatus): Unit {
@@ -5548,7 +5561,7 @@ public class PrintWorkflowPdlModificationRequestedEventArgs <: InterfaceWrapperB
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: _impl_l0.IBuffer, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
+    public unsafe func CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer: impl_p0.IBuffer, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
         return defaultInterface().CreateJobOnPrinterWithAttributesBuffer(jobAttributesBuffer, targetContentType)
     }
 
@@ -5770,7 +5783,7 @@ public class PrintWorkflowVirtualPrinterDataAvailableEventArgs <: InterfaceWrapp
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().GetTargetFileAsync()
     }
 
@@ -6896,7 +6909,7 @@ public class IPrintWorkflowObjectModelSourceFileContentFactory <: InterfaceWrapp
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowObjectModelSourceFileContentFactory", IPrintWorkflowObjectModelSourceFileContentFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowObjectModelSourceFileContentFactoryVtbl", "IPrintWorkflowObjectModelSourceFileContentFactory", "IPrintWorkflowObjectModelSourceFileContentFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("xpsStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowObjectModelSourceFileContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowObjectModelSourceFileContentFactory", IPrintWorkflowObjectModelSourceFileContentFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintWorkflowObjectModelSourceFileContentFactoryVtbl", "IPrintWorkflowObjectModelSourceFileContentFactory", "IPrintWorkflowObjectModelSourceFileContentFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("xpsStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowObjectModelSourceFileContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowObjectModelSourceFileContentFactory.runtimeType())
         return schema
     }
@@ -6926,7 +6939,7 @@ public class IPrintWorkflowObjectModelSourceFileContentFactory <: InterfaceWrapp
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateInstance(xpsStream: _impl_l0.IInputStream): PrintWorkflowObjectModelSourceFileContent {
+    public unsafe func CreateInstance(xpsStream: impl_p0.IInputStream): PrintWorkflowObjectModelSourceFileContent {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInstance(asRaw(), xpsStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7372,7 +7385,7 @@ public class IPrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInt
         if (iid == IPrintWorkflowUIActivatedEventArgs.iid()) {
             return true
         }
-        for (ancestor in [_impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7381,13 +7394,13 @@ public class IPrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintWorkflowUIActivatedEventArgs> {
-        var descriptor = InterfaceDescriptor<IPrintWorkflowUIActivatedEventArgs>("IPrintWorkflowUIActivatedEventArgs", IPrintWorkflowUIActivatedEventArgs.iid(), IInspectable.descriptor(), [_impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid()], { raw => IPrintWorkflowUIActivatedEventArgs.fromAbiTake(raw) }, { raw => IPrintWorkflowUIActivatedEventArgs.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPrintWorkflowUIActivatedEventArgs>("IPrintWorkflowUIActivatedEventArgs", IPrintWorkflowUIActivatedEventArgs.iid(), IInspectable.descriptor(), [impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid()], { raw => IPrintWorkflowUIActivatedEventArgs.fromAbiTake(raw) }, { raw => IPrintWorkflowUIActivatedEventArgs.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPrintWorkflowUIActivatedEventArgs.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintWorkflowUIActivatedEventArgs", IPrintWorkflowUIActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.descriptorSchema(), ["IActivatedEventArgs", "IActivatedEventArgsWithUser"], [_impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid()], "IPrintWorkflowUIActivatedEventArgsVtbl", "IPrintWorkflowUIActivatedEventArgs", "IPrintWorkflowUIActivatedEventArgs_Impl", [InterfaceMethodSchema("PrintWorkflowSession", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowForegroundSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintWorkflowUIActivatedEventArgs", IPrintWorkflowUIActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.descriptorSchema(), ["IActivatedEventArgs", "IActivatedEventArgsWithUser"], [impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid()], "IPrintWorkflowUIActivatedEventArgsVtbl", "IPrintWorkflowUIActivatedEventArgs", "IPrintWorkflowUIActivatedEventArgs_Impl", [InterfaceMethodSchema("PrintWorkflowSession", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintWorkflowForegroundSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintWorkflowUIActivatedEventArgs.runtimeType())
         return schema
     }
@@ -7412,15 +7425,15 @@ public class IPrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query<_impl_l0.IActivatedEventArgs>(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query<impl_p0.IActivatedEventArgs>(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIActivatedEventArgs: QueryInterface failed (E_NOINTERFACE)")
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query<_impl_l1.IActivatedEventArgsWithUser>(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query<impl_p1.IActivatedEventArgsWithUser>(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIActivatedEventArgsWithUser: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7993,7 +8006,7 @@ public class PrintWorkflowJobActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<PrintWorkflowJobActivatedEventArgs> {
-        let ancestors = [IPrintWorkflowJobActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPrintWorkflowJobActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PrintWorkflowJobActivatedEventArgs>("PrintWorkflowJobActivatedEventArgs", IPrintWorkflowJobActivatedEventArgs.iid(), ancestors, { raw => PrintWorkflowJobActivatedEventArgs.fromAbiTake(raw) }, { raw => PrintWorkflowJobActivatedEventArgs.viewOf(raw) })
     }
 
@@ -8035,15 +8048,15 @@ public class PrintWorkflowJobActivatedEventArgs <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8053,20 +8066,20 @@ public class PrintWorkflowJobActivatedEventArgs <: InterfaceWrapperBase & ComInt
         return defaultInterface().Session()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -8475,7 +8488,7 @@ public class PrintWorkflowObjectModelSourceFileContent <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateInstance(xpsStream: _impl_l0.IInputStream): PrintWorkflowObjectModelSourceFileContent {
+    public static unsafe func CreateInstance(xpsStream: impl_p0.IInputStream): PrintWorkflowObjectModelSourceFileContent {
         var result__: Option<PrintWorkflowObjectModelSourceFileContent> = Option<PrintWorkflowObjectModelSourceFileContent>.None
         try (factory__ = windows_core.factory<PrintWorkflowObjectModelSourceFileContent, IPrintWorkflowObjectModelSourceFileContentFactory>().unwrap()) {
             result__ = Some(factory__.CreateInstance(xpsStream))
@@ -8926,7 +8939,7 @@ public class PrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<PrintWorkflowUIActivatedEventArgs> {
-        let ancestors = [IPrintWorkflowUIActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPrintWorkflowUIActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PrintWorkflowUIActivatedEventArgs>("PrintWorkflowUIActivatedEventArgs", IPrintWorkflowUIActivatedEventArgs.iid(), ancestors, { raw => PrintWorkflowUIActivatedEventArgs.fromAbiTake(raw) }, { raw => PrintWorkflowUIActivatedEventArgs.viewOf(raw) })
     }
 
@@ -8968,15 +8981,15 @@ public class PrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8987,20 +9000,20 @@ public class PrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInte
         return defaultInterface().PrintWorkflowSession()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }

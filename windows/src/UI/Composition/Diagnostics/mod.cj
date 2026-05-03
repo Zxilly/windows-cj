@@ -4,13 +4,20 @@
 package windows.UI.Composition.Diagnostics
 
 import std.collection.*
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Composition_Diagnostics == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Composition_Diagnostics == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_UI_Composition_Diagnostics == "on"]
@@ -161,7 +168,7 @@ public class ICompositionDebugHeatMaps <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompositionDebugHeatMaps", ICompositionDebugHeatMaps.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionDebugHeatMapsVtbl", "ICompositionDebugHeatMaps", "ICompositionDebugHeatMaps_Impl", [InterfaceMethodSchema("Hide", 6, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowMemoryUsage", 7, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowOverdraw", 8, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentKinds", "CompositionDebugOverdrawContentKindsAbi", "CompositionDebugOverdrawContentKinds", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowRedraw", 9, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompositionDebugHeatMaps", ICompositionDebugHeatMaps.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionDebugHeatMapsVtbl", "ICompositionDebugHeatMaps", "ICompositionDebugHeatMaps_Impl", [InterfaceMethodSchema("Hide", 6, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowMemoryUsage", 7, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowOverdraw", 8, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentKinds", "CompositionDebugOverdrawContentKindsAbi", "CompositionDebugOverdrawContentKinds", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowRedraw", 9, [InterfaceParameterSchema("subtree", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ICompositionDebugHeatMaps.runtimeType())
         return schema
     }
@@ -191,28 +198,28 @@ public class ICompositionDebugHeatMaps <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Hide(subtree: _impl_l1.Visual): Unit {
+    public unsafe func Hide(subtree: impl_p1.Visual): Unit {
         let v = vtbl()
         let hr = v.Hide(asRaw(), subtree.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowMemoryUsage(subtree: _impl_l1.Visual): Unit {
+    public unsafe func ShowMemoryUsage(subtree: impl_p1.Visual): Unit {
         let v = vtbl()
         let hr = v.ShowMemoryUsage(asRaw(), subtree.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowOverdraw(subtree: _impl_l1.Visual, contentKinds: CompositionDebugOverdrawContentKinds): Unit {
+    public unsafe func ShowOverdraw(subtree: impl_p1.Visual, contentKinds: CompositionDebugOverdrawContentKinds): Unit {
         let v = vtbl()
         let hr = v.ShowOverdraw(asRaw(), subtree.asRaw(), windows_core.projectTypedAbi(contentKinds, windows_core.typeMarker<CompositionDebugOverdrawContentKinds>()))
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowRedraw(subtree: _impl_l1.Visual): Unit {
+    public unsafe func ShowRedraw(subtree: impl_p1.Visual): Unit {
         let v = vtbl()
         let hr = v.ShowRedraw(asRaw(), subtree.asRaw())
         HRESULT(hr).ok()
@@ -292,22 +299,22 @@ public class CompositionDebugHeatMaps <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Hide(subtree: _impl_l1.Visual): Unit {
+    public unsafe func Hide(subtree: impl_p1.Visual): Unit {
         defaultInterface().Hide(subtree)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowMemoryUsage(subtree: _impl_l1.Visual): Unit {
+    public unsafe func ShowMemoryUsage(subtree: impl_p1.Visual): Unit {
         defaultInterface().ShowMemoryUsage(subtree)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowOverdraw(subtree: _impl_l1.Visual, contentKinds: CompositionDebugOverdrawContentKinds): Unit {
+    public unsafe func ShowOverdraw(subtree: impl_p1.Visual, contentKinds: CompositionDebugOverdrawContentKinds): Unit {
         defaultInterface().ShowOverdraw(subtree, contentKinds)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func ShowRedraw(subtree: _impl_l1.Visual): Unit {
+    public unsafe func ShowRedraw(subtree: impl_p1.Visual): Unit {
         defaultInterface().ShowRedraw(subtree)
     }
 }
@@ -489,7 +496,7 @@ public class CompositionDebugSettings <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func TryGetSettings(compositor: _impl_l1.Compositor): CompositionDebugSettings {
+    public static unsafe func TryGetSettings(compositor: impl_p1.Compositor): CompositionDebugSettings {
         var result__: Option<CompositionDebugSettings> = Option<CompositionDebugSettings>.None
         try (factory__ = windows_core.factory<CompositionDebugSettings, ICompositionDebugSettingsStatics>().unwrap()) {
             result__ = Some(factory__.TryGetSettings(compositor))
@@ -566,7 +573,7 @@ public class ICompositionDebugSettingsStatics <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompositionDebugSettingsStatics", ICompositionDebugSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionDebugSettingsStaticsVtbl", "ICompositionDebugSettingsStatics", "ICompositionDebugSettingsStatics_Impl", [InterfaceMethodSchema("TryGetSettings", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionDebugSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompositionDebugSettingsStatics", ICompositionDebugSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionDebugSettingsStaticsVtbl", "ICompositionDebugSettingsStatics", "ICompositionDebugSettingsStatics_Impl", [InterfaceMethodSchema("TryGetSettings", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionDebugSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICompositionDebugSettingsStatics.runtimeType())
         return schema
     }
@@ -596,7 +603,7 @@ public class ICompositionDebugSettingsStatics <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func TryGetSettings(compositor: _impl_l1.Compositor): CompositionDebugSettings {
+    public unsafe func TryGetSettings(compositor: impl_p1.Compositor): CompositionDebugSettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryGetSettings(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))

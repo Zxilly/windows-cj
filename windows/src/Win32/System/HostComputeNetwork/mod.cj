@@ -4,10 +4,15 @@
 package windows.Win32.System.HostComputeNetwork
 
 import std.collection.*
+@When[Windows_Win32_System_HostComputeNetwork == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_HostComputeNetwork == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_HostComputeNetwork == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_HostComputeNetwork == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_HostComputeNetwork == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

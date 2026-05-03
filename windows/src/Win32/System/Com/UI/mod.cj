@@ -4,12 +4,20 @@
 package windows.Win32.System.Com.UI
 
 import std.collection.*
+@When[Windows_Win32_System_Com_UI == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Com_UI == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Com_UI == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Com_UI == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Com_UI == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Com_UI == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_Com_UI == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Com_UI == "on"]
@@ -17,7 +25,7 @@ import windows.Win32._impl_l2 as Win32__impl_l2
 public struct IDummyHICONIncluderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var Dummy: CFunc<(CPointer<Unit>, Win32__impl_l0.HICON, Win32_Graphics_Gdi.HDC) -> Int32> = { _, _, _ => 0 }
+    public var Dummy: CFunc<(CPointer<Unit>, Win32_impl_p1.HICON, Win32_Graphics_Gdi.HDC) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -62,7 +70,7 @@ public class IDummyHICONIncluder <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func Dummy(h1: Win32__impl_l0.HICON, h2: Win32_Graphics_Gdi.HDC): Int32 {
+    public unsafe func Dummy(h1: Win32_impl_p1.HICON, h2: Win32_Graphics_Gdi.HDC): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Dummy(__liveRaw, h1, h2)

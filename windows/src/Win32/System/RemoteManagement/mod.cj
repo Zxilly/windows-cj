@@ -4,21 +4,30 @@
 package windows.Win32.System.RemoteManagement
 
 import std.collection.*
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_System_RemoteManagement == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_RemoteManagement == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_RemoteManagement == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var CreateSession: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -61,7 +70,7 @@ public class IWSMan <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSMan> {
-        return InterfaceDescriptor<IWSMan>("IWSMan", IWSMan.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManFromAbi, viewIWSMan)
+        return InterfaceDescriptor<IWSMan>("IWSMan", IWSMan.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManFromAbi, viewIWSMan)
     }
 
     public unsafe func vtbl(): IWSManVtbl {
@@ -98,7 +107,7 @@ public class IWSMan <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManConnectionOptionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetUserName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetPassword: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -138,7 +147,7 @@ public class IWSManConnectionOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSManConnectionOptions> {
-        return InterfaceDescriptor<IWSManConnectionOptions>("IWSManConnectionOptions", IWSManConnectionOptions.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManConnectionOptionsFromAbi, viewIWSManConnectionOptions)
+        return InterfaceDescriptor<IWSManConnectionOptions>("IWSManConnectionOptions", IWSManConnectionOptions.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManConnectionOptionsFromAbi, viewIWSManConnectionOptions)
     }
 
     public unsafe func vtbl(): IWSManConnectionOptionsVtbl {
@@ -333,7 +342,7 @@ public class IWSManConnectionOptionsEx2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManEnumeratorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ReadItem: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var AtEndOfStream: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Error: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -373,7 +382,7 @@ public class IWSManEnumerator <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSManEnumerator> {
-        return InterfaceDescriptor<IWSManEnumerator>("IWSManEnumerator", IWSManEnumerator.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManEnumeratorFromAbi, viewIWSManEnumerator)
+        return InterfaceDescriptor<IWSManEnumerator>("IWSManEnumerator", IWSManEnumerator.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManEnumeratorFromAbi, viewIWSManEnumerator)
     }
 
     public unsafe func vtbl(): IWSManEnumeratorVtbl {
@@ -744,9 +753,9 @@ public class IWSManEx3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManInternalVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ConfigSDDL: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ConfigSDDL: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -783,7 +792,7 @@ public class IWSManInternal <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSManInternal> {
-        return InterfaceDescriptor<IWSManInternal>("IWSManInternal", IWSManInternal.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManInternalFromAbi, viewIWSManInternal)
+        return InterfaceDescriptor<IWSManInternal>("IWSManInternal", IWSManInternal.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManInternalFromAbi, viewIWSManInternal)
     }
 
     public unsafe func vtbl(): IWSManInternalVtbl {
@@ -791,7 +800,7 @@ public class IWSManInternal <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ConfigSDDL(session: CPointer<Unit>, resourceUri: Win32__impl_l2.VARIANTAbi, flags: Int32, resource: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func ConfigSDDL(session: CPointer<Unit>, resourceUri: Win32_impl_p2.VARIANTAbi, flags: Int32, resource: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ConfigSDDL(__liveRaw, session, resourceUri, flags, resource)
@@ -801,18 +810,18 @@ public class IWSManInternal <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManResourceLocatorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetResourceURI: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ResourceURI: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddSelector: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var AddSelector: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var ClearSelectors: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var FragmentPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFragmentPath: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var FragmentDialect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFragmentDialect: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddOption: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var AddOption: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var SetMustUnderstandOptions: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var MustUnderstandOptions: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ClearOptions: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -853,7 +862,7 @@ public class IWSManResourceLocator <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSManResourceLocator> {
-        return InterfaceDescriptor<IWSManResourceLocator>("IWSManResourceLocator", IWSManResourceLocator.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManResourceLocatorFromAbi, viewIWSManResourceLocator)
+        return InterfaceDescriptor<IWSManResourceLocator>("IWSManResourceLocator", IWSManResourceLocator.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManResourceLocatorFromAbi, viewIWSManResourceLocator)
     }
 
     public unsafe func vtbl(): IWSManResourceLocatorVtbl {
@@ -873,7 +882,7 @@ public class IWSManResourceLocator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddSelector(resourceSelName: CPointer<UInt16>, selValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func AddSelector(resourceSelName: CPointer<UInt16>, selValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddSelector(__liveRaw, resourceSelName, selValue)
@@ -910,7 +919,7 @@ public class IWSManResourceLocator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddOption(OptionName: CPointer<UInt16>, OptionValue: Win32__impl_l2.VARIANTAbi, mustComply: Int32): Int32 {
+    public unsafe func AddOption(OptionName: CPointer<UInt16>, OptionValue: Win32_impl_p2.VARIANTAbi, mustComply: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddOption(__liveRaw, OptionName, OptionValue, mustComply)
@@ -992,19 +1001,19 @@ public class IWSManResourceLocatorInternal <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Win32_System_RemoteManagement == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSManSessionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Get: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
+    public var Get: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Put: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Put: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Create: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Delete: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32) -> Int32> = { _, _, _ => 0 }
+    public var Delete: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Invoke: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Enumerate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Enumerate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Identify: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Error: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BatchItems: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1047,7 +1056,7 @@ public class IWSManSession <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSManSession> {
-        return InterfaceDescriptor<IWSManSession>("IWSManSession", IWSManSession.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSManSessionFromAbi, viewIWSManSession)
+        return InterfaceDescriptor<IWSManSession>("IWSManSession", IWSManSession.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSManSessionFromAbi, viewIWSManSession)
     }
 
     public unsafe func vtbl(): IWSManSessionVtbl {
@@ -1055,42 +1064,42 @@ public class IWSManSession <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Get(resourceUri: Win32__impl_l2.VARIANTAbi, flags: Int32, resource: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func Get(resourceUri: Win32_impl_p2.VARIANTAbi, flags: Int32, resource: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Get(__liveRaw, resourceUri, flags, resource)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Put(resourceUri: Win32__impl_l2.VARIANTAbi, resource: CPointer<UInt16>, flags: Int32, resultResource: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func Put(resourceUri: Win32_impl_p2.VARIANTAbi, resource: CPointer<UInt16>, flags: Int32, resultResource: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Put(__liveRaw, resourceUri, resource, flags, resultResource)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Create(resourceUri: Win32__impl_l2.VARIANTAbi, resource: CPointer<UInt16>, flags: Int32, newUri: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func Create(resourceUri: Win32_impl_p2.VARIANTAbi, resource: CPointer<UInt16>, flags: Int32, newUri: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, resourceUri, resource, flags, newUri)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Delete(resourceUri: Win32__impl_l2.VARIANTAbi, flags: Int32): Int32 {
+    public unsafe func Delete(resourceUri: Win32_impl_p2.VARIANTAbi, flags: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Delete(__liveRaw, resourceUri, flags)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Invoke(actionUri: CPointer<UInt16>, resourceUri: Win32__impl_l2.VARIANTAbi, parameters: CPointer<UInt16>, flags: Int32, result: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func Invoke(actionUri: CPointer<UInt16>, resourceUri: Win32_impl_p2.VARIANTAbi, parameters: CPointer<UInt16>, flags: Int32, result: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Invoke(__liveRaw, actionUri, resourceUri, parameters, flags, result)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Enumerate(resourceUri: Win32__impl_l2.VARIANTAbi, filter: CPointer<UInt16>, dialect: CPointer<UInt16>, flags: Int32, resultSet: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Enumerate(resourceUri: Win32_impl_p2.VARIANTAbi, filter: CPointer<UInt16>, dialect: CPointer<UInt16>, flags: Int32, resultSet: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Enumerate(__liveRaw, resourceUri, filter, dialect, flags, resultSet)

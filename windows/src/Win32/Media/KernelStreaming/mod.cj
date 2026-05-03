@@ -4,17 +4,28 @@
 package windows.Win32.Media.KernelStreaming
 
 import std.collection.*
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteValue, unionReadFloat32, unionReadFloat64, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionWriteFloat32, unionWriteFloat64, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_KernelStreaming == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_KernelStreaming == "on" && Windows_Win32_Media_DirectShow == "on"]
 import windows.Win32.Media.DirectShow as Win32_Media_DirectShow
+@When[Windows_Win32_Media_KernelStreaming == "on" && Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Media_KernelStreaming == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_KernelStreaming == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Media_KernelStreaming == "on"]
@@ -28931,7 +28942,7 @@ extend KSPROPERTY_TIMECODE <: windows_core.CopyType & windows_core.RuntimeType &
 @When[Windows_Win32_Media_KernelStreaming == "on" && Windows_Win32_Media == "on"]
 public struct KSPROPERTY_TIMECODE_S {
     public var Property: KSIDENTIFIER = KSIDENTIFIER()
-    public var TimecodeSamp: Win32_Media__impl_l0.TIMECODE_SAMPLE = Win32_Media__impl_l0.TIMECODE_SAMPLE()
+    public var TimecodeSamp: Win32_Media_impl_p0.TIMECODE_SAMPLE = Win32_Media_impl_p0.TIMECODE_SAMPLE()
     public init() {}
 }
 
@@ -28939,7 +28950,7 @@ public struct KSPROPERTY_TIMECODE_S {
 @C
 public struct KSPROPERTY_TIMECODE_SAbi {
     public var Property: KSIDENTIFIERAbi = KSIDENTIFIERAbi()
-    public var TimecodeSamp: Win32_Media__impl_l0.TIMECODE_SAMPLEAbi = Win32_Media__impl_l0.TIMECODE_SAMPLEAbi()
+    public var TimecodeSamp: Win32_Media_impl_p0.TIMECODE_SAMPLEAbi = Win32_Media_impl_p0.TIMECODE_SAMPLEAbi()
     public init() {}
 }
 
@@ -28951,13 +28962,13 @@ extend KSPROPERTY_TIMECODE_S <: windows_core.CopyType & windows_core.RuntimeType
     public static func projectAbi(value: KSPROPERTY_TIMECODE_S): KSPROPERTY_TIMECODE_SAbi {
         var abi = KSPROPERTY_TIMECODE_SAbi()
         abi.Property = KSIDENTIFIER.projectAbi(value.Property)
-        abi.TimecodeSamp = windows_core.projectTypedAbi(value.TimecodeSamp, windows_core.typeMarker<Win32_Media__impl_l0.TIMECODE_SAMPLE>())
+        abi.TimecodeSamp = windows_core.projectTypedAbi(value.TimecodeSamp, windows_core.typeMarker<Win32_Media_impl_p0.TIMECODE_SAMPLE>())
         return abi
     }
     public static func assumeInitRef(abi: KSPROPERTY_TIMECODE_SAbi): KSPROPERTY_TIMECODE_S {
         var value = KSPROPERTY_TIMECODE_S()
         value.Property = KSIDENTIFIER.assumeInitRef(abi.Property)
-        value.TimecodeSamp = windows_core.fromTypedAbi(abi.TimecodeSamp, windows_core.typeMarker<Win32_Media__impl_l0.TIMECODE_SAMPLE>()).unwrap()
+        value.TimecodeSamp = windows_core.fromTypedAbi(abi.TimecodeSamp, windows_core.typeMarker<Win32_Media_impl_p0.TIMECODE_SAMPLE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: KSPROPERTY_TIMECODE_SAbi): Result<KSPROPERTY_TIMECODE_S> { Result<KSPROPERTY_TIMECODE_S>.Ok(KSPROPERTY_TIMECODE_S.assumeInitRef(abi)) }
@@ -44778,7 +44789,7 @@ extend KSPROPERTY_SPPAL <: windows_core.CopyType & windows_core.RuntimeType & wi
 @When[Windows_Win32_Media_KernelStreaming == "on" && Windows_Win32_Media == "on"]
 public struct KSPROPERTY_TIMECODE_NODE_S {
     public var NodeProperty: KSP_NODE = KSP_NODE()
-    public var TimecodeSamp: Win32_Media__impl_l0.TIMECODE_SAMPLE = Win32_Media__impl_l0.TIMECODE_SAMPLE()
+    public var TimecodeSamp: Win32_Media_impl_p0.TIMECODE_SAMPLE = Win32_Media_impl_p0.TIMECODE_SAMPLE()
     public init() {}
 }
 
@@ -44786,7 +44797,7 @@ public struct KSPROPERTY_TIMECODE_NODE_S {
 @C
 public struct KSPROPERTY_TIMECODE_NODE_SAbi {
     public var NodeProperty: KSP_NODEAbi = KSP_NODEAbi()
-    public var TimecodeSamp: Win32_Media__impl_l0.TIMECODE_SAMPLEAbi = Win32_Media__impl_l0.TIMECODE_SAMPLEAbi()
+    public var TimecodeSamp: Win32_Media_impl_p0.TIMECODE_SAMPLEAbi = Win32_Media_impl_p0.TIMECODE_SAMPLEAbi()
     public init() {}
 }
 
@@ -44798,13 +44809,13 @@ extend KSPROPERTY_TIMECODE_NODE_S <: windows_core.CopyType & windows_core.Runtim
     public static func projectAbi(value: KSPROPERTY_TIMECODE_NODE_S): KSPROPERTY_TIMECODE_NODE_SAbi {
         var abi = KSPROPERTY_TIMECODE_NODE_SAbi()
         abi.NodeProperty = KSP_NODE.projectAbi(value.NodeProperty)
-        abi.TimecodeSamp = windows_core.projectTypedAbi(value.TimecodeSamp, windows_core.typeMarker<Win32_Media__impl_l0.TIMECODE_SAMPLE>())
+        abi.TimecodeSamp = windows_core.projectTypedAbi(value.TimecodeSamp, windows_core.typeMarker<Win32_Media_impl_p0.TIMECODE_SAMPLE>())
         return abi
     }
     public static func assumeInitRef(abi: KSPROPERTY_TIMECODE_NODE_SAbi): KSPROPERTY_TIMECODE_NODE_S {
         var value = KSPROPERTY_TIMECODE_NODE_S()
         value.NodeProperty = KSP_NODE.assumeInitRef(abi.NodeProperty)
-        value.TimecodeSamp = windows_core.fromTypedAbi(abi.TimecodeSamp, windows_core.typeMarker<Win32_Media__impl_l0.TIMECODE_SAMPLE>()).unwrap()
+        value.TimecodeSamp = windows_core.fromTypedAbi(abi.TimecodeSamp, windows_core.typeMarker<Win32_Media_impl_p0.TIMECODE_SAMPLE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: KSPROPERTY_TIMECODE_NODE_SAbi): Result<KSPROPERTY_TIMECODE_NODE_S> { Result<KSPROPERTY_TIMECODE_NODE_S>.Ok(KSPROPERTY_TIMECODE_NODE_S.assumeInitRef(abi)) }

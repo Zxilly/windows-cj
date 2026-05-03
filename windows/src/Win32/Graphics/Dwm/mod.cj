@@ -4,15 +4,24 @@
 package windows.Win32.Graphics.Dwm
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_polyfill.{packedReadFloat64, packedReadInt32, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat64, packedWriteInt32, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue}
+@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_Dwm == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Dwm == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Graphics_Dwm == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
@@ -2063,11 +2072,11 @@ public unsafe func Windows_DwmEnableMMCSS(fEnableMMCSS: Int32): Int32 {
 
 @When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmExtendFrameIntoClientArea == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
-    func DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32__impl_l0.MARGINSAbi>): Int32
+    func DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32_impl_p1.MARGINSAbi>): Int32
 }
 
 @When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmExtendFrameIntoClientArea == "on" && Windows_Win32_UI_Controls == "on"]
-public unsafe func Windows_DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32__impl_l0.MARGINSAbi>): Int32 {
+public unsafe func Windows_DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32_impl_p1.MARGINSAbi>): Int32 {
     return DwmExtendFrameIntoClientArea(hWnd, pMarInset)
 }
 

@@ -4,15 +4,25 @@
 package windows.Services.TargetedContent
 
 import std.collection.*
+@When[Windows_Services_TargetedContent == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Services_TargetedContent == "on"]
 import windows_core as windows_core
+@When[Windows_Services_TargetedContent == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Services_TargetedContent == "on"]
 import windows_interface as windows_interface
+@When[Windows_Services_TargetedContent == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Services_TargetedContent == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Services_TargetedContent == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Services_TargetedContent == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Services_TargetedContent == "on"]
 import windows_collections as windows_collections
+@When[Windows_Services_TargetedContent == "on"]
 import windows_future as windows_future
 
 
@@ -315,7 +325,7 @@ public class ITargetedContentImage <: InterfaceWrapperBase & ComInterface & Runt
         if (iid == ITargetedContentImage.iid()) {
             return true
         }
-        for (ancestor in [_impl_l1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -324,13 +334,13 @@ public class ITargetedContentImage <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<ITargetedContentImage> {
-        var descriptor = InterfaceDescriptor<ITargetedContentImage>("ITargetedContentImage", ITargetedContentImage.iid(), IInspectable.descriptor(), [_impl_l1.IRandomAccessStreamReference.iid()], { raw => ITargetedContentImage.fromAbiTake(raw) }, { raw => ITargetedContentImage.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<ITargetedContentImage>("ITargetedContentImage", ITargetedContentImage.iid(), IInspectable.descriptor(), [impl_p1.IRandomAccessStreamReference.iid()], { raw => ITargetedContentImage.fromAbiTake(raw) }, { raw => ITargetedContentImage.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ITargetedContentImage.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITargetedContentImage", ITargetedContentImage.iid(), _impl_l1.IRandomAccessStreamReference.descriptorSchema(), ["IRandomAccessStreamReference"], [_impl_l1.IRandomAccessStreamReference.iid()], "ITargetedContentImageVtbl", "ITargetedContentImage", "ITargetedContentImage_Impl", [InterfaceMethodSchema("Height", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Width", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITargetedContentImage", ITargetedContentImage.iid(), impl_p1.IRandomAccessStreamReference.descriptorSchema(), ["IRandomAccessStreamReference"], [impl_p1.IRandomAccessStreamReference.iid()], "ITargetedContentImageVtbl", "ITargetedContentImage", "ITargetedContentImage_Impl", [InterfaceMethodSchema("Height", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Width", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITargetedContentImage.runtimeType())
         return schema
     }
@@ -355,8 +365,8 @@ public class ITargetedContentImage <: InterfaceWrapperBase & ComInterface & Runt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamReference(): _impl_l1.IRandomAccessStreamReference {
-        match (unsafe { query<_impl_l1.IRandomAccessStreamReference>(_impl_l1.IRandomAccessStreamReference.descriptor()) }) {
+    public func asIRandomAccessStreamReference(): impl_p1.IRandomAccessStreamReference {
+        match (unsafe { query<impl_p1.IRandomAccessStreamReference>(impl_p1.IRandomAccessStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIRandomAccessStreamReference: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -1049,7 +1059,7 @@ public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func iid(): GUID {
-        _impl_l1.IRandomAccessStreamReference.iid()
+        impl_p1.IRandomAccessStreamReference.iid()
     }
 
     public static func runtimeName(): String {
@@ -1057,12 +1067,12 @@ public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<TargetedContentFile> {
-        let ancestors = [_impl_l1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<TargetedContentFile>("TargetedContentFile", _impl_l1.IRandomAccessStreamReference.iid(), ancestors, { raw => TargetedContentFile.fromAbiTake(raw) }, { raw => TargetedContentFile.viewOf(raw) })
+        let ancestors = [impl_p1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<TargetedContentFile>("TargetedContentFile", impl_p1.IRandomAccessStreamReference.iid(), ancestors, { raw => TargetedContentFile.fromAbiTake(raw) }, { raw => TargetedContentFile.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IRandomAccessStreamReference {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamReference.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IRandomAccessStreamReference {
+        match (unsafe { query(impl_p1.IRandomAccessStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1077,7 +1087,7 @@ public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.Services.TargetedContent.TargetedContentFile", TargetedContentFile.signature(), _impl_l1.IRandomAccessStreamReference.iid())
+        RuntimeTypeContract("Windows.Services.TargetedContent.TargetedContentFile", TargetedContentFile.signature(), impl_p1.IRandomAccessStreamReference.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1092,14 +1102,14 @@ public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & window
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamReference(): _impl_l1.IRandomAccessStreamReference {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamReference.descriptor()) }) {
+    public func asIRandomAccessStreamReference(): impl_p1.IRandomAccessStreamReference {
+        match (unsafe { query(impl_p1.IRandomAccessStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamWithContentType> {
+    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamWithContentType> {
         return defaultInterface().OpenReadAsync()
     }
 }
@@ -1149,7 +1159,7 @@ public class TargetedContentImage <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public static func descriptor(): InterfaceDescriptor<TargetedContentImage> {
-        let ancestors = [ITargetedContentImage.iid(), _impl_l1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ITargetedContentImage.iid(), impl_p1.IRandomAccessStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<TargetedContentImage>("TargetedContentImage", ITargetedContentImage.iid(), ancestors, { raw => TargetedContentImage.fromAbiTake(raw) }, { raw => TargetedContentImage.viewOf(raw) })
     }
 
@@ -1191,8 +1201,8 @@ public class TargetedContentImage <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    public func asIRandomAccessStreamReference(): _impl_l1.IRandomAccessStreamReference {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamReference.descriptor()) }) {
+    public func asIRandomAccessStreamReference(): impl_p1.IRandomAccessStreamReference {
+        match (unsafe { query(impl_p1.IRandomAccessStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1208,7 +1218,7 @@ public class TargetedContentImage <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Width()
     }
 
-    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamWithContentType> {
+    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamWithContentType> {
         return asIRandomAccessStreamReference().OpenReadAsync()
     }
 }

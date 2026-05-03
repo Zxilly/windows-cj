@@ -4,16 +4,28 @@
 package windows.Win32.Graphics.Imaging
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Imaging == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Imaging == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_Graphics_Imaging == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Graphics_Imaging == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Imaging == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Graphics_Imaging == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Graphics_Imaging == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Graphics_Imaging == "on"]
@@ -221,7 +233,7 @@ public class IWICDisplayAdaptationControl <: InterfaceWrapperBase & ComInterface
 public struct IWICEnumMetadataItemVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -269,7 +281,7 @@ public class IWICEnumMetadataItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Next(celt: UInt32, rgeltSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, rgeltId: CPointer<Win32__impl_l2.PROPVARIANTAbi>, rgeltValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
+    public unsafe func Next(celt: UInt32, rgeltSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, rgeltId: CPointer<Win32_impl_p3.PROPVARIANTAbi>, rgeltValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, celt, rgeltSchema, rgeltId, rgeltValue, pceltFetched)
@@ -383,7 +395,7 @@ public struct IWICMetadataQueryReaderVtbl {
     public var GetContainerFormat: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetLocation: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetMetadataByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetMetadataByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -442,7 +454,7 @@ public class IWICMetadataQueryReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetMetadataByName(wzName: CPointer<UInt16>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetMetadataByName(wzName: CPointer<UInt16>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMetadataByName(__liveRaw, wzName, pvarValue)
@@ -461,7 +473,7 @@ public class IWICMetadataQueryReader <: InterfaceWrapperBase & ComInterface {
 public struct IWICMetadataQueryWriterVtbl {
     public var base_: IWICMetadataQueryReaderVtbl = IWICMetadataQueryReaderVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetMetadataByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetMetadataByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RemoveMetadataByName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -507,7 +519,7 @@ public class IWICMetadataQueryWriter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetMetadataByName(wzName: CPointer<UInt16>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetMetadataByName(wzName: CPointer<UInt16>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetMetadataByName(__liveRaw, wzName, pvarValue)
@@ -523,7 +535,7 @@ public class IWICMetadataQueryWriter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Imaging == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWICPersistStreamVtbl {
-    public var base_: Win32__impl_l2.IPersistStreamVtbl = Win32__impl_l2.IPersistStreamVtbl()
+    public var base_: Win32_impl_p2.IPersistStreamVtbl = Win32_impl_p2.IPersistStreamVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var LoadEx: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -564,7 +576,7 @@ public class IWICPersistStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWICPersistStream> {
-        return InterfaceDescriptor<IWICPersistStream>("IWICPersistStream", IWICPersistStream.iid(), Win32__impl_l2.IPersistStream.iid(), takeIWICPersistStreamFromAbi, viewIWICPersistStream)
+        return InterfaceDescriptor<IWICPersistStream>("IWICPersistStream", IWICPersistStream.iid(), Win32_impl_p2.IPersistStream.iid(), takeIWICPersistStreamFromAbi, viewIWICPersistStream)
     }
 
     public unsafe func vtbl(): IWICPersistStreamVtbl {
@@ -658,7 +670,7 @@ public class IWICProgressiveLevelControl <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Graphics_Imaging == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWICStreamVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var InitializeFromIStream: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var InitializeFromFilename: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -701,7 +713,7 @@ public class IWICStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWICStream> {
-        return InterfaceDescriptor<IWICStream>("IWICStream", IWICStream.iid(), Win32__impl_l1.IStream.iid(), takeIWICStreamFromAbi, viewIWICStream)
+        return InterfaceDescriptor<IWICStream>("IWICStream", IWICStream.iid(), Win32_impl_p2.IStream.iid(), takeIWICStreamFromAbi, viewIWICStream)
     }
 
     public unsafe func vtbl(): IWICStreamVtbl {
@@ -2938,7 +2950,7 @@ extend WICHeifProperties <: windows_core.CopyType & windows_core.RuntimeType & w
 
 @When[Windows_Win32_Graphics_Imaging == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 public struct WICImageParameters {
-    public var PixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMAT = Win32__impl_l1.D2D1_PIXEL_FORMAT()
+    public var PixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMAT = Win32_impl_p1.D2D1_PIXEL_FORMAT()
     public var DpiX: Float32 = 0.0f32
     public var DpiY: Float32 = 0.0f32
     public var Top: Float32 = 0.0f32
@@ -2951,7 +2963,7 @@ public struct WICImageParameters {
 @When[Windows_Win32_Graphics_Imaging == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 @C
 public struct WICImageParametersAbi {
-    public var PixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMATAbi = Win32__impl_l1.D2D1_PIXEL_FORMATAbi()
+    public var PixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMATAbi = Win32_impl_p1.D2D1_PIXEL_FORMATAbi()
     public var DpiX: Float32 = 0.0f32
     public var DpiY: Float32 = 0.0f32
     public var Top: Float32 = 0.0f32
@@ -2968,7 +2980,7 @@ extend WICImageParameters <: windows_core.CopyType & windows_core.RuntimeType & 
     public static func signature(): String { "struct(Windows.Win32.Graphics.Imaging.WICImageParameters;struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_PIXEL_FORMAT;enum(Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT;i4);enum(Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE;i4));f4;f4;f4;f4;u4;u4)" }
     public static func projectAbi(value: WICImageParameters): WICImageParametersAbi {
         var abi = WICImageParametersAbi()
-        abi.PixelFormat = windows_core.projectTypedAbi(value.PixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>())
+        abi.PixelFormat = windows_core.projectTypedAbi(value.PixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>())
         abi.DpiX = value.DpiX
         abi.DpiY = value.DpiY
         abi.Top = value.Top
@@ -2979,7 +2991,7 @@ extend WICImageParameters <: windows_core.CopyType & windows_core.RuntimeType & 
     }
     public static func assumeInitRef(abi: WICImageParametersAbi): WICImageParameters {
         var value = WICImageParameters()
-        value.PixelFormat = windows_core.fromTypedAbi(abi.PixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>()).unwrap()
+        value.PixelFormat = windows_core.fromTypedAbi(abi.PixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>()).unwrap()
         value.DpiX = abi.DpiX
         value.DpiY = abi.DpiY
         value.Top = abi.Top
@@ -5841,9 +5853,9 @@ public struct IWICMetadataReaderVtbl {
     public var GetMetadataHandlerInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValueByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetValueByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5907,14 +5919,14 @@ public class IWICMetadataReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValueByIndex(nIndex: UInt32, pvarSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarId: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValueByIndex(nIndex: UInt32, pvarSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarId: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValueByIndex(__liveRaw, nIndex, pvarSchema, pvarId, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(pvarSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarId: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(pvarSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarId: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, pvarSchema, pvarId, pvarValue)
@@ -6003,11 +6015,11 @@ public class IWICMetadataReaderInfo <: InterfaceWrapperBase & ComInterface {
 public struct IWICMetadataWriterVtbl {
     public var base_: IWICMetadataReaderVtbl = IWICMetadataReaderVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetValueByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetValueByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var RemoveValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var RemoveValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RemoveValueByIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6053,21 +6065,21 @@ public class IWICMetadataWriter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetValue(pvarSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarId: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetValue(pvarSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarId: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, pvarSchema, pvarId, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetValueByIndex(nIndex: UInt32, pvarSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarId: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetValueByIndex(nIndex: UInt32, pvarSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarId: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValueByIndex(__liveRaw, nIndex, pvarSchema, pvarId, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func RemoveValue(pvarSchema: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarId: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func RemoveValue(pvarSchema: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarId: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveValue(__liveRaw, pvarSchema, pvarId)
@@ -8451,7 +8463,7 @@ public struct IWICComponentFactoryVtbl {
     public var CreateQueryReaderFromBlockReader: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateQueryWriterFromBlockWriter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateEncoderPropertyBag: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.PROPBAG2Abi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateEncoderPropertyBag: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.PROPBAG2Abi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8534,7 +8546,7 @@ public class IWICComponentFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateEncoderPropertyBag(ppropOptions: CPointer<Win32__impl_l1.PROPBAG2Abi>, cCount: UInt32, ppIPropertyBag: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateEncoderPropertyBag(ppropOptions: CPointer<Win32_impl_p2.PROPBAG2Abi>, cCount: UInt32, ppIPropertyBag: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateEncoderPropertyBag(__liveRaw, ppropOptions, cCount, ppIPropertyBag)
@@ -9102,7 +9114,7 @@ public struct IWICImagingFactoryVtbl {
     @When[Windows_Win32_Graphics_Gdi == "on"]
     public var CreateBitmapFromHBITMAP: CFunc<(CPointer<Unit>, Win32_Graphics_Gdi.HBITMAP, Win32_Graphics_Gdi.HPALETTE, WICBitmapAlphaChannelOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var CreateBitmapFromHICON: CFunc<(CPointer<Unit>, Win32__impl_l0.HICON, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateBitmapFromHICON: CFunc<(CPointer<Unit>, Win32_impl_p1.HICON, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var CreateComponentEnumerator: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateFastMetadataEncoderFromDecoder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -9269,7 +9281,7 @@ public class IWICImagingFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func CreateBitmapFromHICON(hIcon: Win32__impl_l0.HICON, ppIBitmap: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateBitmapFromHICON(hIcon: Win32_impl_p1.HICON, ppIBitmap: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateBitmapFromHICON(__liveRaw, hIcon, ppIBitmap)

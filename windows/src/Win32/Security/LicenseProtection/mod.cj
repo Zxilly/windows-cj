@@ -4,8 +4,11 @@
 package windows.Win32.Security.LicenseProtection
 
 import std.collection.*
+@When[Windows_Win32_Security_LicenseProtection == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_Security_LicenseProtection == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_LicenseProtection == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

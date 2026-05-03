@@ -4,17 +4,29 @@
 package windows.UI.Composition.Scenes
 
 import std.collection.*
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Composition_Scenes == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Composition_Scenes == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Composition_Scenes == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -1555,7 +1567,7 @@ public class SceneModelTransform <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneModelTransform> {
-        let ancestors = [ISceneModelTransform.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneModelTransform.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneModelTransform>("SceneModelTransform", ISceneModelTransform.iid(), ancestors, { raw => SceneModelTransform.fromAbiTake(raw) }, { raw => SceneModelTransform.viewOf(raw) })
     }
 
@@ -1604,22 +1616,22 @@ public class SceneModelTransform <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionTransform(): _impl_l1.CompositionTransform {
-        match (unsafe { query(_impl_l1.CompositionTransform.descriptor()) }) {
+    public func asCompositionTransform(): impl_p1.CompositionTransform {
+        match (unsafe { query(impl_p1.CompositionTransform.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1685,7 +1697,7 @@ public class SceneModelTransform <: InterfaceWrapperBase & ComInterface & window
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -1735,7 +1747,7 @@ public class SceneObject <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneObject> {
-        let ancestors = [ISceneObject.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneObject.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneObject>("SceneObject", ISceneObject.iid(), ancestors, { raw => SceneObject.fromAbiTake(raw) }, { raw => SceneObject.viewOf(raw) })
     }
 
@@ -1784,15 +1796,15 @@ public class SceneObject <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1802,7 +1814,7 @@ public class SceneObject <: InterfaceWrapperBase & ComInterface & windows_interf
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -1972,11 +1984,11 @@ extend ISceneComponent <: windows_core.Interface<ISceneComponent> {}
 public struct ISceneSurfaceMaterialInputVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_UI_Composition == "on"]
-    public var BitmapInterpolationMode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CompositionBitmapInterpolationModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var BitmapInterpolationMode: CFunc<(CPointer<Unit>, CPointer<impl_p0.CompositionBitmapInterpolationModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Composition != "on"]
     public var BitmapInterpolationMode: UIntNative = UIntNative(0)
     @When[Windows_UI_Composition == "on"]
-    public var SetBitmapInterpolationMode: CFunc<(CPointer<Unit>, _impl_l0.CompositionBitmapInterpolationModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetBitmapInterpolationMode: CFunc<(CPointer<Unit>, impl_p0.CompositionBitmapInterpolationModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Composition != "on"]
     public var SetBitmapInterpolationMode: UIntNative = UIntNative(0)
     @When[Windows_UI_Composition == "on"]
@@ -2030,7 +2042,7 @@ public class ISceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneSurfaceMaterialInput", ISceneSurfaceMaterialInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneSurfaceMaterialInputVtbl", "ISceneSurfaceMaterialInput", "ISceneSurfaceMaterialInput_Impl", [InterfaceMethodSchema("BitmapInterpolationMode", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CompositionBitmapInterpolationModeAbi>", "OutSlot<_impl_l0.CompositionBitmapInterpolationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBitmapInterpolationMode", 7, [InterfaceParameterSchema("value", "_impl_l0.CompositionBitmapInterpolationModeAbi", "_impl_l0.CompositionBitmapInterpolationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Surface", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.ICompositionSurface>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSurface", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.ICompositionSurface>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("WrappingUMode", 10, [InterfaceParameterSchema("result", "CPointer<SceneWrappingModeAbi>", "OutSlot<SceneWrappingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWrappingUMode", 11, [InterfaceParameterSchema("value", "SceneWrappingModeAbi", "SceneWrappingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WrappingVMode", 12, [InterfaceParameterSchema("result", "CPointer<SceneWrappingModeAbi>", "OutSlot<SceneWrappingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWrappingVMode", 13, [InterfaceParameterSchema("value", "SceneWrappingModeAbi", "SceneWrappingMode", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneSurfaceMaterialInput", ISceneSurfaceMaterialInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneSurfaceMaterialInputVtbl", "ISceneSurfaceMaterialInput", "ISceneSurfaceMaterialInput_Impl", [InterfaceMethodSchema("BitmapInterpolationMode", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.CompositionBitmapInterpolationModeAbi>", "OutSlot<impl_p0.CompositionBitmapInterpolationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBitmapInterpolationMode", 7, [InterfaceParameterSchema("value", "impl_p0.CompositionBitmapInterpolationModeAbi", "impl_p0.CompositionBitmapInterpolationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Surface", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.ICompositionSurface>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSurface", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.ICompositionSurface>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("WrappingUMode", 10, [InterfaceParameterSchema("result", "CPointer<SceneWrappingModeAbi>", "OutSlot<SceneWrappingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWrappingUMode", 11, [InterfaceParameterSchema("value", "SceneWrappingModeAbi", "SceneWrappingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WrappingVMode", 12, [InterfaceParameterSchema("result", "CPointer<SceneWrappingModeAbi>", "OutSlot<SceneWrappingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWrappingVMode", 13, [InterfaceParameterSchema("value", "SceneWrappingModeAbi", "SceneWrappingMode", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneSurfaceMaterialInput.runtimeType())
         return schema
     }
@@ -2060,32 +2072,32 @@ public class ISceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func BitmapInterpolationMode(): _impl_l0.CompositionBitmapInterpolationMode {
+    public unsafe func BitmapInterpolationMode(): impl_p0.CompositionBitmapInterpolationMode {
         let v = vtbl()
-        var result__ = _impl_l0.CompositionBitmapInterpolationModeAbi()
-        let hr = v.BitmapInterpolationMode(asRaw(), CPointer<_impl_l0.CompositionBitmapInterpolationModeAbi>(inout result__))
+        var result__ = impl_p0.CompositionBitmapInterpolationModeAbi()
+        let hr = v.BitmapInterpolationMode(asRaw(), CPointer<impl_p0.CompositionBitmapInterpolationModeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CompositionBitmapInterpolationMode>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CompositionBitmapInterpolationMode>()).unwrap()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetBitmapInterpolationMode(value: _impl_l0.CompositionBitmapInterpolationMode): Unit {
+    public unsafe func SetBitmapInterpolationMode(value: impl_p0.CompositionBitmapInterpolationMode): Unit {
         let v = vtbl()
-        let hr = v.SetBitmapInterpolationMode(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.CompositionBitmapInterpolationMode>()))
+        let hr = v.SetBitmapInterpolationMode(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.CompositionBitmapInterpolationMode>()))
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Surface(): _impl_l0.ICompositionSurface {
+    public unsafe func Surface(): impl_p0.ICompositionSurface {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Surface(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.ICompositionSurface.fromAbiTake(result__)
+        return impl_p0.ICompositionSurface.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetSurface(value: _impl_l0.ICompositionSurface): Unit {
+    public unsafe func SetSurface(value: impl_p0.ICompositionSurface): Unit {
         let v = vtbl()
         let hr = v.SetSurface(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2150,7 +2162,7 @@ public class SceneBoundingBox <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneBoundingBox> {
-        let ancestors = [ISceneBoundingBox.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneBoundingBox.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneBoundingBox>("SceneBoundingBox", ISceneBoundingBox.iid(), ancestors, { raw => SceneBoundingBox.fromAbiTake(raw) }, { raw => SceneBoundingBox.viewOf(raw) })
     }
 
@@ -2199,8 +2211,8 @@ public class SceneBoundingBox <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2213,8 +2225,8 @@ public class SceneBoundingBox <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2249,7 +2261,7 @@ public class SceneBoundingBox <: InterfaceWrapperBase & ComInterface & windows_i
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -2299,7 +2311,7 @@ public class SceneComponent <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneComponent> {
-        let ancestors = [ISceneComponent.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneComponent.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneComponent>("SceneComponent", ISceneComponent.iid(), ancestors, { raw => SceneComponent.fromAbiTake(raw) }, { raw => SceneComponent.viewOf(raw) })
     }
 
@@ -2348,8 +2360,8 @@ public class SceneComponent <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2362,8 +2374,8 @@ public class SceneComponent <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2377,7 +2389,7 @@ public class SceneComponent <: InterfaceWrapperBase & ComInterface & windows_int
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -2427,7 +2439,7 @@ public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneComponentCollection> {
-        let ancestors = [windows_collections.IVector<SceneComponent>.iid(), windows_collections.IIterable<SceneComponent>.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [windows_collections.IVector<SceneComponent>.iid(), windows_collections.IIterable<SceneComponent>.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneComponentCollection>("SceneComponentCollection", windows_collections.IVector<SceneComponent>.iid(), ancestors, { raw => SceneComponentCollection.fromAbiTake(raw) }, { raw => SceneComponentCollection.viewOf(raw) })
     }
 
@@ -2483,8 +2495,8 @@ public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2497,8 +2509,8 @@ public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2568,7 +2580,7 @@ public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & w
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -2618,7 +2630,7 @@ public class SceneMaterial <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMaterial> {
-        let ancestors = [ISceneMaterial.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMaterial.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMaterial>("SceneMaterial", ISceneMaterial.iid(), ancestors, { raw => SceneMaterial.fromAbiTake(raw) }, { raw => SceneMaterial.viewOf(raw) })
     }
 
@@ -2667,8 +2679,8 @@ public class SceneMaterial <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2681,8 +2693,8 @@ public class SceneMaterial <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2692,7 +2704,7 @@ public class SceneMaterial <: InterfaceWrapperBase & ComInterface & windows_inte
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -2742,7 +2754,7 @@ public class SceneMaterialInput <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMaterialInput> {
-        let ancestors = [ISceneMaterialInput.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMaterialInput.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMaterialInput>("SceneMaterialInput", ISceneMaterialInput.iid(), ancestors, { raw => SceneMaterialInput.fromAbiTake(raw) }, { raw => SceneMaterialInput.viewOf(raw) })
     }
 
@@ -2791,8 +2803,8 @@ public class SceneMaterialInput <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2805,8 +2817,8 @@ public class SceneMaterialInput <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2816,7 +2828,7 @@ public class SceneMaterialInput <: InterfaceWrapperBase & ComInterface & windows
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -2866,7 +2878,7 @@ public class SceneMeshMaterialAttributeMap <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMeshMaterialAttributeMap> {
-        let ancestors = [ISceneMeshMaterialAttributeMap.iid(), windows_collections.IMap<windows_core.HString, SceneAttributeSemantic>.iid(), windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SceneAttributeSemantic>>.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMeshMaterialAttributeMap.iid(), windows_collections.IMap<windows_core.HString, SceneAttributeSemantic>.iid(), windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SceneAttributeSemantic>>.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMeshMaterialAttributeMap>("SceneMeshMaterialAttributeMap", ISceneMeshMaterialAttributeMap.iid(), ancestors, { raw => SceneMeshMaterialAttributeMap.fromAbiTake(raw) }, { raw => SceneMeshMaterialAttributeMap.viewOf(raw) })
     }
 
@@ -2929,8 +2941,8 @@ public class SceneMeshMaterialAttributeMap <: InterfaceWrapperBase & ComInterfac
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2943,8 +2955,8 @@ public class SceneMeshMaterialAttributeMap <: InterfaceWrapperBase & ComInterfac
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2994,7 +3006,7 @@ public class SceneMeshMaterialAttributeMap <: InterfaceWrapperBase & ComInterfac
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -3044,7 +3056,7 @@ public class SceneRendererComponent <: InterfaceWrapperBase & ComInterface & win
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneRendererComponent> {
-        let ancestors = [ISceneRendererComponent.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneRendererComponent.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneRendererComponent>("SceneRendererComponent", ISceneRendererComponent.iid(), ancestors, { raw => SceneRendererComponent.fromAbiTake(raw) }, { raw => SceneRendererComponent.viewOf(raw) })
     }
 
@@ -3093,8 +3105,8 @@ public class SceneRendererComponent <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3114,8 +3126,8 @@ public class SceneRendererComponent <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3125,7 +3137,7 @@ public class SceneRendererComponent <: InterfaceWrapperBase & ComInterface & win
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -3687,7 +3699,7 @@ public class ScenePbrMaterial <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     public static func descriptor(): InterfaceDescriptor<ScenePbrMaterial> {
-        let ancestors = [IScenePbrMaterial.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IScenePbrMaterial.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<ScenePbrMaterial>("ScenePbrMaterial", IScenePbrMaterial.iid(), ancestors, { raw => ScenePbrMaterial.fromAbiTake(raw) }, { raw => ScenePbrMaterial.viewOf(raw) })
     }
 
@@ -3736,8 +3748,8 @@ public class ScenePbrMaterial <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3757,8 +3769,8 @@ public class ScenePbrMaterial <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3842,7 +3854,7 @@ public class ScenePbrMaterial <: InterfaceWrapperBase & ComInterface & windows_i
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -4029,7 +4041,7 @@ public class ISceneMeshRendererComponentStatics <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneMeshRendererComponentStatics", ISceneMeshRendererComponentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMeshRendererComponentStaticsVtbl", "ISceneMeshRendererComponentStatics", "ISceneMeshRendererComponentStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMeshRendererComponent>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneMeshRendererComponentStatics", ISceneMeshRendererComponentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMeshRendererComponentStaticsVtbl", "ISceneMeshRendererComponentStatics", "ISceneMeshRendererComponentStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMeshRendererComponent>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneMeshRendererComponentStatics.runtimeType())
         return schema
     }
@@ -4059,7 +4071,7 @@ public class ISceneMeshRendererComponentStatics <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneMeshRendererComponent {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneMeshRendererComponent {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4118,7 +4130,7 @@ public class ISceneMeshStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneMeshStatics", ISceneMeshStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMeshStaticsVtbl", "ISceneMeshStatics", "ISceneMeshStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMesh>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneMeshStatics", ISceneMeshStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMeshStaticsVtbl", "ISceneMeshStatics", "ISceneMeshStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMesh>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneMeshStatics.runtimeType())
         return schema
     }
@@ -4148,7 +4160,7 @@ public class ISceneMeshStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneMesh {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneMesh {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4207,7 +4219,7 @@ public class ISceneMetallicRoughnessMaterialStatics <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneMetallicRoughnessMaterialStatics", ISceneMetallicRoughnessMaterialStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMetallicRoughnessMaterialStaticsVtbl", "ISceneMetallicRoughnessMaterialStatics", "ISceneMetallicRoughnessMaterialStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMetallicRoughnessMaterial>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneMetallicRoughnessMaterialStatics", ISceneMetallicRoughnessMaterialStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneMetallicRoughnessMaterialStaticsVtbl", "ISceneMetallicRoughnessMaterialStatics", "ISceneMetallicRoughnessMaterialStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneMetallicRoughnessMaterial>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneMetallicRoughnessMaterialStatics.runtimeType())
         return schema
     }
@@ -4237,7 +4249,7 @@ public class ISceneMetallicRoughnessMaterialStatics <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneMetallicRoughnessMaterial {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneMetallicRoughnessMaterial {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4425,7 +4437,7 @@ public class ISceneNodeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneNodeStatics", ISceneNodeStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneNodeStaticsVtbl", "ISceneNodeStatics", "ISceneNodeStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneNodeStatics", ISceneNodeStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneNodeStaticsVtbl", "ISceneNodeStatics", "ISceneNodeStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneNodeStatics.runtimeType())
         return schema
     }
@@ -4455,7 +4467,7 @@ public class ISceneNodeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneNode {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4514,7 +4526,7 @@ public class ISceneSurfaceMaterialInputStatics <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneSurfaceMaterialInputStatics", ISceneSurfaceMaterialInputStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneSurfaceMaterialInputStaticsVtbl", "ISceneSurfaceMaterialInputStatics", "ISceneSurfaceMaterialInputStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneSurfaceMaterialInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneSurfaceMaterialInputStatics", ISceneSurfaceMaterialInputStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneSurfaceMaterialInputStaticsVtbl", "ISceneSurfaceMaterialInputStatics", "ISceneSurfaceMaterialInputStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneSurfaceMaterialInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneSurfaceMaterialInputStatics.runtimeType())
         return schema
     }
@@ -4544,7 +4556,7 @@ public class ISceneSurfaceMaterialInputStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneSurfaceMaterialInput {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneSurfaceMaterialInput {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4695,7 +4707,7 @@ public class ISceneVisualStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISceneVisualStatics", ISceneVisualStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneVisualStaticsVtbl", "ISceneVisualStatics", "ISceneVisualStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneVisual>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISceneVisualStatics", ISceneVisualStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISceneVisualStaticsVtbl", "ISceneVisualStatics", "ISceneVisualStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SceneVisual>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISceneVisualStatics.runtimeType())
         return schema
     }
@@ -4725,7 +4737,7 @@ public class ISceneVisualStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): SceneVisual {
+    public unsafe func Create(compositor: impl_p1.Compositor): SceneVisual {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4764,7 +4776,7 @@ public class SceneMesh <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMesh> {
-        let ancestors = [ISceneMesh.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMesh.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMesh>("SceneMesh", ISceneMesh.iid(), ancestors, { raw => SceneMesh.fromAbiTake(raw) }, { raw => SceneMesh.viewOf(raw) })
     }
 
@@ -4813,8 +4825,8 @@ public class SceneMesh <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4827,8 +4839,8 @@ public class SceneMesh <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4857,12 +4869,12 @@ public class SceneMesh <: InterfaceWrapperBase & ComInterface & windows_interfac
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneMesh {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneMesh {
         var result__: Option<SceneMesh> = Option<SceneMesh>.None
         try (factory__ = windows_core.factory<SceneMesh, ISceneMeshStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -4919,7 +4931,7 @@ public class SceneMeshRendererComponent <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMeshRendererComponent> {
-        let ancestors = [ISceneMeshRendererComponent.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMeshRendererComponent.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMeshRendererComponent>("SceneMeshRendererComponent", ISceneMeshRendererComponent.iid(), ancestors, { raw => SceneMeshRendererComponent.fromAbiTake(raw) }, { raw => SceneMeshRendererComponent.viewOf(raw) })
     }
 
@@ -4968,8 +4980,8 @@ public class SceneMeshRendererComponent <: InterfaceWrapperBase & ComInterface &
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4996,8 +5008,8 @@ public class SceneMeshRendererComponent <: InterfaceWrapperBase & ComInterface &
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5027,12 +5039,12 @@ public class SceneMeshRendererComponent <: InterfaceWrapperBase & ComInterface &
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneMeshRendererComponent {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneMeshRendererComponent {
         var result__: Option<SceneMeshRendererComponent> = Option<SceneMeshRendererComponent>.None
         try (factory__ = windows_core.factory<SceneMeshRendererComponent, ISceneMeshRendererComponentStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -5089,7 +5101,7 @@ public class SceneMetallicRoughnessMaterial <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneMetallicRoughnessMaterial> {
-        let ancestors = [ISceneMetallicRoughnessMaterial.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneMetallicRoughnessMaterial.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneMetallicRoughnessMaterial>("SceneMetallicRoughnessMaterial", ISceneMetallicRoughnessMaterial.iid(), ancestors, { raw => SceneMetallicRoughnessMaterial.fromAbiTake(raw) }, { raw => SceneMetallicRoughnessMaterial.viewOf(raw) })
     }
 
@@ -5138,8 +5150,8 @@ public class SceneMetallicRoughnessMaterial <: InterfaceWrapperBase & ComInterfa
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5166,8 +5178,8 @@ public class SceneMetallicRoughnessMaterial <: InterfaceWrapperBase & ComInterfa
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5219,12 +5231,12 @@ public class SceneMetallicRoughnessMaterial <: InterfaceWrapperBase & ComInterfa
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneMetallicRoughnessMaterial {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneMetallicRoughnessMaterial {
         var result__: Option<SceneMetallicRoughnessMaterial> = Option<SceneMetallicRoughnessMaterial>.None
         try (factory__ = windows_core.factory<SceneMetallicRoughnessMaterial, ISceneMetallicRoughnessMaterialStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -5281,7 +5293,7 @@ public class SceneNode <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneNode> {
-        let ancestors = [ISceneNode.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneNode.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneNode>("SceneNode", ISceneNode.iid(), ancestors, { raw => SceneNode.fromAbiTake(raw) }, { raw => SceneNode.viewOf(raw) })
     }
 
@@ -5330,8 +5342,8 @@ public class SceneNode <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5344,8 +5356,8 @@ public class SceneNode <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5377,12 +5389,12 @@ public class SceneNode <: InterfaceWrapperBase & ComInterface & windows_interfac
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneNode {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneNode {
         var result__: Option<SceneNode> = Option<SceneNode>.None
         try (factory__ = windows_core.factory<SceneNode, ISceneNodeStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -5439,7 +5451,7 @@ public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneNodeCollection> {
-        let ancestors = [windows_collections.IVector<SceneNode>.iid(), windows_collections.IIterable<SceneNode>.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [windows_collections.IVector<SceneNode>.iid(), windows_collections.IIterable<SceneNode>.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneNodeCollection>("SceneNodeCollection", windows_collections.IVector<SceneNode>.iid(), ancestors, { raw => SceneNodeCollection.fromAbiTake(raw) }, { raw => SceneNodeCollection.viewOf(raw) })
     }
 
@@ -5495,8 +5507,8 @@ public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5509,8 +5521,8 @@ public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5580,7 +5592,7 @@ public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & window
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -5630,7 +5642,7 @@ public class SceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneSurfaceMaterialInput> {
-        let ancestors = [ISceneSurfaceMaterialInput.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneSurfaceMaterialInput.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneSurfaceMaterialInput>("SceneSurfaceMaterialInput", ISceneSurfaceMaterialInput.iid(), ancestors, { raw => SceneSurfaceMaterialInput.fromAbiTake(raw) }, { raw => SceneSurfaceMaterialInput.viewOf(raw) })
     }
 
@@ -5679,8 +5691,8 @@ public class SceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5700,30 +5712,30 @@ public class SceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func BitmapInterpolationMode(): _impl_l0.CompositionBitmapInterpolationMode {
+    public unsafe func BitmapInterpolationMode(): impl_p0.CompositionBitmapInterpolationMode {
         return defaultInterface().BitmapInterpolationMode()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetBitmapInterpolationMode(value: _impl_l0.CompositionBitmapInterpolationMode): Unit {
+    public unsafe func SetBitmapInterpolationMode(value: impl_p0.CompositionBitmapInterpolationMode): Unit {
         defaultInterface().SetBitmapInterpolationMode(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Surface(): _impl_l0.ICompositionSurface {
+    public unsafe func Surface(): impl_p0.ICompositionSurface {
         return defaultInterface().Surface()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetSurface(value: _impl_l0.ICompositionSurface): Unit {
+    public unsafe func SetSurface(value: impl_p0.ICompositionSurface): Unit {
         defaultInterface().SetSurface(value)
     }
 
@@ -5747,12 +5759,12 @@ public class SceneSurfaceMaterialInput <: InterfaceWrapperBase & ComInterface & 
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneSurfaceMaterialInput {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneSurfaceMaterialInput {
         var result__: Option<SceneSurfaceMaterialInput> = Option<SceneSurfaceMaterialInput>.None
         try (factory__ = windows_core.factory<SceneSurfaceMaterialInput, ISceneSurfaceMaterialInputStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -5809,7 +5821,7 @@ public class SceneVisual <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func descriptor(): InterfaceDescriptor<SceneVisual> {
-        let ancestors = [ISceneVisual.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISceneVisual.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SceneVisual>("SceneVisual", ISceneVisual.iid(), ancestors, { raw => SceneVisual.fromAbiTake(raw) }, { raw => SceneVisual.viewOf(raw) })
     }
 
@@ -5858,29 +5870,29 @@ public class SceneVisual <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asContainerVisual(): _impl_l1.ContainerVisual {
-        match (unsafe { query(_impl_l1.ContainerVisual.descriptor()) }) {
+    public func asContainerVisual(): impl_p1.ContainerVisual {
+        match (unsafe { query(impl_p1.ContainerVisual.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asVisual(): _impl_l1.Visual {
-        match (unsafe { query(_impl_l1.Visual.descriptor()) }) {
+    public func asVisual(): impl_p1.Visual {
+        match (unsafe { query(impl_p1.Visual.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5898,12 +5910,12 @@ public class SceneVisual <: InterfaceWrapperBase & ComInterface & windows_interf
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): SceneVisual {
+    public static unsafe func Create(compositor: impl_p1.Compositor): SceneVisual {
         var result__: Option<SceneVisual> = Option<SceneVisual>.None
         try (factory__ = windows_core.factory<SceneVisual, ISceneVisualStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))

@@ -4,15 +4,24 @@
 package windows.Win32.Devices.PortableDevices
 
 import std.collection.*
+@When[Windows_Win32_Devices_PortableDevices == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_PortableDevices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_PortableDevices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_PortableDevices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_PortableDevices == "on" && Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
+@When[Windows_Win32_Devices_PortableDevices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_PortableDevices == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_PortableDevices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Devices_PortableDevices == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Devices_PortableDevices == "on" && DMPROCESSXMLFILTERED == "on" && Windows_Win32_Devices_PortableDevices_DMProcessConfigXMLFiltered == "on"]
@@ -1323,7 +1332,7 @@ public class IPortableDeviceConnector <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_PortableDevices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPortableDeviceDataStreamVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     public var GetObjectID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Cancel: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -1362,7 +1371,7 @@ public class IPortableDeviceDataStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPortableDeviceDataStream> {
-        return InterfaceDescriptor<IPortableDeviceDataStream>("IPortableDeviceDataStream", IPortableDeviceDataStream.iid(), Win32__impl_l1.IStream.iid(), takeIPortableDeviceDataStreamFromAbi, viewIPortableDeviceDataStream)
+        return InterfaceDescriptor<IPortableDeviceDataStream>("IPortableDeviceDataStream", IPortableDeviceDataStream.iid(), Win32_impl_p2.IStream.iid(), takeIPortableDeviceDataStreamFromAbi, viewIPortableDeviceDataStream)
     }
 
     public unsafe func vtbl(): IPortableDeviceDataStreamVtbl {
@@ -1625,9 +1634,9 @@ public struct IPortableDevicePropVariantCollectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var GetType: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ChangeType: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1682,14 +1691,14 @@ public class IPortableDevicePropVariantCollection <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetAt(dwIndex: UInt32, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetAt(dwIndex: UInt32, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAt(__liveRaw, dwIndex, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Add(pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Add(pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, pValue)
@@ -1840,7 +1849,7 @@ public class IPortableDeviceServiceOpenCallback <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Devices_PortableDevices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPortableDeviceWebControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var GetDeviceFromId: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -1881,7 +1890,7 @@ public class IPortableDeviceWebControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPortableDeviceWebControl> {
-        return InterfaceDescriptor<IPortableDeviceWebControl>("IPortableDeviceWebControl", IPortableDeviceWebControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIPortableDeviceWebControlFromAbi, viewIPortableDeviceWebControl)
+        return InterfaceDescriptor<IPortableDeviceWebControl>("IPortableDeviceWebControl", IPortableDeviceWebControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIPortableDeviceWebControlFromAbi, viewIPortableDeviceWebControl)
     }
 
     public unsafe func vtbl(): IPortableDeviceWebControlVtbl {
@@ -5899,11 +5908,11 @@ public struct IPortableDeviceValuesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetStringValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var GetStringValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var SetUnsignedIntegerValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -5994,21 +6003,21 @@ public class IPortableDeviceValues <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetAt(index: UInt32, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetAt(index: UInt32, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAt(__liveRaw, index, pKey, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, key, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, key, pValue)

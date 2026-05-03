@@ -4,13 +4,21 @@
 package windows.Win32.System.EventLog
 
 import std.collection.*
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_System_EventLog == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_EventLog == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_EventLog == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 

@@ -4,17 +4,28 @@
 package windows.Win32.Media.Audio.Apo
 
 import std.collection.*
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_Audio_Apo == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Audio_Apo == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_Audio_Apo == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_Audio_Apo == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_Audio_Apo == "on"]
@@ -59,10 +70,10 @@ extend APOInitBaseStruct <: windows_core.CopyType & windows_core.RuntimeType & w
 @When[Windows_Win32_Media_Audio_Apo == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on")]
 public struct APOInitSystemEffects {
     public var APOInit: APOInitBaseStruct = APOInitBaseStruct()
-    public var pAPOEndpointProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
-    public var pAPOSystemEffectsProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var pAPOEndpointProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
+    public var pAPOSystemEffectsProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public var pReserved: CPointer<Unit> = CPointer<Unit>()
-    public var pDeviceCollection: Win32_Media__impl_l0.IMMDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection(CPointer<Unit>())
+    public var pDeviceCollection: Win32_Media_impl_p0.IMMDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection(CPointer<Unit>())
     public init() {}
 }
 
@@ -94,10 +105,10 @@ extend APOInitSystemEffects <: windows_core.CopyType & windows_core.RuntimeType 
     public static func assumeInitRef(abi: APOInitSystemEffectsAbi): APOInitSystemEffects {
         var value = APOInitSystemEffects()
         value.APOInit = APOInitBaseStruct.assumeInitRef(abi.APOInit)
-        value.pAPOEndpointProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
-        value.pAPOSystemEffectsProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pAPOSystemEffectsProperties)
+        value.pAPOEndpointProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
+        value.pAPOSystemEffectsProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pAPOSystemEffectsProperties)
         value.pReserved = abi.pReserved
-        value.pDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
+        value.pDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
         return value
     }
     public static func fromAbi(abi: APOInitSystemEffectsAbi): Result<APOInitSystemEffects> { Result<APOInitSystemEffects>.Ok(APOInitSystemEffects.assumeInitRef(abi)) }
@@ -110,10 +121,10 @@ extend APOInitSystemEffects <: windows_core.CopyType & windows_core.RuntimeType 
 @When[Windows_Win32_Media_Audio_Apo == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on")]
 public struct APOInitSystemEffects2 {
     public var APOInit: APOInitBaseStruct = APOInitBaseStruct()
-    public var pAPOEndpointProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
-    public var pAPOSystemEffectsProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var pAPOEndpointProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
+    public var pAPOSystemEffectsProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public var pReserved: CPointer<Unit> = CPointer<Unit>()
-    public var pDeviceCollection: Win32_Media__impl_l0.IMMDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection(CPointer<Unit>())
+    public var pDeviceCollection: Win32_Media_impl_p0.IMMDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection(CPointer<Unit>())
     public var nSoftwareIoDeviceInCollection: UInt32 = 0u32
     public var nSoftwareIoConnectorIndex: UInt32 = 0u32
     public var AudioProcessingMode: GuidValue = GuidValue()
@@ -157,10 +168,10 @@ extend APOInitSystemEffects2 <: windows_core.CopyType & windows_core.RuntimeType
     public static func assumeInitRef(abi: APOInitSystemEffects2Abi): APOInitSystemEffects2 {
         var value = APOInitSystemEffects2()
         value.APOInit = APOInitBaseStruct.assumeInitRef(abi.APOInit)
-        value.pAPOEndpointProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
-        value.pAPOSystemEffectsProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pAPOSystemEffectsProperties)
+        value.pAPOEndpointProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
+        value.pAPOSystemEffectsProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pAPOSystemEffectsProperties)
         value.pReserved = abi.pReserved
-        value.pDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
+        value.pDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
         value.nSoftwareIoDeviceInCollection = abi.nSoftwareIoDeviceInCollection
         value.nSoftwareIoConnectorIndex = abi.nSoftwareIoConnectorIndex
         value.AudioProcessingMode = GuidValue(abi.AudioProcessingMode)
@@ -177,9 +188,9 @@ extend APOInitSystemEffects2 <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_Media_Audio_Apo == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on")]
 public struct APOInitSystemEffects3 {
     public var APOInit: APOInitBaseStruct = APOInitBaseStruct()
-    public var pAPOEndpointProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
-    public var pServiceProvider: Win32__impl_l1.IServiceProvider = Win32__impl_l1.IServiceProvider(CPointer<Unit>())
-    public var pDeviceCollection: Win32_Media__impl_l0.IMMDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection(CPointer<Unit>())
+    public var pAPOEndpointProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
+    public var pServiceProvider: Win32_impl_p2.IServiceProvider = Win32_impl_p2.IServiceProvider(CPointer<Unit>())
+    public var pDeviceCollection: Win32_Media_impl_p0.IMMDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection(CPointer<Unit>())
     public var nSoftwareIoDeviceInCollection: UInt32 = 0u32
     public var nSoftwareIoConnectorIndex: UInt32 = 0u32
     public var AudioProcessingMode: GuidValue = GuidValue()
@@ -221,9 +232,9 @@ extend APOInitSystemEffects3 <: windows_core.CopyType & windows_core.RuntimeType
     public static func assumeInitRef(abi: APOInitSystemEffects3Abi): APOInitSystemEffects3 {
         var value = APOInitSystemEffects3()
         value.APOInit = APOInitBaseStruct.assumeInitRef(abi.APOInit)
-        value.pAPOEndpointProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
-        value.pServiceProvider = Win32__impl_l1.IServiceProvider.fromAbiTake(abi.pServiceProvider)
-        value.pDeviceCollection = Win32_Media__impl_l0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
+        value.pAPOEndpointProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pAPOEndpointProperties)
+        value.pServiceProvider = Win32_impl_p2.IServiceProvider.fromAbiTake(abi.pServiceProvider)
+        value.pDeviceCollection = Win32_Media_impl_p0.IMMDeviceCollection.fromAbiTake(abi.pDeviceCollection)
         value.nSoftwareIoDeviceInCollection = abi.nSoftwareIoDeviceInCollection
         value.nSoftwareIoConnectorIndex = abi.nSoftwareIoConnectorIndex
         value.AudioProcessingMode = GuidValue(abi.AudioProcessingMode)
@@ -797,7 +808,7 @@ extend APO_REG_PROPERTIES <: windows_core.CopyType & windows_core.RuntimeType & 
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
-    public var device: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var device: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public init() {}
 }
 
@@ -820,7 +831,7 @@ extend AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR <: windows_cor
     }
     public static func assumeInitRef(abi: AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTORAbi): AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
         var value = AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR()
-        value.device = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.device)
+        value.device = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.device)
         return value
     }
     public static func fromAbi(abi: AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTORAbi): Result<AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR> { Result<AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR>.Ok(AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR.assumeInitRef(abi)) }
@@ -832,8 +843,8 @@ extend AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR <: windows_cor
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on")]
 public struct AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION {
-    public var endpoint: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
-    public var propertyStore: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var endpoint: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
+    public var propertyStore: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public var propertyKey: Win32_Foundation.PROPERTYKEY = Win32_Foundation.PROPERTYKEY()
     public init() {}
 }
@@ -861,8 +872,8 @@ extend AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION <: windows_core.CopyType & wi
     }
     public static func assumeInitRef(abi: AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATIONAbi): AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION {
         var value = AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION()
-        value.endpoint = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.endpoint)
-        value.propertyStore = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.propertyStore)
+        value.endpoint = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.endpoint)
+        value.propertyStore = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.propertyStore)
         value.propertyKey = windows_core.fromTypedAbi(abi.propertyKey, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>()).unwrap()
         return value
     }
@@ -875,7 +886,7 @@ extend AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION <: windows_core.CopyType & wi
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR {
-    public var device: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var device: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public init() {}
 }
 
@@ -898,7 +909,7 @@ extend AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR <: windows_core.CopyTyp
     }
     public static func assumeInitRef(abi: AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTORAbi): AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR {
         var value = AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR()
-        value.device = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.device)
+        value.device = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.device)
         return value
     }
     public static func fromAbi(abi: AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTORAbi): Result<AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR> { Result<AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR>.Ok(AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR.assumeInitRef(abi)) }
@@ -910,8 +921,8 @@ extend AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR <: windows_core.CopyTyp
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION {
-    public var endpoint: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
-    public var volume: CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
+    public var endpoint: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
+    public var volume: CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
     public init() {}
 }
 
@@ -919,7 +930,7 @@ public struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION {
 @C
 public struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATIONAbi {
     public var endpoint: CPointer<Unit> = CPointer<Unit>()
-    public var volume: CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
+    public var volume: CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
     public init() {}
 }
 
@@ -936,7 +947,7 @@ extend AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION <: windows_core.CopyType & wind
     }
     public static func assumeInitRef(abi: AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATIONAbi): AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION {
         var value = AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION()
-        value.endpoint = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.endpoint)
+        value.endpoint = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.endpoint)
         value.volume = abi.volume
         return value
     }
@@ -949,7 +960,7 @@ extend AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION <: windows_core.CopyType & wind
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
 public struct AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION {
-    public var propertyStore: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var propertyStore: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public var propertyKey: Win32_Foundation.PROPERTYKEY = Win32_Foundation.PROPERTYKEY()
     public init() {}
 }
@@ -975,7 +986,7 @@ extend AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION <: windows_core.CopyType & wi
     }
     public static func assumeInitRef(abi: AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATIONAbi): AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION {
         var value = AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION()
-        value.propertyStore = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.propertyStore)
+        value.propertyStore = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.propertyStore)
         value.propertyKey = windows_core.fromTypedAbi(abi.propertyKey, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>()).unwrap()
         return value
     }
@@ -1042,7 +1053,7 @@ extend AUDIO_FLOW_TYPE <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR {
-    public var device: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var device: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public init() {}
 }
 
@@ -1065,7 +1076,7 @@ extend AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR <: windows_core.CopyTy
     }
     public static func assumeInitRef(abi: AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTORAbi): AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR {
         var value = AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR()
-        value.device = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.device)
+        value.device = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.device)
         return value
     }
     public static func fromAbi(abi: AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTORAbi): Result<AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR> { Result<AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR>.Ok(AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR.assumeInitRef(abi)) }
@@ -1077,7 +1088,7 @@ extend AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR <: windows_core.CopyTy
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_MICROPHONE_BOOST_NOTIFICATION {
-    public var endpoint: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var endpoint: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public var eventContext: GuidValue = GuidValue()
     public var microphoneBoostEnabled: Int32 = 0i32
     public var levelInDb: Float32 = 0.0f32
@@ -1124,7 +1135,7 @@ extend AUDIO_MICROPHONE_BOOST_NOTIFICATION <: windows_core.CopyType & windows_co
     }
     public static func assumeInitRef(abi: AUDIO_MICROPHONE_BOOST_NOTIFICATIONAbi): AUDIO_MICROPHONE_BOOST_NOTIFICATION {
         var value = AUDIO_MICROPHONE_BOOST_NOTIFICATION()
-        value.endpoint = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.endpoint)
+        value.endpoint = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.endpoint)
         value.eventContext = GuidValue(abi.eventContext)
         value.microphoneBoostEnabled = abi.microphoneBoostEnabled
         value.levelInDb = abi.levelInDb
@@ -1144,7 +1155,7 @@ extend AUDIO_MICROPHONE_BOOST_NOTIFICATION <: windows_core.CopyType & windows_co
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
-    public var device: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var device: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public var propertyStoreContext: GuidValue = GuidValue()
     public init() {}
 }
@@ -1170,7 +1181,7 @@ extend AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR <: window
     }
     public static func assumeInitRef(abi: AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTORAbi): AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
         var value = AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR()
-        value.device = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.device)
+        value.device = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.device)
         value.propertyStoreContext = GuidValue(abi.propertyStoreContext)
         return value
     }
@@ -1183,10 +1194,10 @@ extend AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR <: window
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on")]
 public struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION {
-    public var endpoint: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var endpoint: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public var propertyStoreContext: GuidValue = GuidValue()
-    public var propertyStoreType: Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE = Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE()
-    public var propertyStore: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var propertyStoreType: Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE = Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE()
+    public var propertyStore: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public var propertyKey: Win32_Foundation.PROPERTYKEY = Win32_Foundation.PROPERTYKEY()
     public init() {}
 }
@@ -1196,7 +1207,7 @@ public struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION {
 public struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATIONAbi {
     public var endpoint: CPointer<Unit> = CPointer<Unit>()
     public var propertyStoreContext: GUID = GUID()
-    public var propertyStoreType: Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPEAbi = Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPEAbi()
+    public var propertyStoreType: Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPEAbi = Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPEAbi()
     public var propertyStore: CPointer<Unit> = CPointer<Unit>()
     public var propertyKey: Win32_Foundation.PROPERTYKEYAbi = Win32_Foundation.PROPERTYKEYAbi()
     public init() {}
@@ -1211,17 +1222,17 @@ extend AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION <: windows_core.CopyType
         var abi = AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATIONAbi()
         abi.endpoint = value.endpoint.asRaw()
         abi.propertyStoreContext = value.propertyStoreContext.toRaw()
-        abi.propertyStoreType = windows_core.projectTypedAbi(value.propertyStoreType, windows_core.typeMarker<Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE>())
+        abi.propertyStoreType = windows_core.projectTypedAbi(value.propertyStoreType, windows_core.typeMarker<Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE>())
         abi.propertyStore = value.propertyStore.asRaw()
         abi.propertyKey = windows_core.projectTypedAbi(value.propertyKey, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>())
         return abi
     }
     public static func assumeInitRef(abi: AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATIONAbi): AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION {
         var value = AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION()
-        value.endpoint = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.endpoint)
+        value.endpoint = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.endpoint)
         value.propertyStoreContext = GuidValue(abi.propertyStoreContext)
-        value.propertyStoreType = windows_core.fromTypedAbi(abi.propertyStoreType, windows_core.typeMarker<Win32_Media__impl_l0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE>()).unwrap()
-        value.propertyStore = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.propertyStore)
+        value.propertyStoreType = windows_core.fromTypedAbi(abi.propertyStoreType, windows_core.typeMarker<Win32_Media_impl_p0.AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE>()).unwrap()
+        value.propertyStore = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.propertyStore)
         value.propertyKey = windows_core.fromTypedAbi(abi.propertyKey, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>()).unwrap()
         return value
     }
@@ -1288,7 +1299,7 @@ extend AUDIO_SYSTEMEFFECT_STATE <: windows_core.CopyType & windows_core.RuntimeT
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_VOLUME_NOTIFICATION_DATA2 {
-    public var notificationData: CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
+    public var notificationData: CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
     public var masterVolumeInDb: Float32 = 0.0f32
     public var volumeMinInDb: Float32 = 0.0f32
     public var volumeMaxInDb: Float32 = 0.0f32
@@ -1302,7 +1313,7 @@ public struct AUDIO_VOLUME_NOTIFICATION_DATA2 {
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 @C
 public struct AUDIO_VOLUME_NOTIFICATION_DATA2Abi {
-    public var notificationData: CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
+    public var notificationData: CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi> = CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>()
     public var masterVolumeInDb: Float32 = 0.0f32
     public var volumeMinInDb: Float32 = 0.0f32
     public var volumeMaxInDb: Float32 = 0.0f32
@@ -1435,7 +1446,7 @@ public let AUDIOMEDIATYPE_EQUAL_FORMAT_USER_DATA: UInt32 = 8u32
 public struct AudioFXExtensionParams {
     public var AddPageParam: IntNative = 0
     public var pwstrEndpointID: CPointer<UInt16> = CPointer<UInt16>()
-    public var pFxProperties: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var pFxProperties: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public init() {}
 }
 
@@ -1464,7 +1475,7 @@ extend AudioFXExtensionParams <: windows_core.CopyType & windows_core.RuntimeTyp
         var value = AudioFXExtensionParams()
         value.AddPageParam = abi.AddPageParam
         value.pwstrEndpointID = abi.pwstrEndpointID
-        value.pFxProperties = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pFxProperties)
+        value.pFxProperties = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pFxProperties)
         return value
     }
     public static func fromAbi(abi: AudioFXExtensionParamsAbi): Result<AudioFXExtensionParams> { Result<AudioFXExtensionParams>.Ok(AudioFXExtensionParams.assumeInitRef(abi)) }
@@ -2356,7 +2367,7 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
 
 @When[Windows_Win32_Media_Audio_Apo == "on" && Windows_Win32_Media_Audio == "on"]
 public struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 {
-    public var endpoint: Win32_Media__impl_l0.IMMDevice = Win32_Media__impl_l0.IMMDevice(CPointer<Unit>())
+    public var endpoint: Win32_Media_impl_p0.IMMDevice = Win32_Media_impl_p0.IMMDevice(CPointer<Unit>())
     public var volume: CPointer<AUDIO_VOLUME_NOTIFICATION_DATA2Abi> = CPointer<AUDIO_VOLUME_NOTIFICATION_DATA2Abi>()
     public init() {}
 }
@@ -2382,7 +2393,7 @@ extend AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 <: windows_core.CopyType & win
     }
     public static func assumeInitRef(abi: AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2Abi): AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 {
         var value = AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2()
-        value.endpoint = Win32_Media__impl_l0.IMMDevice.fromAbiTake(abi.endpoint)
+        value.endpoint = Win32_Media_impl_p0.IMMDevice.fromAbiTake(abi.endpoint)
         value.volume = abi.volume
         return value
     }
@@ -2443,7 +2454,7 @@ public struct IAudioMediaTypeVtbl {
     public var IsCompressedFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var IsEqual: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetAudioFormat: CFunc<(CPointer<Unit>) -> CPointer<Win32_Media__impl_l0.WAVEFORMATEX>> = { _ => CPointer<Win32_Media__impl_l0.WAVEFORMATEX>() }
+    public var GetAudioFormat: CFunc<(CPointer<Unit>) -> CPointer<Win32_Media_impl_p0.WAVEFORMATEX>> = { _ => CPointer<Win32_Media_impl_p0.WAVEFORMATEX>() }
     public var GetUncompressedAudioFormat: CFunc<(CPointer<Unit>, CPointer<UNCOMPRESSEDAUDIOFORMATAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2501,7 +2512,7 @@ public class IAudioMediaType <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetAudioFormat(): CPointer<Win32_Media__impl_l0.WAVEFORMATEX> {
+    public unsafe func GetAudioFormat(): CPointer<Win32_Media_impl_p0.WAVEFORMATEX> {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAudioFormat(__liveRaw)

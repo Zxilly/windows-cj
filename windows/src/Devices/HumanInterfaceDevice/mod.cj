@@ -4,15 +4,25 @@
 package windows.Devices.HumanInterfaceDevice
 
 import std.collection.*
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_future as windows_future
 
 
@@ -1643,7 +1653,7 @@ public class IHidFeatureReport <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHidFeatureReport", IHidFeatureReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidFeatureReportVtbl", "IHidFeatureReport", "IHidFeatureReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 9, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 10, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 11, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 12, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHidFeatureReport", IHidFeatureReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidFeatureReportVtbl", "IHidFeatureReport", "IHidFeatureReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 9, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 10, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 11, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 12, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHidFeatureReport.runtimeType())
         return schema
     }
@@ -1681,16 +1691,16 @@ public class IHidFeatureReport <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetData(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetData(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1792,7 +1802,7 @@ public class IHidInputReport <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHidInputReport", IHidInputReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidInputReportVtbl", "IHidInputReport", "IHidInputReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivatedBooleanControls", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HidBooleanControl>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitionedBooleanControls", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HidBooleanControl>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 10, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 11, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 12, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 13, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHidInputReport", IHidInputReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidInputReportVtbl", "IHidInputReport", "IHidInputReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivatedBooleanControls", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HidBooleanControl>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitionedBooleanControls", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HidBooleanControl>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 10, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 11, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 12, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 13, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHidInputReport.runtimeType())
         return schema
     }
@@ -1830,12 +1840,12 @@ public class IHidInputReport <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -1948,7 +1958,7 @@ public class IHidOutputReport <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHidOutputReport", IHidOutputReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidOutputReportVtbl", "IHidOutputReport", "IHidOutputReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 9, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 10, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 11, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 12, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHidOutputReport", IHidOutputReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidOutputReportVtbl", "IHidOutputReport", "IHidOutputReport_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetBooleanControl", 9, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBooleanControlByDescription", 10, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidBooleanControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidBooleanControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControl", 11, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNumericControlByDescription", 12, [InterfaceParameterSchema("controlDescription", "CPointer<Unit>", "InParam<HidNumericControlDescription>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HidNumericControl>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHidOutputReport.runtimeType())
         return schema
     }
@@ -1986,16 +1996,16 @@ public class IHidOutputReport <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetData(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetData(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2111,12 +2121,12 @@ public class HidFeatureReport <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetData(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetData(value: impl_p0.IBuffer): Unit {
         defaultInterface().SetData(value)
     }
 
@@ -2229,7 +2239,7 @@ public class HidInputReport <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
@@ -2352,12 +2362,12 @@ public class HidOutputReport <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetData(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetData(value: impl_p0.IBuffer): Unit {
         defaultInterface().SetData(value)
     }
 
@@ -2754,7 +2764,7 @@ public class HidDevice <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func FromIdAsync(deviceId: windows_core.HString, accessMode: _impl_l0.FileAccessMode): windows_future.IAsyncOperation<HidDevice> {
+    public static unsafe func FromIdAsync(deviceId: windows_core.HString, accessMode: impl_p0.FileAccessMode): windows_future.IAsyncOperation<HidDevice> {
         var result__: Option<windows_future.IAsyncOperation<HidDevice>> = Option<windows_future.IAsyncOperation<HidDevice>>.None
         try (factory__ = windows_core.factory<HidDevice, IHidDeviceStatics>().unwrap()) {
             result__ = Some(factory__.FromIdAsync(deviceId, accessMode))
@@ -3056,7 +3066,7 @@ public struct IHidDeviceStaticsVtbl {
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetDeviceSelectorVidPid: CFunc<(CPointer<Unit>, UInt16, UInt16, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage == "on"]
-    public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.FileAccessModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.FileAccessModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var FromIdAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -3098,7 +3108,7 @@ public class IHidDeviceStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHidDeviceStatics", IHidDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidDeviceStaticsVtbl", "IHidDeviceStatics", "IHidDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelectorVidPid", 7, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("vendorId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("productId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("accessMode", "_impl_l0.FileAccessModeAbi", "_impl_l0.FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<HidDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHidDeviceStatics", IHidDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHidDeviceStaticsVtbl", "IHidDeviceStatics", "IHidDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelectorVidPid", 7, [InterfaceParameterSchema("usagePage", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("usageId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("vendorId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("productId", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("accessMode", "impl_p0.FileAccessModeAbi", "impl_p0.FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<HidDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHidDeviceStatics.runtimeType())
         return schema
     }
@@ -3144,10 +3154,10 @@ public class IHidDeviceStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func FromIdAsync(deviceId: windows_core.HString, accessMode: _impl_l0.FileAccessMode): windows_future.IAsyncOperation<HidDevice> {
+    public unsafe func FromIdAsync(deviceId: windows_core.HString, accessMode: impl_p0.FileAccessMode): windows_future.IAsyncOperation<HidDevice> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.FromIdAsync(asRaw(), deviceId.asRaw(), windows_core.projectTypedAbi(accessMode, windows_core.typeMarker<_impl_l0.FileAccessMode>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.FromIdAsync(asRaw(), deviceId.asRaw(), windows_core.projectTypedAbi(accessMode, windows_core.typeMarker<impl_p0.FileAccessMode>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncOperation<HidDevice>.fromAbiTake(result__)
     }

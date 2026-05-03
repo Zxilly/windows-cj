@@ -4,18 +4,33 @@
 package windows.ApplicationModel.DataTransfer.DragDrop.Core
 
 import std.collection.*
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on" && Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 import windows.ApplicationModel.DataTransfer.DragDrop as ApplicationModel_DataTransfer_DragDrop
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l0 as _impl_l0
-import windows._impl_l2 as _impl_l2
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows_future as windows_future
 
 
@@ -139,7 +154,7 @@ public class ICoreDragInfo <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreDragInfo", ICoreDragInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDragInfoVtbl", "ICoreDragInfo", "ICoreDragInfo_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.DataPackageView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Modifiers", 7, [InterfaceParameterSchema("result", "CPointer<ApplicationModel_DataTransfer_DragDrop.DragDropModifiersAbi>", "OutSlot<ApplicationModel_DataTransfer_DragDrop.DragDropModifiers>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreDragInfo", ICoreDragInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDragInfoVtbl", "ICoreDragInfo", "ICoreDragInfo_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DataPackageView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Modifiers", 7, [InterfaceParameterSchema("result", "CPointer<ApplicationModel_DataTransfer_DragDrop.DragDropModifiersAbi>", "OutSlot<ApplicationModel_DataTransfer_DragDrop.DragDropModifiers>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreDragInfo.runtimeType())
         return schema
     }
@@ -169,12 +184,12 @@ public class ICoreDragInfo <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func Data(): _impl_l2.DataPackageView {
+    public unsafe func Data(): impl_p1.DataPackageView {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.DataPackageView.fromAbiTake(result__)
+        return impl_p1.DataPackageView.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
@@ -203,7 +218,7 @@ extend ICoreDragInfo <: windows_core.Interface<ICoreDragInfo> {}
 public struct ICoreDragInfo2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public var AllowedOperations: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var AllowedOperations: CFunc<(CPointer<Unit>, CPointer<impl_p0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
     public var AllowedOperations: UIntNative = UIntNative(0)
     public init() {}
@@ -250,7 +265,7 @@ public class ICoreDragInfo2 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreDragInfo2", ICoreDragInfo2.iid(), ICoreDragInfo.descriptorSchema(), ["ICoreDragInfo"], [ICoreDragInfo.iid()], "ICoreDragInfo2Vtbl", "ICoreDragInfo2", "ICoreDragInfo2_Impl", [InterfaceMethodSchema("AllowedOperations", 9, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DataPackageOperationAbi>", "OutSlot<_impl_l0.DataPackageOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreDragInfo2", ICoreDragInfo2.iid(), ICoreDragInfo.descriptorSchema(), ["ICoreDragInfo"], [ICoreDragInfo.iid()], "ICoreDragInfo2Vtbl", "ICoreDragInfo2", "ICoreDragInfo2_Impl", [InterfaceMethodSchema("AllowedOperations", 9, [InterfaceParameterSchema("result", "CPointer<impl_p0.DataPackageOperationAbi>", "OutSlot<impl_p0.DataPackageOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreDragInfo2.runtimeType())
         return schema
     }
@@ -287,12 +302,12 @@ public class ICoreDragInfo2 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func AllowedOperations(): _impl_l0.DataPackageOperation {
+    public unsafe func AllowedOperations(): impl_p0.DataPackageOperation {
         let v = vtbl()
-        var result__ = _impl_l0.DataPackageOperationAbi()
-        let hr = v.AllowedOperations(asRaw(), CPointer<_impl_l0.DataPackageOperationAbi>(inout result__))
+        var result__ = impl_p0.DataPackageOperationAbi()
+        let hr = v.AllowedOperations(asRaw(), CPointer<impl_p0.DataPackageOperationAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DataPackageOperation>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DataPackageOperation>()).unwrap()
     }
 }
 
@@ -361,7 +376,7 @@ public class ICoreDragOperation <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreDragOperation", ICoreDragOperation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDragOperationVtbl", "ICoreDragOperation", "ICoreDragOperation_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.DataPackage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPointerId", 7, [InterfaceParameterSchema("pointerId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetDragUIContentFromSoftwareBitmap", 8, [InterfaceParameterSchema("softwareBitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetDragUIContentFromSoftwareBitmapWithAnchorPoint", 9, [InterfaceParameterSchema("softwareBitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("anchorPoint", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DragUIContentMode", 10, [InterfaceParameterSchema("result", "CPointer<CoreDragUIContentModeAbi>", "OutSlot<CoreDragUIContentMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDragUIContentMode", 11, [InterfaceParameterSchema("value", "CoreDragUIContentModeAbi", "CoreDragUIContentMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StartAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreDragOperation", ICoreDragOperation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDragOperationVtbl", "ICoreDragOperation", "ICoreDragOperation_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.DataPackage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPointerId", 7, [InterfaceParameterSchema("pointerId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetDragUIContentFromSoftwareBitmap", 8, [InterfaceParameterSchema("softwareBitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetDragUIContentFromSoftwareBitmapWithAnchorPoint", 9, [InterfaceParameterSchema("softwareBitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("anchorPoint", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DragUIContentMode", 10, [InterfaceParameterSchema("result", "CPointer<CoreDragUIContentModeAbi>", "OutSlot<CoreDragUIContentMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDragUIContentMode", 11, [InterfaceParameterSchema("value", "CoreDragUIContentModeAbi", "CoreDragUIContentMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StartAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreDragOperation.runtimeType())
         return schema
     }
@@ -391,12 +406,12 @@ public class ICoreDragOperation <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func Data(): _impl_l2.DataPackage {
+    public unsafe func Data(): impl_p2.DataPackage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.DataPackage.fromAbiTake(result__)
+        return impl_p2.DataPackage.fromAbiTake(result__)
     }
 
     public unsafe func SetPointerId(pointerId: UInt32): Unit {
@@ -434,12 +449,12 @@ public class ICoreDragOperation <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func StartAsync(): windows_future.IAsyncOperation<_impl_l0.DataPackageOperation> {
+    public unsafe func StartAsync(): windows_future.IAsyncOperation<impl_p0.DataPackageOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StartAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.DataPackageOperation>.fromAbiTake(result__)
     }
 }
 
@@ -451,11 +466,11 @@ extend ICoreDragOperation <: windows_core.Interface<ICoreDragOperation> {}
 public struct ICoreDragOperation2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public var AllowedOperations: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var AllowedOperations: CFunc<(CPointer<Unit>, CPointer<impl_p0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
     public var AllowedOperations: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public var SetAllowedOperations: CFunc<(CPointer<Unit>, _impl_l0.DataPackageOperationAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetAllowedOperations: CFunc<(CPointer<Unit>, impl_p0.DataPackageOperationAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
     public var SetAllowedOperations: UIntNative = UIntNative(0)
     public init() {}
@@ -502,7 +517,7 @@ public class ICoreDragOperation2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreDragOperation2", ICoreDragOperation2.iid(), ICoreDragOperation.descriptorSchema(), ["ICoreDragOperation"], [ICoreDragOperation.iid()], "ICoreDragOperation2Vtbl", "ICoreDragOperation2", "ICoreDragOperation2_Impl", [InterfaceMethodSchema("AllowedOperations", 13, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DataPackageOperationAbi>", "OutSlot<_impl_l0.DataPackageOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowedOperations", 14, [InterfaceParameterSchema("value", "_impl_l0.DataPackageOperationAbi", "_impl_l0.DataPackageOperation", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreDragOperation2", ICoreDragOperation2.iid(), ICoreDragOperation.descriptorSchema(), ["ICoreDragOperation"], [ICoreDragOperation.iid()], "ICoreDragOperation2Vtbl", "ICoreDragOperation2", "ICoreDragOperation2_Impl", [InterfaceMethodSchema("AllowedOperations", 13, [InterfaceParameterSchema("result", "CPointer<impl_p0.DataPackageOperationAbi>", "OutSlot<impl_p0.DataPackageOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowedOperations", 14, [InterfaceParameterSchema("value", "impl_p0.DataPackageOperationAbi", "impl_p0.DataPackageOperation", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreDragOperation2.runtimeType())
         return schema
     }
@@ -539,18 +554,18 @@ public class ICoreDragOperation2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func AllowedOperations(): _impl_l0.DataPackageOperation {
+    public unsafe func AllowedOperations(): impl_p0.DataPackageOperation {
         let v = vtbl()
-        var result__ = _impl_l0.DataPackageOperationAbi()
-        let hr = v.AllowedOperations(asRaw(), CPointer<_impl_l0.DataPackageOperationAbi>(inout result__))
+        var result__ = impl_p0.DataPackageOperationAbi()
+        let hr = v.AllowedOperations(asRaw(), CPointer<impl_p0.DataPackageOperationAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DataPackageOperation>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DataPackageOperation>()).unwrap()
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func SetAllowedOperations(value: _impl_l0.DataPackageOperation): Unit {
+    public unsafe func SetAllowedOperations(value: impl_p0.DataPackageOperation): Unit {
         let v = vtbl()
-        let hr = v.SetAllowedOperations(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.DataPackageOperation>()))
+        let hr = v.SetAllowedOperations(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.DataPackageOperation>()))
         HRESULT(hr).ok()
     }
 }
@@ -797,7 +812,7 @@ public class CoreDragInfo <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func Data(): _impl_l2.DataPackageView {
+    public unsafe func Data(): impl_p1.DataPackageView {
         return defaultInterface().Data()
     }
 
@@ -910,7 +925,7 @@ public class CoreDragOperation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func Data(): _impl_l2.DataPackage {
+    public unsafe func Data(): impl_p2.DataPackage {
         return defaultInterface().Data()
     }
 
@@ -937,7 +952,7 @@ public class CoreDragOperation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func StartAsync(): windows_future.IAsyncOperation<_impl_l0.DataPackageOperation> {
+    public unsafe func StartAsync(): windows_future.IAsyncOperation<impl_p0.DataPackageOperation> {
         return defaultInterface().StartAsync()
     }
 }
@@ -1210,14 +1225,14 @@ public interface ICoreDropOperationTarget_ImplErased {
 
 @When[Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on" && Windows_ApplicationModel_DataTransfer == "on"]
 public interface ICoreDropOperationTarget_Impl <: ICoreDropOperationTarget_ImplErased {
-    public func EnterAsync(dragInfo: InParam<CoreDragInfo>, dragUIOverride: InParam<CoreDragUIOverride>): windows_core.Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>
+    public func EnterAsync(dragInfo: InParam<CoreDragInfo>, dragUIOverride: InParam<CoreDragUIOverride>): windows_core.Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>
 
     public func __winrtThunk_EnterAsync(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.EnterAsync(InParam<CoreDragInfo>(CoreDragInfo.viewOf(arg0)), InParam<CoreDragUIOverride>(CoreDragUIOverride.viewOf(arg1)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -1225,19 +1240,19 @@ public interface ICoreDropOperationTarget_Impl <: ICoreDropOperationTarget_ImplE
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func OverAsync(dragInfo: InParam<CoreDragInfo>, dragUIOverride: InParam<CoreDragUIOverride>): windows_core.Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>
+    public func OverAsync(dragInfo: InParam<CoreDragInfo>, dragUIOverride: InParam<CoreDragUIOverride>): windows_core.Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>
 
     public func __winrtThunk_OverAsync(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.OverAsync(InParam<CoreDragInfo>(CoreDragInfo.viewOf(arg0)), InParam<CoreDragUIOverride>(CoreDragUIOverride.viewOf(arg1)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -1245,7 +1260,7 @@ public interface ICoreDropOperationTarget_Impl <: ICoreDropOperationTarget_ImplE
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Err(error) =>
                 error.code().value
         }
     }
@@ -1270,14 +1285,14 @@ public interface ICoreDropOperationTarget_Impl <: ICoreDropOperationTarget_ImplE
         }
     }
 
-    public func DropAsync(dragInfo: InParam<CoreDragInfo>): windows_core.Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>
+    public func DropAsync(dragInfo: InParam<CoreDragInfo>): windows_core.Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>
 
     public func __winrtThunk_DropAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.DropAsync(InParam<CoreDragInfo>(CoreDragInfo.viewOf(arg0)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -1285,7 +1300,7 @@ public interface ICoreDropOperationTarget_Impl <: ICoreDropOperationTarget_ImplE
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>.Err(error) =>
                 error.code().value
         }
     }
@@ -1327,7 +1342,7 @@ public class ICoreDropOperationTarget <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreDropOperationTarget", ICoreDropOperationTarget.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDropOperationTargetVtbl", "ICoreDropOperationTarget", "ICoreDropOperationTarget_Impl", [InterfaceMethodSchema("EnterAsync", 6, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dragUIOverride", "CPointer<Unit>", "InParam<CoreDragUIOverride>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OverAsync", 7, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dragUIOverride", "CPointer<Unit>", "InParam<CoreDragUIOverride>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LeaveAsync", 8, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DropAsync", 9, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreDropOperationTarget", ICoreDropOperationTarget.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreDropOperationTargetVtbl", "ICoreDropOperationTarget", "ICoreDropOperationTarget_Impl", [InterfaceMethodSchema("EnterAsync", 6, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dragUIOverride", "CPointer<Unit>", "InParam<CoreDragUIOverride>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OverAsync", 7, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dragUIOverride", "CPointer<Unit>", "InParam<CoreDragUIOverride>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LeaveAsync", 8, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DropAsync", 9, [InterfaceParameterSchema("dragInfo", "CPointer<Unit>", "InParam<CoreDragInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.DataPackageOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreDropOperationTarget.runtimeType())
         return schema
     }
@@ -1357,21 +1372,21 @@ public class ICoreDropOperationTarget <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func EnterAsync(dragInfo: CoreDragInfo, dragUIOverride: CoreDragUIOverride): windows_future.IAsyncOperation<_impl_l0.DataPackageOperation> {
+    public unsafe func EnterAsync(dragInfo: CoreDragInfo, dragUIOverride: CoreDragUIOverride): windows_future.IAsyncOperation<impl_p0.DataPackageOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.EnterAsync(asRaw(), dragInfo.asRaw(), dragUIOverride.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.DataPackageOperation>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func OverAsync(dragInfo: CoreDragInfo, dragUIOverride: CoreDragUIOverride): windows_future.IAsyncOperation<_impl_l0.DataPackageOperation> {
+    public unsafe func OverAsync(dragInfo: CoreDragInfo, dragUIOverride: CoreDragUIOverride): windows_future.IAsyncOperation<impl_p0.DataPackageOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OverAsync(asRaw(), dragInfo.asRaw(), dragUIOverride.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.DataPackageOperation>.fromAbiTake(result__)
     }
 
     public unsafe func LeaveAsync(dragInfo: CoreDragInfo): windows_future.IAsyncAction {
@@ -1383,12 +1398,12 @@ public class ICoreDropOperationTarget <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func DropAsync(dragInfo: CoreDragInfo): windows_future.IAsyncOperation<_impl_l0.DataPackageOperation> {
+    public unsafe func DropAsync(dragInfo: CoreDragInfo): windows_future.IAsyncOperation<impl_p0.DataPackageOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DropAsync(asRaw(), dragInfo.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.DataPackageOperation>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.DataPackageOperation>.fromAbiTake(result__)
     }
 }
 

@@ -4,15 +4,26 @@
 package windows.Win32.System.SideShow
 
 import std.collection.*
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteValue}
+@When[Windows_Win32_System_SideShow == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_SideShow == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_SideShow == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_SideShow == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_SideShow == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_SideShow == "on"]
@@ -362,7 +373,7 @@ public struct EVENT_DATA_HEADER {
 public struct ISideShowCapabilitiesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetCapability: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetCapability: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -407,7 +418,7 @@ public class ISideShowCapabilities <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetCapability(in_keyCapability: CPointer<Win32_Foundation.PROPERTYKEYAbi>, inout_pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetCapability(in_keyCapability: CPointer<Win32_Foundation.PROPERTYKEYAbi>, inout_pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCapability(__liveRaw, in_keyCapability, inout_pValue)
@@ -715,9 +726,9 @@ public struct ISideShowNotificationVtbl {
     public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMessage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var Image: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _ => 0 }
+    public var Image: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetImage: CFunc<(CPointer<Unit>, Win32__impl_l0.HICON) -> Int32> = { _, _ => 0 }
+    public var SetImage: CFunc<(CPointer<Unit>, Win32_impl_p1.HICON) -> Int32> = { _, _ => 0 }
     public var ExpirationTime: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.SYSTEMTIMEAbi>) -> Int32> = { _, _ => 0 }
     public var SetExpirationTime: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.SYSTEMTIMEAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -800,14 +811,14 @@ public class ISideShowNotification <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func Image(out_phIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func Image(out_phIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Image(__liveRaw, out_phIcon)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetImage(in_hIcon: Win32__impl_l0.HICON): Int32 {
+    public unsafe func SetImage(in_hIcon: Win32_impl_p1.HICON): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetImage(__liveRaw, in_hIcon)
@@ -900,10 +911,10 @@ public class ISideShowNotificationManager <: InterfaceWrapperBase & ComInterface
 public struct ISideShowPropVariantCollectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var RemoveAt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -950,7 +961,7 @@ public class ISideShowPropVariantCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Add(pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Add(pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, pValue)
@@ -963,7 +974,7 @@ public class ISideShowPropVariantCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetAt(dwIndex: UInt32, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetAt(dwIndex: UInt32, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAt(__liveRaw, dwIndex, pValue)

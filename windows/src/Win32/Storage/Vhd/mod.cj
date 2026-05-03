@@ -4,15 +4,25 @@
 package windows.Win32.Storage.Vhd
 
 import std.collection.*
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Storage_Vhd == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Vhd == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Storage_Vhd == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_core as windows_core
 
 

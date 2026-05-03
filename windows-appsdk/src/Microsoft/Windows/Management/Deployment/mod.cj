@@ -4,16 +4,27 @@
 package windows_appsdk.Microsoft.Windows.Management.Deployment
 
 import std.collection.*
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_core as windows_core
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_Windows_Management_Deployment == "on" && Windows_ApplicationModel == "on"]
 import windows.ApplicationModel as ApplicationModel
+@When[Microsoft_Windows_Management_Deployment == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_Windows_Management_Deployment == "on" && Microsoft_Windows_ApplicationModel_DynamicDependency == "on"]
 import windows_appsdk.Microsoft.Windows.ApplicationModel.DynamicDependency as Microsoft_Windows_ApplicationModel_DynamicDependency
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_Windows_Management_Deployment == "on"]
 import windows_future as windows_future
 
 

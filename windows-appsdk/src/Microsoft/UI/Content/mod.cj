@@ -4,20 +4,35 @@
 package windows_appsdk.Microsoft.UI.Content
 
 import std.collection.*
+@When[Microsoft_UI_Content == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Content == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Content == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Content == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Content == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Content == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Content == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_UI_Content == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
+@When[Microsoft_UI_Content == "on" && Windows_UI_Composition == "on"]
 import windows.UI.Composition as UI_Composition
+@When[Microsoft_UI_Content == "on" && Microsoft_UI == "on"]
 import windows_appsdk.Microsoft.UI as Microsoft_UI
+@When[Microsoft_UI_Content == "on" && Microsoft_UI_Composition == "on"]
 import windows_appsdk.Microsoft.UI.Composition as Microsoft_UI_Composition
+@When[Microsoft_UI_Content == "on" && Microsoft_UI_Dispatching == "on"]
 import windows_appsdk.Microsoft.UI.Dispatching as Microsoft_UI_Dispatching
+@When[Microsoft_UI_Content == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_UI_Content == "on"]
 import windows_future as windows_future
+@When[Microsoft_UI_Content == "on"]
 import windows_numerics as windows_numerics
 
 

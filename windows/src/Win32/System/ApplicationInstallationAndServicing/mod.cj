@@ -4,18 +4,28 @@
 package windows.Win32.System.ApplicationInstallationAndServicing
 
 import std.collection.*
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 import windows.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]
@@ -1259,7 +1269,7 @@ public struct DELTA_HEADER_INFO {
     public var Flags: Int64 = 0i64
     public var TargetSize: UIntNative = 0
     public var TargetFileTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var TargetHashAlgId: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var TargetHashAlgId: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var TargetHash: DELTA_HASH = DELTA_HASH()
     public init() {}
 }
@@ -1272,7 +1282,7 @@ public struct DELTA_HEADER_INFOAbi {
     public var Flags: Int64 = 0i64
     public var TargetSize: UIntNative = 0
     public var TargetFileTime: Win32_Foundation.FILETIMEAbi = Win32_Foundation.FILETIMEAbi()
-    public var TargetHashAlgId: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var TargetHashAlgId: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var TargetHash: DELTA_HASHAbi = DELTA_HASHAbi()
     public init() {}
 }
@@ -1289,7 +1299,7 @@ extend DELTA_HEADER_INFO <: windows_core.CopyType & windows_core.RuntimeType & w
         abi.Flags = value.Flags
         abi.TargetSize = value.TargetSize
         abi.TargetFileTime = windows_core.projectTypedAbi(value.TargetFileTime, windows_core.typeMarker<Win32_Foundation.FILETIME>())
-        abi.TargetHashAlgId = windows_core.projectTypedAbi(value.TargetHashAlgId, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.TargetHashAlgId = windows_core.projectTypedAbi(value.TargetHashAlgId, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.TargetHash = DELTA_HASH.projectAbi(value.TargetHash)
         return abi
     }
@@ -1300,7 +1310,7 @@ extend DELTA_HEADER_INFO <: windows_core.CopyType & windows_core.RuntimeType & w
         value.Flags = abi.Flags
         value.TargetSize = abi.TargetSize
         value.TargetFileTime = windows_core.fromTypedAbi(abi.TargetFileTime, windows_core.typeMarker<Win32_Foundation.FILETIME>()).unwrap()
-        value.TargetHashAlgId = windows_core.fromTypedAbi(abi.TargetHashAlgId, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.TargetHashAlgId = windows_core.fromTypedAbi(abi.TargetHashAlgId, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.TargetHash = DELTA_HASH.assumeInitRef(abi.TargetHash)
         return value
     }
@@ -1820,7 +1830,7 @@ public class IEnumMsmString <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmDependencyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Module: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Language: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1860,7 +1870,7 @@ public class IMsmDependency <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmDependency> {
-        return InterfaceDescriptor<IMsmDependency>("IMsmDependency", IMsmDependency.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmDependencyFromAbi, viewIMsmDependency)
+        return InterfaceDescriptor<IMsmDependency>("IMsmDependency", IMsmDependency.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmDependencyFromAbi, viewIMsmDependency)
     }
 
     public unsafe func vtbl(): IMsmDependencyVtbl {
@@ -1889,7 +1899,7 @@ public class IMsmDependency <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmStringsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -1930,7 +1940,7 @@ public class IMsmStrings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmStrings> {
-        return InterfaceDescriptor<IMsmStrings>("IMsmStrings", IMsmStrings.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmStringsFromAbi, viewIMsmStrings)
+        return InterfaceDescriptor<IMsmStrings>("IMsmStrings", IMsmStrings.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmStringsFromAbi, viewIMsmStrings)
     }
 
     public unsafe func vtbl(): IMsmStringsVtbl {
@@ -9951,7 +9961,7 @@ public class IEnumMsmDependency <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmDependenciesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -9992,7 +10002,7 @@ public class IMsmDependencies <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmDependencies> {
-        return InterfaceDescriptor<IMsmDependencies>("IMsmDependencies", IMsmDependencies.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmDependenciesFromAbi, viewIMsmDependencies)
+        return InterfaceDescriptor<IMsmDependencies>("IMsmDependencies", IMsmDependencies.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmDependenciesFromAbi, viewIMsmDependencies)
     }
 
     public unsafe func vtbl(): IMsmDependenciesVtbl {
@@ -10022,7 +10032,7 @@ public class IMsmDependencies <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmErrorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<msmErrorTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Language: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -10066,7 +10076,7 @@ public class IMsmError <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmError> {
-        return InterfaceDescriptor<IMsmError>("IMsmError", IMsmError.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmErrorFromAbi, viewIMsmError)
+        return InterfaceDescriptor<IMsmError>("IMsmError", IMsmError.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmErrorFromAbi, viewIMsmError)
     }
 
     public unsafe func vtbl(): IMsmErrorVtbl {
@@ -10119,7 +10129,7 @@ public class IMsmError <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmErrorsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -10160,7 +10170,7 @@ public class IMsmErrors <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmErrors> {
-        return InterfaceDescriptor<IMsmErrors>("IMsmErrors", IMsmErrors.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmErrorsFromAbi, viewIMsmErrors)
+        return InterfaceDescriptor<IMsmErrors>("IMsmErrors", IMsmErrors.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmErrorsFromAbi, viewIMsmErrors)
     }
 
     public unsafe func vtbl(): IMsmErrorsVtbl {
@@ -10190,7 +10200,7 @@ public class IMsmErrors <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmGetFilesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ModuleFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -10228,7 +10238,7 @@ public class IMsmGetFiles <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmGetFiles> {
-        return InterfaceDescriptor<IMsmGetFiles>("IMsmGetFiles", IMsmGetFiles.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmGetFilesFromAbi, viewIMsmGetFiles)
+        return InterfaceDescriptor<IMsmGetFiles>("IMsmGetFiles", IMsmGetFiles.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmGetFilesFromAbi, viewIMsmGetFiles)
     }
 
     public unsafe func vtbl(): IMsmGetFilesVtbl {
@@ -10245,7 +10255,7 @@ public class IMsmGetFiles <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMsmMergeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OpenDatabase: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var OpenModule: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16) -> Int32> = { _, _, _ => 0 }
     public var CloseDatabase: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -10295,7 +10305,7 @@ public class IMsmMerge <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMsmMerge> {
-        return InterfaceDescriptor<IMsmMerge>("IMsmMerge", IMsmMerge.iid(), Win32__impl_l2.IDispatch.iid(), takeIMsmMergeFromAbi, viewIMsmMerge)
+        return InterfaceDescriptor<IMsmMerge>("IMsmMerge", IMsmMerge.iid(), Win32_impl_p2.IDispatch.iid(), takeIMsmMergeFromAbi, viewIMsmMerge)
     }
 
     public unsafe func vtbl(): IMsmMergeVtbl {
@@ -10889,10 +10899,10 @@ public struct IPMDeploymentManagerVtbl {
     public var GetLicenseChallengeByProductID2: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<UInt8>>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public var RevokeLicense: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var RebindMdilBinaries: CFunc<(CPointer<Unit>, GUID, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var RebindMdilBinaries: CFunc<(CPointer<Unit>, GUID, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var RebindAllMdilBinaries: CFunc<(CPointer<Unit>, GUID, GUID) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var RegenerateXbf: CFunc<(CPointer<Unit>, GUID, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var RegenerateXbf: CFunc<(CPointer<Unit>, GUID, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var GenerateXbfForCurrentLocale: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     public var BeginProvision: CFunc<(CPointer<Unit>, GUID, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var BeginDeprovision: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
@@ -11044,7 +11054,7 @@ public class IPMDeploymentManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func RebindMdilBinaries(ProductID: GUID, FileNames: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func RebindMdilBinaries(ProductID: GUID, FileNames: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RebindMdilBinaries(__liveRaw, ProductID, FileNames)
@@ -11057,7 +11067,7 @@ public class IPMDeploymentManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func RegenerateXbf(ProductID: GUID, AssemblyPaths: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func RegenerateXbf(ProductID: GUID, AssemblyPaths: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegenerateXbf(__liveRaw, ProductID, AssemblyPaths)
@@ -12679,22 +12689,22 @@ foreign {
     // param-hint: lpSourceOptionsName optional
     // param-hint: lpTargetOptionsName optional
     // param-hint: lpTargetFileTime optional
-    func CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDeltaName: CPointer<UInt8>): Int32
+    func CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDeltaName: CPointer<UInt8>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDeltaName: CPointer<UInt8>): Int32 {
+public unsafe func Windows_CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDeltaName: CPointer<UInt8>): Int32 {
     return CreateDeltaA(FileTypeSet, SetFlags, ResetFlags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, GlobalOptions, lpTargetFileTime, HashAlgId, lpDeltaName)
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaB == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: lpTargetFileTime optional
-    func CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUTAbi, Target: DELTA_INPUTAbi, SourceOptions: DELTA_INPUTAbi, TargetOptions: DELTA_INPUTAbi, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDelta: CPointer<DELTA_OUTPUTAbi>): Int32
+    func CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUTAbi, Target: DELTA_INPUTAbi, SourceOptions: DELTA_INPUTAbi, TargetOptions: DELTA_INPUTAbi, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDelta: CPointer<DELTA_OUTPUTAbi>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaB == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUTAbi, Target: DELTA_INPUTAbi, SourceOptions: DELTA_INPUTAbi, TargetOptions: DELTA_INPUTAbi, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDelta: CPointer<DELTA_OUTPUTAbi>): Int32 {
+public unsafe func Windows_CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUTAbi, Target: DELTA_INPUTAbi, SourceOptions: DELTA_INPUTAbi, TargetOptions: DELTA_INPUTAbi, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDelta: CPointer<DELTA_OUTPUTAbi>): Int32 {
     return CreateDeltaB(FileTypeSet, SetFlags, ResetFlags, Source, Target, SourceOptions, TargetOptions, GlobalOptions, lpTargetFileTime, HashAlgId, lpDelta)
 }
 
@@ -12703,11 +12713,11 @@ foreign {
     // param-hint: lpSourceOptionsName optional
     // param-hint: lpTargetOptionsName optional
     // param-hint: lpTargetFileTime optional
-    func CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDeltaName: CPointer<UInt16>): Int32
+    func CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDeltaName: CPointer<UInt16>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpDeltaName: CPointer<UInt16>): Int32 {
+public unsafe func Windows_CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUTAbi, lpTargetFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpDeltaName: CPointer<UInt16>): Int32 {
     return CreateDeltaW(FileTypeSet, SetFlags, ResetFlags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, GlobalOptions, lpTargetFileTime, HashAlgId, lpDeltaName)
 }
 
@@ -12764,31 +12774,31 @@ public unsafe func Windows_GetDeltaInfoW(lpDeltaName: CPointer<UInt16>, lpHeader
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureA == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASHAbi>): Int32
+    func GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASHAbi>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
+public unsafe func Windows_GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
     return GetDeltaSignatureA(FileTypeSet, HashAlgId, lpSourceName, lpHash)
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureB == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, Source: DELTA_INPUTAbi, lpHash: CPointer<DELTA_HASHAbi>): Int32
+    func GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, Source: DELTA_INPUTAbi, lpHash: CPointer<DELTA_HASHAbi>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureB == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, Source: DELTA_INPUTAbi, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
+public unsafe func Windows_GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, Source: DELTA_INPUTAbi, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
     return GetDeltaSignatureB(FileTypeSet, HashAlgId, Source, lpHash)
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureW == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASHAbi>): Int32
+    func GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASHAbi>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: Win32__impl_l0.ALG_IDAbi, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
+public unsafe func Windows_GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: Win32_impl_p0.ALG_IDAbi, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASHAbi>): Int32 {
     return GetDeltaSignatureW(FileTypeSet, HashAlgId, lpSourceName, lpHash)
 }
 
@@ -13940,11 +13950,11 @@ public unsafe func Windows_MsiGetFileHashW(szFilePath: CPointer<UInt16>, dwOptio
 foreign {
     // param-hint: pbHashData bytes=param[4] optional
     // param-hint: pcbHashData optional
-    func MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
+    func MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
+public unsafe func Windows_MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
     return MsiGetFileSignatureInformationA(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
 }
 
@@ -13952,11 +13962,11 @@ public unsafe func Windows_MsiGetFileSignatureInformationA(szSignedObjectPath: C
 foreign {
     // param-hint: pbHashData bytes=param[4] optional
     // param-hint: pcbHashData optional
-    func MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
+    func MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
+public unsafe func Windows_MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
     return MsiGetFileSignatureInformationW(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
 }
 

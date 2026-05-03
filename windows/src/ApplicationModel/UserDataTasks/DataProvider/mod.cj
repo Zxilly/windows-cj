@@ -4,15 +4,25 @@
 package windows.ApplicationModel.UserDataTasks.DataProvider
 
 import std.collection.*
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_UserDataTasks_DataProvider == "on"]
 import windows_future as windows_future
 
 
@@ -181,7 +191,7 @@ public class IUserDataTaskListCreateOrUpdateTaskRequest <: InterfaceWrapperBase 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserDataTaskListCreateOrUpdateTaskRequest", IUserDataTaskListCreateOrUpdateTaskRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataTaskListCreateOrUpdateTaskRequestVtbl", "IUserDataTaskListCreateOrUpdateTaskRequest", "IUserDataTaskListCreateOrUpdateTaskRequest_Impl", [InterfaceMethodSchema("TaskListId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Task", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.UserDataTask>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("createdOrUpdatedUserDataTask", "CPointer<Unit>", "InParam<_impl_l1.UserDataTask>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserDataTaskListCreateOrUpdateTaskRequest", IUserDataTaskListCreateOrUpdateTaskRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataTaskListCreateOrUpdateTaskRequestVtbl", "IUserDataTaskListCreateOrUpdateTaskRequest", "IUserDataTaskListCreateOrUpdateTaskRequest_Impl", [InterfaceMethodSchema("TaskListId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Task", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.UserDataTask>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("createdOrUpdatedUserDataTask", "CPointer<Unit>", "InParam<impl_p1.UserDataTask>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserDataTaskListCreateOrUpdateTaskRequest.runtimeType())
         return schema
     }
@@ -219,16 +229,16 @@ public class IUserDataTaskListCreateOrUpdateTaskRequest <: InterfaceWrapperBase 
     }
 
     @When[Windows_ApplicationModel_UserDataTasks == "on"]
-    public unsafe func Task(): _impl_l1.UserDataTask {
+    public unsafe func Task(): impl_p1.UserDataTask {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Task(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.UserDataTask.fromAbiTake(result__)
+        return impl_p1.UserDataTask.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_UserDataTasks == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedUserDataTask: _impl_l1.UserDataTask): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedUserDataTask: impl_p1.UserDataTask): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), createdOrUpdatedUserDataTask.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -753,12 +763,12 @@ public class UserDataTaskListCreateOrUpdateTaskRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_UserDataTasks == "on"]
-    public unsafe func Task(): _impl_l1.UserDataTask {
+    public unsafe func Task(): impl_p1.UserDataTask {
         return defaultInterface().Task()
     }
 
     @When[Windows_ApplicationModel_UserDataTasks == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedUserDataTask: _impl_l1.UserDataTask): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedUserDataTask: impl_p1.UserDataTask): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(createdOrUpdatedUserDataTask)
     }
 

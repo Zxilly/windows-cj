@@ -318,22 +318,16 @@ func writeWinrtDelegateBoxSupport(
     let boxTypeName = "${name}Box${genericDecl}"
 
     writeAvailabilityForTags(w, feature, typeTags)
-    w.writeBlock("private open class ${erasedInvokerTypeName}", { =>
+    w.writeBlock("private interface ${erasedInvokerTypeName}", { =>
         writeWinrtDelegateThunkErasedMethod(w, index, sig, methodName)
     })
 
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
-    w.writeBlock("private open class ${invokerTypeName} <: ${erasedInvokerTypeName}${genericWhere}", { =>
-        w.writeLine("public open func ${methodName}(${delegateParams}): ${returnType} {")
-        if (returnType == "Unit") {
-            w.writeLine("    ()")
-        } else {
-            w.writeLine("    ${highLevelDefaultExpr(index, sig.returnType)}")
-        }
-        w.writeLine("}")
+    w.writeBlock("private interface ${invokerTypeName} <: ${erasedInvokerTypeName}${genericWhere}", { =>
+        w.writeLine("public func ${methodName}(${delegateParams}): ${returnType}")
         w.writeBlankLine()
-        writeWinrtDelegateThunkHelperMethod(w, index, sig, methodName, override: true)
+        writeWinrtDelegateThunkHelperMethod(w, index, sig, methodName)
     })
 
     w.writeBlankLine()
@@ -355,7 +349,7 @@ func writeWinrtDelegateBoxSupport(
         w.writeLine("    CPointer<Unit>(vtblHandle.pointer)")
         w.writeLine("}")
         w.writeBlankLine()
-        w.writeLine("public override func ${methodName}(${delegateParams}): ${returnType} {")
+        w.writeLine("public func ${methodName}(${delegateParams}): ${returnType} {")
         if (delegateArgs.isEmpty()) {
             w.writeLine("    invoke_()")
         } else {
@@ -403,9 +397,7 @@ func writeWinrtDelegateThunkErasedMethod(
 ): Unit {
     let helperName = winrtDelegateThunkHelperName(methodName)
     let helperParams = delegateThunkHelperParams(index, sig)
-    w.writeLine("public open func ${helperName}(${helperParams}): Int32 {")
-    w.writeLine("    E_NOTIMPL.value")
-    w.writeLine("}")
+    w.writeLine("public func ${helperName}(${helperParams}): Int32")
 }
 
 func writeWinrtDelegateThunkHelperMethod(
@@ -417,7 +409,7 @@ func writeWinrtDelegateThunkHelperMethod(
 ): Unit {
     let helperName = winrtDelegateThunkHelperName(methodName)
     let helperParams = delegateThunkHelperParams(index, sig)
-    let modifier = if (override) { "public override func" } else { "public open func" }
+    let modifier = if (override) { "public override func" } else { "public func" }
     w.writeLine("${modifier} ${helperName}(${helperParams}): Int32 {")
     writeWinrtDelegateThunkBody(w, index, sig, "this", methodName)
     w.writeLine("}")

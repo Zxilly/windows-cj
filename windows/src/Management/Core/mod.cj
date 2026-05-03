@@ -4,13 +4,20 @@
 package windows.Management.Core
 
 import std.collection.*
+@When[Windows_Management_Core == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Management_Core == "on"]
 import windows_core as windows_core
+@When[Windows_Management_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Management_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_Management_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Management_Core == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_Management_Core == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_Management_Core == "on"]
@@ -136,7 +143,7 @@ public class IApplicationDataManagerStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IApplicationDataManagerStatics", IApplicationDataManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IApplicationDataManagerStaticsVtbl", "IApplicationDataManagerStatics", "IApplicationDataManagerStatics_Impl", [InterfaceMethodSchema("CreateForPackageFamily", 6, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ApplicationData>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IApplicationDataManagerStatics", IApplicationDataManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IApplicationDataManagerStaticsVtbl", "IApplicationDataManagerStatics", "IApplicationDataManagerStatics_Impl", [InterfaceMethodSchema("CreateForPackageFamily", 6, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ApplicationData>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IApplicationDataManagerStatics.runtimeType())
         return schema
     }
@@ -166,12 +173,12 @@ public class IApplicationDataManagerStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateForPackageFamily(packageFamilyName: windows_core.HString): _impl_l1.ApplicationData {
+    public unsafe func CreateForPackageFamily(packageFamilyName: windows_core.HString): impl_p1.ApplicationData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForPackageFamily(asRaw(), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ApplicationData.fromAbiTake(result__)
+        return impl_p1.ApplicationData.fromAbiTake(result__)
     }
 }
 
@@ -248,8 +255,8 @@ public class ApplicationDataManager <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func CreateForPackageFamily(packageFamilyName: windows_core.HString): _impl_l1.ApplicationData {
-        var result__: Option<_impl_l1.ApplicationData> = Option<_impl_l1.ApplicationData>.None
+    public static unsafe func CreateForPackageFamily(packageFamilyName: windows_core.HString): impl_p1.ApplicationData {
+        var result__: Option<impl_p1.ApplicationData> = Option<impl_p1.ApplicationData>.None
         try (factory__ = windows_core.factory<ApplicationDataManager, IApplicationDataManagerStatics>().unwrap()) {
             result__ = Some(factory__.CreateForPackageFamily(packageFamilyName))
         }

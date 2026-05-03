@@ -4,17 +4,27 @@
 package windows.Management.Deployment
 
 import std.collection.*
+@When[Windows_Management_Deployment == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Management_Deployment == "on"]
 import windows_core as windows_core
+@When[Windows_Management_Deployment == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Management_Deployment == "on"]
 import windows_interface as windows_interface
+@When[Windows_Management_Deployment == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Management_Deployment == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Management_Deployment == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Management_Deployment == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Management_Deployment == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Management_Deployment == "on"]
 import windows_collections as windows_collections
+@When[Windows_Management_Deployment == "on"]
 import windows_future as windows_future
 
 
@@ -348,11 +358,11 @@ extend IAddPackageOptions2 <: windows_core.Interface<IAddPackageOptions2> {}
 public struct IAutoUpdateSettingsOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_ApplicationModel == "on"]
-    public var Version: CFunc<(CPointer<Unit>, CPointer<_impl_l0.PackageVersionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Version: CFunc<(CPointer<Unit>, CPointer<impl_p0.PackageVersionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var Version: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel == "on"]
-    public var SetVersion: CFunc<(CPointer<Unit>, _impl_l0.PackageVersionAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetVersion: CFunc<(CPointer<Unit>, impl_p0.PackageVersionAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var SetVersion: UIntNative = UIntNative(0)
     public var AppInstallerUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -426,7 +436,7 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAutoUpdateSettingsOptions", IAutoUpdateSettingsOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAutoUpdateSettingsOptionsVtbl", "IAutoUpdateSettingsOptions", "IAutoUpdateSettingsOptions_Impl", [InterfaceMethodSchema("Version", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.PackageVersionAbi>", "OutSlot<_impl_l0.PackageVersion>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVersion", 7, [InterfaceParameterSchema("value", "_impl_l0.PackageVersionAbi", "_impl_l0.PackageVersion", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppInstallerUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppInstallerUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnLaunch", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOnLaunch", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HoursBetweenUpdateChecks", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHoursBetweenUpdateChecks", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowPrompt", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetShowPrompt", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateBlocksActivation", 16, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUpdateBlocksActivation", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AutomaticBackgroundTask", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAutomaticBackgroundTask", 19, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ForceUpdateFromAnyVersion", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetForceUpdateFromAnyVersion", 21, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsAutoRepairEnabled", 22, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsAutoRepairEnabled", 23, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateUris", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RepairUris", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DependencyPackageUris", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OptionalPackageUris", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAutoUpdateSettingsOptions", IAutoUpdateSettingsOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAutoUpdateSettingsOptionsVtbl", "IAutoUpdateSettingsOptions", "IAutoUpdateSettingsOptions_Impl", [InterfaceMethodSchema("Version", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.PackageVersionAbi>", "OutSlot<impl_p0.PackageVersion>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVersion", 7, [InterfaceParameterSchema("value", "impl_p0.PackageVersionAbi", "impl_p0.PackageVersion", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppInstallerUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppInstallerUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnLaunch", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOnLaunch", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HoursBetweenUpdateChecks", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHoursBetweenUpdateChecks", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowPrompt", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetShowPrompt", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateBlocksActivation", 16, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUpdateBlocksActivation", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AutomaticBackgroundTask", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAutomaticBackgroundTask", 19, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ForceUpdateFromAnyVersion", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetForceUpdateFromAnyVersion", 21, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsAutoRepairEnabled", 22, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsAutoRepairEnabled", 23, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateUris", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RepairUris", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DependencyPackageUris", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OptionalPackageUris", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAutoUpdateSettingsOptions.runtimeType())
         return schema
     }
@@ -456,18 +466,18 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func Version(): _impl_l0.PackageVersion {
+    public unsafe func Version(): impl_p0.PackageVersion {
         let v = vtbl()
-        var result__ = _impl_l0.PackageVersionAbi()
-        let hr = v.Version(asRaw(), CPointer<_impl_l0.PackageVersionAbi>(inout result__))
+        var result__ = impl_p0.PackageVersionAbi()
+        let hr = v.Version(asRaw(), CPointer<impl_p0.PackageVersionAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.PackageVersion>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.PackageVersion>()).unwrap()
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetVersion(value: _impl_l0.PackageVersion): Unit {
+    public unsafe func SetVersion(value: impl_p0.PackageVersion): Unit {
         let v = vtbl()
-        let hr = v.SetVersion(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.PackageVersion>()))
+        let hr = v.SetVersion(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.PackageVersion>()))
         HRESULT(hr).ok()
     }
 
@@ -1338,11 +1348,11 @@ extend IPackageManager12 <: windows_core.Interface<IPackageManager12> {}
 public struct IPackageManagerDebugSettingsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_ApplicationModel == "on"]
-    public var SetContentGroupStateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.PackageContentGroupStateAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var SetContentGroupStateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, impl_p0.PackageContentGroupStateAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var SetContentGroupStateAsync: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel == "on"]
-    public var SetContentGroupStateWithPercentageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.PackageContentGroupStateAbi, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var SetContentGroupStateWithPercentageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, impl_p0.PackageContentGroupStateAbi, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var SetContentGroupStateWithPercentageAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -1384,7 +1394,7 @@ public class IPackageManagerDebugSettings <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPackageManagerDebugSettings", IPackageManagerDebugSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManagerDebugSettingsVtbl", "IPackageManagerDebugSettings", "IPackageManagerDebugSettings_Impl", [InterfaceMethodSchema("SetContentGroupStateAsync", 6, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentGroupName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("state", "_impl_l0.PackageContentGroupStateAbi", "_impl_l0.PackageContentGroupState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentGroupStateWithPercentageAsync", 7, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentGroupName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("state", "_impl_l0.PackageContentGroupStateAbi", "_impl_l0.PackageContentGroupState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("completionPercentage", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPackageManagerDebugSettings", IPackageManagerDebugSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManagerDebugSettingsVtbl", "IPackageManagerDebugSettings", "IPackageManagerDebugSettings_Impl", [InterfaceMethodSchema("SetContentGroupStateAsync", 6, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentGroupName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("state", "impl_p0.PackageContentGroupStateAbi", "impl_p0.PackageContentGroupState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentGroupStateWithPercentageAsync", 7, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("contentGroupName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("state", "impl_p0.PackageContentGroupStateAbi", "impl_p0.PackageContentGroupState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("completionPercentage", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPackageManagerDebugSettings.runtimeType())
         return schema
     }
@@ -1414,19 +1424,19 @@ public class IPackageManagerDebugSettings <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetContentGroupStateAsync(package_: _impl_l2.Package, contentGroupName: windows_core.HString, state: _impl_l0.PackageContentGroupState): windows_future.IAsyncAction {
+    public unsafe func SetContentGroupStateAsync(package_: impl_p1.Package, contentGroupName: windows_core.HString, state: impl_p0.PackageContentGroupState): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.SetContentGroupStateAsync(asRaw(), package_.asRaw(), contentGroupName.asRaw(), windows_core.projectTypedAbi(state, windows_core.typeMarker<_impl_l0.PackageContentGroupState>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.SetContentGroupStateAsync(asRaw(), package_.asRaw(), contentGroupName.asRaw(), windows_core.projectTypedAbi(state, windows_core.typeMarker<impl_p0.PackageContentGroupState>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetContentGroupStateWithPercentageAsync(package_: _impl_l2.Package, contentGroupName: windows_core.HString, state: _impl_l0.PackageContentGroupState, completionPercentage: Float64): windows_future.IAsyncAction {
+    public unsafe func SetContentGroupStateWithPercentageAsync(package_: impl_p1.Package, contentGroupName: windows_core.HString, state: impl_p0.PackageContentGroupState, completionPercentage: Float64): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.SetContentGroupStateWithPercentageAsync(asRaw(), package_.asRaw(), contentGroupName.asRaw(), windows_core.projectTypedAbi(state, windows_core.typeMarker<_impl_l0.PackageContentGroupState>()), completionPercentage, CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.SetContentGroupStateWithPercentageAsync(asRaw(), package_.asRaw(), contentGroupName.asRaw(), windows_core.projectTypedAbi(state, windows_core.typeMarker<impl_p0.PackageContentGroupState>()), completionPercentage, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -2364,12 +2374,12 @@ public class PackageManagerDebugSettings <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetContentGroupStateAsync(package_: _impl_l2.Package, contentGroupName: windows_core.HString, state: _impl_l0.PackageContentGroupState): windows_future.IAsyncAction {
+    public unsafe func SetContentGroupStateAsync(package_: impl_p1.Package, contentGroupName: windows_core.HString, state: impl_p0.PackageContentGroupState): windows_future.IAsyncAction {
         return defaultInterface().SetContentGroupStateAsync(package_, contentGroupName, state)
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetContentGroupStateWithPercentageAsync(package_: _impl_l2.Package, contentGroupName: windows_core.HString, state: _impl_l0.PackageContentGroupState, completionPercentage: Float64): windows_future.IAsyncAction {
+    public unsafe func SetContentGroupStateWithPercentageAsync(package_: impl_p1.Package, contentGroupName: windows_core.HString, state: impl_p0.PackageContentGroupState, completionPercentage: Float64): windows_future.IAsyncAction {
         return defaultInterface().SetContentGroupStateWithPercentageAsync(package_, contentGroupName, state, completionPercentage)
     }
 }
@@ -4057,7 +4067,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPackageManager2", IPackageManager2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManager2Vtbl", "IPackageManager2", "IPackageManager2_Impl", [InterfaceMethodSchema("RemovePackageWithOptionsAsync", 6, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("removalOptions", "RemovalOptionsAbi", "RemovalOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageWithOptionsAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageByFullNameAsync", 8, [InterfaceParameterSchema("mainPackageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageFullNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesWithPackageTypes", 9, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdWithPackageTypes", 10, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisherWithPackageTypes", 11, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisherWithPackageTypes", 12, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyNameWithPackageTypes", 13, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes", 14, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StageUserDataAsync", 15, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPackageManager2", IPackageManager2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManager2Vtbl", "IPackageManager2", "IPackageManager2_Impl", [InterfaceMethodSchema("RemovePackageWithOptionsAsync", 6, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("removalOptions", "RemovalOptionsAbi", "RemovalOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageWithOptionsAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageByFullNameAsync", 8, [InterfaceParameterSchema("mainPackageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageFullNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesWithPackageTypes", 9, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdWithPackageTypes", 10, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisherWithPackageTypes", 11, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisherWithPackageTypes", 12, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyNameWithPackageTypes", 13, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes", 14, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StageUserDataAsync", 15, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPackageManager2.runtimeType())
         return schema
     }
@@ -4113,57 +4123,57 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesWithPackageTypes(asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdWithPackageTypes(asRaw(), userSecurityId.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisherWithPackageTypes(packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisherWithPackageTypes(packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByNamePublisherWithPackageTypes(asRaw(), packageName.asRaw(), packagePublisher.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(asRaw(), userSecurityId.asRaw(), packageName.asRaw(), packagePublisher.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByPackageFamilyNameWithPackageTypes(asRaw(), packageFamilyName.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(asRaw(), userSecurityId.asRaw(), packageFamilyName.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     public unsafe func StageUserDataAsync(packageFullName: windows_core.HString): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
@@ -4462,7 +4472,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPackageVolume", IPackageVolume.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageVolumeVtbl", "IPackageVolume", "IPackageVolume_Impl", [InterfaceMethodSchema("IsOffline", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSystemVolume", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MountPoint", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PackageStorePath", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportsHardLinks", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackages", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisher", 13, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyName", 14, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesWithPackageTypes", 15, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisherWithPackagesTypes", 16, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyNameWithPackageTypes", 17, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByPackageFullName", 18, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityId", 19, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisher", 20, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyName", 21, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdWithPackageTypes", 22, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisherWithPackageTypes", 23, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes", 24, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByUserSecurityIdPackageFullName", 25, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPackageVolume", IPackageVolume.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageVolumeVtbl", "IPackageVolume", "IPackageVolume_Impl", [InterfaceMethodSchema("IsOffline", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSystemVolume", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MountPoint", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PackageStorePath", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportsHardLinks", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackages", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisher", 13, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyName", 14, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesWithPackageTypes", 15, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisherWithPackagesTypes", 16, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyNameWithPackageTypes", 17, [InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByPackageFullName", 18, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityId", 19, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisher", 20, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyName", 21, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdWithPackageTypes", 22, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisherWithPackageTypes", 23, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes", 24, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageTypes", "PackageTypesAbi", "PackageTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByUserSecurityIdPackageFullName", 25, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPackageVolume.runtimeType())
         return schema
     }
@@ -4540,129 +4550,129 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackages(): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackages(): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackages(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByNamePublisher(asRaw(), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByPackageFamilyName(asRaw(), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesWithPackageTypes(asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByNamePublisherWithPackagesTypes(asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByPackageFamilyNameWithPackageTypes(asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackageByPackageFullName(asRaw(), packageFullName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityId(asRaw(), userSecurityId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdNamePublisher(asRaw(), userSecurityId.asRaw(), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdPackageFamilyName(asRaw(), userSecurityId.asRaw(), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdWithPackageTypes(asRaw(), userSecurityId.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(asRaw(), userSecurityId.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(asRaw(), userSecurityId.asRaw(), windows_core.projectTypedAbi(packageTypes, windows_core.typeMarker<PackageTypes>()), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackageByUserSecurityIdPackageFullName(asRaw(), userSecurityId.asRaw(), packageFullName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 }
 
@@ -5045,72 +5055,72 @@ public class PackageVolume <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackages(): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackages(): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackages()
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByNamePublisher(packageName, packagePublisher)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByPackageFamilyName(packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesWithPackageTypes(packageTypes)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByNamePublisherWithPackagesTypes(packageTypes, packageName, packagePublisher)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes, packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackageByPackageFullName(packageFullName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityId(userSecurityId)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisher(userSecurityId, packageName, packagePublisher)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId, packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId, packageTypes)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId, packageTypes, packageName, packagePublisher)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId, packageTypes, packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<impl_p1.Package> {
         return defaultInterface().FindPackageByUserSecurityIdPackageFullName(userSecurityId, packageFullName)
     }
 }
@@ -5759,7 +5769,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPackageManager", IPackageManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManagerVtbl", "IPackageManager", "IPackageManager_Impl", [InterfaceMethodSchema("AddPackageAsync", 6, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePackageAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePackageAsync", 8, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageAsync", 9, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageAsync", 10, [InterfaceParameterSchema("manifestUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackages", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityId", 12, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisher", 13, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisher", 14, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindUsers", 15, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<PackageUserInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPackageState", 16, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageState", "PackageStateAbi", "PackageState", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindPackageByPackageFullName", 17, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CleanupPackageForUserAsync", 18, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyName", 19, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyName", 20, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByUserSecurityIdPackageFullName", 21, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPackageManager", IPackageManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManagerVtbl", "IPackageManager", "IPackageManager_Impl", [InterfaceMethodSchema("AddPackageAsync", 6, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePackageAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePackageAsync", 8, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageAsync", 9, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageAsync", 10, [InterfaceParameterSchema("manifestUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dependencyPackageUris", "CPointer<Unit>", "InParam<windows_collections.IIterable<Foundation.Uri>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deploymentOptions", "DeploymentOptionsAbi", "DeploymentOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackages", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityId", 12, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByNamePublisher", 13, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdNamePublisher", 14, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packagePublisher", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindUsers", 15, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<PackageUserInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPackageState", 16, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageState", "PackageStateAbi", "PackageState", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindPackageByPackageFullName", 17, [InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CleanupPackageForUserAsync", 18, [InterfaceParameterSchema("packageName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByPackageFamilyName", 19, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackagesByUserSecurityIdPackageFamilyName", 20, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IIterable<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindPackageByUserSecurityIdPackageFullName", 21, [InterfaceParameterSchema("userSecurityId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("packageFullName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPackageManager.runtimeType())
         return schema
     }
@@ -5833,39 +5843,39 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackages(): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackages(): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackages(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityId(asRaw(), userSecurityId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByNamePublisher(asRaw(), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdNamePublisher(asRaw(), userSecurityId.asRaw(), packageName.asRaw(), packagePublisher.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -5884,12 +5894,12 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): _impl_l2.Package {
+    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackageByPackageFullName(asRaw(), packageFullName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     public unsafe func CleanupPackageForUserAsync(packageName: windows_core.HString, userSecurityId: windows_core.HString): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
@@ -5901,30 +5911,30 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByPackageFamilyName(asRaw(), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackagesByUserSecurityIdPackageFamilyName(asRaw(), userSecurityId.asRaw(), packageFamilyName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IIterable<impl_p1.Package>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): _impl_l2.Package {
+    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindPackageByUserSecurityIdPackageFullName(asRaw(), userSecurityId.asRaw(), packageFullName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 }
 
@@ -7789,7 +7799,7 @@ public class IPackageManager9 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPackageManager9", IPackageManager9.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManager9Vtbl", "IPackageManager9", "IPackageManager9_Impl", [InterfaceMethodSchema("FindProvisionedPackages", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l2.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddPackageByUriAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<AddPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageByUriAsync", 8, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<StagePackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageByUriAsync", 9, [InterfaceParameterSchema("manifestUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<RegisterPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackagesByFullNameAsync", 10, [InterfaceParameterSchema("packageFullNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<RegisterPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPackageStubPreference", 11, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("useStub", "PackageStubPreferenceAbi", "PackageStubPreference", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPackageStubPreference", 12, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<PackageStubPreferenceAbi>", "OutSlot<PackageStubPreference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPackageManager9", IPackageManager9.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPackageManager9Vtbl", "IPackageManager9", "IPackageManager9_Impl", [InterfaceMethodSchema("FindProvisionedPackages", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.Package>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddPackageByUriAsync", 7, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<AddPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StagePackageByUriAsync", 8, [InterfaceParameterSchema("packageUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<StagePackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackageByUriAsync", 9, [InterfaceParameterSchema("manifestUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<RegisterPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterPackagesByFullNameAsync", 10, [InterfaceParameterSchema("packageFullNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<RegisterPackageOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPackageStubPreference", 11, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("useStub", "PackageStubPreferenceAbi", "PackageStubPreference", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPackageStubPreference", 12, [InterfaceParameterSchema("packageFamilyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<PackageStubPreferenceAbi>", "OutSlot<PackageStubPreference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPackageManager9.runtimeType())
         return schema
     }
@@ -7819,12 +7829,12 @@ public class IPackageManager9 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindProvisionedPackages(): windows_collections.IVector<_impl_l2.Package> {
+    public unsafe func FindProvisionedPackages(): windows_collections.IVector<impl_p1.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindProvisionedPackages(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.Package>.fromAbiTake(result__)
     }
 
     public unsafe func AddPackageByUriAsync(packageUri: Foundation.Uri, options: AddPackageOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
@@ -7983,22 +7993,22 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackages(): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackages(): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackages()
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityId(userSecurityId)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackagesByNamePublisher(packageName, packagePublisher)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisher(userSecurityId, packageName, packagePublisher)
     }
 
@@ -8012,7 +8022,7 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): _impl_l2.Package {
+    public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): impl_p1.Package {
         return defaultInterface().FindPackageByPackageFullName(packageFullName)
     }
 
@@ -8021,17 +8031,17 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackagesByPackageFamilyName(packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
+    public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<impl_p1.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId, packageFamilyName)
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): _impl_l2.Package {
+    public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): impl_p1.Package {
         return defaultInterface().FindPackageByUserSecurityIdPackageFullName(userSecurityId, packageFullName)
     }
 }
@@ -8257,12 +8267,12 @@ public class AutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func Version(): _impl_l0.PackageVersion {
+    public unsafe func Version(): impl_p0.PackageVersion {
         return defaultInterface().Version()
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SetVersion(value: _impl_l0.PackageVersion): Unit {
+    public unsafe func SetVersion(value: impl_p0.PackageVersion): Unit {
         defaultInterface().SetVersion(value)
     }
 
@@ -8351,7 +8361,7 @@ public class AutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public static unsafe func CreateFromAppInstallerInfo(appInstallerInfo: _impl_l1.AppInstallerInfo): AutoUpdateSettingsOptions {
+    public static unsafe func CreateFromAppInstallerInfo(appInstallerInfo: impl_p1.AppInstallerInfo): AutoUpdateSettingsOptions {
         var result__: Option<AutoUpdateSettingsOptions> = Option<AutoUpdateSettingsOptions>.None
         try (factory__ = windows_core.factory<AutoUpdateSettingsOptions, IAutoUpdateSettingsOptionsStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromAppInstallerInfo(appInstallerInfo))
@@ -8839,7 +8849,7 @@ public class IAutoUpdateSettingsOptionsStatics <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAutoUpdateSettingsOptionsStatics", IAutoUpdateSettingsOptionsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAutoUpdateSettingsOptionsStaticsVtbl", "IAutoUpdateSettingsOptionsStatics", "IAutoUpdateSettingsOptionsStatics_Impl", [InterfaceMethodSchema("CreateFromAppInstallerInfo", 6, [InterfaceParameterSchema("appInstallerInfo", "CPointer<Unit>", "InParam<_impl_l1.AppInstallerInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AutoUpdateSettingsOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAutoUpdateSettingsOptionsStatics", IAutoUpdateSettingsOptionsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAutoUpdateSettingsOptionsStaticsVtbl", "IAutoUpdateSettingsOptionsStatics", "IAutoUpdateSettingsOptionsStatics_Impl", [InterfaceMethodSchema("CreateFromAppInstallerInfo", 6, [InterfaceParameterSchema("appInstallerInfo", "CPointer<Unit>", "InParam<impl_p1.AppInstallerInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AutoUpdateSettingsOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAutoUpdateSettingsOptionsStatics.runtimeType())
         return schema
     }
@@ -8869,7 +8879,7 @@ public class IAutoUpdateSettingsOptionsStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func CreateFromAppInstallerInfo(appInstallerInfo: _impl_l1.AppInstallerInfo): AutoUpdateSettingsOptions {
+    public unsafe func CreateFromAppInstallerInfo(appInstallerInfo: impl_p1.AppInstallerInfo): AutoUpdateSettingsOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromAppInstallerInfo(asRaw(), appInstallerInfo.asRaw(), CPointer<CPointer<Unit>>(inout result__))

@@ -4,18 +4,31 @@
 package windows.UI.Input.Inking
 
 import std.collection.*
+@When[Windows_UI_Input_Inking == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Inking == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Inking == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Inking == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Inking == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Inking == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Input_Inking == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Input_Inking == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Input_Inking == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Input_Inking == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Input_Inking == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Input_Inking == "on"]
 import windows_future as windows_future
+@When[Windows_UI_Input_Inking == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -4432,7 +4445,7 @@ public class IInkManager <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkManager", IInkManager.iid(), IInkStrokeContainer.descriptorSchema(), ["IInkStrokeContainer", "IInkRecognizerContainer"], [IInkStrokeContainer.iid(), IInkRecognizerContainer.iid()], "IInkManagerVtbl", "IInkManager", "IInkManager_Impl", [InterfaceMethodSchema("Mode", 20, [InterfaceParameterSchema("result", "CPointer<InkManipulationModeAbi>", "OutSlot<InkManipulationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMode", 21, [InterfaceParameterSchema("value", "InkManipulationModeAbi", "InkManipulationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ProcessPointerDown", 22, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProcessPointerUpdate", 23, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessPointerUp", 24, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultDrawingAttributes", 25, [InterfaceParameterSchema("drawingAttributes", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RecognizeAsync", 26, [InterfaceParameterSchema("recognitionTarget", "InkRecognitionTargetAbi", "InkRecognitionTarget", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<InkRecognitionResult>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkManager", IInkManager.iid(), IInkStrokeContainer.descriptorSchema(), ["IInkStrokeContainer", "IInkRecognizerContainer"], [IInkStrokeContainer.iid(), IInkRecognizerContainer.iid()], "IInkManagerVtbl", "IInkManager", "IInkManager_Impl", [InterfaceMethodSchema("Mode", 20, [InterfaceParameterSchema("result", "CPointer<InkManipulationModeAbi>", "OutSlot<InkManipulationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMode", 21, [InterfaceParameterSchema("value", "InkManipulationModeAbi", "InkManipulationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ProcessPointerDown", 22, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProcessPointerUpdate", 23, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessPointerUp", 24, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultDrawingAttributes", 25, [InterfaceParameterSchema("drawingAttributes", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RecognizeAsync", 26, [InterfaceParameterSchema("recognitionTarget", "InkRecognitionTargetAbi", "InkRecognitionTarget", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<InkRecognitionResult>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInkManager.runtimeType())
         return schema
     }
@@ -4490,14 +4503,14 @@ public class IInkManager <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerDown(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func ProcessPointerDown(pointerPoint: impl_p1.PointerPoint): Unit {
         let v = vtbl()
         let hr = v.ProcessPointerDown(asRaw(), pointerPoint.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerUpdate(pointerPoint: _impl_l1.PointerPoint): IInspectable {
+    public unsafe func ProcessPointerUpdate(pointerPoint: impl_p1.PointerPoint): IInspectable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProcessPointerUpdate(asRaw(), pointerPoint.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4506,7 +4519,7 @@ public class IInkManager <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerUp(pointerPoint: _impl_l1.PointerPoint): windows_future.Rect {
+    public unsafe func ProcessPointerUp(pointerPoint: impl_p1.PointerPoint): windows_future.Rect {
         let v = vtbl()
         var result__ = windows_future.RectAbi()
         let hr = v.ProcessPointerUp(asRaw(), pointerPoint.asRaw(), CPointer<windows_future.RectAbi>(inout result__))
@@ -4760,11 +4773,11 @@ public struct IInkPresenterVtbl {
     public var IsInputEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsInputEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core == "on"]
-    public var InputDeviceTypes: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreInputDeviceTypesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var InputDeviceTypes: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreInputDeviceTypesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core != "on"]
     public var InputDeviceTypes: UIntNative = UIntNative(0)
     @When[Windows_UI_Core == "on"]
-    public var SetInputDeviceTypes: CFunc<(CPointer<Unit>, _impl_l0.CoreInputDeviceTypesAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetInputDeviceTypes: CFunc<(CPointer<Unit>, impl_p0.CoreInputDeviceTypesAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core != "on"]
     public var SetInputDeviceTypes: UIntNative = UIntNative(0)
     public var UnprocessedInput: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4819,7 +4832,7 @@ public class IInkPresenter <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkPresenter", IInkPresenter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkPresenterVtbl", "IInkPresenter", "IInkPresenter_Impl", [InterfaceMethodSchema("IsInputEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsInputEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("InputDeviceTypes", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreInputDeviceTypesAbi>", "OutSlot<_impl_l0.CoreInputDeviceTypes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetInputDeviceTypes", 9, [InterfaceParameterSchema("value", "_impl_l0.CoreInputDeviceTypesAbi", "_impl_l0.CoreInputDeviceTypes", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnprocessedInput", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkUnprocessedInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeInput", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStrokeInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InputProcessingConfiguration", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkInputProcessingConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeContainer", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStrokeContainer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeContainer", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<InkStrokeContainer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyDefaultDrawingAttributes", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkDrawingAttributes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateDefaultDrawingAttributes", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ActivateCustomDrying", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkSynchronizer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPredefinedConfiguration", 18, [InterfaceParameterSchema("value", "InkPresenterPredefinedConfigurationAbi", "InkPresenterPredefinedConfiguration", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokesCollected", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkPresenter, InkStrokesCollectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokesCollected", 20, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokesErased", 21, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkPresenter, InkStrokesErasedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokesErased", 22, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkPresenter", IInkPresenter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkPresenterVtbl", "IInkPresenter", "IInkPresenter_Impl", [InterfaceMethodSchema("IsInputEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsInputEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("InputDeviceTypes", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreInputDeviceTypesAbi>", "OutSlot<impl_p0.CoreInputDeviceTypes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetInputDeviceTypes", 9, [InterfaceParameterSchema("value", "impl_p0.CoreInputDeviceTypesAbi", "impl_p0.CoreInputDeviceTypes", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnprocessedInput", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkUnprocessedInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeInput", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStrokeInput>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InputProcessingConfiguration", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkInputProcessingConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeContainer", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStrokeContainer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeContainer", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<InkStrokeContainer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyDefaultDrawingAttributes", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkDrawingAttributes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateDefaultDrawingAttributes", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ActivateCustomDrying", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkSynchronizer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPredefinedConfiguration", 18, [InterfaceParameterSchema("value", "InkPresenterPredefinedConfigurationAbi", "InkPresenterPredefinedConfiguration", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokesCollected", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkPresenter, InkStrokesCollectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokesCollected", 20, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokesErased", 21, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkPresenter, InkStrokesErasedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokesErased", 22, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IInkPresenter.runtimeType())
         return schema
     }
@@ -4863,18 +4876,18 @@ public class IInkPresenter <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func InputDeviceTypes(): _impl_l0.CoreInputDeviceTypes {
+    public unsafe func InputDeviceTypes(): impl_p0.CoreInputDeviceTypes {
         let v = vtbl()
-        var result__ = _impl_l0.CoreInputDeviceTypesAbi()
-        let hr = v.InputDeviceTypes(asRaw(), CPointer<_impl_l0.CoreInputDeviceTypesAbi>(inout result__))
+        var result__ = impl_p0.CoreInputDeviceTypesAbi()
+        let hr = v.InputDeviceTypes(asRaw(), CPointer<impl_p0.CoreInputDeviceTypesAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreInputDeviceTypes>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreInputDeviceTypes>()).unwrap()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func SetInputDeviceTypes(value: _impl_l0.CoreInputDeviceTypes): Unit {
+    public unsafe func SetInputDeviceTypes(value: impl_p0.CoreInputDeviceTypes): Unit {
         let v = vtbl()
-        let hr = v.SetInputDeviceTypes(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.CoreInputDeviceTypes>()))
+        let hr = v.SetInputDeviceTypes(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.CoreInputDeviceTypes>()))
         HRESULT(hr).ok()
     }
 
@@ -5967,7 +5980,7 @@ public class IInkStrokeBuilder <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkStrokeBuilder", IInkStrokeBuilder.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeBuilderVtbl", "IInkStrokeBuilder", "IInkStrokeBuilder_Impl", [InterfaceMethodSchema("BeginStroke", 6, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppendToStroke", 7, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EndStroke", 8, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateStroke", 9, [InterfaceParameterSchema("points", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_future.Point>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultDrawingAttributes", 10, [InterfaceParameterSchema("drawingAttributes", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkStrokeBuilder", IInkStrokeBuilder.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeBuilderVtbl", "IInkStrokeBuilder", "IInkStrokeBuilder_Impl", [InterfaceMethodSchema("BeginStroke", 6, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppendToStroke", 7, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EndStroke", 8, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateStroke", 9, [InterfaceParameterSchema("points", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_future.Point>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultDrawingAttributes", 10, [InterfaceParameterSchema("drawingAttributes", "CPointer<Unit>", "InParam<InkDrawingAttributes>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IInkStrokeBuilder.runtimeType())
         return schema
     }
@@ -5997,23 +6010,23 @@ public class IInkStrokeBuilder <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func BeginStroke(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func BeginStroke(pointerPoint: impl_p1.PointerPoint): Unit {
         let v = vtbl()
         let hr = v.BeginStroke(asRaw(), pointerPoint.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func AppendToStroke(pointerPoint: _impl_l1.PointerPoint): _impl_l1.PointerPoint {
+    public unsafe func AppendToStroke(pointerPoint: impl_p1.PointerPoint): impl_p1.PointerPoint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AppendToStroke(asRaw(), pointerPoint.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.PointerPoint.fromAbiTake(result__)
+        return impl_p1.PointerPoint.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func EndStroke(pointerPoint: _impl_l1.PointerPoint): InkStroke {
+    public unsafe func EndStroke(pointerPoint: impl_p1.PointerPoint): InkStroke {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.EndStroke(asRaw(), pointerPoint.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6616,13 +6629,13 @@ public interface IInkStrokeContainer_Impl <: IInkStrokeContainer_ImplErased {
         }
     }
 
-    public func LoadAsync(inputStream: InParam<_impl_l0.IInputStream>): windows_core.Result<windows_future.IAsyncActionWithProgress<UInt64>>
+    public func LoadAsync(inputStream: InParam<impl_p0.IInputStream>): windows_core.Result<windows_future.IAsyncActionWithProgress<UInt64>>
 
     public func __winrtThunk_LoadAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.LoadAsync(InParam<_impl_l0.IInputStream>(_impl_l0.IInputStream.viewOf(arg0)))) {
+        match (this.LoadAsync(InParam<impl_p0.IInputStream>(impl_p0.IInputStream.viewOf(arg0)))) {
             case Result<windows_future.IAsyncActionWithProgress<UInt64>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -6636,13 +6649,13 @@ public interface IInkStrokeContainer_Impl <: IInkStrokeContainer_ImplErased {
         }
     }
 
-    public func SaveAsync(outputStream: InParam<_impl_l0.IOutputStream>): windows_core.Result<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>
+    public func SaveAsync(outputStream: InParam<impl_p0.IOutputStream>): windows_core.Result<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>
 
     public func __winrtThunk_SaveAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.SaveAsync(InParam<_impl_l0.IOutputStream>(_impl_l0.IOutputStream.viewOf(arg0)))) {
+        match (this.SaveAsync(InParam<impl_p0.IOutputStream>(impl_p0.IOutputStream.viewOf(arg0)))) {
             case Result<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -6744,7 +6757,7 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkStrokeContainer", IInkStrokeContainer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeContainerVtbl", "IInkStrokeContainer", "IInkStrokeContainer_Impl", [InterfaceMethodSchema("BoundingRect", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddStroke", 7, [InterfaceParameterSchema("stroke", "CPointer<Unit>", "InParam<InkStroke>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DeleteSelected", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveSelected", 9, [InterfaceParameterSchema("translation", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SelectWithPolyLine", 10, [InterfaceParameterSchema("polyline", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_future.Point>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SelectWithLine", 11, [InterfaceParameterSchema("from", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("to", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopySelectedToClipboard", 12, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("PasteFromClipboard", 13, [InterfaceParameterSchema("position", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanPasteFromClipboard", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadAsync", 15, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<UInt64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsync", 16, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateRecognitionResults", 17, [InterfaceParameterSchema("recognitionResults", "CPointer<Unit>", "InParam<windows_collections.IVectorView<InkRecognitionResult>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetStrokes", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<InkStroke>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRecognitionResults", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<InkRecognitionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkStrokeContainer", IInkStrokeContainer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeContainerVtbl", "IInkStrokeContainer", "IInkStrokeContainer_Impl", [InterfaceMethodSchema("BoundingRect", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddStroke", 7, [InterfaceParameterSchema("stroke", "CPointer<Unit>", "InParam<InkStroke>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DeleteSelected", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveSelected", 9, [InterfaceParameterSchema("translation", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SelectWithPolyLine", 10, [InterfaceParameterSchema("polyline", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_future.Point>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SelectWithLine", 11, [InterfaceParameterSchema("from", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("to", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopySelectedToClipboard", 12, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("PasteFromClipboard", 13, [InterfaceParameterSchema("position", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.RectAbi>", "OutSlot<windows_future.Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanPasteFromClipboard", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadAsync", 15, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<UInt64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsync", 16, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateRecognitionResults", 17, [InterfaceParameterSchema("recognitionResults", "CPointer<Unit>", "InParam<windows_collections.IVectorView<InkRecognitionResult>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetStrokes", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<InkStroke>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRecognitionResults", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<InkRecognitionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInkStrokeContainer.runtimeType())
         return schema
     }
@@ -6843,7 +6856,7 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadAsync(inputStream: _impl_l0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
+    public unsafe func LoadAsync(inputStream: impl_p0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadAsync(asRaw(), inputStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6852,7 +6865,7 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsync(outputStream: _impl_l0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func SaveAsync(outputStream: impl_p0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveAsync(asRaw(), outputStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7031,7 +7044,7 @@ public class IInkStrokeContainer3 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkStrokeContainer3", IInkStrokeContainer3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeContainer3Vtbl", "IInkStrokeContainer3", "IInkStrokeContainer3_Impl", [InterfaceMethodSchema("SaveWithFormatAsync", 6, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inkPersistenceFormat", "InkPersistenceFormatAbi", "InkPersistenceFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStrokeById", 7, [InterfaceParameterSchema("id", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkStrokeContainer3", IInkStrokeContainer3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeContainer3Vtbl", "IInkStrokeContainer3", "IInkStrokeContainer3_Impl", [InterfaceMethodSchema("SaveWithFormatAsync", 6, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inkPersistenceFormat", "InkPersistenceFormatAbi", "InkPersistenceFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UInt32, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStrokeById", 7, [InterfaceParameterSchema("id", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkStroke>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInkStrokeContainer3.runtimeType())
         return schema
     }
@@ -7061,7 +7074,7 @@ public class IInkStrokeContainer3 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveWithFormatAsync(outputStream: _impl_l0.IOutputStream, inkPersistenceFormat: InkPersistenceFormat): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func SaveWithFormatAsync(outputStream: impl_p0.IOutputStream, inkPersistenceFormat: InkPersistenceFormat): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveWithFormatAsync(asRaw(), outputStream.asRaw(), windows_core.projectTypedAbi(inkPersistenceFormat, windows_core.typeMarker<InkPersistenceFormat>()), CPointer<CPointer<Unit>>(inout result__))
@@ -7145,7 +7158,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkStrokeInput", IInkStrokeInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeInputVtbl", "IInkStrokeInput", "IInkStrokeInput_Impl", [InterfaceMethodSchema("StrokeStarted", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeStarted", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeContinued", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeContinued", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeEnded", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeEnded", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeCanceled", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeCanceled", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkStrokeInput", IInkStrokeInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkStrokeInputVtbl", "IInkStrokeInput", "IInkStrokeInput_Impl", [InterfaceMethodSchema("StrokeStarted", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeStarted", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeContinued", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeContinued", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeEnded", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeEnded", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeCanceled", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStrokeCanceled", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInkStrokeInput.runtimeType())
         return schema
     }
@@ -7175,7 +7188,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeStarted(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeStarted(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.StrokeStarted(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7190,7 +7203,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeContinued(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeContinued(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.StrokeContinued(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7205,7 +7218,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeEnded(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeEnded(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.StrokeEnded(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7220,7 +7233,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeCanceled(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeCanceled(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.StrokeCanceled(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7599,7 +7612,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInkUnprocessedInput", IInkUnprocessedInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkUnprocessedInputVtbl", "IInkUnprocessedInput", "IInkUnprocessedInput_Impl", [InterfaceMethodSchema("PointerEntered", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerEntered", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerHovered", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerHovered", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerExited", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerExited", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerPressed", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerPressed", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerMoved", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerMoved", 15, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerReleased", 16, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerReleased", 17, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerLost", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerLost", 19, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInkUnprocessedInput", IInkUnprocessedInput.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInkUnprocessedInputVtbl", "IInkUnprocessedInput", "IInkUnprocessedInput_Impl", [InterfaceMethodSchema("PointerEntered", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerEntered", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerHovered", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerHovered", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerExited", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerExited", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerPressed", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerPressed", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerMoved", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerMoved", 15, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerReleased", 16, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerReleased", 17, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerLost", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerLost", 19, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInkUnprocessedInput.runtimeType())
         return schema
     }
@@ -7629,7 +7642,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerEntered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerEntered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerEntered(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7644,7 +7657,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerHovered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerHovered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerHovered(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7659,7 +7672,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerExited(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerExited(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerExited(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7674,7 +7687,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerPressed(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerPressed(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerPressed(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7689,7 +7702,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerMoved(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerMoved(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerMoved(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7704,7 +7717,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerReleased(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerReleased(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerReleased(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -7719,7 +7732,7 @@ public class IInkUnprocessedInput <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerLost(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -8081,17 +8094,17 @@ public class InkManager <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerDown(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func ProcessPointerDown(pointerPoint: impl_p1.PointerPoint): Unit {
         defaultInterface().ProcessPointerDown(pointerPoint)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerUpdate(pointerPoint: _impl_l1.PointerPoint): IInspectable {
+    public unsafe func ProcessPointerUpdate(pointerPoint: impl_p1.PointerPoint): IInspectable {
         return defaultInterface().ProcessPointerUpdate(pointerPoint)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func ProcessPointerUp(pointerPoint: _impl_l1.PointerPoint): windows_future.Rect {
+    public unsafe func ProcessPointerUp(pointerPoint: impl_p1.PointerPoint): windows_future.Rect {
         return defaultInterface().ProcessPointerUp(pointerPoint)
     }
 
@@ -8142,12 +8155,12 @@ public class InkManager <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadAsync(inputStream: _impl_l0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
+    public unsafe func LoadAsync(inputStream: impl_p0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
         return asIInkStrokeContainer().LoadAsync(inputStream)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsync(outputStream: _impl_l0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func SaveAsync(outputStream: impl_p0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         return asIInkStrokeContainer().SaveAsync(outputStream)
     }
 
@@ -8395,12 +8408,12 @@ public class InkPresenter <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func InputDeviceTypes(): _impl_l0.CoreInputDeviceTypes {
+    public unsafe func InputDeviceTypes(): impl_p0.CoreInputDeviceTypes {
         return defaultInterface().InputDeviceTypes()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func SetInputDeviceTypes(value: _impl_l0.CoreInputDeviceTypes): Unit {
+    public unsafe func SetInputDeviceTypes(value: impl_p0.CoreInputDeviceTypes): Unit {
         defaultInterface().SetInputDeviceTypes(value)
     }
 
@@ -9254,17 +9267,17 @@ public class InkStrokeBuilder <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func BeginStroke(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func BeginStroke(pointerPoint: impl_p1.PointerPoint): Unit {
         defaultInterface().BeginStroke(pointerPoint)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func AppendToStroke(pointerPoint: _impl_l1.PointerPoint): _impl_l1.PointerPoint {
+    public unsafe func AppendToStroke(pointerPoint: impl_p1.PointerPoint): impl_p1.PointerPoint {
         return defaultInterface().AppendToStroke(pointerPoint)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func EndStroke(pointerPoint: _impl_l1.PointerPoint): InkStroke {
+    public unsafe func EndStroke(pointerPoint: impl_p1.PointerPoint): InkStroke {
         return defaultInterface().EndStroke(pointerPoint)
     }
 
@@ -9410,12 +9423,12 @@ public class InkStrokeContainer <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadAsync(inputStream: _impl_l0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
+    public unsafe func LoadAsync(inputStream: impl_p0.IInputStream): windows_future.IAsyncActionWithProgress<UInt64> {
         return defaultInterface().LoadAsync(inputStream)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsync(outputStream: _impl_l0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func SaveAsync(outputStream: impl_p0.IOutputStream): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         return defaultInterface().SaveAsync(outputStream)
     }
 
@@ -9523,7 +9536,7 @@ public class InkStrokeInput <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeStarted(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeStarted(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().StrokeStarted(handler)
     }
 
@@ -9532,7 +9545,7 @@ public class InkStrokeInput <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeContinued(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeContinued(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().StrokeContinued(handler)
     }
 
@@ -9541,7 +9554,7 @@ public class InkStrokeInput <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeEnded(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeEnded(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().StrokeEnded(handler)
     }
 
@@ -9550,7 +9563,7 @@ public class InkStrokeInput <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func StrokeCanceled(handler: Foundation.TypedEventHandler<InkStrokeInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func StrokeCanceled(handler: Foundation.TypedEventHandler<InkStrokeInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().StrokeCanceled(handler)
     }
 
@@ -9922,7 +9935,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerEntered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerEntered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerEntered(handler)
     }
 
@@ -9931,7 +9944,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerHovered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerHovered(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerHovered(handler)
     }
 
@@ -9940,7 +9953,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerExited(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerExited(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerExited(handler)
     }
 
@@ -9949,7 +9962,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerPressed(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerPressed(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerPressed(handler)
     }
 
@@ -9958,7 +9971,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerMoved(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerMoved(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerMoved(handler)
     }
 
@@ -9967,7 +9980,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerReleased(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerReleased(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerReleased(handler)
     }
 
@@ -9976,7 +9989,7 @@ public class InkUnprocessedInput <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<InkUnprocessedInput, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<InkUnprocessedInput, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerLost(handler)
     }
 

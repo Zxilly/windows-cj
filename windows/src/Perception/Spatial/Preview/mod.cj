@@ -4,13 +4,21 @@
 package windows.Perception.Spatial.Preview
 
 import std.collection.*
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Perception_Spatial_Preview == "on" && Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
+@When[Windows_Perception_Spatial_Preview == "on"]
 import windows_numerics as windows_numerics
 
 

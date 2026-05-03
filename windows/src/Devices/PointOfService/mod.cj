@@ -4,17 +4,29 @@
 package windows.Devices.PointOfService
 
 import std.collection.*
+@When[Windows_Devices_PointOfService == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_PointOfService == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_PointOfService == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_PointOfService == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_PointOfService == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_PointOfService == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_PointOfService == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Devices_PointOfService == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_PointOfService == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_PointOfService == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Devices_PointOfService == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_PointOfService == "on"]
 import windows_future as windows_future
 
 
@@ -503,7 +515,7 @@ public class IBarcodeScannerImagePreviewReceivedEventArgs <: InterfaceWrapperBas
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBarcodeScannerImagePreviewReceivedEventArgs", IBarcodeScannerImagePreviewReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerImagePreviewReceivedEventArgsVtbl", "IBarcodeScannerImagePreviewReceivedEventArgs", "IBarcodeScannerImagePreviewReceivedEventArgs_Impl", [InterfaceMethodSchema("Preview", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBarcodeScannerImagePreviewReceivedEventArgs", IBarcodeScannerImagePreviewReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerImagePreviewReceivedEventArgsVtbl", "IBarcodeScannerImagePreviewReceivedEventArgs", "IBarcodeScannerImagePreviewReceivedEventArgs_Impl", [InterfaceMethodSchema("Preview", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBarcodeScannerImagePreviewReceivedEventArgs.runtimeType())
         return schema
     }
@@ -533,12 +545,12 @@ public class IBarcodeScannerImagePreviewReceivedEventArgs <: InterfaceWrapperBas
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Preview(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func Preview(): impl_p1.IRandomAccessStreamWithContentType {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Preview(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
     }
 }
 
@@ -597,7 +609,7 @@ public class IBarcodeScannerReport <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBarcodeScannerReport", IBarcodeScannerReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerReportVtbl", "IBarcodeScannerReport", "IBarcodeScannerReport_Impl", [InterfaceMethodSchema("ScanDataType", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanDataLabel", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBarcodeScannerReport", IBarcodeScannerReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerReportVtbl", "IBarcodeScannerReport", "IBarcodeScannerReport_Impl", [InterfaceMethodSchema("ScanDataType", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanDataLabel", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBarcodeScannerReport.runtimeType())
         return schema
     }
@@ -635,21 +647,21 @@ public class IBarcodeScannerReport <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanData(): _impl_l0.IBuffer {
+    public unsafe func ScanData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScanData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanDataLabel(): _impl_l0.IBuffer {
+    public unsafe func ScanDataLabel(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScanDataLabel(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -2874,7 +2886,7 @@ public class ILineDisplayCustomGlyphs <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILineDisplayCustomGlyphs", ILineDisplayCustomGlyphs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineDisplayCustomGlyphsVtbl", "ILineDisplayCustomGlyphs", "ILineDisplayCustomGlyphs_Impl", [InterfaceMethodSchema("SizeInPixels", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedGlyphCodes", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryRedefineAsync", 8, [InterfaceParameterSchema("glyphCode", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("glyphData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILineDisplayCustomGlyphs", ILineDisplayCustomGlyphs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineDisplayCustomGlyphsVtbl", "ILineDisplayCustomGlyphs", "ILineDisplayCustomGlyphs_Impl", [InterfaceMethodSchema("SizeInPixels", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedGlyphCodes", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryRedefineAsync", 8, [InterfaceParameterSchema("glyphCode", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("glyphData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILineDisplayCustomGlyphs.runtimeType())
         return schema
     }
@@ -2921,7 +2933,7 @@ public class ILineDisplayCustomGlyphs <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TryRedefineAsync(glyphCode: UInt32, glyphData: _impl_l0.IBuffer): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryRedefineAsync(glyphCode: UInt32, glyphData: impl_p0.IBuffer): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryRedefineAsync(asRaw(), glyphCode, glyphData.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3400,7 +3412,7 @@ public class IMagneticStripeReaderTrackData <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMagneticStripeReaderTrackData", IMagneticStripeReaderTrackData.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderTrackDataVtbl", "IMagneticStripeReaderTrackData", "IMagneticStripeReaderTrackData_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DiscretionaryData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncryptedData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMagneticStripeReaderTrackData", IMagneticStripeReaderTrackData.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderTrackDataVtbl", "IMagneticStripeReaderTrackData", "IMagneticStripeReaderTrackData_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DiscretionaryData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncryptedData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMagneticStripeReaderTrackData.runtimeType())
         return schema
     }
@@ -3430,30 +3442,30 @@ public class IMagneticStripeReaderTrackData <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DiscretionaryData(): _impl_l0.IBuffer {
+    public unsafe func DiscretionaryData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DiscretionaryData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func EncryptedData(): _impl_l0.IBuffer {
+    public unsafe func EncryptedData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.EncryptedData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -4357,7 +4369,7 @@ public class LineDisplayCustomGlyphs <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TryRedefineAsync(glyphCode: UInt32, glyphData: _impl_l0.IBuffer): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryRedefineAsync(glyphCode: UInt32, glyphData: impl_p0.IBuffer): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TryRedefineAsync(glyphCode, glyphData)
     }
 }
@@ -5455,17 +5467,17 @@ public class MagneticStripeReaderTrackData <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DiscretionaryData(): _impl_l0.IBuffer {
+    public unsafe func DiscretionaryData(): impl_p0.IBuffer {
         return defaultInterface().DiscretionaryData()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func EncryptedData(): _impl_l0.IBuffer {
+    public unsafe func EncryptedData(): impl_p0.IBuffer {
         return defaultInterface().EncryptedData()
     }
 }
@@ -7138,7 +7150,7 @@ public class BarcodeScannerImagePreviewReceivedEventArgs <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Preview(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func Preview(): impl_p1.IRandomAccessStreamWithContentType {
         return defaultInterface().Preview()
     }
 }
@@ -12664,7 +12676,7 @@ public class IMagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMagneticStripeReaderReport", IMagneticStripeReaderReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderReportVtbl", "IMagneticStripeReaderReport", "IMagneticStripeReaderReport_Impl", [InterfaceMethodSchema("CardType", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track1", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track2", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track3", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track4", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CardAuthenticationData", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CardAuthenticationDataLength", 13, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalSecurityInformation", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMagneticStripeReaderReport", IMagneticStripeReaderReport.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderReportVtbl", "IMagneticStripeReaderReport", "IMagneticStripeReaderReport_Impl", [InterfaceMethodSchema("CardType", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track1", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track2", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track3", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Track4", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderTrackData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CardAuthenticationData", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CardAuthenticationDataLength", 13, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalSecurityInformation", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMagneticStripeReaderReport.runtimeType())
         return schema
     }
@@ -12743,12 +12755,12 @@ public class IMagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CardAuthenticationData(): _impl_l0.IBuffer {
+    public unsafe func CardAuthenticationData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CardAuthenticationData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CardAuthenticationDataLength(): UInt32 {
@@ -12760,12 +12772,12 @@ public class IMagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AdditionalSecurityInformation(): _impl_l0.IBuffer {
+    public unsafe func AdditionalSecurityInformation(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AdditionalSecurityInformation(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -15407,7 +15419,7 @@ public class MagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CardAuthenticationData(): _impl_l0.IBuffer {
+    public unsafe func CardAuthenticationData(): impl_p0.IBuffer {
         return defaultInterface().CardAuthenticationData()
     }
 
@@ -15416,7 +15428,7 @@ public class MagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AdditionalSecurityInformation(): _impl_l0.IBuffer {
+    public unsafe func AdditionalSecurityInformation(): impl_p0.IBuffer {
         return defaultInterface().AdditionalSecurityInformation()
     }
 }
@@ -19616,7 +19628,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILineDisplayWindow2", ILineDisplayWindow2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineDisplayWindow2Vtbl", "ILineDisplayWindow2", "ILineDisplayWindow2_Impl", [InterfaceMethodSchema("Cursor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayCursor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Marquee", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayMarquee>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadCharacterAtCursorAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStoredBitmapAtCursorAsync", 9, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<LineDisplayStoredBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorAsync", 10, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync", 11, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync", 12, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtPointAsync", 13, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offsetInPixels", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtPointWithWidthAsync", 14, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offsetInPixels", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILineDisplayWindow2", ILineDisplayWindow2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineDisplayWindow2Vtbl", "ILineDisplayWindow2", "ILineDisplayWindow2_Impl", [InterfaceMethodSchema("Cursor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayCursor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Marquee", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayMarquee>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadCharacterAtCursorAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStoredBitmapAtCursorAsync", 9, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<LineDisplayStoredBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorAsync", 10, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync", 11, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync", 12, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtPointAsync", 13, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offsetInPixels", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryDisplayStorageFileBitmapAtPointWithWidthAsync", 14, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offsetInPixels", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILineDisplayWindow2.runtimeType())
         return schema
     }
@@ -19678,7 +19690,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryDisplayStorageFileBitmapAtCursorAsync(bitmap: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryDisplayStorageFileBitmapAtCursorAsync(bitmap: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryDisplayStorageFileBitmapAtCursorAsync(asRaw(), bitmap.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -19687,7 +19699,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync(bitmap: impl_p1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(horizontalAlignment, windows_core.typeMarker<LineDisplayHorizontalAlignment>()), windows_core.projectTypedAbi(verticalAlignment, windows_core.typeMarker<LineDisplayVerticalAlignment>()), CPointer<CPointer<Unit>>(inout result__))
@@ -19696,7 +19708,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync(bitmap: impl_p1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(horizontalAlignment, windows_core.typeMarker<LineDisplayHorizontalAlignment>()), windows_core.projectTypedAbi(verticalAlignment, windows_core.typeMarker<LineDisplayVerticalAlignment>()), widthInPixels, CPointer<CPointer<Unit>>(inout result__))
@@ -19705,7 +19717,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryDisplayStorageFileBitmapAtPointAsync(bitmap: _impl_l1.StorageFile, offsetInPixels: windows_future.Point): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryDisplayStorageFileBitmapAtPointAsync(bitmap: impl_p1.StorageFile, offsetInPixels: windows_future.Point): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryDisplayStorageFileBitmapAtPointAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(offsetInPixels, windows_core.typeMarker<windows_future.Point>()), CPointer<CPointer<Unit>>(inout result__))
@@ -19714,7 +19726,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryDisplayStorageFileBitmapAtPointWithWidthAsync(bitmap: _impl_l1.StorageFile, offsetInPixels: windows_future.Point, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryDisplayStorageFileBitmapAtPointWithWidthAsync(bitmap: impl_p1.StorageFile, offsetInPixels: windows_future.Point, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryDisplayStorageFileBitmapAtPointWithWidthAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(offsetInPixels, windows_core.typeMarker<windows_future.Point>()), widthInPixels, CPointer<CPointer<Unit>>(inout result__))
@@ -20888,7 +20900,7 @@ public class BarcodeScanner <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().RetrieveStatisticsAsync(statisticsCategories)
     }
 
@@ -21242,17 +21254,17 @@ public class BarcodeScannerReport <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanData(): _impl_l0.IBuffer {
+    public unsafe func ScanData(): impl_p0.IBuffer {
         return defaultInterface().ScanData()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanDataLabel(): _impl_l0.IBuffer {
+    public unsafe func ScanDataLabel(): impl_p0.IBuffer {
         return defaultInterface().ScanDataLabel()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateInstance(scanDataType: UInt32, scanData: _impl_l0.IBuffer, scanDataLabel: _impl_l0.IBuffer): BarcodeScannerReport {
+    public static unsafe func CreateInstance(scanDataType: UInt32, scanData: impl_p0.IBuffer, scanDataLabel: impl_p0.IBuffer): BarcodeScannerReport {
         var result__: Option<BarcodeScannerReport> = Option<BarcodeScannerReport>.None
         try (factory__ = windows_core.factory<BarcodeScannerReport, IBarcodeScannerReportFactory>().unwrap()) {
             result__ = Some(factory__.CreateInstance(scanDataType, scanData, scanDataLabel))
@@ -22558,7 +22570,7 @@ public class ClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveDeviceAuthenticationDataAsync(): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveDeviceAuthenticationDataAsync(): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().RetrieveDeviceAuthenticationDataAsync()
     }
 
@@ -22887,7 +22899,7 @@ public class IBarcodeScanner <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBarcodeScanner", IBarcodeScanner.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerVtbl", "IBarcodeScanner", "IBarcodeScanner_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Capabilities", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BarcodeScannerCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClaimScannerAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ClaimedBarcodeScanner>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 9, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedSymbologiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSymbologySupportedAsync", 11, [InterfaceParameterSchema("barcodeSymbology", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveStatisticsAsync", 12, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedProfiles", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsProfileSupported", 14, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<BarcodeScanner, BarcodeScannerStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBarcodeScanner", IBarcodeScanner.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerVtbl", "IBarcodeScanner", "IBarcodeScanner_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Capabilities", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BarcodeScannerCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClaimScannerAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ClaimedBarcodeScanner>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 9, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedSymbologiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSymbologySupportedAsync", 11, [InterfaceParameterSchema("barcodeSymbology", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveStatisticsAsync", 12, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedProfiles", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsProfileSupported", 14, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<BarcodeScanner, BarcodeScannerStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IBarcodeScanner.runtimeType())
         return schema
     }
@@ -22966,12 +22978,12 @@ public class IBarcodeScanner <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RetrieveStatisticsAsync(asRaw(), statisticsCategories.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -23244,7 +23256,7 @@ public class IBarcodeScannerReportFactory <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBarcodeScannerReportFactory", IBarcodeScannerReportFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerReportFactoryVtbl", "IBarcodeScannerReportFactory", "IBarcodeScannerReportFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("scanDataType", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("scanData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("scanDataLabel", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BarcodeScannerReport>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBarcodeScannerReportFactory", IBarcodeScannerReportFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerReportFactoryVtbl", "IBarcodeScannerReportFactory", "IBarcodeScannerReportFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("scanDataType", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("scanData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("scanDataLabel", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BarcodeScannerReport>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBarcodeScannerReportFactory.runtimeType())
         return schema
     }
@@ -23274,7 +23286,7 @@ public class IBarcodeScannerReportFactory <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateInstance(scanDataType: UInt32, scanData: _impl_l0.IBuffer, scanDataLabel: _impl_l0.IBuffer): BarcodeScannerReport {
+    public unsafe func CreateInstance(scanDataType: UInt32, scanData: impl_p0.IBuffer, scanDataLabel: impl_p0.IBuffer): BarcodeScannerReport {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInstance(asRaw(), scanDataType, scanData.asRaw(), scanDataLabel.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -24986,7 +24998,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IClaimedLineDisplay2", IClaimedLineDisplay2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IClaimedLineDisplay2Vtbl", "IClaimedLineDisplay2", "IClaimedLineDisplay2_Impl", [InterfaceMethodSchema("GetStatisticsAsync", 6, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 7, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckPowerStatusAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayPowerStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedLineDisplay, LineDisplayStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SupportedScreenSizesInCharacters", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_future.Size>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxBitmapSizeInPixels", 12, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedCharacterSets", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomGlyphs", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayCustomGlyphs>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAttributes", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayAttributes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateAttributesAsync", 16, [InterfaceParameterSchema("attributes", "CPointer<Unit>", "InParam<LineDisplayAttributes>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetDescriptorAsync", 17, [InterfaceParameterSchema("descriptor", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("descriptorState", "LineDisplayDescriptorStateAbi", "LineDisplayDescriptorState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryClearDescriptorsAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateWindowAsync", 19, [InterfaceParameterSchema("viewport", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("windowSize", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayWindow>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapAsync", 20, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapWithAlignmentAsync", 21, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapWithAlignmentAndWidthAsync", 22, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IClaimedLineDisplay2", IClaimedLineDisplay2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IClaimedLineDisplay2Vtbl", "IClaimedLineDisplay2", "IClaimedLineDisplay2_Impl", [InterfaceMethodSchema("GetStatisticsAsync", 6, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 7, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckPowerStatusAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayPowerStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedLineDisplay, LineDisplayStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SupportedScreenSizesInCharacters", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_future.Size>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxBitmapSizeInPixels", 12, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedCharacterSets", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomGlyphs", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayCustomGlyphs>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAttributes", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LineDisplayAttributes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateAttributesAsync", 16, [InterfaceParameterSchema("attributes", "CPointer<Unit>", "InParam<LineDisplayAttributes>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetDescriptorAsync", 17, [InterfaceParameterSchema("descriptor", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("descriptorState", "LineDisplayDescriptorStateAbi", "LineDisplayDescriptorState", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryClearDescriptorsAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateWindowAsync", 19, [InterfaceParameterSchema("viewport", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("windowSize", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayWindow>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapAsync", 20, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapWithAlignmentAsync", 21, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryStoreStorageFileBitmapWithAlignmentAndWidthAsync", 22, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("horizontalAlignment", "LineDisplayHorizontalAlignmentAbi", "LineDisplayHorizontalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalAlignment", "LineDisplayVerticalAlignmentAbi", "LineDisplayVerticalAlignment", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("widthInPixels", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LineDisplayStoredBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IClaimedLineDisplay2.runtimeType())
         return schema
     }
@@ -25129,7 +25141,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryStoreStorageFileBitmapAsync(bitmap: _impl_l1.StorageFile): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
+    public unsafe func TryStoreStorageFileBitmapAsync(bitmap: impl_p1.StorageFile): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryStoreStorageFileBitmapAsync(asRaw(), bitmap.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -25138,7 +25150,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryStoreStorageFileBitmapWithAlignmentAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
+    public unsafe func TryStoreStorageFileBitmapWithAlignmentAsync(bitmap: impl_p1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryStoreStorageFileBitmapWithAlignmentAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(horizontalAlignment, windows_core.typeMarker<LineDisplayHorizontalAlignment>()), windows_core.projectTypedAbi(verticalAlignment, windows_core.typeMarker<LineDisplayVerticalAlignment>()), CPointer<CPointer<Unit>>(inout result__))
@@ -25147,7 +25159,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryStoreStorageFileBitmapWithAlignmentAndWidthAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
+    public unsafe func TryStoreStorageFileBitmapWithAlignmentAndWidthAsync(bitmap: impl_p1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryStoreStorageFileBitmapWithAlignmentAndWidthAsync(asRaw(), bitmap.asRaw(), windows_core.projectTypedAbi(horizontalAlignment, windows_core.typeMarker<LineDisplayHorizontalAlignment>()), windows_core.projectTypedAbi(verticalAlignment, windows_core.typeMarker<LineDisplayVerticalAlignment>()), widthInPixels, CPointer<CPointer<Unit>>(inout result__))
@@ -25439,7 +25451,7 @@ public class IClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IClaimedMagneticStripeReader", IClaimedMagneticStripeReader.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IClaimedMagneticStripeReaderVtbl", "IClaimedMagneticStripeReader", "IClaimedMagneticStripeReader_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsDisabledOnDataReceived", 8, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsDisabledOnDataReceived", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsDecodeDataEnabled", 10, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsDecodeDataEnabled", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDeviceAuthenticated", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataEncryptionAlgorithm", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DataEncryptionAlgorithm", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTracksToRead", 15, [InterfaceParameterSchema("value", "MagneticStripeReaderTrackIdsAbi", "MagneticStripeReaderTrackIds", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TracksToRead", 16, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderTrackIdsAbi>", "OutSlot<MagneticStripeReaderTrackIds>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsTransmitSentinelsEnabled", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsTransmitSentinelsEnabled", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EnableAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisableAsync", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetainDevice", 21, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetErrorReportingType", 22, [InterfaceParameterSchema("value", "MagneticStripeReaderErrorReportingTypeAbi", "MagneticStripeReaderErrorReportingType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RetrieveDeviceAuthenticationDataAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticateDeviceAsync", 24, [InterfaceParameterSchema("responseToken", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeAuthenticateDeviceAsync", 25, [InterfaceParameterSchema("responseToken", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateKeyAsync", 26, [InterfaceParameterSchema("key", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResetStatisticsAsync", 27, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateStatisticsAsync", 28, [InterfaceParameterSchema("statistics", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BankCardDataReceived", 29, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderBankCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveBankCardDataReceived", 30, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AamvaCardDataReceived", 31, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderAamvaCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAamvaCardDataReceived", 32, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VendorSpecificDataReceived", 33, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveVendorSpecificDataReceived", 34, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReleaseDeviceRequested", 35, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.EventHandler<ClaimedMagneticStripeReader>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveReleaseDeviceRequested", 36, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ErrorOccurred", 37, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderErrorOccurredEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveErrorOccurred", 38, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IClaimedMagneticStripeReader", IClaimedMagneticStripeReader.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IClaimedMagneticStripeReaderVtbl", "IClaimedMagneticStripeReader", "IClaimedMagneticStripeReader_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsDisabledOnDataReceived", 8, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsDisabledOnDataReceived", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsDecodeDataEnabled", 10, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsDecodeDataEnabled", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDeviceAuthenticated", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataEncryptionAlgorithm", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DataEncryptionAlgorithm", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTracksToRead", 15, [InterfaceParameterSchema("value", "MagneticStripeReaderTrackIdsAbi", "MagneticStripeReaderTrackIds", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TracksToRead", 16, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderTrackIdsAbi>", "OutSlot<MagneticStripeReaderTrackIds>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsTransmitSentinelsEnabled", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsTransmitSentinelsEnabled", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EnableAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisableAsync", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetainDevice", 21, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetErrorReportingType", 22, [InterfaceParameterSchema("value", "MagneticStripeReaderErrorReportingTypeAbi", "MagneticStripeReaderErrorReportingType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RetrieveDeviceAuthenticationDataAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticateDeviceAsync", 24, [InterfaceParameterSchema("responseToken", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeAuthenticateDeviceAsync", 25, [InterfaceParameterSchema("responseToken", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateKeyAsync", 26, [InterfaceParameterSchema("key", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResetStatisticsAsync", 27, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateStatisticsAsync", 28, [InterfaceParameterSchema("statistics", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BankCardDataReceived", 29, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderBankCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveBankCardDataReceived", 30, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AamvaCardDataReceived", 31, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderAamvaCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAamvaCardDataReceived", 32, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VendorSpecificDataReceived", 33, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveVendorSpecificDataReceived", 34, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReleaseDeviceRequested", 35, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.EventHandler<ClaimedMagneticStripeReader>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveReleaseDeviceRequested", 36, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ErrorOccurred", 37, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderErrorOccurredEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveErrorOccurred", 38, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IClaimedMagneticStripeReader.runtimeType())
         return schema
     }
@@ -25591,12 +25603,12 @@ public class IClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveDeviceAuthenticationDataAsync(): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveDeviceAuthenticationDataAsync(): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RetrieveDeviceAuthenticationDataAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     public unsafe func AuthenticateDeviceAsync(responseTokenSize: UInt32, responseToken: CPointer<UInt8>): windows_future.IAsyncAction {
@@ -26462,7 +26474,7 @@ public class IMagneticStripeReader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMagneticStripeReader", IMagneticStripeReader.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderVtbl", "IMagneticStripeReader", "IMagneticStripeReader_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Capabilities", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedCardTypes", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt32>>", "OutSlot<CPointer<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceAuthenticationProtocol", 9, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderAuthenticationProtocolAbi>", "OutSlot<MagneticStripeReaderAuthenticationProtocol>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 10, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClaimReaderAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ClaimedMagneticStripeReader>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveStatisticsAsync", 12, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetErrorReportingType", 13, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderErrorReportingTypeAbi>", "OutSlot<MagneticStripeReaderErrorReportingType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MagneticStripeReader, MagneticStripeReaderStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMagneticStripeReader", IMagneticStripeReader.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMagneticStripeReaderVtbl", "IMagneticStripeReader", "IMagneticStripeReader_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Capabilities", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MagneticStripeReaderCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedCardTypes", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt32>>", "OutSlot<CPointer<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceAuthenticationProtocol", 9, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderAuthenticationProtocolAbi>", "OutSlot<MagneticStripeReaderAuthenticationProtocol>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckHealthAsync", 10, [InterfaceParameterSchema("level", "UnifiedPosHealthCheckLevelAbi", "UnifiedPosHealthCheckLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClaimReaderAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ClaimedMagneticStripeReader>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveStatisticsAsync", 12, [InterfaceParameterSchema("statisticsCategories", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetErrorReportingType", 13, [InterfaceParameterSchema("result", "CPointer<MagneticStripeReaderErrorReportingTypeAbi>", "OutSlot<MagneticStripeReaderErrorReportingType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusUpdated", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MagneticStripeReader, MagneticStripeReaderStatusUpdatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusUpdated", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMagneticStripeReader.runtimeType())
         return schema
     }
@@ -26541,12 +26553,12 @@ public class IMagneticStripeReader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RetrieveStatisticsAsync(asRaw(), statisticsCategories.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     public unsafe func GetErrorReportingType(): MagneticStripeReaderErrorReportingType {
@@ -27459,7 +27471,7 @@ public class MagneticStripeReader <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().RetrieveStatisticsAsync(statisticsCategories)
     }
 

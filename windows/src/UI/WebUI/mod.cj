@@ -4,22 +4,39 @@
 package windows.UI.WebUI
 
 import std.collection.*
+@When[Windows_UI_WebUI == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_UI_WebUI == "on"]
 import windows_core as windows_core
+@When[Windows_UI_WebUI == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_WebUI == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_WebUI == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_WebUI == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_WebUI == "on" && Windows_Devices_Printers_Extensions == "on"]
 import windows.Devices.Printers.Extensions as Devices_Printers_Extensions
+@When[Windows_UI_WebUI == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_WebUI == "on" && Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
+@When[Windows_UI_WebUI == "on" && Windows_Security_Authentication_Web == "on"]
 import windows.Security.Authentication.Web as Security_Authentication_Web
+@When[Windows_UI_WebUI == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_UI_WebUI == "on" && Windows_Web_UI == "on"]
 import windows.Web.UI as Web_UI
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_UI_WebUI == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_WebUI == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_WebUI == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_UI_WebUI == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_WebUI == "on"]
 import windows_future as windows_future
 
 
@@ -59,7 +76,7 @@ public class ActivatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ActivatedEventHandler", ActivatedEventHandler.iid(), IUnknown.descriptorSchema(), "ActivatedEventHandlerVtbl", "ActivatedEventHandler", "ActivatedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("eventArgs", "CPointer<Unit>", "InParam<_impl_l0.IActivatedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ActivatedEventHandler", ActivatedEventHandler.iid(), IUnknown.descriptorSchema(), "ActivatedEventHandlerVtbl", "ActivatedEventHandler", "ActivatedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("eventArgs", "CPointer<Unit>", "InParam<impl_p0.IActivatedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ActivatedEventHandler.runtimeType())
         return schema
     }
@@ -85,13 +102,13 @@ public class ActivatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func Invoke(sender: IInspectable, eventArgs: _impl_l0.IActivatedEventArgs): Unit {
+    public unsafe func Invoke(sender: IInspectable, eventArgs: impl_p0.IActivatedEventArgs): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), eventArgs.asRaw())
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (InParam<IInspectable>, InParam<_impl_l0.IActivatedEventArgs>) -> Unit): ActivatedEventHandler {
+    public static func new(invoke: (InParam<IInspectable>, InParam<impl_p0.IActivatedEventArgs>) -> Unit): ActivatedEventHandler {
         let box = ActivatedEventHandlerBox(invoke)
         let object = ComObject<ActivatedEventHandlerBox>.new(box, [ActivatedEventHandler.descriptorSchema()], box.vtblPtr())
         return object.intoInterface(ActivatedEventHandler.descriptor())
@@ -102,30 +119,26 @@ public class ActivatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
 extend ActivatedEventHandler <: windows_core.Interface<ActivatedEventHandler> {}
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
-private open class ActivatedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface ActivatedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
-private open class ActivatedEventHandlerInvoker <: ActivatedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l0.IActivatedEventArgs>): Unit {
-        ()
-    }
+private interface ActivatedEventHandlerInvoker <: ActivatedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<impl_p0.IActivatedEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<_impl_l0.IActivatedEventArgs>(_impl_l0.IActivatedEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<impl_p0.IActivatedEventArgs>(impl_p0.IActivatedEventArgs.viewOf(arg1)))
         return S_OK.value
     }
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private class ActivatedEventHandlerBox <: ActivatedEventHandlerInvoker {
-    public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.IActivatedEventArgs>) -> Unit
+    public let invoke_: (InParam<IInspectable>, InParam<impl_p0.IActivatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ActivatedEventHandlerVtbl>
 
-    public init(invoke: (InParam<IInspectable>, InParam<_impl_l0.IActivatedEventArgs>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, InParam<impl_p0.IActivatedEventArgs>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<ActivatedEventHandlerVtbl>(1, { _ => buildActivatedEventHandlerBoxVtbl() })) }
     }
@@ -134,7 +147,7 @@ private class ActivatedEventHandlerBox <: ActivatedEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l0.IActivatedEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<impl_p0.IActivatedEventArgs>): Unit {
         invoke_(sender, eventArgs)
     }
 }
@@ -173,7 +186,7 @@ public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface
     }
 
     public static func iid(): GUID {
-        _impl_l1.IBackgroundActivatedEventArgs.iid()
+        impl_p0.IBackgroundActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -181,12 +194,12 @@ public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<BackgroundActivatedEventArgs> {
-        let ancestors = [_impl_l1.IBackgroundActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<BackgroundActivatedEventArgs>("BackgroundActivatedEventArgs", _impl_l1.IBackgroundActivatedEventArgs.iid(), ancestors, { raw => BackgroundActivatedEventArgs.fromAbiTake(raw) }, { raw => BackgroundActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IBackgroundActivatedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<BackgroundActivatedEventArgs>("BackgroundActivatedEventArgs", impl_p0.IBackgroundActivatedEventArgs.iid(), ancestors, { raw => BackgroundActivatedEventArgs.fromAbiTake(raw) }, { raw => BackgroundActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IBackgroundActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IBackgroundActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IBackgroundActivatedEventArgs {
+        match (unsafe { query(impl_p0.IBackgroundActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -201,7 +214,7 @@ public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.BackgroundActivatedEventArgs", BackgroundActivatedEventArgs.signature(), _impl_l1.IBackgroundActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.BackgroundActivatedEventArgs", BackgroundActivatedEventArgs.signature(), impl_p0.IBackgroundActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -216,15 +229,15 @@ public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIBackgroundActivatedEventArgs(): _impl_l1.IBackgroundActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IBackgroundActivatedEventArgs.descriptor()) }) {
+    public func asIBackgroundActivatedEventArgs(): impl_p0.IBackgroundActivatedEventArgs {
+        match (unsafe { query(impl_p0.IBackgroundActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_Background == "on"]
-    public unsafe func TaskInstance(): _impl_l1.IBackgroundTaskInstance {
+    public unsafe func TaskInstance(): impl_p0.IBackgroundTaskInstance {
         return defaultInterface().TaskInstance()
     }
 }
@@ -283,7 +296,7 @@ public class BackgroundActivatedEventHandler <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("BackgroundActivatedEventHandler", BackgroundActivatedEventHandler.iid(), IUnknown.descriptorSchema(), "BackgroundActivatedEventHandlerVtbl", "BackgroundActivatedEventHandler", "BackgroundActivatedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("eventArgs", "CPointer<Unit>", "InParam<_impl_l1.IBackgroundActivatedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("BackgroundActivatedEventHandler", BackgroundActivatedEventHandler.iid(), IUnknown.descriptorSchema(), "BackgroundActivatedEventHandlerVtbl", "BackgroundActivatedEventHandler", "BackgroundActivatedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("eventArgs", "CPointer<Unit>", "InParam<impl_p0.IBackgroundActivatedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(BackgroundActivatedEventHandler.runtimeType())
         return schema
     }
@@ -309,13 +322,13 @@ public class BackgroundActivatedEventHandler <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func Invoke(sender: IInspectable, eventArgs: _impl_l1.IBackgroundActivatedEventArgs): Unit {
+    public unsafe func Invoke(sender: IInspectable, eventArgs: impl_p0.IBackgroundActivatedEventArgs): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), eventArgs.asRaw())
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (InParam<IInspectable>, InParam<_impl_l1.IBackgroundActivatedEventArgs>) -> Unit): BackgroundActivatedEventHandler {
+    public static func new(invoke: (InParam<IInspectable>, InParam<impl_p0.IBackgroundActivatedEventArgs>) -> Unit): BackgroundActivatedEventHandler {
         let box = BackgroundActivatedEventHandlerBox(invoke)
         let object = ComObject<BackgroundActivatedEventHandlerBox>.new(box, [BackgroundActivatedEventHandler.descriptorSchema()], box.vtblPtr())
         return object.intoInterface(BackgroundActivatedEventHandler.descriptor())
@@ -326,30 +339,26 @@ public class BackgroundActivatedEventHandler <: InterfaceWrapperBase & ComInterf
 extend BackgroundActivatedEventHandler <: windows_core.Interface<BackgroundActivatedEventHandler> {}
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
-private open class BackgroundActivatedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface BackgroundActivatedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
-private open class BackgroundActivatedEventHandlerInvoker <: BackgroundActivatedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l1.IBackgroundActivatedEventArgs>): Unit {
-        ()
-    }
+private interface BackgroundActivatedEventHandlerInvoker <: BackgroundActivatedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<impl_p0.IBackgroundActivatedEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<_impl_l1.IBackgroundActivatedEventArgs>(_impl_l1.IBackgroundActivatedEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<impl_p0.IBackgroundActivatedEventArgs>(impl_p0.IBackgroundActivatedEventArgs.viewOf(arg1)))
         return S_OK.value
     }
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private class BackgroundActivatedEventHandlerBox <: BackgroundActivatedEventHandlerInvoker {
-    public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.IBackgroundActivatedEventArgs>) -> Unit
+    public let invoke_: (InParam<IInspectable>, InParam<impl_p0.IBackgroundActivatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BackgroundActivatedEventHandlerVtbl>
 
-    public init(invoke: (InParam<IInspectable>, InParam<_impl_l1.IBackgroundActivatedEventArgs>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, InParam<impl_p0.IBackgroundActivatedEventArgs>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<BackgroundActivatedEventHandlerVtbl>(1, { _ => buildBackgroundActivatedEventHandlerBoxVtbl() })) }
     }
@@ -358,7 +367,7 @@ private class BackgroundActivatedEventHandlerBox <: BackgroundActivatedEventHand
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l1.IBackgroundActivatedEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<impl_p0.IBackgroundActivatedEventArgs>): Unit {
         invoke_(sender, eventArgs)
     }
 }
@@ -397,7 +406,7 @@ public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func iid(): GUID {
-        _impl_l0.IEnteredBackgroundEventArgs.iid()
+        impl_p0.IEnteredBackgroundEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -405,12 +414,12 @@ public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<EnteredBackgroundEventArgs> {
-        let ancestors = [_impl_l0.IEnteredBackgroundEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<EnteredBackgroundEventArgs>("EnteredBackgroundEventArgs", _impl_l0.IEnteredBackgroundEventArgs.iid(), ancestors, { raw => EnteredBackgroundEventArgs.fromAbiTake(raw) }, { raw => EnteredBackgroundEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IEnteredBackgroundEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<EnteredBackgroundEventArgs>("EnteredBackgroundEventArgs", impl_p0.IEnteredBackgroundEventArgs.iid(), ancestors, { raw => EnteredBackgroundEventArgs.fromAbiTake(raw) }, { raw => EnteredBackgroundEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l0.IEnteredBackgroundEventArgs {
-        match (unsafe { query(_impl_l0.IEnteredBackgroundEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IEnteredBackgroundEventArgs {
+        match (unsafe { query(impl_p0.IEnteredBackgroundEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -425,7 +434,7 @@ public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.EnteredBackgroundEventArgs", EnteredBackgroundEventArgs.signature(), _impl_l0.IEnteredBackgroundEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.EnteredBackgroundEventArgs", EnteredBackgroundEventArgs.signature(), impl_p0.IEnteredBackgroundEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -440,8 +449,8 @@ public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIEnteredBackgroundEventArgs(): _impl_l0.IEnteredBackgroundEventArgs {
-        match (unsafe { query(_impl_l0.IEnteredBackgroundEventArgs.descriptor()) }) {
+    public func asIEnteredBackgroundEventArgs(): impl_p0.IEnteredBackgroundEventArgs {
+        match (unsafe { query(impl_p0.IEnteredBackgroundEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -506,7 +515,7 @@ public class EnteredBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("EnteredBackgroundEventHandler", EnteredBackgroundEventHandler.iid(), IUnknown.descriptorSchema(), "EnteredBackgroundEventHandlerVtbl", "EnteredBackgroundEventHandler", "EnteredBackgroundEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<_impl_l0.IEnteredBackgroundEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("EnteredBackgroundEventHandler", EnteredBackgroundEventHandler.iid(), IUnknown.descriptorSchema(), "EnteredBackgroundEventHandlerVtbl", "EnteredBackgroundEventHandler", "EnteredBackgroundEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<impl_p0.IEnteredBackgroundEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(EnteredBackgroundEventHandler.runtimeType())
         return schema
     }
@@ -532,13 +541,13 @@ public class EnteredBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func Invoke(sender: IInspectable, e: _impl_l0.IEnteredBackgroundEventArgs): Unit {
+    public unsafe func Invoke(sender: IInspectable, e: impl_p0.IEnteredBackgroundEventArgs): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), e.asRaw())
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (InParam<IInspectable>, InParam<_impl_l0.IEnteredBackgroundEventArgs>) -> Unit): EnteredBackgroundEventHandler {
+    public static func new(invoke: (InParam<IInspectable>, InParam<impl_p0.IEnteredBackgroundEventArgs>) -> Unit): EnteredBackgroundEventHandler {
         let box = EnteredBackgroundEventHandlerBox(invoke)
         let object = ComObject<EnteredBackgroundEventHandlerBox>.new(box, [EnteredBackgroundEventHandler.descriptorSchema()], box.vtblPtr())
         return object.intoInterface(EnteredBackgroundEventHandler.descriptor())
@@ -549,30 +558,26 @@ public class EnteredBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 extend EnteredBackgroundEventHandler <: windows_core.Interface<EnteredBackgroundEventHandler> {}
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class EnteredBackgroundEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface EnteredBackgroundEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.IEnteredBackgroundEventArgs>): Unit {
-        ()
-    }
+private interface EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p0.IEnteredBackgroundEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<_impl_l0.IEnteredBackgroundEventArgs>(_impl_l0.IEnteredBackgroundEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<impl_p0.IEnteredBackgroundEventArgs>(impl_p0.IEnteredBackgroundEventArgs.viewOf(arg1)))
         return S_OK.value
     }
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerInvoker {
-    public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.IEnteredBackgroundEventArgs>) -> Unit
+    public let invoke_: (InParam<IInspectable>, InParam<impl_p0.IEnteredBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<EnteredBackgroundEventHandlerVtbl>
 
-    public init(invoke: (InParam<IInspectable>, InParam<_impl_l0.IEnteredBackgroundEventArgs>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, InParam<impl_p0.IEnteredBackgroundEventArgs>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<EnteredBackgroundEventHandlerVtbl>(1, { _ => buildEnteredBackgroundEventHandlerBoxVtbl() })) }
     }
@@ -581,7 +586,7 @@ private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerI
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.IEnteredBackgroundEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p0.IEnteredBackgroundEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -735,7 +740,7 @@ public class IWebUIActivationStatics3 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebUIActivationStatics3", IWebUIActivationStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebUIActivationStatics3Vtbl", "IWebUIActivationStatics3", "IWebUIActivationStatics3_Impl", [InterfaceMethodSchema("RequestRestartAsync", 6, [InterfaceParameterSchema("launchArguments", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestRestartForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("launchArguments", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebUIActivationStatics3", IWebUIActivationStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebUIActivationStatics3Vtbl", "IWebUIActivationStatics3", "IWebUIActivationStatics3_Impl", [InterfaceMethodSchema("RequestRestartAsync", 6, [InterfaceParameterSchema("launchArguments", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestRestartForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("launchArguments", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebUIActivationStatics3.runtimeType())
         return schema
     }
@@ -765,21 +770,21 @@ public class IWebUIActivationStatics3 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func RequestRestartAsync(launchArguments: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason> {
+    public unsafe func RequestRestartAsync(launchArguments: windows_core.HString): windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestRestartAsync(asRaw(), launchArguments.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Core == "on" && Windows_System == "on"]
-    public unsafe func RequestRestartForUserAsync(user: _impl_l1.User, launchArguments: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason> {
+    public unsafe func RequestRestartForUserAsync(user: impl_p1.User, launchArguments: windows_core.HString): windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestRestartForUserAsync(asRaw(), user.asRaw(), launchArguments.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>.fromAbiTake(result__)
     }
 }
 
@@ -1131,7 +1136,7 @@ public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func iid(): GUID {
-        _impl_l0.ILeavingBackgroundEventArgs.iid()
+        impl_p0.ILeavingBackgroundEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -1139,12 +1144,12 @@ public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<LeavingBackgroundEventArgs> {
-        let ancestors = [_impl_l0.ILeavingBackgroundEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LeavingBackgroundEventArgs>("LeavingBackgroundEventArgs", _impl_l0.ILeavingBackgroundEventArgs.iid(), ancestors, { raw => LeavingBackgroundEventArgs.fromAbiTake(raw) }, { raw => LeavingBackgroundEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ILeavingBackgroundEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<LeavingBackgroundEventArgs>("LeavingBackgroundEventArgs", impl_p0.ILeavingBackgroundEventArgs.iid(), ancestors, { raw => LeavingBackgroundEventArgs.fromAbiTake(raw) }, { raw => LeavingBackgroundEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l0.ILeavingBackgroundEventArgs {
-        match (unsafe { query(_impl_l0.ILeavingBackgroundEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ILeavingBackgroundEventArgs {
+        match (unsafe { query(impl_p0.ILeavingBackgroundEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1159,7 +1164,7 @@ public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.LeavingBackgroundEventArgs", LeavingBackgroundEventArgs.signature(), _impl_l0.ILeavingBackgroundEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.LeavingBackgroundEventArgs", LeavingBackgroundEventArgs.signature(), impl_p0.ILeavingBackgroundEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1174,8 +1179,8 @@ public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asILeavingBackgroundEventArgs(): _impl_l0.ILeavingBackgroundEventArgs {
-        match (unsafe { query(_impl_l0.ILeavingBackgroundEventArgs.descriptor()) }) {
+    public func asILeavingBackgroundEventArgs(): impl_p0.ILeavingBackgroundEventArgs {
+        match (unsafe { query(impl_p0.ILeavingBackgroundEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1240,7 +1245,7 @@ public class LeavingBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("LeavingBackgroundEventHandler", LeavingBackgroundEventHandler.iid(), IUnknown.descriptorSchema(), "LeavingBackgroundEventHandlerVtbl", "LeavingBackgroundEventHandler", "LeavingBackgroundEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<_impl_l0.ILeavingBackgroundEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("LeavingBackgroundEventHandler", LeavingBackgroundEventHandler.iid(), IUnknown.descriptorSchema(), "LeavingBackgroundEventHandlerVtbl", "LeavingBackgroundEventHandler", "LeavingBackgroundEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<impl_p0.ILeavingBackgroundEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(LeavingBackgroundEventHandler.runtimeType())
         return schema
     }
@@ -1266,13 +1271,13 @@ public class LeavingBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func Invoke(sender: IInspectable, e: _impl_l0.ILeavingBackgroundEventArgs): Unit {
+    public unsafe func Invoke(sender: IInspectable, e: impl_p0.ILeavingBackgroundEventArgs): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), e.asRaw())
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (InParam<IInspectable>, InParam<_impl_l0.ILeavingBackgroundEventArgs>) -> Unit): LeavingBackgroundEventHandler {
+    public static func new(invoke: (InParam<IInspectable>, InParam<impl_p0.ILeavingBackgroundEventArgs>) -> Unit): LeavingBackgroundEventHandler {
         let box = LeavingBackgroundEventHandlerBox(invoke)
         let object = ComObject<LeavingBackgroundEventHandlerBox>.new(box, [LeavingBackgroundEventHandler.descriptorSchema()], box.vtblPtr())
         return object.intoInterface(LeavingBackgroundEventHandler.descriptor())
@@ -1283,30 +1288,26 @@ public class LeavingBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 extend LeavingBackgroundEventHandler <: windows_core.Interface<LeavingBackgroundEventHandler> {}
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class LeavingBackgroundEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface LeavingBackgroundEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.ILeavingBackgroundEventArgs>): Unit {
-        ()
-    }
+private interface LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p0.ILeavingBackgroundEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<_impl_l0.ILeavingBackgroundEventArgs>(_impl_l0.ILeavingBackgroundEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<impl_p0.ILeavingBackgroundEventArgs>(impl_p0.ILeavingBackgroundEventArgs.viewOf(arg1)))
         return S_OK.value
     }
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerInvoker {
-    public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.ILeavingBackgroundEventArgs>) -> Unit
+    public let invoke_: (InParam<IInspectable>, InParam<impl_p0.ILeavingBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<LeavingBackgroundEventHandlerVtbl>
 
-    public init(invoke: (InParam<IInspectable>, InParam<_impl_l0.ILeavingBackgroundEventArgs>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, InParam<impl_p0.ILeavingBackgroundEventArgs>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<LeavingBackgroundEventHandlerVtbl>(1, { _ => buildLeavingBackgroundEventHandlerBoxVtbl() })) }
     }
@@ -1315,7 +1316,7 @@ private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerI
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.ILeavingBackgroundEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p0.ILeavingBackgroundEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -1472,19 +1473,15 @@ public class ResumingEventHandler <: InterfaceWrapperBase & ComInterface & windo
 extend ResumingEventHandler <: windows_core.Interface<ResumingEventHandler> {}
 
 @When[Windows_UI_WebUI == "on"]
-private open class ResumingEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface ResumingEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on"]
-private open class ResumingEventHandlerInvoker <: ResumingEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>): Unit {
-        ()
-    }
+private interface ResumingEventHandlerInvoker <: ResumingEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)))
         return S_OK.value
     }
@@ -1504,7 +1501,7 @@ private class ResumingEventHandlerBox <: ResumingEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>): Unit {
+    public func Invoke(sender: InParam<IInspectable>): Unit {
         invoke_(sender)
     }
 }
@@ -1543,7 +1540,7 @@ public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func iid(): GUID {
-        _impl_l0.ISuspendingDeferral.iid()
+        impl_p0.ISuspendingDeferral.iid()
     }
 
     public static func runtimeName(): String {
@@ -1551,12 +1548,12 @@ public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func descriptor(): InterfaceDescriptor<SuspendingDeferral> {
-        let ancestors = [_impl_l0.ISuspendingDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<SuspendingDeferral>("SuspendingDeferral", _impl_l0.ISuspendingDeferral.iid(), ancestors, { raw => SuspendingDeferral.fromAbiTake(raw) }, { raw => SuspendingDeferral.viewOf(raw) })
+        let ancestors = [impl_p0.ISuspendingDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<SuspendingDeferral>("SuspendingDeferral", impl_p0.ISuspendingDeferral.iid(), ancestors, { raw => SuspendingDeferral.fromAbiTake(raw) }, { raw => SuspendingDeferral.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l0.ISuspendingDeferral {
-        match (unsafe { query(_impl_l0.ISuspendingDeferral.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ISuspendingDeferral {
+        match (unsafe { query(impl_p0.ISuspendingDeferral.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1571,7 +1568,7 @@ public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.SuspendingDeferral", SuspendingDeferral.signature(), _impl_l0.ISuspendingDeferral.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.SuspendingDeferral", SuspendingDeferral.signature(), impl_p0.ISuspendingDeferral.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1582,8 +1579,8 @@ public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows
         IInspectable.viewOf(asRaw())
     }
 
-    public func asISuspendingDeferral(): _impl_l0.ISuspendingDeferral {
-        match (unsafe { query(_impl_l0.ISuspendingDeferral.descriptor()) }) {
+    public func asISuspendingDeferral(): impl_p0.ISuspendingDeferral {
+        match (unsafe { query(impl_p0.ISuspendingDeferral.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1631,7 +1628,7 @@ public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func iid(): GUID {
-        _impl_l1.ISuspendingEventArgs.iid()
+        impl_p1.ISuspendingEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -1639,12 +1636,12 @@ public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<SuspendingEventArgs> {
-        let ancestors = [_impl_l1.ISuspendingEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<SuspendingEventArgs>("SuspendingEventArgs", _impl_l1.ISuspendingEventArgs.iid(), ancestors, { raw => SuspendingEventArgs.fromAbiTake(raw) }, { raw => SuspendingEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.ISuspendingEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<SuspendingEventArgs>("SuspendingEventArgs", impl_p1.ISuspendingEventArgs.iid(), ancestors, { raw => SuspendingEventArgs.fromAbiTake(raw) }, { raw => SuspendingEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ISuspendingEventArgs {
-        match (unsafe { query(_impl_l1.ISuspendingEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.ISuspendingEventArgs {
+        match (unsafe { query(impl_p1.ISuspendingEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1659,7 +1656,7 @@ public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.SuspendingEventArgs", SuspendingEventArgs.signature(), _impl_l1.ISuspendingEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.SuspendingEventArgs", SuspendingEventArgs.signature(), impl_p1.ISuspendingEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1670,14 +1667,14 @@ public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & window
         IInspectable.viewOf(asRaw())
     }
 
-    public func asISuspendingEventArgs(): _impl_l1.ISuspendingEventArgs {
-        match (unsafe { query(_impl_l1.ISuspendingEventArgs.descriptor()) }) {
+    public func asISuspendingEventArgs(): impl_p1.ISuspendingEventArgs {
+        match (unsafe { query(impl_p1.ISuspendingEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public unsafe func get_SuspendingOperation(): _impl_l1.SuspendingOperation {
+    public unsafe func get_SuspendingOperation(): impl_p1.SuspendingOperation {
         return defaultInterface().get_SuspendingOperation()
     }
 }
@@ -1736,7 +1733,7 @@ public class SuspendingEventHandler <: InterfaceWrapperBase & ComInterface & win
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("SuspendingEventHandler", SuspendingEventHandler.iid(), IUnknown.descriptorSchema(), "SuspendingEventHandlerVtbl", "SuspendingEventHandler", "SuspendingEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<_impl_l1.ISuspendingEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("SuspendingEventHandler", SuspendingEventHandler.iid(), IUnknown.descriptorSchema(), "SuspendingEventHandlerVtbl", "SuspendingEventHandler", "SuspendingEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("e", "CPointer<Unit>", "InParam<impl_p1.ISuspendingEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(SuspendingEventHandler.runtimeType())
         return schema
     }
@@ -1762,13 +1759,13 @@ public class SuspendingEventHandler <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func Invoke(sender: IInspectable, e: _impl_l1.ISuspendingEventArgs): Unit {
+    public unsafe func Invoke(sender: IInspectable, e: impl_p1.ISuspendingEventArgs): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), e.asRaw())
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (InParam<IInspectable>, InParam<_impl_l1.ISuspendingEventArgs>) -> Unit): SuspendingEventHandler {
+    public static func new(invoke: (InParam<IInspectable>, InParam<impl_p1.ISuspendingEventArgs>) -> Unit): SuspendingEventHandler {
         let box = SuspendingEventHandlerBox(invoke)
         let object = ComObject<SuspendingEventHandlerBox>.new(box, [SuspendingEventHandler.descriptorSchema()], box.vtblPtr())
         return object.intoInterface(SuspendingEventHandler.descriptor())
@@ -1779,30 +1776,26 @@ public class SuspendingEventHandler <: InterfaceWrapperBase & ComInterface & win
 extend SuspendingEventHandler <: windows_core.Interface<SuspendingEventHandler> {}
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class SuspendingEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface SuspendingEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
-private open class SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.ISuspendingEventArgs>): Unit {
-        ()
-    }
+private interface SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p1.ISuspendingEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<_impl_l1.ISuspendingEventArgs>(_impl_l1.ISuspendingEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<impl_p1.ISuspendingEventArgs>(impl_p1.ISuspendingEventArgs.viewOf(arg1)))
         return S_OK.value
     }
 }
 
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
-    public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.ISuspendingEventArgs>) -> Unit
+    public let invoke_: (InParam<IInspectable>, InParam<impl_p1.ISuspendingEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SuspendingEventHandlerVtbl>
 
-    public init(invoke: (InParam<IInspectable>, InParam<_impl_l1.ISuspendingEventArgs>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, InParam<impl_p1.ISuspendingEventArgs>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<SuspendingEventHandlerVtbl>(1, { _ => buildSuspendingEventHandlerBoxVtbl() })) }
     }
@@ -1811,7 +1804,7 @@ private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.ISuspendingEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<impl_p1.ISuspendingEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -1850,7 +1843,7 @@ public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func iid(): GUID {
-        _impl_l1.ISuspendingOperation.iid()
+        impl_p1.ISuspendingOperation.iid()
     }
 
     public static func runtimeName(): String {
@@ -1858,12 +1851,12 @@ public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<SuspendingOperation> {
-        let ancestors = [_impl_l1.ISuspendingOperation.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<SuspendingOperation>("SuspendingOperation", _impl_l1.ISuspendingOperation.iid(), ancestors, { raw => SuspendingOperation.fromAbiTake(raw) }, { raw => SuspendingOperation.viewOf(raw) })
+        let ancestors = [impl_p1.ISuspendingOperation.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<SuspendingOperation>("SuspendingOperation", impl_p1.ISuspendingOperation.iid(), ancestors, { raw => SuspendingOperation.fromAbiTake(raw) }, { raw => SuspendingOperation.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ISuspendingOperation {
-        match (unsafe { query(_impl_l1.ISuspendingOperation.descriptor()) }) {
+    public func defaultInterface(): impl_p1.ISuspendingOperation {
+        match (unsafe { query(impl_p1.ISuspendingOperation.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1878,7 +1871,7 @@ public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.SuspendingOperation", SuspendingOperation.signature(), _impl_l1.ISuspendingOperation.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.SuspendingOperation", SuspendingOperation.signature(), impl_p1.ISuspendingOperation.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1889,14 +1882,14 @@ public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & window
         IInspectable.viewOf(asRaw())
     }
 
-    public func asISuspendingOperation(): _impl_l1.ISuspendingOperation {
-        match (unsafe { query(_impl_l1.ISuspendingOperation.descriptor()) }) {
+    public func asISuspendingOperation(): impl_p1.ISuspendingOperation {
+        match (unsafe { query(impl_p1.ISuspendingOperation.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public unsafe func GetDeferral(): _impl_l0.SuspendingDeferral {
+    public unsafe func GetDeferral(): impl_p0.SuspendingDeferral {
         return defaultInterface().GetDeferral()
     }
 
@@ -1982,7 +1975,7 @@ public class WebUIBackgroundTaskInstanceRuntimeClass <: InterfaceWrapperBase & C
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIBackgroundTaskInstanceRuntimeClass> {
-        let ancestors = [IWebUIBackgroundTaskInstance.iid(), _impl_l1.IBackgroundTaskInstance.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IWebUIBackgroundTaskInstance.iid(), impl_p0.IBackgroundTaskInstance.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<WebUIBackgroundTaskInstanceRuntimeClass>("WebUIBackgroundTaskInstanceRuntimeClass", IWebUIBackgroundTaskInstance.iid(), ancestors, { raw => WebUIBackgroundTaskInstanceRuntimeClass.fromAbiTake(raw) }, { raw => WebUIBackgroundTaskInstanceRuntimeClass.viewOf(raw) })
     }
 
@@ -2020,8 +2013,8 @@ public class WebUIBackgroundTaskInstanceRuntimeClass <: InterfaceWrapperBase & C
         }
     }
 
-    public func asIBackgroundTaskInstance(): _impl_l1.IBackgroundTaskInstance {
-        match (unsafe { query(_impl_l1.IBackgroundTaskInstance.descriptor()) }) {
+    public func asIBackgroundTaskInstance(): impl_p0.IBackgroundTaskInstance {
+        match (unsafe { query(impl_p0.IBackgroundTaskInstance.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2039,7 +2032,7 @@ public class WebUIBackgroundTaskInstanceRuntimeClass <: InterfaceWrapperBase & C
         return asIBackgroundTaskInstance().InstanceId()
     }
 
-    public unsafe func Task(): _impl_l1.BackgroundTaskRegistration {
+    public unsafe func Task(): impl_p0.BackgroundTaskRegistration {
         return asIBackgroundTaskInstance().Task()
     }
 
@@ -2055,7 +2048,7 @@ public class WebUIBackgroundTaskInstanceRuntimeClass <: InterfaceWrapperBase & C
         return asIBackgroundTaskInstance().TriggerDetails()
     }
 
-    public unsafe func Canceled(cancelHandler: _impl_l1.BackgroundTaskCanceledEventHandler): windows_collections.EventRegistrationToken {
+    public unsafe func Canceled(cancelHandler: impl_p0.BackgroundTaskCanceledEventHandler): windows_collections.EventRegistrationToken {
         return asIBackgroundTaskInstance().Canceled(cancelHandler)
     }
 
@@ -2067,7 +2060,7 @@ public class WebUIBackgroundTaskInstanceRuntimeClass <: InterfaceWrapperBase & C
         return asIBackgroundTaskInstance().SuspendedCount()
     }
 
-    public unsafe func GetDeferral(): _impl_l0.BackgroundTaskDeferral {
+    public unsafe func GetDeferral(): impl_p0.BackgroundTaskDeferral {
         return asIBackgroundTaskInstance().GetDeferral()
     }
 }
@@ -3512,19 +3505,15 @@ public class NavigatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
 extend NavigatedEventHandler <: windows_core.Interface<NavigatedEventHandler> {}
 
 @When[Windows_UI_WebUI == "on"]
-private open class NavigatedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface NavigatedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_WebUI == "on"]
-private open class NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<IWebUINavigatedEventArgs>): Unit {
-        ()
-    }
+private interface NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<IWebUINavigatedEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<IWebUINavigatedEventArgs>(IWebUINavigatedEventArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -3544,7 +3533,7 @@ private class NavigatedEventHandlerBox <: NavigatedEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<IWebUINavigatedEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<IWebUINavigatedEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -3583,7 +3572,7 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
     }
 
     public static func iid(): GUID {
-        _impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid()
+        impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -3591,12 +3580,12 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIAppointmentsProviderAddAppointmentActivatedEventArgs> {
-        let ancestors = [_impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid(), _impl_l1.IAppointmentsProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIAppointmentsProviderAddAppointmentActivatedEventArgs>("WebUIAppointmentsProviderAddAppointmentActivatedEventArgs", _impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid(), impl_p0.IAppointmentsProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIAppointmentsProviderAddAppointmentActivatedEventArgs>("WebUIAppointmentsProviderAddAppointmentActivatedEventArgs", impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3611,7 +3600,7 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderAddAppointmentActivatedEventArgs", WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.signature(), _impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderAddAppointmentActivatedEventArgs", WebUIAppointmentsProviderAddAppointmentActivatedEventArgs.signature(), impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -3622,22 +3611,22 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAppointmentsProviderAddAppointmentActivatedEventArgs(): _impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderAddAppointmentActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderAddAppointmentActivatedEventArgs(): impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderAddAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAppointmentsProviderActivatedEventArgs(): _impl_l1.IAppointmentsProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderActivatedEventArgs(): impl_p0.IAppointmentsProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3650,15 +3639,15 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_Appointments_AppointmentsProvider == "on"]
-    public unsafe func get_AddAppointmentOperation(): _impl_l1.AddAppointmentOperation {
+    public unsafe func get_AddAppointmentOperation(): impl_p1.AddAppointmentOperation {
         return defaultInterface().get_AddAppointmentOperation()
     }
 
@@ -3666,15 +3655,15 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
         return asIAppointmentsProviderActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -3683,7 +3672,7 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -3725,7 +3714,7 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
     }
 
     public static func iid(): GUID {
-        _impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid()
+        impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -3733,12 +3722,12 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs> {
-        let ancestors = [_impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid(), _impl_l1.IAppointmentsProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs>("WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs", _impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid(), impl_p0.IAppointmentsProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs>("WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs", impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3753,7 +3742,7 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs", WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.signature(), _impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs", WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs.signature(), impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -3764,22 +3753,22 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAppointmentsProviderRemoveAppointmentActivatedEventArgs(): _impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderRemoveAppointmentActivatedEventArgs(): impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderRemoveAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAppointmentsProviderActivatedEventArgs(): _impl_l1.IAppointmentsProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderActivatedEventArgs(): impl_p0.IAppointmentsProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3792,15 +3781,15 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_Appointments_AppointmentsProvider == "on"]
-    public unsafe func get_RemoveAppointmentOperation(): _impl_l0.RemoveAppointmentOperation {
+    public unsafe func get_RemoveAppointmentOperation(): impl_p0.RemoveAppointmentOperation {
         return defaultInterface().get_RemoveAppointmentOperation()
     }
 
@@ -3808,15 +3797,15 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
         return asIAppointmentsProviderActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -3825,7 +3814,7 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -3867,7 +3856,7 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
     }
 
     public static func iid(): GUID {
-        _impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid()
+        impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -3875,12 +3864,12 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs> {
-        let ancestors = [_impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid(), _impl_l1.IAppointmentsProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs>("WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs", _impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid(), impl_p0.IAppointmentsProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs>("WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs", impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3895,7 +3884,7 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs", WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.signature(), _impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs", WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs.signature(), impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -3906,22 +3895,22 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAppointmentsProviderReplaceAppointmentActivatedEventArgs(): _impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderReplaceAppointmentActivatedEventArgs(): impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderReplaceAppointmentActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAppointmentsProviderActivatedEventArgs(): _impl_l1.IAppointmentsProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderActivatedEventArgs(): impl_p0.IAppointmentsProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3934,15 +3923,15 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_Appointments_AppointmentsProvider == "on"]
-    public unsafe func get_ReplaceAppointmentOperation(): _impl_l1.ReplaceAppointmentOperation {
+    public unsafe func get_ReplaceAppointmentOperation(): impl_p1.ReplaceAppointmentOperation {
         return defaultInterface().get_ReplaceAppointmentOperation()
     }
 
@@ -3950,15 +3939,15 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
         return asIAppointmentsProviderActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -3967,7 +3956,7 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -4009,7 +3998,7 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
     }
 
     public static func iid(): GUID {
-        _impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid()
+        impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4017,12 +4006,12 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs> {
-        let ancestors = [_impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid(), _impl_l1.IAppointmentsProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs>("WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs", _impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid(), impl_p0.IAppointmentsProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs>("WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs", impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4037,7 +4026,7 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs", WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.signature(), _impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs", WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.signature(), impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4048,22 +4037,22 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs(): _impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs(): impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAppointmentsProviderActivatedEventArgs(): _impl_l1.IAppointmentsProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderActivatedEventArgs(): impl_p0.IAppointmentsProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4076,8 +4065,8 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4099,15 +4088,15 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
         return asIAppointmentsProviderActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -4116,7 +4105,7 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -4158,7 +4147,7 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
     }
 
     public static func iid(): GUID {
-        _impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid()
+        impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4166,12 +4155,12 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs> {
-        let ancestors = [_impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid(), _impl_l1.IAppointmentsProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs>("WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs", _impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid(), impl_p0.IAppointmentsProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs>("WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs", impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid(), ancestors, { raw => WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4186,7 +4175,7 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs", WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.signature(), _impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs", WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs.signature(), impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4197,22 +4186,22 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAppointmentsProviderShowTimeFrameActivatedEventArgs(): _impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderShowTimeFrameActivatedEventArgs(): impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs {
+        match (unsafe { query(impl_p1.IAppointmentsProviderShowTimeFrameActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAppointmentsProviderActivatedEventArgs(): _impl_l1.IAppointmentsProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
+    public func asIAppointmentsProviderActivatedEventArgs(): impl_p0.IAppointmentsProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IAppointmentsProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4225,8 +4214,8 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4244,15 +4233,15 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
         return asIAppointmentsProviderActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -4261,7 +4250,7 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -4303,7 +4292,7 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
     }
 
     public static func iid(): GUID {
-        _impl_l1.IBarcodeScannerPreviewActivatedEventArgs.iid()
+        impl_p0.IBarcodeScannerPreviewActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4311,12 +4300,12 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIBarcodeScannerPreviewActivatedEventArgs> {
-        let ancestors = [_impl_l1.IBarcodeScannerPreviewActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIBarcodeScannerPreviewActivatedEventArgs>("WebUIBarcodeScannerPreviewActivatedEventArgs", _impl_l1.IBarcodeScannerPreviewActivatedEventArgs.iid(), ancestors, { raw => WebUIBarcodeScannerPreviewActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIBarcodeScannerPreviewActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IBarcodeScannerPreviewActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIBarcodeScannerPreviewActivatedEventArgs>("WebUIBarcodeScannerPreviewActivatedEventArgs", impl_p0.IBarcodeScannerPreviewActivatedEventArgs.iid(), ancestors, { raw => WebUIBarcodeScannerPreviewActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIBarcodeScannerPreviewActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IBarcodeScannerPreviewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IBarcodeScannerPreviewActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IBarcodeScannerPreviewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IBarcodeScannerPreviewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4331,7 +4320,7 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIBarcodeScannerPreviewActivatedEventArgs", WebUIBarcodeScannerPreviewActivatedEventArgs.signature(), _impl_l1.IBarcodeScannerPreviewActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIBarcodeScannerPreviewActivatedEventArgs", WebUIBarcodeScannerPreviewActivatedEventArgs.signature(), impl_p0.IBarcodeScannerPreviewActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4346,22 +4335,22 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIBarcodeScannerPreviewActivatedEventArgs(): _impl_l1.IBarcodeScannerPreviewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IBarcodeScannerPreviewActivatedEventArgs.descriptor()) }) {
+    public func asIBarcodeScannerPreviewActivatedEventArgs(): impl_p0.IBarcodeScannerPreviewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IBarcodeScannerPreviewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4378,20 +4367,20 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
         return defaultInterface().ConnectionId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 
@@ -4437,7 +4426,7 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func iid(): GUID {
-        _impl_l2.ICachedFileUpdaterActivatedEventArgs.iid()
+        impl_p2.ICachedFileUpdaterActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4445,12 +4434,12 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUICachedFileUpdaterActivatedEventArgs> {
-        let ancestors = [_impl_l2.ICachedFileUpdaterActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUICachedFileUpdaterActivatedEventArgs>("WebUICachedFileUpdaterActivatedEventArgs", _impl_l2.ICachedFileUpdaterActivatedEventArgs.iid(), ancestors, { raw => WebUICachedFileUpdaterActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICachedFileUpdaterActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p2.ICachedFileUpdaterActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUICachedFileUpdaterActivatedEventArgs>("WebUICachedFileUpdaterActivatedEventArgs", impl_p2.ICachedFileUpdaterActivatedEventArgs.iid(), ancestors, { raw => WebUICachedFileUpdaterActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICachedFileUpdaterActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l2.ICachedFileUpdaterActivatedEventArgs {
-        match (unsafe { query(_impl_l2.ICachedFileUpdaterActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p2.ICachedFileUpdaterActivatedEventArgs {
+        match (unsafe { query(impl_p2.ICachedFileUpdaterActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4465,7 +4454,7 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUICachedFileUpdaterActivatedEventArgs", WebUICachedFileUpdaterActivatedEventArgs.signature(), _impl_l2.ICachedFileUpdaterActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUICachedFileUpdaterActivatedEventArgs", WebUICachedFileUpdaterActivatedEventArgs.signature(), impl_p2.ICachedFileUpdaterActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4476,15 +4465,15 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asICachedFileUpdaterActivatedEventArgs(): _impl_l2.ICachedFileUpdaterActivatedEventArgs {
-        match (unsafe { query(_impl_l2.ICachedFileUpdaterActivatedEventArgs.descriptor()) }) {
+    public func asICachedFileUpdaterActivatedEventArgs(): impl_p2.ICachedFileUpdaterActivatedEventArgs {
+        match (unsafe { query(impl_p2.ICachedFileUpdaterActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4497,27 +4486,27 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_Provider == "on"]
-    public unsafe func get_CachedFileUpdaterUI(): _impl_l2.CachedFileUpdaterUI {
+    public unsafe func get_CachedFileUpdaterUI(): impl_p2.CachedFileUpdaterUI {
         return defaultInterface().get_CachedFileUpdaterUI()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -4526,7 +4515,7 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -4568,7 +4557,7 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func iid(): GUID {
-        _impl_l1.ICameraSettingsActivatedEventArgs.iid()
+        impl_p0.ICameraSettingsActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4576,12 +4565,12 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUICameraSettingsActivatedEventArgs> {
-        let ancestors = [_impl_l1.ICameraSettingsActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUICameraSettingsActivatedEventArgs>("WebUICameraSettingsActivatedEventArgs", _impl_l1.ICameraSettingsActivatedEventArgs.iid(), ancestors, { raw => WebUICameraSettingsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICameraSettingsActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ICameraSettingsActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUICameraSettingsActivatedEventArgs>("WebUICameraSettingsActivatedEventArgs", impl_p0.ICameraSettingsActivatedEventArgs.iid(), ancestors, { raw => WebUICameraSettingsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICameraSettingsActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ICameraSettingsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ICameraSettingsActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ICameraSettingsActivatedEventArgs {
+        match (unsafe { query(impl_p0.ICameraSettingsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4596,7 +4585,7 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUICameraSettingsActivatedEventArgs", WebUICameraSettingsActivatedEventArgs.signature(), _impl_l1.ICameraSettingsActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUICameraSettingsActivatedEventArgs", WebUICameraSettingsActivatedEventArgs.signature(), impl_p0.ICameraSettingsActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4607,15 +4596,15 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
         IInspectable.viewOf(asRaw())
     }
 
-    public func asICameraSettingsActivatedEventArgs(): _impl_l1.ICameraSettingsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ICameraSettingsActivatedEventArgs.descriptor()) }) {
+    public func asICameraSettingsActivatedEventArgs(): impl_p0.ICameraSettingsActivatedEventArgs {
+        match (unsafe { query(impl_p0.ICameraSettingsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4636,15 +4625,15 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
         return defaultInterface().VideoDeviceExtension()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -4690,7 +4679,7 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func iid(): GUID {
-        _impl_l1.ICommandLineActivatedEventArgs.iid()
+        impl_p0.ICommandLineActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4698,12 +4687,12 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUICommandLineActivatedEventArgs> {
-        let ancestors = [_impl_l1.ICommandLineActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUICommandLineActivatedEventArgs>("WebUICommandLineActivatedEventArgs", _impl_l1.ICommandLineActivatedEventArgs.iid(), ancestors, { raw => WebUICommandLineActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICommandLineActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ICommandLineActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUICommandLineActivatedEventArgs>("WebUICommandLineActivatedEventArgs", impl_p0.ICommandLineActivatedEventArgs.iid(), ancestors, { raw => WebUICommandLineActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUICommandLineActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ICommandLineActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ICommandLineActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ICommandLineActivatedEventArgs {
+        match (unsafe { query(impl_p0.ICommandLineActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4718,7 +4707,7 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUICommandLineActivatedEventArgs", WebUICommandLineActivatedEventArgs.signature(), _impl_l1.ICommandLineActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUICommandLineActivatedEventArgs", WebUICommandLineActivatedEventArgs.signature(), impl_p0.ICommandLineActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4733,22 +4722,22 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asICommandLineActivatedEventArgs(): _impl_l1.ICommandLineActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ICommandLineActivatedEventArgs.descriptor()) }) {
+    public func asICommandLineActivatedEventArgs(): impl_p0.ICommandLineActivatedEventArgs {
+        match (unsafe { query(impl_p0.ICommandLineActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4761,24 +4750,24 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public unsafe func Operation(): _impl_l0.CommandLineActivationOperation {
+    public unsafe func Operation(): impl_p0.CommandLineActivationOperation {
         return defaultInterface().Operation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 
@@ -4824,7 +4813,7 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactCallActivatedEventArgs.iid()
+        impl_p1.IContactCallActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4832,12 +4821,12 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactCallActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactCallActivatedEventArgs.iid(), _impl_l1.IContactActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactCallActivatedEventArgs>("WebUIContactCallActivatedEventArgs", _impl_l1.IContactCallActivatedEventArgs.iid(), ancestors, { raw => WebUIContactCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactCallActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactCallActivatedEventArgs.iid(), impl_p0.IContactActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactCallActivatedEventArgs>("WebUIContactCallActivatedEventArgs", impl_p1.IContactCallActivatedEventArgs.iid(), ancestors, { raw => WebUIContactCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactCallActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactCallActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4852,7 +4841,7 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactCallActivatedEventArgs", WebUIContactCallActivatedEventArgs.signature(), _impl_l1.IContactCallActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactCallActivatedEventArgs", WebUIContactCallActivatedEventArgs.signature(), impl_p1.IContactCallActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -4863,22 +4852,22 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactCallActivatedEventArgs(): _impl_l1.IContactCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactCallActivatedEventArgs.descriptor()) }) {
+    public func asIContactCallActivatedEventArgs(): impl_p1.IContactCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContactActivatedEventArgs(): _impl_l1.IContactActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactActivatedEventArgs.descriptor()) }) {
+    public func asIContactActivatedEventArgs(): impl_p0.IContactActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContactActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4900,7 +4889,7 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
@@ -4908,15 +4897,15 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
         return asIContactActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -4962,7 +4951,7 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactMapActivatedEventArgs.iid()
+        impl_p1.IContactMapActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -4970,12 +4959,12 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactMapActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactMapActivatedEventArgs.iid(), _impl_l1.IContactActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactMapActivatedEventArgs>("WebUIContactMapActivatedEventArgs", _impl_l1.IContactMapActivatedEventArgs.iid(), ancestors, { raw => WebUIContactMapActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactMapActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactMapActivatedEventArgs.iid(), impl_p0.IContactActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactMapActivatedEventArgs>("WebUIContactMapActivatedEventArgs", impl_p1.IContactMapActivatedEventArgs.iid(), ancestors, { raw => WebUIContactMapActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactMapActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactMapActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactMapActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactMapActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactMapActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4990,7 +4979,7 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactMapActivatedEventArgs", WebUIContactMapActivatedEventArgs.signature(), _impl_l1.IContactMapActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactMapActivatedEventArgs", WebUIContactMapActivatedEventArgs.signature(), impl_p1.IContactMapActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5001,22 +4990,22 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactMapActivatedEventArgs(): _impl_l1.IContactMapActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactMapActivatedEventArgs.descriptor()) }) {
+    public func asIContactMapActivatedEventArgs(): impl_p1.IContactMapActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactMapActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContactActivatedEventArgs(): _impl_l1.IContactActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactActivatedEventArgs.descriptor()) }) {
+    public func asIContactActivatedEventArgs(): impl_p0.IContactActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContactActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5030,12 +5019,12 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func Address(): _impl_l1.ContactAddress {
+    public unsafe func Address(): impl_p1.ContactAddress {
         return defaultInterface().Address()
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
@@ -5043,15 +5032,15 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
         return asIContactActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5097,7 +5086,7 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactMessageActivatedEventArgs.iid()
+        impl_p1.IContactMessageActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5105,12 +5094,12 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactMessageActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactMessageActivatedEventArgs.iid(), _impl_l1.IContactActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactMessageActivatedEventArgs>("WebUIContactMessageActivatedEventArgs", _impl_l1.IContactMessageActivatedEventArgs.iid(), ancestors, { raw => WebUIContactMessageActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactMessageActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactMessageActivatedEventArgs.iid(), impl_p0.IContactActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactMessageActivatedEventArgs>("WebUIContactMessageActivatedEventArgs", impl_p1.IContactMessageActivatedEventArgs.iid(), ancestors, { raw => WebUIContactMessageActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactMessageActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactMessageActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactMessageActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactMessageActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactMessageActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5125,7 +5114,7 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactMessageActivatedEventArgs", WebUIContactMessageActivatedEventArgs.signature(), _impl_l1.IContactMessageActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactMessageActivatedEventArgs", WebUIContactMessageActivatedEventArgs.signature(), impl_p1.IContactMessageActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5136,22 +5125,22 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactMessageActivatedEventArgs(): _impl_l1.IContactMessageActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactMessageActivatedEventArgs.descriptor()) }) {
+    public func asIContactMessageActivatedEventArgs(): impl_p1.IContactMessageActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactMessageActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContactActivatedEventArgs(): _impl_l1.IContactActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactActivatedEventArgs.descriptor()) }) {
+    public func asIContactActivatedEventArgs(): impl_p0.IContactActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContactActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5173,7 +5162,7 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
@@ -5181,15 +5170,15 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
         return asIContactActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5235,7 +5224,7 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactPanelActivatedEventArgs.iid()
+        impl_p1.IContactPanelActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5243,12 +5232,12 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactPanelActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactPanelActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactPanelActivatedEventArgs>("WebUIContactPanelActivatedEventArgs", _impl_l1.IContactPanelActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPanelActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPanelActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactPanelActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactPanelActivatedEventArgs>("WebUIContactPanelActivatedEventArgs", impl_p1.IContactPanelActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPanelActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPanelActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactPanelActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPanelActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactPanelActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPanelActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5263,7 +5252,7 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPanelActivatedEventArgs", WebUIContactPanelActivatedEventArgs.signature(), _impl_l1.IContactPanelActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPanelActivatedEventArgs", WebUIContactPanelActivatedEventArgs.signature(), impl_p1.IContactPanelActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5278,15 +5267,15 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactPanelActivatedEventArgs(): _impl_l1.IContactPanelActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPanelActivatedEventArgs.descriptor()) }) {
+    public func asIContactPanelActivatedEventArgs(): impl_p1.IContactPanelActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPanelActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5299,32 +5288,32 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_ContactPanel(): _impl_l1.ContactPanel {
+    public unsafe func get_ContactPanel(): impl_p1.ContactPanel {
         return defaultInterface().get_ContactPanel()
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5333,7 +5322,7 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -5375,7 +5364,7 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactPickerActivatedEventArgs.iid()
+        impl_p1.IContactPickerActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5383,12 +5372,12 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactPickerActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactPickerActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactPickerActivatedEventArgs>("WebUIContactPickerActivatedEventArgs", _impl_l1.IContactPickerActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPickerActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactPickerActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactPickerActivatedEventArgs>("WebUIContactPickerActivatedEventArgs", impl_p1.IContactPickerActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPickerActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactPickerActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPickerActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactPickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5403,7 +5392,7 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPickerActivatedEventArgs", WebUIContactPickerActivatedEventArgs.signature(), _impl_l1.IContactPickerActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPickerActivatedEventArgs", WebUIContactPickerActivatedEventArgs.signature(), impl_p1.IContactPickerActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5414,15 +5403,15 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactPickerActivatedEventArgs(): _impl_l1.IContactPickerActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPickerActivatedEventArgs.descriptor()) }) {
+    public func asIContactPickerActivatedEventArgs(): impl_p1.IContactPickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5436,19 +5425,19 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel_Contacts_Provider == "on"]
-    public unsafe func get_ContactPickerUI(): _impl_l1.ContactPickerUI {
+    public unsafe func get_ContactPickerUI(): impl_p1.ContactPickerUI {
         return defaultInterface().get_ContactPickerUI()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5494,7 +5483,7 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactPostActivatedEventArgs.iid()
+        impl_p1.IContactPostActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5502,12 +5491,12 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactPostActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactPostActivatedEventArgs.iid(), _impl_l1.IContactActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactPostActivatedEventArgs>("WebUIContactPostActivatedEventArgs", _impl_l1.IContactPostActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPostActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPostActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactPostActivatedEventArgs.iid(), impl_p0.IContactActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactPostActivatedEventArgs>("WebUIContactPostActivatedEventArgs", impl_p1.IContactPostActivatedEventArgs.iid(), ancestors, { raw => WebUIContactPostActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactPostActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactPostActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPostActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactPostActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPostActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5522,7 +5511,7 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPostActivatedEventArgs", WebUIContactPostActivatedEventArgs.signature(), _impl_l1.IContactPostActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactPostActivatedEventArgs", WebUIContactPostActivatedEventArgs.signature(), impl_p1.IContactPostActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5533,22 +5522,22 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactPostActivatedEventArgs(): _impl_l1.IContactPostActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactPostActivatedEventArgs.descriptor()) }) {
+    public func asIContactPostActivatedEventArgs(): impl_p1.IContactPostActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactPostActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContactActivatedEventArgs(): _impl_l1.IContactActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactActivatedEventArgs.descriptor()) }) {
+    public func asIContactActivatedEventArgs(): impl_p0.IContactActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContactActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5570,7 +5559,7 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
@@ -5578,15 +5567,15 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
         return asIContactActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5632,7 +5621,7 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func iid(): GUID {
-        _impl_l1.IContactVideoCallActivatedEventArgs.iid()
+        impl_p1.IContactVideoCallActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5640,12 +5629,12 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIContactVideoCallActivatedEventArgs> {
-        let ancestors = [_impl_l1.IContactVideoCallActivatedEventArgs.iid(), _impl_l1.IContactActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIContactVideoCallActivatedEventArgs>("WebUIContactVideoCallActivatedEventArgs", _impl_l1.IContactVideoCallActivatedEventArgs.iid(), ancestors, { raw => WebUIContactVideoCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactVideoCallActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IContactVideoCallActivatedEventArgs.iid(), impl_p0.IContactActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIContactVideoCallActivatedEventArgs>("WebUIContactVideoCallActivatedEventArgs", impl_p1.IContactVideoCallActivatedEventArgs.iid(), ancestors, { raw => WebUIContactVideoCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIContactVideoCallActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IContactVideoCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactVideoCallActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IContactVideoCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactVideoCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5660,7 +5649,7 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactVideoCallActivatedEventArgs", WebUIContactVideoCallActivatedEventArgs.signature(), _impl_l1.IContactVideoCallActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIContactVideoCallActivatedEventArgs", WebUIContactVideoCallActivatedEventArgs.signature(), impl_p1.IContactVideoCallActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5671,22 +5660,22 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIContactVideoCallActivatedEventArgs(): _impl_l1.IContactVideoCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactVideoCallActivatedEventArgs.descriptor()) }) {
+    public func asIContactVideoCallActivatedEventArgs(): impl_p1.IContactVideoCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.IContactVideoCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContactActivatedEventArgs(): _impl_l1.IContactActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContactActivatedEventArgs.descriptor()) }) {
+    public func asIContactActivatedEventArgs(): impl_p0.IContactActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContactActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5708,7 +5697,7 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
@@ -5716,15 +5705,15 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
         return asIContactActivatedEventArgs().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5770,7 +5759,7 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func iid(): GUID {
-        _impl_l1.IDeviceActivatedEventArgs.iid()
+        impl_p0.IDeviceActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5778,12 +5767,12 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIDeviceActivatedEventArgs> {
-        let ancestors = [_impl_l1.IDeviceActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIDeviceActivatedEventArgs>("WebUIDeviceActivatedEventArgs", _impl_l1.IDeviceActivatedEventArgs.iid(), ancestors, { raw => WebUIDeviceActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDeviceActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IDeviceActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIDeviceActivatedEventArgs>("WebUIDeviceActivatedEventArgs", impl_p0.IDeviceActivatedEventArgs.iid(), ancestors, { raw => WebUIDeviceActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDeviceActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IDeviceActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDeviceActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IDeviceActivatedEventArgs {
+        match (unsafe { query(impl_p0.IDeviceActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5798,7 +5787,7 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIDeviceActivatedEventArgs", WebUIDeviceActivatedEventArgs.signature(), _impl_l1.IDeviceActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIDeviceActivatedEventArgs", WebUIDeviceActivatedEventArgs.signature(), impl_p0.IDeviceActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5809,22 +5798,22 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIDeviceActivatedEventArgs(): _impl_l1.IDeviceActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDeviceActivatedEventArgs.descriptor()) }) {
+    public func asIDeviceActivatedEventArgs(): impl_p0.IDeviceActivatedEventArgs {
+        match (unsafe { query(impl_p0.IDeviceActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5837,8 +5826,8 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5852,15 +5841,15 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -5873,7 +5862,7 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -5915,7 +5904,7 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func iid(): GUID {
-        _impl_l1.IDevicePairingActivatedEventArgs.iid()
+        impl_p1.IDevicePairingActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -5923,12 +5912,12 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIDevicePairingActivatedEventArgs> {
-        let ancestors = [_impl_l1.IDevicePairingActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIDevicePairingActivatedEventArgs>("WebUIDevicePairingActivatedEventArgs", _impl_l1.IDevicePairingActivatedEventArgs.iid(), ancestors, { raw => WebUIDevicePairingActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDevicePairingActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IDevicePairingActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIDevicePairingActivatedEventArgs>("WebUIDevicePairingActivatedEventArgs", impl_p1.IDevicePairingActivatedEventArgs.iid(), ancestors, { raw => WebUIDevicePairingActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDevicePairingActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IDevicePairingActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDevicePairingActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IDevicePairingActivatedEventArgs {
+        match (unsafe { query(impl_p1.IDevicePairingActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5943,7 +5932,7 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIDevicePairingActivatedEventArgs", WebUIDevicePairingActivatedEventArgs.signature(), _impl_l1.IDevicePairingActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIDevicePairingActivatedEventArgs", WebUIDevicePairingActivatedEventArgs.signature(), impl_p1.IDevicePairingActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5954,15 +5943,15 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIDevicePairingActivatedEventArgs(): _impl_l1.IDevicePairingActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDevicePairingActivatedEventArgs.descriptor()) }) {
+    public func asIDevicePairingActivatedEventArgs(): impl_p1.IDevicePairingActivatedEventArgs {
+        match (unsafe { query(impl_p1.IDevicePairingActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -5975,27 +5964,27 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func get_DeviceInformation(): _impl_l1.DeviceInformation {
+    public unsafe func get_DeviceInformation(): impl_p1.DeviceInformation {
         return defaultInterface().get_DeviceInformation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6004,7 +5993,7 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6046,7 +6035,7 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func iid(): GUID {
-        _impl_l1.IDialReceiverActivatedEventArgs.iid()
+        impl_p1.IDialReceiverActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6054,12 +6043,12 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIDialReceiverActivatedEventArgs> {
-        let ancestors = [_impl_l1.IDialReceiverActivatedEventArgs.iid(), _impl_l1.ILaunchActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIDialReceiverActivatedEventArgs>("WebUIDialReceiverActivatedEventArgs", _impl_l1.IDialReceiverActivatedEventArgs.iid(), ancestors, { raw => WebUIDialReceiverActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDialReceiverActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IDialReceiverActivatedEventArgs.iid(), impl_p0.ILaunchActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIDialReceiverActivatedEventArgs>("WebUIDialReceiverActivatedEventArgs", impl_p1.IDialReceiverActivatedEventArgs.iid(), ancestors, { raw => WebUIDialReceiverActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIDialReceiverActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IDialReceiverActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDialReceiverActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IDialReceiverActivatedEventArgs {
+        match (unsafe { query(impl_p1.IDialReceiverActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6074,7 +6063,7 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIDialReceiverActivatedEventArgs", WebUIDialReceiverActivatedEventArgs.signature(), _impl_l1.IDialReceiverActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIDialReceiverActivatedEventArgs", WebUIDialReceiverActivatedEventArgs.signature(), impl_p1.IDialReceiverActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6085,29 +6074,29 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIDialReceiverActivatedEventArgs(): _impl_l1.IDialReceiverActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IDialReceiverActivatedEventArgs.descriptor()) }) {
+    public func asIDialReceiverActivatedEventArgs(): impl_p1.IDialReceiverActivatedEventArgs {
+        match (unsafe { query(impl_p1.IDialReceiverActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asILaunchActivatedEventArgs(): _impl_l1.ILaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILaunchActivatedEventArgs.descriptor()) }) {
+    public func asILaunchActivatedEventArgs(): impl_p0.ILaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6120,8 +6109,8 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6139,15 +6128,15 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
         return asILaunchActivatedEventArgs().TileId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6160,7 +6149,7 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6202,7 +6191,7 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func iid(): GUID {
-        _impl_l1.IFileActivatedEventArgs.iid()
+        impl_p1.IFileActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6210,12 +6199,12 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFileActivatedEventArgs> {
-        let ancestors = [_impl_l1.IFileActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IFileActivatedEventArgsWithNeighboringFiles.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFileActivatedEventArgs>("WebUIFileActivatedEventArgs", _impl_l1.IFileActivatedEventArgs.iid(), ancestors, { raw => WebUIFileActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFileActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IFileActivatedEventArgsWithNeighboringFiles.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFileActivatedEventArgs>("WebUIFileActivatedEventArgs", impl_p1.IFileActivatedEventArgs.iid(), ancestors, { raw => WebUIFileActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IFileActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IFileActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFileActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6230,7 +6219,7 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileActivatedEventArgs", WebUIFileActivatedEventArgs.signature(), _impl_l1.IFileActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileActivatedEventArgs", WebUIFileActivatedEventArgs.signature(), impl_p1.IFileActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6241,22 +6230,22 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFileActivatedEventArgs(): _impl_l1.IFileActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IFileActivatedEventArgs.descriptor()) }) {
+    public func asIFileActivatedEventArgs(): impl_p1.IFileActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6269,22 +6258,22 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
         }
     }
 
-    public func asIFileActivatedEventArgsWithNeighboringFiles(): _impl_l1.IFileActivatedEventArgsWithNeighboringFiles {
-        match (unsafe { query(_impl_l1.IFileActivatedEventArgsWithNeighboringFiles.descriptor()) }) {
+    public func asIFileActivatedEventArgsWithNeighboringFiles(): impl_p1.IFileActivatedEventArgsWithNeighboringFiles {
+        match (unsafe { query(impl_p1.IFileActivatedEventArgsWithNeighboringFiles.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func Files(): windows_collections.IVectorView<_impl_l1.IStorageItem> {
+    public unsafe func Files(): windows_collections.IVectorView<impl_p1.IStorageItem> {
         return defaultInterface().Files()
     }
 
@@ -6292,15 +6281,15 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().Verb()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6313,12 +6302,12 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Search == "on"]
-    public unsafe func NeighboringFilesQuery(): _impl_l1.StorageFileQueryResult {
+    public unsafe func NeighboringFilesQuery(): impl_p1.StorageFileQueryResult {
         return asIFileActivatedEventArgsWithNeighboringFiles().NeighboringFilesQuery()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6360,7 +6349,7 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func iid(): GUID {
-        _impl_l1.IFileOpenPickerActivatedEventArgs.iid()
+        impl_p1.IFileOpenPickerActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6368,12 +6357,12 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFileOpenPickerActivatedEventArgs> {
-        let ancestors = [_impl_l1.IFileOpenPickerActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l0.IFileOpenPickerActivatedEventArgs2.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFileOpenPickerActivatedEventArgs>("WebUIFileOpenPickerActivatedEventArgs", _impl_l1.IFileOpenPickerActivatedEventArgs.iid(), ancestors, { raw => WebUIFileOpenPickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileOpenPickerActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFileOpenPickerActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IFileOpenPickerActivatedEventArgs2.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFileOpenPickerActivatedEventArgs>("WebUIFileOpenPickerActivatedEventArgs", impl_p1.IFileOpenPickerActivatedEventArgs.iid(), ancestors, { raw => WebUIFileOpenPickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileOpenPickerActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IFileOpenPickerActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IFileOpenPickerActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFileOpenPickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileOpenPickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6388,7 +6377,7 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileOpenPickerActivatedEventArgs", WebUIFileOpenPickerActivatedEventArgs.signature(), _impl_l1.IFileOpenPickerActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileOpenPickerActivatedEventArgs", WebUIFileOpenPickerActivatedEventArgs.signature(), impl_p1.IFileOpenPickerActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6399,22 +6388,22 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFileOpenPickerActivatedEventArgs(): _impl_l1.IFileOpenPickerActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IFileOpenPickerActivatedEventArgs.descriptor()) }) {
+    public func asIFileOpenPickerActivatedEventArgs(): impl_p1.IFileOpenPickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileOpenPickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIFileOpenPickerActivatedEventArgs2(): _impl_l0.IFileOpenPickerActivatedEventArgs2 {
-        match (unsafe { query(_impl_l0.IFileOpenPickerActivatedEventArgs2.descriptor()) }) {
+    public func asIFileOpenPickerActivatedEventArgs2(): impl_p0.IFileOpenPickerActivatedEventArgs2 {
+        match (unsafe { query(impl_p0.IFileOpenPickerActivatedEventArgs2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6427,27 +6416,27 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_Pickers_Provider == "on"]
-    public unsafe func get_FileOpenPickerUI(): _impl_l1.FileOpenPickerUI {
+    public unsafe func get_FileOpenPickerUI(): impl_p1.FileOpenPickerUI {
         return defaultInterface().get_FileOpenPickerUI()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6460,7 +6449,7 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6502,7 +6491,7 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func iid(): GUID {
-        _impl_l1.IFileOpenPickerContinuationEventArgs.iid()
+        impl_p1.IFileOpenPickerContinuationEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6510,12 +6499,12 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFileOpenPickerContinuationEventArgs> {
-        let ancestors = [_impl_l1.IFileOpenPickerContinuationEventArgs.iid(), _impl_l1.IContinuationActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFileOpenPickerContinuationEventArgs>("WebUIFileOpenPickerContinuationEventArgs", _impl_l1.IFileOpenPickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFileOpenPickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFileOpenPickerContinuationEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFileOpenPickerContinuationEventArgs.iid(), impl_p0.IContinuationActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFileOpenPickerContinuationEventArgs>("WebUIFileOpenPickerContinuationEventArgs", impl_p1.IFileOpenPickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFileOpenPickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFileOpenPickerContinuationEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IFileOpenPickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFileOpenPickerContinuationEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFileOpenPickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFileOpenPickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6530,7 +6519,7 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileOpenPickerContinuationEventArgs", WebUIFileOpenPickerContinuationEventArgs.signature(), _impl_l1.IFileOpenPickerContinuationEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileOpenPickerContinuationEventArgs", WebUIFileOpenPickerContinuationEventArgs.signature(), impl_p1.IFileOpenPickerContinuationEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6541,22 +6530,22 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFileOpenPickerContinuationEventArgs(): _impl_l1.IFileOpenPickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFileOpenPickerContinuationEventArgs.descriptor()) }) {
+    public func asIFileOpenPickerContinuationEventArgs(): impl_p1.IFileOpenPickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFileOpenPickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContinuationActivatedEventArgs(): _impl_l1.IContinuationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContinuationActivatedEventArgs.descriptor()) }) {
+    public func asIContinuationActivatedEventArgs(): impl_p0.IContinuationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContinuationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6569,15 +6558,15 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Files(): windows_collections.IVectorView<_impl_l1.StorageFile> {
+    public unsafe func Files(): windows_collections.IVectorView<impl_p1.StorageFile> {
         return defaultInterface().Files()
     }
 
@@ -6586,15 +6575,15 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
         return asIContinuationActivatedEventArgs().ContinuationData()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6603,7 +6592,7 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6645,7 +6634,7 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func iid(): GUID {
-        _impl_l2.IFileSavePickerActivatedEventArgs.iid()
+        impl_p1.IFileSavePickerActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6653,12 +6642,12 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFileSavePickerActivatedEventArgs> {
-        let ancestors = [_impl_l2.IFileSavePickerActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l0.IFileSavePickerActivatedEventArgs2.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFileSavePickerActivatedEventArgs>("WebUIFileSavePickerActivatedEventArgs", _impl_l2.IFileSavePickerActivatedEventArgs.iid(), ancestors, { raw => WebUIFileSavePickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileSavePickerActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFileSavePickerActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IFileSavePickerActivatedEventArgs2.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFileSavePickerActivatedEventArgs>("WebUIFileSavePickerActivatedEventArgs", impl_p1.IFileSavePickerActivatedEventArgs.iid(), ancestors, { raw => WebUIFileSavePickerActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIFileSavePickerActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l2.IFileSavePickerActivatedEventArgs {
-        match (unsafe { query(_impl_l2.IFileSavePickerActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFileSavePickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileSavePickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6673,7 +6662,7 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileSavePickerActivatedEventArgs", WebUIFileSavePickerActivatedEventArgs.signature(), _impl_l2.IFileSavePickerActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileSavePickerActivatedEventArgs", WebUIFileSavePickerActivatedEventArgs.signature(), impl_p1.IFileSavePickerActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6684,22 +6673,22 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFileSavePickerActivatedEventArgs(): _impl_l2.IFileSavePickerActivatedEventArgs {
-        match (unsafe { query(_impl_l2.IFileSavePickerActivatedEventArgs.descriptor()) }) {
+    public func asIFileSavePickerActivatedEventArgs(): impl_p1.IFileSavePickerActivatedEventArgs {
+        match (unsafe { query(impl_p1.IFileSavePickerActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIFileSavePickerActivatedEventArgs2(): _impl_l0.IFileSavePickerActivatedEventArgs2 {
-        match (unsafe { query(_impl_l0.IFileSavePickerActivatedEventArgs2.descriptor()) }) {
+    public func asIFileSavePickerActivatedEventArgs2(): impl_p0.IFileSavePickerActivatedEventArgs2 {
+        match (unsafe { query(impl_p0.IFileSavePickerActivatedEventArgs2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6712,27 +6701,27 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_Pickers_Provider == "on"]
-    public unsafe func get_FileSavePickerUI(): _impl_l2.FileSavePickerUI {
+    public unsafe func get_FileSavePickerUI(): impl_p1.FileSavePickerUI {
         return defaultInterface().get_FileSavePickerUI()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6749,7 +6738,7 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6791,7 +6780,7 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func iid(): GUID {
-        _impl_l1.IFileSavePickerContinuationEventArgs.iid()
+        impl_p1.IFileSavePickerContinuationEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6799,12 +6788,12 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFileSavePickerContinuationEventArgs> {
-        let ancestors = [_impl_l1.IFileSavePickerContinuationEventArgs.iid(), _impl_l1.IContinuationActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFileSavePickerContinuationEventArgs>("WebUIFileSavePickerContinuationEventArgs", _impl_l1.IFileSavePickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFileSavePickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFileSavePickerContinuationEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFileSavePickerContinuationEventArgs.iid(), impl_p0.IContinuationActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFileSavePickerContinuationEventArgs>("WebUIFileSavePickerContinuationEventArgs", impl_p1.IFileSavePickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFileSavePickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFileSavePickerContinuationEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IFileSavePickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFileSavePickerContinuationEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFileSavePickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFileSavePickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6819,7 +6808,7 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileSavePickerContinuationEventArgs", WebUIFileSavePickerContinuationEventArgs.signature(), _impl_l1.IFileSavePickerContinuationEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFileSavePickerContinuationEventArgs", WebUIFileSavePickerContinuationEventArgs.signature(), impl_p1.IFileSavePickerContinuationEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6830,22 +6819,22 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFileSavePickerContinuationEventArgs(): _impl_l1.IFileSavePickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFileSavePickerContinuationEventArgs.descriptor()) }) {
+    public func asIFileSavePickerContinuationEventArgs(): impl_p1.IFileSavePickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFileSavePickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContinuationActivatedEventArgs(): _impl_l1.IContinuationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContinuationActivatedEventArgs.descriptor()) }) {
+    public func asIContinuationActivatedEventArgs(): impl_p0.IContinuationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContinuationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6858,15 +6847,15 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func File(): _impl_l1.StorageFile {
+    public unsafe func File(): impl_p1.StorageFile {
         return defaultInterface().File()
     }
 
@@ -6875,15 +6864,15 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
         return asIContinuationActivatedEventArgs().ContinuationData()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -6892,7 +6881,7 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6934,7 +6923,7 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func iid(): GUID {
-        _impl_l1.IFolderPickerContinuationEventArgs.iid()
+        impl_p1.IFolderPickerContinuationEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -6942,12 +6931,12 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIFolderPickerContinuationEventArgs> {
-        let ancestors = [_impl_l1.IFolderPickerContinuationEventArgs.iid(), _impl_l1.IContinuationActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIFolderPickerContinuationEventArgs>("WebUIFolderPickerContinuationEventArgs", _impl_l1.IFolderPickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFolderPickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFolderPickerContinuationEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IFolderPickerContinuationEventArgs.iid(), impl_p0.IContinuationActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIFolderPickerContinuationEventArgs>("WebUIFolderPickerContinuationEventArgs", impl_p1.IFolderPickerContinuationEventArgs.iid(), ancestors, { raw => WebUIFolderPickerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIFolderPickerContinuationEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IFolderPickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFolderPickerContinuationEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IFolderPickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFolderPickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6962,7 +6951,7 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIFolderPickerContinuationEventArgs", WebUIFolderPickerContinuationEventArgs.signature(), _impl_l1.IFolderPickerContinuationEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIFolderPickerContinuationEventArgs", WebUIFolderPickerContinuationEventArgs.signature(), impl_p1.IFolderPickerContinuationEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -6973,22 +6962,22 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIFolderPickerContinuationEventArgs(): _impl_l1.IFolderPickerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IFolderPickerContinuationEventArgs.descriptor()) }) {
+    public func asIFolderPickerContinuationEventArgs(): impl_p1.IFolderPickerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IFolderPickerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContinuationActivatedEventArgs(): _impl_l1.IContinuationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContinuationActivatedEventArgs.descriptor()) }) {
+    public func asIContinuationActivatedEventArgs(): impl_p0.IContinuationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContinuationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7001,15 +6990,15 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Folder(): _impl_l1.StorageFolder {
+    public unsafe func Folder(): impl_p1.StorageFolder {
         return defaultInterface().Folder()
     }
 
@@ -7018,15 +7007,15 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
         return asIContinuationActivatedEventArgs().ContinuationData()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -7035,7 +7024,7 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -7077,7 +7066,7 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func iid(): GUID {
-        _impl_l1.ILaunchActivatedEventArgs.iid()
+        impl_p0.ILaunchActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7085,12 +7074,12 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUILaunchActivatedEventArgs> {
-        let ancestors = [_impl_l1.ILaunchActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IPrelaunchActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), _impl_l1.ILaunchActivatedEventArgs2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUILaunchActivatedEventArgs>("WebUILaunchActivatedEventArgs", _impl_l1.ILaunchActivatedEventArgs.iid(), ancestors, { raw => WebUILaunchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILaunchActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ILaunchActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IPrelaunchActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), impl_p1.ILaunchActivatedEventArgs2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUILaunchActivatedEventArgs>("WebUILaunchActivatedEventArgs", impl_p0.ILaunchActivatedEventArgs.iid(), ancestors, { raw => WebUILaunchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILaunchActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ILaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILaunchActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ILaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7105,7 +7094,7 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUILaunchActivatedEventArgs", WebUILaunchActivatedEventArgs.signature(), _impl_l1.ILaunchActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUILaunchActivatedEventArgs", WebUILaunchActivatedEventArgs.signature(), impl_p0.ILaunchActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7116,29 +7105,29 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         IInspectable.viewOf(asRaw())
     }
 
-    public func asILaunchActivatedEventArgs(): _impl_l1.ILaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILaunchActivatedEventArgs.descriptor()) }) {
+    public func asILaunchActivatedEventArgs(): impl_p0.ILaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIPrelaunchActivatedEventArgs(): _impl_l1.IPrelaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPrelaunchActivatedEventArgs.descriptor()) }) {
+    public func asIPrelaunchActivatedEventArgs(): impl_p0.IPrelaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPrelaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7151,15 +7140,15 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asILaunchActivatedEventArgs2(): _impl_l1.ILaunchActivatedEventArgs2 {
-        match (unsafe { query(_impl_l1.ILaunchActivatedEventArgs2.descriptor()) }) {
+    public func asILaunchActivatedEventArgs2(): impl_p1.ILaunchActivatedEventArgs2 {
+        match (unsafe { query(impl_p1.ILaunchActivatedEventArgs2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7173,15 +7162,15 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().TileId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -7198,11 +7187,11 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 
-    public unsafe func get_TileActivatedInfo(): _impl_l1.TileActivatedInfo {
+    public unsafe func get_TileActivatedInfo(): impl_p1.TileActivatedInfo {
         return asILaunchActivatedEventArgs2().get_TileActivatedInfo()
     }
 }
@@ -7244,7 +7233,7 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func iid(): GUID {
-        _impl_l1.ILockScreenActivatedEventArgs.iid()
+        impl_p0.ILockScreenActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7252,12 +7241,12 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUILockScreenActivatedEventArgs> {
-        let ancestors = [_impl_l1.ILockScreenActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUILockScreenActivatedEventArgs>("WebUILockScreenActivatedEventArgs", _impl_l1.ILockScreenActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ILockScreenActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUILockScreenActivatedEventArgs>("WebUILockScreenActivatedEventArgs", impl_p0.ILockScreenActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ILockScreenActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILockScreenActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ILockScreenActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILockScreenActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7272,7 +7261,7 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenActivatedEventArgs", WebUILockScreenActivatedEventArgs.signature(), _impl_l1.ILockScreenActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenActivatedEventArgs", WebUILockScreenActivatedEventArgs.signature(), impl_p0.ILockScreenActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7283,22 +7272,22 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
         IInspectable.viewOf(asRaw())
     }
 
-    public func asILockScreenActivatedEventArgs(): _impl_l1.ILockScreenActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILockScreenActivatedEventArgs.descriptor()) }) {
+    public func asILockScreenActivatedEventArgs(): impl_p0.ILockScreenActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILockScreenActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7311,8 +7300,8 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7322,15 +7311,15 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
         return defaultInterface().Info()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -7343,7 +7332,7 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -7385,7 +7374,7 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func iid(): GUID {
-        _impl_l1.ILockScreenCallActivatedEventArgs.iid()
+        impl_p1.ILockScreenCallActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7393,12 +7382,12 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUILockScreenCallActivatedEventArgs> {
-        let ancestors = [_impl_l1.ILockScreenCallActivatedEventArgs.iid(), _impl_l1.ILaunchActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUILockScreenCallActivatedEventArgs>("WebUILockScreenCallActivatedEventArgs", _impl_l1.ILockScreenCallActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenCallActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.ILockScreenCallActivatedEventArgs.iid(), impl_p0.ILaunchActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUILockScreenCallActivatedEventArgs>("WebUILockScreenCallActivatedEventArgs", impl_p1.ILockScreenCallActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenCallActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ILockScreenCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILockScreenCallActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.ILockScreenCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.ILockScreenCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7413,7 +7402,7 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenCallActivatedEventArgs", WebUILockScreenCallActivatedEventArgs.signature(), _impl_l1.ILockScreenCallActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenCallActivatedEventArgs", WebUILockScreenCallActivatedEventArgs.signature(), impl_p1.ILockScreenCallActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7424,29 +7413,29 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
         IInspectable.viewOf(asRaw())
     }
 
-    public func asILockScreenCallActivatedEventArgs(): _impl_l1.ILockScreenCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILockScreenCallActivatedEventArgs.descriptor()) }) {
+    public func asILockScreenCallActivatedEventArgs(): impl_p1.ILockScreenCallActivatedEventArgs {
+        match (unsafe { query(impl_p1.ILockScreenCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asILaunchActivatedEventArgs(): _impl_l1.ILaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ILaunchActivatedEventArgs.descriptor()) }) {
+    public func asILaunchActivatedEventArgs(): impl_p0.ILaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ILaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7460,7 +7449,7 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel_Calls == "on"]
-    public unsafe func CallUI(): _impl_l1.LockScreenCallUI {
+    public unsafe func CallUI(): impl_p1.LockScreenCallUI {
         return defaultInterface().CallUI()
     }
 
@@ -7472,15 +7461,15 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
         return asILaunchActivatedEventArgs().TileId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -7530,7 +7519,7 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
     }
 
     public static func iid(): GUID {
-        _impl_l0.IActivatedEventArgs.iid()
+        impl_p0.IActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7538,12 +7527,12 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUILockScreenComponentActivatedEventArgs> {
-        let ancestors = [_impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUILockScreenComponentActivatedEventArgs>("WebUILockScreenComponentActivatedEventArgs", _impl_l0.IActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenComponentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenComponentActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUILockScreenComponentActivatedEventArgs>("WebUILockScreenComponentActivatedEventArgs", impl_p0.IActivatedEventArgs.iid(), ancestors, { raw => WebUILockScreenComponentActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUILockScreenComponentActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7558,7 +7547,7 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenComponentActivatedEventArgs", WebUILockScreenComponentActivatedEventArgs.signature(), _impl_l0.IActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUILockScreenComponentActivatedEventArgs", WebUILockScreenComponentActivatedEventArgs.signature(), impl_p0.IActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7569,8 +7558,8 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7583,15 +7572,15 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
         }
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return defaultInterface().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return defaultInterface().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return defaultInterface().get_SplashScreen()
     }
 
@@ -7725,7 +7714,7 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 
     public static func iid(): GUID {
-        _impl_l1.IPhoneCallActivatedEventArgs.iid()
+        impl_p0.IPhoneCallActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7733,12 +7722,12 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIPhoneCallActivatedEventArgs> {
-        let ancestors = [_impl_l1.IPhoneCallActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIPhoneCallActivatedEventArgs>("WebUIPhoneCallActivatedEventArgs", _impl_l1.IPhoneCallActivatedEventArgs.iid(), ancestors, { raw => WebUIPhoneCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPhoneCallActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IPhoneCallActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIPhoneCallActivatedEventArgs>("WebUIPhoneCallActivatedEventArgs", impl_p0.IPhoneCallActivatedEventArgs.iid(), ancestors, { raw => WebUIPhoneCallActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPhoneCallActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IPhoneCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPhoneCallActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IPhoneCallActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPhoneCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7753,7 +7742,7 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIPhoneCallActivatedEventArgs", WebUIPhoneCallActivatedEventArgs.signature(), _impl_l1.IPhoneCallActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIPhoneCallActivatedEventArgs", WebUIPhoneCallActivatedEventArgs.signature(), impl_p0.IPhoneCallActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7768,22 +7757,22 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIPhoneCallActivatedEventArgs(): _impl_l1.IPhoneCallActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPhoneCallActivatedEventArgs.descriptor()) }) {
+    public func asIPhoneCallActivatedEventArgs(): impl_p0.IPhoneCallActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPhoneCallActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7800,20 +7789,20 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
         return defaultInterface().LineId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 
@@ -7859,7 +7848,7 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func iid(): GUID {
-        _impl_l1.IPrint3DWorkflowActivatedEventArgs.iid()
+        impl_p0.IPrint3DWorkflowActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7867,12 +7856,12 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIPrint3DWorkflowActivatedEventArgs> {
-        let ancestors = [_impl_l1.IPrint3DWorkflowActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIPrint3DWorkflowActivatedEventArgs>("WebUIPrint3DWorkflowActivatedEventArgs", _impl_l1.IPrint3DWorkflowActivatedEventArgs.iid(), ancestors, { raw => WebUIPrint3DWorkflowActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrint3DWorkflowActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IPrint3DWorkflowActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIPrint3DWorkflowActivatedEventArgs>("WebUIPrint3DWorkflowActivatedEventArgs", impl_p0.IPrint3DWorkflowActivatedEventArgs.iid(), ancestors, { raw => WebUIPrint3DWorkflowActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrint3DWorkflowActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IPrint3DWorkflowActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPrint3DWorkflowActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IPrint3DWorkflowActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPrint3DWorkflowActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7887,7 +7876,7 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrint3DWorkflowActivatedEventArgs", WebUIPrint3DWorkflowActivatedEventArgs.signature(), _impl_l1.IPrint3DWorkflowActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrint3DWorkflowActivatedEventArgs", WebUIPrint3DWorkflowActivatedEventArgs.signature(), impl_p0.IPrint3DWorkflowActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -7898,15 +7887,15 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIPrint3DWorkflowActivatedEventArgs(): _impl_l1.IPrint3DWorkflowActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPrint3DWorkflowActivatedEventArgs.descriptor()) }) {
+    public func asIPrint3DWorkflowActivatedEventArgs(): impl_p0.IPrint3DWorkflowActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPrint3DWorkflowActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7924,15 +7913,15 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
         return defaultInterface().Workflow()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -7978,7 +7967,7 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func iid(): GUID {
-        _impl_l1.IPrintTaskSettingsActivatedEventArgs.iid()
+        impl_p0.IPrintTaskSettingsActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -7986,12 +7975,12 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIPrintTaskSettingsActivatedEventArgs> {
-        let ancestors = [_impl_l1.IPrintTaskSettingsActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIPrintTaskSettingsActivatedEventArgs>("WebUIPrintTaskSettingsActivatedEventArgs", _impl_l1.IPrintTaskSettingsActivatedEventArgs.iid(), ancestors, { raw => WebUIPrintTaskSettingsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrintTaskSettingsActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IPrintTaskSettingsActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIPrintTaskSettingsActivatedEventArgs>("WebUIPrintTaskSettingsActivatedEventArgs", impl_p0.IPrintTaskSettingsActivatedEventArgs.iid(), ancestors, { raw => WebUIPrintTaskSettingsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrintTaskSettingsActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IPrintTaskSettingsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPrintTaskSettingsActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IPrintTaskSettingsActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPrintTaskSettingsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8006,7 +7995,7 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrintTaskSettingsActivatedEventArgs", WebUIPrintTaskSettingsActivatedEventArgs.signature(), _impl_l1.IPrintTaskSettingsActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrintTaskSettingsActivatedEventArgs", WebUIPrintTaskSettingsActivatedEventArgs.signature(), impl_p0.IPrintTaskSettingsActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8017,15 +8006,15 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIPrintTaskSettingsActivatedEventArgs(): _impl_l1.IPrintTaskSettingsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IPrintTaskSettingsActivatedEventArgs.descriptor()) }) {
+    public func asIPrintTaskSettingsActivatedEventArgs(): impl_p0.IPrintTaskSettingsActivatedEventArgs {
+        match (unsafe { query(impl_p0.IPrintTaskSettingsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8043,15 +8032,15 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
         return defaultInterface().Configuration()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -8097,7 +8086,7 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
     }
 
     public static func iid(): GUID {
-        _impl_l0.IActivatedEventArgs.iid()
+        impl_p0.IActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8105,12 +8094,12 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIPrintWorkflowForegroundTaskActivatedEventArgs> {
-        let ancestors = [_impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIPrintWorkflowForegroundTaskActivatedEventArgs>("WebUIPrintWorkflowForegroundTaskActivatedEventArgs", _impl_l0.IActivatedEventArgs.iid(), ancestors, { raw => WebUIPrintWorkflowForegroundTaskActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrintWorkflowForegroundTaskActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIPrintWorkflowForegroundTaskActivatedEventArgs>("WebUIPrintWorkflowForegroundTaskActivatedEventArgs", impl_p0.IActivatedEventArgs.iid(), ancestors, { raw => WebUIPrintWorkflowForegroundTaskActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIPrintWorkflowForegroundTaskActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8125,7 +8114,7 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrintWorkflowForegroundTaskActivatedEventArgs", WebUIPrintWorkflowForegroundTaskActivatedEventArgs.signature(), _impl_l0.IActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIPrintWorkflowForegroundTaskActivatedEventArgs", WebUIPrintWorkflowForegroundTaskActivatedEventArgs.signature(), impl_p0.IActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8136,8 +8125,8 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8150,15 +8139,15 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
         }
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return defaultInterface().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return defaultInterface().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return defaultInterface().get_SplashScreen()
     }
 
@@ -8204,7 +8193,7 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     public static func iid(): GUID {
-        _impl_l1.IProtocolActivatedEventArgs.iid()
+        impl_p0.IProtocolActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8212,12 +8201,12 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIProtocolActivatedEventArgs> {
-        let ancestors = [_impl_l1.IProtocolActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIProtocolActivatedEventArgs>("WebUIProtocolActivatedEventArgs", _impl_l1.IProtocolActivatedEventArgs.iid(), ancestors, { raw => WebUIProtocolActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIProtocolActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IProtocolActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIProtocolActivatedEventArgs>("WebUIProtocolActivatedEventArgs", impl_p0.IProtocolActivatedEventArgs.iid(), ancestors, { raw => WebUIProtocolActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIProtocolActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IProtocolActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IProtocolActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IProtocolActivatedEventArgs {
+        match (unsafe { query(impl_p0.IProtocolActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8232,7 +8221,7 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIProtocolActivatedEventArgs", WebUIProtocolActivatedEventArgs.signature(), _impl_l1.IProtocolActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIProtocolActivatedEventArgs", WebUIProtocolActivatedEventArgs.signature(), impl_p0.IProtocolActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8243,29 +8232,29 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIProtocolActivatedEventArgs(): _impl_l1.IProtocolActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IProtocolActivatedEventArgs.descriptor()) }) {
+    public func asIProtocolActivatedEventArgs(): impl_p0.IProtocolActivatedEventArgs {
+        match (unsafe { query(impl_p0.IProtocolActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData(): _impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData {
-        match (unsafe { query(_impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.descriptor()) }) {
+    public func asIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData(): impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData {
+        match (unsafe { query(impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8278,8 +8267,8 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8289,15 +8278,15 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
         return defaultInterface().get_Uri()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -8319,7 +8308,7 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -8361,7 +8350,7 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func iid(): GUID {
-        _impl_l1.IProtocolForResultsActivatedEventArgs.iid()
+        impl_p0.IProtocolForResultsActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8369,12 +8358,12 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIProtocolForResultsActivatedEventArgs> {
-        let ancestors = [_impl_l1.IProtocolForResultsActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IProtocolActivatedEventArgs.iid(), _impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIProtocolForResultsActivatedEventArgs>("WebUIProtocolForResultsActivatedEventArgs", _impl_l1.IProtocolForResultsActivatedEventArgs.iid(), ancestors, { raw => WebUIProtocolForResultsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIProtocolForResultsActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IProtocolForResultsActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.IProtocolActivatedEventArgs.iid(), impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIProtocolForResultsActivatedEventArgs>("WebUIProtocolForResultsActivatedEventArgs", impl_p0.IProtocolForResultsActivatedEventArgs.iid(), ancestors, { raw => WebUIProtocolForResultsActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIProtocolForResultsActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IProtocolForResultsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IProtocolForResultsActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IProtocolForResultsActivatedEventArgs {
+        match (unsafe { query(impl_p0.IProtocolForResultsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8389,7 +8378,7 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIProtocolForResultsActivatedEventArgs", WebUIProtocolForResultsActivatedEventArgs.signature(), _impl_l1.IProtocolForResultsActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIProtocolForResultsActivatedEventArgs", WebUIProtocolForResultsActivatedEventArgs.signature(), impl_p0.IProtocolForResultsActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8400,36 +8389,36 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIProtocolForResultsActivatedEventArgs(): _impl_l1.IProtocolForResultsActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IProtocolForResultsActivatedEventArgs.descriptor()) }) {
+    public func asIProtocolForResultsActivatedEventArgs(): impl_p0.IProtocolForResultsActivatedEventArgs {
+        match (unsafe { query(impl_p0.IProtocolForResultsActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIProtocolActivatedEventArgs(): _impl_l1.IProtocolActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IProtocolActivatedEventArgs.descriptor()) }) {
+    public func asIProtocolActivatedEventArgs(): impl_p0.IProtocolActivatedEventArgs {
+        match (unsafe { query(impl_p0.IProtocolActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData(): _impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData {
-        match (unsafe { query(_impl_l1.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.descriptor()) }) {
+    public func asIProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData(): impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData {
+        match (unsafe { query(impl_p0.IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8442,27 +8431,27 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_ProtocolForResultsOperation(): _impl_l0.ProtocolForResultsOperation {
+    public unsafe func get_ProtocolForResultsOperation(): impl_p0.ProtocolForResultsOperation {
         return defaultInterface().get_ProtocolForResultsOperation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -8488,7 +8477,7 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -8530,7 +8519,7 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func iid(): GUID {
-        _impl_l1.IRestrictedLaunchActivatedEventArgs.iid()
+        impl_p0.IRestrictedLaunchActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8538,12 +8527,12 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIRestrictedLaunchActivatedEventArgs> {
-        let ancestors = [_impl_l1.IRestrictedLaunchActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIRestrictedLaunchActivatedEventArgs>("WebUIRestrictedLaunchActivatedEventArgs", _impl_l1.IRestrictedLaunchActivatedEventArgs.iid(), ancestors, { raw => WebUIRestrictedLaunchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIRestrictedLaunchActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IRestrictedLaunchActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIRestrictedLaunchActivatedEventArgs>("WebUIRestrictedLaunchActivatedEventArgs", impl_p0.IRestrictedLaunchActivatedEventArgs.iid(), ancestors, { raw => WebUIRestrictedLaunchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIRestrictedLaunchActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IRestrictedLaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IRestrictedLaunchActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IRestrictedLaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.IRestrictedLaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8558,7 +8547,7 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIRestrictedLaunchActivatedEventArgs", WebUIRestrictedLaunchActivatedEventArgs.signature(), _impl_l1.IRestrictedLaunchActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIRestrictedLaunchActivatedEventArgs", WebUIRestrictedLaunchActivatedEventArgs.signature(), impl_p0.IRestrictedLaunchActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8569,15 +8558,15 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIRestrictedLaunchActivatedEventArgs(): _impl_l1.IRestrictedLaunchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IRestrictedLaunchActivatedEventArgs.descriptor()) }) {
+    public func asIRestrictedLaunchActivatedEventArgs(): impl_p0.IRestrictedLaunchActivatedEventArgs {
+        match (unsafe { query(impl_p0.IRestrictedLaunchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8590,8 +8579,8 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8601,15 +8590,15 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
         return defaultInterface().SharedContext()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -8618,7 +8607,7 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -8660,7 +8649,7 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func iid(): GUID {
-        _impl_l1.ISearchActivatedEventArgs.iid()
+        impl_p0.ISearchActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8668,12 +8657,12 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUISearchActivatedEventArgs> {
-        let ancestors = [_impl_l1.ISearchActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.ISearchActivatedEventArgsWithLinguisticDetails.iid(), _impl_l1.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUISearchActivatedEventArgs>("WebUISearchActivatedEventArgs", _impl_l1.ISearchActivatedEventArgs.iid(), ancestors, { raw => WebUISearchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUISearchActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.ISearchActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p0.ISearchActivatedEventArgsWithLinguisticDetails.iid(), impl_p0.IApplicationViewActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUISearchActivatedEventArgs>("WebUISearchActivatedEventArgs", impl_p0.ISearchActivatedEventArgs.iid(), ancestors, { raw => WebUISearchActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUISearchActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.ISearchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ISearchActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.ISearchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ISearchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8688,7 +8677,7 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUISearchActivatedEventArgs", WebUISearchActivatedEventArgs.signature(), _impl_l1.ISearchActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUISearchActivatedEventArgs", WebUISearchActivatedEventArgs.signature(), impl_p0.ISearchActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8699,29 +8688,29 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         IInspectable.viewOf(asRaw())
     }
 
-    public func asISearchActivatedEventArgs(): _impl_l1.ISearchActivatedEventArgs {
-        match (unsafe { query(_impl_l1.ISearchActivatedEventArgs.descriptor()) }) {
+    public func asISearchActivatedEventArgs(): impl_p0.ISearchActivatedEventArgs {
+        match (unsafe { query(impl_p0.ISearchActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asISearchActivatedEventArgsWithLinguisticDetails(): _impl_l1.ISearchActivatedEventArgsWithLinguisticDetails {
-        match (unsafe { query(_impl_l1.ISearchActivatedEventArgsWithLinguisticDetails.descriptor()) }) {
+    public func asISearchActivatedEventArgsWithLinguisticDetails(): impl_p0.ISearchActivatedEventArgsWithLinguisticDetails {
+        match (unsafe { query(impl_p0.ISearchActivatedEventArgsWithLinguisticDetails.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIApplicationViewActivatedEventArgs(): _impl_l1.IApplicationViewActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IApplicationViewActivatedEventArgs.descriptor()) }) {
+    public func asIApplicationViewActivatedEventArgs(): impl_p0.IApplicationViewActivatedEventArgs {
+        match (unsafe { query(impl_p0.IApplicationViewActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8742,20 +8731,20 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().Language()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func LinguisticDetails(): _impl_l0.SearchPaneQueryLinguisticDetails {
+    public unsafe func LinguisticDetails(): impl_p0.SearchPaneQueryLinguisticDetails {
         return asISearchActivatedEventArgsWithLinguisticDetails().LinguisticDetails()
     }
 
@@ -8805,7 +8794,7 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func iid(): GUID {
-        _impl_l2.IShareTargetActivatedEventArgs.iid()
+        impl_p2.IShareTargetActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8813,12 +8802,12 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIShareTargetActivatedEventArgs> {
-        let ancestors = [_impl_l2.IShareTargetActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIShareTargetActivatedEventArgs>("WebUIShareTargetActivatedEventArgs", _impl_l2.IShareTargetActivatedEventArgs.iid(), ancestors, { raw => WebUIShareTargetActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIShareTargetActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p2.IShareTargetActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIShareTargetActivatedEventArgs>("WebUIShareTargetActivatedEventArgs", impl_p2.IShareTargetActivatedEventArgs.iid(), ancestors, { raw => WebUIShareTargetActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIShareTargetActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l2.IShareTargetActivatedEventArgs {
-        match (unsafe { query(_impl_l2.IShareTargetActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p2.IShareTargetActivatedEventArgs {
+        match (unsafe { query(impl_p2.IShareTargetActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8833,7 +8822,7 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIShareTargetActivatedEventArgs", WebUIShareTargetActivatedEventArgs.signature(), _impl_l2.IShareTargetActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIShareTargetActivatedEventArgs", WebUIShareTargetActivatedEventArgs.signature(), impl_p2.IShareTargetActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8844,15 +8833,15 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIShareTargetActivatedEventArgs(): _impl_l2.IShareTargetActivatedEventArgs {
-        match (unsafe { query(_impl_l2.IShareTargetActivatedEventArgs.descriptor()) }) {
+    public func asIShareTargetActivatedEventArgs(): impl_p2.IShareTargetActivatedEventArgs {
+        match (unsafe { query(impl_p2.IShareTargetActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8865,27 +8854,27 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_ApplicationModel_DataTransfer_ShareTarget == "on"]
-    public unsafe func get_ShareOperation(): _impl_l2.ShareOperation {
+    public unsafe func get_ShareOperation(): impl_p2.ShareOperation {
         return defaultInterface().get_ShareOperation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -8894,7 +8883,7 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -8936,7 +8925,7 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func iid(): GUID {
-        _impl_l1.IStartupTaskActivatedEventArgs.iid()
+        impl_p0.IStartupTaskActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -8944,12 +8933,12 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIStartupTaskActivatedEventArgs> {
-        let ancestors = [_impl_l1.IStartupTaskActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIStartupTaskActivatedEventArgs>("WebUIStartupTaskActivatedEventArgs", _impl_l1.IStartupTaskActivatedEventArgs.iid(), ancestors, { raw => WebUIStartupTaskActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIStartupTaskActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IStartupTaskActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIStartupTaskActivatedEventArgs>("WebUIStartupTaskActivatedEventArgs", impl_p0.IStartupTaskActivatedEventArgs.iid(), ancestors, { raw => WebUIStartupTaskActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIStartupTaskActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IStartupTaskActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IStartupTaskActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IStartupTaskActivatedEventArgs {
+        match (unsafe { query(impl_p0.IStartupTaskActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8964,7 +8953,7 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIStartupTaskActivatedEventArgs", WebUIStartupTaskActivatedEventArgs.signature(), _impl_l1.IStartupTaskActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIStartupTaskActivatedEventArgs", WebUIStartupTaskActivatedEventArgs.signature(), impl_p0.IStartupTaskActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -8979,22 +8968,22 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIStartupTaskActivatedEventArgs(): _impl_l1.IStartupTaskActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IStartupTaskActivatedEventArgs.descriptor()) }) {
+    public func asIStartupTaskActivatedEventArgs(): impl_p0.IStartupTaskActivatedEventArgs {
+        match (unsafe { query(impl_p0.IStartupTaskActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9011,20 +9000,20 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
         return defaultInterface().TaskId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 
@@ -9070,7 +9059,7 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func iid(): GUID {
-        _impl_l1.IToastNotificationActivatedEventArgs.iid()
+        impl_p0.IToastNotificationActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9078,12 +9067,12 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIToastNotificationActivatedEventArgs> {
-        let ancestors = [_impl_l1.IToastNotificationActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIToastNotificationActivatedEventArgs>("WebUIToastNotificationActivatedEventArgs", _impl_l1.IToastNotificationActivatedEventArgs.iid(), ancestors, { raw => WebUIToastNotificationActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIToastNotificationActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IToastNotificationActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIToastNotificationActivatedEventArgs>("WebUIToastNotificationActivatedEventArgs", impl_p0.IToastNotificationActivatedEventArgs.iid(), ancestors, { raw => WebUIToastNotificationActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIToastNotificationActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IToastNotificationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IToastNotificationActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IToastNotificationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IToastNotificationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9098,7 +9087,7 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIToastNotificationActivatedEventArgs", WebUIToastNotificationActivatedEventArgs.signature(), _impl_l1.IToastNotificationActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIToastNotificationActivatedEventArgs", WebUIToastNotificationActivatedEventArgs.signature(), impl_p0.IToastNotificationActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9109,15 +9098,15 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIToastNotificationActivatedEventArgs(): _impl_l1.IToastNotificationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IToastNotificationActivatedEventArgs.descriptor()) }) {
+    public func asIToastNotificationActivatedEventArgs(): impl_p0.IToastNotificationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IToastNotificationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9130,8 +9119,8 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9146,15 +9135,15 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
         return defaultInterface().UserInput()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -9163,7 +9152,7 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -9205,7 +9194,7 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
     }
 
     public static func iid(): GUID {
-        _impl_l1.IUserDataAccountProviderActivatedEventArgs.iid()
+        impl_p0.IUserDataAccountProviderActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9213,12 +9202,12 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIUserDataAccountProviderActivatedEventArgs> {
-        let ancestors = [_impl_l1.IUserDataAccountProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIUserDataAccountProviderActivatedEventArgs>("WebUIUserDataAccountProviderActivatedEventArgs", _impl_l1.IUserDataAccountProviderActivatedEventArgs.iid(), ancestors, { raw => WebUIUserDataAccountProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIUserDataAccountProviderActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IUserDataAccountProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIUserDataAccountProviderActivatedEventArgs>("WebUIUserDataAccountProviderActivatedEventArgs", impl_p0.IUserDataAccountProviderActivatedEventArgs.iid(), ancestors, { raw => WebUIUserDataAccountProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIUserDataAccountProviderActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IUserDataAccountProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IUserDataAccountProviderActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IUserDataAccountProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IUserDataAccountProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9233,7 +9222,7 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIUserDataAccountProviderActivatedEventArgs", WebUIUserDataAccountProviderActivatedEventArgs.signature(), _impl_l1.IUserDataAccountProviderActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIUserDataAccountProviderActivatedEventArgs", WebUIUserDataAccountProviderActivatedEventArgs.signature(), impl_p0.IUserDataAccountProviderActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9244,15 +9233,15 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIUserDataAccountProviderActivatedEventArgs(): _impl_l1.IUserDataAccountProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IUserDataAccountProviderActivatedEventArgs.descriptor()) }) {
+    public func asIUserDataAccountProviderActivatedEventArgs(): impl_p0.IUserDataAccountProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IUserDataAccountProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9266,19 +9255,19 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
     }
 
     @When[Windows_ApplicationModel_UserDataAccounts_Provider == "on"]
-    public unsafe func Operation(): _impl_l0.IUserDataAccountProviderOperation {
+    public unsafe func Operation(): impl_p0.IUserDataAccountProviderOperation {
         return defaultInterface().Operation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -9324,7 +9313,7 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func iid(): GUID {
-        _impl_l1.IVoiceCommandActivatedEventArgs.iid()
+        impl_p1.IVoiceCommandActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9332,12 +9321,12 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIVoiceCommandActivatedEventArgs> {
-        let ancestors = [_impl_l1.IVoiceCommandActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIVoiceCommandActivatedEventArgs>("WebUIVoiceCommandActivatedEventArgs", _impl_l1.IVoiceCommandActivatedEventArgs.iid(), ancestors, { raw => WebUIVoiceCommandActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIVoiceCommandActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IVoiceCommandActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIVoiceCommandActivatedEventArgs>("WebUIVoiceCommandActivatedEventArgs", impl_p1.IVoiceCommandActivatedEventArgs.iid(), ancestors, { raw => WebUIVoiceCommandActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIVoiceCommandActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IVoiceCommandActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IVoiceCommandActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IVoiceCommandActivatedEventArgs {
+        match (unsafe { query(impl_p1.IVoiceCommandActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9352,7 +9341,7 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIVoiceCommandActivatedEventArgs", WebUIVoiceCommandActivatedEventArgs.signature(), _impl_l1.IVoiceCommandActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIVoiceCommandActivatedEventArgs", WebUIVoiceCommandActivatedEventArgs.signature(), impl_p1.IVoiceCommandActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9363,15 +9352,15 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIVoiceCommandActivatedEventArgs(): _impl_l1.IVoiceCommandActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IVoiceCommandActivatedEventArgs.descriptor()) }) {
+    public func asIVoiceCommandActivatedEventArgs(): impl_p1.IVoiceCommandActivatedEventArgs {
+        match (unsafe { query(impl_p1.IVoiceCommandActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9384,27 +9373,27 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Media_SpeechRecognition == "on"]
-    public unsafe func Result(): _impl_l1.SpeechRecognitionResult {
+    public unsafe func Result(): impl_p1.SpeechRecognitionResult {
         return defaultInterface().Result()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -9413,7 +9402,7 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -9455,7 +9444,7 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func iid(): GUID {
-        _impl_l1.IWalletActionActivatedEventArgs.iid()
+        impl_p0.IWalletActionActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9463,12 +9452,12 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIWalletActionActivatedEventArgs> {
-        let ancestors = [_impl_l1.IWalletActionActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIWalletActionActivatedEventArgs>("WebUIWalletActionActivatedEventArgs", _impl_l1.IWalletActionActivatedEventArgs.iid(), ancestors, { raw => WebUIWalletActionActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIWalletActionActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IWalletActionActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIWalletActionActivatedEventArgs>("WebUIWalletActionActivatedEventArgs", impl_p0.IWalletActionActivatedEventArgs.iid(), ancestors, { raw => WebUIWalletActionActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIWalletActionActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IWalletActionActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IWalletActionActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IWalletActionActivatedEventArgs {
+        match (unsafe { query(impl_p0.IWalletActionActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9483,7 +9472,7 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIWalletActionActivatedEventArgs", WebUIWalletActionActivatedEventArgs.signature(), _impl_l1.IWalletActionActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIWalletActionActivatedEventArgs", WebUIWalletActionActivatedEventArgs.signature(), impl_p0.IWalletActionActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9494,15 +9483,15 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIWalletActionActivatedEventArgs(): _impl_l1.IWalletActionActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IWalletActionActivatedEventArgs.descriptor()) }) {
+    public func asIWalletActionActivatedEventArgs(): impl_p0.IWalletActionActivatedEventArgs {
+        match (unsafe { query(impl_p0.IWalletActionActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9520,7 +9509,7 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func ActionKind(): _impl_l0.WalletActionKind {
+    public unsafe func ActionKind(): impl_p0.WalletActionKind {
         return defaultInterface().ActionKind()
     }
 
@@ -9528,15 +9517,15 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
         return defaultInterface().ActionId()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -9582,7 +9571,7 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func iid(): GUID {
-        _impl_l1.IWebAccountProviderActivatedEventArgs.iid()
+        impl_p0.IWebAccountProviderActivatedEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9590,12 +9579,12 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIWebAccountProviderActivatedEventArgs> {
-        let ancestors = [_impl_l1.IWebAccountProviderActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIWebAccountProviderActivatedEventArgs>("WebUIWebAccountProviderActivatedEventArgs", _impl_l1.IWebAccountProviderActivatedEventArgs.iid(), ancestors, { raw => WebUIWebAccountProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIWebAccountProviderActivatedEventArgs.viewOf(raw) })
+        let ancestors = [impl_p0.IWebAccountProviderActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIWebAccountProviderActivatedEventArgs>("WebUIWebAccountProviderActivatedEventArgs", impl_p0.IWebAccountProviderActivatedEventArgs.iid(), ancestors, { raw => WebUIWebAccountProviderActivatedEventArgs.fromAbiTake(raw) }, { raw => WebUIWebAccountProviderActivatedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IWebAccountProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IWebAccountProviderActivatedEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p0.IWebAccountProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IWebAccountProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9610,7 +9599,7 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIWebAccountProviderActivatedEventArgs", WebUIWebAccountProviderActivatedEventArgs.signature(), _impl_l1.IWebAccountProviderActivatedEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIWebAccountProviderActivatedEventArgs", WebUIWebAccountProviderActivatedEventArgs.signature(), impl_p0.IWebAccountProviderActivatedEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9621,15 +9610,15 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIWebAccountProviderActivatedEventArgs(): _impl_l1.IWebAccountProviderActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IWebAccountProviderActivatedEventArgs.descriptor()) }) {
+    public func asIWebAccountProviderActivatedEventArgs(): impl_p0.IWebAccountProviderActivatedEventArgs {
+        match (unsafe { query(impl_p0.IWebAccountProviderActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9642,27 +9631,27 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Security_Authentication_Web_Provider == "on"]
-    public unsafe func Operation(): _impl_l0.IWebAccountProviderOperation {
+    public unsafe func Operation(): impl_p0.IWebAccountProviderOperation {
         return defaultInterface().Operation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -9671,7 +9660,7 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -9713,7 +9702,7 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
     }
 
     public static func iid(): GUID {
-        _impl_l1.IWebAuthenticationBrokerContinuationEventArgs.iid()
+        impl_p1.IWebAuthenticationBrokerContinuationEventArgs.iid()
     }
 
     public static func runtimeName(): String {
@@ -9721,12 +9710,12 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
     }
 
     public static func descriptor(): InterfaceDescriptor<WebUIWebAuthenticationBrokerContinuationEventArgs> {
-        let ancestors = [_impl_l1.IWebAuthenticationBrokerContinuationEventArgs.iid(), _impl_l1.IContinuationActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WebUIWebAuthenticationBrokerContinuationEventArgs>("WebUIWebAuthenticationBrokerContinuationEventArgs", _impl_l1.IWebAuthenticationBrokerContinuationEventArgs.iid(), ancestors, { raw => WebUIWebAuthenticationBrokerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIWebAuthenticationBrokerContinuationEventArgs.viewOf(raw) })
+        let ancestors = [impl_p1.IWebAuthenticationBrokerContinuationEventArgs.iid(), impl_p0.IContinuationActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), IActivatedEventArgsDeferral.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WebUIWebAuthenticationBrokerContinuationEventArgs>("WebUIWebAuthenticationBrokerContinuationEventArgs", impl_p1.IWebAuthenticationBrokerContinuationEventArgs.iid(), ancestors, { raw => WebUIWebAuthenticationBrokerContinuationEventArgs.fromAbiTake(raw) }, { raw => WebUIWebAuthenticationBrokerContinuationEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IWebAuthenticationBrokerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IWebAuthenticationBrokerContinuationEventArgs.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IWebAuthenticationBrokerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IWebAuthenticationBrokerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9741,7 +9730,7 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.UI.WebUI.WebUIWebAuthenticationBrokerContinuationEventArgs", WebUIWebAuthenticationBrokerContinuationEventArgs.signature(), _impl_l1.IWebAuthenticationBrokerContinuationEventArgs.iid())
+        RuntimeTypeContract("Windows.UI.WebUI.WebUIWebAuthenticationBrokerContinuationEventArgs", WebUIWebAuthenticationBrokerContinuationEventArgs.signature(), impl_p1.IWebAuthenticationBrokerContinuationEventArgs.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -9752,22 +9741,22 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIWebAuthenticationBrokerContinuationEventArgs(): _impl_l1.IWebAuthenticationBrokerContinuationEventArgs {
-        match (unsafe { query(_impl_l1.IWebAuthenticationBrokerContinuationEventArgs.descriptor()) }) {
+    public func asIWebAuthenticationBrokerContinuationEventArgs(): impl_p1.IWebAuthenticationBrokerContinuationEventArgs {
+        match (unsafe { query(impl_p1.IWebAuthenticationBrokerContinuationEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContinuationActivatedEventArgs(): _impl_l1.IContinuationActivatedEventArgs {
-        match (unsafe { query(_impl_l1.IContinuationActivatedEventArgs.descriptor()) }) {
+    public func asIContinuationActivatedEventArgs(): impl_p0.IContinuationActivatedEventArgs {
+        match (unsafe { query(impl_p0.IContinuationActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -9790,15 +9779,15 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
         return asIContinuationActivatedEventArgs().ContinuationData()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
@@ -10023,7 +10012,7 @@ public class INewWebUIViewCreatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INewWebUIViewCreatedEventArgs", INewWebUIViewCreatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INewWebUIViewCreatedEventArgsVtbl", "INewWebUIViewCreatedEventArgs", "INewWebUIViewCreatedEventArgs_Impl", [InterfaceMethodSchema("get_WebUIView", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebUIView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivatedEventArgs", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IActivatedEventArgs>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasPendingNavigate", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INewWebUIViewCreatedEventArgs", INewWebUIViewCreatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INewWebUIViewCreatedEventArgsVtbl", "INewWebUIViewCreatedEventArgs", "INewWebUIViewCreatedEventArgs_Impl", [InterfaceMethodSchema("get_WebUIView", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebUIView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivatedEventArgs", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IActivatedEventArgs>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasPendingNavigate", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INewWebUIViewCreatedEventArgs.runtimeType())
         return schema
     }
@@ -10061,12 +10050,12 @@ public class INewWebUIViewCreatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func ActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
+    public unsafe func ActivatedEventArgs(): impl_p0.IActivatedEventArgs {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ActivatedEventArgs(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IActivatedEventArgs.fromAbiTake(result__)
+        return impl_p0.IActivatedEventArgs.fromAbiTake(result__)
     }
 
     public unsafe func HasPendingNavigate(): Bool {
@@ -10254,7 +10243,7 @@ public class IWebUIView <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebUIView", IWebUIView.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebUIViewVtbl", "IWebUIView", "IWebUIView_Impl", [InterfaceMethodSchema("ApplicationViewId", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Closed", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WebUIView, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveClosed", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Activated", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WebUIView, _impl_l0.IActivatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivated", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IgnoreApplicationContentUriRulesNavigationRestrictions", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIgnoreApplicationContentUriRulesNavigationRestrictions", 12, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebUIView", IWebUIView.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebUIViewVtbl", "IWebUIView", "IWebUIView_Impl", [InterfaceMethodSchema("ApplicationViewId", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Closed", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WebUIView, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveClosed", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Activated", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WebUIView, impl_p0.IActivatedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivated", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IgnoreApplicationContentUriRulesNavigationRestrictions", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIgnoreApplicationContentUriRulesNavigationRestrictions", 12, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IWebUIView.runtimeType())
         return schema
     }
@@ -10306,7 +10295,7 @@ public class IWebUIView <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func Activated(handler: Foundation.TypedEventHandler<WebUIView, _impl_l0.IActivatedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func Activated(handler: Foundation.TypedEventHandler<WebUIView, impl_p0.IActivatedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.Activated(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -10502,7 +10491,7 @@ public class NewWebUIViewCreatedEventArgs <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func ActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
+    public unsafe func ActivatedEventArgs(): impl_p0.IActivatedEventArgs {
         return defaultInterface().ActivatedEventArgs()
     }
 
@@ -10554,8 +10543,8 @@ public class WebUIApplication <: windows_interface.RuntimeName & windows_core.Ru
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public static unsafe func RequestRestartAsync(launchArguments: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>> = Option<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>>.None
+    public static unsafe func RequestRestartAsync(launchArguments: windows_core.HString): windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>> = Option<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>>.None
         try (factory__ = windows_core.factory<WebUIApplication, IWebUIActivationStatics3>().unwrap()) {
             result__ = Some(factory__.RequestRestartAsync(launchArguments))
         }
@@ -10566,8 +10555,8 @@ public class WebUIApplication <: windows_interface.RuntimeName & windows_core.Ru
     }
 
     @When[Windows_ApplicationModel_Core == "on" && Windows_System == "on"]
-    public static unsafe func RequestRestartForUserAsync(user: _impl_l1.User, launchArguments: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>> = Option<windows_future.IAsyncOperation<_impl_l0.AppRestartFailureReason>>.None
+    public static unsafe func RequestRestartForUserAsync(user: impl_p1.User, launchArguments: windows_core.HString): windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>> = Option<windows_future.IAsyncOperation<impl_p0.AppRestartFailureReason>>.None
         try (factory__ = windows_core.factory<WebUIApplication, IWebUIActivationStatics3>().unwrap()) {
             result__ = Some(factory__.RequestRestartForUserAsync(user, launchArguments))
         }
@@ -10826,7 +10815,7 @@ public class WebUIView <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func Activated(handler: Foundation.TypedEventHandler<WebUIView, _impl_l0.IActivatedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func Activated(handler: Foundation.TypedEventHandler<WebUIView, impl_p0.IActivatedEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().Activated(handler)
     }
 
@@ -10910,12 +10899,12 @@ public class WebUIView <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: _impl_l1.IUriToStreamResolver): Unit {
+    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: impl_p1.IUriToStreamResolver): Unit {
         asIWebViewControl().NavigateToLocalStreamUri(source, streamResolver)
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func NavigateWithHttpRequestMessage(requestMessage: _impl_l2.HttpRequestMessage): Unit {
+    public unsafe func NavigateWithHttpRequestMessage(requestMessage: impl_p2.HttpRequestMessage): Unit {
         asIWebViewControl().NavigateWithHttpRequestMessage(requestMessage)
     }
 
@@ -10925,12 +10914,12 @@ public class WebUIView <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CapturePreviewToStreamAsync(stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func CapturePreviewToStreamAsync(stream: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         return asIWebViewControl().CapturePreviewToStreamAsync(stream)
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<_impl_l2.DataPackage> {
+    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<impl_p2.DataPackage> {
         return asIWebViewControl().CaptureSelectedContentToDataPackageAsync()
     }
 

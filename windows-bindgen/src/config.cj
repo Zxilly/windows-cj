@@ -24,12 +24,10 @@ public class BindgenConfig {
     public var packageName: String = ""
     public var specificDeps: Bool = false
     public var noDeps: Bool = false
-    public var usesLayeredImpl: Bool = true
-    public var targetBucketSize: Int64 = 2000
     // 0 means "auto-detect from logical core count" — runBindgen resolves it on
     // startup. Explicit `--jobs N` overrides this.
     public var jobs: Int64 = 0
-    public var layerAssignment: Option<LayerAssignment> = None
+    public var packageLayout: Option<PackageLayoutResult> = None
     public var derivesByType: HashMap<TypeName, Array<String>> = HashMap<TypeName, Array<String>>()
 
     var rawDerivesByType: HashMap<String, Array<String>> = HashMap<String, Array<String>>()
@@ -66,16 +64,8 @@ public class BindgenConfig {
                     case "--link" => kind = ArgKind.Link
                     case "--package" => kind = ArgKind.Package
                     case "--jobs" => kind = ArgKind.Jobs
-                    case "--bucket-size" => kind = ArgKind.BucketSize
-                    case "--target-bucket-size" => kind = ArgKind.BucketSize
                     case "--specific-deps" =>
                         config.specificDeps = true
-                        kind = ArgKind.None
-                    case "--layered" =>
-                        config.usesLayeredImpl = true
-                        kind = ArgKind.None
-                    case "--no-layered" =>
-                        config.usesLayeredImpl = false
                         kind = ArgKind.None
                     case "--sys" =>
                         config.generateSys = true
@@ -150,9 +140,6 @@ public class BindgenConfig {
                         throw Exception("`--jobs` requires a positive integer")
                     }
                     kind = ArgKind.None
-                case BucketSize =>
-                    config.targetBucketSize = parseInt64OrZero(arg)
-                    kind = ArgKind.None
             }
             i += 1
         }
@@ -200,14 +187,7 @@ public class BindgenConfig {
     }
 
     public func packageNameForType(namespace: String, name: String): String {
-        match (layerAssignment) {
-            case Some(assignment) =>
-                match (assignment.packageFor(namespace, name)) {
-                    case Some(packageName) => return packageName
-                    case None => ()
-                }
-            case None => ()
-        }
+        let _ = name
         return packageNameForNamespace(namespace)
     }
 
@@ -271,41 +251,9 @@ public class BindgenConfig {
         return packageNameForNamespace(leftNamespace) == packageNameForNamespace(rightNamespace)
     }
 
-    public func namespaceHasLayeredTypes(namespace: String): Bool {
-        match (layerAssignment) {
-            case Some(assignment) => return assignment.namespaceHasLayeredTypes(namespace)
-            case None => return false
-        }
-    }
-
-    public func packageImportAvailabilityTags(packageImport: String): ArrayList<String> {
-        let result = ArrayList<String>()
-        if (!usesSubpackageLayout()) {
-            return result
-        }
-
-        let rootPackage = outputRootPackageName()
-        if (rootPackage.isEmpty()) {
-            return result
-        }
-
-        let prefix = "${rootPackage}."
-        if (!startsWith(packageImport, prefix)) {
-            return result
-        }
-
-        let packageArr = packageImport.toArray()
-        let prefixLen = Int64(prefix.toArray().size)
-        let relative = String.fromUtf8(packageArr[prefixLen..Int64(packageArr.size)])
-        if (relative.isEmpty() || relative == "impl" || relative.endsWith(".impl")) {
-            return result
-        }
-        if (relative.startsWith("_impl_l") || relative.indexOf("._impl_l", 0).isSome()) {
-            return result
-        }
-
-        result.add("${namespaceToFeature(packageImportFeatureNamespace(rootPackage, relative))} == \"on\"")
-        return result
+    public func namespaceHasPartitionedTypes(namespace: String): Bool {
+        let _ = namespace
+        return false
     }
 
     public func outputRelativePathForNamespace(namespace: String): String {
@@ -333,25 +281,7 @@ public class BindgenConfig {
     }
 
     public func outputRelativePathForType(namespace: String, name: String): String {
-        match (layerAssignment) {
-            case Some(assignment) =>
-                match (assignment.packageFor(namespace, name)) {
-                    case Some(packageName) =>
-                        match (assignment.bucketStemFor(namespace, name)) {
-                            case Some(_) =>
-                                let relativeDir = FileWriter.packageNameToRelativeDirPath(packageName,
-                                    outputRootPackageName())
-                                let stem = groupedFileStemForNamespace(namespace, packageNamespaceForNamespace(namespace))
-                                if (relativeDir.isEmpty()) {
-                                    return "${stem}.cj"
-                                }
-                                return "${relativeDir}/${stem}.cj"
-                            case None => ()
-                        }
-                    case None => ()
-                }
-            case None => ()
-        }
+        let _ = name
         return outputRelativePathForNamespace(namespace)
     }
 
@@ -368,79 +298,17 @@ public class BindgenConfig {
 
     public func resolveGeneratedPackages(index: TypeIndex, typeMap: TypeMap): Unit {
         generatedPackageNamespaces.clear()
+        packageLayout = None
         if (!usesSubpackageLayout()) {
             return
         }
         let namespaces = typeMap.namespaces()
         let graph = buildNamespaceDependencyGraph(index, typeMap)
-        let components = computeNamespaceComponents(namespaces, graph)
-        for (component in components) {
-            if (component.isEmpty()) {
-                continue
-            }
-
-            let mergedNamespace = if (component.size == 1) {
-                component[0]
-            } else {
-                "${chooseComponentPackageNamespace(component)}.impl"
-            }
-
-            for (namespace in component) {
-                generatedPackageNamespaces[namespace] = mergedNamespace
-            }
+        let layout = computePackageLayoutFromGraph(namespaces, graph)
+        for (namespace in namespaces) {
+            generatedPackageNamespaces[namespace] = layout.packageNamespaceForNamespace(namespace)
         }
-
-        if (usesLayeredImpl) {
-            return
-        }
-
-        var changed = true
-        while (changed) {
-            changed = false
-            let packageGraph = buildGeneratedPackageDependencyGraph(namespaces, graph, generatedPackageNamespaces)
-            let packageNames = ArrayList<String>()
-            for ((packageName, _) in packageGraph) {
-                if (!containsString(packageNames, packageName)) {
-                    packageNames.add(packageName)
-                }
-            }
-            for (namespace in namespaces) {
-                let packageName = generatedPackageNamespaces[namespace]
-                if (!containsString(packageNames, packageName)) {
-                    packageNames.add(packageName)
-                }
-            }
-
-            let packageComponents = computeNamespaceComponents(packageNames, packageGraph)
-            for (component in packageComponents) {
-                if (component.size <= 1) {
-                    continue
-                }
-
-                let mergedNamespaces = collectNamespacesForGeneratedPackages(namespaces, generatedPackageNamespaces,
-                    component)
-                if (mergedNamespaces.isEmpty()) {
-                    continue
-                }
-
-                let mergedPackage = "${chooseComponentPackageNamespace(mergedNamespaces)}.impl"
-                var needsMerge = false
-                for (namespace in mergedNamespaces) {
-                    if (generatedPackageNamespaces[namespace] != mergedPackage) {
-                        needsMerge = true
-                        break
-                    }
-                }
-                if (!needsMerge) {
-                    continue
-                }
-
-                for (namespace in mergedNamespaces) {
-                    generatedPackageNamespaces[namespace] = mergedPackage
-                }
-                changed = true
-            }
-        }
+        packageLayout = Some(layout)
     }
 
     public func resolveDeriveTargets(index: TypeIndex, typeMap: TypeMap, references: References): Unit {
@@ -515,7 +383,18 @@ func packageImportFeatureNamespace(rootPackage: String, relative: String): Strin
     if (rootPackage == "windows" || rootPackage == "windows_sys") {
         return "Windows.${relative}"
     }
+    if (startsWithUpperAscii(rootPackage)) {
+        return "${rootPackage}.${relative}"
+    }
     return relative
+}
+
+func startsWithUpperAscii(value: String): Bool {
+    if (value.isEmpty()) {
+        return false
+    }
+    let first = value[0]
+    return first >= b'A' && first <= b'Z'
 }
 
 func buildNamespaceDependencyGraph(
@@ -746,12 +625,18 @@ func lastNamespaceComponent(namespace: String): String {
 }
 
 func isImplementationPackageNamespace(namespace: String): Bool {
-    return namespace.endsWith(".impl")
+    return namespace.endsWith(".impl") || namespace.indexOf(".impl.", 0).isSome()
 }
 
 func implementationOwnerNamespace(namespace: String): String {
     if (!isImplementationPackageNamespace(namespace)) {
         return namespace
+    }
+    match (namespace.indexOf(".impl", 0)) {
+        case Some(pos) =>
+            let arr = namespace.toArray()
+            return String.fromUtf8(arr[0..pos])
+        case None => ()
     }
     let arr = namespace.toArray()
     return String.fromUtf8(arr[0..Int64(arr.size) - Int64(".impl".toArray().size)])
@@ -775,7 +660,6 @@ enum ArgKind {
     | Link
     | Package
     | Jobs
-    | BucketSize
 }
 
 func isPackageArgKind(kind: ArgKind): Bool {

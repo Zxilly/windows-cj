@@ -4,13 +4,20 @@
 package windows.Data.Xml.Xsl
 
 import std.collection.*
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_core as windows_core
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_interface as windows_interface
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Data_Xml_Xsl == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_Data_Xml_Xsl == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_Data_Xml_Xsl == "on"]
@@ -60,7 +67,7 @@ public class IXsltProcessor <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXsltProcessor", IXsltProcessor.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessorVtbl", "IXsltProcessor", "IXsltProcessor_Impl", [InterfaceMethodSchema("TransformToString", 6, [InterfaceParameterSchema("inputNode", "CPointer<Unit>", "InParam<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXsltProcessor", IXsltProcessor.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessorVtbl", "IXsltProcessor", "IXsltProcessor_Impl", [InterfaceMethodSchema("TransformToString", 6, [InterfaceParameterSchema("inputNode", "CPointer<Unit>", "InParam<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXsltProcessor.runtimeType())
         return schema
     }
@@ -90,7 +97,7 @@ public class IXsltProcessor <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func TransformToString(inputNode: _impl_l1.IXmlNode): windows_core.HString {
+    public unsafe func TransformToString(inputNode: impl_p1.IXmlNode): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TransformToString(asRaw(), inputNode.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -149,7 +156,7 @@ public class IXsltProcessor2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXsltProcessor2", IXsltProcessor2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessor2Vtbl", "IXsltProcessor2", "IXsltProcessor2_Impl", [InterfaceMethodSchema("TransformToDocument", 6, [InterfaceParameterSchema("inputNode", "CPointer<Unit>", "InParam<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXsltProcessor2", IXsltProcessor2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessor2Vtbl", "IXsltProcessor2", "IXsltProcessor2_Impl", [InterfaceMethodSchema("TransformToDocument", 6, [InterfaceParameterSchema("inputNode", "CPointer<Unit>", "InParam<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXsltProcessor2.runtimeType())
         return schema
     }
@@ -179,12 +186,12 @@ public class IXsltProcessor2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func TransformToDocument(inputNode: _impl_l1.IXmlNode): _impl_l1.XmlDocument {
+    public unsafe func TransformToDocument(inputNode: impl_p1.IXmlNode): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TransformToDocument(asRaw(), inputNode.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 }
 
@@ -238,7 +245,7 @@ public class IXsltProcessorFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXsltProcessorFactory", IXsltProcessorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessorFactoryVtbl", "IXsltProcessorFactory", "IXsltProcessorFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("document", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XsltProcessor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXsltProcessorFactory", IXsltProcessorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXsltProcessorFactoryVtbl", "IXsltProcessorFactory", "IXsltProcessorFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("document", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XsltProcessor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXsltProcessorFactory.runtimeType())
         return schema
     }
@@ -268,7 +275,7 @@ public class IXsltProcessorFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func CreateInstance(document: _impl_l1.XmlDocument): XsltProcessor {
+    public unsafe func CreateInstance(document: impl_p1.XmlDocument): XsltProcessor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInstance(asRaw(), document.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -350,12 +357,12 @@ public class XsltProcessor <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func TransformToString(inputNode: _impl_l1.IXmlNode): windows_core.HString {
+    public unsafe func TransformToString(inputNode: impl_p1.IXmlNode): windows_core.HString {
         return defaultInterface().TransformToString(inputNode)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public static unsafe func CreateInstance(document: _impl_l1.XmlDocument): XsltProcessor {
+    public static unsafe func CreateInstance(document: impl_p1.XmlDocument): XsltProcessor {
         var result__: Option<XsltProcessor> = Option<XsltProcessor>.None
         try (factory__ = windows_core.factory<XsltProcessor, IXsltProcessorFactory>().unwrap()) {
             result__ = Some(factory__.CreateInstance(document))

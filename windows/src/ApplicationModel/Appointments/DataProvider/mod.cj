@@ -4,16 +4,27 @@
 package windows.ApplicationModel.Appointments.DataProvider
 
 import std.collection.*
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Appointments_DataProvider == "on"]
 import windows_future as windows_future
 
 
@@ -223,7 +234,7 @@ public class IAppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWr
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppointmentCalendarCreateOrUpdateAppointmentRequest", IAppointmentCalendarCreateOrUpdateAppointmentRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarCreateOrUpdateAppointmentRequestVtbl", "IAppointmentCalendarCreateOrUpdateAppointmentRequest", "IAppointmentCalendarCreateOrUpdateAppointmentRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Appointment", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Appointment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotifyInvitees", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChangedProperties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 10, [InterfaceParameterSchema("createdOrUpdatedAppointment", "CPointer<Unit>", "InParam<_impl_l1.Appointment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppointmentCalendarCreateOrUpdateAppointmentRequest", IAppointmentCalendarCreateOrUpdateAppointmentRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarCreateOrUpdateAppointmentRequestVtbl", "IAppointmentCalendarCreateOrUpdateAppointmentRequest", "IAppointmentCalendarCreateOrUpdateAppointmentRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Appointment", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Appointment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotifyInvitees", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChangedProperties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 10, [InterfaceParameterSchema("createdOrUpdatedAppointment", "CPointer<Unit>", "InParam<impl_p1.Appointment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppointmentCalendarCreateOrUpdateAppointmentRequest.runtimeType())
         return schema
     }
@@ -261,12 +272,12 @@ public class IAppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWr
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func get_Appointment(): _impl_l1.Appointment {
+    public unsafe func get_Appointment(): impl_p1.Appointment {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Appointment(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Appointment.fromAbiTake(result__)
+        return impl_p1.Appointment.fromAbiTake(result__)
     }
 
     public unsafe func NotifyInvitees(): Bool {
@@ -287,7 +298,7 @@ public class IAppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWr
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedAppointment: _impl_l1.Appointment): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedAppointment: impl_p1.Appointment): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), createdOrUpdatedAppointment.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -362,7 +373,7 @@ public class IAppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppointmentCalendarForwardMeetingRequest", IAppointmentCalendarForwardMeetingRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarForwardMeetingRequestVtbl", "IAppointmentCalendarForwardMeetingRequest", "IAppointmentCalendarForwardMeetingRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentLocalId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentOriginalStartTime", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invitees", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.AppointmentInvitee>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeader", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppointmentCalendarForwardMeetingRequest", IAppointmentCalendarForwardMeetingRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarForwardMeetingRequestVtbl", "IAppointmentCalendarForwardMeetingRequest", "IAppointmentCalendarForwardMeetingRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentLocalId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentOriginalStartTime", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invitees", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p0.AppointmentInvitee>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeader", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppointmentCalendarForwardMeetingRequest.runtimeType())
         return schema
     }
@@ -416,12 +427,12 @@ public class IAppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Invitees(): windows_collections.IVectorView<_impl_l1.AppointmentInvitee> {
+    public unsafe func Invitees(): windows_collections.IVectorView<impl_p0.AppointmentInvitee> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Invitees(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.AppointmentInvitee>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p0.AppointmentInvitee>.fromAbiTake(result__)
     }
 
     public unsafe func Subject(): windows_core.HString {
@@ -736,7 +747,7 @@ public struct IAppointmentCalendarUpdateMeetingResponseRequestVtbl {
     public var AppointmentLocalId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppointmentOriginalStartTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public var Response: CFunc<(CPointer<Unit>, CPointer<_impl_l0.AppointmentParticipantResponseAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Response: CFunc<(CPointer<Unit>, CPointer<impl_p0.AppointmentParticipantResponseAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Appointments != "on"]
     public var Response: UIntNative = UIntNative(0)
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -783,7 +794,7 @@ public class IAppointmentCalendarUpdateMeetingResponseRequest <: InterfaceWrappe
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppointmentCalendarUpdateMeetingResponseRequest", IAppointmentCalendarUpdateMeetingResponseRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarUpdateMeetingResponseRequestVtbl", "IAppointmentCalendarUpdateMeetingResponseRequest", "IAppointmentCalendarUpdateMeetingResponseRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentLocalId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentOriginalStartTime", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Response", 9, [InterfaceParameterSchema("result", "CPointer<_impl_l0.AppointmentParticipantResponseAbi>", "OutSlot<_impl_l0.AppointmentParticipantResponse>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendUpdate", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppointmentCalendarUpdateMeetingResponseRequest", IAppointmentCalendarUpdateMeetingResponseRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppointmentCalendarUpdateMeetingResponseRequestVtbl", "IAppointmentCalendarUpdateMeetingResponseRequest", "IAppointmentCalendarUpdateMeetingResponseRequest_Impl", [InterfaceMethodSchema("AppointmentCalendarLocalId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentLocalId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppointmentOriginalStartTime", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Response", 9, [InterfaceParameterSchema("result", "CPointer<impl_p0.AppointmentParticipantResponseAbi>", "OutSlot<impl_p0.AppointmentParticipantResponse>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendUpdate", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppointmentCalendarUpdateMeetingResponseRequest.runtimeType())
         return schema
     }
@@ -837,12 +848,12 @@ public class IAppointmentCalendarUpdateMeetingResponseRequest <: InterfaceWrappe
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func Response(): _impl_l0.AppointmentParticipantResponse {
+    public unsafe func Response(): impl_p0.AppointmentParticipantResponse {
         let v = vtbl()
-        var result__ = _impl_l0.AppointmentParticipantResponseAbi()
-        let hr = v.Response(asRaw(), CPointer<_impl_l0.AppointmentParticipantResponseAbi>(inout result__))
+        var result__ = impl_p0.AppointmentParticipantResponseAbi()
+        let hr = v.Response(asRaw(), CPointer<impl_p0.AppointmentParticipantResponseAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.AppointmentParticipantResponse>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.AppointmentParticipantResponse>()).unwrap()
     }
 
     public unsafe func Subject(): windows_core.HString {
@@ -1083,7 +1094,7 @@ public class AppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWra
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func get_Appointment(): _impl_l1.Appointment {
+    public unsafe func get_Appointment(): impl_p1.Appointment {
         return defaultInterface().get_Appointment()
     }
 
@@ -1097,7 +1108,7 @@ public class AppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWra
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedAppointment: _impl_l1.Appointment): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedAppointment: impl_p1.Appointment): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(createdOrUpdatedAppointment)
     }
 
@@ -1206,7 +1217,7 @@ public class AppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Invitees(): windows_collections.IVectorView<_impl_l1.AppointmentInvitee> {
+    public unsafe func Invitees(): windows_collections.IVectorView<impl_p0.AppointmentInvitee> {
         return defaultInterface().Invitees()
     }
 
@@ -1555,7 +1566,7 @@ public class AppointmentCalendarUpdateMeetingResponseRequest <: InterfaceWrapper
     }
 
     @When[Windows_ApplicationModel_Appointments == "on"]
-    public unsafe func Response(): _impl_l0.AppointmentParticipantResponse {
+    public unsafe func Response(): impl_p0.AppointmentParticipantResponse {
         return defaultInterface().Response()
     }
 

@@ -4,13 +4,21 @@
 package windows.Security.Credentials.UI
 
 import std.collection.*
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_Security_Credentials_UI == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Security_Credentials_UI == "on"]
 import windows_future as windows_future
 
 
@@ -209,7 +217,7 @@ public class ICredentialPickerOptions <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICredentialPickerOptions", ICredentialPickerOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialPickerOptionsVtbl", "ICredentialPickerOptions", "ICredentialPickerOptions_Impl", [InterfaceMethodSchema("SetCaption", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Caption", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMessage", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Message", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetErrorCode", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ErrorCode", 11, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTargetName", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TargetName", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAuthenticationProtocol", 14, [InterfaceParameterSchema("value", "AuthenticationProtocolAbi", "AuthenticationProtocol", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_AuthenticationProtocol", 15, [InterfaceParameterSchema("result", "CPointer<AuthenticationProtocolAbi>", "OutSlot<AuthenticationProtocol>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCustomAuthenticationProtocol", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CustomAuthenticationProtocol", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPreviousCredential", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PreviousCredential", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAlwaysDisplayDialog", 20, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AlwaysDisplayDialog", 21, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCallerSavesCredential", 22, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CallerSavesCredential", 23, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCredentialSaveOption", 24, [InterfaceParameterSchema("value", "CredentialSaveOptionAbi", "CredentialSaveOption", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_CredentialSaveOption", 25, [InterfaceParameterSchema("result", "CPointer<CredentialSaveOptionAbi>", "OutSlot<CredentialSaveOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICredentialPickerOptions", ICredentialPickerOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialPickerOptionsVtbl", "ICredentialPickerOptions", "ICredentialPickerOptions_Impl", [InterfaceMethodSchema("SetCaption", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Caption", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMessage", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Message", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetErrorCode", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ErrorCode", 11, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTargetName", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TargetName", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAuthenticationProtocol", 14, [InterfaceParameterSchema("value", "AuthenticationProtocolAbi", "AuthenticationProtocol", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_AuthenticationProtocol", 15, [InterfaceParameterSchema("result", "CPointer<AuthenticationProtocolAbi>", "OutSlot<AuthenticationProtocol>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCustomAuthenticationProtocol", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CustomAuthenticationProtocol", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPreviousCredential", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PreviousCredential", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAlwaysDisplayDialog", 20, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AlwaysDisplayDialog", 21, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCallerSavesCredential", 22, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CallerSavesCredential", 23, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCredentialSaveOption", 24, [InterfaceParameterSchema("value", "CredentialSaveOptionAbi", "CredentialSaveOption", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_CredentialSaveOption", 25, [InterfaceParameterSchema("result", "CPointer<CredentialSaveOptionAbi>", "OutSlot<CredentialSaveOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICredentialPickerOptions.runtimeType())
         return schema
     }
@@ -323,19 +331,19 @@ public class ICredentialPickerOptions <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPreviousCredential(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetPreviousCredential(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetPreviousCredential(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PreviousCredential(): _impl_l0.IBuffer {
+    public unsafe func PreviousCredential(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PreviousCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func SetAlwaysDisplayDialog(value: Bool): Unit {
@@ -437,7 +445,7 @@ public class ICredentialPickerResults <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICredentialPickerResults", ICredentialPickerResults.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialPickerResultsVtbl", "ICredentialPickerResults", "ICredentialPickerResults_Impl", [InterfaceMethodSchema("ErrorCode", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_CredentialSaveOption", 7, [InterfaceParameterSchema("result", "CPointer<CredentialSaveOptionAbi>", "OutSlot<CredentialSaveOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialSaved", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Credential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialDomainName", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialUserName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialPassword", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICredentialPickerResults", ICredentialPickerResults.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialPickerResultsVtbl", "ICredentialPickerResults", "ICredentialPickerResults_Impl", [InterfaceMethodSchema("ErrorCode", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_CredentialSaveOption", 7, [InterfaceParameterSchema("result", "CPointer<CredentialSaveOptionAbi>", "OutSlot<CredentialSaveOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialSaved", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Credential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialDomainName", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialUserName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialPassword", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICredentialPickerResults.runtimeType())
         return schema
     }
@@ -491,12 +499,12 @@ public class ICredentialPickerResults <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Credential(): _impl_l0.IBuffer {
+    public unsafe func Credential(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Credential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CredentialDomainName(): windows_core.HString {
@@ -784,12 +792,12 @@ public class CredentialPickerOptions <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPreviousCredential(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetPreviousCredential(value: impl_p0.IBuffer): Unit {
         defaultInterface().SetPreviousCredential(value)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PreviousCredential(): _impl_l0.IBuffer {
+    public unsafe func PreviousCredential(): impl_p0.IBuffer {
         return defaultInterface().PreviousCredential()
     }
 
@@ -914,7 +922,7 @@ public class CredentialPickerResults <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Credential(): _impl_l0.IBuffer {
+    public unsafe func Credential(): impl_p0.IBuffer {
         return defaultInterface().Credential()
     }
 

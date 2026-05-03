@@ -4,16 +4,27 @@
 package windows.Media.Control
 
 import std.collection.*
+@When[Windows_Media_Control == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Control == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Control == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Control == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Control == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Control == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Control == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_Control == "on" && Windows_Media == "on"]
 import windows.Media as Media
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Control == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Control == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Control == "on"]
 import windows_future as windows_future
 
 
@@ -221,7 +232,7 @@ public class IGlobalSystemMediaTransportControlsSessionMediaProperties <: Interf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGlobalSystemMediaTransportControlsSessionMediaProperties", IGlobalSystemMediaTransportControlsSessionMediaProperties.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalSystemMediaTransportControlsSessionMediaPropertiesVtbl", "IGlobalSystemMediaTransportControlsSessionMediaProperties", "IGlobalSystemMediaTransportControlsSessionMediaProperties_Impl", [InterfaceMethodSchema("Title", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subtitle", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumArtist", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Artist", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumTitle", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrackNumber", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Genres", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumTrackCount", 13, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PlaybackType", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Media.MediaPlaybackType>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGlobalSystemMediaTransportControlsSessionMediaProperties", IGlobalSystemMediaTransportControlsSessionMediaProperties.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalSystemMediaTransportControlsSessionMediaPropertiesVtbl", "IGlobalSystemMediaTransportControlsSessionMediaProperties", "IGlobalSystemMediaTransportControlsSessionMediaProperties_Impl", [InterfaceMethodSchema("Title", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subtitle", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumArtist", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Artist", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumTitle", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrackNumber", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Genres", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumTrackCount", 13, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PlaybackType", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Media.MediaPlaybackType>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGlobalSystemMediaTransportControlsSessionMediaProperties.runtimeType())
         return schema
     }
@@ -325,12 +336,12 @@ public class IGlobalSystemMediaTransportControlsSessionMediaProperties <: Interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 }
 
@@ -1530,7 +1541,7 @@ public class GlobalSystemMediaTransportControlsSessionMediaProperties <: Interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Thumbnail()
     }
 }

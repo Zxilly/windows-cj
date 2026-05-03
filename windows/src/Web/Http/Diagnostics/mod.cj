@@ -4,15 +4,25 @@
 package windows.Web.Http.Diagnostics
 
 import std.collection.*
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_core as windows_core
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_interface as windows_interface
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Web_Http_Diagnostics == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l2 as _impl_l2
+@When[Windows_Web_Http_Diagnostics == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_collections as windows_collections
+@When[Windows_Web_Http_Diagnostics == "on"]
 import windows_future as windows_future
 
 
@@ -340,7 +350,7 @@ public class IHttpDiagnosticProviderResponseReceivedEventArgs <: InterfaceWrappe
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderResponseReceivedEventArgs", IHttpDiagnosticProviderResponseReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderResponseReceivedEventArgsVtbl", "IHttpDiagnosticProviderResponseReceivedEventArgs", "IHttpDiagnosticProviderResponseReceivedEventArgs_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderResponseReceivedEventArgs", IHttpDiagnosticProviderResponseReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderResponseReceivedEventArgsVtbl", "IHttpDiagnosticProviderResponseReceivedEventArgs", "IHttpDiagnosticProviderResponseReceivedEventArgs_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHttpDiagnosticProviderResponseReceivedEventArgs.runtimeType())
         return schema
     }
@@ -386,12 +396,12 @@ public class IHttpDiagnosticProviderResponseReceivedEventArgs <: InterfaceWrappe
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Message(): _impl_l2.HttpResponseMessage {
+    public unsafe func Message(): impl_p2.HttpResponseMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Message(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpResponseMessage.fromAbiTake(result__)
+        return impl_p2.HttpResponseMessage.fromAbiTake(result__)
     }
 }
 
@@ -703,7 +713,7 @@ public class HttpDiagnosticProviderResponseReceivedEventArgs <: InterfaceWrapper
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Message(): _impl_l2.HttpResponseMessage {
+    public unsafe func Message(): impl_p2.HttpResponseMessage {
         return defaultInterface().Message()
     }
 }
@@ -1025,7 +1035,7 @@ public class IHttpDiagnosticProviderRequestSentEventArgs <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderRequestSentEventArgs", IHttpDiagnosticProviderRequestSentEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderRequestSentEventArgsVtbl", "IHttpDiagnosticProviderRequestSentEventArgs", "IHttpDiagnosticProviderRequestSentEventArgs_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessId", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ThreadId", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Initiator", 11, [InterfaceParameterSchema("result", "CPointer<HttpDiagnosticRequestInitiatorAbi>", "OutSlot<HttpDiagnosticRequestInitiator>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceLocations", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HttpDiagnosticSourceLocation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderRequestSentEventArgs", IHttpDiagnosticProviderRequestSentEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderRequestSentEventArgsVtbl", "IHttpDiagnosticProviderRequestSentEventArgs", "IHttpDiagnosticProviderRequestSentEventArgs_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessId", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ThreadId", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Initiator", 11, [InterfaceParameterSchema("result", "CPointer<HttpDiagnosticRequestInitiatorAbi>", "OutSlot<HttpDiagnosticRequestInitiator>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceLocations", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<HttpDiagnosticSourceLocation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHttpDiagnosticProviderRequestSentEventArgs.runtimeType())
         return schema
     }
@@ -1071,12 +1081,12 @@ public class IHttpDiagnosticProviderRequestSentEventArgs <: InterfaceWrapperBase
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Message(): _impl_l2.HttpRequestMessage {
+    public unsafe func Message(): impl_p2.HttpRequestMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Message(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpRequestMessage.fromAbiTake(result__)
+        return impl_p2.HttpRequestMessage.fromAbiTake(result__)
     }
 
     public unsafe func ProcessId(): UInt32 {
@@ -1311,7 +1321,7 @@ public class HttpDiagnosticProviderRequestSentEventArgs <: InterfaceWrapperBase 
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Message(): _impl_l2.HttpRequestMessage {
+    public unsafe func Message(): impl_p2.HttpRequestMessage {
         return defaultInterface().Message()
     }
 
@@ -1453,7 +1463,7 @@ public class HttpDiagnosticProvider <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_System_Diagnostics == "on"]
-    public static unsafe func CreateFromProcessDiagnosticInfo(processDiagnosticInfo: _impl_l2.ProcessDiagnosticInfo): HttpDiagnosticProvider {
+    public static unsafe func CreateFromProcessDiagnosticInfo(processDiagnosticInfo: impl_p2.ProcessDiagnosticInfo): HttpDiagnosticProvider {
         var result__: Option<HttpDiagnosticProvider> = Option<HttpDiagnosticProvider>.None
         try (factory__ = windows_core.factory<HttpDiagnosticProvider, IHttpDiagnosticProviderStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromProcessDiagnosticInfo(processDiagnosticInfo))
@@ -1668,7 +1678,7 @@ public class IHttpDiagnosticProviderStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderStatics", IHttpDiagnosticProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderStaticsVtbl", "IHttpDiagnosticProviderStatics", "IHttpDiagnosticProviderStatics_Impl", [InterfaceMethodSchema("CreateFromProcessDiagnosticInfo", 6, [InterfaceParameterSchema("processDiagnosticInfo", "CPointer<Unit>", "InParam<_impl_l2.ProcessDiagnosticInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HttpDiagnosticProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHttpDiagnosticProviderStatics", IHttpDiagnosticProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHttpDiagnosticProviderStaticsVtbl", "IHttpDiagnosticProviderStatics", "IHttpDiagnosticProviderStatics_Impl", [InterfaceMethodSchema("CreateFromProcessDiagnosticInfo", 6, [InterfaceParameterSchema("processDiagnosticInfo", "CPointer<Unit>", "InParam<impl_p2.ProcessDiagnosticInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HttpDiagnosticProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHttpDiagnosticProviderStatics.runtimeType())
         return schema
     }
@@ -1698,7 +1708,7 @@ public class IHttpDiagnosticProviderStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_System_Diagnostics == "on"]
-    public unsafe func CreateFromProcessDiagnosticInfo(processDiagnosticInfo: _impl_l2.ProcessDiagnosticInfo): HttpDiagnosticProvider {
+    public unsafe func CreateFromProcessDiagnosticInfo(processDiagnosticInfo: impl_p2.ProcessDiagnosticInfo): HttpDiagnosticProvider {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromProcessDiagnosticInfo(asRaw(), processDiagnosticInfo.asRaw(), CPointer<CPointer<Unit>>(inout result__))

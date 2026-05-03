@@ -4,13 +4,20 @@
 package windows.Win32.System.SecurityCenter
 
 import std.collection.*
+@When[Windows_Win32_System_SecurityCenter == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_SecurityCenter == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_SecurityCenter == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_SecurityCenter == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_SecurityCenter == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_SecurityCenter == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_SecurityCenter == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_SecurityCenter == "on"]
@@ -473,11 +480,11 @@ public unsafe func Windows_WscQueryAntiMalwareUri(): Int32 {
 
 @When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForChanges == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
-    func WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32
+    func WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32_impl_p1.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32
 }
 
 @When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForChanges == "on" && Windows_Win32_System_Threading == "on"]
-public unsafe func Windows_WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32 {
+public unsafe func Windows_WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32_impl_p1.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32 {
     return WscRegisterForChanges(Reserved, phCallbackRegistration, lpCallbackAddress, pContext)
 }
 
@@ -504,7 +511,7 @@ public unsafe func Windows_WscUnRegisterChanges(hRegistrationHandle: CPointer<Un
 @When[Windows_Win32_System_SecurityCenter == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSCDefaultProductVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetDefaultProduct: CFunc<(CPointer<Unit>, SECURITY_PRODUCT_TYPEAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -542,7 +549,7 @@ public class IWSCDefaultProduct <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSCDefaultProduct> {
-        return InterfaceDescriptor<IWSCDefaultProduct>("IWSCDefaultProduct", IWSCDefaultProduct.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSCDefaultProductFromAbi, viewIWSCDefaultProduct)
+        return InterfaceDescriptor<IWSCDefaultProduct>("IWSCDefaultProduct", IWSCDefaultProduct.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSCDefaultProductFromAbi, viewIWSCDefaultProduct)
     }
 
     public unsafe func vtbl(): IWSCDefaultProductVtbl {
@@ -559,7 +566,7 @@ public class IWSCDefaultProduct <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_SecurityCenter == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWscProductVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ProductName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ProductState: CFunc<(CPointer<Unit>, CPointer<WSC_SECURITY_PRODUCT_STATEAbi>) -> Int32> = { _, _ => 0 }
     public var SignatureStatus: CFunc<(CPointer<Unit>, CPointer<WSC_SECURITY_SIGNATURE_STATUSAbi>) -> Int32> = { _, _ => 0 }
@@ -603,7 +610,7 @@ public class IWscProduct <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWscProduct> {
-        return InterfaceDescriptor<IWscProduct>("IWscProduct", IWscProduct.iid(), Win32__impl_l2.IDispatch.iid(), takeIWscProductFromAbi, viewIWscProduct)
+        return InterfaceDescriptor<IWscProduct>("IWscProduct", IWscProduct.iid(), Win32_impl_p2.IDispatch.iid(), takeIWscProductFromAbi, viewIWscProduct)
     }
 
     public unsafe func vtbl(): IWscProductVtbl {
@@ -801,7 +808,7 @@ public class IWscProduct3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_SecurityCenter == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWSCProductListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Initialize: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -841,7 +848,7 @@ public class IWSCProductList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWSCProductList> {
-        return InterfaceDescriptor<IWSCProductList>("IWSCProductList", IWSCProductList.iid(), Win32__impl_l2.IDispatch.iid(), takeIWSCProductListFromAbi, viewIWSCProductList)
+        return InterfaceDescriptor<IWSCProductList>("IWSCProductList", IWSCProductList.iid(), Win32_impl_p2.IDispatch.iid(), takeIWSCProductListFromAbi, viewIWSCProductList)
     }
 
     public unsafe func vtbl(): IWSCProductListVtbl {

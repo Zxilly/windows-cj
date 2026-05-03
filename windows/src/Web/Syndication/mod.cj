@@ -4,16 +4,27 @@
 package windows.Web.Syndication
 
 import std.collection.*
+@When[Windows_Web_Syndication == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Web_Syndication == "on"]
 import windows_core as windows_core
+@When[Windows_Web_Syndication == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Web_Syndication == "on"]
 import windows_interface as windows_interface
+@When[Windows_Web_Syndication == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Web_Syndication == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Web_Syndication == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Web_Syndication == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Web_Syndication == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Web_Syndication == "on"]
 import windows_collections as windows_collections
+@When[Windows_Web_Syndication == "on"]
 import windows_future as windows_future
 
 
@@ -1191,14 +1202,14 @@ public interface ISyndicationClient_ImplErased {
 
 @When[Windows_Web_Syndication == "on" && Windows_Security_Credentials == "on"]
 public interface ISyndicationClient_Impl <: ISyndicationClient_ImplErased {
-    public func ServerCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func ServerCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_ServerCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.ServerCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -1206,15 +1217,15 @@ public interface ISyndicationClient_Impl <: ISyndicationClient_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func SetServerCredential(value: InParam<_impl_l0.PasswordCredential>): windows_core.Result<Unit>
+    public func SetServerCredential(value: InParam<impl_p0.PasswordCredential>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetServerCredential(arg0: CPointer<Unit>): Int32 {
-        match (this.SetServerCredential(InParam<_impl_l0.PasswordCredential>(_impl_l0.PasswordCredential.viewOf(arg0)))) {
+        match (this.SetServerCredential(InParam<impl_p0.PasswordCredential>(impl_p0.PasswordCredential.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -1222,14 +1233,14 @@ public interface ISyndicationClient_Impl <: ISyndicationClient_ImplErased {
         }
     }
 
-    public func ProxyCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func ProxyCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_ProxyCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.ProxyCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -1237,15 +1248,15 @@ public interface ISyndicationClient_Impl <: ISyndicationClient_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func SetProxyCredential(value: InParam<_impl_l0.PasswordCredential>): windows_core.Result<Unit>
+    public func SetProxyCredential(value: InParam<impl_p0.PasswordCredential>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetProxyCredential(arg0: CPointer<Unit>): Int32 {
-        match (this.SetProxyCredential(InParam<_impl_l0.PasswordCredential>(_impl_l0.PasswordCredential.viewOf(arg0)))) {
+        match (this.SetProxyCredential(InParam<impl_p0.PasswordCredential>(impl_p0.PasswordCredential.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -1399,7 +1410,7 @@ public class ISyndicationClient <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationClient", ISyndicationClient.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationClientVtbl", "ISyndicationClient", "ISyndicationClient_Impl", [InterfaceMethodSchema("ServerCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetServerCredential", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProxyCredential", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetProxyCredential", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxResponseBufferSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxResponseBufferSize", 11, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Timeout", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTimeout", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BypassCacheOnRetrieve", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBypassCacheOnRetrieve", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetRequestHeader", 16, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RetrieveFeedAsync", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<SyndicationFeed, RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationClient", ISyndicationClient.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationClientVtbl", "ISyndicationClient", "ISyndicationClient_Impl", [InterfaceMethodSchema("ServerCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetServerCredential", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProxyCredential", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetProxyCredential", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxResponseBufferSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxResponseBufferSize", 11, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Timeout", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTimeout", 13, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BypassCacheOnRetrieve", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBypassCacheOnRetrieve", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetRequestHeader", 16, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RetrieveFeedAsync", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<SyndicationFeed, RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationClient.runtimeType())
         return schema
     }
@@ -1429,32 +1440,32 @@ public class ISyndicationClient <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ServerCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(value: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetServerCredential(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProxyCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(value: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetProxyCredential(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1567,7 +1578,7 @@ public class ISyndicationClientFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationClientFactory", ISyndicationClientFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationClientFactoryVtbl", "ISyndicationClientFactory", "ISyndicationClientFactory_Impl", [InterfaceMethodSchema("CreateSyndicationClient", 6, [InterfaceParameterSchema("serverCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationClient>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationClientFactory", ISyndicationClientFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationClientFactoryVtbl", "ISyndicationClientFactory", "ISyndicationClientFactory_Impl", [InterfaceMethodSchema("CreateSyndicationClient", 6, [InterfaceParameterSchema("serverCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationClient>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationClientFactory.runtimeType())
         return schema
     }
@@ -1597,7 +1608,7 @@ public class ISyndicationClientFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func CreateSyndicationClient(serverCredential: _impl_l0.PasswordCredential): SyndicationClient {
+    public unsafe func CreateSyndicationClient(serverCredential: impl_p0.PasswordCredential): SyndicationClient {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSyndicationClient(asRaw(), serverCredential.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1908,7 +1919,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationFeed", ISyndicationFeed.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationFeedVtbl", "ISyndicationFeed", "ISyndicationFeed_Impl", [InterfaceMethodSchema("Authors", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Categories", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationCategory>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Contributors", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Generator", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationGenerator>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGenerator", 23, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationGenerator>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IconUri", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIconUri", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetId", 27, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Items", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LastUpdatedTime", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLastUpdatedTime", 30, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Links", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationLink>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageUri", 32, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageUri", 33, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Rights", 34, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRights", 35, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Subtitle", 36, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubtitle", 37, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 38, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 39, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FirstUri", 40, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LastUri", 41, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NextUri", 42, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreviousUri", 43, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceFormat", 44, [InterfaceParameterSchema("result", "CPointer<SyndicationFormatAbi>", "OutSlot<SyndicationFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Load", 45, [InterfaceParameterSchema("feed", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LoadFromXml", 46, [InterfaceParameterSchema("feedDocument", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationFeed", ISyndicationFeed.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationFeedVtbl", "ISyndicationFeed", "ISyndicationFeed_Impl", [InterfaceMethodSchema("Authors", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Categories", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationCategory>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Contributors", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Generator", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationGenerator>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGenerator", 23, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationGenerator>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IconUri", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIconUri", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetId", 27, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Items", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LastUpdatedTime", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLastUpdatedTime", 30, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Links", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationLink>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageUri", 32, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageUri", 33, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Rights", 34, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRights", 35, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Subtitle", 36, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubtitle", 37, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 38, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 39, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FirstUri", 40, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LastUri", 41, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NextUri", 42, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreviousUri", 43, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceFormat", 44, [InterfaceParameterSchema("result", "CPointer<SyndicationFormatAbi>", "OutSlot<SyndicationFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Load", 45, [InterfaceParameterSchema("feed", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LoadFromXml", 46, [InterfaceParameterSchema("feedDocument", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationFeed.runtimeType())
         return schema
     }
@@ -2148,7 +2159,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func LoadFromXml(feedDocument: _impl_l1.XmlDocument): Unit {
+    public unsafe func LoadFromXml(feedDocument: impl_p1.XmlDocument): Unit {
         let v = vtbl()
         let hr = v.LoadFromXml(asRaw(), feedDocument.asRaw())
         HRESULT(hr).ok()
@@ -2419,7 +2430,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationItem", ISyndicationItem.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationItemVtbl", "ISyndicationItem", "ISyndicationItem_Impl", [InterfaceMethodSchema("Authors", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Categories", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationCategory>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Contributors", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Content", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContent", 23, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationContent>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetId", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LastUpdatedTime", 26, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLastUpdatedTime", 27, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Links", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationLink>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishedDate", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublishedDate", 30, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Rights", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRights", 32, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Source", 33, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationFeed>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSource", 34, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationFeed>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Summary", 35, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSummary", 36, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 37, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 38, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CommentsUri", 39, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommentsUri", 40, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("EditUri", 41, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EditMediaUri", 42, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ETag", 43, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemUri", 44, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Load", 45, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LoadFromXml", 46, [InterfaceParameterSchema("itemDocument", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationItem", ISyndicationItem.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationItemVtbl", "ISyndicationItem", "ISyndicationItem_Impl", [InterfaceMethodSchema("Authors", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Categories", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationCategory>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Contributors", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationPerson>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Content", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationContent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContent", 23, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationContent>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetId", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LastUpdatedTime", 26, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLastUpdatedTime", 27, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Links", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationLink>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishedDate", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublishedDate", 30, [InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Rights", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRights", 32, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Source", 33, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SyndicationFeed>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSource", 34, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<SyndicationFeed>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Summary", 35, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSummary", 36, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 37, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ISyndicationText>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 38, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<ISyndicationText>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CommentsUri", 39, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommentsUri", 40, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("EditUri", 41, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EditMediaUri", 42, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ETag", 43, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemUri", 44, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Load", 45, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LoadFromXml", 46, [InterfaceParameterSchema("itemDocument", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationItem.runtimeType())
         return schema
     }
@@ -2656,7 +2667,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func LoadFromXml(itemDocument: _impl_l1.XmlDocument): Unit {
+    public unsafe func LoadFromXml(itemDocument: impl_p1.XmlDocument): Unit {
         let v = vtbl()
         let hr = v.LoadFromXml(asRaw(), itemDocument.asRaw())
         HRESULT(hr).ok()
@@ -3439,14 +3450,14 @@ public interface ISyndicationNode_Impl <: ISyndicationNode_ImplErased {
         }
     }
 
-    public func GetXmlDocument(format: SyndicationFormat): windows_core.Result<_impl_l1.XmlDocument>
+    public func GetXmlDocument(format: SyndicationFormat): windows_core.Result<impl_p1.XmlDocument>
 
     public func __winrtThunk_GetXmlDocument(arg0: SyndicationFormatAbi, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetXmlDocument(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<SyndicationFormat>()))) {
-            case Result<_impl_l1.XmlDocument>.Ok(value) =>
+            case Result<impl_p1.XmlDocument>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -3454,7 +3465,7 @@ public interface ISyndicationNode_Impl <: ISyndicationNode_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.XmlDocument>.Err(error) =>
+            case Result<impl_p1.XmlDocument>.Err(error) =>
                 error.code().value
         }
     }
@@ -3496,7 +3507,7 @@ public class ISyndicationNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationNode", ISyndicationNode.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationNodeVtbl", "ISyndicationNode", "ISyndicationNode_Impl", [InterfaceMethodSchema("NodeName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NodeNamespace", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeNamespace", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NodeValue", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeValue", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Language", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLanguage", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("BaseUri", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBaseUri", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AttributeExtensions", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationAttribute>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ElementExtensions", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<ISyndicationNode>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetXmlDocument", 18, [InterfaceParameterSchema("format", "SyndicationFormatAbi", "SyndicationFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationNode", ISyndicationNode.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISyndicationNodeVtbl", "ISyndicationNode", "ISyndicationNode_Impl", [InterfaceMethodSchema("NodeName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NodeNamespace", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeNamespace", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NodeValue", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNodeValue", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Language", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLanguage", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("BaseUri", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBaseUri", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AttributeExtensions", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<SyndicationAttribute>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ElementExtensions", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<ISyndicationNode>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetXmlDocument", 18, [InterfaceParameterSchema("format", "SyndicationFormatAbi", "SyndicationFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationNode.runtimeType())
         return schema
     }
@@ -3614,12 +3625,12 @@ public class ISyndicationNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetXmlDocument(asRaw(), windows_core.projectTypedAbi(format, windows_core.typeMarker<SyndicationFormat>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 }
 
@@ -4131,14 +4142,14 @@ public interface ISyndicationText_Impl <: ISyndicationText_ImplErased & ISyndica
         }
     }
 
-    public func Xml(): windows_core.Result<_impl_l1.XmlDocument>
+    public func Xml(): windows_core.Result<impl_p1.XmlDocument>
 
     public func __winrtThunk_Xml(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.Xml()) {
-            case Result<_impl_l1.XmlDocument>.Ok(value) =>
+            case Result<impl_p1.XmlDocument>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -4146,15 +4157,15 @@ public interface ISyndicationText_Impl <: ISyndicationText_ImplErased & ISyndica
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.XmlDocument>.Err(error) =>
+            case Result<impl_p1.XmlDocument>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func SetXml(value: InParam<_impl_l1.XmlDocument>): windows_core.Result<Unit>
+    public func SetXml(value: InParam<impl_p1.XmlDocument>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetXml(arg0: CPointer<Unit>): Int32 {
-        match (this.SetXml(InParam<_impl_l1.XmlDocument>(_impl_l1.XmlDocument.viewOf(arg0)))) {
+        match (this.SetXml(InParam<impl_p1.XmlDocument>(impl_p1.XmlDocument.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4338,7 +4349,7 @@ public interface ISyndicationText_Impl <: ISyndicationText_ImplErased & ISyndica
             return E_POINTER.value
         }
         match (this.GetXmlDocument(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<SyndicationFormat>()))) {
-            case Result<_impl_l1.XmlDocument>.Ok(value) =>
+            case Result<impl_p1.XmlDocument>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -4346,7 +4357,7 @@ public interface ISyndicationText_Impl <: ISyndicationText_ImplErased & ISyndica
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.XmlDocument>.Err(error) =>
+            case Result<impl_p1.XmlDocument>.Err(error) =>
                 error.code().value
         }
     }
@@ -4393,7 +4404,7 @@ public class ISyndicationText <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISyndicationText", ISyndicationText.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationTextVtbl", "ISyndicationText", "ISyndicationText_Impl", [InterfaceMethodSchema("Text", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 20, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Type", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetType", 22, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Xml", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetXml", 24, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISyndicationText", ISyndicationText.iid(), ISyndicationNode.descriptorSchema(), ["ISyndicationNode"], [ISyndicationNode.iid()], "ISyndicationTextVtbl", "ISyndicationText", "ISyndicationText_Impl", [InterfaceMethodSchema("Text", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 20, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Type", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetType", 22, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Xml", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetXml", 24, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ISyndicationText.runtimeType())
         return schema
     }
@@ -4458,16 +4469,16 @@ public class ISyndicationText <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func Xml(): _impl_l1.XmlDocument {
+    public unsafe func Xml(): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Xml(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func SetXml(value: _impl_l1.XmlDocument): Unit {
+    public unsafe func SetXml(value: impl_p1.XmlDocument): Unit {
         let v = vtbl()
         let hr = v.SetXml(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -4867,7 +4878,7 @@ public class SyndicationCategory <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -4993,22 +5004,22 @@ public class SyndicationClient <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         return defaultInterface().ServerCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(value: impl_p0.PasswordCredential): Unit {
         defaultInterface().SetServerCredential(value)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         return defaultInterface().ProxyCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(value: impl_p0.PasswordCredential): Unit {
         defaultInterface().SetProxyCredential(value)
     }
 
@@ -5045,7 +5056,7 @@ public class SyndicationClient <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func CreateSyndicationClient(serverCredential: _impl_l0.PasswordCredential): SyndicationClient {
+    public static unsafe func CreateSyndicationClient(serverCredential: impl_p0.PasswordCredential): SyndicationClient {
         var result__: Option<SyndicationClient> = Option<SyndicationClient>.None
         try (factory__ = windows_core.factory<SyndicationClient, ISyndicationClientFactory>().unwrap()) {
             result__ = Some(factory__.CreateSyndicationClient(serverCredential))
@@ -5194,12 +5205,12 @@ public class SyndicationContent <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func Xml(): _impl_l1.XmlDocument {
+    public unsafe func Xml(): impl_p1.XmlDocument {
         return asISyndicationText().Xml()
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func SetXml(value: _impl_l1.XmlDocument): Unit {
+    public unsafe func SetXml(value: impl_p1.XmlDocument): Unit {
         asISyndicationText().SetXml(value)
     }
 
@@ -5254,7 +5265,7 @@ public class SyndicationContent <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -5500,7 +5511,7 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func LoadFromXml(feedDocument: _impl_l1.XmlDocument): Unit {
+    public unsafe func LoadFromXml(feedDocument: impl_p1.XmlDocument): Unit {
         defaultInterface().LoadFromXml(feedDocument)
     }
 
@@ -5555,7 +5566,7 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -5751,7 +5762,7 @@ public class SyndicationGenerator <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -5985,7 +5996,7 @@ public class SyndicationItem <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func LoadFromXml(itemDocument: _impl_l1.XmlDocument): Unit {
+    public unsafe func LoadFromXml(itemDocument: impl_p1.XmlDocument): Unit {
         defaultInterface().LoadFromXml(itemDocument)
     }
 
@@ -6040,7 +6051,7 @@ public class SyndicationItem <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -6260,7 +6271,7 @@ public class SyndicationLink <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -6436,7 +6447,7 @@ public class SyndicationNode <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return defaultInterface().GetXmlDocument(format)
     }
 
@@ -6632,7 +6643,7 @@ public class SyndicationPerson <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 
@@ -6781,12 +6792,12 @@ public class SyndicationText <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func Xml(): _impl_l1.XmlDocument {
+    public unsafe func Xml(): impl_p1.XmlDocument {
         return defaultInterface().Xml()
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func SetXml(value: _impl_l1.XmlDocument): Unit {
+    public unsafe func SetXml(value: impl_p1.XmlDocument): Unit {
         defaultInterface().SetXml(value)
     }
 
@@ -6841,7 +6852,7 @@ public class SyndicationText <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 

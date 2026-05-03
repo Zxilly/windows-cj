@@ -4,15 +4,24 @@
 package windows.Win32.NetworkManagement.Rras
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt32, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadUInt64, unionWriteUInt64}
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
@@ -1378,13 +1387,13 @@ public type PMGM_WRONG_IF_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt
 public type PMPRADMINGETIPADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
-public type PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>
+public type PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMPRADMINRELEASEIPADRESS = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
-public type PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>) -> Unit>
+public type PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMPRADMINTERMINATEDLL = CFunc<() -> UInt32>
@@ -6322,15 +6331,15 @@ extend RASTUNNELENDPOINT <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct RASTUNNELENDPOINT__Anonymous_e__Union {
     public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public mut prop ipv4: Win32__impl_l0.IN_ADDR {
+    public mut prop ipv4: Win32_impl_p0.IN_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -6338,22 +6347,22 @@ public struct RASTUNNELENDPOINT__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()))
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop ipv6: Win32__impl_l0.IN6_ADDR {
+    public mut prop ipv6: Win32_impl_p0.IN6_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -6361,8 +6370,8 @@ public struct RASTUNNELENDPOINT__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()))
                 _raw = rawStorage
             }
         }
@@ -7290,7 +7299,7 @@ extend ROUTER_CUSTOM_IKEv2_POLICY0 <: windows_core.CopyType & windows_core.Runti
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG0 {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public init() {}
 }
@@ -7300,7 +7309,7 @@ public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG0 {
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG0Abi {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public init() {}
 }
@@ -7314,7 +7323,7 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG0 <: windows_core.CopyType & windows_core.Ru
         var abi = ROUTER_IKEv2_IF_CUSTOM_CONFIG0Abi()
         abi.dwSaLifeTime = value.dwSaLifeTime
         abi.dwSaDataSize = value.dwSaDataSize
-        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.customPolicy = value.customPolicy
         return abi
     }
@@ -7322,7 +7331,7 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG0 <: windows_core.CopyType & windows_core.Ru
         var value = ROUTER_IKEv2_IF_CUSTOM_CONFIG0()
         value.dwSaLifeTime = abi.dwSaLifeTime
         value.dwSaDataSize = abi.dwSaDataSize
-        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.customPolicy = abi.customPolicy
         return value
     }
@@ -7337,9 +7346,9 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG0 <: windows_core.CopyType & windows_core.Ru
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG1 {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
-    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public init() {}
 }
 
@@ -7348,9 +7357,9 @@ public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG1 {
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG1Abi {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
-    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public init() {}
 }
 
@@ -7363,18 +7372,18 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG1 <: windows_core.CopyType & windows_core.Ru
         var abi = ROUTER_IKEv2_IF_CUSTOM_CONFIG1Abi()
         abi.dwSaLifeTime = value.dwSaLifeTime
         abi.dwSaDataSize = value.dwSaDataSize
-        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.customPolicy = value.customPolicy
-        abi.certificateHash = windows_core.projectTypedAbi(value.certificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certificateHash = windows_core.projectTypedAbi(value.certificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         return abi
     }
     public static func assumeInitRef(abi: ROUTER_IKEv2_IF_CUSTOM_CONFIG1Abi): ROUTER_IKEv2_IF_CUSTOM_CONFIG1 {
         var value = ROUTER_IKEv2_IF_CUSTOM_CONFIG1()
         value.dwSaLifeTime = abi.dwSaLifeTime
         value.dwSaDataSize = abi.dwSaDataSize
-        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.customPolicy = abi.customPolicy
-        value.certificateHash = windows_core.fromTypedAbi(abi.certificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certificateHash = windows_core.fromTypedAbi(abi.certificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         return value
     }
     public static func fromAbi(abi: ROUTER_IKEv2_IF_CUSTOM_CONFIG1Abi): Result<ROUTER_IKEv2_IF_CUSTOM_CONFIG1> { Result<ROUTER_IKEv2_IF_CUSTOM_CONFIG1>.Ok(ROUTER_IKEv2_IF_CUSTOM_CONFIG1.assumeInitRef(abi)) }
@@ -8267,7 +8276,7 @@ extend SOURCE_GROUP_ENTRY <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct SSTP_CERT_INFO {
     public var isDefault: Int32 = 0i32
-    public var certBlob: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certBlob: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public init() {}
 }
 
@@ -8275,7 +8284,7 @@ public struct SSTP_CERT_INFO {
 @C
 public struct SSTP_CERT_INFOAbi {
     public var isDefault: Int32 = 0i32
-    public var certBlob: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certBlob: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public init() {}
 }
 
@@ -8287,13 +8296,13 @@ extend SSTP_CERT_INFO <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func projectAbi(value: SSTP_CERT_INFO): SSTP_CERT_INFOAbi {
         var abi = SSTP_CERT_INFOAbi()
         abi.isDefault = value.isDefault
-        abi.certBlob = windows_core.projectTypedAbi(value.certBlob, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certBlob = windows_core.projectTypedAbi(value.certBlob, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         return abi
     }
     public static func assumeInitRef(abi: SSTP_CERT_INFOAbi): SSTP_CERT_INFO {
         var value = SSTP_CERT_INFO()
         value.isDefault = abi.isDefault
-        value.certBlob = windows_core.fromTypedAbi(abi.certBlob, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certBlob = windows_core.fromTypedAbi(abi.certBlob, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         return value
     }
     public static func fromAbi(abi: SSTP_CERT_INFOAbi): Result<SSTP_CERT_INFO> { Result<SSTP_CERT_INFO>.Ok(SSTP_CERT_INFO.assumeInitRef(abi)) }
@@ -8400,15 +8409,15 @@ extend VPN_TS_IP_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct VPN_TS_IP_ADDRESS__Anonymous_e__Union {
     public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public mut prop v4: Win32__impl_l0.IN_ADDR {
+    public mut prop v4: Win32_impl_p0.IN_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -8416,22 +8425,22 @@ public struct VPN_TS_IP_ADDRESS__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()))
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop v6: Win32__impl_l0.IN6_ADDR {
+    public mut prop v6: Win32_impl_p0.IN6_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
             }
         }
         set(val) {
@@ -8439,8 +8448,8 @@ public struct VPN_TS_IP_ADDRESS__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.IN6_ADDRAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()))
+                let ptr = CPointer<Win32_impl_p0.IN6_ADDRAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()))
                 _raw = rawStorage
             }
         }
@@ -8511,8 +8520,8 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS2 {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public init() {}
@@ -8527,8 +8536,8 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS2Abi {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public init() {}
@@ -8548,7 +8557,7 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS2 <: windows_core.CopyType & windows_core.Runti
         abi.dwConfigOptions = value.dwConfigOptions
         abi.dwTotalCertificates = value.dwTotalCertificates
         abi.certificateNames = value.certificateNames
-        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.dwEncryptionType = value.dwEncryptionType
         abi.customPolicy = value.customPolicy
         return abi
@@ -8562,7 +8571,7 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS2 <: windows_core.CopyType & windows_core.Runti
         value.dwConfigOptions = abi.dwConfigOptions
         value.dwTotalCertificates = abi.dwTotalCertificates
         value.certificateNames = abi.certificateNames
-        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.dwEncryptionType = abi.dwEncryptionType
         value.customPolicy = abi.customPolicy
         return value
@@ -8582,13 +8591,13 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS3 {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public var dwTotalEkus: UInt32 = 0u32
     public var certificateEKUs: CPointer<MPR_CERT_EKUAbi> = CPointer<MPR_CERT_EKUAbi>()
-    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var machineCertificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public init() {}
 }
 
@@ -8601,13 +8610,13 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS3Abi {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public var dwTotalEkus: UInt32 = 0u32
     public var certificateEKUs: CPointer<MPR_CERT_EKUAbi> = CPointer<MPR_CERT_EKUAbi>()
-    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var machineCertificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public init() {}
 }
 
@@ -8625,12 +8634,12 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS3 <: windows_core.CopyType & windows_core.Runti
         abi.dwConfigOptions = value.dwConfigOptions
         abi.dwTotalCertificates = value.dwTotalCertificates
         abi.certificateNames = value.certificateNames
-        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.dwEncryptionType = value.dwEncryptionType
         abi.customPolicy = value.customPolicy
         abi.dwTotalEkus = value.dwTotalEkus
         abi.certificateEKUs = value.certificateEKUs
-        abi.machineCertificateHash = windows_core.projectTypedAbi(value.machineCertificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.machineCertificateHash = windows_core.projectTypedAbi(value.machineCertificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         return abi
     }
     public static func assumeInitRef(abi: IKEV2_TUNNEL_CONFIG_PARAMS3Abi): IKEV2_TUNNEL_CONFIG_PARAMS3 {
@@ -8642,12 +8651,12 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS3 <: windows_core.CopyType & windows_core.Runti
         value.dwConfigOptions = abi.dwConfigOptions
         value.dwTotalCertificates = abi.dwTotalCertificates
         value.certificateNames = abi.certificateNames
-        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.dwEncryptionType = abi.dwEncryptionType
         value.customPolicy = abi.customPolicy
         value.dwTotalEkus = abi.dwTotalEkus
         value.certificateEKUs = abi.certificateEKUs
-        value.machineCertificateHash = windows_core.fromTypedAbi(abi.machineCertificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.machineCertificateHash = windows_core.fromTypedAbi(abi.machineCertificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         return value
     }
     public static func fromAbi(abi: IKEV2_TUNNEL_CONFIG_PARAMS3Abi): Result<IKEV2_TUNNEL_CONFIG_PARAMS3> { Result<IKEV2_TUNNEL_CONFIG_PARAMS3>.Ok(IKEV2_TUNNEL_CONFIG_PARAMS3.assumeInitRef(abi)) }
@@ -8665,13 +8674,13 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS4 {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public var dwTotalEkus: UInt32 = 0u32
     public var certificateEKUs: CPointer<MPR_CERT_EKUAbi> = CPointer<MPR_CERT_EKUAbi>()
-    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var machineCertificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var dwMmSaLifeTime: UInt32 = 0u32
     public init() {}
 }
@@ -8685,13 +8694,13 @@ public struct IKEV2_TUNNEL_CONFIG_PARAMS4Abi {
     public var dwSaDataSizeForRenegotiation: UInt32 = 0u32
     public var dwConfigOptions: UInt32 = 0u32
     public var dwTotalCertificates: UInt32 = 0u32
-    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
-    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateNames: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
+    public var machineCertificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var dwEncryptionType: UInt32 = 0u32
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
     public var dwTotalEkus: UInt32 = 0u32
     public var certificateEKUs: CPointer<MPR_CERT_EKUAbi> = CPointer<MPR_CERT_EKUAbi>()
-    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var machineCertificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var dwMmSaLifeTime: UInt32 = 0u32
     public init() {}
 }
@@ -8710,12 +8719,12 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS4 <: windows_core.CopyType & windows_core.Runti
         abi.dwConfigOptions = value.dwConfigOptions
         abi.dwTotalCertificates = value.dwTotalCertificates
         abi.certificateNames = value.certificateNames
-        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.machineCertificateName = windows_core.projectTypedAbi(value.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.dwEncryptionType = value.dwEncryptionType
         abi.customPolicy = value.customPolicy
         abi.dwTotalEkus = value.dwTotalEkus
         abi.certificateEKUs = value.certificateEKUs
-        abi.machineCertificateHash = windows_core.projectTypedAbi(value.machineCertificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.machineCertificateHash = windows_core.projectTypedAbi(value.machineCertificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.dwMmSaLifeTime = value.dwMmSaLifeTime
         return abi
     }
@@ -8728,12 +8737,12 @@ extend IKEV2_TUNNEL_CONFIG_PARAMS4 <: windows_core.CopyType & windows_core.Runti
         value.dwConfigOptions = abi.dwConfigOptions
         value.dwTotalCertificates = abi.dwTotalCertificates
         value.certificateNames = abi.certificateNames
-        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.machineCertificateName = windows_core.fromTypedAbi(abi.machineCertificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.dwEncryptionType = abi.dwEncryptionType
         value.customPolicy = abi.customPolicy
         value.dwTotalEkus = abi.dwTotalEkus
         value.certificateEKUs = abi.certificateEKUs
-        value.machineCertificateHash = windows_core.fromTypedAbi(abi.machineCertificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.machineCertificateHash = windows_core.fromTypedAbi(abi.machineCertificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.dwMmSaLifeTime = abi.dwMmSaLifeTime
         return value
     }
@@ -9277,9 +9286,9 @@ public struct MPR_INTERFACE_3 {
     public var guidId: GuidValue = GuidValue()
     public var dwVpnStrategy: MPR_VS = MPR_VS()
     public var AddressCount: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
-    public var ipv6addr: CPointer<Win32__impl_l0.IN6_ADDRAbi> = CPointer<Win32__impl_l0.IN6_ADDRAbi>()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
+    public var ipv6addr: CPointer<Win32_impl_p0.IN6_ADDRAbi> = CPointer<Win32_impl_p0.IN6_ADDRAbi>()
     public init() {}
 }
 
@@ -9324,9 +9333,9 @@ public struct MPR_INTERFACE_3Abi {
     public var guidId: GUID = GUID()
     public var dwVpnStrategy: MPR_VSAbi = MPR_VSAbi()
     public var AddressCount: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-    public var ipv6addr: CPointer<Win32__impl_l0.IN6_ADDRAbi> = CPointer<Win32__impl_l0.IN6_ADDRAbi>()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+    public var ipv6addr: CPointer<Win32_impl_p0.IN6_ADDRAbi> = CPointer<Win32_impl_p0.IN6_ADDRAbi>()
     public init() {}
 }
 
@@ -9375,8 +9384,8 @@ extend MPR_INTERFACE_3 <: windows_core.CopyType & windows_core.RuntimeType & win
         abi.guidId = value.guidId.toRaw()
         abi.dwVpnStrategy = MPR_VS.projectAbi(value.dwVpnStrategy)
         abi.AddressCount = value.AddressCount
-        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
-        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
+        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
+        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
         abi.ipv6addr = value.ipv6addr
         return abi
     }
@@ -9420,8 +9429,8 @@ extend MPR_INTERFACE_3 <: windows_core.CopyType & windows_core.RuntimeType & win
         value.guidId = GuidValue(abi.guidId)
         value.dwVpnStrategy = MPR_VS.assumeInitRef(abi.dwVpnStrategy)
         value.AddressCount = abi.AddressCount
-        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
-        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
         value.ipv6addr = abi.ipv6addr
         return value
     }
@@ -10056,11 +10065,11 @@ public struct RASENTRYA {
     public var szPrerequisiteEntry: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0i8)
     public var dwRedialCount: UInt32 = 0u32
     public var dwRedialPause: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
     public var dwIPv4InterfaceMetric: UInt32 = 0u32
     public var dwIPv6InterfaceMetric: UInt32 = 0u32
-    public var ipv6addr: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addr: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
     public var dwIPv6PrefixLength: UInt32 = 0u32
     public var dwNetworkOutageTime: UInt32 = 0u32
     public var szIDi: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0i8)
@@ -10123,11 +10132,11 @@ public struct RASENTRYAAbi {
     public var szPrerequisiteEntry: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0i8)
     public var dwRedialCount: UInt32 = 0u32
     public var dwRedialPause: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
     public var dwIPv4InterfaceMetric: UInt32 = 0u32
     public var dwIPv6InterfaceMetric: UInt32 = 0u32
-    public var ipv6addr: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
+    public var ipv6addr: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
     public var dwIPv6PrefixLength: UInt32 = 0u32
     public var dwNetworkOutageTime: UInt32 = 0u32
     public var szIDi: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0i8)
@@ -10194,11 +10203,11 @@ extend RASENTRYA <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.szPrerequisiteEntry = value.szPrerequisiteEntry
         abi.dwRedialCount = value.dwRedialCount
         abi.dwRedialPause = value.dwRedialPause
-        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
-        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
+        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
+        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
         abi.dwIPv4InterfaceMetric = value.dwIPv4InterfaceMetric
         abi.dwIPv6InterfaceMetric = value.dwIPv6InterfaceMetric
-        abi.ipv6addr = windows_core.projectTypedAbi(value.ipv6addr, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
+        abi.ipv6addr = windows_core.projectTypedAbi(value.ipv6addr, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
         abi.dwIPv6PrefixLength = value.dwIPv6PrefixLength
         abi.dwNetworkOutageTime = value.dwNetworkOutageTime
         abi.szIDi = value.szIDi
@@ -10259,11 +10268,11 @@ extend RASENTRYA <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.szPrerequisiteEntry = abi.szPrerequisiteEntry
         value.dwRedialCount = abi.dwRedialCount
         value.dwRedialPause = abi.dwRedialPause
-        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
-        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
         value.dwIPv4InterfaceMetric = abi.dwIPv4InterfaceMetric
         value.dwIPv6InterfaceMetric = abi.dwIPv6InterfaceMetric
-        value.ipv6addr = windows_core.fromTypedAbi(abi.ipv6addr, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+        value.ipv6addr = windows_core.fromTypedAbi(abi.ipv6addr, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
         value.dwIPv6PrefixLength = abi.dwIPv6PrefixLength
         value.dwNetworkOutageTime = abi.dwNetworkOutageTime
         value.szIDi = abi.szIDi
@@ -10331,11 +10340,11 @@ public struct RASENTRYW {
     public var szPrerequisiteEntry: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0u16)
     public var dwRedialCount: UInt32 = 0u32
     public var dwRedialPause: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
     public var dwIPv4InterfaceMetric: UInt32 = 0u32
     public var dwIPv6InterfaceMetric: UInt32 = 0u32
-    public var ipv6addr: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addr: Win32_impl_p0.IN6_ADDR = Win32_impl_p0.IN6_ADDR()
     public var dwIPv6PrefixLength: UInt32 = 0u32
     public var dwNetworkOutageTime: UInt32 = 0u32
     public var szIDi: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0u16)
@@ -10398,11 +10407,11 @@ public struct RASENTRYWAbi {
     public var szPrerequisiteEntry: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0u16)
     public var dwRedialCount: UInt32 = 0u32
     public var dwRedialPause: UInt32 = 0u32
-    public var ipv6addrDns: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
+    public var ipv6addrDns: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+    public var ipv6addrDnsAlt: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
     public var dwIPv4InterfaceMetric: UInt32 = 0u32
     public var dwIPv6InterfaceMetric: UInt32 = 0u32
-    public var ipv6addr: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
+    public var ipv6addr: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
     public var dwIPv6PrefixLength: UInt32 = 0u32
     public var dwNetworkOutageTime: UInt32 = 0u32
     public var szIDi: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0u16)
@@ -10469,11 +10478,11 @@ extend RASENTRYW <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.szPrerequisiteEntry = value.szPrerequisiteEntry
         abi.dwRedialCount = value.dwRedialCount
         abi.dwRedialPause = value.dwRedialPause
-        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
-        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
+        abi.ipv6addrDns = windows_core.projectTypedAbi(value.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
+        abi.ipv6addrDnsAlt = windows_core.projectTypedAbi(value.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
         abi.dwIPv4InterfaceMetric = value.dwIPv4InterfaceMetric
         abi.dwIPv6InterfaceMetric = value.dwIPv6InterfaceMetric
-        abi.ipv6addr = windows_core.projectTypedAbi(value.ipv6addr, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>())
+        abi.ipv6addr = windows_core.projectTypedAbi(value.ipv6addr, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>())
         abi.dwIPv6PrefixLength = value.dwIPv6PrefixLength
         abi.dwNetworkOutageTime = value.dwNetworkOutageTime
         abi.szIDi = value.szIDi
@@ -10534,11 +10543,11 @@ extend RASENTRYW <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.szPrerequisiteEntry = abi.szPrerequisiteEntry
         value.dwRedialCount = abi.dwRedialCount
         value.dwRedialPause = abi.dwRedialPause
-        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
-        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDns = windows_core.fromTypedAbi(abi.ipv6addrDns, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
+        value.ipv6addrDnsAlt = windows_core.fromTypedAbi(abi.ipv6addrDnsAlt, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
         value.dwIPv4InterfaceMetric = abi.dwIPv4InterfaceMetric
         value.dwIPv6InterfaceMetric = abi.dwIPv6InterfaceMetric
-        value.ipv6addr = windows_core.fromTypedAbi(abi.ipv6addr, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+        value.ipv6addr = windows_core.fromTypedAbi(abi.ipv6addr, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
         value.dwIPv6PrefixLength = abi.dwIPv6PrefixLength
         value.dwNetworkOutageTime = abi.dwNetworkOutageTime
         value.szIDi = abi.szIDi
@@ -10580,41 +10589,41 @@ public struct RASIKEV2_PROJECTION_INFO {
         }
     }
 
-    public mut prop ipv4Address: Win32__impl_l0.IN_ADDR {
+    public mut prop ipv4Address: Win32_impl_p0.IN_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.IN_ADDRAbi = Win32__impl_l0.IN_ADDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.IN_ADDRAbi>(base, 4, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+                let defaultValue: Win32_impl_p0.IN_ADDRAbi = Win32_impl_p0.IN_ADDRAbi()
+                let raw = packedReadValue<Win32_impl_p0.IN_ADDRAbi>(base, 4, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 4, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()))
+                packedWriteValue(base, 4, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()))
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop ipv4ServerAddress: Win32__impl_l0.IN_ADDR {
+    public mut prop ipv4ServerAddress: Win32_impl_p0.IN_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.IN_ADDRAbi = Win32__impl_l0.IN_ADDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.IN_ADDRAbi>(base, 8, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+                let defaultValue: Win32_impl_p0.IN_ADDRAbi = Win32_impl_p0.IN_ADDRAbi()
+                let raw = packedReadValue<Win32_impl_p0.IN_ADDRAbi>(base, 8, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 8, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()))
+                packedWriteValue(base, 8, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()))
                 _raw = rawStorage
             }
         }
@@ -10638,41 +10647,41 @@ public struct RASIKEV2_PROJECTION_INFO {
         }
     }
 
-    public mut prop ipv6Address: Win32__impl_l0.IN6_ADDR {
+    public mut prop ipv6Address: Win32_impl_p0.IN6_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.IN6_ADDRAbi>(base, 16, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+                let defaultValue: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+                let raw = packedReadValue<Win32_impl_p0.IN6_ADDRAbi>(base, 16, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 16, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()))
+                packedWriteValue(base, 16, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()))
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop ipv6ServerAddress: Win32__impl_l0.IN6_ADDR {
+    public mut prop ipv6ServerAddress: Win32_impl_p0.IN6_ADDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.IN6_ADDRAbi = Win32__impl_l0.IN6_ADDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.IN6_ADDRAbi>(base, 32, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()).unwrap()
+                let defaultValue: Win32_impl_p0.IN6_ADDRAbi = Win32_impl_p0.IN6_ADDRAbi()
+                let raw = packedReadValue<Win32_impl_p0.IN6_ADDRAbi>(base, 32, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 32, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.IN6_ADDR>()))
+                packedWriteValue(base, 32, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.IN6_ADDR>()))
                 _raw = rawStorage
             }
         }
@@ -10786,13 +10795,13 @@ public struct RASIKEV2_PROJECTION_INFO {
         }
     }
 
-    public mut prop ipv4ServerAddresses: CPointer<Win32__impl_l0.IN_ADDRAbi> {
+    public mut prop ipv4ServerAddresses: CPointer<Win32_impl_p0.IN_ADDRAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: CPointer<Win32__impl_l0.IN_ADDRAbi> = CPointer<Win32__impl_l0.IN_ADDRAbi>()
-                return packedReadValue<CPointer<Win32__impl_l0.IN_ADDRAbi>>(base, 72, defaultValue)
+                let defaultValue: CPointer<Win32_impl_p0.IN_ADDRAbi> = CPointer<Win32_impl_p0.IN_ADDRAbi>()
+                return packedReadValue<CPointer<Win32_impl_p0.IN_ADDRAbi>>(base, 72, defaultValue)
             }
         }
         set(val) {
@@ -10823,13 +10832,13 @@ public struct RASIKEV2_PROJECTION_INFO {
         }
     }
 
-    public mut prop ipv6ServerAddresses: CPointer<Win32__impl_l0.IN6_ADDRAbi> {
+    public mut prop ipv6ServerAddresses: CPointer<Win32_impl_p0.IN6_ADDRAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: CPointer<Win32__impl_l0.IN6_ADDRAbi> = CPointer<Win32__impl_l0.IN6_ADDRAbi>()
-                return packedReadValue<CPointer<Win32__impl_l0.IN6_ADDRAbi>>(base, 84, defaultValue)
+                let defaultValue: CPointer<Win32_impl_p0.IN6_ADDRAbi> = CPointer<Win32_impl_p0.IN6_ADDRAbi>()
+                return packedReadValue<CPointer<Win32_impl_p0.IN6_ADDRAbi>>(base, 84, defaultValue)
             }
         }
         set(val) {
@@ -11037,8 +11046,8 @@ public struct RASPBDLGA {
 @When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct RASPPP_PROJECTION_INFO {
     public var dwIPv4NegotiationError: UInt32 = 0u32
-    public var ipv4Address: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
-    public var ipv4ServerAddress: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
+    public var ipv4Address: Win32_impl_p0.IN_ADDR = Win32_impl_p0.IN_ADDR()
+    public var ipv4ServerAddress: Win32_impl_p0.IN_ADDR = Win32_impl_p0.IN_ADDR()
     public var dwIPv4Options: UInt32 = 0u32
     public var dwIPv4ServerOptions: UInt32 = 0u32
     public var dwIPv6NegotiationError: UInt32 = 0u32
@@ -11066,8 +11075,8 @@ public struct RASPPP_PROJECTION_INFO {
 @C
 public struct RASPPP_PROJECTION_INFOAbi {
     public var dwIPv4NegotiationError: UInt32 = 0u32
-    public var ipv4Address: Win32__impl_l0.IN_ADDRAbi = Win32__impl_l0.IN_ADDRAbi()
-    public var ipv4ServerAddress: Win32__impl_l0.IN_ADDRAbi = Win32__impl_l0.IN_ADDRAbi()
+    public var ipv4Address: Win32_impl_p0.IN_ADDRAbi = Win32_impl_p0.IN_ADDRAbi()
+    public var ipv4ServerAddress: Win32_impl_p0.IN_ADDRAbi = Win32_impl_p0.IN_ADDRAbi()
     public var dwIPv4Options: UInt32 = 0u32
     public var dwIPv4ServerOptions: UInt32 = 0u32
     public var dwIPv6NegotiationError: UInt32 = 0u32
@@ -11099,8 +11108,8 @@ extend RASPPP_PROJECTION_INFO <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func projectAbi(value: RASPPP_PROJECTION_INFO): RASPPP_PROJECTION_INFOAbi {
         var abi = RASPPP_PROJECTION_INFOAbi()
         abi.dwIPv4NegotiationError = value.dwIPv4NegotiationError
-        abi.ipv4Address = windows_core.projectTypedAbi(value.ipv4Address, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>())
-        abi.ipv4ServerAddress = windows_core.projectTypedAbi(value.ipv4ServerAddress, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>())
+        abi.ipv4Address = windows_core.projectTypedAbi(value.ipv4Address, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>())
+        abi.ipv4ServerAddress = windows_core.projectTypedAbi(value.ipv4ServerAddress, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>())
         abi.dwIPv4Options = value.dwIPv4Options
         abi.dwIPv4ServerOptions = value.dwIPv4ServerOptions
         abi.dwIPv6NegotiationError = value.dwIPv6NegotiationError
@@ -11126,8 +11135,8 @@ extend RASPPP_PROJECTION_INFO <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func assumeInitRef(abi: RASPPP_PROJECTION_INFOAbi): RASPPP_PROJECTION_INFO {
         var value = RASPPP_PROJECTION_INFO()
         value.dwIPv4NegotiationError = abi.dwIPv4NegotiationError
-        value.ipv4Address = windows_core.fromTypedAbi(abi.ipv4Address, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
-        value.ipv4ServerAddress = windows_core.fromTypedAbi(abi.ipv4ServerAddress, windows_core.typeMarker<Win32__impl_l0.IN_ADDR>()).unwrap()
+        value.ipv4Address = windows_core.fromTypedAbi(abi.ipv4Address, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
+        value.ipv4ServerAddress = windows_core.fromTypedAbi(abi.ipv4ServerAddress, windows_core.typeMarker<Win32_impl_p0.IN_ADDR>()).unwrap()
         value.dwIPv4Options = abi.dwIPv4Options
         value.dwIPv4ServerOptions = abi.dwIPv4ServerOptions
         value.dwIPv6NegotiationError = abi.dwIPv6NegotiationError
@@ -11782,9 +11791,9 @@ public struct RAS_PROJECTION_INFO__Anonymous_e__Union {
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2 {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
-    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var certificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOB = Win32_impl_p0.CRYPT_INTEGER_BLOB()
     public var dwMmSaLifeTime: UInt32 = 0u32
     public var vpnTrafficSelectors: MPR_VPN_TRAFFIC_SELECTORS = MPR_VPN_TRAFFIC_SELECTORS()
     public init() {}
@@ -11795,9 +11804,9 @@ public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2 {
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2Abi {
     public var dwSaLifeTime: UInt32 = 0u32
     public var dwSaDataSize: UInt32 = 0u32
-    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateName: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0Abi>()
-    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi = Win32__impl_l0.CRYPT_INTEGER_BLOBAbi()
+    public var certificateHash: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi = Win32_impl_p0.CRYPT_INTEGER_BLOBAbi()
     public var dwMmSaLifeTime: UInt32 = 0u32
     public var vpnTrafficSelectors: MPR_VPN_TRAFFIC_SELECTORSAbi = MPR_VPN_TRAFFIC_SELECTORSAbi()
     public init() {}
@@ -11812,9 +11821,9 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG2 <: windows_core.CopyType & windows_core.Ru
         var abi = ROUTER_IKEv2_IF_CUSTOM_CONFIG2Abi()
         abi.dwSaLifeTime = value.dwSaLifeTime
         abi.dwSaDataSize = value.dwSaDataSize
-        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certificateName = windows_core.projectTypedAbi(value.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.customPolicy = value.customPolicy
-        abi.certificateHash = windows_core.projectTypedAbi(value.certificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>())
+        abi.certificateHash = windows_core.projectTypedAbi(value.certificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>())
         abi.dwMmSaLifeTime = value.dwMmSaLifeTime
         abi.vpnTrafficSelectors = MPR_VPN_TRAFFIC_SELECTORS.projectAbi(value.vpnTrafficSelectors)
         return abi
@@ -11823,9 +11832,9 @@ extend ROUTER_IKEv2_IF_CUSTOM_CONFIG2 <: windows_core.CopyType & windows_core.Ru
         var value = ROUTER_IKEv2_IF_CUSTOM_CONFIG2()
         value.dwSaLifeTime = abi.dwSaLifeTime
         value.dwSaDataSize = abi.dwSaDataSize
-        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certificateName = windows_core.fromTypedAbi(abi.certificateName, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.customPolicy = abi.customPolicy
-        value.certificateHash = windows_core.fromTypedAbi(abi.certificateHash, windows_core.typeMarker<Win32__impl_l0.CRYPT_INTEGER_BLOB>()).unwrap()
+        value.certificateHash = windows_core.fromTypedAbi(abi.certificateHash, windows_core.typeMarker<Win32_impl_p0.CRYPT_INTEGER_BLOB>()).unwrap()
         value.dwMmSaLifeTime = abi.dwMmSaLifeTime
         value.vpnTrafficSelectors = MPR_VPN_TRAFFIC_SELECTORS.assumeInitRef(abi.vpnTrafficSelectors)
         return value
@@ -14967,41 +14976,41 @@ public unsafe func Windows_MgmGetFirstMfeStats(pdwBufferSize: CPointer<UInt32>, 
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
 foreign {
-    func MgmGetMfe(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32
+    func MgmGetMfe(pimm: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
-public unsafe func Windows_MgmGetMfe(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32 {
+public unsafe func Windows_MgmGetMfe(pimm: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32 {
     return MgmGetMfe(pimm, pdwBufferSize, pbBuffer)
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
 foreign {
-    func MgmGetMfeStats(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32
+    func MgmGetMfeStats(pimm: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
-public unsafe func Windows_MgmGetMfeStats(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32 {
+public unsafe func Windows_MgmGetMfeStats(pimm: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32 {
     return MgmGetMfeStats(pimm, pdwBufferSize, pbBuffer, dwFlags)
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
 foreign {
-    func MgmGetNextMfe(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
+    func MgmGetNextMfe(pimmStart: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
-public unsafe func Windows_MgmGetNextMfe(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32 {
+public unsafe func Windows_MgmGetNextMfe(pimmStart: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32 {
     return MgmGetNextMfe(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries)
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
 foreign {
-    func MgmGetNextMfeStats(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
+    func MgmGetNextMfeStats(pimmStart: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
-public unsafe func Windows_MgmGetNextMfeStats(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+public unsafe func Windows_MgmGetNextMfeStats(pimmStart: CPointer<Win32_impl_p1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
     return MgmGetNextMfeStats(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
 }
 
@@ -15107,21 +15116,21 @@ public unsafe func Windows_RtmBlockMethods(RtmRegHandle: IntNative, TargetHandle
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertIpv6AddressAndLengthToNetAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
-    func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32__impl_l0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32
+    func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32_impl_p0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertIpv6AddressAndLengthToNetAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32__impl_l0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32 {
+public unsafe func Windows_RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32_impl_p0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32 {
     return RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress, Address, dwLength, dwAddressSize)
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertNetAddressToIpv6AddressAndLength == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
-    func RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32__impl_l0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32
+    func RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32_impl_p0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertNetAddressToIpv6AddressAndLength == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32__impl_l0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32 {
+public unsafe func Windows_RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32_impl_p0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32 {
     return RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress, pAddress, pLength, dwAddressSize)
 }
 
@@ -17114,8 +17123,8 @@ public struct MPRAPI_ADMIN_DLL_CALLBACKS {
     public var revision: UInt8 = 0u8
     public var lpfnMprAdminGetIpAddressForUser: PMPRADMINGETIPADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
     public var lpfnMprAdminReleaseIpAddress: PMPRADMINRELEASEIPADRESS = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
-    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
-    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>) -> Unit>(CPointer<Unit>())
+    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>) -> Unit>(CPointer<Unit>())
     public var lpfnRasAdminAcceptNewLink: PMPRADMINACCEPTNEWLINK = CFunc<(CPointer<RAS_PORT_0Abi>, CPointer<RAS_PORT_1Abi>) -> Int32>(CPointer<Unit>())
     public var lpfnRasAdminLinkHangupNotification: PMPRADMINLINKHANGUPNOTIFICATION = CFunc<(CPointer<RAS_PORT_0Abi>, CPointer<RAS_PORT_1Abi>) -> Unit>(CPointer<Unit>())
     public var lpfnRasAdminTerminateDll: PMPRADMINTERMINATEDLL = CFunc<() -> UInt32>(CPointer<Unit>())
@@ -17133,8 +17142,8 @@ public struct MPRAPI_ADMIN_DLL_CALLBACKSAbi {
     public var revision: UInt8 = 0u8
     public var lpfnMprAdminGetIpAddressForUser: PMPRADMINGETIPADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
     public var lpfnMprAdminReleaseIpAddress: PMPRADMINRELEASEIPADRESS = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
-    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
-    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDRAbi>) -> Unit>(CPointer<Unit>())
+    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p0.IN6_ADDRAbi>) -> Unit>(CPointer<Unit>())
     public var lpfnRasAdminAcceptNewLink: PMPRADMINACCEPTNEWLINK = CFunc<(CPointer<RAS_PORT_0Abi>, CPointer<RAS_PORT_1Abi>) -> Int32>(CPointer<Unit>())
     public var lpfnRasAdminLinkHangupNotification: PMPRADMINLINKHANGUPNOTIFICATION = CFunc<(CPointer<RAS_PORT_0Abi>, CPointer<RAS_PORT_1Abi>) -> Unit>(CPointer<Unit>())
     public var lpfnRasAdminTerminateDll: PMPRADMINTERMINATEDLL = CFunc<() -> UInt32>(CPointer<Unit>())

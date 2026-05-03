@@ -42,6 +42,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     private var identityKey: UIntNative = UIntNative(0)
     private var identityRaw: CPointer<Unit> = CPointer<Unit>()
     private var onDestroy: Option<() -> Unit> = None
+    private var queryInterfaceFallback: Option<(GUID, CPointer<CPointer<Unit>>) -> Int32> = None
     private var runtimeType: Option<RuntimeTypeContract> = None
     private var runtimeClassName: Option<HString> = None
     private var agileEnabled: Bool = false
@@ -85,6 +86,14 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
 
     public func setOnDestroy(callback: () -> Unit): Unit {
         onDestroy = Some(callback)
+    }
+
+    public func setQueryInterfaceFallback(callback: (GUID, CPointer<CPointer<Unit>>) -> Int32): Unit {
+        queryInterfaceFallback = Some(callback)
+    }
+
+    public func clearQueryInterfaceFallback(): Unit {
+        queryInterfaceFallback = None
     }
 
     public func setIdentityPointer(raw: CPointer<Unit>): Unit {
@@ -243,6 +252,15 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             if (descriptor.matchesNonIdentity(iid)) {
                 return writeInterfacePointer(descriptor.slotIndex, resultSlot)
             }
+        }
+
+        match (queryInterfaceFallback) {
+            case Some(callback) =>
+                let delegated = callback(iid, resultSlot)
+                if (delegated != E_NOINTERFACE) {
+                    return delegated
+                }
+            case None => ()
         }
 
         if (resultSlot.isNotNull()) {

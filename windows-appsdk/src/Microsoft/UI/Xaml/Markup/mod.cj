@@ -4,18 +4,29 @@
 package windows_appsdk.Microsoft.UI.Xaml.Markup
 
 import std.collection.*
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Xaml_Markup == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_UI_Xaml_Markup == "on" && Windows_Storage_Streams == "on"]
 import windows.Storage.Streams as Storage_Streams
+@When[Microsoft_UI_Xaml_Markup == "on" && Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
-import windows_appsdk.Microsoft.UI.Xaml._impl_l0 as Microsoft_UI_Xaml__impl_l0
-import windows_appsdk.Microsoft.UI.Xaml._impl_l1 as Microsoft_UI_Xaml__impl_l1
+@When[Microsoft_UI_Xaml_Markup == "on"]
+import windows_appsdk.Microsoft.UI.Xaml.impl.p0 as Microsoft_UI_Xaml_impl_p0
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_UI_Xaml_Markup == "on"]
 import windows_future as windows_future
 
 
@@ -420,6 +431,99 @@ public struct IMarkupExtensionOverridesVtbl {
     @When[Microsoft_UI_Xaml != "on"]
     public var ProvideValueWithIXamlServiceProvider: UIntNative = UIntNative(0)
     public init() {}
+
+    @When[Microsoft_UI_Xaml == "on"]
+    public static func new<Identity>(offset!: Int64 = 0): IMarkupExtensionOverridesVtbl where Identity <: IMarkupExtensionOverrides_Impl {
+        let _ = offset
+        var vtbl = IMarkupExtensionOverridesVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.ProvideValue = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IMarkupExtensionOverrides_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_ProvideValue(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl = IMarkupExtensionOverridesVtbl.__assignProvideValueWithIXamlServiceProvider<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Microsoft_UI_Xaml == "on" && Microsoft_UI_Xaml == "on"]
+    public static func __assignProvideValueWithIXamlServiceProvider<Identity>(vtbl: IMarkupExtensionOverridesVtbl): IMarkupExtensionOverridesVtbl where Identity <: IMarkupExtensionOverrides_Impl {
+        var next = vtbl
+        next.ProvideValueWithIXamlServiceProvider = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IMarkupExtensionOverrides_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_ProvideValueWithIXamlServiceProvider(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Microsoft_UI_Xaml == "on" && Microsoft_UI_Xaml != "on"]
+    public static func __assignProvideValueWithIXamlServiceProvider<Identity>(vtbl: IMarkupExtensionOverridesVtbl): IMarkupExtensionOverridesVtbl where Identity <: IMarkupExtensionOverrides_Impl {
+        return vtbl
+    }
+
+    public static func matches(iid: GUID): Bool {
+        if (iid == IMarkupExtensionOverrides.iid()) {
+            return true
+        }
+        return false
+    }
+}
+
+@When[Microsoft_UI_Xaml_Markup == "on" && Microsoft_UI_Xaml == "on"]
+public interface IMarkupExtensionOverrides_ImplErased {
+    public func __winrtThunk_ProvideValue(result__: CPointer<CPointer<Unit>>): Int32
+
+    public func __winrtThunk_ProvideValueWithIXamlServiceProvider(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Microsoft_UI_Xaml_Markup == "on" && Microsoft_UI_Xaml == "on"]
+public interface IMarkupExtensionOverrides_Impl <: IMarkupExtensionOverrides_ImplErased {
+    public func ProvideValue(): windows_core.Result<IInspectable>
+
+    public func __winrtThunk_ProvideValue(result__: CPointer<CPointer<Unit>>): Int32 {
+        if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        match (this.ProvideValue()) {
+            case Result<IInspectable>.Ok(value) =>
+                let raw = value.intoAbi()
+                if (raw.isNull()) {
+                    E_POINTER.value
+                } else {
+                    unsafe { result__.write(raw) }
+                    S_OK.value
+                }
+            case Result<IInspectable>.Err(error) =>
+                error.code().value
+        }
+    }
+
+    public func ProvideValueWithIXamlServiceProvider(serviceProvider: InParam<Microsoft_UI_Xaml_impl_p0.IXamlServiceProvider>): windows_core.Result<IInspectable>
+
+    public func __winrtThunk_ProvideValueWithIXamlServiceProvider(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
+        if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        match (this.ProvideValueWithIXamlServiceProvider(InParam<Microsoft_UI_Xaml_impl_p0.IXamlServiceProvider>(Microsoft_UI_Xaml_impl_p0.IXamlServiceProvider.viewOf(arg0)))) {
+            case Result<IInspectable>.Ok(value) =>
+                let raw = value.intoAbi()
+                if (raw.isNull()) {
+                    E_POINTER.value
+                } else {
+                    unsafe { result__.write(raw) }
+                    S_OK.value
+                }
+            case Result<IInspectable>.Err(error) =>
+                error.code().value
+        }
+    }
 }
 
 @When[Microsoft_UI_Xaml_Markup == "on"]
@@ -458,7 +562,7 @@ public class IMarkupExtensionOverrides <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMarkupExtensionOverrides", IMarkupExtensionOverrides.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMarkupExtensionOverridesVtbl", "IMarkupExtensionOverrides", "IMarkupExtensionOverrides_Impl", [InterfaceMethodSchema("ProvideValue", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProvideValueWithIXamlServiceProvider", 7, [InterfaceParameterSchema("serviceProvider", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.IXamlServiceProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMarkupExtensionOverrides", IMarkupExtensionOverrides.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMarkupExtensionOverridesVtbl", "IMarkupExtensionOverrides", "IMarkupExtensionOverrides_Impl", [InterfaceMethodSchema("ProvideValue", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProvideValueWithIXamlServiceProvider", 7, [InterfaceParameterSchema("serviceProvider", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.IXamlServiceProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMarkupExtensionOverrides.runtimeType())
         return schema
     }
@@ -496,7 +600,7 @@ public class IMarkupExtensionOverrides <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func ProvideValueWithIXamlServiceProvider(serviceProvider: Microsoft_UI_Xaml__impl_l0.IXamlServiceProvider): IInspectable {
+    public unsafe func ProvideValueWithIXamlServiceProvider(serviceProvider: Microsoft_UI_Xaml_impl_p0.IXamlServiceProvider): IInspectable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProvideValueWithIXamlServiceProvider(asRaw(), serviceProvider.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1491,7 +1595,7 @@ public class IXamlBindingHelperStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXamlBindingHelperStatics", IXamlBindingHelperStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXamlBindingHelperStaticsVtbl", "IXamlBindingHelperStatics", "IXamlBindingHelperStatics_Impl", [InterfaceMethodSchema("DataTemplateComponentProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDataTemplateComponent", 7, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IDataTemplateComponent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataTemplateComponent", 8, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IDataTemplateComponent>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuspendRendering", 9, [InterfaceParameterSchema("target", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResumeRendering", 10, [InterfaceParameterSchema("target", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConvertValue", 11, [InterfaceParameterSchema("type_", "UI_Xaml_Interop.TypeNameAbi", "UI_Xaml_Interop.TypeName", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPropertyFromString", 12, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPropertyFromBoolean", 13, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromChar16", 14, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromDateTime", 15, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromDouble", 16, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromInt32", 17, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUInt32", 18, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromInt64", 19, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUInt64", 20, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromSingle", 21, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromPoint", 22, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromRect", 23, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromSize", 24, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromTimeSpan", 25, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.TimeSpanAbi", "windows_future.TimeSpan", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromByte", 26, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUri", 27, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPropertyFromObject", 28, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXamlBindingHelperStatics", IXamlBindingHelperStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXamlBindingHelperStaticsVtbl", "IXamlBindingHelperStatics", "IXamlBindingHelperStatics_Impl", [InterfaceMethodSchema("DataTemplateComponentProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDataTemplateComponent", 7, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IDataTemplateComponent>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataTemplateComponent", 8, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IDataTemplateComponent>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuspendRendering", 9, [InterfaceParameterSchema("target", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResumeRendering", 10, [InterfaceParameterSchema("target", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConvertValue", 11, [InterfaceParameterSchema("type_", "UI_Xaml_Interop.TypeNameAbi", "UI_Xaml_Interop.TypeName", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPropertyFromString", 12, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPropertyFromBoolean", 13, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromChar16", 14, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromDateTime", 15, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.DateTimeAbi", "windows_future.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromDouble", 16, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromInt32", 17, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUInt32", 18, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromInt64", 19, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUInt64", 20, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromSingle", 21, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromPoint", 22, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromRect", 23, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromSize", 24, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromTimeSpan", 25, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.TimeSpanAbi", "windows_future.TimeSpan", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromByte", 26, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyFromUri", 27, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPropertyFromObject", 28, [InterfaceParameterSchema("dependencyObject", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("propertyToSet", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IXamlBindingHelperStatics.runtimeType())
         return schema
     }
@@ -1521,16 +1625,16 @@ public class IXamlBindingHelperStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func DataTemplateComponentProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func DataTemplateComponentProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DataTemplateComponentProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func GetDataTemplateComponent(element: Microsoft_UI_Xaml__impl_l0.DependencyObject): IDataTemplateComponent {
+    public unsafe func GetDataTemplateComponent(element: Microsoft_UI_Xaml_impl_p0.DependencyObject): IDataTemplateComponent {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetDataTemplateComponent(asRaw(), element.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1539,21 +1643,21 @@ public class IXamlBindingHelperStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetDataTemplateComponent(element: Microsoft_UI_Xaml__impl_l0.DependencyObject, value: IDataTemplateComponent): Unit {
+    public unsafe func SetDataTemplateComponent(element: Microsoft_UI_Xaml_impl_p0.DependencyObject, value: IDataTemplateComponent): Unit {
         let v = vtbl()
         let hr = v.SetDataTemplateComponent(asRaw(), element.asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SuspendRendering(target: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func SuspendRendering(target: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         let v = vtbl()
         let hr = v.SuspendRendering(asRaw(), target.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func ResumeRendering(target: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func ResumeRendering(target: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         let v = vtbl()
         let hr = v.ResumeRendering(asRaw(), target.asRaw())
         HRESULT(hr).ok()
@@ -1569,119 +1673,119 @@ public class IXamlBindingHelperStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromString(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_core.HString): Unit {
+    public unsafe func SetPropertyFromString(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromString(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromBoolean(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Bool): Unit {
+    public unsafe func SetPropertyFromBoolean(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Bool): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromBoolean(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromChar16(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt16): Unit {
+    public unsafe func SetPropertyFromChar16(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt16): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromChar16(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromDateTime(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.DateTime): Unit {
+    public unsafe func SetPropertyFromDateTime(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.DateTime): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromDateTime(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.DateTime>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromDouble(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Float64): Unit {
+    public unsafe func SetPropertyFromDouble(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Float64): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromDouble(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Int32): Unit {
+    public unsafe func SetPropertyFromInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Int32): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromInt32(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromUInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt32): Unit {
+    public unsafe func SetPropertyFromUInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt32): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromUInt32(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Int64): Unit {
+    public unsafe func SetPropertyFromInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Int64): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromInt64(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromUInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt64): Unit {
+    public unsafe func SetPropertyFromUInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt64): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromUInt64(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromSingle(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Float32): Unit {
+    public unsafe func SetPropertyFromSingle(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Float32): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromSingle(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromPoint(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Point): Unit {
+    public unsafe func SetPropertyFromPoint(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Point): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromPoint(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.Point>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromRect(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Rect): Unit {
+    public unsafe func SetPropertyFromRect(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Rect): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromRect(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.Rect>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromSize(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Size): Unit {
+    public unsafe func SetPropertyFromSize(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Size): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromSize(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.Size>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromTimeSpan(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.TimeSpan): Unit {
+    public unsafe func SetPropertyFromTimeSpan(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.TimeSpan): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromTimeSpan(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.TimeSpan>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromByte(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt8): Unit {
+    public unsafe func SetPropertyFromByte(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt8): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromByte(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public unsafe func SetPropertyFromUri(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Foundation.Uri): Unit {
+    public unsafe func SetPropertyFromUri(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Foundation.Uri): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromUri(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetPropertyFromObject(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: IInspectable): Unit {
+    public unsafe func SetPropertyFromObject(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: IInspectable): Unit {
         let v = vtbl()
         let hr = v.SetPropertyFromObject(asRaw(), dependencyObject.asRaw(), propertyToSet.asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1814,7 +1918,7 @@ public class IXamlMarkupHelperStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXamlMarkupHelperStatics", IXamlMarkupHelperStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXamlMarkupHelperStaticsVtbl", "IXamlMarkupHelperStatics", "IXamlMarkupHelperStatics_Impl", [InterfaceMethodSchema("UnloadObject", 6, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXamlMarkupHelperStatics", IXamlMarkupHelperStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXamlMarkupHelperStaticsVtbl", "IXamlMarkupHelperStatics", "IXamlMarkupHelperStatics_Impl", [InterfaceMethodSchema("UnloadObject", 6, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IXamlMarkupHelperStatics.runtimeType())
         return schema
     }
@@ -1844,7 +1948,7 @@ public class IXamlMarkupHelperStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func UnloadObject(element: Microsoft_UI_Xaml__impl_l0.DependencyObject): Unit {
+    public unsafe func UnloadObject(element: Microsoft_UI_Xaml_impl_p0.DependencyObject): Unit {
         let v = vtbl()
         let hr = v.UnloadObject(asRaw(), element.asRaw())
         HRESULT(hr).ok()
@@ -2397,8 +2501,8 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func DataTemplateComponentProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func DataTemplateComponentProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             result__ = Some(factory__.DataTemplateComponentProperty())
         }
@@ -2409,7 +2513,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func GetDataTemplateComponent(element: Microsoft_UI_Xaml__impl_l0.DependencyObject): IDataTemplateComponent {
+    public static unsafe func GetDataTemplateComponent(element: Microsoft_UI_Xaml_impl_p0.DependencyObject): IDataTemplateComponent {
         var result__: Option<IDataTemplateComponent> = Option<IDataTemplateComponent>.None
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             result__ = Some(factory__.GetDataTemplateComponent(element))
@@ -2421,7 +2525,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetDataTemplateComponent(element: Microsoft_UI_Xaml__impl_l0.DependencyObject, value: IDataTemplateComponent): Unit {
+    public static unsafe func SetDataTemplateComponent(element: Microsoft_UI_Xaml_impl_p0.DependencyObject, value: IDataTemplateComponent): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetDataTemplateComponent(element, value)
         }
@@ -2429,7 +2533,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SuspendRendering(target: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public static unsafe func SuspendRendering(target: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SuspendRendering(target)
         }
@@ -2437,7 +2541,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func ResumeRendering(target: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public static unsafe func ResumeRendering(target: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.ResumeRendering(target)
         }
@@ -2457,7 +2561,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromString(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_core.HString): Unit {
+    public static unsafe func SetPropertyFromString(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromString(dependencyObject, propertyToSet, value)
         }
@@ -2465,7 +2569,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromBoolean(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Bool): Unit {
+    public static unsafe func SetPropertyFromBoolean(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Bool): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromBoolean(dependencyObject, propertyToSet, value)
         }
@@ -2473,7 +2577,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromChar16(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt16): Unit {
+    public static unsafe func SetPropertyFromChar16(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt16): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromChar16(dependencyObject, propertyToSet, value)
         }
@@ -2481,7 +2585,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromDateTime(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.DateTime): Unit {
+    public static unsafe func SetPropertyFromDateTime(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.DateTime): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromDateTime(dependencyObject, propertyToSet, value)
         }
@@ -2489,7 +2593,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromDouble(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Float64): Unit {
+    public static unsafe func SetPropertyFromDouble(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Float64): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromDouble(dependencyObject, propertyToSet, value)
         }
@@ -2497,7 +2601,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Int32): Unit {
+    public static unsafe func SetPropertyFromInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Int32): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromInt32(dependencyObject, propertyToSet, value)
         }
@@ -2505,7 +2609,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromUInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt32): Unit {
+    public static unsafe func SetPropertyFromUInt32(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt32): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromUInt32(dependencyObject, propertyToSet, value)
         }
@@ -2513,7 +2617,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Int64): Unit {
+    public static unsafe func SetPropertyFromInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Int64): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromInt64(dependencyObject, propertyToSet, value)
         }
@@ -2521,7 +2625,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromUInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt64): Unit {
+    public static unsafe func SetPropertyFromUInt64(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt64): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromUInt64(dependencyObject, propertyToSet, value)
         }
@@ -2529,7 +2633,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromSingle(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Float32): Unit {
+    public static unsafe func SetPropertyFromSingle(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Float32): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromSingle(dependencyObject, propertyToSet, value)
         }
@@ -2537,7 +2641,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromPoint(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Point): Unit {
+    public static unsafe func SetPropertyFromPoint(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Point): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromPoint(dependencyObject, propertyToSet, value)
         }
@@ -2545,7 +2649,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromRect(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Rect): Unit {
+    public static unsafe func SetPropertyFromRect(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Rect): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromRect(dependencyObject, propertyToSet, value)
         }
@@ -2553,7 +2657,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromSize(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.Size): Unit {
+    public static unsafe func SetPropertyFromSize(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.Size): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromSize(dependencyObject, propertyToSet, value)
         }
@@ -2561,7 +2665,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromTimeSpan(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: windows_future.TimeSpan): Unit {
+    public static unsafe func SetPropertyFromTimeSpan(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: windows_future.TimeSpan): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromTimeSpan(dependencyObject, propertyToSet, value)
         }
@@ -2569,7 +2673,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromByte(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: UInt8): Unit {
+    public static unsafe func SetPropertyFromByte(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: UInt8): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromByte(dependencyObject, propertyToSet, value)
         }
@@ -2577,7 +2681,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on" && Windows_Foundation == "on"]
-    public static unsafe func SetPropertyFromUri(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: Foundation.Uri): Unit {
+    public static unsafe func SetPropertyFromUri(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: Foundation.Uri): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromUri(dependencyObject, propertyToSet, value)
         }
@@ -2585,7 +2689,7 @@ public class XamlBindingHelper <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetPropertyFromObject(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml__impl_l0.DependencyProperty, value: IInspectable): Unit {
+    public static unsafe func SetPropertyFromObject(dependencyObject: IInspectable, propertyToSet: Microsoft_UI_Xaml_impl_p0.DependencyProperty, value: IInspectable): Unit {
         try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
             factory__.SetPropertyFromObject(dependencyObject, propertyToSet, value)
         }
@@ -2681,7 +2785,7 @@ public class XamlMarkupHelper <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func UnloadObject(element: Microsoft_UI_Xaml__impl_l0.DependencyObject): Unit {
+    public static unsafe func UnloadObject(element: Microsoft_UI_Xaml_impl_p0.DependencyObject): Unit {
         try (factory__ = windows_core.factory<XamlMarkupHelper, IXamlMarkupHelperStatics>().unwrap()) {
             factory__.UnloadObject(element)
         }

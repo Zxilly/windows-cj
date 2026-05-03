@@ -4,17 +4,29 @@
 package windows.Media.DialProtocol
 
 import std.collection.*
+@When[Windows_Media_DialProtocol == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_DialProtocol == "on"]
 import windows_core as windows_core
+@When[Windows_Media_DialProtocol == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_DialProtocol == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_DialProtocol == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_DialProtocol == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_DialProtocol == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_DialProtocol == "on" && Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_DialProtocol == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Media_DialProtocol == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_DialProtocol == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_DialProtocol == "on"]
 import windows_future as windows_future
 
 
@@ -406,7 +418,7 @@ public class IDialDevice2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDialDevice2", IDialDevice2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDevice2Vtbl", "IDialDevice2", "IDialDevice2_Impl", [InterfaceMethodSchema("FriendlyName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDialDevice2", IDialDevice2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDevice2Vtbl", "IDialDevice2", "IDialDevice2_Impl", [InterfaceMethodSchema("FriendlyName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDialDevice2.runtimeType())
         return schema
     }
@@ -444,12 +456,12 @@ public class IDialDevice2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 }
 
@@ -1331,7 +1343,7 @@ public class DialDevice <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public static unsafe func DeviceInfoSupportsDialAsync(device: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
+    public static unsafe func DeviceInfoSupportsDialAsync(device: impl_p1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
         var result__: Option<windows_future.IAsyncOperation<Bool>> = Option<windows_future.IAsyncOperation<Bool>>.None
         try (factory__ = windows_core.factory<DialDevice, IDialDeviceStatics>().unwrap()) {
             result__ = Some(factory__.DeviceInfoSupportsDialAsync(device))
@@ -1446,7 +1458,7 @@ public class DialDevicePicker <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Appearance(): _impl_l0.DevicePickerAppearance {
+    public unsafe func Appearance(): impl_p0.DevicePickerAppearance {
         return defaultInterface().Appearance()
     }
 
@@ -1878,7 +1890,7 @@ public class IDialDevicePicker <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDialDevicePicker", IDialDevicePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDevicePickerVtbl", "IDialDevicePicker", "IDialDevicePicker_Impl", [InterfaceMethodSchema("Filter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DialDevicePickerFilter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Appearance", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.DevicePickerAppearance>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DialDeviceSelected", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, DialDeviceSelectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDialDeviceSelected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DisconnectButtonClicked", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, DialDisconnectButtonClickedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDisconnectButtonClicked", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DialDevicePickerDismissed", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDialDevicePickerDismissed", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Show", 14, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowWithPlacement", 15, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PickSingleDialDeviceAsync", 16, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleDialDeviceAsyncWithPlacement", 17, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Hide", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetDisplayStatus", 19, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<DialDevice>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("status", "DialDeviceDisplayStatusAbi", "DialDeviceDisplayStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDialDevicePicker", IDialDevicePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDevicePickerVtbl", "IDialDevicePicker", "IDialDevicePicker_Impl", [InterfaceMethodSchema("Filter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DialDevicePickerFilter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Appearance", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.DevicePickerAppearance>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DialDeviceSelected", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, DialDeviceSelectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDialDeviceSelected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DisconnectButtonClicked", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, DialDisconnectButtonClickedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDisconnectButtonClicked", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DialDevicePickerDismissed", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DialDevicePicker, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDialDevicePickerDismissed", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Show", 14, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowWithPlacement", 15, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PickSingleDialDeviceAsync", 16, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleDialDeviceAsyncWithPlacement", 17, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Hide", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetDisplayStatus", 19, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<DialDevice>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("status", "DialDeviceDisplayStatusAbi", "DialDeviceDisplayStatus", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IDialDevicePicker.runtimeType())
         return schema
     }
@@ -1916,12 +1928,12 @@ public class IDialDevicePicker <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Appearance(): _impl_l0.DevicePickerAppearance {
+    public unsafe func Appearance(): impl_p0.DevicePickerAppearance {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Appearance(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.DevicePickerAppearance.fromAbiTake(result__)
+        return impl_p0.DevicePickerAppearance.fromAbiTake(result__)
     }
 
     public unsafe func DialDeviceSelected(handler: Foundation.TypedEventHandler<DialDevicePicker, DialDeviceSelectedEventArgs>): windows_collections.EventRegistrationToken {
@@ -2146,7 +2158,7 @@ public class IDialDeviceStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDialDeviceStatics", IDialDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDeviceStaticsVtbl", "IDialDeviceStatics", "IDialDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("appName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceInfoSupportsDialAsync", 8, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDialDeviceStatics", IDialDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDialDeviceStaticsVtbl", "IDialDeviceStatics", "IDialDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("appName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DialDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceInfoSupportsDialAsync", 8, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDialDeviceStatics.runtimeType())
         return schema
     }
@@ -2192,7 +2204,7 @@ public class IDialDeviceStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func DeviceInfoSupportsDialAsync(device: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
+    public unsafe func DeviceInfoSupportsDialAsync(device: impl_p1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeviceInfoSupportsDialAsync(asRaw(), device.asRaw(), CPointer<CPointer<Unit>>(inout result__))

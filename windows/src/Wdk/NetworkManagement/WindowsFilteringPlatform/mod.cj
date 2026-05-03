@@ -4,12 +4,19 @@
 package windows.Wdk.NetworkManagement.WindowsFilteringPlatform
 
 import std.collection.*
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on"]
 import windows_interface.{GUID}
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on"]
 import windows_interface as windows_interface
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 import windows.Win32.NetworkManagement.WindowsFilteringPlatform as Win32_NetworkManagement_WindowsFilteringPlatform
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_System_Rpc == "on"]
 import windows.Win32.System.Rpc as Win32_System_Rpc
+@When[Windows_Wdk_NetworkManagement_WindowsFilteringPlatform == "on"]
 import windows_core as windows_core
 
 

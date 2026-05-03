@@ -4,12 +4,19 @@
 package windows.UI.Xaml.Interop
 
 import std.collection.*
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Xaml_Interop == "on"]
 import windows_collections as windows_collections
 
 
@@ -1391,19 +1398,15 @@ public class BindableVectorChangedEventHandler <: InterfaceWrapperBase & ComInte
 extend BindableVectorChangedEventHandler <: windows_core.Interface<BindableVectorChangedEventHandler> {}
 
 @When[Windows_UI_Xaml_Interop == "on"]
-private open class BindableVectorChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface BindableVectorChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Xaml_Interop == "on"]
-private open class BindableVectorChangedEventHandlerInvoker <: BindableVectorChangedEventHandlerInvokerErased {
-    public open func Invoke(vector: InParam<IBindableObservableVector>, e: InParam<IInspectable>): Unit {
-        ()
-    }
+private interface BindableVectorChangedEventHandlerInvoker <: BindableVectorChangedEventHandlerInvokerErased {
+    public func Invoke(vector: InParam<IBindableObservableVector>, e: InParam<IInspectable>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IBindableObservableVector>(IBindableObservableVector.viewOf(arg0)), InParam<IInspectable>(IInspectable.viewOf(arg1)))
         return S_OK.value
     }
@@ -1423,7 +1426,7 @@ private class BindableVectorChangedEventHandlerBox <: BindableVectorChangedEvent
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(vector: InParam<IBindableObservableVector>, e: InParam<IInspectable>): Unit {
+    public func Invoke(vector: InParam<IBindableObservableVector>, e: InParam<IInspectable>): Unit {
         invoke_(vector, e)
     }
 }
@@ -2199,19 +2202,15 @@ public class NotifyCollectionChangedEventHandler <: InterfaceWrapperBase & ComIn
 extend NotifyCollectionChangedEventHandler <: windows_core.Interface<NotifyCollectionChangedEventHandler> {}
 
 @When[Windows_UI_Xaml_Interop == "on"]
-private open class NotifyCollectionChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface NotifyCollectionChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Xaml_Interop == "on"]
-private open class NotifyCollectionChangedEventHandlerInvoker <: NotifyCollectionChangedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyCollectionChangedEventArgs>): Unit {
-        ()
-    }
+private interface NotifyCollectionChangedEventHandlerInvoker <: NotifyCollectionChangedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyCollectionChangedEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<NotifyCollectionChangedEventArgs>(NotifyCollectionChangedEventArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -2231,7 +2230,7 @@ private class NotifyCollectionChangedEventHandlerBox <: NotifyCollectionChangedE
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyCollectionChangedEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyCollectionChangedEventArgs>): Unit {
         invoke_(sender, e)
     }
 }

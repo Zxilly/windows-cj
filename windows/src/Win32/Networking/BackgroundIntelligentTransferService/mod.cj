@@ -4,15 +4,24 @@
 package windows.Win32.Networking.BackgroundIntelligentTransferService
 
 import std.collection.*
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on"]
@@ -2119,7 +2128,7 @@ extend GROUPPROP <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 @When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBITSExtensionSetupVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EnableBITSUploads: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var DisableBITSUploads: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetCleanupTaskName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -2161,7 +2170,7 @@ public class IBITSExtensionSetup <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBITSExtensionSetup> {
-        return InterfaceDescriptor<IBITSExtensionSetup>("IBITSExtensionSetup", IBITSExtensionSetup.iid(), Win32__impl_l2.IDispatch.iid(), takeIBITSExtensionSetupFromAbi, viewIBITSExtensionSetup)
+        return InterfaceDescriptor<IBITSExtensionSetup>("IBITSExtensionSetup", IBITSExtensionSetup.iid(), Win32_impl_p2.IDispatch.iid(), takeIBITSExtensionSetupFromAbi, viewIBITSExtensionSetup)
     }
 
     public unsafe func vtbl(): IBITSExtensionSetupVtbl {
@@ -2197,7 +2206,7 @@ public class IBITSExtensionSetup <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_BackgroundIntelligentTransferService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBITSExtensionSetupFactoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2235,7 +2244,7 @@ public class IBITSExtensionSetupFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBITSExtensionSetupFactory> {
-        return InterfaceDescriptor<IBITSExtensionSetupFactory>("IBITSExtensionSetupFactory", IBITSExtensionSetupFactory.iid(), Win32__impl_l2.IDispatch.iid(), takeIBITSExtensionSetupFactoryFromAbi, viewIBITSExtensionSetupFactory)
+        return InterfaceDescriptor<IBITSExtensionSetupFactory>("IBITSExtensionSetupFactory", IBITSExtensionSetupFactory.iid(), Win32_impl_p2.IDispatch.iid(), takeIBITSExtensionSetupFactoryFromAbi, viewIBITSExtensionSetupFactory)
     }
 
     public unsafe func vtbl(): IBITSExtensionSetupFactoryVtbl {
@@ -3760,9 +3769,9 @@ public class IBackgroundCopyError <: InterfaceWrapperBase & ComInterface {
 public struct IBackgroundCopyGroupVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProp: CFunc<(CPointer<Unit>, GROUPPROPAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProp: CFunc<(CPointer<Unit>, GROUPPROPAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProp: CFunc<(CPointer<Unit>, GROUPPROPAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProp: CFunc<(CPointer<Unit>, GROUPPROPAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetProgress: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetJob: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3822,14 +3831,14 @@ public class IBackgroundCopyGroup <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProp(propID: GROUPPROPAbi, pvarVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProp(propID: GROUPPROPAbi, pvarVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProp(__liveRaw, propID, pvarVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProp(propID: GROUPPROPAbi, pvarVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetProp(propID: GROUPPROPAbi, pvarVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProp(__liveRaw, propID, pvarVal)

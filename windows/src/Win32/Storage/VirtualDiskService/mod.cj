@@ -4,15 +4,24 @@
 package windows.Win32.Storage.VirtualDiskService
 
 import std.collection.*
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_Storage_Vhd == "on"]
 import windows.Win32.Storage.Vhd as Win32_Storage_Vhd
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Storage_VirtualDiskService == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on"]
@@ -10338,7 +10347,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cp <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv {
-    public var pVolumeUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pVolumeUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10361,7 +10370,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv <: windows_core.CopyType & windo
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv()
-        value.pVolumeUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pVolumeUnk)
+        value.pVolumeUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pVolumeUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv.assumeInitRef(abi)) }
@@ -10373,7 +10382,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cv <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp {
-    public var pVolumeUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pVolumeUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10396,7 +10405,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp <: windows_core.CopyType & wind
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvpAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp()
-        value.pVolumeUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pVolumeUnk)
+        value.pVolumeUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pVolumeUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvpAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__bvp.assumeInitRef(abi)) }
@@ -10443,7 +10452,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__sv <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl {
-    public var pLunUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pLunUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10466,7 +10475,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl <: windows_core.CopyType & windo
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__clAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl()
-        value.pLunUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pLunUnk)
+        value.pLunUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pLunUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__clAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl.assumeInitRef(abi)) }
@@ -10478,7 +10487,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cl <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct {
-    public var pTargetUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pTargetUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10501,7 +10510,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct <: windows_core.CopyType & windo
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__ctAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct()
-        value.pTargetUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pTargetUnk)
+        value.pTargetUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pTargetUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__ctAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct.assumeInitRef(abi)) }
@@ -10513,7 +10522,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__ct <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg {
-    public var pPortalGroupUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pPortalGroupUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10536,7 +10545,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg <: windows_core.CopyType & wind
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpgAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg()
-        value.pPortalGroupUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pPortalGroupUnk)
+        value.pPortalGroupUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pPortalGroupUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpgAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg.assumeInitRef(abi)) }
@@ -10548,7 +10557,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cpg <: windows_core.CopyType & wind
 
 @When[Windows_Win32_Storage_VirtualDiskService == "on" && Windows_Win32_System_Com == "on"]
 public struct VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd {
-    public var pVDiskUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pVDiskUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -10571,7 +10580,7 @@ extend VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd <: windows_core.CopyType & wind
     }
     public static func assumeInitRef(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvdAbi): VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd {
         var value = VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd()
-        value.pVDiskUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pVDiskUnk)
+        value.pVDiskUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pVDiskUnk)
         return value
     }
     public static func fromAbi(abi: VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvdAbi): Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd> { Result<VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd>.Ok(VDS_ASYNC_OUTPUT__Anonymous_e__Union__cvd.assumeInitRef(abi)) }

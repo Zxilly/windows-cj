@@ -4,20 +4,26 @@
 package windows.Win32.NetworkManagement.MobileBroadband
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_MobileBroadband == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_NetworkManagement_MobileBroadband == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDummyMBNUCMExtVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -54,7 +60,7 @@ public class IDummyMBNUCMExt <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDummyMBNUCMExt> {
-        return InterfaceDescriptor<IDummyMBNUCMExt>("IDummyMBNUCMExt", IDummyMBNUCMExt.iid(), Win32__impl_l2.IDispatch.iid(), takeIDummyMBNUCMExtFromAbi, viewIDummyMBNUCMExt)
+        return InterfaceDescriptor<IDummyMBNUCMExt>("IDummyMBNUCMExt", IDummyMBNUCMExt.iid(), Win32_impl_p2.IDispatch.iid(), takeIDummyMBNUCMExtFromAbi, viewIDummyMBNUCMExt)
     }
 
     public unsafe func vtbl(): IDummyMBNUCMExtVtbl {
@@ -256,13 +262,13 @@ public struct IMbnDeviceServiceVtbl {
     public var OpenCommandSession: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CloseCommandSession: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var QueryCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var OpenDataSession: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CloseDataSession: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var WriteData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var WriteData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var InterfaceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DeviceServiceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IsCommandSessionOpen: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -329,14 +335,14 @@ public class IMbnDeviceService <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetCommand(commandID: UInt32, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func SetCommand(commandID: UInt32, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCommand(__liveRaw, commandID, deviceServiceData, requestID)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryCommand(commandID: UInt32, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func QueryCommand(commandID: UInt32, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryCommand(__liveRaw, commandID, deviceServiceData, requestID)
@@ -355,7 +361,7 @@ public class IMbnDeviceService <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func WriteData(deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func WriteData(deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WriteData(__liveRaw, deviceServiceData, requestID)
@@ -391,7 +397,7 @@ public class IMbnDeviceService <: InterfaceWrapperBase & ComInterface {
 public struct IMbnDeviceServicesContextVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var EnumerateDeviceServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var EnumerateDeviceServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetDeviceService: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var MaxCommandSize: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var MaxDataSize: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -439,7 +445,7 @@ public class IMbnDeviceServicesContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func EnumerateDeviceServices(deviceServices: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func EnumerateDeviceServices(deviceServices: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumerateDeviceServices(__liveRaw, deviceServices)
@@ -524,7 +530,7 @@ public class IMbnDeviceServicesManager <: InterfaceWrapperBase & ComInterface {
 public struct IMbnServiceActivationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var Activate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var Activate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -569,7 +575,7 @@ public class IMbnServiceActivation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Activate(vendorSpecificData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func Activate(vendorSpecificData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Activate(__liveRaw, vendorSpecificData, requestID)
@@ -581,7 +587,7 @@ public class IMbnServiceActivation <: InterfaceWrapperBase & ComInterface {
 public struct IMbnServiceActivationEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var OnActivationComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, UInt32, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var OnActivationComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, UInt32, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -626,7 +632,7 @@ public class IMbnServiceActivationEvents <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnActivationComplete(serviceActivation: CPointer<Unit>, vendorSpecificData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: UInt32, status: Int32, networkError: UInt32): Int32 {
+    public unsafe func OnActivationComplete(serviceActivation: CPointer<Unit>, vendorSpecificData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: UInt32, status: Int32, networkError: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnActivationComplete(__liveRaw, serviceActivation, vendorSpecificData, requestID, status, networkError)
@@ -757,7 +763,7 @@ public struct IMbnSubscriberInformationVtbl {
     public var SubscriberID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SimIccID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var TelephoneNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var TelephoneNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -814,7 +820,7 @@ public class IMbnSubscriberInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func TelephoneNumbers(TelephoneNumbers: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func TelephoneNumbers(TelephoneNumbers: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TelephoneNumbers(__liveRaw, TelephoneNumbers)
@@ -826,7 +832,7 @@ public class IMbnSubscriberInformation <: InterfaceWrapperBase & ComInterface {
 public struct IMbnVendorSpecificOperationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var SetVendorSpecific: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var SetVendorSpecific: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -871,7 +877,7 @@ public class IMbnVendorSpecificOperation <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetVendorSpecific(vendorSpecificData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func SetVendorSpecific(vendorSpecificData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetVendorSpecific(__liveRaw, vendorSpecificData, requestID)
@@ -3765,7 +3771,7 @@ public struct IMbnConnectionManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetConnection: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3816,7 +3822,7 @@ public class IMbnConnectionManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetConnections(mbnConnections: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetConnections(mbnConnections: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConnections(__liveRaw, mbnConnections)
@@ -3945,20 +3951,20 @@ public class IMbnDeviceServiceStateEvents <: InterfaceWrapperBase & ComInterface
 public struct IMbnDeviceServicesEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var OnQuerySupportedCommandsComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
+    public var OnQuerySupportedCommandsComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public var OnOpenCommandSessionComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var OnCloseCommandSessionComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnSetCommandComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var OnSetCommandComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnQueryCommandComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var OnQueryCommandComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>, Int32, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnEventNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var OnEventNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var OnOpenDataSessionComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var OnCloseDataSessionComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var OnWriteDataComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnReadData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var OnReadData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var OnInterfaceStateChange: CFunc<(CPointer<Unit>, CPointer<UInt16>, MBN_DEVICE_SERVICES_INTERFACE_STATEAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4004,7 +4010,7 @@ public class IMbnDeviceServicesEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnQuerySupportedCommandsComplete(deviceService: CPointer<Unit>, commandIDList: CPointer<Win32__impl_l1.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
+    public unsafe func OnQuerySupportedCommandsComplete(deviceService: CPointer<Unit>, commandIDList: CPointer<Win32_impl_p2.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnQuerySupportedCommandsComplete(__liveRaw, deviceService, commandIDList, status, requestID)
@@ -4023,21 +4029,21 @@ public class IMbnDeviceServicesEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnSetCommandComplete(deviceService: CPointer<Unit>, responseID: UInt32, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
+    public unsafe func OnSetCommandComplete(deviceService: CPointer<Unit>, responseID: UInt32, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnSetCommandComplete(__liveRaw, deviceService, responseID, deviceServiceData, status, requestID)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnQueryCommandComplete(deviceService: CPointer<Unit>, responseID: UInt32, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
+    public unsafe func OnQueryCommandComplete(deviceService: CPointer<Unit>, responseID: UInt32, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, status: Int32, requestID: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnQueryCommandComplete(__liveRaw, deviceService, responseID, deviceServiceData, status, requestID)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnEventNotification(deviceService: CPointer<Unit>, eventID: UInt32, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnEventNotification(deviceService: CPointer<Unit>, eventID: UInt32, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnEventNotification(__liveRaw, deviceService, eventID, deviceServiceData)
@@ -4062,7 +4068,7 @@ public class IMbnDeviceServicesEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnReadData(deviceService: CPointer<Unit>, deviceServiceData: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnReadData(deviceService: CPointer<Unit>, deviceServiceData: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnReadData(__liveRaw, deviceService, deviceServiceData)
@@ -4081,11 +4087,11 @@ public struct IMbnMultiCarrierVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var SetHomeProvider: CFunc<(CPointer<Unit>, CPointer<MBN_PROVIDER2Abi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetVisibleProviders: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var GetVisibleProviders: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSupportedCellularClasses: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSupportedCellularClasses: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetCurrentCellularClass: CFunc<(CPointer<Unit>, CPointer<MBN_CELLULAR_CLASSAbi>) -> Int32> = { _, _ => 0 }
     public var ScanNetwork: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4138,21 +4144,21 @@ public class IMbnMultiCarrier <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetPreferredProviders(preferredMulticarrierProviders: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetPreferredProviders(preferredMulticarrierProviders: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPreferredProviders(__liveRaw, preferredMulticarrierProviders)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetVisibleProviders(age: CPointer<UInt32>, visibleProviders: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetVisibleProviders(age: CPointer<UInt32>, visibleProviders: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVisibleProviders(__liveRaw, age, visibleProviders)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSupportedCellularClasses(cellularClasses: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSupportedCellularClasses(cellularClasses: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSupportedCellularClasses(__liveRaw, cellularClasses)
@@ -4677,7 +4683,7 @@ public struct IMbnSmsReadMsgPduVtbl {
     public var Status: CFunc<(CPointer<Unit>, CPointer<MBN_MSG_STATUSAbi>) -> Int32> = { _, _ => 0 }
     public var PduData: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4740,7 +4746,7 @@ public class IMbnSmsReadMsgPdu <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Message(Message: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Message(Message: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Message(__liveRaw, Message)
@@ -4759,7 +4765,7 @@ public struct IMbnSmsReadMsgTextCdmaVtbl {
     public var LanguageID: CFunc<(CPointer<Unit>, CPointer<MBN_SMS_CDMA_LANGAbi>) -> Int32> = { _, _ => 0 }
     public var SizeInCharacters: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4846,7 +4852,7 @@ public class IMbnSmsReadMsgTextCdma <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Message(Message: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Message(Message: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Message(__liveRaw, Message)
@@ -4858,9 +4864,9 @@ public class IMbnSmsReadMsgTextCdma <: InterfaceWrapperBase & ComInterface {
 public struct IMbnVendorSpecificEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var OnEventNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var OnEventNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnSetVendorSpecificComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var OnSetVendorSpecificComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -4905,14 +4911,14 @@ public class IMbnVendorSpecificEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnEventNotification(vendorOperation: CPointer<Unit>, vendorSpecificData: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnEventNotification(vendorOperation: CPointer<Unit>, vendorSpecificData: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnEventNotification(__liveRaw, vendorOperation, vendorSpecificData)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnSetVendorSpecificComplete(vendorOperation: CPointer<Unit>, vendorSpecificData: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: UInt32): Int32 {
+    public unsafe func OnSetVendorSpecificComplete(vendorOperation: CPointer<Unit>, vendorSpecificData: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnSetVendorSpecificComplete(__liveRaw, vendorOperation, vendorSpecificData, requestID)
@@ -5148,7 +5154,7 @@ extend MBN_SMS_FILTER <: windows_core.CopyType & windows_core.RuntimeType & wind
 public struct IMbnConnectionContextVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetProvisionedContexts: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetProvisionedContexts: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var SetProvisionedContext: CFunc<(CPointer<Unit>, MBN_CONTEXTAbi, CPointer<UInt16>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -5194,7 +5200,7 @@ public class IMbnConnectionContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetProvisionedContexts(provisionedContexts: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetProvisionedContexts(provisionedContexts: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProvisionedContexts(__liveRaw, provisionedContexts)
@@ -5280,11 +5286,11 @@ public struct IMbnInterfaceVtbl {
     public var InEmergencyMode: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var GetHomeProvider: CFunc<(CPointer<Unit>, CPointer<MBN_PROVIDERAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var SetPreferredProviders: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetVisibleProviders: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var GetVisibleProviders: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public var ScanNetwork: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetConnection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -5367,21 +5373,21 @@ public class IMbnInterface <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetPreferredProviders(preferredProviders: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetPreferredProviders(preferredProviders: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPreferredProviders(__liveRaw, preferredProviders)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetPreferredProviders(preferredProviders: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func SetPreferredProviders(preferredProviders: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPreferredProviders(__liveRaw, preferredProviders, requestID)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetVisibleProviders(age: CPointer<UInt32>, visibleProviders: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetVisibleProviders(age: CPointer<UInt32>, visibleProviders: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVisibleProviders(__liveRaw, age, visibleProviders)
@@ -5510,7 +5516,7 @@ public struct IMbnInterfaceManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetInterface: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5561,7 +5567,7 @@ public class IMbnInterfaceManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetInterfaces(mbnInterfaces: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetInterfaces(mbnInterfaces: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInterfaces(__liveRaw, mbnInterfaces)
@@ -5638,9 +5644,9 @@ public struct IMbnSmsVtbl {
     public var SetSmsConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var SmsSendPdu: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt8, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SmsSendCdma: CFunc<(CPointer<Unit>, CPointer<UInt16>, MBN_SMS_CDMA_ENCODINGAbi, MBN_SMS_CDMA_LANGAbi, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var SmsSendCdma: CFunc<(CPointer<Unit>, CPointer<UInt16>, MBN_SMS_CDMA_ENCODINGAbi, MBN_SMS_CDMA_LANGAbi, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SmsSendCdmaPdu: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var SmsSendCdmaPdu: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var SmsRead: CFunc<(CPointer<Unit>, CPointer<MBN_SMS_FILTERAbi>, MBN_SMS_FORMATAbi, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var SmsDelete: CFunc<(CPointer<Unit>, CPointer<MBN_SMS_FILTERAbi>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetSmsStatus: CFunc<(CPointer<Unit>, CPointer<MBN_SMS_STATUS_INFOAbi>) -> Int32> = { _, _ => 0 }
@@ -5706,14 +5712,14 @@ public class IMbnSms <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SmsSendCdma(address: CPointer<UInt16>, encoding: MBN_SMS_CDMA_ENCODINGAbi, language: MBN_SMS_CDMA_LANGAbi, sizeInCharacters: UInt32, message: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func SmsSendCdma(address: CPointer<UInt16>, encoding: MBN_SMS_CDMA_ENCODINGAbi, language: MBN_SMS_CDMA_LANGAbi, sizeInCharacters: UInt32, message: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SmsSendCdma(__liveRaw, address, encoding, language, sizeInCharacters, message, requestID)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SmsSendCdmaPdu(message: CPointer<Win32__impl_l1.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
+    public unsafe func SmsSendCdmaPdu(message: CPointer<Win32_impl_p2.SAFEARRAYAbi>, requestID: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SmsSendCdmaPdu(__liveRaw, message, requestID)
@@ -5746,9 +5752,9 @@ public struct IMbnSmsEventsVtbl {
     public var OnSetSmsConfigurationComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var OnSmsSendComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnSmsReadComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, MBN_SMS_FORMATAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>, Int16, UInt32, Int32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var OnSmsReadComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, MBN_SMS_FORMATAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>, Int16, UInt32, Int32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnSmsNewClass0Message: CFunc<(CPointer<Unit>, CPointer<Unit>, MBN_SMS_FORMATAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var OnSmsNewClass0Message: CFunc<(CPointer<Unit>, CPointer<Unit>, MBN_SMS_FORMATAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var OnSmsDeleteComplete: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var OnSmsStatusChange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -5813,14 +5819,14 @@ public class IMbnSmsEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnSmsReadComplete(sms: CPointer<Unit>, smsFormat: MBN_SMS_FORMATAbi, readMsgs: CPointer<Win32__impl_l1.SAFEARRAYAbi>, moreMsgs: Int16, requestID: UInt32, status: Int32): Int32 {
+    public unsafe func OnSmsReadComplete(sms: CPointer<Unit>, smsFormat: MBN_SMS_FORMATAbi, readMsgs: CPointer<Win32_impl_p2.SAFEARRAYAbi>, moreMsgs: Int16, requestID: UInt32, status: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnSmsReadComplete(__liveRaw, sms, smsFormat, readMsgs, moreMsgs, requestID, status)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnSmsNewClass0Message(sms: CPointer<Unit>, smsFormat: MBN_SMS_FORMATAbi, readMsgs: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnSmsNewClass0Message(sms: CPointer<Unit>, smsFormat: MBN_SMS_FORMATAbi, readMsgs: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnSmsNewClass0Message(__liveRaw, sms, smsFormat, readMsgs)
@@ -5844,7 +5850,7 @@ public class IMbnSmsEvents <: InterfaceWrapperBase & ComInterface {
 public struct IMbnConnectionProfileManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetConnectionProfiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var GetConnectionProfiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public var GetConnectionProfile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateConnectionProfile: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -5891,7 +5897,7 @@ public class IMbnConnectionProfileManager <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetConnectionProfiles(mbnInterface: CPointer<Unit>, connectionProfiles: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetConnectionProfiles(mbnInterface: CPointer<Unit>, connectionProfiles: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConnectionProfiles(__liveRaw, mbnInterface, connectionProfiles)
@@ -6123,7 +6129,7 @@ public class IMbnPinEvents <: InterfaceWrapperBase & ComInterface {
 public struct IMbnPinManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetPinList: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetPinList: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetPin: CFunc<(CPointer<Unit>, MBN_PIN_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetPinState: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -6170,7 +6176,7 @@ public class IMbnPinManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetPinList(pinList: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetPinList(pinList: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPinList(__liveRaw, pinList)

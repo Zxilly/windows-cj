@@ -4,14 +4,20 @@
 package windows.Win32.Networking.DeliveryOptimization
 
 import std.collection.*
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_DeliveryOptimization == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_DeliveryOptimization == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Networking_DeliveryOptimization == "on"]
@@ -510,9 +516,9 @@ public struct IDODownloadVtbl {
     public var Finalize: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<DO_DOWNLOAD_STATUSAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, DODownloadPropertyAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, DODownloadPropertyAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, DODownloadPropertyAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, DODownloadPropertyAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -587,14 +593,14 @@ public class IDODownload <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProperty(propId: DODownloadPropertyAbi, propVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProperty(propId: DODownloadPropertyAbi, propVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, propId, propVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProperty(propId: DODownloadPropertyAbi, propVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetProperty(propId: DODownloadPropertyAbi, propVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, propId, propVal)

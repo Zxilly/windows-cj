@@ -4,12 +4,18 @@
 package windows.Win32.System.StationsAndDesktops
 
 import std.collection.*
+@When[Windows_Win32_System_StationsAndDesktops == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_StationsAndDesktops == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_StationsAndDesktops == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_StationsAndDesktops == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_System_StationsAndDesktops == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_StationsAndDesktops == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_System_StationsAndDesktops == "on"]
@@ -652,11 +658,11 @@ public unsafe func Windows_CreateWindowStationW(lpwinsta: CPointer<UInt16>, dwFl
 foreign {
     // param-hint: hDesktop optional
     // pinvoke-hint: SetLastError
-    func EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32__impl_l0.WNDENUMPROC, lParam: IntNative): Int32
+    func EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32_impl_p1.WNDENUMPROC, lParam: IntNative): Int32
 }
 
 @When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopWindows == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32__impl_l0.WNDENUMPROC, lParam: IntNative): Int32 {
+public unsafe func Windows_EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32_impl_p1.WNDENUMPROC, lParam: IntNative): Int32 {
     return EnumDesktopWindows(hDesktop, lpfn, lParam)
 }
 

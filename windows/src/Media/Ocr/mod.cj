@@ -4,16 +4,27 @@
 package windows.Media.Ocr
 
 import std.collection.*
+@When[Windows_Media_Ocr == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Ocr == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Ocr == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Ocr == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Ocr == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Ocr == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Ocr == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_Ocr == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Ocr == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Ocr == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Ocr == "on"]
 import windows_future as windows_future
 
 
@@ -661,7 +672,7 @@ public class IOcrEngine <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IOcrEngine", IOcrEngine.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOcrEngineVtbl", "IOcrEngine", "IOcrEngine_Impl", [InterfaceMethodSchema("RecognizeAsync", 6, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<OcrResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RecognizerLanguage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Language>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IOcrEngine", IOcrEngine.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOcrEngineVtbl", "IOcrEngine", "IOcrEngine_Impl", [InterfaceMethodSchema("RecognizeAsync", 6, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<OcrResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RecognizerLanguage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Language>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IOcrEngine.runtimeType())
         return schema
     }
@@ -700,12 +711,12 @@ public class IOcrEngine <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func RecognizerLanguage(): _impl_l1.Language {
+    public unsafe func RecognizerLanguage(): impl_p1.Language {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RecognizerLanguage(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Language.fromAbiTake(result__)
+        return impl_p1.Language.fromAbiTake(result__)
     }
 }
 
@@ -769,7 +780,7 @@ public class IOcrEngineStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IOcrEngineStatics", IOcrEngineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOcrEngineStaticsVtbl", "IOcrEngineStatics", "IOcrEngineStatics_Impl", [InterfaceMethodSchema("MaxImageDimension", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AvailableRecognizerLanguages", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.Language>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLanguageSupported", 8, [InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<_impl_l1.Language>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateFromLanguage", 9, [InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<_impl_l1.Language>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OcrEngine>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateFromUserProfileLanguages", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OcrEngine>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IOcrEngineStatics", IOcrEngineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOcrEngineStaticsVtbl", "IOcrEngineStatics", "IOcrEngineStatics_Impl", [InterfaceMethodSchema("MaxImageDimension", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AvailableRecognizerLanguages", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.Language>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLanguageSupported", 8, [InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<impl_p1.Language>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateFromLanguage", 9, [InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<impl_p1.Language>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OcrEngine>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryCreateFromUserProfileLanguages", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OcrEngine>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IOcrEngineStatics.runtimeType())
         return schema
     }
@@ -807,16 +818,16 @@ public class IOcrEngineStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
-    public unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<_impl_l1.Language> {
+    public unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<impl_p1.Language> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AvailableRecognizerLanguages(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.Language>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.Language>.fromAbiTake(result__)
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func IsLanguageSupported(language: _impl_l1.Language): Bool {
+    public unsafe func IsLanguageSupported(language: impl_p1.Language): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.IsLanguageSupported(asRaw(), language.asRaw(), CPointer<Bool>(inout result__))
@@ -825,7 +836,7 @@ public class IOcrEngineStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func TryCreateFromLanguage(language: _impl_l1.Language): OcrEngine {
+    public unsafe func TryCreateFromLanguage(language: impl_p1.Language): OcrEngine {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryCreateFromLanguage(asRaw(), language.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -920,7 +931,7 @@ public class OcrEngine <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func RecognizerLanguage(): _impl_l1.Language {
+    public unsafe func RecognizerLanguage(): impl_p1.Language {
         return defaultInterface().RecognizerLanguage()
     }
 
@@ -936,8 +947,8 @@ public class OcrEngine <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
-    public static unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<_impl_l1.Language> {
-        var result__: Option<windows_collections.IVectorView<_impl_l1.Language>> = Option<windows_collections.IVectorView<_impl_l1.Language>>.None
+    public static unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<impl_p1.Language> {
+        var result__: Option<windows_collections.IVectorView<impl_p1.Language>> = Option<windows_collections.IVectorView<impl_p1.Language>>.None
         try (factory__ = windows_core.factory<OcrEngine, IOcrEngineStatics>().unwrap()) {
             result__ = Some(factory__.AvailableRecognizerLanguages())
         }
@@ -948,7 +959,7 @@ public class OcrEngine <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Globalization == "on"]
-    public static unsafe func IsLanguageSupported(language: _impl_l1.Language): Bool {
+    public static unsafe func IsLanguageSupported(language: impl_p1.Language): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<OcrEngine, IOcrEngineStatics>().unwrap()) {
             result__ = Some(factory__.IsLanguageSupported(language))
@@ -960,7 +971,7 @@ public class OcrEngine <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Globalization == "on"]
-    public static unsafe func TryCreateFromLanguage(language: _impl_l1.Language): OcrEngine {
+    public static unsafe func TryCreateFromLanguage(language: impl_p1.Language): OcrEngine {
         var result__: Option<OcrEngine> = Option<OcrEngine>.None
         try (factory__ = windows_core.factory<OcrEngine, IOcrEngineStatics>().unwrap()) {
             result__ = Some(factory__.TryCreateFromLanguage(language))

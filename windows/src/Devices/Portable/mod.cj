@@ -4,13 +4,20 @@
 package windows.Devices.Portable
 
 import std.collection.*
+@When[Windows_Devices_Portable == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Portable == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Portable == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Portable == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Portable == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Portable == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_Portable == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_Devices_Portable == "on"]
@@ -61,7 +68,7 @@ public class IStorageDeviceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageDeviceStatics", IStorageDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageDeviceStaticsVtbl", "IStorageDeviceStatics", "IStorageDeviceStatics_Impl", [InterfaceMethodSchema("FromId", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelector", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageDeviceStatics", IStorageDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageDeviceStaticsVtbl", "IStorageDeviceStatics", "IStorageDeviceStatics_Impl", [InterfaceMethodSchema("FromId", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelector", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageDeviceStatics.runtimeType())
         return schema
     }
@@ -91,12 +98,12 @@ public class IStorageDeviceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func FromId(deviceId: windows_core.HString): _impl_l1.StorageFolder {
+    public unsafe func FromId(deviceId: windows_core.HString): impl_p1.StorageFolder {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FromId(asRaw(), deviceId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageFolder.fromAbiTake(result__)
+        return impl_p1.StorageFolder.fromAbiTake(result__)
     }
 
     public unsafe func GetDeviceSelector(): windows_core.HString {
@@ -232,8 +239,8 @@ public class StorageDevice <: windows_interface.RuntimeName & windows_core.Runti
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func FromId(deviceId: windows_core.HString): _impl_l1.StorageFolder {
-        var result__: Option<_impl_l1.StorageFolder> = Option<_impl_l1.StorageFolder>.None
+    public static unsafe func FromId(deviceId: windows_core.HString): impl_p1.StorageFolder {
+        var result__: Option<impl_p1.StorageFolder> = Option<impl_p1.StorageFolder>.None
         try (factory__ = windows_core.factory<StorageDevice, IStorageDeviceStatics>().unwrap()) {
             result__ = Some(factory__.FromId(deviceId))
         }

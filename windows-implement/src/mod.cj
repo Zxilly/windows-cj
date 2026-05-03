@@ -1,3 +1,3 @@
 package windows_implement
 
-// Wave B implementation-side COM runtime and descriptor shims.
+// Wave B implementation-side COM runtime, descriptor, and composable activation shims.

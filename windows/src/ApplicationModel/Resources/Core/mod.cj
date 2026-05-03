@@ -4,16 +4,27 @@
 package windows.ApplicationModel.Resources.Core
 
 import std.collection.*
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Resources_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_Resources_Core == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Resources_Core == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Resources_Core == "on"]
 import windows_future as windows_future
 
 
@@ -64,7 +75,7 @@ public class IResourceCandidate2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IResourceCandidate2", IResourceCandidate2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceCandidate2Vtbl", "IResourceCandidate2", "IResourceCandidate2_Impl", [InterfaceMethodSchema("GetValueAsStreamAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IResourceCandidate2", IResourceCandidate2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceCandidate2Vtbl", "IResourceCandidate2", "IResourceCandidate2_Impl", [InterfaceMethodSchema("GetValueAsStreamAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IResourceCandidate2.runtimeType())
         return schema
     }
@@ -94,12 +105,12 @@ public class IResourceCandidate2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetValueAsStreamAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream> {
+    public unsafe func GetValueAsStreamAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetValueAsStreamAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.IRandomAccessStream>.fromAbiTake(result__)
     }
 }
 
@@ -1072,7 +1083,7 @@ public class IResourceCandidate <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IResourceCandidate", IResourceCandidate.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceCandidateVtbl", "IResourceCandidate", "IResourceCandidate_Impl", [InterfaceMethodSchema("Qualifiers", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<ResourceQualifier>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMatch", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMatchAsDefault", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDefault", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ValueAsString", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetValueAsFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetQualifierValue", 12, [InterfaceParameterSchema("qualifierName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IResourceCandidate", IResourceCandidate.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceCandidateVtbl", "IResourceCandidate", "IResourceCandidate_Impl", [InterfaceMethodSchema("Qualifiers", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<ResourceQualifier>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMatch", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMatchAsDefault", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDefault", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ValueAsString", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetValueAsFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetQualifierValue", 12, [InterfaceParameterSchema("qualifierName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IResourceCandidate.runtimeType())
         return schema
     }
@@ -1143,12 +1154,12 @@ public class IResourceCandidate <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetValueAsFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetValueAsFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetValueAsFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     public unsafe func GetQualifierValue(qualifierName: windows_core.HString): windows_core.HString {
@@ -1422,7 +1433,7 @@ public class ResourceCandidate <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetValueAsFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetValueAsFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().GetValueAsFileAsync()
     }
 
@@ -2222,7 +2233,7 @@ public class IResourceManager <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IResourceManager", IResourceManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceManagerVtbl", "IResourceManager", "IResourceManager_Impl", [InterfaceMethodSchema("MainResourceMap", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResourceMap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AllResourceMaps", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, ResourceMap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultContext", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResourceContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadPriFiles", 9, [InterfaceParameterSchema("files", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.IStorageFile>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("UnloadPriFiles", 10, [InterfaceParameterSchema("files", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.IStorageFile>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IResourceManager", IResourceManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IResourceManagerVtbl", "IResourceManager", "IResourceManager_Impl", [InterfaceMethodSchema("MainResourceMap", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResourceMap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AllResourceMaps", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, ResourceMap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultContext", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResourceContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadPriFiles", 9, [InterfaceParameterSchema("files", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.IStorageFile>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("UnloadPriFiles", 10, [InterfaceParameterSchema("files", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.IStorageFile>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IResourceManager.runtimeType())
         return schema
     }
@@ -2278,14 +2289,14 @@ public class IResourceManager <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func LoadPriFiles(files: windows_collections.IIterable<_impl_l1.IStorageFile>): Unit {
+    public unsafe func LoadPriFiles(files: windows_collections.IIterable<impl_p1.IStorageFile>): Unit {
         let v = vtbl()
         let hr = v.LoadPriFiles(asRaw(), files.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func UnloadPriFiles(files: windows_collections.IIterable<_impl_l1.IStorageFile>): Unit {
+    public unsafe func UnloadPriFiles(files: windows_collections.IIterable<impl_p1.IStorageFile>): Unit {
         let v = vtbl()
         let hr = v.UnloadPriFiles(asRaw(), files.asRaw())
         HRESULT(hr).ok()
@@ -3040,12 +3051,12 @@ public class ResourceManager <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func LoadPriFiles(files: windows_collections.IIterable<_impl_l1.IStorageFile>): Unit {
+    public unsafe func LoadPriFiles(files: windows_collections.IIterable<impl_p1.IStorageFile>): Unit {
         defaultInterface().LoadPriFiles(files)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func UnloadPriFiles(files: windows_collections.IIterable<_impl_l1.IStorageFile>): Unit {
+    public unsafe func UnloadPriFiles(files: windows_collections.IIterable<impl_p1.IStorageFile>): Unit {
         defaultInterface().UnloadPriFiles(files)
     }
 

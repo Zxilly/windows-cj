@@ -4,13 +4,20 @@
 package windows.Win32.System.Com.Events
 
 import std.collection.*
+@When[Windows_Win32_System_Com_Events == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Com_Events == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Com_Events == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Com_Events == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Com_Events == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Com_Events == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Com_Events == "on"]
@@ -385,7 +392,7 @@ public class IEnumEventObject <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventClassVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EventClassID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetEventClassID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var EventClassName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -436,7 +443,7 @@ public class IEventClass <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventClass> {
-        return InterfaceDescriptor<IEventClass>("IEventClass", IEventClass.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventClassFromAbi, viewIEventClass)
+        return InterfaceDescriptor<IEventClass>("IEventClass", IEventClass.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventClassFromAbi, viewIEventClass)
     }
 
     public unsafe func vtbl(): IEventClassVtbl {
@@ -704,15 +711,15 @@ public class IEventObjectChange <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventObjectCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -750,7 +757,7 @@ public class IEventObjectCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventObjectCollection> {
-        return InterfaceDescriptor<IEventObjectCollection>("IEventObjectCollection", IEventObjectCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventObjectCollectionFromAbi, viewIEventObjectCollection)
+        return InterfaceDescriptor<IEventObjectCollection>("IEventObjectCollection", IEventObjectCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventObjectCollectionFromAbi, viewIEventObjectCollection)
     }
 
     public unsafe func vtbl(): IEventObjectCollectionVtbl {
@@ -765,7 +772,7 @@ public class IEventObjectCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(objectID: CPointer<UInt16>, pItem: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(objectID: CPointer<UInt16>, pItem: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, objectID, pItem)
@@ -784,7 +791,7 @@ public class IEventObjectCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(item: CPointer<Win32__impl_l2.VARIANTAbi>, objectID: CPointer<UInt16>): Int32 {
+    public unsafe func Add(item: CPointer<Win32_impl_p2.VARIANTAbi>, objectID: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, item, objectID)
@@ -800,13 +807,13 @@ public class IEventObjectCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -843,7 +850,7 @@ public class IEventProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventProperty> {
-        return InterfaceDescriptor<IEventProperty>("IEventProperty", IEventProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventPropertyFromAbi, viewIEventProperty)
+        return InterfaceDescriptor<IEventProperty>("IEventProperty", IEventProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventPropertyFromAbi, viewIEventProperty)
     }
 
     public unsafe func vtbl(): IEventPropertyVtbl {
@@ -863,14 +870,14 @@ public class IEventProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, propertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, propertyValue)
@@ -880,7 +887,7 @@ public class IEventProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventPublisherVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var PublisherID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetPublisherID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var PublisherName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -892,9 +899,9 @@ public struct IEventPublisherVtbl {
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetDefaultProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetDefaultProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutDefaultProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PutDefaultProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDefaultProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetDefaultPropertyCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -933,7 +940,7 @@ public class IEventPublisher <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventPublisher> {
-        return InterfaceDescriptor<IEventPublisher>("IEventPublisher", IEventPublisher.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventPublisherFromAbi, viewIEventPublisher)
+        return InterfaceDescriptor<IEventPublisher>("IEventPublisher", IEventPublisher.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventPublisherFromAbi, viewIEventPublisher)
     }
 
     public unsafe func vtbl(): IEventPublisherVtbl {
@@ -1001,14 +1008,14 @@ public class IEventPublisher <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetDefaultProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetDefaultProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultProperty(__liveRaw, bstrPropertyName, propertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutDefaultProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PutDefaultProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutDefaultProperty(__liveRaw, bstrPropertyName, propertyValue)
@@ -1030,7 +1037,7 @@ public class IEventPublisher <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventSubscriptionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SubscriptionID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetSubscriptionID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SubscriptionName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1058,15 +1065,15 @@ public struct IEventSubscriptionVtbl {
     public var MachineName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMachineName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPublisherProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPublisherProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutPublisherProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PutPublisherProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RemovePublisherProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetPublisherPropertyCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetSubscriberProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetSubscriberProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutSubscriberProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PutSubscriberProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSubscriberProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetSubscriberPropertyCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var InterfaceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1107,7 +1114,7 @@ public class IEventSubscription <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventSubscription> {
-        return InterfaceDescriptor<IEventSubscription>("IEventSubscription", IEventSubscription.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventSubscriptionFromAbi, viewIEventSubscription)
+        return InterfaceDescriptor<IEventSubscription>("IEventSubscription", IEventSubscription.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventSubscriptionFromAbi, viewIEventSubscription)
     }
 
     public unsafe func vtbl(): IEventSubscriptionVtbl {
@@ -1261,14 +1268,14 @@ public class IEventSubscription <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPublisherProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPublisherProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPublisherProperty(__liveRaw, bstrPropertyName, propertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutPublisherProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PutPublisherProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutPublisherProperty(__liveRaw, bstrPropertyName, propertyValue)
@@ -1287,14 +1294,14 @@ public class IEventSubscription <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetSubscriberProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetSubscriberProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSubscriberProperty(__liveRaw, bstrPropertyName, propertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutSubscriberProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PutSubscriberProperty(bstrPropertyName: CPointer<UInt16>, propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutSubscriberProperty(__liveRaw, bstrPropertyName, propertyValue)
@@ -1328,7 +1335,7 @@ public class IEventSubscription <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventSystemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Query: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -1374,7 +1381,7 @@ public class IEventSystem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventSystem> {
-        return InterfaceDescriptor<IEventSystem>("IEventSystem", IEventSystem.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventSystemFromAbi, viewIEventSystem)
+        return InterfaceDescriptor<IEventSystem>("IEventSystem", IEventSystem.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventSystemFromAbi, viewIEventSystem)
     }
 
     public unsafe func vtbl(): IEventSystemVtbl {
@@ -1424,7 +1431,7 @@ public class IEventSystem <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFiringControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FireSubscription: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1462,7 +1469,7 @@ public class IFiringControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFiringControl> {
-        return InterfaceDescriptor<IFiringControl>("IFiringControl", IFiringControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIFiringControlFromAbi, viewIFiringControl)
+        return InterfaceDescriptor<IFiringControl>("IFiringControl", IFiringControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIFiringControlFromAbi, viewIFiringControl)
     }
 
     public unsafe func vtbl(): IFiringControlVtbl {
@@ -1598,7 +1605,7 @@ extend COMEVENTSYSCHANGEINFO <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_System_Com_Events == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEventControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetPublisherFilter: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var AllowInprocActivation: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAllowInprocActivation: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -1640,7 +1647,7 @@ public class IEventControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEventControl> {
-        return InterfaceDescriptor<IEventControl>("IEventControl", IEventControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIEventControlFromAbi, viewIEventControl)
+        return InterfaceDescriptor<IEventControl>("IEventControl", IEventControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIEventControlFromAbi, viewIEventControl)
     }
 
     public unsafe func vtbl(): IEventControlVtbl {

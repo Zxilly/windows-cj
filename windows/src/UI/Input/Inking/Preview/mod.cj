@@ -4,14 +4,23 @@
 package windows.UI.Input.Inking.Preview
 
 import std.collection.*
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Input_Inking_Preview == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Input_Inking_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Input_Inking_Preview == "on"]
 import windows_future as windows_future
 
 
@@ -142,7 +151,7 @@ public class IPalmRejectionDelayZonePreviewStatics <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPalmRejectionDelayZonePreviewStatics", IPalmRejectionDelayZonePreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPalmRejectionDelayZonePreviewStaticsVtbl", "IPalmRejectionDelayZonePreviewStatics", "IPalmRejectionDelayZonePreviewStatics_Impl", [InterfaceMethodSchema("CreateForVisual", 6, [InterfaceParameterSchema("inputPanelVisual", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputPanelRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PalmRejectionDelayZonePreview>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForVisualWithViewportClip", 7, [InterfaceParameterSchema("inputPanelVisual", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputPanelRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("viewportVisual", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("viewportRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PalmRejectionDelayZonePreview>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPalmRejectionDelayZonePreviewStatics", IPalmRejectionDelayZonePreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPalmRejectionDelayZonePreviewStaticsVtbl", "IPalmRejectionDelayZonePreviewStatics", "IPalmRejectionDelayZonePreviewStatics_Impl", [InterfaceMethodSchema("CreateForVisual", 6, [InterfaceParameterSchema("inputPanelVisual", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputPanelRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PalmRejectionDelayZonePreview>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForVisualWithViewportClip", 7, [InterfaceParameterSchema("inputPanelVisual", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputPanelRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("viewportVisual", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("viewportRect", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PalmRejectionDelayZonePreview>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPalmRejectionDelayZonePreviewStatics.runtimeType())
         return schema
     }
@@ -172,7 +181,7 @@ public class IPalmRejectionDelayZonePreviewStatics <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func CreateForVisual(inputPanelVisual: _impl_l1.Visual, inputPanelRect: windows_future.Rect): PalmRejectionDelayZonePreview {
+    public unsafe func CreateForVisual(inputPanelVisual: impl_p1.Visual, inputPanelRect: windows_future.Rect): PalmRejectionDelayZonePreview {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForVisual(asRaw(), inputPanelVisual.asRaw(), windows_core.projectTypedAbi(inputPanelRect, windows_core.typeMarker<windows_future.Rect>()), CPointer<CPointer<Unit>>(inout result__))
@@ -181,7 +190,7 @@ public class IPalmRejectionDelayZonePreviewStatics <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func CreateForVisualWithViewportClip(inputPanelVisual: _impl_l1.Visual, inputPanelRect: windows_future.Rect, viewportVisual: _impl_l1.Visual, viewportRect: windows_future.Rect): PalmRejectionDelayZonePreview {
+    public unsafe func CreateForVisualWithViewportClip(inputPanelVisual: impl_p1.Visual, inputPanelRect: windows_future.Rect, viewportVisual: impl_p1.Visual, viewportRect: windows_future.Rect): PalmRejectionDelayZonePreview {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForVisualWithViewportClip(asRaw(), inputPanelVisual.asRaw(), windows_core.projectTypedAbi(inputPanelRect, windows_core.typeMarker<windows_future.Rect>()), viewportVisual.asRaw(), windows_core.projectTypedAbi(viewportRect, windows_core.typeMarker<windows_future.Rect>()), CPointer<CPointer<Unit>>(inout result__))
@@ -274,7 +283,7 @@ public class PalmRejectionDelayZonePreview <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func CreateForVisual(inputPanelVisual: _impl_l1.Visual, inputPanelRect: windows_future.Rect): PalmRejectionDelayZonePreview {
+    public static unsafe func CreateForVisual(inputPanelVisual: impl_p1.Visual, inputPanelRect: windows_future.Rect): PalmRejectionDelayZonePreview {
         var result__: Option<PalmRejectionDelayZonePreview> = Option<PalmRejectionDelayZonePreview>.None
         try (factory__ = windows_core.factory<PalmRejectionDelayZonePreview, IPalmRejectionDelayZonePreviewStatics>().unwrap()) {
             result__ = Some(factory__.CreateForVisual(inputPanelVisual, inputPanelRect))
@@ -286,7 +295,7 @@ public class PalmRejectionDelayZonePreview <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func CreateForVisualWithViewportClip(inputPanelVisual: _impl_l1.Visual, inputPanelRect: windows_future.Rect, viewportVisual: _impl_l1.Visual, viewportRect: windows_future.Rect): PalmRejectionDelayZonePreview {
+    public static unsafe func CreateForVisualWithViewportClip(inputPanelVisual: impl_p1.Visual, inputPanelRect: windows_future.Rect, viewportVisual: impl_p1.Visual, viewportRect: windows_future.Rect): PalmRejectionDelayZonePreview {
         var result__: Option<PalmRejectionDelayZonePreview> = Option<PalmRejectionDelayZonePreview>.None
         try (factory__ = windows_core.factory<PalmRejectionDelayZonePreview, IPalmRejectionDelayZonePreviewStatics>().unwrap()) {
             result__ = Some(factory__.CreateForVisualWithViewportClip(inputPanelVisual, inputPanelRect, viewportVisual, viewportRect))

@@ -4,13 +4,21 @@
 package windows.System.Threading.Core
 
 import std.collection.*
+@When[Windows_System_Threading_Core == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_System_Threading_Core == "on"]
 import windows_core as windows_core
+@When[Windows_System_Threading_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Threading_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Threading_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Threading_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Threading_Core == "on" && Windows_System_Threading == "on"]
 import windows.System.Threading as System_Threading
+@When[Windows_System_Threading_Core == "on"]
 import windows_future as windows_future
 
 
@@ -621,19 +629,15 @@ public class SignalHandler <: InterfaceWrapperBase & ComInterface & windows_inte
 extend SignalHandler <: windows_core.Interface<SignalHandler> {}
 
 @When[Windows_System_Threading_Core == "on"]
-private open class SignalHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Bool): Int32 {
-        E_NOTIMPL.value
-    }
+private interface SignalHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Bool): Int32
 }
 
 @When[Windows_System_Threading_Core == "on"]
-private open class SignalHandlerInvoker <: SignalHandlerInvokerErased {
-    public open func Invoke(signalNotifier: InParam<SignalNotifier>, timedOut: Bool): Unit {
-        ()
-    }
+private interface SignalHandlerInvoker <: SignalHandlerInvokerErased {
+    public func Invoke(signalNotifier: InParam<SignalNotifier>, timedOut: Bool): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Bool): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Bool): Int32 {
         this.Invoke(InParam<SignalNotifier>(SignalNotifier.viewOf(arg0)), arg1)
         return S_OK.value
     }
@@ -653,7 +657,7 @@ private class SignalHandlerBox <: SignalHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(signalNotifier: InParam<SignalNotifier>, timedOut: Bool): Unit {
+    public func Invoke(signalNotifier: InParam<SignalNotifier>, timedOut: Bool): Unit {
         invoke_(signalNotifier, timedOut)
     }
 }

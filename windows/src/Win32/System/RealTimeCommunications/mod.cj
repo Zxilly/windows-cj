@@ -4,14 +4,22 @@
 package windows.Win32.System.RealTimeCommunications
 
 import std.collection.*
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_Media_DirectShow == "on"]
 import windows.Win32.Media.DirectShow as Win32_Media_DirectShow
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_RealTimeCommunications == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_RealTimeCommunications == "on"]
@@ -524,9 +532,9 @@ public let RTC_E_PINT_STATUS_REJECTED_BADNUMBER: Int32 = -2131754997i32
 public struct INetworkTransportSettingsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public var ApplySetting: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.TRANSPORT_SETTING_IDAbi>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ApplySetting: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.TRANSPORT_SETTING_IDAbi>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public var QuerySetting: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.TRANSPORT_SETTING_IDAbi>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var QuerySetting: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.TRANSPORT_SETTING_IDAbi>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -571,14 +579,14 @@ public class INetworkTransportSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public unsafe func ApplySetting(SettingId: CPointer<Win32__impl_l0.TRANSPORT_SETTING_IDAbi>, LengthIn: UInt32, ValueIn: CPointer<UInt8>, LengthOut: CPointer<UInt32>, ValueOut: CPointer<CPointer<UInt8>>): Int32 {
+    public unsafe func ApplySetting(SettingId: CPointer<Win32_impl_p0.TRANSPORT_SETTING_IDAbi>, LengthIn: UInt32, ValueIn: CPointer<UInt8>, LengthOut: CPointer<UInt32>, ValueOut: CPointer<CPointer<UInt8>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ApplySetting(__liveRaw, SettingId, LengthIn, ValueIn, LengthOut, ValueOut)
     }
 
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public unsafe func QuerySetting(SettingId: CPointer<Win32__impl_l0.TRANSPORT_SETTING_IDAbi>, LengthIn: UInt32, ValueIn: CPointer<UInt8>, LengthOut: CPointer<UInt32>, ValueOut: CPointer<CPointer<UInt8>>): Int32 {
+    public unsafe func QuerySetting(SettingId: CPointer<Win32_impl_p0.TRANSPORT_SETTING_IDAbi>, LengthIn: UInt32, ValueIn: CPointer<UInt8>, LengthOut: CPointer<UInt32>, ValueOut: CPointer<CPointer<UInt8>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QuerySetting(__liveRaw, SettingId, LengthIn, ValueIn, LengthOut, ValueOut)
@@ -650,10 +658,10 @@ public class INotificationTransportSync <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -692,7 +700,7 @@ public class IRTCCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCCollection> {
-        return InterfaceDescriptor<IRTCCollection>("IRTCCollection", IRTCCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCCollectionFromAbi, viewIRTCCollection)
+        return InterfaceDescriptor<IRTCCollection>("IRTCCollection", IRTCCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCCollectionFromAbi, viewIRTCCollection)
     }
 
     public unsafe func vtbl(): IRTCCollectionVtbl {
@@ -706,7 +714,7 @@ public class IRTCCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Int32, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(Index: Int32, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, pVariant)
@@ -723,7 +731,7 @@ public class IRTCCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCDispatchEventNotificationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -760,7 +768,7 @@ public class IRTCDispatchEventNotification <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCDispatchEventNotification> {
-        return InterfaceDescriptor<IRTCDispatchEventNotification>("IRTCDispatchEventNotification", IRTCDispatchEventNotification.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCDispatchEventNotificationFromAbi, viewIRTCDispatchEventNotification)
+        return InterfaceDescriptor<IRTCDispatchEventNotification>("IRTCDispatchEventNotification", IRTCDispatchEventNotification.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCDispatchEventNotificationFromAbi, viewIRTCDispatchEventNotification)
     }
 
     public unsafe func vtbl(): IRTCDispatchEventNotificationVtbl {
@@ -875,7 +883,7 @@ public class IRTCPresenceContact <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCPresenceDataEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var StatusText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetPresenceData: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -915,7 +923,7 @@ public class IRTCPresenceDataEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCPresenceDataEvent> {
-        return InterfaceDescriptor<IRTCPresenceDataEvent>("IRTCPresenceDataEvent", IRTCPresenceDataEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCPresenceDataEventFromAbi, viewIRTCPresenceDataEvent)
+        return InterfaceDescriptor<IRTCPresenceDataEvent>("IRTCPresenceDataEvent", IRTCPresenceDataEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCPresenceDataEventFromAbi, viewIRTCPresenceDataEvent)
     }
 
     public unsafe func vtbl(): IRTCPresenceDataEventVtbl {
@@ -3627,7 +3635,7 @@ extend RTC_WATCHER_STATE <: windows_core.CopyType & windows_core.RuntimeType & w
 
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct TRANSPORT_SETTING {
-    public var SettingId: Win32__impl_l0.TRANSPORT_SETTING_ID = Win32__impl_l0.TRANSPORT_SETTING_ID()
+    public var SettingId: Win32_impl_p0.TRANSPORT_SETTING_ID = Win32_impl_p0.TRANSPORT_SETTING_ID()
     public var Length: CPointer<UInt32> = CPointer<UInt32>()
     public var Value: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
@@ -3636,7 +3644,7 @@ public struct TRANSPORT_SETTING {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct TRANSPORT_SETTINGAbi {
-    public var SettingId: Win32__impl_l0.TRANSPORT_SETTING_IDAbi = Win32__impl_l0.TRANSPORT_SETTING_IDAbi()
+    public var SettingId: Win32_impl_p0.TRANSPORT_SETTING_IDAbi = Win32_impl_p0.TRANSPORT_SETTING_IDAbi()
     public var Length: CPointer<UInt32> = CPointer<UInt32>()
     public var Value: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
@@ -3649,14 +3657,14 @@ extend TRANSPORT_SETTING <: windows_core.CopyType & windows_core.RuntimeType & w
     public static func signature(): String { "struct(Windows.Win32.System.RealTimeCommunications.TRANSPORT_SETTING;struct(Windows.Win32.Networking.WinSock.TRANSPORT_SETTING_ID;g16);cinterface(IInspectable);cinterface(IInspectable))" }
     public static func projectAbi(value: TRANSPORT_SETTING): TRANSPORT_SETTINGAbi {
         var abi = TRANSPORT_SETTINGAbi()
-        abi.SettingId = windows_core.projectTypedAbi(value.SettingId, windows_core.typeMarker<Win32__impl_l0.TRANSPORT_SETTING_ID>())
+        abi.SettingId = windows_core.projectTypedAbi(value.SettingId, windows_core.typeMarker<Win32_impl_p0.TRANSPORT_SETTING_ID>())
         abi.Length = value.Length
         abi.Value = value.Value
         return abi
     }
     public static func assumeInitRef(abi: TRANSPORT_SETTINGAbi): TRANSPORT_SETTING {
         var value = TRANSPORT_SETTING()
-        value.SettingId = windows_core.fromTypedAbi(abi.SettingId, windows_core.typeMarker<Win32__impl_l0.TRANSPORT_SETTING_ID>()).unwrap()
+        value.SettingId = windows_core.fromTypedAbi(abi.SettingId, windows_core.typeMarker<Win32_impl_p0.TRANSPORT_SETTING_ID>()).unwrap()
         value.Length = abi.Length
         value.Value = abi.Value
         return value
@@ -3733,7 +3741,7 @@ public class IRTCBuddy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCBuddyEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Buddy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3771,7 +3779,7 @@ public class IRTCBuddyEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCBuddyEvent> {
-        return InterfaceDescriptor<IRTCBuddyEvent>("IRTCBuddyEvent", IRTCBuddyEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCBuddyEventFromAbi, viewIRTCBuddyEvent)
+        return InterfaceDescriptor<IRTCBuddyEvent>("IRTCBuddyEvent", IRTCBuddyEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCBuddyEventFromAbi, viewIRTCBuddyEvent)
     }
 
     public unsafe func vtbl(): IRTCBuddyEventVtbl {
@@ -4059,7 +4067,7 @@ public class IRTCEventNotification <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCIntensityEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Level: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Min: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Max: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4100,7 +4108,7 @@ public class IRTCIntensityEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCIntensityEvent> {
-        return InterfaceDescriptor<IRTCIntensityEvent>("IRTCIntensityEvent", IRTCIntensityEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCIntensityEventFromAbi, viewIRTCIntensityEvent)
+        return InterfaceDescriptor<IRTCIntensityEvent>("IRTCIntensityEvent", IRTCIntensityEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCIntensityEventFromAbi, viewIRTCIntensityEvent)
     }
 
     public unsafe func vtbl(): IRTCIntensityEventVtbl {
@@ -4135,7 +4143,7 @@ public class IRTCIntensityEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCMediaEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EventType: CFunc<(CPointer<Unit>, CPointer<RTC_MEDIA_EVENT_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var EventReason: CFunc<(CPointer<Unit>, CPointer<RTC_MEDIA_EVENT_REASONAbi>) -> Int32> = { _, _ => 0 }
@@ -4175,7 +4183,7 @@ public class IRTCMediaEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCMediaEvent> {
-        return InterfaceDescriptor<IRTCMediaEvent>("IRTCMediaEvent", IRTCMediaEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCMediaEventFromAbi, viewIRTCMediaEvent)
+        return InterfaceDescriptor<IRTCMediaEvent>("IRTCMediaEvent", IRTCMediaEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCMediaEventFromAbi, viewIRTCMediaEvent)
     }
 
     public unsafe func vtbl(): IRTCMediaEventVtbl {
@@ -4349,7 +4357,7 @@ public class IRTCPresenceDevice <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCPresencePropertyEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var StatusText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var PresenceProperty: CFunc<(CPointer<Unit>, CPointer<RTC_PRESENCE_PROPERTYAbi>) -> Int32> = { _, _ => 0 }
@@ -4390,7 +4398,7 @@ public class IRTCPresencePropertyEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCPresencePropertyEvent> {
-        return InterfaceDescriptor<IRTCPresencePropertyEvent>("IRTCPresencePropertyEvent", IRTCPresencePropertyEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCPresencePropertyEventFromAbi, viewIRTCPresencePropertyEvent)
+        return InterfaceDescriptor<IRTCPresencePropertyEvent>("IRTCPresencePropertyEvent", IRTCPresencePropertyEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCPresencePropertyEventFromAbi, viewIRTCPresencePropertyEvent)
     }
 
     public unsafe func vtbl(): IRTCPresencePropertyEventVtbl {
@@ -4425,7 +4433,7 @@ public class IRTCPresencePropertyEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCPresenceStatusEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var StatusText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetLocalPresenceInfo: CFunc<(CPointer<Unit>, CPointer<RTC_PRESENCE_STATUSAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -4465,7 +4473,7 @@ public class IRTCPresenceStatusEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCPresenceStatusEvent> {
-        return InterfaceDescriptor<IRTCPresenceStatusEvent>("IRTCPresenceStatusEvent", IRTCPresenceStatusEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCPresenceStatusEventFromAbi, viewIRTCPresenceStatusEvent)
+        return InterfaceDescriptor<IRTCPresenceStatusEvent>("IRTCPresenceStatusEvent", IRTCPresenceStatusEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCPresenceStatusEventFromAbi, viewIRTCPresenceStatusEvent)
     }
 
     public unsafe func vtbl(): IRTCPresenceStatusEventVtbl {
@@ -4744,7 +4752,7 @@ public class IRTCProfile2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCProfileEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Cookie: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4784,7 +4792,7 @@ public class IRTCProfileEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCProfileEvent> {
-        return InterfaceDescriptor<IRTCProfileEvent>("IRTCProfileEvent", IRTCProfileEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCProfileEventFromAbi, viewIRTCProfileEvent)
+        return InterfaceDescriptor<IRTCProfileEvent>("IRTCProfileEvent", IRTCProfileEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCProfileEventFromAbi, viewIRTCProfileEvent)
     }
 
     public unsafe func vtbl(): IRTCProfileEventVtbl {
@@ -4868,7 +4876,7 @@ public class IRTCProfileEvent2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCRegistrationStateChangeEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<RTC_REGISTRATION_STATEAbi>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4909,7 +4917,7 @@ public class IRTCRegistrationStateChangeEvent <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCRegistrationStateChangeEvent> {
-        return InterfaceDescriptor<IRTCRegistrationStateChangeEvent>("IRTCRegistrationStateChangeEvent", IRTCRegistrationStateChangeEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCRegistrationStateChangeEventFromAbi, viewIRTCRegistrationStateChangeEvent)
+        return InterfaceDescriptor<IRTCRegistrationStateChangeEvent>("IRTCRegistrationStateChangeEvent", IRTCRegistrationStateChangeEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCRegistrationStateChangeEventFromAbi, viewIRTCRegistrationStateChangeEvent)
     }
 
     public unsafe func vtbl(): IRTCRegistrationStateChangeEventVtbl {
@@ -4944,7 +4952,7 @@ public class IRTCRegistrationStateChangeEvent <: InterfaceWrapperBase & ComInter
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCRoamingEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EventType: CFunc<(CPointer<Unit>, CPointer<RTC_ROAMING_EVENT_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4985,7 +4993,7 @@ public class IRTCRoamingEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCRoamingEvent> {
-        return InterfaceDescriptor<IRTCRoamingEvent>("IRTCRoamingEvent", IRTCRoamingEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCRoamingEventFromAbi, viewIRTCRoamingEvent)
+        return InterfaceDescriptor<IRTCRoamingEvent>("IRTCRoamingEvent", IRTCRoamingEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCRoamingEventFromAbi, viewIRTCRoamingEvent)
     }
 
     public unsafe func vtbl(): IRTCRoamingEventVtbl {
@@ -5351,7 +5359,7 @@ public class IRTCWatcher2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCWatcherEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Watcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5389,7 +5397,7 @@ public class IRTCWatcherEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCWatcherEvent> {
-        return InterfaceDescriptor<IRTCWatcherEvent>("IRTCWatcherEvent", IRTCWatcherEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCWatcherEventFromAbi, viewIRTCWatcherEvent)
+        return InterfaceDescriptor<IRTCWatcherEvent>("IRTCWatcherEvent", IRTCWatcherEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCWatcherEventFromAbi, viewIRTCWatcherEvent)
     }
 
     public unsafe func vtbl(): IRTCWatcherEventVtbl {
@@ -6087,7 +6095,7 @@ public class IRTCUserSearch <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCUserSearchResultsEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EnumerateResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Results: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6131,7 +6139,7 @@ public class IRTCUserSearchResultsEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCUserSearchResultsEvent> {
-        return InterfaceDescriptor<IRTCUserSearchResultsEvent>("IRTCUserSearchResultsEvent", IRTCUserSearchResultsEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCUserSearchResultsEventFromAbi, viewIRTCUserSearchResultsEvent)
+        return InterfaceDescriptor<IRTCUserSearchResultsEvent>("IRTCUserSearchResultsEvent", IRTCUserSearchResultsEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCUserSearchResultsEventFromAbi, viewIRTCUserSearchResultsEvent)
     }
 
     public unsafe func vtbl(): IRTCUserSearchResultsEventVtbl {
@@ -6288,7 +6296,7 @@ public class IRTCBuddy2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCBuddyGroupEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EventType: CFunc<(CPointer<Unit>, CPointer<RTC_GROUP_EVENT_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var Group: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Buddy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6329,7 +6337,7 @@ public class IRTCBuddyGroupEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCBuddyGroupEvent> {
-        return InterfaceDescriptor<IRTCBuddyGroupEvent>("IRTCBuddyGroupEvent", IRTCBuddyGroupEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCBuddyGroupEventFromAbi, viewIRTCBuddyGroupEvent)
+        return InterfaceDescriptor<IRTCBuddyGroupEvent>("IRTCBuddyGroupEvent", IRTCBuddyGroupEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCBuddyGroupEventFromAbi, viewIRTCBuddyGroupEvent)
     }
 
     public unsafe func vtbl(): IRTCBuddyGroupEventVtbl {
@@ -6366,11 +6374,11 @@ public class IRTCBuddyGroupEvent <: InterfaceWrapperBase & ComInterface {
 public struct IRTCClientPresenceVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnablePresence: CFunc<(CPointer<Unit>, Int16, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var EnablePresence: CFunc<(CPointer<Unit>, Int16, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Export: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Export: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Import: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int16) -> Int32> = { _, _, _ => 0 }
+    public var Import: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int16) -> Int32> = { _, _, _ => 0 }
     public var EnumerateBuddies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Buddies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Buddy: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -6430,21 +6438,21 @@ public class IRTCClientPresence <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnablePresence(fUseStorage: Int16, varStorage: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func EnablePresence(fUseStorage: Int16, varStorage: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnablePresence(__liveRaw, fUseStorage, varStorage)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Export(varStorage: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Export(varStorage: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Export(__liveRaw, varStorage)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Import(varStorage: Win32__impl_l2.VARIANTAbi, fReplaceAll: Int16): Int32 {
+    public unsafe func Import(varStorage: Win32_impl_p2.VARIANTAbi, fReplaceAll: Int16): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Import(__liveRaw, varStorage, fReplaceAll)
@@ -6546,7 +6554,7 @@ public class IRTCClientPresence <: InterfaceWrapperBase & ComInterface {
 public struct IRTCClientPresence2Vtbl {
     public var base_: IRTCClientPresenceVtbl = IRTCClientPresenceVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnablePresenceEx: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var EnablePresenceEx: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var DisablePresence: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AddGroup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RemoveGroup: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -6605,7 +6613,7 @@ public class IRTCClientPresence2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnablePresenceEx(pProfile: CPointer<Unit>, varStorage: Win32__impl_l2.VARIANTAbi, lFlags: Int32): Int32 {
+    public unsafe func EnablePresenceEx(pProfile: CPointer<Unit>, varStorage: Win32_impl_p2.VARIANTAbi, lFlags: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnablePresenceEx(__liveRaw, pProfile, varStorage, lFlags)
@@ -6864,7 +6872,7 @@ public struct IRTCClientVtbl {
     public var SetListenForIncomingSessions: CFunc<(CPointer<Unit>, RTC_LISTEN_MODEAbi) -> Int32> = { _, _ => 0 }
     public var ListenForIncomingSessions: CFunc<(CPointer<Unit>, CPointer<RTC_LISTEN_MODEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_NetworkAddresses: CFunc<(CPointer<Unit>, Int16, Int16, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var get_NetworkAddresses: CFunc<(CPointer<Unit>, Int16, Int16, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var put_Volume: CFunc<(CPointer<Unit>, RTC_AUDIO_DEVICEAbi, Int32) -> Int32> = { _, _, _ => 0 }
     public var get_Volume: CFunc<(CPointer<Unit>, RTC_AUDIO_DEVICEAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var put_AudioMuted: CFunc<(CPointer<Unit>, RTC_AUDIO_DEVICEAbi, Int16) -> Int32> = { _, _, _ => 0 }
@@ -7006,7 +7014,7 @@ public class IRTCClient <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_NetworkAddresses(fTCP: Int16, fExternal: Int16, pvAddresses: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_NetworkAddresses(fTCP: Int16, fExternal: Int16, pvAddresses: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_NetworkAddresses(__liveRaw, fTCP, fExternal, pvAddresses)
@@ -7336,7 +7344,7 @@ public class IRTCClient2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCClientEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EventType: CFunc<(CPointer<Unit>, CPointer<RTC_CLIENT_EVENT_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var Client: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -7375,7 +7383,7 @@ public class IRTCClientEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCClientEvent> {
-        return InterfaceDescriptor<IRTCClientEvent>("IRTCClientEvent", IRTCClientEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCClientEventFromAbi, viewIRTCClientEvent)
+        return InterfaceDescriptor<IRTCClientEvent>("IRTCClientEvent", IRTCClientEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCClientEventFromAbi, viewIRTCClientEvent)
     }
 
     public unsafe func vtbl(): IRTCClientEventVtbl {
@@ -7474,7 +7482,7 @@ public class IRTCEnumParticipants <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCInfoEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Participant: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Info: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -7515,7 +7523,7 @@ public class IRTCInfoEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCInfoEvent> {
-        return InterfaceDescriptor<IRTCInfoEvent>("IRTCInfoEvent", IRTCInfoEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCInfoEventFromAbi, viewIRTCInfoEvent)
+        return InterfaceDescriptor<IRTCInfoEvent>("IRTCInfoEvent", IRTCInfoEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCInfoEventFromAbi, viewIRTCInfoEvent)
     }
 
     public unsafe func vtbl(): IRTCInfoEventVtbl {
@@ -7550,7 +7558,7 @@ public class IRTCInfoEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCMediaRequestEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProposedMedia: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentMedia: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7594,7 +7602,7 @@ public class IRTCMediaRequestEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCMediaRequestEvent> {
-        return InterfaceDescriptor<IRTCMediaRequestEvent>("IRTCMediaRequestEvent", IRTCMediaRequestEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCMediaRequestEventFromAbi, viewIRTCMediaRequestEvent)
+        return InterfaceDescriptor<IRTCMediaRequestEvent>("IRTCMediaRequestEvent", IRTCMediaRequestEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCMediaRequestEventFromAbi, viewIRTCMediaRequestEvent)
     }
 
     public unsafe func vtbl(): IRTCMediaRequestEventVtbl {
@@ -7647,7 +7655,7 @@ public class IRTCMediaRequestEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCMessagingEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Participant: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EventType: CFunc<(CPointer<Unit>, CPointer<RTC_MESSAGING_EVENT_TYPEAbi>) -> Int32> = { _, _ => 0 }
@@ -7690,7 +7698,7 @@ public class IRTCMessagingEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCMessagingEvent> {
-        return InterfaceDescriptor<IRTCMessagingEvent>("IRTCMessagingEvent", IRTCMessagingEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCMessagingEventFromAbi, viewIRTCMessagingEvent)
+        return InterfaceDescriptor<IRTCMessagingEvent>("IRTCMessagingEvent", IRTCMessagingEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCMessagingEventFromAbi, viewIRTCMessagingEvent)
     }
 
     public unsafe func vtbl(): IRTCMessagingEventVtbl {
@@ -7820,7 +7828,7 @@ public class IRTCParticipant <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCParticipantStateChangeEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Participant: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<RTC_PARTICIPANT_STATEAbi>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7860,7 +7868,7 @@ public class IRTCParticipantStateChangeEvent <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCParticipantStateChangeEvent> {
-        return InterfaceDescriptor<IRTCParticipantStateChangeEvent>("IRTCParticipantStateChangeEvent", IRTCParticipantStateChangeEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCParticipantStateChangeEventFromAbi, viewIRTCParticipantStateChangeEvent)
+        return InterfaceDescriptor<IRTCParticipantStateChangeEvent>("IRTCParticipantStateChangeEvent", IRTCParticipantStateChangeEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCParticipantStateChangeEventFromAbi, viewIRTCParticipantStateChangeEvent)
     }
 
     public unsafe func vtbl(): IRTCParticipantStateChangeEventVtbl {
@@ -7889,7 +7897,7 @@ public class IRTCParticipantStateChangeEvent <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCReInviteEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Accept: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Reject: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -7931,7 +7939,7 @@ public class IRTCReInviteEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCReInviteEvent> {
-        return InterfaceDescriptor<IRTCReInviteEvent>("IRTCReInviteEvent", IRTCReInviteEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCReInviteEventFromAbi, viewIRTCReInviteEvent)
+        return InterfaceDescriptor<IRTCReInviteEvent>("IRTCReInviteEvent", IRTCReInviteEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCReInviteEventFromAbi, viewIRTCReInviteEvent)
     }
 
     public unsafe func vtbl(): IRTCReInviteEventVtbl {
@@ -8250,7 +8258,7 @@ public class IRTCSession2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCSessionOperationCompleteEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Cookie: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8291,7 +8299,7 @@ public class IRTCSessionOperationCompleteEvent <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCSessionOperationCompleteEvent> {
-        return InterfaceDescriptor<IRTCSessionOperationCompleteEvent>("IRTCSessionOperationCompleteEvent", IRTCSessionOperationCompleteEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCSessionOperationCompleteEventFromAbi, viewIRTCSessionOperationCompleteEvent)
+        return InterfaceDescriptor<IRTCSessionOperationCompleteEvent>("IRTCSessionOperationCompleteEvent", IRTCSessionOperationCompleteEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCSessionOperationCompleteEventFromAbi, viewIRTCSessionOperationCompleteEvent)
     }
 
     public unsafe func vtbl(): IRTCSessionOperationCompleteEventVtbl {
@@ -8388,7 +8396,7 @@ public class IRTCSessionOperationCompleteEvent2 <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCSessionReferStatusEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReferStatus: CFunc<(CPointer<Unit>, CPointer<RTC_SESSION_REFER_STATUSAbi>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8429,7 +8437,7 @@ public class IRTCSessionReferStatusEvent <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCSessionReferStatusEvent> {
-        return InterfaceDescriptor<IRTCSessionReferStatusEvent>("IRTCSessionReferStatusEvent", IRTCSessionReferStatusEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCSessionReferStatusEventFromAbi, viewIRTCSessionReferStatusEvent)
+        return InterfaceDescriptor<IRTCSessionReferStatusEvent>("IRTCSessionReferStatusEvent", IRTCSessionReferStatusEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCSessionReferStatusEventFromAbi, viewIRTCSessionReferStatusEvent)
     }
 
     public unsafe func vtbl(): IRTCSessionReferStatusEventVtbl {
@@ -8464,7 +8472,7 @@ public class IRTCSessionReferStatusEvent <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCSessionReferredEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReferredByURI: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ReferToURI: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8508,7 +8516,7 @@ public class IRTCSessionReferredEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCSessionReferredEvent> {
-        return InterfaceDescriptor<IRTCSessionReferredEvent>("IRTCSessionReferredEvent", IRTCSessionReferredEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCSessionReferredEventFromAbi, viewIRTCSessionReferredEvent)
+        return InterfaceDescriptor<IRTCSessionReferredEvent>("IRTCSessionReferredEvent", IRTCSessionReferredEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCSessionReferredEventFromAbi, viewIRTCSessionReferredEvent)
     }
 
     public unsafe func vtbl(): IRTCSessionReferredEventVtbl {
@@ -8561,7 +8569,7 @@ public class IRTCSessionReferredEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RealTimeCommunications == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRTCSessionStateChangeEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<RTC_SESSION_STATEAbi>) -> Int32> = { _, _ => 0 }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8602,7 +8610,7 @@ public class IRTCSessionStateChangeEvent <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IRTCSessionStateChangeEvent> {
-        return InterfaceDescriptor<IRTCSessionStateChangeEvent>("IRTCSessionStateChangeEvent", IRTCSessionStateChangeEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIRTCSessionStateChangeEventFromAbi, viewIRTCSessionStateChangeEvent)
+        return InterfaceDescriptor<IRTCSessionStateChangeEvent>("IRTCSessionStateChangeEvent", IRTCSessionStateChangeEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIRTCSessionStateChangeEventFromAbi, viewIRTCSessionStateChangeEvent)
     }
 
     public unsafe func vtbl(): IRTCSessionStateChangeEventVtbl {

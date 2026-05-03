@@ -4,18 +4,33 @@
 package windows_appsdk.Microsoft.UI.Xaml.Hosting
 
 import std.collection.*
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Xaml_Hosting == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_UI_Xaml_Hosting == "on" && Microsoft_UI == "on"]
 import windows_appsdk.Microsoft.UI as Microsoft_UI
+@When[Microsoft_UI_Xaml_Hosting == "on" && Microsoft_UI_Composition == "on"]
 import windows_appsdk.Microsoft.UI.Composition as Microsoft_UI_Composition
+@When[Microsoft_UI_Xaml_Hosting == "on" && Microsoft_UI_Content == "on"]
 import windows_appsdk.Microsoft.UI.Content as Microsoft_UI_Content
-import windows_appsdk.Microsoft.UI.Xaml._impl_l1 as Microsoft_UI_Xaml__impl_l1
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+import windows_appsdk.Microsoft.UI.Xaml.impl.p0 as Microsoft_UI_Xaml_impl_p0
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+import windows_appsdk.Microsoft.UI.Xaml.impl.p1 as Microsoft_UI_Xaml_impl_p1
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_UI_Xaml_Hosting == "on"]
 import windows_future as windows_future
 
 
@@ -262,7 +277,7 @@ public class IElementCompositionPreviewStatics <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IElementCompositionPreviewStatics", IElementCompositionPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IElementCompositionPreviewStaticsVtbl", "IElementCompositionPreviewStatics", "IElementCompositionPreviewStatics_Impl", [InterfaceMethodSchema("GetElementVisual", 6, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetElementChildVisual", 7, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetElementChildVisual", 8, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visual", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetScrollViewerManipulationPropertySet", 9, [InterfaceParameterSchema("scrollViewer", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.ScrollViewer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImplicitShowAnimation", 10, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.ICompositionAnimationBase>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetImplicitHideAnimation", 11, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.ICompositionAnimationBase>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetIsTranslationEnabled", 12, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPointerPositionPropertySet", 13, [InterfaceParameterSchema("targetElement", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IElementCompositionPreviewStatics", IElementCompositionPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IElementCompositionPreviewStaticsVtbl", "IElementCompositionPreviewStatics", "IElementCompositionPreviewStatics_Impl", [InterfaceMethodSchema("GetElementVisual", 6, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetElementChildVisual", 7, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetElementChildVisual", 8, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visual", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.Visual>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetScrollViewerManipulationPropertySet", 9, [InterfaceParameterSchema("scrollViewer", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p1.ScrollViewer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImplicitShowAnimation", 10, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.ICompositionAnimationBase>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetImplicitHideAnimation", 11, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<Microsoft_UI_Composition.ICompositionAnimationBase>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetIsTranslationEnabled", 12, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPointerPositionPropertySet", 13, [InterfaceParameterSchema("targetElement", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IElementCompositionPreviewStatics.runtimeType())
         return schema
     }
@@ -292,7 +307,7 @@ public class IElementCompositionPreviewStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func GetElementVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.Visual {
+    public unsafe func GetElementVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.Visual {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetElementVisual(asRaw(), element.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -301,7 +316,7 @@ public class IElementCompositionPreviewStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func GetElementChildVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.Visual {
+    public unsafe func GetElementChildVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.Visual {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetElementChildVisual(asRaw(), element.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -310,14 +325,14 @@ public class IElementCompositionPreviewStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func SetElementChildVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement, visual: Microsoft_UI_Composition.Visual): Unit {
+    public unsafe func SetElementChildVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement, visual: Microsoft_UI_Composition.Visual): Unit {
         let v = vtbl()
         let hr = v.SetElementChildVisual(asRaw(), element.asRaw(), visual.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml_Controls == "on"]
-    public unsafe func GetScrollViewerManipulationPropertySet(scrollViewer: Microsoft_UI_Xaml__impl_l1.ScrollViewer): Microsoft_UI_Composition.CompositionPropertySet {
+    public unsafe func GetScrollViewerManipulationPropertySet(scrollViewer: Microsoft_UI_Xaml_impl_p1.ScrollViewer): Microsoft_UI_Composition.CompositionPropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetScrollViewerManipulationPropertySet(asRaw(), scrollViewer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -326,28 +341,28 @@ public class IElementCompositionPreviewStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func SetImplicitShowAnimation(element: Microsoft_UI_Xaml__impl_l1.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
+    public unsafe func SetImplicitShowAnimation(element: Microsoft_UI_Xaml_impl_p0.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
         let v = vtbl()
         let hr = v.SetImplicitShowAnimation(asRaw(), element.asRaw(), animation.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func SetImplicitHideAnimation(element: Microsoft_UI_Xaml__impl_l1.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
+    public unsafe func SetImplicitHideAnimation(element: Microsoft_UI_Xaml_impl_p0.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
         let v = vtbl()
         let hr = v.SetImplicitHideAnimation(asRaw(), element.asRaw(), animation.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetIsTranslationEnabled(element: Microsoft_UI_Xaml__impl_l1.UIElement, value: Bool): Unit {
+    public unsafe func SetIsTranslationEnabled(element: Microsoft_UI_Xaml_impl_p0.UIElement, value: Bool): Unit {
         let v = vtbl()
         let hr = v.SetIsTranslationEnabled(asRaw(), element.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public unsafe func GetPointerPositionPropertySet(targetElement: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.CompositionPropertySet {
+    public unsafe func GetPointerPositionPropertySet(targetElement: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.CompositionPropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPointerPositionPropertySet(asRaw(), targetElement.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -844,7 +859,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func GetElementVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.Visual {
+    public static unsafe func GetElementVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.Visual {
         var result__: Option<Microsoft_UI_Composition.Visual> = Option<Microsoft_UI_Composition.Visual>.None
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             result__ = Some(factory__.GetElementVisual(element))
@@ -856,7 +871,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func GetElementChildVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.Visual {
+    public static unsafe func GetElementChildVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.Visual {
         var result__: Option<Microsoft_UI_Composition.Visual> = Option<Microsoft_UI_Composition.Visual>.None
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             result__ = Some(factory__.GetElementChildVisual(element))
@@ -868,7 +883,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetElementChildVisual(element: Microsoft_UI_Xaml__impl_l1.UIElement, visual: Microsoft_UI_Composition.Visual): Unit {
+    public static unsafe func SetElementChildVisual(element: Microsoft_UI_Xaml_impl_p0.UIElement, visual: Microsoft_UI_Composition.Visual): Unit {
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             factory__.SetElementChildVisual(element, visual)
         }
@@ -876,7 +891,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml_Controls == "on"]
-    public static unsafe func GetScrollViewerManipulationPropertySet(scrollViewer: Microsoft_UI_Xaml__impl_l1.ScrollViewer): Microsoft_UI_Composition.CompositionPropertySet {
+    public static unsafe func GetScrollViewerManipulationPropertySet(scrollViewer: Microsoft_UI_Xaml_impl_p1.ScrollViewer): Microsoft_UI_Composition.CompositionPropertySet {
         var result__: Option<Microsoft_UI_Composition.CompositionPropertySet> = Option<Microsoft_UI_Composition.CompositionPropertySet>.None
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             result__ = Some(factory__.GetScrollViewerManipulationPropertySet(scrollViewer))
@@ -888,7 +903,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetImplicitShowAnimation(element: Microsoft_UI_Xaml__impl_l1.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
+    public static unsafe func SetImplicitShowAnimation(element: Microsoft_UI_Xaml_impl_p0.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             factory__.SetImplicitShowAnimation(element, animation)
         }
@@ -896,7 +911,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetImplicitHideAnimation(element: Microsoft_UI_Xaml__impl_l1.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
+    public static unsafe func SetImplicitHideAnimation(element: Microsoft_UI_Xaml_impl_p0.UIElement, animation: Microsoft_UI_Composition.ICompositionAnimationBase): Unit {
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             factory__.SetImplicitHideAnimation(element, animation)
         }
@@ -904,7 +919,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func SetIsTranslationEnabled(element: Microsoft_UI_Xaml__impl_l1.UIElement, value: Bool): Unit {
+    public static unsafe func SetIsTranslationEnabled(element: Microsoft_UI_Xaml_impl_p0.UIElement, value: Bool): Unit {
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             factory__.SetIsTranslationEnabled(element, value)
         }
@@ -912,7 +927,7 @@ public class ElementCompositionPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Microsoft_UI_Composition == "on" && Microsoft_UI_Xaml == "on"]
-    public static unsafe func GetPointerPositionPropertySet(targetElement: Microsoft_UI_Xaml__impl_l1.UIElement): Microsoft_UI_Composition.CompositionPropertySet {
+    public static unsafe func GetPointerPositionPropertySet(targetElement: Microsoft_UI_Xaml_impl_p0.UIElement): Microsoft_UI_Composition.CompositionPropertySet {
         var result__: Option<Microsoft_UI_Composition.CompositionPropertySet> = Option<Microsoft_UI_Composition.CompositionPropertySet>.None
         try (factory__ = windows_core.factory<ElementCompositionPreview, IElementCompositionPreviewStatics>().unwrap()) {
             result__ = Some(factory__.GetPointerPositionPropertySet(targetElement))
@@ -1126,12 +1141,12 @@ public class DesktopWindowXamlSource <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func Content(): Microsoft_UI_Xaml__impl_l1.UIElement {
+    public unsafe func Content(): Microsoft_UI_Xaml_impl_p0.UIElement {
         return defaultInterface().Content()
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetContent(value: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func SetContent(value: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         defaultInterface().SetContent(value)
     }
 
@@ -1140,12 +1155,12 @@ public class DesktopWindowXamlSource <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_SystemBackdrop(): Microsoft_UI_Xaml__impl_l1.SystemBackdrop {
+    public unsafe func get_SystemBackdrop(): Microsoft_UI_Xaml_impl_p0.SystemBackdrop {
         return defaultInterface().get_SystemBackdrop()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetSystemBackdrop(value: Microsoft_UI_Xaml__impl_l1.SystemBackdrop): Unit {
+    public unsafe func SetSystemBackdrop(value: Microsoft_UI_Xaml_impl_p0.SystemBackdrop): Unit {
         defaultInterface().SetSystemBackdrop(value)
     }
 
@@ -1487,7 +1502,7 @@ public class IDesktopWindowXamlSource <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDesktopWindowXamlSource", IDesktopWindowXamlSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDesktopWindowXamlSourceVtbl", "IDesktopWindowXamlSource", "IDesktopWindowXamlSource_Impl", [InterfaceMethodSchema("Content", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContent", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("HasFocus", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_SystemBackdrop", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l1.SystemBackdrop>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSystemBackdrop", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l1.SystemBackdrop>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SiteBridge", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Content.DesktopChildSiteBridge>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TakeFocusRequested", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceTakeFocusRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTakeFocusRequested", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GotFocus", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceGotFocusEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveGotFocus", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigateFocus", 16, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<XamlSourceFocusNavigationRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XamlSourceFocusNavigationResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Initialize", 17, [InterfaceParameterSchema("parentWindowId", "Microsoft_UI.WindowIdAbi", "Microsoft_UI.WindowId", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDesktopWindowXamlSource", IDesktopWindowXamlSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDesktopWindowXamlSourceVtbl", "IDesktopWindowXamlSource", "IDesktopWindowXamlSource_Impl", [InterfaceMethodSchema("Content", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContent", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("HasFocus", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_SystemBackdrop", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.SystemBackdrop>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSystemBackdrop", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.SystemBackdrop>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SiteBridge", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Content.DesktopChildSiteBridge>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TakeFocusRequested", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceTakeFocusRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTakeFocusRequested", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GotFocus", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceGotFocusEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveGotFocus", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigateFocus", 16, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<XamlSourceFocusNavigationRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XamlSourceFocusNavigationResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Initialize", 17, [InterfaceParameterSchema("parentWindowId", "Microsoft_UI.WindowIdAbi", "Microsoft_UI.WindowId", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IDesktopWindowXamlSource.runtimeType())
         return schema
     }
@@ -1517,16 +1532,16 @@ public class IDesktopWindowXamlSource <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func Content(): Microsoft_UI_Xaml__impl_l1.UIElement {
+    public unsafe func Content(): Microsoft_UI_Xaml_impl_p0.UIElement {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Content(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l1.UIElement.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.UIElement.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func SetContent(value: Microsoft_UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func SetContent(value: Microsoft_UI_Xaml_impl_p0.UIElement): Unit {
         let v = vtbl()
         let hr = v.SetContent(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1541,16 +1556,16 @@ public class IDesktopWindowXamlSource <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_SystemBackdrop(): Microsoft_UI_Xaml__impl_l1.SystemBackdrop {
+    public unsafe func get_SystemBackdrop(): Microsoft_UI_Xaml_impl_p0.SystemBackdrop {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_SystemBackdrop(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l1.SystemBackdrop.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.SystemBackdrop.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetSystemBackdrop(value: Microsoft_UI_Xaml__impl_l1.SystemBackdrop): Unit {
+    public unsafe func SetSystemBackdrop(value: Microsoft_UI_Xaml_impl_p0.SystemBackdrop): Unit {
         let v = vtbl()
         let hr = v.SetSystemBackdrop(asRaw(), value.asRaw())
         HRESULT(hr).ok()

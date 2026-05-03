@@ -4,13 +4,21 @@
 package windows.Win32.Storage.IscsiDisc
 
 import std.collection.*
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_polyfill.{unionReadUInt64, unionReadUInt8, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Storage_IscsiDisc == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_IscsiDisc == "on" && Windows_Win32_System_Ioctl == "on"]
 import windows.Win32.System.Ioctl as Win32_System_Ioctl
 
 

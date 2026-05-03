@@ -4,16 +4,27 @@
 package windows.UI.Input.Preview.Text
 
 import std.collection.*
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Input_Preview_Text == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Input_Preview_Text == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l0 as _impl_l0
+@When[Windows_UI_Input_Preview_Text == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Input_Preview_Text == "on"]
 import windows_future as windows_future
 
 
@@ -107,7 +118,7 @@ extend IInputDelegationModeChangedEventArgs <: windows_core.Interface<IInputDele
 public struct IReconversionRequestedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_UI_Text_Core == "on"]
-    public var Range: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Range: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var Range: UIntNative = UIntNative(0)
     public init() {}
@@ -149,7 +160,7 @@ public class IReconversionRequestedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IReconversionRequestedEventArgs", IReconversionRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IReconversionRequestedEventArgsVtbl", "IReconversionRequestedEventArgs", "IReconversionRequestedEventArgs_Impl", [InterfaceMethodSchema("Range", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextRangeAbi>", "OutSlot<_impl_l0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IReconversionRequestedEventArgs", IReconversionRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IReconversionRequestedEventArgsVtbl", "IReconversionRequestedEventArgs", "IReconversionRequestedEventArgs_Impl", [InterfaceMethodSchema("Range", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextRangeAbi>", "OutSlot<impl_p0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IReconversionRequestedEventArgs.runtimeType())
         return schema
     }
@@ -179,12 +190,12 @@ public class IReconversionRequestedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func Range(): _impl_l0.CoreTextRange {
+    public unsafe func Range(): impl_p0.CoreTextRange {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextRangeAbi()
-        let hr = v.Range(asRaw(), CPointer<_impl_l0.CoreTextRangeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextRangeAbi()
+        let hr = v.Range(asRaw(), CPointer<impl_p0.CoreTextRangeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextRange>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextRange>()).unwrap()
     }
 }
 
@@ -516,7 +527,7 @@ public class ReconversionRequestedEventArgs <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func Range(): _impl_l0.CoreTextRange {
+    public unsafe func Range(): impl_p0.CoreTextRange {
         return defaultInterface().Range()
     }
 }
@@ -1260,7 +1271,7 @@ public struct ITextBoxInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<TextBoxIdAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core == "on"]
-    public var InputScope: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextInputScopeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var InputScope: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextInputScopeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var InputScope: UIntNative = UIntNative(0)
     public var AppName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1306,7 +1317,7 @@ public class ITextBoxInfo <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITextBoxInfo", ITextBoxInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextBoxInfoVtbl", "ITextBoxInfo", "ITextBoxInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<TextBoxIdAbi>", "OutSlot<TextBoxId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InputScope", 7, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextInputScopeAbi>", "OutSlot<_impl_l0.CoreTextInputScope>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppName", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Url", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Settings", 10, [InterfaceParameterSchema("result", "CPointer<TextBoxSettingsAbi>", "OutSlot<TextBoxSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisabledFeatures", 11, [InterfaceParameterSchema("result", "CPointer<TextBoxFeaturesAbi>", "OutSlot<TextBoxFeatures>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITextBoxInfo", ITextBoxInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextBoxInfoVtbl", "ITextBoxInfo", "ITextBoxInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<TextBoxIdAbi>", "OutSlot<TextBoxId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InputScope", 7, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextInputScopeAbi>", "OutSlot<impl_p0.CoreTextInputScope>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppName", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Url", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Settings", 10, [InterfaceParameterSchema("result", "CPointer<TextBoxSettingsAbi>", "OutSlot<TextBoxSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisabledFeatures", 11, [InterfaceParameterSchema("result", "CPointer<TextBoxFeaturesAbi>", "OutSlot<TextBoxFeatures>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITextBoxInfo.runtimeType())
         return schema
     }
@@ -1344,12 +1355,12 @@ public class ITextBoxInfo <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func InputScope(): _impl_l0.CoreTextInputScope {
+    public unsafe func InputScope(): impl_p0.CoreTextInputScope {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextInputScopeAbi()
-        let hr = v.InputScope(asRaw(), CPointer<_impl_l0.CoreTextInputScopeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextInputScopeAbi()
+        let hr = v.InputScope(asRaw(), CPointer<impl_p0.CoreTextInputScopeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextInputScope>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextInputScope>()).unwrap()
     }
 
     public unsafe func AppName(): windows_core.HString {
@@ -1566,7 +1577,7 @@ public class TextBoxInfo <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func InputScope(): _impl_l0.CoreTextInputScope {
+    public unsafe func InputScope(): impl_p0.CoreTextInputScope {
         return defaultInterface().InputScope()
     }
 
@@ -1611,7 +1622,7 @@ public struct TextStyle {
     public var textColor: UI.Color = UI.Color()
     public var backgroundColor: UI.Color = UI.Color()
     public var underlineColor: UI.Color = UI.Color()
-    public var underlineType: _impl_l0.UnderlineType = _impl_l0.UnderlineType()
+    public var underlineType: impl_p0.UnderlineType = impl_p0.UnderlineType()
     public init() {}
 }
 
@@ -1622,7 +1633,7 @@ public struct TextStyleAbi {
     public var textColor: UI.ColorAbi = UI.ColorAbi()
     public var backgroundColor: UI.ColorAbi = UI.ColorAbi()
     public var underlineColor: UI.ColorAbi = UI.ColorAbi()
-    public var underlineType: _impl_l0.UnderlineTypeAbi = _impl_l0.UnderlineTypeAbi()
+    public var underlineType: impl_p0.UnderlineTypeAbi = impl_p0.UnderlineTypeAbi()
     public init() {}
 }
 
@@ -1637,7 +1648,7 @@ extend TextStyle <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.textColor = windows_core.projectTypedAbi(value.textColor, windows_core.typeMarker<UI.Color>())
         abi.backgroundColor = windows_core.projectTypedAbi(value.backgroundColor, windows_core.typeMarker<UI.Color>())
         abi.underlineColor = windows_core.projectTypedAbi(value.underlineColor, windows_core.typeMarker<UI.Color>())
-        abi.underlineType = windows_core.projectTypedAbi(value.underlineType, windows_core.typeMarker<_impl_l0.UnderlineType>())
+        abi.underlineType = windows_core.projectTypedAbi(value.underlineType, windows_core.typeMarker<impl_p0.UnderlineType>())
         return abi
     }
     public static func assumeInitRef(abi: TextStyleAbi): TextStyle {
@@ -1646,7 +1657,7 @@ extend TextStyle <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.textColor = windows_core.fromTypedAbi(abi.textColor, windows_core.typeMarker<UI.Color>()).unwrap()
         value.backgroundColor = windows_core.fromTypedAbi(abi.backgroundColor, windows_core.typeMarker<UI.Color>()).unwrap()
         value.underlineColor = windows_core.fromTypedAbi(abi.underlineColor, windows_core.typeMarker<UI.Color>()).unwrap()
-        value.underlineType = windows_core.fromTypedAbi(abi.underlineType, windows_core.typeMarker<_impl_l0.UnderlineType>()).unwrap()
+        value.underlineType = windows_core.fromTypedAbi(abi.underlineType, windows_core.typeMarker<impl_p0.UnderlineType>()).unwrap()
         return value
     }
     public static func fromAbi(abi: TextStyleAbi): Result<TextStyle> { Result<TextStyle>.Ok(TextStyle.assumeInitRef(abi)) }
@@ -2107,21 +2118,21 @@ extend FocusEnteredEventArgs <: windows_core.HandleWinrtType<FocusEnteredEventAr
 public struct IKeyEventReceivedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_System == "on"]
-    public var get_VirtualKey: CFunc<(CPointer<Unit>, CPointer<_impl_l0.VirtualKeyAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_VirtualKey: CFunc<(CPointer<Unit>, CPointer<impl_p0.VirtualKeyAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var get_VirtualKey: UIntNative = UIntNative(0)
     @When[Windows_UI_Core == "on"]
-    public var KeyStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CorePhysicalKeyStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var KeyStatus: CFunc<(CPointer<Unit>, CPointer<impl_p0.CorePhysicalKeyStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core != "on"]
     public var KeyStatus: UIntNative = UIntNative(0)
     public var Unicode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Source: CFunc<(CPointer<Unit>, CPointer<KeyEventDeviceTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_System == "on"]
-    public var IsKeyPressed: CFunc<(CPointer<Unit>, _impl_l0.VirtualKeyAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var IsKeyPressed: CFunc<(CPointer<Unit>, impl_p0.VirtualKeyAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var IsKeyPressed: UIntNative = UIntNative(0)
     @When[Windows_System == "on"]
-    public var IsToggleKeyOn: CFunc<(CPointer<Unit>, _impl_l0.VirtualKeyAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var IsToggleKeyOn: CFunc<(CPointer<Unit>, impl_p0.VirtualKeyAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var IsToggleKeyOn: UIntNative = UIntNative(0)
     public var EditSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2166,7 +2177,7 @@ public class IKeyEventReceivedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IKeyEventReceivedEventArgs", IKeyEventReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IKeyEventReceivedEventArgsVtbl", "IKeyEventReceivedEventArgs", "IKeyEventReceivedEventArgs_Impl", [InterfaceMethodSchema("get_VirtualKey", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.VirtualKeyAbi>", "OutSlot<_impl_l0.VirtualKey>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("KeyStatus", 7, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CorePhysicalKeyStatusAbi>", "OutSlot<_impl_l0.CorePhysicalKeyStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Unicode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 9, [InterfaceParameterSchema("result", "CPointer<KeyEventDeviceTypeAbi>", "OutSlot<KeyEventDeviceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsKeyPressed", 10, [InterfaceParameterSchema("vkey", "_impl_l0.VirtualKeyAbi", "_impl_l0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsToggleKeyOn", 11, [InterfaceParameterSchema("vkey", "_impl_l0.VirtualKeyAbi", "_impl_l0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EditSession", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextEditSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Handled", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHandled", 14, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IKeyEventReceivedEventArgs", IKeyEventReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IKeyEventReceivedEventArgsVtbl", "IKeyEventReceivedEventArgs", "IKeyEventReceivedEventArgs_Impl", [InterfaceMethodSchema("get_VirtualKey", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.VirtualKeyAbi>", "OutSlot<impl_p0.VirtualKey>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("KeyStatus", 7, [InterfaceParameterSchema("result", "CPointer<impl_p0.CorePhysicalKeyStatusAbi>", "OutSlot<impl_p0.CorePhysicalKeyStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Unicode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 9, [InterfaceParameterSchema("result", "CPointer<KeyEventDeviceTypeAbi>", "OutSlot<KeyEventDeviceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsKeyPressed", 10, [InterfaceParameterSchema("vkey", "impl_p0.VirtualKeyAbi", "impl_p0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsToggleKeyOn", 11, [InterfaceParameterSchema("vkey", "impl_p0.VirtualKeyAbi", "impl_p0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EditSession", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextEditSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Handled", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHandled", 14, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IKeyEventReceivedEventArgs.runtimeType())
         return schema
     }
@@ -2196,21 +2207,21 @@ public class IKeyEventReceivedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_VirtualKey(): _impl_l0.VirtualKey {
+    public unsafe func get_VirtualKey(): impl_p0.VirtualKey {
         let v = vtbl()
-        var result__ = _impl_l0.VirtualKeyAbi()
-        let hr = v.get_VirtualKey(asRaw(), CPointer<_impl_l0.VirtualKeyAbi>(inout result__))
+        var result__ = impl_p0.VirtualKeyAbi()
+        let hr = v.get_VirtualKey(asRaw(), CPointer<impl_p0.VirtualKeyAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.VirtualKey>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.VirtualKey>()).unwrap()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func KeyStatus(): _impl_l0.CorePhysicalKeyStatus {
+    public unsafe func KeyStatus(): impl_p0.CorePhysicalKeyStatus {
         let v = vtbl()
-        var result__ = _impl_l0.CorePhysicalKeyStatusAbi()
-        let hr = v.KeyStatus(asRaw(), CPointer<_impl_l0.CorePhysicalKeyStatusAbi>(inout result__))
+        var result__ = impl_p0.CorePhysicalKeyStatusAbi()
+        let hr = v.KeyStatus(asRaw(), CPointer<impl_p0.CorePhysicalKeyStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CorePhysicalKeyStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CorePhysicalKeyStatus>()).unwrap()
     }
 
     public unsafe func Unicode(): windows_core.HString {
@@ -2230,19 +2241,19 @@ public class IKeyEventReceivedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsKeyPressed(vkey: _impl_l0.VirtualKey): Bool {
+    public unsafe func IsKeyPressed(vkey: impl_p0.VirtualKey): Bool {
         let v = vtbl()
         var result__ = false
-        let hr = v.IsKeyPressed(asRaw(), windows_core.projectTypedAbi(vkey, windows_core.typeMarker<_impl_l0.VirtualKey>()), CPointer<Bool>(inout result__))
+        let hr = v.IsKeyPressed(asRaw(), windows_core.projectTypedAbi(vkey, windows_core.typeMarker<impl_p0.VirtualKey>()), CPointer<Bool>(inout result__))
         HRESULT(hr).ok()
         return result__
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsToggleKeyOn(vkey: _impl_l0.VirtualKey): Bool {
+    public unsafe func IsToggleKeyOn(vkey: impl_p0.VirtualKey): Bool {
         let v = vtbl()
         var result__ = false
-        let hr = v.IsToggleKeyOn(asRaw(), windows_core.projectTypedAbi(vkey, windows_core.typeMarker<_impl_l0.VirtualKey>()), CPointer<Bool>(inout result__))
+        let hr = v.IsToggleKeyOn(asRaw(), windows_core.projectTypedAbi(vkey, windows_core.typeMarker<impl_p0.VirtualKey>()), CPointer<Bool>(inout result__))
         HRESULT(hr).ok()
         return result__
     }
@@ -2757,15 +2768,15 @@ public struct ITextCompositionSegmentVtbl {
     public var UnconvertedText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetUnconvertedText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core == "on"]
-    public var Range: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Range: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var Range: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var ConversionState: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextFormatUpdatingReasonAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ConversionState: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextFormatUpdatingReasonAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var ConversionState: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var SetConversionState: CFunc<(CPointer<Unit>, _impl_l0.CoreTextFormatUpdatingReasonAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetConversionState: CFunc<(CPointer<Unit>, impl_p0.CoreTextFormatUpdatingReasonAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var SetConversionState: UIntNative = UIntNative(0)
     public var Next: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2817,7 +2828,7 @@ public class ITextCompositionSegment <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITextCompositionSegment", ITextCompositionSegment.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextCompositionSegmentVtbl", "ITextCompositionSegment", "ITextCompositionSegment_Impl", [InterfaceMethodSchema("Text", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConvertedText", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetConvertedText", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("UnconvertedText", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUnconvertedText", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Range", 12, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextRangeAbi>", "OutSlot<_impl_l0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConversionState", 13, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextFormatUpdatingReasonAbi>", "OutSlot<_impl_l0.CoreTextFormatUpdatingReason>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetConversionState", 14, [InterfaceParameterSchema("value", "_impl_l0.CoreTextFormatUpdatingReasonAbi", "_impl_l0.CoreTextFormatUpdatingReason", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Next", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextCompositionSegment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Previous", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextCompositionSegment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetTextStyle", 17, [InterfaceParameterSchema("result", "CPointer<TextStyleAbi>", "OutSlot<TextStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextStyle", 18, [InterfaceParameterSchema("value", "TextStyleAbi", "TextStyle", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITextCompositionSegment", ITextCompositionSegment.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextCompositionSegmentVtbl", "ITextCompositionSegment", "ITextCompositionSegment_Impl", [InterfaceMethodSchema("Text", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConvertedText", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetConvertedText", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("UnconvertedText", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUnconvertedText", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Range", 12, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextRangeAbi>", "OutSlot<impl_p0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConversionState", 13, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextFormatUpdatingReasonAbi>", "OutSlot<impl_p0.CoreTextFormatUpdatingReason>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetConversionState", 14, [InterfaceParameterSchema("value", "impl_p0.CoreTextFormatUpdatingReasonAbi", "impl_p0.CoreTextFormatUpdatingReason", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Next", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextCompositionSegment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Previous", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextCompositionSegment>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetTextStyle", 17, [InterfaceParameterSchema("result", "CPointer<TextStyleAbi>", "OutSlot<TextStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextStyle", 18, [InterfaceParameterSchema("value", "TextStyleAbi", "TextStyle", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ITextCompositionSegment.runtimeType())
         return schema
     }
@@ -2889,27 +2900,27 @@ public class ITextCompositionSegment <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func Range(): _impl_l0.CoreTextRange {
+    public unsafe func Range(): impl_p0.CoreTextRange {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextRangeAbi()
-        let hr = v.Range(asRaw(), CPointer<_impl_l0.CoreTextRangeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextRangeAbi()
+        let hr = v.Range(asRaw(), CPointer<impl_p0.CoreTextRangeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextRange>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextRange>()).unwrap()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func ConversionState(): _impl_l0.CoreTextFormatUpdatingReason {
+    public unsafe func ConversionState(): impl_p0.CoreTextFormatUpdatingReason {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextFormatUpdatingReasonAbi()
-        let hr = v.ConversionState(asRaw(), CPointer<_impl_l0.CoreTextFormatUpdatingReasonAbi>(inout result__))
+        var result__ = impl_p0.CoreTextFormatUpdatingReasonAbi()
+        let hr = v.ConversionState(asRaw(), CPointer<impl_p0.CoreTextFormatUpdatingReasonAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextFormatUpdatingReason>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextFormatUpdatingReason>()).unwrap()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func SetConversionState(value: _impl_l0.CoreTextFormatUpdatingReason): Unit {
+    public unsafe func SetConversionState(value: impl_p0.CoreTextFormatUpdatingReason): Unit {
         let v = vtbl()
-        let hr = v.SetConversionState(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.CoreTextFormatUpdatingReason>()))
+        let hr = v.SetConversionState(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.CoreTextFormatUpdatingReason>()))
         HRESULT(hr).ok()
     }
 
@@ -2956,33 +2967,33 @@ public struct ITextEditSessionVtbl {
     public var get_TextBoxId: CFunc<(CPointer<Unit>, CPointer<TextBoxIdAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TextLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core == "on"]
-    public var PopulatedRange: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var PopulatedRange: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var PopulatedRange: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var PopulateAsync: CFunc<(CPointer<Unit>, _impl_l0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var PopulateAsync: CFunc<(CPointer<Unit>, impl_p0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var PopulateAsync: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var GetText: CFunc<(CPointer<Unit>, _impl_l0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetText: CFunc<(CPointer<Unit>, impl_p0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var GetText: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var GetSelectedRange: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var GetSelectedRange: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreTextRangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var GetSelectedRange: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var SetSelectedRange: CFunc<(CPointer<Unit>, _impl_l0.CoreTextRangeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetSelectedRange: CFunc<(CPointer<Unit>, impl_p0.CoreTextRangeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var SetSelectedRange: UIntNative = UIntNative(0)
     @When[Windows_UI_Text_Core == "on"]
-    public var ReplaceText: CFunc<(CPointer<Unit>, _impl_l0.CoreTextRangeAbi, CPointer<Unit>, CPointer<_impl_l0.CoreTextRangeAbi>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var ReplaceText: CFunc<(CPointer<Unit>, impl_p0.CoreTextRangeAbi, CPointer<Unit>, CPointer<impl_p0.CoreTextRangeAbi>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var ReplaceText: UIntNative = UIntNative(0)
     public var Composition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StartComposition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core == "on"]
-    public var StartReconversion: CFunc<(CPointer<Unit>, _impl_l0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var StartReconversion: CFunc<(CPointer<Unit>, impl_p0.CoreTextRangeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text_Core != "on"]
     public var StartReconversion: UIntNative = UIntNative(0)
     public var SubmitPayload: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3026,7 +3037,7 @@ public class ITextEditSession <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITextEditSession", ITextEditSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextEditSessionVtbl", "ITextEditSession", "ITextEditSession_Impl", [InterfaceMethodSchema("get_TextBoxId", 6, [InterfaceParameterSchema("result", "CPointer<TextBoxIdAbi>", "OutSlot<TextBoxId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TextLength", 7, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PopulatedRange", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextRangeAbi>", "OutSlot<_impl_l0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PopulateAsync", 9, [InterfaceParameterSchema("range", "_impl_l0.CoreTextRangeAbi", "_impl_l0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetText", 10, [InterfaceParameterSchema("range", "_impl_l0.CoreTextRangeAbi", "_impl_l0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSelectedRange", 11, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextRangeAbi>", "OutSlot<_impl_l0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSelectedRange", 12, [InterfaceParameterSchema("value", "_impl_l0.CoreTextRangeAbi", "_impl_l0.CoreTextRange", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReplaceText", 13, [InterfaceParameterSchema("replaceRange", "_impl_l0.CoreTextRangeAbi", "_impl_l0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreTextRangeAbi>", "OutSlot<_impl_l0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Composition", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartComposition", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartReconversion", 16, [InterfaceParameterSchema("range", "_impl_l0.CoreTextRangeAbi", "_impl_l0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPayload", 17, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPayloadAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PayloadResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITextEditSession", ITextEditSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITextEditSessionVtbl", "ITextEditSession", "ITextEditSession_Impl", [InterfaceMethodSchema("get_TextBoxId", 6, [InterfaceParameterSchema("result", "CPointer<TextBoxIdAbi>", "OutSlot<TextBoxId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TextLength", 7, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PopulatedRange", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextRangeAbi>", "OutSlot<impl_p0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PopulateAsync", 9, [InterfaceParameterSchema("range", "impl_p0.CoreTextRangeAbi", "impl_p0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetText", 10, [InterfaceParameterSchema("range", "impl_p0.CoreTextRangeAbi", "impl_p0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSelectedRange", 11, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextRangeAbi>", "OutSlot<impl_p0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSelectedRange", 12, [InterfaceParameterSchema("value", "impl_p0.CoreTextRangeAbi", "impl_p0.CoreTextRange", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReplaceText", 13, [InterfaceParameterSchema("replaceRange", "impl_p0.CoreTextRangeAbi", "impl_p0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<impl_p0.CoreTextRangeAbi>", "OutSlot<impl_p0.CoreTextRange>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Composition", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartComposition", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartReconversion", 16, [InterfaceParameterSchema("range", "impl_p0.CoreTextRangeAbi", "impl_p0.CoreTextRange", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TextComposition>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPayload", 17, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPayloadAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PayloadResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITextEditSession.runtimeType())
         return schema
     }
@@ -3072,55 +3083,55 @@ public class ITextEditSession <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func PopulatedRange(): _impl_l0.CoreTextRange {
+    public unsafe func PopulatedRange(): impl_p0.CoreTextRange {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextRangeAbi()
-        let hr = v.PopulatedRange(asRaw(), CPointer<_impl_l0.CoreTextRangeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextRangeAbi()
+        let hr = v.PopulatedRange(asRaw(), CPointer<impl_p0.CoreTextRangeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextRange>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextRange>()).unwrap()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func PopulateAsync(range: _impl_l0.CoreTextRange): windows_future.IAsyncAction {
+    public unsafe func PopulateAsync(range: impl_p0.CoreTextRange): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.PopulateAsync(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<_impl_l0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.PopulateAsync(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<impl_p0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func GetText(range: _impl_l0.CoreTextRange): windows_core.HString {
+    public unsafe func GetText(range: impl_p0.CoreTextRange): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.GetText(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<_impl_l0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.GetText(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<impl_p0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_core.HString.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func GetSelectedRange(): _impl_l0.CoreTextRange {
+    public unsafe func GetSelectedRange(): impl_p0.CoreTextRange {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextRangeAbi()
-        let hr = v.GetSelectedRange(asRaw(), CPointer<_impl_l0.CoreTextRangeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextRangeAbi()
+        let hr = v.GetSelectedRange(asRaw(), CPointer<impl_p0.CoreTextRangeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextRange>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextRange>()).unwrap()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func SetSelectedRange(value: _impl_l0.CoreTextRange): Unit {
+    public unsafe func SetSelectedRange(value: impl_p0.CoreTextRange): Unit {
         let v = vtbl()
-        let hr = v.SetSelectedRange(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.CoreTextRange>()))
+        let hr = v.SetSelectedRange(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.CoreTextRange>()))
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func ReplaceText(replaceRange: _impl_l0.CoreTextRange, text: windows_core.HString): _impl_l0.CoreTextRange {
+    public unsafe func ReplaceText(replaceRange: impl_p0.CoreTextRange, text: windows_core.HString): impl_p0.CoreTextRange {
         let v = vtbl()
-        var result__ = _impl_l0.CoreTextRangeAbi()
-        let hr = v.ReplaceText(asRaw(), windows_core.projectTypedAbi(replaceRange, windows_core.typeMarker<_impl_l0.CoreTextRange>()), text.asRaw(), CPointer<_impl_l0.CoreTextRangeAbi>(inout result__))
+        var result__ = impl_p0.CoreTextRangeAbi()
+        let hr = v.ReplaceText(asRaw(), windows_core.projectTypedAbi(replaceRange, windows_core.typeMarker<impl_p0.CoreTextRange>()), text.asRaw(), CPointer<impl_p0.CoreTextRangeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreTextRange>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreTextRange>()).unwrap()
     }
 
     public unsafe func Composition(): TextComposition {
@@ -3140,10 +3151,10 @@ public class ITextEditSession <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func StartReconversion(range: _impl_l0.CoreTextRange): TextComposition {
+    public unsafe func StartReconversion(range: impl_p0.CoreTextRange): TextComposition {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.StartReconversion(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<_impl_l0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.StartReconversion(asRaw(), windows_core.projectTypedAbi(range, windows_core.typeMarker<impl_p0.CoreTextRange>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return TextComposition.fromAbiTake(result__)
     }
@@ -3691,12 +3702,12 @@ public class KeyEventReceivedEventArgs <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_VirtualKey(): _impl_l0.VirtualKey {
+    public unsafe func get_VirtualKey(): impl_p0.VirtualKey {
         return defaultInterface().get_VirtualKey()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func KeyStatus(): _impl_l0.CorePhysicalKeyStatus {
+    public unsafe func KeyStatus(): impl_p0.CorePhysicalKeyStatus {
         return defaultInterface().KeyStatus()
     }
 
@@ -3709,12 +3720,12 @@ public class KeyEventReceivedEventArgs <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsKeyPressed(vkey: _impl_l0.VirtualKey): Bool {
+    public unsafe func IsKeyPressed(vkey: impl_p0.VirtualKey): Bool {
         return defaultInterface().IsKeyPressed(vkey)
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsToggleKeyOn(vkey: _impl_l0.VirtualKey): Bool {
+    public unsafe func IsToggleKeyOn(vkey: impl_p0.VirtualKey): Bool {
         return defaultInterface().IsToggleKeyOn(vkey)
     }
 
@@ -4175,17 +4186,17 @@ public class TextCompositionSegment <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func Range(): _impl_l0.CoreTextRange {
+    public unsafe func Range(): impl_p0.CoreTextRange {
         return defaultInterface().Range()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func ConversionState(): _impl_l0.CoreTextFormatUpdatingReason {
+    public unsafe func ConversionState(): impl_p0.CoreTextFormatUpdatingReason {
         return defaultInterface().ConversionState()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func SetConversionState(value: _impl_l0.CoreTextFormatUpdatingReason): Unit {
+    public unsafe func SetConversionState(value: impl_p0.CoreTextFormatUpdatingReason): Unit {
         defaultInterface().SetConversionState(value)
     }
 
@@ -4304,32 +4315,32 @@ public class TextEditSession <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func PopulatedRange(): _impl_l0.CoreTextRange {
+    public unsafe func PopulatedRange(): impl_p0.CoreTextRange {
         return defaultInterface().PopulatedRange()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func PopulateAsync(range: _impl_l0.CoreTextRange): windows_future.IAsyncAction {
+    public unsafe func PopulateAsync(range: impl_p0.CoreTextRange): windows_future.IAsyncAction {
         return defaultInterface().PopulateAsync(range)
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func GetText(range: _impl_l0.CoreTextRange): windows_core.HString {
+    public unsafe func GetText(range: impl_p0.CoreTextRange): windows_core.HString {
         return defaultInterface().GetText(range)
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func GetSelectedRange(): _impl_l0.CoreTextRange {
+    public unsafe func GetSelectedRange(): impl_p0.CoreTextRange {
         return defaultInterface().GetSelectedRange()
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func SetSelectedRange(value: _impl_l0.CoreTextRange): Unit {
+    public unsafe func SetSelectedRange(value: impl_p0.CoreTextRange): Unit {
         defaultInterface().SetSelectedRange(value)
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func ReplaceText(replaceRange: _impl_l0.CoreTextRange, text: windows_core.HString): _impl_l0.CoreTextRange {
+    public unsafe func ReplaceText(replaceRange: impl_p0.CoreTextRange, text: windows_core.HString): impl_p0.CoreTextRange {
         return defaultInterface().ReplaceText(replaceRange, text)
     }
 
@@ -4342,7 +4353,7 @@ public class TextEditSession <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_UI_Text_Core == "on"]
-    public unsafe func StartReconversion(range: _impl_l0.CoreTextRange): TextComposition {
+    public unsafe func StartReconversion(range: impl_p0.CoreTextRange): TextComposition {
         return defaultInterface().StartReconversion(range)
     }
 

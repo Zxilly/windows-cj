@@ -4,15 +4,25 @@
 package windows.ApplicationModel.Search.Core
 
 import std.collection.*
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Search_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Search_Core == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Search_Core == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Search_Core == "on"]
 import windows_collections as windows_collections
 
 
@@ -145,7 +155,7 @@ public class ISearchSuggestionsRequestedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISearchSuggestionsRequestedEventArgs", ISearchSuggestionsRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionsRequestedEventArgsVtbl", "ISearchSuggestionsRequestedEventArgs", "ISearchSuggestionsRequestedEventArgs_Impl", [InterfaceMethodSchema("QueryText", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Language", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LinguisticDetails", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.SearchQueryLinguisticDetails>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Request", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.SearchSuggestionsRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISearchSuggestionsRequestedEventArgs", ISearchSuggestionsRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionsRequestedEventArgsVtbl", "ISearchSuggestionsRequestedEventArgs", "ISearchSuggestionsRequestedEventArgs_Impl", [InterfaceMethodSchema("QueryText", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Language", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LinguisticDetails", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.SearchQueryLinguisticDetails>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Request", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.SearchSuggestionsRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISearchSuggestionsRequestedEventArgs.runtimeType())
         return schema
     }
@@ -191,21 +201,21 @@ public class ISearchSuggestionsRequestedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func LinguisticDetails(): _impl_l0.SearchQueryLinguisticDetails {
+    public unsafe func LinguisticDetails(): impl_p0.SearchQueryLinguisticDetails {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LinguisticDetails(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.SearchQueryLinguisticDetails.fromAbiTake(result__)
+        return impl_p0.SearchQueryLinguisticDetails.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func Request(): _impl_l1.SearchSuggestionsRequest {
+    public unsafe func Request(): impl_p1.SearchSuggestionsRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Request(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.SearchSuggestionsRequest.fromAbiTake(result__)
+        return impl_p1.SearchSuggestionsRequest.fromAbiTake(result__)
     }
 }
 
@@ -466,12 +476,12 @@ public class SearchSuggestionsRequestedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func LinguisticDetails(): _impl_l0.SearchQueryLinguisticDetails {
+    public unsafe func LinguisticDetails(): impl_p0.SearchQueryLinguisticDetails {
         return defaultInterface().LinguisticDetails()
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func Request(): _impl_l1.SearchSuggestionsRequest {
+    public unsafe func Request(): impl_p1.SearchSuggestionsRequest {
         return defaultInterface().Request()
     }
 }
@@ -546,7 +556,7 @@ public class ISearchSuggestion <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISearchSuggestion", ISearchSuggestion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionVtbl", "ISearchSuggestion", "ISearchSuggestion_Impl", [InterfaceMethodSchema("Kind", 6, [InterfaceParameterSchema("result", "CPointer<SearchSuggestionKindAbi>", "OutSlot<SearchSuggestionKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Text", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Tag", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetailText", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Image", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageAlternateText", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISearchSuggestion", ISearchSuggestion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionVtbl", "ISearchSuggestion", "ISearchSuggestion_Impl", [InterfaceMethodSchema("Kind", 6, [InterfaceParameterSchema("result", "CPointer<SearchSuggestionKindAbi>", "OutSlot<SearchSuggestionKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Text", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Tag", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetailText", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Image", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageAlternateText", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISearchSuggestion.runtimeType())
         return schema
     }
@@ -608,12 +618,12 @@ public class ISearchSuggestion <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Image(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     public unsafe func ImageAlternateText(): windows_core.HString {
@@ -710,7 +720,7 @@ public class SearchSuggestion <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Image()
     }
 
@@ -805,7 +815,7 @@ public class ISearchSuggestionManager <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISearchSuggestionManager", ISearchSuggestionManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionManagerVtbl", "ISearchSuggestionManager", "ISearchSuggestionManager_Impl", [InterfaceMethodSchema("SearchHistoryEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSearchHistoryEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SearchHistoryContext", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSearchHistoryContext", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetLocalContentSuggestionSettings", 10, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<_impl_l1.LocalContentSuggestionSettings>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQuery", 11, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQueryWithLanguage", 12, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQueryWithSearchQueryLinguisticDetails", 13, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("linguisticDetails", "CPointer<Unit>", "InParam<_impl_l0.SearchQueryLinguisticDetails>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Suggestions", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IObservableVector<SearchSuggestion>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddToHistory", 15, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddToHistoryWithLanguage", 16, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ClearHistory", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SuggestionsRequested", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<SearchSuggestionManager, SearchSuggestionsRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSuggestionsRequested", 19, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RequestingFocusOnKeyboardInput", 20, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<SearchSuggestionManager, RequestingFocusOnKeyboardInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRequestingFocusOnKeyboardInput", 21, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISearchSuggestionManager", ISearchSuggestionManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISearchSuggestionManagerVtbl", "ISearchSuggestionManager", "ISearchSuggestionManager_Impl", [InterfaceMethodSchema("SearchHistoryEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSearchHistoryEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SearchHistoryContext", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSearchHistoryContext", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetLocalContentSuggestionSettings", 10, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<impl_p1.LocalContentSuggestionSettings>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQuery", 11, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQueryWithLanguage", 12, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetQueryWithSearchQueryLinguisticDetails", 13, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("linguisticDetails", "CPointer<Unit>", "InParam<impl_p0.SearchQueryLinguisticDetails>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Suggestions", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IObservableVector<SearchSuggestion>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddToHistory", 15, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddToHistoryWithLanguage", 16, [InterfaceParameterSchema("queryText", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("language", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ClearHistory", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SuggestionsRequested", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<SearchSuggestionManager, SearchSuggestionsRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSuggestionsRequested", 19, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RequestingFocusOnKeyboardInput", 20, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<SearchSuggestionManager, RequestingFocusOnKeyboardInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRequestingFocusOnKeyboardInput", 21, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ISearchSuggestionManager.runtimeType())
         return schema
     }
@@ -863,7 +873,7 @@ public class ISearchSuggestionManager <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func SetLocalContentSuggestionSettings(settings: _impl_l1.LocalContentSuggestionSettings): Unit {
+    public unsafe func SetLocalContentSuggestionSettings(settings: impl_p1.LocalContentSuggestionSettings): Unit {
         let v = vtbl()
         let hr = v.SetLocalContentSuggestionSettings(asRaw(), settings.asRaw())
         HRESULT(hr).ok()
@@ -882,7 +892,7 @@ public class ISearchSuggestionManager <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func SetQueryWithSearchQueryLinguisticDetails(queryText: windows_core.HString, language: windows_core.HString, linguisticDetails: _impl_l0.SearchQueryLinguisticDetails): Unit {
+    public unsafe func SetQueryWithSearchQueryLinguisticDetails(queryText: windows_core.HString, language: windows_core.HString, linguisticDetails: impl_p0.SearchQueryLinguisticDetails): Unit {
         let v = vtbl()
         let hr = v.SetQueryWithSearchQueryLinguisticDetails(asRaw(), queryText.asRaw(), language.asRaw(), linguisticDetails.asRaw())
         HRESULT(hr).ok()
@@ -1040,7 +1050,7 @@ public class SearchSuggestionManager <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func SetLocalContentSuggestionSettings(settings: _impl_l1.LocalContentSuggestionSettings): Unit {
+    public unsafe func SetLocalContentSuggestionSettings(settings: impl_p1.LocalContentSuggestionSettings): Unit {
         defaultInterface().SetLocalContentSuggestionSettings(settings)
     }
 
@@ -1053,7 +1063,7 @@ public class SearchSuggestionManager <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_ApplicationModel_Search == "on"]
-    public unsafe func SetQueryWithSearchQueryLinguisticDetails(queryText: windows_core.HString, language: windows_core.HString, linguisticDetails: _impl_l0.SearchQueryLinguisticDetails): Unit {
+    public unsafe func SetQueryWithSearchQueryLinguisticDetails(queryText: windows_core.HString, language: windows_core.HString, linguisticDetails: impl_p0.SearchQueryLinguisticDetails): Unit {
         defaultInterface().SetQueryWithSearchQueryLinguisticDetails(queryText, language, linguisticDetails)
     }
 

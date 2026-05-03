@@ -4,13 +4,21 @@
 package windows.Devices.Custom
 
 import std.collection.*
+@When[Windows_Devices_Custom == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Custom == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Custom == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Custom == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Custom == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Custom == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_Custom == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Custom == "on"]
 import windows_future as windows_future
 
 
@@ -718,7 +726,7 @@ public class ICustomDevice <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICustomDevice", ICustomDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICustomDeviceVtbl", "ICustomDevice", "ICustomDevice_Impl", [InterfaceMethodSchema("InputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendIOControlAsync", 8, [InterfaceParameterSchema("ioControlCode", "CPointer<Unit>", "InParam<IIOControlCode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySendIOControlAsync", 9, [InterfaceParameterSchema("ioControlCode", "CPointer<Unit>", "InParam<IIOControlCode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICustomDevice", ICustomDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICustomDeviceVtbl", "ICustomDevice", "ICustomDevice_Impl", [InterfaceMethodSchema("InputStream", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendIOControlAsync", 8, [InterfaceParameterSchema("ioControlCode", "CPointer<Unit>", "InParam<IIOControlCode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySendIOControlAsync", 9, [InterfaceParameterSchema("ioControlCode", "CPointer<Unit>", "InParam<IIOControlCode>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("inputBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outputBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICustomDevice.runtimeType())
         return schema
     }
@@ -748,25 +756,25 @@ public class ICustomDevice <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InputStream(): _impl_l0.IInputStream {
+    public unsafe func InputStream(): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.InputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OutputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: _impl_l0.IBuffer, outputBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UInt32> {
+    public unsafe func SendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: impl_p0.IBuffer, outputBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendIOControlAsync(asRaw(), ioControlCode.asRaw(), inputBuffer.asRaw(), outputBuffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -775,7 +783,7 @@ public class ICustomDevice <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TrySendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: _impl_l0.IBuffer, outputBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: impl_p0.IBuffer, outputBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TrySendIOControlAsync(asRaw(), ioControlCode.asRaw(), inputBuffer.asRaw(), outputBuffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -857,22 +865,22 @@ public class CustomDevice <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InputStream(): _impl_l0.IInputStream {
+    public unsafe func InputStream(): impl_p0.IInputStream {
         return defaultInterface().InputStream()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         return defaultInterface().OutputStream()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: _impl_l0.IBuffer, outputBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UInt32> {
+    public unsafe func SendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: impl_p0.IBuffer, outputBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UInt32> {
         return defaultInterface().SendIOControlAsync(ioControlCode, inputBuffer, outputBuffer)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TrySendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: _impl_l0.IBuffer, outputBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySendIOControlAsync(ioControlCode: IIOControlCode, inputBuffer: impl_p0.IBuffer, outputBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySendIOControlAsync(ioControlCode, inputBuffer, outputBuffer)
     }
 

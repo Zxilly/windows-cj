@@ -4,15 +4,25 @@
 package windows.Security.Authorization.AppCapabilityAccess
 
 import std.collection.*
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_collections as windows_collections
+@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_future as windows_future
 
 
@@ -409,7 +419,7 @@ public class AppCapability <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -442,7 +452,7 @@ public class AppCapability <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public static unsafe func RequestAccessForCapabilitiesForUserAsync(user: _impl_l1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
+    public static unsafe func RequestAccessForCapabilitiesForUserAsync(user: impl_p1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>.None
         try (factory__ = windows_core.factory<AppCapability, IAppCapabilityStatics>().unwrap()) {
             result__ = Some(factory__.RequestAccessForCapabilitiesForUserAsync(user, capabilityNames))
@@ -465,7 +475,7 @@ public class AppCapability <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func CreateWithProcessIdForUser(user: _impl_l1.User, capabilityName: windows_core.HString, pid: UInt32): AppCapability {
+    public static unsafe func CreateWithProcessIdForUser(user: impl_p1.User, capabilityName: windows_core.HString, pid: UInt32): AppCapability {
         var result__: Option<AppCapability> = Option<AppCapability>.None
         try (factory__ = windows_core.factory<AppCapability, IAppCapabilityStatics>().unwrap()) {
             result__ = Some(factory__.CreateWithProcessIdForUser(user, capabilityName, pid))
@@ -547,7 +557,7 @@ public class IAppCapability <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppCapability", IAppCapability.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppCapabilityVtbl", "IAppCapability", "IAppCapability_Impl", [InterfaceMethodSchema("CapabilityName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<AppCapabilityAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckAccess", 9, [InterfaceParameterSchema("result", "CPointer<AppCapabilityAccessStatusAbi>", "OutSlot<AppCapabilityAccessStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccessChanged", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<AppCapability, AppCapabilityAccessChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAccessChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppCapability", IAppCapability.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppCapabilityVtbl", "IAppCapability", "IAppCapability_Impl", [InterfaceMethodSchema("CapabilityName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<AppCapabilityAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CheckAccess", 9, [InterfaceParameterSchema("result", "CPointer<AppCapabilityAccessStatusAbi>", "OutSlot<AppCapabilityAccessStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccessChanged", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<AppCapability, AppCapabilityAccessChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAccessChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IAppCapability.runtimeType())
         return schema
     }
@@ -585,12 +595,12 @@ public class IAppCapability <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     public unsafe func RequestAccessAsync(): windows_future.IAsyncOperation<AppCapabilityAccessStatus> {
@@ -683,7 +693,7 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppCapabilityStatics", IAppCapabilityStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppCapabilityStaticsVtbl", "IAppCapabilityStatics", "IAppCapabilityStatics_Impl", [InterfaceMethodSchema("RequestAccessForCapabilitiesAsync", 6, [InterfaceParameterSchema("capabilityNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessForCapabilitiesForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilityNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Create", 8, [InterfaceParameterSchema("capabilityName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithProcessIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilityName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pid", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppCapabilityStatics", IAppCapabilityStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppCapabilityStaticsVtbl", "IAppCapabilityStatics", "IAppCapabilityStatics_Impl", [InterfaceMethodSchema("RequestAccessForCapabilitiesAsync", 6, [InterfaceParameterSchema("capabilityNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessForCapabilitiesForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilityNames", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Create", 8, [InterfaceParameterSchema("capabilityName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithProcessIdForUser", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilityName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pid", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppCapabilityStatics.runtimeType())
         return schema
     }
@@ -722,7 +732,7 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public unsafe func RequestAccessForCapabilitiesForUserAsync(user: _impl_l1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
+    public unsafe func RequestAccessForCapabilitiesForUserAsync(user: impl_p1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestAccessForCapabilitiesForUserAsync(asRaw(), user.asRaw(), capabilityNames.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -739,7 +749,7 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_System == "on"]
-    public unsafe func CreateWithProcessIdForUser(user: _impl_l1.User, capabilityName: windows_core.HString, pid: UInt32): AppCapability {
+    public unsafe func CreateWithProcessIdForUser(user: impl_p1.User, capabilityName: windows_core.HString, pid: UInt32): AppCapability {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWithProcessIdForUser(asRaw(), user.asRaw(), capabilityName.asRaw(), pid, CPointer<CPointer<Unit>>(inout result__))

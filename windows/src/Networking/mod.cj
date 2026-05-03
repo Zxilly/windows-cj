@@ -2,6 +2,6 @@
 package windows.Networking
 
 @When[Windows_Networking == "on"]
-public import windows._impl_l0.{DomainNameType, DomainNameTypeAbi, DomainNameType_FullyQualified, DomainNameType_Suffix, HostNameSortOptions, HostNameSortOptionsAbi, HostNameSortOptions_None, HostNameSortOptions_OptimizeForLongConnections, HostNameType, HostNameTypeAbi, HostNameType_Bluetooth, HostNameType_DomainName, HostNameType_Ipv4, HostNameType_Ipv6, IHostNameStatics, IHostNameStaticsVtbl}
+public import windows.impl.p0.{DomainNameType, DomainNameTypeAbi, DomainNameType_FullyQualified, DomainNameType_Suffix, HostNameSortOptions, HostNameSortOptionsAbi, HostNameSortOptions_None, HostNameSortOptions_OptimizeForLongConnections, HostNameType, HostNameTypeAbi, HostNameType_Bluetooth, HostNameType_DomainName, HostNameType_Ipv4, HostNameType_Ipv6, IHostNameStatics, IHostNameStaticsVtbl}
 @When[Windows_Networking == "on"]
-public import windows._impl_l1.{EndpointPair, HostName, IEndpointPair, IEndpointPairFactory, IEndpointPairFactoryVtbl, IEndpointPairVtbl, IHostName, IHostNameFactory, IHostNameFactoryVtbl, IHostNameVtbl}
+public import windows.impl.p1.{EndpointPair, HostName, IEndpointPair, IEndpointPairFactory, IEndpointPairFactoryVtbl, IEndpointPairVtbl, IHostName, IHostNameFactory, IHostNameFactoryVtbl, IHostNameVtbl}

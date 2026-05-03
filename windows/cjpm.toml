@@ -4,7 +4,7 @@
   description = "High-level Windows API projections for Cangjie"
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "--cfg . -Woff unused -Woff parser -Woff package-import"
+  compile-option = "--cfg . -Woff unused -Woff parser -Woff package-import --profile-compile-time"
 
 [dependencies]
   windows_collections = { path = "../windows-collections" }

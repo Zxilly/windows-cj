@@ -4,21 +4,27 @@
 package windows.Win32.Media.LibrarySharingServices
 
 import std.collection.*
+@When[Windows_Win32_Media_LibrarySharingServices == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_LibrarySharingServices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_LibrarySharingServices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_LibrarySharingServices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_LibrarySharingServices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsMediaLibrarySharingDevicePropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -55,7 +61,7 @@ public class IWindowsMediaLibrarySharingDeviceProperty <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperty> {
-        return InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperty>("IWindowsMediaLibrarySharingDeviceProperty", IWindowsMediaLibrarySharingDeviceProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicePropertyFromAbi, viewIWindowsMediaLibrarySharingDeviceProperty)
+        return InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperty>("IWindowsMediaLibrarySharingDeviceProperty", IWindowsMediaLibrarySharingDeviceProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicePropertyFromAbi, viewIWindowsMediaLibrarySharingDeviceProperty)
     }
 
     public unsafe func vtbl(): IWindowsMediaLibrarySharingDevicePropertyVtbl {
@@ -69,7 +75,7 @@ public class IWindowsMediaLibrarySharingDeviceProperty <: InterfaceWrapperBase &
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, value)
@@ -167,7 +173,7 @@ extend WindowsMediaLibrarySharingServices <: windows_core.CopyType & windows_cor
 @When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsMediaLibrarySharingDevicePropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -207,7 +213,7 @@ public class IWindowsMediaLibrarySharingDeviceProperties <: InterfaceWrapperBase
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperties> {
-        return InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperties>("IWindowsMediaLibrarySharingDeviceProperties", IWindowsMediaLibrarySharingDeviceProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicePropertiesFromAbi, viewIWindowsMediaLibrarySharingDeviceProperties)
+        return InterfaceDescriptor<IWindowsMediaLibrarySharingDeviceProperties>("IWindowsMediaLibrarySharingDeviceProperties", IWindowsMediaLibrarySharingDeviceProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicePropertiesFromAbi, viewIWindowsMediaLibrarySharingDeviceProperties)
     }
 
     public unsafe func vtbl(): IWindowsMediaLibrarySharingDevicePropertiesVtbl {
@@ -236,7 +242,7 @@ public class IWindowsMediaLibrarySharingDeviceProperties <: InterfaceWrapperBase
 @When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsMediaLibrarySharingDeviceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DeviceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Authorization: CFunc<(CPointer<Unit>, CPointer<WindowsMediaLibrarySharingDeviceAuthorizationStatusAbi>) -> Int32> = { _, _ => 0 }
     public var SetAuthorization: CFunc<(CPointer<Unit>, WindowsMediaLibrarySharingDeviceAuthorizationStatusAbi) -> Int32> = { _, _ => 0 }
@@ -277,7 +283,7 @@ public class IWindowsMediaLibrarySharingDevice <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsMediaLibrarySharingDevice> {
-        return InterfaceDescriptor<IWindowsMediaLibrarySharingDevice>("IWindowsMediaLibrarySharingDevice", IWindowsMediaLibrarySharingDevice.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDeviceFromAbi, viewIWindowsMediaLibrarySharingDevice)
+        return InterfaceDescriptor<IWindowsMediaLibrarySharingDevice>("IWindowsMediaLibrarySharingDevice", IWindowsMediaLibrarySharingDevice.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDeviceFromAbi, viewIWindowsMediaLibrarySharingDevice)
     }
 
     public unsafe func vtbl(): IWindowsMediaLibrarySharingDeviceVtbl {
@@ -312,7 +318,7 @@ public class IWindowsMediaLibrarySharingDevice <: InterfaceWrapperBase & ComInte
 @When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsMediaLibrarySharingDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetDevice: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -352,7 +358,7 @@ public class IWindowsMediaLibrarySharingDevices <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsMediaLibrarySharingDevices> {
-        return InterfaceDescriptor<IWindowsMediaLibrarySharingDevices>("IWindowsMediaLibrarySharingDevices", IWindowsMediaLibrarySharingDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicesFromAbi, viewIWindowsMediaLibrarySharingDevices)
+        return InterfaceDescriptor<IWindowsMediaLibrarySharingDevices>("IWindowsMediaLibrarySharingDevices", IWindowsMediaLibrarySharingDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsMediaLibrarySharingDevicesFromAbi, viewIWindowsMediaLibrarySharingDevices)
     }
 
     public unsafe func vtbl(): IWindowsMediaLibrarySharingDevicesVtbl {
@@ -381,7 +387,7 @@ public class IWindowsMediaLibrarySharingDevices <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Media_LibrarySharingServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsMediaLibrarySharingServicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var showShareMediaCPL: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var userHomeMediaSharingState: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetuserHomeMediaSharingState: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -437,7 +443,7 @@ public class IWindowsMediaLibrarySharingServices <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsMediaLibrarySharingServices> {
-        return InterfaceDescriptor<IWindowsMediaLibrarySharingServices>("IWindowsMediaLibrarySharingServices", IWindowsMediaLibrarySharingServices.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsMediaLibrarySharingServicesFromAbi, viewIWindowsMediaLibrarySharingServices)
+        return InterfaceDescriptor<IWindowsMediaLibrarySharingServices>("IWindowsMediaLibrarySharingServices", IWindowsMediaLibrarySharingServices.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsMediaLibrarySharingServicesFromAbi, viewIWindowsMediaLibrarySharingServices)
     }
 
     public unsafe func vtbl(): IWindowsMediaLibrarySharingServicesVtbl {

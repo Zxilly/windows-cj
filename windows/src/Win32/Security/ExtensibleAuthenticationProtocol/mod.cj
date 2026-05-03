@@ -4,14 +4,22 @@
 package windows.Win32.Security.ExtensibleAuthenticationProtocol
 
 import std.collection.*
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
@@ -2266,7 +2274,7 @@ extend LEGACY_INTERACTIVE_UI_PARAMS <: windows_core.CopyType & windows_core.Runt
 @When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct NgcTicketContext {
     public var wszTicket: VArray<UInt16, $45> = VArray<UInt16, $45>(repeat: 0u16)
-    public var hKey: Win32__impl_l1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
+    public var hKey: Win32_impl_p1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
     public var hImpersonateToken: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -2275,7 +2283,7 @@ public struct NgcTicketContext {
 @C
 public struct NgcTicketContextAbi {
     public var wszTicket: VArray<UInt16, $45> = VArray<UInt16, $45>(repeat: 0u16)
-    public var hKey: Win32__impl_l1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
+    public var hKey: Win32_impl_p1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
     public var hImpersonateToken: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }

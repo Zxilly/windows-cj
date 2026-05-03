@@ -4,17 +4,29 @@
 package windows.Devices.Lights
 
 import std.collection.*
+@When[Windows_Devices_Lights == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Lights == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Lights == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Lights == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Lights == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Lights == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Lights == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Devices_Lights == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_Lights == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Lights == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Lights == "on"]
 import windows_future as windows_future
+@When[Windows_Devices_Lights == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -700,7 +712,7 @@ public struct ILampArrayVtbl {
     public var SupportsVirtualKeys: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetLampInfo: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_System == "on"]
-    public var GetIndicesForKey: CFunc<(CPointer<Unit>, _impl_l0.VirtualKeyAbi, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var GetIndicesForKey: CFunc<(CPointer<Unit>, impl_p0.VirtualKeyAbi, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var GetIndicesForKey: UIntNative = UIntNative(0)
     public var GetIndicesForPurposes: CFunc<(CPointer<Unit>, LampPurposesAbi, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -721,11 +733,11 @@ public struct ILampArrayVtbl {
     @When[Windows_UI != "on"]
     public var SetColorsForIndices: UIntNative = UIntNative(0)
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public var SetColorsForKey: CFunc<(CPointer<Unit>, UI.ColorAbi, _impl_l0.VirtualKeyAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var SetColorsForKey: CFunc<(CPointer<Unit>, UI.ColorAbi, impl_p0.VirtualKeyAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on" || Windows_UI != "on"]
     public var SetColorsForKey: UIntNative = UIntNative(0)
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public var SetColorsForKeys: CFunc<(CPointer<Unit>, UInt32, CPointer<UI.ColorAbi>, UInt32, CPointer<_impl_l0.VirtualKeyAbi>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var SetColorsForKeys: CFunc<(CPointer<Unit>, UInt32, CPointer<UI.ColorAbi>, UInt32, CPointer<impl_p0.VirtualKeyAbi>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on" || Windows_UI != "on"]
     public var SetColorsForKeys: UIntNative = UIntNative(0)
     @When[Windows_UI == "on"]
@@ -779,7 +791,7 @@ public class ILampArray <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILampArray", ILampArray.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILampArrayVtbl", "ILampArray", "ILampArray_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareVendorId", 7, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareProductId", 8, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareVersion", 9, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_LampArrayKind", 10, [InterfaceParameterSchema("result", "CPointer<LampArrayKindAbi>", "OutSlot<LampArrayKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LampCount", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MinUpdateInterval", 12, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BoundingBox", 13, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsEnabled", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BrightnessLevel", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBrightnessLevel", 17, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsConnected", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportsVirtualKeys", 19, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLampInfo", 20, [InterfaceParameterSchema("lampIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LampInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetIndicesForKey", 21, [InterfaceParameterSchema("key", "_impl_l0.VirtualKeyAbi", "_impl_l0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Int32>>", "OutSlot<CPointer<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetIndicesForPurposes", 22, [InterfaceParameterSchema("purposes", "LampPurposesAbi", "LampPurposes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Int32>>", "OutSlot<CPointer<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetColor", 23, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorForIndex", 24, [InterfaceParameterSchema("lampIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetSingleColorForIndices", 25, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("lampIndexes", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForIndices", 26, [InterfaceParameterSchema("desiredColors", "CPointer<UI.ColorAbi>", "CPointer<UI.ColorAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("lampIndexes", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForKey", 27, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("key", "_impl_l0.VirtualKeyAbi", "_impl_l0.VirtualKey", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForKeys", 28, [InterfaceParameterSchema("desiredColors", "CPointer<UI.ColorAbi>", "CPointer<UI.ColorAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("keys", "CPointer<_impl_l0.VirtualKeyAbi>", "CPointer<_impl_l0.VirtualKeyAbi>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForPurposes", 29, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("purposes", "LampPurposesAbi", "LampPurposes", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SendMessageAsync", 30, [InterfaceParameterSchema("messageId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestMessageAsync", 31, [InterfaceParameterSchema("messageId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILampArray", ILampArray.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILampArrayVtbl", "ILampArray", "ILampArray_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareVendorId", 7, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareProductId", 8, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HardwareVersion", 9, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_LampArrayKind", 10, [InterfaceParameterSchema("result", "CPointer<LampArrayKindAbi>", "OutSlot<LampArrayKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LampCount", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MinUpdateInterval", 12, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BoundingBox", 13, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsEnabled", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BrightnessLevel", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBrightnessLevel", 17, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsConnected", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportsVirtualKeys", 19, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLampInfo", 20, [InterfaceParameterSchema("lampIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LampInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetIndicesForKey", 21, [InterfaceParameterSchema("key", "impl_p0.VirtualKeyAbi", "impl_p0.VirtualKey", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Int32>>", "OutSlot<CPointer<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetIndicesForPurposes", 22, [InterfaceParameterSchema("purposes", "LampPurposesAbi", "LampPurposes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Int32>>", "OutSlot<CPointer<Int32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetColor", 23, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorForIndex", 24, [InterfaceParameterSchema("lampIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetSingleColorForIndices", 25, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("lampIndexes", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForIndices", 26, [InterfaceParameterSchema("desiredColors", "CPointer<UI.ColorAbi>", "CPointer<UI.ColorAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("lampIndexes", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForKey", 27, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("key", "impl_p0.VirtualKeyAbi", "impl_p0.VirtualKey", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForKeys", 28, [InterfaceParameterSchema("desiredColors", "CPointer<UI.ColorAbi>", "CPointer<UI.ColorAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("keys", "CPointer<impl_p0.VirtualKeyAbi>", "CPointer<impl_p0.VirtualKeyAbi>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetColorsForPurposes", 29, [InterfaceParameterSchema("desiredColor", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("purposes", "LampPurposesAbi", "LampPurposes", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SendMessageAsync", 30, [InterfaceParameterSchema("messageId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestMessageAsync", 31, [InterfaceParameterSchema("messageId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILampArray.runtimeType())
         return schema
     }
@@ -926,11 +938,11 @@ public class ILampArray <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetIndicesForKey(key: _impl_l0.VirtualKey): (UInt32, CPointer<Int32>) {
+    public unsafe func GetIndicesForKey(key: impl_p0.VirtualKey): (UInt32, CPointer<Int32>) {
         let v = vtbl()
         var resultSize__: UInt32 = 0u32
         var result__: CPointer<Int32> = CPointer<Int32>()
-        let hr = v.GetIndicesForKey(asRaw(), windows_core.projectTypedAbi(key, windows_core.typeMarker<_impl_l0.VirtualKey>()), CPointer<UInt32>(inout resultSize__), CPointer<CPointer<Int32>>(inout result__))
+        let hr = v.GetIndicesForKey(asRaw(), windows_core.projectTypedAbi(key, windows_core.typeMarker<impl_p0.VirtualKey>()), CPointer<UInt32>(inout resultSize__), CPointer<CPointer<Int32>>(inout result__))
         HRESULT(hr).ok()
         return (resultSize__, result__)
     }
@@ -973,14 +985,14 @@ public class ILampArray <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public unsafe func SetColorsForKey(desiredColor: UI.Color, key: _impl_l0.VirtualKey): Unit {
+    public unsafe func SetColorsForKey(desiredColor: UI.Color, key: impl_p0.VirtualKey): Unit {
         let v = vtbl()
-        let hr = v.SetColorsForKey(asRaw(), windows_core.projectTypedAbi(desiredColor, windows_core.typeMarker<UI.Color>()), windows_core.projectTypedAbi(key, windows_core.typeMarker<_impl_l0.VirtualKey>()))
+        let hr = v.SetColorsForKey(asRaw(), windows_core.projectTypedAbi(desiredColor, windows_core.typeMarker<UI.Color>()), windows_core.projectTypedAbi(key, windows_core.typeMarker<impl_p0.VirtualKey>()))
         HRESULT(hr).ok()
     }
 
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public unsafe func SetColorsForKeys(desiredColorsSize: UInt32, desiredColors: CPointer<UI.ColorAbi>, keysSize: UInt32, keys: CPointer<_impl_l0.VirtualKeyAbi>): Unit {
+    public unsafe func SetColorsForKeys(desiredColorsSize: UInt32, desiredColors: CPointer<UI.ColorAbi>, keysSize: UInt32, keys: CPointer<impl_p0.VirtualKeyAbi>): Unit {
         let v = vtbl()
         let hr = v.SetColorsForKeys(asRaw(), desiredColorsSize, desiredColors, keysSize, keys)
         HRESULT(hr).ok()
@@ -994,7 +1006,7 @@ public class ILampArray <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendMessageAsync(messageId: Int32, message: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func SendMessageAsync(messageId: Int32, message: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendMessageAsync(asRaw(), messageId, message.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1003,12 +1015,12 @@ public class ILampArray <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RequestMessageAsync(messageId: Int32): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RequestMessageAsync(messageId: Int32): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestMessageAsync(asRaw(), messageId, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 }
 
@@ -1796,7 +1808,7 @@ public class LampArray <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetIndicesForKey(key: _impl_l0.VirtualKey): (UInt32, CPointer<Int32>) {
+    public unsafe func GetIndicesForKey(key: impl_p0.VirtualKey): (UInt32, CPointer<Int32>) {
         return defaultInterface().GetIndicesForKey(key)
     }
 
@@ -1825,12 +1837,12 @@ public class LampArray <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public unsafe func SetColorsForKey(desiredColor: UI.Color, key: _impl_l0.VirtualKey): Unit {
+    public unsafe func SetColorsForKey(desiredColor: UI.Color, key: impl_p0.VirtualKey): Unit {
         defaultInterface().SetColorsForKey(desiredColor, key)
     }
 
     @When[Windows_System == "on" && Windows_UI == "on"]
-    public unsafe func SetColorsForKeys(desiredColorsSize: UInt32, desiredColors: CPointer<UI.ColorAbi>, keysSize: UInt32, keys: CPointer<_impl_l0.VirtualKeyAbi>): Unit {
+    public unsafe func SetColorsForKeys(desiredColorsSize: UInt32, desiredColors: CPointer<UI.ColorAbi>, keysSize: UInt32, keys: CPointer<impl_p0.VirtualKeyAbi>): Unit {
         defaultInterface().SetColorsForKeys(desiredColorsSize, desiredColors, keysSize, keys)
     }
 
@@ -1840,12 +1852,12 @@ public class LampArray <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendMessageAsync(messageId: Int32, message: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func SendMessageAsync(messageId: Int32, message: impl_p0.IBuffer): windows_future.IAsyncAction {
         return defaultInterface().SendMessageAsync(messageId, message)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RequestMessageAsync(messageId: Int32): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func RequestMessageAsync(messageId: Int32): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().RequestMessageAsync(messageId)
     }
 

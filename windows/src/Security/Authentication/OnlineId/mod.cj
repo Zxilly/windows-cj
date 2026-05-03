@@ -4,14 +4,23 @@
 package windows.Security.Authentication.OnlineId
 
 import std.collection.*
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_Security_Authentication_OnlineId == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_collections as windows_collections
+@When[Windows_Security_Authentication_OnlineId == "on"]
 import windows_future as windows_future
 
 
@@ -614,7 +623,7 @@ public class IOnlineIdSystemAuthenticatorForUser <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IOnlineIdSystemAuthenticatorForUser", IOnlineIdSystemAuthenticatorForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOnlineIdSystemAuthenticatorForUserVtbl", "IOnlineIdSystemAuthenticatorForUser", "IOnlineIdSystemAuthenticatorForUser_Impl", [InterfaceMethodSchema("GetTicketAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<OnlineIdServiceTicketRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<OnlineIdSystemTicketResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetApplicationId", 7, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ApplicationId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IOnlineIdSystemAuthenticatorForUser", IOnlineIdSystemAuthenticatorForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOnlineIdSystemAuthenticatorForUserVtbl", "IOnlineIdSystemAuthenticatorForUser", "IOnlineIdSystemAuthenticatorForUser_Impl", [InterfaceMethodSchema("GetTicketAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<OnlineIdServiceTicketRequest>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<OnlineIdSystemTicketResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetApplicationId", 7, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ApplicationId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IOnlineIdSystemAuthenticatorForUser.runtimeType())
         return schema
     }
@@ -666,12 +675,12 @@ public class IOnlineIdSystemAuthenticatorForUser <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -726,7 +735,7 @@ public class IOnlineIdSystemAuthenticatorStatics <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IOnlineIdSystemAuthenticatorStatics", IOnlineIdSystemAuthenticatorStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOnlineIdSystemAuthenticatorStaticsVtbl", "IOnlineIdSystemAuthenticatorStatics", "IOnlineIdSystemAuthenticatorStatics_Impl", [InterfaceMethodSchema("Default", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OnlineIdSystemAuthenticatorForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OnlineIdSystemAuthenticatorForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IOnlineIdSystemAuthenticatorStatics", IOnlineIdSystemAuthenticatorStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IOnlineIdSystemAuthenticatorStaticsVtbl", "IOnlineIdSystemAuthenticatorStatics", "IOnlineIdSystemAuthenticatorStatics_Impl", [InterfaceMethodSchema("Default", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OnlineIdSystemAuthenticatorForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<OnlineIdSystemAuthenticatorForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IOnlineIdSystemAuthenticatorStatics.runtimeType())
         return schema
     }
@@ -764,7 +773,7 @@ public class IOnlineIdSystemAuthenticatorStatics <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): OnlineIdSystemAuthenticatorForUser {
+    public unsafe func GetForUser(user: impl_p1.User): OnlineIdSystemAuthenticatorForUser {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1503,7 +1512,7 @@ public class OnlineIdSystemAuthenticator <: windows_interface.RuntimeName & wind
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): OnlineIdSystemAuthenticatorForUser {
+    public static unsafe func GetForUser(user: impl_p1.User): OnlineIdSystemAuthenticatorForUser {
         var result__: Option<OnlineIdSystemAuthenticatorForUser> = Option<OnlineIdSystemAuthenticatorForUser>.None
         try (factory__ = windows_core.factory<OnlineIdSystemAuthenticator, IOnlineIdSystemAuthenticatorStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -1597,7 +1606,7 @@ public class OnlineIdSystemAuthenticatorForUser <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 }

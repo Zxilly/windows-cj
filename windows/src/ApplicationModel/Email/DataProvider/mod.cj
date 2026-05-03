@@ -4,17 +4,27 @@
 package windows.ApplicationModel.Email.DataProvider
 
 import std.collection.*
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Email_DataProvider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Email_DataProvider == "on"]
 import windows_future as windows_future
 
 
@@ -30,7 +40,7 @@ public struct IEmailMailboxCreateFolderRequestVtbl {
     @When[Windows_ApplicationModel_Email != "on"]
     public var ReportCompletedAsync: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_Email == "on"]
-    public var ReportFailedAsync: CFunc<(CPointer<Unit>, _impl_l0.EmailMailboxCreateFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var ReportFailedAsync: CFunc<(CPointer<Unit>, impl_p0.EmailMailboxCreateFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var ReportFailedAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -72,7 +82,7 @@ public class IEmailMailboxCreateFolderRequest <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxCreateFolderRequest", IEmailMailboxCreateFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxCreateFolderRequestVtbl", "IEmailMailboxCreateFolderRequest", "IEmailMailboxCreateFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ParentFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 9, [InterfaceParameterSchema("folder", "CPointer<Unit>", "InParam<_impl_l2.EmailFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 10, [InterfaceParameterSchema("status", "_impl_l0.EmailMailboxCreateFolderStatusAbi", "_impl_l0.EmailMailboxCreateFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxCreateFolderRequest", IEmailMailboxCreateFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxCreateFolderRequestVtbl", "IEmailMailboxCreateFolderRequest", "IEmailMailboxCreateFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ParentFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 9, [InterfaceParameterSchema("folder", "CPointer<Unit>", "InParam<impl_p1.EmailFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 10, [InterfaceParameterSchema("status", "impl_p0.EmailMailboxCreateFolderStatusAbi", "impl_p0.EmailMailboxCreateFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxCreateFolderRequest.runtimeType())
         return schema
     }
@@ -126,7 +136,7 @@ public class IEmailMailboxCreateFolderRequest <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportCompletedAsync(folder: _impl_l2.EmailFolder): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(folder: impl_p1.EmailFolder): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), folder.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -135,10 +145,10 @@ public class IEmailMailboxCreateFolderRequest <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxCreateFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxCreateFolderStatus): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<_impl_l0.EmailMailboxCreateFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<impl_p0.EmailMailboxCreateFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -155,7 +165,7 @@ public struct IEmailMailboxDeleteFolderRequestVtbl {
     public var EmailFolderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var ReportFailedAsync: CFunc<(CPointer<Unit>, _impl_l0.EmailMailboxDeleteFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var ReportFailedAsync: CFunc<(CPointer<Unit>, impl_p0.EmailMailboxDeleteFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var ReportFailedAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -197,7 +207,7 @@ public class IEmailMailboxDeleteFolderRequest <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxDeleteFolderRequest", IEmailMailboxDeleteFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxDeleteFolderRequestVtbl", "IEmailMailboxDeleteFolderRequest", "IEmailMailboxDeleteFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("status", "_impl_l0.EmailMailboxDeleteFolderStatusAbi", "_impl_l0.EmailMailboxDeleteFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxDeleteFolderRequest", IEmailMailboxDeleteFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxDeleteFolderRequestVtbl", "IEmailMailboxDeleteFolderRequest", "IEmailMailboxDeleteFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("status", "impl_p0.EmailMailboxDeleteFolderStatusAbi", "impl_p0.EmailMailboxDeleteFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxDeleteFolderRequest.runtimeType())
         return schema
     }
@@ -251,10 +261,10 @@ public class IEmailMailboxDeleteFolderRequest <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxDeleteFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxDeleteFolderStatus): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<_impl_l0.EmailMailboxDeleteFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<impl_p0.EmailMailboxDeleteFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -504,7 +514,7 @@ public struct IEmailMailboxEmptyFolderRequestVtbl {
     public var EmailFolderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var ReportFailedAsync: CFunc<(CPointer<Unit>, _impl_l0.EmailMailboxEmptyFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var ReportFailedAsync: CFunc<(CPointer<Unit>, impl_p0.EmailMailboxEmptyFolderStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var ReportFailedAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -546,7 +556,7 @@ public class IEmailMailboxEmptyFolderRequest <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxEmptyFolderRequest", IEmailMailboxEmptyFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxEmptyFolderRequestVtbl", "IEmailMailboxEmptyFolderRequest", "IEmailMailboxEmptyFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("status", "_impl_l0.EmailMailboxEmptyFolderStatusAbi", "_impl_l0.EmailMailboxEmptyFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxEmptyFolderRequest", IEmailMailboxEmptyFolderRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxEmptyFolderRequestVtbl", "IEmailMailboxEmptyFolderRequest", "IEmailMailboxEmptyFolderRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("status", "impl_p0.EmailMailboxEmptyFolderStatusAbi", "impl_p0.EmailMailboxEmptyFolderStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxEmptyFolderRequest.runtimeType())
         return schema
     }
@@ -600,10 +610,10 @@ public class IEmailMailboxEmptyFolderRequest <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxEmptyFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxEmptyFolderStatus): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<_impl_l0.EmailMailboxEmptyFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(status, windows_core.typeMarker<impl_p0.EmailMailboxEmptyFolderStatus>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -624,7 +634,7 @@ public struct IEmailMailboxForwardMeetingRequestVtbl {
     public var Recipients: UIntNative = UIntNative(0)
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var ForwardHeaderType: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailMessageBodyKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ForwardHeaderType: CFunc<(CPointer<Unit>, CPointer<impl_p0.EmailMessageBodyKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var ForwardHeaderType: UIntNative = UIntNative(0)
     public var ForwardHeader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -670,7 +680,7 @@ public class IEmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxForwardMeetingRequest", IEmailMailboxForwardMeetingRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxForwardMeetingRequestVtbl", "IEmailMailboxForwardMeetingRequest", "IEmailMailboxForwardMeetingRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMessageId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Recipients", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l0.EmailRecipient>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeaderType", 10, [InterfaceParameterSchema("result", "CPointer<_impl_l0.EmailMessageBodyKindAbi>", "OutSlot<_impl_l0.EmailMessageBodyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeader", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxForwardMeetingRequest", IEmailMailboxForwardMeetingRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxForwardMeetingRequestVtbl", "IEmailMailboxForwardMeetingRequest", "IEmailMailboxForwardMeetingRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMessageId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Recipients", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p0.EmailRecipient>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeaderType", 10, [InterfaceParameterSchema("result", "CPointer<impl_p0.EmailMessageBodyKindAbi>", "OutSlot<impl_p0.EmailMessageBodyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ForwardHeader", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxForwardMeetingRequest.runtimeType())
         return schema
     }
@@ -716,12 +726,12 @@ public class IEmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Recipients(): windows_collections.IVectorView<_impl_l0.EmailRecipient> {
+    public unsafe func Recipients(): windows_collections.IVectorView<impl_p0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Recipients(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l0.EmailRecipient>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p0.EmailRecipient>.fromAbiTake(result__)
     }
 
     public unsafe func Subject(): windows_core.HString {
@@ -733,12 +743,12 @@ public class IEmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ForwardHeaderType(): _impl_l0.EmailMessageBodyKind {
+    public unsafe func ForwardHeaderType(): impl_p0.EmailMessageBodyKind {
         let v = vtbl()
-        var result__ = _impl_l0.EmailMessageBodyKindAbi()
-        let hr = v.ForwardHeaderType(asRaw(), CPointer<_impl_l0.EmailMessageBodyKindAbi>(inout result__))
+        var result__ = impl_p0.EmailMessageBodyKindAbi()
+        let hr = v.ForwardHeaderType(asRaw(), CPointer<impl_p0.EmailMessageBodyKindAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.EmailMessageBodyKind>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.EmailMessageBodyKind>()).unwrap()
     }
 
     public unsafe func ForwardHeader(): windows_core.HString {
@@ -783,7 +793,7 @@ public struct IEmailMailboxGetAutoReplySettingsRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var EmailMailboxId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var RequestedFormat: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailMailboxAutoReplyMessageResponseKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var RequestedFormat: CFunc<(CPointer<Unit>, CPointer<impl_p0.EmailMailboxAutoReplyMessageResponseKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var RequestedFormat: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_Email == "on"]
@@ -830,7 +840,7 @@ public class IEmailMailboxGetAutoReplySettingsRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxGetAutoReplySettingsRequest", IEmailMailboxGetAutoReplySettingsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxGetAutoReplySettingsRequestVtbl", "IEmailMailboxGetAutoReplySettingsRequest", "IEmailMailboxGetAutoReplySettingsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedFormat", 7, [InterfaceParameterSchema("result", "CPointer<_impl_l0.EmailMailboxAutoReplyMessageResponseKindAbi>", "OutSlot<_impl_l0.EmailMailboxAutoReplyMessageResponseKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("autoReplySettings", "CPointer<Unit>", "InParam<_impl_l1.EmailMailboxAutoReplySettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxGetAutoReplySettingsRequest", IEmailMailboxGetAutoReplySettingsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxGetAutoReplySettingsRequestVtbl", "IEmailMailboxGetAutoReplySettingsRequest", "IEmailMailboxGetAutoReplySettingsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedFormat", 7, [InterfaceParameterSchema("result", "CPointer<impl_p0.EmailMailboxAutoReplyMessageResponseKindAbi>", "OutSlot<impl_p0.EmailMailboxAutoReplyMessageResponseKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("autoReplySettings", "CPointer<Unit>", "InParam<impl_p1.EmailMailboxAutoReplySettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxGetAutoReplySettingsRequest.runtimeType())
         return schema
     }
@@ -868,16 +878,16 @@ public class IEmailMailboxGetAutoReplySettingsRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func RequestedFormat(): _impl_l0.EmailMailboxAutoReplyMessageResponseKind {
+    public unsafe func RequestedFormat(): impl_p0.EmailMailboxAutoReplyMessageResponseKind {
         let v = vtbl()
-        var result__ = _impl_l0.EmailMailboxAutoReplyMessageResponseKindAbi()
-        let hr = v.RequestedFormat(asRaw(), CPointer<_impl_l0.EmailMailboxAutoReplyMessageResponseKindAbi>(inout result__))
+        var result__ = impl_p0.EmailMailboxAutoReplyMessageResponseKindAbi()
+        let hr = v.RequestedFormat(asRaw(), CPointer<impl_p0.EmailMailboxAutoReplyMessageResponseKindAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.EmailMailboxAutoReplyMessageResponseKind>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.EmailMailboxAutoReplyMessageResponseKind>()).unwrap()
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportCompletedAsync(autoReplySettings: _impl_l1.EmailMailboxAutoReplySettings): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(autoReplySettings: impl_p1.EmailMailboxAutoReplySettings): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), autoReplySettings.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1228,7 +1238,7 @@ public class IEmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxResolveRecipientsRequest", IEmailMailboxResolveRecipientsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxResolveRecipientsRequestVtbl", "IEmailMailboxResolveRecipientsRequest", "IEmailMailboxResolveRecipientsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Recipients", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("resolutionResults", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l2.EmailRecipientResolutionResult>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxResolveRecipientsRequest", IEmailMailboxResolveRecipientsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxResolveRecipientsRequestVtbl", "IEmailMailboxResolveRecipientsRequest", "IEmailMailboxResolveRecipientsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Recipients", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("resolutionResults", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.EmailRecipientResolutionResult>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxResolveRecipientsRequest.runtimeType())
         return schema
     }
@@ -1275,7 +1285,7 @@ public class IEmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<_impl_l2.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<impl_p1.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), resolutionResults.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1313,7 +1323,7 @@ public struct IEmailMailboxServerSearchReadBatchRequestVtbl {
     public var SaveMessageAsync: UIntNative = UIntNative(0)
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var ReportFailedAsync: CFunc<(CPointer<Unit>, _impl_l0.EmailBatchStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var ReportFailedAsync: CFunc<(CPointer<Unit>, impl_p0.EmailBatchStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var ReportFailedAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -1355,7 +1365,7 @@ public class IEmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxServerSearchReadBatchRequest", IEmailMailboxServerSearchReadBatchRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxServerSearchReadBatchRequestVtbl", "IEmailMailboxServerSearchReadBatchRequest", "IEmailMailboxServerSearchReadBatchRequest_Impl", [InterfaceMethodSchema("SessionId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMailboxId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.EmailQueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SuggestedBatchSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveMessageAsync", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<_impl_l1.EmailMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 13, [InterfaceParameterSchema("batchStatus", "_impl_l0.EmailBatchStatusAbi", "_impl_l0.EmailBatchStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxServerSearchReadBatchRequest", IEmailMailboxServerSearchReadBatchRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxServerSearchReadBatchRequestVtbl", "IEmailMailboxServerSearchReadBatchRequest", "IEmailMailboxServerSearchReadBatchRequest_Impl", [InterfaceMethodSchema("SessionId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMailboxId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailFolderId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.EmailQueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SuggestedBatchSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveMessageAsync", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<impl_p1.EmailMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 13, [InterfaceParameterSchema("batchStatus", "impl_p0.EmailBatchStatusAbi", "impl_p0.EmailBatchStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxServerSearchReadBatchRequest.runtimeType())
         return schema
     }
@@ -1409,12 +1419,12 @@ public class IEmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func Options(): _impl_l1.EmailQueryOptions {
+    public unsafe func Options(): impl_p1.EmailQueryOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Options(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.EmailQueryOptions.fromAbiTake(result__)
+        return impl_p1.EmailQueryOptions.fromAbiTake(result__)
     }
 
     public unsafe func SuggestedBatchSize(): UInt32 {
@@ -1426,7 +1436,7 @@ public class IEmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func SaveMessageAsync(message: _impl_l1.EmailMessage): windows_future.IAsyncAction {
+    public unsafe func SaveMessageAsync(message: impl_p1.EmailMessage): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveMessageAsync(asRaw(), message.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1443,10 +1453,10 @@ public class IEmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(batchStatus: _impl_l0.EmailBatchStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(batchStatus: impl_p0.EmailBatchStatus): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(batchStatus, windows_core.typeMarker<_impl_l0.EmailBatchStatus>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(batchStatus, windows_core.typeMarker<impl_p0.EmailBatchStatus>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -1505,7 +1515,7 @@ public class IEmailMailboxSetAutoReplySettingsRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxSetAutoReplySettingsRequest", IEmailMailboxSetAutoReplySettingsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxSetAutoReplySettingsRequestVtbl", "IEmailMailboxSetAutoReplySettingsRequest", "IEmailMailboxSetAutoReplySettingsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoReplySettings", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.EmailMailboxAutoReplySettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxSetAutoReplySettingsRequest", IEmailMailboxSetAutoReplySettingsRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxSetAutoReplySettingsRequestVtbl", "IEmailMailboxSetAutoReplySettingsRequest", "IEmailMailboxSetAutoReplySettingsRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoReplySettings", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.EmailMailboxAutoReplySettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxSetAutoReplySettingsRequest.runtimeType())
         return schema
     }
@@ -1543,12 +1553,12 @@ public class IEmailMailboxSetAutoReplySettingsRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func AutoReplySettings(): _impl_l1.EmailMailboxAutoReplySettings {
+    public unsafe func AutoReplySettings(): impl_p1.EmailMailboxAutoReplySettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AutoReplySettings(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.EmailMailboxAutoReplySettings.fromAbiTake(result__)
+        return impl_p1.EmailMailboxAutoReplySettings.fromAbiTake(result__)
     }
 
     public unsafe func ReportCompletedAsync(): windows_future.IAsyncAction {
@@ -1681,7 +1691,7 @@ public struct IEmailMailboxUpdateMeetingResponseRequestVtbl {
     public var EmailMailboxId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var EmailMessageId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
-    public var Response: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailMeetingResponseTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Response: CFunc<(CPointer<Unit>, CPointer<impl_p0.EmailMeetingResponseTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email != "on"]
     public var Response: UIntNative = UIntNative(0)
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1728,7 +1738,7 @@ public class IEmailMailboxUpdateMeetingResponseRequest <: InterfaceWrapperBase &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxUpdateMeetingResponseRequest", IEmailMailboxUpdateMeetingResponseRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxUpdateMeetingResponseRequestVtbl", "IEmailMailboxUpdateMeetingResponseRequest", "IEmailMailboxUpdateMeetingResponseRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMessageId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Response", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.EmailMeetingResponseTypeAbi>", "OutSlot<_impl_l0.EmailMeetingResponseType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendUpdate", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxUpdateMeetingResponseRequest", IEmailMailboxUpdateMeetingResponseRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxUpdateMeetingResponseRequestVtbl", "IEmailMailboxUpdateMeetingResponseRequest", "IEmailMailboxUpdateMeetingResponseRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EmailMessageId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Response", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.EmailMeetingResponseTypeAbi>", "OutSlot<impl_p0.EmailMeetingResponseType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subject", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendUpdate", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxUpdateMeetingResponseRequest.runtimeType())
         return schema
     }
@@ -1774,12 +1784,12 @@ public class IEmailMailboxUpdateMeetingResponseRequest <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func Response(): _impl_l0.EmailMeetingResponseType {
+    public unsafe func Response(): impl_p0.EmailMeetingResponseType {
         let v = vtbl()
-        var result__ = _impl_l0.EmailMeetingResponseTypeAbi()
-        let hr = v.Response(asRaw(), CPointer<_impl_l0.EmailMeetingResponseTypeAbi>(inout result__))
+        var result__ = impl_p0.EmailMeetingResponseTypeAbi()
+        let hr = v.Response(asRaw(), CPointer<impl_p0.EmailMeetingResponseTypeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.EmailMeetingResponseType>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.EmailMeetingResponseType>()).unwrap()
     }
 
     public unsafe func Subject(): windows_core.HString {
@@ -1879,7 +1889,7 @@ public class IEmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IEmailMailboxValidateCertificatesRequest", IEmailMailboxValidateCertificatesRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxValidateCertificatesRequestVtbl", "IEmailMailboxValidateCertificatesRequest", "IEmailMailboxValidateCertificatesRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Certificates", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.Certificate>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("validationStatuses", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l0.EmailCertificateValidationStatus>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IEmailMailboxValidateCertificatesRequest", IEmailMailboxValidateCertificatesRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IEmailMailboxValidateCertificatesRequestVtbl", "IEmailMailboxValidateCertificatesRequest", "IEmailMailboxValidateCertificatesRequest_Impl", [InterfaceMethodSchema("EmailMailboxId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Certificates", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.Certificate>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("validationStatuses", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p0.EmailCertificateValidationStatus>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IEmailMailboxValidateCertificatesRequest.runtimeType())
         return schema
     }
@@ -1917,16 +1927,16 @@ public class IEmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
+    public unsafe func Certificates(): windows_collections.IVectorView<impl_p1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Certificates(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.Certificate>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.Certificate>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<_impl_l0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<impl_p0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), validationStatuses.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2028,12 +2038,12 @@ public class EmailMailboxCreateFolderRequest <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportCompletedAsync(folder: _impl_l2.EmailFolder): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(folder: impl_p1.EmailFolder): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(folder)
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxCreateFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxCreateFolderStatus): windows_future.IAsyncAction {
         return defaultInterface().ReportFailedAsync(status)
     }
 }
@@ -2138,7 +2148,7 @@ public class EmailMailboxDeleteFolderRequest <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxDeleteFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxDeleteFolderStatus): windows_future.IAsyncAction {
         return defaultInterface().ReportFailedAsync(status)
     }
 }
@@ -2455,7 +2465,7 @@ public class EmailMailboxEmptyFolderRequest <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(status: _impl_l0.EmailMailboxEmptyFolderStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(status: impl_p0.EmailMailboxEmptyFolderStatus): windows_future.IAsyncAction {
         return defaultInterface().ReportFailedAsync(status)
     }
 }
@@ -2556,7 +2566,7 @@ public class EmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Recipients(): windows_collections.IVectorView<_impl_l0.EmailRecipient> {
+    public unsafe func Recipients(): windows_collections.IVectorView<impl_p0.EmailRecipient> {
         return defaultInterface().Recipients()
     }
 
@@ -2565,7 +2575,7 @@ public class EmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ForwardHeaderType(): _impl_l0.EmailMessageBodyKind {
+    public unsafe func ForwardHeaderType(): impl_p0.EmailMessageBodyKind {
         return defaultInterface().ForwardHeaderType()
     }
 
@@ -2678,12 +2688,12 @@ public class EmailMailboxGetAutoReplySettingsRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func RequestedFormat(): _impl_l0.EmailMailboxAutoReplyMessageResponseKind {
+    public unsafe func RequestedFormat(): impl_p0.EmailMailboxAutoReplyMessageResponseKind {
         return defaultInterface().RequestedFormat()
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportCompletedAsync(autoReplySettings: _impl_l1.EmailMailboxAutoReplySettings): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(autoReplySettings: impl_p1.EmailMailboxAutoReplySettings): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(autoReplySettings)
     }
 
@@ -3021,7 +3031,7 @@ public class EmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<_impl_l2.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<impl_p1.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(resolutionResults)
     }
 
@@ -3130,7 +3140,7 @@ public class EmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func Options(): _impl_l1.EmailQueryOptions {
+    public unsafe func Options(): impl_p1.EmailQueryOptions {
         return defaultInterface().Options()
     }
 
@@ -3139,7 +3149,7 @@ public class EmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func SaveMessageAsync(message: _impl_l1.EmailMessage): windows_future.IAsyncAction {
+    public unsafe func SaveMessageAsync(message: impl_p1.EmailMessage): windows_future.IAsyncAction {
         return defaultInterface().SaveMessageAsync(message)
     }
 
@@ -3148,7 +3158,7 @@ public class EmailMailboxServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func ReportFailedAsync(batchStatus: _impl_l0.EmailBatchStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(batchStatus: impl_p0.EmailBatchStatus): windows_future.IAsyncAction {
         return defaultInterface().ReportFailedAsync(batchStatus)
     }
 }
@@ -3245,7 +3255,7 @@ public class EmailMailboxSetAutoReplySettingsRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func AutoReplySettings(): _impl_l1.EmailMailboxAutoReplySettings {
+    public unsafe func AutoReplySettings(): impl_p1.EmailMailboxAutoReplySettings {
         return defaultInterface().AutoReplySettings()
     }
 
@@ -3454,7 +3464,7 @@ public class EmailMailboxUpdateMeetingResponseRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Email == "on"]
-    public unsafe func Response(): _impl_l0.EmailMeetingResponseType {
+    public unsafe func Response(): impl_p0.EmailMeetingResponseType {
         return defaultInterface().Response()
     }
 
@@ -3571,12 +3581,12 @@ public class EmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
+    public unsafe func Certificates(): windows_collections.IVectorView<impl_p1.Certificate> {
         return defaultInterface().Certificates()
     }
 
     @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<_impl_l0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<impl_p0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(validationStatuses)
     }
 

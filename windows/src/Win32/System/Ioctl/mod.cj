@@ -4,16 +4,26 @@
 package windows.Win32.System.Ioctl
 
 import std.collection.*
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_Vhd == "on"]
 import windows.Win32.Storage.Vhd as Win32_Storage_Vhd
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_Ioctl == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_System_Ioctl == "on"]
@@ -3346,7 +3356,7 @@ extend CSV_QUERY_FILE_REVISION <: windows_core.CopyType & windows_core.RuntimeTy
 
 @When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 public struct CSV_QUERY_FILE_REVISION_FILE_ID_128 {
-    public var FileId: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var FileId: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
     public var FileRevision: VArray<Int64, $3> = VArray<Int64, $3>(repeat: 0i64)
     public init() {}
 }
@@ -3354,7 +3364,7 @@ public struct CSV_QUERY_FILE_REVISION_FILE_ID_128 {
 @When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct CSV_QUERY_FILE_REVISION_FILE_ID_128Abi {
-    public var FileId: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
+    public var FileId: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
     public var FileRevision: VArray<Int64, $3> = VArray<Int64, $3>(repeat: 0i64)
     public init() {}
 }
@@ -3366,13 +3376,13 @@ extend CSV_QUERY_FILE_REVISION_FILE_ID_128 <: windows_core.CopyType & windows_co
     public static func signature(): String { "struct(Windows.Win32.System.Ioctl.CSV_QUERY_FILE_REVISION_FILE_ID_128;struct(Windows.Win32.Storage.FileSystem.FILE_ID_128;cinterface(IInspectable));cinterface(IInspectable))" }
     public static func projectAbi(value: CSV_QUERY_FILE_REVISION_FILE_ID_128): CSV_QUERY_FILE_REVISION_FILE_ID_128Abi {
         var abi = CSV_QUERY_FILE_REVISION_FILE_ID_128Abi()
-        abi.FileId = windows_core.projectTypedAbi(value.FileId, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
+        abi.FileId = windows_core.projectTypedAbi(value.FileId, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
         abi.FileRevision = value.FileRevision
         return abi
     }
     public static func assumeInitRef(abi: CSV_QUERY_FILE_REVISION_FILE_ID_128Abi): CSV_QUERY_FILE_REVISION_FILE_ID_128 {
         var value = CSV_QUERY_FILE_REVISION_FILE_ID_128()
-        value.FileId = windows_core.fromTypedAbi(abi.FileId, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
+        value.FileId = windows_core.fromTypedAbi(abi.FileId, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
         value.FileRevision = abi.FileRevision
         return value
     }
@@ -19350,7 +19360,7 @@ public struct STORAGE_DEVICE_DESCRIPTOR {
     public var ProductIdOffset: UInt32 = 0u32
     public var ProductRevisionOffset: UInt32 = 0u32
     public var SerialNumberOffset: UInt32 = 0u32
-    public var BusType: Win32__impl_l0.STORAGE_BUS_TYPE = Win32__impl_l0.STORAGE_BUS_TYPE()
+    public var BusType: Win32_impl_p0.STORAGE_BUS_TYPE = Win32_impl_p0.STORAGE_BUS_TYPE()
     public var RawPropertiesLength: UInt32 = 0u32
     public var RawDeviceProperties: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
     public init() {}
@@ -19369,7 +19379,7 @@ public struct STORAGE_DEVICE_DESCRIPTORAbi {
     public var ProductIdOffset: UInt32 = 0u32
     public var ProductRevisionOffset: UInt32 = 0u32
     public var SerialNumberOffset: UInt32 = 0u32
-    public var BusType: Win32__impl_l0.STORAGE_BUS_TYPEAbi = Win32__impl_l0.STORAGE_BUS_TYPEAbi()
+    public var BusType: Win32_impl_p0.STORAGE_BUS_TYPEAbi = Win32_impl_p0.STORAGE_BUS_TYPEAbi()
     public var RawPropertiesLength: UInt32 = 0u32
     public var RawDeviceProperties: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
     public init() {}
@@ -19392,7 +19402,7 @@ extend STORAGE_DEVICE_DESCRIPTOR <: windows_core.CopyType & windows_core.Runtime
         abi.ProductIdOffset = value.ProductIdOffset
         abi.ProductRevisionOffset = value.ProductRevisionOffset
         abi.SerialNumberOffset = value.SerialNumberOffset
-        abi.BusType = windows_core.projectTypedAbi(value.BusType, windows_core.typeMarker<Win32__impl_l0.STORAGE_BUS_TYPE>())
+        abi.BusType = windows_core.projectTypedAbi(value.BusType, windows_core.typeMarker<Win32_impl_p0.STORAGE_BUS_TYPE>())
         abi.RawPropertiesLength = value.RawPropertiesLength
         abi.RawDeviceProperties = value.RawDeviceProperties
         return abi
@@ -19409,7 +19419,7 @@ extend STORAGE_DEVICE_DESCRIPTOR <: windows_core.CopyType & windows_core.Runtime
         value.ProductIdOffset = abi.ProductIdOffset
         value.ProductRevisionOffset = abi.ProductRevisionOffset
         value.SerialNumberOffset = abi.SerialNumberOffset
-        value.BusType = windows_core.fromTypedAbi(abi.BusType, windows_core.typeMarker<Win32__impl_l0.STORAGE_BUS_TYPE>()).unwrap()
+        value.BusType = windows_core.fromTypedAbi(abi.BusType, windows_core.typeMarker<Win32_impl_p0.STORAGE_BUS_TYPE>()).unwrap()
         value.RawPropertiesLength = abi.RawPropertiesLength
         value.RawDeviceProperties = abi.RawDeviceProperties
         return value
@@ -26739,8 +26749,8 @@ public struct USN_RECORD_V3 {
     public var RecordLength: UInt32 = 0u32
     public var MajorVersion: UInt16 = 0u16
     public var MinorVersion: UInt16 = 0u16
-    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
-    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var FileReferenceNumber: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
+    public var ParentFileReferenceNumber: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
     public var Usn: Int64 = 0i64
     public var TimeStamp: Int64 = 0i64
     public var Reason: UInt32 = 0u32
@@ -26759,8 +26769,8 @@ public struct USN_RECORD_V3Abi {
     public var RecordLength: UInt32 = 0u32
     public var MajorVersion: UInt16 = 0u16
     public var MinorVersion: UInt16 = 0u16
-    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
-    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
+    public var FileReferenceNumber: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
+    public var ParentFileReferenceNumber: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
     public var Usn: Int64 = 0i64
     public var TimeStamp: Int64 = 0i64
     public var Reason: UInt32 = 0u32
@@ -26783,8 +26793,8 @@ extend USN_RECORD_V3 <: windows_core.CopyType & windows_core.RuntimeType & windo
         abi.RecordLength = value.RecordLength
         abi.MajorVersion = value.MajorVersion
         abi.MinorVersion = value.MinorVersion
-        abi.FileReferenceNumber = windows_core.projectTypedAbi(value.FileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
-        abi.ParentFileReferenceNumber = windows_core.projectTypedAbi(value.ParentFileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
+        abi.FileReferenceNumber = windows_core.projectTypedAbi(value.FileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
+        abi.ParentFileReferenceNumber = windows_core.projectTypedAbi(value.ParentFileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
         abi.Usn = value.Usn
         abi.TimeStamp = value.TimeStamp
         abi.Reason = value.Reason
@@ -26801,8 +26811,8 @@ extend USN_RECORD_V3 <: windows_core.CopyType & windows_core.RuntimeType & windo
         value.RecordLength = abi.RecordLength
         value.MajorVersion = abi.MajorVersion
         value.MinorVersion = abi.MinorVersion
-        value.FileReferenceNumber = windows_core.fromTypedAbi(abi.FileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
-        value.ParentFileReferenceNumber = windows_core.fromTypedAbi(abi.ParentFileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
+        value.FileReferenceNumber = windows_core.fromTypedAbi(abi.FileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
+        value.ParentFileReferenceNumber = windows_core.fromTypedAbi(abi.ParentFileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
         value.Usn = abi.Usn
         value.TimeStamp = abi.TimeStamp
         value.Reason = abi.Reason
@@ -27579,14 +27589,14 @@ extend WIM_PROVIDER_UPDATE_OVERLAY_INPUT <: windows_core.CopyType & windows_core
 
 @When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 public struct WOF_EXTERNAL_FILE_ID {
-    public var FileId: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var FileId: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct WOF_EXTERNAL_FILE_IDAbi {
-    public var FileId: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
+    public var FileId: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
     public init() {}
 }
 
@@ -27597,12 +27607,12 @@ extend WOF_EXTERNAL_FILE_ID <: windows_core.CopyType & windows_core.RuntimeType 
     public static func signature(): String { "struct(Windows.Win32.System.Ioctl.WOF_EXTERNAL_FILE_ID;struct(Windows.Win32.Storage.FileSystem.FILE_ID_128;cinterface(IInspectable)))" }
     public static func projectAbi(value: WOF_EXTERNAL_FILE_ID): WOF_EXTERNAL_FILE_IDAbi {
         var abi = WOF_EXTERNAL_FILE_IDAbi()
-        abi.FileId = windows_core.projectTypedAbi(value.FileId, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
+        abi.FileId = windows_core.projectTypedAbi(value.FileId, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
         return abi
     }
     public static func assumeInitRef(abi: WOF_EXTERNAL_FILE_IDAbi): WOF_EXTERNAL_FILE_ID {
         var value = WOF_EXTERNAL_FILE_ID()
-        value.FileId = windows_core.fromTypedAbi(abi.FileId, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
+        value.FileId = windows_core.fromTypedAbi(abi.FileId, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
         return value
     }
     public static func fromAbi(abi: WOF_EXTERNAL_FILE_IDAbi): Result<WOF_EXTERNAL_FILE_ID> { Result<WOF_EXTERNAL_FILE_ID>.Ok(WOF_EXTERNAL_FILE_ID.assumeInitRef(abi)) }
@@ -29586,7 +29596,7 @@ public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct {
     public var MediaType: STORAGE_MEDIA_TYPE = STORAGE_MEDIA_TYPE()
     public var MediaCharacteristics: UInt32 = 0u32
     public var CurrentBlockSize: UInt32 = 0u32
-    public var BusType: Win32__impl_l0.STORAGE_BUS_TYPE = Win32__impl_l0.STORAGE_BUS_TYPE()
+    public var BusType: Win32_impl_p0.STORAGE_BUS_TYPE = Win32_impl_p0.STORAGE_BUS_TYPE()
     public var BusSpecificData: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union()
     public init() {}
 }
@@ -29597,7 +29607,7 @@ public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__StructAbi 
     public var MediaType: STORAGE_MEDIA_TYPEAbi = STORAGE_MEDIA_TYPEAbi()
     public var MediaCharacteristics: UInt32 = 0u32
     public var CurrentBlockSize: UInt32 = 0u32
-    public var BusType: Win32__impl_l0.STORAGE_BUS_TYPEAbi = Win32__impl_l0.STORAGE_BUS_TYPEAbi()
+    public var BusType: Win32_impl_p0.STORAGE_BUS_TYPEAbi = Win32_impl_p0.STORAGE_BUS_TYPEAbi()
     public var BusSpecificData: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union()
     public init() {}
 }
@@ -29612,7 +29622,7 @@ extend DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct <: windows
         abi.MediaType = STORAGE_MEDIA_TYPE.projectAbi(value.MediaType)
         abi.MediaCharacteristics = value.MediaCharacteristics
         abi.CurrentBlockSize = value.CurrentBlockSize
-        abi.BusType = windows_core.projectTypedAbi(value.BusType, windows_core.typeMarker<Win32__impl_l0.STORAGE_BUS_TYPE>())
+        abi.BusType = windows_core.projectTypedAbi(value.BusType, windows_core.typeMarker<Win32_impl_p0.STORAGE_BUS_TYPE>())
         abi.BusSpecificData = value.BusSpecificData
         return abi
     }
@@ -29621,7 +29631,7 @@ extend DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct <: windows
         value.MediaType = STORAGE_MEDIA_TYPE.assumeInitRef(abi.MediaType)
         value.MediaCharacteristics = abi.MediaCharacteristics
         value.CurrentBlockSize = abi.CurrentBlockSize
-        value.BusType = windows_core.fromTypedAbi(abi.BusType, windows_core.typeMarker<Win32__impl_l0.STORAGE_BUS_TYPE>()).unwrap()
+        value.BusType = windows_core.fromTypedAbi(abi.BusType, windows_core.typeMarker<Win32_impl_p0.STORAGE_BUS_TYPE>()).unwrap()
         value.BusSpecificData = abi.BusSpecificData
         return value
     }
@@ -35124,8 +35134,8 @@ extend TXFS_QUERY_RM_INFORMATION <: windows_core.CopyType & windows_core.Runtime
 @When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 public struct USN_RECORD_V4 {
     public var Header: USN_RECORD_COMMON_HEADER = USN_RECORD_COMMON_HEADER()
-    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
-    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var FileReferenceNumber: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
+    public var ParentFileReferenceNumber: Win32_impl_p0.FILE_ID_128 = Win32_impl_p0.FILE_ID_128()
     public var Usn: Int64 = 0i64
     public var Reason: UInt32 = 0u32
     public var SourceInfo: USN_SOURCE_INFO_ID = USN_SOURCE_INFO_ID()
@@ -35140,8 +35150,8 @@ public struct USN_RECORD_V4 {
 @C
 public struct USN_RECORD_V4Abi {
     public var Header: USN_RECORD_COMMON_HEADERAbi = USN_RECORD_COMMON_HEADERAbi()
-    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
-    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128Abi = Win32__impl_l0.FILE_ID_128Abi()
+    public var FileReferenceNumber: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
+    public var ParentFileReferenceNumber: Win32_impl_p0.FILE_ID_128Abi = Win32_impl_p0.FILE_ID_128Abi()
     public var Usn: Int64 = 0i64
     public var Reason: UInt32 = 0u32
     public var SourceInfo: USN_SOURCE_INFO_IDAbi = USN_SOURCE_INFO_IDAbi()
@@ -35160,8 +35170,8 @@ extend USN_RECORD_V4 <: windows_core.CopyType & windows_core.RuntimeType & windo
     public static func projectAbi(value: USN_RECORD_V4): USN_RECORD_V4Abi {
         var abi = USN_RECORD_V4Abi()
         abi.Header = USN_RECORD_COMMON_HEADER.projectAbi(value.Header)
-        abi.FileReferenceNumber = windows_core.projectTypedAbi(value.FileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
-        abi.ParentFileReferenceNumber = windows_core.projectTypedAbi(value.ParentFileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>())
+        abi.FileReferenceNumber = windows_core.projectTypedAbi(value.FileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
+        abi.ParentFileReferenceNumber = windows_core.projectTypedAbi(value.ParentFileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>())
         abi.Usn = value.Usn
         abi.Reason = value.Reason
         abi.SourceInfo = USN_SOURCE_INFO_ID.projectAbi(value.SourceInfo)
@@ -35174,8 +35184,8 @@ extend USN_RECORD_V4 <: windows_core.CopyType & windows_core.RuntimeType & windo
     public static func assumeInitRef(abi: USN_RECORD_V4Abi): USN_RECORD_V4 {
         var value = USN_RECORD_V4()
         value.Header = USN_RECORD_COMMON_HEADER.assumeInitRef(abi.Header)
-        value.FileReferenceNumber = windows_core.fromTypedAbi(abi.FileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
-        value.ParentFileReferenceNumber = windows_core.fromTypedAbi(abi.ParentFileReferenceNumber, windows_core.typeMarker<Win32__impl_l0.FILE_ID_128>()).unwrap()
+        value.FileReferenceNumber = windows_core.fromTypedAbi(abi.FileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
+        value.ParentFileReferenceNumber = windows_core.fromTypedAbi(abi.ParentFileReferenceNumber, windows_core.typeMarker<Win32_impl_p0.FILE_ID_128>()).unwrap()
         value.Usn = abi.Usn
         value.Reason = abi.Reason
         value.SourceInfo = USN_SOURCE_INFO_ID.assumeInitRef(abi.SourceInfo)

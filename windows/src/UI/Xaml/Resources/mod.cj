@@ -4,11 +4,17 @@
 package windows.UI.Xaml.Resources
 
 import std.collection.*
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Xaml_Resources == "on"]
 import windows_polyfill as windows_polyfill
 
 
@@ -94,6 +100,56 @@ public struct ICustomXamlResourceLoaderOverridesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetResource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
+
+    public static func new<Identity>(offset!: Int64 = 0): ICustomXamlResourceLoaderOverridesVtbl where Identity <: ICustomXamlResourceLoaderOverrides_Impl {
+        let _ = offset
+        var vtbl = ICustomXamlResourceLoaderOverridesVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.GetResource = { instanceRaw, arg0, arg1, arg2, arg3, result__ =>
+            match (unsafe { asImplFromRaw<ICustomXamlResourceLoaderOverrides_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetResource(arg0, arg1, arg2, arg3, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return vtbl
+    }
+
+    public static func matches(iid: GUID): Bool {
+        if (iid == ICustomXamlResourceLoaderOverrides.iid()) {
+            return true
+        }
+        return false
+    }
+}
+
+@When[Windows_UI_Xaml_Resources == "on"]
+public interface ICustomXamlResourceLoaderOverrides_ImplErased {
+    public func __winrtThunk_GetResource(arg0: CPointer<Unit>, arg1: CPointer<Unit>, arg2: CPointer<Unit>, arg3: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_UI_Xaml_Resources == "on"]
+public interface ICustomXamlResourceLoaderOverrides_Impl <: ICustomXamlResourceLoaderOverrides_ImplErased {
+    public func GetResource(resourceId: InParam<windows_core.HString>, objectType: InParam<windows_core.HString>, propertyName: InParam<windows_core.HString>, propertyType: InParam<windows_core.HString>): windows_core.Result<IInspectable>
+
+    public func __winrtThunk_GetResource(arg0: CPointer<Unit>, arg1: CPointer<Unit>, arg2: CPointer<Unit>, arg3: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
+        if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        match (this.GetResource(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg1)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg2)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg3)))) {
+            case Result<IInspectable>.Ok(value) =>
+                let raw = value.intoAbi()
+                if (raw.isNull()) {
+                    E_POINTER.value
+                } else {
+                    unsafe { result__.write(raw) }
+                    S_OK.value
+                }
+            case Result<IInspectable>.Err(error) =>
+                error.code().value
+        }
+    }
 }
 
 @When[Windows_UI_Xaml_Resources == "on"]

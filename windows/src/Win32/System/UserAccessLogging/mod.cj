@@ -4,12 +4,18 @@
 package windows.Win32.System.UserAccessLogging
 
 import std.collection.*
+@When[Windows_Win32_System_UserAccessLogging == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_UserAccessLogging == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_UserAccessLogging == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_UserAccessLogging == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_UserAccessLogging == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_UserAccessLogging == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_System_UserAccessLogging == "on" && Windows_Win32_Networking_WinSock == "on"]
@@ -17,7 +23,7 @@ public struct UAL_DATA_BLOB {
     public var Size: UInt32 = 0u32
     public var RoleGuid: GuidValue = GuidValue()
     public var TenantId: GuidValue = GuidValue()
-    public var Address: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var Address: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public var UserName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0u16)
     public init() {}
 }
@@ -28,7 +34,7 @@ public struct UAL_DATA_BLOBAbi {
     public var Size: UInt32 = 0u32
     public var RoleGuid: GUID = GUID()
     public var TenantId: GUID = GUID()
-    public var Address: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var Address: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public var UserName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0u16)
     public init() {}
 }
@@ -43,7 +49,7 @@ extend UAL_DATA_BLOB <: windows_core.CopyType & windows_core.RuntimeType & windo
         abi.Size = value.Size
         abi.RoleGuid = value.RoleGuid.toRaw()
         abi.TenantId = value.TenantId.toRaw()
-        abi.Address = windows_core.projectTypedAbi(value.Address, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.Address = windows_core.projectTypedAbi(value.Address, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         abi.UserName = value.UserName
         return abi
     }
@@ -52,7 +58,7 @@ extend UAL_DATA_BLOB <: windows_core.CopyType & windows_core.RuntimeType & windo
         value.Size = abi.Size
         value.RoleGuid = GuidValue(abi.RoleGuid)
         value.TenantId = GuidValue(abi.TenantId)
-        value.Address = windows_core.fromTypedAbi(abi.Address, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.Address = windows_core.fromTypedAbi(abi.Address, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         value.UserName = abi.UserName
         return value
     }

@@ -4,16 +4,27 @@
 package windows.Networking.NetworkOperators
 
 import std.collection.*
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_NetworkOperators == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Networking_NetworkOperators == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_NetworkOperators == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_NetworkOperators == "on"]
 import windows_future as windows_future
 
 
@@ -1403,7 +1414,7 @@ public class IHotspotAuthenticationContext <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHotspotAuthenticationContext", IHotspotAuthenticationContext.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHotspotAuthenticationContextVtbl", "IHotspotAuthenticationContext", "IHotspotAuthenticationContext_Impl", [InterfaceMethodSchema("WirelessNetworkId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_NetworkAdapter", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RedirectMessageUrl", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RedirectMessageXml", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationUrl", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IssueCredentials", 11, [InterfaceParameterSchema("userName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("extraParameters", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("markAsManualConnectOnFailure", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AbortAuthentication", 12, [InterfaceParameterSchema("markAsManual", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SkipAuthentication", 13, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TriggerAttentionRequired", 14, [InterfaceParameterSchema("packageRelativeApplicationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("applicationParameters", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHotspotAuthenticationContext", IHotspotAuthenticationContext.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHotspotAuthenticationContextVtbl", "IHotspotAuthenticationContext", "IHotspotAuthenticationContext_Impl", [InterfaceMethodSchema("WirelessNetworkId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_NetworkAdapter", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RedirectMessageUrl", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RedirectMessageXml", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationUrl", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IssueCredentials", 11, [InterfaceParameterSchema("userName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("extraParameters", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("markAsManualConnectOnFailure", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AbortAuthentication", 12, [InterfaceParameterSchema("markAsManual", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SkipAuthentication", 13, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TriggerAttentionRequired", 14, [InterfaceParameterSchema("packageRelativeApplicationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("applicationParameters", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IHotspotAuthenticationContext.runtimeType())
         return schema
     }
@@ -1442,12 +1453,12 @@ public class IHotspotAuthenticationContext <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_NetworkAdapter(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.NetworkAdapter.fromAbiTake(result__)
+        return impl_p1.NetworkAdapter.fromAbiTake(result__)
     }
 
     public unsafe func RedirectMessageUrl(): Foundation.Uri {
@@ -1459,12 +1470,12 @@ public class IHotspotAuthenticationContext <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func RedirectMessageXml(): _impl_l1.XmlDocument {
+    public unsafe func RedirectMessageXml(): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RedirectMessageXml(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 
     public unsafe func AuthenticationUrl(): Foundation.Uri {
@@ -1638,7 +1649,7 @@ public class IHotspotCredentialsAuthenticationResult <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHotspotCredentialsAuthenticationResult", IHotspotCredentialsAuthenticationResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHotspotCredentialsAuthenticationResultVtbl", "IHotspotCredentialsAuthenticationResult", "IHotspotCredentialsAuthenticationResult_Impl", [InterfaceMethodSchema("HasNetworkErrorOccurred", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseCode", 7, [InterfaceParameterSchema("result", "CPointer<HotspotAuthenticationResponseCodeAbi>", "OutSlot<HotspotAuthenticationResponseCode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogoffUrl", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationReplyXml", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHotspotCredentialsAuthenticationResult", IHotspotCredentialsAuthenticationResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHotspotCredentialsAuthenticationResultVtbl", "IHotspotCredentialsAuthenticationResult", "IHotspotCredentialsAuthenticationResult_Impl", [InterfaceMethodSchema("HasNetworkErrorOccurred", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseCode", 7, [InterfaceParameterSchema("result", "CPointer<HotspotAuthenticationResponseCodeAbi>", "OutSlot<HotspotAuthenticationResponseCode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogoffUrl", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationReplyXml", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHotspotCredentialsAuthenticationResult.runtimeType())
         return schema
     }
@@ -1692,12 +1703,12 @@ public class IHotspotCredentialsAuthenticationResult <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func AuthenticationReplyXml(): _impl_l1.XmlDocument {
+    public unsafe func AuthenticationReplyXml(): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AuthenticationReplyXml(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 }
 
@@ -2250,7 +2261,7 @@ public class IMobileBroadbandAccount2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandAccount2", IMobileBroadbandAccount2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandAccount2Vtbl", "IMobileBroadbandAccount2", "IMobileBroadbandAccount2_Impl", [InterfaceMethodSchema("GetConnectionProfiles", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.ConnectionProfile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandAccount2", IMobileBroadbandAccount2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandAccount2Vtbl", "IMobileBroadbandAccount2", "IMobileBroadbandAccount2_Impl", [InterfaceMethodSchema("GetConnectionProfiles", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.ConnectionProfile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandAccount2.runtimeType())
         return schema
     }
@@ -2280,12 +2291,12 @@ public class IMobileBroadbandAccount2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking_Connectivity == "on"]
-    public unsafe func GetConnectionProfiles(): windows_collections.IVectorView<_impl_l1.ConnectionProfile> {
+    public unsafe func GetConnectionProfiles(): windows_collections.IVectorView<impl_p1.ConnectionProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetConnectionProfiles(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.ConnectionProfile>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.ConnectionProfile>.fromAbiTake(result__)
     }
 }
 
@@ -3785,7 +3796,7 @@ public class IMobileBroadbandDeviceServiceCommandEventArgs <: InterfaceWrapperBa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandEventArgs", IMobileBroadbandDeviceServiceCommandEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandEventArgsVtbl", "IMobileBroadbandDeviceServiceCommandEventArgs", "IMobileBroadbandDeviceServiceCommandEventArgs_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceServiceId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EventId", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReceivedData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandEventArgs", IMobileBroadbandDeviceServiceCommandEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandEventArgsVtbl", "IMobileBroadbandDeviceServiceCommandEventArgs", "IMobileBroadbandDeviceServiceCommandEventArgs_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceServiceId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EventId", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReceivedData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceCommandEventArgs.runtimeType())
         return schema
     }
@@ -3839,12 +3850,12 @@ public class IMobileBroadbandDeviceServiceCommandEventArgs <: InterfaceWrapperBa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReceivedData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -3899,7 +3910,7 @@ public class IMobileBroadbandDeviceServiceCommandResult <: InterfaceWrapperBase 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandResult", IMobileBroadbandDeviceServiceCommandResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandResultVtbl", "IMobileBroadbandDeviceServiceCommandResult", "IMobileBroadbandDeviceServiceCommandResult_Impl", [InterfaceMethodSchema("StatusCode", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandResult", IMobileBroadbandDeviceServiceCommandResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandResultVtbl", "IMobileBroadbandDeviceServiceCommandResult", "IMobileBroadbandDeviceServiceCommandResult_Impl", [InterfaceMethodSchema("StatusCode", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceCommandResult.runtimeType())
         return schema
     }
@@ -3937,12 +3948,12 @@ public class IMobileBroadbandDeviceServiceCommandResult <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ResponseData(): _impl_l0.IBuffer {
+    public unsafe func ResponseData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ResponseData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -3996,7 +4007,7 @@ public class IMobileBroadbandDeviceServiceDataReceivedEventArgs <: InterfaceWrap
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceDataReceivedEventArgs", IMobileBroadbandDeviceServiceDataReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceDataReceivedEventArgsVtbl", "IMobileBroadbandDeviceServiceDataReceivedEventArgs", "IMobileBroadbandDeviceServiceDataReceivedEventArgs_Impl", [InterfaceMethodSchema("ReceivedData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceDataReceivedEventArgs", IMobileBroadbandDeviceServiceDataReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceDataReceivedEventArgsVtbl", "IMobileBroadbandDeviceServiceDataReceivedEventArgs", "IMobileBroadbandDeviceServiceDataReceivedEventArgs_Impl", [InterfaceMethodSchema("ReceivedData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceDataReceivedEventArgs.runtimeType())
         return schema
     }
@@ -4026,12 +4037,12 @@ public class IMobileBroadbandDeviceServiceDataReceivedEventArgs <: InterfaceWrap
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReceivedData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -4190,7 +4201,7 @@ public class IMobileBroadbandDeviceServiceTriggerDetails <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceTriggerDetails", IMobileBroadbandDeviceServiceTriggerDetails.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceTriggerDetailsVtbl", "IMobileBroadbandDeviceServiceTriggerDetails", "IMobileBroadbandDeviceServiceTriggerDetails_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceServiceId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReceivedData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceTriggerDetails", IMobileBroadbandDeviceServiceTriggerDetails.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceTriggerDetailsVtbl", "IMobileBroadbandDeviceServiceTriggerDetails", "IMobileBroadbandDeviceServiceTriggerDetails_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceServiceId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReceivedData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceTriggerDetails.runtimeType())
         return schema
     }
@@ -4236,12 +4247,12 @@ public class IMobileBroadbandDeviceServiceTriggerDetails <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReceivedData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -4386,7 +4397,7 @@ public class IMobileBroadbandModemIsolation <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandModemIsolation", IMobileBroadbandModemIsolation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandModemIsolationVtbl", "IMobileBroadbandModemIsolation", "IMobileBroadbandModemIsolation_Impl", [InterfaceMethodSchema("AddAllowedHost", 6, [InterfaceParameterSchema("host", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddAllowedHostRange", 7, [InterfaceParameterSchema("first", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("last", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ApplyConfigurationAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearConfigurationAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandModemIsolation", IMobileBroadbandModemIsolation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandModemIsolationVtbl", "IMobileBroadbandModemIsolation", "IMobileBroadbandModemIsolation_Impl", [InterfaceMethodSchema("AddAllowedHost", 6, [InterfaceParameterSchema("host", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddAllowedHostRange", 7, [InterfaceParameterSchema("first", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("last", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ApplyConfigurationAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearConfigurationAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandModemIsolation.runtimeType())
         return schema
     }
@@ -4416,14 +4427,14 @@ public class IMobileBroadbandModemIsolation <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func AddAllowedHost(host: _impl_l1.HostName): Unit {
+    public unsafe func AddAllowedHost(host: impl_p1.HostName): Unit {
         let v = vtbl()
         let hr = v.AddAllowedHost(asRaw(), host.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func AddAllowedHostRange(first: _impl_l1.HostName, last: _impl_l1.HostName): Unit {
+    public unsafe func AddAllowedHostRange(first: impl_p1.HostName, last: impl_p1.HostName): Unit {
         let v = vtbl()
         let hr = v.AddAllowedHostRange(asRaw(), first.asRaw(), last.asRaw())
         HRESULT(hr).ok()
@@ -4498,7 +4509,7 @@ public class IMobileBroadbandPco <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandPco", IMobileBroadbandPco.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandPcoVtbl", "IMobileBroadbandPco", "IMobileBroadbandPco_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsComplete", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandPco", IMobileBroadbandPco.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandPcoVtbl", "IMobileBroadbandPco", "IMobileBroadbandPco_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsComplete", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandPco.runtimeType())
         return schema
     }
@@ -4528,12 +4539,12 @@ public class IMobileBroadbandPco <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func IsComplete(): Bool {
@@ -4976,7 +4987,7 @@ public class INetworkOperatorTetheringClient <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringClient", INetworkOperatorTetheringClient.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringClientVtbl", "INetworkOperatorTetheringClient", "INetworkOperatorTetheringClient_Impl", [InterfaceMethodSchema("MacAddress", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HostNames", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringClient", INetworkOperatorTetheringClient.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringClientVtbl", "INetworkOperatorTetheringClient", "INetworkOperatorTetheringClient_Impl", [InterfaceMethodSchema("MacAddress", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HostNames", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INetworkOperatorTetheringClient.runtimeType())
         return schema
     }
@@ -5014,12 +5025,12 @@ public class INetworkOperatorTetheringClient <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func HostNames(): windows_collections.IVectorView<_impl_l1.HostName> {
+    public unsafe func HostNames(): windows_collections.IVectorView<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.HostNames(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.HostName>.fromAbiTake(result__)
     }
 }
 
@@ -6980,7 +6991,7 @@ public class MobileBroadbandDeviceServiceCommandEventArgs <: InterfaceWrapperBas
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         return defaultInterface().ReceivedData()
     }
 }
@@ -7077,7 +7088,7 @@ public class MobileBroadbandDeviceServiceCommandResult <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ResponseData(): _impl_l0.IBuffer {
+    public unsafe func ResponseData(): impl_p0.IBuffer {
         return defaultInterface().ResponseData()
     }
 }
@@ -7170,7 +7181,7 @@ public class MobileBroadbandDeviceServiceDataReceivedEventArgs <: InterfaceWrapp
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         return defaultInterface().ReceivedData()
     }
 }
@@ -7371,7 +7382,7 @@ public class MobileBroadbandDeviceServiceTriggerDetails <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReceivedData(): _impl_l0.IBuffer {
+    public unsafe func ReceivedData(): impl_p0.IBuffer {
         return defaultInterface().ReceivedData()
     }
 }
@@ -7584,7 +7595,7 @@ public class MobileBroadbandPco <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
@@ -8477,7 +8488,7 @@ public class NetworkOperatorTetheringClient <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func HostNames(): windows_collections.IVectorView<_impl_l1.HostName> {
+    public unsafe func HostNames(): windows_collections.IVectorView<impl_p1.HostName> {
         return defaultInterface().HostNames()
     }
 }
@@ -10147,7 +10158,7 @@ public class HotspotCredentialsAuthenticationResult <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func AuthenticationReplyXml(): _impl_l1.XmlDocument {
+    public unsafe func AuthenticationReplyXml(): impl_p1.XmlDocument {
         return defaultInterface().AuthenticationReplyXml()
     }
 }
@@ -10227,7 +10238,7 @@ public class IESimProfile <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IESimProfile", IESimProfile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IESimProfileVtbl", "IESimProfile", "IESimProfile_Impl", [InterfaceMethodSchema("Class", 6, [InterfaceParameterSchema("result", "CPointer<ESimProfileClassAbi>", "OutSlot<ESimProfileClass>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Nickname", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Policy", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ESimProfilePolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderIcon", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderId", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderName", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("State", 13, [InterfaceParameterSchema("result", "CPointer<ESimProfileStateAbi>", "OutSlot<ESimProfileState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisableAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EnableAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNicknameAsync", 16, [InterfaceParameterSchema("newNickname", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IESimProfile", IESimProfile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IESimProfileVtbl", "IESimProfile", "IESimProfile_Impl", [InterfaceMethodSchema("Class", 6, [InterfaceParameterSchema("result", "CPointer<ESimProfileClassAbi>", "OutSlot<ESimProfileClass>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Nickname", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Policy", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ESimProfilePolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderIcon", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderId", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderName", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("State", 13, [InterfaceParameterSchema("result", "CPointer<ESimProfileStateAbi>", "OutSlot<ESimProfileState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisableAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EnableAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNicknameAsync", 16, [InterfaceParameterSchema("newNickname", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IESimProfile.runtimeType())
         return schema
     }
@@ -10289,12 +10300,12 @@ public class IESimProfile <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProviderIcon(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func ProviderIcon(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProviderIcon(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     public unsafe func ProviderId(): windows_core.HString {
@@ -10751,7 +10762,7 @@ public struct IMobileBroadbandDeviceInformationVtbl {
     public var Model: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FirmwareInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sms == "on"]
-    public var get_CellularClass: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CellularClassAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_CellularClass: CFunc<(CPointer<Unit>, CPointer<impl_p0.CellularClassAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sms != "on"]
     public var get_CellularClass: UIntNative = UIntNative(0)
     public var get_DataClasses: CFunc<(CPointer<Unit>, CPointer<DataClassesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -10805,7 +10816,7 @@ public class IMobileBroadbandDeviceInformation <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceInformation", IMobileBroadbandDeviceInformation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceInformationVtbl", "IMobileBroadbandDeviceInformation", "IMobileBroadbandDeviceInformation_Impl", [InterfaceMethodSchema("get_NetworkDeviceStatus", 6, [InterfaceParameterSchema("result", "CPointer<NetworkDeviceStatusAbi>", "OutSlot<NetworkDeviceStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Manufacturer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Model", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FirmwareInformation", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_CellularClass", 10, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CellularClassAbi>", "OutSlot<_impl_l0.CellularClass>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DataClasses", 11, [InterfaceParameterSchema("result", "CPointer<DataClassesAbi>", "OutSlot<DataClasses>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomDataClass", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MobileEquipmentId", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TelephoneNumbers", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubscriberId", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SimIccId", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceType", 17, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandDeviceTypeAbi>", "OutSlot<MobileBroadbandDeviceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentRadioState", 19, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandRadioStateAbi>", "OutSlot<MobileBroadbandRadioState>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceInformation", IMobileBroadbandDeviceInformation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceInformationVtbl", "IMobileBroadbandDeviceInformation", "IMobileBroadbandDeviceInformation_Impl", [InterfaceMethodSchema("get_NetworkDeviceStatus", 6, [InterfaceParameterSchema("result", "CPointer<NetworkDeviceStatusAbi>", "OutSlot<NetworkDeviceStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Manufacturer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Model", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FirmwareInformation", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_CellularClass", 10, [InterfaceParameterSchema("result", "CPointer<impl_p0.CellularClassAbi>", "OutSlot<impl_p0.CellularClass>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DataClasses", 11, [InterfaceParameterSchema("result", "CPointer<DataClassesAbi>", "OutSlot<DataClasses>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomDataClass", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MobileEquipmentId", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TelephoneNumbers", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubscriberId", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SimIccId", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceType", 17, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandDeviceTypeAbi>", "OutSlot<MobileBroadbandDeviceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentRadioState", 19, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandRadioStateAbi>", "OutSlot<MobileBroadbandRadioState>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceInformation.runtimeType())
         return schema
     }
@@ -10867,12 +10878,12 @@ public class IMobileBroadbandDeviceInformation <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Devices_Sms == "on"]
-    public unsafe func get_CellularClass(): _impl_l0.CellularClass {
+    public unsafe func get_CellularClass(): impl_p0.CellularClass {
         let v = vtbl()
-        var result__ = _impl_l0.CellularClassAbi()
-        let hr = v.get_CellularClass(asRaw(), CPointer<_impl_l0.CellularClassAbi>(inout result__))
+        var result__ = impl_p0.CellularClassAbi()
+        let hr = v.get_CellularClass(asRaw(), CPointer<impl_p0.CellularClassAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CellularClass>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CellularClass>()).unwrap()
     }
 
     public unsafe func get_DataClasses(): DataClasses {
@@ -11004,7 +11015,7 @@ public class IMobileBroadbandDeviceServiceCommandSession <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandSession", IMobileBroadbandDeviceServiceCommandSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandSessionVtbl", "IMobileBroadbandDeviceServiceCommandSession", "IMobileBroadbandDeviceServiceCommandSession_Impl", [InterfaceMethodSchema("SendQueryCommandAsync", 6, [InterfaceParameterSchema("commandId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendSetCommandAsync", 7, [InterfaceParameterSchema("commandId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CloseSession", 8, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceCommandSession", IMobileBroadbandDeviceServiceCommandSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceCommandSessionVtbl", "IMobileBroadbandDeviceServiceCommandSession", "IMobileBroadbandDeviceServiceCommandSession_Impl", [InterfaceMethodSchema("SendQueryCommandAsync", 6, [InterfaceParameterSchema("commandId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendSetCommandAsync", 7, [InterfaceParameterSchema("commandId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CloseSession", 8, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceCommandSession.runtimeType())
         return schema
     }
@@ -11034,7 +11045,7 @@ public class IMobileBroadbandDeviceServiceCommandSession <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendQueryCommandAsync(commandId: UInt32, data: _impl_l0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
+    public unsafe func SendQueryCommandAsync(commandId: UInt32, data: impl_p0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendQueryCommandAsync(asRaw(), commandId, data.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -11043,7 +11054,7 @@ public class IMobileBroadbandDeviceServiceCommandSession <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendSetCommandAsync(commandId: UInt32, data: _impl_l0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
+    public unsafe func SendSetCommandAsync(commandId: UInt32, data: impl_p0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendSetCommandAsync(asRaw(), commandId, data.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -11323,7 +11334,7 @@ public class IMobileBroadbandNetwork <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandNetwork", IMobileBroadbandNetwork.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandNetworkVtbl", "IMobileBroadbandNetwork", "IMobileBroadbandNetwork_Impl", [InterfaceMethodSchema("get_NetworkAdapter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_NetworkRegistrationState", 7, [InterfaceParameterSchema("result", "CPointer<NetworkRegistrationStateAbi>", "OutSlot<NetworkRegistrationState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegistrationNetworkError", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PacketAttachNetworkError", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivationNetworkError", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccessPointName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredDataClass", 12, [InterfaceParameterSchema("result", "CPointer<DataClassesAbi>", "OutSlot<DataClasses>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredProviderId", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredProviderName", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowConnectionUI", 15, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandNetwork", IMobileBroadbandNetwork.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandNetworkVtbl", "IMobileBroadbandNetwork", "IMobileBroadbandNetwork_Impl", [InterfaceMethodSchema("get_NetworkAdapter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_NetworkRegistrationState", 7, [InterfaceParameterSchema("result", "CPointer<NetworkRegistrationStateAbi>", "OutSlot<NetworkRegistrationState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegistrationNetworkError", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PacketAttachNetworkError", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivationNetworkError", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccessPointName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredDataClass", 12, [InterfaceParameterSchema("result", "CPointer<DataClassesAbi>", "OutSlot<DataClasses>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredProviderId", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisteredProviderName", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowConnectionUI", 15, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandNetwork.runtimeType())
         return schema
     }
@@ -11353,12 +11364,12 @@ public class IMobileBroadbandNetwork <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_NetworkAdapter(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.NetworkAdapter.fromAbiTake(result__)
+        return impl_p1.NetworkAdapter.fromAbiTake(result__)
     }
 
     public unsafe func get_NetworkRegistrationState(): NetworkRegistrationState {
@@ -12043,7 +12054,7 @@ public class IMobileBroadbandUiccAppReadRecordResult <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandUiccAppReadRecordResult", IMobileBroadbandUiccAppReadRecordResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandUiccAppReadRecordResultVtbl", "IMobileBroadbandUiccAppReadRecordResult", "IMobileBroadbandUiccAppReadRecordResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandUiccAppOperationStatusAbi>", "OutSlot<MobileBroadbandUiccAppOperationStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandUiccAppReadRecordResult", IMobileBroadbandUiccAppReadRecordResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandUiccAppReadRecordResultVtbl", "IMobileBroadbandUiccAppReadRecordResult", "IMobileBroadbandUiccAppReadRecordResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<MobileBroadbandUiccAppOperationStatusAbi>", "OutSlot<MobileBroadbandUiccAppOperationStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandUiccAppReadRecordResult.runtimeType())
         return schema
     }
@@ -12081,12 +12092,12 @@ public class IMobileBroadbandUiccAppReadRecordResult <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -12360,7 +12371,7 @@ public class INetworkOperatorNotificationEventDetails <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INetworkOperatorNotificationEventDetails", INetworkOperatorNotificationEventDetails.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorNotificationEventDetailsVtbl", "INetworkOperatorNotificationEventDetails", "INetworkOperatorNotificationEventDetails_Impl", [InterfaceMethodSchema("NotificationType", 6, [InterfaceParameterSchema("result", "CPointer<NetworkOperatorEventMessageTypeAbi>", "OutSlot<NetworkOperatorEventMessageType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkAccountId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodingType", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RuleId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SmsMessage", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.ISmsMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INetworkOperatorNotificationEventDetails", INetworkOperatorNotificationEventDetails.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorNotificationEventDetailsVtbl", "INetworkOperatorNotificationEventDetails", "INetworkOperatorNotificationEventDetails_Impl", [InterfaceMethodSchema("NotificationType", 6, [InterfaceParameterSchema("result", "CPointer<NetworkOperatorEventMessageTypeAbi>", "OutSlot<NetworkOperatorEventMessageType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkAccountId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodingType", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Message", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RuleId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SmsMessage", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.ISmsMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INetworkOperatorNotificationEventDetails.runtimeType())
         return schema
     }
@@ -12430,12 +12441,12 @@ public class INetworkOperatorNotificationEventDetails <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Devices_Sms == "on"]
-    public unsafe func SmsMessage(): _impl_l0.ISmsMessage {
+    public unsafe func SmsMessage(): impl_p0.ISmsMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SmsMessage(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.ISmsMessage.fromAbiTake(result__)
+        return impl_p0.ISmsMessage.fromAbiTake(result__)
     }
 }
 
@@ -13042,7 +13053,7 @@ extend INetworkOperatorTetheringSessionAccessPointConfiguration <: windows_core.
 public struct IProvisionedProfileVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Networking_Connectivity == "on"]
-    public var UpdateCost: CFunc<(CPointer<Unit>, _impl_l0.NetworkCostTypeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var UpdateCost: CFunc<(CPointer<Unit>, impl_p0.NetworkCostTypeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Connectivity != "on"]
     public var UpdateCost: UIntNative = UIntNative(0)
     public var UpdateUsage: CFunc<(CPointer<Unit>, ProfileUsageAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -13085,7 +13096,7 @@ public class IProvisionedProfile <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IProvisionedProfile", IProvisionedProfile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProvisionedProfileVtbl", "IProvisionedProfile", "IProvisionedProfile_Impl", [InterfaceMethodSchema("UpdateCost", 6, [InterfaceParameterSchema("value", "_impl_l0.NetworkCostTypeAbi", "_impl_l0.NetworkCostType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateUsage", 7, [InterfaceParameterSchema("value", "ProfileUsageAbi", "ProfileUsage", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IProvisionedProfile", IProvisionedProfile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProvisionedProfileVtbl", "IProvisionedProfile", "IProvisionedProfile_Impl", [InterfaceMethodSchema("UpdateCost", 6, [InterfaceParameterSchema("value", "impl_p0.NetworkCostTypeAbi", "impl_p0.NetworkCostType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateUsage", 7, [InterfaceParameterSchema("value", "ProfileUsageAbi", "ProfileUsage", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IProvisionedProfile.runtimeType())
         return schema
     }
@@ -13115,9 +13126,9 @@ public class IProvisionedProfile <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func UpdateCost(value: _impl_l0.NetworkCostType): Unit {
+    public unsafe func UpdateCost(value: impl_p0.NetworkCostType): Unit {
         let v = vtbl()
-        let hr = v.UpdateCost(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<_impl_l0.NetworkCostType>()))
+        let hr = v.UpdateCost(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<impl_p0.NetworkCostType>()))
         HRESULT(hr).ok()
     }
 
@@ -13863,7 +13874,7 @@ public class MobileBroadbandUiccAppReadRecordResult <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 }
@@ -14180,7 +14191,7 @@ public class NetworkOperatorNotificationEventDetails <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Devices_Sms == "on"]
-    public unsafe func SmsMessage(): _impl_l0.ISmsMessage {
+    public unsafe func SmsMessage(): impl_p0.ISmsMessage {
         return defaultInterface().SmsMessage()
     }
 }
@@ -14631,7 +14642,7 @@ public class ProvisionedProfile <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func UpdateCost(value: _impl_l0.NetworkCostType): Unit {
+    public unsafe func UpdateCost(value: impl_p0.NetworkCostType): Unit {
         defaultInterface().UpdateCost(value)
     }
 
@@ -14744,7 +14755,7 @@ public class ESimProfile <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProviderIcon(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func ProviderIcon(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().ProviderIcon()
     }
 
@@ -15293,7 +15304,7 @@ public class IMobileBroadbandUiccApp <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandUiccApp", IMobileBroadbandUiccApp.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandUiccAppVtbl", "IMobileBroadbandUiccApp", "IMobileBroadbandUiccApp_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Kind", 7, [InterfaceParameterSchema("result", "CPointer<UiccAppKindAbi>", "OutSlot<UiccAppKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRecordDetailsAsync", 8, [InterfaceParameterSchema("uiccFilePath", "CPointer<Unit>", "InParam<windows_collections.IIterable<UInt32>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandUiccAppRecordDetailsResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadRecordAsync", 9, [InterfaceParameterSchema("uiccFilePath", "CPointer<Unit>", "InParam<windows_collections.IIterable<UInt32>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("recordIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandUiccAppReadRecordResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandUiccApp", IMobileBroadbandUiccApp.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandUiccAppVtbl", "IMobileBroadbandUiccApp", "IMobileBroadbandUiccApp_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Kind", 7, [InterfaceParameterSchema("result", "CPointer<UiccAppKindAbi>", "OutSlot<UiccAppKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRecordDetailsAsync", 8, [InterfaceParameterSchema("uiccFilePath", "CPointer<Unit>", "InParam<windows_collections.IIterable<UInt32>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandUiccAppRecordDetailsResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadRecordAsync", 9, [InterfaceParameterSchema("uiccFilePath", "CPointer<Unit>", "InParam<windows_collections.IIterable<UInt32>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("recordIndex", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MobileBroadbandUiccAppReadRecordResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandUiccApp.runtimeType())
         return schema
     }
@@ -15323,12 +15334,12 @@ public class IMobileBroadbandUiccApp <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Id(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func Kind(): UiccAppKind {
@@ -16124,7 +16135,7 @@ public class MobileBroadbandUiccApp <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         return defaultInterface().Id()
     }
 
@@ -16526,7 +16537,7 @@ public class MobileBroadbandNetwork <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         return defaultInterface().get_NetworkAdapter()
     }
 
@@ -17920,7 +17931,7 @@ public class ESimProfileMetadata <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProviderIcon(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func ProviderIcon(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().ProviderIcon()
     }
 
@@ -18373,7 +18384,7 @@ public class HotspotAuthenticationContext <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         return defaultInterface().get_NetworkAdapter()
     }
 
@@ -18382,7 +18393,7 @@ public class HotspotAuthenticationContext <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func RedirectMessageXml(): _impl_l1.XmlDocument {
+    public unsafe func RedirectMessageXml(): impl_p1.XmlDocument {
         return defaultInterface().RedirectMessageXml()
     }
 
@@ -19198,7 +19209,7 @@ public class IESimProfileMetadata <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IESimProfileMetadata", IESimProfileMetadata.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IESimProfileMetadataVtbl", "IESimProfileMetadata", "IESimProfileMetadata_Impl", [InterfaceMethodSchema("IsConfirmationCodeRequired", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Policy", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ESimProfilePolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderIcon", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("State", 12, [InterfaceParameterSchema("result", "CPointer<ESimProfileMetadataStateAbi>", "OutSlot<ESimProfileMetadataState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DenyInstallAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfirmInstallAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ESimOperationResult, ESimProfileInstallProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfirmInstallWithConfirmationCodeAsync", 15, [InterfaceParameterSchema("confirmationCode", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ESimOperationResult, ESimProfileInstallProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PostponeInstallAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StateChanged", 17, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ESimProfileMetadata, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStateChanged", 18, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IESimProfileMetadata", IESimProfileMetadata.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IESimProfileMetadataVtbl", "IESimProfileMetadata", "IESimProfileMetadata_Impl", [InterfaceMethodSchema("IsConfirmationCodeRequired", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Policy", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ESimProfilePolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderIcon", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderId", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProviderName", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("State", 12, [InterfaceParameterSchema("result", "CPointer<ESimProfileMetadataStateAbi>", "OutSlot<ESimProfileMetadataState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DenyInstallAsync", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfirmInstallAsync", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ESimOperationResult, ESimProfileInstallProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfirmInstallWithConfirmationCodeAsync", 15, [InterfaceParameterSchema("confirmationCode", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ESimOperationResult, ESimProfileInstallProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PostponeInstallAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ESimOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StateChanged", 17, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ESimProfileMetadata, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStateChanged", 18, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IESimProfileMetadata.runtimeType())
         return schema
     }
@@ -19252,12 +19263,12 @@ public class IESimProfileMetadata <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProviderIcon(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func ProviderIcon(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProviderIcon(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     public unsafe func ProviderId(): windows_core.HString {
@@ -20594,7 +20605,7 @@ public class IMobileBroadbandDeviceServiceDataSession <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceDataSession", IMobileBroadbandDeviceServiceDataSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceDataSessionVtbl", "IMobileBroadbandDeviceServiceDataSession", "IMobileBroadbandDeviceServiceDataSession_Impl", [InterfaceMethodSchema("WriteDataAsync", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CloseSession", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("DataReceived", 8, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MobileBroadbandDeviceServiceDataSession, MobileBroadbandDeviceServiceDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDataReceived", 9, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMobileBroadbandDeviceServiceDataSession", IMobileBroadbandDeviceServiceDataSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMobileBroadbandDeviceServiceDataSessionVtbl", "IMobileBroadbandDeviceServiceDataSession", "IMobileBroadbandDeviceServiceDataSession_Impl", [InterfaceMethodSchema("WriteDataAsync", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CloseSession", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("DataReceived", 8, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MobileBroadbandDeviceServiceDataSession, MobileBroadbandDeviceServiceDataReceivedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDataReceived", 9, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMobileBroadbandDeviceServiceDataSession.runtimeType())
         return schema
     }
@@ -20624,7 +20635,7 @@ public class IMobileBroadbandDeviceServiceDataSession <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func WriteDataAsync(value: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func WriteDataAsync(value: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.WriteDataAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -21715,7 +21726,7 @@ public class INetworkOperatorTetheringManagerStatics2 <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringManagerStatics2", INetworkOperatorTetheringManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringManagerStatics2Vtbl", "INetworkOperatorTetheringManagerStatics2", "INetworkOperatorTetheringManagerStatics2_Impl", [InterfaceMethodSchema("GetTetheringCapabilityFromConnectionProfile", 6, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<_impl_l1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<TetheringCapabilityAbi>", "OutSlot<TetheringCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromConnectionProfile", 7, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<_impl_l1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NetworkOperatorTetheringManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringManagerStatics2", INetworkOperatorTetheringManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringManagerStatics2Vtbl", "INetworkOperatorTetheringManagerStatics2", "INetworkOperatorTetheringManagerStatics2_Impl", [InterfaceMethodSchema("GetTetheringCapabilityFromConnectionProfile", 6, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<impl_p1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<TetheringCapabilityAbi>", "OutSlot<TetheringCapability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromConnectionProfile", 7, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<impl_p1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NetworkOperatorTetheringManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INetworkOperatorTetheringManagerStatics2.runtimeType())
         return schema
     }
@@ -21745,7 +21756,7 @@ public class INetworkOperatorTetheringManagerStatics2 <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func GetTetheringCapabilityFromConnectionProfile(profile: _impl_l1.ConnectionProfile): TetheringCapability {
+    public unsafe func GetTetheringCapabilityFromConnectionProfile(profile: impl_p1.ConnectionProfile): TetheringCapability {
         let v = vtbl()
         var result__ = TetheringCapabilityAbi()
         let hr = v.GetTetheringCapabilityFromConnectionProfile(asRaw(), profile.asRaw(), CPointer<TetheringCapabilityAbi>(inout result__))
@@ -21754,7 +21765,7 @@ public class INetworkOperatorTetheringManagerStatics2 <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func CreateFromConnectionProfile(profile: _impl_l1.ConnectionProfile): NetworkOperatorTetheringManager {
+    public unsafe func CreateFromConnectionProfile(profile: impl_p1.ConnectionProfile): NetworkOperatorTetheringManager {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromConnectionProfile(asRaw(), profile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -21813,7 +21824,7 @@ public class INetworkOperatorTetheringManagerStatics3 <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringManagerStatics3", INetworkOperatorTetheringManagerStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringManagerStatics3Vtbl", "INetworkOperatorTetheringManagerStatics3", "INetworkOperatorTetheringManagerStatics3_Impl", [InterfaceMethodSchema("CreateFromConnectionProfileWithTargetAdapter", 6, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<_impl_l1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NetworkOperatorTetheringManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INetworkOperatorTetheringManagerStatics3", INetworkOperatorTetheringManagerStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INetworkOperatorTetheringManagerStatics3Vtbl", "INetworkOperatorTetheringManagerStatics3", "INetworkOperatorTetheringManagerStatics3_Impl", [InterfaceMethodSchema("CreateFromConnectionProfileWithTargetAdapter", 6, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<impl_p1.ConnectionProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NetworkOperatorTetheringManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INetworkOperatorTetheringManagerStatics3.runtimeType())
         return schema
     }
@@ -21843,7 +21854,7 @@ public class INetworkOperatorTetheringManagerStatics3 <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func CreateFromConnectionProfileWithTargetAdapter(profile: _impl_l1.ConnectionProfile, adapter: _impl_l1.NetworkAdapter): NetworkOperatorTetheringManager {
+    public unsafe func CreateFromConnectionProfileWithTargetAdapter(profile: impl_p1.ConnectionProfile, adapter: impl_p1.NetworkAdapter): NetworkOperatorTetheringManager {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromConnectionProfileWithTargetAdapter(asRaw(), profile.asRaw(), adapter.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -22768,7 +22779,7 @@ public class MobileBroadbandDeviceInformation <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Devices_Sms == "on"]
-    public unsafe func get_CellularClass(): _impl_l0.CellularClass {
+    public unsafe func get_CellularClass(): impl_p0.CellularClass {
         return defaultInterface().get_CellularClass()
     }
 
@@ -23003,12 +23014,12 @@ public class MobileBroadbandDeviceServiceCommandSession <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendQueryCommandAsync(commandId: UInt32, data: _impl_l0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
+    public unsafe func SendQueryCommandAsync(commandId: UInt32, data: impl_p0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
         return defaultInterface().SendQueryCommandAsync(commandId, data)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendSetCommandAsync(commandId: UInt32, data: _impl_l0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
+    public unsafe func SendSetCommandAsync(commandId: UInt32, data: impl_p0.IBuffer): windows_future.IAsyncOperation<MobileBroadbandDeviceServiceCommandResult> {
         return defaultInterface().SendSetCommandAsync(commandId, data)
     }
 
@@ -23105,7 +23116,7 @@ public class MobileBroadbandDeviceServiceDataSession <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func WriteDataAsync(value: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func WriteDataAsync(value: impl_p0.IBuffer): windows_future.IAsyncAction {
         return defaultInterface().WriteDataAsync(value)
     }
 
@@ -23468,12 +23479,12 @@ public class MobileBroadbandModemIsolation <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func AddAllowedHost(host: _impl_l1.HostName): Unit {
+    public unsafe func AddAllowedHost(host: impl_p1.HostName): Unit {
         defaultInterface().AddAllowedHost(host)
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func AddAllowedHostRange(first: _impl_l1.HostName, last: _impl_l1.HostName): Unit {
+    public unsafe func AddAllowedHostRange(first: impl_p1.HostName, last: impl_p1.HostName): Unit {
         defaultInterface().AddAllowedHostRange(first, last)
     }
 
@@ -23927,7 +23938,7 @@ public class NetworkOperatorTetheringManager <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public static unsafe func GetTetheringCapabilityFromConnectionProfile(profile: _impl_l1.ConnectionProfile): TetheringCapability {
+    public static unsafe func GetTetheringCapabilityFromConnectionProfile(profile: impl_p1.ConnectionProfile): TetheringCapability {
         var result__: Option<TetheringCapability> = Option<TetheringCapability>.None
         try (factory__ = windows_core.factory<NetworkOperatorTetheringManager, INetworkOperatorTetheringManagerStatics2>().unwrap()) {
             result__ = Some(factory__.GetTetheringCapabilityFromConnectionProfile(profile))
@@ -23939,7 +23950,7 @@ public class NetworkOperatorTetheringManager <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public static unsafe func CreateFromConnectionProfile(profile: _impl_l1.ConnectionProfile): NetworkOperatorTetheringManager {
+    public static unsafe func CreateFromConnectionProfile(profile: impl_p1.ConnectionProfile): NetworkOperatorTetheringManager {
         var result__: Option<NetworkOperatorTetheringManager> = Option<NetworkOperatorTetheringManager>.None
         try (factory__ = windows_core.factory<NetworkOperatorTetheringManager, INetworkOperatorTetheringManagerStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromConnectionProfile(profile))
@@ -23973,7 +23984,7 @@ public class NetworkOperatorTetheringManager <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public static unsafe func CreateFromConnectionProfileWithTargetAdapter(profile: _impl_l1.ConnectionProfile, adapter: _impl_l1.NetworkAdapter): NetworkOperatorTetheringManager {
+    public static unsafe func CreateFromConnectionProfileWithTargetAdapter(profile: impl_p1.ConnectionProfile, adapter: impl_p1.NetworkAdapter): NetworkOperatorTetheringManager {
         var result__: Option<NetworkOperatorTetheringManager> = Option<NetworkOperatorTetheringManager>.None
         try (factory__ = windows_core.factory<NetworkOperatorTetheringManager, INetworkOperatorTetheringManagerStatics3>().unwrap()) {
             result__ = Some(factory__.CreateFromConnectionProfileWithTargetAdapter(profile, adapter))

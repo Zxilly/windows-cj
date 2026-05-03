@@ -4,17 +4,29 @@
 package windows.Networking.Proximity
 
 import std.collection.*
+@When[Windows_Networking_Proximity == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Networking_Proximity == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_Proximity == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_Proximity == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_Proximity == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_Proximity == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_Proximity == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Networking_Proximity == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_Proximity == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_Proximity == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Networking_Proximity == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_Proximity == "on"]
 import windows_future as windows_future
 
 
@@ -151,7 +163,7 @@ public class IPeerInformation3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPeerInformation3", IPeerInformation3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerInformation3Vtbl", "IPeerInformation3", "IPeerInformation3_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DiscoveryData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPeerInformation3", IPeerInformation3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerInformation3Vtbl", "IPeerInformation3", "IPeerInformation3_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DiscoveryData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPeerInformation3.runtimeType())
         return schema
     }
@@ -189,12 +201,12 @@ public class IPeerInformation3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DiscoveryData(): _impl_l0.IBuffer {
+    public unsafe func DiscoveryData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DiscoveryData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -249,7 +261,7 @@ public class IPeerInformationWithHostAndService <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPeerInformationWithHostAndService", IPeerInformationWithHostAndService.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerInformationWithHostAndServiceVtbl", "IPeerInformationWithHostAndService", "IPeerInformationWithHostAndService_Impl", [InterfaceMethodSchema("get_HostName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ServiceName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPeerInformationWithHostAndService", IPeerInformationWithHostAndService.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerInformationWithHostAndServiceVtbl", "IPeerInformationWithHostAndService", "IPeerInformationWithHostAndService_Impl", [InterfaceMethodSchema("get_HostName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ServiceName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPeerInformationWithHostAndService.runtimeType())
         return schema
     }
@@ -279,12 +291,12 @@ public class IPeerInformationWithHostAndService <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func get_HostName(): _impl_l1.HostName {
+    public unsafe func get_HostName(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_HostName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func ServiceName(): windows_core.HString {
@@ -349,7 +361,7 @@ public class IProximityMessage <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IProximityMessage", IProximityMessage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProximityMessageVtbl", "IProximityMessage", "IProximityMessage_Impl", [InterfaceMethodSchema("MessageType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubscriptionId", 7, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataAsString", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IProximityMessage", IProximityMessage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProximityMessageVtbl", "IProximityMessage", "IProximityMessage_Impl", [InterfaceMethodSchema("MessageType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubscriptionId", 7, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataAsString", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IProximityMessage.runtimeType())
         return schema
     }
@@ -395,12 +407,12 @@ public class IProximityMessage <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func DataAsString(): windows_core.HString {
@@ -779,7 +791,7 @@ public class ProximityMessage <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 
@@ -1006,7 +1018,7 @@ public class ITriggeredConnectionStateChangedEventArgs <: InterfaceWrapperBase &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITriggeredConnectionStateChangedEventArgs", ITriggeredConnectionStateChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITriggeredConnectionStateChangedEventArgsVtbl", "ITriggeredConnectionStateChangedEventArgs", "ITriggeredConnectionStateChangedEventArgs_Impl", [InterfaceMethodSchema("State", 6, [InterfaceParameterSchema("result", "CPointer<TriggeredConnectStateAbi>", "OutSlot<TriggeredConnectState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Socket", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.StreamSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITriggeredConnectionStateChangedEventArgs", ITriggeredConnectionStateChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITriggeredConnectionStateChangedEventArgsVtbl", "ITriggeredConnectionStateChangedEventArgs", "ITriggeredConnectionStateChangedEventArgs_Impl", [InterfaceMethodSchema("State", 6, [InterfaceParameterSchema("result", "CPointer<TriggeredConnectStateAbi>", "OutSlot<TriggeredConnectState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Socket", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.StreamSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITriggeredConnectionStateChangedEventArgs.runtimeType())
         return schema
     }
@@ -1052,12 +1064,12 @@ public class ITriggeredConnectionStateChangedEventArgs <: InterfaceWrapperBase &
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func Socket(): _impl_l2.StreamSocket {
+    public unsafe func Socket(): impl_p2.StreamSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Socket(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.StreamSocket.fromAbiTake(result__)
+        return impl_p2.StreamSocket.fromAbiTake(result__)
     }
 }
 
@@ -1142,7 +1154,7 @@ public class TriggeredConnectionStateChangedEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func Socket(): _impl_l2.StreamSocket {
+    public unsafe func Socket(): impl_p2.StreamSocket {
         return defaultInterface().Socket()
     }
 }
@@ -1328,7 +1340,7 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPeerFinderStatics", IPeerFinderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerFinderStaticsVtbl", "IPeerFinderStatics", "IPeerFinderStatics_Impl", [InterfaceMethodSchema("AllowBluetooth", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowBluetooth", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AllowInfrastructure", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowInfrastructure", 9, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AllowWiFiDirect", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowWiFiDirect", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DisplayName", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayName", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SupportedDiscoveryTypes", 14, [InterfaceParameterSchema("result", "CPointer<PeerDiscoveryTypesAbi>", "OutSlot<PeerDiscoveryTypes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlternateIdentities", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("StartWithMessage", 17, [InterfaceParameterSchema("peerMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stop", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TriggeredConnectionStateChanged", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IInspectable, TriggeredConnectionStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTriggeredConnectionStateChanged", 20, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConnectionRequested", 21, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IInspectable, ConnectionRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveConnectionRequested", 22, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindAllPeersAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectAsync", 24, [InterfaceParameterSchema("peerInformation", "CPointer<Unit>", "InParam<PeerInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l2.StreamSocket>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPeerFinderStatics", IPeerFinderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerFinderStaticsVtbl", "IPeerFinderStatics", "IPeerFinderStatics_Impl", [InterfaceMethodSchema("AllowBluetooth", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowBluetooth", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AllowInfrastructure", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowInfrastructure", 9, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AllowWiFiDirect", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAllowWiFiDirect", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DisplayName", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayName", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SupportedDiscoveryTypes", 14, [InterfaceParameterSchema("result", "CPointer<PeerDiscoveryTypesAbi>", "OutSlot<PeerDiscoveryTypes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlternateIdentities", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("StartWithMessage", 17, [InterfaceParameterSchema("peerMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stop", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TriggeredConnectionStateChanged", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IInspectable, TriggeredConnectionStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTriggeredConnectionStateChanged", 20, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConnectionRequested", 21, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IInspectable, ConnectionRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveConnectionRequested", 22, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindAllPeersAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectAsync", 24, [InterfaceParameterSchema("peerInformation", "CPointer<Unit>", "InParam<PeerInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p2.StreamSocket>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPeerFinderStatics.runtimeType())
         return schema
     }
@@ -1486,12 +1498,12 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func ConnectAsync(peerInformation: PeerInformation): windows_future.IAsyncOperation<_impl_l2.StreamSocket> {
+    public unsafe func ConnectAsync(peerInformation: PeerInformation): windows_future.IAsyncOperation<impl_p2.StreamSocket> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConnectAsync(asRaw(), peerInformation.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l2.StreamSocket>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p2.StreamSocket>.fromAbiTake(result__)
     }
 }
 
@@ -1575,19 +1587,15 @@ public class DeviceArrivedEventHandler <: InterfaceWrapperBase & ComInterface & 
 extend DeviceArrivedEventHandler <: windows_core.Interface<DeviceArrivedEventHandler> {}
 
 @When[Windows_Networking_Proximity == "on"]
-private open class DeviceArrivedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface DeviceArrivedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Networking_Proximity == "on"]
-private open class DeviceArrivedEventHandlerInvoker <: DeviceArrivedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<ProximityDevice>): Unit {
-        ()
-    }
+private interface DeviceArrivedEventHandlerInvoker <: DeviceArrivedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<ProximityDevice>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<ProximityDevice>(ProximityDevice.viewOf(arg0)))
         return S_OK.value
     }
@@ -1607,7 +1615,7 @@ private class DeviceArrivedEventHandlerBox <: DeviceArrivedEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<ProximityDevice>): Unit {
+    public func Invoke(sender: InParam<ProximityDevice>): Unit {
         invoke_(sender)
     }
 }
@@ -1704,19 +1712,15 @@ public class DeviceDepartedEventHandler <: InterfaceWrapperBase & ComInterface &
 extend DeviceDepartedEventHandler <: windows_core.Interface<DeviceDepartedEventHandler> {}
 
 @When[Windows_Networking_Proximity == "on"]
-private open class DeviceDepartedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface DeviceDepartedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Networking_Proximity == "on"]
-private open class DeviceDepartedEventHandlerInvoker <: DeviceDepartedEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<ProximityDevice>): Unit {
-        ()
-    }
+private interface DeviceDepartedEventHandlerInvoker <: DeviceDepartedEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<ProximityDevice>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<ProximityDevice>(ProximityDevice.viewOf(arg0)))
         return S_OK.value
     }
@@ -1736,7 +1740,7 @@ private class DeviceDepartedEventHandlerBox <: DeviceDepartedEventHandlerInvoker
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<ProximityDevice>): Unit {
+    public func Invoke(sender: InParam<ProximityDevice>): Unit {
         invoke_(sender)
     }
 }
@@ -1810,7 +1814,7 @@ public class IPeerFinderStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPeerFinderStatics2", IPeerFinderStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerFinderStatics2Vtbl", "IPeerFinderStatics2", "IPeerFinderStatics2_Impl", [InterfaceMethodSchema("Role", 6, [InterfaceParameterSchema("result", "CPointer<PeerRoleAbi>", "OutSlot<PeerRole>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRole", 7, [InterfaceParameterSchema("value", "PeerRoleAbi", "PeerRole", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DiscoveryData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDiscoveryData", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CreateWatcher", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PeerWatcher>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPeerFinderStatics2", IPeerFinderStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPeerFinderStatics2Vtbl", "IPeerFinderStatics2", "IPeerFinderStatics2_Impl", [InterfaceMethodSchema("Role", 6, [InterfaceParameterSchema("result", "CPointer<PeerRoleAbi>", "OutSlot<PeerRole>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRole", 7, [InterfaceParameterSchema("value", "PeerRoleAbi", "PeerRole", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DiscoveryData", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDiscoveryData", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CreateWatcher", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PeerWatcher>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPeerFinderStatics2.runtimeType())
         return schema
     }
@@ -1854,16 +1858,16 @@ public class IPeerFinderStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DiscoveryData(): _impl_l0.IBuffer {
+    public unsafe func DiscoveryData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DiscoveryData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetDiscoveryData(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetDiscoveryData(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetDiscoveryData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2125,7 +2129,7 @@ public class IProximityDevice <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IProximityDevice", IProximityDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProximityDeviceVtbl", "IProximityDevice", "IProximityDevice_Impl", [InterfaceMethodSchema("SubscribeForMessage", 6, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageReceivedHandler", "CPointer<Unit>", "InParam<MessageReceivedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishMessage", 7, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishMessageWithCallback", 8, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishBinaryMessage", 9, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishBinaryMessageWithCallback", 10, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishUriMessage", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishUriMessageWithCallback", 12, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StopSubscribingForMessage", 13, [InterfaceParameterSchema("subscriptionId", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopPublishingMessage", 14, [InterfaceParameterSchema("messageId", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeviceArrived", 15, [InterfaceParameterSchema("arrivedHandler", "CPointer<Unit>", "InParam<DeviceArrivedEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDeviceArrived", 16, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeviceDeparted", 17, [InterfaceParameterSchema("departedHandler", "CPointer<Unit>", "InParam<DeviceDepartedEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDeviceDeparted", 18, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MaxMessageBytes", 19, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BitsPerSecond", 20, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IProximityDevice", IProximityDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IProximityDeviceVtbl", "IProximityDevice", "IProximityDevice_Impl", [InterfaceMethodSchema("SubscribeForMessage", 6, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageReceivedHandler", "CPointer<Unit>", "InParam<MessageReceivedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishMessage", 7, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishMessageWithCallback", 8, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishBinaryMessage", 9, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishBinaryMessageWithCallback", 10, [InterfaceParameterSchema("messageType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishUriMessage", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublishUriMessageWithCallback", 12, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageTransmittedHandler", "CPointer<Unit>", "InParam<MessageTransmittedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StopSubscribingForMessage", 13, [InterfaceParameterSchema("subscriptionId", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopPublishingMessage", 14, [InterfaceParameterSchema("messageId", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeviceArrived", 15, [InterfaceParameterSchema("arrivedHandler", "CPointer<Unit>", "InParam<DeviceArrivedEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDeviceArrived", 16, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeviceDeparted", 17, [InterfaceParameterSchema("departedHandler", "CPointer<Unit>", "InParam<DeviceDepartedEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDeviceDeparted", 18, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MaxMessageBytes", 19, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BitsPerSecond", 20, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IProximityDevice.runtimeType())
         return schema
     }
@@ -2179,7 +2183,7 @@ public class IProximityDevice <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PublishBinaryMessage(messageType: windows_core.HString, message: _impl_l0.IBuffer): Int64 {
+    public unsafe func PublishBinaryMessage(messageType: windows_core.HString, message: impl_p0.IBuffer): Int64 {
         let v = vtbl()
         var result__ = 0i64
         let hr = v.PublishBinaryMessage(asRaw(), messageType.asRaw(), message.asRaw(), CPointer<Int64>(inout result__))
@@ -2188,7 +2192,7 @@ public class IProximityDevice <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PublishBinaryMessageWithCallback(messageType: windows_core.HString, message: _impl_l0.IBuffer, messageTransmittedHandler: MessageTransmittedHandler): Int64 {
+    public unsafe func PublishBinaryMessageWithCallback(messageType: windows_core.HString, message: impl_p0.IBuffer, messageTransmittedHandler: MessageTransmittedHandler): Int64 {
         let v = vtbl()
         var result__ = 0i64
         let hr = v.PublishBinaryMessageWithCallback(asRaw(), messageType.asRaw(), message.asRaw(), messageTransmittedHandler.asRaw(), CPointer<Int64>(inout result__))
@@ -2460,19 +2464,15 @@ public class MessageReceivedHandler <: InterfaceWrapperBase & ComInterface & win
 extend MessageReceivedHandler <: windows_core.Interface<MessageReceivedHandler> {}
 
 @When[Windows_Networking_Proximity == "on"]
-private open class MessageReceivedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface MessageReceivedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_Networking_Proximity == "on"]
-private open class MessageReceivedHandlerInvoker <: MessageReceivedHandlerInvokerErased {
-    public open func Invoke(sender: InParam<ProximityDevice>, message: InParam<ProximityMessage>): Unit {
-        ()
-    }
+private interface MessageReceivedHandlerInvoker <: MessageReceivedHandlerInvokerErased {
+    public func Invoke(sender: InParam<ProximityDevice>, message: InParam<ProximityMessage>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<ProximityDevice>(ProximityDevice.viewOf(arg0)), InParam<ProximityMessage>(ProximityMessage.viewOf(arg1)))
         return S_OK.value
     }
@@ -2492,7 +2492,7 @@ private class MessageReceivedHandlerBox <: MessageReceivedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<ProximityDevice>, message: InParam<ProximityMessage>): Unit {
+    public func Invoke(sender: InParam<ProximityDevice>, message: InParam<ProximityMessage>): Unit {
         invoke_(sender, message)
     }
 }
@@ -2589,19 +2589,15 @@ public class MessageTransmittedHandler <: InterfaceWrapperBase & ComInterface & 
 extend MessageTransmittedHandler <: windows_core.Interface<MessageTransmittedHandler> {}
 
 @When[Windows_Networking_Proximity == "on"]
-private open class MessageTransmittedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Int64): Int32 {
-        E_NOTIMPL.value
-    }
+private interface MessageTransmittedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Int64): Int32
 }
 
 @When[Windows_Networking_Proximity == "on"]
-private open class MessageTransmittedHandlerInvoker <: MessageTransmittedHandlerInvokerErased {
-    public open func Invoke(sender: InParam<ProximityDevice>, messageId: Int64): Unit {
-        ()
-    }
+private interface MessageTransmittedHandlerInvoker <: MessageTransmittedHandlerInvokerErased {
+    public func Invoke(sender: InParam<ProximityDevice>, messageId: Int64): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Int64): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Int64): Int32 {
         this.Invoke(InParam<ProximityDevice>(ProximityDevice.viewOf(arg0)), arg1)
         return S_OK.value
     }
@@ -2621,7 +2617,7 @@ private class MessageTransmittedHandlerBox <: MessageTransmittedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<ProximityDevice>, messageId: Int64): Unit {
+    public func Invoke(sender: InParam<ProximityDevice>, messageId: Int64): Unit {
         invoke_(sender, messageId)
     }
 }
@@ -2680,8 +2676,8 @@ public class PeerFinder <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func DiscoveryData(): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func DiscoveryData(): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<PeerFinder, IPeerFinderStatics2>().unwrap()) {
             result__ = Some(factory__.DiscoveryData())
         }
@@ -2692,7 +2688,7 @@ public class PeerFinder <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func SetDiscoveryData(value: _impl_l0.IBuffer): Unit {
+    public static unsafe func SetDiscoveryData(value: impl_p0.IBuffer): Unit {
         try (factory__ = windows_core.factory<PeerFinder, IPeerFinderStatics2>().unwrap()) {
             factory__.SetDiscoveryData(value)
         }
@@ -2875,8 +2871,8 @@ public class PeerFinder <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public static unsafe func ConnectAsync(peerInformation: PeerInformation): windows_future.IAsyncOperation<_impl_l2.StreamSocket> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l2.StreamSocket>> = Option<windows_future.IAsyncOperation<_impl_l2.StreamSocket>>.None
+    public static unsafe func ConnectAsync(peerInformation: PeerInformation): windows_future.IAsyncOperation<impl_p2.StreamSocket> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p2.StreamSocket>> = Option<windows_future.IAsyncOperation<impl_p2.StreamSocket>>.None
         try (factory__ = windows_core.factory<PeerFinder, IPeerFinderStatics>().unwrap()) {
             result__ = Some(factory__.ConnectAsync(peerInformation))
         }
@@ -3109,12 +3105,12 @@ public class ProximityDevice <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PublishBinaryMessage(messageType: windows_core.HString, message: _impl_l0.IBuffer): Int64 {
+    public unsafe func PublishBinaryMessage(messageType: windows_core.HString, message: impl_p0.IBuffer): Int64 {
         return defaultInterface().PublishBinaryMessage(messageType, message)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PublishBinaryMessageWithCallback(messageType: windows_core.HString, message: _impl_l0.IBuffer, messageTransmittedHandler: MessageTransmittedHandler): Int64 {
+    public unsafe func PublishBinaryMessageWithCallback(messageType: windows_core.HString, message: impl_p0.IBuffer, messageTransmittedHandler: MessageTransmittedHandler): Int64 {
         return defaultInterface().PublishBinaryMessageWithCallback(messageType, message, messageTransmittedHandler)
     }
 

@@ -4,14 +4,22 @@
 package windows.Win32.Devices.FunctionDiscovery
 
 import std.collection.*
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_FunctionDiscovery == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Devices_FunctionDiscovery == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Devices_FunctionDiscovery == "on"]
@@ -334,11 +342,11 @@ extend FunctionInstanceCollection <: windows_core.CopyType & windows_core.Runtim
 @When[Windows_Win32_Devices_FunctionDiscovery == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFunctionInstanceVtbl {
-    public var base_: Win32__impl_l1.IServiceProviderVtbl = Win32__impl_l1.IServiceProviderVtbl()
+    public var base_: Win32_impl_p2.IServiceProviderVtbl = Win32_impl_p2.IServiceProviderVtbl()
     public var GetID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetProviderInstanceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-    public var OpenPropertyStore: CFunc<(CPointer<Unit>, Win32__impl_l0.STGMAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var OpenPropertyStore: CFunc<(CPointer<Unit>, Win32_impl_p0.STGMAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetCategory: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -376,7 +384,7 @@ public class IFunctionInstance <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFunctionInstance> {
-        return InterfaceDescriptor<IFunctionInstance>("IFunctionInstance", IFunctionInstance.iid(), Win32__impl_l1.IServiceProvider.iid(), takeIFunctionInstanceFromAbi, viewIFunctionInstance)
+        return InterfaceDescriptor<IFunctionInstance>("IFunctionInstance", IFunctionInstance.iid(), Win32_impl_p2.IServiceProvider.iid(), takeIFunctionInstanceFromAbi, viewIFunctionInstance)
     }
 
     public unsafe func vtbl(): IFunctionInstanceVtbl {
@@ -396,7 +404,7 @@ public class IFunctionInstance <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-    public unsafe func OpenPropertyStore(dwStgAccess: Win32__impl_l0.STGMAbi, ppIPropertyStore: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func OpenPropertyStore(dwStgAccess: Win32_impl_p0.STGMAbi, ppIPropertyStore: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OpenPropertyStore(__liveRaw, dwStgAccess, ppIPropertyStore)
@@ -742,9 +750,9 @@ public struct IProviderPropertiesVtbl {
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetAt: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<Unit>, IntNative, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -801,14 +809,14 @@ public class IProviderProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(pIFunctionInstance: CPointer<Unit>, iProviderInstanceContext: IntNative, Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(pIFunctionInstance: CPointer<Unit>, iProviderInstanceContext: IntNative, Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, pIFunctionInstance, iProviderInstanceContext, Key, ppropVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetValue(pIFunctionInstance: CPointer<Unit>, iProviderInstanceContext: IntNative, Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetValue(pIFunctionInstance: CPointer<Unit>, iProviderInstanceContext: IntNative, Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, pIFunctionInstance, iProviderInstanceContext, Key, ppropVar)
@@ -821,11 +829,11 @@ public struct IProviderPropertyConstraintCollectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Get: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Get: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Item: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Next: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -878,21 +886,21 @@ public class IProviderPropertyConstraintCollection <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Get(Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
+    public unsafe func Get(Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Get(__liveRaw, Key, pPropVar, pdwPropertyConstraint)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Item(dwIndex: UInt32, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
+    public unsafe func Item(dwIndex: UInt32, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, dwIndex, pKey, pPropVar, pdwPropertyConstraint)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Next(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
+    public unsafe func Next(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pdwPropertyConstraint: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, pKey, pPropVar, pdwPropertyConstraint)
@@ -1574,7 +1582,7 @@ public struct IFunctionInstanceCollectionQueryVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var AddQueryConstraint: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var AddPropertyConstraint: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, PropertyConstraintAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var AddPropertyConstraint: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, PropertyConstraintAbi) -> Int32> = { _, _, _, _ => 0 }
     public var Execute: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1626,7 +1634,7 @@ public class IFunctionInstanceCollectionQuery <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func AddPropertyConstraint(Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32__impl_l2.PROPVARIANTAbi>, enumPropertyConstraint: PropertyConstraintAbi): Int32 {
+    public unsafe func AddPropertyConstraint(Key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32_impl_p3.PROPVARIANTAbi>, enumPropertyConstraint: PropertyConstraintAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPropertyConstraint(__liveRaw, Key, pv, enumPropertyConstraint)

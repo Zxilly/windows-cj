@@ -4,14 +4,20 @@
 package windows.UI.Input.Core
 
 import std.collection.*
+@When[Windows_UI_Input_Core == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Core == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Core == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_UI_Input_Core == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_UI_Input_Core == "on"]
@@ -65,7 +71,7 @@ public class IRadialControllerIndependentInputSource <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSource", IRadialControllerIndependentInputSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSourceVtbl", "IRadialControllerIndependentInputSource", "IRadialControllerIndependentInputSource_Impl", [InterfaceMethodSchema("Controller", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.RadialController>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Dispatcher", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.CoreDispatcher>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSource", IRadialControllerIndependentInputSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSourceVtbl", "IRadialControllerIndependentInputSource", "IRadialControllerIndependentInputSource_Impl", [InterfaceMethodSchema("Controller", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.RadialController>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Dispatcher", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.CoreDispatcher>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRadialControllerIndependentInputSource.runtimeType())
         return schema
     }
@@ -95,21 +101,21 @@ public class IRadialControllerIndependentInputSource <: InterfaceWrapperBase & C
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func Controller(): _impl_l2.RadialController {
+    public unsafe func Controller(): impl_p1.RadialController {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Controller(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.RadialController.fromAbiTake(result__)
+        return impl_p1.RadialController.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func Dispatcher(): _impl_l1.CoreDispatcher {
+    public unsafe func Dispatcher(): impl_p1.CoreDispatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Dispatcher(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.CoreDispatcher.fromAbiTake(result__)
+        return impl_p1.CoreDispatcher.fromAbiTake(result__)
     }
 }
 
@@ -163,7 +169,7 @@ public class IRadialControllerIndependentInputSource2 <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSource2", IRadialControllerIndependentInputSource2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSource2Vtbl", "IRadialControllerIndependentInputSource2", "IRadialControllerIndependentInputSource2_Impl", [InterfaceMethodSchema("get_DispatcherQueue", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DispatcherQueue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSource2", IRadialControllerIndependentInputSource2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSource2Vtbl", "IRadialControllerIndependentInputSource2", "IRadialControllerIndependentInputSource2_Impl", [InterfaceMethodSchema("get_DispatcherQueue", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DispatcherQueue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRadialControllerIndependentInputSource2.runtimeType())
         return schema
     }
@@ -193,12 +199,12 @@ public class IRadialControllerIndependentInputSource2 <: InterfaceWrapperBase & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_DispatcherQueue(): _impl_l1.DispatcherQueue {
+    public unsafe func get_DispatcherQueue(): impl_p1.DispatcherQueue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_DispatcherQueue(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DispatcherQueue.fromAbiTake(result__)
+        return impl_p1.DispatcherQueue.fromAbiTake(result__)
     }
 }
 
@@ -252,7 +258,7 @@ public class IRadialControllerIndependentInputSourceStatics <: InterfaceWrapperB
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSourceStatics", IRadialControllerIndependentInputSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSourceStaticsVtbl", "IRadialControllerIndependentInputSourceStatics", "IRadialControllerIndependentInputSourceStatics_Impl", [InterfaceMethodSchema("CreateForView", 6, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<_impl_l1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<RadialControllerIndependentInputSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRadialControllerIndependentInputSourceStatics", IRadialControllerIndependentInputSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRadialControllerIndependentInputSourceStaticsVtbl", "IRadialControllerIndependentInputSourceStatics", "IRadialControllerIndependentInputSourceStatics_Impl", [InterfaceMethodSchema("CreateForView", 6, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<impl_p1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<RadialControllerIndependentInputSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRadialControllerIndependentInputSourceStatics.runtimeType())
         return schema
     }
@@ -282,7 +288,7 @@ public class IRadialControllerIndependentInputSourceStatics <: InterfaceWrapperB
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func CreateForView(view: _impl_l1.CoreApplicationView): RadialControllerIndependentInputSource {
+    public unsafe func CreateForView(view: impl_p1.CoreApplicationView): RadialControllerIndependentInputSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForView(asRaw(), view.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -364,17 +370,17 @@ public class RadialControllerIndependentInputSource <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func Controller(): _impl_l2.RadialController {
+    public unsafe func Controller(): impl_p1.RadialController {
         return defaultInterface().Controller()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func Dispatcher(): _impl_l1.CoreDispatcher {
+    public unsafe func Dispatcher(): impl_p1.CoreDispatcher {
         return defaultInterface().Dispatcher()
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public static unsafe func CreateForView(view: _impl_l1.CoreApplicationView): RadialControllerIndependentInputSource {
+    public static unsafe func CreateForView(view: impl_p1.CoreApplicationView): RadialControllerIndependentInputSource {
         var result__: Option<RadialControllerIndependentInputSource> = Option<RadialControllerIndependentInputSource>.None
         try (factory__ = windows_core.factory<RadialControllerIndependentInputSource, IRadialControllerIndependentInputSourceStatics>().unwrap()) {
             result__ = Some(factory__.CreateForView(view))

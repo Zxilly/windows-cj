@@ -4,13 +4,20 @@
 package windows.Win32.System.Com.CallObj
 
 import std.collection.*
+@When[Windows_Win32_System_Com_CallObj == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Com_CallObj == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Com_CallObj == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Com_CallObj == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Com_CallObj == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Com_CallObj == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Com_CallObj == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Com_CallObj == "on" && OLE32 == "on" && Windows_Win32_System_Com_CallObj_CoGetInterceptor == "on" && Windows_Win32_System_Com == "on"]
@@ -287,7 +294,7 @@ public struct CALLFRAME_MARSHALCONTEXT {
     public var fIn: UInt8 = 0u8
     public var dwDestContext: UInt32 = 0u32
     public var pvDestContext: CPointer<Unit> = CPointer<Unit>()
-    public var punkReserved: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var punkReserved: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public var guidTransferSyntax: GuidValue = GuidValue()
     public init() {}
 }
@@ -322,7 +329,7 @@ extend CALLFRAME_MARSHALCONTEXT <: windows_core.CopyType & windows_core.RuntimeT
         value.fIn = abi.fIn
         value.dwDestContext = abi.dwDestContext
         value.pvDestContext = abi.pvDestContext
-        value.punkReserved = Win32__impl_l0.IUnknown.fromAbiTake(abi.punkReserved)
+        value.punkReserved = Win32_impl_p0.IUnknown.fromAbiTake(abi.punkReserved)
         value.guidTransferSyntax = GuidValue(abi.guidTransferSyntax)
         return value
     }
@@ -656,17 +663,17 @@ public struct ICallFrameVtbl {
     public var GetReturnValue: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetParamInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<CALLFRAMEPARAMINFOAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetParam: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetParam: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetParam: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetParam: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Copy: CFunc<(CPointer<Unit>, CALLFRAME_COPYAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Free: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var FreeParam: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public var WalkFrame: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<CALLFRAME_MARSHALCONTEXTAbi>, Win32__impl_l0.MSHLFLAGSAbi, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<CALLFRAME_MARSHALCONTEXTAbi>, Win32_impl_p0.MSHLFLAGSAbi, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Marshal: CFunc<(CPointer<Unit>, CPointer<CALLFRAME_MARSHALCONTEXTAbi>, Win32__impl_l0.MSHLFLAGSAbi, CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var Marshal: CFunc<(CPointer<Unit>, CPointer<CALLFRAME_MARSHALCONTEXTAbi>, Win32_impl_p0.MSHLFLAGSAbi, CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Unmarshal: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<CALLFRAME_MARSHALCONTEXTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -764,14 +771,14 @@ public class ICallFrame <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetParam(iparam: UInt32, pvar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetParam(iparam: UInt32, pvar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParam(__liveRaw, iparam, pvar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetParam(iparam: UInt32, pvar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetParam(iparam: UInt32, pvar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetParam(__liveRaw, iparam, pvar)
@@ -802,14 +809,14 @@ public class ICallFrame <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetMarshalSizeMax(pmshlContext: CPointer<CALLFRAME_MARSHALCONTEXTAbi>, mshlflags: Win32__impl_l0.MSHLFLAGSAbi, pcbBufferNeeded: CPointer<UInt32>): Int32 {
+    public unsafe func GetMarshalSizeMax(pmshlContext: CPointer<CALLFRAME_MARSHALCONTEXTAbi>, mshlflags: Win32_impl_p0.MSHLFLAGSAbi, pcbBufferNeeded: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMarshalSizeMax(__liveRaw, pmshlContext, mshlflags, pcbBufferNeeded)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Marshal(pmshlContext: CPointer<CALLFRAME_MARSHALCONTEXTAbi>, mshlflags: Win32__impl_l0.MSHLFLAGSAbi, pBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbBufferUsed: CPointer<UInt32>, pdataRep: CPointer<UInt32>, prpcFlags: CPointer<UInt32>): Int32 {
+    public unsafe func Marshal(pmshlContext: CPointer<CALLFRAME_MARSHALCONTEXTAbi>, mshlflags: Win32_impl_p0.MSHLFLAGSAbi, pBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbBufferUsed: CPointer<UInt32>, pdataRep: CPointer<UInt32>, prpcFlags: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Marshal(__liveRaw, pmshlContext, mshlflags, pBuffer, cbBuffer, pcbBufferUsed, pdataRep, prpcFlags)

@@ -4,14 +4,20 @@
 package windows.Win32.Storage.FileServerResourceManager
 
 import std.collection.*
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_FileServerResourceManager == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Storage_FileServerResourceManager == "on"]
@@ -585,7 +591,7 @@ public let FSRM_E_MODULE_TIMEOUT: Int32 = -2147200101i32
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DIFsrmClassificationEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -622,7 +628,7 @@ public class DIFsrmClassificationEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DIFsrmClassificationEvents> {
-        return InterfaceDescriptor<DIFsrmClassificationEvents>("DIFsrmClassificationEvents", DIFsrmClassificationEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDIFsrmClassificationEventsFromAbi, viewDIFsrmClassificationEvents)
+        return InterfaceDescriptor<DIFsrmClassificationEvents>("DIFsrmClassificationEvents", DIFsrmClassificationEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDIFsrmClassificationEventsFromAbi, viewDIFsrmClassificationEvents)
     }
 
     public unsafe func vtbl(): DIFsrmClassificationEventsVtbl {
@@ -3428,7 +3434,7 @@ extend FsrmTemplateApplyOptions <: windows_core.CopyType & windows_core.RuntimeT
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmAccessDeniedRemediationClientVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Show: CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt16>, AdrClientErrorTypeAbi, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3466,7 +3472,7 @@ public class IFsrmAccessDeniedRemediationClient <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmAccessDeniedRemediationClient> {
-        return InterfaceDescriptor<IFsrmAccessDeniedRemediationClient>("IFsrmAccessDeniedRemediationClient", IFsrmAccessDeniedRemediationClient.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmAccessDeniedRemediationClientFromAbi, viewIFsrmAccessDeniedRemediationClient)
+        return InterfaceDescriptor<IFsrmAccessDeniedRemediationClient>("IFsrmAccessDeniedRemediationClient", IFsrmAccessDeniedRemediationClient.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmAccessDeniedRemediationClientFromAbi, viewIFsrmAccessDeniedRemediationClient)
     }
 
     public unsafe func vtbl(): IFsrmAccessDeniedRemediationClientVtbl {
@@ -3483,7 +3489,7 @@ public class IFsrmAccessDeniedRemediationClient <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmActionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var ActionType: CFunc<(CPointer<Unit>, CPointer<FsrmActionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var RunLimitInterval: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -3525,7 +3531,7 @@ public class IFsrmAction <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmAction> {
-        return InterfaceDescriptor<IFsrmAction>("IFsrmAction", IFsrmAction.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmActionFromAbi, viewIFsrmAction)
+        return InterfaceDescriptor<IFsrmAction>("IFsrmAction", IFsrmAction.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmActionFromAbi, viewIFsrmAction)
     }
 
     public unsafe func vtbl(): IFsrmActionVtbl {
@@ -3998,9 +4004,9 @@ public class IFsrmActionEventLog <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmActionReportVtbl {
     public var base_: IFsrmActionVtbl = IFsrmActionVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ReportTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ReportTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetReportTypes: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetReportTypes: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var MailTo: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMailTo: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4047,14 +4053,14 @@ public class IFsrmActionReport <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ReportTypes(reportTypes: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ReportTypes(reportTypes: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReportTypes(__liveRaw, reportTypes)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetReportTypes(reportTypes: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetReportTypes(reportTypes: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetReportTypes(__liveRaw, reportTypes)
@@ -4076,17 +4082,17 @@ public class IFsrmActionReport <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<FsrmCollectionStateAbi>) -> Int32> = { _, _ => 0 }
     public var Cancel: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var WaitForCompletion: CFunc<(CPointer<Unit>, Int32, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetById: CFunc<(CPointer<Unit>, GUID, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetById: CFunc<(CPointer<Unit>, GUID, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -4123,7 +4129,7 @@ public class IFsrmCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmCollection> {
-        return InterfaceDescriptor<IFsrmCollection>("IFsrmCollection", IFsrmCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmCollectionFromAbi, viewIFsrmCollection)
+        return InterfaceDescriptor<IFsrmCollection>("IFsrmCollection", IFsrmCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmCollectionFromAbi, viewIFsrmCollection)
     }
 
     public unsafe func vtbl(): IFsrmCollectionVtbl {
@@ -4138,7 +4144,7 @@ public class IFsrmCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(index: Int32, item: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(index: Int32, item: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, index, item)
@@ -4169,7 +4175,7 @@ public class IFsrmCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetById(id: GUID, entry: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetById(id: GUID, entry: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetById(__liveRaw, id, entry)
@@ -4179,7 +4185,7 @@ public class IFsrmCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmDerivedObjectsResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DerivedObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Results: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4218,7 +4224,7 @@ public class IFsrmDerivedObjectsResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmDerivedObjectsResult> {
-        return InterfaceDescriptor<IFsrmDerivedObjectsResult>("IFsrmDerivedObjectsResult", IFsrmDerivedObjectsResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmDerivedObjectsResultFromAbi, viewIFsrmDerivedObjectsResult)
+        return InterfaceDescriptor<IFsrmDerivedObjectsResult>("IFsrmDerivedObjectsResult", IFsrmDerivedObjectsResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmDerivedObjectsResultFromAbi, viewIFsrmDerivedObjectsResult)
     }
 
     public unsafe func vtbl(): IFsrmDerivedObjectsResultVtbl {
@@ -4241,7 +4247,7 @@ public class IFsrmDerivedObjectsResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmFileConditionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<FsrmFileConditionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -4280,7 +4286,7 @@ public class IFsrmFileCondition <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmFileCondition> {
-        return InterfaceDescriptor<IFsrmFileCondition>("IFsrmFileCondition", IFsrmFileCondition.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmFileConditionFromAbi, viewIFsrmFileCondition)
+        return InterfaceDescriptor<IFsrmFileCondition>("IFsrmFileCondition", IFsrmFileCondition.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmFileConditionFromAbi, viewIFsrmFileCondition)
     }
 
     public unsafe func vtbl(): IFsrmFileConditionVtbl {
@@ -4313,9 +4319,9 @@ public struct IFsrmFileConditionPropertyVtbl {
     public var ValueType: CFunc<(CPointer<Unit>, CPointer<FsrmPropertyValueTypeAbi>) -> Int32> = { _, _ => 0 }
     public var SetValueType: CFunc<(CPointer<Unit>, FsrmPropertyValueTypeAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4408,14 +4414,14 @@ public class IFsrmFileConditionProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValue(newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, newVal)
@@ -4427,7 +4433,7 @@ public class IFsrmFileConditionProperty <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmMutableCollectionVtbl {
     public var base_: IFsrmCollectionVtbl = IFsrmCollectionVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var RemoveById: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -4475,7 +4481,7 @@ public class IFsrmMutableCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(item: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Add(item: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, item)
@@ -4503,7 +4509,7 @@ public class IFsrmMutableCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmObjectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -4545,7 +4551,7 @@ public class IFsrmObject <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmObject> {
-        return InterfaceDescriptor<IFsrmObject>("IFsrmObject", IFsrmObject.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmObjectFromAbi, viewIFsrmObject)
+        return InterfaceDescriptor<IFsrmObject>("IFsrmObject", IFsrmObject.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmObjectFromAbi, viewIFsrmObject)
     }
 
     public unsafe func vtbl(): IFsrmObjectVtbl {
@@ -4586,9 +4592,9 @@ public class IFsrmObject <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPathMapperVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSharePathsForLocalPath: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var GetSharePathsForLocalPath: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -4625,7 +4631,7 @@ public class IFsrmPathMapper <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPathMapper> {
-        return InterfaceDescriptor<IFsrmPathMapper>("IFsrmPathMapper", IFsrmPathMapper.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPathMapperFromAbi, viewIFsrmPathMapper)
+        return InterfaceDescriptor<IFsrmPathMapper>("IFsrmPathMapper", IFsrmPathMapper.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPathMapperFromAbi, viewIFsrmPathMapper)
     }
 
     public unsafe func vtbl(): IFsrmPathMapperVtbl {
@@ -4633,7 +4639,7 @@ public class IFsrmPathMapper <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSharePathsForLocalPath(localPath: CPointer<UInt16>, sharePaths: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSharePathsForLocalPath(localPath: CPointer<UInt16>, sharePaths: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSharePathsForLocalPath(__liveRaw, localPath, sharePaths)
@@ -4660,13 +4666,13 @@ public struct IFsrmPipelineModuleDefinitionVtbl {
     public var Account: CFunc<(CPointer<Unit>, CPointer<FsrmAccountTypeAbi>) -> Int32> = { _, _ => 0 }
     public var SetAccount: CFunc<(CPointer<Unit>, FsrmAccountTypeAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetSupportedExtensions: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetSupportedExtensions: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4801,28 +4807,28 @@ public class IFsrmPipelineModuleDefinition <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedExtensions(supportedExtensions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedExtensions(supportedExtensions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedExtensions(__liveRaw, supportedExtensions)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetSupportedExtensions(supportedExtensions: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetSupportedExtensions(supportedExtensions: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSupportedExtensions(__liveRaw, supportedExtensions)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Parameters(parameters: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Parameters(parameters: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Parameters(__liveRaw, parameters)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetParameters(parameters: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetParameters(parameters: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParameters(__liveRaw, parameters)
@@ -4832,11 +4838,11 @@ public class IFsrmPipelineModuleDefinition <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Sources: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Sources: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var PropertyFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4874,7 +4880,7 @@ public class IFsrmProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmProperty> {
-        return InterfaceDescriptor<IFsrmProperty>("IFsrmProperty", IFsrmProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPropertyFromAbi, viewIFsrmProperty)
+        return InterfaceDescriptor<IFsrmProperty>("IFsrmProperty", IFsrmProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPropertyFromAbi, viewIFsrmProperty)
     }
 
     public unsafe func vtbl(): IFsrmPropertyVtbl {
@@ -4894,7 +4900,7 @@ public class IFsrmProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Sources(sources: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Sources(sources: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Sources(__liveRaw, sources)
@@ -4910,38 +4916,38 @@ public class IFsrmProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPropertyBagVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var RelativePath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var VolumeName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var RelativeNamespaceRoot: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var VolumeIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FileId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var FileId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ParentDirectoryId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ParentDirectoryId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Size: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SizeAllocated: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SizeAllocated: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreationTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CreationTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastAccessTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastAccessTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastModificationTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastModificationTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var OwnerSid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var FilePropertyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var FilePropertyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Messages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Messages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var PropertyBagFlags: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetFileProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetFileProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var AddMessage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFileStreamInterface: CFunc<(CPointer<Unit>, FsrmFileStreamingModeAbi, FsrmFileStreamingInterfaceTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFileStreamInterface: CFunc<(CPointer<Unit>, FsrmFileStreamingModeAbi, FsrmFileStreamingInterfaceTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -4978,7 +4984,7 @@ public class IFsrmPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPropertyBag> {
-        return InterfaceDescriptor<IFsrmPropertyBag>("IFsrmPropertyBag", IFsrmPropertyBag.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPropertyBagFromAbi, viewIFsrmPropertyBag)
+        return InterfaceDescriptor<IFsrmPropertyBag>("IFsrmPropertyBag", IFsrmPropertyBag.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPropertyBagFromAbi, viewIFsrmPropertyBag)
     }
 
     public unsafe func vtbl(): IFsrmPropertyBagVtbl {
@@ -5016,49 +5022,49 @@ public class IFsrmPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FileId(fileId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func FileId(fileId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FileId(__liveRaw, fileId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ParentDirectoryId(parentDirectoryId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ParentDirectoryId(parentDirectoryId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ParentDirectoryId(__liveRaw, parentDirectoryId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Size(size: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Size(size: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Size(__liveRaw, size)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SizeAllocated(sizeAllocated: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SizeAllocated(sizeAllocated: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SizeAllocated(__liveRaw, sizeAllocated)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreationTime(creationTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreationTime(creationTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreationTime(__liveRaw, creationTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastAccessTime(lastAccessTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastAccessTime(lastAccessTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastAccessTime(__liveRaw, lastAccessTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastModificationTime(lastModificationTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastModificationTime(lastModificationTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastModificationTime(__liveRaw, lastModificationTime)
@@ -5077,14 +5083,14 @@ public class IFsrmPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func FilePropertyNames(filePropertyNames: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func FilePropertyNames(filePropertyNames: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FilePropertyNames(__liveRaw, filePropertyNames)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Messages(messages: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Messages(messages: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Messages(__liveRaw, messages)
@@ -5115,7 +5121,7 @@ public class IFsrmPropertyBag <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFileStreamInterface(accessMode: FsrmFileStreamingModeAbi, interfaceType: FsrmFileStreamingInterfaceTypeAbi, pStreamInterface: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFileStreamInterface(accessMode: FsrmFileStreamingModeAbi, interfaceType: FsrmFileStreamingInterfaceTypeAbi, pStreamInterface: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFileStreamInterface(__liveRaw, accessMode, interfaceType, pStreamInterface)
@@ -5127,7 +5133,7 @@ public class IFsrmPropertyBag <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmPropertyBag2Vtbl {
     public var base_: IFsrmPropertyBagVtbl = IFsrmPropertyBagVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFieldValue: CFunc<(CPointer<Unit>, FsrmPropertyBagFieldAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetFieldValue: CFunc<(CPointer<Unit>, FsrmPropertyBagFieldAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetUntrustedInFileProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5173,7 +5179,7 @@ public class IFsrmPropertyBag2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFieldValue(field: FsrmPropertyBagFieldAbi, value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFieldValue(field: FsrmPropertyBagFieldAbi, value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFieldValue(__liveRaw, field, value)
@@ -5189,7 +5195,7 @@ public class IFsrmPropertyBag2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPropertyConditionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<FsrmPropertyConditionTypeAbi>) -> Int32> = { _, _ => 0 }
@@ -5233,7 +5239,7 @@ public class IFsrmPropertyCondition <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPropertyCondition> {
-        return InterfaceDescriptor<IFsrmPropertyCondition>("IFsrmPropertyCondition", IFsrmPropertyCondition.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPropertyConditionFromAbi, viewIFsrmPropertyCondition)
+        return InterfaceDescriptor<IFsrmPropertyCondition>("IFsrmPropertyCondition", IFsrmPropertyCondition.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPropertyConditionFromAbi, viewIFsrmPropertyCondition)
     }
 
     public unsafe func vtbl(): IFsrmPropertyConditionVtbl {
@@ -5292,17 +5298,17 @@ public struct IFsrmPropertyDefinitionVtbl {
     public var Type: CFunc<(CPointer<Unit>, CPointer<FsrmPropertyDefinitionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, FsrmPropertyDefinitionTypeAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var PossibleValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var PossibleValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetPossibleValues: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetPossibleValues: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ValueDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ValueDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetValueDescriptions: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetValueDescriptions: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5371,42 +5377,42 @@ public class IFsrmPropertyDefinition <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func PossibleValues(possibleValues: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func PossibleValues(possibleValues: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PossibleValues(__liveRaw, possibleValues)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetPossibleValues(possibleValues: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetPossibleValues(possibleValues: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPossibleValues(__liveRaw, possibleValues)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ValueDescriptions(valueDescriptions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ValueDescriptions(valueDescriptions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ValueDescriptions(__liveRaw, valueDescriptions)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetValueDescriptions(valueDescriptions: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetValueDescriptions(valueDescriptions: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValueDescriptions(__liveRaw, valueDescriptions)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Parameters(parameters: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Parameters(parameters: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Parameters(__liveRaw, parameters)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetParameters(parameters: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetParameters(parameters: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParameters(__liveRaw, parameters)
@@ -5499,7 +5505,7 @@ public class IFsrmPropertyDefinition2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPropertyDefinitionValueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5540,7 +5546,7 @@ public class IFsrmPropertyDefinitionValue <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPropertyDefinitionValue> {
-        return InterfaceDescriptor<IFsrmPropertyDefinitionValue>("IFsrmPropertyDefinitionValue", IFsrmPropertyDefinitionValue.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPropertyDefinitionValueFromAbi, viewIFsrmPropertyDefinitionValue)
+        return InterfaceDescriptor<IFsrmPropertyDefinitionValue>("IFsrmPropertyDefinitionValue", IFsrmPropertyDefinitionValue.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPropertyDefinitionValueFromAbi, viewIFsrmPropertyDefinitionValue)
     }
 
     public unsafe func vtbl(): IFsrmPropertyDefinitionValueVtbl {
@@ -5577,13 +5583,13 @@ public class IFsrmPropertyDefinitionValue <: InterfaceWrapperBase & ComInterface
 public struct IFsrmQuotaBaseVtbl {
     public var base_: IFsrmObjectVtbl = IFsrmObjectVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var QuotaLimit: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var QuotaLimit: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetQuotaLimit: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetQuotaLimit: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var QuotaFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetQuotaFlags: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Thresholds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Thresholds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var AddThreshold: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var DeleteThreshold: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ModifyThreshold: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _ => 0 }
@@ -5633,14 +5639,14 @@ public class IFsrmQuotaBase <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func QuotaLimit(quotaLimit: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func QuotaLimit(quotaLimit: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QuotaLimit(__liveRaw, quotaLimit)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetQuotaLimit(quotaLimit: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetQuotaLimit(quotaLimit: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetQuotaLimit(__liveRaw, quotaLimit)
@@ -5659,7 +5665,7 @@ public class IFsrmQuotaBase <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Thresholds(thresholds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Thresholds(thresholds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Thresholds(__liveRaw, thresholds)
@@ -5927,7 +5933,7 @@ public class IFsrmQuotaTemplateImported <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmReportVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<FsrmReportTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -5935,9 +5941,9 @@ public struct IFsrmReportVtbl {
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var LastGeneratedFileNamePrefix: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFilter: CFunc<(CPointer<Unit>, FsrmReportFilterAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetFilter: CFunc<(CPointer<Unit>, FsrmReportFilterAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetFilter: CFunc<(CPointer<Unit>, FsrmReportFilterAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetFilter: CFunc<(CPointer<Unit>, FsrmReportFilterAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -5975,7 +5981,7 @@ public class IFsrmReport <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmReport> {
-        return InterfaceDescriptor<IFsrmReport>("IFsrmReport", IFsrmReport.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmReportFromAbi, viewIFsrmReport)
+        return InterfaceDescriptor<IFsrmReport>("IFsrmReport", IFsrmReport.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmReportFromAbi, viewIFsrmReport)
     }
 
     public unsafe func vtbl(): IFsrmReportVtbl {
@@ -6019,14 +6025,14 @@ public class IFsrmReport <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFilter(filter: FsrmReportFilterAbi, filterValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFilter(filter: FsrmReportFilterAbi, filterValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFilter(__liveRaw, filter, filterValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetFilter(filter: FsrmReportFilterAbi, filterValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetFilter(filter: FsrmReportFilterAbi, filterValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFilter(__liveRaw, filter, filterValue)
@@ -6046,13 +6052,13 @@ public struct IFsrmReportJobVtbl {
     public var Task: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetTask: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Formats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Formats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetFormats: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetFormats: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var MailTo: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMailTo: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var RunningStatus: CFunc<(CPointer<Unit>, CPointer<FsrmReportRunningStatusAbi>) -> Int32> = { _, _ => 0 }
@@ -6120,28 +6126,28 @@ public class IFsrmReportJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NamespaceRoots(__liveRaw, namespaceRoots)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNamespaceRoots(__liveRaw, namespaceRoots)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Formats(formats: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Formats(formats: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Formats(__liveRaw, formats)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetFormats(formats: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetFormats(formats: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormats(__liveRaw, formats)
@@ -6217,7 +6223,7 @@ public class IFsrmReportJob <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmReportManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EnumReportJobs: CFunc<(CPointer<Unit>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateReportJob: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetReportJob: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -6225,13 +6231,13 @@ public struct IFsrmReportManagerVtbl {
     public var SetOutputDirectory: CFunc<(CPointer<Unit>, FsrmReportGenerationContextAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var IsFilterValidForReportType: CFunc<(CPointer<Unit>, FsrmReportTypeAbi, FsrmReportFilterAbi, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetDefaultFilter: CFunc<(CPointer<Unit>, FsrmReportTypeAbi, FsrmReportFilterAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDefaultFilter: CFunc<(CPointer<Unit>, FsrmReportTypeAbi, FsrmReportFilterAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDefaultFilter: CFunc<(CPointer<Unit>, FsrmReportTypeAbi, FsrmReportFilterAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var SetDefaultFilter: CFunc<(CPointer<Unit>, FsrmReportTypeAbi, FsrmReportFilterAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetReportSizeLimit: CFunc<(CPointer<Unit>, FsrmReportLimitAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetReportSizeLimit: CFunc<(CPointer<Unit>, FsrmReportLimitAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetReportSizeLimit: CFunc<(CPointer<Unit>, FsrmReportLimitAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetReportSizeLimit: CFunc<(CPointer<Unit>, FsrmReportLimitAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -6268,7 +6274,7 @@ public class IFsrmReportManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmReportManager> {
-        return InterfaceDescriptor<IFsrmReportManager>("IFsrmReportManager", IFsrmReportManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmReportManagerFromAbi, viewIFsrmReportManager)
+        return InterfaceDescriptor<IFsrmReportManager>("IFsrmReportManager", IFsrmReportManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmReportManagerFromAbi, viewIFsrmReportManager)
     }
 
     public unsafe func vtbl(): IFsrmReportManagerVtbl {
@@ -6312,28 +6318,28 @@ public class IFsrmReportManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetDefaultFilter(reportType: FsrmReportTypeAbi, filter: FsrmReportFilterAbi, filterValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetDefaultFilter(reportType: FsrmReportTypeAbi, filter: FsrmReportFilterAbi, filterValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultFilter(__liveRaw, reportType, filter, filterValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDefaultFilter(reportType: FsrmReportTypeAbi, filter: FsrmReportFilterAbi, filterValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDefaultFilter(reportType: FsrmReportTypeAbi, filter: FsrmReportFilterAbi, filterValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDefaultFilter(__liveRaw, reportType, filter, filterValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetReportSizeLimit(limit: FsrmReportLimitAbi, limitValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetReportSizeLimit(limit: FsrmReportLimitAbi, limitValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetReportSizeLimit(__liveRaw, limit, limitValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetReportSizeLimit(limit: FsrmReportLimitAbi, limitValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetReportSizeLimit(limit: FsrmReportLimitAbi, limitValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetReportSizeLimit(__liveRaw, limit, limitValue)
@@ -6343,13 +6349,13 @@ public class IFsrmReportManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmReportSchedulerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VerifyNamespaces: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var VerifyNamespaces: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateScheduleTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateScheduleTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ModifyScheduleTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
+    public var ModifyScheduleTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteScheduleTask: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6387,7 +6393,7 @@ public class IFsrmReportScheduler <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmReportScheduler> {
-        return InterfaceDescriptor<IFsrmReportScheduler>("IFsrmReportScheduler", IFsrmReportScheduler.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmReportSchedulerFromAbi, viewIFsrmReportScheduler)
+        return InterfaceDescriptor<IFsrmReportScheduler>("IFsrmReportScheduler", IFsrmReportScheduler.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmReportSchedulerFromAbi, viewIFsrmReportScheduler)
     }
 
     public unsafe func vtbl(): IFsrmReportSchedulerVtbl {
@@ -6395,21 +6401,21 @@ public class IFsrmReportScheduler <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VerifyNamespaces(namespacesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func VerifyNamespaces(namespacesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VerifyNamespaces(__liveRaw, namespacesSafeArray)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateScheduleTask(taskName: CPointer<UInt16>, namespacesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, serializedTask: CPointer<UInt16>): Int32 {
+    public unsafe func CreateScheduleTask(taskName: CPointer<UInt16>, namespacesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, serializedTask: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateScheduleTask(__liveRaw, taskName, namespacesSafeArray, serializedTask)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ModifyScheduleTask(taskName: CPointer<UInt16>, namespacesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, serializedTask: CPointer<UInt16>): Int32 {
+    public unsafe func ModifyScheduleTask(taskName: CPointer<UInt16>, namespacesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, serializedTask: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ModifyScheduleTask(__liveRaw, taskName, namespacesSafeArray, serializedTask)
@@ -6432,17 +6438,17 @@ public struct IFsrmRuleVtbl {
     public var ModuleDefinitionName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetModuleDefinitionName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var RuleFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetRuleFlags: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastModified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastModified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -6517,14 +6523,14 @@ public class IFsrmRule <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NamespaceRoots(__liveRaw, namespaceRoots)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNamespaceRoots(__liveRaw, namespaceRoots)
@@ -6543,21 +6549,21 @@ public class IFsrmRule <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Parameters(parameters: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Parameters(parameters: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Parameters(__liveRaw, parameters)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetParameters(parameters: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetParameters(parameters: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParameters(__liveRaw, parameters)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastModified(lastModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastModified(lastModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastModified(__liveRaw, lastModified)
@@ -6567,7 +6573,7 @@ public class IFsrmRule <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmSettingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SmtpServer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetSmtpServer: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var MailFrom: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6617,7 +6623,7 @@ public class IFsrmSetting <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmSetting> {
-        return InterfaceDescriptor<IFsrmSetting>("IFsrmSetting", IFsrmSetting.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmSettingFromAbi, viewIFsrmSetting)
+        return InterfaceDescriptor<IFsrmSetting>("IFsrmSetting", IFsrmSetting.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmSettingFromAbi, viewIFsrmSetting)
     }
 
     public unsafe func vtbl(): IFsrmSettingVtbl {
@@ -6798,9 +6804,9 @@ public class IFsrmStorageModuleDefinition <: InterfaceWrapperBase & ComInterface
 public struct IFsrmAutoApplyQuotaVtbl {
     public var base_: IFsrmQuotaObjectVtbl = IFsrmQuotaObjectVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ExcludeFolders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ExcludeFolders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetExcludeFolders: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetExcludeFolders: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var CommitAndUpdateDerived: CFunc<(CPointer<Unit>, FsrmCommitOptionsAbi, FsrmTemplateApplyOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -6846,14 +6852,14 @@ public class IFsrmAutoApplyQuota <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ExcludeFolders(folders: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ExcludeFolders(folders: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExcludeFolders(__liveRaw, folders)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetExcludeFolders(folders: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetExcludeFolders(folders: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExcludeFolders(__liveRaw, folders)
@@ -6869,11 +6875,11 @@ public class IFsrmAutoApplyQuota <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmClassificationManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ClassificationReportFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ClassificationReportFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetClassificationReportFormats: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetClassificationReportFormats: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var Logging: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetLogging: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ClassificationReportMailTo: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6935,7 +6941,7 @@ public class IFsrmClassificationManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmClassificationManager> {
-        return InterfaceDescriptor<IFsrmClassificationManager>("IFsrmClassificationManager", IFsrmClassificationManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmClassificationManagerFromAbi, viewIFsrmClassificationManager)
+        return InterfaceDescriptor<IFsrmClassificationManager>("IFsrmClassificationManager", IFsrmClassificationManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmClassificationManagerFromAbi, viewIFsrmClassificationManager)
     }
 
     public unsafe func vtbl(): IFsrmClassificationManagerVtbl {
@@ -6943,14 +6949,14 @@ public class IFsrmClassificationManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ClassificationReportFormats(formats: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ClassificationReportFormats(formats: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ClassificationReportFormats(__liveRaw, formats)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetClassificationReportFormats(formats: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetClassificationReportFormats(formats: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetClassificationReportFormats(__liveRaw, formats)
@@ -7112,7 +7118,7 @@ public class IFsrmClassificationManager <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmClassificationManager2Vtbl {
     public var base_: IFsrmClassificationManagerVtbl = IFsrmClassificationManagerVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ClassifyFiles: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, FsrmGetFilePropertyOptionsAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ClassifyFiles: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, FsrmGetFilePropertyOptionsAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7157,7 +7163,7 @@ public class IFsrmClassificationManager2 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ClassifyFiles(filePaths: CPointer<Win32__impl_l1.SAFEARRAYAbi>, propertyNames: CPointer<Win32__impl_l1.SAFEARRAYAbi>, propertyValues: CPointer<Win32__impl_l1.SAFEARRAYAbi>, options: FsrmGetFilePropertyOptionsAbi): Int32 {
+    public unsafe func ClassifyFiles(filePaths: CPointer<Win32_impl_p2.SAFEARRAYAbi>, propertyNames: CPointer<Win32_impl_p2.SAFEARRAYAbi>, propertyValues: CPointer<Win32_impl_p2.SAFEARRAYAbi>, options: FsrmGetFilePropertyOptionsAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ClassifyFiles(__liveRaw, filePaths, propertyNames, propertyValues, options)
@@ -7259,13 +7265,13 @@ public class IFsrmClassificationRule <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmClassifierModuleDefinitionVtbl {
     public var base_: IFsrmPipelineModuleDefinitionVtbl = IFsrmPipelineModuleDefinitionVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var PropertiesAffected: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var PropertiesAffected: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetPropertiesAffected: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetPropertiesAffected: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var PropertiesUsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var PropertiesUsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetPropertiesUsed: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetPropertiesUsed: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var NeedsExplicitValue: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetNeedsExplicitValue: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -7312,28 +7318,28 @@ public class IFsrmClassifierModuleDefinition <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func PropertiesAffected(propertiesAffected: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func PropertiesAffected(propertiesAffected: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PropertiesAffected(__liveRaw, propertiesAffected)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetPropertiesAffected(propertiesAffected: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetPropertiesAffected(propertiesAffected: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPropertiesAffected(__liveRaw, propertiesAffected)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func PropertiesUsed(propertiesUsed: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func PropertiesUsed(propertiesUsed: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PropertiesUsed(__liveRaw, propertiesUsed)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetPropertiesUsed(propertiesUsed: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetPropertiesUsed(propertiesUsed: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPropertiesUsed(__liveRaw, propertiesUsed)
@@ -7410,19 +7416,19 @@ public class IFsrmCommittableCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmExportImportVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
+    public var ExportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ImportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportFileScreenTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
+    public var ExportFileScreenTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportFileScreenTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ImportFileScreenTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportQuotaTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
+    public var ExportQuotaTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportQuotaTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ImportQuotaTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7459,7 +7465,7 @@ public class IFsrmExportImport <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmExportImport> {
-        return InterfaceDescriptor<IFsrmExportImport>("IFsrmExportImport", IFsrmExportImport.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmExportImportFromAbi, viewIFsrmExportImport)
+        return InterfaceDescriptor<IFsrmExportImport>("IFsrmExportImport", IFsrmExportImport.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmExportImportFromAbi, viewIFsrmExportImport)
     }
 
     public unsafe func vtbl(): IFsrmExportImportVtbl {
@@ -7467,42 +7473,42 @@ public class IFsrmExportImport <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportFileGroups(filePath: CPointer<UInt16>, fileGroupNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
+    public unsafe func ExportFileGroups(filePath: CPointer<UInt16>, fileGroupNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportFileGroups(__liveRaw, filePath, fileGroupNamesSafeArray, remoteHost)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportFileGroups(filePath: CPointer<UInt16>, fileGroupNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>, fileGroups: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportFileGroups(filePath: CPointer<UInt16>, fileGroupNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>, fileGroups: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportFileGroups(__liveRaw, filePath, fileGroupNamesSafeArray, remoteHost, fileGroups)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportFileScreenTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
+    public unsafe func ExportFileScreenTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportFileScreenTemplates(__liveRaw, filePath, templateNamesSafeArray, remoteHost)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportFileScreenTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>, templates: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportFileScreenTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>, templates: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportFileScreenTemplates(__liveRaw, filePath, templateNamesSafeArray, remoteHost, templates)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportQuotaTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
+    public unsafe func ExportQuotaTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportQuotaTemplates(__liveRaw, filePath, templateNamesSafeArray, remoteHost)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportQuotaTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32__impl_l2.VARIANTAbi>, remoteHost: CPointer<UInt16>, templates: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportQuotaTemplates(filePath: CPointer<UInt16>, templateNamesSafeArray: CPointer<Win32_impl_p2.VARIANTAbi>, remoteHost: CPointer<UInt16>, templates: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportQuotaTemplates(__liveRaw, filePath, templateNamesSafeArray, remoteHost, templates)
@@ -7664,14 +7670,14 @@ public class IFsrmFileGroupImported <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmFileGroupManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateFileGroup: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetFileGroup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumFileGroups: CFunc<(CPointer<Unit>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportFileGroups: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var ExportFileGroups: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var ImportFileGroups: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7708,7 +7714,7 @@ public class IFsrmFileGroupManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmFileGroupManager> {
-        return InterfaceDescriptor<IFsrmFileGroupManager>("IFsrmFileGroupManager", IFsrmFileGroupManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmFileGroupManagerFromAbi, viewIFsrmFileGroupManager)
+        return InterfaceDescriptor<IFsrmFileGroupManager>("IFsrmFileGroupManager", IFsrmFileGroupManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmFileGroupManagerFromAbi, viewIFsrmFileGroupManager)
     }
 
     public unsafe func vtbl(): IFsrmFileGroupManagerVtbl {
@@ -7734,14 +7740,14 @@ public class IFsrmFileGroupManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportFileGroups(fileGroupNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, serializedFileGroups: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func ExportFileGroups(fileGroupNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, serializedFileGroups: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportFileGroups(__liveRaw, fileGroupNamesArray, serializedFileGroups)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportFileGroups(serializedFileGroups: CPointer<UInt16>, fileGroupNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, fileGroups: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportFileGroups(serializedFileGroups: CPointer<UInt16>, fileGroupNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, fileGroups: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportFileGroups(__liveRaw, serializedFileGroups, fileGroupNamesArray, fileGroups)
@@ -7755,9 +7761,9 @@ public struct IFsrmFileManagementJobVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var NamespaceRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetNamespaceRoots: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var OperationType: CFunc<(CPointer<Unit>, CPointer<FsrmFileManagementTypeAbi>) -> Int32> = { _, _ => 0 }
@@ -7766,15 +7772,15 @@ public struct IFsrmFileManagementJobVtbl {
     public var SetExpirationDirectory: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var CustomAction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Notifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Notifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var Logging: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetLogging: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ReportEnabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetReportEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Formats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Formats: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetFormats: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetFormats: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var MailTo: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetMailTo: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var DaysSinceFileCreated: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7789,9 +7795,9 @@ public struct IFsrmFileManagementJobVtbl {
     public var Task: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetTask: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetParameters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public var RunningStatus: CFunc<(CPointer<Unit>, CPointer<FsrmReportRunningStatusAbi>) -> Int32> = { _, _ => 0 }
     public var LastError: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var LastReportPathWithoutExtension: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -7864,14 +7870,14 @@ public class IFsrmFileManagementJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func NamespaceRoots(namespaceRoots: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NamespaceRoots(__liveRaw, namespaceRoots)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetNamespaceRoots(namespaceRoots: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNamespaceRoots(__liveRaw, namespaceRoots)
@@ -7920,7 +7926,7 @@ public class IFsrmFileManagementJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Notifications(notifications: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Notifications(notifications: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Notifications(__liveRaw, notifications)
@@ -7951,14 +7957,14 @@ public class IFsrmFileManagementJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Formats(formats: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Formats(formats: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Formats(__liveRaw, formats)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetFormats(formats: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetFormats(formats: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormats(__liveRaw, formats)
@@ -8043,14 +8049,14 @@ public class IFsrmFileManagementJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Parameters(parameters: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Parameters(parameters: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Parameters(__liveRaw, parameters)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetParameters(parameters: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetParameters(parameters: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParameters(__liveRaw, parameters)
@@ -8156,11 +8162,11 @@ public class IFsrmFileManagementJob <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmFileManagementJobManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var EnumFileManagementJobs: CFunc<(CPointer<Unit>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateFileManagementJob: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetFileManagementJob: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8200,7 +8206,7 @@ public class IFsrmFileManagementJobManager <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmFileManagementJobManager> {
-        return InterfaceDescriptor<IFsrmFileManagementJobManager>("IFsrmFileManagementJobManager", IFsrmFileManagementJobManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmFileManagementJobManagerFromAbi, viewIFsrmFileManagementJobManager)
+        return InterfaceDescriptor<IFsrmFileManagementJobManager>("IFsrmFileManagementJobManager", IFsrmFileManagementJobManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmFileManagementJobManagerFromAbi, viewIFsrmFileManagementJobManager)
     }
 
     public unsafe func vtbl(): IFsrmFileManagementJobManagerVtbl {
@@ -8208,14 +8214,14 @@ public class IFsrmFileManagementJobManager <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariables(__liveRaw, variables)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariableDescriptions(__liveRaw, descriptions)
@@ -8540,14 +8546,14 @@ public class IFsrmFileScreenTemplateImported <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmFileScreenTemplateManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTemplate: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumTemplates: CFunc<(CPointer<Unit>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportTemplates: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var ExportTemplates: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var ImportTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8584,7 +8590,7 @@ public class IFsrmFileScreenTemplateManager <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmFileScreenTemplateManager> {
-        return InterfaceDescriptor<IFsrmFileScreenTemplateManager>("IFsrmFileScreenTemplateManager", IFsrmFileScreenTemplateManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmFileScreenTemplateManagerFromAbi, viewIFsrmFileScreenTemplateManager)
+        return InterfaceDescriptor<IFsrmFileScreenTemplateManager>("IFsrmFileScreenTemplateManager", IFsrmFileScreenTemplateManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmFileScreenTemplateManagerFromAbi, viewIFsrmFileScreenTemplateManager)
     }
 
     public unsafe func vtbl(): IFsrmFileScreenTemplateManagerVtbl {
@@ -8610,14 +8616,14 @@ public class IFsrmFileScreenTemplateManager <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportTemplates(fileScreenTemplateNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, serializedFileScreenTemplates: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func ExportTemplates(fileScreenTemplateNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, serializedFileScreenTemplates: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportTemplates(__liveRaw, fileScreenTemplateNamesArray, serializedFileScreenTemplates)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportTemplates(serializedFileScreenTemplates: CPointer<UInt16>, fileScreenTemplateNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, fileScreenTemplates: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportTemplates(serializedFileScreenTemplates: CPointer<UInt16>, fileScreenTemplateNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, fileScreenTemplates: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportTemplates(__liveRaw, serializedFileScreenTemplates, fileScreenTemplateNamesArray, fileScreenTemplates)
@@ -8629,9 +8635,9 @@ public class IFsrmFileScreenTemplateManager <: InterfaceWrapperBase & ComInterfa
 public struct IFsrmQuotaVtbl {
     public var base_: IFsrmQuotaObjectVtbl = IFsrmQuotaObjectVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var QuotaUsed: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var QuotaUsed: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var QuotaPeakUsage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var QuotaPeakUsage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var QuotaPeakUsageTime: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var ResetPeakUsage: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var RefreshUsageProperties: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -8679,14 +8685,14 @@ public class IFsrmQuota <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func QuotaUsed(used: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func QuotaUsed(used: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QuotaUsed(__liveRaw, used)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func QuotaPeakUsage(peakUsage: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func QuotaPeakUsage(peakUsage: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QuotaPeakUsage(__liveRaw, peakUsage)
@@ -8714,11 +8720,11 @@ public class IFsrmQuota <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmQuotaManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CreateQuota: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateAutoApplyQuota: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetQuota: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8765,7 +8771,7 @@ public class IFsrmQuotaManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmQuotaManager> {
-        return InterfaceDescriptor<IFsrmQuotaManager>("IFsrmQuotaManager", IFsrmQuotaManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmQuotaManagerFromAbi, viewIFsrmQuotaManager)
+        return InterfaceDescriptor<IFsrmQuotaManager>("IFsrmQuotaManager", IFsrmQuotaManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmQuotaManagerFromAbi, viewIFsrmQuotaManager)
     }
 
     public unsafe func vtbl(): IFsrmQuotaManagerVtbl {
@@ -8773,14 +8779,14 @@ public class IFsrmQuotaManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariables(__liveRaw, variables)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariableDescriptions(__liveRaw, descriptions)
@@ -8905,14 +8911,14 @@ public class IFsrmQuotaManagerEx <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmQuotaTemplateManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTemplate: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumTemplates: CFunc<(CPointer<Unit>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExportTemplates: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var ExportTemplates: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ImportTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var ImportTemplates: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8949,7 +8955,7 @@ public class IFsrmQuotaTemplateManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmQuotaTemplateManager> {
-        return InterfaceDescriptor<IFsrmQuotaTemplateManager>("IFsrmQuotaTemplateManager", IFsrmQuotaTemplateManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmQuotaTemplateManagerFromAbi, viewIFsrmQuotaTemplateManager)
+        return InterfaceDescriptor<IFsrmQuotaTemplateManager>("IFsrmQuotaTemplateManager", IFsrmQuotaTemplateManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmQuotaTemplateManagerFromAbi, viewIFsrmQuotaTemplateManager)
     }
 
     public unsafe func vtbl(): IFsrmQuotaTemplateManagerVtbl {
@@ -8975,14 +8981,14 @@ public class IFsrmQuotaTemplateManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExportTemplates(quotaTemplateNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, serializedQuotaTemplates: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func ExportTemplates(quotaTemplateNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, serializedQuotaTemplates: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExportTemplates(__liveRaw, quotaTemplateNamesArray, serializedQuotaTemplates)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ImportTemplates(serializedQuotaTemplates: CPointer<UInt16>, quotaTemplateNamesArray: CPointer<Win32__impl_l2.VARIANTAbi>, quotaTemplates: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ImportTemplates(serializedQuotaTemplates: CPointer<UInt16>, quotaTemplateNamesArray: CPointer<Win32_impl_p2.VARIANTAbi>, quotaTemplates: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImportTemplates(__liveRaw, serializedQuotaTemplates, quotaTemplateNamesArray, quotaTemplates)
@@ -9082,11 +9088,11 @@ public class IFsrmFileScreen <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmFileScreenManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariables: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ActionVariableDescriptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CreateFileScreen: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetFileScreen: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumFileScreens: CFunc<(CPointer<Unit>, CPointer<UInt16>, FsrmEnumOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -9130,7 +9136,7 @@ public class IFsrmFileScreenManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmFileScreenManager> {
-        return InterfaceDescriptor<IFsrmFileScreenManager>("IFsrmFileScreenManager", IFsrmFileScreenManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmFileScreenManagerFromAbi, viewIFsrmFileScreenManager)
+        return InterfaceDescriptor<IFsrmFileScreenManager>("IFsrmFileScreenManager", IFsrmFileScreenManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmFileScreenManagerFromAbi, viewIFsrmFileScreenManager)
     }
 
     public unsafe func vtbl(): IFsrmFileScreenManagerVtbl {
@@ -9138,14 +9144,14 @@ public class IFsrmFileScreenManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariables(variables: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariables(__liveRaw, variables)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ActionVariableDescriptions(descriptions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActionVariableDescriptions(__liveRaw, descriptions)
@@ -9199,10 +9205,10 @@ public class IFsrmFileScreenManager <: InterfaceWrapperBase & ComInterface {
 public struct IFsrmClassifierModuleImplementationVtbl {
     public var base_: IFsrmPipelineModuleImplementationVtbl = IFsrmPipelineModuleImplementationVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastModified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastModified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var UseRulesAndDefinitions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnBeginFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var OnBeginFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var DoesPropertyValueApply: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int16>, GUID, GUID) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetPropertyValueToApply: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, GUID, GUID) -> Int32> = { _, _, _, _, _ => 0 }
     public var OnEndFile: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -9250,7 +9256,7 @@ public class IFsrmClassifierModuleImplementation <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastModified(lastModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastModified(lastModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastModified(__liveRaw, lastModified)
@@ -9263,7 +9269,7 @@ public class IFsrmClassifierModuleImplementation <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnBeginFile(propertyBag: CPointer<Unit>, arrayRuleIds: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnBeginFile(propertyBag: CPointer<Unit>, arrayRuleIds: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnBeginFile(__liveRaw, propertyBag, arrayRuleIds)
@@ -9291,7 +9297,7 @@ public class IFsrmClassifierModuleImplementation <: InterfaceWrapperBase & ComIn
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPipelineModuleConnectorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ModuleImplementation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ModuleName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var HostingUserAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9333,7 +9339,7 @@ public class IFsrmPipelineModuleConnector <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPipelineModuleConnector> {
-        return InterfaceDescriptor<IFsrmPipelineModuleConnector>("IFsrmPipelineModuleConnector", IFsrmPipelineModuleConnector.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPipelineModuleConnectorFromAbi, viewIFsrmPipelineModuleConnector)
+        return InterfaceDescriptor<IFsrmPipelineModuleConnector>("IFsrmPipelineModuleConnector", IFsrmPipelineModuleConnector.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPipelineModuleConnectorFromAbi, viewIFsrmPipelineModuleConnector)
     }
 
     public unsafe func vtbl(): IFsrmPipelineModuleConnectorVtbl {
@@ -9374,7 +9380,7 @@ public class IFsrmPipelineModuleConnector <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Storage_FileServerResourceManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsrmPipelineModuleImplementationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnLoad: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var OnUnload: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -9413,7 +9419,7 @@ public class IFsrmPipelineModuleImplementation <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsrmPipelineModuleImplementation> {
-        return InterfaceDescriptor<IFsrmPipelineModuleImplementation>("IFsrmPipelineModuleImplementation", IFsrmPipelineModuleImplementation.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsrmPipelineModuleImplementationFromAbi, viewIFsrmPipelineModuleImplementation)
+        return InterfaceDescriptor<IFsrmPipelineModuleImplementation>("IFsrmPipelineModuleImplementation", IFsrmPipelineModuleImplementation.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsrmPipelineModuleImplementationFromAbi, viewIFsrmPipelineModuleImplementation)
     }
 
     public unsafe func vtbl(): IFsrmPipelineModuleImplementationVtbl {

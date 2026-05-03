@@ -4,19 +4,34 @@
 package windows.Win32.Networking.ActiveDirectory
 
 import std.collection.*
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_polyfill.{unionReadInt64, unionReadUInt32, unionWriteInt64, unionWriteUInt32}
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Networking_ActiveDirectory == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on"]
@@ -3382,7 +3397,7 @@ public struct CQFORM {
     public var cbStruct: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
     public var clsid: GuidValue = GuidValue()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pszTitle: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
@@ -3393,7 +3408,7 @@ public struct CQFORMAbi {
     public var cbStruct: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
     public var clsid: GUID = GUID()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pszTitle: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
@@ -3768,7 +3783,7 @@ extend DOMAIN_TREE <: windows_core.CopyType & windows_core.RuntimeType & windows
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 public struct DSA_NEWOBJ_DISPINFO {
     public var dwSize: UInt32 = 0u32
-    public var hObjClassIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hObjClassIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var lpszWizTitle: CPointer<UInt16> = CPointer<UInt16>()
     public var lpszContDisplayName: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
@@ -3778,7 +3793,7 @@ public struct DSA_NEWOBJ_DISPINFO {
 @C
 public struct DSA_NEWOBJ_DISPINFOAbi {
     public var dwSize: UInt32 = 0u32
-    public var hObjClassIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hObjClassIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var lpszWizTitle: CPointer<UInt16> = CPointer<UInt16>()
     public var lpszContDisplayName: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
@@ -3956,7 +3971,7 @@ public struct DSBROWSEINFOA {
     public var pszPath: CPointer<UInt16> = CPointer<UInt16>()
     public var cchPath: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
-    public var pfnCallback: Win32__impl_l0.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
+    public var pfnCallback: Win32_impl_p1.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var dwReturnFormat: UInt32 = 0u32
     public var pUserName: CPointer<UInt16> = CPointer<UInt16>()
@@ -3977,7 +3992,7 @@ public struct DSBROWSEINFOAAbi {
     public var pszPath: CPointer<UInt16> = CPointer<UInt16>()
     public var cchPath: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
-    public var pfnCallback: Win32__impl_l0.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
+    public var pfnCallback: Win32_impl_p1.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var dwReturnFormat: UInt32 = 0u32
     public var pUserName: CPointer<UInt16> = CPointer<UInt16>()
@@ -4047,7 +4062,7 @@ public struct DSBROWSEINFOW {
     public var pszPath: CPointer<UInt16> = CPointer<UInt16>()
     public var cchPath: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
-    public var pfnCallback: Win32__impl_l0.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
+    public var pfnCallback: Win32_impl_p1.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var dwReturnFormat: UInt32 = 0u32
     public var pUserName: CPointer<UInt16> = CPointer<UInt16>()
@@ -4068,7 +4083,7 @@ public struct DSBROWSEINFOWAbi {
     public var pszPath: CPointer<UInt16> = CPointer<UInt16>()
     public var cchPath: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
-    public var pfnCallback: Win32__impl_l0.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
+    public var pfnCallback: Win32_impl_p1.BFFCALLBACK = CFunc<(CPointer<Unit>, UInt32, IntNative, IntNative) -> Int32>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var dwReturnFormat: UInt32 = 0u32
     public var pUserName: CPointer<UInt16> = CPointer<UInt16>()
@@ -7703,7 +7718,7 @@ public struct DS_SELECTION {
     public var pwzADsPath: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzClass: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzUPN: CPointer<UInt16> = CPointer<UInt16>()
-    public var pvarFetchedAttributes: CPointer<Win32__impl_l2.VARIANTAbi> = CPointer<Win32__impl_l2.VARIANTAbi>()
+    public var pvarFetchedAttributes: CPointer<Win32_impl_p2.VARIANTAbi> = CPointer<Win32_impl_p2.VARIANTAbi>()
     public var flScopeType: UInt32 = 0u32
     public init() {}
 }
@@ -7715,7 +7730,7 @@ public struct DS_SELECTIONAbi {
     public var pwzADsPath: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzClass: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzUPN: CPointer<UInt16> = CPointer<UInt16>()
-    public var pvarFetchedAttributes: CPointer<Win32__impl_l2.VARIANTAbi> = CPointer<Win32__impl_l2.VARIANTAbi>()
+    public var pvarFetchedAttributes: CPointer<Win32_impl_p2.VARIANTAbi> = CPointer<Win32_impl_p2.VARIANTAbi>()
     public var flScopeType: UInt32 = 0u32
     public init() {}
 }
@@ -8053,7 +8068,7 @@ extend Hold <: windows_core.CopyType & windows_core.RuntimeType & windows_core.T
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Class: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var get_GUID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8063,15 +8078,15 @@ public struct IADsVtbl {
     public var GetInfo: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetInfo: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Get: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Get: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Put: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var Put: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetEx: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetEx: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutEx: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var PutEx: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetInfoEx: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32) -> Int32> = { _, _, _ => 0 }
+    public var GetInfoEx: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -8108,7 +8123,7 @@ public class IADs <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADs> {
-        return InterfaceDescriptor<IADs>("IADs", IADs.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsFromAbi, viewIADs)
+        return InterfaceDescriptor<IADs>("IADs", IADs.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsFromAbi, viewIADs)
     }
 
     public unsafe func vtbl(): IADsVtbl {
@@ -8164,35 +8179,35 @@ public class IADs <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Get(bstrName: CPointer<UInt16>, pvProp: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Get(bstrName: CPointer<UInt16>, pvProp: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Get(__liveRaw, bstrName, pvProp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Put(bstrName: CPointer<UInt16>, vProp: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Put(bstrName: CPointer<UInt16>, vProp: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Put(__liveRaw, bstrName, vProp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetEx(bstrName: CPointer<UInt16>, pvProp: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetEx(bstrName: CPointer<UInt16>, pvProp: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEx(__liveRaw, bstrName, pvProp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutEx(lnControlCode: Int32, bstrName: CPointer<UInt16>, vProp: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func PutEx(lnControlCode: Int32, bstrName: CPointer<UInt16>, vProp: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutEx(__liveRaw, lnControlCode, bstrName, vProp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetInfoEx(vProperties: Win32__impl_l2.VARIANTAbi, lnReserved: Int32): Int32 {
+    public unsafe func GetInfoEx(vProperties: Win32_impl_p2.VARIANTAbi, lnReserved: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInfoEx(__liveRaw, vProperties, lnReserved)
@@ -8202,7 +8217,7 @@ public class IADs <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsADSystemInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ComputerName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SiteName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8216,7 +8231,7 @@ public struct IADsADSystemInfoVtbl {
     public var GetDCSiteName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var RefreshSchemaCache: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetTrees: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetTrees: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -8253,7 +8268,7 @@ public class IADsADSystemInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsADSystemInfo> {
-        return InterfaceDescriptor<IADsADSystemInfo>("IADsADSystemInfo", IADsADSystemInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsADSystemInfoFromAbi, viewIADsADSystemInfo)
+        return InterfaceDescriptor<IADsADSystemInfo>("IADsADSystemInfo", IADsADSystemInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsADSystemInfoFromAbi, viewIADsADSystemInfo)
     }
 
     public unsafe func vtbl(): IADsADSystemInfoVtbl {
@@ -8333,7 +8348,7 @@ public class IADsADSystemInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetTrees(pvTrees: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetTrees(pvTrees: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTrees(__liveRaw, pvTrees)
@@ -8343,7 +8358,7 @@ public class IADsADSystemInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsAccessControlEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AccessMask: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAccessMask: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AceType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8394,7 +8409,7 @@ public class IADsAccessControlEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsAccessControlEntry> {
-        return InterfaceDescriptor<IADsAccessControlEntry>("IADsAccessControlEntry", IADsAccessControlEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsAccessControlEntryFromAbi, viewIADsAccessControlEntry)
+        return InterfaceDescriptor<IADsAccessControlEntry>("IADsAccessControlEntry", IADsAccessControlEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsAccessControlEntryFromAbi, viewIADsAccessControlEntry)
     }
 
     public unsafe func vtbl(): IADsAccessControlEntryVtbl {
@@ -8489,7 +8504,7 @@ public class IADsAccessControlEntry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsAccessControlListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AclRevision: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAclRevision: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AceCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8538,7 +8553,7 @@ public class IADsAccessControlList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsAccessControlList> {
-        return InterfaceDescriptor<IADsAccessControlList>("IADsAccessControlList", IADsAccessControlList.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsAccessControlListFromAbi, viewIADsAccessControlList)
+        return InterfaceDescriptor<IADsAccessControlList>("IADsAccessControlList", IADsAccessControlList.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsAccessControlListFromAbi, viewIADsAccessControlList)
     }
 
     public unsafe func vtbl(): IADsAccessControlListVtbl {
@@ -8601,7 +8616,7 @@ public class IADsAccessControlList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsAclVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ProtectedAttrName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetProtectedAttrName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SubjectName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8646,7 +8661,7 @@ public class IADsAcl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsAcl> {
-        return InterfaceDescriptor<IADsAcl>("IADsAcl", IADsAcl.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsAclFromAbi, viewIADsAcl)
+        return InterfaceDescriptor<IADsAcl>("IADsAcl", IADsAcl.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsAclFromAbi, viewIADsAcl)
     }
 
     public unsafe func vtbl(): IADsAclVtbl {
@@ -8842,7 +8857,7 @@ public class IADsAggregator <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsBackLinkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RemoteID: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetRemoteID: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ObjectName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8883,7 +8898,7 @@ public class IADsBackLink <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsBackLink> {
-        return InterfaceDescriptor<IADsBackLink>("IADsBackLink", IADsBackLink.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsBackLinkFromAbi, viewIADsBackLink)
+        return InterfaceDescriptor<IADsBackLink>("IADsBackLink", IADsBackLink.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsBackLinkFromAbi, viewIADsBackLink)
     }
 
     public unsafe func vtbl(): IADsBackLinkVtbl {
@@ -8918,11 +8933,11 @@ public class IADsBackLink <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsCaseIgnoreListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CaseIgnoreList: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CaseIgnoreList: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCaseIgnoreList: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetCaseIgnoreList: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -8959,7 +8974,7 @@ public class IADsCaseIgnoreList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsCaseIgnoreList> {
-        return InterfaceDescriptor<IADsCaseIgnoreList>("IADsCaseIgnoreList", IADsCaseIgnoreList.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsCaseIgnoreListFromAbi, viewIADsCaseIgnoreList)
+        return InterfaceDescriptor<IADsCaseIgnoreList>("IADsCaseIgnoreList", IADsCaseIgnoreList.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsCaseIgnoreListFromAbi, viewIADsCaseIgnoreList)
     }
 
     public unsafe func vtbl(): IADsCaseIgnoreListVtbl {
@@ -8967,14 +8982,14 @@ public class IADsCaseIgnoreList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CaseIgnoreList(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CaseIgnoreList(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CaseIgnoreList(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCaseIgnoreList(vCaseIgnoreList: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetCaseIgnoreList(vCaseIgnoreList: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCaseIgnoreList(__liveRaw, vCaseIgnoreList)
@@ -8984,14 +8999,14 @@ public class IADsCaseIgnoreList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -9028,7 +9043,7 @@ public class IADsCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsCollection> {
-        return InterfaceDescriptor<IADsCollection>("IADsCollection", IADsCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsCollectionFromAbi, viewIADsCollection)
+        return InterfaceDescriptor<IADsCollection>("IADsCollection", IADsCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsCollectionFromAbi, viewIADsCollection)
     }
 
     public unsafe func vtbl(): IADsCollectionVtbl {
@@ -9043,7 +9058,7 @@ public class IADsCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(bstrName: CPointer<UInt16>, vItem: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Add(bstrName: CPointer<UInt16>, vItem: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, bstrName, vItem)
@@ -9056,7 +9071,7 @@ public class IADsCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetObject(bstrName: CPointer<UInt16>, pvItem: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetObject(bstrName: CPointer<UInt16>, pvItem: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetObject(__liveRaw, bstrName, pvItem)
@@ -9098,9 +9113,9 @@ public struct IADsComputerVtbl {
     public var StorageCapacity: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetStorageCapacity: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var NetAddresses: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var NetAddresses: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetNetAddresses: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetNetAddresses: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -9325,14 +9340,14 @@ public class IADsComputer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func NetAddresses(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func NetAddresses(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NetAddresses(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetNetAddresses(vNetAddresses: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetNetAddresses(vNetAddresses: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNetAddresses(__liveRaw, vNetAddresses)
@@ -9406,18 +9421,18 @@ public class IADsComputerOperations <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsContainerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Filter: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Filter: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetFilter: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetFilter: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Hints: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Hints: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetHints: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetHints: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -9463,7 +9478,7 @@ public class IADsContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsContainer> {
-        return InterfaceDescriptor<IADsContainer>("IADsContainer", IADsContainer.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsContainerFromAbi, viewIADsContainer)
+        return InterfaceDescriptor<IADsContainer>("IADsContainer", IADsContainer.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsContainerFromAbi, viewIADsContainer)
     }
 
     public unsafe func vtbl(): IADsContainerVtbl {
@@ -9484,28 +9499,28 @@ public class IADsContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Filter(pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Filter(pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Filter(__liveRaw, pVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetFilter(Var: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetFilter(Var: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFilter(__liveRaw, Var)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Hints(pvFilter: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Hints(pvFilter: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Hints(__liveRaw, pvFilter)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetHints(vHints: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetHints(vHints: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHints(__liveRaw, vHints)
@@ -9549,11 +9564,11 @@ public class IADsContainer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsDNWithBinaryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BinaryValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BinaryValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBinaryValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBinaryValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var DNString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDNString: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -9592,7 +9607,7 @@ public class IADsDNWithBinary <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsDNWithBinary> {
-        return InterfaceDescriptor<IADsDNWithBinary>("IADsDNWithBinary", IADsDNWithBinary.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsDNWithBinaryFromAbi, viewIADsDNWithBinary)
+        return InterfaceDescriptor<IADsDNWithBinary>("IADsDNWithBinary", IADsDNWithBinary.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsDNWithBinaryFromAbi, viewIADsDNWithBinary)
     }
 
     public unsafe func vtbl(): IADsDNWithBinaryVtbl {
@@ -9600,14 +9615,14 @@ public class IADsDNWithBinary <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BinaryValue(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BinaryValue(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BinaryValue(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBinaryValue(vBinaryValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBinaryValue(vBinaryValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBinaryValue(__liveRaw, vBinaryValue)
@@ -9629,7 +9644,7 @@ public class IADsDNWithBinary <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsDNWithStringVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StringValue: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetStringValue: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var DNString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9670,7 +9685,7 @@ public class IADsDNWithString <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsDNWithString> {
-        return InterfaceDescriptor<IADsDNWithString>("IADsDNWithString", IADsDNWithString.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsDNWithStringFromAbi, viewIADsDNWithString)
+        return InterfaceDescriptor<IADsDNWithString>("IADsDNWithString", IADsDNWithString.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsDNWithStringFromAbi, viewIADsDNWithString)
     }
 
     public unsafe func vtbl(): IADsDNWithStringVtbl {
@@ -9705,7 +9720,7 @@ public class IADsDNWithString <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsDeleteOpsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DeleteObject: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -9743,7 +9758,7 @@ public class IADsDeleteOps <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsDeleteOps> {
-        return InterfaceDescriptor<IADsDeleteOps>("IADsDeleteOps", IADsDeleteOps.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsDeleteOpsFromAbi, viewIADsDeleteOps)
+        return InterfaceDescriptor<IADsDeleteOps>("IADsDeleteOps", IADsDeleteOps.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsDeleteOpsFromAbi, viewIADsDeleteOps)
     }
 
     public unsafe func vtbl(): IADsDeleteOpsVtbl {
@@ -9927,7 +9942,7 @@ public class IADsDomain <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsEmailVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Address: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9968,7 +9983,7 @@ public class IADsEmail <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsEmail> {
-        return InterfaceDescriptor<IADsEmail>("IADsEmail", IADsEmail.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsEmailFromAbi, viewIADsEmail)
+        return InterfaceDescriptor<IADsEmail>("IADsEmail", IADsEmail.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsEmailFromAbi, viewIADsEmail)
     }
 
     public unsafe func vtbl(): IADsEmailVtbl {
@@ -10005,10 +10020,10 @@ public class IADsEmail <: InterfaceWrapperBase & ComInterface {
 public struct IADsExtensionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Operate: CFunc<(CPointer<Unit>, UInt32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Operate: CFunc<(CPointer<Unit>, UInt32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var PrivateGetIDsOfNames: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<UInt16>>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PrivateInvoke: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, UInt32, UInt16, CPointer<Win32__impl_l2.DISPPARAMSAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l0.EXCEPINFOAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var PrivateInvoke: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, UInt32, UInt16, CPointer<Win32_impl_p2.DISPPARAMSAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p0.EXCEPINFOAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -10053,7 +10068,7 @@ public class IADsExtension <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Operate(dwCode: UInt32, varData1: Win32__impl_l2.VARIANTAbi, varData2: Win32__impl_l2.VARIANTAbi, varData3: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Operate(dwCode: UInt32, varData1: Win32_impl_p2.VARIANTAbi, varData2: Win32_impl_p2.VARIANTAbi, varData3: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Operate(__liveRaw, dwCode, varData1, varData2, varData3)
@@ -10066,7 +10081,7 @@ public class IADsExtension <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PrivateInvoke(dispidMember: Int32, riid: CPointer<GUID>, lcid: UInt32, wFlags: UInt16, pdispparams: CPointer<Win32__impl_l2.DISPPARAMSAbi>, pvarResult: CPointer<Win32__impl_l2.VARIANTAbi>, pexcepinfo: CPointer<Win32__impl_l0.EXCEPINFOAbi>, puArgErr: CPointer<UInt32>): Int32 {
+    public unsafe func PrivateInvoke(dispidMember: Int32, riid: CPointer<GUID>, lcid: UInt32, wFlags: UInt16, pdispparams: CPointer<Win32_impl_p2.DISPPARAMSAbi>, pvarResult: CPointer<Win32_impl_p2.VARIANTAbi>, pexcepinfo: CPointer<Win32_impl_p0.EXCEPINFOAbi>, puArgErr: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PrivateInvoke(__liveRaw, dispidMember, riid, lcid, wFlags, pdispparams, pvarResult, pexcepinfo, puArgErr)
@@ -10076,13 +10091,13 @@ public class IADsExtension <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsFaxNumberVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var TelephoneNumber: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetTelephoneNumber: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Parameters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Parameters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetParameters: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetParameters: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10119,7 +10134,7 @@ public class IADsFaxNumber <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsFaxNumber> {
-        return InterfaceDescriptor<IADsFaxNumber>("IADsFaxNumber", IADsFaxNumber.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsFaxNumberFromAbi, viewIADsFaxNumber)
+        return InterfaceDescriptor<IADsFaxNumber>("IADsFaxNumber", IADsFaxNumber.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsFaxNumberFromAbi, viewIADsFaxNumber)
     }
 
     public unsafe func vtbl(): IADsFaxNumberVtbl {
@@ -10139,14 +10154,14 @@ public class IADsFaxNumber <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Parameters(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Parameters(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Parameters(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetParameters(vParameters: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetParameters(vParameters: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetParameters(__liveRaw, vParameters)
@@ -10267,7 +10282,7 @@ public class IADsFileShare <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsHoldVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ObjectName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetObjectName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Amount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10308,7 +10323,7 @@ public class IADsHold <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsHold> {
-        return InterfaceDescriptor<IADsHold>("IADsHold", IADsHold.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsHoldFromAbi, viewIADsHold)
+        return InterfaceDescriptor<IADsHold>("IADsHold", IADsHold.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsHoldFromAbi, viewIADsHold)
     }
 
     public unsafe func vtbl(): IADsHoldVtbl {
@@ -10343,7 +10358,7 @@ public class IADsHold <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsLargeIntegerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HighPart: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetHighPart: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var LowPart: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10384,7 +10399,7 @@ public class IADsLargeInteger <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsLargeInteger> {
-        return InterfaceDescriptor<IADsLargeInteger>("IADsLargeInteger", IADsLargeInteger.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsLargeIntegerFromAbi, viewIADsLargeInteger)
+        return InterfaceDescriptor<IADsLargeInteger>("IADsLargeInteger", IADsLargeInteger.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsLargeIntegerFromAbi, viewIADsLargeInteger)
     }
 
     public unsafe func vtbl(): IADsLargeIntegerVtbl {
@@ -10427,9 +10442,9 @@ public struct IADsLocalityVtbl {
     public var PostalAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetPostalAddress: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10510,14 +10525,14 @@ public class IADsLocality <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SeeAlso(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SeeAlso(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SeeAlso(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSeeAlso(vSeeAlso: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSeeAlso(vSeeAlso: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSeeAlso(__liveRaw, vSeeAlso)
@@ -10527,14 +10542,14 @@ public class IADsLocality <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsMembersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Filter: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Filter: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetFilter: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetFilter: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10571,7 +10586,7 @@ public class IADsMembers <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsMembers> {
-        return InterfaceDescriptor<IADsMembers>("IADsMembers", IADsMembers.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsMembersFromAbi, viewIADsMembers)
+        return InterfaceDescriptor<IADsMembers>("IADsMembers", IADsMembers.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsMembersFromAbi, viewIADsMembers)
     }
 
     public unsafe func vtbl(): IADsMembersVtbl {
@@ -10592,14 +10607,14 @@ public class IADsMembers <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Filter(pvFilter: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Filter(pvFilter: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Filter(__liveRaw, pvFilter)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetFilter(pvFilter: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetFilter(pvFilter: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFilter(__liveRaw, pvFilter)
@@ -10609,16 +10624,16 @@ public class IADsMembers <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsNameTranslateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetChaseReferral: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Init: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var InitEx: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Set: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var Get: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetEx: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetEx: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetEx: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetEx: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -10655,7 +10670,7 @@ public class IADsNameTranslate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsNameTranslate> {
-        return InterfaceDescriptor<IADsNameTranslate>("IADsNameTranslate", IADsNameTranslate.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsNameTranslateFromAbi, viewIADsNameTranslate)
+        return InterfaceDescriptor<IADsNameTranslate>("IADsNameTranslate", IADsNameTranslate.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsNameTranslateFromAbi, viewIADsNameTranslate)
     }
 
     public unsafe func vtbl(): IADsNameTranslateVtbl {
@@ -10693,14 +10708,14 @@ public class IADsNameTranslate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetEx(lnFormatType: Int32, pvar: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetEx(lnFormatType: Int32, pvar: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetEx(__liveRaw, lnFormatType, pvar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetEx(lnFormatType: Int32, pvar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetEx(lnFormatType: Int32, pvar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEx(__liveRaw, lnFormatType, pvar)
@@ -10772,13 +10787,13 @@ public class IADsNamespaces <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsNetAddressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddressType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAddressType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Address: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Address: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetAddress: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetAddress: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10815,7 +10830,7 @@ public class IADsNetAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsNetAddress> {
-        return InterfaceDescriptor<IADsNetAddress>("IADsNetAddress", IADsNetAddress.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsNetAddressFromAbi, viewIADsNetAddress)
+        return InterfaceDescriptor<IADsNetAddress>("IADsNetAddress", IADsNetAddress.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsNetAddressFromAbi, viewIADsNetAddress)
     }
 
     public unsafe func vtbl(): IADsNetAddressVtbl {
@@ -10835,14 +10850,14 @@ public class IADsNetAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Address(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Address(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Address(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetAddress(vAddress: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetAddress(vAddress: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAddress(__liveRaw, vAddress)
@@ -10864,9 +10879,9 @@ public struct IADsOVtbl {
     public var FaxNumber: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFaxNumber: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10971,14 +10986,14 @@ public class IADsO <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SeeAlso(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SeeAlso(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SeeAlso(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSeeAlso(vSeeAlso: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSeeAlso(vSeeAlso: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSeeAlso(__liveRaw, vSeeAlso)
@@ -11000,9 +11015,9 @@ public struct IADsOUVtbl {
     public var FaxNumber: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFaxNumber: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var BusinessCategory: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetBusinessCategory: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -11109,14 +11124,14 @@ public class IADsOU <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SeeAlso(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SeeAlso(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SeeAlso(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSeeAlso(vSeeAlso: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSeeAlso(vSeeAlso: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSeeAlso(__liveRaw, vSeeAlso)
@@ -11138,11 +11153,11 @@ public class IADsOU <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsObjectOptionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetOption: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetOption: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOption: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetOption: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -11179,7 +11194,7 @@ public class IADsObjectOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsObjectOptions> {
-        return InterfaceDescriptor<IADsObjectOptions>("IADsObjectOptions", IADsObjectOptions.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsObjectOptionsFromAbi, viewIADsObjectOptions)
+        return InterfaceDescriptor<IADsObjectOptions>("IADsObjectOptions", IADsObjectOptions.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsObjectOptionsFromAbi, viewIADsObjectOptions)
     }
 
     public unsafe func vtbl(): IADsObjectOptionsVtbl {
@@ -11187,14 +11202,14 @@ public class IADsObjectOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetOption(lnOption: Int32, pvValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetOption(lnOption: Int32, pvValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetOption(__liveRaw, lnOption, pvValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOption(lnOption: Int32, vValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOption(lnOption: Int32, vValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOption(__liveRaw, lnOption, vValue)
@@ -11204,11 +11219,11 @@ public class IADsObjectOptions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsOctetListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OctetList: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var OctetList: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOctetList: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetOctetList: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11245,7 +11260,7 @@ public class IADsOctetList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsOctetList> {
-        return InterfaceDescriptor<IADsOctetList>("IADsOctetList", IADsOctetList.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsOctetListFromAbi, viewIADsOctetList)
+        return InterfaceDescriptor<IADsOctetList>("IADsOctetList", IADsOctetList.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsOctetListFromAbi, viewIADsOctetList)
     }
 
     public unsafe func vtbl(): IADsOctetListVtbl {
@@ -11253,14 +11268,14 @@ public class IADsOctetList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OctetList(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func OctetList(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OctetList(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOctetList(vOctetList: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOctetList(vOctetList: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOctetList(__liveRaw, vOctetList)
@@ -11270,7 +11285,7 @@ public class IADsOctetList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsOpenDSObjectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var OpenDSObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
@@ -11309,7 +11324,7 @@ public class IADsOpenDSObject <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsOpenDSObject> {
-        return InterfaceDescriptor<IADsOpenDSObject>("IADsOpenDSObject", IADsOpenDSObject.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsOpenDSObjectFromAbi, viewIADsOpenDSObject)
+        return InterfaceDescriptor<IADsOpenDSObject>("IADsOpenDSObject", IADsOpenDSObject.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsOpenDSObjectFromAbi, viewIADsOpenDSObject)
     }
 
     public unsafe func vtbl(): IADsOpenDSObjectVtbl {
@@ -11327,7 +11342,7 @@ public class IADsOpenDSObject <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPathVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var VolumeName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -11370,7 +11385,7 @@ public class IADsPath <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPath> {
-        return InterfaceDescriptor<IADsPath>("IADsPath", IADsPath.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPathFromAbi, viewIADsPath)
+        return InterfaceDescriptor<IADsPath>("IADsPath", IADsPath.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPathFromAbi, viewIADsPath)
     }
 
     public unsafe func vtbl(): IADsPathVtbl {
@@ -11417,7 +11432,7 @@ public class IADsPath <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPathnameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Set: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public var SetDisplayType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Retrieve: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -11466,7 +11481,7 @@ public class IADsPathname <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPathname> {
-        return InterfaceDescriptor<IADsPathname>("IADsPathname", IADsPathname.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPathnameFromAbi, viewIADsPathname)
+        return InterfaceDescriptor<IADsPathname>("IADsPathname", IADsPathname.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPathnameFromAbi, viewIADsPathname)
     }
 
     public unsafe func vtbl(): IADsPathnameVtbl {
@@ -11544,11 +11559,11 @@ public class IADsPathname <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPostalAddressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PostalAddress: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PostalAddress: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPostalAddress: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPostalAddress: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11585,7 +11600,7 @@ public class IADsPostalAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPostalAddress> {
-        return InterfaceDescriptor<IADsPostalAddress>("IADsPostalAddress", IADsPostalAddress.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPostalAddressFromAbi, viewIADsPostalAddress)
+        return InterfaceDescriptor<IADsPostalAddress>("IADsPostalAddress", IADsPostalAddress.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPostalAddressFromAbi, viewIADsPostalAddress)
     }
 
     public unsafe func vtbl(): IADsPostalAddressVtbl {
@@ -11593,14 +11608,14 @@ public class IADsPostalAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PostalAddress(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PostalAddress(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PostalAddress(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPostalAddress(vPostalAddress: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPostalAddress(vPostalAddress: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPostalAddress(__liveRaw, vPostalAddress)
@@ -11905,13 +11920,13 @@ public struct IADsPrintQueueVtbl {
     public var BannerPage: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetBannerPage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PrintDevices: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PrintDevices: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPrintDevices: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPrintDevices: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var NetAddresses: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var NetAddresses: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetNetAddresses: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetNetAddresses: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12088,28 +12103,28 @@ public class IADsPrintQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PrintDevices(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PrintDevices(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PrintDevices(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPrintDevices(vPrintDevices: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPrintDevices(vPrintDevices: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPrintDevices(__liveRaw, vPrintDevices)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func NetAddresses(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func NetAddresses(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NetAddresses(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetNetAddresses(vNetAddresses: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetNetAddresses(vNetAddresses: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNetAddresses(__liveRaw, vNetAddresses)
@@ -12327,7 +12342,7 @@ public class IADsProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPropertyEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -12336,9 +12351,9 @@ public struct IADsPropertyEntryVtbl {
     public var ControlCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetControlCode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Values: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Values: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValues: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValues: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12375,7 +12390,7 @@ public class IADsPropertyEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPropertyEntry> {
-        return InterfaceDescriptor<IADsPropertyEntry>("IADsPropertyEntry", IADsPropertyEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPropertyEntryFromAbi, viewIADsPropertyEntry)
+        return InterfaceDescriptor<IADsPropertyEntry>("IADsPropertyEntry", IADsPropertyEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPropertyEntryFromAbi, viewIADsPropertyEntry)
     }
 
     public unsafe func vtbl(): IADsPropertyEntryVtbl {
@@ -12425,14 +12440,14 @@ public class IADsPropertyEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Values(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Values(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Values(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValues(vValues: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValues(vValues: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValues(__liveRaw, vValues)
@@ -12442,20 +12457,20 @@ public class IADsPropertyEntry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPropertyListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var PropertyCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Next: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPropertyItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPropertyItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutPropertyItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var PutPropertyItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ResetPropertyItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ResetPropertyItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var PurgePropertyList: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -12493,7 +12508,7 @@ public class IADsPropertyList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPropertyList> {
-        return InterfaceDescriptor<IADsPropertyList>("IADsPropertyList", IADsPropertyList.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPropertyListFromAbi, viewIADsPropertyList)
+        return InterfaceDescriptor<IADsPropertyList>("IADsPropertyList", IADsPropertyList.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPropertyListFromAbi, viewIADsPropertyList)
     }
 
     public unsafe func vtbl(): IADsPropertyListVtbl {
@@ -12507,7 +12522,7 @@ public class IADsPropertyList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Next(pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Next(pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, pVariant)
@@ -12526,28 +12541,28 @@ public class IADsPropertyList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(varIndex: Win32__impl_l2.VARIANTAbi, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Item(varIndex: Win32_impl_p2.VARIANTAbi, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, varIndex, pVariant)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPropertyItem(bstrName: CPointer<UInt16>, lnADsType: Int32, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPropertyItem(bstrName: CPointer<UInt16>, lnADsType: Int32, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertyItem(__liveRaw, bstrName, lnADsType, pVariant)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutPropertyItem(varData: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func PutPropertyItem(varData: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutPropertyItem(__liveRaw, varData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ResetPropertyItem(varEntry: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ResetPropertyItem(varEntry: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResetPropertyItem(__liveRaw, varEntry)
@@ -12563,7 +12578,7 @@ public class IADsPropertyList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPropertyValueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ADsType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetADsType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -12582,9 +12597,9 @@ public struct IADsPropertyValueVtbl {
     public var Integer: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetInteger: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OctetString: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var OctetString: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOctetString: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetOctetString: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var SecurityDescriptor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -12631,7 +12646,7 @@ public class IADsPropertyValue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPropertyValue> {
-        return InterfaceDescriptor<IADsPropertyValue>("IADsPropertyValue", IADsPropertyValue.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPropertyValueFromAbi, viewIADsPropertyValue)
+        return InterfaceDescriptor<IADsPropertyValue>("IADsPropertyValue", IADsPropertyValue.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPropertyValueFromAbi, viewIADsPropertyValue)
     }
 
     public unsafe func vtbl(): IADsPropertyValueVtbl {
@@ -12741,14 +12756,14 @@ public class IADsPropertyValue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OctetString(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func OctetString(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OctetString(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOctetString(vOctetString: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOctetString(vOctetString: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOctetString(__liveRaw, vOctetString)
@@ -12798,11 +12813,11 @@ public class IADsPropertyValue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsPropertyValue2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetObjectProperty: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetObjectProperty: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutObjectProperty: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var PutObjectProperty: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -12839,7 +12854,7 @@ public class IADsPropertyValue2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsPropertyValue2> {
-        return InterfaceDescriptor<IADsPropertyValue2>("IADsPropertyValue2", IADsPropertyValue2.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsPropertyValue2FromAbi, viewIADsPropertyValue2)
+        return InterfaceDescriptor<IADsPropertyValue2>("IADsPropertyValue2", IADsPropertyValue2.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsPropertyValue2FromAbi, viewIADsPropertyValue2)
     }
 
     public unsafe func vtbl(): IADsPropertyValue2Vtbl {
@@ -12847,14 +12862,14 @@ public class IADsPropertyValue2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetObjectProperty(lnADsType: CPointer<Int32>, pvProp: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetObjectProperty(lnADsType: CPointer<Int32>, pvProp: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetObjectProperty(__liveRaw, lnADsType, pvProp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutObjectProperty(lnADsType: Int32, vProp: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func PutObjectProperty(lnADsType: Int32, vProp: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutObjectProperty(__liveRaw, lnADsType, vProp)
@@ -12864,7 +12879,7 @@ public class IADsPropertyValue2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsReplicaPointerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ServerName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServerName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ReplicaType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -12874,9 +12889,9 @@ public struct IADsReplicaPointerVtbl {
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetCount: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReplicaAddressHints: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ReplicaAddressHints: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetReplicaAddressHints: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetReplicaAddressHints: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12913,7 +12928,7 @@ public class IADsReplicaPointer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsReplicaPointer> {
-        return InterfaceDescriptor<IADsReplicaPointer>("IADsReplicaPointer", IADsReplicaPointer.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsReplicaPointerFromAbi, viewIADsReplicaPointer)
+        return InterfaceDescriptor<IADsReplicaPointer>("IADsReplicaPointer", IADsReplicaPointer.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsReplicaPointerFromAbi, viewIADsReplicaPointer)
     }
 
     public unsafe func vtbl(): IADsReplicaPointerVtbl {
@@ -12969,14 +12984,14 @@ public class IADsReplicaPointer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReplicaAddressHints(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ReplicaAddressHints(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReplicaAddressHints(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetReplicaAddressHints(vReplicaAddressHints: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetReplicaAddressHints(vReplicaAddressHints: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetReplicaAddressHints(__liveRaw, vReplicaAddressHints)
@@ -13062,7 +13077,7 @@ public class IADsResource <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsSecurityDescriptorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Revision: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetRevision: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Control: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -13125,7 +13140,7 @@ public class IADsSecurityDescriptor <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsSecurityDescriptor> {
-        return InterfaceDescriptor<IADsSecurityDescriptor>("IADsSecurityDescriptor", IADsSecurityDescriptor.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsSecurityDescriptorFromAbi, viewIADsSecurityDescriptor)
+        return InterfaceDescriptor<IADsSecurityDescriptor>("IADsSecurityDescriptor", IADsSecurityDescriptor.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsSecurityDescriptorFromAbi, viewIADsSecurityDescriptor)
     }
 
     public unsafe func vtbl(): IADsSecurityDescriptorVtbl {
@@ -13267,13 +13282,13 @@ public class IADsSecurityDescriptor <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsSecurityUtilityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, Win32__impl_l2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, Win32_impl_p2.VARIANTAbi, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ConvertSecurityDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ConvertSecurityDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var SecurityMask: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSecurityMask: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -13312,7 +13327,7 @@ public class IADsSecurityUtility <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsSecurityUtility> {
-        return InterfaceDescriptor<IADsSecurityUtility>("IADsSecurityUtility", IADsSecurityUtility.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsSecurityUtilityFromAbi, viewIADsSecurityUtility)
+        return InterfaceDescriptor<IADsSecurityUtility>("IADsSecurityUtility", IADsSecurityUtility.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsSecurityUtilityFromAbi, viewIADsSecurityUtility)
     }
 
     public unsafe func vtbl(): IADsSecurityUtilityVtbl {
@@ -13320,21 +13335,21 @@ public class IADsSecurityUtility <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetSecurityDescriptor(varPath: Win32__impl_l2.VARIANTAbi, lPathFormat: Int32, lFormat: Int32, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetSecurityDescriptor(varPath: Win32_impl_p2.VARIANTAbi, lPathFormat: Int32, lFormat: Int32, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSecurityDescriptor(__liveRaw, varPath, lPathFormat, lFormat, pVariant)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSecurityDescriptor(varPath: Win32__impl_l2.VARIANTAbi, lPathFormat: Int32, varData: Win32__impl_l2.VARIANTAbi, lDataFormat: Int32): Int32 {
+    public unsafe func SetSecurityDescriptor(varPath: Win32_impl_p2.VARIANTAbi, lPathFormat: Int32, varData: Win32_impl_p2.VARIANTAbi, lDataFormat: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSecurityDescriptor(__liveRaw, varPath, lPathFormat, varData, lDataFormat)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ConvertSecurityDescriptor(varSD: Win32__impl_l2.VARIANTAbi, lDataFormat: Int32, lOutFormat: Int32, pResult: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ConvertSecurityDescriptor(varSD: Win32_impl_p2.VARIANTAbi, lDataFormat: Int32, lOutFormat: Int32, pResult: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ConvertSecurityDescriptor(__liveRaw, varSD, lDataFormat, lOutFormat, pResult)
@@ -13380,9 +13395,9 @@ public struct IADsServiceVtbl {
     public var ServiceAccountPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServiceAccountPath: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Dependencies: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Dependencies: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDependencies: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDependencies: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -13559,14 +13574,14 @@ public class IADsService <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Dependencies(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Dependencies(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Dependencies(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDependencies(vDependencies: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDependencies(vDependencies: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDependencies(__liveRaw, vDependencies)
@@ -13818,7 +13833,7 @@ public class IADsSyntax <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsTimestampVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var WholeSeconds: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetWholeSeconds: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var EventID: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -13859,7 +13874,7 @@ public class IADsTimestamp <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsTimestamp> {
-        return InterfaceDescriptor<IADsTimestamp>("IADsTimestamp", IADsTimestamp.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsTimestampFromAbi, viewIADsTimestamp)
+        return InterfaceDescriptor<IADsTimestamp>("IADsTimestamp", IADsTimestamp.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsTimestampFromAbi, viewIADsTimestamp)
     }
 
     public unsafe func vtbl(): IADsTimestampVtbl {
@@ -13894,7 +13909,7 @@ public class IADsTimestamp <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsTypedNameVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ObjectName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetObjectName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Level: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -13937,7 +13952,7 @@ public class IADsTypedName <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsTypedName> {
-        return InterfaceDescriptor<IADsTypedName>("IADsTypedName", IADsTypedName.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsTypedNameFromAbi, viewIADsTypedName)
+        return InterfaceDescriptor<IADsTypedName>("IADsTypedName", IADsTypedName.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsTypedNameFromAbi, viewIADsTypedName)
     }
 
     public unsafe func vtbl(): IADsTypedNameVtbl {
@@ -14016,41 +14031,41 @@ public struct IADsUserVtbl {
     public var Manager: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetManager: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TelephoneHome: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TelephoneHome: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTelephoneHome: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetTelephoneHome: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TelephoneMobile: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TelephoneMobile: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTelephoneMobile: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetTelephoneMobile: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TelephoneNumber: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TelephoneNumber: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTelephoneNumber: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetTelephoneNumber: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TelephonePager: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TelephonePager: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTelephonePager: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetTelephonePager: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FaxNumber: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var FaxNumber: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetFaxNumber: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetFaxNumber: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OfficeLocations: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var OfficeLocations: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOfficeLocations: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetOfficeLocations: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PostalAddresses: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PostalAddresses: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPostalAddresses: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPostalAddresses: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PostalCodes: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PostalCodes: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPostalCodes: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPostalCodes: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SeeAlso: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSeeAlso: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AccountDisabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAccountDisabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var AccountExpirationDate: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -14062,13 +14077,13 @@ public struct IADsUserVtbl {
     public var IsAccountLocked: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetIsAccountLocked: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LoginHours: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LoginHours: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetLoginHours: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetLoginHours: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LoginWorkstations: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LoginWorkstations: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetLoginWorkstations: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetLoginWorkstations: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var MaxLogins: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMaxLogins: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var MaxStorage: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -14086,17 +14101,17 @@ public struct IADsUserVtbl {
     public var HomeDirectory: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetHomeDirectory: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Languages: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Languages: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetLanguages: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetLanguages: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetProfile: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var LoginScript: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetLoginScript: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Picture: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Picture: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPicture: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPicture: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var HomePage: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetHomePage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Groups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -14326,126 +14341,126 @@ public class IADsUser <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TelephoneHome(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TelephoneHome(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TelephoneHome(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTelephoneHome(vTelephoneHome: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetTelephoneHome(vTelephoneHome: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTelephoneHome(__liveRaw, vTelephoneHome)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TelephoneMobile(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TelephoneMobile(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TelephoneMobile(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTelephoneMobile(vTelephoneMobile: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetTelephoneMobile(vTelephoneMobile: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTelephoneMobile(__liveRaw, vTelephoneMobile)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TelephoneNumber(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TelephoneNumber(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TelephoneNumber(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTelephoneNumber(vTelephoneNumber: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetTelephoneNumber(vTelephoneNumber: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTelephoneNumber(__liveRaw, vTelephoneNumber)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TelephonePager(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TelephonePager(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TelephonePager(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTelephonePager(vTelephonePager: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetTelephonePager(vTelephonePager: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTelephonePager(__liveRaw, vTelephonePager)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FaxNumber(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func FaxNumber(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FaxNumber(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetFaxNumber(vFaxNumber: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetFaxNumber(vFaxNumber: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFaxNumber(__liveRaw, vFaxNumber)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OfficeLocations(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func OfficeLocations(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OfficeLocations(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOfficeLocations(vOfficeLocations: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOfficeLocations(vOfficeLocations: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOfficeLocations(__liveRaw, vOfficeLocations)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PostalAddresses(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PostalAddresses(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PostalAddresses(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPostalAddresses(vPostalAddresses: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPostalAddresses(vPostalAddresses: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPostalAddresses(__liveRaw, vPostalAddresses)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PostalCodes(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PostalCodes(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PostalCodes(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPostalCodes(vPostalCodes: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPostalCodes(vPostalCodes: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPostalCodes(__liveRaw, vPostalCodes)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SeeAlso(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SeeAlso(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SeeAlso(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSeeAlso(vSeeAlso: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSeeAlso(vSeeAlso: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSeeAlso(__liveRaw, vSeeAlso)
@@ -14512,28 +14527,28 @@ public class IADsUser <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LoginHours(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LoginHours(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoginHours(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetLoginHours(vLoginHours: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetLoginHours(vLoginHours: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetLoginHours(__liveRaw, vLoginHours)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LoginWorkstations(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LoginWorkstations(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoginWorkstations(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetLoginWorkstations(vLoginWorkstations: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetLoginWorkstations(vLoginWorkstations: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetLoginWorkstations(__liveRaw, vLoginWorkstations)
@@ -14636,14 +14651,14 @@ public class IADsUser <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Languages(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Languages(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Languages(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetLanguages(vLanguages: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetLanguages(vLanguages: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetLanguages(__liveRaw, vLanguages)
@@ -14674,14 +14689,14 @@ public class IADsUser <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Picture(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Picture(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Picture(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPicture(vPicture: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPicture(vPicture: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPicture(__liveRaw, vPicture)
@@ -14721,7 +14736,7 @@ public class IADsUser <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsWinNTSystemInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ComputerName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DomainName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -14762,7 +14777,7 @@ public class IADsWinNTSystemInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsWinNTSystemInfo> {
-        return InterfaceDescriptor<IADsWinNTSystemInfo>("IADsWinNTSystemInfo", IADsWinNTSystemInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsWinNTSystemInfoFromAbi, viewIADsWinNTSystemInfo)
+        return InterfaceDescriptor<IADsWinNTSystemInfo>("IADsWinNTSystemInfo", IADsWinNTSystemInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsWinNTSystemInfoFromAbi, viewIADsWinNTSystemInfo)
     }
 
     public unsafe func vtbl(): IADsWinNTSystemInfoVtbl {
@@ -15029,7 +15044,7 @@ public struct IDsAdminNewObjExtVtbl {
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<DSA_NEWOBJ_DISPINFOAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_Controls == "on"]
-    public var AddPages: CFunc<(CPointer<Unit>, Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, IntNative) -> Int32> = { _, _, _ => 0 }
+    public var AddPages: CFunc<(CPointer<Unit>, Win32_impl_p2.LPFNSVADDPROPSHEETPAGE, IntNative) -> Int32> = { _, _, _ => 0 }
     public var SetObject: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var WriteData: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var OnError: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
@@ -15085,7 +15100,7 @@ public class IDsAdminNewObjExt <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func AddPages(lpfnAddPage: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): Int32 {
+    public unsafe func AddPages(lpfnAddPage: Win32_impl_p2.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPages(__liveRaw, lpfnAddPage, lParam)
@@ -15344,7 +15359,7 @@ public class IDsBrowseDomainTree <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPersistQueryVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     public var WriteString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var ReadString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public var WriteInt: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
@@ -15388,7 +15403,7 @@ public class IPersistQuery <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPersistQuery> {
-        return InterfaceDescriptor<IPersistQuery>("IPersistQuery", IPersistQuery.iid(), Win32__impl_l1.IPersist.iid(), takeIPersistQueryFromAbi, viewIPersistQuery)
+        return InterfaceDescriptor<IPersistQuery>("IPersistQuery", IPersistQuery.iid(), Win32_impl_p2.IPersist.iid(), takeIPersistQueryFromAbi, viewIPersistQuery)
     }
 
     public unsafe func vtbl(): IPersistQueryVtbl {
@@ -15448,7 +15463,7 @@ public struct IPrivateDispatchVtbl {
     public var ADSIGetTypeInfo: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ADSIGetIDsOfNames: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<UInt16>>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ADSIInvoke: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, UInt32, UInt16, CPointer<Win32__impl_l2.DISPPARAMSAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l0.EXCEPINFOAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var ADSIInvoke: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, UInt32, UInt16, CPointer<Win32_impl_p2.DISPPARAMSAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p0.EXCEPINFOAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -15518,7 +15533,7 @@ public class IPrivateDispatch <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ADSIInvoke(dispidMember: Int32, riid: CPointer<GUID>, lcid: UInt32, wFlags: UInt16, pdispparams: CPointer<Win32__impl_l2.DISPPARAMSAbi>, pvarResult: CPointer<Win32__impl_l2.VARIANTAbi>, pexcepinfo: CPointer<Win32__impl_l0.EXCEPINFOAbi>, puArgErr: CPointer<UInt32>): Int32 {
+    public unsafe func ADSIInvoke(dispidMember: Int32, riid: CPointer<GUID>, lcid: UInt32, wFlags: UInt16, pdispparams: CPointer<Win32_impl_p2.DISPPARAMSAbi>, pvarResult: CPointer<Win32_impl_p2.VARIANTAbi>, pexcepinfo: CPointer<Win32_impl_p0.EXCEPINFOAbi>, puArgErr: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ADSIInvoke(__liveRaw, dispidMember, riid, lcid, wFlags, pdispparams, pvarResult, pexcepinfo, puArgErr)
@@ -17795,33 +17810,33 @@ public struct IADsClassVtbl {
     public var Auxiliary: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAuxiliary: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MandatoryProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var MandatoryProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetMandatoryProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetMandatoryProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OptionalProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var OptionalProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOptionalProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetOptionalProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var NamingProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var NamingProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetNamingProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetNamingProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DerivedFrom: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DerivedFrom: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDerivedFrom: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDerivedFrom: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AuxDerivedFrom: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AuxDerivedFrom: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetAuxDerivedFrom: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetAuxDerivedFrom: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PossibleSuperiors: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PossibleSuperiors: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPossibleSuperiors: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPossibleSuperiors: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Containment: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Containment: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetContainment: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetContainment: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Container: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetContainer: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var HelpFileName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -17927,98 +17942,98 @@ public class IADsClass <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MandatoryProperties(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func MandatoryProperties(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MandatoryProperties(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetMandatoryProperties(vMandatoryProperties: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetMandatoryProperties(vMandatoryProperties: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetMandatoryProperties(__liveRaw, vMandatoryProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OptionalProperties(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func OptionalProperties(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OptionalProperties(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOptionalProperties(vOptionalProperties: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOptionalProperties(vOptionalProperties: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOptionalProperties(__liveRaw, vOptionalProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func NamingProperties(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func NamingProperties(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NamingProperties(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetNamingProperties(vNamingProperties: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetNamingProperties(vNamingProperties: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNamingProperties(__liveRaw, vNamingProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DerivedFrom(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DerivedFrom(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DerivedFrom(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDerivedFrom(vDerivedFrom: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDerivedFrom(vDerivedFrom: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDerivedFrom(__liveRaw, vDerivedFrom)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AuxDerivedFrom(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AuxDerivedFrom(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AuxDerivedFrom(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetAuxDerivedFrom(vAuxDerivedFrom: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetAuxDerivedFrom(vAuxDerivedFrom: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAuxDerivedFrom(__liveRaw, vAuxDerivedFrom)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PossibleSuperiors(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PossibleSuperiors(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PossibleSuperiors(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPossibleSuperiors(vPossibleSuperiors: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPossibleSuperiors(vPossibleSuperiors: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPossibleSuperiors(__liveRaw, vPossibleSuperiors)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Containment(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Containment(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Containment(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetContainment(vContainment: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetContainment(vContainment: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetContainment(__liveRaw, vContainment)
@@ -18564,7 +18579,7 @@ public struct IDsDisplaySpecifierVtbl {
     public var GetDisplaySpecifier: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetIconLocation: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, Int32, Int32) -> Win32__impl_l0.HICON> = { _, _, _, _, _ => CPointer<Unit>() }
+    public var GetIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, Int32, Int32) -> Win32_impl_p1.HICON> = { _, _, _, _, _ => CPointer<Unit>() }
     public var GetFriendlyClassName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var GetFriendlyAttributeName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public var IsClassContainer: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _ => 0 }
@@ -18639,7 +18654,7 @@ public class IDsDisplaySpecifier <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetIcon(pszObjectClass: CPointer<UInt16>, dwFlags: UInt32, cxIcon: Int32, cyIcon: Int32): Win32__impl_l0.HICON {
+    public unsafe func GetIcon(pszObjectClass: CPointer<UInt16>, dwFlags: UInt32, cxIcon: Int32, cyIcon: Int32): Win32_impl_p1.HICON {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIcon(__liveRaw, pszObjectClass, dwFlags, cxIcon, cyIcon)
@@ -18796,22 +18811,22 @@ public unsafe func Windows_ADsBuildEnumerator(pADsContainer: CPointer<Unit>, ppE
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return ADsBuildVarArrayInt(lpdwObjectTypes, dwObjectTypes, pVar)
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayStr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     // param-hint: lppPathNames len=param[1]
-    func ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayStr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return ADsBuildVarArrayStr(lppPathNames, dwPathNames, pVar)
 }
 
@@ -18837,11 +18852,11 @@ public unsafe func Windows_ADsEncodeBinaryData(pbSrcData: CPointer<UInt8>, dwSrc
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEnumerateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32__impl_l2.VARIANTAbi>, pcElementsFetched: CPointer<UInt32>): Int32
+    func ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32_impl_p2.VARIANTAbi>, pcElementsFetched: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEnumerateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32__impl_l2.VARIANTAbi>, pcElementsFetched: CPointer<UInt32>): Int32 {
+public unsafe func Windows_ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32_impl_p2.VARIANTAbi>, pcElementsFetched: CPointer<UInt32>): Int32 {
     return ADsEnumerateNext(pEnumVariant, cElements, pvar, pcElementsFetched)
 }
 
@@ -18910,11 +18925,11 @@ public unsafe func Windows_AdsFreeAdsValues(pAdsValues: CPointer<ADSVALUEAbi>, d
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsTypeToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUEAbi>, dwNumValues: UInt32, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUEAbi>, dwNumValues: UInt32, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsTypeToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUEAbi>, dwNumValues: UInt32, pVariant: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUEAbi>, dwNumValues: UInt32, pVariant: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return AdsTypeToPropVariant(pAdsValues, dwNumValues, pVariant)
 }
 
@@ -18940,11 +18955,11 @@ public unsafe func Windows_AllocADsStr(pStr: CPointer<UInt16>): CPointer<UInt16>
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_BinarySDToSecurityDescriptor == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32__impl_l2.VARIANTAbi>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
+    func BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32_impl_p2.VARIANTAbi>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_BinarySDToSecurityDescriptor == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32__impl_l2.VARIANTAbi>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+public unsafe func Windows_BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32_impl_p2.VARIANTAbi>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
     return BinarySDToSecurityDescriptor(pSecurityDescriptor, pVarsec, pszServerName, userName, passWord, dwFlags)
 }
 
@@ -18970,11 +18985,11 @@ public unsafe func Windows_FreeADsStr(pStr: CPointer<UInt16>): Int32 {
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_PropVariantToAdsType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func PropVariantToAdsType(pVariant: CPointer<Win32__impl_l2.VARIANTAbi>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUEAbi>>, pdwNumValues: CPointer<UInt32>): Int32
+    func PropVariantToAdsType(pVariant: CPointer<Win32_impl_p2.VARIANTAbi>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUEAbi>>, pdwNumValues: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_PropVariantToAdsType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_PropVariantToAdsType(pVariant: CPointer<Win32__impl_l2.VARIANTAbi>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUEAbi>>, pdwNumValues: CPointer<UInt32>): Int32 {
+public unsafe func Windows_PropVariantToAdsType(pVariant: CPointer<Win32_impl_p2.VARIANTAbi>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUEAbi>>, pdwNumValues: CPointer<UInt32>): Int32 {
     return PropVariantToAdsType(pVariant, dwNumVariant, ppAdsValues, pdwNumValues)
 }
 
@@ -19000,11 +19015,11 @@ public unsafe func Windows_ReallocADsStr(ppStr: CPointer<CPointer<UInt16>>, pStr
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_SecurityDescriptorToBinarySD == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func SecurityDescriptorToBinarySD(vVarSecDes: Win32__impl_l2.VARIANTAbi, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
+    func SecurityDescriptorToBinarySD(vVarSecDes: Win32_impl_p2.VARIANTAbi, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_SecurityDescriptorToBinarySD == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_SecurityDescriptorToBinarySD(vVarSecDes: Win32__impl_l2.VARIANTAbi, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+public unsafe func Windows_SecurityDescriptorToBinarySD(vVarSecDes: Win32_impl_p2.VARIANTAbi, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
     return SecurityDescriptorToBinarySD(vVarSecDes, ppSecurityDescriptor, pdwSDLength, pszServerName, userName, passWord, dwFlags)
 }
 
@@ -19264,11 +19279,11 @@ public unsafe func Windows_DsUnquoteRdnValueW(cQuotedRdnValueLength: UInt32, psQ
 foreign {
     // param-hint: ComputerName optional
     // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+    func DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesA == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+public unsafe func Windows_DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
     return DsAddressToSiteNamesA(ComputerName, EntryCount, SocketAddresses, SiteNames)
 }
 
@@ -19276,11 +19291,11 @@ public unsafe func Windows_DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, 
 foreign {
     // param-hint: ComputerName optional
     // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+    func DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExA == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+public unsafe func Windows_DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
     return DsAddressToSiteNamesExA(ComputerName, EntryCount, SocketAddresses, SiteNames, SubnetNames)
 }
 
@@ -19288,11 +19303,11 @@ public unsafe func Windows_DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>
 foreign {
     // param-hint: ComputerName optional
     // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+    func DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExW == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+public unsafe func Windows_DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
     return DsAddressToSiteNamesExW(ComputerName, EntryCount, SocketAddresses, SiteNames, SubnetNames)
 }
 
@@ -19300,11 +19315,11 @@ public unsafe func Windows_DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16
 foreign {
     // param-hint: ComputerName optional
     // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+    func DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesW == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+public unsafe func Windows_DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
     return DsAddressToSiteNamesW(ComputerName, EntryCount, SocketAddresses, SiteNames)
 }
 
@@ -19401,11 +19416,11 @@ foreign {
     // param-hint: SockAddressCount optional
     // param-hint: SockAddresses optional
     // param-hint: DnsHostName optional
-    func DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32
+    func DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextA == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32 {
+public unsafe func Windows_DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32 {
     return DsGetDcNextA(GetDcContextHandle, SockAddressCount, SockAddresses, DnsHostName)
 }
 
@@ -19414,11 +19429,11 @@ foreign {
     // param-hint: SockAddressCount optional
     // param-hint: SockAddresses optional
     // param-hint: DnsHostName optional
-    func DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32
+    func DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextW == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32 {
+public unsafe func Windows_DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32_impl_p2.SOCKET_ADDRESSAbi>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32 {
     return DsGetDcNextW(GetDcContextHandle, SockAddressCount, SockAddresses, DnsHostName)
 }
 
@@ -20575,11 +20590,11 @@ public unsafe func Windows_DsGetFriendlyClassName(pszObjectClass: CPointer<UInt1
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32__impl_l0.HICON
+    func DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32_impl_p1.HICON
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32__impl_l0.HICON {
+public unsafe func Windows_DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32_impl_p1.HICON {
     return DsGetIcon(dwFlags, pszObjectClass, cxImage, cyImage)
 }
 
@@ -22140,7 +22155,7 @@ public struct CQPAGE {
     public var hInstance: CPointer<Unit> = CPointer<Unit>()
     public var idPageName: Int32 = 0i32
     public var idPageTemplate: Int32 = 0i32
-    public var pDlgProc: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var pDlgProc: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public init() {}
 }
@@ -22154,7 +22169,7 @@ public struct CQPAGEAbi {
     public var hInstance: CPointer<Unit> = CPointer<Unit>()
     public var idPageName: Int32 = 0i32
     public var idPageTemplate: Int32 = 0i32
-    public var pDlgProc: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var pDlgProc: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public init() {}
 }

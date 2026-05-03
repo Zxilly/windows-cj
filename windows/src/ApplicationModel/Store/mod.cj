@@ -4,15 +4,25 @@
 package windows.ApplicationModel.Store
 
 import std.collection.*
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Store == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Store == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Store == "on"]
 import windows_future as windows_future
 
 
@@ -1174,19 +1184,15 @@ public class LicenseChangedEventHandler <: InterfaceWrapperBase & ComInterface &
 extend LicenseChangedEventHandler <: windows_core.Interface<LicenseChangedEventHandler> {}
 
 @When[Windows_ApplicationModel_Store == "on"]
-private open class LicenseChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(): Int32 {
-        E_NOTIMPL.value
-    }
+private interface LicenseChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(): Int32
 }
 
 @When[Windows_ApplicationModel_Store == "on"]
-private open class LicenseChangedEventHandlerInvoker <: LicenseChangedEventHandlerInvokerErased {
-    public open func Invoke(): Unit {
-        ()
-    }
+private interface LicenseChangedEventHandlerInvoker <: LicenseChangedEventHandlerInvokerErased {
+    public func Invoke(): Unit
 
-    public override func __winrtThunk_Invoke(): Int32 {
+    public func __winrtThunk_Invoke(): Int32 {
         this.Invoke()
         return S_OK.value
     }
@@ -1206,7 +1212,7 @@ private class LicenseChangedEventHandlerBox <: LicenseChangedEventHandlerInvoker
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(): Unit {
+    public func Invoke(): Unit {
         invoke_()
     }
 }
@@ -2776,7 +2782,7 @@ public class ICurrentAppSimulator <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICurrentAppSimulator", ICurrentAppSimulator.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICurrentAppSimulatorVtbl", "ICurrentAppSimulator", "ICurrentAppSimulator_Impl", [InterfaceMethodSchema("get_LicenseInformation", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LicenseInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LinkUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAppPurchaseAsync", 9, [InterfaceParameterSchema("includeReceipt", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestProductPurchaseAsync", 10, [InterfaceParameterSchema("productId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("includeReceipt", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadListingInformationAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ListingInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppReceiptAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetProductReceiptAsync", 13, [InterfaceParameterSchema("productId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReloadSimulatorAsync", 14, [InterfaceParameterSchema("simulatorSettingsFile", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICurrentAppSimulator", ICurrentAppSimulator.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICurrentAppSimulatorVtbl", "ICurrentAppSimulator", "ICurrentAppSimulator_Impl", [InterfaceMethodSchema("get_LicenseInformation", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LicenseInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LinkUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAppPurchaseAsync", 9, [InterfaceParameterSchema("includeReceipt", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestProductPurchaseAsync", 10, [InterfaceParameterSchema("productId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("includeReceipt", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadListingInformationAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ListingInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppReceiptAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetProductReceiptAsync", 13, [InterfaceParameterSchema("productId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReloadSimulatorAsync", 14, [InterfaceParameterSchema("simulatorSettingsFile", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICurrentAppSimulator.runtimeType())
         return schema
     }
@@ -2870,7 +2876,7 @@ public class ICurrentAppSimulator <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ReloadSimulatorAsync(simulatorSettingsFile: _impl_l1.StorageFile): windows_future.IAsyncAction {
+    public unsafe func ReloadSimulatorAsync(simulatorSettingsFile: impl_p1.StorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReloadSimulatorAsync(asRaw(), simulatorSettingsFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3476,7 +3482,7 @@ public class CurrentAppSimulator <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func ReloadSimulatorAsync(simulatorSettingsFile: _impl_l1.StorageFile): windows_future.IAsyncAction {
+    public static unsafe func ReloadSimulatorAsync(simulatorSettingsFile: impl_p1.StorageFile): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<CurrentAppSimulator, ICurrentAppSimulator>().unwrap()) {
             result__ = Some(factory__.ReloadSimulatorAsync(simulatorSettingsFile))

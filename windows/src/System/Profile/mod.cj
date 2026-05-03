@@ -4,16 +4,27 @@
 package windows.System.Profile
 
 import std.collection.*
+@When[Windows_System_Profile == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_Profile == "on"]
 import windows_core as windows_core
+@When[Windows_System_Profile == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Profile == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Profile == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Profile == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Profile == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_System_Profile == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_System_Profile == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_System_Profile == "on"]
 import windows_collections as windows_collections
+@When[Windows_System_Profile == "on"]
 import windows_future as windows_future
 
 
@@ -425,7 +436,7 @@ public class IHardwareToken <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHardwareToken", IHardwareToken.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHardwareTokenVtbl", "IHardwareToken", "IHardwareToken_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Signature", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Certificate", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHardwareToken", IHardwareToken.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHardwareTokenVtbl", "IHardwareToken", "IHardwareToken_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Signature", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Certificate", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHardwareToken.runtimeType())
         return schema
     }
@@ -455,30 +466,30 @@ public class IHardwareToken <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Id(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Signature(): _impl_l0.IBuffer {
+    public unsafe func Signature(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Signature(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Certificate(): _impl_l0.IBuffer {
+    public unsafe func Certificate(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Certificate(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -2363,17 +2374,17 @@ public class HardwareToken <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         return defaultInterface().Id()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Signature(): _impl_l0.IBuffer {
+    public unsafe func Signature(): impl_p0.IBuffer {
         return defaultInterface().Signature()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Certificate(): _impl_l0.IBuffer {
+    public unsafe func Certificate(): impl_p0.IBuffer {
         return defaultInterface().Certificate()
     }
 }
@@ -2537,7 +2548,7 @@ public class IHardwareIdentificationStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHardwareIdentificationStatics", IHardwareIdentificationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHardwareIdentificationStaticsVtbl", "IHardwareIdentificationStatics", "IHardwareIdentificationStatics_Impl", [InterfaceMethodSchema("GetPackageSpecificToken", 6, [InterfaceParameterSchema("nonce", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HardwareToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHardwareIdentificationStatics", IHardwareIdentificationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHardwareIdentificationStaticsVtbl", "IHardwareIdentificationStatics", "IHardwareIdentificationStatics_Impl", [InterfaceMethodSchema("GetPackageSpecificToken", 6, [InterfaceParameterSchema("nonce", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HardwareToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHardwareIdentificationStatics.runtimeType())
         return schema
     }
@@ -2567,7 +2578,7 @@ public class IHardwareIdentificationStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetPackageSpecificToken(nonce: _impl_l0.IBuffer): HardwareToken {
+    public unsafe func GetPackageSpecificToken(nonce: impl_p0.IBuffer): HardwareToken {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPackageSpecificToken(asRaw(), nonce.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2822,7 +2833,7 @@ public class ISystemIdentificationInfo <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISystemIdentificationInfo", ISystemIdentificationInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemIdentificationInfoVtbl", "ISystemIdentificationInfo", "ISystemIdentificationInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<SystemIdentificationSourceAbi>", "OutSlot<SystemIdentificationSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISystemIdentificationInfo", ISystemIdentificationInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemIdentificationInfoVtbl", "ISystemIdentificationInfo", "ISystemIdentificationInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<SystemIdentificationSourceAbi>", "OutSlot<SystemIdentificationSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISystemIdentificationInfo.runtimeType())
         return schema
     }
@@ -2852,12 +2863,12 @@ public class ISystemIdentificationInfo <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Id(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func Source(): SystemIdentificationSource {
@@ -3230,7 +3241,7 @@ public class SystemIdentificationInfo <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Id(): _impl_l0.IBuffer {
+    public unsafe func Id(): impl_p0.IBuffer {
         return defaultInterface().Id()
     }
 
@@ -3479,7 +3490,7 @@ public class HardwareIdentification <: windows_interface.RuntimeName & windows_c
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func GetPackageSpecificToken(nonce: _impl_l0.IBuffer): HardwareToken {
+    public static unsafe func GetPackageSpecificToken(nonce: impl_p0.IBuffer): HardwareToken {
         var result__: Option<HardwareToken> = Option<HardwareToken>.None
         try (factory__ = windows_core.factory<HardwareIdentification, IHardwareIdentificationStatics>().unwrap()) {
             result__ = Some(factory__.GetPackageSpecificToken(nonce))
@@ -3628,7 +3639,7 @@ public class ISystemIdentificationStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISystemIdentificationStatics", ISystemIdentificationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemIdentificationStaticsVtbl", "ISystemIdentificationStatics", "ISystemIdentificationStatics_Impl", [InterfaceMethodSchema("GetSystemIdForPublisher", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SystemIdentificationInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSystemIdForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SystemIdentificationInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISystemIdentificationStatics", ISystemIdentificationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemIdentificationStaticsVtbl", "ISystemIdentificationStatics", "ISystemIdentificationStatics_Impl", [InterfaceMethodSchema("GetSystemIdForPublisher", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SystemIdentificationInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSystemIdForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SystemIdentificationInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISystemIdentificationStatics.runtimeType())
         return schema
     }
@@ -3666,7 +3677,7 @@ public class ISystemIdentificationStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetSystemIdForUser(user: _impl_l1.User): SystemIdentificationInfo {
+    public unsafe func GetSystemIdForUser(user: impl_p1.User): SystemIdentificationInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetSystemIdForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3710,7 +3721,7 @@ public class SystemIdentification <: windows_interface.RuntimeName & windows_cor
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetSystemIdForUser(user: _impl_l1.User): SystemIdentificationInfo {
+    public static unsafe func GetSystemIdForUser(user: impl_p1.User): SystemIdentificationInfo {
         var result__: Option<SystemIdentificationInfo> = Option<SystemIdentificationInfo>.None
         try (factory__ = windows_core.factory<SystemIdentification, ISystemIdentificationStatics>().unwrap()) {
             result__ = Some(factory__.GetSystemIdForUser(user))

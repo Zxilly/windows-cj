@@ -4,12 +4,20 @@
 package windows.Win32.Graphics.DirectManipulation
 
 import std.collection.*
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_DirectManipulation == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_DirectManipulation == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Graphics_DirectManipulation == "on"]
@@ -1635,7 +1643,7 @@ public struct IDirectManipulationManagerVtbl {
     public var Deactivate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RegisterHitTestTarget: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DIRECTMANIPULATION_HITTEST_TYPEAbi) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var ProcessInput: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    public var ProcessInput: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var GetUpdateManager: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateViewport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateContent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -1701,7 +1709,7 @@ public class IDirectManipulationManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func ProcessInput(message: CPointer<Win32__impl_l0.MSGAbi>, handled: CPointer<Int32>): Int32 {
+    public unsafe func ProcessInput(message: CPointer<Win32_impl_p1.MSGAbi>, handled: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProcessInput(__liveRaw, message, handled)

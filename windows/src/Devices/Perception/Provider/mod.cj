@@ -4,18 +4,31 @@
 package windows.Devices.Perception.Provider
 
 import std.collection.*
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Perception_Provider == "on" && Windows_Devices_Perception == "on"]
 import windows.Devices.Perception as Devices_Perception
+@When[Windows_Devices_Perception_Provider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Devices_Perception_Provider == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
+@When[Windows_Devices_Perception_Provider == "on" && Windows_Media == "on"]
 import windows.Media as Media
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_future as windows_future
+@When[Windows_Devices_Perception_Provider == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -3101,19 +3114,15 @@ public class PerceptionStartFaceAuthenticationHandler <: InterfaceWrapperBase & 
 extend PerceptionStartFaceAuthenticationHandler <: windows_core.Interface<PerceptionStartFaceAuthenticationHandler> {}
 
 @When[Windows_Devices_Perception_Provider == "on"]
-private open class PerceptionStartFaceAuthenticationHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<Bool>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface PerceptionStartFaceAuthenticationHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<Bool>): Int32
 }
 
 @When[Windows_Devices_Perception_Provider == "on"]
-private open class PerceptionStartFaceAuthenticationHandlerInvoker <: PerceptionStartFaceAuthenticationHandlerInvokerErased {
-    public open func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Bool {
-        false
-    }
+private interface PerceptionStartFaceAuthenticationHandlerInvoker <: PerceptionStartFaceAuthenticationHandlerInvokerErased {
+    public func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Bool
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<Bool>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<Bool>): Int32 {
         let value = this.Invoke(InParam<PerceptionFaceAuthenticationGroup>(PerceptionFaceAuthenticationGroup.viewOf(arg0)))
         unsafe { result.write(value) }
         return S_OK.value
@@ -3134,7 +3143,7 @@ private class PerceptionStartFaceAuthenticationHandlerBox <: PerceptionStartFace
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Bool {
+    public func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Bool {
         invoke_(sender)
     }
 }
@@ -3231,19 +3240,15 @@ public class PerceptionStopFaceAuthenticationHandler <: InterfaceWrapperBase & C
 extend PerceptionStopFaceAuthenticationHandler <: windows_core.Interface<PerceptionStopFaceAuthenticationHandler> {}
 
 @When[Windows_Devices_Perception_Provider == "on"]
-private open class PerceptionStopFaceAuthenticationHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface PerceptionStopFaceAuthenticationHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Devices_Perception_Provider == "on"]
-private open class PerceptionStopFaceAuthenticationHandlerInvoker <: PerceptionStopFaceAuthenticationHandlerInvokerErased {
-    public open func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Unit {
-        ()
-    }
+private interface PerceptionStopFaceAuthenticationHandlerInvoker <: PerceptionStopFaceAuthenticationHandlerInvokerErased {
+    public func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<PerceptionFaceAuthenticationGroup>(PerceptionFaceAuthenticationGroup.viewOf(arg0)))
         return S_OK.value
     }
@@ -3263,7 +3268,7 @@ private class PerceptionStopFaceAuthenticationHandlerBox <: PerceptionStopFaceAu
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Unit {
+    public func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Unit {
         invoke_(sender)
     }
 }

@@ -4,8 +4,11 @@
 package windows.Win32.Media.Streaming
 
 import std.collection.*
+@When[Windows_Win32_Media_Streaming == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Streaming == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Streaming == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

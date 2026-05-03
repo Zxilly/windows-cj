@@ -4,14 +4,23 @@
 package windows.Media.AppBroadcasting
 
 import std.collection.*
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_core as windows_core
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_AppBroadcasting == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_AppBroadcasting == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_AppBroadcasting == "on"]
 import windows_collections as windows_collections
 
 
@@ -796,7 +805,7 @@ public class AppBroadcastingUI <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): AppBroadcastingUI {
+    public static unsafe func GetForUser(user: impl_p1.User): AppBroadcastingUI {
         var result__: Option<AppBroadcastingUI> = Option<AppBroadcastingUI>.None
         try (factory__ = windows_core.factory<AppBroadcastingUI, IAppBroadcastingUIStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -975,7 +984,7 @@ public class IAppBroadcastingUIStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppBroadcastingUIStatics", IAppBroadcastingUIStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppBroadcastingUIStaticsVtbl", "IAppBroadcastingUIStatics", "IAppBroadcastingUIStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppBroadcastingUI>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppBroadcastingUI>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppBroadcastingUIStatics", IAppBroadcastingUIStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppBroadcastingUIStaticsVtbl", "IAppBroadcastingUIStatics", "IAppBroadcastingUIStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppBroadcastingUI>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AppBroadcastingUI>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppBroadcastingUIStatics.runtimeType())
         return schema
     }
@@ -1013,7 +1022,7 @@ public class IAppBroadcastingUIStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): AppBroadcastingUI {
+    public unsafe func GetForUser(user: impl_p1.User): AppBroadcastingUI {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))

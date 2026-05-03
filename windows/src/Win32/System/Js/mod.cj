@@ -4,11 +4,16 @@
 package windows.Win32.System.Js
 
 import std.collection.*
+@When[Windows_Win32_System_Js == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_Js == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Js == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Js == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 import windows.Win32.System.Diagnostics.Debug.ActiveScript as Win32_System_Diagnostics_Debug_ActiveScript
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Js == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Js == "on"]
@@ -1266,21 +1271,21 @@ public unsafe func Windows_JsStringToPointer(value: CPointer<Unit>, stringValue:
 
 @When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsValueToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32__impl_l2.VARIANTAbi>): JsErrorCodeAbi
+    func JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32_impl_p2.VARIANTAbi>): JsErrorCodeAbi
 }
 
 @When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsValueToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32__impl_l2.VARIANTAbi>): JsErrorCodeAbi {
+public unsafe func Windows_JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32_impl_p2.VARIANTAbi>): JsErrorCodeAbi {
     return JsValueToVariant(object, variant)
 }
 
 @When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsVariantToValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func JsVariantToValue(variant: CPointer<Win32__impl_l2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+    func JsVariantToValue(variant: CPointer<Win32_impl_p2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
 }
 
 @When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsVariantToValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_JsVariantToValue(variant: CPointer<Win32__impl_l2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+public unsafe func Windows_JsVariantToValue(variant: CPointer<Win32_impl_p2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
     return JsVariantToValue(variant, value)
 }
 

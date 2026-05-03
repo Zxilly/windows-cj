@@ -4,13 +4,20 @@
 package windows.Win32.Storage.EnhancedStorage
 
 import std.collection.*
+@When[Windows_Win32_Storage_EnhancedStorage == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_EnhancedStorage == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_EnhancedStorage == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_EnhancedStorage == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_EnhancedStorage == "on" && Windows_Win32_Devices_PortableDevices == "on"]
 import windows.Win32.Devices.PortableDevices as Win32_Devices_PortableDevices
+@When[Windows_Win32_Storage_EnhancedStorage == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Storage_EnhancedStorage == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Storage_EnhancedStorage == "on"]

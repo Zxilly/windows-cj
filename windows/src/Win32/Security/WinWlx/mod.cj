@@ -4,12 +4,18 @@
 package windows.Win32.Security.WinWlx
 
 import std.collection.*
+@When[Windows_Win32_Security_WinWlx == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_WinWlx == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_System_StationsAndDesktops == "on"]
 import windows.Win32.System.StationsAndDesktops as Win32_System_StationsAndDesktops
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Security_WinWlx == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Security_WinWlx == "on"]
@@ -138,16 +144,16 @@ public type PFNMSGECALLBACK = CFunc<(Int32, CPointer<UInt16>) -> UInt32>
 public type PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public type PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>
+public type PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>
 
 @When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public type PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>
+public type PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>
 
 @When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public type PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>
+public type PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>
 
 @When[Windows_Win32_Security_WinWlx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public type PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>
+public type PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>
 
 @When[Windows_Win32_Security_WinWlx == "on"]
 public type PWLX_DISCONNECT = CFunc<() -> Int32>
@@ -866,10 +872,10 @@ public struct WLX_DISPATCH_VERSION_1_0 {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -885,10 +891,10 @@ public struct WLX_DISPATCH_VERSION_1_0Abi {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -949,10 +955,10 @@ public struct WLX_DISPATCH_VERSION_1_1 {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -972,10 +978,10 @@ public struct WLX_DISPATCH_VERSION_1_1Abi {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1048,10 +1054,10 @@ public struct WLX_DISPATCH_VERSION_1_2 {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1072,10 +1078,10 @@ public struct WLX_DISPATCH_VERSION_1_2Abi {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1151,10 +1157,10 @@ public struct WLX_DISPATCH_VERSION_1_3 {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1182,10 +1188,10 @@ public struct WLX_DISPATCH_VERSION_1_3Abi {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1282,10 +1288,10 @@ public struct WLX_DISPATCH_VERSION_1_4 {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())
@@ -1315,10 +1321,10 @@ public struct WLX_DISPATCH_VERSION_1_4Abi {
     public var WlxSetTimeout: PWLX_SET_TIMEOUT = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var WlxAssignShellProtection: PWLX_ASSIGN_SHELL_PROTECTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxMessageBox: PWLX_MESSAGE_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC) -> Int32>(CPointer<Unit>())
-    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.DLGTEMPLATE>, CPointer<Unit>, Win32__impl_l0.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBox: PWLX_DIALOG_BOX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxParam: PWLX_DIALOG_BOX_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirect: PWLX_DIALOG_BOX_INDIRECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC) -> Int32>(CPointer<Unit>())
+    public var WlxDialogBoxIndirectParam: PWLX_DIALOG_BOX_INDIRECT_PARAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p1.DLGTEMPLATE>, CPointer<Unit>, Win32_impl_p1.DLGPROC, IntNative) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToUser: PWLX_SWITCH_DESKTOP_TO_USER = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxSwitchDesktopToWinlogon: PWLX_SWITCH_DESKTOP_TO_WINLOGON = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var WlxChangePasswordNotify: PWLX_CHANGE_PASSWORD_NOTIFY = CFunc<(CPointer<Unit>, CPointer<WLX_MPR_NOTIFY_INFOAbi>, UInt32) -> Int32>(CPointer<Unit>())

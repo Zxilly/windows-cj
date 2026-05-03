@@ -4,6 +4,7 @@
 package windows.Win32.System.DeveloperLicensing
 
 import std.collection.*
+@When[Windows_Win32_System_DeveloperLicensing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

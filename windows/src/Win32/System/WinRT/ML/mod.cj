@@ -4,12 +4,18 @@
 package windows.Win32.System.WinRT.ML
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_ML == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WinRT_ML == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_ML == "on" && Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows.Win32.AI.MachineLearning.WinML as Win32_AI_MachineLearning_WinML
+@When[Windows_Win32_System_WinRT_ML == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_ML == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_WinRT_ML == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_System_WinRT_ML == "on"]

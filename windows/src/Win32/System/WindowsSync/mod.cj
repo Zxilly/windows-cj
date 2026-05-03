@@ -4,13 +4,20 @@
 package windows.Win32.System.WindowsSync
 
 import std.collection.*
+@When[Windows_Win32_System_WindowsSync == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_WindowsSync == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WindowsSync == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WindowsSync == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WindowsSync == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_WindowsSync == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WindowsSync == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_WindowsSync == "on"]
@@ -1904,7 +1911,7 @@ public class ISyncMergeTombstoneChange <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_WindowsSync == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
 @C
 public struct ISyncProviderInfoVtbl {
-    public var base_: Win32__impl_l2.IPropertyStoreVtbl = Win32__impl_l2.IPropertyStoreVtbl()
+    public var base_: Win32_impl_p3.IPropertyStoreVtbl = Win32_impl_p3.IPropertyStoreVtbl()
     public var GetSyncProvider: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1942,7 +1949,7 @@ public class ISyncProviderInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISyncProviderInfo> {
-        return InterfaceDescriptor<ISyncProviderInfo>("ISyncProviderInfo", ISyncProviderInfo.iid(), Win32__impl_l2.IPropertyStore.iid(), takeISyncProviderInfoFromAbi, viewISyncProviderInfo)
+        return InterfaceDescriptor<ISyncProviderInfo>("ISyncProviderInfo", ISyncProviderInfo.iid(), Win32_impl_p3.IPropertyStore.iid(), takeISyncProviderInfoFromAbi, viewISyncProviderInfo)
     }
 
     public unsafe func vtbl(): ISyncProviderInfoVtbl {
@@ -4025,7 +4032,7 @@ public class ISyncProviderConfigUI <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_WindowsSync == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
 @C
 public struct ISyncProviderConfigUIInfoVtbl {
-    public var base_: Win32__impl_l2.IPropertyStoreVtbl = Win32__impl_l2.IPropertyStoreVtbl()
+    public var base_: Win32_impl_p3.IPropertyStoreVtbl = Win32_impl_p3.IPropertyStoreVtbl()
     public var GetSyncProviderConfigUI: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4063,7 +4070,7 @@ public class ISyncProviderConfigUIInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISyncProviderConfigUIInfo> {
-        return InterfaceDescriptor<ISyncProviderConfigUIInfo>("ISyncProviderConfigUIInfo", ISyncProviderConfigUIInfo.iid(), Win32__impl_l2.IPropertyStore.iid(), takeISyncProviderConfigUIInfoFromAbi, viewISyncProviderConfigUIInfo)
+        return InterfaceDescriptor<ISyncProviderConfigUIInfo>("ISyncProviderConfigUIInfo", ISyncProviderConfigUIInfo.iid(), Win32_impl_p3.IPropertyStore.iid(), takeISyncProviderConfigUIInfoFromAbi, viewISyncProviderConfigUIInfo)
     }
 
     public unsafe func vtbl(): ISyncProviderConfigUIInfoVtbl {

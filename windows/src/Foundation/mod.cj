@@ -4,13 +4,21 @@
 package windows.Foundation
 
 import std.collection.*
+@When[Windows_Foundation == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Foundation == "on"]
 import windows_core as windows_core
+@When[Windows_Foundation == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Foundation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Foundation == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Foundation == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Foundation == "on"]
 import windows_collections as windows_collections
+@When[Windows_Foundation == "on"]
 import windows_future as windows_future
 
 
@@ -91,19 +99,15 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
 extend DeferralCompletedHandler <: windows_core.Interface<DeferralCompletedHandler> {}
 
 @When[Windows_Foundation == "on"]
-private open class DeferralCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(): Int32 {
-        E_NOTIMPL.value
-    }
+private interface DeferralCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(): Int32
 }
 
 @When[Windows_Foundation == "on"]
-private open class DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvokerErased {
-    public open func Invoke(): Unit {
-        ()
-    }
+private interface DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvokerErased {
+    public func Invoke(): Unit
 
-    public override func __winrtThunk_Invoke(): Int32 {
+    public func __winrtThunk_Invoke(): Int32 {
         this.Invoke()
         return S_OK.value
     }
@@ -123,7 +127,7 @@ private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(): Unit {
+    public func Invoke(): Unit {
         invoke_()
     }
 }
@@ -232,19 +236,15 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
 extend<T> EventHandler<T> <: windows_core.Interface<EventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
 @When[Windows_Foundation == "on"]
-private open class EventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface EventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_Foundation == "on"]
-private open class EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    public open func Invoke(sender: InParam<IInspectable>, args: T): Unit {
-        ()
-    }
+private interface EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public func Invoke(sender: InParam<IInspectable>, args: T): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), windows_core.winrtProjectGenericIn<T>(arg1))
         return S_OK.value
     }
@@ -264,7 +264,7 @@ private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_co
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, args: T): Unit {
+    public func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         invoke_(sender, args)
     }
 }
@@ -4808,19 +4808,15 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
 extend<TSender, TResult> TypedEventHandler<TSender, TResult> <: windows_core.Interface<TypedEventHandler<TSender, TResult>> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
 @When[Windows_Foundation == "on"]
-private open class TypedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface TypedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_Foundation == "on"]
-private open class TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandlerInvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
-    public open func Invoke(sender: TSender, args: TResult): Unit {
-        ()
-    }
+private interface TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandlerInvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
+    public func Invoke(sender: TSender, args: TResult): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(windows_core.winrtProjectGenericIn<TSender>(arg0), windows_core.winrtProjectGenericIn<TResult>(arg1))
         return S_OK.value
     }
@@ -4840,7 +4836,7 @@ private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: TSender, args: TResult): Unit {
+    public func Invoke(sender: TSender, args: TResult): Unit {
         invoke_(sender, args)
     }
 }

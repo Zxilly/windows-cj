@@ -4,15 +4,24 @@
 package windows.Win32.Storage.Imapi
 
 import std.collection.*
+@When[Windows_Win32_Storage_Imapi == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Imapi == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Imapi == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Imapi == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_AddressBook == "on"]
 import windows.Win32.System.AddressBook as Win32_System_AddressBook
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Imapi == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Imapi == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Storage_Imapi == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Storage_Imapi == "on"]
@@ -111,7 +120,7 @@ extend BootOptions <: windows_core.CopyType & windows_core.RuntimeType & windows
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DDiscFormat2DataEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -150,7 +159,7 @@ public class DDiscFormat2DataEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DDiscFormat2DataEvents> {
-        return InterfaceDescriptor<DDiscFormat2DataEvents>("DDiscFormat2DataEvents", DDiscFormat2DataEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDDiscFormat2DataEventsFromAbi, viewDDiscFormat2DataEvents)
+        return InterfaceDescriptor<DDiscFormat2DataEvents>("DDiscFormat2DataEvents", DDiscFormat2DataEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDDiscFormat2DataEventsFromAbi, viewDDiscFormat2DataEvents)
     }
 
     public unsafe func vtbl(): DDiscFormat2DataEventsVtbl {
@@ -168,7 +177,7 @@ public class DDiscFormat2DataEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DDiscFormat2EraseEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -207,7 +216,7 @@ public class DDiscFormat2EraseEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DDiscFormat2EraseEvents> {
-        return InterfaceDescriptor<DDiscFormat2EraseEvents>("DDiscFormat2EraseEvents", DDiscFormat2EraseEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDDiscFormat2EraseEventsFromAbi, viewDDiscFormat2EraseEvents)
+        return InterfaceDescriptor<DDiscFormat2EraseEvents>("DDiscFormat2EraseEvents", DDiscFormat2EraseEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDDiscFormat2EraseEventsFromAbi, viewDDiscFormat2EraseEvents)
     }
 
     public unsafe func vtbl(): DDiscFormat2EraseEventsVtbl {
@@ -225,7 +234,7 @@ public class DDiscFormat2EraseEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DDiscFormat2RawCDEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -264,7 +273,7 @@ public class DDiscFormat2RawCDEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DDiscFormat2RawCDEvents> {
-        return InterfaceDescriptor<DDiscFormat2RawCDEvents>("DDiscFormat2RawCDEvents", DDiscFormat2RawCDEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDDiscFormat2RawCDEventsFromAbi, viewDDiscFormat2RawCDEvents)
+        return InterfaceDescriptor<DDiscFormat2RawCDEvents>("DDiscFormat2RawCDEvents", DDiscFormat2RawCDEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDDiscFormat2RawCDEventsFromAbi, viewDDiscFormat2RawCDEvents)
     }
 
     public unsafe func vtbl(): DDiscFormat2RawCDEventsVtbl {
@@ -282,7 +291,7 @@ public class DDiscFormat2RawCDEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DDiscFormat2TrackAtOnceEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -321,7 +330,7 @@ public class DDiscFormat2TrackAtOnceEvents <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<DDiscFormat2TrackAtOnceEvents> {
-        return InterfaceDescriptor<DDiscFormat2TrackAtOnceEvents>("DDiscFormat2TrackAtOnceEvents", DDiscFormat2TrackAtOnceEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDDiscFormat2TrackAtOnceEventsFromAbi, viewDDiscFormat2TrackAtOnceEvents)
+        return InterfaceDescriptor<DDiscFormat2TrackAtOnceEvents>("DDiscFormat2TrackAtOnceEvents", DDiscFormat2TrackAtOnceEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDDiscFormat2TrackAtOnceEventsFromAbi, viewDDiscFormat2TrackAtOnceEvents)
     }
 
     public unsafe func vtbl(): DDiscFormat2TrackAtOnceEventsVtbl {
@@ -339,7 +348,7 @@ public class DDiscFormat2TrackAtOnceEvents <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DDiscMaster2EventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var NotifyDeviceAdded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -380,7 +389,7 @@ public class DDiscMaster2Events <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DDiscMaster2Events> {
-        return InterfaceDescriptor<DDiscMaster2Events>("DDiscMaster2Events", DDiscMaster2Events.iid(), Win32__impl_l2.IDispatch.iid(), takeDDiscMaster2EventsFromAbi, viewDDiscMaster2Events)
+        return InterfaceDescriptor<DDiscMaster2Events>("DDiscMaster2Events", DDiscMaster2Events.iid(), Win32_impl_p2.IDispatch.iid(), takeDDiscMaster2EventsFromAbi, viewDDiscMaster2Events)
     }
 
     public unsafe func vtbl(): DDiscMaster2EventsVtbl {
@@ -405,7 +414,7 @@ public class DDiscMaster2Events <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DFileSystemImageEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, Int32, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
@@ -444,7 +453,7 @@ public class DFileSystemImageEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DFileSystemImageEvents> {
-        return InterfaceDescriptor<DFileSystemImageEvents>("DFileSystemImageEvents", DFileSystemImageEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDFileSystemImageEventsFromAbi, viewDFileSystemImageEvents)
+        return InterfaceDescriptor<DFileSystemImageEvents>("DFileSystemImageEvents", DFileSystemImageEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDFileSystemImageEventsFromAbi, viewDFileSystemImageEvents)
     }
 
     public unsafe func vtbl(): DFileSystemImageEventsVtbl {
@@ -519,7 +528,7 @@ extend DISC_RECORDER_STATE_FLAGS <: windows_core.CopyType & windows_core.Runtime
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DWriteEngine2EventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -558,7 +567,7 @@ public class DWriteEngine2Events <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<DWriteEngine2Events> {
-        return InterfaceDescriptor<DWriteEngine2Events>("DWriteEngine2Events", DWriteEngine2Events.iid(), Win32__impl_l2.IDispatch.iid(), takeDWriteEngine2EventsFromAbi, viewDWriteEngine2Events)
+        return InterfaceDescriptor<DWriteEngine2Events>("DWriteEngine2Events", DWriteEngine2Events.iid(), Win32_impl_p2.IDispatch.iid(), takeDWriteEngine2EventsFromAbi, viewDWriteEngine2Events)
     }
 
     public unsafe func vtbl(): DWriteEngine2EventsVtbl {
@@ -976,7 +985,7 @@ extend FsiStream <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBlockRangeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StartLba: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EndLba: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1015,7 +1024,7 @@ public class IBlockRange <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBlockRange> {
-        return InterfaceDescriptor<IBlockRange>("IBlockRange", IBlockRange.iid(), Win32__impl_l2.IDispatch.iid(), takeIBlockRangeFromAbi, viewIBlockRange)
+        return InterfaceDescriptor<IBlockRange>("IBlockRange", IBlockRange.iid(), Win32_impl_p2.IDispatch.iid(), takeIBlockRangeFromAbi, viewIBlockRange)
     }
 
     public unsafe func vtbl(): IBlockRangeVtbl {
@@ -1038,9 +1047,9 @@ public class IBlockRange <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBlockRangeListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var BlockRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var BlockRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1077,7 +1086,7 @@ public class IBlockRangeList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBlockRangeList> {
-        return InterfaceDescriptor<IBlockRangeList>("IBlockRangeList", IBlockRangeList.iid(), Win32__impl_l2.IDispatch.iid(), takeIBlockRangeListFromAbi, viewIBlockRangeList)
+        return InterfaceDescriptor<IBlockRangeList>("IBlockRangeList", IBlockRangeList.iid(), Win32_impl_p2.IDispatch.iid(), takeIBlockRangeListFromAbi, viewIBlockRangeList)
     }
 
     public unsafe func vtbl(): IBlockRangeListVtbl {
@@ -1085,7 +1094,7 @@ public class IBlockRangeList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func BlockRanges(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func BlockRanges(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BlockRanges(__liveRaw, value)
@@ -1095,7 +1104,7 @@ public class IBlockRangeList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDiscMaster2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
@@ -1137,7 +1146,7 @@ public class IDiscMaster2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDiscMaster2> {
-        return InterfaceDescriptor<IDiscMaster2>("IDiscMaster2", IDiscMaster2.iid(), Win32__impl_l2.IDispatch.iid(), takeIDiscMaster2FromAbi, viewIDiscMaster2)
+        return InterfaceDescriptor<IDiscMaster2>("IDiscMaster2", IDiscMaster2.iid(), Win32_impl_p2.IDispatch.iid(), takeIDiscMaster2FromAbi, viewIDiscMaster2)
     }
 
     public unsafe func vtbl(): IDiscMaster2Vtbl {
@@ -1284,7 +1293,7 @@ public class IDiscMasterProgressEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDiscRecorder2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EjectMedia: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var CloseTray: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AcquireExclusiveAccess: CFunc<(CPointer<Unit>, Int16, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
@@ -1298,19 +1307,19 @@ public struct IDiscRecorder2Vtbl {
     public var ProductRevision: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var VolumeName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var VolumePathNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var VolumePathNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var DeviceCanLoadMedia: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var LegacyDeviceNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedFeaturePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedFeaturePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CurrentFeaturePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CurrentFeaturePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CurrentProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CurrentProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedModePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedModePages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var ExclusiveAccessOwner: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1348,7 +1357,7 @@ public class IDiscRecorder2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDiscRecorder2> {
-        return InterfaceDescriptor<IDiscRecorder2>("IDiscRecorder2", IDiscRecorder2.iid(), Win32__impl_l2.IDispatch.iid(), takeIDiscRecorder2FromAbi, viewIDiscRecorder2)
+        return InterfaceDescriptor<IDiscRecorder2>("IDiscRecorder2", IDiscRecorder2.iid(), Win32_impl_p2.IDispatch.iid(), takeIDiscRecorder2FromAbi, viewIDiscRecorder2)
     }
 
     public unsafe func vtbl(): IDiscRecorder2Vtbl {
@@ -1428,7 +1437,7 @@ public class IDiscRecorder2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func VolumePathNames(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func VolumePathNames(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VolumePathNames(__liveRaw, value)
@@ -1447,35 +1456,35 @@ public class IDiscRecorder2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedFeaturePages(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedFeaturePages(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedFeaturePages(__liveRaw, value)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CurrentFeaturePages(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CurrentFeaturePages(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentFeaturePages(__liveRaw, value)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedProfiles(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedProfiles(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedProfiles(__liveRaw, value)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CurrentProfiles(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CurrentProfiles(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentProfiles(__liveRaw, value)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedModePages(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedModePages(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedModePages(__liveRaw, value)
@@ -1567,7 +1576,7 @@ public class IEnumDiscMasterFormats <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsiItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var FullPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CreationTime: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -1616,7 +1625,7 @@ public class IFsiItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsiItem> {
-        return InterfaceDescriptor<IFsiItem>("IFsiItem", IFsiItem.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsiItemFromAbi, viewIFsiItem)
+        return InterfaceDescriptor<IFsiItem>("IFsiItem", IFsiItem.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsiItemFromAbi, viewIFsiItem)
     }
 
     public unsafe func vtbl(): IFsiItemVtbl {
@@ -1699,7 +1708,7 @@ public class IFsiItem <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IIsoImageManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Stream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1743,7 +1752,7 @@ public class IIsoImageManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IIsoImageManager> {
-        return InterfaceDescriptor<IIsoImageManager>("IIsoImageManager", IIsoImageManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIIsoImageManagerFromAbi, viewIIsoImageManager)
+        return InterfaceDescriptor<IIsoImageManager>("IIsoImageManager", IIsoImageManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIIsoImageManagerFromAbi, viewIIsoImageManager)
     }
 
     public unsafe func vtbl(): IIsoImageManagerVtbl {
@@ -3771,7 +3780,7 @@ extend IMMP_MPV_STORE_DRIVER_HANDLE <: windows_core.CopyType & windows_core.Runt
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMultisessionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IsSupportedOnCurrentMediaState: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetInUse: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var InUse: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -3812,7 +3821,7 @@ public class IMultisession <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMultisession> {
-        return InterfaceDescriptor<IMultisession>("IMultisession", IMultisession.iid(), Win32__impl_l2.IDispatch.iid(), takeIMultisessionFromAbi, viewIMultisession)
+        return InterfaceDescriptor<IMultisession>("IMultisession", IMultisession.iid(), Win32_impl_p2.IDispatch.iid(), takeIMultisessionFromAbi, viewIMultisession)
     }
 
     public unsafe func vtbl(): IMultisessionVtbl {
@@ -4054,7 +4063,7 @@ public class IMultisessionSequential2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IProgressItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var FirstBlock: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var LastBlock: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -4095,7 +4104,7 @@ public class IProgressItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IProgressItem> {
-        return InterfaceDescriptor<IProgressItem>("IProgressItem", IProgressItem.iid(), Win32__impl_l2.IDispatch.iid(), takeIProgressItemFromAbi, viewIProgressItem)
+        return InterfaceDescriptor<IProgressItem>("IProgressItem", IProgressItem.iid(), Win32_impl_p2.IDispatch.iid(), takeIProgressItemFromAbi, viewIProgressItem)
     }
 
     public unsafe func vtbl(): IProgressItemVtbl {
@@ -4130,7 +4139,7 @@ public class IProgressItem <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRawCDImageTrackInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StartingLba: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SectorCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var TrackNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4142,7 +4151,7 @@ public struct IRawCDImageTrackInfoVtbl {
     public var AudioHasPreemphasis: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAudioHasPreemphasis: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var TrackIndexes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var TrackIndexes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var AddTrackIndex: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ClearTrackIndex: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4181,7 +4190,7 @@ public class IRawCDImageTrackInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRawCDImageTrackInfo> {
-        return InterfaceDescriptor<IRawCDImageTrackInfo>("IRawCDImageTrackInfo", IRawCDImageTrackInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIRawCDImageTrackInfoFromAbi, viewIRawCDImageTrackInfo)
+        return InterfaceDescriptor<IRawCDImageTrackInfo>("IRawCDImageTrackInfo", IRawCDImageTrackInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIRawCDImageTrackInfoFromAbi, viewIRawCDImageTrackInfo)
     }
 
     public unsafe func vtbl(): IRawCDImageTrackInfoVtbl {
@@ -4249,7 +4258,7 @@ public class IRawCDImageTrackInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func TrackIndexes(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func TrackIndexes(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TrackIndexes(__liveRaw, value)
@@ -4375,7 +4384,7 @@ public class IRedbookDiscMaster <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStreamConcatenateVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -4420,7 +4429,7 @@ public class IStreamConcatenate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IStreamConcatenate> {
-        return InterfaceDescriptor<IStreamConcatenate>("IStreamConcatenate", IStreamConcatenate.iid(), Win32__impl_l1.IStream.iid(), takeIStreamConcatenateFromAbi, viewIStreamConcatenate)
+        return InterfaceDescriptor<IStreamConcatenate>("IStreamConcatenate", IStreamConcatenate.iid(), Win32_impl_p2.IStream.iid(), takeIStreamConcatenateFromAbi, viewIStreamConcatenate)
     }
 
     public unsafe func vtbl(): IStreamConcatenateVtbl {
@@ -4459,7 +4468,7 @@ public class IStreamConcatenate <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStreamInterleaveVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<UInt32>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -4498,7 +4507,7 @@ public class IStreamInterleave <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IStreamInterleave> {
-        return InterfaceDescriptor<IStreamInterleave>("IStreamInterleave", IStreamInterleave.iid(), Win32__impl_l1.IStream.iid(), takeIStreamInterleaveFromAbi, viewIStreamInterleave)
+        return InterfaceDescriptor<IStreamInterleave>("IStreamInterleave", IStreamInterleave.iid(), Win32_impl_p2.IStream.iid(), takeIStreamInterleaveFromAbi, viewIStreamInterleave)
     }
 
     public unsafe func vtbl(): IStreamInterleaveVtbl {
@@ -4516,7 +4525,7 @@ public class IStreamInterleave <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStreamPseudoRandomBasedVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     public var SetSeed: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Seed: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var put_ExtendedSeed: CFunc<(CPointer<Unit>, CPointer<UInt32>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -4557,7 +4566,7 @@ public class IStreamPseudoRandomBased <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IStreamPseudoRandomBased> {
-        return InterfaceDescriptor<IStreamPseudoRandomBased>("IStreamPseudoRandomBased", IStreamPseudoRandomBased.iid(), Win32__impl_l1.IStream.iid(), takeIStreamPseudoRandomBasedFromAbi, viewIStreamPseudoRandomBased)
+        return InterfaceDescriptor<IStreamPseudoRandomBased>("IStreamPseudoRandomBased", IStreamPseudoRandomBased.iid(), Win32_impl_p2.IStream.iid(), takeIStreamPseudoRandomBasedFromAbi, viewIStreamPseudoRandomBased)
     }
 
     public unsafe func vtbl(): IStreamPseudoRandomBasedVtbl {
@@ -4592,7 +4601,7 @@ public class IStreamPseudoRandomBased <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWriteEngine2EventArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StartLba: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SectorCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LastReadLba: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4636,7 +4645,7 @@ public class IWriteEngine2EventArgs <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWriteEngine2EventArgs> {
-        return InterfaceDescriptor<IWriteEngine2EventArgs>("IWriteEngine2EventArgs", IWriteEngine2EventArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeIWriteEngine2EventArgsFromAbi, viewIWriteEngine2EventArgs)
+        return InterfaceDescriptor<IWriteEngine2EventArgs>("IWriteEngine2EventArgs", IWriteEngine2EventArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeIWriteEngine2EventArgsFromAbi, viewIWriteEngine2EventArgs)
     }
 
     public unsafe func vtbl(): IWriteEngine2EventArgsVtbl {
@@ -4689,7 +4698,7 @@ public class IWriteEngine2EventArgs <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWriteSpeedDescriptorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<IMAPI_MEDIA_PHYSICAL_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var RotationTypeIsPureCAV: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var WriteSpeed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4729,7 +4738,7 @@ public class IWriteSpeedDescriptor <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWriteSpeedDescriptor> {
-        return InterfaceDescriptor<IWriteSpeedDescriptor>("IWriteSpeedDescriptor", IWriteSpeedDescriptor.iid(), Win32__impl_l2.IDispatch.iid(), takeIWriteSpeedDescriptorFromAbi, viewIWriteSpeedDescriptor)
+        return InterfaceDescriptor<IWriteSpeedDescriptor>("IWriteSpeedDescriptor", IWriteSpeedDescriptor.iid(), Win32_impl_p2.IDispatch.iid(), takeIWriteSpeedDescriptorFromAbi, viewIWriteSpeedDescriptor)
     }
 
     public unsafe func vtbl(): IWriteSpeedDescriptorVtbl {
@@ -6545,7 +6554,7 @@ public let IMAPI_E_BOOTIMAGE_AND_NONBLANK_DISC: Int32 = -2147220946i32
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct DFileSystemImageImportEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var UpdateImport: CFunc<(CPointer<Unit>, CPointer<Unit>, FsiFileSystemsAbi, CPointer<UInt16>, Int32, Int32, Int32, Int32) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
@@ -6584,7 +6593,7 @@ public class DFileSystemImageImportEvents <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<DFileSystemImageImportEvents> {
-        return InterfaceDescriptor<DFileSystemImageImportEvents>("DFileSystemImageImportEvents", DFileSystemImageImportEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeDFileSystemImageImportEventsFromAbi, viewDFileSystemImageImportEvents)
+        return InterfaceDescriptor<DFileSystemImageImportEvents>("DFileSystemImageImportEvents", DFileSystemImageImportEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeDFileSystemImageImportEventsFromAbi, viewDFileSystemImageImportEvents)
     }
 
     public unsafe func vtbl(): DFileSystemImageImportEventsVtbl {
@@ -6602,7 +6611,7 @@ public class DFileSystemImageImportEvents <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IBootOptionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var BootImage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Manufacturer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6650,7 +6659,7 @@ public class IBootOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IBootOptions> {
-        return InterfaceDescriptor<IBootOptions>("IBootOptions", IBootOptions.iid(), Win32__impl_l2.IDispatch.iid(), takeIBootOptionsFromAbi, viewIBootOptions)
+        return InterfaceDescriptor<IBootOptions>("IBootOptions", IBootOptions.iid(), Win32_impl_p2.IDispatch.iid(), takeIBootOptionsFromAbi, viewIBootOptions)
     }
 
     public unsafe func vtbl(): IBootOptionsVtbl {
@@ -6779,13 +6788,13 @@ public class IBurnVerification <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDiscFormat2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IsRecorderSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var IsCurrentMediaSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var MediaPhysicallyBlank: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var MediaHeuristicallyBlank: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedMediaTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedMediaTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -6822,7 +6831,7 @@ public class IDiscFormat2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDiscFormat2> {
-        return InterfaceDescriptor<IDiscFormat2>("IDiscFormat2", IDiscFormat2.iid(), Win32__impl_l2.IDispatch.iid(), takeIDiscFormat2FromAbi, viewIDiscFormat2)
+        return InterfaceDescriptor<IDiscFormat2>("IDiscFormat2", IDiscFormat2.iid(), Win32_impl_p2.IDispatch.iid(), takeIDiscFormat2FromAbi, viewIDiscFormat2)
     }
 
     public unsafe func vtbl(): IDiscFormat2Vtbl {
@@ -6854,7 +6863,7 @@ public class IDiscFormat2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedMediaTypes(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedMediaTypes(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedMediaTypes(__liveRaw, value)
@@ -6890,13 +6899,13 @@ public struct IDiscFormat2DataVtbl {
     public var CurrentWriteSpeed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentRotationTypeIsPureCAV: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var SetForceOverwrite: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ForceOverwrite: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var MultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var MultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Write: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CancelWrite: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -7089,14 +7098,14 @@ public class IDiscFormat2Data <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeeds(__liveRaw, supportedSpeeds)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeedDescriptors(__liveRaw, supportedSpeedDescriptors)
@@ -7115,7 +7124,7 @@ public class IDiscFormat2Data <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func MultisessionInterfaces(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func MultisessionInterfaces(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MultisessionInterfaces(__liveRaw, value)
@@ -7341,7 +7350,7 @@ public struct IDiscFormat2RawCDVtbl {
     public var LastPossibleStartOfLeadout: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentPhysicalMediaType: CFunc<(CPointer<Unit>, CPointer<IMAPI_MEDIA_PHYSICAL_TYPEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedSectorTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedSectorTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var SetRequestedSectorType: CFunc<(CPointer<Unit>, IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var RequestedSectorType: CFunc<(CPointer<Unit>, CPointer<IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var SetClientName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -7351,9 +7360,9 @@ public struct IDiscFormat2RawCDVtbl {
     public var CurrentWriteSpeed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentRotationTypeIsPureCAV: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -7478,7 +7487,7 @@ public class IDiscFormat2RawCD <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedSectorTypes(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedSectorTypes(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedSectorTypes(__liveRaw, value)
@@ -7533,14 +7542,14 @@ public class IDiscFormat2RawCD <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeeds(__liveRaw, supportedSpeeds)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeedDescriptors(__liveRaw, supportedSpeedDescriptors)
@@ -7637,7 +7646,7 @@ public struct IDiscFormat2TrackAtOnceVtbl {
     public var SetDoNotFinalizeMedia: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var DoNotFinalizeMedia: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ExpectedTableOfContents: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ExpectedTableOfContents: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CurrentPhysicalMediaType: CFunc<(CPointer<Unit>, CPointer<IMAPI_MEDIA_PHYSICAL_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var SetClientName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ClientName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -7646,9 +7655,9 @@ public struct IDiscFormat2TrackAtOnceVtbl {
     public var CurrentWriteSpeed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentRotationTypeIsPureCAV: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var SupportedWriteSpeedDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -7784,7 +7793,7 @@ public class IDiscFormat2TrackAtOnce <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ExpectedTableOfContents(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ExpectedTableOfContents(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExpectedTableOfContents(__liveRaw, value)
@@ -7833,14 +7842,14 @@ public class IDiscFormat2TrackAtOnce <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeeds(supportedSpeeds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeeds(__liveRaw, supportedSpeeds)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func SupportedWriteSpeedDescriptors(supportedSpeedDescriptors: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedWriteSpeedDescriptors(__liveRaw, supportedSpeedDescriptors)
@@ -8749,7 +8758,7 @@ public class IFsiFileItem <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IProgressItemsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8793,7 +8802,7 @@ public class IProgressItems <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IProgressItems> {
-        return InterfaceDescriptor<IProgressItems>("IProgressItems", IProgressItems.iid(), Win32__impl_l2.IDispatch.iid(), takeIProgressItemsFromAbi, viewIProgressItems)
+        return InterfaceDescriptor<IProgressItems>("IProgressItems", IProgressItems.iid(), Win32_impl_p2.IDispatch.iid(), takeIProgressItemsFromAbi, viewIProgressItems)
     }
 
     public unsafe func vtbl(): IProgressItemsVtbl {
@@ -8841,7 +8850,7 @@ public class IProgressItems <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRawCDImageCreatorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var CreateResultImage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -8865,7 +8874,7 @@ public struct IRawCDImageCreatorVtbl {
     public var NumberOfExistingTracks: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LastUsedUserSectorInImage: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ExpectedTableOfContents: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ExpectedTableOfContents: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -8902,7 +8911,7 @@ public class IRawCDImageCreator <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRawCDImageCreator> {
-        return InterfaceDescriptor<IRawCDImageCreator>("IRawCDImageCreator", IRawCDImageCreator.iid(), Win32__impl_l2.IDispatch.iid(), takeIRawCDImageCreatorFromAbi, viewIRawCDImageCreator)
+        return InterfaceDescriptor<IRawCDImageCreator>("IRawCDImageCreator", IRawCDImageCreator.iid(), Win32_impl_p2.IDispatch.iid(), takeIRawCDImageCreatorFromAbi, viewIRawCDImageCreator)
     }
 
     public unsafe func vtbl(): IRawCDImageCreatorVtbl {
@@ -9022,7 +9031,7 @@ public class IRawCDImageCreator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ExpectedTableOfContents(value: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ExpectedTableOfContents(value: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExpectedTableOfContents(__liveRaw, value)
@@ -9032,7 +9041,7 @@ public class IRawCDImageCreator <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWriteEngine2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var WriteSection: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var CancelWrite: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -9083,7 +9092,7 @@ public class IWriteEngine2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWriteEngine2> {
-        return InterfaceDescriptor<IWriteEngine2>("IWriteEngine2", IWriteEngine2.iid(), Win32__impl_l2.IDispatch.iid(), takeIWriteEngine2FromAbi, viewIWriteEngine2)
+        return InterfaceDescriptor<IWriteEngine2>("IWriteEngine2", IWriteEngine2.iid(), Win32_impl_p2.IDispatch.iid(), takeIWriteEngine2FromAbi, viewIWriteEngine2)
     }
 
     public unsafe func vtbl(): IWriteEngine2Vtbl {
@@ -9305,7 +9314,7 @@ public class IDiscMaster <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFileSystemImageResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var ImageStream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProgressItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -9348,7 +9357,7 @@ public class IFileSystemImageResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFileSystemImageResult> {
-        return InterfaceDescriptor<IFileSystemImageResult>("IFileSystemImageResult", IFileSystemImageResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIFileSystemImageResultFromAbi, viewIFileSystemImageResult)
+        return InterfaceDescriptor<IFileSystemImageResult>("IFileSystemImageResult", IFileSystemImageResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIFileSystemImageResultFromAbi, viewIFileSystemImageResult)
     }
 
     public unsafe func vtbl(): IFileSystemImageResultVtbl {
@@ -9445,7 +9454,7 @@ public class IFileSystemImageResult2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFileSystemImageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Root: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SessionStartBlock: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSessionStartBlock: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -9473,13 +9482,13 @@ public struct IFileSystemImageVtbl {
     public var SetUDFRevision: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var UDFRevision: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var UDFRevisionsSupported: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var UDFRevisionsSupported: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var ChooseImageDefaults: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ChooseImageDefaultsForMediaType: CFunc<(CPointer<Unit>, IMAPI_MEDIA_PHYSICAL_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var SetISO9660InterchangeLevel: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ISO9660InterchangeLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var ISO9660InterchangeLevelsSupported: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var ISO9660InterchangeLevelsSupported: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CreateResultImage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Exists: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<FsiItemTypeAbi>) -> Int32> = { _, _, _ => 0 }
     public var CalculateDiscIdentifier: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9497,9 +9506,9 @@ public struct IFileSystemImageVtbl {
     public var StageFiles: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetStageFiles: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var MultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var MultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetMultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetMultisessionInterfaces: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -9536,7 +9545,7 @@ public class IFileSystemImage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFileSystemImage> {
-        return InterfaceDescriptor<IFileSystemImage>("IFileSystemImage", IFileSystemImage.iid(), Win32__impl_l2.IDispatch.iid(), takeIFileSystemImageFromAbi, viewIFileSystemImage)
+        return InterfaceDescriptor<IFileSystemImage>("IFileSystemImage", IFileSystemImage.iid(), Win32_impl_p2.IDispatch.iid(), takeIFileSystemImageFromAbi, viewIFileSystemImage)
     }
 
     public unsafe func vtbl(): IFileSystemImageVtbl {
@@ -9700,7 +9709,7 @@ public class IFileSystemImage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func UDFRevisionsSupported(pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func UDFRevisionsSupported(pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UDFRevisionsSupported(__liveRaw, pVal)
@@ -9731,7 +9740,7 @@ public class IFileSystemImage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func ISO9660InterchangeLevelsSupported(pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func ISO9660InterchangeLevelsSupported(pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ISO9660InterchangeLevelsSupported(__liveRaw, pVal)
@@ -9834,14 +9843,14 @@ public class IFileSystemImage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func MultisessionInterfaces(pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func MultisessionInterfaces(pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MultisessionInterfaces(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetMultisessionInterfaces(newVal: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetMultisessionInterfaces(newVal: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetMultisessionInterfaces(__liveRaw, newVal)
@@ -9853,9 +9862,9 @@ public class IFileSystemImage <: InterfaceWrapperBase & ComInterface {
 public struct IFileSystemImage2Vtbl {
     public var base_: IFileSystemImageVtbl = IFileSystemImageVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var BootImageOptionsArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var BootImageOptionsArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetBootImageOptionsArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetBootImageOptionsArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -9900,14 +9909,14 @@ public class IFileSystemImage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func BootImageOptionsArray(pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func BootImageOptionsArray(pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BootImageOptionsArray(__liveRaw, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetBootImageOptionsArray(newVal: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetBootImageOptionsArray(newVal: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBootImageOptionsArray(__liveRaw, newVal)
@@ -10078,7 +10087,7 @@ public class IFsiFileItem2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Imapi == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFsiNamedStreamsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -10120,7 +10129,7 @@ public class IFsiNamedStreams <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFsiNamedStreams> {
-        return InterfaceDescriptor<IFsiNamedStreams>("IFsiNamedStreams", IFsiNamedStreams.iid(), Win32__impl_l2.IDispatch.iid(), takeIFsiNamedStreamsFromAbi, viewIFsiNamedStreams)
+        return InterfaceDescriptor<IFsiNamedStreams>("IFsiNamedStreams", IFsiNamedStreams.iid(), Win32_impl_p2.IDispatch.iid(), takeIFsiNamedStreamsFromAbi, viewIFsiNamedStreams)
     }
 
     public unsafe func vtbl(): IFsiNamedStreamsVtbl {

@@ -4,15 +4,25 @@
 package windows.UI.Composition.Core
 
 import std.collection.*
+@When[Windows_UI_Composition_Core == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Composition_Core == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Composition_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Composition_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Composition_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Composition_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Composition_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Composition_Core == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Composition_Core == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Composition_Core == "on"]
 import windows_future as windows_future
 
 
@@ -104,7 +114,7 @@ public class CompositorController <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func get_Compositor(): _impl_l1.Compositor {
+    public unsafe func get_Compositor(): impl_p1.Compositor {
         return defaultInterface().get_Compositor()
     }
 
@@ -198,7 +208,7 @@ public class ICompositorController <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompositorController", ICompositorController.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositorControllerVtbl", "ICompositorController", "ICompositorController_Impl", [InterfaceMethodSchema("get_Compositor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Compositor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Commit", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("EnsurePreviousCommitCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CommitNeeded", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CompositorController, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCommitNeeded", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompositorController", ICompositorController.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositorControllerVtbl", "ICompositorController", "ICompositorController_Impl", [InterfaceMethodSchema("get_Compositor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Compositor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Commit", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("EnsurePreviousCommitCompletedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CommitNeeded", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CompositorController, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCommitNeeded", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ICompositorController.runtimeType())
         return schema
     }
@@ -228,12 +238,12 @@ public class ICompositorController <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func get_Compositor(): _impl_l1.Compositor {
+    public unsafe func get_Compositor(): impl_p1.Compositor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Compositor(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Compositor.fromAbiTake(result__)
+        return impl_p1.Compositor.fromAbiTake(result__)
     }
 
     public unsafe func Commit(): Unit {

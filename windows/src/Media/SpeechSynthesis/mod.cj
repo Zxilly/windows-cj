@@ -4,18 +4,31 @@
 package windows.Media.SpeechSynthesis
 
 import std.collection.*
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_core as windows_core
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_SpeechSynthesis == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_SpeechSynthesis == "on" && Windows_Media == "on"]
 import windows.Media as Media
-import windows.Media._impl_l0 as Media__impl_l0
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_SpeechSynthesis == "on"]
+import windows.Media.impl.p0 as Media_impl_p0
+@When[Windows_Media_SpeechSynthesis == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Media_SpeechSynthesis == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_SpeechSynthesis == "on"]
 import windows_future as windows_future
 
 
@@ -56,7 +69,7 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & Run
         if (iid == ISpeechSynthesisStream.iid()) {
             return true
         }
-        for (ancestor in [_impl_l1.IRandomAccessStreamWithContentType.iid(), _impl_l1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), _impl_l0.IInputStream.iid(), _impl_l0.IOutputStream.iid(), _impl_l0.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p1.IRandomAccessStreamWithContentType.iid(), impl_p1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), impl_p0.IInputStream.iid(), impl_p0.IOutputStream.iid(), impl_p0.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -65,13 +78,13 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechSynthesisStream> {
-        var descriptor = InterfaceDescriptor<ISpeechSynthesisStream>("ISpeechSynthesisStream", ISpeechSynthesisStream.iid(), IInspectable.descriptor(), [_impl_l1.IRandomAccessStreamWithContentType.iid(), _impl_l1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), _impl_l0.IInputStream.iid(), _impl_l0.IOutputStream.iid(), _impl_l0.IContentTypeProvider.iid()], { raw => ISpeechSynthesisStream.fromAbiTake(raw) }, { raw => ISpeechSynthesisStream.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<ISpeechSynthesisStream>("ISpeechSynthesisStream", ISpeechSynthesisStream.iid(), IInspectable.descriptor(), [impl_p1.IRandomAccessStreamWithContentType.iid(), impl_p1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), impl_p0.IInputStream.iid(), impl_p0.IOutputStream.iid(), impl_p0.IContentTypeProvider.iid()], { raw => ISpeechSynthesisStream.fromAbiTake(raw) }, { raw => ISpeechSynthesisStream.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ISpeechSynthesisStream.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISpeechSynthesisStream", ISpeechSynthesisStream.iid(), _impl_l1.IRandomAccessStreamWithContentType.descriptorSchema(), ["IRandomAccessStreamWithContentType", "IRandomAccessStream", "IClosable", "IInputStream", "IOutputStream", "IContentTypeProvider"], [_impl_l1.IRandomAccessStreamWithContentType.iid(), _impl_l1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), _impl_l0.IInputStream.iid(), _impl_l0.IOutputStream.iid(), _impl_l0.IContentTypeProvider.iid()], "ISpeechSynthesisStreamVtbl", "ISpeechSynthesisStream", "ISpeechSynthesisStream_Impl", [InterfaceMethodSchema("Markers", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<Media.IMediaMarker>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISpeechSynthesisStream", ISpeechSynthesisStream.iid(), impl_p1.IRandomAccessStreamWithContentType.descriptorSchema(), ["IRandomAccessStreamWithContentType", "IRandomAccessStream", "IClosable", "IInputStream", "IOutputStream", "IContentTypeProvider"], [impl_p1.IRandomAccessStreamWithContentType.iid(), impl_p1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), impl_p0.IInputStream.iid(), impl_p0.IOutputStream.iid(), impl_p0.IContentTypeProvider.iid()], "ISpeechSynthesisStreamVtbl", "ISpeechSynthesisStream", "ISpeechSynthesisStream_Impl", [InterfaceMethodSchema("Markers", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<Media.IMediaMarker>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISpeechSynthesisStream.runtimeType())
         return schema
     }
@@ -96,15 +109,15 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & Run
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamWithContentType(): _impl_l1.IRandomAccessStreamWithContentType {
-        match (unsafe { query<_impl_l1.IRandomAccessStreamWithContentType>(_impl_l1.IRandomAccessStreamWithContentType.descriptor()) }) {
+    public func asIRandomAccessStreamWithContentType(): impl_p1.IRandomAccessStreamWithContentType {
+        match (unsafe { query<impl_p1.IRandomAccessStreamWithContentType>(impl_p1.IRandomAccessStreamWithContentType.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIRandomAccessStreamWithContentType: QueryInterface failed (E_NOINTERFACE)")
         }
     }
 
-    public func asIRandomAccessStream(): _impl_l1.IRandomAccessStream {
-        match (unsafe { query<_impl_l1.IRandomAccessStream>(_impl_l1.IRandomAccessStream.descriptor()) }) {
+    public func asIRandomAccessStream(): impl_p1.IRandomAccessStream {
+        match (unsafe { query<impl_p1.IRandomAccessStream>(impl_p1.IRandomAccessStream.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIRandomAccessStream: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -117,22 +130,22 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & Run
         }
     }
 
-    public func asIInputStream(): _impl_l0.IInputStream {
-        match (unsafe { query<_impl_l0.IInputStream>(_impl_l0.IInputStream.descriptor()) }) {
+    public func asIInputStream(): impl_p0.IInputStream {
+        match (unsafe { query<impl_p0.IInputStream>(impl_p0.IInputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIInputStream: QueryInterface failed (E_NOINTERFACE)")
         }
     }
 
-    public func asIOutputStream(): _impl_l0.IOutputStream {
-        match (unsafe { query<_impl_l0.IOutputStream>(_impl_l0.IOutputStream.descriptor()) }) {
+    public func asIOutputStream(): impl_p0.IOutputStream {
+        match (unsafe { query<impl_p0.IOutputStream>(impl_p0.IOutputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIOutputStream: QueryInterface failed (E_NOINTERFACE)")
         }
     }
 
-    public func asIContentTypeProvider(): _impl_l0.IContentTypeProvider {
-        match (unsafe { query<_impl_l0.IContentTypeProvider>(_impl_l0.IContentTypeProvider.descriptor()) }) {
+    public func asIContentTypeProvider(): impl_p0.IContentTypeProvider {
+        match (unsafe { query<impl_p0.IContentTypeProvider>(impl_p0.IContentTypeProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIContentTypeProvider: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -522,7 +535,7 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
     }
 
     public static func descriptor(): InterfaceDescriptor<SpeechSynthesisStream> {
-        let ancestors = [ISpeechSynthesisStream.iid(), _impl_l1.IRandomAccessStreamWithContentType.iid(), _impl_l1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), _impl_l0.IInputStream.iid(), _impl_l0.IOutputStream.iid(), _impl_l0.IContentTypeProvider.iid(), Media__impl_l0.ITimedMetadataTrackProvider.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ISpeechSynthesisStream.iid(), impl_p1.IRandomAccessStreamWithContentType.iid(), impl_p1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), impl_p0.IInputStream.iid(), impl_p0.IOutputStream.iid(), impl_p0.IContentTypeProvider.iid(), Media_impl_p0.ITimedMetadataTrackProvider.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<SpeechSynthesisStream>("SpeechSynthesisStream", ISpeechSynthesisStream.iid(), ancestors, { raw => SpeechSynthesisStream.fromAbiTake(raw) }, { raw => SpeechSynthesisStream.viewOf(raw) })
     }
 
@@ -564,15 +577,15 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    public func asIRandomAccessStreamWithContentType(): _impl_l1.IRandomAccessStreamWithContentType {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamWithContentType.descriptor()) }) {
+    public func asIRandomAccessStreamWithContentType(): impl_p1.IRandomAccessStreamWithContentType {
+        match (unsafe { query(impl_p1.IRandomAccessStreamWithContentType.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIRandomAccessStream(): _impl_l1.IRandomAccessStream {
-        match (unsafe { query(_impl_l1.IRandomAccessStream.descriptor()) }) {
+    public func asIRandomAccessStream(): impl_p1.IRandomAccessStream {
+        match (unsafe { query(impl_p1.IRandomAccessStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -585,29 +598,29 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    public func asIInputStream(): _impl_l0.IInputStream {
-        match (unsafe { query(_impl_l0.IInputStream.descriptor()) }) {
+    public func asIInputStream(): impl_p0.IInputStream {
+        match (unsafe { query(impl_p0.IInputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIOutputStream(): _impl_l0.IOutputStream {
-        match (unsafe { query(_impl_l0.IOutputStream.descriptor()) }) {
+    public func asIOutputStream(): impl_p0.IOutputStream {
+        match (unsafe { query(impl_p0.IOutputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContentTypeProvider(): _impl_l0.IContentTypeProvider {
-        match (unsafe { query(_impl_l0.IContentTypeProvider.descriptor()) }) {
+    public func asIContentTypeProvider(): impl_p0.IContentTypeProvider {
+        match (unsafe { query(impl_p0.IContentTypeProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asITimedMetadataTrackProvider(): Media__impl_l0.ITimedMetadataTrackProvider {
-        match (unsafe { query(Media__impl_l0.ITimedMetadataTrackProvider.descriptor()) }) {
+    public func asITimedMetadataTrackProvider(): Media_impl_p0.ITimedMetadataTrackProvider {
+        match (unsafe { query(Media_impl_p0.ITimedMetadataTrackProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -626,11 +639,11 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         asIRandomAccessStream().SetSize(value)
     }
 
-    public unsafe func GetInputStreamAt(position: UInt64): _impl_l0.IInputStream {
+    public unsafe func GetInputStreamAt(position: UInt64): impl_p0.IInputStream {
         return asIRandomAccessStream().GetInputStreamAt(position)
     }
 
-    public unsafe func GetOutputStreamAt(position: UInt64): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStreamAt(position: UInt64): impl_p0.IOutputStream {
         return asIRandomAccessStream().GetOutputStreamAt(position)
     }
 
@@ -642,7 +655,7 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         asIRandomAccessStream().Seek(position)
     }
 
-    public unsafe func CloneStream(): _impl_l1.IRandomAccessStream {
+    public unsafe func CloneStream(): impl_p1.IRandomAccessStream {
         return asIRandomAccessStream().CloneStream()
     }
 
@@ -658,11 +671,11 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         asIClosable().Close()
     }
 
-    public unsafe func ReadAsync(buffer: _impl_l0.IBuffer, count: UInt32, options: _impl_l0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<_impl_l0.IBuffer, UInt32> {
+    public unsafe func ReadAsync(buffer: impl_p0.IBuffer, count: UInt32, options: impl_p0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<impl_p0.IBuffer, UInt32> {
         return asIInputStream().ReadAsync(buffer, count, options)
     }
 
-    public unsafe func WriteAsync(buffer: _impl_l0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func WriteAsync(buffer: impl_p0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         return asIOutputStream().WriteAsync(buffer)
     }
 
@@ -675,7 +688,7 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Foundation_Collections == "on"]
-    public unsafe func TimedMetadataTracks(): windows_collections.IVectorView<Media__impl_l0.TimedMetadataTrack> {
+    public unsafe func TimedMetadataTracks(): windows_collections.IVectorView<Media_impl_p0.TimedMetadataTrack> {
         return asITimedMetadataTrackProvider().TimedMetadataTracks()
     }
 }

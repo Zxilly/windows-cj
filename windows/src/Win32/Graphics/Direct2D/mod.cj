@@ -4,19 +4,34 @@
 package windows.Win32.Graphics.Direct2D
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
 import windows.Win32.Graphics.DirectWrite as Win32_Graphics_DirectWrite
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Imaging == "on"]
 import windows.Win32.Graphics.Imaging as Win32_Graphics_Imaging
+@When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Storage_Xps_Printing == "on"]
 import windows.Win32.Storage.Xps.Printing as Win32_Storage_Xps_Printing
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Graphics_Direct2D == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Direct2D == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Graphics_Direct2D == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Graphics_Direct2D == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Graphics_Direct2D == "on"]
@@ -938,7 +953,7 @@ extend D2D1_BITMAP_OPTIONS <: windows_core.CopyType & windows_core.RuntimeType &
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 public struct D2D1_BITMAP_PROPERTIES {
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMAT = Win32__impl_l1.D2D1_PIXEL_FORMAT()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMAT = Win32_impl_p1.D2D1_PIXEL_FORMAT()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public init() {}
@@ -947,7 +962,7 @@ public struct D2D1_BITMAP_PROPERTIES {
 @When[Windows_Win32_Graphics_Direct2D == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 @C
 public struct D2D1_BITMAP_PROPERTIESAbi {
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMATAbi = Win32__impl_l1.D2D1_PIXEL_FORMATAbi()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMATAbi = Win32_impl_p1.D2D1_PIXEL_FORMATAbi()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public init() {}
@@ -960,14 +975,14 @@ extend D2D1_BITMAP_PROPERTIES <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_PROPERTIES;struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_PIXEL_FORMAT;enum(Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT;i4);enum(Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE;i4));f4;f4)" }
     public static func projectAbi(value: D2D1_BITMAP_PROPERTIES): D2D1_BITMAP_PROPERTIESAbi {
         var abi = D2D1_BITMAP_PROPERTIESAbi()
-        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>())
+        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>())
         abi.dpiX = value.dpiX
         abi.dpiY = value.dpiY
         return abi
     }
     public static func assumeInitRef(abi: D2D1_BITMAP_PROPERTIESAbi): D2D1_BITMAP_PROPERTIES {
         var value = D2D1_BITMAP_PROPERTIES()
-        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>()).unwrap()
+        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>()).unwrap()
         value.dpiX = abi.dpiX
         value.dpiY = abi.dpiY
         return value
@@ -1348,7 +1363,7 @@ extend D2D1_BRIGHTNESS_PROP <: windows_core.CopyType & windows_core.RuntimeType 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_BRUSH_PROPERTIES {
     public var opacity: Float32 = 0.0f32
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public init() {}
 }
 
@@ -1356,7 +1371,7 @@ public struct D2D1_BRUSH_PROPERTIES {
 @C
 public struct D2D1_BRUSH_PROPERTIESAbi {
     public var opacity: Float32 = 0.0f32
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public init() {}
 }
 
@@ -1368,13 +1383,13 @@ extend D2D1_BRUSH_PROPERTIES <: windows_core.CopyType & windows_core.RuntimeType
     public static func projectAbi(value: D2D1_BRUSH_PROPERTIES): D2D1_BRUSH_PROPERTIESAbi {
         var abi = D2D1_BRUSH_PROPERTIESAbi()
         abi.opacity = value.opacity
-        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_BRUSH_PROPERTIESAbi): D2D1_BRUSH_PROPERTIES {
         var value = D2D1_BRUSH_PROPERTIES()
         value.opacity = abi.opacity
-        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_BRUSH_PROPERTIESAbi): Result<D2D1_BRUSH_PROPERTIES> { Result<D2D1_BRUSH_PROPERTIES>.Ok(D2D1_BRUSH_PROPERTIES.assumeInitRef(abi)) }
@@ -3851,7 +3866,7 @@ extend D2D1_EDGEDETECTION_PROP <: windows_core.CopyType & windows_core.RuntimeTy
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_ELLIPSE {
-    public var point: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var point: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -3860,7 +3875,7 @@ public struct D2D1_ELLIPSE {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_ELLIPSEAbi {
-    public var point: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var point: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -3873,14 +3888,14 @@ extend D2D1_ELLIPSE <: windows_core.CopyType & windows_core.RuntimeType & window
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_ELLIPSE;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);f4;f4)" }
     public static func projectAbi(value: D2D1_ELLIPSE): D2D1_ELLIPSEAbi {
         var abi = D2D1_ELLIPSEAbi()
-        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         abi.radiusX = value.radiusX
         abi.radiusY = value.radiusY
         return abi
     }
     public static func assumeInitRef(abi: D2D1_ELLIPSEAbi): D2D1_ELLIPSE {
         var value = D2D1_ELLIPSE()
-        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         value.radiusX = abi.radiusX
         value.radiusY = abi.radiusY
         return value
@@ -5571,7 +5586,7 @@ extend D2D1_INK_POINT <: windows_core.CopyType & windows_core.RuntimeType & wind
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_INK_STYLE_PROPERTIES {
     public var nibShape: D2D1_INK_NIB_SHAPE = D2D1_INK_NIB_SHAPE()
-    public var nibTransform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var nibTransform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public init() {}
 }
 
@@ -5579,7 +5594,7 @@ public struct D2D1_INK_STYLE_PROPERTIES {
 @C
 public struct D2D1_INK_STYLE_PROPERTIESAbi {
     public var nibShape: D2D1_INK_NIB_SHAPEAbi = D2D1_INK_NIB_SHAPEAbi()
-    public var nibTransform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var nibTransform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public init() {}
 }
 
@@ -5591,13 +5606,13 @@ extend D2D1_INK_STYLE_PROPERTIES <: windows_core.CopyType & windows_core.Runtime
     public static func projectAbi(value: D2D1_INK_STYLE_PROPERTIES): D2D1_INK_STYLE_PROPERTIESAbi {
         var abi = D2D1_INK_STYLE_PROPERTIESAbi()
         abi.nibShape = D2D1_INK_NIB_SHAPE.projectAbi(value.nibShape)
-        abi.nibTransform = windows_core.projectTypedAbi(value.nibTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.nibTransform = windows_core.projectTypedAbi(value.nibTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_INK_STYLE_PROPERTIESAbi): D2D1_INK_STYLE_PROPERTIES {
         var value = D2D1_INK_STYLE_PROPERTIES()
         value.nibShape = D2D1_INK_NIB_SHAPE.assumeInitRef(abi.nibShape)
-        value.nibTransform = windows_core.fromTypedAbi(abi.nibTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.nibTransform = windows_core.fromTypedAbi(abi.nibTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_INK_STYLE_PROPERTIESAbi): Result<D2D1_INK_STYLE_PROPERTIES> { Result<D2D1_INK_STYLE_PROPERTIES>.Ok(D2D1_INK_STYLE_PROPERTIES.assumeInitRef(abi)) }
@@ -6063,16 +6078,16 @@ extend D2D1_LINEARTRANSFER_PROP <: windows_core.CopyType & windows_core.RuntimeT
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES {
-    public var startPoint: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var endPoint: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var startPoint: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var endPoint: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi {
-    public var startPoint: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var endPoint: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var startPoint: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var endPoint: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public init() {}
 }
 
@@ -6083,14 +6098,14 @@ extend D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES <: windows_core.CopyType & windows_
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4))" }
     public static func projectAbi(value: D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES): D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi {
         var abi = D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi()
-        abi.startPoint = windows_core.projectTypedAbi(value.startPoint, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.endPoint = windows_core.projectTypedAbi(value.endPoint, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.startPoint = windows_core.projectTypedAbi(value.startPoint, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.endPoint = windows_core.projectTypedAbi(value.endPoint, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi): D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES {
         var value = D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES()
-        value.startPoint = windows_core.fromTypedAbi(abi.startPoint, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.endPoint = windows_core.fromTypedAbi(abi.endPoint, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.startPoint = windows_core.fromTypedAbi(abi.startPoint, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.endPoint = windows_core.fromTypedAbi(abi.endPoint, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi): Result<D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES> { Result<D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES>.Ok(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES.assumeInitRef(abi)) }
@@ -7063,8 +7078,8 @@ extend D2D1_POINTSPECULAR_SCALE_MODE <: windows_core.CopyType & windows_core.Run
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_POINT_DESCRIPTION {
-    public var point: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var unitTangentVector: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var point: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var unitTangentVector: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public var endSegment: UInt32 = 0u32
     public var endFigure: UInt32 = 0u32
     public var lengthToEndSegment: Float32 = 0.0f32
@@ -7074,8 +7089,8 @@ public struct D2D1_POINT_DESCRIPTION {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_POINT_DESCRIPTIONAbi {
-    public var point: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var unitTangentVector: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var point: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var unitTangentVector: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public var endSegment: UInt32 = 0u32
     public var endFigure: UInt32 = 0u32
     public var lengthToEndSegment: Float32 = 0.0f32
@@ -7089,8 +7104,8 @@ extend D2D1_POINT_DESCRIPTION <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_POINT_DESCRIPTION;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);u4;u4;f4)" }
     public static func projectAbi(value: D2D1_POINT_DESCRIPTION): D2D1_POINT_DESCRIPTIONAbi {
         var abi = D2D1_POINT_DESCRIPTIONAbi()
-        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.unitTangentVector = windows_core.projectTypedAbi(value.unitTangentVector, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.unitTangentVector = windows_core.projectTypedAbi(value.unitTangentVector, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         abi.endSegment = value.endSegment
         abi.endFigure = value.endFigure
         abi.lengthToEndSegment = value.lengthToEndSegment
@@ -7098,8 +7113,8 @@ extend D2D1_POINT_DESCRIPTION <: windows_core.CopyType & windows_core.RuntimeTyp
     }
     public static func assumeInitRef(abi: D2D1_POINT_DESCRIPTIONAbi): D2D1_POINT_DESCRIPTION {
         var value = D2D1_POINT_DESCRIPTION()
-        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.unitTangentVector = windows_core.fromTypedAbi(abi.unitTangentVector, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.unitTangentVector = windows_core.fromTypedAbi(abi.unitTangentVector, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         value.endSegment = abi.endSegment
         value.endFigure = abi.endFigure
         value.lengthToEndSegment = abi.lengthToEndSegment
@@ -7545,16 +7560,16 @@ extend D2D1_PROPERTY_TYPE <: windows_core.CopyType & windows_core.RuntimeType & 
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_QUADRATIC_BEZIER_SEGMENT {
-    public var point1: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point2: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var point1: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point2: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_QUADRATIC_BEZIER_SEGMENTAbi {
-    public var point1: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point2: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var point1: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point2: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public init() {}
 }
 
@@ -7565,14 +7580,14 @@ extend D2D1_QUADRATIC_BEZIER_SEGMENT <: windows_core.CopyType & windows_core.Run
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_QUADRATIC_BEZIER_SEGMENT;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4))" }
     public static func projectAbi(value: D2D1_QUADRATIC_BEZIER_SEGMENT): D2D1_QUADRATIC_BEZIER_SEGMENTAbi {
         var abi = D2D1_QUADRATIC_BEZIER_SEGMENTAbi()
-        abi.point1 = windows_core.projectTypedAbi(value.point1, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point2 = windows_core.projectTypedAbi(value.point2, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.point1 = windows_core.projectTypedAbi(value.point1, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point2 = windows_core.projectTypedAbi(value.point2, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_QUADRATIC_BEZIER_SEGMENTAbi): D2D1_QUADRATIC_BEZIER_SEGMENT {
         var value = D2D1_QUADRATIC_BEZIER_SEGMENT()
-        value.point1 = windows_core.fromTypedAbi(abi.point1, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point2 = windows_core.fromTypedAbi(abi.point2, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.point1 = windows_core.fromTypedAbi(abi.point1, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point2 = windows_core.fromTypedAbi(abi.point2, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_QUADRATIC_BEZIER_SEGMENTAbi): Result<D2D1_QUADRATIC_BEZIER_SEGMENT> { Result<D2D1_QUADRATIC_BEZIER_SEGMENT>.Ok(D2D1_QUADRATIC_BEZIER_SEGMENT.assumeInitRef(abi)) }
@@ -7584,8 +7599,8 @@ extend D2D1_QUADRATIC_BEZIER_SEGMENT <: windows_core.CopyType & windows_core.Run
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
-    public var center: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var gradientOriginOffset: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var center: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var gradientOriginOffset: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -7594,8 +7609,8 @@ public struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIESAbi {
-    public var center: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var gradientOriginOffset: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var center: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var gradientOriginOffset: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -7608,16 +7623,16 @@ extend D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES <: windows_core.CopyType & windows_
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);f4;f4)" }
     public static func projectAbi(value: D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES): D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIESAbi {
         var abi = D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIESAbi()
-        abi.center = windows_core.projectTypedAbi(value.center, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.gradientOriginOffset = windows_core.projectTypedAbi(value.gradientOriginOffset, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.center = windows_core.projectTypedAbi(value.center, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.gradientOriginOffset = windows_core.projectTypedAbi(value.gradientOriginOffset, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         abi.radiusX = value.radiusX
         abi.radiusY = value.radiusY
         return abi
     }
     public static func assumeInitRef(abi: D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIESAbi): D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES {
         var value = D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES()
-        value.center = windows_core.fromTypedAbi(abi.center, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.gradientOriginOffset = windows_core.fromTypedAbi(abi.gradientOriginOffset, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.center = windows_core.fromTypedAbi(abi.center, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.gradientOriginOffset = windows_core.fromTypedAbi(abi.gradientOriginOffset, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         value.radiusX = abi.radiusX
         value.radiusY = abi.radiusY
         return value
@@ -7632,7 +7647,7 @@ extend D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES <: windows_core.CopyType & windows_
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_RENDERING_CONTROLS {
     public var bufferPrecision: D2D1_BUFFER_PRECISION = D2D1_BUFFER_PRECISION()
-    public var tileSize: Win32__impl_l0.D2D_SIZE_U = Win32__impl_l0.D2D_SIZE_U()
+    public var tileSize: Win32_impl_p0.D2D_SIZE_U = Win32_impl_p0.D2D_SIZE_U()
     public init() {}
 }
 
@@ -7640,7 +7655,7 @@ public struct D2D1_RENDERING_CONTROLS {
 @C
 public struct D2D1_RENDERING_CONTROLSAbi {
     public var bufferPrecision: D2D1_BUFFER_PRECISIONAbi = D2D1_BUFFER_PRECISIONAbi()
-    public var tileSize: Win32__impl_l0.D2D_SIZE_UAbi = Win32__impl_l0.D2D_SIZE_UAbi()
+    public var tileSize: Win32_impl_p0.D2D_SIZE_UAbi = Win32_impl_p0.D2D_SIZE_UAbi()
     public init() {}
 }
 
@@ -7652,13 +7667,13 @@ extend D2D1_RENDERING_CONTROLS <: windows_core.CopyType & windows_core.RuntimeTy
     public static func projectAbi(value: D2D1_RENDERING_CONTROLS): D2D1_RENDERING_CONTROLSAbi {
         var abi = D2D1_RENDERING_CONTROLSAbi()
         abi.bufferPrecision = D2D1_BUFFER_PRECISION.projectAbi(value.bufferPrecision)
-        abi.tileSize = windows_core.projectTypedAbi(value.tileSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>())
+        abi.tileSize = windows_core.projectTypedAbi(value.tileSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_RENDERING_CONTROLSAbi): D2D1_RENDERING_CONTROLS {
         var value = D2D1_RENDERING_CONTROLS()
         value.bufferPrecision = D2D1_BUFFER_PRECISION.assumeInitRef(abi.bufferPrecision)
-        value.tileSize = windows_core.fromTypedAbi(abi.tileSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>()).unwrap()
+        value.tileSize = windows_core.fromTypedAbi(abi.tileSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_RENDERING_CONTROLSAbi): Result<D2D1_RENDERING_CONTROLS> { Result<D2D1_RENDERING_CONTROLS>.Ok(D2D1_RENDERING_CONTROLS.assumeInitRef(abi)) }
@@ -8012,7 +8027,7 @@ extend D2D1_RGBTOHUE_PROP <: windows_core.CopyType & windows_core.RuntimeType & 
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_ROUNDED_RECT {
-    public var rect: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var rect: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -8021,7 +8036,7 @@ public struct D2D1_ROUNDED_RECT {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_ROUNDED_RECTAbi {
-    public var rect: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var rect: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public var radiusX: Float32 = 0.0f32
     public var radiusY: Float32 = 0.0f32
     public init() {}
@@ -8034,14 +8049,14 @@ extend D2D1_ROUNDED_RECT <: windows_core.CopyType & windows_core.RuntimeType & w
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_ROUNDED_RECT;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_RECT_F;f4;f4;f4;f4);f4;f4)" }
     public static func projectAbi(value: D2D1_ROUNDED_RECT): D2D1_ROUNDED_RECTAbi {
         var abi = D2D1_ROUNDED_RECTAbi()
-        abi.rect = windows_core.projectTypedAbi(value.rect, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.rect = windows_core.projectTypedAbi(value.rect, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         abi.radiusX = value.radiusX
         abi.radiusY = value.radiusY
         return abi
     }
     public static func assumeInitRef(abi: D2D1_ROUNDED_RECTAbi): D2D1_ROUNDED_RECT {
         var value = D2D1_ROUNDED_RECT()
-        value.rect = windows_core.fromTypedAbi(abi.rect, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.rect = windows_core.fromTypedAbi(abi.rect, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         value.radiusX = abi.radiusX
         value.radiusY = abi.radiusY
         return value
@@ -8457,10 +8472,10 @@ extend D2D1_SHARPEN_PROP <: windows_core.CopyType & windows_core.RuntimeType & w
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_SIMPLE_COLOR_PROFILE {
-    public var redPrimary: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var greenPrimary: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var bluePrimary: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var whitePointXZ: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var redPrimary: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var greenPrimary: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var bluePrimary: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var whitePointXZ: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public var gamma: D2D1_GAMMA1 = D2D1_GAMMA1()
     public init() {}
 }
@@ -8468,10 +8483,10 @@ public struct D2D1_SIMPLE_COLOR_PROFILE {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_SIMPLE_COLOR_PROFILEAbi {
-    public var redPrimary: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var greenPrimary: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var bluePrimary: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var whitePointXZ: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var redPrimary: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var greenPrimary: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var bluePrimary: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var whitePointXZ: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public var gamma: D2D1_GAMMA1Abi = D2D1_GAMMA1Abi()
     public init() {}
 }
@@ -8483,19 +8498,19 @@ extend D2D1_SIMPLE_COLOR_PROFILE <: windows_core.CopyType & windows_core.Runtime
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_SIMPLE_COLOR_PROFILE;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);enum(Windows.Win32.Graphics.Direct2D.D2D1_GAMMA1;i4))" }
     public static func projectAbi(value: D2D1_SIMPLE_COLOR_PROFILE): D2D1_SIMPLE_COLOR_PROFILEAbi {
         var abi = D2D1_SIMPLE_COLOR_PROFILEAbi()
-        abi.redPrimary = windows_core.projectTypedAbi(value.redPrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.greenPrimary = windows_core.projectTypedAbi(value.greenPrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.bluePrimary = windows_core.projectTypedAbi(value.bluePrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.whitePointXZ = windows_core.projectTypedAbi(value.whitePointXZ, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.redPrimary = windows_core.projectTypedAbi(value.redPrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.greenPrimary = windows_core.projectTypedAbi(value.greenPrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.bluePrimary = windows_core.projectTypedAbi(value.bluePrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.whitePointXZ = windows_core.projectTypedAbi(value.whitePointXZ, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         abi.gamma = D2D1_GAMMA1.projectAbi(value.gamma)
         return abi
     }
     public static func assumeInitRef(abi: D2D1_SIMPLE_COLOR_PROFILEAbi): D2D1_SIMPLE_COLOR_PROFILE {
         var value = D2D1_SIMPLE_COLOR_PROFILE()
-        value.redPrimary = windows_core.fromTypedAbi(abi.redPrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.greenPrimary = windows_core.fromTypedAbi(abi.greenPrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.bluePrimary = windows_core.fromTypedAbi(abi.bluePrimary, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.whitePointXZ = windows_core.fromTypedAbi(abi.whitePointXZ, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.redPrimary = windows_core.fromTypedAbi(abi.redPrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.greenPrimary = windows_core.fromTypedAbi(abi.greenPrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.bluePrimary = windows_core.fromTypedAbi(abi.bluePrimary, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.whitePointXZ = windows_core.fromTypedAbi(abi.whitePointXZ, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         value.gamma = D2D1_GAMMA1.assumeInitRef(abi.gamma)
         return value
     }
@@ -10611,18 +10626,18 @@ extend D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES <: windows_core.CopyType & windo
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_TRIANGLE {
-    public var point1: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point2: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point3: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
+    public var point1: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point2: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point3: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_TRIANGLEAbi {
-    public var point1: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point2: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point3: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
+    public var point1: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point2: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point3: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
     public init() {}
 }
 
@@ -10633,16 +10648,16 @@ extend D2D1_TRIANGLE <: windows_core.CopyType & windows_core.RuntimeType & windo
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_TRIANGLE;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4))" }
     public static func projectAbi(value: D2D1_TRIANGLE): D2D1_TRIANGLEAbi {
         var abi = D2D1_TRIANGLEAbi()
-        abi.point1 = windows_core.projectTypedAbi(value.point1, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point2 = windows_core.projectTypedAbi(value.point2, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point3 = windows_core.projectTypedAbi(value.point3, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
+        abi.point1 = windows_core.projectTypedAbi(value.point1, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point2 = windows_core.projectTypedAbi(value.point2, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point3 = windows_core.projectTypedAbi(value.point3, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_TRIANGLEAbi): D2D1_TRIANGLE {
         var value = D2D1_TRIANGLE()
-        value.point1 = windows_core.fromTypedAbi(abi.point1, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point2 = windows_core.fromTypedAbi(abi.point2, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point3 = windows_core.fromTypedAbi(abi.point3, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
+        value.point1 = windows_core.fromTypedAbi(abi.point1, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point2 = windows_core.fromTypedAbi(abi.point2, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point3 = windows_core.fromTypedAbi(abi.point3, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_TRIANGLEAbi): Result<D2D1_TRIANGLE> { Result<D2D1_TRIANGLE>.Ok(D2D1_TRIANGLE.assumeInitRef(abi)) }
@@ -12053,8 +12068,8 @@ public type PD2D1_PROPERTY_SET_FUNCTION = CFunc<(CPointer<Unit>, CPointer<UInt8>
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_ARC_SEGMENT {
-    public var point: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var size: Win32__impl_l0.D2D_SIZE_F = Win32__impl_l0.D2D_SIZE_F()
+    public var point: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var size: Win32_impl_p0.D2D_SIZE_F = Win32_impl_p0.D2D_SIZE_F()
     public var rotationAngle: Float32 = 0.0f32
     public var sweepDirection: D2D1_SWEEP_DIRECTION = D2D1_SWEEP_DIRECTION()
     public var arcSize: D2D1_ARC_SIZE = D2D1_ARC_SIZE()
@@ -12064,8 +12079,8 @@ public struct D2D1_ARC_SEGMENT {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_ARC_SEGMENTAbi {
-    public var point: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var size: Win32__impl_l0.D2D_SIZE_FAbi = Win32__impl_l0.D2D_SIZE_FAbi()
+    public var point: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var size: Win32_impl_p0.D2D_SIZE_FAbi = Win32_impl_p0.D2D_SIZE_FAbi()
     public var rotationAngle: Float32 = 0.0f32
     public var sweepDirection: D2D1_SWEEP_DIRECTIONAbi = D2D1_SWEEP_DIRECTIONAbi()
     public var arcSize: D2D1_ARC_SIZEAbi = D2D1_ARC_SIZEAbi()
@@ -12079,8 +12094,8 @@ extend D2D1_ARC_SEGMENT <: windows_core.CopyType & windows_core.RuntimeType & wi
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_ARC_SEGMENT;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_SIZE_F;f4;f4);f4;enum(Windows.Win32.Graphics.Direct2D.D2D1_SWEEP_DIRECTION;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_ARC_SIZE;i4))" }
     public static func projectAbi(value: D2D1_ARC_SEGMENT): D2D1_ARC_SEGMENTAbi {
         var abi = D2D1_ARC_SEGMENTAbi()
-        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.size = windows_core.projectTypedAbi(value.size, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_F>())
+        abi.point = windows_core.projectTypedAbi(value.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.size = windows_core.projectTypedAbi(value.size, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_F>())
         abi.rotationAngle = value.rotationAngle
         abi.sweepDirection = D2D1_SWEEP_DIRECTION.projectAbi(value.sweepDirection)
         abi.arcSize = D2D1_ARC_SIZE.projectAbi(value.arcSize)
@@ -12088,8 +12103,8 @@ extend D2D1_ARC_SEGMENT <: windows_core.CopyType & windows_core.RuntimeType & wi
     }
     public static func assumeInitRef(abi: D2D1_ARC_SEGMENTAbi): D2D1_ARC_SEGMENT {
         var value = D2D1_ARC_SEGMENT()
-        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.size = windows_core.fromTypedAbi(abi.size, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_F>()).unwrap()
+        value.point = windows_core.fromTypedAbi(abi.point, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.size = windows_core.fromTypedAbi(abi.size, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_F>()).unwrap()
         value.rotationAngle = abi.rotationAngle
         value.sweepDirection = D2D1_SWEEP_DIRECTION.assumeInitRef(abi.sweepDirection)
         value.arcSize = D2D1_ARC_SIZE.assumeInitRef(abi.arcSize)
@@ -12347,7 +12362,7 @@ public struct D2D1_DRAWING_STATE_DESCRIPTION {
     public var textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE = D2D1_TEXT_ANTIALIAS_MODE()
     public var tag1: UInt64 = 0u64
     public var tag2: UInt64 = 0u64
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public init() {}
 }
 
@@ -12358,7 +12373,7 @@ public struct D2D1_DRAWING_STATE_DESCRIPTIONAbi {
     public var textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODEAbi = D2D1_TEXT_ANTIALIAS_MODEAbi()
     public var tag1: UInt64 = 0u64
     public var tag2: UInt64 = 0u64
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public init() {}
 }
 
@@ -12373,7 +12388,7 @@ extend D2D1_DRAWING_STATE_DESCRIPTION <: windows_core.CopyType & windows_core.Ru
         abi.textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE.projectAbi(value.textAntialiasMode)
         abi.tag1 = value.tag1
         abi.tag2 = value.tag2
-        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_DRAWING_STATE_DESCRIPTIONAbi): D2D1_DRAWING_STATE_DESCRIPTION {
@@ -12382,7 +12397,7 @@ extend D2D1_DRAWING_STATE_DESCRIPTION <: windows_core.CopyType & windows_core.Ru
         value.textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE.assumeInitRef(abi.textAntialiasMode)
         value.tag1 = abi.tag1
         value.tag2 = abi.tag2
-        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_DRAWING_STATE_DESCRIPTIONAbi): Result<D2D1_DRAWING_STATE_DESCRIPTION> { Result<D2D1_DRAWING_STATE_DESCRIPTION>.Ok(D2D1_DRAWING_STATE_DESCRIPTION.assumeInitRef(abi)) }
@@ -12398,7 +12413,7 @@ public struct D2D1_DRAWING_STATE_DESCRIPTION1 {
     public var textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODE = D2D1_TEXT_ANTIALIAS_MODE()
     public var tag1: UInt64 = 0u64
     public var tag2: UInt64 = 0u64
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public var primitiveBlend: D2D1_PRIMITIVE_BLEND = D2D1_PRIMITIVE_BLEND()
     public var unitMode: D2D1_UNIT_MODE = D2D1_UNIT_MODE()
     public init() {}
@@ -12411,7 +12426,7 @@ public struct D2D1_DRAWING_STATE_DESCRIPTION1Abi {
     public var textAntialiasMode: D2D1_TEXT_ANTIALIAS_MODEAbi = D2D1_TEXT_ANTIALIAS_MODEAbi()
     public var tag1: UInt64 = 0u64
     public var tag2: UInt64 = 0u64
-    public var transform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var transform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public var primitiveBlend: D2D1_PRIMITIVE_BLENDAbi = D2D1_PRIMITIVE_BLENDAbi()
     public var unitMode: D2D1_UNIT_MODEAbi = D2D1_UNIT_MODEAbi()
     public init() {}
@@ -12428,7 +12443,7 @@ extend D2D1_DRAWING_STATE_DESCRIPTION1 <: windows_core.CopyType & windows_core.R
         abi.textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE.projectAbi(value.textAntialiasMode)
         abi.tag1 = value.tag1
         abi.tag2 = value.tag2
-        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.transform = windows_core.projectTypedAbi(value.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         abi.primitiveBlend = D2D1_PRIMITIVE_BLEND.projectAbi(value.primitiveBlend)
         abi.unitMode = D2D1_UNIT_MODE.projectAbi(value.unitMode)
         return abi
@@ -12439,7 +12454,7 @@ extend D2D1_DRAWING_STATE_DESCRIPTION1 <: windows_core.CopyType & windows_core.R
         value.textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE.assumeInitRef(abi.textAntialiasMode)
         value.tag1 = abi.tag1
         value.tag2 = abi.tag2
-        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.transform = windows_core.fromTypedAbi(abi.transform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         value.primitiveBlend = D2D1_PRIMITIVE_BLEND.assumeInitRef(abi.primitiveBlend)
         value.unitMode = D2D1_UNIT_MODE.assumeInitRef(abi.unitMode)
         return value
@@ -12453,26 +12468,26 @@ extend D2D1_DRAWING_STATE_DESCRIPTION1 <: windows_core.CopyType & windows_core.R
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_GRADIENT_MESH_PATCH {
-    public var point00: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point01: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point02: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point03: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point10: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point11: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point12: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point13: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point20: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point21: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point22: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point23: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point30: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point31: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point32: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var point33: Win32__impl_l0.D2D_POINT_2F = Win32__impl_l0.D2D_POINT_2F()
-    public var color00: Win32__impl_l0.D2D1_COLOR_F = Win32__impl_l0.D2D1_COLOR_F()
-    public var color03: Win32__impl_l0.D2D1_COLOR_F = Win32__impl_l0.D2D1_COLOR_F()
-    public var color30: Win32__impl_l0.D2D1_COLOR_F = Win32__impl_l0.D2D1_COLOR_F()
-    public var color33: Win32__impl_l0.D2D1_COLOR_F = Win32__impl_l0.D2D1_COLOR_F()
+    public var point00: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point01: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point02: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point03: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point10: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point11: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point12: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point13: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point20: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point21: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point22: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point23: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point30: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point31: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point32: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var point33: Win32_impl_p0.D2D_POINT_2F = Win32_impl_p0.D2D_POINT_2F()
+    public var color00: Win32_impl_p0.D2D1_COLOR_F = Win32_impl_p0.D2D1_COLOR_F()
+    public var color03: Win32_impl_p0.D2D1_COLOR_F = Win32_impl_p0.D2D1_COLOR_F()
+    public var color30: Win32_impl_p0.D2D1_COLOR_F = Win32_impl_p0.D2D1_COLOR_F()
+    public var color33: Win32_impl_p0.D2D1_COLOR_F = Win32_impl_p0.D2D1_COLOR_F()
     public var topEdgeMode: D2D1_PATCH_EDGE_MODE = D2D1_PATCH_EDGE_MODE()
     public var leftEdgeMode: D2D1_PATCH_EDGE_MODE = D2D1_PATCH_EDGE_MODE()
     public var bottomEdgeMode: D2D1_PATCH_EDGE_MODE = D2D1_PATCH_EDGE_MODE()
@@ -12483,26 +12498,26 @@ public struct D2D1_GRADIENT_MESH_PATCH {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_GRADIENT_MESH_PATCHAbi {
-    public var point00: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point01: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point02: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point03: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point10: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point11: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point12: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point13: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point20: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point21: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point22: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point23: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point30: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point31: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point32: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var point33: Win32__impl_l0.D2D_POINT_2FAbi = Win32__impl_l0.D2D_POINT_2FAbi()
-    public var color00: Win32__impl_l0.D2D1_COLOR_FAbi = Win32__impl_l0.D2D1_COLOR_FAbi()
-    public var color03: Win32__impl_l0.D2D1_COLOR_FAbi = Win32__impl_l0.D2D1_COLOR_FAbi()
-    public var color30: Win32__impl_l0.D2D1_COLOR_FAbi = Win32__impl_l0.D2D1_COLOR_FAbi()
-    public var color33: Win32__impl_l0.D2D1_COLOR_FAbi = Win32__impl_l0.D2D1_COLOR_FAbi()
+    public var point00: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point01: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point02: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point03: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point10: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point11: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point12: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point13: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point20: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point21: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point22: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point23: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point30: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point31: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point32: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var point33: Win32_impl_p0.D2D_POINT_2FAbi = Win32_impl_p0.D2D_POINT_2FAbi()
+    public var color00: Win32_impl_p0.D2D1_COLOR_FAbi = Win32_impl_p0.D2D1_COLOR_FAbi()
+    public var color03: Win32_impl_p0.D2D1_COLOR_FAbi = Win32_impl_p0.D2D1_COLOR_FAbi()
+    public var color30: Win32_impl_p0.D2D1_COLOR_FAbi = Win32_impl_p0.D2D1_COLOR_FAbi()
+    public var color33: Win32_impl_p0.D2D1_COLOR_FAbi = Win32_impl_p0.D2D1_COLOR_FAbi()
     public var topEdgeMode: D2D1_PATCH_EDGE_MODEAbi = D2D1_PATCH_EDGE_MODEAbi()
     public var leftEdgeMode: D2D1_PATCH_EDGE_MODEAbi = D2D1_PATCH_EDGE_MODEAbi()
     public var bottomEdgeMode: D2D1_PATCH_EDGE_MODEAbi = D2D1_PATCH_EDGE_MODEAbi()
@@ -12517,26 +12532,26 @@ extend D2D1_GRADIENT_MESH_PATCH <: windows_core.CopyType & windows_core.RuntimeT
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_GRADIENT_MESH_PATCH;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_POINT_2F;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_COLOR_F;f4;f4;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_COLOR_F;f4;f4;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_COLOR_F;f4;f4;f4;f4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_COLOR_F;f4;f4;f4;f4);enum(Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE;i4))" }
     public static func projectAbi(value: D2D1_GRADIENT_MESH_PATCH): D2D1_GRADIENT_MESH_PATCHAbi {
         var abi = D2D1_GRADIENT_MESH_PATCHAbi()
-        abi.point00 = windows_core.projectTypedAbi(value.point00, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point01 = windows_core.projectTypedAbi(value.point01, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point02 = windows_core.projectTypedAbi(value.point02, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point03 = windows_core.projectTypedAbi(value.point03, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point10 = windows_core.projectTypedAbi(value.point10, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point11 = windows_core.projectTypedAbi(value.point11, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point12 = windows_core.projectTypedAbi(value.point12, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point13 = windows_core.projectTypedAbi(value.point13, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point20 = windows_core.projectTypedAbi(value.point20, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point21 = windows_core.projectTypedAbi(value.point21, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point22 = windows_core.projectTypedAbi(value.point22, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point23 = windows_core.projectTypedAbi(value.point23, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point30 = windows_core.projectTypedAbi(value.point30, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point31 = windows_core.projectTypedAbi(value.point31, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point32 = windows_core.projectTypedAbi(value.point32, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.point33 = windows_core.projectTypedAbi(value.point33, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>())
-        abi.color00 = windows_core.projectTypedAbi(value.color00, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>())
-        abi.color03 = windows_core.projectTypedAbi(value.color03, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>())
-        abi.color30 = windows_core.projectTypedAbi(value.color30, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>())
-        abi.color33 = windows_core.projectTypedAbi(value.color33, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>())
+        abi.point00 = windows_core.projectTypedAbi(value.point00, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point01 = windows_core.projectTypedAbi(value.point01, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point02 = windows_core.projectTypedAbi(value.point02, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point03 = windows_core.projectTypedAbi(value.point03, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point10 = windows_core.projectTypedAbi(value.point10, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point11 = windows_core.projectTypedAbi(value.point11, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point12 = windows_core.projectTypedAbi(value.point12, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point13 = windows_core.projectTypedAbi(value.point13, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point20 = windows_core.projectTypedAbi(value.point20, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point21 = windows_core.projectTypedAbi(value.point21, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point22 = windows_core.projectTypedAbi(value.point22, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point23 = windows_core.projectTypedAbi(value.point23, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point30 = windows_core.projectTypedAbi(value.point30, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point31 = windows_core.projectTypedAbi(value.point31, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point32 = windows_core.projectTypedAbi(value.point32, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.point33 = windows_core.projectTypedAbi(value.point33, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>())
+        abi.color00 = windows_core.projectTypedAbi(value.color00, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>())
+        abi.color03 = windows_core.projectTypedAbi(value.color03, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>())
+        abi.color30 = windows_core.projectTypedAbi(value.color30, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>())
+        abi.color33 = windows_core.projectTypedAbi(value.color33, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>())
         abi.topEdgeMode = D2D1_PATCH_EDGE_MODE.projectAbi(value.topEdgeMode)
         abi.leftEdgeMode = D2D1_PATCH_EDGE_MODE.projectAbi(value.leftEdgeMode)
         abi.bottomEdgeMode = D2D1_PATCH_EDGE_MODE.projectAbi(value.bottomEdgeMode)
@@ -12545,26 +12560,26 @@ extend D2D1_GRADIENT_MESH_PATCH <: windows_core.CopyType & windows_core.RuntimeT
     }
     public static func assumeInitRef(abi: D2D1_GRADIENT_MESH_PATCHAbi): D2D1_GRADIENT_MESH_PATCH {
         var value = D2D1_GRADIENT_MESH_PATCH()
-        value.point00 = windows_core.fromTypedAbi(abi.point00, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point01 = windows_core.fromTypedAbi(abi.point01, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point02 = windows_core.fromTypedAbi(abi.point02, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point03 = windows_core.fromTypedAbi(abi.point03, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point10 = windows_core.fromTypedAbi(abi.point10, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point11 = windows_core.fromTypedAbi(abi.point11, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point12 = windows_core.fromTypedAbi(abi.point12, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point13 = windows_core.fromTypedAbi(abi.point13, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point20 = windows_core.fromTypedAbi(abi.point20, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point21 = windows_core.fromTypedAbi(abi.point21, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point22 = windows_core.fromTypedAbi(abi.point22, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point23 = windows_core.fromTypedAbi(abi.point23, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point30 = windows_core.fromTypedAbi(abi.point30, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point31 = windows_core.fromTypedAbi(abi.point31, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point32 = windows_core.fromTypedAbi(abi.point32, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.point33 = windows_core.fromTypedAbi(abi.point33, windows_core.typeMarker<Win32__impl_l0.D2D_POINT_2F>()).unwrap()
-        value.color00 = windows_core.fromTypedAbi(abi.color00, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>()).unwrap()
-        value.color03 = windows_core.fromTypedAbi(abi.color03, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>()).unwrap()
-        value.color30 = windows_core.fromTypedAbi(abi.color30, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>()).unwrap()
-        value.color33 = windows_core.fromTypedAbi(abi.color33, windows_core.typeMarker<Win32__impl_l0.D2D1_COLOR_F>()).unwrap()
+        value.point00 = windows_core.fromTypedAbi(abi.point00, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point01 = windows_core.fromTypedAbi(abi.point01, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point02 = windows_core.fromTypedAbi(abi.point02, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point03 = windows_core.fromTypedAbi(abi.point03, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point10 = windows_core.fromTypedAbi(abi.point10, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point11 = windows_core.fromTypedAbi(abi.point11, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point12 = windows_core.fromTypedAbi(abi.point12, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point13 = windows_core.fromTypedAbi(abi.point13, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point20 = windows_core.fromTypedAbi(abi.point20, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point21 = windows_core.fromTypedAbi(abi.point21, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point22 = windows_core.fromTypedAbi(abi.point22, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point23 = windows_core.fromTypedAbi(abi.point23, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point30 = windows_core.fromTypedAbi(abi.point30, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point31 = windows_core.fromTypedAbi(abi.point31, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point32 = windows_core.fromTypedAbi(abi.point32, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.point33 = windows_core.fromTypedAbi(abi.point33, windows_core.typeMarker<Win32_impl_p0.D2D_POINT_2F>()).unwrap()
+        value.color00 = windows_core.fromTypedAbi(abi.color00, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>()).unwrap()
+        value.color03 = windows_core.fromTypedAbi(abi.color03, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>()).unwrap()
+        value.color30 = windows_core.fromTypedAbi(abi.color30, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>()).unwrap()
+        value.color33 = windows_core.fromTypedAbi(abi.color33, windows_core.typeMarker<Win32_impl_p0.D2D1_COLOR_F>()).unwrap()
         value.topEdgeMode = D2D1_PATCH_EDGE_MODE.assumeInitRef(abi.topEdgeMode)
         value.leftEdgeMode = D2D1_PATCH_EDGE_MODE.assumeInitRef(abi.leftEdgeMode)
         value.bottomEdgeMode = D2D1_PATCH_EDGE_MODE.assumeInitRef(abi.bottomEdgeMode)
@@ -12581,7 +12596,7 @@ extend D2D1_GRADIENT_MESH_PATCH <: windows_core.CopyType & windows_core.RuntimeT
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_HWND_RENDER_TARGET_PROPERTIES {
     public var hwnd: CPointer<Unit> = CPointer<Unit>()
-    public var pixelSize: Win32__impl_l0.D2D_SIZE_U = Win32__impl_l0.D2D_SIZE_U()
+    public var pixelSize: Win32_impl_p0.D2D_SIZE_U = Win32_impl_p0.D2D_SIZE_U()
     public var presentOptions: D2D1_PRESENT_OPTIONS = D2D1_PRESENT_OPTIONS()
     public init() {}
 }
@@ -12590,7 +12605,7 @@ public struct D2D1_HWND_RENDER_TARGET_PROPERTIES {
 @C
 public struct D2D1_HWND_RENDER_TARGET_PROPERTIESAbi {
     public var hwnd: CPointer<Unit> = CPointer<Unit>()
-    public var pixelSize: Win32__impl_l0.D2D_SIZE_UAbi = Win32__impl_l0.D2D_SIZE_UAbi()
+    public var pixelSize: Win32_impl_p0.D2D_SIZE_UAbi = Win32_impl_p0.D2D_SIZE_UAbi()
     public var presentOptions: D2D1_PRESENT_OPTIONSAbi = D2D1_PRESENT_OPTIONSAbi()
     public init() {}
 }
@@ -12603,14 +12618,14 @@ extend D2D1_HWND_RENDER_TARGET_PROPERTIES <: windows_core.CopyType & windows_cor
     public static func projectAbi(value: D2D1_HWND_RENDER_TARGET_PROPERTIES): D2D1_HWND_RENDER_TARGET_PROPERTIESAbi {
         var abi = D2D1_HWND_RENDER_TARGET_PROPERTIESAbi()
         abi.hwnd = value.hwnd
-        abi.pixelSize = windows_core.projectTypedAbi(value.pixelSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>())
+        abi.pixelSize = windows_core.projectTypedAbi(value.pixelSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>())
         abi.presentOptions = D2D1_PRESENT_OPTIONS.projectAbi(value.presentOptions)
         return abi
     }
     public static func assumeInitRef(abi: D2D1_HWND_RENDER_TARGET_PROPERTIESAbi): D2D1_HWND_RENDER_TARGET_PROPERTIES {
         var value = D2D1_HWND_RENDER_TARGET_PROPERTIES()
         value.hwnd = abi.hwnd
-        value.pixelSize = windows_core.fromTypedAbi(abi.pixelSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>()).unwrap()
+        value.pixelSize = windows_core.fromTypedAbi(abi.pixelSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>()).unwrap()
         value.presentOptions = D2D1_PRESENT_OPTIONS.assumeInitRef(abi.presentOptions)
         return value
     }
@@ -12623,7 +12638,7 @@ extend D2D1_HWND_RENDER_TARGET_PROPERTIES <: windows_core.CopyType & windows_cor
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_IMAGE_BRUSH_PROPERTIES {
-    public var sourceRectangle: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var sourceRectangle: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public var extendModeX: D2D1_EXTEND_MODE = D2D1_EXTEND_MODE()
     public var extendModeY: D2D1_EXTEND_MODE = D2D1_EXTEND_MODE()
     public var interpolationMode: D2D1_INTERPOLATION_MODE = D2D1_INTERPOLATION_MODE()
@@ -12633,7 +12648,7 @@ public struct D2D1_IMAGE_BRUSH_PROPERTIES {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_IMAGE_BRUSH_PROPERTIESAbi {
-    public var sourceRectangle: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var sourceRectangle: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public var extendModeX: D2D1_EXTEND_MODEAbi = D2D1_EXTEND_MODEAbi()
     public var extendModeY: D2D1_EXTEND_MODEAbi = D2D1_EXTEND_MODEAbi()
     public var interpolationMode: D2D1_INTERPOLATION_MODEAbi = D2D1_INTERPOLATION_MODEAbi()
@@ -12647,7 +12662,7 @@ extend D2D1_IMAGE_BRUSH_PROPERTIES <: windows_core.CopyType & windows_core.Runti
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_BRUSH_PROPERTIES;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_RECT_F;f4;f4;f4;f4);enum(Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE;i4);enum(Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE;i4))" }
     public static func projectAbi(value: D2D1_IMAGE_BRUSH_PROPERTIES): D2D1_IMAGE_BRUSH_PROPERTIESAbi {
         var abi = D2D1_IMAGE_BRUSH_PROPERTIESAbi()
-        abi.sourceRectangle = windows_core.projectTypedAbi(value.sourceRectangle, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.sourceRectangle = windows_core.projectTypedAbi(value.sourceRectangle, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         abi.extendModeX = D2D1_EXTEND_MODE.projectAbi(value.extendModeX)
         abi.extendModeY = D2D1_EXTEND_MODE.projectAbi(value.extendModeY)
         abi.interpolationMode = D2D1_INTERPOLATION_MODE.projectAbi(value.interpolationMode)
@@ -12655,7 +12670,7 @@ extend D2D1_IMAGE_BRUSH_PROPERTIES <: windows_core.CopyType & windows_core.Runti
     }
     public static func assumeInitRef(abi: D2D1_IMAGE_BRUSH_PROPERTIESAbi): D2D1_IMAGE_BRUSH_PROPERTIES {
         var value = D2D1_IMAGE_BRUSH_PROPERTIES()
-        value.sourceRectangle = windows_core.fromTypedAbi(abi.sourceRectangle, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.sourceRectangle = windows_core.fromTypedAbi(abi.sourceRectangle, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         value.extendModeX = D2D1_EXTEND_MODE.assumeInitRef(abi.extendModeX)
         value.extendModeY = D2D1_EXTEND_MODE.assumeInitRef(abi.extendModeY)
         value.interpolationMode = D2D1_INTERPOLATION_MODE.assumeInitRef(abi.interpolationMode)
@@ -12800,7 +12815,7 @@ extend D2D1_PROPERTY_BINDING <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_Graphics_Direct2D == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 public struct D2D1_RENDER_TARGET_PROPERTIES {
     public var type_: D2D1_RENDER_TARGET_TYPE = D2D1_RENDER_TARGET_TYPE()
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMAT = Win32__impl_l1.D2D1_PIXEL_FORMAT()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMAT = Win32_impl_p1.D2D1_PIXEL_FORMAT()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public var usage: D2D1_RENDER_TARGET_USAGE = D2D1_RENDER_TARGET_USAGE()
@@ -12812,7 +12827,7 @@ public struct D2D1_RENDER_TARGET_PROPERTIES {
 @C
 public struct D2D1_RENDER_TARGET_PROPERTIESAbi {
     public var type_: D2D1_RENDER_TARGET_TYPEAbi = D2D1_RENDER_TARGET_TYPEAbi()
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMATAbi = Win32__impl_l1.D2D1_PIXEL_FORMATAbi()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMATAbi = Win32_impl_p1.D2D1_PIXEL_FORMATAbi()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public var usage: D2D1_RENDER_TARGET_USAGEAbi = D2D1_RENDER_TARGET_USAGEAbi()
@@ -12828,7 +12843,7 @@ extend D2D1_RENDER_TARGET_PROPERTIES <: windows_core.CopyType & windows_core.Run
     public static func projectAbi(value: D2D1_RENDER_TARGET_PROPERTIES): D2D1_RENDER_TARGET_PROPERTIESAbi {
         var abi = D2D1_RENDER_TARGET_PROPERTIESAbi()
         abi.type_ = D2D1_RENDER_TARGET_TYPE.projectAbi(value.type_)
-        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>())
+        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>())
         abi.dpiX = value.dpiX
         abi.dpiY = value.dpiY
         abi.usage = D2D1_RENDER_TARGET_USAGE.projectAbi(value.usage)
@@ -12838,7 +12853,7 @@ extend D2D1_RENDER_TARGET_PROPERTIES <: windows_core.CopyType & windows_core.Run
     public static func assumeInitRef(abi: D2D1_RENDER_TARGET_PROPERTIESAbi): D2D1_RENDER_TARGET_PROPERTIES {
         var value = D2D1_RENDER_TARGET_PROPERTIES()
         value.type_ = D2D1_RENDER_TARGET_TYPE.assumeInitRef(abi.type_)
-        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>()).unwrap()
+        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>()).unwrap()
         value.dpiX = abi.dpiX
         value.dpiY = abi.dpiY
         value.usage = D2D1_RENDER_TARGET_USAGE.assumeInitRef(abi.usage)
@@ -13280,11 +13295,11 @@ public class ID2D1DrawInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct ID2D1GeometrySinkVtbl {
-    public var base_: Win32__impl_l1.ID2D1SimplifiedGeometrySinkVtbl = Win32__impl_l1.ID2D1SimplifiedGeometrySinkVtbl()
+    public var base_: Win32_impl_p2.ID2D1SimplifiedGeometrySinkVtbl = Win32_impl_p2.ID2D1SimplifiedGeometrySinkVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var AddLine: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
+    public var AddLine: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var AddBezier: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.D2D1_BEZIER_SEGMENTAbi>) -> Unit> = { _, _ => () }
+    public var AddBezier: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.D2D1_BEZIER_SEGMENTAbi>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var AddQuadraticBezier: CFunc<(CPointer<Unit>, CPointer<D2D1_QUADRATIC_BEZIER_SEGMENTAbi>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
@@ -13327,7 +13342,7 @@ public class ID2D1GeometrySink <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ID2D1GeometrySink> {
-        return InterfaceDescriptor<ID2D1GeometrySink>("ID2D1GeometrySink", ID2D1GeometrySink.iid(), Win32__impl_l1.ID2D1SimplifiedGeometrySink.iid(), takeID2D1GeometrySinkFromAbi, viewID2D1GeometrySink)
+        return InterfaceDescriptor<ID2D1GeometrySink>("ID2D1GeometrySink", ID2D1GeometrySink.iid(), Win32_impl_p2.ID2D1SimplifiedGeometrySink.iid(), takeID2D1GeometrySinkFromAbi, viewID2D1GeometrySink)
     }
 
     public unsafe func vtbl(): ID2D1GeometrySinkVtbl {
@@ -13335,14 +13350,14 @@ public class ID2D1GeometrySink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func AddLine(point: Win32__impl_l0.D2D_POINT_2FAbi): Unit {
+    public unsafe func AddLine(point: Win32_impl_p0.D2D_POINT_2FAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.AddLine(__liveRaw, point)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func AddBezier(bezier: CPointer<Win32__impl_l1.D2D1_BEZIER_SEGMENTAbi>): Unit {
+    public unsafe func AddBezier(bezier: CPointer<Win32_impl_p1.D2D1_BEZIER_SEGMENTAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.AddBezier(__liveRaw, bezier)
@@ -13869,21 +13884,21 @@ public class ID2D1DrawTransform <: InterfaceWrapperBase & ComInterface {
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ComputeMaximumScaleFactor == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Float32
+    func D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Float32
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ComputeMaximumScaleFactor == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Float32 {
+public unsafe func Windows_D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Float32 {
     return D2D1ComputeMaximumScaleFactor(matrix)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ConvertColorSpace == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1ConvertColorSpace(sourceColorSpace: D2D1_COLOR_SPACEAbi, destinationColorSpace: D2D1_COLOR_SPACEAbi, color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Win32__impl_l0.D2D1_COLOR_FAbi
+    func D2D1ConvertColorSpace(sourceColorSpace: D2D1_COLOR_SPACEAbi, destinationColorSpace: D2D1_COLOR_SPACEAbi, color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Win32_impl_p0.D2D1_COLOR_FAbi
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ConvertColorSpace == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1ConvertColorSpace(sourceColorSpace: D2D1_COLOR_SPACEAbi, destinationColorSpace: D2D1_COLOR_SPACEAbi, color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Win32__impl_l0.D2D1_COLOR_FAbi {
+public unsafe func Windows_D2D1ConvertColorSpace(sourceColorSpace: D2D1_COLOR_SPACEAbi, destinationColorSpace: D2D1_COLOR_SPACEAbi, color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Win32_impl_p0.D2D1_COLOR_FAbi {
     return D2D1ConvertColorSpace(sourceColorSpace, destinationColorSpace, color)
 }
 
@@ -13922,51 +13937,51 @@ public unsafe func Windows_D2D1CreateFactory(factoryType: D2D1_FACTORY_TYPEAbi, 
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1GetGradientMeshInteriorPointsFromCoonsPatch == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint1: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint2: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint3: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint4: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint5: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint6: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint7: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint8: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint9: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint10: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint11: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint11: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint12: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint21: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint22: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Unit
+    func D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint1: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint2: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint3: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint4: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint5: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint6: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint7: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint8: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint9: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint10: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint11: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint11: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint12: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint21: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint22: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Unit
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1GetGradientMeshInteriorPointsFromCoonsPatch == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint1: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint2: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint3: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint4: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint5: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint6: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint7: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint8: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint9: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint10: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pPoint11: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint11: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint12: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint21: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pTensorPoint22: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Unit {
+public unsafe func Windows_D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint1: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint2: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint3: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint4: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint5: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint6: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint7: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint8: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint9: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint10: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pPoint11: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint11: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint12: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint21: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pTensorPoint22: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Unit {
     D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0, pPoint1, pPoint2, pPoint3, pPoint4, pPoint5, pPoint6, pPoint7, pPoint8, pPoint9, pPoint10, pPoint11, pTensorPoint11, pTensorPoint12, pTensorPoint21, pTensorPoint22)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1InvertMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1InvertMatrix(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32
+    func D2D1InvertMatrix(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1InvertMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1InvertMatrix(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32 {
+public unsafe func Windows_D2D1InvertMatrix(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32 {
     return D2D1InvertMatrix(matrix)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1IsMatrixInvertible == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1IsMatrixInvertible(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32
+    func D2D1IsMatrixInvertible(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1IsMatrixInvertible == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1IsMatrixInvertible(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32 {
+public unsafe func Windows_D2D1IsMatrixInvertible(matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32 {
     return D2D1IsMatrixInvertible(matrix)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeRotateMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1MakeRotateMatrix(angle: Float32, center: Win32__impl_l0.D2D_POINT_2FAbi, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit
+    func D2D1MakeRotateMatrix(angle: Float32, center: Win32_impl_p0.D2D_POINT_2FAbi, matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeRotateMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1MakeRotateMatrix(angle: Float32, center: Win32__impl_l0.D2D_POINT_2FAbi, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+public unsafe func Windows_D2D1MakeRotateMatrix(angle: Float32, center: Win32_impl_p0.D2D_POINT_2FAbi, matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
     D2D1MakeRotateMatrix(angle, center, matrix)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeSkewMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
-    func D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32__impl_l0.D2D_POINT_2FAbi, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit
+    func D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32_impl_p0.D2D_POINT_2FAbi, matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeSkewMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
-public unsafe func Windows_D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32__impl_l0.D2D_POINT_2FAbi, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+public unsafe func Windows_D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32_impl_p0.D2D_POINT_2FAbi, matrix: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
     D2D1MakeSkewMatrix(angleX, angleY, center, matrix)
 }
 
@@ -14011,7 +14026,7 @@ public let FACILITY_D2D: UInt32 = 2201u32
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 public struct D2D1_BITMAP_PROPERTIES1 {
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMAT = Win32__impl_l1.D2D1_PIXEL_FORMAT()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMAT = Win32_impl_p1.D2D1_PIXEL_FORMAT()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public var bitmapOptions: D2D1_BITMAP_OPTIONS = D2D1_BITMAP_OPTIONS()
@@ -14022,7 +14037,7 @@ public struct D2D1_BITMAP_PROPERTIES1 {
 @When[Windows_Win32_Graphics_Direct2D == "on" && (Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 @C
 public struct D2D1_BITMAP_PROPERTIES1Abi {
-    public var pixelFormat: Win32__impl_l1.D2D1_PIXEL_FORMATAbi = Win32__impl_l1.D2D1_PIXEL_FORMATAbi()
+    public var pixelFormat: Win32_impl_p1.D2D1_PIXEL_FORMATAbi = Win32_impl_p1.D2D1_PIXEL_FORMATAbi()
     public var dpiX: Float32 = 0.0f32
     public var dpiY: Float32 = 0.0f32
     public var bitmapOptions: D2D1_BITMAP_OPTIONSAbi = D2D1_BITMAP_OPTIONSAbi()
@@ -14037,7 +14052,7 @@ extend D2D1_BITMAP_PROPERTIES1 <: windows_core.CopyType & windows_core.RuntimeTy
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_PROPERTIES1;struct(Windows.Win32.Graphics.Direct2D.Common.D2D1_PIXEL_FORMAT;enum(Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT;i4);enum(Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE;i4));f4;f4;enum(Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS;i4);{1C4820BB-5771-4518-A581-2FE4DD0EC657})" }
     public static func projectAbi(value: D2D1_BITMAP_PROPERTIES1): D2D1_BITMAP_PROPERTIES1Abi {
         var abi = D2D1_BITMAP_PROPERTIES1Abi()
-        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>())
+        abi.pixelFormat = windows_core.projectTypedAbi(value.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>())
         abi.dpiX = value.dpiX
         abi.dpiY = value.dpiY
         abi.bitmapOptions = D2D1_BITMAP_OPTIONS.projectAbi(value.bitmapOptions)
@@ -14046,7 +14061,7 @@ extend D2D1_BITMAP_PROPERTIES1 <: windows_core.CopyType & windows_core.RuntimeTy
     }
     public static func assumeInitRef(abi: D2D1_BITMAP_PROPERTIES1Abi): D2D1_BITMAP_PROPERTIES1 {
         var value = D2D1_BITMAP_PROPERTIES1()
-        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32__impl_l1.D2D1_PIXEL_FORMAT>()).unwrap()
+        value.pixelFormat = windows_core.fromTypedAbi(abi.pixelFormat, windows_core.typeMarker<Win32_impl_p1.D2D1_PIXEL_FORMAT>()).unwrap()
         value.dpiX = abi.dpiX
         value.dpiY = abi.dpiY
         value.bitmapOptions = D2D1_BITMAP_OPTIONS.assumeInitRef(abi.bitmapOptions)
@@ -14064,7 +14079,7 @@ extend D2D1_BITMAP_PROPERTIES1 <: windows_core.CopyType & windows_core.RuntimeTy
 public struct D2D1_EFFECT_INPUT_DESCRIPTION {
     public var effect: ID2D1Effect = ID2D1Effect(CPointer<Unit>())
     public var inputIndex: UInt32 = 0u32
-    public var inputRectangle: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var inputRectangle: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public init() {}
 }
 
@@ -14073,7 +14088,7 @@ public struct D2D1_EFFECT_INPUT_DESCRIPTION {
 public struct D2D1_EFFECT_INPUT_DESCRIPTIONAbi {
     public var effect: CPointer<Unit> = CPointer<Unit>()
     public var inputIndex: UInt32 = 0u32
-    public var inputRectangle: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var inputRectangle: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public init() {}
 }
 
@@ -14086,14 +14101,14 @@ extend D2D1_EFFECT_INPUT_DESCRIPTION <: windows_core.CopyType & windows_core.Run
         var abi = D2D1_EFFECT_INPUT_DESCRIPTIONAbi()
         abi.effect = value.effect.asRaw()
         abi.inputIndex = value.inputIndex
-        abi.inputRectangle = windows_core.projectTypedAbi(value.inputRectangle, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.inputRectangle = windows_core.projectTypedAbi(value.inputRectangle, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         return abi
     }
     public static func assumeInitRef(abi: D2D1_EFFECT_INPUT_DESCRIPTIONAbi): D2D1_EFFECT_INPUT_DESCRIPTION {
         var value = D2D1_EFFECT_INPUT_DESCRIPTION()
         value.effect = ID2D1Effect.fromAbiTake(abi.effect)
         value.inputIndex = abi.inputIndex
-        value.inputRectangle = windows_core.fromTypedAbi(abi.inputRectangle, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.inputRectangle = windows_core.fromTypedAbi(abi.inputRectangle, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D2D1_EFFECT_INPUT_DESCRIPTIONAbi): Result<D2D1_EFFECT_INPUT_DESCRIPTION> { Result<D2D1_EFFECT_INPUT_DESCRIPTION>.Ok(D2D1_EFFECT_INPUT_DESCRIPTION.assumeInitRef(abi)) }
@@ -14105,10 +14120,10 @@ extend D2D1_EFFECT_INPUT_DESCRIPTION <: windows_core.CopyType & windows_core.Run
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_LAYER_PARAMETERS {
-    public var contentBounds: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var contentBounds: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public var geometricMask: ID2D1Geometry = ID2D1Geometry(CPointer<Unit>())
     public var maskAntialiasMode: D2D1_ANTIALIAS_MODE = D2D1_ANTIALIAS_MODE()
-    public var maskTransform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var maskTransform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public var opacity: Float32 = 0.0f32
     public var opacityBrush: ID2D1Brush = ID2D1Brush(CPointer<Unit>())
     public var layerOptions: D2D1_LAYER_OPTIONS = D2D1_LAYER_OPTIONS()
@@ -14118,10 +14133,10 @@ public struct D2D1_LAYER_PARAMETERS {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_LAYER_PARAMETERSAbi {
-    public var contentBounds: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var contentBounds: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public var geometricMask: CPointer<Unit> = CPointer<Unit>()
     public var maskAntialiasMode: D2D1_ANTIALIAS_MODEAbi = D2D1_ANTIALIAS_MODEAbi()
-    public var maskTransform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var maskTransform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public var opacity: Float32 = 0.0f32
     public var opacityBrush: CPointer<Unit> = CPointer<Unit>()
     public var layerOptions: D2D1_LAYER_OPTIONSAbi = D2D1_LAYER_OPTIONSAbi()
@@ -14135,10 +14150,10 @@ extend D2D1_LAYER_PARAMETERS <: windows_core.CopyType & windows_core.RuntimeType
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_LAYER_PARAMETERS;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_RECT_F;f4;f4;f4;f4);{2CD906A1-12E2-11DC-9FED-001143A055F9};enum(Windows.Win32.Graphics.Direct2D.D2D1_ANTIALIAS_MODE;i4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_MATRIX_3X2_F;_Anonymous_e__Union);f4;{2CD906A8-12E2-11DC-9FED-001143A055F9};enum(Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS;i4))" }
     public static func projectAbi(value: D2D1_LAYER_PARAMETERS): D2D1_LAYER_PARAMETERSAbi {
         var abi = D2D1_LAYER_PARAMETERSAbi()
-        abi.contentBounds = windows_core.projectTypedAbi(value.contentBounds, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.contentBounds = windows_core.projectTypedAbi(value.contentBounds, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         abi.geometricMask = value.geometricMask.asRaw()
         abi.maskAntialiasMode = D2D1_ANTIALIAS_MODE.projectAbi(value.maskAntialiasMode)
-        abi.maskTransform = windows_core.projectTypedAbi(value.maskTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.maskTransform = windows_core.projectTypedAbi(value.maskTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         abi.opacity = value.opacity
         abi.opacityBrush = value.opacityBrush.asRaw()
         abi.layerOptions = D2D1_LAYER_OPTIONS.projectAbi(value.layerOptions)
@@ -14146,10 +14161,10 @@ extend D2D1_LAYER_PARAMETERS <: windows_core.CopyType & windows_core.RuntimeType
     }
     public static func assumeInitRef(abi: D2D1_LAYER_PARAMETERSAbi): D2D1_LAYER_PARAMETERS {
         var value = D2D1_LAYER_PARAMETERS()
-        value.contentBounds = windows_core.fromTypedAbi(abi.contentBounds, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.contentBounds = windows_core.fromTypedAbi(abi.contentBounds, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         value.geometricMask = ID2D1Geometry.fromAbiTake(abi.geometricMask)
         value.maskAntialiasMode = D2D1_ANTIALIAS_MODE.assumeInitRef(abi.maskAntialiasMode)
-        value.maskTransform = windows_core.fromTypedAbi(abi.maskTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.maskTransform = windows_core.fromTypedAbi(abi.maskTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         value.opacity = abi.opacity
         value.opacityBrush = ID2D1Brush.fromAbiTake(abi.opacityBrush)
         value.layerOptions = D2D1_LAYER_OPTIONS.assumeInitRef(abi.layerOptions)
@@ -14164,10 +14179,10 @@ extend D2D1_LAYER_PARAMETERS <: windows_core.CopyType & windows_core.RuntimeType
 
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct D2D1_LAYER_PARAMETERS1 {
-    public var contentBounds: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var contentBounds: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public var geometricMask: ID2D1Geometry = ID2D1Geometry(CPointer<Unit>())
     public var maskAntialiasMode: D2D1_ANTIALIAS_MODE = D2D1_ANTIALIAS_MODE()
-    public var maskTransform: Win32__impl_l0.D2D_MATRIX_3X2_F = Win32__impl_l0.D2D_MATRIX_3X2_F()
+    public var maskTransform: Win32_impl_p0.D2D_MATRIX_3X2_F = Win32_impl_p0.D2D_MATRIX_3X2_F()
     public var opacity: Float32 = 0.0f32
     public var opacityBrush: ID2D1Brush = ID2D1Brush(CPointer<Unit>())
     public var layerOptions: D2D1_LAYER_OPTIONS1 = D2D1_LAYER_OPTIONS1()
@@ -14177,10 +14192,10 @@ public struct D2D1_LAYER_PARAMETERS1 {
 @When[Windows_Win32_Graphics_Direct2D == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct D2D1_LAYER_PARAMETERS1Abi {
-    public var contentBounds: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var contentBounds: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public var geometricMask: CPointer<Unit> = CPointer<Unit>()
     public var maskAntialiasMode: D2D1_ANTIALIAS_MODEAbi = D2D1_ANTIALIAS_MODEAbi()
-    public var maskTransform: Win32__impl_l0.D2D_MATRIX_3X2_FAbi = Win32__impl_l0.D2D_MATRIX_3X2_FAbi()
+    public var maskTransform: Win32_impl_p0.D2D_MATRIX_3X2_FAbi = Win32_impl_p0.D2D_MATRIX_3X2_FAbi()
     public var opacity: Float32 = 0.0f32
     public var opacityBrush: CPointer<Unit> = CPointer<Unit>()
     public var layerOptions: D2D1_LAYER_OPTIONS1Abi = D2D1_LAYER_OPTIONS1Abi()
@@ -14194,10 +14209,10 @@ extend D2D1_LAYER_PARAMETERS1 <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct2D.D2D1_LAYER_PARAMETERS1;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_RECT_F;f4;f4;f4;f4);{2CD906A1-12E2-11DC-9FED-001143A055F9};enum(Windows.Win32.Graphics.Direct2D.D2D1_ANTIALIAS_MODE;i4);struct(Windows.Win32.Graphics.Direct2D.Common.D2D_MATRIX_3X2_F;_Anonymous_e__Union);f4;{2CD906A8-12E2-11DC-9FED-001143A055F9};enum(Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS1;i4))" }
     public static func projectAbi(value: D2D1_LAYER_PARAMETERS1): D2D1_LAYER_PARAMETERS1Abi {
         var abi = D2D1_LAYER_PARAMETERS1Abi()
-        abi.contentBounds = windows_core.projectTypedAbi(value.contentBounds, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.contentBounds = windows_core.projectTypedAbi(value.contentBounds, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         abi.geometricMask = value.geometricMask.asRaw()
         abi.maskAntialiasMode = D2D1_ANTIALIAS_MODE.projectAbi(value.maskAntialiasMode)
-        abi.maskTransform = windows_core.projectTypedAbi(value.maskTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>())
+        abi.maskTransform = windows_core.projectTypedAbi(value.maskTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>())
         abi.opacity = value.opacity
         abi.opacityBrush = value.opacityBrush.asRaw()
         abi.layerOptions = D2D1_LAYER_OPTIONS1.projectAbi(value.layerOptions)
@@ -14205,10 +14220,10 @@ extend D2D1_LAYER_PARAMETERS1 <: windows_core.CopyType & windows_core.RuntimeTyp
     }
     public static func assumeInitRef(abi: D2D1_LAYER_PARAMETERS1Abi): D2D1_LAYER_PARAMETERS1 {
         var value = D2D1_LAYER_PARAMETERS1()
-        value.contentBounds = windows_core.fromTypedAbi(abi.contentBounds, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.contentBounds = windows_core.fromTypedAbi(abi.contentBounds, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         value.geometricMask = ID2D1Geometry.fromAbiTake(abi.geometricMask)
         value.maskAntialiasMode = D2D1_ANTIALIAS_MODE.assumeInitRef(abi.maskAntialiasMode)
-        value.maskTransform = windows_core.fromTypedAbi(abi.maskTransform, windows_core.typeMarker<Win32__impl_l0.D2D_MATRIX_3X2_F>()).unwrap()
+        value.maskTransform = windows_core.fromTypedAbi(abi.maskTransform, windows_core.typeMarker<Win32_impl_p0.D2D_MATRIX_3X2_F>()).unwrap()
         value.opacity = abi.opacity
         value.opacityBrush = ID2D1Brush.fromAbiTake(abi.opacityBrush)
         value.layerOptions = D2D1_LAYER_OPTIONS1.assumeInitRef(abi.layerOptions)
@@ -14226,18 +14241,18 @@ extend D2D1_LAYER_PARAMETERS1 <: windows_core.CopyType & windows_core.RuntimeTyp
 public struct ID2D1BitmapVtbl {
     public var base_: ID2D1ImageVtbl = ID2D1ImageVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_FAbi> = { _ => Win32__impl_l0.D2D_SIZE_FAbi() }
+    public var GetSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_FAbi> = { _ => Win32_impl_p0.D2D_SIZE_FAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetPixelSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_UAbi> = { _ => Win32__impl_l0.D2D_SIZE_UAbi() }
+    public var GetPixelSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_UAbi> = { _ => Win32_impl_p0.D2D_SIZE_UAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public var GetPixelFormat: CFunc<(CPointer<Unit>) -> Win32__impl_l1.D2D1_PIXEL_FORMATAbi> = { _ => Win32__impl_l1.D2D1_PIXEL_FORMATAbi() }
+    public var GetPixelFormat: CFunc<(CPointer<Unit>) -> Win32_impl_p1.D2D1_PIXEL_FORMATAbi> = { _ => Win32_impl_p1.D2D1_PIXEL_FORMATAbi() }
     public var GetDpi: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<Float32>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CopyFromBitmap: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2UAbi>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var CopyFromBitmap: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2UAbi>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CopyFromRenderTarget: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2UAbi>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var CopyFromRenderTarget: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2UAbi>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CopyFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var CopyFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -14282,21 +14297,21 @@ public class ID2D1Bitmap <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSize(): Win32__impl_l0.D2D_SIZE_FAbi {
+    public unsafe func GetSize(): Win32_impl_p0.D2D_SIZE_FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSize(__liveRaw)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetPixelSize(): Win32__impl_l0.D2D_SIZE_UAbi {
+    public unsafe func GetPixelSize(): Win32_impl_p0.D2D_SIZE_UAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPixelSize(__liveRaw)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public unsafe func GetPixelFormat(): Win32__impl_l1.D2D1_PIXEL_FORMATAbi {
+    public unsafe func GetPixelFormat(): Win32_impl_p1.D2D1_PIXEL_FORMATAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPixelFormat(__liveRaw)
@@ -14309,21 +14324,21 @@ public class ID2D1Bitmap <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CopyFromBitmap(destPoint: CPointer<Win32__impl_l0.D2D_POINT_2UAbi>, bitmap: CPointer<Unit>, srcRect: CPointer<Win32__impl_l0.D2D_RECT_UAbi>): Int32 {
+    public unsafe func CopyFromBitmap(destPoint: CPointer<Win32_impl_p0.D2D_POINT_2UAbi>, bitmap: CPointer<Unit>, srcRect: CPointer<Win32_impl_p0.D2D_RECT_UAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyFromBitmap(__liveRaw, destPoint, bitmap, srcRect)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CopyFromRenderTarget(destPoint: CPointer<Win32__impl_l0.D2D_POINT_2UAbi>, renderTarget: CPointer<Unit>, srcRect: CPointer<Win32__impl_l0.D2D_RECT_UAbi>): Int32 {
+    public unsafe func CopyFromRenderTarget(destPoint: CPointer<Win32_impl_p0.D2D_POINT_2UAbi>, renderTarget: CPointer<Unit>, srcRect: CPointer<Win32_impl_p0.D2D_RECT_UAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyFromRenderTarget(__liveRaw, destPoint, renderTarget, srcRect)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CopyFromMemory(dstRect: CPointer<Win32__impl_l0.D2D_RECT_UAbi>, srcData: CPointer<Unit>, pitch: UInt32): Int32 {
+    public unsafe func CopyFromMemory(dstRect: CPointer<Win32_impl_p0.D2D_RECT_UAbi>, srcData: CPointer<Unit>, pitch: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyFromMemory(__liveRaw, dstRect, srcData, pitch)
@@ -14642,10 +14657,10 @@ public struct ID2D1BrushVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     public var SetOpacity: CFunc<(CPointer<Unit>, Float32) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     public var GetOpacity: CFunc<(CPointer<Unit>) -> Float32> = { _ => 0.0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     public init() {}
 }
 
@@ -14696,7 +14711,7 @@ public class ID2D1Brush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func SetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetTransform(__liveRaw, transform)
@@ -14709,7 +14724,7 @@ public class ID2D1Brush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func GetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetTransform(__liveRaw, transform)
@@ -14932,32 +14947,32 @@ public struct ID2D1CommandSinkVtbl {
     @When[Windows_Win32_Graphics_DirectWrite == "on"]
     public var SetTextRenderingParams: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Int32> = { _, _ => 0 }
+    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Int32> = { _, _ => 0 }
     public var SetPrimitiveBlend: CFunc<(CPointer<Unit>, D2D1_PRIMITIVE_BLENDAbi) -> Int32> = { _, _ => 0 }
     public var SetUnitMode: CFunc<(CPointer<Unit>, D2D1_UNIT_MODEAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Clear: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>) -> Int32> = { _, _ => 0 }
+    public var Clear: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawLine: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var DrawLine: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var DrawGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var DrawRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, Float32, D2D1_INTERPOLATION_MODEAbi, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_MATRIX_4X4_FAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, Float32, D2D1_INTERPOLATION_MODEAbi, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_MATRIX_4X4_FAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawImage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi, Win32__impl_l0.D2D1_COMPOSITE_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var DrawImage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi, Win32_impl_p0.D2D1_COMPOSITE_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _ => 0 }
+    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _ => 0 }
     public var FillMesh: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FillGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var FillRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var PushAxisAlignedClip: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_ANTIALIAS_MODEAbi) -> Int32> = { _, _, _ => 0 }
+    public var PushAxisAlignedClip: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_ANTIALIAS_MODEAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var PushLayer: CFunc<(CPointer<Unit>, CPointer<D2D1_LAYER_PARAMETERS1Abi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var PopAxisAlignedClip: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -15043,7 +15058,7 @@ public class ID2D1CommandSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32 {
+    public unsafe func SetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTransform(__liveRaw, transform)
@@ -15062,21 +15077,21 @@ public class ID2D1CommandSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Clear(color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Int32 {
+    public unsafe func Clear(color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Clear(__liveRaw, color)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Int32 {
+    public unsafe func DrawGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawGlyphRun(__liveRaw, baselineOrigin, glyphRun, glyphRunDescription, foregroundBrush, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawLine(point0: Win32__impl_l0.D2D_POINT_2FAbi, point1: Win32__impl_l0.D2D_POINT_2FAbi, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Int32 {
+    public unsafe func DrawLine(point0: Win32_impl_p0.D2D_POINT_2FAbi, point1: Win32_impl_p0.D2D_POINT_2FAbi, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawLine(__liveRaw, point0, point1, brush, strokeWidth, strokeStyle)
@@ -15089,28 +15104,28 @@ public class ID2D1CommandSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawRectangle(rect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Int32 {
+    public unsafe func DrawRectangle(rect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawRectangle(__liveRaw, rect, brush, strokeWidth, strokeStyle)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, perspectiveTransform: CPointer<Win32__impl_l0.D2D_MATRIX_4X4_FAbi>): Int32 {
+    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, perspectiveTransform: CPointer<Win32_impl_p0.D2D_MATRIX_4X4_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawBitmap(__liveRaw, bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle, perspectiveTransform)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawImage(image: CPointer<Unit>, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi, compositeMode: Win32__impl_l0.D2D1_COMPOSITE_MODEAbi): Int32 {
+    public unsafe func DrawImage(image: CPointer<Unit>, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi, compositeMode: Win32_impl_p0.D2D1_COMPOSITE_MODEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawImage(__liveRaw, image, targetOffset, imageRectangle, interpolationMode, compositeMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Int32 {
+    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawGdiMetafile(__liveRaw, gdiMetafile, targetOffset)
@@ -15123,7 +15138,7 @@ public class ID2D1CommandSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FillOpacityMask(__liveRaw, opacityMask, brush, destinationRectangle, sourceRectangle)
@@ -15136,14 +15151,14 @@ public class ID2D1CommandSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillRectangle(rect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, brush: CPointer<Unit>): Int32 {
+    public unsafe func FillRectangle(rect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, brush: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FillRectangle(__liveRaw, rect, brush)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func PushAxisAlignedClip(clipRect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, antialiasMode: D2D1_ANTIALIAS_MODEAbi): Int32 {
+    public unsafe func PushAxisAlignedClip(clipRect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, antialiasMode: D2D1_ANTIALIAS_MODEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PushAxisAlignedClip(__liveRaw, clipRect, antialiasMode)
@@ -15231,7 +15246,7 @@ public struct ID2D1CommandSink2Vtbl {
     public var DrawInk: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public var DrawGradientMesh: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -15288,7 +15303,7 @@ public class ID2D1CommandSink2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DrawGdiMetafile(__liveRaw, gdiMetafile, destinationRectangle, sourceRectangle)
@@ -15410,7 +15425,7 @@ public class ID2D1CommandSink4 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1CommandSink5Vtbl {
     public var base_: ID2D1CommandSink4Vtbl = ID2D1CommandSink4Vtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var BlendImage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.D2D1_BLEND_MODEAbi, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var BlendImage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p0.D2D1_BLEND_MODEAbi, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -15455,7 +15470,7 @@ public class ID2D1CommandSink5 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func BlendImage(image: CPointer<Unit>, blendMode: Win32__impl_l0.D2D1_BLEND_MODEAbi, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi): Int32 {
+    public unsafe func BlendImage(image: CPointer<Unit>, blendMode: Win32_impl_p0.D2D1_BLEND_MODEAbi, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BlendImage(__liveRaw, image, blendMode, targetOffset, imageRectangle, interpolationMode)
@@ -16038,7 +16053,7 @@ public class ID2D1Device7 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1DeviceContextVtbl {
     public var base_: ID2D1RenderTargetVtbl = ID2D1RenderTargetVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public var CreateBitmap: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_SIZE_UAbi, CPointer<Unit>, UInt32, CPointer<D2D1_BITMAP_PROPERTIES1Abi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CreateBitmap: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_SIZE_UAbi, CPointer<Unit>, UInt32, CPointer<D2D1_BITMAP_PROPERTIES1Abi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on" && Windows_Win32_Graphics_Imaging == "on"]
     public var CreateBitmapFromWicBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_BITMAP_PROPERTIES1Abi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateColorContext: CFunc<(CPointer<Unit>, D2D1_COLOR_SPACEAbi, CPointer<UInt8>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -16049,7 +16064,7 @@ public struct ID2D1DeviceContextVtbl {
     public var CreateBitmapFromDxgiSurface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_BITMAP_PROPERTIES1Abi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateEffect: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, UInt32, D2D1_COLOR_SPACEAbi, D2D1_COLOR_SPACEAbi, D2D1_BUFFER_PRECISIONAbi, D2D1_EXTEND_MODEAbi, D2D1_COLOR_INTERPOLATION_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var CreateGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, UInt32, D2D1_COLOR_SPACEAbi, D2D1_COLOR_SPACEAbi, D2D1_BUFFER_PRECISIONAbi, D2D1_EXTEND_MODEAbi, D2D1_COLOR_INTERPOLATION_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateImageBrush: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_IMAGE_BRUSH_PROPERTIESAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
@@ -16059,11 +16074,11 @@ public struct ID2D1DeviceContextVtbl {
     public var IsDxgiFormatSupported: CFunc<(CPointer<Unit>, Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi) -> Int32> = { _, _ => 0 }
     public var IsBufferPrecisionSupported: CFunc<(CPointer<Unit>, D2D1_BUFFER_PRECISIONAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetImageLocalBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetImageLocalBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetImageWorldBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetImageWorldBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var GetGlyphRunWorldBounds: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetGlyphRunWorldBounds: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetDevice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     public var SetTarget: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     public var GetTarget: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
@@ -16076,24 +16091,24 @@ public struct ID2D1DeviceContextVtbl {
     public var SetUnitMode: CFunc<(CPointer<Unit>, D2D1_UNIT_MODEAbi) -> Unit> = { _, _ => () }
     public var GetUnitMode: CFunc<(CPointer<Unit>) -> D2D1_UNIT_MODEAbi> = { _ => D2D1_UNIT_MODEAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawImage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi, Win32__impl_l0.D2D1_COMPOSITE_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawImage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi, Win32_impl_p0.D2D1_COMPOSITE_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>) -> Unit> = { _, _, _ => () }
+    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, Float32, D2D1_INTERPOLATION_MODEAbi, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_MATRIX_4X4_FAbi>) -> Unit> = { _, _, _, _, _, _, _ => () }
+    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, Float32, D2D1_INTERPOLATION_MODEAbi, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_MATRIX_4X4_FAbi>) -> Unit> = { _, _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var PushLayer: CFunc<(CPointer<Unit>, CPointer<D2D1_LAYER_PARAMETERS1Abi>, CPointer<Unit>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var InvalidateEffectInputRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var InvalidateEffectInputRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetEffectInvalidRectangleCount: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetEffectInvalidRectangles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var GetEffectInvalidRectangles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetEffectRequiredInputRectangles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<D2D1_EFFECT_INPUT_DESCRIPTIONAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetEffectRequiredInputRectangles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<D2D1_EFFECT_INPUT_DESCRIPTIONAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _ => () }
+    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _ => () }
     public init() {}
 }
 
@@ -16138,7 +16153,7 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public unsafe func CreateBitmap(size: Win32__impl_l0.D2D_SIZE_UAbi, sourceData: CPointer<Unit>, pitch: UInt32, bitmapProperties: CPointer<D2D1_BITMAP_PROPERTIES1Abi>, bitmap: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateBitmap(size: Win32_impl_p0.D2D_SIZE_UAbi, sourceData: CPointer<Unit>, pitch: UInt32, bitmapProperties: CPointer<D2D1_BITMAP_PROPERTIES1Abi>, bitmap: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateBitmap(__liveRaw, size, sourceData, pitch, bitmapProperties, bitmap)
@@ -16184,7 +16199,7 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateGradientStopCollection(straightAlphaGradientStops: CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, straightAlphaGradientStopsCount: UInt32, preInterpolationSpace: D2D1_COLOR_SPACEAbi, postInterpolationSpace: D2D1_COLOR_SPACEAbi, bufferPrecision: D2D1_BUFFER_PRECISIONAbi, extendMode: D2D1_EXTEND_MODEAbi, colorInterpolationMode: D2D1_COLOR_INTERPOLATION_MODEAbi, gradientStopCollection1: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateGradientStopCollection(straightAlphaGradientStops: CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, straightAlphaGradientStopsCount: UInt32, preInterpolationSpace: D2D1_COLOR_SPACEAbi, postInterpolationSpace: D2D1_COLOR_SPACEAbi, bufferPrecision: D2D1_BUFFER_PRECISIONAbi, extendMode: D2D1_EXTEND_MODEAbi, colorInterpolationMode: D2D1_COLOR_INTERPOLATION_MODEAbi, gradientStopCollection1: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateGradientStopCollection(__liveRaw, straightAlphaGradientStops, straightAlphaGradientStopsCount, preInterpolationSpace, postInterpolationSpace, bufferPrecision, extendMode, colorInterpolationMode, gradientStopCollection1)
@@ -16224,21 +16239,21 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetImageLocalBounds(image: CPointer<Unit>, localBounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetImageLocalBounds(image: CPointer<Unit>, localBounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetImageLocalBounds(__liveRaw, image, localBounds)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetImageWorldBounds(image: CPointer<Unit>, worldBounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetImageWorldBounds(image: CPointer<Unit>, worldBounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetImageWorldBounds(__liveRaw, image, worldBounds)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func GetGlyphRunWorldBounds(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetGlyphRunWorldBounds(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGlyphRunWorldBounds(__liveRaw, baselineOrigin, glyphRun, measuringMode, bounds)
@@ -16301,28 +16316,28 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawGlyphRun(__liveRaw, baselineOrigin, glyphRun, glyphRunDescription, foregroundBrush, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawImage(image: CPointer<Unit>, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi, compositeMode: Win32__impl_l0.D2D1_COMPOSITE_MODEAbi): Unit {
+    public unsafe func DrawImage(image: CPointer<Unit>, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi, compositeMode: Win32_impl_p0.D2D1_COMPOSITE_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawImage(__liveRaw, image, targetOffset, imageRectangle, interpolationMode, compositeMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Unit {
+    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawGdiMetafile(__liveRaw, gdiMetafile, targetOffset)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, perspectiveTransform: CPointer<Win32__impl_l0.D2D_MATRIX_4X4_FAbi>): Unit {
+    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, perspectiveTransform: CPointer<Win32_impl_p0.D2D_MATRIX_4X4_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawBitmap(__liveRaw, bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle, perspectiveTransform)
@@ -16336,7 +16351,7 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func InvalidateEffectInputRectangle(effect: CPointer<Unit>, input: UInt32, inputRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func InvalidateEffectInputRectangle(effect: CPointer<Unit>, input: UInt32, inputRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InvalidateEffectInputRectangle(__liveRaw, effect, input, inputRectangle)
@@ -16349,21 +16364,21 @@ public class ID2D1DeviceContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetEffectInvalidRectangles(effect: CPointer<Unit>, rectangles: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, rectanglesCount: UInt32): Int32 {
+    public unsafe func GetEffectInvalidRectangles(effect: CPointer<Unit>, rectangles: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, rectanglesCount: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEffectInvalidRectangles(__liveRaw, effect, rectangles, rectanglesCount)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetEffectRequiredInputRectangles(renderEffect: CPointer<Unit>, renderImageRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, inputDescriptions: CPointer<D2D1_EFFECT_INPUT_DESCRIPTIONAbi>, requiredInputRects: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, inputCount: UInt32): Int32 {
+    public unsafe func GetEffectRequiredInputRectangles(renderEffect: CPointer<Unit>, renderImageRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, inputDescriptions: CPointer<D2D1_EFFECT_INPUT_DESCRIPTIONAbi>, requiredInputRects: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, inputCount: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEffectRequiredInputRectangles(__liveRaw, renderEffect, renderImageRectangle, inputDescriptions, requiredInputRects, inputCount)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.FillOpacityMask(__liveRaw, opacityMask, brush, destinationRectangle, sourceRectangle)
@@ -16449,16 +16464,16 @@ public struct ID2D1DeviceContext2Vtbl {
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateGradientMesh: CFunc<(CPointer<Unit>, CPointer<D2D1_GRADIENT_MESH_PATCHAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Imaging == "on"]
-    public var CreateImageSourceFromWic: CFunc<(CPointer<Unit>, CPointer<Unit>, D2D1_IMAGE_SOURCE_LOADING_OPTIONSAbi, Win32__impl_l0.D2D1_ALPHA_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateImageSourceFromWic: CFunc<(CPointer<Unit>, CPointer<Unit>, D2D1_IMAGE_SOURCE_LOADING_OPTIONSAbi, Win32_impl_p0.D2D1_ALPHA_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateLookupTable3D: CFunc<(CPointer<Unit>, D2D1_BUFFER_PRECISIONAbi, CPointer<UInt32>, CPointer<UInt8>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
     public var CreateImageSourceFromDxgi: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32, Win32_Graphics_Dxgi_Common.DXGI_COLOR_SPACE_TYPEAbi, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetGradientMeshWorldBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetGradientMeshWorldBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
     public var DrawInk: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _, _, _ => () }
     public var DrawGradientMesh: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _ => () }
+    public var DrawGdiMetafile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _ => () }
     public var CreateTransformedImageSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -16524,7 +16539,7 @@ public class ID2D1DeviceContext2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Imaging == "on"]
-    public unsafe func CreateImageSourceFromWic(wicBitmapSource: CPointer<Unit>, loadingOptions: D2D1_IMAGE_SOURCE_LOADING_OPTIONSAbi, alphaMode: Win32__impl_l0.D2D1_ALPHA_MODEAbi, imageSource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateImageSourceFromWic(wicBitmapSource: CPointer<Unit>, loadingOptions: D2D1_IMAGE_SOURCE_LOADING_OPTIONSAbi, alphaMode: Win32_impl_p0.D2D1_ALPHA_MODEAbi, imageSource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateImageSourceFromWic(__liveRaw, wicBitmapSource, loadingOptions, alphaMode, imageSource)
@@ -16544,7 +16559,7 @@ public class ID2D1DeviceContext2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetGradientMeshWorldBounds(gradientMesh: CPointer<Unit>, pBounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetGradientMeshWorldBounds(gradientMesh: CPointer<Unit>, pBounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGradientMeshWorldBounds(__liveRaw, gradientMesh, pBounds)
@@ -16563,7 +16578,7 @@ public class ID2D1DeviceContext2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func DrawGdiMetafile(gdiMetafile: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawGdiMetafile(__liveRaw, gdiMetafile, destinationRectangle, sourceRectangle)
@@ -16644,17 +16659,17 @@ public struct ID2D1DeviceContext4Vtbl {
     public var base_: ID2D1DeviceContext3Vtbl = ID2D1DeviceContext3Vtbl()
     public var CreateSvgGlyphStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawText: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, D2D1_DRAW_TEXT_OPTIONSAbi, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _, _, _, _ => () }
+    public var DrawText: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, D2D1_DRAW_TEXT_OPTIONSAbi, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawTextLayout: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, D2D1_DRAW_TEXT_OPTIONSAbi) -> Unit> = { _, _, _, _, _, _, _ => () }
+    public var DrawTextLayout: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, D2D1_DRAW_TEXT_OPTIONSAbi) -> Unit> = { _, _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawColorBitmapGlyphRun: CFunc<(CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawColorBitmapGlyphRun: CFunc<(CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawSvgGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _ => () }
+    public var DrawSvgGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var GetColorBitmapGlyphImage: CFunc<(CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, UInt16, Int32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, Float32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var GetColorBitmapGlyphImage: CFunc<(CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, UInt16, Int32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, Float32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var GetSvgGlyphImage: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, UInt16, Int32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var GetSvgGlyphImage: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, UInt16, Int32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -16705,42 +16720,42 @@ public class ID2D1DeviceContext4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawText(string: CPointer<UInt16>, stringLength: UInt32, textFormat: CPointer<Unit>, layoutRect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, options: D2D1_DRAW_TEXT_OPTIONSAbi, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawText(string: CPointer<UInt16>, stringLength: UInt32, textFormat: CPointer<Unit>, layoutRect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, options: D2D1_DRAW_TEXT_OPTIONSAbi, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawText(__liveRaw, string, stringLength, textFormat, layoutRect, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawTextLayout(origin: Win32__impl_l0.D2D_POINT_2FAbi, textLayout: CPointer<Unit>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, options: D2D1_DRAW_TEXT_OPTIONSAbi): Unit {
+    public unsafe func DrawTextLayout(origin: Win32_impl_p0.D2D_POINT_2FAbi, textLayout: CPointer<Unit>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, options: D2D1_DRAW_TEXT_OPTIONSAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawTextLayout(__liveRaw, origin, textLayout, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawColorBitmapGlyphRun(glyphImageFormat: Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bitmapSnapOption: D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi): Unit {
+    public unsafe func DrawColorBitmapGlyphRun(glyphImageFormat: Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bitmapSnapOption: D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawColorBitmapGlyphRun(__liveRaw, glyphImageFormat, baselineOrigin, glyphRun, measuringMode, bitmapSnapOption)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawSvgGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawSvgGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawSvgGlyphRun(__liveRaw, baselineOrigin, glyphRun, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func GetColorBitmapGlyphImage(glyphImageFormat: Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, glyphOrigin: Win32__impl_l0.D2D_POINT_2FAbi, fontFace: CPointer<Unit>, fontEmSize: Float32, glyphIndex: UInt16, isSideways: Int32, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, dpiX: Float32, dpiY: Float32, glyphTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, glyphImage: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GetColorBitmapGlyphImage(glyphImageFormat: Win32_Graphics_DirectWrite.DWRITE_GLYPH_IMAGE_FORMATSAbi, glyphOrigin: Win32_impl_p0.D2D_POINT_2FAbi, fontFace: CPointer<Unit>, fontEmSize: Float32, glyphIndex: UInt16, isSideways: Int32, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, dpiX: Float32, dpiY: Float32, glyphTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, glyphImage: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetColorBitmapGlyphImage(__liveRaw, glyphImageFormat, glyphOrigin, fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, dpiX, dpiY, glyphTransform, glyphImage)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func GetSvgGlyphImage(glyphOrigin: Win32__impl_l0.D2D_POINT_2FAbi, fontFace: CPointer<Unit>, fontEmSize: Float32, glyphIndex: UInt16, isSideways: Int32, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, glyphTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, glyphImage: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GetSvgGlyphImage(glyphOrigin: Win32_impl_p0.D2D_POINT_2FAbi, fontFace: CPointer<Unit>, fontEmSize: Float32, glyphIndex: UInt16, isSideways: Int32, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, defaultFillBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, glyphTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, glyphImage: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSvgGlyphImage(__liveRaw, glyphOrigin, fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, glyphTransform, glyphImage)
@@ -16752,7 +16767,7 @@ public class ID2D1DeviceContext4 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1DeviceContext5Vtbl {
     public var base_: ID2D1DeviceContext4Vtbl = ID2D1DeviceContext4Vtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_System_Com == "on"]
-    public var CreateSvgDocument: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.D2D_SIZE_FAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateSvgDocument: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p0.D2D_SIZE_FAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DrawSvgDocument: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Dxgi_Common == "on"]
     public var CreateColorContextFromDxgiColorSpace: CFunc<(CPointer<Unit>, Win32_Graphics_Dxgi_Common.DXGI_COLOR_SPACE_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -16802,7 +16817,7 @@ public class ID2D1DeviceContext5 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func CreateSvgDocument(inputXmlStream: CPointer<Unit>, viewportSize: Win32__impl_l0.D2D_SIZE_FAbi, svgDocument: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateSvgDocument(inputXmlStream: CPointer<Unit>, viewportSize: Win32_impl_p0.D2D_SIZE_FAbi, svgDocument: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateSvgDocument(__liveRaw, inputXmlStream, viewportSize, svgDocument)
@@ -16834,7 +16849,7 @@ public class ID2D1DeviceContext5 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1DeviceContext6Vtbl {
     public var base_: ID2D1DeviceContext5Vtbl = ID2D1DeviceContext5Vtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var BlendImage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.D2D1_BLEND_MODEAbi, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
+    public var BlendImage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p0.D2D1_BLEND_MODEAbi, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_INTERPOLATION_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
     public init() {}
 }
 
@@ -16879,7 +16894,7 @@ public class ID2D1DeviceContext6 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func BlendImage(image: CPointer<Unit>, blendMode: Win32__impl_l0.D2D1_BLEND_MODEAbi, targetOffset: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi): Unit {
+    public unsafe func BlendImage(image: CPointer<Unit>, blendMode: Win32_impl_p0.D2D1_BLEND_MODEAbi, targetOffset: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, imageRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, interpolationMode: D2D1_INTERPOLATION_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.BlendImage(__liveRaw, image, blendMode, targetOffset, imageRectangle, interpolationMode)
@@ -16893,9 +16908,9 @@ public struct ID2D1DeviceContext7Vtbl {
     @When[Windows_Win32_Graphics_DirectWrite == "on"]
     public var GetPaintFeatureLevel: CFunc<(CPointer<Unit>) -> Win32_Graphics_DirectWrite.DWRITE_PAINT_FEATURE_LEVELAbi> = { _ => Win32_Graphics_DirectWrite.DWRITE_PAINT_FEATURE_LEVELAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawPaintGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawPaintGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawGlyphRunWithColorSupport: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi) -> Unit> = { _, _, _, _, _, _, _, _, _ => () }
+    public var DrawGlyphRunWithColorSupport: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, CPointer<Unit>, CPointer<Unit>, UInt32, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi) -> Unit> = { _, _, _, _, _, _, _, _, _ => () }
     public init() {}
 }
 
@@ -16947,14 +16962,14 @@ public class ID2D1DeviceContext7 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawPaintGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, defaultFillBrush: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawPaintGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, defaultFillBrush: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawPaintGlyphRun(__liveRaw, baselineOrigin, glyphRun, defaultFillBrush, colorPaletteIndex, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawGlyphRunWithColorSupport(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bitmapSnapOption: D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi): Unit {
+    public unsafe func DrawGlyphRunWithColorSupport(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, foregroundBrush: CPointer<Unit>, svgGlyphStyle: CPointer<Unit>, colorPaletteIndex: UInt32, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi, bitmapSnapOption: D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTIONAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawGlyphRunWithColorSupport(__liveRaw, baselineOrigin, glyphRun, glyphRunDescription, foregroundBrush, svgGlyphStyle, colorPaletteIndex, measuringMode, bitmapSnapOption)
@@ -17201,7 +17216,7 @@ public struct ID2D1EffectContextVtbl {
     public var GetDpi: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<Float32>) -> Unit> = { _, _, _ => () }
     public var CreateEffect: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetMaximumSupportedFeatureLevel: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, UInt32, CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetMaximumSupportedFeatureLevel: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>, UInt32, CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateTransformNodeFromEffect: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateBlendTransform: CFunc<(CPointer<Unit>, UInt32, CPointer<D2D1_BLEND_DESCRIPTIONAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateBorderTransform: CFunc<(CPointer<Unit>, D2D1_EXTEND_MODEAbi, D2D1_EXTEND_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -17278,7 +17293,7 @@ public class ID2D1EffectContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetMaximumSupportedFeatureLevel(featureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, featureLevelsCount: UInt32, maximumSupportedFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>): Int32 {
+    public unsafe func GetMaximumSupportedFeatureLevel(featureLevels: CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>, featureLevelsCount: UInt32, maximumSupportedFeatureLevel: CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMaximumSupportedFeatureLevel(__liveRaw, featureLevels, featureLevelsCount, maximumSupportedFeatureLevel)
@@ -17649,15 +17664,15 @@ public struct ID2D1FactoryVtbl {
     public var ReloadSystemMetrics: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetDesktopDpi: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<Float32>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateRectangleGeometry: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateRectangleGeometry: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateRoundedRectangleGeometry: CFunc<(CPointer<Unit>, CPointer<D2D1_ROUNDED_RECTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateEllipseGeometry: CFunc<(CPointer<Unit>, CPointer<D2D1_ELLIPSEAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateGeometryGroup: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D1_FILL_MODEAbi, CPointer<CPointer<Unit>>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateGeometryGroup: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D1_FILL_MODEAbi, CPointer<CPointer<Unit>>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateTransformedGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateTransformedGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreatePathGeometry: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateStrokeStyle: CFunc<(CPointer<Unit>, CPointer<D2D1_STROKE_STYLE_PROPERTIESAbi>, CPointer<Float32>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
@@ -17726,7 +17741,7 @@ public class ID2D1Factory <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateRectangleGeometry(rectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, rectangleGeometry: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateRectangleGeometry(rectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, rectangleGeometry: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateRectangleGeometry(__liveRaw, rectangle, rectangleGeometry)
@@ -17747,14 +17762,14 @@ public class ID2D1Factory <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateGeometryGroup(fillMode: Win32__impl_l0.D2D1_FILL_MODEAbi, geometries: CPointer<CPointer<Unit>>, geometriesCount: UInt32, geometryGroup: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateGeometryGroup(fillMode: Win32_impl_p0.D2D1_FILL_MODEAbi, geometries: CPointer<CPointer<Unit>>, geometriesCount: UInt32, geometryGroup: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateGeometryGroup(__liveRaw, fillMode, geometries, geometriesCount, geometryGroup)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateTransformedGeometry(sourceGeometry: CPointer<Unit>, transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, transformedGeometry: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateTransformedGeometry(sourceGeometry: CPointer<Unit>, transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, transformedGeometry: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTransformedGeometry(__liveRaw, sourceGeometry, transform, transformedGeometry)
@@ -18341,7 +18356,7 @@ public struct ID2D1GdiMetafileVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     public var Stream: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _ => 0 }
+    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -18392,7 +18407,7 @@ public class ID2D1GdiMetafile <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetBounds(bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetBounds(bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBounds(__liveRaw, bounds)
@@ -18405,7 +18420,7 @@ public struct ID2D1GdiMetafile1Vtbl {
     public var base_: ID2D1GdiMetafileVtbl = ID2D1GdiMetafileVtbl()
     public var GetDpi: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<Float32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSourceBounds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _ => 0 }
+    public var GetSourceBounds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -18456,7 +18471,7 @@ public class ID2D1GdiMetafile1 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSourceBounds(bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetSourceBounds(bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSourceBounds(__liveRaw, bounds)
@@ -18468,31 +18483,31 @@ public class ID2D1GdiMetafile1 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1GeometryVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetWidenedBounds: CFunc<(CPointer<Unit>, Float32, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetWidenedBounds: CFunc<(CPointer<Unit>, Float32, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var StrokeContainsPoint: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, Float32, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var StrokeContainsPoint: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, Float32, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillContainsPoint: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FillContainsPoint: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CompareWithGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<D2D1_GEOMETRY_RELATIONAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CompareWithGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<D2D1_GEOMETRY_RELATIONAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Simplify: CFunc<(CPointer<Unit>, D2D1_GEOMETRY_SIMPLIFICATION_OPTIONAbi, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Simplify: CFunc<(CPointer<Unit>, D2D1_GEOMETRY_SIMPLIFICATION_OPTIONAbi, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Tessellate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
+    public var Tessellate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CombineWithGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, D2D1_COMBINE_MODEAbi, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CombineWithGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, D2D1_COMBINE_MODEAbi, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Outline: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
+    public var Outline: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputeArea: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Float32>) -> Int32> = { _, _, _, _ => 0 }
+    public var ComputeArea: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Float32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputeLength: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Float32>) -> Int32> = { _, _, _, _ => 0 }
+    public var ComputeLength: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Float32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputePointAtLength: CFunc<(CPointer<Unit>, Float32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ComputePointAtLength: CFunc<(CPointer<Unit>, Float32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Widen: CFunc<(CPointer<Unit>, Float32, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Widen: CFunc<(CPointer<Unit>, Float32, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -18537,91 +18552,91 @@ public class ID2D1Geometry <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetBounds(worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetBounds(worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBounds(__liveRaw, worldTransform, bounds)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetWidenedBounds(strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetWidenedBounds(strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetWidenedBounds(__liveRaw, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, bounds)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func StrokeContainsPoint(point: Win32__impl_l0.D2D_POINT_2FAbi, strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, contains: CPointer<Int32>): Int32 {
+    public unsafe func StrokeContainsPoint(point: Win32_impl_p0.D2D_POINT_2FAbi, strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, contains: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StrokeContainsPoint(__liveRaw, point, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, contains)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillContainsPoint(point: Win32__impl_l0.D2D_POINT_2FAbi, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, contains: CPointer<Int32>): Int32 {
+    public unsafe func FillContainsPoint(point: Win32_impl_p0.D2D_POINT_2FAbi, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, contains: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FillContainsPoint(__liveRaw, point, worldTransform, flatteningTolerance, contains)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CompareWithGeometry(inputGeometry: CPointer<Unit>, inputGeometryTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, relation: CPointer<D2D1_GEOMETRY_RELATIONAbi>): Int32 {
+    public unsafe func CompareWithGeometry(inputGeometry: CPointer<Unit>, inputGeometryTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, relation: CPointer<D2D1_GEOMETRY_RELATIONAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompareWithGeometry(__liveRaw, inputGeometry, inputGeometryTransform, flatteningTolerance, relation)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Simplify(simplificationOption: D2D1_GEOMETRY_SIMPLIFICATION_OPTIONAbi, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
+    public unsafe func Simplify(simplificationOption: D2D1_GEOMETRY_SIMPLIFICATION_OPTIONAbi, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Simplify(__liveRaw, simplificationOption, worldTransform, flatteningTolerance, geometrySink)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Tessellate(worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, tessellationSink: CPointer<Unit>): Int32 {
+    public unsafe func Tessellate(worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, tessellationSink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Tessellate(__liveRaw, worldTransform, flatteningTolerance, tessellationSink)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CombineWithGeometry(inputGeometry: CPointer<Unit>, combineMode: D2D1_COMBINE_MODEAbi, inputGeometryTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
+    public unsafe func CombineWithGeometry(inputGeometry: CPointer<Unit>, combineMode: D2D1_COMBINE_MODEAbi, inputGeometryTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CombineWithGeometry(__liveRaw, inputGeometry, combineMode, inputGeometryTransform, flatteningTolerance, geometrySink)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Outline(worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
+    public unsafe func Outline(worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Outline(__liveRaw, worldTransform, flatteningTolerance, geometrySink)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputeArea(worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, area: CPointer<Float32>): Int32 {
+    public unsafe func ComputeArea(worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, area: CPointer<Float32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputeArea(__liveRaw, worldTransform, flatteningTolerance, area)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputeLength(worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, length: CPointer<Float32>): Int32 {
+    public unsafe func ComputeLength(worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, length: CPointer<Float32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputeLength(__liveRaw, worldTransform, flatteningTolerance, length)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputePointAtLength(length: Float32, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, point: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, unitTangentVector: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Int32 {
+    public unsafe func ComputePointAtLength(length: Float32, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, point: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, unitTangentVector: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputePointAtLength(__liveRaw, length, worldTransform, flatteningTolerance, point, unitTangentVector)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Widen(strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
+    public unsafe func Widen(strokeWidth: Float32, strokeStyle: CPointer<Unit>, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Widen(__liveRaw, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, geometrySink)
@@ -18633,7 +18648,7 @@ public class ID2D1Geometry <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1GeometryGroupVtbl {
     public var base_: ID2D1GeometryVtbl = ID2D1GeometryVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetFillMode: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D1_FILL_MODEAbi> = { _ => Win32__impl_l0.D2D1_FILL_MODEAbi() }
+    public var GetFillMode: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D1_FILL_MODEAbi> = { _ => Win32_impl_p0.D2D1_FILL_MODEAbi() }
     public var GetSourceGeometryCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     public var GetSourceGeometries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32) -> Unit> = { _, _, _ => () }
     public init() {}
@@ -18680,7 +18695,7 @@ public class ID2D1GeometryGroup <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetFillMode(): Win32__impl_l0.D2D1_FILL_MODEAbi {
+    public unsafe func GetFillMode(): Win32_impl_p0.D2D1_FILL_MODEAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFillMode(__liveRaw)
@@ -18817,7 +18832,7 @@ public struct ID2D1GradientStopCollectionVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     public var GetGradientStopCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetGradientStops: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, UInt32) -> Unit> = { _, _, _ => () }
+    public var GetGradientStops: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, UInt32) -> Unit> = { _, _, _ => () }
     public var GetColorInterpolationGamma: CFunc<(CPointer<Unit>) -> D2D1_GAMMAAbi> = { _ => D2D1_GAMMAAbi() }
     public var GetExtendMode: CFunc<(CPointer<Unit>) -> D2D1_EXTEND_MODEAbi> = { _ => D2D1_EXTEND_MODEAbi() }
     public init() {}
@@ -18870,7 +18885,7 @@ public class ID2D1GradientStopCollection <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetGradientStops(gradientStops: CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32): Unit {
+    public unsafe func GetGradientStops(gradientStops: CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetGradientStops(__liveRaw, gradientStops, gradientStopsCount)
@@ -18894,7 +18909,7 @@ public class ID2D1GradientStopCollection <: InterfaceWrapperBase & ComInterface 
 public struct ID2D1GradientStopCollection1Vtbl {
     public var base_: ID2D1GradientStopCollectionVtbl = ID2D1GradientStopCollectionVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetGradientStops1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, UInt32) -> Unit> = { _, _, _ => () }
+    public var GetGradientStops1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, UInt32) -> Unit> = { _, _, _ => () }
     public var GetPreInterpolationSpace: CFunc<(CPointer<Unit>) -> D2D1_COLOR_SPACEAbi> = { _ => D2D1_COLOR_SPACEAbi() }
     public var GetPostInterpolationSpace: CFunc<(CPointer<Unit>) -> D2D1_COLOR_SPACEAbi> = { _ => D2D1_COLOR_SPACEAbi() }
     public var GetBufferPrecision: CFunc<(CPointer<Unit>) -> D2D1_BUFFER_PRECISIONAbi> = { _ => D2D1_BUFFER_PRECISIONAbi() }
@@ -18943,7 +18958,7 @@ public class ID2D1GradientStopCollection1 <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetGradientStops1(gradientStops: CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32): Unit {
+    public unsafe func GetGradientStops1(gradientStops: CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetGradientStops1(__liveRaw, gradientStops, gradientStopsCount)
@@ -18980,7 +18995,7 @@ public struct ID2D1HwndRenderTargetVtbl {
     public var base_: ID2D1RenderTargetVtbl = ID2D1RenderTargetVtbl()
     public var CheckWindowState: CFunc<(CPointer<Unit>) -> D2D1_WINDOW_STATEAbi> = { _ => D2D1_WINDOW_STATEAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Resize: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_SIZE_UAbi>) -> Int32> = { _, _ => 0 }
+    public var Resize: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_SIZE_UAbi>) -> Int32> = { _, _ => 0 }
     public var GetHwnd: CFunc<(CPointer<Unit>) -> CPointer<Unit>> = { _ => CPointer<Unit>() }
     public init() {}
 }
@@ -19032,7 +19047,7 @@ public class ID2D1HwndRenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Resize(pixelSize: CPointer<Win32__impl_l0.D2D_SIZE_UAbi>): Int32 {
+    public unsafe func Resize(pixelSize: CPointer<Win32_impl_p0.D2D_SIZE_UAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Resize(__liveRaw, pixelSize)
@@ -19102,13 +19117,13 @@ public struct ID2D1ImageBrushVtbl {
     public var SetExtendModeY: CFunc<(CPointer<Unit>, D2D1_EXTEND_MODEAbi) -> Unit> = { _, _ => () }
     public var SetInterpolationMode: CFunc<(CPointer<Unit>, D2D1_INTERPOLATION_MODEAbi) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetSourceRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
+    public var SetSourceRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
     public var GetImage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     public var GetExtendModeX: CFunc<(CPointer<Unit>) -> D2D1_EXTEND_MODEAbi> = { _ => D2D1_EXTEND_MODEAbi() }
     public var GetExtendModeY: CFunc<(CPointer<Unit>) -> D2D1_EXTEND_MODEAbi> = { _ => D2D1_EXTEND_MODEAbi() }
     public var GetInterpolationMode: CFunc<(CPointer<Unit>) -> D2D1_INTERPOLATION_MODEAbi> = { _ => D2D1_INTERPOLATION_MODEAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSourceRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
+    public var GetSourceRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
     public init() {}
 }
 
@@ -19177,7 +19192,7 @@ public class ID2D1ImageBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetSourceRectangle(sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func SetSourceRectangle(sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetSourceRectangle(__liveRaw, sourceRectangle)
@@ -19208,7 +19223,7 @@ public class ID2D1ImageBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSourceRectangle(sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func GetSourceRectangle(sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetSourceRectangle(__liveRaw, sourceRectangle)
@@ -19282,9 +19297,9 @@ public class ID2D1ImageSource <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1ImageSourceFromWicVtbl {
     public var base_: ID2D1ImageSourceVtbl = ID2D1ImageSourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var EnsureCached: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>) -> Int32> = { _, _ => 0 }
+    public var EnsureCached: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var TrimCache: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>) -> Int32> = { _, _ => 0 }
+    public var TrimCache: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Imaging == "on"]
     public var GetSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     public init() {}
@@ -19331,14 +19346,14 @@ public class ID2D1ImageSourceFromWic <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func EnsureCached(rectangleToFill: CPointer<Win32__impl_l0.D2D_RECT_UAbi>): Int32 {
+    public unsafe func EnsureCached(rectangleToFill: CPointer<Win32_impl_p0.D2D_RECT_UAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnsureCached(__liveRaw, rectangleToFill)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func TrimCache(rectangleToPreserve: CPointer<Win32__impl_l0.D2D_RECT_UAbi>): Int32 {
+    public unsafe func TrimCache(rectangleToPreserve: CPointer<Win32_impl_p0.D2D_RECT_UAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TrimCache(__liveRaw, rectangleToPreserve)
@@ -19365,9 +19380,9 @@ public struct ID2D1InkVtbl {
     public var GetSegmentCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     public var GetSegments: CFunc<(CPointer<Unit>, UInt32, CPointer<D2D1_INK_BEZIER_SEGMENTAbi>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var StreamAsGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var StreamAsGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetBounds: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -19460,14 +19475,14 @@ public class ID2D1Ink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func StreamAsGeometry(inkStyle: CPointer<Unit>, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
+    public unsafe func StreamAsGeometry(inkStyle: CPointer<Unit>, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, geometrySink: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StreamAsGeometry(__liveRaw, inkStyle, worldTransform, flatteningTolerance, geometrySink)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetBounds(inkStyle: CPointer<Unit>, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, bounds: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Int32 {
+    public unsafe func GetBounds(inkStyle: CPointer<Unit>, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, bounds: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBounds(__liveRaw, inkStyle, worldTransform, bounds)
@@ -19479,9 +19494,9 @@ public class ID2D1Ink <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1InkStyleVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetNibTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var SetNibTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetNibTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var GetNibTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     public var SetNibShape: CFunc<(CPointer<Unit>, D2D1_INK_NIB_SHAPEAbi) -> Unit> = { _, _ => () }
     public var GetNibShape: CFunc<(CPointer<Unit>) -> D2D1_INK_NIB_SHAPEAbi> = { _ => D2D1_INK_NIB_SHAPEAbi() }
     public init() {}
@@ -19528,14 +19543,14 @@ public class ID2D1InkStyle <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetNibTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func SetNibTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetNibTransform(__liveRaw, transform)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetNibTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func GetNibTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetNibTransform(__liveRaw, transform)
@@ -19559,7 +19574,7 @@ public class ID2D1InkStyle <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1LayerVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_FAbi> = { _ => Win32__impl_l0.D2D_SIZE_FAbi() }
+    public var GetSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_FAbi> = { _ => Win32_impl_p0.D2D_SIZE_FAbi() }
     public init() {}
 }
 
@@ -19604,7 +19619,7 @@ public class ID2D1Layer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSize(): Win32__impl_l0.D2D_SIZE_FAbi {
+    public unsafe func GetSize(): Win32_impl_p0.D2D_SIZE_FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSize(__liveRaw)
@@ -19616,13 +19631,13 @@ public class ID2D1Layer <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1LinearGradientBrushVtbl {
     public var base_: ID2D1BrushVtbl = ID2D1BrushVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetStartPoint: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
+    public var SetStartPoint: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetEndPoint: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
+    public var SetEndPoint: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetStartPoint: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_POINT_2FAbi> = { _ => Win32__impl_l0.D2D_POINT_2FAbi() }
+    public var GetStartPoint: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_POINT_2FAbi> = { _ => Win32_impl_p0.D2D_POINT_2FAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetEndPoint: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_POINT_2FAbi> = { _ => Win32__impl_l0.D2D_POINT_2FAbi() }
+    public var GetEndPoint: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_POINT_2FAbi> = { _ => Win32_impl_p0.D2D_POINT_2FAbi() }
     public var GetGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     public init() {}
 }
@@ -19668,28 +19683,28 @@ public class ID2D1LinearGradientBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetStartPoint(startPoint: Win32__impl_l0.D2D_POINT_2FAbi): Unit {
+    public unsafe func SetStartPoint(startPoint: Win32_impl_p0.D2D_POINT_2FAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetStartPoint(__liveRaw, startPoint)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetEndPoint(endPoint: Win32__impl_l0.D2D_POINT_2FAbi): Unit {
+    public unsafe func SetEndPoint(endPoint: Win32_impl_p0.D2D_POINT_2FAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetEndPoint(__liveRaw, endPoint)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetStartPoint(): Win32__impl_l0.D2D_POINT_2FAbi {
+    public unsafe func GetStartPoint(): Win32_impl_p0.D2D_POINT_2FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStartPoint(__liveRaw)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetEndPoint(): Win32__impl_l0.D2D_POINT_2FAbi {
+    public unsafe func GetEndPoint(): Win32_impl_p0.D2D_POINT_2FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEndPoint(__liveRaw)
@@ -19886,7 +19901,7 @@ public class ID2D1PathGeometry <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1PathGeometry1Vtbl {
     public var base_: ID2D1PathGeometryVtbl = ID2D1PathGeometryVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputePointAndSegmentAtLength: CFunc<(CPointer<Unit>, Float32, UInt32, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<D2D1_POINT_DESCRIPTIONAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ComputePointAndSegmentAtLength: CFunc<(CPointer<Unit>, Float32, UInt32, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, Float32, CPointer<D2D1_POINT_DESCRIPTIONAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -19931,7 +19946,7 @@ public class ID2D1PathGeometry1 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputePointAndSegmentAtLength(length: Float32, startSegment: UInt32, worldTransform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, pointDescription: CPointer<D2D1_POINT_DESCRIPTIONAbi>): Int32 {
+    public unsafe func ComputePointAndSegmentAtLength(length: Float32, startSegment: UInt32, worldTransform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, flatteningTolerance: Float32, pointDescription: CPointer<D2D1_POINT_DESCRIPTIONAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputePointAndSegmentAtLength(__liveRaw, length, startSegment, worldTransform, flatteningTolerance, pointDescription)
@@ -19943,7 +19958,7 @@ public class ID2D1PathGeometry1 <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1PrintControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_System_Com == "on"]
-    public var AddPage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.D2D_SIZE_FAbi, CPointer<Unit>, CPointer<UInt64>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var AddPage: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p0.D2D_SIZE_FAbi, CPointer<Unit>, CPointer<UInt64>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -19989,7 +20004,7 @@ public class ID2D1PrintControl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func AddPage(commandList: CPointer<Unit>, pageSize: Win32__impl_l0.D2D_SIZE_FAbi, pagePrintTicketStream: CPointer<Unit>, tag1: CPointer<UInt64>, tag2: CPointer<UInt64>): Int32 {
+    public unsafe func AddPage(commandList: CPointer<Unit>, pageSize: Win32_impl_p0.D2D_SIZE_FAbi, pagePrintTicketStream: CPointer<Unit>, tag1: CPointer<UInt64>, tag2: CPointer<UInt64>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPage(__liveRaw, commandList, pageSize, pagePrintTicketStream, tag1, tag2)
@@ -20007,15 +20022,15 @@ public class ID2D1PrintControl <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1RadialGradientBrushVtbl {
     public var base_: ID2D1BrushVtbl = ID2D1BrushVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetCenter: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
+    public var SetCenter: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetGradientOriginOffset: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
+    public var SetGradientOriginOffset: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi) -> Unit> = { _, _ => () }
     public var SetRadiusX: CFunc<(CPointer<Unit>, Float32) -> Unit> = { _, _ => () }
     public var SetRadiusY: CFunc<(CPointer<Unit>, Float32) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetCenter: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_POINT_2FAbi> = { _ => Win32__impl_l0.D2D_POINT_2FAbi() }
+    public var GetCenter: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_POINT_2FAbi> = { _ => Win32_impl_p0.D2D_POINT_2FAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetGradientOriginOffset: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_POINT_2FAbi> = { _ => Win32__impl_l0.D2D_POINT_2FAbi() }
+    public var GetGradientOriginOffset: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_POINT_2FAbi> = { _ => Win32_impl_p0.D2D_POINT_2FAbi() }
     public var GetRadiusX: CFunc<(CPointer<Unit>) -> Float32> = { _ => 0.0 }
     public var GetRadiusY: CFunc<(CPointer<Unit>) -> Float32> = { _ => 0.0 }
     public var GetGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
@@ -20063,14 +20078,14 @@ public class ID2D1RadialGradientBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetCenter(center: Win32__impl_l0.D2D_POINT_2FAbi): Unit {
+    public unsafe func SetCenter(center: Win32_impl_p0.D2D_POINT_2FAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetCenter(__liveRaw, center)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetGradientOriginOffset(gradientOriginOffset: Win32__impl_l0.D2D_POINT_2FAbi): Unit {
+    public unsafe func SetGradientOriginOffset(gradientOriginOffset: Win32_impl_p0.D2D_POINT_2FAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetGradientOriginOffset(__liveRaw, gradientOriginOffset)
@@ -20089,14 +20104,14 @@ public class ID2D1RadialGradientBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetCenter(): Win32__impl_l0.D2D_POINT_2FAbi {
+    public unsafe func GetCenter(): Win32_impl_p0.D2D_POINT_2FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCenter(__liveRaw)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetGradientOriginOffset(): Win32__impl_l0.D2D_POINT_2FAbi {
+    public unsafe func GetGradientOriginOffset(): Win32_impl_p0.D2D_POINT_2FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGradientOriginOffset(__liveRaw)
@@ -20126,7 +20141,7 @@ public class ID2D1RadialGradientBrush <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1RectangleGeometryVtbl {
     public var base_: ID2D1GeometryVtbl = ID2D1GeometryVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetRect: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
+    public var GetRect: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _ => () }
     public init() {}
 }
 
@@ -20171,7 +20186,7 @@ public class ID2D1RectangleGeometry <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetRect(rect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func GetRect(rect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetRect(__liveRaw, rect)
@@ -20183,7 +20198,7 @@ public class ID2D1RectangleGeometry <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1RenderTargetVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public var CreateBitmap: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_SIZE_UAbi, CPointer<Unit>, UInt32, CPointer<D2D1_BITMAP_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CreateBitmap: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_SIZE_UAbi, CPointer<Unit>, UInt32, CPointer<D2D1_BITMAP_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on" && Windows_Win32_Graphics_Imaging == "on"]
     public var CreateBitmapFromWicBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_BITMAP_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
@@ -20191,24 +20206,24 @@ public struct ID2D1RenderTargetVtbl {
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateBitmapBrush: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<D2D1_BITMAP_BRUSH_PROPERTIESAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateSolidColorBrush: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateSolidColorBrush: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, UInt32, D2D1_GAMMAAbi, D2D1_EXTEND_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CreateGradientStopCollection: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, UInt32, D2D1_GAMMAAbi, D2D1_EXTEND_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateLinearGradientBrush: CFunc<(CPointer<Unit>, CPointer<D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIESAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var CreateRadialGradientBrush: CFunc<(CPointer<Unit>, CPointer<D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIESAbi>, CPointer<D2D1_BRUSH_PROPERTIESAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public var CreateCompatibleRenderTarget: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_SIZE_FAbi>, CPointer<Win32__impl_l0.D2D_SIZE_UAbi>, CPointer<Win32__impl_l1.D2D1_PIXEL_FORMATAbi>, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CreateCompatibleRenderTarget: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_SIZE_FAbi>, CPointer<Win32_impl_p0.D2D_SIZE_UAbi>, CPointer<Win32_impl_p1.D2D1_PIXEL_FORMATAbi>, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreateLayer: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_SIZE_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateLayer: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_SIZE_FAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateMesh: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawLine: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, CPointer<Unit>) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawLine: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, Float32, CPointer<Unit>) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>, Float32, CPointer<Unit>) -> Unit> = { _, _, _, _, _ => () }
+    public var DrawRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>, Float32, CPointer<Unit>) -> Unit> = { _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillRectangle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>) -> Unit> = { _, _, _ => () }
+    public var FillRectangle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
     public var DrawRoundedRectangle: CFunc<(CPointer<Unit>, CPointer<D2D1_ROUNDED_RECTAbi>, CPointer<Unit>, Float32, CPointer<Unit>) -> Unit> = { _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
@@ -20221,19 +20236,19 @@ public struct ID2D1RenderTargetVtbl {
     public var FillGeometry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _, _, _ => () }
     public var FillMesh: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, D2D1_OPACITY_MASK_CONTENTAbi, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _, _ => () }
+    public var FillOpacityMask: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, D2D1_OPACITY_MASK_CONTENTAbi, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, Float32, D2D1_BITMAP_INTERPOLATION_MODEAbi, CPointer<Win32__impl_l0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _, _ => () }
+    public var DrawBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, Float32, D2D1_BITMAP_INTERPOLATION_MODEAbi, CPointer<Win32_impl_p0.D2D_RECT_FAbi>) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawText: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Unit>, D2D1_DRAW_TEXT_OPTIONSAbi, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _, _ => () }
+    public var DrawText: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Unit>, D2D1_DRAW_TEXT_OPTIONSAbi, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawTextLayout: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Unit>, CPointer<Unit>, D2D1_DRAW_TEXT_OPTIONSAbi) -> Unit> = { _, _, _, _, _ => () }
+    public var DrawTextLayout: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Unit>, CPointer<Unit>, D2D1_DRAW_TEXT_OPTIONSAbi) -> Unit> = { _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _ => () }
+    public var DrawGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, CPointer<Unit>, Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi) -> Unit> = { _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var SetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     public var SetAntialiasMode: CFunc<(CPointer<Unit>, D2D1_ANTIALIAS_MODEAbi) -> Unit> = { _, _ => () }
     public var GetAntialiasMode: CFunc<(CPointer<Unit>) -> D2D1_ANTIALIAS_MODEAbi> = { _ => D2D1_ANTIALIAS_MODEAbi() }
     public var SetTextAntialiasMode: CFunc<(CPointer<Unit>, D2D1_TEXT_ANTIALIAS_MODEAbi) -> Unit> = { _, _ => () }
@@ -20251,20 +20266,20 @@ public struct ID2D1RenderTargetVtbl {
     public var SaveDrawingState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     public var RestoreDrawingState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var PushAxisAlignedClip: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, D2D1_ANTIALIAS_MODEAbi) -> Unit> = { _, _, _ => () }
+    public var PushAxisAlignedClip: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, D2D1_ANTIALIAS_MODEAbi) -> Unit> = { _, _, _ => () }
     public var PopAxisAlignedClip: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Clear: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
+    public var Clear: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
     public var BeginDraw: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var EndDraw: CFunc<(CPointer<Unit>, CPointer<UInt64>, CPointer<UInt64>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public var GetPixelFormat: CFunc<(CPointer<Unit>) -> Win32__impl_l1.D2D1_PIXEL_FORMATAbi> = { _ => Win32__impl_l1.D2D1_PIXEL_FORMATAbi() }
+    public var GetPixelFormat: CFunc<(CPointer<Unit>) -> Win32_impl_p1.D2D1_PIXEL_FORMATAbi> = { _ => Win32_impl_p1.D2D1_PIXEL_FORMATAbi() }
     public var SetDpi: CFunc<(CPointer<Unit>, Float32, Float32) -> Unit> = { _, _, _ => () }
     public var GetDpi: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<Float32>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_FAbi> = { _ => Win32__impl_l0.D2D_SIZE_FAbi() }
+    public var GetSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_FAbi> = { _ => Win32_impl_p0.D2D_SIZE_FAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetPixelSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_UAbi> = { _ => Win32__impl_l0.D2D_SIZE_UAbi() }
+    public var GetPixelSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_UAbi> = { _ => Win32_impl_p0.D2D_SIZE_UAbi() }
     public var GetMaximumBitmapSize: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<D2D1_RENDER_TARGET_PROPERTIESAbi>) -> Int32> = { _, _ => 0 }
@@ -20312,7 +20327,7 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public unsafe func CreateBitmap(size: Win32__impl_l0.D2D_SIZE_UAbi, srcData: CPointer<Unit>, pitch: UInt32, bitmapProperties: CPointer<D2D1_BITMAP_PROPERTIESAbi>, bitmap: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateBitmap(size: Win32_impl_p0.D2D_SIZE_UAbi, srcData: CPointer<Unit>, pitch: UInt32, bitmapProperties: CPointer<D2D1_BITMAP_PROPERTIESAbi>, bitmap: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateBitmap(__liveRaw, size, srcData, pitch, bitmapProperties, bitmap)
@@ -20340,14 +20355,14 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateSolidColorBrush(color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, brushProperties: CPointer<D2D1_BRUSH_PROPERTIESAbi>, solidColorBrush: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateSolidColorBrush(color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, brushProperties: CPointer<D2D1_BRUSH_PROPERTIESAbi>, solidColorBrush: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateSolidColorBrush(__liveRaw, color, brushProperties, solidColorBrush)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateGradientStopCollection(gradientStops: CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32, colorInterpolationGamma: D2D1_GAMMAAbi, extendMode: D2D1_EXTEND_MODEAbi, gradientStopCollection: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateGradientStopCollection(gradientStops: CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>, gradientStopsCount: UInt32, colorInterpolationGamma: D2D1_GAMMAAbi, extendMode: D2D1_EXTEND_MODEAbi, gradientStopCollection: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateGradientStopCollection(__liveRaw, gradientStops, gradientStopsCount, colorInterpolationGamma, extendMode, gradientStopCollection)
@@ -20368,14 +20383,14 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public unsafe func CreateCompatibleRenderTarget(desiredSize: CPointer<Win32__impl_l0.D2D_SIZE_FAbi>, desiredPixelSize: CPointer<Win32__impl_l0.D2D_SIZE_UAbi>, desiredFormat: CPointer<Win32__impl_l1.D2D1_PIXEL_FORMATAbi>, options: D2D1_COMPATIBLE_RENDER_TARGET_OPTIONSAbi, bitmapRenderTarget: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateCompatibleRenderTarget(desiredSize: CPointer<Win32_impl_p0.D2D_SIZE_FAbi>, desiredPixelSize: CPointer<Win32_impl_p0.D2D_SIZE_UAbi>, desiredFormat: CPointer<Win32_impl_p1.D2D1_PIXEL_FORMATAbi>, options: D2D1_COMPATIBLE_RENDER_TARGET_OPTIONSAbi, bitmapRenderTarget: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateCompatibleRenderTarget(__liveRaw, desiredSize, desiredPixelSize, desiredFormat, options, bitmapRenderTarget)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreateLayer(size: CPointer<Win32__impl_l0.D2D_SIZE_FAbi>, layer: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateLayer(size: CPointer<Win32_impl_p0.D2D_SIZE_FAbi>, layer: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateLayer(__liveRaw, size, layer)
@@ -20388,21 +20403,21 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawLine(point0: Win32__impl_l0.D2D_POINT_2FAbi, point1: Win32__impl_l0.D2D_POINT_2FAbi, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Unit {
+    public unsafe func DrawLine(point0: Win32_impl_p0.D2D_POINT_2FAbi, point1: Win32_impl_p0.D2D_POINT_2FAbi, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawLine(__liveRaw, point0, point1, brush, strokeWidth, strokeStyle)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawRectangle(rect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Unit {
+    public unsafe func DrawRectangle(rect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, brush: CPointer<Unit>, strokeWidth: Float32, strokeStyle: CPointer<Unit>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawRectangle(__liveRaw, rect, brush, strokeWidth, strokeStyle)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillRectangle(rect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, brush: CPointer<Unit>): Unit {
+    public unsafe func FillRectangle(rect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, brush: CPointer<Unit>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.FillRectangle(__liveRaw, rect, brush)
@@ -20455,49 +20470,49 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, content: D2D1_OPACITY_MASK_CONTENTAbi, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func FillOpacityMask(opacityMask: CPointer<Unit>, brush: CPointer<Unit>, content: D2D1_OPACITY_MASK_CONTENTAbi, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.FillOpacityMask(__liveRaw, opacityMask, brush, content, destinationRectangle, sourceRectangle)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_BITMAP_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32__impl_l0.D2D_RECT_FAbi>): Unit {
+    public unsafe func DrawBitmap(bitmap: CPointer<Unit>, destinationRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, opacity: Float32, interpolationMode: D2D1_BITMAP_INTERPOLATION_MODEAbi, sourceRectangle: CPointer<Win32_impl_p0.D2D_RECT_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawBitmap(__liveRaw, bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawText(string: CPointer<UInt16>, stringLength: UInt32, textFormat: CPointer<Unit>, layoutRect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, defaultFillBrush: CPointer<Unit>, options: D2D1_DRAW_TEXT_OPTIONSAbi, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawText(string: CPointer<UInt16>, stringLength: UInt32, textFormat: CPointer<Unit>, layoutRect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, defaultFillBrush: CPointer<Unit>, options: D2D1_DRAW_TEXT_OPTIONSAbi, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawText(__liveRaw, string, stringLength, textFormat, layoutRect, defaultFillBrush, options, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawTextLayout(origin: Win32__impl_l0.D2D_POINT_2FAbi, textLayout: CPointer<Unit>, defaultFillBrush: CPointer<Unit>, options: D2D1_DRAW_TEXT_OPTIONSAbi): Unit {
+    public unsafe func DrawTextLayout(origin: Win32_impl_p0.D2D_POINT_2FAbi, textLayout: CPointer<Unit>, defaultFillBrush: CPointer<Unit>, options: D2D1_DRAW_TEXT_OPTIONSAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawTextLayout(__liveRaw, origin, textLayout, defaultFillBrush, options)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_DirectWrite == "on"]
-    public unsafe func DrawGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
+    public unsafe func DrawGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<Win32_Graphics_DirectWrite.DWRITE_GLYPH_RUNAbi>, foregroundBrush: CPointer<Unit>, measuringMode: Win32_Graphics_DirectWrite.DWRITE_MEASURING_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.DrawGlyphRun(__liveRaw, baselineOrigin, glyphRun, foregroundBrush, measuringMode)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func SetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetTransform(__liveRaw, transform)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func GetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetTransform(__liveRaw, transform)
@@ -20585,7 +20600,7 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func PushAxisAlignedClip(clipRect: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, antialiasMode: D2D1_ANTIALIAS_MODEAbi): Unit {
+    public unsafe func PushAxisAlignedClip(clipRect: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, antialiasMode: D2D1_ANTIALIAS_MODEAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.PushAxisAlignedClip(__liveRaw, clipRect, antialiasMode)
@@ -20598,7 +20613,7 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Clear(clearColor: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Unit {
+    public unsafe func Clear(clearColor: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.Clear(__liveRaw, clearColor)
@@ -20617,7 +20632,7 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-    public unsafe func GetPixelFormat(): Win32__impl_l1.D2D1_PIXEL_FORMATAbi {
+    public unsafe func GetPixelFormat(): Win32_impl_p1.D2D1_PIXEL_FORMATAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPixelFormat(__liveRaw)
@@ -20636,14 +20651,14 @@ public class ID2D1RenderTarget <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSize(): Win32__impl_l0.D2D_SIZE_FAbi {
+    public unsafe func GetSize(): Win32_impl_p0.D2D_SIZE_FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSize(__liveRaw)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetPixelSize(): Win32__impl_l0.D2D_SIZE_UAbi {
+    public unsafe func GetPixelSize(): Win32_impl_p0.D2D_SIZE_UAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPixelSize(__liveRaw)
@@ -20780,9 +20795,9 @@ public class ID2D1RoundedRectangleGeometry <: InterfaceWrapperBase & ComInterfac
 public struct ID2D1SolidColorBrushVtbl {
     public var base_: ID2D1BrushVtbl = ID2D1BrushVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetColor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
+    public var SetColor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetColor: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D1_COLOR_FAbi> = { _ => Win32__impl_l0.D2D1_COLOR_FAbi() }
+    public var GetColor: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D1_COLOR_FAbi> = { _ => Win32_impl_p0.D2D1_COLOR_FAbi() }
     public init() {}
 }
 
@@ -20827,14 +20842,14 @@ public class ID2D1SolidColorBrush <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetColor(color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Unit {
+    public unsafe func SetColor(color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.SetColor(__liveRaw, color)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetColor(): Win32__impl_l0.D2D1_COLOR_FAbi {
+    public unsafe func GetColor(): Win32_impl_p0.D2D1_COLOR_FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetColor(__liveRaw)
@@ -20847,7 +20862,7 @@ public struct ID2D1SourceTransformVtbl {
     public var base_: ID2D1TransformVtbl = ID2D1TransformVtbl()
     public var SetRenderInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var Draw: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_Foundation.RECTAbi>, Win32__impl_l0.D2D_POINT_2UAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var Draw: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_Foundation.RECTAbi>, Win32_impl_p0.D2D_POINT_2UAbi) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -20898,7 +20913,7 @@ public class ID2D1SourceTransform <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func Draw(target: CPointer<Unit>, drawRect: CPointer<Win32_Foundation.RECTAbi>, targetOrigin: Win32__impl_l0.D2D_POINT_2UAbi): Int32 {
+    public unsafe func Draw(target: CPointer<Unit>, drawRect: CPointer<Win32_Foundation.RECTAbi>, targetOrigin: Win32_impl_p0.D2D_POINT_2UAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Draw(__liveRaw, target, drawRect, targetOrigin)
@@ -20910,11 +20925,11 @@ public class ID2D1SourceTransform <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1SpriteBatchVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var AddSprites: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, UInt32, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var AddSprites: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, UInt32, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetSprites: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, UInt32, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var SetSprites: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, UInt32, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetSprites: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<Win32__impl_l0.D2D_RECT_UAbi>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var GetSprites: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<Win32_impl_p0.D2D_RECT_UAbi>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var GetSpriteCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public init() {}
@@ -20961,21 +20976,21 @@ public class ID2D1SpriteBatch <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func AddSprites(spriteCount: UInt32, destinationRectangles: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32__impl_l0.D2D_RECT_UAbi>, colors: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, destinationRectanglesStride: UInt32, sourceRectanglesStride: UInt32, colorsStride: UInt32, transformsStride: UInt32): Int32 {
+    public unsafe func AddSprites(spriteCount: UInt32, destinationRectangles: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32_impl_p0.D2D_RECT_UAbi>, colors: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, destinationRectanglesStride: UInt32, sourceRectanglesStride: UInt32, colorsStride: UInt32, transformsStride: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddSprites(__liveRaw, spriteCount, destinationRectangles, sourceRectangles, colors, transforms, destinationRectanglesStride, sourceRectanglesStride, colorsStride, transformsStride)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetSprites(startIndex: UInt32, spriteCount: UInt32, destinationRectangles: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32__impl_l0.D2D_RECT_UAbi>, colors: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>, destinationRectanglesStride: UInt32, sourceRectanglesStride: UInt32, colorsStride: UInt32, transformsStride: UInt32): Int32 {
+    public unsafe func SetSprites(startIndex: UInt32, spriteCount: UInt32, destinationRectangles: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32_impl_p0.D2D_RECT_UAbi>, colors: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>, destinationRectanglesStride: UInt32, sourceRectanglesStride: UInt32, colorsStride: UInt32, transformsStride: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSprites(__liveRaw, startIndex, spriteCount, destinationRectangles, sourceRectangles, colors, transforms, destinationRectanglesStride, sourceRectanglesStride, colorsStride, transformsStride)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetSprites(startIndex: UInt32, spriteCount: UInt32, destinationRectangles: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32__impl_l0.D2D_RECT_UAbi>, colors: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Int32 {
+    public unsafe func GetSprites(startIndex: UInt32, spriteCount: UInt32, destinationRectangles: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, sourceRectangles: CPointer<Win32_impl_p0.D2D_RECT_UAbi>, colors: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, transforms: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSprites(__liveRaw, startIndex, spriteCount, destinationRectangles, sourceRectangles, colors, transforms)
@@ -21227,9 +21242,9 @@ public class ID2D1SvgAttribute <: InterfaceWrapperBase & ComInterface {
 public struct ID2D1SvgDocumentVtbl {
     public var base_: ID2D1ResourceVtbl = ID2D1ResourceVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetViewportSize: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_SIZE_FAbi) -> Int32> = { _, _ => 0 }
+    public var SetViewportSize: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_SIZE_FAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetViewportSize: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D2D_SIZE_FAbi> = { _ => Win32__impl_l0.D2D_SIZE_FAbi() }
+    public var GetViewportSize: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D2D_SIZE_FAbi> = { _ => Win32_impl_p0.D2D_SIZE_FAbi() }
     public var SetRoot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetRoot: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     public var FindElementById: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -21238,10 +21253,10 @@ public struct ID2D1SvgDocumentVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Deserialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreatePaint: CFunc<(CPointer<Unit>, D2D1_SVG_PAINT_TYPEAbi, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreatePaint: CFunc<(CPointer<Unit>, D2D1_SVG_PAINT_TYPEAbi, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateStrokeDashArray: CFunc<(CPointer<Unit>, CPointer<D2D1_SVG_LENGTHAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreatePointCollection: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreatePointCollection: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreatePathData: CFunc<(CPointer<Unit>, CPointer<Float32>, UInt32, CPointer<D2D1_SVG_PATH_COMMANDAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -21287,14 +21302,14 @@ public class ID2D1SvgDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetViewportSize(viewportSize: Win32__impl_l0.D2D_SIZE_FAbi): Int32 {
+    public unsafe func SetViewportSize(viewportSize: Win32_impl_p0.D2D_SIZE_FAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetViewportSize(__liveRaw, viewportSize)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetViewportSize(): Win32__impl_l0.D2D_SIZE_FAbi {
+    public unsafe func GetViewportSize(): Win32_impl_p0.D2D_SIZE_FAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetViewportSize(__liveRaw)
@@ -21333,7 +21348,7 @@ public class ID2D1SvgDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreatePaint(paintType: D2D1_SVG_PAINT_TYPEAbi, color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>, id: CPointer<UInt16>, paint: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreatePaint(paintType: D2D1_SVG_PAINT_TYPEAbi, color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>, id: CPointer<UInt16>, paint: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePaint(__liveRaw, paintType, color, id, paint)
@@ -21346,7 +21361,7 @@ public class ID2D1SvgDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreatePointCollection(points: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pointsCount: UInt32, pointCollection: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreatePointCollection(points: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pointsCount: UInt32, pointCollection: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePointCollection(__liveRaw, points, pointsCount, pointCollection)
@@ -21707,9 +21722,9 @@ public struct ID2D1SvgPaintVtbl {
     public var SetPaintType: CFunc<(CPointer<Unit>, D2D1_SVG_PAINT_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var GetPaintType: CFunc<(CPointer<Unit>) -> D2D1_SVG_PAINT_TYPEAbi> = { _ => D2D1_SVG_PAINT_TYPEAbi() }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetColor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>) -> Int32> = { _, _ => 0 }
+    public var SetColor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetColor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
+    public var GetColor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>) -> Unit> = { _, _ => () }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetId: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var GetIdLength: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
@@ -21769,14 +21784,14 @@ public class ID2D1SvgPaint <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetColor(color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Int32 {
+    public unsafe func SetColor(color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetColor(__liveRaw, color)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetColor(color: CPointer<Win32__impl_l0.D2D1_COLOR_FAbi>): Unit {
+    public unsafe func GetColor(color: CPointer<Win32_impl_p0.D2D1_COLOR_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetColor(__liveRaw, color)
@@ -21814,7 +21829,7 @@ public struct ID2D1SvgPathDataVtbl {
     public var GetCommands: CFunc<(CPointer<Unit>, CPointer<D2D1_SVG_PATH_COMMANDAbi>, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var GetCommandsCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var CreatePathGeometry: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D1_FILL_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreatePathGeometry: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D1_FILL_MODEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -21907,7 +21922,7 @@ public class ID2D1SvgPathData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func CreatePathGeometry(fillMode: Win32__impl_l0.D2D1_FILL_MODEAbi, pathGeometry: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreatePathGeometry(fillMode: Win32_impl_p0.D2D1_FILL_MODEAbi, pathGeometry: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePathGeometry(__liveRaw, fillMode, pathGeometry)
@@ -21920,9 +21935,9 @@ public struct ID2D1SvgPointCollectionVtbl {
     public var base_: ID2D1SvgAttributeVtbl = ID2D1SvgAttributeVtbl()
     public var RemovePointsAtEnd: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var UpdatePoints: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var UpdatePoints: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetPoints: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPoints: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var GetPointsCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     public init() {}
 }
@@ -21974,14 +21989,14 @@ public class ID2D1SvgPointCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func UpdatePoints(points: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pointsCount: UInt32, startIndex: UInt32): Int32 {
+    public unsafe func UpdatePoints(points: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pointsCount: UInt32, startIndex: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UpdatePoints(__liveRaw, points, pointsCount, startIndex)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetPoints(points: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>, pointsCount: UInt32, startIndex: UInt32): Int32 {
+    public unsafe func GetPoints(points: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>, pointsCount: UInt32, startIndex: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPoints(__liveRaw, points, pointsCount, startIndex)
@@ -22090,7 +22105,7 @@ public struct ID2D1TransformedGeometryVtbl {
     public var base_: ID2D1GeometryVtbl = ID2D1GeometryVtbl()
     public var GetSourceGeometry: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
+    public var GetTransform: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>) -> Unit> = { _, _ => () }
     public init() {}
 }
 
@@ -22141,7 +22156,7 @@ public class ID2D1TransformedGeometry <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetTransform(transform: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_FAbi>): Unit {
+    public unsafe func GetTransform(transform: CPointer<Win32_impl_p0.D2D_MATRIX_3X2_FAbi>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.GetTransform(__liveRaw, transform)

@@ -4,18 +4,30 @@
 package windows.Win32.Media.DeviceManager
 
 import std.collection.*
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteValue}
+@When[Windows_Win32_Media_DeviceManager == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_DeviceManager == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_DeviceManager == "on" && Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_DeviceManager == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_DeviceManager == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_DeviceManager == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_DeviceManager == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_DeviceManager == "on"]
@@ -625,7 +637,7 @@ public struct IMDSPDeviceControlVtbl {
     public var GetCapabilities: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Play: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var Record: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var Record: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -692,7 +704,7 @@ public class IMDSPDeviceControl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func Record(pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func Record(pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Record(__liveRaw, pFormat)
@@ -952,7 +964,7 @@ public struct IWMDMDeviceControlVtbl {
     public var GetCapabilities: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Play: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var Record: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var Record: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1019,7 +1031,7 @@ public class IWMDMDeviceControl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func Record(pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func Record(pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Record(__liveRaw, pFormat)
@@ -1322,9 +1334,9 @@ public struct IWMDMOperationVtbl {
     public var GetObjectName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var SetObjectName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetObjectAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var GetObjectAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetObjectAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetObjectAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetObjectTotalSize: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var SetObjectTotalSize: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public var TransferObjectData: CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>) -> Int32> = { _, _, _, _ => 0 }
@@ -1398,14 +1410,14 @@ public class IWMDMOperation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetObjectAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func GetObjectAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetObjectAttributes(__liveRaw, pdwAttributes, pFormat)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetObjectAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetObjectAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetObjectAttributes(__liveRaw, dwAttributes, pFormat)
@@ -1442,9 +1454,9 @@ public class IWMDMOperation <: InterfaceWrapperBase & ComInterface {
 public struct IWMDMOperation2Vtbl {
     public var base_: IWMDMOperationVtbl = IWMDMOperationVtbl()
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var SetObjectAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetObjectAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var GetObjectAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetObjectAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1489,14 +1501,14 @@ public class IWMDMOperation2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func SetObjectAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func SetObjectAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetObjectAttributes2(__liveRaw, dwAttributes, dwAttributesEx, pFormat, pVideoFormat)
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func GetObjectAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func GetObjectAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetObjectAttributes2(__liveRaw, pdwAttributes, pdwAttributesEx, pAudioFormat, pVideoFormat)
@@ -4813,7 +4825,7 @@ extend WMDM_FORMATCODE <: windows_core.CopyType & windows_core.RuntimeType & win
 @When[Windows_Win32_Media_DeviceManager == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
 public struct WMDM_PROP_VALUES_ENUM {
     public var cEnumValues: UInt32 = 0u32
-    public var pValues: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var pValues: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public init() {}
 }
 
@@ -4821,7 +4833,7 @@ public struct WMDM_PROP_VALUES_ENUM {
 @C
 public struct WMDM_PROP_VALUES_ENUMAbi {
     public var cEnumValues: UInt32 = 0u32
-    public var pValues: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var pValues: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public init() {}
 }
 
@@ -4851,18 +4863,18 @@ extend WMDM_PROP_VALUES_ENUM <: windows_core.CopyType & windows_core.RuntimeType
 
 @When[Windows_Win32_Media_DeviceManager == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
 public struct WMDM_PROP_VALUES_RANGE {
-    public var rangeMin: Win32__impl_l2.PROPVARIANT = Win32__impl_l2.PROPVARIANT()
-    public var rangeMax: Win32__impl_l2.PROPVARIANT = Win32__impl_l2.PROPVARIANT()
-    public var rangeStep: Win32__impl_l2.PROPVARIANT = Win32__impl_l2.PROPVARIANT()
+    public var rangeMin: Win32_impl_p3.PROPVARIANT = Win32_impl_p3.PROPVARIANT()
+    public var rangeMax: Win32_impl_p3.PROPVARIANT = Win32_impl_p3.PROPVARIANT()
+    public var rangeStep: Win32_impl_p3.PROPVARIANT = Win32_impl_p3.PROPVARIANT()
     public init() {}
 }
 
 @When[Windows_Win32_Media_DeviceManager == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
 @C
 public struct WMDM_PROP_VALUES_RANGEAbi {
-    public var rangeMin: Win32__impl_l2.PROPVARIANTAbi = Win32__impl_l2.PROPVARIANTAbi()
-    public var rangeMax: Win32__impl_l2.PROPVARIANTAbi = Win32__impl_l2.PROPVARIANTAbi()
-    public var rangeStep: Win32__impl_l2.PROPVARIANTAbi = Win32__impl_l2.PROPVARIANTAbi()
+    public var rangeMin: Win32_impl_p3.PROPVARIANTAbi = Win32_impl_p3.PROPVARIANTAbi()
+    public var rangeMax: Win32_impl_p3.PROPVARIANTAbi = Win32_impl_p3.PROPVARIANTAbi()
+    public var rangeStep: Win32_impl_p3.PROPVARIANTAbi = Win32_impl_p3.PROPVARIANTAbi()
     public init() {}
 }
 
@@ -4873,16 +4885,16 @@ extend WMDM_PROP_VALUES_RANGE <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func signature(): String { "struct(Windows.Win32.Media.DeviceManager.WMDM_PROP_VALUES_RANGE;struct(Windows.Win32.System.Com.StructuredStorage.PROPVARIANT;_Anonymous_e__Union);struct(Windows.Win32.System.Com.StructuredStorage.PROPVARIANT;_Anonymous_e__Union);struct(Windows.Win32.System.Com.StructuredStorage.PROPVARIANT;_Anonymous_e__Union))" }
     public static func projectAbi(value: WMDM_PROP_VALUES_RANGE): WMDM_PROP_VALUES_RANGEAbi {
         var abi = WMDM_PROP_VALUES_RANGEAbi()
-        abi.rangeMin = windows_core.projectTypedAbi(value.rangeMin, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>())
-        abi.rangeMax = windows_core.projectTypedAbi(value.rangeMax, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>())
-        abi.rangeStep = windows_core.projectTypedAbi(value.rangeStep, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>())
+        abi.rangeMin = windows_core.projectTypedAbi(value.rangeMin, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>())
+        abi.rangeMax = windows_core.projectTypedAbi(value.rangeMax, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>())
+        abi.rangeStep = windows_core.projectTypedAbi(value.rangeStep, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: WMDM_PROP_VALUES_RANGEAbi): WMDM_PROP_VALUES_RANGE {
         var value = WMDM_PROP_VALUES_RANGE()
-        value.rangeMin = windows_core.fromTypedAbi(abi.rangeMin, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>()).unwrap()
-        value.rangeMax = windows_core.fromTypedAbi(abi.rangeMax, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>()).unwrap()
-        value.rangeStep = windows_core.fromTypedAbi(abi.rangeStep, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>()).unwrap()
+        value.rangeMin = windows_core.fromTypedAbi(abi.rangeMin, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>()).unwrap()
+        value.rangeMax = windows_core.fromTypedAbi(abi.rangeMax, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>()).unwrap()
+        value.rangeStep = windows_core.fromTypedAbi(abi.rangeStep, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: WMDM_PROP_VALUES_RANGEAbi): Result<WMDM_PROP_VALUES_RANGE> { Result<WMDM_PROP_VALUES_RANGE>.Ok(WMDM_PROP_VALUES_RANGE.assumeInitRef(abi)) }
@@ -5676,7 +5688,7 @@ public struct IMDSPDeviceVtbl {
     public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var EnumStorage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormatSupport: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<CPointer<UInt16>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetFormatSupport: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<CPointer<UInt16>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var SendOpaqueCommand: CFunc<(CPointer<Unit>, CPointer<OPAQUECOMMANDAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5776,7 +5788,7 @@ public class IMDSPDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormatSupport(pFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pnFormatCount: CPointer<UInt32>, pppwszMimeType: CPointer<CPointer<CPointer<UInt16>>>, pnMimeTypeCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormatSupport(pFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pnFormatCount: CPointer<UInt32>, pppwszMimeType: CPointer<CPointer<CPointer<UInt16>>>, pnMimeTypeCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormatSupport(__liveRaw, pFormatEx, pnFormatCount, pppwszMimeType, pnMimeTypeCount)
@@ -5795,7 +5807,7 @@ public struct IMDSPDevice2Vtbl {
     public var base_: IMDSPDeviceVtbl = IMDSPDeviceVtbl()
     public var GetStorage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var GetFormatSupport2: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, CPointer<UInt32>, CPointer<CPointer<WMFILECAPABILITIESAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var GetFormatSupport2: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, CPointer<UInt32>, CPointer<CPointer<WMFILECAPABILITIESAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
     public var GetSpecifyPropertyPages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCanonicalName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -5849,7 +5861,7 @@ public class IMDSPDevice2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func GetFormatSupport2(dwFlags: UInt32, ppAudioFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pnAudioFormatCount: CPointer<UInt32>, ppVideoFormatEx: CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, pnVideoFormatCount: CPointer<UInt32>, ppFileType: CPointer<CPointer<WMFILECAPABILITIESAbi>>, pnFileTypeCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormatSupport2(dwFlags: UInt32, ppAudioFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pnAudioFormatCount: CPointer<UInt32>, ppVideoFormatEx: CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, pnVideoFormatCount: CPointer<UInt32>, ppFileType: CPointer<CPointer<WMFILECAPABILITIESAbi>>, pnFileTypeCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormatSupport2(__liveRaw, dwFlags, ppAudioFormatEx, pnAudioFormatCount, ppVideoFormatEx, pnVideoFormatCount, ppFileType, pnFileTypeCount)
@@ -5874,9 +5886,9 @@ public class IMDSPDevice2 <: InterfaceWrapperBase & ComInterface {
 public struct IMDSPDevice3Vtbl {
     public var base_: IMDSPDevice2Vtbl = IMDSPDevice2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
     public var GetFormatCapability: CFunc<(CPointer<Unit>, WMDM_FORMATCODEAbi, CPointer<WMDM_FORMAT_CAPABILITYAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeviceIoControl: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt8>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -5925,14 +5937,14 @@ public class IMDSPDevice3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, pwszPropName, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, pwszPropName, pValue)
@@ -6336,16 +6348,16 @@ public class IMDSPObject2 <: InterfaceWrapperBase & ComInterface {
 public struct IMDSPStorageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetStorageGlobals: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var GetDate: CFunc<(CPointer<Unit>, CPointer<WMDMDATETIMEAbi>) -> Int32> = { _, _ => 0 }
     public var GetSize: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetRights: CFunc<(CPointer<Unit>, CPointer<CPointer<WMDMRIGHTSAbi>>, CPointer<UInt32>, CPointer<UInt8>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var CreateStorage: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateStorage: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var EnumStorage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SendOpaqueCommand: CFunc<(CPointer<Unit>, CPointer<OPAQUECOMMANDAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -6392,7 +6404,7 @@ public class IMDSPStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAttributes(__liveRaw, dwAttributes, pFormat)
@@ -6405,7 +6417,7 @@ public class IMDSPStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func GetAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributes(__liveRaw, pdwAttributes, pFormat)
@@ -6436,7 +6448,7 @@ public class IMDSPStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func CreateStorage(dwAttributes: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pwszName: CPointer<UInt16>, ppNewStorage: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateStorage(dwAttributes: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pwszName: CPointer<UInt16>, ppNewStorage: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateStorage(__liveRaw, dwAttributes, pFormat, pwszName, ppNewStorage)
@@ -6461,11 +6473,11 @@ public struct IMDSPStorage2Vtbl {
     public var base_: IMDSPStorageVtbl = IMDSPStorageVtbl()
     public var GetStorage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var CreateStorage2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>, CPointer<UInt16>, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CreateStorage2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>, CPointer<UInt16>, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var SetAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var GetAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -6516,21 +6528,21 @@ public class IMDSPStorage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func CreateStorage2(dwAttributes: UInt32, dwAttributesEx: UInt32, pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>, pwszName: CPointer<UInt16>, qwFileSize: UInt64, ppNewStorage: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateStorage2(dwAttributes: UInt32, dwAttributesEx: UInt32, pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>, pwszName: CPointer<UInt16>, qwFileSize: UInt64, ppNewStorage: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateStorage2(__liveRaw, dwAttributes, dwAttributesEx, pAudioFormat, pVideoFormat, pwszName, qwFileSize, ppNewStorage)
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func SetAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func SetAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAttributes2(__liveRaw, dwAttributes, dwAttributesEx, pAudioFormat, pVideoFormat)
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func GetAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func GetAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributes2(__liveRaw, pdwAttributes, pdwAttributesEx, pAudioFormat, pVideoFormat)
@@ -7431,7 +7443,7 @@ public struct IWMDMDeviceVtbl {
     public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var EnumStorage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormatSupport: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<CPointer<UInt16>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetFormatSupport: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<CPointer<UInt16>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var SendOpaqueCommand: CFunc<(CPointer<Unit>, CPointer<OPAQUECOMMANDAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7531,7 +7543,7 @@ public class IWMDMDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormatSupport(ppFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pnFormatCount: CPointer<UInt32>, pppwszMimeType: CPointer<CPointer<CPointer<UInt16>>>, pnMimeTypeCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormatSupport(ppFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pnFormatCount: CPointer<UInt32>, pppwszMimeType: CPointer<CPointer<CPointer<UInt16>>>, pnMimeTypeCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormatSupport(__liveRaw, ppFormatEx, pnFormatCount, pppwszMimeType, pnMimeTypeCount)
@@ -7550,7 +7562,7 @@ public struct IWMDMDevice2Vtbl {
     public var base_: IWMDMDeviceVtbl = IWMDMDeviceVtbl()
     public var GetStorage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var GetFormatSupport2: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, CPointer<UInt32>, CPointer<CPointer<WMFILECAPABILITIESAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var GetFormatSupport2: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, CPointer<UInt32>, CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, CPointer<UInt32>, CPointer<CPointer<WMFILECAPABILITIESAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
     public var GetSpecifyPropertyPages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCanonicalName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -7604,7 +7616,7 @@ public class IWMDMDevice2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func GetFormatSupport2(dwFlags: UInt32, ppAudioFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pnAudioFormatCount: CPointer<UInt32>, ppVideoFormatEx: CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, pnVideoFormatCount: CPointer<UInt32>, ppFileType: CPointer<CPointer<WMFILECAPABILITIESAbi>>, pnFileTypeCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormatSupport2(dwFlags: UInt32, ppAudioFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pnAudioFormatCount: CPointer<UInt32>, ppVideoFormatEx: CPointer<CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>>, pnVideoFormatCount: CPointer<UInt32>, ppFileType: CPointer<CPointer<WMFILECAPABILITIESAbi>>, pnFileTypeCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormatSupport2(__liveRaw, dwFlags, ppAudioFormatEx, pnAudioFormatCount, ppVideoFormatEx, pnVideoFormatCount, ppFileType, pnFileTypeCount)
@@ -7629,9 +7641,9 @@ public class IWMDMDevice2 <: InterfaceWrapperBase & ComInterface {
 public struct IWMDMDevice3Vtbl {
     public var base_: IWMDMDevice2Vtbl = IWMDMDevice2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
     public var GetFormatCapability: CFunc<(CPointer<Unit>, WMDM_FORMATCODEAbi, CPointer<WMDM_FORMAT_CAPABILITYAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeviceIoControl: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt8>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -7680,14 +7692,14 @@ public class IWMDMDevice3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, pwszPropName, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetProperty(pwszPropName: CPointer<UInt16>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, pwszPropName, pValue)
@@ -7870,10 +7882,10 @@ public class IWMDMEnumStorage <: InterfaceWrapperBase & ComInterface {
 public struct IWMDMStorageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetStorageGlobals: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttributes: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetName: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var GetDate: CFunc<(CPointer<Unit>, CPointer<WMDMDATETIMEAbi>) -> Int32> = { _, _ => 0 }
     public var GetSize: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
@@ -7924,7 +7936,7 @@ public class IWMDMStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetAttributes(dwAttributes: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAttributes(__liveRaw, dwAttributes, pFormat)
@@ -7937,7 +7949,7 @@ public class IWMDMStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func GetAttributes(pdwAttributes: CPointer<UInt32>, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributes(__liveRaw, pdwAttributes, pFormat)
@@ -7986,9 +7998,9 @@ public struct IWMDMStorage2Vtbl {
     public var base_: IWMDMStorageVtbl = IWMDMStorageVtbl()
     public var GetStorage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var SetAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetAttributes2: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public var GetAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetAttributes2: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8039,14 +8051,14 @@ public class IWMDMStorage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func SetAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func SetAttributes2(dwAttributes: UInt32, dwAttributesEx: UInt32, pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAttributes2(__liveRaw, dwAttributes, dwAttributesEx, pFormat, pVideoFormat)
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_Media_MediaFoundation == "on"]
-    public unsafe func GetAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
+    public unsafe func GetAttributes2(pdwAttributes: CPointer<UInt32>, pdwAttributesEx: CPointer<UInt32>, pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pVideoFormat: CPointer<Win32_Media_MediaFoundation.VIDEOINFOHEADERAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributes2(__liveRaw, pdwAttributes, pdwAttributesEx, pAudioFormat, pVideoFormat)

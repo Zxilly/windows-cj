@@ -4,17 +4,29 @@
 package windows.Services.Maps.LocalSearch
 
 import std.collection.*
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_core as windows_core
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_interface as windows_interface
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Services_Maps_LocalSearch == "on" && Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
+@When[Windows_Services_Maps_LocalSearch == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Services_Maps_LocalSearch == "on" && Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
-import windows._impl_l0 as _impl_l0
+@When[Windows_Services_Maps_LocalSearch == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_collections as windows_collections
+@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows_future as windows_future
 
 
@@ -318,7 +330,7 @@ extend ILocalLocation <: windows_core.Interface<ILocalLocation> {}
 public struct ILocalLocationHoursOfOperationItemVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Globalization == "on"]
-    public var Day: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Day: CFunc<(CPointer<Unit>, CPointer<impl_p0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization != "on"]
     public var Day: UIntNative = UIntNative(0)
     public var Start: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -362,7 +374,7 @@ public class ILocalLocationHoursOfOperationItem <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILocalLocationHoursOfOperationItem", ILocalLocationHoursOfOperationItem.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILocalLocationHoursOfOperationItemVtbl", "ILocalLocationHoursOfOperationItem", "ILocalLocationHoursOfOperationItem_Impl", [InterfaceMethodSchema("Day", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DayOfWeekAbi>", "OutSlot<_impl_l0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 7, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Span", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILocalLocationHoursOfOperationItem", ILocalLocationHoursOfOperationItem.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILocalLocationHoursOfOperationItemVtbl", "ILocalLocationHoursOfOperationItem", "ILocalLocationHoursOfOperationItem_Impl", [InterfaceMethodSchema("Day", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.DayOfWeekAbi>", "OutSlot<impl_p0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 7, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Span", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILocalLocationHoursOfOperationItem.runtimeType())
         return schema
     }
@@ -392,12 +404,12 @@ public class ILocalLocationHoursOfOperationItem <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func Day(): _impl_l0.DayOfWeek {
+    public unsafe func Day(): impl_p0.DayOfWeek {
         let v = vtbl()
-        var result__ = _impl_l0.DayOfWeekAbi()
-        let hr = v.Day(asRaw(), CPointer<_impl_l0.DayOfWeekAbi>(inout result__))
+        var result__ = impl_p0.DayOfWeekAbi()
+        let hr = v.Day(asRaw(), CPointer<impl_p0.DayOfWeekAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DayOfWeek>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DayOfWeek>()).unwrap()
     }
 
     public unsafe func Start(): windows_future.TimeSpan {
@@ -774,7 +786,7 @@ public class LocalLocationHoursOfOperationItem <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func Day(): _impl_l0.DayOfWeek {
+    public unsafe func Day(): impl_p0.DayOfWeek {
         return defaultInterface().Day()
     }
 

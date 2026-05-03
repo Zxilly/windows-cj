@@ -4,24 +4,28 @@
 package windows.Win32.System.Com.ChannelCredentials
 
 import std.collection.*
+@When[Windows_Win32_System_Com_ChannelCredentials == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Com_ChannelCredentials == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Com_ChannelCredentials == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Com_ChannelCredentials == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Com_ChannelCredentials == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IChannelCredentialsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetWindowsCredential: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, Int32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SetUserNameCredential: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetClientCertificateFromStore: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetClientCertificateFromStore: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetClientCertificateFromStoreByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var SetClientCertificateFromFile: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDefaultServiceCertificateFromStore: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetDefaultServiceCertificateFromStore: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetDefaultServiceCertificateFromStoreByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var SetDefaultServiceCertificateFromFile: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var SetServiceCertificateAuthentication: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
@@ -62,7 +66,7 @@ public class IChannelCredentials <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IChannelCredentials> {
-        return InterfaceDescriptor<IChannelCredentials>("IChannelCredentials", IChannelCredentials.iid(), Win32__impl_l2.IDispatch.iid(), takeIChannelCredentialsFromAbi, viewIChannelCredentials)
+        return InterfaceDescriptor<IChannelCredentials>("IChannelCredentials", IChannelCredentials.iid(), Win32_impl_p2.IDispatch.iid(), takeIChannelCredentialsFromAbi, viewIChannelCredentials)
     }
 
     public unsafe func vtbl(): IChannelCredentialsVtbl {
@@ -82,7 +86,7 @@ public class IChannelCredentials <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetClientCertificateFromStore(storeLocation: CPointer<UInt16>, storeName: CPointer<UInt16>, findYype: CPointer<UInt16>, findValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetClientCertificateFromStore(storeLocation: CPointer<UInt16>, storeName: CPointer<UInt16>, findYype: CPointer<UInt16>, findValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetClientCertificateFromStore(__liveRaw, storeLocation, storeName, findYype, findValue)
@@ -101,7 +105,7 @@ public class IChannelCredentials <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDefaultServiceCertificateFromStore(storeLocation: CPointer<UInt16>, storeName: CPointer<UInt16>, findType: CPointer<UInt16>, findValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDefaultServiceCertificateFromStore(storeLocation: CPointer<UInt16>, storeName: CPointer<UInt16>, findType: CPointer<UInt16>, findValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDefaultServiceCertificateFromStore(__liveRaw, storeLocation, storeName, findType, findValue)

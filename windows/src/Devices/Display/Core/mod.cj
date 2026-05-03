@@ -4,20 +4,35 @@
 package windows.Devices.Display.Core
 
 import std.collection.*
+@When[Windows_Devices_Display_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Display_Core == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Display_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Display_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Display_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Display_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Display_Core == "on" && Windows_Devices_Display == "on"]
 import windows.Devices.Display as Devices_Display
+@When[Windows_Devices_Display_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Devices_Display_Core == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
+@When[Windows_Devices_Display_Core == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
+@When[Windows_Devices_Display_Core == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_Display_Core == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Display_Core == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Display_Core == "on"]
 import windows_future as windows_future
+@When[Windows_Devices_Display_Core == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -2547,7 +2562,7 @@ public class IDisplaySource <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDisplaySource", IDisplaySource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDisplaySourceVtbl", "IDisplaySource", "IDisplaySource_Impl", [InterfaceMethodSchema("AdapterId", 6, [InterfaceParameterSchema("result", "CPointer<Graphics.DisplayAdapterIdAbi>", "OutSlot<Graphics.DisplayAdapterId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceId", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetMetadata", 8, [InterfaceParameterSchema("Key", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDisplaySource", IDisplaySource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDisplaySourceVtbl", "IDisplaySource", "IDisplaySource_Impl", [InterfaceMethodSchema("AdapterId", 6, [InterfaceParameterSchema("result", "CPointer<Graphics.DisplayAdapterIdAbi>", "OutSlot<Graphics.DisplayAdapterId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SourceId", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetMetadata", 8, [InterfaceParameterSchema("Key", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDisplaySource.runtimeType())
         return schema
     }
@@ -2594,12 +2609,12 @@ public class IDisplaySource <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetMetadata(Key: GuidValue): _impl_l0.IBuffer {
+    public unsafe func GetMetadata(Key: GuidValue): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetMetadata(asRaw(), Key.toRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -5664,7 +5679,7 @@ public class DisplaySource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetMetadata(Key: GuidValue): _impl_l0.IBuffer {
+    public unsafe func GetMetadata(Key: GuidValue): impl_p0.IBuffer {
         return defaultInterface().GetMetadata(Key)
     }
 }

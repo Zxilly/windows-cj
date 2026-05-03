@@ -4,16 +4,27 @@
 package windows.Devices.Midi
 
 import std.collection.*
+@When[Windows_Devices_Midi == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Midi == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Midi == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Midi == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Midi == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Midi == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Midi == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_Midi == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Midi == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Devices_Midi == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Midi == "on"]
 import windows_future as windows_future
 
 
@@ -215,14 +226,14 @@ public interface IMidiMessage_Impl <: IMidiMessage_ImplErased {
         }
     }
 
-    public func RawData(): windows_core.Result<_impl_l0.IBuffer>
+    public func RawData(): windows_core.Result<impl_p0.IBuffer>
 
     public func __winrtThunk_RawData(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.RawData()) {
-            case Result<_impl_l0.IBuffer>.Ok(value) =>
+            case Result<impl_p0.IBuffer>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -230,7 +241,7 @@ public interface IMidiMessage_Impl <: IMidiMessage_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.IBuffer>.Err(error) =>
+            case Result<impl_p0.IBuffer>.Err(error) =>
                 error.code().value
         }
     }
@@ -287,7 +298,7 @@ public class IMidiMessage <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMidiMessage", IMidiMessage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiMessageVtbl", "IMidiMessage", "IMidiMessage_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RawData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Type", 8, [InterfaceParameterSchema("result", "CPointer<MidiMessageTypeAbi>", "OutSlot<MidiMessageType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMidiMessage", IMidiMessage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiMessageVtbl", "IMidiMessage", "IMidiMessage_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RawData", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Type", 8, [InterfaceParameterSchema("result", "CPointer<MidiMessageTypeAbi>", "OutSlot<MidiMessageType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMidiMessage.runtimeType())
         return schema
     }
@@ -325,12 +336,12 @@ public class IMidiMessage <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RawData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func Type(): MidiMessageType {
@@ -751,10 +762,10 @@ public interface IMidiOutPort_Impl <: IMidiOutPort_ImplErased & Foundation.IClos
         }
     }
 
-    public func SendBuffer(midiData: InParam<_impl_l0.IBuffer>): windows_core.Result<Unit>
+    public func SendBuffer(midiData: InParam<impl_p0.IBuffer>): windows_core.Result<Unit>
 
     public func __winrtThunk_SendBuffer(arg0: CPointer<Unit>): Int32 {
-        match (this.SendBuffer(InParam<_impl_l0.IBuffer>(_impl_l0.IBuffer.viewOf(arg0)))) {
+        match (this.SendBuffer(InParam<impl_p0.IBuffer>(impl_p0.IBuffer.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -833,7 +844,7 @@ public class IMidiOutPort <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMidiOutPort", IMidiOutPort.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IMidiOutPortVtbl", "IMidiOutPort", "IMidiOutPort_Impl", [InterfaceMethodSchema("SendMessage", 7, [InterfaceParameterSchema("midiMessage", "CPointer<Unit>", "InParam<IMidiMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SendBuffer", 8, [InterfaceParameterSchema("midiData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DeviceId", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMidiOutPort", IMidiOutPort.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IMidiOutPortVtbl", "IMidiOutPort", "IMidiOutPort_Impl", [InterfaceMethodSchema("SendMessage", 7, [InterfaceParameterSchema("midiMessage", "CPointer<Unit>", "InParam<IMidiMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SendBuffer", 8, [InterfaceParameterSchema("midiData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DeviceId", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMidiOutPort.runtimeType())
         return schema
     }
@@ -876,7 +887,7 @@ public class IMidiOutPort <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendBuffer(midiData: _impl_l0.IBuffer): Unit {
+    public unsafe func SendBuffer(midiData: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SendBuffer(asRaw(), midiData.asRaw())
         HRESULT(hr).ok()
@@ -1563,7 +1574,7 @@ public class IMidiSynthesizer <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMidiSynthesizer", IMidiSynthesizer.iid(), IMidiOutPort.descriptorSchema(), ["IMidiOutPort", "IClosable"], [IMidiOutPort.iid(), Foundation.IClosable.iid()], "IMidiSynthesizerVtbl", "IMidiSynthesizer", "IMidiSynthesizer_Impl", [InterfaceMethodSchema("AudioDevice", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Volume", 11, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVolume", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMidiSynthesizer", IMidiSynthesizer.iid(), IMidiOutPort.descriptorSchema(), ["IMidiOutPort", "IClosable"], [IMidiOutPort.iid(), Foundation.IClosable.iid()], "IMidiSynthesizerVtbl", "IMidiSynthesizer", "IMidiSynthesizer_Impl", [InterfaceMethodSchema("AudioDevice", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Volume", 11, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVolume", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMidiSynthesizer.runtimeType())
         return schema
     }
@@ -1607,12 +1618,12 @@ public class IMidiSynthesizer <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func AudioDevice(): _impl_l1.DeviceInformation {
+    public unsafe func AudioDevice(): impl_p1.DeviceInformation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AudioDevice(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DeviceInformation.fromAbiTake(result__)
+        return impl_p1.DeviceInformation.fromAbiTake(result__)
     }
 
     public unsafe func Volume(): Float64 {
@@ -1824,7 +1835,7 @@ public class MidiActiveSensingMessage <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -1936,7 +1947,7 @@ public class MidiContinueMessage <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -2136,7 +2147,7 @@ public class MidiOutPort <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendBuffer(midiData: _impl_l0.IBuffer): Unit {
+    public unsafe func SendBuffer(midiData: impl_p0.IBuffer): Unit {
         defaultInterface().SendBuffer(midiData)
     }
 
@@ -2274,7 +2285,7 @@ public class MidiStartMessage <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -2386,7 +2397,7 @@ public class MidiStopMessage <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -2498,7 +2509,7 @@ public class MidiSystemResetMessage <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -2610,7 +2621,7 @@ public class MidiTimingClockMessage <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -2722,7 +2733,7 @@ public class MidiTuneRequestMessage <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -3994,7 +4005,7 @@ public class IMidiSynthesizerStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMidiSynthesizerStatics", IMidiSynthesizerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiSynthesizerStaticsVtbl", "IMidiSynthesizerStatics", "IMidiSynthesizerStatics_Impl", [InterfaceMethodSchema("CreateAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MidiSynthesizer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromAudioDeviceAsync", 7, [InterfaceParameterSchema("audioDevice", "CPointer<Unit>", "InParam<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MidiSynthesizer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSynthesizer", 8, [InterfaceParameterSchema("midiDevice", "CPointer<Unit>", "InParam<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMidiSynthesizerStatics", IMidiSynthesizerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiSynthesizerStaticsVtbl", "IMidiSynthesizerStatics", "IMidiSynthesizerStatics_Impl", [InterfaceMethodSchema("CreateAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MidiSynthesizer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromAudioDeviceAsync", 7, [InterfaceParameterSchema("audioDevice", "CPointer<Unit>", "InParam<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MidiSynthesizer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSynthesizer", 8, [InterfaceParameterSchema("midiDevice", "CPointer<Unit>", "InParam<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMidiSynthesizerStatics.runtimeType())
         return schema
     }
@@ -4032,7 +4043,7 @@ public class IMidiSynthesizerStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func CreateFromAudioDeviceAsync(audioDevice: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<MidiSynthesizer> {
+    public unsafe func CreateFromAudioDeviceAsync(audioDevice: impl_p1.DeviceInformation): windows_future.IAsyncOperation<MidiSynthesizer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromAudioDeviceAsync(asRaw(), audioDevice.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4041,7 +4052,7 @@ public class IMidiSynthesizerStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func IsSynthesizer(midiDevice: _impl_l1.DeviceInformation): Bool {
+    public unsafe func IsSynthesizer(midiDevice: impl_p1.DeviceInformation): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.IsSynthesizer(asRaw(), midiDevice.asRaw(), CPointer<Bool>(inout result__))
@@ -4100,7 +4111,7 @@ public class IMidiSystemExclusiveMessageFactory <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMidiSystemExclusiveMessageFactory", IMidiSystemExclusiveMessageFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiSystemExclusiveMessageFactoryVtbl", "IMidiSystemExclusiveMessageFactory", "IMidiSystemExclusiveMessageFactory_Impl", [InterfaceMethodSchema("CreateMidiSystemExclusiveMessage", 6, [InterfaceParameterSchema("rawData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MidiSystemExclusiveMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMidiSystemExclusiveMessageFactory", IMidiSystemExclusiveMessageFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMidiSystemExclusiveMessageFactoryVtbl", "IMidiSystemExclusiveMessageFactory", "IMidiSystemExclusiveMessageFactory_Impl", [InterfaceMethodSchema("CreateMidiSystemExclusiveMessage", 6, [InterfaceParameterSchema("rawData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MidiSystemExclusiveMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMidiSystemExclusiveMessageFactory.runtimeType())
         return schema
     }
@@ -4130,7 +4141,7 @@ public class IMidiSystemExclusiveMessageFactory <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateMidiSystemExclusiveMessage(rawData: _impl_l0.IBuffer): MidiSystemExclusiveMessage {
+    public unsafe func CreateMidiSystemExclusiveMessage(rawData: impl_p0.IBuffer): MidiSystemExclusiveMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateMidiSystemExclusiveMessage(asRaw(), rawData.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4316,7 +4327,7 @@ public class MidiChannelPressureMessage <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -4447,7 +4458,7 @@ public class MidiControlChangeMessage <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -4711,7 +4722,7 @@ public class MidiNoteOffMessage <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -4842,7 +4853,7 @@ public class MidiNoteOnMessage <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -4969,7 +4980,7 @@ public class MidiPitchBendChangeMessage <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -5100,7 +5111,7 @@ public class MidiPolyphonicKeyPressureMessage <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -5227,7 +5238,7 @@ public class MidiProgramChangeMessage <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -5350,7 +5361,7 @@ public class MidiSongPositionPointerMessage <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -5473,7 +5484,7 @@ public class MidiSongSelectMessage <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 
@@ -5595,7 +5606,7 @@ public class MidiSynthesizer <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func AudioDevice(): _impl_l1.DeviceInformation {
+    public unsafe func AudioDevice(): impl_p1.DeviceInformation {
         return defaultInterface().AudioDevice()
     }
 
@@ -5612,7 +5623,7 @@ public class MidiSynthesizer <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendBuffer(midiData: _impl_l0.IBuffer): Unit {
+    public unsafe func SendBuffer(midiData: impl_p0.IBuffer): Unit {
         asIMidiOutPort().SendBuffer(midiData)
     }
 
@@ -5636,7 +5647,7 @@ public class MidiSynthesizer <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public static unsafe func CreateFromAudioDeviceAsync(audioDevice: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<MidiSynthesizer> {
+    public static unsafe func CreateFromAudioDeviceAsync(audioDevice: impl_p1.DeviceInformation): windows_future.IAsyncOperation<MidiSynthesizer> {
         var result__: Option<windows_future.IAsyncOperation<MidiSynthesizer>> = Option<windows_future.IAsyncOperation<MidiSynthesizer>>.None
         try (factory__ = windows_core.factory<MidiSynthesizer, IMidiSynthesizerStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromAudioDeviceAsync(audioDevice))
@@ -5648,7 +5659,7 @@ public class MidiSynthesizer <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public static unsafe func IsSynthesizer(midiDevice: _impl_l1.DeviceInformation): Bool {
+    public static unsafe func IsSynthesizer(midiDevice: impl_p1.DeviceInformation): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<MidiSynthesizer, IMidiSynthesizerStatics>().unwrap()) {
             result__ = Some(factory__.IsSynthesizer(midiDevice))
@@ -5752,7 +5763,7 @@ public class MidiSystemExclusiveMessage <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return defaultInterface().RawData()
     }
 
@@ -5761,7 +5772,7 @@ public class MidiSystemExclusiveMessage <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateMidiSystemExclusiveMessage(rawData: _impl_l0.IBuffer): MidiSystemExclusiveMessage {
+    public static unsafe func CreateMidiSystemExclusiveMessage(rawData: impl_p0.IBuffer): MidiSystemExclusiveMessage {
         var result__: Option<MidiSystemExclusiveMessage> = Option<MidiSystemExclusiveMessage>.None
         try (factory__ = windows_core.factory<MidiSystemExclusiveMessage, IMidiSystemExclusiveMessageFactory>().unwrap()) {
             result__ = Some(factory__.CreateMidiSystemExclusiveMessage(rawData))
@@ -5880,7 +5891,7 @@ public class MidiTimeCodeMessage <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RawData(): _impl_l0.IBuffer {
+    public unsafe func RawData(): impl_p0.IBuffer {
         return asIMidiMessage().RawData()
     }
 

@@ -4,16 +4,27 @@
 package windows_appsdk.Microsoft.UI.Composition.Interactions
 
 import std.collection.*
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Composition_Interactions == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_UI_Composition_Interactions == "on" && Microsoft_UI_Composition == "on"]
 import windows_appsdk.Microsoft.UI.Composition as Microsoft_UI_Composition
+@When[Microsoft_UI_Composition_Interactions == "on" && Microsoft_UI_Input == "on"]
 import windows_appsdk.Microsoft.UI.Input as Microsoft_UI_Input
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_UI_Composition_Interactions == "on"]
 import windows_numerics as windows_numerics
 
 

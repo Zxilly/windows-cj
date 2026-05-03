@@ -4,18 +4,28 @@
 package windows.Win32.Media.Speech
 
 import std.collection.*
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Media_Speech == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_Speech == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
+@When[Windows_Win32_Media_Speech == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_Speech == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_Speech == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Media_Speech == "on"]
@@ -4281,7 +4291,7 @@ public class ISpRegDataKey <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpResourceManagerVtbl {
-    public var base_: Win32__impl_l1.IServiceProviderVtbl = Win32__impl_l1.IServiceProviderVtbl()
+    public var base_: Win32_impl_p2.IServiceProviderVtbl = Win32_impl_p2.IServiceProviderVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var SetObject: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var GetObject: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<GUID>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -4321,7 +4331,7 @@ public class ISpResourceManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpResourceManager> {
-        return InterfaceDescriptor<ISpResourceManager>("ISpResourceManager", ISpResourceManager.iid(), Win32__impl_l1.IServiceProvider.iid(), takeISpResourceManagerFromAbi, viewISpResourceManager)
+        return InterfaceDescriptor<ISpResourceManager>("ISpResourceManager", ISpResourceManager.iid(), Win32_impl_p2.IServiceProvider.iid(), takeISpResourceManagerFromAbi, viewISpResourceManager)
     }
 
     public unsafe func vtbl(): ISpResourceManagerVtbl {
@@ -4407,9 +4417,9 @@ public class ISpSerializeState <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpStreamFormatVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -4446,7 +4456,7 @@ public class ISpStreamFormat <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpStreamFormat> {
-        return InterfaceDescriptor<ISpStreamFormat>("ISpStreamFormat", ISpStreamFormat.iid(), Win32__impl_l1.IStream.iid(), takeISpStreamFormatFromAbi, viewISpStreamFormat)
+        return InterfaceDescriptor<ISpStreamFormat>("ISpStreamFormat", ISpStreamFormat.iid(), Win32_impl_p2.IStream.iid(), takeISpStreamFormatFromAbi, viewISpStreamFormat)
     }
 
     public unsafe func vtbl(): ISpStreamFormatVtbl {
@@ -4454,7 +4464,7 @@ public class ISpStreamFormat <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pguidFormatId: CPointer<GUID>, ppCoMemWaveFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetFormat(pguidFormatId: CPointer<GUID>, ppCoMemWaveFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pguidFormatId, ppCoMemWaveFormatEx)
@@ -4468,7 +4478,7 @@ public struct ISpStreamFormatConverterVtbl {
     public var SetBaseStream: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var GetBaseStream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var ResetSeekPosition: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ScaleConvertedToBaseOffset: CFunc<(CPointer<Unit>, UInt64, CPointer<UInt64>) -> Int32> = { _, _, _ => 0 }
     public var ScaleBaseToConvertedOffset: CFunc<(CPointer<Unit>, UInt64, CPointer<UInt64>) -> Int32> = { _, _, _ => 0 }
@@ -4528,7 +4538,7 @@ public class ISpStreamFormatConverter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetFormat(rguidFormatIdOfConvertedStream: CPointer<GUID>, pWaveFormatExOfConvertedStream: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetFormat(rguidFormatIdOfConvertedStream: CPointer<GUID>, pWaveFormatExOfConvertedStream: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, rguidFormatIdOfConvertedStream, pWaveFormatExOfConvertedStream)
@@ -4853,7 +4863,7 @@ public class ISpTranscript <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechAudioBufferInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var MinNotification: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMinNotification: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var BufferSize: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4896,7 +4906,7 @@ public class ISpeechAudioBufferInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechAudioBufferInfo> {
-        return InterfaceDescriptor<ISpeechAudioBufferInfo>("ISpeechAudioBufferInfo", ISpeechAudioBufferInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechAudioBufferInfoFromAbi, viewISpeechAudioBufferInfo)
+        return InterfaceDescriptor<ISpeechAudioBufferInfo>("ISpeechAudioBufferInfo", ISpeechAudioBufferInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechAudioBufferInfoFromAbi, viewISpeechAudioBufferInfo)
     }
 
     public unsafe func vtbl(): ISpeechAudioBufferInfoVtbl {
@@ -4943,11 +4953,11 @@ public class ISpeechAudioBufferInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechDataKeyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBinaryValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetBinaryValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetBinaryValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetBinaryValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetStringValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var GetStringValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var SetLongValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
@@ -4994,7 +5004,7 @@ public class ISpeechDataKey <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechDataKey> {
-        return InterfaceDescriptor<ISpeechDataKey>("ISpeechDataKey", ISpeechDataKey.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechDataKeyFromAbi, viewISpeechDataKey)
+        return InterfaceDescriptor<ISpeechDataKey>("ISpeechDataKey", ISpeechDataKey.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechDataKeyFromAbi, viewISpeechDataKey)
     }
 
     public unsafe func vtbl(): ISpeechDataKeyVtbl {
@@ -5002,14 +5012,14 @@ public class ISpeechDataKey <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBinaryValue(ValueName: CPointer<UInt16>, Value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBinaryValue(ValueName: CPointer<UInt16>, Value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBinaryValue(__liveRaw, ValueName, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetBinaryValue(ValueName: CPointer<UInt16>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetBinaryValue(ValueName: CPointer<UInt16>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBinaryValue(__liveRaw, ValueName, Value)
@@ -5079,13 +5089,13 @@ public class ISpeechDataKey <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhoneConverterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var LanguageId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetLanguageId: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PhoneToId: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PhoneToId: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IdToPhone: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var IdToPhone: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -5122,7 +5132,7 @@ public class ISpeechPhoneConverter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhoneConverter> {
-        return InterfaceDescriptor<ISpeechPhoneConverter>("ISpeechPhoneConverter", ISpeechPhoneConverter.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhoneConverterFromAbi, viewISpeechPhoneConverter)
+        return InterfaceDescriptor<ISpeechPhoneConverter>("ISpeechPhoneConverter", ISpeechPhoneConverter.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhoneConverterFromAbi, viewISpeechPhoneConverter)
     }
 
     public unsafe func vtbl(): ISpeechPhoneConverterVtbl {
@@ -5142,14 +5152,14 @@ public class ISpeechPhoneConverter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PhoneToId(Phonemes: CPointer<UInt16>, IdArray: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PhoneToId(Phonemes: CPointer<UInt16>, IdArray: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PhoneToId(__liveRaw, Phonemes, IdArray)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IdToPhone(IdArray: Win32__impl_l2.VARIANTAbi, Phonemes: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func IdToPhone(IdArray: Win32_impl_p2.VARIANTAbi, Phonemes: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IdToPhone(__liveRaw, IdArray, Phonemes)
@@ -5159,14 +5169,14 @@ public class ISpeechPhoneConverter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecoResultTimesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var StreamTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var StreamTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Length: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Length: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var TickCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OffsetFromStart: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var OffsetFromStart: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5203,7 +5213,7 @@ public class ISpeechRecoResultTimes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecoResultTimes> {
-        return InterfaceDescriptor<ISpeechRecoResultTimes>("ISpeechRecoResultTimes", ISpeechRecoResultTimes.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecoResultTimesFromAbi, viewISpeechRecoResultTimes)
+        return InterfaceDescriptor<ISpeechRecoResultTimes>("ISpeechRecoResultTimes", ISpeechRecoResultTimes.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecoResultTimesFromAbi, viewISpeechRecoResultTimes)
     }
 
     public unsafe func vtbl(): ISpeechRecoResultTimesVtbl {
@@ -5211,14 +5221,14 @@ public class ISpeechRecoResultTimes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func StreamTime(Time: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func StreamTime(Time: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StreamTime(__liveRaw, Time)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Length(Length: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Length(Length: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Length(__liveRaw, Length)
@@ -5231,7 +5241,7 @@ public class ISpeechRecoResultTimes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OffsetFromStart(OffsetFromStart: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func OffsetFromStart(OffsetFromStart: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OffsetFromStart(__liveRaw, OffsetFromStart)
@@ -5241,7 +5251,7 @@ public class ISpeechRecoResultTimes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechResourceLoaderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var LoadResource: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, CPointer<CPointer<Unit>>, CPointer<CPointer<UInt16>>, CPointer<Int16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var GetLocalCopy: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -5282,7 +5292,7 @@ public class ISpeechResourceLoader <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechResourceLoader> {
-        return InterfaceDescriptor<ISpeechResourceLoader>("ISpeechResourceLoader", ISpeechResourceLoader.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechResourceLoaderFromAbi, viewISpeechResourceLoader)
+        return InterfaceDescriptor<ISpeechResourceLoader>("ISpeechResourceLoader", ISpeechResourceLoader.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechResourceLoaderFromAbi, viewISpeechResourceLoader)
     }
 
     public unsafe func vtbl(): ISpeechResourceLoaderVtbl {
@@ -5312,7 +5322,7 @@ public class ISpeechResourceLoader <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechTextSelectionInformationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetActiveOffset: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ActiveOffset: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetActiveLength: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -5357,7 +5367,7 @@ public class ISpeechTextSelectionInformation <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechTextSelectionInformation> {
-        return InterfaceDescriptor<ISpeechTextSelectionInformation>("ISpeechTextSelectionInformation", ISpeechTextSelectionInformation.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechTextSelectionInformationFromAbi, viewISpeechTextSelectionInformation)
+        return InterfaceDescriptor<ISpeechTextSelectionInformation>("ISpeechTextSelectionInformation", ISpeechTextSelectionInformation.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechTextSelectionInformationFromAbi, viewISpeechTextSelectionInformation)
     }
 
     public unsafe func vtbl(): ISpeechTextSelectionInformationVtbl {
@@ -5416,7 +5426,7 @@ public class ISpeechTextSelectionInformation <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechWaveFormatExVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FormatTag: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetFormatTag: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Channels: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5430,9 +5440,9 @@ public struct ISpeechWaveFormatExVtbl {
     public var BitsPerSample: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetBitsPerSample: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ExtraData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ExtraData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtraData: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetExtraData: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -5469,7 +5479,7 @@ public class ISpeechWaveFormatEx <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechWaveFormatEx> {
-        return InterfaceDescriptor<ISpeechWaveFormatEx>("ISpeechWaveFormatEx", ISpeechWaveFormatEx.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechWaveFormatExFromAbi, viewISpeechWaveFormatEx)
+        return InterfaceDescriptor<ISpeechWaveFormatEx>("ISpeechWaveFormatEx", ISpeechWaveFormatEx.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechWaveFormatExFromAbi, viewISpeechWaveFormatEx)
     }
 
     public unsafe func vtbl(): ISpeechWaveFormatExVtbl {
@@ -5549,14 +5559,14 @@ public class ISpeechWaveFormatEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ExtraData(ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ExtraData(ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ExtraData(__liveRaw, ExtraData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtraData(ExtraData: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtraData(ExtraData: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtraData(__liveRaw, ExtraData)
@@ -7826,7 +7836,7 @@ public struct SPPHRASEPROPERTY {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var Anonymous: SPPHRASEPROPERTY__Anonymous_e__Union = SPPHRASEPROPERTY__Anonymous_e__Union()
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var vValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public var ulFirstElement: UInt32 = 0u32
     public var ulCountOfElements: UInt32 = 0u32
     public var pNextSibling: CPointer<SPPHRASEPROPERTYAbi> = CPointer<SPPHRASEPROPERTYAbi>()
@@ -7842,7 +7852,7 @@ public struct SPPHRASEPROPERTYAbi {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var Anonymous: SPPHRASEPROPERTY__Anonymous_e__Union = SPPHRASEPROPERTY__Anonymous_e__Union()
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var vValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public var ulFirstElement: UInt32 = 0u32
     public var ulCountOfElements: UInt32 = 0u32
     public var pNextSibling: CPointer<SPPHRASEPROPERTYAbi> = CPointer<SPPHRASEPROPERTYAbi>()
@@ -7862,7 +7872,7 @@ extend SPPHRASEPROPERTY <: windows_core.CopyType & windows_core.RuntimeType & wi
         abi.pszName = value.pszName
         abi.Anonymous = value.Anonymous
         abi.pszValue = value.pszValue
-        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         abi.ulFirstElement = value.ulFirstElement
         abi.ulCountOfElements = value.ulCountOfElements
         abi.pNextSibling = value.pNextSibling
@@ -7876,7 +7886,7 @@ extend SPPHRASEPROPERTY <: windows_core.CopyType & windows_core.RuntimeType & wi
         value.pszName = abi.pszName
         value.Anonymous = abi.Anonymous
         value.pszValue = abi.pszValue
-        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         value.ulFirstElement = abi.ulFirstElement
         value.ulCountOfElements = abi.ulCountOfElements
         value.pNextSibling = abi.pNextSibling
@@ -8361,7 +8371,7 @@ public struct SPPROPERTYINFO {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var ulId: UInt32 = 0u32
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var vValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -8371,7 +8381,7 @@ public struct SPPROPERTYINFOAbi {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var ulId: UInt32 = 0u32
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var vValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -8385,7 +8395,7 @@ extend SPPROPERTYINFO <: windows_core.CopyType & windows_core.RuntimeType & wind
         abi.pszName = value.pszName
         abi.ulId = value.ulId
         abi.pszValue = value.pszValue
-        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: SPPROPERTYINFOAbi): SPPROPERTYINFO {
@@ -8393,7 +8403,7 @@ extend SPPROPERTYINFO <: windows_core.CopyType & windows_core.RuntimeType & wind
         value.pszName = abi.pszName
         value.ulId = abi.ulId
         value.pszValue = abi.pszValue
-        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: SPPROPERTYINFOAbi): Result<SPPROPERTYINFO> { Result<SPPROPERTYINFO>.Ok(SPPROPERTYINFO.assumeInitRef(abi)) }
@@ -9810,7 +9820,7 @@ public struct SPTRANSITIONPROPERTY {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var ulId: UInt32 = 0u32
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var vValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -9820,7 +9830,7 @@ public struct SPTRANSITIONPROPERTYAbi {
     public var pszName: CPointer<UInt16> = CPointer<UInt16>()
     public var ulId: UInt32 = 0u32
     public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
-    public var vValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var vValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -9834,7 +9844,7 @@ extend SPTRANSITIONPROPERTY <: windows_core.CopyType & windows_core.RuntimeType 
         abi.pszName = value.pszName
         abi.ulId = value.ulId
         abi.pszValue = value.pszValue
-        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.vValue = windows_core.projectTypedAbi(value.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: SPTRANSITIONPROPERTYAbi): SPTRANSITIONPROPERTY {
@@ -9842,7 +9852,7 @@ extend SPTRANSITIONPROPERTY <: windows_core.CopyType & windows_core.RuntimeType 
         value.pszName = abi.pszName
         value.ulId = abi.ulId
         value.pszValue = abi.pszValue
-        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.vValue = windows_core.fromTypedAbi(abi.vValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: SPTRANSITIONPROPERTYAbi): Result<SPTRANSITIONPROPERTY> { Result<SPTRANSITIONPROPERTY>.Ok(SPTRANSITIONPROPERTY.assumeInitRef(abi)) }
@@ -14733,7 +14743,7 @@ public class _ISpPrivateEngineCall <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ISpeechRecoContextEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -14770,7 +14780,7 @@ public class _ISpeechRecoContextEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_ISpeechRecoContextEvents> {
-        return InterfaceDescriptor<_ISpeechRecoContextEvents>("_ISpeechRecoContextEvents", _ISpeechRecoContextEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_ISpeechRecoContextEventsFromAbi, view_ISpeechRecoContextEvents)
+        return InterfaceDescriptor<_ISpeechRecoContextEvents>("_ISpeechRecoContextEvents", _ISpeechRecoContextEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_ISpeechRecoContextEventsFromAbi, view_ISpeechRecoContextEvents)
     }
 
     public unsafe func vtbl(): _ISpeechRecoContextEventsVtbl {
@@ -14781,7 +14791,7 @@ public class _ISpeechRecoContextEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ISpeechVoiceEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -14818,7 +14828,7 @@ public class _ISpeechVoiceEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_ISpeechVoiceEvents> {
-        return InterfaceDescriptor<_ISpeechVoiceEvents>("_ISpeechVoiceEvents", _ISpeechVoiceEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_ISpeechVoiceEventsFromAbi, view_ISpeechVoiceEvents)
+        return InterfaceDescriptor<_ISpeechVoiceEvents>("_ISpeechVoiceEvents", _ISpeechVoiceEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_ISpeechVoiceEventsFromAbi, view_ISpeechVoiceEvents)
     }
 
     public unsafe func vtbl(): _ISpeechVoiceEventsVtbl {
@@ -14832,12 +14842,12 @@ public struct ISpAudioVtbl {
     public var base_: ISpStreamFormatVtbl = ISpStreamFormatVtbl()
     public var SetState: CFunc<(CPointer<Unit>, SPAUDIOSTATEAbi, UInt64) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<SPAUDIOSTATUSAbi>) -> Int32> = { _, _ => 0 }
     public var SetBufferInfo: CFunc<(CPointer<Unit>, CPointer<SPAUDIOBUFFERINFOAbi>) -> Int32> = { _, _ => 0 }
     public var GetBufferInfo: CFunc<(CPointer<Unit>, CPointer<SPAUDIOBUFFERINFOAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetDefaultFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _ => 0 }
+    public var GetDefaultFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _ => 0 }
     public var EventHandle: CFunc<(CPointer<Unit>) -> CPointer<Unit>> = { _ => CPointer<Unit>() }
     public var GetVolumeLevel: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetVolumeLevel: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -14893,7 +14903,7 @@ public class ISpAudio <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetFormat(rguidFmtId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetFormat(rguidFmtId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, rguidFmtId, pWaveFormatEx)
@@ -14918,7 +14928,7 @@ public class ISpAudio <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetDefaultFormat(pFormatId: CPointer<GUID>, ppCoMemWaveFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetDefaultFormat(pFormatId: CPointer<GUID>, ppCoMemWaveFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultFormat(__liveRaw, pFormatId, ppCoMemWaveFormatEx)
@@ -15770,11 +15780,11 @@ public class ISpRecoGrammar2 <: InterfaceWrapperBase & ComInterface {
 public struct ISpStreamVtbl {
     public var base_: ISpStreamFormatVtbl = ISpStreamFormatVtbl()
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public var SetBaseStream: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetBaseStream: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetBaseStream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var BindToFile: CFunc<(CPointer<Unit>, CPointer<UInt16>, SPFILEMODEAbi, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, UInt64) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var BindToFile: CFunc<(CPointer<Unit>, CPointer<UInt16>, SPFILEMODEAbi, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, UInt64) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -15820,7 +15830,7 @@ public class ISpStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func SetBaseStream(pStream: CPointer<Unit>, rguidFormat: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetBaseStream(pStream: CPointer<Unit>, rguidFormat: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBaseStream(__liveRaw, pStream, rguidFormat, pWaveFormatEx)
@@ -15834,7 +15844,7 @@ public class ISpStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func BindToFile(pszFileName: CPointer<UInt16>, eMode: SPFILEMODEAbi, pFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ullEventInterest: UInt64): Int32 {
+    public unsafe func BindToFile(pszFileName: CPointer<UInt16>, eMode: SPFILEMODEAbi, pFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, ullEventInterest: UInt64): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BindToFile(__liveRaw, pszFileName, eMode, pFormatId, pWaveFormatEx, ullEventInterest)
@@ -16037,7 +16047,7 @@ public class ISpTaskManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechAudioFormatVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<SpeechAudioFormatTypeAbi>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, SpeechAudioFormatTypeAbi) -> Int32> = { _, _ => 0 }
     public var Guid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -16080,7 +16090,7 @@ public class ISpeechAudioFormat <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechAudioFormat> {
-        return InterfaceDescriptor<ISpeechAudioFormat>("ISpeechAudioFormat", ISpeechAudioFormat.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechAudioFormatFromAbi, viewISpeechAudioFormat)
+        return InterfaceDescriptor<ISpeechAudioFormat>("ISpeechAudioFormat", ISpeechAudioFormat.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechAudioFormatFromAbi, viewISpeechAudioFormat)
     }
 
     public unsafe func vtbl(): ISpeechAudioFormatVtbl {
@@ -16127,14 +16137,14 @@ public class ISpeechAudioFormat <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechAudioStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FreeBufferSpace: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var NonBlockingIO: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<SpeechAudioStateAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CurrentSeekPosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CurrentSeekPosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CurrentDevicePosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CurrentDevicePosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -16171,7 +16181,7 @@ public class ISpeechAudioStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechAudioStatus> {
-        return InterfaceDescriptor<ISpeechAudioStatus>("ISpeechAudioStatus", ISpeechAudioStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechAudioStatusFromAbi, viewISpeechAudioStatus)
+        return InterfaceDescriptor<ISpeechAudioStatus>("ISpeechAudioStatus", ISpeechAudioStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechAudioStatusFromAbi, viewISpeechAudioStatus)
     }
 
     public unsafe func vtbl(): ISpeechAudioStatusVtbl {
@@ -16197,14 +16207,14 @@ public class ISpeechAudioStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CurrentSeekPosition(CurrentSeekPosition: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CurrentSeekPosition(CurrentSeekPosition: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentSeekPosition(__liveRaw, CurrentSeekPosition)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CurrentDevicePosition(CurrentDevicePosition: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CurrentDevicePosition(CurrentDevicePosition: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentDevicePosition(__liveRaw, CurrentDevicePosition)
@@ -16214,15 +16224,15 @@ public class ISpeechAudioStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechBaseStreamVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Format: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_Format: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Read: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Read: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Write: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    public var Write: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Seek: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, SpeechStreamSeekPositionTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Seek: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, SpeechStreamSeekPositionTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -16259,7 +16269,7 @@ public class ISpeechBaseStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechBaseStream> {
-        return InterfaceDescriptor<ISpeechBaseStream>("ISpeechBaseStream", ISpeechBaseStream.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechBaseStreamFromAbi, viewISpeechBaseStream)
+        return InterfaceDescriptor<ISpeechBaseStream>("ISpeechBaseStream", ISpeechBaseStream.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechBaseStreamFromAbi, viewISpeechBaseStream)
     }
 
     public unsafe func vtbl(): ISpeechBaseStreamVtbl {
@@ -16279,21 +16289,21 @@ public class ISpeechBaseStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Read(Buffer: CPointer<Win32__impl_l2.VARIANTAbi>, NumberOfBytes: Int32, BytesRead: CPointer<Int32>): Int32 {
+    public unsafe func Read(Buffer: CPointer<Win32_impl_p2.VARIANTAbi>, NumberOfBytes: Int32, BytesRead: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Read(__liveRaw, Buffer, NumberOfBytes, BytesRead)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Write(Buffer: Win32__impl_l2.VARIANTAbi, BytesWritten: CPointer<Int32>): Int32 {
+    public unsafe func Write(Buffer: Win32_impl_p2.VARIANTAbi, BytesWritten: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Write(__liveRaw, Buffer, BytesWritten)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Seek(Position: Win32__impl_l2.VARIANTAbi, Origin: SpeechStreamSeekPositionTypeAbi, NewPosition: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Seek(Position: Win32_impl_p2.VARIANTAbi, Origin: SpeechStreamSeekPositionTypeAbi, NewPosition: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Seek(__liveRaw, Position, Origin, NewPosition)
@@ -16431,12 +16441,12 @@ public class ISpeechFileStream <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechLexiconPronunciationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<SpeechLexiconTypeAbi>) -> Int32> = { _, _ => 0 }
     public var LangId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PartOfSpeech: CFunc<(CPointer<Unit>, CPointer<SpeechPartOfSpeechAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PhoneIds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PhoneIds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Symbolic: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -16474,7 +16484,7 @@ public class ISpeechLexiconPronunciation <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechLexiconPronunciation> {
-        return InterfaceDescriptor<ISpeechLexiconPronunciation>("ISpeechLexiconPronunciation", ISpeechLexiconPronunciation.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechLexiconPronunciationFromAbi, viewISpeechLexiconPronunciation)
+        return InterfaceDescriptor<ISpeechLexiconPronunciation>("ISpeechLexiconPronunciation", ISpeechLexiconPronunciation.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechLexiconPronunciationFromAbi, viewISpeechLexiconPronunciation)
     }
 
     public unsafe func vtbl(): ISpeechLexiconPronunciationVtbl {
@@ -16500,7 +16510,7 @@ public class ISpeechLexiconPronunciation <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PhoneIds(PhoneIds: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PhoneIds(PhoneIds: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PhoneIds(__liveRaw, PhoneIds)
@@ -16516,7 +16526,7 @@ public class ISpeechLexiconPronunciation <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechLexiconPronunciationsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16557,7 +16567,7 @@ public class ISpeechLexiconPronunciations <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechLexiconPronunciations> {
-        return InterfaceDescriptor<ISpeechLexiconPronunciations>("ISpeechLexiconPronunciations", ISpeechLexiconPronunciations.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechLexiconPronunciationsFromAbi, viewISpeechLexiconPronunciations)
+        return InterfaceDescriptor<ISpeechLexiconPronunciations>("ISpeechLexiconPronunciations", ISpeechLexiconPronunciations.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechLexiconPronunciationsFromAbi, viewISpeechLexiconPronunciations)
     }
 
     public unsafe func vtbl(): ISpeechLexiconPronunciationsVtbl {
@@ -16587,7 +16597,7 @@ public class ISpeechLexiconPronunciations <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechLexiconWordVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var LangId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<SpeechWordTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Word: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -16628,7 +16638,7 @@ public class ISpeechLexiconWord <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechLexiconWord> {
-        return InterfaceDescriptor<ISpeechLexiconWord>("ISpeechLexiconWord", ISpeechLexiconWord.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechLexiconWordFromAbi, viewISpeechLexiconWord)
+        return InterfaceDescriptor<ISpeechLexiconWord>("ISpeechLexiconWord", ISpeechLexiconWord.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechLexiconWordFromAbi, viewISpeechLexiconWord)
     }
 
     public unsafe func vtbl(): ISpeechLexiconWordVtbl {
@@ -16663,7 +16673,7 @@ public class ISpeechLexiconWord <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechLexiconWordsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16704,7 +16714,7 @@ public class ISpeechLexiconWords <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechLexiconWords> {
-        return InterfaceDescriptor<ISpeechLexiconWords>("ISpeechLexiconWords", ISpeechLexiconWords.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechLexiconWordsFromAbi, viewISpeechLexiconWords)
+        return InterfaceDescriptor<ISpeechLexiconWords>("ISpeechLexiconWords", ISpeechLexiconWords.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechLexiconWordsFromAbi, viewISpeechLexiconWords)
     }
 
     public unsafe func vtbl(): ISpeechLexiconWordsVtbl {
@@ -16736,9 +16746,9 @@ public class ISpeechLexiconWords <: InterfaceWrapperBase & ComInterface {
 public struct ISpeechMemoryStreamVtbl {
     public var base_: ISpeechBaseStreamVtbl = ISpeechBaseStreamVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetData: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetData: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -16783,14 +16793,14 @@ public class ISpeechMemoryStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetData(Data: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetData(Data: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetData(__liveRaw, Data)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetData(pData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetData(pData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetData(__liveRaw, pData)
@@ -16800,7 +16810,7 @@ public class ISpeechMemoryStream <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseElementVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AudioTimeOffset: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AudioSizeTime: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AudioStreamOffset: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -16810,7 +16820,7 @@ public struct ISpeechPhraseElementVtbl {
     public var DisplayText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var LexicalForm: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Pronunciation: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Pronunciation: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DisplayAttributes: CFunc<(CPointer<Unit>, CPointer<SpeechDisplayAttributesAbi>) -> Int32> = { _, _ => 0 }
     public var RequiredConfidence: CFunc<(CPointer<Unit>, CPointer<SpeechEngineConfidenceAbi>) -> Int32> = { _, _ => 0 }
     public var ActualConfidence: CFunc<(CPointer<Unit>, CPointer<SpeechEngineConfidenceAbi>) -> Int32> = { _, _ => 0 }
@@ -16851,7 +16861,7 @@ public class ISpeechPhraseElement <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseElement> {
-        return InterfaceDescriptor<ISpeechPhraseElement>("ISpeechPhraseElement", ISpeechPhraseElement.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseElementFromAbi, viewISpeechPhraseElement)
+        return InterfaceDescriptor<ISpeechPhraseElement>("ISpeechPhraseElement", ISpeechPhraseElement.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseElementFromAbi, viewISpeechPhraseElement)
     }
 
     public unsafe func vtbl(): ISpeechPhraseElementVtbl {
@@ -16907,7 +16917,7 @@ public class ISpeechPhraseElement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Pronunciation(Pronunciation: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Pronunciation(Pronunciation: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Pronunciation(__liveRaw, Pronunciation)
@@ -16941,7 +16951,7 @@ public class ISpeechPhraseElement <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseElementsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16982,7 +16992,7 @@ public class ISpeechPhraseElements <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseElements> {
-        return InterfaceDescriptor<ISpeechPhraseElements>("ISpeechPhraseElements", ISpeechPhraseElements.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseElementsFromAbi, viewISpeechPhraseElements)
+        return InterfaceDescriptor<ISpeechPhraseElements>("ISpeechPhraseElements", ISpeechPhraseElements.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseElementsFromAbi, viewISpeechPhraseElements)
     }
 
     public unsafe func vtbl(): ISpeechPhraseElementsVtbl {
@@ -17012,7 +17022,7 @@ public class ISpeechPhraseElements <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseReplacementVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisplayAttributes: CFunc<(CPointer<Unit>, CPointer<SpeechDisplayAttributesAbi>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var FirstElement: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -17053,7 +17063,7 @@ public class ISpeechPhraseReplacement <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseReplacement> {
-        return InterfaceDescriptor<ISpeechPhraseReplacement>("ISpeechPhraseReplacement", ISpeechPhraseReplacement.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseReplacementFromAbi, viewISpeechPhraseReplacement)
+        return InterfaceDescriptor<ISpeechPhraseReplacement>("ISpeechPhraseReplacement", ISpeechPhraseReplacement.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseReplacementFromAbi, viewISpeechPhraseReplacement)
     }
 
     public unsafe func vtbl(): ISpeechPhraseReplacementVtbl {
@@ -17088,7 +17098,7 @@ public class ISpeechPhraseReplacement <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseReplacementsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -17129,7 +17139,7 @@ public class ISpeechPhraseReplacements <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseReplacements> {
-        return InterfaceDescriptor<ISpeechPhraseReplacements>("ISpeechPhraseReplacements", ISpeechPhraseReplacements.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseReplacementsFromAbi, viewISpeechPhraseReplacements)
+        return InterfaceDescriptor<ISpeechPhraseReplacements>("ISpeechPhraseReplacements", ISpeechPhraseReplacements.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseReplacementsFromAbi, viewISpeechPhraseReplacements)
     }
 
     public unsafe func vtbl(): ISpeechPhraseReplacementsVtbl {
@@ -17159,15 +17169,15 @@ public class ISpeechPhraseReplacements <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecognizerStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AudioStatus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CurrentStreamPosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CurrentStreamPosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var CurrentStreamNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var NumberOfActiveRules: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ClsidEngine: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SupportedLanguages: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SupportedLanguages: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -17204,7 +17214,7 @@ public class ISpeechRecognizerStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecognizerStatus> {
-        return InterfaceDescriptor<ISpeechRecognizerStatus>("ISpeechRecognizerStatus", ISpeechRecognizerStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecognizerStatusFromAbi, viewISpeechRecognizerStatus)
+        return InterfaceDescriptor<ISpeechRecognizerStatus>("ISpeechRecognizerStatus", ISpeechRecognizerStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecognizerStatusFromAbi, viewISpeechRecognizerStatus)
     }
 
     public unsafe func vtbl(): ISpeechRecognizerStatusVtbl {
@@ -17218,7 +17228,7 @@ public class ISpeechRecognizerStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CurrentStreamPosition(pCurrentStreamPos: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CurrentStreamPosition(pCurrentStreamPos: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentStreamPosition(__liveRaw, pCurrentStreamPos)
@@ -17243,7 +17253,7 @@ public class ISpeechRecognizerStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SupportedLanguages(SupportedLanguages: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SupportedLanguages(SupportedLanguages: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedLanguages(__liveRaw, SupportedLanguages)
@@ -17253,7 +17263,7 @@ public class ISpeechRecognizerStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechVoiceStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CurrentStreamNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LastStreamNumberQueued: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LastHResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -17302,7 +17312,7 @@ public class ISpeechVoiceStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechVoiceStatus> {
-        return InterfaceDescriptor<ISpeechVoiceStatus>("ISpeechVoiceStatus", ISpeechVoiceStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechVoiceStatusFromAbi, viewISpeechVoiceStatus)
+        return InterfaceDescriptor<ISpeechVoiceStatus>("ISpeechVoiceStatus", ISpeechVoiceStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechVoiceStatusFromAbi, viewISpeechVoiceStatus)
     }
 
     public unsafe func vtbl(): ISpeechVoiceStatusVtbl {
@@ -18911,9 +18921,9 @@ public class ISpShortcut <: InterfaceWrapperBase & ComInterface {
 public struct ISpTTSEngineVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var Speak: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<SPVTEXTFRAGAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Speak: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<SPVTEXTFRAGAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetOutputFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetOutputFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -18958,14 +18968,14 @@ public class ISpTTSEngine <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func Speak(dwSpeakFlags: UInt32, rguidFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pTextFragList: CPointer<SPVTEXTFRAGAbi>, pOutputSite: CPointer<Unit>): Int32 {
+    public unsafe func Speak(dwSpeakFlags: UInt32, rguidFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pTextFragList: CPointer<SPVTEXTFRAGAbi>, pOutputSite: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Speak(__liveRaw, dwSpeakFlags, rguidFormatId, pWaveFormatEx, pTextFragList, pOutputSite)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetOutputFormat(pTargetFmtId: CPointer<GUID>, pTargetWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pOutputFormatId: CPointer<GUID>, ppCoMemOutputWaveFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetOutputFormat(pTargetFmtId: CPointer<GUID>, pTargetWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pOutputFormatId: CPointer<GUID>, ppCoMemOutputWaveFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetOutputFormat(__liveRaw, pTargetFmtId, pTargetWaveFormatEx, pOutputFormatId, ppCoMemOutputWaveFormatEx)
@@ -19086,15 +19096,15 @@ public class ISpeechAudio <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechLexiconVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GenerationId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetWords: CFunc<(CPointer<Unit>, SpeechLexiconTypeAbi, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var AddPronunciation: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddPronunciationByPhoneIds: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var AddPronunciationByPhoneIds: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var RemovePronunciation: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemovePronunciationByPhoneIds: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var RemovePronunciationByPhoneIds: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechPartOfSpeechAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetPronunciations: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, SpeechLexiconTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetGenerationChange: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -19133,7 +19143,7 @@ public class ISpeechLexicon <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechLexicon> {
-        return InterfaceDescriptor<ISpeechLexicon>("ISpeechLexicon", ISpeechLexicon.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechLexiconFromAbi, viewISpeechLexicon)
+        return InterfaceDescriptor<ISpeechLexicon>("ISpeechLexicon", ISpeechLexicon.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechLexiconFromAbi, viewISpeechLexicon)
     }
 
     public unsafe func vtbl(): ISpeechLexiconVtbl {
@@ -19159,7 +19169,7 @@ public class ISpeechLexicon <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddPronunciationByPhoneIds(bstrWord: CPointer<UInt16>, LangId: Int32, PartOfSpeech: SpeechPartOfSpeechAbi, PhoneIds: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AddPronunciationByPhoneIds(bstrWord: CPointer<UInt16>, LangId: Int32, PartOfSpeech: SpeechPartOfSpeechAbi, PhoneIds: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPronunciationByPhoneIds(__liveRaw, bstrWord, LangId, PartOfSpeech, PhoneIds)
@@ -19172,7 +19182,7 @@ public class ISpeechLexicon <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemovePronunciationByPhoneIds(bstrWord: CPointer<UInt16>, LangId: Int32, PartOfSpeech: SpeechPartOfSpeechAbi, PhoneIds: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RemovePronunciationByPhoneIds(bstrWord: CPointer<UInt16>, LangId: Int32, PartOfSpeech: SpeechPartOfSpeechAbi, PhoneIds: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemovePronunciationByPhoneIds(__liveRaw, bstrWord, LangId, PartOfSpeech, PhoneIds)
@@ -20584,9 +20594,9 @@ public struct ISpRecoContextVtbl {
     public var GetMaxAlternates: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetMaxAlternates: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetAudioOptions: CFunc<(CPointer<Unit>, SPAUDIOOPTIONSAbi, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetAudioOptions: CFunc<(CPointer<Unit>, SPAUDIOOPTIONSAbi, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetAudioOptions: CFunc<(CPointer<Unit>, CPointer<SPAUDIOOPTIONSAbi>, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetAudioOptions: CFunc<(CPointer<Unit>, CPointer<SPAUDIOOPTIONSAbi>, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeserializeResult: CFunc<(CPointer<Unit>, CPointer<SPSERIALIZEDRESULTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Bookmark: CFunc<(CPointer<Unit>, SPBOOKMARKOPTIONSAbi, UInt64, IntNative) -> Int32> = { _, _, _, _ => 0 }
     public var SetAdaptationData: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -20672,14 +20682,14 @@ public class ISpRecoContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetAudioOptions(Options: SPAUDIOOPTIONSAbi, pAudioFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetAudioOptions(Options: SPAUDIOOPTIONSAbi, pAudioFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAudioOptions(__liveRaw, Options, pAudioFormatId, pWaveFormatEx)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetAudioOptions(pOptions: CPointer<SPAUDIOOPTIONSAbi>, pAudioFormatId: CPointer<GUID>, ppCoMemWFEX: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetAudioOptions(pOptions: CPointer<SPAUDIOOPTIONSAbi>, pAudioFormatId: CPointer<GUID>, ppCoMemWFEX: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAudioOptions(__liveRaw, pOptions, pAudioFormatId, ppCoMemWFEX)
@@ -20938,7 +20948,7 @@ public struct ISpRecoResultVtbl {
     public var SpeakAudio: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Serialize: CFunc<(CPointer<Unit>, CPointer<CPointer<SPSERIALIZEDRESULTAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var ScaleAudio: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var ScaleAudio: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     public var GetRecoContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -21014,7 +21024,7 @@ public class ISpRecoResult <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func ScaleAudio(pAudioFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func ScaleAudio(pAudioFormatId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ScaleAudio(__liveRaw, pAudioFormatId, pWaveFormatEx)
@@ -21114,7 +21124,7 @@ public struct ISpRecognizerVtbl {
     public var SetRecoState: CFunc<(CPointer<Unit>, SPRECOSTATEAbi) -> Int32> = { _, _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<SPRECOGNIZERSTATUSAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, SPSTREAMFORMATTYPEAbi, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, SPSTREAMFORMATTYPEAbi, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
     public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var DisplayUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var EmulateRecognition: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -21235,7 +21245,7 @@ public class ISpRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(WaveFormatType: SPSTREAMFORMATTYPEAbi, pFormatId: CPointer<GUID>, ppCoMemWFEX: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetFormat(WaveFormatType: SPSTREAMFORMATTYPEAbi, pFormatId: CPointer<GUID>, ppCoMemWFEX: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, WaveFormatType, pFormatId, ppCoMemWFEX)
@@ -21383,9 +21393,9 @@ public struct ISpSREngineVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var SetSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetInputAudioFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<GUID>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetInputAudioFormat: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<GUID>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var RecognizeStream: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var RecognizeStream: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public var SetRecoProfile: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var OnCreateGrammar: CFunc<(CPointer<Unit>, CPointer<Unit>, SPGRAMMARHANDLE, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var OnDeleteGrammar: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -21462,14 +21472,14 @@ public class ISpSREngine <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetInputAudioFormat(pguidSourceFormatId: CPointer<GUID>, pSourceWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pguidDesiredFormatId: CPointer<GUID>, ppCoMemDesiredWaveFormatEx: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetInputAudioFormat(pguidSourceFormatId: CPointer<GUID>, pSourceWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pguidDesiredFormatId: CPointer<GUID>, ppCoMemDesiredWaveFormatEx: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInputAudioFormat(__liveRaw, pguidSourceFormatId, pSourceWaveFormatEx, pguidDesiredFormatId, ppCoMemDesiredWaveFormatEx)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func RecognizeStream(rguidFmtId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, hRequestSync: CPointer<Unit>, hDataAvailable: CPointer<Unit>, hExit: CPointer<Unit>, fNewAudioStream: Int32, fRealTimeAudio: Int32, pAudioObjectToken: CPointer<Unit>): Int32 {
+    public unsafe func RecognizeStream(rguidFmtId: CPointer<GUID>, pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, hRequestSync: CPointer<Unit>, hDataAvailable: CPointer<Unit>, hExit: CPointer<Unit>, fNewAudioStream: Int32, fRealTimeAudio: Int32, pAudioObjectToken: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RecognizeStream(__liveRaw, rguidFmtId, pWaveFormatEx, hRequestSync, hDataAvailable, hExit, fNewAudioStream, fRealTimeAudio, pAudioObjectToken)
@@ -22115,7 +22125,7 @@ public class ISpXMLRecoResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechGrammarRuleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<SpeechRuleAttributesAbi>) -> Int32> = { _, _ => 0 }
     public var InitialState: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -22159,7 +22169,7 @@ public class ISpeechGrammarRule <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechGrammarRule> {
-        return InterfaceDescriptor<ISpeechGrammarRule>("ISpeechGrammarRule", ISpeechGrammarRule.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechGrammarRuleFromAbi, viewISpeechGrammarRule)
+        return InterfaceDescriptor<ISpeechGrammarRule>("ISpeechGrammarRule", ISpeechGrammarRule.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechGrammarRuleFromAbi, viewISpeechGrammarRule)
     }
 
     public unsafe func vtbl(): ISpeechGrammarRuleVtbl {
@@ -22212,15 +22222,15 @@ public class ISpeechGrammarRule <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechGrammarRuleStateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Rule: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Transitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddWordTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, SpeechGrammarWordTypeAbi, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var AddWordTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, SpeechGrammarWordTypeAbi, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddRuleTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var AddRuleTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddSpecialTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, SpeechSpecialTransitionTypeAbi, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var AddSpecialTransition: CFunc<(CPointer<Unit>, CPointer<Unit>, SpeechSpecialTransitionTypeAbi, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, Float32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -22257,7 +22267,7 @@ public class ISpeechGrammarRuleState <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechGrammarRuleState> {
-        return InterfaceDescriptor<ISpeechGrammarRuleState>("ISpeechGrammarRuleState", ISpeechGrammarRuleState.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechGrammarRuleStateFromAbi, viewISpeechGrammarRuleState)
+        return InterfaceDescriptor<ISpeechGrammarRuleState>("ISpeechGrammarRuleState", ISpeechGrammarRuleState.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechGrammarRuleStateFromAbi, viewISpeechGrammarRuleState)
     }
 
     public unsafe func vtbl(): ISpeechGrammarRuleStateVtbl {
@@ -22277,21 +22287,21 @@ public class ISpeechGrammarRuleState <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddWordTransition(DestState: CPointer<Unit>, Words: CPointer<UInt16>, Separators: CPointer<UInt16>, Type: SpeechGrammarWordTypeAbi, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>, Weight: Float32): Int32 {
+    public unsafe func AddWordTransition(DestState: CPointer<Unit>, Words: CPointer<UInt16>, Separators: CPointer<UInt16>, Type: SpeechGrammarWordTypeAbi, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>, Weight: Float32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddWordTransition(__liveRaw, DestState, Words, Separators, Type, PropertyName, PropertyId, PropertyValue, Weight)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddRuleTransition(DestinationState: CPointer<Unit>, Rule: CPointer<Unit>, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>, Weight: Float32): Int32 {
+    public unsafe func AddRuleTransition(DestinationState: CPointer<Unit>, Rule: CPointer<Unit>, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>, Weight: Float32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddRuleTransition(__liveRaw, DestinationState, Rule, PropertyName, PropertyId, PropertyValue, Weight)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddSpecialTransition(DestinationState: CPointer<Unit>, Type: SpeechSpecialTransitionTypeAbi, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>, Weight: Float32): Int32 {
+    public unsafe func AddSpecialTransition(DestinationState: CPointer<Unit>, Type: SpeechSpecialTransitionTypeAbi, PropertyName: CPointer<UInt16>, PropertyId: Int32, PropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>, Weight: Float32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddSpecialTransition(__liveRaw, DestinationState, Type, PropertyName, PropertyId, PropertyValue, Weight)
@@ -22301,16 +22311,16 @@ public class ISpeechGrammarRuleState <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechGrammarRuleStateTransitionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<SpeechGrammarRuleStateTransitionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Rule: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Weight: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Weight: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var PropertyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var PropertyId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PropertyValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PropertyValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var NextState: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -22348,7 +22358,7 @@ public class ISpeechGrammarRuleStateTransition <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechGrammarRuleStateTransition> {
-        return InterfaceDescriptor<ISpeechGrammarRuleStateTransition>("ISpeechGrammarRuleStateTransition", ISpeechGrammarRuleStateTransition.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechGrammarRuleStateTransitionFromAbi, viewISpeechGrammarRuleStateTransition)
+        return InterfaceDescriptor<ISpeechGrammarRuleStateTransition>("ISpeechGrammarRuleStateTransition", ISpeechGrammarRuleStateTransition.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechGrammarRuleStateTransitionFromAbi, viewISpeechGrammarRuleStateTransition)
     }
 
     public unsafe func vtbl(): ISpeechGrammarRuleStateTransitionVtbl {
@@ -22374,7 +22384,7 @@ public class ISpeechGrammarRuleStateTransition <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Weight(Weight: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Weight(Weight: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Weight(__liveRaw, Weight)
@@ -22393,7 +22403,7 @@ public class ISpeechGrammarRuleStateTransition <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PropertyValue(PropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PropertyValue(PropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PropertyValue(__liveRaw, PropertyValue)
@@ -22409,7 +22419,7 @@ public class ISpeechGrammarRuleStateTransition <: InterfaceWrapperBase & ComInte
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechGrammarRuleStateTransitionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -22450,7 +22460,7 @@ public class ISpeechGrammarRuleStateTransitions <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechGrammarRuleStateTransitions> {
-        return InterfaceDescriptor<ISpeechGrammarRuleStateTransitions>("ISpeechGrammarRuleStateTransitions", ISpeechGrammarRuleStateTransitions.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechGrammarRuleStateTransitionsFromAbi, viewISpeechGrammarRuleStateTransitions)
+        return InterfaceDescriptor<ISpeechGrammarRuleStateTransitions>("ISpeechGrammarRuleStateTransitions", ISpeechGrammarRuleStateTransitions.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechGrammarRuleStateTransitionsFromAbi, viewISpeechGrammarRuleStateTransitions)
     }
 
     public unsafe func vtbl(): ISpeechGrammarRuleStateTransitionsVtbl {
@@ -22480,10 +22490,10 @@ public class ISpeechGrammarRuleStateTransitions <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechGrammarRulesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindRule: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var FindRule: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -22491,7 +22501,7 @@ public struct ISpeechGrammarRulesVtbl {
     public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, SpeechRuleAttributesAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Commit: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CommitAndSave: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var CommitAndSave: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -22528,7 +22538,7 @@ public class ISpeechGrammarRules <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechGrammarRules> {
-        return InterfaceDescriptor<ISpeechGrammarRules>("ISpeechGrammarRules", ISpeechGrammarRules.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechGrammarRulesFromAbi, viewISpeechGrammarRules)
+        return InterfaceDescriptor<ISpeechGrammarRules>("ISpeechGrammarRules", ISpeechGrammarRules.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechGrammarRulesFromAbi, viewISpeechGrammarRules)
     }
 
     public unsafe func vtbl(): ISpeechGrammarRulesVtbl {
@@ -22542,7 +22552,7 @@ public class ISpeechGrammarRules <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindRule(RuleNameOrId: Win32__impl_l2.VARIANTAbi, Rule: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func FindRule(RuleNameOrId: Win32_impl_p2.VARIANTAbi, Rule: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindRule(__liveRaw, RuleNameOrId, Rule)
@@ -22580,7 +22590,7 @@ public class ISpeechGrammarRules <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CommitAndSave(ErrorText: CPointer<CPointer<UInt16>>, SaveStream: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CommitAndSave(ErrorText: CPointer<CPointer<UInt16>>, SaveStream: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CommitAndSave(__liveRaw, ErrorText, SaveStream)
@@ -22590,7 +22600,7 @@ public class ISpeechGrammarRules <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechObjectTokenVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DataKey: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Category: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -22603,9 +22613,9 @@ public struct ISpeechObjectTokenVtbl {
     public var GetStorageFileName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, SpeechTokenShellFolderAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RemoveStorageFileName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int16) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var MatchesAttributes: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -22643,7 +22653,7 @@ public class ISpeechObjectToken <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechObjectToken> {
-        return InterfaceDescriptor<ISpeechObjectToken>("ISpeechObjectToken", ISpeechObjectToken.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechObjectTokenFromAbi, viewISpeechObjectToken)
+        return InterfaceDescriptor<ISpeechObjectToken>("ISpeechObjectToken", ISpeechObjectToken.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechObjectTokenFromAbi, viewISpeechObjectToken)
     }
 
     public unsafe func vtbl(): ISpeechObjectTokenVtbl {
@@ -22712,14 +22722,14 @@ public class ISpeechObjectToken <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>, Object: CPointer<Unit>, Supported: CPointer<Int16>): Int32 {
+    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>, Object: CPointer<Unit>, Supported: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsUISupported(__liveRaw, TypeOfUI, ExtraData, Object, Supported)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DisplayUI(hWnd: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>, Object: CPointer<Unit>): Int32 {
+    public unsafe func DisplayUI(hWnd: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>, Object: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayUI(__liveRaw, hWnd, Title, TypeOfUI, ExtraData, Object)
@@ -22735,7 +22745,7 @@ public class ISpeechObjectToken <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechObjectTokenCategoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDefault: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Default: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -22778,7 +22788,7 @@ public class ISpeechObjectTokenCategory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechObjectTokenCategory> {
-        return InterfaceDescriptor<ISpeechObjectTokenCategory>("ISpeechObjectTokenCategory", ISpeechObjectTokenCategory.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechObjectTokenCategoryFromAbi, viewISpeechObjectTokenCategory)
+        return InterfaceDescriptor<ISpeechObjectTokenCategory>("ISpeechObjectTokenCategory", ISpeechObjectTokenCategory.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechObjectTokenCategoryFromAbi, viewISpeechObjectTokenCategory)
     }
 
     public unsafe func vtbl(): ISpeechObjectTokenCategoryVtbl {
@@ -22825,7 +22835,7 @@ public class ISpeechObjectTokenCategory <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechObjectTokensVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -22866,7 +22876,7 @@ public class ISpeechObjectTokens <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechObjectTokens> {
-        return InterfaceDescriptor<ISpeechObjectTokens>("ISpeechObjectTokens", ISpeechObjectTokens.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechObjectTokensFromAbi, viewISpeechObjectTokens)
+        return InterfaceDescriptor<ISpeechObjectTokens>("ISpeechObjectTokens", ISpeechObjectTokens.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechObjectTokensFromAbi, viewISpeechObjectTokens)
     }
 
     public unsafe func vtbl(): ISpeechObjectTokensVtbl {
@@ -22896,7 +22906,7 @@ public class ISpeechObjectTokens <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseAlternateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RecoResult: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StartElementInResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var NumberOfElementsInResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -22938,7 +22948,7 @@ public class ISpeechPhraseAlternate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseAlternate> {
-        return InterfaceDescriptor<ISpeechPhraseAlternate>("ISpeechPhraseAlternate", ISpeechPhraseAlternate.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseAlternateFromAbi, viewISpeechPhraseAlternate)
+        return InterfaceDescriptor<ISpeechPhraseAlternate>("ISpeechPhraseAlternate", ISpeechPhraseAlternate.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseAlternateFromAbi, viewISpeechPhraseAlternate)
     }
 
     public unsafe func vtbl(): ISpeechPhraseAlternateVtbl {
@@ -22979,7 +22989,7 @@ public class ISpeechPhraseAlternate <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseAlternatesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23020,7 +23030,7 @@ public class ISpeechPhraseAlternates <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseAlternates> {
-        return InterfaceDescriptor<ISpeechPhraseAlternates>("ISpeechPhraseAlternates", ISpeechPhraseAlternates.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseAlternatesFromAbi, viewISpeechPhraseAlternates)
+        return InterfaceDescriptor<ISpeechPhraseAlternates>("ISpeechPhraseAlternates", ISpeechPhraseAlternates.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseAlternatesFromAbi, viewISpeechPhraseAlternates)
     }
 
     public unsafe func vtbl(): ISpeechPhraseAlternatesVtbl {
@@ -23050,14 +23060,14 @@ public class ISpeechPhraseAlternates <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var LanguageId: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GrammarId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GrammarId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var StartTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var StartTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AudioStreamPosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AudioStreamPosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var AudioSizeBytes: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RetainedSizeBytes: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AudioSizeTime: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -23067,9 +23077,9 @@ public struct ISpeechPhraseInfoVtbl {
     public var Replacements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EngineId: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnginePrivateData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var EnginePrivateData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var GetText: CFunc<(CPointer<Unit>, Int32, Int32, Int16, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetDisplayAttributes: CFunc<(CPointer<Unit>, Int32, Int32, Int16, CPointer<SpeechDisplayAttributesAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
@@ -23108,7 +23118,7 @@ public class ISpeechPhraseInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseInfo> {
-        return InterfaceDescriptor<ISpeechPhraseInfo>("ISpeechPhraseInfo", ISpeechPhraseInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseInfoFromAbi, viewISpeechPhraseInfo)
+        return InterfaceDescriptor<ISpeechPhraseInfo>("ISpeechPhraseInfo", ISpeechPhraseInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseInfoFromAbi, viewISpeechPhraseInfo)
     }
 
     public unsafe func vtbl(): ISpeechPhraseInfoVtbl {
@@ -23122,21 +23132,21 @@ public class ISpeechPhraseInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GrammarId(GrammarId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GrammarId(GrammarId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GrammarId(__liveRaw, GrammarId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func StartTime(StartTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func StartTime(StartTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartTime(__liveRaw, StartTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AudioStreamPosition(AudioStreamPosition: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AudioStreamPosition(AudioStreamPosition: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AudioStreamPosition(__liveRaw, AudioStreamPosition)
@@ -23191,14 +23201,14 @@ public class ISpeechPhraseInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnginePrivateData(PrivateData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnginePrivateData(PrivateData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnginePrivateData(__liveRaw, PrivateData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SaveToMemory(PhraseBlock: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SaveToMemory(PhraseBlock: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SaveToMemory(__liveRaw, PhraseBlock)
@@ -23220,9 +23230,9 @@ public class ISpeechPhraseInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseInfoBuilderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RestorePhraseFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var RestorePhraseFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -23259,7 +23269,7 @@ public class ISpeechPhraseInfoBuilder <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseInfoBuilder> {
-        return InterfaceDescriptor<ISpeechPhraseInfoBuilder>("ISpeechPhraseInfoBuilder", ISpeechPhraseInfoBuilder.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseInfoBuilderFromAbi, viewISpeechPhraseInfoBuilder)
+        return InterfaceDescriptor<ISpeechPhraseInfoBuilder>("ISpeechPhraseInfoBuilder", ISpeechPhraseInfoBuilder.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseInfoBuilderFromAbi, viewISpeechPhraseInfoBuilder)
     }
 
     public unsafe func vtbl(): ISpeechPhraseInfoBuilderVtbl {
@@ -23267,7 +23277,7 @@ public class ISpeechPhraseInfoBuilder <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RestorePhraseFromMemory(PhraseInMemory: CPointer<Win32__impl_l2.VARIANTAbi>, PhraseInfo: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RestorePhraseFromMemory(PhraseInMemory: CPointer<Win32_impl_p2.VARIANTAbi>, PhraseInfo: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RestorePhraseFromMemory(__liveRaw, PhraseInMemory, PhraseInfo)
@@ -23277,7 +23287,7 @@ public class ISpeechPhraseInfoBuilder <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhrasePropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23318,7 +23328,7 @@ public class ISpeechPhraseProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseProperties> {
-        return InterfaceDescriptor<ISpeechPhraseProperties>("ISpeechPhraseProperties", ISpeechPhraseProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhrasePropertiesFromAbi, viewISpeechPhraseProperties)
+        return InterfaceDescriptor<ISpeechPhraseProperties>("ISpeechPhraseProperties", ISpeechPhraseProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhrasePropertiesFromAbi, viewISpeechPhraseProperties)
     }
 
     public unsafe func vtbl(): ISpeechPhrasePropertiesVtbl {
@@ -23348,11 +23358,11 @@ public class ISpeechPhraseProperties <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhrasePropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var FirstElement: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var NumberOfElements: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EngineConfidence: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
@@ -23395,7 +23405,7 @@ public class ISpeechPhraseProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseProperty> {
-        return InterfaceDescriptor<ISpeechPhraseProperty>("ISpeechPhraseProperty", ISpeechPhraseProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhrasePropertyFromAbi, viewISpeechPhraseProperty)
+        return InterfaceDescriptor<ISpeechPhraseProperty>("ISpeechPhraseProperty", ISpeechPhraseProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhrasePropertyFromAbi, viewISpeechPhraseProperty)
     }
 
     public unsafe func vtbl(): ISpeechPhrasePropertyVtbl {
@@ -23415,7 +23425,7 @@ public class ISpeechPhraseProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, Value)
@@ -23461,7 +23471,7 @@ public class ISpeechPhraseProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseRuleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var FirstElement: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -23506,7 +23516,7 @@ public class ISpeechPhraseRule <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseRule> {
-        return InterfaceDescriptor<ISpeechPhraseRule>("ISpeechPhraseRule", ISpeechPhraseRule.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseRuleFromAbi, viewISpeechPhraseRule)
+        return InterfaceDescriptor<ISpeechPhraseRule>("ISpeechPhraseRule", ISpeechPhraseRule.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseRuleFromAbi, viewISpeechPhraseRule)
     }
 
     public unsafe func vtbl(): ISpeechPhraseRuleVtbl {
@@ -23565,7 +23575,7 @@ public class ISpeechPhraseRule <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechPhraseRulesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -23606,7 +23616,7 @@ public class ISpeechPhraseRules <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechPhraseRules> {
-        return InterfaceDescriptor<ISpeechPhraseRules>("ISpeechPhraseRules", ISpeechPhraseRules.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechPhraseRulesFromAbi, viewISpeechPhraseRules)
+        return InterfaceDescriptor<ISpeechPhraseRules>("ISpeechPhraseRules", ISpeechPhraseRules.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechPhraseRulesFromAbi, viewISpeechPhraseRules)
     }
 
     public unsafe func vtbl(): ISpeechPhraseRulesVtbl {
@@ -23636,7 +23646,7 @@ public class ISpeechPhraseRules <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecoContextVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Recognizer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AudioInputInterferenceStatus: CFunc<(CPointer<Unit>, CPointer<SpeechInterferenceAbi>) -> Int32> = { _, _ => 0 }
     public var RequestedUIType: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -23659,11 +23669,11 @@ public struct ISpeechRecoContextVtbl {
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateGrammar: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateGrammar: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateResultFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateResultFromMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Bookmark: CFunc<(CPointer<Unit>, SpeechBookmarkOptionsAbi, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var Bookmark: CFunc<(CPointer<Unit>, SpeechBookmarkOptionsAbi, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var SetAdaptationData: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -23701,7 +23711,7 @@ public class ISpeechRecoContext <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecoContext> {
-        return InterfaceDescriptor<ISpeechRecoContext>("ISpeechRecoContext", ISpeechRecoContext.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecoContextFromAbi, viewISpeechRecoContext)
+        return InterfaceDescriptor<ISpeechRecoContext>("ISpeechRecoContext", ISpeechRecoContext.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecoContextFromAbi, viewISpeechRecoContext)
     }
 
     public unsafe func vtbl(): ISpeechRecoContextVtbl {
@@ -23835,21 +23845,21 @@ public class ISpeechRecoContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateGrammar(GrammarId: Win32__impl_l2.VARIANTAbi, Grammar: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateGrammar(GrammarId: Win32_impl_p2.VARIANTAbi, Grammar: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateGrammar(__liveRaw, GrammarId, Grammar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateResultFromMemory(ResultBlock: CPointer<Win32__impl_l2.VARIANTAbi>, Result: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateResultFromMemory(ResultBlock: CPointer<Win32_impl_p2.VARIANTAbi>, Result: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateResultFromMemory(__liveRaw, ResultBlock, Result)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Bookmark(Options: SpeechBookmarkOptionsAbi, StreamPos: Win32__impl_l2.VARIANTAbi, BookmarkId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Bookmark(Options: SpeechBookmarkOptionsAbi, StreamPos: Win32_impl_p2.VARIANTAbi, BookmarkId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Bookmark(__liveRaw, Options, StreamPos, BookmarkId)
@@ -23865,9 +23875,9 @@ public class ISpeechRecoContext <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecoGrammarVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var RecoContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetState: CFunc<(CPointer<Unit>, SpeechGrammarStateAbi) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<SpeechGrammarStateAbi>) -> Int32> = { _, _ => 0 }
@@ -23876,11 +23886,11 @@ public struct ISpeechRecoGrammarVtbl {
     public var CmdLoadFromFile: CFunc<(CPointer<Unit>, CPointer<UInt16>, SpeechLoadOptionAbi) -> Int32> = { _, _, _ => 0 }
     public var CmdLoadFromObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, SpeechLoadOptionAbi) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CmdLoadFromResource: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, Int32, SpeechLoadOptionAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var CmdLoadFromResource: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, Int32, SpeechLoadOptionAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CmdLoadFromMemory: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, SpeechLoadOptionAbi) -> Int32> = { _, _, _ => 0 }
+    public var CmdLoadFromMemory: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, SpeechLoadOptionAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CmdLoadFromProprietaryGrammar: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, SpeechLoadOptionAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CmdLoadFromProprietaryGrammar: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, SpeechLoadOptionAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var CmdSetRuleState: CFunc<(CPointer<Unit>, CPointer<UInt16>, SpeechRuleStateAbi) -> Int32> = { _, _, _ => 0 }
     public var CmdSetRuleIdState: CFunc<(CPointer<Unit>, Int32, SpeechRuleStateAbi) -> Int32> = { _, _, _ => 0 }
     public var DictationLoad: CFunc<(CPointer<Unit>, CPointer<UInt16>, SpeechLoadOptionAbi) -> Int32> = { _, _, _ => 0 }
@@ -23925,7 +23935,7 @@ public class ISpeechRecoGrammar <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecoGrammar> {
-        return InterfaceDescriptor<ISpeechRecoGrammar>("ISpeechRecoGrammar", ISpeechRecoGrammar.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecoGrammarFromAbi, viewISpeechRecoGrammar)
+        return InterfaceDescriptor<ISpeechRecoGrammar>("ISpeechRecoGrammar", ISpeechRecoGrammar.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecoGrammarFromAbi, viewISpeechRecoGrammar)
     }
 
     public unsafe func vtbl(): ISpeechRecoGrammarVtbl {
@@ -23933,7 +23943,7 @@ public class ISpeechRecoGrammar <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Id(Id: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Id(Id: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Id(__liveRaw, Id)
@@ -23982,21 +23992,21 @@ public class ISpeechRecoGrammar <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CmdLoadFromResource(hModule: Int32, ResourceName: Win32__impl_l2.VARIANTAbi, ResourceType: Win32__impl_l2.VARIANTAbi, LanguageId: Int32, LoadOption: SpeechLoadOptionAbi): Int32 {
+    public unsafe func CmdLoadFromResource(hModule: Int32, ResourceName: Win32_impl_p2.VARIANTAbi, ResourceType: Win32_impl_p2.VARIANTAbi, LanguageId: Int32, LoadOption: SpeechLoadOptionAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CmdLoadFromResource(__liveRaw, hModule, ResourceName, ResourceType, LanguageId, LoadOption)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CmdLoadFromMemory(GrammarData: Win32__impl_l2.VARIANTAbi, LoadOption: SpeechLoadOptionAbi): Int32 {
+    public unsafe func CmdLoadFromMemory(GrammarData: Win32_impl_p2.VARIANTAbi, LoadOption: SpeechLoadOptionAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CmdLoadFromMemory(__liveRaw, GrammarData, LoadOption)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CmdLoadFromProprietaryGrammar(ProprietaryGuid: CPointer<UInt16>, ProprietaryString: CPointer<UInt16>, ProprietaryData: Win32__impl_l2.VARIANTAbi, LoadOption: SpeechLoadOptionAbi): Int32 {
+    public unsafe func CmdLoadFromProprietaryGrammar(ProprietaryGuid: CPointer<UInt16>, ProprietaryString: CPointer<UInt16>, ProprietaryData: Win32_impl_p2.VARIANTAbi, LoadOption: SpeechLoadOptionAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CmdLoadFromProprietaryGrammar(__liveRaw, ProprietaryGuid, ProprietaryString, ProprietaryData, LoadOption)
@@ -24054,7 +24064,7 @@ public class ISpeechRecoGrammar <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecoResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RecoContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Times: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AudioFormat: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -24064,7 +24074,7 @@ public struct ISpeechRecoResultVtbl {
     public var Audio: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SpeakAudio: CFunc<(CPointer<Unit>, Int32, Int32, SpeechVoiceSpeakFlagsAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DiscardResultInfo: CFunc<(CPointer<Unit>, SpeechDiscardTypeAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -24102,7 +24112,7 @@ public class ISpeechRecoResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecoResult> {
-        return InterfaceDescriptor<ISpeechRecoResult>("ISpeechRecoResult", ISpeechRecoResult.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecoResultFromAbi, viewISpeechRecoResult)
+        return InterfaceDescriptor<ISpeechRecoResult>("ISpeechRecoResult", ISpeechRecoResult.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecoResultFromAbi, viewISpeechRecoResult)
     }
 
     public unsafe func vtbl(): ISpeechRecoResultVtbl {
@@ -24158,7 +24168,7 @@ public class ISpeechRecoResult <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SaveToMemory(ResultBlock: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SaveToMemory(ResultBlock: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SaveToMemory(__liveRaw, ResultBlock)
@@ -24229,7 +24239,7 @@ public class ISpeechRecoResult2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecoResultDispatchVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RecoContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Times: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AudioFormat: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -24239,7 +24249,7 @@ public struct ISpeechRecoResultDispatchVtbl {
     public var Audio: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SpeakAudio: CFunc<(CPointer<Unit>, Int32, Int32, SpeechVoiceSpeakFlagsAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SaveToMemory: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DiscardResultInfo: CFunc<(CPointer<Unit>, SpeechDiscardTypeAbi) -> Int32> = { _, _ => 0 }
     public var GetXMLResult: CFunc<(CPointer<Unit>, SPXMLRESULTOPTIONSAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var GetXMLErrorInfo: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<Int16>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -24280,7 +24290,7 @@ public class ISpeechRecoResultDispatch <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecoResultDispatch> {
-        return InterfaceDescriptor<ISpeechRecoResultDispatch>("ISpeechRecoResultDispatch", ISpeechRecoResultDispatch.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecoResultDispatchFromAbi, viewISpeechRecoResultDispatch)
+        return InterfaceDescriptor<ISpeechRecoResultDispatch>("ISpeechRecoResultDispatch", ISpeechRecoResultDispatch.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecoResultDispatchFromAbi, viewISpeechRecoResultDispatch)
     }
 
     public unsafe func vtbl(): ISpeechRecoResultDispatchVtbl {
@@ -24336,7 +24346,7 @@ public class ISpeechRecoResultDispatch <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SaveToMemory(ResultBlock: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SaveToMemory(ResultBlock: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SaveToMemory(__liveRaw, ResultBlock)
@@ -24370,7 +24380,7 @@ public class ISpeechRecoResultDispatch <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechRecognizerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var putref_Recognizer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Recognizer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAllowAudioInputFormatChangesOnNextSet: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -24386,7 +24396,7 @@ public struct ISpeechRecognizerVtbl {
     public var putref_Profile: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Profile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EmulateRecognition: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var EmulateRecognition: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var CreateRecoContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetFormat: CFunc<(CPointer<Unit>, SpeechFormatTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetPropertyNumber: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
@@ -24394,9 +24404,9 @@ public struct ISpeechRecognizerVtbl {
     public var SetPropertyString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     public var GetPropertyString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
+    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetRecognizers: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetAudioInputs: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetProfiles: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -24436,7 +24446,7 @@ public class ISpeechRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechRecognizer> {
-        return InterfaceDescriptor<ISpeechRecognizer>("ISpeechRecognizer", ISpeechRecognizer.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechRecognizerFromAbi, viewISpeechRecognizer)
+        return InterfaceDescriptor<ISpeechRecognizer>("ISpeechRecognizer", ISpeechRecognizer.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechRecognizerFromAbi, viewISpeechRecognizer)
     }
 
     public unsafe func vtbl(): ISpeechRecognizerVtbl {
@@ -24528,7 +24538,7 @@ public class ISpeechRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EmulateRecognition(TextElements: Win32__impl_l2.VARIANTAbi, ElementDisplayAttributes: CPointer<Win32__impl_l2.VARIANTAbi>, LanguageId: Int32): Int32 {
+    public unsafe func EmulateRecognition(TextElements: Win32_impl_p2.VARIANTAbi, ElementDisplayAttributes: CPointer<Win32_impl_p2.VARIANTAbi>, LanguageId: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EmulateRecognition(__liveRaw, TextElements, ElementDisplayAttributes, LanguageId)
@@ -24571,14 +24581,14 @@ public class ISpeechRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>, Supported: CPointer<Int16>): Int32 {
+    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>, Supported: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsUISupported(__liveRaw, TypeOfUI, ExtraData, Supported)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DisplayUI(hWndParent: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DisplayUI(hWndParent: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayUI(__liveRaw, hWndParent, Title, TypeOfUI, ExtraData)
@@ -24606,7 +24616,7 @@ public class ISpeechRecognizer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_Speech == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISpeechVoiceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Voice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_Voice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -24638,9 +24648,9 @@ public struct ISpeechVoiceVtbl {
     public var WaitUntilDone: CFunc<(CPointer<Unit>, Int32, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var SpeakCompleteEvent: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
+    public var IsUISupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var DisplayUI: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -24677,7 +24687,7 @@ public class ISpeechVoice <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISpeechVoice> {
-        return InterfaceDescriptor<ISpeechVoice>("ISpeechVoice", ISpeechVoice.iid(), Win32__impl_l2.IDispatch.iid(), takeISpeechVoiceFromAbi, viewISpeechVoice)
+        return InterfaceDescriptor<ISpeechVoice>("ISpeechVoice", ISpeechVoice.iid(), Win32_impl_p2.IDispatch.iid(), takeISpeechVoiceFromAbi, viewISpeechVoice)
     }
 
     public unsafe func vtbl(): ISpeechVoiceVtbl {
@@ -24865,14 +24875,14 @@ public class ISpeechVoice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>, Supported: CPointer<Int16>): Int32 {
+    public unsafe func IsUISupported(TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>, Supported: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsUISupported(__liveRaw, TypeOfUI, ExtraData, Supported)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DisplayUI(hWndParent: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DisplayUI(hWndParent: Int32, Title: CPointer<UInt16>, TypeOfUI: CPointer<UInt16>, ExtraData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayUI(__liveRaw, hWndParent, Title, TypeOfUI, ExtraData)

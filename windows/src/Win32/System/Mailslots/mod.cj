@@ -4,7 +4,9 @@
 package windows.Win32.System.Mailslots
 
 import std.collection.*
+@When[Windows_Win32_System_Mailslots == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Mailslots == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 

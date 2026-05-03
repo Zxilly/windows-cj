@@ -4,14 +4,23 @@
 package windows.Storage.Pickers
 
 import std.collection.*
+@When[Windows_Storage_Pickers == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Storage_Pickers == "on"]
 import windows_core as windows_core
+@When[Windows_Storage_Pickers == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Storage_Pickers == "on"]
 import windows_interface as windows_interface
+@When[Windows_Storage_Pickers == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Storage_Pickers == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_Storage_Pickers == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Storage_Pickers == "on"]
 import windows_collections as windows_collections
+@When[Windows_Storage_Pickers == "on"]
 import windows_future as windows_future
 
 
@@ -324,7 +333,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
     }
 
     public static func iid(): GUID {
-        windows_collections.IVectorView<_impl_l1.StorageFile>.iid()
+        windows_collections.IVectorView<impl_p1.StorageFile>.iid()
     }
 
     public static func runtimeName(): String {
@@ -332,12 +341,12 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<FilePickerSelectedFilesArray> {
-        let ancestors = [windows_collections.IVectorView<_impl_l1.StorageFile>.iid(), windows_collections.IIterable<_impl_l1.StorageFile>.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<FilePickerSelectedFilesArray>("FilePickerSelectedFilesArray", windows_collections.IVectorView<_impl_l1.StorageFile>.iid(), ancestors, { raw => FilePickerSelectedFilesArray.fromAbiTake(raw) }, { raw => FilePickerSelectedFilesArray.viewOf(raw) })
+        let ancestors = [windows_collections.IVectorView<impl_p1.StorageFile>.iid(), windows_collections.IIterable<impl_p1.StorageFile>.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<FilePickerSelectedFilesArray>("FilePickerSelectedFilesArray", windows_collections.IVectorView<impl_p1.StorageFile>.iid(), ancestors, { raw => FilePickerSelectedFilesArray.fromAbiTake(raw) }, { raw => FilePickerSelectedFilesArray.viewOf(raw) })
     }
 
-    public func defaultInterface(): windows_collections.IVectorView<_impl_l1.StorageFile> {
-        match (unsafe { query(windows_collections.IVectorView<_impl_l1.StorageFile>.descriptor()) }) {
+    public func defaultInterface(): windows_collections.IVectorView<impl_p1.StorageFile> {
+        match (unsafe { query(windows_collections.IVectorView<impl_p1.StorageFile>.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -352,7 +361,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.Storage.Pickers.FilePickerSelectedFilesArray", FilePickerSelectedFilesArray.signature(), windows_collections.IVectorView<_impl_l1.StorageFile>.iid())
+        RuntimeTypeContract("Windows.Storage.Pickers.FilePickerSelectedFilesArray", FilePickerSelectedFilesArray.signature(), windows_collections.IVectorView<impl_p1.StorageFile>.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -367,29 +376,29 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIVectorView(): windows_collections.IVectorView<_impl_l1.StorageFile> {
-        match (unsafe { query(windows_collections.IVectorView<_impl_l1.StorageFile>.descriptor()) }) {
+    public func asIVectorView(): windows_collections.IVectorView<impl_p1.StorageFile> {
+        match (unsafe { query(windows_collections.IVectorView<impl_p1.StorageFile>.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIIterable(): windows_collections.IIterable<_impl_l1.StorageFile> {
-        match (unsafe { query(windows_collections.IIterable<_impl_l1.StorageFile>.descriptor()) }) {
+    public func asIIterable(): windows_collections.IIterable<impl_p1.StorageFile> {
+        match (unsafe { query(windows_collections.IIterable<impl_p1.StorageFile>.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func intoIterator(): Iterator<_impl_l1.StorageFile> {
+    public func intoIterator(): Iterator<impl_p1.StorageFile> {
         asIIterable().intoIterator()
     }
 
-    public func iterator(): Iterator<_impl_l1.StorageFile> {
+    public func iterator(): Iterator<impl_p1.StorageFile> {
         intoIterator()
     }
 
-    public unsafe func GetAt(index: UInt32): _impl_l1.StorageFile {
+    public unsafe func GetAt(index: UInt32): impl_p1.StorageFile {
         return defaultInterface().GetAt(index)
     }
 
@@ -397,7 +406,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
         return defaultInterface().Size()
     }
 
-    public unsafe func IndexOf(value: _impl_l1.StorageFile, index: CPointer<UInt32>): Bool {
+    public unsafe func IndexOf(value: impl_p1.StorageFile, index: CPointer<UInt32>): Bool {
         return defaultInterface().IndexOf(value, index)
     }
 
@@ -405,7 +414,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
         return defaultInterface().GetMany(startIndex, itemsSize, CPointer<Unit>(items))
     }
 
-    public unsafe func First(): windows_collections.IIterator<_impl_l1.StorageFile> {
+    public unsafe func First(): windows_collections.IIterator<impl_p1.StorageFile> {
         return asIIterable().First()
     }
 }
@@ -578,7 +587,7 @@ public class IFileOpenPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileOpenPicker3", IFileOpenPicker3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPicker3Vtbl", "IFileOpenPicker3", "IFileOpenPicker3_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileOpenPicker3", IFileOpenPicker3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPicker3Vtbl", "IFileOpenPicker3", "IFileOpenPicker3_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileOpenPicker3.runtimeType())
         return schema
     }
@@ -608,12 +617,12 @@ public class IFileOpenPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -667,7 +676,7 @@ public class IFileOpenPickerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileOpenPickerStatics", IFileOpenPickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerStaticsVtbl", "IFileOpenPickerStatics", "IFileOpenPickerStatics_Impl", [InterfaceMethodSchema("ResumePickSingleFileAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileOpenPickerStatics", IFileOpenPickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerStaticsVtbl", "IFileOpenPickerStatics", "IFileOpenPickerStatics_Impl", [InterfaceMethodSchema("ResumePickSingleFileAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileOpenPickerStatics.runtimeType())
         return schema
     }
@@ -697,12 +706,12 @@ public class IFileOpenPickerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ResumePickSingleFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -756,7 +765,7 @@ public class IFileOpenPickerWithOperationId <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileOpenPickerWithOperationId", IFileOpenPickerWithOperationId.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerWithOperationIdVtbl", "IFileOpenPickerWithOperationId", "IFileOpenPickerWithOperationId_Impl", [InterfaceMethodSchema("PickSingleFileAsync", 6, [InterfaceParameterSchema("pickerOperationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileOpenPickerWithOperationId", IFileOpenPickerWithOperationId.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerWithOperationIdVtbl", "IFileOpenPickerWithOperationId", "IFileOpenPickerWithOperationId_Impl", [InterfaceMethodSchema("PickSingleFileAsync", 6, [InterfaceParameterSchema("pickerOperationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileOpenPickerWithOperationId.runtimeType())
         return schema
     }
@@ -786,12 +795,12 @@ public class IFileOpenPickerWithOperationId <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickSingleFileAsync(pickerOperationId: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func PickSingleFileAsync(pickerOperationId: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PickSingleFileAsync(asRaw(), pickerOperationId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -1033,7 +1042,7 @@ public class IFileSavePicker4 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileSavePicker4", IFileSavePicker4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePicker4Vtbl", "IFileSavePicker4", "IFileSavePicker4_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileSavePicker4", IFileSavePicker4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePicker4Vtbl", "IFileSavePicker4", "IFileSavePicker4_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileSavePicker4.runtimeType())
         return schema
     }
@@ -1063,12 +1072,12 @@ public class IFileSavePicker4 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -1218,7 +1227,7 @@ public class IFolderPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFolderPicker3", IFolderPicker3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPicker3Vtbl", "IFolderPicker3", "IFolderPicker3_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFolderPicker3", IFolderPicker3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPicker3Vtbl", "IFolderPicker3", "IFolderPicker3_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFolderPicker3.runtimeType())
         return schema
     }
@@ -1248,12 +1257,12 @@ public class IFolderPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -1455,7 +1464,7 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileOpenPicker", IFileOpenPicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerVtbl", "IFileOpenPicker", "IFileOpenPicker_Impl", [InterfaceMethodSchema("ViewMode", 6, [InterfaceParameterSchema("result", "CPointer<PickerViewModeAbi>", "OutSlot<PickerViewMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewMode", 7, [InterfaceParameterSchema("value", "PickerViewModeAbi", "PickerViewMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SettingsIdentifier", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 10, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 11, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeFilter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleFileAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickMultipleFilesAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileOpenPicker", IFileOpenPicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerVtbl", "IFileOpenPicker", "IFileOpenPicker_Impl", [InterfaceMethodSchema("ViewMode", 6, [InterfaceParameterSchema("result", "CPointer<PickerViewModeAbi>", "OutSlot<PickerViewMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewMode", 7, [InterfaceParameterSchema("value", "PickerViewModeAbi", "PickerViewMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SettingsIdentifier", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 10, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 11, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeFilter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleFileAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickMultipleFilesAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileOpenPicker.runtimeType())
         return schema
     }
@@ -1550,21 +1559,21 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PickSingleFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
+    public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PickMultipleFilesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>>.fromAbiTake(result__)
     }
 }
 
@@ -1640,7 +1649,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileSavePicker", IFileSavePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePickerVtbl", "IFileSavePicker", "IFileSavePicker_Impl", [InterfaceMethodSchema("SettingsIdentifier", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 8, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 9, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeChoices", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_collections.IVector<windows_core.HString>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultFileExtension", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultFileExtension", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedSaveFile", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedSaveFile", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedFileName", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedFileName", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PickSaveFileAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileSavePicker", IFileSavePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePickerVtbl", "IFileSavePicker", "IFileSavePicker_Impl", [InterfaceMethodSchema("SettingsIdentifier", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 8, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 9, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeChoices", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_collections.IVector<windows_core.HString>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultFileExtension", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultFileExtension", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedSaveFile", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedSaveFile", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedFileName", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedFileName", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PickSaveFileAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileSavePicker.runtimeType())
         return schema
     }
@@ -1735,16 +1744,16 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SuggestedSaveFile(): _impl_l1.StorageFile {
+    public unsafe func SuggestedSaveFile(): impl_p1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SuggestedSaveFile(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageFile.fromAbiTake(result__)
+        return impl_p1.StorageFile.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SetSuggestedSaveFile(value: _impl_l1.StorageFile): Unit {
+    public unsafe func SetSuggestedSaveFile(value: impl_p1.StorageFile): Unit {
         let v = vtbl()
         let hr = v.SetSuggestedSaveFile(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1765,12 +1774,12 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PickSaveFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -1836,7 +1845,7 @@ public class IFolderPicker <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFolderPicker", IFolderPicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPickerVtbl", "IFolderPicker", "IFolderPicker_Impl", [InterfaceMethodSchema("ViewMode", 6, [InterfaceParameterSchema("result", "CPointer<PickerViewModeAbi>", "OutSlot<PickerViewMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewMode", 7, [InterfaceParameterSchema("value", "PickerViewModeAbi", "PickerViewMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SettingsIdentifier", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 10, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 11, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeFilter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleFolderAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFolderPicker", IFolderPicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPickerVtbl", "IFolderPicker", "IFolderPicker_Impl", [InterfaceMethodSchema("ViewMode", 6, [InterfaceParameterSchema("result", "CPointer<PickerViewModeAbi>", "OutSlot<PickerViewMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewMode", 7, [InterfaceParameterSchema("value", "PickerViewModeAbi", "PickerViewMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SettingsIdentifier", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSettingsIdentifier", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuggestedStartLocation", 10, [InterfaceParameterSchema("result", "CPointer<PickerLocationIdAbi>", "OutSlot<PickerLocationId>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuggestedStartLocation", 11, [InterfaceParameterSchema("value", "PickerLocationIdAbi", "PickerLocationId", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CommitButtonText", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCommitButtonText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FileTypeFilter", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PickSingleFolderAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFolderPicker.runtimeType())
         return schema
     }
@@ -1931,12 +1940,12 @@ public class IFolderPicker <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func PickSingleFolderAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func PickSingleFolderAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PickSingleFolderAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFolder>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFolder>.fromAbiTake(result__)
     }
 }
 
@@ -2061,18 +2070,18 @@ public class FileOpenPicker <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().PickSingleFileAsync()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
+    public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>> {
         return defaultInterface().PickMultipleFilesAsync()
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
-        var result__: Option<windows_future.IAsyncOperation<_impl_l1.StorageFile>> = Option<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.None
+    public static unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
+        var result__: Option<windows_future.IAsyncOperation<impl_p1.StorageFile>> = Option<windows_future.IAsyncOperation<impl_p1.StorageFile>>.None
         try (factory__ = windows_core.factory<FileOpenPicker, IFileOpenPickerStatics>().unwrap()) {
             result__ = Some(factory__.ResumePickSingleFileAsync())
         }
@@ -2083,7 +2092,7 @@ public class FileOpenPicker <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func CreateForUser(user: _impl_l1.User): FileOpenPicker {
+    public static unsafe func CreateForUser(user: impl_p1.User): FileOpenPicker {
         var result__: Option<FileOpenPicker> = Option<FileOpenPicker>.None
         try (factory__ = windows_core.factory<FileOpenPicker, IFileOpenPickerStatics2>().unwrap()) {
             result__ = Some(factory__.CreateForUser(user))
@@ -2231,12 +2240,12 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SuggestedSaveFile(): _impl_l1.StorageFile {
+    public unsafe func SuggestedSaveFile(): impl_p1.StorageFile {
         return defaultInterface().SuggestedSaveFile()
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SetSuggestedSaveFile(value: _impl_l1.StorageFile): Unit {
+    public unsafe func SetSuggestedSaveFile(value: impl_p1.StorageFile): Unit {
         defaultInterface().SetSuggestedSaveFile(value)
     }
 
@@ -2249,12 +2258,12 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().PickSaveFileAsync()
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func CreateForUser(user: _impl_l1.User): FileSavePicker {
+    public static unsafe func CreateForUser(user: impl_p1.User): FileSavePicker {
         var result__: Option<FileSavePicker> = Option<FileSavePicker>.None
         try (factory__ = windows_core.factory<FileSavePicker, IFileSavePickerStatics>().unwrap()) {
             result__ = Some(factory__.CreateForUser(user))
@@ -2402,12 +2411,12 @@ public class FolderPicker <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func PickSingleFolderAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func PickSingleFolderAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return defaultInterface().PickSingleFolderAsync()
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func CreateForUser(user: _impl_l1.User): FolderPicker {
+    public static unsafe func CreateForUser(user: impl_p1.User): FolderPicker {
         var result__: Option<FolderPicker> = Option<FolderPicker>.None
         try (factory__ = windows_core.factory<FolderPicker, IFolderPickerStatics>().unwrap()) {
             result__ = Some(factory__.CreateForUser(user))
@@ -2484,7 +2493,7 @@ public class IFileOpenPickerStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileOpenPickerStatics2", IFileOpenPickerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerStatics2Vtbl", "IFileOpenPickerStatics2", "IFileOpenPickerStatics2_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileOpenPicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileOpenPickerStatics2", IFileOpenPickerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileOpenPickerStatics2Vtbl", "IFileOpenPickerStatics2", "IFileOpenPickerStatics2_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileOpenPicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileOpenPickerStatics2.runtimeType())
         return schema
     }
@@ -2514,7 +2523,7 @@ public class IFileOpenPickerStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_System == "on"]
-    public unsafe func CreateForUser(user: _impl_l1.User): FileOpenPicker {
+    public unsafe func CreateForUser(user: impl_p1.User): FileOpenPicker {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2573,7 +2582,7 @@ public class IFileSavePickerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileSavePickerStatics", IFileSavePickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePickerStaticsVtbl", "IFileSavePickerStatics", "IFileSavePickerStatics_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileSavePicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileSavePickerStatics", IFileSavePickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileSavePickerStaticsVtbl", "IFileSavePickerStatics", "IFileSavePickerStatics_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileSavePicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileSavePickerStatics.runtimeType())
         return schema
     }
@@ -2603,7 +2612,7 @@ public class IFileSavePickerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_System == "on"]
-    public unsafe func CreateForUser(user: _impl_l1.User): FileSavePicker {
+    public unsafe func CreateForUser(user: impl_p1.User): FileSavePicker {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2662,7 +2671,7 @@ public class IFolderPickerStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFolderPickerStatics", IFolderPickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPickerStaticsVtbl", "IFolderPickerStatics", "IFolderPickerStatics_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FolderPicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFolderPickerStatics", IFolderPickerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFolderPickerStaticsVtbl", "IFolderPickerStatics", "IFolderPickerStatics_Impl", [InterfaceMethodSchema("CreateForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FolderPicker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFolderPickerStatics.runtimeType())
         return schema
     }
@@ -2692,7 +2701,7 @@ public class IFolderPickerStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_System == "on"]
-    public unsafe func CreateForUser(user: _impl_l1.User): FolderPicker {
+    public unsafe func CreateForUser(user: impl_p1.User): FolderPicker {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))

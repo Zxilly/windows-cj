@@ -4,16 +4,26 @@
 package windows.Win32.System.MessageQueuing
 
 import std.collection.*
+@When[Windows_Win32_System_MessageQueuing == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_MessageQueuing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_MessageQueuing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_MessageQueuing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_MessageQueuing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_MessageQueuing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_MessageQueuing == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_MessageQueuing == "on"]
@@ -76,7 +86,7 @@ extend FOREIGN_STATUS <: windows_core.CopyType & windows_core.RuntimeType & wind
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var MachineIdOfMachineName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -114,7 +124,7 @@ public class IMSMQApplication <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQApplication> {
-        return InterfaceDescriptor<IMSMQApplication>("IMSMQApplication", IMSMQApplication.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQApplicationFromAbi, viewIMSMQApplication)
+        return InterfaceDescriptor<IMSMQApplication>("IMSMQApplication", IMSMQApplication.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQApplicationFromAbi, viewIMSMQApplication)
     }
 
     public unsafe func vtbl(): IMSMQApplicationVtbl {
@@ -133,7 +143,7 @@ public class IMSMQApplication <: InterfaceWrapperBase & ComInterface {
 public struct IMSMQApplication2Vtbl {
     public var base_: IMSMQApplicationVtbl = IMSMQApplicationVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RegisterCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var RegisterCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var MachineNameOfMachineId: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var MSMQVersionMajor: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var MSMQVersionMinor: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -185,7 +195,7 @@ public class IMSMQApplication2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RegisterCertificate(Flags: CPointer<Win32__impl_l2.VARIANTAbi>, ExternalCertificate: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RegisterCertificate(Flags: CPointer<Win32_impl_p2.VARIANTAbi>, ExternalCertificate: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegisterCertificate(__liveRaw, Flags, ExternalCertificate)
@@ -234,13 +244,13 @@ public class IMSMQApplication2 <: InterfaceWrapperBase & ComInterface {
 public struct IMSMQApplication3Vtbl {
     public var base_: IMSMQApplication2Vtbl = IMSMQApplication2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ActiveQueues: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ActiveQueues: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PrivateQueues: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PrivateQueues: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DirectoryServiceServer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IsConnected: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BytesInAllQueues: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BytesInAllQueues: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SetMachine: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Machine: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Connect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -290,14 +300,14 @@ public class IMSMQApplication3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ActiveQueues(pvActiveQueues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ActiveQueues(pvActiveQueues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActiveQueues(__liveRaw, pvActiveQueues)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PrivateQueues(pvPrivateQueues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PrivateQueues(pvPrivateQueues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PrivateQueues(__liveRaw, pvPrivateQueues)
@@ -316,7 +326,7 @@ public class IMSMQApplication3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BytesInAllQueues(pvBytesInAllQueues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BytesInAllQueues(pvBytesInAllQueues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BytesInAllQueues(__liveRaw, pvBytesInAllQueues)
@@ -356,9 +366,9 @@ public class IMSMQApplication3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -398,7 +408,7 @@ public class IMSMQCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQCollection> {
-        return InterfaceDescriptor<IMSMQCollection>("IMSMQCollection", IMSMQCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQCollectionFromAbi, viewIMSMQCollection)
+        return InterfaceDescriptor<IMSMQCollection>("IMSMQCollection", IMSMQCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQCollectionFromAbi, viewIMSMQCollection)
     }
 
     public unsafe func vtbl(): IMSMQCollectionVtbl {
@@ -406,7 +416,7 @@ public class IMSMQCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(Index: CPointer<Win32__impl_l2.VARIANTAbi>, pvarRet: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Item(Index: CPointer<Win32_impl_p2.VARIANTAbi>, pvarRet: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, Index, pvarRet)
@@ -429,7 +439,7 @@ public class IMSMQCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQDestinationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Open: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -485,7 +495,7 @@ public class IMSMQDestination <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQDestination> {
-        return InterfaceDescriptor<IMSMQDestination>("IMSMQDestination", IMSMQDestination.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQDestinationFromAbi, viewIMSMQDestination)
+        return InterfaceDescriptor<IMSMQDestination>("IMSMQDestination", IMSMQDestination.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQDestinationFromAbi, viewIMSMQDestination)
     }
 
     public unsafe func vtbl(): IMSMQDestinationVtbl {
@@ -585,7 +595,7 @@ public class IMSMQDestination <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -622,7 +632,7 @@ public class IMSMQEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQEvent> {
-        return InterfaceDescriptor<IMSMQEvent>("IMSMQEvent", IMSMQEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQEventFromAbi, viewIMSMQEvent)
+        return InterfaceDescriptor<IMSMQEvent>("IMSMQEvent", IMSMQEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQEventFromAbi, viewIMSMQEvent)
     }
 
     public unsafe func vtbl(): IMSMQEventVtbl {
@@ -738,9 +748,9 @@ public class IMSMQEvent3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQManagementVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Init: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Init: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var FormatName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Machine: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var MessageCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -749,7 +759,7 @@ public struct IMSMQManagementVtbl {
     public var IsLocal: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var TransactionalStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BytesInQueue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BytesInQueue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -786,7 +796,7 @@ public class IMSMQManagement <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQManagement> {
-        return InterfaceDescriptor<IMSMQManagement>("IMSMQManagement", IMSMQManagement.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQManagementFromAbi, viewIMSMQManagement)
+        return InterfaceDescriptor<IMSMQManagement>("IMSMQManagement", IMSMQManagement.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQManagementFromAbi, viewIMSMQManagement)
     }
 
     public unsafe func vtbl(): IMSMQManagementVtbl {
@@ -794,7 +804,7 @@ public class IMSMQManagement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Init(Machine: CPointer<Win32__impl_l2.VARIANTAbi>, Pathname: CPointer<Win32__impl_l2.VARIANTAbi>, FormatName: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Init(Machine: CPointer<Win32_impl_p2.VARIANTAbi>, Pathname: CPointer<Win32_impl_p2.VARIANTAbi>, FormatName: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Init(__liveRaw, Machine, Pathname, FormatName)
@@ -843,7 +853,7 @@ public class IMSMQManagement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BytesInQueue(pvBytesInQueue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BytesInQueue(pvBytesInQueue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BytesInQueue(__liveRaw, pvBytesInQueue)
@@ -856,7 +866,7 @@ public struct IMSMQOutgoingQueueManagementVtbl {
     public var base_: IMSMQManagementVtbl = IMSMQManagementVtbl()
     public var State: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var NextHops: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var NextHops: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var EodGetSendInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -911,7 +921,7 @@ public class IMSMQOutgoingQueueManagement <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func NextHops(pvNextHops: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func NextHops(pvNextHops: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NextHops(__liveRaw, pvNextHops)
@@ -945,11 +955,11 @@ public class IMSMQOutgoingQueueManagement <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQPrivateDestinationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Handle: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Handle: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetHandle: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetHandle: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -986,7 +996,7 @@ public class IMSMQPrivateDestination <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQPrivateDestination> {
-        return InterfaceDescriptor<IMSMQPrivateDestination>("IMSMQPrivateDestination", IMSMQPrivateDestination.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQPrivateDestinationFromAbi, viewIMSMQPrivateDestination)
+        return InterfaceDescriptor<IMSMQPrivateDestination>("IMSMQPrivateDestination", IMSMQPrivateDestination.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQPrivateDestinationFromAbi, viewIMSMQPrivateDestination)
     }
 
     public unsafe func vtbl(): IMSMQPrivateDestinationVtbl {
@@ -994,14 +1004,14 @@ public class IMSMQPrivateDestination <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Handle(pvarHandle: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Handle(pvarHandle: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Handle(__liveRaw, pvarHandle)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetHandle(varHandle: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetHandle(varHandle: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHandle(__liveRaw, varHandle)
@@ -1014,9 +1024,9 @@ public struct IMSMQQueueManagementVtbl {
     public var base_: IMSMQManagementVtbl = IMSMQManagementVtbl()
     public var JournalMessageCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BytesInJournal: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BytesInJournal: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EodGetReceiveInfo: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var EodGetReceiveInfo: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1067,14 +1077,14 @@ public class IMSMQQueueManagement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BytesInJournal(pvBytesInJournal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BytesInJournal(pvBytesInJournal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BytesInJournal(__liveRaw, pvBytesInJournal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EodGetReceiveInfo(pvCollection: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EodGetReceiveInfo(pvCollection: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EodGetReceiveInfo(__liveRaw, pvCollection)
@@ -1084,12 +1094,12 @@ public class IMSMQQueueManagement <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQTransactionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Transaction: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Commit: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Commit: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Abort: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Abort: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -1126,7 +1136,7 @@ public class IMSMQTransaction <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQTransaction> {
-        return InterfaceDescriptor<IMSMQTransaction>("IMSMQTransaction", IMSMQTransaction.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQTransactionFromAbi, viewIMSMQTransaction)
+        return InterfaceDescriptor<IMSMQTransaction>("IMSMQTransaction", IMSMQTransaction.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQTransactionFromAbi, viewIMSMQTransaction)
     }
 
     public unsafe func vtbl(): IMSMQTransactionVtbl {
@@ -1140,14 +1150,14 @@ public class IMSMQTransaction <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Commit(fRetaining: CPointer<Win32__impl_l2.VARIANTAbi>, grfTC: CPointer<Win32__impl_l2.VARIANTAbi>, grfRM: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Commit(fRetaining: CPointer<Win32_impl_p2.VARIANTAbi>, grfTC: CPointer<Win32_impl_p2.VARIANTAbi>, grfRM: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Commit(__liveRaw, fRetaining, grfTC, grfRM)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Abort(fRetaining: CPointer<Win32__impl_l2.VARIANTAbi>, fAsync: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Abort(fRetaining: CPointer<Win32_impl_p2.VARIANTAbi>, fAsync: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Abort(__liveRaw, fRetaining, fAsync)
@@ -1159,7 +1169,7 @@ public class IMSMQTransaction <: InterfaceWrapperBase & ComInterface {
 public struct IMSMQTransaction2Vtbl {
     public var base_: IMSMQTransactionVtbl = IMSMQTransactionVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InitNew: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var InitNew: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1206,7 +1216,7 @@ public class IMSMQTransaction2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InitNew(varTransaction: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func InitNew(varTransaction: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InitNew(__liveRaw, varTransaction)
@@ -1225,7 +1235,7 @@ public class IMSMQTransaction2 <: InterfaceWrapperBase & ComInterface {
 public struct IMSMQTransaction3Vtbl {
     public var base_: IMSMQTransaction2Vtbl = IMSMQTransaction2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ITransaction: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ITransaction: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1270,7 +1280,7 @@ public class IMSMQTransaction3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ITransaction(pvarITransaction: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ITransaction(pvarITransaction: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ITransaction(__liveRaw, pvarITransaction)
@@ -1280,7 +1290,7 @@ public class IMSMQTransaction3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQTransactionDispenserVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1318,7 +1328,7 @@ public class IMSMQTransactionDispenser <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQTransactionDispenser> {
-        return InterfaceDescriptor<IMSMQTransactionDispenser>("IMSMQTransactionDispenser", IMSMQTransactionDispenser.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQTransactionDispenserFromAbi, viewIMSMQTransactionDispenser)
+        return InterfaceDescriptor<IMSMQTransactionDispenser>("IMSMQTransactionDispenser", IMSMQTransactionDispenser.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQTransactionDispenserFromAbi, viewIMSMQTransactionDispenser)
     }
 
     public unsafe func vtbl(): IMSMQTransactionDispenserVtbl {
@@ -1335,7 +1345,7 @@ public class IMSMQTransactionDispenser <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQTransactionDispenser2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1375,7 +1385,7 @@ public class IMSMQTransactionDispenser2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQTransactionDispenser2> {
-        return InterfaceDescriptor<IMSMQTransactionDispenser2>("IMSMQTransactionDispenser2", IMSMQTransactionDispenser2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQTransactionDispenser2FromAbi, viewIMSMQTransactionDispenser2)
+        return InterfaceDescriptor<IMSMQTransactionDispenser2>("IMSMQTransactionDispenser2", IMSMQTransactionDispenser2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQTransactionDispenser2FromAbi, viewIMSMQTransactionDispenser2)
     }
 
     public unsafe func vtbl(): IMSMQTransactionDispenser2Vtbl {
@@ -1399,7 +1409,7 @@ public class IMSMQTransactionDispenser2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQTransactionDispenser3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1439,7 +1449,7 @@ public class IMSMQTransactionDispenser3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQTransactionDispenser3> {
-        return InterfaceDescriptor<IMSMQTransactionDispenser3>("IMSMQTransactionDispenser3", IMSMQTransactionDispenser3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQTransactionDispenser3FromAbi, viewIMSMQTransactionDispenser3)
+        return InterfaceDescriptor<IMSMQTransactionDispenser3>("IMSMQTransactionDispenser3", IMSMQTransactionDispenser3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQTransactionDispenser3FromAbi, viewIMSMQTransactionDispenser3)
     }
 
     public unsafe func vtbl(): IMSMQTransactionDispenser3Vtbl {
@@ -2508,7 +2518,7 @@ extend MQMAX <: windows_core.CopyType & windows_core.RuntimeType & windows_core.
 public struct MQMGMTPROPS {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -2518,7 +2528,7 @@ public struct MQMGMTPROPS {
 public struct MQMGMTPROPSAbi {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3212,7 +3222,7 @@ extend MQMSGPRIVLEVEL <: windows_core.CopyType & windows_core.RuntimeType & wind
 public struct MQMSGPROPS {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3222,7 +3232,7 @@ public struct MQMSGPROPS {
 public struct MQMSGPROPSAbi {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3421,7 +3431,7 @@ extend MQPRIORITY <: windows_core.CopyType & windows_core.RuntimeType & windows_
 public struct MQPRIVATEPROPS {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3431,7 +3441,7 @@ public struct MQPRIVATEPROPS {
 public struct MQPRIVATEPROPSAbi {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3525,7 +3535,7 @@ extend MQPRIVLEVEL <: windows_core.CopyType & windows_core.RuntimeType & windows
 public struct MQPROPERTYRESTRICTION {
     public var rel: UInt32 = 0u32
     public var prop_: UInt32 = 0u32
-    public var prval: Win32__impl_l2.PROPVARIANT = Win32__impl_l2.PROPVARIANT()
+    public var prval: Win32_impl_p3.PROPVARIANT = Win32_impl_p3.PROPVARIANT()
     public init() {}
 }
 
@@ -3534,7 +3544,7 @@ public struct MQPROPERTYRESTRICTION {
 public struct MQPROPERTYRESTRICTIONAbi {
     public var rel: UInt32 = 0u32
     public var prop_: UInt32 = 0u32
-    public var prval: Win32__impl_l2.PROPVARIANTAbi = Win32__impl_l2.PROPVARIANTAbi()
+    public var prval: Win32_impl_p3.PROPVARIANTAbi = Win32_impl_p3.PROPVARIANTAbi()
     public init() {}
 }
 
@@ -3547,14 +3557,14 @@ extend MQPROPERTYRESTRICTION <: windows_core.CopyType & windows_core.RuntimeType
         var abi = MQPROPERTYRESTRICTIONAbi()
         abi.rel = value.rel
         abi.prop_ = value.prop_
-        abi.prval = windows_core.projectTypedAbi(value.prval, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>())
+        abi.prval = windows_core.projectTypedAbi(value.prval, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: MQPROPERTYRESTRICTIONAbi): MQPROPERTYRESTRICTION {
         var value = MQPROPERTYRESTRICTION()
         value.rel = abi.rel
         value.prop_ = abi.prop_
-        value.prval = windows_core.fromTypedAbi(abi.prval, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>()).unwrap()
+        value.prval = windows_core.fromTypedAbi(abi.prval, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: MQPROPERTYRESTRICTIONAbi): Result<MQPROPERTYRESTRICTION> { Result<MQPROPERTYRESTRICTION>.Ok(MQPROPERTYRESTRICTION.assumeInitRef(abi)) }
@@ -3568,7 +3578,7 @@ extend MQPROPERTYRESTRICTION <: windows_core.CopyType & windows_core.RuntimeType
 public struct MQQMPROPS {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3578,7 +3588,7 @@ public struct MQQMPROPS {
 public struct MQQMPROPSAbi {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3725,7 +3735,7 @@ extend MQQUEUEACCESSMASK <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct MQQUEUEPROPS {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -3735,7 +3745,7 @@ public struct MQQUEUEPROPS {
 public struct MQQUEUEPROPSAbi {
     public var cProp: UInt32 = 0u32
     public var aPropID: CPointer<UInt32> = CPointer<UInt32>()
-    public var aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi> = CPointer<Win32__impl_l2.PROPVARIANTAbi>()
+    public var aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi> = CPointer<Win32_impl_p3.PROPVARIANTAbi>()
     public var aStatus: CPointer<Int32> = CPointer<Int32>()
     public init() {}
 }
@@ -4906,7 +4916,7 @@ extend XACT_STATUS <: windows_core.CopyType & windows_core.RuntimeType & windows
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _DMSMQEventEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -4943,7 +4953,7 @@ public class _DMSMQEventEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_DMSMQEventEvents> {
-        return InterfaceDescriptor<_DMSMQEventEvents>("_DMSMQEventEvents", _DMSMQEventEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_DMSMQEventEventsFromAbi, view_DMSMQEventEvents)
+        return InterfaceDescriptor<_DMSMQEventEvents>("_DMSMQEventEvents", _DMSMQEventEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_DMSMQEventEventsFromAbi, view_DMSMQEventEvents)
     }
 
     public unsafe func vtbl(): _DMSMQEventEventsVtbl {
@@ -5166,11 +5176,11 @@ public unsafe func Windows_MQLocateEnd(hEnum: CPointer<Unit>): Int32 {
 
 @When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return MQLocateNext(hEnum, pcProps, aPropVar)
 }
 
@@ -5739,7 +5749,7 @@ public let MQ_ERROR_MESSAGE_LOCKED_UNDER_TRANSACTION: Int32 = -1072824164i32
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQCoordinatedTransactionDispenserVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5777,7 +5787,7 @@ public class IMSMQCoordinatedTransactionDispenser <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser> {
-        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser>("IMSMQCoordinatedTransactionDispenser", IMSMQCoordinatedTransactionDispenser.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenserFromAbi, viewIMSMQCoordinatedTransactionDispenser)
+        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser>("IMSMQCoordinatedTransactionDispenser", IMSMQCoordinatedTransactionDispenser.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenserFromAbi, viewIMSMQCoordinatedTransactionDispenser)
     }
 
     public unsafe func vtbl(): IMSMQCoordinatedTransactionDispenserVtbl {
@@ -5794,7 +5804,7 @@ public class IMSMQCoordinatedTransactionDispenser <: InterfaceWrapperBase & ComI
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQCoordinatedTransactionDispenser2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5834,7 +5844,7 @@ public class IMSMQCoordinatedTransactionDispenser2 <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser2> {
-        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser2>("IMSMQCoordinatedTransactionDispenser2", IMSMQCoordinatedTransactionDispenser2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenser2FromAbi, viewIMSMQCoordinatedTransactionDispenser2)
+        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser2>("IMSMQCoordinatedTransactionDispenser2", IMSMQCoordinatedTransactionDispenser2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenser2FromAbi, viewIMSMQCoordinatedTransactionDispenser2)
     }
 
     public unsafe func vtbl(): IMSMQCoordinatedTransactionDispenser2Vtbl {
@@ -5858,7 +5868,7 @@ public class IMSMQCoordinatedTransactionDispenser2 <: InterfaceWrapperBase & Com
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQCoordinatedTransactionDispenser3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BeginTransaction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5898,7 +5908,7 @@ public class IMSMQCoordinatedTransactionDispenser3 <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser3> {
-        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser3>("IMSMQCoordinatedTransactionDispenser3", IMSMQCoordinatedTransactionDispenser3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenser3FromAbi, viewIMSMQCoordinatedTransactionDispenser3)
+        return InterfaceDescriptor<IMSMQCoordinatedTransactionDispenser3>("IMSMQCoordinatedTransactionDispenser3", IMSMQCoordinatedTransactionDispenser3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQCoordinatedTransactionDispenser3FromAbi, viewIMSMQCoordinatedTransactionDispenser3)
     }
 
     public unsafe func vtbl(): IMSMQCoordinatedTransactionDispenser3Vtbl {
@@ -5922,7 +5932,7 @@ public class IMSMQCoordinatedTransactionDispenser3 <: InterfaceWrapperBase & Com
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQMessageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Class: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PrivLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPrivLevel: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -5944,17 +5954,17 @@ public struct IMSMQMessageVtbl {
     public var SourceMachineGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BodyLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBody: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBody: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AdminQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AdminQueueInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Ack: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAck: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Label: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5968,20 +5978,20 @@ public struct IMSMQMessageVtbl {
     public var EncryptAlgorithm: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEncryptAlgorithm: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DestinationQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SenderIdType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSenderIdType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttachCurrentSecurityContext: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -6019,7 +6029,7 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQMessage> {
-        return InterfaceDescriptor<IMSMQMessage>("IMSMQMessage", IMSMQMessage.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQMessageFromAbi, viewIMSMQMessage)
+        return InterfaceDescriptor<IMSMQMessage>("IMSMQMessage", IMSMQMessage.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQMessageFromAbi, viewIMSMQMessage)
     }
 
     public unsafe func vtbl(): IMSMQMessageVtbl {
@@ -6147,14 +6157,14 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Body(pvarBody: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Body(pvarBody: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Body(__liveRaw, pvarBody)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBody(varBody: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBody(varBody: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBody(__liveRaw, varBody)
@@ -6173,21 +6183,21 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Id(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Id(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Id(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorrelationId(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCorrelationId(varMsgId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetCorrelationId(varMsgId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCorrelationId(__liveRaw, varMsgId)
@@ -6266,14 +6276,14 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SentTime(pvarSentTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SentTime(pvarSentTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SentTime(__liveRaw, pvarSentTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ArrivedTime(__liveRaw, plArrivedTime)
@@ -6286,21 +6296,21 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderCertificate(__liveRaw, pvarSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderCertificate(varSenderCert: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderCertificate(varSenderCert: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderCertificate(__liveRaw, varSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderId(pvarSenderId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderId(pvarSenderId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderId(__liveRaw, pvarSenderId)
@@ -6319,7 +6329,7 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Send(__liveRaw, DestinationQueue, Transaction)
@@ -6335,7 +6345,7 @@ public class IMSMQMessage <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQMessage2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Class: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PrivLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPrivLevel: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -6357,17 +6367,17 @@ public struct IMSMQMessage2Vtbl {
     public var SourceMachineGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BodyLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBody: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBody: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Ack: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAck: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Label: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6381,49 +6391,49 @@ public struct IMSMQMessage2Vtbl {
     public var EncryptAlgorithm: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEncryptAlgorithm: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DestinationQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SenderIdType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSenderIdType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttachCurrentSecurityContext: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SenderVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtension: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetExtension: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var ConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var TransactionStatusQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSignature: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSignature: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var MsgClass: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMsgClass: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsFirstInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsLastInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ResponseQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6467,7 +6477,7 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQMessage2> {
-        return InterfaceDescriptor<IMSMQMessage2>("IMSMQMessage2", IMSMQMessage2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQMessage2FromAbi, viewIMSMQMessage2)
+        return InterfaceDescriptor<IMSMQMessage2>("IMSMQMessage2", IMSMQMessage2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQMessage2FromAbi, viewIMSMQMessage2)
     }
 
     public unsafe func vtbl(): IMSMQMessage2Vtbl {
@@ -6595,14 +6605,14 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Body(pvarBody: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Body(pvarBody: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Body(__liveRaw, pvarBody)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBody(varBody: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBody(varBody: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBody(__liveRaw, varBody)
@@ -6621,21 +6631,21 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Id(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Id(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Id(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorrelationId(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCorrelationId(varMsgId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetCorrelationId(varMsgId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCorrelationId(__liveRaw, varMsgId)
@@ -6714,14 +6724,14 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SentTime(pvarSentTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SentTime(pvarSentTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SentTime(__liveRaw, pvarSentTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ArrivedTime(__liveRaw, plArrivedTime)
@@ -6734,21 +6744,21 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderCertificate(__liveRaw, pvarSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderCertificate(varSenderCert: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderCertificate(varSenderCert: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderCertificate(__liveRaw, varSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderId(pvarSenderId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderId(pvarSenderId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderId(__liveRaw, pvarSenderId)
@@ -6767,7 +6777,7 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Send(__liveRaw, DestinationQueue, Transaction)
@@ -6786,14 +6796,14 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Extension(pvarExtension: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Extension(pvarExtension: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Extension(__liveRaw, pvarExtension)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtension(varExtension: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtension(varExtension: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtension(__liveRaw, varExtension)
@@ -6818,28 +6828,28 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DestinationSymmetricKey(__liveRaw, pvarDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDestinationSymmetricKey(__liveRaw, varDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Signature(pvarSignature: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Signature(pvarSignature: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Signature(__liveRaw, pvarSignature)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSignature(varSignature: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSignature(varSignature: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSignature(__liveRaw, varSignature)
@@ -6870,7 +6880,7 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderId(varSenderId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderId(varSenderId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderId(__liveRaw, varSenderId)
@@ -6896,7 +6906,7 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TransactionId(pvarXactId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TransactionId(pvarXactId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TransactionId(__liveRaw, pvarXactId)
@@ -6948,7 +6958,7 @@ public class IMSMQMessage2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQMessage3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Class: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PrivLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPrivLevel: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -6970,17 +6980,17 @@ public struct IMSMQMessage3Vtbl {
     public var SourceMachineGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BodyLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBody: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBody: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Ack: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAck: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Label: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6994,49 +7004,49 @@ public struct IMSMQMessage3Vtbl {
     public var EncryptAlgorithm: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEncryptAlgorithm: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DestinationQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SenderIdType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSenderIdType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttachCurrentSecurityContext: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SenderVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtension: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetExtension: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var ConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var TransactionStatusQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSignature: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSignature: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var MsgClass: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMsgClass: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsFirstInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsLastInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ResponseQueueInfo_v2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -7055,14 +7065,14 @@ public struct IMSMQMessage3Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Destination: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsAuthenticated2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsFirstInTransaction2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsLastInTransaction2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var AttachCurrentSecurityContext2: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SoapEnvelope: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CompoundMessage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CompoundMessage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SetSoapHeader: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetSoapBody: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -7101,7 +7111,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQMessage3> {
-        return InterfaceDescriptor<IMSMQMessage3>("IMSMQMessage3", IMSMQMessage3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQMessage3FromAbi, viewIMSMQMessage3)
+        return InterfaceDescriptor<IMSMQMessage3>("IMSMQMessage3", IMSMQMessage3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQMessage3FromAbi, viewIMSMQMessage3)
     }
 
     public unsafe func vtbl(): IMSMQMessage3Vtbl {
@@ -7229,14 +7239,14 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Body(pvarBody: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Body(pvarBody: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Body(__liveRaw, pvarBody)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBody(varBody: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBody(varBody: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBody(__liveRaw, varBody)
@@ -7255,21 +7265,21 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Id(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Id(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Id(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorrelationId(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCorrelationId(varMsgId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetCorrelationId(varMsgId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCorrelationId(__liveRaw, varMsgId)
@@ -7348,14 +7358,14 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SentTime(pvarSentTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SentTime(pvarSentTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SentTime(__liveRaw, pvarSentTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ArrivedTime(__liveRaw, plArrivedTime)
@@ -7368,21 +7378,21 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderCertificate(__liveRaw, pvarSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderCertificate(varSenderCert: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderCertificate(varSenderCert: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderCertificate(__liveRaw, varSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderId(pvarSenderId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderId(pvarSenderId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderId(__liveRaw, pvarSenderId)
@@ -7401,7 +7411,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Send(__liveRaw, DestinationQueue, Transaction)
@@ -7420,14 +7430,14 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Extension(pvarExtension: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Extension(pvarExtension: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Extension(__liveRaw, pvarExtension)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtension(varExtension: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtension(varExtension: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtension(__liveRaw, varExtension)
@@ -7452,28 +7462,28 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DestinationSymmetricKey(__liveRaw, pvarDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDestinationSymmetricKey(__liveRaw, varDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Signature(pvarSignature: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Signature(pvarSignature: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Signature(__liveRaw, pvarSignature)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSignature(varSignature: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSignature(varSignature: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSignature(__liveRaw, varSignature)
@@ -7504,7 +7514,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderId(varSenderId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderId(varSenderId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderId(__liveRaw, varSenderId)
@@ -7530,7 +7540,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TransactionId(pvarXactId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TransactionId(pvarXactId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TransactionId(__liveRaw, pvarXactId)
@@ -7624,7 +7634,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupId(pvarLookupId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LookupId(pvarLookupId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupId(__liveRaw, pvarLookupId)
@@ -7661,7 +7671,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CompoundMessage(pvarCompoundMessage: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CompoundMessage(pvarCompoundMessage: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompoundMessage(__liveRaw, pvarCompoundMessage)
@@ -7683,7 +7693,7 @@ public class IMSMQMessage3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQMessage4Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Class: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PrivLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPrivLevel: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -7705,17 +7715,17 @@ public struct IMSMQMessage4Vtbl {
     public var SourceMachineGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BodyLength: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Body: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBody: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBody: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_AdminQueueInfo_v1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetCorrelationId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Ack: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAck: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Label: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -7729,49 +7739,49 @@ public struct IMSMQMessage4Vtbl {
     public var EncryptAlgorithm: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEncryptAlgorithm: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SentTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ArrivedTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DestinationQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderCertificate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderCertificate: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SenderId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SenderIdType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSenderIdType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Send: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttachCurrentSecurityContext: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SenderVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Extension: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtension: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetExtension: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var ConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetConnectorTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var TransactionStatusQueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DestinationSymmetricKey: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDestinationSymmetricKey: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Signature: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSignature: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSignature: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationProviderName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSenderId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSenderId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var MsgClass: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMsgClass: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TransactionId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsFirstInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsLastInTransaction: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ResponseQueueInfo_v2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -7790,14 +7800,14 @@ public struct IMSMQMessage4Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Destination: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsAuthenticated2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsFirstInTransaction2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsLastInTransaction2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var AttachCurrentSecurityContext2: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SoapEnvelope: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CompoundMessage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CompoundMessage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SetSoapHeader: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetSoapBody: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -7836,7 +7846,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQMessage4> {
-        return InterfaceDescriptor<IMSMQMessage4>("IMSMQMessage4", IMSMQMessage4.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQMessage4FromAbi, viewIMSMQMessage4)
+        return InterfaceDescriptor<IMSMQMessage4>("IMSMQMessage4", IMSMQMessage4.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQMessage4FromAbi, viewIMSMQMessage4)
     }
 
     public unsafe func vtbl(): IMSMQMessage4Vtbl {
@@ -7964,14 +7974,14 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Body(pvarBody: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Body(pvarBody: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Body(__liveRaw, pvarBody)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBody(varBody: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBody(varBody: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBody(__liveRaw, varBody)
@@ -7990,21 +8000,21 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Id(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Id(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Id(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CorrelationId(pvarMsgId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CorrelationId(__liveRaw, pvarMsgId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetCorrelationId(varMsgId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetCorrelationId(varMsgId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCorrelationId(__liveRaw, varMsgId)
@@ -8083,14 +8093,14 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SentTime(pvarSentTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SentTime(pvarSentTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SentTime(__liveRaw, pvarSentTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ArrivedTime(plArrivedTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ArrivedTime(__liveRaw, plArrivedTime)
@@ -8103,21 +8113,21 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderCertificate(pvarSenderCert: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderCertificate(__liveRaw, pvarSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderCertificate(varSenderCert: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderCertificate(varSenderCert: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderCertificate(__liveRaw, varSenderCert)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SenderId(pvarSenderId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SenderId(pvarSenderId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderId(__liveRaw, pvarSenderId)
@@ -8136,7 +8146,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Send(DestinationQueue: CPointer<Unit>, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Send(__liveRaw, DestinationQueue, Transaction)
@@ -8155,14 +8165,14 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Extension(pvarExtension: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Extension(pvarExtension: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Extension(__liveRaw, pvarExtension)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtension(varExtension: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtension(varExtension: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtension(__liveRaw, varExtension)
@@ -8187,28 +8197,28 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DestinationSymmetricKey(pvarDestSymmKey: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DestinationSymmetricKey(__liveRaw, pvarDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDestinationSymmetricKey(varDestSymmKey: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDestinationSymmetricKey(__liveRaw, varDestSymmKey)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Signature(pvarSignature: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Signature(pvarSignature: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Signature(__liveRaw, pvarSignature)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSignature(varSignature: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSignature(varSignature: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSignature(__liveRaw, varSignature)
@@ -8239,7 +8249,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSenderId(varSenderId: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSenderId(varSenderId: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSenderId(__liveRaw, varSenderId)
@@ -8265,7 +8275,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TransactionId(pvarXactId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TransactionId(pvarXactId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TransactionId(__liveRaw, pvarXactId)
@@ -8359,7 +8369,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupId(pvarLookupId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LookupId(pvarLookupId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupId(__liveRaw, pvarLookupId)
@@ -8396,7 +8406,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CompoundMessage(pvarCompoundMessage: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CompoundMessage(pvarCompoundMessage: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompoundMessage(__liveRaw, pvarCompoundMessage)
@@ -8418,7 +8428,7 @@ public class IMSMQMessage4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQPrivateEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Hwnd: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var FireArrivedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var FireArrivedErrorEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
@@ -8458,7 +8468,7 @@ public class IMSMQPrivateEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQPrivateEvent> {
-        return InterfaceDescriptor<IMSMQPrivateEvent>("IMSMQPrivateEvent", IMSMQPrivateEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQPrivateEventFromAbi, viewIMSMQPrivateEvent)
+        return InterfaceDescriptor<IMSMQPrivateEvent>("IMSMQPrivateEvent", IMSMQPrivateEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQPrivateEventFromAbi, viewIMSMQPrivateEvent)
     }
 
     public unsafe func vtbl(): IMSMQPrivateEventVtbl {
@@ -8487,9 +8497,9 @@ public class IMSMQPrivateEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8526,7 +8536,7 @@ public class IMSMQQuery <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQuery> {
-        return InterfaceDescriptor<IMSMQQuery>("IMSMQQuery", IMSMQQuery.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueryFromAbi, viewIMSMQQuery)
+        return InterfaceDescriptor<IMSMQQuery>("IMSMQQuery", IMSMQQuery.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueryFromAbi, viewIMSMQQuery)
     }
 
     public unsafe func vtbl(): IMSMQQueryVtbl {
@@ -8534,7 +8544,7 @@ public class IMSMQQuery <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, ppqinfos)
@@ -8544,9 +8554,9 @@ public class IMSMQQuery <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQuery2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -8585,7 +8595,7 @@ public class IMSMQQuery2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQuery2> {
-        return InterfaceDescriptor<IMSMQQuery2>("IMSMQQuery2", IMSMQQuery2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQuery2FromAbi, viewIMSMQQuery2)
+        return InterfaceDescriptor<IMSMQQuery2>("IMSMQQuery2", IMSMQQuery2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQuery2FromAbi, viewIMSMQQuery2)
     }
 
     public unsafe func vtbl(): IMSMQQuery2Vtbl {
@@ -8593,7 +8603,7 @@ public class IMSMQQuery2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, ppqinfos)
@@ -8610,13 +8620,13 @@ public class IMSMQQuery2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQuery3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue_v2: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue_v2: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8653,7 +8663,7 @@ public class IMSMQQuery3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQuery3> {
-        return InterfaceDescriptor<IMSMQQuery3>("IMSMQQuery3", IMSMQQuery3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQuery3FromAbi, viewIMSMQQuery3)
+        return InterfaceDescriptor<IMSMQQuery3>("IMSMQQuery3", IMSMQQuery3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQuery3FromAbi, viewIMSMQQuery3)
     }
 
     public unsafe func vtbl(): IMSMQQuery3Vtbl {
@@ -8661,7 +8671,7 @@ public class IMSMQQuery3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue_v2(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue_v2(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue_v2(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, ppqinfos)
@@ -8675,7 +8685,7 @@ public class IMSMQQuery3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, MulticastAddress: CPointer<Win32__impl_l2.VARIANTAbi>, RelMulticastAddress: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, MulticastAddress: CPointer<Win32_impl_p2.VARIANTAbi>, RelMulticastAddress: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, MulticastAddress, RelMulticastAddress, ppqinfos)
@@ -8685,13 +8695,13 @@ public class IMSMQQuery3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQuery4Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue_v2: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue_v2: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var LookupQueue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8728,7 +8738,7 @@ public class IMSMQQuery4 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQuery4> {
-        return InterfaceDescriptor<IMSMQQuery4>("IMSMQQuery4", IMSMQQuery4.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQuery4FromAbi, viewIMSMQQuery4)
+        return InterfaceDescriptor<IMSMQQuery4>("IMSMQQuery4", IMSMQQuery4.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQuery4FromAbi, viewIMSMQQuery4)
     }
 
     public unsafe func vtbl(): IMSMQQuery4Vtbl {
@@ -8736,7 +8746,7 @@ public class IMSMQQuery4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue_v2(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue_v2(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue_v2(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, ppqinfos)
@@ -8750,7 +8760,7 @@ public class IMSMQQuery4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LookupQueue(QueueGuid: CPointer<Win32__impl_l2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32__impl_l2.VARIANTAbi>, Label: CPointer<Win32__impl_l2.VARIANTAbi>, CreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, ModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelServiceType: CPointer<Win32__impl_l2.VARIANTAbi>, RelLabel: CPointer<Win32__impl_l2.VARIANTAbi>, RelCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>, RelModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>, MulticastAddress: CPointer<Win32__impl_l2.VARIANTAbi>, RelMulticastAddress: CPointer<Win32__impl_l2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LookupQueue(QueueGuid: CPointer<Win32_impl_p2.VARIANTAbi>, ServiceTypeGuid: CPointer<Win32_impl_p2.VARIANTAbi>, Label: CPointer<Win32_impl_p2.VARIANTAbi>, CreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, ModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelServiceType: CPointer<Win32_impl_p2.VARIANTAbi>, RelLabel: CPointer<Win32_impl_p2.VARIANTAbi>, RelCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>, RelModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>, MulticastAddress: CPointer<Win32_impl_p2.VARIANTAbi>, RelMulticastAddress: CPointer<Win32_impl_p2.VARIANTAbi>, ppqinfos: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LookupQueue(__liveRaw, QueueGuid, ServiceTypeGuid, Label, CreateTime, ModifyTime, RelServiceType, RelLabel, RelCreateTime, RelModifyTime, MulticastAddress, RelMulticastAddress, ppqinfos)
@@ -8760,7 +8770,7 @@ public class IMSMQQuery4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Access: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ShareMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var QueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -8768,18 +8778,18 @@ public struct IMSMQQueueVtbl {
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8816,7 +8826,7 @@ public class IMSMQQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueue> {
-        return InterfaceDescriptor<IMSMQQueue>("IMSMQQueue", IMSMQQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueFromAbi, viewIMSMQQueue)
+        return InterfaceDescriptor<IMSMQQueue>("IMSMQQueue", IMSMQQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueFromAbi, viewIMSMQQueue)
     }
 
     public unsafe func vtbl(): IMSMQQueueVtbl {
@@ -8860,21 +8870,21 @@ public class IMSMQQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnableNotification(__liveRaw, Event, Cursor, ReceiveTimeout)
@@ -8887,21 +8897,21 @@ public class IMSMQQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
@@ -8911,7 +8921,7 @@ public class IMSMQQueue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueue2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Access: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ShareMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var QueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -8919,28 +8929,28 @@ public struct IMSMQQueue2Vtbl {
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -8979,7 +8989,7 @@ public class IMSMQQueue2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueue2> {
-        return InterfaceDescriptor<IMSMQQueue2>("IMSMQQueue2", IMSMQQueue2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueue2FromAbi, viewIMSMQQueue2)
+        return InterfaceDescriptor<IMSMQQueue2>("IMSMQQueue2", IMSMQQueue2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueue2FromAbi, viewIMSMQQueue2)
     }
 
     public unsafe func vtbl(): IMSMQQueue2Vtbl {
@@ -9023,21 +9033,21 @@ public class IMSMQQueue2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnableNotification(__liveRaw, Event, Cursor, ReceiveTimeout)
@@ -9050,56 +9060,56 @@ public class IMSMQQueue2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
@@ -9116,7 +9126,7 @@ public class IMSMQQueue2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueue3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Access: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ShareMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var QueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -9124,52 +9134,52 @@ public struct IMSMQQueue3Vtbl {
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Handle2: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Handle2: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveNextByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveNextByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceivePreviousByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceivePreviousByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNextByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekNextByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekPreviousByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekPreviousByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Purge: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsOpen2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -9208,7 +9218,7 @@ public class IMSMQQueue3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueue3> {
-        return InterfaceDescriptor<IMSMQQueue3>("IMSMQQueue3", IMSMQQueue3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueue3FromAbi, viewIMSMQQueue3)
+        return InterfaceDescriptor<IMSMQQueue3>("IMSMQQueue3", IMSMQQueue3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueue3FromAbi, viewIMSMQQueue3)
     }
 
     public unsafe func vtbl(): IMSMQQueue3Vtbl {
@@ -9252,21 +9262,21 @@ public class IMSMQQueue3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnableNotification(__liveRaw, Event, Cursor, ReceiveTimeout)
@@ -9279,56 +9289,56 @@ public class IMSMQQueue3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
@@ -9342,77 +9352,77 @@ public class IMSMQQueue3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Handle2(pvarHandle: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Handle2(pvarHandle: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Handle2(__liveRaw, pvarHandle)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveNextByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveNextByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveNextByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceivePreviousByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceivePreviousByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceivePreviousByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveFirstByLookupId(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveFirstByLookupId(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveFirstByLookupId(__liveRaw, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveLastByLookupId(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveLastByLookupId(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveLastByLookupId(__liveRaw, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNextByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNextByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNextByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekPreviousByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekPreviousByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekPreviousByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekFirstByLookupId(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekFirstByLookupId(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekFirstByLookupId(__liveRaw, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekLastByLookupId(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekLastByLookupId(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekLastByLookupId(__liveRaw, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
@@ -9434,7 +9444,7 @@ public class IMSMQQueue3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueue4Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Access: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ShareMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var QueueInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -9442,56 +9452,56 @@ public struct IMSMQQueue4Vtbl {
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Receive_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Peek_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnableNotification: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekNext_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekCurrent_v1: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var Receive: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Peek: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekCurrent: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Handle2: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Handle2: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveNextByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveNextByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceivePreviousByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceivePreviousByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ReceiveLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekNextByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekNextByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekPreviousByLookupId: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var PeekPreviousByLookupId: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekFirstByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PeekLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var PeekLastByLookupId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Purge: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsOpen2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReceiveByLookupIdAllowPeek: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReceiveByLookupIdAllowPeek: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -9528,7 +9538,7 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueue4> {
-        return InterfaceDescriptor<IMSMQQueue4>("IMSMQQueue4", IMSMQQueue4.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueue4FromAbi, viewIMSMQQueue4)
+        return InterfaceDescriptor<IMSMQQueue4>("IMSMQQueue4", IMSMQQueue4.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueue4FromAbi, viewIMSMQQueue4)
     }
 
     public unsafe func vtbl(): IMSMQQueue4Vtbl {
@@ -9572,21 +9582,21 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnableNotification(Event: CPointer<Unit>, Cursor: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnableNotification(__liveRaw, Event, Cursor, ReceiveTimeout)
@@ -9599,56 +9609,56 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent_v1(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent_v1(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent_v1(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent_v1(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Receive(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Receive(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Receive(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Peek(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Peek(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Peek(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveCurrent(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveCurrent(__liveRaw, Transaction, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNext(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNext(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekCurrent(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, ReceiveTimeout: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekCurrent(__liveRaw, WantDestinationQueue, WantBody, ReceiveTimeout, WantConnectorType, ppmsg)
@@ -9662,77 +9672,77 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Handle2(pvarHandle: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Handle2(pvarHandle: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Handle2(__liveRaw, pvarHandle)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveNextByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveNextByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveNextByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceivePreviousByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceivePreviousByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceivePreviousByLookupId(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveFirstByLookupId(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveFirstByLookupId(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveFirstByLookupId(__liveRaw, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveLastByLookupId(Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveLastByLookupId(Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveLastByLookupId(__liveRaw, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekNextByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekNextByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekNextByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekPreviousByLookupId(LookupId: Win32__impl_l2.VARIANTAbi, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekPreviousByLookupId(LookupId: Win32_impl_p2.VARIANTAbi, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekPreviousByLookupId(__liveRaw, LookupId, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekFirstByLookupId(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekFirstByLookupId(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekFirstByLookupId(__liveRaw, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PeekLastByLookupId(WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func PeekLastByLookupId(WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekLastByLookupId(__liveRaw, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
@@ -9751,7 +9761,7 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReceiveByLookupIdAllowPeek(LookupId: Win32__impl_l2.VARIANTAbi, Transaction: CPointer<Win32__impl_l2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32__impl_l2.VARIANTAbi>, WantBody: CPointer<Win32__impl_l2.VARIANTAbi>, WantConnectorType: CPointer<Win32__impl_l2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func ReceiveByLookupIdAllowPeek(LookupId: Win32_impl_p2.VARIANTAbi, Transaction: CPointer<Win32_impl_p2.VARIANTAbi>, WantDestinationQueue: CPointer<Win32_impl_p2.VARIANTAbi>, WantBody: CPointer<Win32_impl_p2.VARIANTAbi>, WantConnectorType: CPointer<Win32_impl_p2.VARIANTAbi>, ppmsg: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReceiveByLookupIdAllowPeek(__liveRaw, LookupId, Transaction, WantDestinationQueue, WantBody, WantConnectorType, ppmsg)
@@ -9761,7 +9771,7 @@ public class IMSMQQueue4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var QueueGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -9781,16 +9791,16 @@ public struct IMSMQQueueInfoVtbl {
     public var BasePriority: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetBasePriority: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Authenticate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticate: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var JournalQuota: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetJournalQuota: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Open: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -9831,7 +9841,7 @@ public class IMSMQQueueInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfo> {
-        return InterfaceDescriptor<IMSMQQueueInfo>("IMSMQQueueInfo", IMSMQQueueInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfoFromAbi, viewIMSMQQueueInfo)
+        return InterfaceDescriptor<IMSMQQueueInfo>("IMSMQQueueInfo", IMSMQQueueInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfoFromAbi, viewIMSMQQueueInfo)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfoVtbl {
@@ -9947,14 +9957,14 @@ public class IMSMQQueueInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTime(__liveRaw, pvarCreateTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ModifyTime(__liveRaw, pvarModifyTime)
@@ -9991,7 +10001,7 @@ public class IMSMQQueueInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Create(IsTransactional: CPointer<Win32__impl_l2.VARIANTAbi>, IsWorldReadable: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Create(IsTransactional: CPointer<Win32_impl_p2.VARIANTAbi>, IsWorldReadable: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, IsTransactional, IsWorldReadable)
@@ -10025,7 +10035,7 @@ public class IMSMQQueueInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfo2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var QueueGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -10045,16 +10055,16 @@ public struct IMSMQQueueInfo2Vtbl {
     public var BasePriority: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetBasePriority: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Authenticate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticate: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var JournalQuota: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetJournalQuota: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Open: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -10063,9 +10073,9 @@ public struct IMSMQQueueInfo2Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSecurity: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSecurity: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10102,7 +10112,7 @@ public class IMSMQQueueInfo2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfo2> {
-        return InterfaceDescriptor<IMSMQQueueInfo2>("IMSMQQueueInfo2", IMSMQQueueInfo2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfo2FromAbi, viewIMSMQQueueInfo2)
+        return InterfaceDescriptor<IMSMQQueueInfo2>("IMSMQQueueInfo2", IMSMQQueueInfo2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfo2FromAbi, viewIMSMQQueueInfo2)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfo2Vtbl {
@@ -10218,14 +10228,14 @@ public class IMSMQQueueInfo2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTime(__liveRaw, pvarCreateTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ModifyTime(__liveRaw, pvarModifyTime)
@@ -10262,7 +10272,7 @@ public class IMSMQQueueInfo2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Create(IsTransactional: CPointer<Win32__impl_l2.VARIANTAbi>, IsWorldReadable: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Create(IsTransactional: CPointer<Win32_impl_p2.VARIANTAbi>, IsWorldReadable: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, IsTransactional, IsWorldReadable)
@@ -10306,14 +10316,14 @@ public class IMSMQQueueInfo2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Security(pvarSecurity: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Security(pvarSecurity: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Security(__liveRaw, pvarSecurity)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSecurity(varSecurity: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSecurity(varSecurity: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSecurity(__liveRaw, varSecurity)
@@ -10323,7 +10333,7 @@ public class IMSMQQueueInfo2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfo3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var QueueGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -10343,16 +10353,16 @@ public struct IMSMQQueueInfo3Vtbl {
     public var BasePriority: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetBasePriority: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Authenticate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticate: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var JournalQuota: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetJournalQuota: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Open: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -10361,9 +10371,9 @@ public struct IMSMQQueueInfo3Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSecurity: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSecurity: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var IsTransactional2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var MulticastAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -10405,7 +10415,7 @@ public class IMSMQQueueInfo3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfo3> {
-        return InterfaceDescriptor<IMSMQQueueInfo3>("IMSMQQueueInfo3", IMSMQQueueInfo3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfo3FromAbi, viewIMSMQQueueInfo3)
+        return InterfaceDescriptor<IMSMQQueueInfo3>("IMSMQQueueInfo3", IMSMQQueueInfo3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfo3FromAbi, viewIMSMQQueueInfo3)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfo3Vtbl {
@@ -10521,14 +10531,14 @@ public class IMSMQQueueInfo3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTime(__liveRaw, pvarCreateTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ModifyTime(__liveRaw, pvarModifyTime)
@@ -10565,7 +10575,7 @@ public class IMSMQQueueInfo3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Create(IsTransactional: CPointer<Win32__impl_l2.VARIANTAbi>, IsWorldReadable: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Create(IsTransactional: CPointer<Win32_impl_p2.VARIANTAbi>, IsWorldReadable: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, IsTransactional, IsWorldReadable)
@@ -10609,14 +10619,14 @@ public class IMSMQQueueInfo3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Security(pvarSecurity: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Security(pvarSecurity: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Security(__liveRaw, pvarSecurity)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSecurity(varSecurity: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSecurity(varSecurity: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSecurity(__liveRaw, varSecurity)
@@ -10656,7 +10666,7 @@ public class IMSMQQueueInfo3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfo4Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var QueueGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetServiceTypeGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -10676,16 +10686,16 @@ public struct IMSMQQueueInfo4Vtbl {
     public var BasePriority: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetBasePriority: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var CreateTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ModifyTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Authenticate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticate: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var JournalQuota: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetJournalQuota: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Open: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -10694,9 +10704,9 @@ public struct IMSMQQueueInfo4Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Security: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSecurity: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSecurity: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var IsTransactional2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsWorldReadable2: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var MulticastAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -10738,7 +10748,7 @@ public class IMSMQQueueInfo4 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfo4> {
-        return InterfaceDescriptor<IMSMQQueueInfo4>("IMSMQQueueInfo4", IMSMQQueueInfo4.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfo4FromAbi, viewIMSMQQueueInfo4)
+        return InterfaceDescriptor<IMSMQQueueInfo4>("IMSMQQueueInfo4", IMSMQQueueInfo4.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfo4FromAbi, viewIMSMQQueueInfo4)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfo4Vtbl {
@@ -10854,14 +10864,14 @@ public class IMSMQQueueInfo4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreateTime(pvarCreateTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTime(__liveRaw, pvarCreateTime)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ModifyTime(pvarModifyTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ModifyTime(__liveRaw, pvarModifyTime)
@@ -10898,7 +10908,7 @@ public class IMSMQQueueInfo4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Create(IsTransactional: CPointer<Win32__impl_l2.VARIANTAbi>, IsWorldReadable: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Create(IsTransactional: CPointer<Win32_impl_p2.VARIANTAbi>, IsWorldReadable: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, IsTransactional, IsWorldReadable)
@@ -10942,14 +10952,14 @@ public class IMSMQQueueInfo4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Security(pvarSecurity: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Security(pvarSecurity: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Security(__liveRaw, pvarSecurity)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSecurity(varSecurity: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSecurity(varSecurity: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSecurity(__liveRaw, varSecurity)
@@ -10989,7 +10999,7 @@ public class IMSMQQueueInfo4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfosVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -11028,7 +11038,7 @@ public class IMSMQQueueInfos <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfos> {
-        return InterfaceDescriptor<IMSMQQueueInfos>("IMSMQQueueInfos", IMSMQQueueInfos.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfosFromAbi, viewIMSMQQueueInfos)
+        return InterfaceDescriptor<IMSMQQueueInfos>("IMSMQQueueInfos", IMSMQQueueInfos.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfosFromAbi, viewIMSMQQueueInfos)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfosVtbl {
@@ -11051,7 +11061,7 @@ public class IMSMQQueueInfos <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfos2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -11092,7 +11102,7 @@ public class IMSMQQueueInfos2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfos2> {
-        return InterfaceDescriptor<IMSMQQueueInfos2>("IMSMQQueueInfos2", IMSMQQueueInfos2.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfos2FromAbi, viewIMSMQQueueInfos2)
+        return InterfaceDescriptor<IMSMQQueueInfos2>("IMSMQQueueInfos2", IMSMQQueueInfos2.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfos2FromAbi, viewIMSMQQueueInfos2)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfos2Vtbl {
@@ -11122,7 +11132,7 @@ public class IMSMQQueueInfos2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfos3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -11163,7 +11173,7 @@ public class IMSMQQueueInfos3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfos3> {
-        return InterfaceDescriptor<IMSMQQueueInfos3>("IMSMQQueueInfos3", IMSMQQueueInfos3.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfos3FromAbi, viewIMSMQQueueInfos3)
+        return InterfaceDescriptor<IMSMQQueueInfos3>("IMSMQQueueInfos3", IMSMQQueueInfos3.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfos3FromAbi, viewIMSMQQueueInfos3)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfos3Vtbl {
@@ -11193,7 +11203,7 @@ public class IMSMQQueueInfos3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_MessageQueuing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSMQQueueInfos4Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -11234,7 +11244,7 @@ public class IMSMQQueueInfos4 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSMQQueueInfos4> {
-        return InterfaceDescriptor<IMSMQQueueInfos4>("IMSMQQueueInfos4", IMSMQQueueInfos4.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSMQQueueInfos4FromAbi, viewIMSMQQueueInfos4)
+        return InterfaceDescriptor<IMSMQQueueInfos4>("IMSMQQueueInfos4", IMSMQQueueInfos4.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSMQQueueInfos4FromAbi, viewIMSMQQueueInfos4)
     }
 
     public unsafe func vtbl(): IMSMQQueueInfos4Vtbl {

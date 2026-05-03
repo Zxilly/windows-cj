@@ -2,8 +2,4 @@
 package windows_sys.Devices.Bluetooth.Rfcomm
 
 @When[Windows_Devices_Bluetooth_Rfcomm == "on"]
-public import windows_sys._impl_l1.{IRfcommDeviceService, IRfcommDeviceService2, IRfcommDeviceService2Vtbl, IRfcommDeviceService3, IRfcommDeviceService3Vtbl, IRfcommDeviceServiceStatics, IRfcommDeviceServiceStatics2, IRfcommDeviceServiceStatics2Vtbl, IRfcommDeviceServiceStaticsVtbl, IRfcommDeviceServiceVtbl, IRfcommDeviceServicesResult, IRfcommDeviceServicesResultVtbl}
-@When[Windows_Devices_Bluetooth_Rfcomm == "on"]
-public import windows_sys._impl_l0.{IRfcommServiceId, IRfcommServiceIdStatics, IRfcommServiceIdStaticsVtbl, IRfcommServiceIdVtbl}
-@When[Windows_Devices_Bluetooth_Rfcomm == "on"]
-public import windows_sys._impl_l2.{IRfcommServiceProvider, IRfcommServiceProvider2, IRfcommServiceProvider2Vtbl, IRfcommServiceProviderStatics, IRfcommServiceProviderStaticsVtbl, IRfcommServiceProviderVtbl}
+public import windows_sys.impl.s_967903364.{IRfcommDeviceService, IRfcommDeviceService2, IRfcommDeviceService2Vtbl, IRfcommDeviceService3, IRfcommDeviceService3Vtbl, IRfcommDeviceServiceStatics, IRfcommDeviceServiceStatics2, IRfcommDeviceServiceStatics2Vtbl, IRfcommDeviceServiceStaticsVtbl, IRfcommDeviceServiceVtbl, IRfcommDeviceServicesResult, IRfcommDeviceServicesResultVtbl, IRfcommServiceId, IRfcommServiceIdStatics, IRfcommServiceIdStaticsVtbl, IRfcommServiceIdVtbl, IRfcommServiceProvider, IRfcommServiceProvider2, IRfcommServiceProvider2Vtbl, IRfcommServiceProviderStatics, IRfcommServiceProviderStaticsVtbl, IRfcommServiceProviderVtbl}

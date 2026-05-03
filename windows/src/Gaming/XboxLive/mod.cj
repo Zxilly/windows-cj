@@ -4,7 +4,9 @@
 package windows.Gaming.XboxLive
 
 import std.collection.*
+@When[Windows_Gaming_XboxLive == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Gaming_XboxLive == "on"]
 import windows_core as windows_core
 
 

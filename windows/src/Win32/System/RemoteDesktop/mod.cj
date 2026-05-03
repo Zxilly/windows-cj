@@ -4,21 +4,38 @@
 package windows.Win32.System.RemoteDesktop
 
 import std.collection.*
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_libloading
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_Media_Audio_Apo == "on"]
 import windows.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
+@When[Windows_Win32_System_RemoteDesktop == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_RemoteDesktop == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_RemoteDesktop == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_RemoteDesktop == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_RemoteDesktop == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
@@ -617,7 +634,7 @@ extend CONNECTION_CHANGE_NOTIFICATION <: windows_core.CopyType & windows_core.Ru
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IADsTSUserExVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var TerminalServicesProfilePath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetTerminalServicesProfilePath: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var TerminalServicesHomeDirectory: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -684,7 +701,7 @@ public class IADsTSUserEx <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IADsTSUserEx> {
-        return InterfaceDescriptor<IADsTSUserEx>("IADsTSUserEx", IADsTSUserEx.iid(), Win32__impl_l2.IDispatch.iid(), takeIADsTSUserExFromAbi, viewIADsTSUserEx)
+        return InterfaceDescriptor<IADsTSUserEx>("IADsTSUserEx", IADsTSUserEx.iid(), Win32_impl_p2.IDispatch.iid(), takeIADsTSUserExFromAbi, viewIADsTSUserEx)
     }
 
     public unsafe func vtbl(): IADsTSUserExVtbl {
@@ -953,7 +970,7 @@ public class IAudioDeviceEndpoint <: InterfaceWrapperBase & ComInterface {
 public struct IAudioEndpointVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFrameFormat: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _ => 0 }
+    public var GetFrameFormat: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _ => 0 }
     public var GetFramesPerPacket: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetLatency: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => 0 }
     public var SetStreamFlags: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -1002,7 +1019,7 @@ public class IAudioEndpoint <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFrameFormat(ppFormat: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetFrameFormat(ppFormat: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFrameFormat(__liveRaw, ppFormat)
@@ -1105,13 +1122,13 @@ public class IAudioEndpointControl <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRemoteDesktopClientSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ApplySettings: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var RetrieveSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetRdpProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetRdpProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetRdpProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetRdpProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -1148,7 +1165,7 @@ public class IRemoteDesktopClientSettings <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IRemoteDesktopClientSettings> {
-        return InterfaceDescriptor<IRemoteDesktopClientSettings>("IRemoteDesktopClientSettings", IRemoteDesktopClientSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeIRemoteDesktopClientSettingsFromAbi, viewIRemoteDesktopClientSettings)
+        return InterfaceDescriptor<IRemoteDesktopClientSettings>("IRemoteDesktopClientSettings", IRemoteDesktopClientSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeIRemoteDesktopClientSettingsFromAbi, viewIRemoteDesktopClientSettings)
     }
 
     public unsafe func vtbl(): IRemoteDesktopClientSettingsVtbl {
@@ -1168,14 +1185,14 @@ public class IRemoteDesktopClientSettings <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetRdpProperty(propertyName: CPointer<UInt16>, value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetRdpProperty(propertyName: CPointer<UInt16>, value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRdpProperty(__liveRaw, propertyName, value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetRdpProperty(propertyName: CPointer<UInt16>, value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetRdpProperty(propertyName: CPointer<UInt16>, value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetRdpProperty(__liveRaw, propertyName, value)
@@ -1185,7 +1202,7 @@ public class IRemoteDesktopClientSettings <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRemoteDesktopClientTouchPointerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetEventsEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -1228,7 +1245,7 @@ public class IRemoteDesktopClientTouchPointer <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<IRemoteDesktopClientTouchPointer> {
-        return InterfaceDescriptor<IRemoteDesktopClientTouchPointer>("IRemoteDesktopClientTouchPointer", IRemoteDesktopClientTouchPointer.iid(), Win32__impl_l2.IDispatch.iid(), takeIRemoteDesktopClientTouchPointerFromAbi, viewIRemoteDesktopClientTouchPointer)
+        return InterfaceDescriptor<IRemoteDesktopClientTouchPointer>("IRemoteDesktopClientTouchPointer", IRemoteDesktopClientTouchPointer.iid(), Win32_impl_p2.IDispatch.iid(), takeIRemoteDesktopClientTouchPointerFromAbi, viewIRemoteDesktopClientTouchPointer)
     }
 
     public unsafe func vtbl(): IRemoteDesktopClientTouchPointerVtbl {
@@ -1821,7 +1838,7 @@ public class ITsSbPluginNotifySink <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 @C
 public struct ITsSbPropertySetVtbl {
-    public var base_: Win32__impl_l2.IPropertyBagVtbl = Win32__impl_l2.IPropertyBagVtbl()
+    public var base_: Win32_impl_p3.IPropertyBagVtbl = Win32_impl_p3.IPropertyBagVtbl()
     public init() {}
 }
 
@@ -1858,7 +1875,7 @@ public class ITsSbPropertySet <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITsSbPropertySet> {
-        return InterfaceDescriptor<ITsSbPropertySet>("ITsSbPropertySet", ITsSbPropertySet.iid(), Win32__impl_l2.IPropertyBag.iid(), takeITsSbPropertySetFromAbi, viewITsSbPropertySet)
+        return InterfaceDescriptor<ITsSbPropertySet>("ITsSbPropertySet", ITsSbPropertySet.iid(), Win32_impl_p3.IPropertyBag.iid(), takeITsSbPropertySetFromAbi, viewITsSbPropertySet)
     }
 
     public unsafe func vtbl(): ITsSbPropertySetVtbl {
@@ -2894,9 +2911,9 @@ public class IWTSVirtualChannelCallback <: InterfaceWrapperBase & ComInterface {
 public struct IWorkspaceVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetWorkspaceNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetWorkspaceNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var StartRemoteApplication: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var StartRemoteApplication: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetProcessId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2942,14 +2959,14 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetWorkspaceNames(psaWkspNames: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetWorkspaceNames(psaWkspNames: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetWorkspaceNames(__liveRaw, psaWkspNames)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func StartRemoteApplication(bstrWorkspaceId: CPointer<UInt16>, psaParams: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func StartRemoteApplication(bstrWorkspaceId: CPointer<UInt16>, psaParams: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartRemoteApplication(__liveRaw, bstrWorkspaceId, psaParams)
@@ -2967,7 +2984,7 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface {
 public struct IWorkspace2Vtbl {
     public var base_: IWorkspaceVtbl = IWorkspaceVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var StartRemoteApplicationEx: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int16, CPointer<UInt16>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var StartRemoteApplicationEx: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int16, CPointer<UInt16>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -3012,7 +3029,7 @@ public class IWorkspace2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func StartRemoteApplicationEx(bstrWorkspaceId: CPointer<UInt16>, bstrRequestingAppId: CPointer<UInt16>, bstrRequestingAppFamilyName: CPointer<UInt16>, bLaunchIntoImmersiveClient: Int16, bstrImmersiveClientActivationContext: CPointer<UInt16>, psaParams: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func StartRemoteApplicationEx(bstrWorkspaceId: CPointer<UInt16>, bstrRequestingAppId: CPointer<UInt16>, bstrRequestingAppFamilyName: CPointer<UInt16>, bLaunchIntoImmersiveClient: Int16, bstrImmersiveClientActivationContext: CPointer<UInt16>, psaParams: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartRemoteApplicationEx(__liveRaw, bstrWorkspaceId, bstrRequestingAppId, bstrRequestingAppFamilyName, bLaunchIntoImmersiveClient, bstrImmersiveClientActivationContext, psaParams)
@@ -3346,11 +3363,11 @@ public class IWorkspaceReportMessage <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWorkspaceResTypeRegistryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddResourceType: CFunc<(CPointer<Unit>, Int16, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteResourceType: CFunc<(CPointer<Unit>, Int16, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRegisteredFileExtensions: CFunc<(CPointer<Unit>, Int16, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var GetRegisteredFileExtensions: CFunc<(CPointer<Unit>, Int16, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public var GetResourceTypeInfo: CFunc<(CPointer<Unit>, Int16, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var ModifyResourceType: CFunc<(CPointer<Unit>, Int16, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -3389,7 +3406,7 @@ public class IWorkspaceResTypeRegistry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWorkspaceResTypeRegistry> {
-        return InterfaceDescriptor<IWorkspaceResTypeRegistry>("IWorkspaceResTypeRegistry", IWorkspaceResTypeRegistry.iid(), Win32__impl_l2.IDispatch.iid(), takeIWorkspaceResTypeRegistryFromAbi, viewIWorkspaceResTypeRegistry)
+        return InterfaceDescriptor<IWorkspaceResTypeRegistry>("IWorkspaceResTypeRegistry", IWorkspaceResTypeRegistry.iid(), Win32_impl_p2.IDispatch.iid(), takeIWorkspaceResTypeRegistryFromAbi, viewIWorkspaceResTypeRegistry)
     }
 
     public unsafe func vtbl(): IWorkspaceResTypeRegistryVtbl {
@@ -3409,7 +3426,7 @@ public class IWorkspaceResTypeRegistry <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRegisteredFileExtensions(fMachineWide: Int16, psaFileExtensions: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRegisteredFileExtensions(fMachineWide: Int16, psaFileExtensions: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRegisteredFileExtensions(__liveRaw, fMachineWide, psaFileExtensions)
@@ -3431,7 +3448,7 @@ public class IWorkspaceResTypeRegistry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWorkspaceScriptableVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisconnectWorkspace: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var StartWorkspace: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, Int32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var IsWorkspaceCredentialSpecified: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
@@ -3475,7 +3492,7 @@ public class IWorkspaceScriptable <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWorkspaceScriptable> {
-        return InterfaceDescriptor<IWorkspaceScriptable>("IWorkspaceScriptable", IWorkspaceScriptable.iid(), Win32__impl_l2.IDispatch.iid(), takeIWorkspaceScriptableFromAbi, viewIWorkspaceScriptable)
+        return InterfaceDescriptor<IWorkspaceScriptable>("IWorkspaceScriptable", IWorkspaceScriptable.iid(), Win32_impl_p2.IDispatch.iid(), takeIWorkspaceScriptableFromAbi, viewIWorkspaceScriptable)
     }
 
     public unsafe func vtbl(): IWorkspaceScriptableVtbl {
@@ -10164,7 +10181,7 @@ extend Workspace <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ITSWkspEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10201,7 +10218,7 @@ public class _ITSWkspEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_ITSWkspEvents> {
-        return InterfaceDescriptor<_ITSWkspEvents>("_ITSWkspEvents", _ITSWkspEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_ITSWkspEventsFromAbi, view_ITSWkspEvents)
+        return InterfaceDescriptor<_ITSWkspEvents>("_ITSWkspEvents", _ITSWkspEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_ITSWkspEventsFromAbi, view_ITSWkspEvents)
     }
 
     public unsafe func vtbl(): _ITSWkspEventsVtbl {
@@ -10944,11 +10961,11 @@ foreign {
     // param-hint: pTitle bytes=param[3]
     // param-hint: pMessage bytes=param[5]
     // pinvoke-hint: SetLastError
-    func WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
+    func WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32_impl_p1.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32_impl_p1.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
+public unsafe func Windows_WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32_impl_p1.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32_impl_p1.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
     return WTSSendMessageA(hServer, SessionId, pTitle, TitleLength, pMessage, MessageLength, Style, Timeout, pResponse, bWait)
 }
 
@@ -10958,11 +10975,11 @@ foreign {
     // param-hint: pTitle bytes=param[3]
     // param-hint: pMessage bytes=param[5]
     // pinvoke-hint: SetLastError
-    func WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
+    func WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32_impl_p1.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32_impl_p1.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
+public unsafe func Windows_WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32_impl_p1.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32_impl_p1.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
     return WTSSendMessageW(hServer, SessionId, pTitle, TitleLength, pMessage, MessageLength, Style, Timeout, pResponse, bWait)
 }
 
@@ -12077,7 +12094,7 @@ public class IAudioOutputEndpointRT <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRemoteDesktopClientActionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SuspendScreenUpdates: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ResumeScreenUpdates: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ExecuteRemoteAction: CFunc<(CPointer<Unit>, RemoteActionTypeAbi) -> Int32> = { _, _ => 0 }
@@ -12118,7 +12135,7 @@ public class IRemoteDesktopClientActions <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IRemoteDesktopClientActions> {
-        return InterfaceDescriptor<IRemoteDesktopClientActions>("IRemoteDesktopClientActions", IRemoteDesktopClientActions.iid(), Win32__impl_l2.IDispatch.iid(), takeIRemoteDesktopClientActionsFromAbi, viewIRemoteDesktopClientActions)
+        return InterfaceDescriptor<IRemoteDesktopClientActions>("IRemoteDesktopClientActions", IRemoteDesktopClientActions.iid(), Win32_impl_p2.IDispatch.iid(), takeIRemoteDesktopClientActionsFromAbi, viewIRemoteDesktopClientActions)
     }
 
     public unsafe func vtbl(): IRemoteDesktopClientActionsVtbl {
@@ -13067,7 +13084,7 @@ public struct ITsSbTaskInfoVtbl {
     public var Identifier: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Label: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Context: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Context: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var Plugin: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<RDV_TASK_STATUSAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -13150,7 +13167,7 @@ public class ITsSbTaskInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Context(pContext: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Context(pContext: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Context(__liveRaw, pContext)
@@ -13174,7 +13191,7 @@ public class ITsSbTaskInfo <: InterfaceWrapperBase & ComInterface {
 public struct ITsSbTaskPluginNotifySinkVtbl {
     public var base_: ITsSbBaseNotifySinkVtbl = ITsSbBaseNotifySinkVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var OnSetTaskTime: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_Foundation.FILETIMEAbi, Win32_Foundation.FILETIMEAbi, Win32_Foundation.FILETIMEAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var OnSetTaskTime: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_Foundation.FILETIMEAbi, Win32_Foundation.FILETIMEAbi, Win32_Foundation.FILETIMEAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     public var OnDeleteTaskTime: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var OnUpdateTaskStatus: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, RDV_TASK_STATUSAbi) -> Int32> = { _, _, _, _ => 0 }
     public var OnReportTasks: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -13222,7 +13239,7 @@ public class ITsSbTaskPluginNotifySink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnSetTaskTime(szTargetName: CPointer<UInt16>, TaskStartTime: Win32_Foundation.FILETIMEAbi, TaskEndTime: Win32_Foundation.FILETIMEAbi, TaskDeadline: Win32_Foundation.FILETIMEAbi, szTaskLabel: CPointer<UInt16>, szTaskIdentifier: CPointer<UInt16>, szTaskPlugin: CPointer<UInt16>, dwTaskStatus: UInt32, saContext: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func OnSetTaskTime(szTargetName: CPointer<UInt16>, TaskStartTime: Win32_Foundation.FILETIMEAbi, TaskEndTime: Win32_Foundation.FILETIMEAbi, TaskDeadline: Win32_Foundation.FILETIMEAbi, szTaskLabel: CPointer<UInt16>, szTaskIdentifier: CPointer<UInt16>, szTaskPlugin: CPointer<UInt16>, dwTaskStatus: UInt32, saContext: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnSetTaskTime(__liveRaw, szTargetName, TaskStartTime, TaskEndTime, TaskDeadline, szTaskLabel, szTaskIdentifier, szTaskPlugin, dwTaskStatus, saContext)
@@ -15829,7 +15846,7 @@ extend pluginResource2 <: windows_core.CopyType & windows_core.RuntimeType & win
 @When[Windows_Win32_System_RemoteDesktop == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRemoteDesktopClientVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Connect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Disconnect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Reconnect: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -15878,7 +15895,7 @@ public class IRemoteDesktopClient <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRemoteDesktopClient> {
-        return InterfaceDescriptor<IRemoteDesktopClient>("IRemoteDesktopClient", IRemoteDesktopClient.iid(), Win32__impl_l2.IDispatch.iid(), takeIRemoteDesktopClientFromAbi, viewIRemoteDesktopClient)
+        return InterfaceDescriptor<IRemoteDesktopClient>("IRemoteDesktopClient", IRemoteDesktopClient.iid(), Win32_impl_p2.IDispatch.iid(), takeIRemoteDesktopClientFromAbi, viewIRemoteDesktopClient)
     }
 
     public unsafe func vtbl(): IRemoteDesktopClientVtbl {
@@ -16031,12 +16048,12 @@ public struct ITsSbGlobalStoreVtbl {
     public var QueryTarget: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var QuerySessionBySessionId: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var EnumerateFarms: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnumerateFarms: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public var EnumerateTargets: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var EnumerateEnvironmentsByProvider: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _, _ => 0 }
     public var EnumerateSessions: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<TSSESSION_STATEAbi>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFarmProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFarmProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -16093,7 +16110,7 @@ public class ITsSbGlobalStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func EnumerateFarms(ProviderName: CPointer<UInt16>, pdwCount: CPointer<UInt32>, pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func EnumerateFarms(ProviderName: CPointer<UInt16>, pdwCount: CPointer<UInt32>, pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumerateFarms(__liveRaw, ProviderName, pdwCount, pVal)
@@ -16118,7 +16135,7 @@ public class ITsSbGlobalStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFarmProperty(farmName: CPointer<UInt16>, propertyName: CPointer<UInt16>, pVarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFarmProperty(farmName: CPointer<UInt16>, propertyName: CPointer<UInt16>, pVarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFarmProperty(__liveRaw, farmName, propertyName, pVarValue)
@@ -16246,27 +16263,27 @@ public struct ITsSbResourcePluginStoreVtbl {
     public var AddEnvironmentToStore: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveEnvironmentFromStore: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var EnumerateFarms: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var EnumerateFarms: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public var QueryEnvironment: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumerateEnvironments: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => 0 }
     public var SaveTarget: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var SaveEnvironment: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var SaveSession: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTargetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetTargetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetEnvironmentProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetEnvironmentProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var SetTargetState: CFunc<(CPointer<Unit>, CPointer<UInt16>, TARGET_STATEAbi, CPointer<TARGET_STATEAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var SetSessionState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var EnumerateTargets: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, TS_SB_SORT_BYAbi, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var EnumerateSessions: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<TSSESSION_STATEAbi>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFarmProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFarmProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteTarget: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetTargetPropertyWithVersionCheck: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetTargetPropertyWithVersionCheck: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetEnvironmentPropertyWithVersionCheck: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetEnvironmentPropertyWithVersionCheck: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var AcquireTargetLock: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16355,7 +16372,7 @@ public class ITsSbResourcePluginStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func EnumerateFarms(pdwCount: CPointer<UInt32>, pVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func EnumerateFarms(pdwCount: CPointer<UInt32>, pVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumerateFarms(__liveRaw, pdwCount, pVal)
@@ -16392,14 +16409,14 @@ public class ITsSbResourcePluginStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTargetProperty(TargetName: CPointer<UInt16>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetTargetProperty(TargetName: CPointer<UInt16>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTargetProperty(__liveRaw, TargetName, PropertyName, pProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetEnvironmentProperty(EnvironmentName: CPointer<UInt16>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetEnvironmentProperty(EnvironmentName: CPointer<UInt16>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetEnvironmentProperty(__liveRaw, EnvironmentName, PropertyName, pProperty)
@@ -16430,7 +16447,7 @@ public class ITsSbResourcePluginStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFarmProperty(farmName: CPointer<UInt16>, propertyName: CPointer<UInt16>, pVarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFarmProperty(farmName: CPointer<UInt16>, propertyName: CPointer<UInt16>, pVarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFarmProperty(__liveRaw, farmName, propertyName, pVarValue)
@@ -16443,14 +16460,14 @@ public class ITsSbResourcePluginStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetTargetPropertyWithVersionCheck(pTarget: CPointer<Unit>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetTargetPropertyWithVersionCheck(pTarget: CPointer<Unit>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTargetPropertyWithVersionCheck(__liveRaw, pTarget, PropertyName, pProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetEnvironmentPropertyWithVersionCheck(pEnvironment: CPointer<Unit>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetEnvironmentPropertyWithVersionCheck(pEnvironment: CPointer<Unit>, PropertyName: CPointer<UInt16>, pProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetEnvironmentPropertyWithVersionCheck(__liveRaw, pEnvironment, PropertyName, pProperty)
@@ -17293,9 +17310,9 @@ public struct ITsSbClientConnectionVtbl {
     public var LoadBalanceResult: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FarmName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutContext: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var PutContext: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetContext: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetContext: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Environment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_ConnectionError: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SamUserAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -17378,14 +17395,14 @@ public class ITsSbClientConnection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutContext(contextId: CPointer<UInt16>, context: Win32__impl_l2.VARIANTAbi, existingContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PutContext(contextId: CPointer<UInt16>, context: Win32_impl_p2.VARIANTAbi, existingContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutContext(__liveRaw, contextId, context, existingContext)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetContext(contextId: CPointer<UInt16>, context: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetContext(contextId: CPointer<UInt16>, context: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetContext(__liveRaw, contextId, context)

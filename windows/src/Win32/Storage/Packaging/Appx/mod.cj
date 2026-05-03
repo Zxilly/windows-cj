@@ -4,18 +4,31 @@
 package windows.Win32.Storage.Packaging.Appx
 
 import std.collection.*
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_libloading
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_polyfill.{packedReadUInt32, packedReadValue, packedWriteUInt32, packedWriteValue, unionReadUInt64, unionWriteUInt64}
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows_core as windows_core
 
 
@@ -478,7 +491,7 @@ public struct APPX_ENCRYPTED_PACKAGE_SETTINGS {
     public var keyLength: UInt32 = 0u32
     public var encryptionAlgorithm: CPointer<UInt16> = CPointer<UInt16>()
     public var useDiffusion: Int32 = 0i32
-    public var blockMapHashAlgorithm: Win32__impl_l1.IUri = Win32__impl_l1.IUri(CPointer<Unit>())
+    public var blockMapHashAlgorithm: Win32_impl_p2.IUri = Win32_impl_p2.IUri(CPointer<Unit>())
     public init() {}
 }
 
@@ -510,7 +523,7 @@ extend APPX_ENCRYPTED_PACKAGE_SETTINGS <: windows_core.CopyType & windows_core.R
         value.keyLength = abi.keyLength
         value.encryptionAlgorithm = abi.encryptionAlgorithm
         value.useDiffusion = abi.useDiffusion
-        value.blockMapHashAlgorithm = Win32__impl_l1.IUri.fromAbiTake(abi.blockMapHashAlgorithm)
+        value.blockMapHashAlgorithm = Win32_impl_p2.IUri.fromAbiTake(abi.blockMapHashAlgorithm)
         return value
     }
     public static func fromAbi(abi: APPX_ENCRYPTED_PACKAGE_SETTINGSAbi): Result<APPX_ENCRYPTED_PACKAGE_SETTINGS> { Result<APPX_ENCRYPTED_PACKAGE_SETTINGS>.Ok(APPX_ENCRYPTED_PACKAGE_SETTINGS.assumeInitRef(abi)) }
@@ -524,7 +537,7 @@ extend APPX_ENCRYPTED_PACKAGE_SETTINGS <: windows_core.CopyType & windows_core.R
 public struct APPX_ENCRYPTED_PACKAGE_SETTINGS2 {
     public var keyLength: UInt32 = 0u32
     public var encryptionAlgorithm: CPointer<UInt16> = CPointer<UInt16>()
-    public var blockMapHashAlgorithm: Win32__impl_l1.IUri = Win32__impl_l1.IUri(CPointer<Unit>())
+    public var blockMapHashAlgorithm: Win32_impl_p2.IUri = Win32_impl_p2.IUri(CPointer<Unit>())
     public var options: UInt32 = 0u32
     public init() {}
 }
@@ -556,7 +569,7 @@ extend APPX_ENCRYPTED_PACKAGE_SETTINGS2 <: windows_core.CopyType & windows_core.
         var value = APPX_ENCRYPTED_PACKAGE_SETTINGS2()
         value.keyLength = abi.keyLength
         value.encryptionAlgorithm = abi.encryptionAlgorithm
-        value.blockMapHashAlgorithm = Win32__impl_l1.IUri.fromAbiTake(abi.blockMapHashAlgorithm)
+        value.blockMapHashAlgorithm = Win32_impl_p2.IUri.fromAbiTake(abi.blockMapHashAlgorithm)
         value.options = abi.options
         return value
     }
@@ -934,7 +947,7 @@ extend APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION <: windows_core.CopyType & wind
 @When[Windows_Win32_Storage_Packaging_Appx == "on" && Windows_Win32_System_Com == "on"]
 public struct APPX_PACKAGE_SETTINGS {
     public var forceZip32: Int32 = 0i32
-    public var hashMethod: Win32__impl_l1.IUri = Win32__impl_l1.IUri(CPointer<Unit>())
+    public var hashMethod: Win32_impl_p2.IUri = Win32_impl_p2.IUri(CPointer<Unit>())
     public init() {}
 }
 
@@ -960,7 +973,7 @@ extend APPX_PACKAGE_SETTINGS <: windows_core.CopyType & windows_core.RuntimeType
     public static func assumeInitRef(abi: APPX_PACKAGE_SETTINGSAbi): APPX_PACKAGE_SETTINGS {
         var value = APPX_PACKAGE_SETTINGS()
         value.forceZip32 = abi.forceZip32
-        value.hashMethod = Win32__impl_l1.IUri.fromAbiTake(abi.hashMethod)
+        value.hashMethod = Win32_impl_p2.IUri.fromAbiTake(abi.hashMethod)
         return value
     }
     public static func fromAbi(abi: APPX_PACKAGE_SETTINGSAbi): Result<APPX_PACKAGE_SETTINGS> { Result<APPX_PACKAGE_SETTINGS>.Ok(APPX_PACKAGE_SETTINGS.assumeInitRef(abi)) }
@@ -972,7 +985,7 @@ extend APPX_PACKAGE_SETTINGS <: windows_core.CopyType & windows_core.RuntimeType
 
 @When[Windows_Win32_Storage_Packaging_Appx == "on" && Windows_Win32_System_Com == "on"]
 public struct APPX_PACKAGE_WRITER_PAYLOAD_STREAM {
-    public var inputStream: Win32__impl_l1.IStream = Win32__impl_l1.IStream(CPointer<Unit>())
+    public var inputStream: Win32_impl_p2.IStream = Win32_impl_p2.IStream(CPointer<Unit>())
     public var fileName: CPointer<UInt16> = CPointer<UInt16>()
     public var contentType: CPointer<UInt16> = CPointer<UInt16>()
     public var compressionOption: APPX_COMPRESSION_OPTION = APPX_COMPRESSION_OPTION()
@@ -1004,7 +1017,7 @@ extend APPX_PACKAGE_WRITER_PAYLOAD_STREAM <: windows_core.CopyType & windows_cor
     }
     public static func assumeInitRef(abi: APPX_PACKAGE_WRITER_PAYLOAD_STREAMAbi): APPX_PACKAGE_WRITER_PAYLOAD_STREAM {
         var value = APPX_PACKAGE_WRITER_PAYLOAD_STREAM()
-        value.inputStream = Win32__impl_l1.IStream.fromAbiTake(abi.inputStream)
+        value.inputStream = Win32_impl_p2.IStream.fromAbiTake(abi.inputStream)
         value.fileName = abi.fileName
         value.contentType = abi.contentType
         value.compressionOption = APPX_COMPRESSION_OPTION.assumeInitRef(abi.compressionOption)

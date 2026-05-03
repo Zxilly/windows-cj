@@ -4,15 +4,24 @@
 package windows.Win32.Graphics.Direct3D.Fxc
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D10 == "on"]
 import windows.Win32.Graphics.Direct3D10 as Win32_Graphics_Direct3D10
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
 import windows.Win32.Graphics.Direct3D11 as Win32_Graphics_Direct3D11
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]
@@ -217,13 +226,13 @@ extend D3D_SHADER_DATA <: windows_core.CopyType & windows_core.RuntimeType & win
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public type pD3DCompile = CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt8>, CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
+public type pD3DCompile = CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt8>, CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public type pD3DDisassemble = CFunc<(CPointer<Unit>, UIntNative, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public type pD3DPreprocess = CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt8>, CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
+public type pD3DPreprocess = CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt8>, CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 foreign {
@@ -233,11 +242,11 @@ foreign {
     // param-hint: pInclude optional
     // param-hint: pEntrypoint optional
     // param-hint: ppErrorMsgs optional
-    func D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+    func D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public unsafe func Windows_D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
     return D3DCompile(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)
 }
 
@@ -249,11 +258,11 @@ foreign {
     // param-hint: pInclude optional
     // param-hint: pSecondaryData bytes=param[11] optional
     // param-hint: ppErrorMsgs optional
-    func D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+    func D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile2 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public unsafe func Windows_D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
     return D3DCompile2(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, SecondaryDataFlags, pSecondaryData, SecondaryDataSize, ppCode, ppErrorMsgs)
 }
 
@@ -262,11 +271,11 @@ foreign {
     // param-hint: pDefines optional
     // param-hint: pInclude optional
     // param-hint: ppErrorMsgs optional
-    func D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+    func D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompileFromFile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public unsafe func Windows_D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
     return D3DCompileFromFile(pFileName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)
 }
 
@@ -445,11 +454,11 @@ foreign {
     // param-hint: pDefines optional
     // param-hint: pInclude optional
     // param-hint: ppErrorMsgs optional
-    func D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+    func D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DPreprocess == "on" && Windows_Win32_Graphics_Direct3D == "on"]
-public unsafe func Windows_D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32_impl_p0.D3D_SHADER_MACROAbi>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
     return D3DPreprocess(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, ppCodeText, ppErrorMsgs)
 }
 

@@ -2,178 +2,178 @@
 package windows_sys.Win32.System.Variant
 
 @When[Windows_Win32_System_Variant == "on"]
-public import windows_sys.Win32._impl_l0.{DRAWPROGRESSFLAGS, DRAWPROGRESSFLAGS_DPF_ERROR, DRAWPROGRESSFLAGS_DPF_MARQUEE, DRAWPROGRESSFLAGS_DPF_MARQUEE_COMPLETE, DRAWPROGRESSFLAGS_DPF_NONE, DRAWPROGRESSFLAGS_DPF_STOPPED, DRAWPROGRESSFLAGS_DPF_WARNING, PSTIME_FLAGS, PSTIME_FLAGS_PSTF_LOCAL, PSTIME_FLAGS_PSTF_UTC, VARENUM, VARENUM_VT_ARRAY, VARENUM_VT_BLOB, VARENUM_VT_BLOB_OBJECT, VARENUM_VT_BOOL, VARENUM_VT_BSTR, VARENUM_VT_BSTR_BLOB, VARENUM_VT_BYREF, VARENUM_VT_CARRAY, VARENUM_VT_CF, VARENUM_VT_CLSID, VARENUM_VT_CY, VARENUM_VT_DATE, VARENUM_VT_DECIMAL, VARENUM_VT_DISPATCH, VARENUM_VT_EMPTY, VARENUM_VT_ERROR, VARENUM_VT_FILETIME, VARENUM_VT_HRESULT, VARENUM_VT_I1, VARENUM_VT_I2, VARENUM_VT_I4, VARENUM_VT_I8, VARENUM_VT_ILLEGAL, VARENUM_VT_ILLEGALMASKED, VARENUM_VT_INT, VARENUM_VT_INT_PTR, VARENUM_VT_LPSTR, VARENUM_VT_LPWSTR, VARENUM_VT_NULL, VARENUM_VT_PTR, VARENUM_VT_R4, VARENUM_VT_R8, VARENUM_VT_RECORD, VARENUM_VT_RESERVED, VARENUM_VT_SAFEARRAY, VARENUM_VT_STORAGE, VARENUM_VT_STORED_OBJECT, VARENUM_VT_STREAM, VARENUM_VT_STREAMED_OBJECT, VARENUM_VT_TYPEMASK, VARENUM_VT_UI1, VARENUM_VT_UI2, VARENUM_VT_UI4, VARENUM_VT_UI8, VARENUM_VT_UINT, VARENUM_VT_UINT_PTR, VARENUM_VT_UNKNOWN, VARENUM_VT_USERDEFINED, VARENUM_VT_VARIANT, VARENUM_VT_VECTOR, VARENUM_VT_VERSIONED_STREAM, VARENUM_VT_VOID, VAR_CHANGE_FLAGS, VAR_CHANGE_FLAGS_VARIANT_ALPHABOOL, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_GREGORIAN, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_HIJRI, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_THAI, VAR_CHANGE_FLAGS_VARIANT_LOCALBOOL, VAR_CHANGE_FLAGS_VARIANT_NOUSEROVERRIDE, VAR_CHANGE_FLAGS_VARIANT_NOVALUEPROP, VAR_CHANGE_FLAGS_VARIANT_USE_NLS}
+public import windows_sys.Win32.impl.{DRAWPROGRESSFLAGS, DRAWPROGRESSFLAGS_DPF_ERROR, DRAWPROGRESSFLAGS_DPF_MARQUEE, DRAWPROGRESSFLAGS_DPF_MARQUEE_COMPLETE, DRAWPROGRESSFLAGS_DPF_NONE, DRAWPROGRESSFLAGS_DPF_STOPPED, DRAWPROGRESSFLAGS_DPF_WARNING, PSTIME_FLAGS, PSTIME_FLAGS_PSTF_LOCAL, PSTIME_FLAGS_PSTF_UTC, VARENUM, VARENUM_VT_ARRAY, VARENUM_VT_BLOB, VARENUM_VT_BLOB_OBJECT, VARENUM_VT_BOOL, VARENUM_VT_BSTR, VARENUM_VT_BSTR_BLOB, VARENUM_VT_BYREF, VARENUM_VT_CARRAY, VARENUM_VT_CF, VARENUM_VT_CLSID, VARENUM_VT_CY, VARENUM_VT_DATE, VARENUM_VT_DECIMAL, VARENUM_VT_DISPATCH, VARENUM_VT_EMPTY, VARENUM_VT_ERROR, VARENUM_VT_FILETIME, VARENUM_VT_HRESULT, VARENUM_VT_I1, VARENUM_VT_I2, VARENUM_VT_I4, VARENUM_VT_I8, VARENUM_VT_ILLEGAL, VARENUM_VT_ILLEGALMASKED, VARENUM_VT_INT, VARENUM_VT_INT_PTR, VARENUM_VT_LPSTR, VARENUM_VT_LPWSTR, VARENUM_VT_NULL, VARENUM_VT_PTR, VARENUM_VT_R4, VARENUM_VT_R8, VARENUM_VT_RECORD, VARENUM_VT_RESERVED, VARENUM_VT_SAFEARRAY, VARENUM_VT_STORAGE, VARENUM_VT_STORED_OBJECT, VARENUM_VT_STREAM, VARENUM_VT_STREAMED_OBJECT, VARENUM_VT_TYPEMASK, VARENUM_VT_UI1, VARENUM_VT_UI2, VARENUM_VT_UI4, VARENUM_VT_UI8, VARENUM_VT_UINT, VARENUM_VT_UINT_PTR, VARENUM_VT_UNKNOWN, VARENUM_VT_USERDEFINED, VARENUM_VT_VARIANT, VARENUM_VT_VECTOR, VARENUM_VT_VERSIONED_STREAM, VARENUM_VT_VOID, VAR_CHANGE_FLAGS, VAR_CHANGE_FLAGS_VARIANT_ALPHABOOL, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_GREGORIAN, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_HIJRI, VAR_CHANGE_FLAGS_VARIANT_CALENDAR_THAI, VAR_CHANGE_FLAGS_VARIANT_LOCALBOOL, VAR_CHANGE_FLAGS_VARIANT_NOUSEROVERRIDE, VAR_CHANGE_FLAGS_VARIANT_NOVALUEPROP, VAR_CHANGE_FLAGS_VARIANT_USE_NLS}
 @When[Windows_Win32_System_Variant == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Ole == "on")]
-public import windows_sys.Win32._impl_l2.VARIANT
+public import windows_sys.Win32.impl.VARIANT
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_ClearVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_ClearVariantArray
+public import windows_sys.Win32.impl.Windows_ClearVariantArray
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_DosDateTimeToVariantTime == "on"]
-public import windows_sys.Win32._impl_l2.Windows_DosDateTimeToVariantTime
+public import windows_sys.Win32.impl.Windows_DosDateTimeToVariantTime
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromBooleanArray
+public import windows_sys.Win32.impl.Windows_InitVariantFromBooleanArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromBuffer
+public import windows_sys.Win32.impl.Windows_InitVariantFromBuffer
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromDoubleArray
+public import windows_sys.Win32.impl.Windows_InitVariantFromDoubleArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromFileTime
+public import windows_sys.Win32.impl.Windows_InitVariantFromFileTime
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTimeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromFileTimeArray
+public import windows_sys.Win32.impl.Windows_InitVariantFromFileTimeArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromGUIDAsString
+public import windows_sys.Win32.impl.Windows_InitVariantFromGUIDAsString
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromInt16Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromInt16Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromInt32Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromInt32Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromInt64Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromInt64Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromResource
+public import windows_sys.Win32.impl.Windows_InitVariantFromResource
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromStringArray
+public import windows_sys.Win32.impl.Windows_InitVariantFromStringArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromUInt16Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromUInt16Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromUInt32Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromUInt32Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromUInt64Array
+public import windows_sys.Win32.impl.Windows_InitVariantFromUInt64Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromVariantArrayElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitVariantFromVariantArrayElem
+public import windows_sys.Win32.impl.Windows_InitVariantFromVariantArrayElem
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_SystemTimeToVariantTime == "on"]
-public import windows_sys.Win32._impl_l2.Windows_SystemTimeToVariantTime
+public import windows_sys.Win32.impl.Windows_SystemTimeToVariantTime
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserFree
+public import windows_sys.Win32.impl.Windows_VARIANT_UserFree
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserFree64
+public import windows_sys.Win32.impl.Windows_VARIANT_UserFree64
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserMarshal
+public import windows_sys.Win32.impl.Windows_VARIANT_UserMarshal
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserMarshal64
+public import windows_sys.Win32.impl.Windows_VARIANT_UserMarshal64
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserSize
+public import windows_sys.Win32.impl.Windows_VARIANT_UserSize
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserSize64
+public import windows_sys.Win32.impl.Windows_VARIANT_UserSize64
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserUnmarshal
+public import windows_sys.Win32.impl.Windows_VARIANT_UserUnmarshal
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VARIANT_UserUnmarshal64
+public import windows_sys.Win32.impl.Windows_VARIANT_UserUnmarshal64
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantChangeType
+public import windows_sys.Win32.impl.Windows_VariantChangeType
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeTypeEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantChangeTypeEx
+public import windows_sys.Win32.impl.Windows_VariantChangeTypeEx
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantClear
+public import windows_sys.Win32.impl.Windows_VariantClear
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantCompare == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantCompare
+public import windows_sys.Win32.impl.Windows_VariantCompare
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantCopy
+public import windows_sys.Win32.impl.Windows_VariantCopy
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopyInd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantCopyInd
+public import windows_sys.Win32.impl.Windows_VariantCopyInd
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetBooleanElem
+public import windows_sys.Win32.impl.Windows_VariantGetBooleanElem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetDoubleElem
+public import windows_sys.Win32.impl.Windows_VariantGetDoubleElem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetElementCount
+public import windows_sys.Win32.impl.Windows_VariantGetElementCount
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetInt16Elem
+public import windows_sys.Win32.impl.Windows_VariantGetInt16Elem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetInt32Elem
+public import windows_sys.Win32.impl.Windows_VariantGetInt32Elem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetInt64Elem
+public import windows_sys.Win32.impl.Windows_VariantGetInt64Elem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetStringElem
+public import windows_sys.Win32.impl.Windows_VariantGetStringElem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetUInt16Elem
+public import windows_sys.Win32.impl.Windows_VariantGetUInt16Elem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetUInt32Elem
+public import windows_sys.Win32.impl.Windows_VariantGetUInt32Elem
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantGetUInt64Elem
+public import windows_sys.Win32.impl.Windows_VariantGetUInt64Elem
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantInit == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantInit
+public import windows_sys.Win32.impl.Windows_VariantInit
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToDosDateTime == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantTimeToDosDateTime
+public import windows_sys.Win32.impl.Windows_VariantTimeToDosDateTime
 @When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToSystemTime == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantTimeToSystemTime
+public import windows_sys.Win32.impl.Windows_VariantTimeToSystemTime
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToBoolean
+public import windows_sys.Win32.impl.Windows_VariantToBoolean
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToBooleanArray
+public import windows_sys.Win32.impl.Windows_VariantToBooleanArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToBooleanArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToBooleanArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToBooleanWithDefault
+public import windows_sys.Win32.impl.Windows_VariantToBooleanWithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToBuffer
+public import windows_sys.Win32.impl.Windows_VariantToBuffer
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDosDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToDosDateTime
+public import windows_sys.Win32.impl.Windows_VariantToDosDateTime
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToDouble
+public import windows_sys.Win32.impl.Windows_VariantToDouble
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToDoubleArray
+public import windows_sys.Win32.impl.Windows_VariantToDoubleArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToDoubleArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToDoubleArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToDoubleWithDefault
+public import windows_sys.Win32.impl.Windows_VariantToDoubleWithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToFileTime
+public import windows_sys.Win32.impl.Windows_VariantToFileTime
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToGUID
+public import windows_sys.Win32.impl.Windows_VariantToGUID
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt16
+public import windows_sys.Win32.impl.Windows_VariantToInt16
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt16Array
+public import windows_sys.Win32.impl.Windows_VariantToInt16Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt16ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToInt16ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt16WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToInt16WithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt32
+public import windows_sys.Win32.impl.Windows_VariantToInt32
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt32Array
+public import windows_sys.Win32.impl.Windows_VariantToInt32Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt32ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToInt32ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt32WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToInt32WithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt64
+public import windows_sys.Win32.impl.Windows_VariantToInt64
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt64Array
+public import windows_sys.Win32.impl.Windows_VariantToInt64Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt64ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToInt64ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToInt64WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToInt64WithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToString
+public import windows_sys.Win32.impl.Windows_VariantToString
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToStringAlloc
+public import windows_sys.Win32.impl.Windows_VariantToStringAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToStringArray
+public import windows_sys.Win32.impl.Windows_VariantToStringArray
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToStringArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToStringArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToStringWithDefault
+public import windows_sys.Win32.impl.Windows_VariantToStringWithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt16
+public import windows_sys.Win32.impl.Windows_VariantToUInt16
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt16Array
+public import windows_sys.Win32.impl.Windows_VariantToUInt16Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt16ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToUInt16ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt16WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToUInt16WithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt32
+public import windows_sys.Win32.impl.Windows_VariantToUInt32
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt32Array
+public import windows_sys.Win32.impl.Windows_VariantToUInt32Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt32ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToUInt32ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt32WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToUInt32WithDefault
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt64
+public import windows_sys.Win32.impl.Windows_VariantToUInt64
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt64Array
+public import windows_sys.Win32.impl.Windows_VariantToUInt64Array
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt64ArrayAlloc
+public import windows_sys.Win32.impl.Windows_VariantToUInt64ArrayAlloc
 @When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
-public import windows_sys.Win32._impl_l2.Windows_VariantToUInt64WithDefault
+public import windows_sys.Win32.impl.Windows_VariantToUInt64WithDefault

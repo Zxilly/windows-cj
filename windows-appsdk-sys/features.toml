@@ -7,43 +7,43 @@ deps = []
 
 [features.Microsoft_Foundation]
 cfg = "Microsoft_Foundation"
-deps = ["Microsoft"]
+deps = []
 
 [features.Microsoft_Graphics]
 cfg = "Microsoft_Graphics"
-deps = ["Microsoft"]
+deps = []
 
 [features.Microsoft_Graphics_DirectX]
 cfg = "Microsoft_Graphics_DirectX"
-deps = ["Microsoft_Graphics"]
+deps = []
 
 [features.Microsoft_Graphics_Display]
 cfg = "Microsoft_Graphics_Display"
-deps = ["Microsoft_Graphics", "Microsoft_UI", "Microsoft_UI_Dispatching", "Windows_Foundation", "Windows_Storage_Streams"]
+deps = ["Microsoft_UI", "Microsoft_UI_Dispatching", "Windows_Foundation", "Windows_Storage_Streams"]
 
 [features.Microsoft_Graphics_Imaging]
 cfg = "Microsoft_Graphics_Imaging"
-deps = ["Microsoft_Graphics", "Windows_Foundation", "Windows_Graphics_Imaging", "Windows_Storage_Streams"]
+deps = ["Windows_Foundation", "Windows_Graphics_Imaging", "Windows_Storage_Streams"]
 
 [features.Microsoft_Security]
 cfg = "Microsoft_Security"
-deps = ["Microsoft"]
+deps = []
 
 [features.Microsoft_Security_Authentication]
 cfg = "Microsoft_Security_Authentication"
-deps = ["Microsoft_Security"]
+deps = []
 
 [features.Microsoft_Security_Authentication_OAuth]
 cfg = "Microsoft_Security_Authentication_OAuth"
-deps = ["Microsoft_Security_Authentication", "Microsoft_UI", "Windows_Data_Json", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Web_Http", "Windows_Web_Http_Headers"]
+deps = ["Microsoft_UI", "Windows_Data_Json", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Web_Http", "Windows_Web_Http_Headers"]
 
 [features.Microsoft_UI]
 cfg = "Microsoft_UI"
-deps = ["Microsoft", "Windows_Foundation", "Windows_UI"]
+deps = ["Windows_Foundation", "Windows_UI"]
 
 [features.Microsoft_UI_Composition]
 cfg = "Microsoft_UI_Composition"
-deps = ["Microsoft_Graphics_DirectX", "Microsoft_UI", "Microsoft_UI_Dispatching", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Graphics", "Windows_Graphics_Effects", "Windows_UI", "Windows_UI_Composition"]
+deps = ["Microsoft_Graphics_DirectX", "Microsoft_UI_Dispatching", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Graphics", "Windows_Graphics_Effects", "Windows_UI", "Windows_UI_Composition"]
 
 [features.Microsoft_UI_Composition_Core]
 cfg = "Microsoft_UI_Composition_Core"
@@ -55,7 +55,7 @@ deps = ["Microsoft_UI_Composition"]
 
 [features.Microsoft_UI_Composition_Effects]
 cfg = "Microsoft_UI_Composition_Effects"
-deps = ["Microsoft_UI_Composition", "Windows_Graphics_Effects"]
+deps = ["Windows_Graphics_Effects"]
 
 [features.Microsoft_UI_Composition_Interactions]
 cfg = "Microsoft_UI_Composition_Interactions"
@@ -75,7 +75,7 @@ deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Dispatching", 
 
 [features.Microsoft_UI_Dispatching]
 cfg = "Microsoft_UI_Dispatching"
-deps = ["Microsoft_UI", "Windows_Foundation"]
+deps = ["Windows_Foundation"]
 
 [features.Microsoft_UI_Input]
 cfg = "Microsoft_UI_Input"
@@ -95,7 +95,7 @@ deps = ["Microsoft_UI", "Windows_Foundation"]
 
 [features.Microsoft_UI_Text]
 cfg = "Microsoft_UI_Text"
-deps = ["Microsoft_UI", "Windows_Foundation", "Windows_Storage_Streams", "Windows_UI", "Windows_UI_Text"]
+deps = ["Windows_Foundation", "Windows_Storage_Streams", "Windows_UI", "Windows_UI_Text"]
 
 [features.Microsoft_UI_Windowing]
 cfg = "Microsoft_UI_Windowing"
@@ -103,27 +103,27 @@ deps = ["Microsoft_UI", "Microsoft_UI_Dispatching", "Windows_Foundation", "Windo
 
 [features.Microsoft_UI_Xaml]
 cfg = "Microsoft_UI_Xaml"
-deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Content", "Microsoft_UI_Dispatching", "Microsoft_UI_Input", "Microsoft_UI_Windowing", "Microsoft_Windows_ApplicationModel_Resources", "Windows_ApplicationModel", "Windows_ApplicationModel_Activation", "Windows_ApplicationModel_Core", "Windows_ApplicationModel_DataTransfer", "Windows_ApplicationModel_DataTransfer_DragDrop", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Graphics_Imaging", "Windows_UI", "Windows_UI_Core", "Windows_UI_Xaml_Interop"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Content", "Microsoft_UI_Dispatching", "Microsoft_UI_Input", "Microsoft_UI_Windowing", "Microsoft_UI_Xaml_Automation_Peers", "Microsoft_UI_Xaml_Controls", "Microsoft_UI_Xaml_Controls_Primitives", "Microsoft_UI_Xaml_Data", "Microsoft_UI_Xaml_Input", "Microsoft_UI_Xaml_Media", "Microsoft_UI_Xaml_Media_Animation", "Microsoft_UI_Xaml_Media_Imaging", "Microsoft_UI_Xaml_Media_Media3D", "Microsoft_Windows_ApplicationModel_Resources", "Windows_ApplicationModel", "Windows_ApplicationModel_Activation", "Windows_ApplicationModel_Core", "Windows_ApplicationModel_DataTransfer", "Windows_ApplicationModel_DataTransfer_DragDrop", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Graphics_Imaging", "Windows_UI", "Windows_UI_Core", "Windows_UI_Xaml_Interop"]
 
 [features.Microsoft_UI_Xaml_Automation]
 cfg = "Microsoft_UI_Xaml_Automation"
-deps = ["Microsoft_UI_Xaml", "Windows_Foundation_Collections"]
+deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Automation_Peers", "Windows_Foundation_Collections"]
 
 [features.Microsoft_UI_Xaml_Automation_Peers]
 cfg = "Microsoft_UI_Xaml_Automation_Peers"
-deps = ["Microsoft_UI_Xaml_Automation", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Automation", "Microsoft_UI_Xaml_Automation_Provider", "Microsoft_UI_Xaml_Controls", "Microsoft_UI_Xaml_Controls_Primitives", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_UI_Xaml_Automation_Provider]
 cfg = "Microsoft_UI_Xaml_Automation_Provider"
-deps = ["Microsoft_UI_Xaml_Automation", "Microsoft_UI_Xaml_Automation_Text", "Windows_Foundation", "Windows_UI"]
+deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Automation", "Microsoft_UI_Xaml_Automation_Peers", "Microsoft_UI_Xaml_Automation_Text", "Windows_Foundation", "Windows_UI"]
 
 [features.Microsoft_UI_Xaml_Automation_Text]
 cfg = "Microsoft_UI_Xaml_Automation_Text"
-deps = ["Microsoft_UI_Xaml_Automation"]
+deps = []
 
 [features.Microsoft_UI_Xaml_Controls]
 cfg = "Microsoft_UI_Xaml_Controls"
-deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Input", "Microsoft_UI_Text", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Interop", "Microsoft_Web_WebView2_Core", "Windows_ApplicationModel_Contacts", "Windows_ApplicationModel_DataTransfer", "Windows_Devices_Geolocation", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Globalization", "Windows_Globalization_NumberFormatting", "Windows_Media_Casting", "Windows_Media_Playback", "Windows_UI", "Windows_UI_Text", "Windows_UI_Xaml_Interop"]
+deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Input", "Microsoft_UI_Text", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Automation_Peers", "Microsoft_UI_Xaml_Controls_Primitives", "Microsoft_UI_Xaml_Data", "Microsoft_UI_Xaml_Documents", "Microsoft_UI_Xaml_Input", "Microsoft_UI_Xaml_Interop", "Microsoft_UI_Xaml_Media", "Microsoft_UI_Xaml_Media_Animation", "Microsoft_UI_Xaml_Navigation", "Microsoft_Web_WebView2_Core", "Windows_ApplicationModel_Contacts", "Windows_ApplicationModel_DataTransfer", "Windows_Devices_Geolocation", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_Globalization", "Windows_Globalization_NumberFormatting", "Windows_Media_Casting", "Windows_Media_Playback", "Windows_UI", "Windows_UI_Text", "Windows_UI_Xaml_Interop"]
 
 [features.Microsoft_UI_Xaml_Controls_AnimatedVisuals]
 cfg = "Microsoft_UI_Xaml_Controls_AnimatedVisuals"
@@ -131,11 +131,11 @@ deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml_Controls", "Windows_Found
 
 [features.Microsoft_UI_Xaml_Controls_Primitives]
 cfg = "Microsoft_UI_Xaml_Controls_Primitives"
-deps = ["Microsoft_UI_Composition", "Microsoft_UI_Input", "Microsoft_UI_Xaml_Controls", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_UI", "Windows_UI_Xaml_Interop"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Input", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Automation_Peers", "Microsoft_UI_Xaml_Controls", "Microsoft_UI_Xaml_Data", "Microsoft_UI_Xaml_Input", "Microsoft_UI_Xaml_Media", "Microsoft_UI_Xaml_Media_Animation", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Foundation_Numerics", "Windows_UI", "Windows_UI_Xaml_Interop"]
 
 [features.Microsoft_UI_Xaml_CustomAttributes]
 cfg = "Microsoft_UI_Xaml_CustomAttributes"
-deps = ["Microsoft_UI_Xaml"]
+deps = []
 
 [features.Microsoft_UI_Xaml_Data]
 cfg = "Microsoft_UI_Xaml_Data"
@@ -143,19 +143,19 @@ deps = ["Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Foundation_Collectio
 
 [features.Microsoft_UI_Xaml_Documents]
 cfg = "Microsoft_UI_Xaml_Documents"
-deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_UI_Text"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Input", "Microsoft_UI_Xaml_Media", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_UI_Text"]
 
 [features.Microsoft_UI_Xaml_Hosting]
 cfg = "Microsoft_UI_Xaml_Hosting"
-deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Content", "Microsoft_UI_Xaml", "Windows_Foundation"]
+deps = ["Microsoft_UI", "Microsoft_UI_Composition", "Microsoft_UI_Content", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Controls", "Microsoft_UI_Xaml_Media", "Windows_Foundation"]
 
 [features.Microsoft_UI_Xaml_Input]
 cfg = "Microsoft_UI_Xaml_Input"
-deps = ["Microsoft_UI_Input", "Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_System", "Windows_UI_Core"]
+deps = ["Microsoft_UI_Input", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Controls", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_System", "Windows_UI_Core"]
 
 [features.Microsoft_UI_Xaml_Interop]
 cfg = "Microsoft_UI_Xaml_Interop"
-deps = ["Microsoft_UI_Xaml", "Windows_Foundation"]
+deps = ["Windows_Foundation"]
 
 [features.Microsoft_UI_Xaml_Markup]
 cfg = "Microsoft_UI_Xaml_Markup"
@@ -163,23 +163,23 @@ deps = ["Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Foundation_Collectio
 
 [features.Microsoft_UI_Xaml_Media]
 cfg = "Microsoft_UI_Xaml_Media"
-deps = ["Microsoft_UI_Composition", "Microsoft_UI_Composition_SystemBackdrops", "Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage_Streams", "Windows_UI"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Composition_SystemBackdrops", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Controls_Primitives", "Microsoft_UI_Xaml_Media_Media3D", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage_Streams", "Windows_UI"]
 
 [features.Microsoft_UI_Xaml_Media_Animation]
 cfg = "Microsoft_UI_Xaml_Media_Animation"
-deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml_Media", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_UI"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Controls", "Microsoft_UI_Xaml_Controls_Primitives", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_UI"]
 
 [features.Microsoft_UI_Xaml_Media_Imaging]
 cfg = "Microsoft_UI_Xaml_Media_Imaging"
-deps = ["Microsoft_UI_Xaml_Media", "Windows_ApplicationModel_Background", "Windows_Foundation", "Windows_Graphics_Imaging", "Windows_Storage_Streams"]
+deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Media", "Windows_ApplicationModel_Background", "Windows_Foundation", "Windows_Graphics_Imaging", "Windows_Storage_Streams"]
 
 [features.Microsoft_UI_Xaml_Media_Media3D]
 cfg = "Microsoft_UI_Xaml_Media_Media3D"
-deps = ["Microsoft_UI_Xaml_Media"]
+deps = ["Microsoft_UI_Xaml"]
 
 [features.Microsoft_UI_Xaml_Navigation]
 cfg = "Microsoft_UI_Xaml_Navigation"
-deps = ["Microsoft_UI_Xaml", "Windows_Foundation", "Windows_UI_Xaml_Interop"]
+deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Media_Animation", "Windows_Foundation", "Windows_UI_Xaml_Interop"]
 
 [features.Microsoft_UI_Xaml_Printing]
 cfg = "Microsoft_UI_Xaml_Printing"
@@ -187,43 +187,31 @@ deps = ["Microsoft_UI_Xaml", "Windows_Foundation", "Windows_Graphics_Printing"]
 
 [features.Microsoft_UI_Xaml_Resources]
 cfg = "Microsoft_UI_Xaml_Resources"
-deps = ["Microsoft_UI_Xaml"]
+deps = []
 
 [features.Microsoft_UI_Xaml_Shapes]
 cfg = "Microsoft_UI_Xaml_Shapes"
-deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml"]
+deps = ["Microsoft_UI_Composition", "Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Media"]
 
 [features.Microsoft_UI_Xaml_XamlTypeInfo]
 cfg = "Microsoft_UI_Xaml_XamlTypeInfo"
-deps = ["Microsoft_UI_Xaml", "Microsoft_UI_Xaml_Markup", "Windows_UI_Xaml_Interop"]
-
-[features.Microsoft_Web]
-cfg = "Microsoft_Web"
-deps = ["Microsoft"]
-
-[features.Microsoft_Web_WebView2]
-cfg = "Microsoft_Web_WebView2"
-deps = ["Microsoft_Web"]
-
-[features.Microsoft_Web_WebView2_Core]
-cfg = "Microsoft_Web_WebView2_Core"
-deps = ["Microsoft_Web_WebView2"]
+deps = ["Microsoft_UI_Xaml_Markup", "Windows_UI_Xaml_Interop"]
 
 [features.Microsoft_Windows]
 cfg = "Microsoft_Windows"
-deps = ["Microsoft"]
+deps = []
 
 [features.Microsoft_Windows_AI]
 cfg = "Microsoft_Windows_AI"
-deps = ["Microsoft_Windows", "Windows_Foundation"]
+deps = ["Windows_Foundation"]
 
 [features.Microsoft_Windows_AI_ContentSafety]
 cfg = "Microsoft_Windows_AI_ContentSafety"
-deps = ["Microsoft_Windows_AI"]
+deps = []
 
 [features.Microsoft_Windows_AI_Foundation]
 cfg = "Microsoft_Windows_AI_Foundation"
-deps = ["Microsoft_Windows_AI"]
+deps = []
 
 [features.Microsoft_Windows_AI_Imaging]
 cfg = "Microsoft_Windows_AI_Imaging"
@@ -231,7 +219,7 @@ deps = ["Microsoft_Graphics_Imaging", "Microsoft_Windows_AI", "Microsoft_Windows
 
 [features.Microsoft_Windows_AI_MachineLearning]
 cfg = "Microsoft_Windows_AI_MachineLearning"
-deps = ["Microsoft_Windows_AI", "Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_AI_Text]
 cfg = "Microsoft_Windows_AI_Text"
@@ -239,11 +227,11 @@ deps = ["Microsoft_Windows_AI", "Microsoft_Windows_AI_ContentSafety", "Microsoft
 
 [features.Microsoft_Windows_AppLifecycle]
 cfg = "Microsoft_Windows_AppLifecycle"
-deps = ["Microsoft_Windows", "Windows_ApplicationModel_Core", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Windows_ApplicationModel_Core", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_AppNotifications]
 cfg = "Microsoft_Windows_AppNotifications"
-deps = ["Microsoft_Windows", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_AppNotifications_Builder]
 cfg = "Microsoft_Windows_AppNotifications_Builder"
@@ -251,99 +239,99 @@ deps = ["Microsoft_Windows_AppNotifications", "Windows_Foundation", "Windows_Fou
 
 [features.Microsoft_Windows_ApplicationModel]
 cfg = "Microsoft_Windows_ApplicationModel"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_ApplicationModel_Background]
 cfg = "Microsoft_Windows_ApplicationModel_Background"
-deps = ["Microsoft_Windows_ApplicationModel", "Windows_ApplicationModel_Background"]
+deps = ["Windows_ApplicationModel_Background"]
 
 [features.Microsoft_Windows_ApplicationModel_Background_UniversalBGTask]
 cfg = "Microsoft_Windows_ApplicationModel_Background_UniversalBGTask"
-deps = ["Microsoft_Windows_ApplicationModel_Background", "Windows_ApplicationModel_Background"]
+deps = ["Windows_ApplicationModel_Background"]
 
 [features.Microsoft_Windows_ApplicationModel_DynamicDependency]
 cfg = "Microsoft_Windows_ApplicationModel_DynamicDependency"
-deps = ["Microsoft_Windows_ApplicationModel", "Windows_ApplicationModel"]
+deps = ["Windows_ApplicationModel"]
 
 [features.Microsoft_Windows_ApplicationModel_Resources]
 cfg = "Microsoft_Windows_ApplicationModel_Resources"
-deps = ["Microsoft_Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_ApplicationModel_WindowsAppRuntime]
 cfg = "Microsoft_Windows_ApplicationModel_WindowsAppRuntime"
-deps = ["Microsoft_Windows_ApplicationModel", "Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_BadgeNotifications]
 cfg = "Microsoft_Windows_BadgeNotifications"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Foundation]
 cfg = "Microsoft_Windows_Foundation"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Globalization]
 cfg = "Microsoft_Windows_Globalization"
-deps = ["Microsoft_Windows", "Windows_Foundation_Collections"]
+deps = ["Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_Management]
 cfg = "Microsoft_Windows_Management"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Management_Deployment]
 cfg = "Microsoft_Windows_Management_Deployment"
-deps = ["Microsoft_Windows_ApplicationModel_DynamicDependency", "Microsoft_Windows_Management", "Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Microsoft_Windows_ApplicationModel_DynamicDependency", "Windows_ApplicationModel", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_Media]
 cfg = "Microsoft_Windows_Media"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Media_Capture]
 cfg = "Microsoft_Windows_Media_Capture"
-deps = ["Microsoft_UI", "Microsoft_Windows_Media", "Windows_Foundation", "Windows_Storage"]
+deps = ["Microsoft_UI", "Windows_Foundation", "Windows_Storage"]
 
 [features.Microsoft_Windows_PushNotifications]
 cfg = "Microsoft_Windows_PushNotifications"
-deps = ["Microsoft_Windows", "Windows_ApplicationModel_Background", "Windows_Foundation"]
+deps = ["Windows_ApplicationModel_Background", "Windows_Foundation"]
 
 [features.Microsoft_Windows_Security]
 cfg = "Microsoft_Windows_Security"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Security_AccessControl]
 cfg = "Microsoft_Windows_Security_AccessControl"
-deps = ["Microsoft_Windows_Security"]
+deps = []
 
 [features.Microsoft_Windows_Storage]
 cfg = "Microsoft_Windows_Storage"
-deps = ["Microsoft_Windows", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage", "Windows_System"]
+deps = ["Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage", "Windows_System"]
 
 [features.Microsoft_Windows_Storage_Pickers]
 cfg = "Microsoft_Windows_Storage_Pickers"
-deps = ["Microsoft_UI", "Microsoft_Windows_Storage", "Windows_Foundation", "Windows_Foundation_Collections"]
+deps = ["Microsoft_UI", "Windows_Foundation", "Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_System]
 cfg = "Microsoft_Windows_System"
-deps = ["Microsoft_Windows", "Windows_Foundation_Collections"]
+deps = ["Windows_Foundation_Collections"]
 
 [features.Microsoft_Windows_System_Power]
 cfg = "Microsoft_Windows_System_Power"
-deps = ["Microsoft_Windows_System", "Windows_Foundation"]
+deps = ["Windows_Foundation"]
 
 [features.Microsoft_Windows_Widgets]
 cfg = "Microsoft_Windows_Widgets"
-deps = ["Microsoft_Windows"]
+deps = []
 
 [features.Microsoft_Windows_Widgets_Feeds]
 cfg = "Microsoft_Windows_Widgets_Feeds"
-deps = ["Microsoft_Windows_Widgets"]
+deps = []
 
 [features.Microsoft_Windows_Widgets_Feeds_Providers]
 cfg = "Microsoft_Windows_Widgets_Feeds_Providers"
-deps = ["Microsoft_Windows_Widgets_Feeds", "Microsoft_Windows_Widgets_Notifications", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage_Streams"]
+deps = ["Microsoft_Windows_Widgets_Notifications", "Windows_Foundation", "Windows_Foundation_Collections", "Windows_Storage_Streams"]
 
 [features.Microsoft_Windows_Widgets_Notifications]
 cfg = "Microsoft_Windows_Widgets_Notifications"
-deps = ["Microsoft_Windows_Widgets", "Windows_Foundation"]
+deps = ["Windows_Foundation"]
 
 [features.Microsoft_Windows_Widgets_Providers]
 cfg = "Microsoft_Windows_Widgets_Providers"
@@ -351,148 +339,4 @@ deps = ["Microsoft_Windows_Widgets", "Windows_Foundation", "Windows_Foundation_C
 
 [features.Microsoft_Windows_Workloads]
 cfg = "Microsoft_Windows_Workloads"
-deps = ["Microsoft_Windows"]
-
-[features.Windows_ApplicationModel]
-cfg = "Windows_ApplicationModel"
-deps = ["Windows_Foundation"]
-
-[features.Windows_ApplicationModel_Activation]
-cfg = "Windows_ApplicationModel_Activation"
-deps = ["Windows_ApplicationModel"]
-
-[features.Windows_ApplicationModel_Background]
-cfg = "Windows_ApplicationModel_Background"
-deps = ["Windows_ApplicationModel"]
-
-[features.Windows_ApplicationModel_Contacts]
-cfg = "Windows_ApplicationModel_Contacts"
-deps = ["Windows_ApplicationModel"]
-
-[features.Windows_ApplicationModel_Core]
-cfg = "Windows_ApplicationModel_Core"
-deps = ["Windows_ApplicationModel"]
-
-[features.Windows_ApplicationModel_DataTransfer]
-cfg = "Windows_ApplicationModel_DataTransfer"
-deps = ["Windows_ApplicationModel"]
-
-[features.Windows_ApplicationModel_DataTransfer_DragDrop]
-cfg = "Windows_ApplicationModel_DataTransfer_DragDrop"
-deps = ["Windows_ApplicationModel_DataTransfer"]
-
-[features.Windows_Data]
-cfg = "Windows_Data"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Data_Json]
-cfg = "Windows_Data_Json"
-deps = ["Windows_Data"]
-
-[features.Windows_Devices]
-cfg = "Windows_Devices"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Devices_Geolocation]
-cfg = "Windows_Devices_Geolocation"
-deps = ["Windows_Devices"]
-
-[features.Windows_Devices_Input]
-cfg = "Windows_Devices_Input"
-deps = ["Windows_Devices"]
-
-[features.Windows_Foundation]
-cfg = "Windows_Foundation"
 deps = []
-
-[features.Windows_Foundation_Collections]
-cfg = "Windows_Foundation_Collections"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Foundation_Numerics]
-cfg = "Windows_Foundation_Numerics"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Globalization]
-cfg = "Windows_Globalization"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Globalization_NumberFormatting]
-cfg = "Windows_Globalization_NumberFormatting"
-deps = ["Windows_Globalization"]
-
-[features.Windows_Graphics]
-cfg = "Windows_Graphics"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Graphics_Effects]
-cfg = "Windows_Graphics_Effects"
-deps = ["Windows_Graphics"]
-
-[features.Windows_Graphics_Imaging]
-cfg = "Windows_Graphics_Imaging"
-deps = ["Windows_Graphics"]
-
-[features.Windows_Graphics_Printing]
-cfg = "Windows_Graphics_Printing"
-deps = ["Windows_Graphics"]
-
-[features.Windows_Media]
-cfg = "Windows_Media"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Media_Casting]
-cfg = "Windows_Media_Casting"
-deps = ["Windows_Media"]
-
-[features.Windows_Media_Playback]
-cfg = "Windows_Media_Playback"
-deps = ["Windows_Media"]
-
-[features.Windows_Storage]
-cfg = "Windows_Storage"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Storage_Streams]
-cfg = "Windows_Storage_Streams"
-deps = ["Windows_Storage"]
-
-[features.Windows_System]
-cfg = "Windows_System"
-deps = ["Windows_Foundation"]
-
-[features.Windows_UI]
-cfg = "Windows_UI"
-deps = ["Windows_Foundation"]
-
-[features.Windows_UI_Composition]
-cfg = "Windows_UI_Composition"
-deps = ["Windows_UI"]
-
-[features.Windows_UI_Core]
-cfg = "Windows_UI_Core"
-deps = ["Windows_UI"]
-
-[features.Windows_UI_Text]
-cfg = "Windows_UI_Text"
-deps = ["Windows_UI"]
-
-[features.Windows_UI_Xaml]
-cfg = "Windows_UI_Xaml"
-deps = ["Windows_UI"]
-
-[features.Windows_UI_Xaml_Interop]
-cfg = "Windows_UI_Xaml_Interop"
-deps = ["Windows_UI_Xaml"]
-
-[features.Windows_Web]
-cfg = "Windows_Web"
-deps = ["Windows_Foundation"]
-
-[features.Windows_Web_Http]
-cfg = "Windows_Web_Http"
-deps = ["Windows_Web"]
-
-[features.Windows_Web_Http_Headers]
-cfg = "Windows_Web_Http_Headers"
-deps = ["Windows_Web_Http"]

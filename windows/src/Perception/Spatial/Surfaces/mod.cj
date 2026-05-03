@@ -4,18 +4,31 @@
 package windows.Perception.Spatial.Surfaces
 
 import std.collection.*
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_core as windows_core
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_interface as windows_interface
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Perception_Spatial_Surfaces == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Perception_Spatial_Surfaces == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
+@When[Windows_Perception_Spatial_Surfaces == "on" && Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
-import windows._impl_l0 as _impl_l0
+@When[Windows_Perception_Spatial_Surfaces == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_collections as windows_collections
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_future as windows_future
+@When[Windows_Perception_Spatial_Surfaces == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -72,7 +85,7 @@ public class ISpatialSurfaceMeshBuffer <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISpatialSurfaceMeshBuffer", ISpatialSurfaceMeshBuffer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialSurfaceMeshBufferVtbl", "ISpatialSurfaceMeshBuffer", "ISpatialSurfaceMeshBuffer_Impl", [InterfaceMethodSchema("Format", 6, [InterfaceParameterSchema("result", "CPointer<Graphics_DirectX.DirectXPixelFormatAbi>", "OutSlot<Graphics_DirectX.DirectXPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Stride", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ElementCount", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISpatialSurfaceMeshBuffer", ISpatialSurfaceMeshBuffer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialSurfaceMeshBufferVtbl", "ISpatialSurfaceMeshBuffer", "ISpatialSurfaceMeshBuffer_Impl", [InterfaceMethodSchema("Format", 6, [InterfaceParameterSchema("result", "CPointer<Graphics_DirectX.DirectXPixelFormatAbi>", "OutSlot<Graphics_DirectX.DirectXPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Stride", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ElementCount", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Data", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISpatialSurfaceMeshBuffer.runtimeType())
         return schema
     }
@@ -127,12 +140,12 @@ public class ISpatialSurfaceMeshBuffer <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -687,7 +700,7 @@ public class SpatialSurfaceMeshBuffer <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Data(): _impl_l0.IBuffer {
+    public unsafe func Data(): impl_p0.IBuffer {
         return defaultInterface().Data()
     }
 }

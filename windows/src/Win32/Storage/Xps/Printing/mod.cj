@@ -4,15 +4,22 @@
 package windows.Win32.Storage.Xps.Printing
 
 import std.collection.*
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Xps_Printing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Xps_Printing == "on" && Windows_Win32_Storage_Xps == "on"]
 import windows.Win32.Storage.Xps as Win32_Storage_Xps
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Xps_Printing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Storage_Xps_Printing == "on"]
@@ -206,7 +213,7 @@ public class IPrintDocumentPackageTargetFactory <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_Storage_Xps_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IXpsPrintJobStreamVtbl {
-    public var base_: Win32__impl_l1.ISequentialStreamVtbl = Win32__impl_l1.ISequentialStreamVtbl()
+    public var base_: Win32_impl_p2.ISequentialStreamVtbl = Win32_impl_p2.ISequentialStreamVtbl()
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -244,7 +251,7 @@ public class IXpsPrintJobStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IXpsPrintJobStream> {
-        return InterfaceDescriptor<IXpsPrintJobStream>("IXpsPrintJobStream", IXpsPrintJobStream.iid(), Win32__impl_l1.ISequentialStream.iid(), takeIXpsPrintJobStreamFromAbi, viewIXpsPrintJobStream)
+        return InterfaceDescriptor<IXpsPrintJobStream>("IXpsPrintJobStream", IXpsPrintJobStream.iid(), Win32_impl_p2.ISequentialStream.iid(), takeIXpsPrintJobStreamFromAbi, viewIXpsPrintJobStream)
     }
 
     public unsafe func vtbl(): IXpsPrintJobStreamVtbl {
@@ -553,7 +560,7 @@ extend XPS_JOB_STATUS <: windows_core.CopyType & windows_core.RuntimeType & wind
 @When[Windows_Win32_Storage_Xps_Printing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrintDocumentPackageStatusEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var PackageStatusUpdated: CFunc<(CPointer<Unit>, CPointer<PrintDocumentPackageStatusAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -591,7 +598,7 @@ public class IPrintDocumentPackageStatusEvent <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrintDocumentPackageStatusEvent> {
-        return InterfaceDescriptor<IPrintDocumentPackageStatusEvent>("IPrintDocumentPackageStatusEvent", IPrintDocumentPackageStatusEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrintDocumentPackageStatusEventFromAbi, viewIPrintDocumentPackageStatusEvent)
+        return InterfaceDescriptor<IPrintDocumentPackageStatusEvent>("IPrintDocumentPackageStatusEvent", IPrintDocumentPackageStatusEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrintDocumentPackageStatusEventFromAbi, viewIPrintDocumentPackageStatusEvent)
     }
 
     public unsafe func vtbl(): IPrintDocumentPackageStatusEventVtbl {

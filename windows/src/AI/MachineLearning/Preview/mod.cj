@@ -4,15 +4,25 @@
 package windows.AI.MachineLearning.Preview
 
 import std.collection.*
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_AI_MachineLearning_Preview == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l1 as _impl_l1
+@When[Windows_AI_MachineLearning_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_collections as windows_collections
+@When[Windows_AI_MachineLearning_Preview == "on"]
 import windows_future as windows_future
 
 
@@ -2689,7 +2699,7 @@ public class ILearningModelPreviewStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILearningModelPreviewStatics", ILearningModelPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILearningModelPreviewStaticsVtbl", "ILearningModelPreviewStatics", "ILearningModelPreviewStatics_Impl", [InterfaceMethodSchema("LoadModelFromStorageFileAsync", 6, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModelPreview>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadModelFromStreamAsync", 7, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModelPreview>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILearningModelPreviewStatics", ILearningModelPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILearningModelPreviewStaticsVtbl", "ILearningModelPreviewStatics", "ILearningModelPreviewStatics_Impl", [InterfaceMethodSchema("LoadModelFromStorageFileAsync", 6, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModelPreview>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadModelFromStreamAsync", 7, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModelPreview>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILearningModelPreviewStatics.runtimeType())
         return schema
     }
@@ -2719,7 +2729,7 @@ public class ILearningModelPreviewStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadModelFromStorageFileAsync(modelFile: _impl_l1.IStorageFile): windows_future.IAsyncOperation<LearningModelPreview> {
+    public unsafe func LoadModelFromStorageFileAsync(modelFile: impl_p1.IStorageFile): windows_future.IAsyncOperation<LearningModelPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadModelFromStorageFileAsync(asRaw(), modelFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2728,7 +2738,7 @@ public class ILearningModelPreviewStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadModelFromStreamAsync(modelStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModelPreview> {
+    public unsafe func LoadModelFromStreamAsync(modelStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModelPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadModelFromStreamAsync(asRaw(), modelStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2981,7 +2991,7 @@ public class LearningModelPreview <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadModelFromStorageFileAsync(modelFile: _impl_l1.IStorageFile): windows_future.IAsyncOperation<LearningModelPreview> {
+    public static unsafe func LoadModelFromStorageFileAsync(modelFile: impl_p1.IStorageFile): windows_future.IAsyncOperation<LearningModelPreview> {
         var result__: Option<windows_future.IAsyncOperation<LearningModelPreview>> = Option<windows_future.IAsyncOperation<LearningModelPreview>>.None
         try (factory__ = windows_core.factory<LearningModelPreview, ILearningModelPreviewStatics>().unwrap()) {
             result__ = Some(factory__.LoadModelFromStorageFileAsync(modelFile))
@@ -2993,7 +3003,7 @@ public class LearningModelPreview <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadModelFromStreamAsync(modelStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModelPreview> {
+    public static unsafe func LoadModelFromStreamAsync(modelStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModelPreview> {
         var result__: Option<windows_future.IAsyncOperation<LearningModelPreview>> = Option<windows_future.IAsyncOperation<LearningModelPreview>>.None
         try (factory__ = windows_core.factory<LearningModelPreview, ILearningModelPreviewStatics>().unwrap()) {
             result__ = Some(factory__.LoadModelFromStreamAsync(modelStream))

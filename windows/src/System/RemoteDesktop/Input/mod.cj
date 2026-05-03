@@ -4,12 +4,19 @@
 package windows.System.RemoteDesktop.Input
 
 import std.collection.*
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_core as windows_core
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_RemoteDesktop_Input == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_RemoteDesktop_Input == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 
 
@@ -282,19 +289,15 @@ public class RemoteTextConnectionDataHandler <: InterfaceWrapperBase & ComInterf
 extend RemoteTextConnectionDataHandler <: windows_core.Interface<RemoteTextConnectionDataHandler> {}
 
 @When[Windows_System_RemoteDesktop_Input == "on"]
-private open class RemoteTextConnectionDataHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0Size: UInt32, arg0: CPointer<UInt8>, result: CPointer<Bool>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface RemoteTextConnectionDataHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0Size: UInt32, arg0: CPointer<UInt8>, result: CPointer<Bool>): Int32
 }
 
 @When[Windows_System_RemoteDesktop_Input == "on"]
-private open class RemoteTextConnectionDataHandlerInvoker <: RemoteTextConnectionDataHandlerInvokerErased {
-    public open func Invoke(pduDataSize: UInt32, pduData: CPointer<UInt8>): Bool {
-        false
-    }
+private interface RemoteTextConnectionDataHandlerInvoker <: RemoteTextConnectionDataHandlerInvokerErased {
+    public func Invoke(pduDataSize: UInt32, pduData: CPointer<UInt8>): Bool
 
-    public override func __winrtThunk_Invoke(arg0Size: UInt32, arg0: CPointer<UInt8>, result: CPointer<Bool>): Int32 {
+    public func __winrtThunk_Invoke(arg0Size: UInt32, arg0: CPointer<UInt8>, result: CPointer<Bool>): Int32 {
         let value = this.Invoke(arg0Size, arg0)
         unsafe { result.write(value) }
         return S_OK.value
@@ -315,7 +318,7 @@ private class RemoteTextConnectionDataHandlerBox <: RemoteTextConnectionDataHand
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(pduDataSize: UInt32, pduData: CPointer<UInt8>): Bool {
+    public func Invoke(pduDataSize: UInt32, pduData: CPointer<UInt8>): Bool {
         invoke_(pduDataSize, pduData)
     }
 }

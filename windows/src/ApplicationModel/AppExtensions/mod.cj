@@ -4,16 +4,25 @@
 package windows.ApplicationModel.AppExtensions
 
 import std.collection.*
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_AppExtensions == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_ApplicationModel_AppExtensions == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_AppExtensions == "on"]
 import windows_future as windows_future
 
 
@@ -79,7 +88,7 @@ public class IAppExtension <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtension", IAppExtension.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionVtbl", "IAppExtension", "IAppExtension_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Description", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_AppInfo", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetExtensionPropertiesAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IPropertySet>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicFolderAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtension", IAppExtension.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionVtbl", "IAppExtension", "IAppExtension_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Description", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_AppInfo", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetExtensionPropertiesAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IPropertySet>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicFolderAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtension.runtimeType())
         return schema
     }
@@ -133,21 +142,21 @@ public class IAppExtension <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_AppInfo(): _impl_l2.AppInfo {
+    public unsafe func get_AppInfo(): impl_p1.AppInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_AppInfo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.AppInfo.fromAbiTake(result__)
+        return impl_p1.AppInfo.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -160,12 +169,12 @@ public class IAppExtension <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetPublicFolderAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetPublicFolderAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPublicFolderAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFolder>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFolder>.fromAbiTake(result__)
     }
 }
 
@@ -309,7 +318,7 @@ public class IAppExtension3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtension3", IAppExtension3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtension3Vtbl", "IAppExtension3", "IAppExtension3_Impl", [InterfaceMethodSchema("GetExtensionProperties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicPath", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicFolder", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtension3", IAppExtension3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtension3Vtbl", "IAppExtension3", "IAppExtension3_Impl", [InterfaceMethodSchema("GetExtensionProperties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicPath", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPublicFolder", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtension3.runtimeType())
         return schema
     }
@@ -356,12 +365,12 @@ public class IAppExtension3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetPublicFolder(): _impl_l1.StorageFolder {
+    public unsafe func GetPublicFolder(): impl_p1.StorageFolder {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPublicFolder(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageFolder.fromAbiTake(result__)
+        return impl_p1.StorageFolder.fromAbiTake(result__)
     }
 }
 
@@ -416,7 +425,7 @@ public class IAppExtensionPackageStatusChangedEventArgs <: InterfaceWrapperBase 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtensionPackageStatusChangedEventArgs", IAppExtensionPackageStatusChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageStatusChangedEventArgsVtbl", "IAppExtensionPackageStatusChangedEventArgs", "IAppExtensionPackageStatusChangedEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtensionPackageStatusChangedEventArgs", IAppExtensionPackageStatusChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageStatusChangedEventArgsVtbl", "IAppExtensionPackageStatusChangedEventArgs", "IAppExtensionPackageStatusChangedEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtensionPackageStatusChangedEventArgs.runtimeType())
         return schema
     }
@@ -454,12 +463,12 @@ public class IAppExtensionPackageStatusChangedEventArgs <: InterfaceWrapperBase 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 }
 
@@ -514,7 +523,7 @@ public class IAppExtensionPackageUninstallingEventArgs <: InterfaceWrapperBase &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUninstallingEventArgs", IAppExtensionPackageUninstallingEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUninstallingEventArgsVtbl", "IAppExtensionPackageUninstallingEventArgs", "IAppExtensionPackageUninstallingEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUninstallingEventArgs", IAppExtensionPackageUninstallingEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUninstallingEventArgsVtbl", "IAppExtensionPackageUninstallingEventArgs", "IAppExtensionPackageUninstallingEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtensionPackageUninstallingEventArgs.runtimeType())
         return schema
     }
@@ -552,12 +561,12 @@ public class IAppExtensionPackageUninstallingEventArgs <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 }
 
@@ -612,7 +621,7 @@ public class IAppExtensionPackageUpdatingEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUpdatingEventArgs", IAppExtensionPackageUpdatingEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUpdatingEventArgsVtbl", "IAppExtensionPackageUpdatingEventArgs", "IAppExtensionPackageUpdatingEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUpdatingEventArgs", IAppExtensionPackageUpdatingEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUpdatingEventArgsVtbl", "IAppExtensionPackageUpdatingEventArgs", "IAppExtensionPackageUpdatingEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtensionPackageUpdatingEventArgs.runtimeType())
         return schema
     }
@@ -650,12 +659,12 @@ public class IAppExtensionPackageUpdatingEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 }
 
@@ -744,12 +753,12 @@ public class AppExtension <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_AppInfo(): _impl_l2.AppInfo {
+    public unsafe func get_AppInfo(): impl_p1.AppInfo {
         return defaultInterface().get_AppInfo()
     }
 
@@ -759,7 +768,7 @@ public class AppExtension <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetPublicFolderAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetPublicFolderAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return defaultInterface().GetPublicFolderAsync()
     }
 }
@@ -856,7 +865,7 @@ public class AppExtensionPackageStatusChangedEventArgs <: InterfaceWrapperBase &
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 }
@@ -953,7 +962,7 @@ public class AppExtensionPackageUninstallingEventArgs <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 }
@@ -1050,7 +1059,7 @@ public class AppExtensionPackageUpdatingEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 }
@@ -1214,7 +1223,7 @@ public class IAppExtensionPackageInstalledEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtensionPackageInstalledEventArgs", IAppExtensionPackageInstalledEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageInstalledEventArgsVtbl", "IAppExtensionPackageInstalledEventArgs", "IAppExtensionPackageInstalledEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Extensions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<AppExtension>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtensionPackageInstalledEventArgs", IAppExtensionPackageInstalledEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageInstalledEventArgsVtbl", "IAppExtensionPackageInstalledEventArgs", "IAppExtensionPackageInstalledEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Extensions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<AppExtension>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtensionPackageInstalledEventArgs.runtimeType())
         return schema
     }
@@ -1252,12 +1261,12 @@ public class IAppExtensionPackageInstalledEventArgs <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -1325,7 +1334,7 @@ public class IAppExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUpdatedEventArgs", IAppExtensionPackageUpdatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUpdatedEventArgsVtbl", "IAppExtensionPackageUpdatedEventArgs", "IAppExtensionPackageUpdatedEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Extensions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<AppExtension>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAppExtensionPackageUpdatedEventArgs", IAppExtensionPackageUpdatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAppExtensionPackageUpdatedEventArgsVtbl", "IAppExtensionPackageUpdatedEventArgs", "IAppExtensionPackageUpdatedEventArgs_Impl", [InterfaceMethodSchema("AppExtensionName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Package", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Extensions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<AppExtension>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAppExtensionPackageUpdatedEventArgs.runtimeType())
         return schema
     }
@@ -1363,12 +1372,12 @@ public class IAppExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -1458,7 +1467,7 @@ public class AppExtensionPackageInstalledEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 
@@ -1560,7 +1569,7 @@ public class AppExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 

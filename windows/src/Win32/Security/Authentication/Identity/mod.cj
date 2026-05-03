@@ -4,20 +4,37 @@
 package windows.Win32.Security.Authentication.Identity
 
 import std.collection.*
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_libloading
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_polyfill.{packedReadInt32, packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue}
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Credentials == "on"]
 import windows.Win32.Security.Credentials as Win32_Security_Credentials
+@When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_System_PasswordManagement == "on"]
 import windows.Win32.System.PasswordManagement as Win32_System_PasswordManagement
+@When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_System_Rpc == "on"]
 import windows.Win32.System.Rpc as Win32_System_Rpc
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_core as windows_core
 
 
@@ -2614,7 +2631,7 @@ extend KSEC_CONTEXT_TYPE <: windows_core.CopyType & windows_core.RuntimeType & w
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_System_Kernel == "on"]
 public struct KSEC_LIST_ENTRY {
-    public var List: Win32__impl_l0.LIST_ENTRY = Win32__impl_l0.LIST_ENTRY()
+    public var List: Win32_impl_p0.LIST_ENTRY = Win32_impl_p0.LIST_ENTRY()
     public var RefCount: Int32 = 0i32
     public var Signature: UInt32 = 0u32
     public var OwningList: CPointer<Unit> = CPointer<Unit>()
@@ -2625,7 +2642,7 @@ public struct KSEC_LIST_ENTRY {
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_System_Kernel == "on"]
 @C
 public struct KSEC_LIST_ENTRYAbi {
-    public var List: Win32__impl_l0.LIST_ENTRYAbi = Win32__impl_l0.LIST_ENTRYAbi()
+    public var List: Win32_impl_p0.LIST_ENTRYAbi = Win32_impl_p0.LIST_ENTRYAbi()
     public var RefCount: Int32 = 0i32
     public var Signature: UInt32 = 0u32
     public var OwningList: CPointer<Unit> = CPointer<Unit>()
@@ -2640,7 +2657,7 @@ extend KSEC_LIST_ENTRY <: windows_core.CopyType & windows_core.RuntimeType & win
     public static func signature(): String { "struct(Windows.Win32.Security.Authentication.Identity.KSEC_LIST_ENTRY;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable));i4;u4;cinterface(IInspectable);cinterface(IInspectable))" }
     public static func projectAbi(value: KSEC_LIST_ENTRY): KSEC_LIST_ENTRYAbi {
         var abi = KSEC_LIST_ENTRYAbi()
-        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY>())
+        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY>())
         abi.RefCount = value.RefCount
         abi.Signature = value.Signature
         abi.OwningList = value.OwningList
@@ -2649,7 +2666,7 @@ extend KSEC_LIST_ENTRY <: windows_core.CopyType & windows_core.RuntimeType & win
     }
     public static func assumeInitRef(abi: KSEC_LIST_ENTRYAbi): KSEC_LIST_ENTRY {
         var value = KSEC_LIST_ENTRY()
-        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY>()).unwrap()
+        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY>()).unwrap()
         value.RefCount = abi.RefCount
         value.Signature = abi.Signature
         value.OwningList = abi.OwningList
@@ -5449,7 +5466,7 @@ public type PLSA_CREATE_LOGON_SESSION = CFunc<(CPointer<Win32_Foundation.LUIDAbi
 public type PLSA_CREATE_SHARED_MEMORY = CFunc<(UInt32, UInt32) -> CPointer<Unit>>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")]
-public type PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>
+public type PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on"]
 public type PLSA_DELETE_CREDENTIAL = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, UInt32, CPointer<LSA_STRINGAbi>) -> Int32>
@@ -5524,7 +5541,7 @@ public type PLSA_REDIRECTED_LOGON_GET_SID = CFunc<(CPointer<Unit>, CPointer<Win3
 public type PLSA_REDIRECTED_LOGON_INIT = CFunc<(CPointer<Unit>, CPointer<LSA_UNICODE_STRINGAbi>, UInt32, CPointer<Win32_Foundation.LUIDAbi>) -> Int32>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_System_Threading == "on"]
-public type PLSA_REGISTER_NOTIFICATION = CFunc<(Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>
+public type PLSA_REGISTER_NOTIFICATION = CFunc<(Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on"]
 public type PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, UInt32, CPointer<Unit>, UInt8) -> Int32>
@@ -7048,7 +7065,7 @@ extend SCHANNEL_CERT_HASH_STORE <: windows_core.CopyType & windows_core.RuntimeT
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct SCHANNEL_CLIENT_SIGNATURE {
     public var cbLength: UInt32 = 0u32
-    public var aiHash: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var aiHash: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var cbHash: UInt32 = 0u32
     public var HashValue: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
     public var CertThumbprint: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
@@ -7059,7 +7076,7 @@ public struct SCHANNEL_CLIENT_SIGNATURE {
 @C
 public struct SCHANNEL_CLIENT_SIGNATUREAbi {
     public var cbLength: UInt32 = 0u32
-    public var aiHash: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var aiHash: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var cbHash: UInt32 = 0u32
     public var HashValue: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
     public var CertThumbprint: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
@@ -7074,7 +7091,7 @@ extend SCHANNEL_CLIENT_SIGNATURE <: windows_core.CopyType & windows_core.Runtime
     public static func projectAbi(value: SCHANNEL_CLIENT_SIGNATURE): SCHANNEL_CLIENT_SIGNATUREAbi {
         var abi = SCHANNEL_CLIENT_SIGNATUREAbi()
         abi.cbLength = value.cbLength
-        abi.aiHash = windows_core.projectTypedAbi(value.aiHash, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.aiHash = windows_core.projectTypedAbi(value.aiHash, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.cbHash = value.cbHash
         abi.HashValue = value.HashValue
         abi.CertThumbprint = value.CertThumbprint
@@ -7083,7 +7100,7 @@ extend SCHANNEL_CLIENT_SIGNATURE <: windows_core.CopyType & windows_core.Runtime
     public static func assumeInitRef(abi: SCHANNEL_CLIENT_SIGNATUREAbi): SCHANNEL_CLIENT_SIGNATURE {
         var value = SCHANNEL_CLIENT_SIGNATURE()
         value.cbLength = abi.cbLength
-        value.aiHash = windows_core.fromTypedAbi(abi.aiHash, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.aiHash = windows_core.fromTypedAbi(abi.aiHash, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.cbHash = abi.cbHash
         value.HashValue = abi.HashValue
         value.CertThumbprint = abi.CertThumbprint
@@ -12941,11 +12958,11 @@ extend SecPkgContext_ClientSpecifiedTarget <: windows_core.CopyType & windows_co
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct SecPkgContext_ConnectionInfo {
     public var dwProtocol: UInt32 = 0u32
-    public var aiCipher: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var aiCipher: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var dwCipherStrength: UInt32 = 0u32
-    public var aiHash: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var aiHash: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var dwHashStrength: UInt32 = 0u32
-    public var aiExch: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var aiExch: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var dwExchStrength: UInt32 = 0u32
     public init() {}
 }
@@ -12954,11 +12971,11 @@ public struct SecPkgContext_ConnectionInfo {
 @C
 public struct SecPkgContext_ConnectionInfoAbi {
     public var dwProtocol: UInt32 = 0u32
-    public var aiCipher: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var aiCipher: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var dwCipherStrength: UInt32 = 0u32
-    public var aiHash: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var aiHash: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var dwHashStrength: UInt32 = 0u32
-    public var aiExch: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var aiExch: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var dwExchStrength: UInt32 = 0u32
     public init() {}
 }
@@ -12971,22 +12988,22 @@ extend SecPkgContext_ConnectionInfo <: windows_core.CopyType & windows_core.Runt
     public static func projectAbi(value: SecPkgContext_ConnectionInfo): SecPkgContext_ConnectionInfoAbi {
         var abi = SecPkgContext_ConnectionInfoAbi()
         abi.dwProtocol = value.dwProtocol
-        abi.aiCipher = windows_core.projectTypedAbi(value.aiCipher, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.aiCipher = windows_core.projectTypedAbi(value.aiCipher, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.dwCipherStrength = value.dwCipherStrength
-        abi.aiHash = windows_core.projectTypedAbi(value.aiHash, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.aiHash = windows_core.projectTypedAbi(value.aiHash, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.dwHashStrength = value.dwHashStrength
-        abi.aiExch = windows_core.projectTypedAbi(value.aiExch, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.aiExch = windows_core.projectTypedAbi(value.aiExch, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.dwExchStrength = value.dwExchStrength
         return abi
     }
     public static func assumeInitRef(abi: SecPkgContext_ConnectionInfoAbi): SecPkgContext_ConnectionInfo {
         var value = SecPkgContext_ConnectionInfo()
         value.dwProtocol = abi.dwProtocol
-        value.aiCipher = windows_core.fromTypedAbi(abi.aiCipher, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.aiCipher = windows_core.fromTypedAbi(abi.aiCipher, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.dwCipherStrength = abi.dwCipherStrength
-        value.aiHash = windows_core.fromTypedAbi(abi.aiHash, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.aiHash = windows_core.fromTypedAbi(abi.aiHash, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.dwHashStrength = abi.dwHashStrength
-        value.aiExch = windows_core.fromTypedAbi(abi.aiExch, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.aiExch = windows_core.fromTypedAbi(abi.aiExch, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.dwExchStrength = abi.dwExchStrength
         return value
     }
@@ -13370,7 +13387,7 @@ extend SecPkgContext_Flags <: windows_core.CopyType & windows_core.RuntimeType &
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct SecPkgContext_IssuerListInfoEx {
-    public var aIssuers: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
+    public var aIssuers: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
     public var cIssuers: UInt32 = 0u32
     public init() {}
 }
@@ -13378,7 +13395,7 @@ public struct SecPkgContext_IssuerListInfoEx {
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct SecPkgContext_IssuerListInfoExAbi {
-    public var aIssuers: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOBAbi>()
+    public var aIssuers: CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi> = CPointer<Win32_impl_p0.CRYPT_INTEGER_BLOBAbi>()
     public var cIssuers: UInt32 = 0u32
     public init() {}
 }
@@ -15102,7 +15119,7 @@ extend SecPkgCred_SessionTicketKeys <: windows_core.CopyType & windows_core.Runt
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct SecPkgCred_SupportedAlgs {
     public var cSupportedAlgs: UInt32 = 0u32
-    public var palgSupportedAlgs: CPointer<Win32__impl_l0.ALG_IDAbi> = CPointer<Win32__impl_l0.ALG_IDAbi>()
+    public var palgSupportedAlgs: CPointer<Win32_impl_p0.ALG_IDAbi> = CPointer<Win32_impl_p0.ALG_IDAbi>()
     public init() {}
 }
 
@@ -15110,7 +15127,7 @@ public struct SecPkgCred_SupportedAlgs {
 @C
 public struct SecPkgCred_SupportedAlgsAbi {
     public var cSupportedAlgs: UInt32 = 0u32
-    public var palgSupportedAlgs: CPointer<Win32__impl_l0.ALG_IDAbi> = CPointer<Win32__impl_l0.ALG_IDAbi>()
+    public var palgSupportedAlgs: CPointer<Win32_impl_p0.ALG_IDAbi> = CPointer<Win32_impl_p0.ALG_IDAbi>()
     public init() {}
 }
 
@@ -15713,7 +15730,7 @@ public type SpValidateTargetInfoFn = CFunc<(CPointer<CPointer<Unit>>, CPointer<U
 public type SpVerifySignatureFn = CFunc<(UIntNative, CPointer<SecBufferDescAbi>, UInt32, CPointer<UInt32>) -> Int32>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type SslDeserializeCertificateStoreFn = CFunc<(Win32__impl_l0.CRYPT_INTEGER_BLOBAbi, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32>
+public type SslDeserializeCertificateStoreFn = CFunc<(Win32_impl_p0.CRYPT_INTEGER_BLOBAbi, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32>
 
 @When[Windows_Win32_Security_Authentication_Identity == "on"]
 public type SslGetExtensionsFn = CFunc<(CPointer<UInt8>, UInt32, CPointer<SCH_EXTENSION_DATAAbi>, UInt8, CPointer<UInt32>, SchGetExtensionsOptionsAbi) -> Int32>
@@ -17201,7 +17218,7 @@ public type VERIFY_SIGNATURE_FN = CFunc<(CPointer<Win32_Security_Credentials.Sec
 public struct X509Certificate {
     public var Version: UInt32 = 0u32
     public var SerialNumber: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
-    public var SignatureAlgorithm: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var SignatureAlgorithm: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var ValidFrom: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
     public var ValidUntil: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
     public var pszIssuer: CPointer<UInt8> = CPointer<UInt8>()
@@ -17215,7 +17232,7 @@ public struct X509Certificate {
 public struct X509CertificateAbi {
     public var Version: UInt32 = 0u32
     public var SerialNumber: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
-    public var SignatureAlgorithm: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var SignatureAlgorithm: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var ValidFrom: Win32_Foundation.FILETIMEAbi = Win32_Foundation.FILETIMEAbi()
     public var ValidUntil: Win32_Foundation.FILETIMEAbi = Win32_Foundation.FILETIMEAbi()
     public var pszIssuer: CPointer<UInt8> = CPointer<UInt8>()
@@ -17233,7 +17250,7 @@ extend X509Certificate <: windows_core.CopyType & windows_core.RuntimeType & win
         var abi = X509CertificateAbi()
         abi.Version = value.Version
         abi.SerialNumber = value.SerialNumber
-        abi.SignatureAlgorithm = windows_core.projectTypedAbi(value.SignatureAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.SignatureAlgorithm = windows_core.projectTypedAbi(value.SignatureAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.ValidFrom = windows_core.projectTypedAbi(value.ValidFrom, windows_core.typeMarker<Win32_Foundation.FILETIME>())
         abi.ValidUntil = windows_core.projectTypedAbi(value.ValidUntil, windows_core.typeMarker<Win32_Foundation.FILETIME>())
         abi.pszIssuer = value.pszIssuer
@@ -17245,7 +17262,7 @@ extend X509Certificate <: windows_core.CopyType & windows_core.RuntimeType & win
         var value = X509Certificate()
         value.Version = abi.Version
         value.SerialNumber = abi.SerialNumber
-        value.SignatureAlgorithm = windows_core.fromTypedAbi(abi.SignatureAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.SignatureAlgorithm = windows_core.fromTypedAbi(abi.SignatureAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.ValidFrom = windows_core.fromTypedAbi(abi.ValidFrom, windows_core.typeMarker<Win32_Foundation.FILETIME>()).unwrap()
         value.ValidUntil = windows_core.fromTypedAbi(abi.ValidUntil, windows_core.typeMarker<Win32_Foundation.FILETIME>()).unwrap()
         value.pszIssuer = abi.pszIssuer
@@ -21443,12 +21460,12 @@ extend SCHANNEL_ALERT_TOKEN <: windows_core.CopyType & windows_core.RuntimeType 
 public struct SCHANNEL_CRED {
     public var dwVersion: UInt32 = 0u32
     public var cCreds: UInt32 = 0u32
-    public var paCred: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
-    public var hRootStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var paCred: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
+    public var hRootStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var cMappers: UInt32 = 0u32
     public var aphMappers: CPointer<CPointer<_HMAPPER>> = CPointer<CPointer<_HMAPPER>>()
     public var cSupportedAlgs: UInt32 = 0u32
-    public var palgSupportedAlgs: CPointer<Win32__impl_l0.ALG_IDAbi> = CPointer<Win32__impl_l0.ALG_IDAbi>()
+    public var palgSupportedAlgs: CPointer<Win32_impl_p0.ALG_IDAbi> = CPointer<Win32_impl_p0.ALG_IDAbi>()
     public var grbitEnabledProtocols: UInt32 = 0u32
     public var dwMinimumCipherStrength: UInt32 = 0u32
     public var dwMaximumCipherStrength: UInt32 = 0u32
@@ -21463,12 +21480,12 @@ public struct SCHANNEL_CRED {
 public struct SCHANNEL_CREDAbi {
     public var dwVersion: UInt32 = 0u32
     public var cCreds: UInt32 = 0u32
-    public var paCred: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
-    public var hRootStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var paCred: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
+    public var hRootStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var cMappers: UInt32 = 0u32
     public var aphMappers: CPointer<CPointer<_HMAPPER>> = CPointer<CPointer<_HMAPPER>>()
     public var cSupportedAlgs: UInt32 = 0u32
-    public var palgSupportedAlgs: CPointer<Win32__impl_l0.ALG_IDAbi> = CPointer<Win32__impl_l0.ALG_IDAbi>()
+    public var palgSupportedAlgs: CPointer<Win32_impl_p0.ALG_IDAbi> = CPointer<Win32_impl_p0.ALG_IDAbi>()
     public var grbitEnabledProtocols: UInt32 = 0u32
     public var dwMinimumCipherStrength: UInt32 = 0u32
     public var dwMaximumCipherStrength: UInt32 = 0u32
@@ -23868,8 +23885,8 @@ public struct SCH_CREDENTIALS {
     public var dwVersion: UInt32 = 0u32
     public var dwCredFormat: UInt32 = 0u32
     public var cCreds: UInt32 = 0u32
-    public var paCred: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
-    public var hRootStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var paCred: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
+    public var hRootStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var cMappers: UInt32 = 0u32
     public var aphMappers: CPointer<CPointer<_HMAPPER>> = CPointer<CPointer<_HMAPPER>>()
     public var dwSessionLifespan: UInt32 = 0u32
@@ -23885,8 +23902,8 @@ public struct SCH_CREDENTIALSAbi {
     public var dwVersion: UInt32 = 0u32
     public var dwCredFormat: UInt32 = 0u32
     public var cCreds: UInt32 = 0u32
-    public var paCred: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
-    public var hRootStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var paCred: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
+    public var hRootStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var cMappers: UInt32 = 0u32
     public var aphMappers: CPointer<CPointer<_HMAPPER>> = CPointer<CPointer<_HMAPPER>>()
     public var dwSessionLifespan: UInt32 = 0u32
@@ -24425,9 +24442,9 @@ public struct LSA_SECPKG_FUNCTION_TABLE {
     public var UnloadPackage: PLSA_UNLOAD_PACKAGE = CFunc<() -> Int32>(CPointer<Unit>())
     public var DuplicateHandle: PLSA_DUPLICATE_HANDLE = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
     public var SaveSupplementalCredentials: PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, UInt32, CPointer<Unit>, UInt8) -> Int32>(CPointer<Unit>())
-    public var CreateThread: PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var CreateThread: PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(CPointer<Unit>())
     public var GetClientInfo: PLSA_GET_CLIENT_INFO = CFunc<(CPointer<SECPKG_CLIENT_INFOAbi>) -> Int32>(CPointer<Unit>())
-    public var RegisterNotification: PLSA_REGISTER_NOTIFICATION = CFunc<(Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var RegisterNotification: PLSA_REGISTER_NOTIFICATION = CFunc<(Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
     public var CancelNotification: PLSA_CANCEL_NOTIFICATION = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var MapBuffer: PLSA_MAP_BUFFER = CFunc<(CPointer<SecBufferAbi>, CPointer<SecBufferAbi>) -> Int32>(CPointer<Unit>())
     public var CreateToken: PLSA_CREATE_TOKEN = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, CPointer<Win32_Security.TOKEN_SOURCEAbi>, SECURITY_LOGON_TYPEAbi, Win32_Security.SECURITY_IMPERSONATION_LEVELAbi, LSA_TOKEN_INFORMATION_TYPEAbi, CPointer<Unit>, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
@@ -24497,9 +24514,9 @@ public struct LSA_SECPKG_FUNCTION_TABLEAbi {
     public var UnloadPackage: PLSA_UNLOAD_PACKAGE = CFunc<() -> Int32>(CPointer<Unit>())
     public var DuplicateHandle: PLSA_DUPLICATE_HANDLE = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
     public var SaveSupplementalCredentials: PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, UInt32, CPointer<Unit>, UInt8) -> Int32>(CPointer<Unit>())
-    public var CreateThread: PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var CreateThread: PLSA_CREATE_THREAD = CFunc<(CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, UInt32, Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(CPointer<Unit>())
     public var GetClientInfo: PLSA_GET_CLIENT_INFO = CFunc<(CPointer<SECPKG_CLIENT_INFOAbi>) -> Int32>(CPointer<Unit>())
-    public var RegisterNotification: PLSA_REGISTER_NOTIFICATION = CFunc<(Win32__impl_l0.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var RegisterNotification: PLSA_REGISTER_NOTIFICATION = CFunc<(Win32_impl_p1.LPTHREAD_START_ROUTINE, CPointer<Unit>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
     public var CancelNotification: PLSA_CANCEL_NOTIFICATION = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var MapBuffer: PLSA_MAP_BUFFER = CFunc<(CPointer<SecBufferAbi>, CPointer<SecBufferAbi>) -> Int32>(CPointer<Unit>())
     public var CreateToken: PLSA_CREATE_TOKEN = CFunc<(CPointer<Win32_Foundation.LUIDAbi>, CPointer<Win32_Security.TOKEN_SOURCEAbi>, SECURITY_LOGON_TYPEAbi, Win32_Security.SECURITY_IMPERSONATION_LEVELAbi, LSA_TOKEN_INFORMATION_TYPEAbi, CPointer<Unit>, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<LSA_UNICODE_STRINGAbi>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
@@ -25376,11 +25393,11 @@ public unsafe func Windows_SslCrackCertificate(pbCertificate: CPointer<UInt8>, c
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && SCHANNEL == "on" && Windows_Win32_Security_Authentication_Identity_SslDeserializeCertificateStore == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func SslDeserializeCertificateStore(SerializedCertificateStore: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi, ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32
+    func SslDeserializeCertificateStore(SerializedCertificateStore: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi, ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32
 }
 
 @When[Windows_Win32_Security_Authentication_Identity == "on" && SCHANNEL == "on" && Windows_Win32_Security_Authentication_Identity_SslDeserializeCertificateStore == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_SslDeserializeCertificateStore(SerializedCertificateStore: Win32__impl_l0.CRYPT_INTEGER_BLOBAbi, ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+public unsafe func Windows_SslDeserializeCertificateStore(SerializedCertificateStore: Win32_impl_p0.CRYPT_INTEGER_BLOBAbi, ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
     return SslDeserializeCertificateStore(SerializedCertificateStore, ppCertContext)
 }
 

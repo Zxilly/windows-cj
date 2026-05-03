@@ -4,18 +4,31 @@
 package windows.Graphics.Printing3D
 
 import std.collection.*
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Printing3D == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Printing3D == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Printing3D == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Graphics_Printing3D == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_future as windows_future
+@When[Windows_Graphics_Printing3D == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -771,7 +784,7 @@ public class IPrinting3DTextureResource <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrinting3DTextureResource", IPrinting3DTextureResource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3DTextureResourceVtbl", "IPrinting3DTextureResource", "IPrinting3DTextureResource_Impl", [InterfaceMethodSchema("TextureData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextureData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Name", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetName", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrinting3DTextureResource", IPrinting3DTextureResource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3DTextureResourceVtbl", "IPrinting3DTextureResource", "IPrinting3DTextureResource_Impl", [InterfaceMethodSchema("TextureData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextureData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Name", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetName", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPrinting3DTextureResource.runtimeType())
         return schema
     }
@@ -801,16 +814,16 @@ public class IPrinting3DTextureResource <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TextureData(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func TextureData(): impl_p1.IRandomAccessStreamWithContentType {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TextureData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetTextureData(value: _impl_l1.IRandomAccessStreamWithContentType): Unit {
+    public unsafe func SetTextureData(value: impl_p1.IRandomAccessStreamWithContentType): Unit {
         let v = vtbl()
         let hr = v.SetTextureData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1981,12 +1994,12 @@ public class Printing3DTextureResource <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TextureData(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func TextureData(): impl_p1.IRandomAccessStreamWithContentType {
         return defaultInterface().TextureData()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetTextureData(value: _impl_l1.IRandomAccessStreamWithContentType): Unit {
+    public unsafe func SetTextureData(value: impl_p1.IRandomAccessStreamWithContentType): Unit {
         defaultInterface().SetTextureData(value)
     }
 
@@ -3462,7 +3475,7 @@ public class IPrinting3DMesh <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrinting3DMesh", IPrinting3DMesh.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3DMeshVtbl", "IPrinting3DMesh", "IPrinting3DMesh_Impl", [InterfaceMethodSchema("VertexCount", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexCount", 7, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IndexCount", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIndexCount", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VertexPositionsDescription", 10, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexPositionsDescription", 11, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VertexNormalsDescription", 12, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexNormalsDescription", 13, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TriangleIndicesDescription", 14, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTriangleIndicesDescription", 15, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TriangleMaterialIndicesDescription", 16, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTriangleMaterialIndicesDescription", 17, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVertexPositions", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateVertexPositions", 19, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVertexNormals", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateVertexNormals", 21, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTriangleIndices", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTriangleIndices", 23, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTriangleMaterialIndices", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTriangleMaterialIndices", 25, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BufferDescriptionSet", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BufferSet", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VerifyAsync", 28, [InterfaceParameterSchema("value", "Printing3DMeshVerificationModeAbi", "Printing3DMeshVerificationMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3DMeshVerificationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrinting3DMesh", IPrinting3DMesh.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3DMeshVtbl", "IPrinting3DMesh", "IPrinting3DMesh_Impl", [InterfaceMethodSchema("VertexCount", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexCount", 7, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IndexCount", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIndexCount", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VertexPositionsDescription", 10, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexPositionsDescription", 11, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("VertexNormalsDescription", 12, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetVertexNormalsDescription", 13, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TriangleIndicesDescription", 14, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTriangleIndicesDescription", 15, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TriangleMaterialIndicesDescription", 16, [InterfaceParameterSchema("result", "CPointer<Printing3DBufferDescriptionAbi>", "OutSlot<Printing3DBufferDescription>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTriangleMaterialIndicesDescription", 17, [InterfaceParameterSchema("value", "Printing3DBufferDescriptionAbi", "Printing3DBufferDescription", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVertexPositions", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateVertexPositions", 19, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVertexNormals", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateVertexNormals", 21, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTriangleIndices", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTriangleIndices", 23, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTriangleMaterialIndices", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTriangleMaterialIndices", 25, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BufferDescriptionSet", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BufferSet", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VerifyAsync", 28, [InterfaceParameterSchema("value", "Printing3DMeshVerificationModeAbi", "Printing3DMeshVerificationMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3DMeshVerificationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrinting3DMesh.runtimeType())
         return schema
     }
@@ -3576,12 +3589,12 @@ public class IPrinting3DMesh <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetVertexPositions(): _impl_l0.IBuffer {
+    public unsafe func GetVertexPositions(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetVertexPositions(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CreateVertexPositions(value: UInt32): Unit {
@@ -3591,12 +3604,12 @@ public class IPrinting3DMesh <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetVertexNormals(): _impl_l0.IBuffer {
+    public unsafe func GetVertexNormals(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetVertexNormals(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CreateVertexNormals(value: UInt32): Unit {
@@ -3606,12 +3619,12 @@ public class IPrinting3DMesh <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetTriangleIndices(): _impl_l0.IBuffer {
+    public unsafe func GetTriangleIndices(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetTriangleIndices(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CreateTriangleIndices(value: UInt32): Unit {
@@ -3621,12 +3634,12 @@ public class IPrinting3DMesh <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetTriangleMaterialIndices(): _impl_l0.IBuffer {
+    public unsafe func GetTriangleMaterialIndices(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetTriangleMaterialIndices(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func CreateTriangleMaterialIndices(value: UInt32): Unit {
@@ -4010,7 +4023,7 @@ public class Printing3DMesh <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetVertexPositions(): _impl_l0.IBuffer {
+    public unsafe func GetVertexPositions(): impl_p0.IBuffer {
         return defaultInterface().GetVertexPositions()
     }
 
@@ -4019,7 +4032,7 @@ public class Printing3DMesh <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetVertexNormals(): _impl_l0.IBuffer {
+    public unsafe func GetVertexNormals(): impl_p0.IBuffer {
         return defaultInterface().GetVertexNormals()
     }
 
@@ -4028,7 +4041,7 @@ public class Printing3DMesh <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetTriangleIndices(): _impl_l0.IBuffer {
+    public unsafe func GetTriangleIndices(): impl_p0.IBuffer {
         return defaultInterface().GetTriangleIndices()
     }
 
@@ -4037,7 +4050,7 @@ public class Printing3DMesh <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetTriangleMaterialIndices(): _impl_l0.IBuffer {
+    public unsafe func GetTriangleMaterialIndices(): impl_p0.IBuffer {
         return defaultInterface().GetTriangleMaterialIndices()
     }
 
@@ -5030,7 +5043,7 @@ public class IPrinting3D3MFPackage <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrinting3D3MFPackage", IPrinting3D3MFPackage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3D3MFPackageVtbl", "IPrinting3D3MFPackage", "IPrinting3D3MFPackage_Impl", [InterfaceMethodSchema("SaveAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrintTicket", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrintTicket", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ModelPart", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetModelPart", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Thumbnail", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Printing3DTextureResource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Printing3DTextureResource>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Textures", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Printing3DTextureResource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadModelFromPackageAsync", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3DModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveModelToPackageAsync", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Printing3DModel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrinting3D3MFPackage", IPrinting3D3MFPackage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3D3MFPackageVtbl", "IPrinting3D3MFPackage", "IPrinting3D3MFPackage_Impl", [InterfaceMethodSchema("SaveAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrintTicket", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrintTicket", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ModelPart", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetModelPart", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Thumbnail", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Printing3DTextureResource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Printing3DTextureResource>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Textures", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<Printing3DTextureResource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadModelFromPackageAsync", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3DModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveModelToPackageAsync", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Printing3DModel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrinting3D3MFPackage.runtimeType())
         return schema
     }
@@ -5060,41 +5073,41 @@ public class IPrinting3D3MFPackage <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream> {
+    public unsafe func SaveAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.IRandomAccessStream>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PrintTicket(): _impl_l1.IRandomAccessStream {
+    public unsafe func PrintTicket(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PrintTicket(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPrintTicket(value: _impl_l1.IRandomAccessStream): Unit {
+    public unsafe func SetPrintTicket(value: impl_p1.IRandomAccessStream): Unit {
         let v = vtbl()
         let hr = v.SetPrintTicket(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ModelPart(): _impl_l1.IRandomAccessStream {
+    public unsafe func ModelPart(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ModelPart(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetModelPart(value: _impl_l1.IRandomAccessStream): Unit {
+    public unsafe func SetModelPart(value: impl_p1.IRandomAccessStream): Unit {
         let v = vtbl()
         let hr = v.SetModelPart(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -5124,7 +5137,7 @@ public class IPrinting3D3MFPackage <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadModelFromPackageAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3DModel> {
+    public unsafe func LoadModelFromPackageAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3DModel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadModelFromPackageAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5191,7 +5204,7 @@ public class IPrinting3D3MFPackageStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrinting3D3MFPackageStatics", IPrinting3D3MFPackageStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3D3MFPackageStaticsVtbl", "IPrinting3D3MFPackageStatics", "IPrinting3D3MFPackageStatics_Impl", [InterfaceMethodSchema("LoadAsync", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3D3MFPackage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrinting3D3MFPackageStatics", IPrinting3D3MFPackageStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrinting3D3MFPackageStaticsVtbl", "IPrinting3D3MFPackageStatics", "IPrinting3D3MFPackageStatics_Impl", [InterfaceMethodSchema("LoadAsync", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Printing3D3MFPackage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrinting3D3MFPackageStatics.runtimeType())
         return schema
     }
@@ -5221,7 +5234,7 @@ public class IPrinting3D3MFPackageStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3D3MFPackage> {
+    public unsafe func LoadAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3D3MFPackage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7078,19 +7091,15 @@ public class Print3DTaskSourceRequestedHandler <: InterfaceWrapperBase & ComInte
 extend Print3DTaskSourceRequestedHandler <: windows_core.Interface<Print3DTaskSourceRequestedHandler> {}
 
 @When[Windows_Graphics_Printing3D == "on"]
-private open class Print3DTaskSourceRequestedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface Print3DTaskSourceRequestedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Graphics_Printing3D == "on"]
-private open class Print3DTaskSourceRequestedHandlerInvoker <: Print3DTaskSourceRequestedHandlerInvokerErased {
-    public open func Invoke(args: InParam<Print3DTaskSourceRequestedArgs>): Unit {
-        ()
-    }
+private interface Print3DTaskSourceRequestedHandlerInvoker <: Print3DTaskSourceRequestedHandlerInvokerErased {
+    public func Invoke(args: InParam<Print3DTaskSourceRequestedArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<Print3DTaskSourceRequestedArgs>(Print3DTaskSourceRequestedArgs.viewOf(arg0)))
         return S_OK.value
     }
@@ -7110,7 +7119,7 @@ private class Print3DTaskSourceRequestedHandlerBox <: Print3DTaskSourceRequested
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(args: InParam<Print3DTaskSourceRequestedArgs>): Unit {
+    public func Invoke(args: InParam<Print3DTaskSourceRequestedArgs>): Unit {
         invoke_(args)
     }
 }
@@ -7211,27 +7220,27 @@ public class Printing3D3MFPackage <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream> {
+    public unsafe func SaveAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStream> {
         return defaultInterface().SaveAsync()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PrintTicket(): _impl_l1.IRandomAccessStream {
+    public unsafe func PrintTicket(): impl_p1.IRandomAccessStream {
         return defaultInterface().PrintTicket()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPrintTicket(value: _impl_l1.IRandomAccessStream): Unit {
+    public unsafe func SetPrintTicket(value: impl_p1.IRandomAccessStream): Unit {
         defaultInterface().SetPrintTicket(value)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ModelPart(): _impl_l1.IRandomAccessStream {
+    public unsafe func ModelPart(): impl_p1.IRandomAccessStream {
         return defaultInterface().ModelPart()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetModelPart(value: _impl_l1.IRandomAccessStream): Unit {
+    public unsafe func SetModelPart(value: impl_p1.IRandomAccessStream): Unit {
         defaultInterface().SetModelPart(value)
     }
 
@@ -7249,7 +7258,7 @@ public class Printing3D3MFPackage <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadModelFromPackageAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3DModel> {
+    public unsafe func LoadModelFromPackageAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3DModel> {
         return defaultInterface().LoadModelFromPackageAsync(value)
     }
 
@@ -7258,7 +7267,7 @@ public class Printing3D3MFPackage <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3D3MFPackage> {
+    public static unsafe func LoadAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<Printing3D3MFPackage> {
         var result__: Option<windows_future.IAsyncOperation<Printing3D3MFPackage>> = Option<windows_future.IAsyncOperation<Printing3D3MFPackage>>.None
         try (factory__ = windows_core.factory<Printing3D3MFPackage, IPrinting3D3MFPackageStatics>().unwrap()) {
             result__ = Some(factory__.LoadAsync(value))

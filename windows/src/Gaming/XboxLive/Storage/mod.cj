@@ -4,15 +4,25 @@
 package windows.Gaming.XboxLive.Storage
 
 import std.collection.*
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Gaming_XboxLive_Storage == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Gaming_XboxLive_Storage == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_collections as windows_collections
+@When[Windows_Gaming_XboxLive_Storage == "on"]
 import windows_future as windows_future
 
 
@@ -157,7 +167,7 @@ public class IGameSaveBlobGetResult <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameSaveBlobGetResult", IGameSaveBlobGetResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveBlobGetResultVtbl", "IGameSaveBlobGetResult", "IGameSaveBlobGetResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<GameSaveErrorStatusAbi>", "OutSlot<GameSaveErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Value", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameSaveBlobGetResult", IGameSaveBlobGetResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveBlobGetResultVtbl", "IGameSaveBlobGetResult", "IGameSaveBlobGetResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<GameSaveErrorStatusAbi>", "OutSlot<GameSaveErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Value", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameSaveBlobGetResult.runtimeType())
         return schema
     }
@@ -195,12 +205,12 @@ public class IGameSaveBlobGetResult <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Value(): windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer> {
+    public unsafe func Value(): windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>.fromAbiTake(result__)
     }
 }
 
@@ -581,7 +591,7 @@ public class GameSaveBlobGetResult <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Value(): windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer> {
+    public unsafe func Value(): windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer> {
         return defaultInterface().Value()
     }
 }
@@ -1774,12 +1784,12 @@ public class GameSaveContainer <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
+    public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
         return defaultInterface().SubmitUpdatesAsync(blobsToWrite, blobsToDelete, displayName)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
+    public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
         return defaultInterface().ReadAsync(blobsToRead)
     }
 
@@ -1886,7 +1896,7 @@ public class GameSaveProvider <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -1916,7 +1926,7 @@ public class GameSaveProvider <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUserAsync(user: _impl_l1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
+    public static unsafe func GetForUserAsync(user: impl_p1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
         var result__: Option<windows_future.IAsyncOperation<GameSaveProviderGetResult>> = Option<windows_future.IAsyncOperation<GameSaveProviderGetResult>>.None
         try (factory__ = windows_core.factory<GameSaveProvider, IGameSaveProviderStatics>().unwrap()) {
             result__ = Some(factory__.GetForUserAsync(user, serviceConfigId))
@@ -1928,7 +1938,7 @@ public class GameSaveProvider <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetSyncOnDemandForUserAsync(user: _impl_l1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
+    public static unsafe func GetSyncOnDemandForUserAsync(user: impl_p1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
         var result__: Option<windows_future.IAsyncOperation<GameSaveProviderGetResult>> = Option<windows_future.IAsyncOperation<GameSaveProviderGetResult>>.None
         try (factory__ = windows_core.factory<GameSaveProvider, IGameSaveProviderStatics>().unwrap()) {
             result__ = Some(factory__.GetSyncOnDemandForUserAsync(user, serviceConfigId))
@@ -2116,7 +2126,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameSaveContainer", IGameSaveContainer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveContainerVtbl", "IGameSaveContainer", "IGameSaveContainer_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Provider", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitUpdatesAsync", 8, [InterfaceParameterSchema("blobsToWrite", "CPointer<Unit>", "InParam<windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("blobsToDelete", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadAsync", 9, [InterfaceParameterSchema("blobsToRead", "CPointer<Unit>", "InParam<windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAsync", 10, [InterfaceParameterSchema("blobsToRead", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveBlobGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPropertySetUpdatesAsync", 11, [InterfaceParameterSchema("blobsToWrite", "CPointer<Unit>", "InParam<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("blobsToDelete", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateBlobInfoQuery", 12, [InterfaceParameterSchema("blobNamePrefix", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveBlobInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameSaveContainer", IGameSaveContainer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveContainerVtbl", "IGameSaveContainer", "IGameSaveContainer_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Provider", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitUpdatesAsync", 8, [InterfaceParameterSchema("blobsToWrite", "CPointer<Unit>", "InParam<windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("blobsToDelete", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadAsync", 9, [InterfaceParameterSchema("blobsToRead", "CPointer<Unit>", "InParam<windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAsync", 10, [InterfaceParameterSchema("blobsToRead", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveBlobGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SubmitPropertySetUpdatesAsync", 11, [InterfaceParameterSchema("blobsToWrite", "CPointer<Unit>", "InParam<windows_collections.IPropertySet>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("blobsToDelete", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateBlobInfoQuery", 12, [InterfaceParameterSchema("blobNamePrefix", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveBlobInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameSaveContainer.runtimeType())
         return schema
     }
@@ -2162,7 +2172,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
+    public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SubmitUpdatesAsync(asRaw(), blobsToWrite.asRaw(), blobsToDelete.asRaw(), displayName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2171,7 +2181,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
+    public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, impl_p0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReadAsync(asRaw(), blobsToRead.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2265,7 +2275,7 @@ public class IGameSaveProvider <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameSaveProvider", IGameSaveProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveProviderVtbl", "IGameSaveProvider", "IGameSaveProvider_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainer", 7, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteContainerAsync", 8, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainerInfoQuery", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainerInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainerInfoQueryWithName", 10, [InterfaceParameterSchema("containerNamePrefix", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainerInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRemainingBytesInQuotaAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Int64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContainersChangedSinceLastSync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameSaveProvider", IGameSaveProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveProviderVtbl", "IGameSaveProvider", "IGameSaveProvider_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainer", 7, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteContainerAsync", 8, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveOperationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainerInfoQuery", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainerInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateContainerInfoQueryWithName", 10, [InterfaceParameterSchema("containerNamePrefix", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameSaveContainerInfoQuery>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRemainingBytesInQuotaAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Int64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContainersChangedSinceLastSync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameSaveProvider.runtimeType())
         return schema
     }
@@ -2295,12 +2305,12 @@ public class IGameSaveProvider <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     public unsafe func CreateContainer(name: windows_core.HString): GameSaveContainer {
@@ -2501,7 +2511,7 @@ public class IGameSaveProviderStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameSaveProviderStatics", IGameSaveProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveProviderStaticsVtbl", "IGameSaveProviderStatics", "IGameSaveProviderStatics_Impl", [InterfaceMethodSchema("GetForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceConfigId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveProviderGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSyncOnDemandForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceConfigId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveProviderGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameSaveProviderStatics", IGameSaveProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameSaveProviderStaticsVtbl", "IGameSaveProviderStatics", "IGameSaveProviderStatics_Impl", [InterfaceMethodSchema("GetForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceConfigId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveProviderGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSyncOnDemandForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceConfigId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<GameSaveProviderGetResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameSaveProviderStatics.runtimeType())
         return schema
     }
@@ -2531,7 +2541,7 @@ public class IGameSaveProviderStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUserAsync(user: _impl_l1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
+    public unsafe func GetForUserAsync(user: impl_p1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUserAsync(asRaw(), user.asRaw(), serviceConfigId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2540,7 +2550,7 @@ public class IGameSaveProviderStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetSyncOnDemandForUserAsync(user: _impl_l1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
+    public unsafe func GetSyncOnDemandForUserAsync(user: impl_p1.User, serviceConfigId: windows_core.HString): windows_future.IAsyncOperation<GameSaveProviderGetResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetSyncOnDemandForUserAsync(asRaw(), user.asRaw(), serviceConfigId.asRaw(), CPointer<CPointer<Unit>>(inout result__))

@@ -4,15 +4,25 @@
 package windows.System.Preview
 
 import std.collection.*
+@When[Windows_System_Preview == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_System_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Preview == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_System_Preview == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_System_Preview == "on"]
 import windows_collections as windows_collections
+@When[Windows_System_Preview == "on"]
 import windows_future as windows_future
 
 
@@ -89,12 +99,12 @@ public struct ITwoPanelHingedDevicePosturePreviewReadingVtbl {
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_HingeState: CFunc<(CPointer<Unit>, CPointer<HingeStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sensors == "on"]
-    public var Panel1Orientation: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SimpleOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Panel1Orientation: CFunc<(CPointer<Unit>, CPointer<impl_p0.SimpleOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sensors != "on"]
     public var Panel1Orientation: UIntNative = UIntNative(0)
     public var Panel1Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sensors == "on"]
-    public var Panel2Orientation: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SimpleOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Panel2Orientation: CFunc<(CPointer<Unit>, CPointer<impl_p0.SimpleOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Sensors != "on"]
     public var Panel2Orientation: UIntNative = UIntNative(0)
     public var Panel2Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -137,7 +147,7 @@ public class ITwoPanelHingedDevicePosturePreviewReading <: InterfaceWrapperBase 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITwoPanelHingedDevicePosturePreviewReading", ITwoPanelHingedDevicePosturePreviewReading.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITwoPanelHingedDevicePosturePreviewReadingVtbl", "ITwoPanelHingedDevicePosturePreviewReading", "ITwoPanelHingedDevicePosturePreviewReading_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_HingeState", 7, [InterfaceParameterSchema("result", "CPointer<HingeStateAbi>", "OutSlot<HingeState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel1Orientation", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.SimpleOrientationAbi>", "OutSlot<_impl_l0.SimpleOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel1Id", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel2Orientation", 10, [InterfaceParameterSchema("result", "CPointer<_impl_l0.SimpleOrientationAbi>", "OutSlot<_impl_l0.SimpleOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel2Id", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITwoPanelHingedDevicePosturePreviewReading", ITwoPanelHingedDevicePosturePreviewReading.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITwoPanelHingedDevicePosturePreviewReadingVtbl", "ITwoPanelHingedDevicePosturePreviewReading", "ITwoPanelHingedDevicePosturePreviewReading_Impl", [InterfaceMethodSchema("Timestamp", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_HingeState", 7, [InterfaceParameterSchema("result", "CPointer<HingeStateAbi>", "OutSlot<HingeState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel1Orientation", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.SimpleOrientationAbi>", "OutSlot<impl_p0.SimpleOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel1Id", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel2Orientation", 10, [InterfaceParameterSchema("result", "CPointer<impl_p0.SimpleOrientationAbi>", "OutSlot<impl_p0.SimpleOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Panel2Id", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITwoPanelHingedDevicePosturePreviewReading.runtimeType())
         return schema
     }
@@ -183,12 +193,12 @@ public class ITwoPanelHingedDevicePosturePreviewReading <: InterfaceWrapperBase 
     }
 
     @When[Windows_Devices_Sensors == "on"]
-    public unsafe func Panel1Orientation(): _impl_l0.SimpleOrientation {
+    public unsafe func Panel1Orientation(): impl_p0.SimpleOrientation {
         let v = vtbl()
-        var result__ = _impl_l0.SimpleOrientationAbi()
-        let hr = v.Panel1Orientation(asRaw(), CPointer<_impl_l0.SimpleOrientationAbi>(inout result__))
+        var result__ = impl_p0.SimpleOrientationAbi()
+        let hr = v.Panel1Orientation(asRaw(), CPointer<impl_p0.SimpleOrientationAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SimpleOrientation>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.SimpleOrientation>()).unwrap()
     }
 
     public unsafe func Panel1Id(): windows_core.HString {
@@ -200,12 +210,12 @@ public class ITwoPanelHingedDevicePosturePreviewReading <: InterfaceWrapperBase 
     }
 
     @When[Windows_Devices_Sensors == "on"]
-    public unsafe func Panel2Orientation(): _impl_l0.SimpleOrientation {
+    public unsafe func Panel2Orientation(): impl_p0.SimpleOrientation {
         let v = vtbl()
-        var result__ = _impl_l0.SimpleOrientationAbi()
-        let hr = v.Panel2Orientation(asRaw(), CPointer<_impl_l0.SimpleOrientationAbi>(inout result__))
+        var result__ = impl_p0.SimpleOrientationAbi()
+        let hr = v.Panel2Orientation(asRaw(), CPointer<impl_p0.SimpleOrientationAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SimpleOrientation>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.SimpleOrientation>()).unwrap()
     }
 
     public unsafe func Panel2Id(): windows_core.HString {
@@ -298,7 +308,7 @@ public class TwoPanelHingedDevicePosturePreviewReading <: InterfaceWrapperBase &
     }
 
     @When[Windows_Devices_Sensors == "on"]
-    public unsafe func Panel1Orientation(): _impl_l0.SimpleOrientation {
+    public unsafe func Panel1Orientation(): impl_p0.SimpleOrientation {
         return defaultInterface().Panel1Orientation()
     }
 
@@ -307,7 +317,7 @@ public class TwoPanelHingedDevicePosturePreviewReading <: InterfaceWrapperBase &
     }
 
     @When[Windows_Devices_Sensors == "on"]
-    public unsafe func Panel2Orientation(): _impl_l0.SimpleOrientation {
+    public unsafe func Panel2Orientation(): impl_p0.SimpleOrientation {
         return defaultInterface().Panel2Orientation()
     }
 

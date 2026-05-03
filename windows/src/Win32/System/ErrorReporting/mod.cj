@@ -4,14 +4,20 @@
 package windows.Win32.System.ErrorReporting
 
 import std.collection.*
+@When[Windows_Win32_System_ErrorReporting == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_ErrorReporting == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_ErrorReporting == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_ErrorReporting == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_ErrorReporting == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_ErrorReporting == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_ErrorReporting == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
@@ -548,7 +554,7 @@ extend WER_DUMP_TYPE <: windows_core.CopyType & windows_core.RuntimeType & windo
 
 @When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 public struct WER_EXCEPTION_INFORMATION {
-    public var pExceptionPointers: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi> = CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>()
+    public var pExceptionPointers: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi> = CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>()
     public var bClientPointers: Int32 = 0i32
     public init() {}
 }
@@ -556,7 +562,7 @@ public struct WER_EXCEPTION_INFORMATION {
 @When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 @C
 public struct WER_EXCEPTION_INFORMATIONAbi {
-    public var pExceptionPointers: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi> = CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>()
+    public var pExceptionPointers: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi> = CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>()
     public var bClientPointers: Int32 = 0i32
     public init() {}
 }
@@ -1315,8 +1321,8 @@ public struct WER_RUNTIME_EXCEPTION_INFORMATION {
     public var dwSize: UInt32 = 0u32
     public var hProcess: CPointer<Unit> = CPointer<Unit>()
     public var hThread: CPointer<Unit> = CPointer<Unit>()
-    public var exceptionRecord: Win32__impl_l0.EXCEPTION_RECORD = Win32__impl_l0.EXCEPTION_RECORD()
-    public var context: Win32__impl_l1.CONTEXT = Win32__impl_l1.CONTEXT()
+    public var exceptionRecord: Win32_impl_p0.EXCEPTION_RECORD = Win32_impl_p0.EXCEPTION_RECORD()
+    public var context: Win32_impl_p2.CONTEXT = Win32_impl_p2.CONTEXT()
     public var pwszReportId: CPointer<UInt16> = CPointer<UInt16>()
     public var bIsFatal: Int32 = 0i32
     public var dwReserved: UInt32 = 0u32
@@ -1329,8 +1335,8 @@ public struct WER_RUNTIME_EXCEPTION_INFORMATIONAbi {
     public var dwSize: UInt32 = 0u32
     public var hProcess: CPointer<Unit> = CPointer<Unit>()
     public var hThread: CPointer<Unit> = CPointer<Unit>()
-    public var exceptionRecord: Win32__impl_l0.EXCEPTION_RECORDAbi = Win32__impl_l0.EXCEPTION_RECORDAbi()
-    public var context: Win32__impl_l1.CONTEXTAbi = Win32__impl_l1.CONTEXTAbi()
+    public var exceptionRecord: Win32_impl_p0.EXCEPTION_RECORDAbi = Win32_impl_p0.EXCEPTION_RECORDAbi()
+    public var context: Win32_impl_p2.CONTEXTAbi = Win32_impl_p2.CONTEXTAbi()
     public var pwszReportId: CPointer<UInt16> = CPointer<UInt16>()
     public var bIsFatal: Int32 = 0i32
     public var dwReserved: UInt32 = 0u32
@@ -1347,8 +1353,8 @@ extend WER_RUNTIME_EXCEPTION_INFORMATION <: windows_core.CopyType & windows_core
         abi.dwSize = value.dwSize
         abi.hProcess = value.hProcess
         abi.hThread = value.hThread
-        abi.exceptionRecord = windows_core.projectTypedAbi(value.exceptionRecord, windows_core.typeMarker<Win32__impl_l0.EXCEPTION_RECORD>())
-        abi.context = windows_core.projectTypedAbi(value.context, windows_core.typeMarker<Win32__impl_l1.CONTEXT>())
+        abi.exceptionRecord = windows_core.projectTypedAbi(value.exceptionRecord, windows_core.typeMarker<Win32_impl_p0.EXCEPTION_RECORD>())
+        abi.context = windows_core.projectTypedAbi(value.context, windows_core.typeMarker<Win32_impl_p2.CONTEXT>())
         abi.pwszReportId = value.pwszReportId
         abi.bIsFatal = value.bIsFatal
         abi.dwReserved = value.dwReserved
@@ -1359,8 +1365,8 @@ extend WER_RUNTIME_EXCEPTION_INFORMATION <: windows_core.CopyType & windows_core
         value.dwSize = abi.dwSize
         value.hProcess = abi.hProcess
         value.hThread = abi.hThread
-        value.exceptionRecord = windows_core.fromTypedAbi(abi.exceptionRecord, windows_core.typeMarker<Win32__impl_l0.EXCEPTION_RECORD>()).unwrap()
-        value.context = windows_core.fromTypedAbi(abi.context, windows_core.typeMarker<Win32__impl_l1.CONTEXT>()).unwrap()
+        value.exceptionRecord = windows_core.fromTypedAbi(abi.exceptionRecord, windows_core.typeMarker<Win32_impl_p0.EXCEPTION_RECORD>()).unwrap()
+        value.context = windows_core.fromTypedAbi(abi.context, windows_core.typeMarker<Win32_impl_p2.CONTEXT>()).unwrap()
         value.pwszReportId = abi.pwszReportId
         value.bIsFatal = abi.bIsFatal
         value.dwReserved = abi.dwReserved
@@ -1571,7 +1577,7 @@ public type pfn_ADDEREXCLUDEDAPPLICATIONA = CFunc<(CPointer<UInt8>) -> EFaultRep
 public type pfn_ADDEREXCLUDEDAPPLICATIONW = CFunc<(CPointer<UInt16>) -> EFaultRepRetValAbi>
 
 @When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
-public type pfn_REPORTFAULT = CFunc<(CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>, UInt32) -> EFaultRepRetValAbi>
+public type pfn_REPORTFAULT = CFunc<(CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>, UInt32) -> EFaultRepRetValAbi>
 
 @When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 public type PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATIONAbi>, CPointer<Int32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> Int32>
@@ -2078,11 +2084,11 @@ public unsafe func Windows_AddERExcludedApplicationW(wszApplication: CPointer<UI
 
 @When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_ReportFault == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 foreign {
-    func ReportFault(pep: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi
+    func ReportFault(pep: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_ReportFault == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
-public unsafe func Windows_ReportFault(pep: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi {
+public unsafe func Windows_ReportFault(pep: CPointer<Win32_impl_p2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi {
     return ReportFault(pep, dwOpt)
 }
 

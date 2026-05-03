@@ -4,12 +4,19 @@
 package windows.Win32.Devices.Bluetooth
 
 import std.collection.*
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_Bluetooth == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

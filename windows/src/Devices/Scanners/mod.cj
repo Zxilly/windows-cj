@@ -4,15 +4,25 @@
 package windows.Devices.Scanners
 
 import std.collection.*
+@When[Windows_Devices_Scanners == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Scanners == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Scanners == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Scanners == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Scanners == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Scanners == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Scanners == "on" && Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_Scanners == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Devices_Scanners == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Scanners == "on"]
 import windows_future as windows_future
 
 
@@ -63,7 +73,7 @@ public class IImageScannerScanResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IImageScannerScanResult", IImageScannerScanResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IImageScannerScanResultVtbl", "IImageScannerScanResult", "IImageScannerScanResult_Impl", [InterfaceMethodSchema("ScannedFiles", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IImageScannerScanResult", IImageScannerScanResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IImageScannerScanResultVtbl", "IImageScannerScanResult", "IImageScannerScanResult_Impl", [InterfaceMethodSchema("ScannedFiles", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IImageScannerScanResult.runtimeType())
         return schema
     }
@@ -93,12 +103,12 @@ public class IImageScannerScanResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ScannedFiles(): windows_collections.IVectorView<_impl_l1.StorageFile> {
+    public unsafe func ScannedFiles(): windows_collections.IVectorView<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScannedFiles(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -400,7 +410,7 @@ public class ImageScannerScanResult <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ScannedFiles(): windows_collections.IVectorView<_impl_l1.StorageFile> {
+    public unsafe func ScannedFiles(): windows_collections.IVectorView<impl_p1.StorageFile> {
         return defaultInterface().ScannedFiles()
     }
 }
@@ -2913,7 +2923,7 @@ public class IImageScanner <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IImageScanner", IImageScanner.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IImageScannerVtbl", "IImageScanner", "IImageScanner_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultScanSource", 7, [InterfaceParameterSchema("result", "CPointer<ImageScannerScanSourceAbi>", "OutSlot<ImageScannerScanSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsScanSourceSupported", 8, [InterfaceParameterSchema("value", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FlatbedConfiguration", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerFlatbedConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FeederConfiguration", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerFeederConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoConfiguration", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerAutoConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPreviewSupported", 12, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanPreviewToStreamAsync", 13, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("targetStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ImageScannerPreviewResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanFilesToFolderAsync", 14, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("storageFolder", "CPointer<Unit>", "InParam<_impl_l1.StorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IImageScanner", IImageScanner.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IImageScannerVtbl", "IImageScanner", "IImageScanner_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultScanSource", 7, [InterfaceParameterSchema("result", "CPointer<ImageScannerScanSourceAbi>", "OutSlot<ImageScannerScanSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsScanSourceSupported", 8, [InterfaceParameterSchema("value", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FlatbedConfiguration", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerFlatbedConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FeederConfiguration", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerFeederConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoConfiguration", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageScannerAutoConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPreviewSupported", 12, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanPreviewToStreamAsync", 13, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("targetStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<ImageScannerPreviewResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanFilesToFolderAsync", 14, [InterfaceParameterSchema("scanSource", "ImageScannerScanSourceAbi", "ImageScannerScanSource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("storageFolder", "CPointer<Unit>", "InParam<impl_p1.StorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IImageScanner.runtimeType())
         return schema
     }
@@ -2999,7 +3009,7 @@ public class IImageScanner <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanPreviewToStreamAsync(scanSource: ImageScannerScanSource, targetStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<ImageScannerPreviewResult> {
+    public unsafe func ScanPreviewToStreamAsync(scanSource: ImageScannerScanSource, targetStream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<ImageScannerPreviewResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScanPreviewToStreamAsync(asRaw(), windows_core.projectTypedAbi(scanSource, windows_core.typeMarker<ImageScannerScanSource>()), targetStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3008,7 +3018,7 @@ public class IImageScanner <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ScanFilesToFolderAsync(scanSource: ImageScannerScanSource, storageFolder: _impl_l1.StorageFolder): windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32> {
+    public unsafe func ScanFilesToFolderAsync(scanSource: ImageScannerScanSource, storageFolder: impl_p1.StorageFolder): windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScanFilesToFolderAsync(asRaw(), windows_core.projectTypedAbi(scanSource, windows_core.typeMarker<ImageScannerScanSource>()), storageFolder.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3212,12 +3222,12 @@ public class ImageScanner <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ScanPreviewToStreamAsync(scanSource: ImageScannerScanSource, targetStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<ImageScannerPreviewResult> {
+    public unsafe func ScanPreviewToStreamAsync(scanSource: ImageScannerScanSource, targetStream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<ImageScannerPreviewResult> {
         return defaultInterface().ScanPreviewToStreamAsync(scanSource, targetStream)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ScanFilesToFolderAsync(scanSource: ImageScannerScanSource, storageFolder: _impl_l1.StorageFolder): windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32> {
+    public unsafe func ScanFilesToFolderAsync(scanSource: ImageScannerScanSource, storageFolder: impl_p1.StorageFolder): windows_future.IAsyncOperationWithProgress<ImageScannerScanResult, UInt32> {
         return defaultInterface().ScanFilesToFolderAsync(scanSource, storageFolder)
     }
 

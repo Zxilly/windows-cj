@@ -4,16 +4,27 @@
 package windows.Networking.XboxLive
 
 import std.collection.*
+@When[Windows_Networking_XboxLive == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_XboxLive == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_XboxLive == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_XboxLive == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_XboxLive == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_XboxLive == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_XboxLive == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Networking_XboxLive == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_XboxLive == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_XboxLive == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_XboxLive == "on"]
 import windows_future as windows_future
 
 
@@ -77,7 +88,7 @@ public class IXboxLiveQualityOfServiceMeasurementStatics <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveQualityOfServiceMeasurementStatics", IXboxLiveQualityOfServiceMeasurementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveQualityOfServiceMeasurementStaticsVtbl", "IXboxLiveQualityOfServiceMeasurementStatics", "IXboxLiveQualityOfServiceMeasurementStatics_Impl", [InterfaceMethodSchema("PublishPrivatePayloadBytes", 6, [InterfaceParameterSchema("payload", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ClearPrivatePayload", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("MaxSimultaneousProbeConnections", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxSimultaneousProbeConnections", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsSystemOutboundBandwidthConstrained", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSystemOutboundBandwidthConstrained", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsSystemInboundBandwidthConstrained", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSystemInboundBandwidthConstrained", 13, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PublishedPrivatePayload", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublishedPrivatePayload", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxPrivatePayloadSize", 16, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveQualityOfServiceMeasurementStatics", IXboxLiveQualityOfServiceMeasurementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveQualityOfServiceMeasurementStaticsVtbl", "IXboxLiveQualityOfServiceMeasurementStatics", "IXboxLiveQualityOfServiceMeasurementStatics_Impl", [InterfaceMethodSchema("PublishPrivatePayloadBytes", 6, [InterfaceParameterSchema("payload", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ClearPrivatePayload", 7, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("MaxSimultaneousProbeConnections", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxSimultaneousProbeConnections", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsSystemOutboundBandwidthConstrained", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSystemOutboundBandwidthConstrained", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsSystemInboundBandwidthConstrained", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSystemInboundBandwidthConstrained", 13, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PublishedPrivatePayload", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublishedPrivatePayload", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxPrivatePayloadSize", 16, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveQualityOfServiceMeasurementStatics.runtimeType())
         return schema
     }
@@ -161,16 +172,16 @@ public class IXboxLiveQualityOfServiceMeasurementStatics <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PublishedPrivatePayload(): _impl_l0.IBuffer {
+    public unsafe func PublishedPrivatePayload(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PublishedPrivatePayload(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPublishedPrivatePayload(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetPublishedPrivatePayload(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetPublishedPrivatePayload(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -949,7 +960,7 @@ public class IXboxLiveDeviceAddress <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveDeviceAddress", IXboxLiveDeviceAddress.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveDeviceAddressVtbl", "IXboxLiveDeviceAddress", "IXboxLiveDeviceAddress_Impl", [InterfaceMethodSchema("SnapshotChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<XboxLiveDeviceAddress, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSnapshotChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBase64", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBuffer", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBytes", 10, [InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("bytesWritten", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Compare", 11, [InterfaceParameterSchema("otherDeviceAddress", "CPointer<Unit>", "InParam<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsValid", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLocal", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkAccessKind", 14, [InterfaceParameterSchema("result", "CPointer<XboxLiveNetworkAccessKindAbi>", "OutSlot<XboxLiveNetworkAccessKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveDeviceAddress", IXboxLiveDeviceAddress.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveDeviceAddressVtbl", "IXboxLiveDeviceAddress", "IXboxLiveDeviceAddress_Impl", [InterfaceMethodSchema("SnapshotChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<XboxLiveDeviceAddress, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSnapshotChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBase64", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBuffer", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSnapshotAsBytes", 10, [InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("bytesWritten", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Compare", 11, [InterfaceParameterSchema("otherDeviceAddress", "CPointer<Unit>", "InParam<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsValid", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLocal", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkAccessKind", 14, [InterfaceParameterSchema("result", "CPointer<XboxLiveNetworkAccessKindAbi>", "OutSlot<XboxLiveNetworkAccessKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveDeviceAddress.runtimeType())
         return schema
     }
@@ -1001,12 +1012,12 @@ public class IXboxLiveDeviceAddress <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetSnapshotAsBuffer(): _impl_l0.IBuffer {
+    public unsafe func GetSnapshotAsBuffer(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetSnapshotAsBuffer(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func GetSnapshotAsBytes(bufferSize: UInt32, buffer: CPointer<UInt8>, bytesWritten: CPointer<UInt32>): Unit {
@@ -1102,7 +1113,7 @@ public class IXboxLiveDeviceAddressStatics <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveDeviceAddressStatics", IXboxLiveDeviceAddressStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveDeviceAddressStaticsVtbl", "IXboxLiveDeviceAddressStatics", "IXboxLiveDeviceAddressStatics_Impl", [InterfaceMethodSchema("CreateFromSnapshotBase64", 6, [InterfaceParameterSchema("base64", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromSnapshotBuffer", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromSnapshotBytes", 8, [InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocal", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxSnapshotBytesSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveDeviceAddressStatics", IXboxLiveDeviceAddressStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveDeviceAddressStaticsVtbl", "IXboxLiveDeviceAddressStatics", "IXboxLiveDeviceAddressStatics_Impl", [InterfaceMethodSchema("CreateFromSnapshotBase64", 6, [InterfaceParameterSchema("base64", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromSnapshotBuffer", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromSnapshotBytes", 8, [InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocal", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxSnapshotBytesSize", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveDeviceAddressStatics.runtimeType())
         return schema
     }
@@ -1140,7 +1151,7 @@ public class IXboxLiveDeviceAddressStatics <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromSnapshotBuffer(buffer: _impl_l0.IBuffer): XboxLiveDeviceAddress {
+    public unsafe func CreateFromSnapshotBuffer(buffer: impl_p0.IBuffer): XboxLiveDeviceAddress {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromSnapshotBuffer(asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1237,7 +1248,7 @@ public class IXboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveEndpointPair", IXboxLiveEndpointPair.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveEndpointPairVtbl", "IXboxLiveEndpointPair", "IXboxLiveEndpointPair_Impl", [InterfaceMethodSchema("StateChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<XboxLiveEndpointPair, XboxLiveEndpointPairStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStateChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeleteAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRemoteSocketAddressBytes", 9, [InterfaceParameterSchema("socketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetLocalSocketAddressBytes", 10, [InterfaceParameterSchema("socketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("State", 11, [InterfaceParameterSchema("result", "CPointer<XboxLiveEndpointPairStateAbi>", "OutSlot<XboxLiveEndpointPairState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Template", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPairTemplate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoteDeviceAddress", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoteHostName", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemotePort", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocalHostName", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocalPort", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveEndpointPair", IXboxLiveEndpointPair.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveEndpointPairVtbl", "IXboxLiveEndpointPair", "IXboxLiveEndpointPair_Impl", [InterfaceMethodSchema("StateChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<XboxLiveEndpointPair, XboxLiveEndpointPairStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStateChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DeleteAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRemoteSocketAddressBytes", 9, [InterfaceParameterSchema("socketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetLocalSocketAddressBytes", 10, [InterfaceParameterSchema("socketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("State", 11, [InterfaceParameterSchema("result", "CPointer<XboxLiveEndpointPairStateAbi>", "OutSlot<XboxLiveEndpointPairState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Template", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPairTemplate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoteDeviceAddress", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoteHostName", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemotePort", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocalHostName", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocalPort", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveEndpointPair.runtimeType())
         return schema
     }
@@ -1325,12 +1336,12 @@ public class IXboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func RemoteHostName(): _impl_l1.HostName {
+    public unsafe func RemoteHostName(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RemoteHostName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func RemotePort(): windows_core.HString {
@@ -1342,12 +1353,12 @@ public class IXboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func LocalHostName(): _impl_l1.HostName {
+    public unsafe func LocalHostName(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LocalHostName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func LocalPort(): windows_core.HString {
@@ -1522,7 +1533,7 @@ public class IXboxLiveEndpointPairStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveEndpointPairStatics", IXboxLiveEndpointPairStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveEndpointPairStaticsVtbl", "IXboxLiveEndpointPairStatics", "IXboxLiveEndpointPairStatics_Impl", [InterfaceMethodSchema("FindEndpointPairBySocketAddressBytes", 6, [InterfaceParameterSchema("localSocketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("remoteSocketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPair>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindEndpointPairByHostNamesAndPorts", 7, [InterfaceParameterSchema("localHostName", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("localPort", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("remoteHostName", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("remotePort", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPair>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveEndpointPairStatics", IXboxLiveEndpointPairStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveEndpointPairStaticsVtbl", "IXboxLiveEndpointPairStatics", "IXboxLiveEndpointPairStatics_Impl", [InterfaceMethodSchema("FindEndpointPairBySocketAddressBytes", 6, [InterfaceParameterSchema("localSocketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("remoteSocketAddress", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPair>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindEndpointPairByHostNamesAndPorts", 7, [InterfaceParameterSchema("localHostName", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("localPort", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("remoteHostName", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("remotePort", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveEndpointPair>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveEndpointPairStatics.runtimeType())
         return schema
     }
@@ -1560,7 +1571,7 @@ public class IXboxLiveEndpointPairStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func FindEndpointPairByHostNamesAndPorts(localHostName: _impl_l1.HostName, localPort: windows_core.HString, remoteHostName: _impl_l1.HostName, remotePort: windows_core.HString): XboxLiveEndpointPair {
+    public unsafe func FindEndpointPairByHostNamesAndPorts(localHostName: impl_p1.HostName, localPort: windows_core.HString, remoteHostName: impl_p1.HostName, remotePort: windows_core.HString): XboxLiveEndpointPair {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindEndpointPairByHostNamesAndPorts(asRaw(), localHostName.asRaw(), localPort.asRaw(), remoteHostName.asRaw(), remotePort.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2349,7 +2360,7 @@ public class IXboxLiveQualityOfServicePrivatePayloadResult <: InterfaceWrapperBa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IXboxLiveQualityOfServicePrivatePayloadResult", IXboxLiveQualityOfServicePrivatePayloadResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveQualityOfServicePrivatePayloadResultVtbl", "IXboxLiveQualityOfServicePrivatePayloadResult", "IXboxLiveQualityOfServicePrivatePayloadResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<XboxLiveQualityOfServiceMeasurementStatusAbi>", "OutSlot<XboxLiveQualityOfServiceMeasurementStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceAddress", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Value", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IXboxLiveQualityOfServicePrivatePayloadResult", IXboxLiveQualityOfServicePrivatePayloadResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IXboxLiveQualityOfServicePrivatePayloadResultVtbl", "IXboxLiveQualityOfServicePrivatePayloadResult", "IXboxLiveQualityOfServicePrivatePayloadResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<XboxLiveQualityOfServiceMeasurementStatusAbi>", "OutSlot<XboxLiveQualityOfServiceMeasurementStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceAddress", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<XboxLiveDeviceAddress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Value", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IXboxLiveQualityOfServicePrivatePayloadResult.runtimeType())
         return schema
     }
@@ -2395,12 +2406,12 @@ public class IXboxLiveQualityOfServicePrivatePayloadResult <: InterfaceWrapperBa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Value(): _impl_l0.IBuffer {
+    public unsafe func Value(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -2489,7 +2500,7 @@ public class XboxLiveDeviceAddress <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetSnapshotAsBuffer(): _impl_l0.IBuffer {
+    public unsafe func GetSnapshotAsBuffer(): impl_p0.IBuffer {
         return defaultInterface().GetSnapshotAsBuffer()
     }
 
@@ -2525,7 +2536,7 @@ public class XboxLiveDeviceAddress <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromSnapshotBuffer(buffer: _impl_l0.IBuffer): XboxLiveDeviceAddress {
+    public static unsafe func CreateFromSnapshotBuffer(buffer: impl_p0.IBuffer): XboxLiveDeviceAddress {
         var result__: Option<XboxLiveDeviceAddress> = Option<XboxLiveDeviceAddress>.None
         try (factory__ = windows_core.factory<XboxLiveDeviceAddress, IXboxLiveDeviceAddressStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromSnapshotBuffer(buffer))
@@ -2690,7 +2701,7 @@ public class XboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func RemoteHostName(): _impl_l1.HostName {
+    public unsafe func RemoteHostName(): impl_p1.HostName {
         return defaultInterface().RemoteHostName()
     }
 
@@ -2699,7 +2710,7 @@ public class XboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func LocalHostName(): _impl_l1.HostName {
+    public unsafe func LocalHostName(): impl_p1.HostName {
         return defaultInterface().LocalHostName()
     }
 
@@ -2719,7 +2730,7 @@ public class XboxLiveEndpointPair <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking == "on"]
-    public static unsafe func FindEndpointPairByHostNamesAndPorts(localHostName: _impl_l1.HostName, localPort: windows_core.HString, remoteHostName: _impl_l1.HostName, remotePort: windows_core.HString): XboxLiveEndpointPair {
+    public static unsafe func FindEndpointPairByHostNamesAndPorts(localHostName: impl_p1.HostName, localPort: windows_core.HString, remoteHostName: impl_p1.HostName, remotePort: windows_core.HString): XboxLiveEndpointPair {
         var result__: Option<XboxLiveEndpointPair> = Option<XboxLiveEndpointPair>.None
         try (factory__ = windows_core.factory<XboxLiveEndpointPair, IXboxLiveEndpointPairStatics>().unwrap()) {
             result__ = Some(factory__.FindEndpointPairByHostNamesAndPorts(localHostName, localPort, remoteHostName, remotePort))
@@ -3328,8 +3339,8 @@ public class XboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func PublishedPrivatePayload(): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func PublishedPrivatePayload(): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<XboxLiveQualityOfServiceMeasurement, IXboxLiveQualityOfServiceMeasurementStatics>().unwrap()) {
             result__ = Some(factory__.PublishedPrivatePayload())
         }
@@ -3340,7 +3351,7 @@ public class XboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func SetPublishedPrivatePayload(value: _impl_l0.IBuffer): Unit {
+    public static unsafe func SetPublishedPrivatePayload(value: impl_p0.IBuffer): Unit {
         try (factory__ = windows_core.factory<XboxLiveQualityOfServiceMeasurement, IXboxLiveQualityOfServiceMeasurementStatics>().unwrap()) {
             factory__.SetPublishedPrivatePayload(value)
         }
@@ -3559,7 +3570,7 @@ public class XboxLiveQualityOfServicePrivatePayloadResult <: InterfaceWrapperBas
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Value(): _impl_l0.IBuffer {
+    public unsafe func Value(): impl_p0.IBuffer {
         return defaultInterface().Value()
     }
 }

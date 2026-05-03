@@ -4,8 +4,11 @@
 package windows.Wdk.System.SystemInformation
 
 import std.collection.*
+@When[Windows_Wdk_System_SystemInformation == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Wdk_System_SystemInformation == "on"]
 import windows_core as windows_core
+@When[Windows_Wdk_System_SystemInformation == "on"]
 import windows_core as windows_core
 
 

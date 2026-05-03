@@ -4,16 +4,27 @@
 package windows.Storage.BulkAccess
 
 import std.collection.*
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_core as windows_core
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_interface as windows_interface
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Storage_BulkAccess == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Storage_BulkAccess == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Storage_BulkAccess == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_collections as windows_collections
+@When[Windows_Storage_BulkAccess == "on"]
 import windows_future as windows_future
 
 
@@ -244,14 +255,14 @@ public interface IStorageItemInformation_ImplErased {
 
 @When[Windows_Storage_BulkAccess == "on" && ((Windows_Storage_FileProperties == "on") && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"))]
 public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplErased {
-    public func get_MusicProperties(): windows_core.Result<_impl_l1.MusicProperties>
+    public func get_MusicProperties(): windows_core.Result<impl_p1.MusicProperties>
 
     public func __winrtThunk_get_MusicProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_MusicProperties()) {
-            case Result<_impl_l1.MusicProperties>.Ok(value) =>
+            case Result<impl_p1.MusicProperties>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -259,19 +270,19 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.MusicProperties>.Err(error) =>
+            case Result<impl_p1.MusicProperties>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func get_VideoProperties(): windows_core.Result<_impl_l1.VideoProperties>
+    public func get_VideoProperties(): windows_core.Result<impl_p1.VideoProperties>
 
     public func __winrtThunk_get_VideoProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_VideoProperties()) {
-            case Result<_impl_l1.VideoProperties>.Ok(value) =>
+            case Result<impl_p1.VideoProperties>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -279,19 +290,19 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.VideoProperties>.Err(error) =>
+            case Result<impl_p1.VideoProperties>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func get_ImageProperties(): windows_core.Result<_impl_l1.ImageProperties>
+    public func get_ImageProperties(): windows_core.Result<impl_p1.ImageProperties>
 
     public func __winrtThunk_get_ImageProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_ImageProperties()) {
-            case Result<_impl_l1.ImageProperties>.Ok(value) =>
+            case Result<impl_p1.ImageProperties>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -299,19 +310,19 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.ImageProperties>.Err(error) =>
+            case Result<impl_p1.ImageProperties>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func get_DocumentProperties(): windows_core.Result<_impl_l1.DocumentProperties>
+    public func get_DocumentProperties(): windows_core.Result<impl_p1.DocumentProperties>
 
     public func __winrtThunk_get_DocumentProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_DocumentProperties()) {
-            case Result<_impl_l1.DocumentProperties>.Ok(value) =>
+            case Result<impl_p1.DocumentProperties>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -319,19 +330,19 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.DocumentProperties>.Err(error) =>
+            case Result<impl_p1.DocumentProperties>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func get_BasicProperties(): windows_core.Result<_impl_l0.BasicProperties>
+    public func get_BasicProperties(): windows_core.Result<impl_p0.BasicProperties>
 
     public func __winrtThunk_get_BasicProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_BasicProperties()) {
-            case Result<_impl_l0.BasicProperties>.Ok(value) =>
+            case Result<impl_p0.BasicProperties>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -339,19 +350,19 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.BasicProperties>.Err(error) =>
+            case Result<impl_p0.BasicProperties>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func Thumbnail(): windows_core.Result<_impl_l1.StorageItemThumbnail>
+    public func Thumbnail(): windows_core.Result<impl_p1.StorageItemThumbnail>
 
     public func __winrtThunk_Thumbnail(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.Thumbnail()) {
-            case Result<_impl_l1.StorageItemThumbnail>.Ok(value) =>
+            case Result<impl_p1.StorageItemThumbnail>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -359,7 +370,7 @@ public interface IStorageItemInformation_Impl <: IStorageItemInformation_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.StorageItemThumbnail>.Err(error) =>
+            case Result<impl_p1.StorageItemThumbnail>.Err(error) =>
                 error.code().value
         }
     }
@@ -453,7 +464,7 @@ public class IStorageItemInformation <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemInformation", IStorageItemInformation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageItemInformationVtbl", "IStorageItemInformation", "IStorageItemInformation_Impl", [InterfaceMethodSchema("get_MusicProperties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.MusicProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_VideoProperties", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.VideoProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_ImageProperties", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ImageProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DocumentProperties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DocumentProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BasicProperties", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.BasicProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageItemThumbnail>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ThumbnailUpdated", 12, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageItemInformation, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveThumbnailUpdated", 13, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PropertiesUpdated", 14, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageItemInformation, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePropertiesUpdated", 15, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemInformation", IStorageItemInformation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageItemInformationVtbl", "IStorageItemInformation", "IStorageItemInformation_Impl", [InterfaceMethodSchema("get_MusicProperties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.MusicProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_VideoProperties", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.VideoProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_ImageProperties", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ImageProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DocumentProperties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DocumentProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BasicProperties", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.BasicProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageItemThumbnail>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ThumbnailUpdated", 12, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageItemInformation, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveThumbnailUpdated", 13, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PropertiesUpdated", 14, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageItemInformation, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePropertiesUpdated", 15, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemInformation.runtimeType())
         return schema
     }
@@ -483,57 +494,57 @@ public class IStorageItemInformation <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_MusicProperties(): _impl_l1.MusicProperties {
+    public unsafe func get_MusicProperties(): impl_p1.MusicProperties {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_MusicProperties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.MusicProperties.fromAbiTake(result__)
+        return impl_p1.MusicProperties.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_VideoProperties(): _impl_l1.VideoProperties {
+    public unsafe func get_VideoProperties(): impl_p1.VideoProperties {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_VideoProperties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.VideoProperties.fromAbiTake(result__)
+        return impl_p1.VideoProperties.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_ImageProperties(): _impl_l1.ImageProperties {
+    public unsafe func get_ImageProperties(): impl_p1.ImageProperties {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_ImageProperties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ImageProperties.fromAbiTake(result__)
+        return impl_p1.ImageProperties.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_DocumentProperties(): _impl_l1.DocumentProperties {
+    public unsafe func get_DocumentProperties(): impl_p1.DocumentProperties {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_DocumentProperties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DocumentProperties.fromAbiTake(result__)
+        return impl_p1.DocumentProperties.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_BasicProperties(): _impl_l0.BasicProperties {
+    public unsafe func get_BasicProperties(): impl_p0.BasicProperties {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_BasicProperties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.BasicProperties.fromAbiTake(result__)
+        return impl_p0.BasicProperties.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.StorageItemThumbnail {
+    public unsafe func Thumbnail(): impl_p1.StorageItemThumbnail {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageItemThumbnail.fromAbiTake(result__)
+        return impl_p1.StorageItemThumbnail.fromAbiTake(result__)
     }
 
     public unsafe func ThumbnailUpdated(changedHandler: Foundation.TypedEventHandler<IStorageItemInformation, IInspectable>): windows_collections.EventRegistrationToken {
@@ -595,7 +606,7 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public static func descriptor(): InterfaceDescriptor<FileInformation> {
-        let ancestors = [IStorageItemInformation.iid(), _impl_l1.IStorageFile.iid(), _impl_l1.IStorageItem.iid(), _impl_l1.IRandomAccessStreamReference.iid(), _impl_l1.IInputStreamReference.iid(), _impl_l1.IStorageItemProperties.iid(), _impl_l1.IStorageItem2.iid(), _impl_l1.IStorageItemPropertiesWithProvider.iid(), _impl_l0.IStorageFilePropertiesWithAvailability.iid(), _impl_l1.IStorageFile2.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IStorageItemInformation.iid(), impl_p1.IStorageFile.iid(), impl_p1.IStorageItem.iid(), impl_p1.IRandomAccessStreamReference.iid(), impl_p1.IInputStreamReference.iid(), impl_p1.IStorageItemProperties.iid(), impl_p1.IStorageItem2.iid(), impl_p1.IStorageItemPropertiesWithProvider.iid(), impl_p0.IStorageFilePropertiesWithAvailability.iid(), impl_p1.IStorageFile2.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<FileInformation>("FileInformation", IStorageItemInformation.iid(), ancestors, { raw => FileInformation.fromAbiTake(raw) }, { raw => FileInformation.viewOf(raw) })
     }
 
@@ -633,96 +644,96 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
-    public func asIStorageFile(): _impl_l1.IStorageFile {
-        match (unsafe { query(_impl_l1.IStorageFile.descriptor()) }) {
+    public func asIStorageFile(): impl_p1.IStorageFile {
+        match (unsafe { query(impl_p1.IStorageFile.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItem(): _impl_l1.IStorageItem {
-        match (unsafe { query(_impl_l1.IStorageItem.descriptor()) }) {
+    public func asIStorageItem(): impl_p1.IStorageItem {
+        match (unsafe { query(impl_p1.IStorageItem.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIRandomAccessStreamReference(): _impl_l1.IRandomAccessStreamReference {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamReference.descriptor()) }) {
+    public func asIRandomAccessStreamReference(): impl_p1.IRandomAccessStreamReference {
+        match (unsafe { query(impl_p1.IRandomAccessStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIInputStreamReference(): _impl_l1.IInputStreamReference {
-        match (unsafe { query(_impl_l1.IInputStreamReference.descriptor()) }) {
+    public func asIInputStreamReference(): impl_p1.IInputStreamReference {
+        match (unsafe { query(impl_p1.IInputStreamReference.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItemProperties(): _impl_l1.IStorageItemProperties {
-        match (unsafe { query(_impl_l1.IStorageItemProperties.descriptor()) }) {
+    public func asIStorageItemProperties(): impl_p1.IStorageItemProperties {
+        match (unsafe { query(impl_p1.IStorageItemProperties.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItem2(): _impl_l1.IStorageItem2 {
-        match (unsafe { query(_impl_l1.IStorageItem2.descriptor()) }) {
+    public func asIStorageItem2(): impl_p1.IStorageItem2 {
+        match (unsafe { query(impl_p1.IStorageItem2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItemPropertiesWithProvider(): _impl_l1.IStorageItemPropertiesWithProvider {
-        match (unsafe { query(_impl_l1.IStorageItemPropertiesWithProvider.descriptor()) }) {
+    public func asIStorageItemPropertiesWithProvider(): impl_p1.IStorageItemPropertiesWithProvider {
+        match (unsafe { query(impl_p1.IStorageItemPropertiesWithProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageFilePropertiesWithAvailability(): _impl_l0.IStorageFilePropertiesWithAvailability {
-        match (unsafe { query(_impl_l0.IStorageFilePropertiesWithAvailability.descriptor()) }) {
+    public func asIStorageFilePropertiesWithAvailability(): impl_p0.IStorageFilePropertiesWithAvailability {
+        match (unsafe { query(impl_p0.IStorageFilePropertiesWithAvailability.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageFile2(): _impl_l1.IStorageFile2 {
-        match (unsafe { query(_impl_l1.IStorageFile2.descriptor()) }) {
+    public func asIStorageFile2(): impl_p1.IStorageFile2 {
+        match (unsafe { query(impl_p1.IStorageFile2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_MusicProperties(): _impl_l1.MusicProperties {
+    public unsafe func get_MusicProperties(): impl_p1.MusicProperties {
         return defaultInterface().get_MusicProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_VideoProperties(): _impl_l1.VideoProperties {
+    public unsafe func get_VideoProperties(): impl_p1.VideoProperties {
         return defaultInterface().get_VideoProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_ImageProperties(): _impl_l1.ImageProperties {
+    public unsafe func get_ImageProperties(): impl_p1.ImageProperties {
         return defaultInterface().get_ImageProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_DocumentProperties(): _impl_l1.DocumentProperties {
+    public unsafe func get_DocumentProperties(): impl_p1.DocumentProperties {
         return defaultInterface().get_DocumentProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_BasicProperties(): _impl_l0.BasicProperties {
+    public unsafe func get_BasicProperties(): impl_p0.BasicProperties {
         return defaultInterface().get_BasicProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.StorageItemThumbnail {
+    public unsafe func Thumbnail(): impl_p1.StorageItemThumbnail {
         return defaultInterface().Thumbnail()
     }
 
@@ -751,46 +762,46 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OpenAsync(accessMode: _impl_l0.FileAccessMode): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream> {
+    public unsafe func OpenAsync(accessMode: impl_p0.FileAccessMode): windows_future.IAsyncOperation<impl_p1.IRandomAccessStream> {
         return asIStorageFile().OpenAsync(accessMode)
     }
 
-    public unsafe func OpenTransactedWriteAsync(): windows_future.IAsyncOperation<_impl_l1.StorageStreamTransaction> {
+    public unsafe func OpenTransactedWriteAsync(): windows_future.IAsyncOperation<impl_p1.StorageStreamTransaction> {
         return asIStorageFile().OpenTransactedWriteAsync()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: _impl_l1.IStorageFolder): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: impl_p1.IStorageFolder): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFile().CopyOverloadDefaultNameAndOptions(destinationFolder)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyOverloadDefaultOptions(destinationFolder: _impl_l1.IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CopyOverloadDefaultOptions(destinationFolder: impl_p1.IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFile().CopyOverloadDefaultOptions(destinationFolder, desiredNewName)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyOverload(destinationFolder: _impl_l1.IStorageFolder, desiredNewName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CopyOverload(destinationFolder: impl_p1.IStorageFolder, desiredNewName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFile().CopyOverload(destinationFolder, desiredNewName, option)
     }
 
-    public unsafe func CopyAndReplaceAsync(fileToReplace: _impl_l1.IStorageFile): windows_future.IAsyncAction {
+    public unsafe func CopyAndReplaceAsync(fileToReplace: impl_p1.IStorageFile): windows_future.IAsyncAction {
         return asIStorageFile().CopyAndReplaceAsync(fileToReplace)
     }
 
-    public unsafe func MoveOverloadDefaultNameAndOptions(destinationFolder: _impl_l1.IStorageFolder): windows_future.IAsyncAction {
+    public unsafe func MoveOverloadDefaultNameAndOptions(destinationFolder: impl_p1.IStorageFolder): windows_future.IAsyncAction {
         return asIStorageFile().MoveOverloadDefaultNameAndOptions(destinationFolder)
     }
 
-    public unsafe func MoveOverloadDefaultOptions(destinationFolder: _impl_l1.IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncAction {
+    public unsafe func MoveOverloadDefaultOptions(destinationFolder: impl_p1.IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncAction {
         return asIStorageFile().MoveOverloadDefaultOptions(destinationFolder, desiredNewName)
     }
 
-    public unsafe func MoveOverload(destinationFolder: _impl_l1.IStorageFolder, desiredNewName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncAction {
+    public unsafe func MoveOverload(destinationFolder: impl_p1.IStorageFolder, desiredNewName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncAction {
         return asIStorageFile().MoveOverload(destinationFolder, desiredNewName, option)
     }
 
-    public unsafe func MoveAndReplaceAsync(fileToReplace: _impl_l1.IStorageFile): windows_future.IAsyncAction {
+    public unsafe func MoveAndReplaceAsync(fileToReplace: impl_p1.IStorageFile): windows_future.IAsyncAction {
         return asIStorageFile().MoveAndReplaceAsync(fileToReplace)
     }
 
@@ -798,7 +809,7 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         return asIStorageItem().RenameAsyncOverloadDefaultOptions(desiredName)
     }
 
-    public unsafe func RenameAsync(desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncAction {
+    public unsafe func RenameAsync(desiredName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncAction {
         return asIStorageItem().RenameAsync(desiredName, option)
     }
 
@@ -806,12 +817,12 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         return asIStorageItem().DeleteAsyncOverloadDefaultOptions()
     }
 
-    public unsafe func DeleteAsync(option: _impl_l0.StorageDeleteOption): windows_future.IAsyncAction {
+    public unsafe func DeleteAsync(option: impl_p0.StorageDeleteOption): windows_future.IAsyncAction {
         return asIStorageItem().DeleteAsync(option)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func GetBasicPropertiesAsync(): windows_future.IAsyncOperation<_impl_l0.BasicProperties> {
+    public unsafe func GetBasicPropertiesAsync(): windows_future.IAsyncOperation<impl_p0.BasicProperties> {
         return asIStorageItem().GetBasicPropertiesAsync()
     }
 
@@ -823,7 +834,7 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         return asIStorageItem().Path()
     }
 
-    public unsafe func Attributes(): _impl_l0.FileAttributes {
+    public unsafe func Attributes(): impl_p0.FileAttributes {
         return asIStorageItem().Attributes()
     }
 
@@ -831,30 +842,30 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         return asIStorageItem().DateCreated()
     }
 
-    public unsafe func IsOfType(type_: _impl_l0.StorageItemTypes): Bool {
+    public unsafe func IsOfType(type_: impl_p0.StorageItemTypes): Bool {
         return asIStorageItem().IsOfType(type_)
     }
 
-    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStreamWithContentType> {
+    public unsafe func OpenReadAsync(): windows_future.IAsyncOperation<impl_p1.IRandomAccessStreamWithContentType> {
         return asIRandomAccessStreamReference().OpenReadAsync()
     }
 
-    public unsafe func OpenSequentialReadAsync(): windows_future.IAsyncOperation<_impl_l0.IInputStream> {
+    public unsafe func OpenSequentialReadAsync(): windows_future.IAsyncOperation<impl_p0.IInputStream> {
         return asIInputStreamReference().OpenSequentialReadAsync()
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: impl_p0.ThumbnailMode): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: impl_p0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsync(mode: impl_p0.ThumbnailMode, requestedSize: UInt32, options: impl_p0.ThumbnailOptions): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(mode, requestedSize, options)
     }
 
@@ -871,19 +882,19 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func Properties(): _impl_l1.StorageItemContentProperties {
+    public unsafe func Properties(): impl_p1.StorageItemContentProperties {
         return asIStorageItemProperties().Properties()
     }
 
-    public unsafe func GetParentAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetParentAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageItem2().GetParentAsync()
     }
 
-    public unsafe func IsEqual(item: _impl_l1.IStorageItem): Bool {
+    public unsafe func IsEqual(item: impl_p1.IStorageItem): Bool {
         return asIStorageItem2().IsEqual(item)
     }
 
-    public unsafe func Provider(): _impl_l1.StorageProvider {
+    public unsafe func Provider(): impl_p1.StorageProvider {
         return asIStorageItemPropertiesWithProvider().Provider()
     }
 
@@ -892,11 +903,11 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OpenWithOptionsAsync(accessMode: _impl_l0.FileAccessMode, options: _impl_l0.StorageOpenOptions): windows_future.IAsyncOperation<_impl_l1.IRandomAccessStream> {
+    public unsafe func OpenWithOptionsAsync(accessMode: impl_p0.FileAccessMode, options: impl_p0.StorageOpenOptions): windows_future.IAsyncOperation<impl_p1.IRandomAccessStream> {
         return asIStorageFile2().OpenWithOptionsAsync(accessMode, options)
     }
 
-    public unsafe func OpenTransactedWriteWithOptionsAsync(options: _impl_l0.StorageOpenOptions): windows_future.IAsyncOperation<_impl_l1.StorageStreamTransaction> {
+    public unsafe func OpenTransactedWriteWithOptionsAsync(options: impl_p0.StorageOpenOptions): windows_future.IAsyncOperation<impl_p1.StorageStreamTransaction> {
         return asIStorageFile2().OpenTransactedWriteWithOptionsAsync(options)
     }
 }
@@ -946,7 +957,7 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public static func descriptor(): InterfaceDescriptor<FolderInformation> {
-        let ancestors = [IStorageItemInformation.iid(), _impl_l1.IStorageFolder.iid(), _impl_l1.IStorageItem.iid(), _impl_l1.IStorageItemProperties.iid(), _impl_l1.IStorageFolderQueryOperations.iid(), _impl_l1.IStorageItem2.iid(), _impl_l1.IStorageFolder2.iid(), _impl_l1.IStorageItemPropertiesWithProvider.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IStorageItemInformation.iid(), impl_p1.IStorageFolder.iid(), impl_p1.IStorageItem.iid(), impl_p1.IStorageItemProperties.iid(), impl_p1.IStorageFolderQueryOperations.iid(), impl_p1.IStorageItem2.iid(), impl_p1.IStorageFolder2.iid(), impl_p1.IStorageItemPropertiesWithProvider.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<FolderInformation>("FolderInformation", IStorageItemInformation.iid(), ancestors, { raw => FolderInformation.fromAbiTake(raw) }, { raw => FolderInformation.viewOf(raw) })
     }
 
@@ -984,82 +995,82 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
-    public func asIStorageFolder(): _impl_l1.IStorageFolder {
-        match (unsafe { query(_impl_l1.IStorageFolder.descriptor()) }) {
+    public func asIStorageFolder(): impl_p1.IStorageFolder {
+        match (unsafe { query(impl_p1.IStorageFolder.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItem(): _impl_l1.IStorageItem {
-        match (unsafe { query(_impl_l1.IStorageItem.descriptor()) }) {
+    public func asIStorageItem(): impl_p1.IStorageItem {
+        match (unsafe { query(impl_p1.IStorageItem.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItemProperties(): _impl_l1.IStorageItemProperties {
-        match (unsafe { query(_impl_l1.IStorageItemProperties.descriptor()) }) {
+    public func asIStorageItemProperties(): impl_p1.IStorageItemProperties {
+        match (unsafe { query(impl_p1.IStorageItemProperties.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageFolderQueryOperations(): _impl_l1.IStorageFolderQueryOperations {
-        match (unsafe { query(_impl_l1.IStorageFolderQueryOperations.descriptor()) }) {
+    public func asIStorageFolderQueryOperations(): impl_p1.IStorageFolderQueryOperations {
+        match (unsafe { query(impl_p1.IStorageFolderQueryOperations.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItem2(): _impl_l1.IStorageItem2 {
-        match (unsafe { query(_impl_l1.IStorageItem2.descriptor()) }) {
+    public func asIStorageItem2(): impl_p1.IStorageItem2 {
+        match (unsafe { query(impl_p1.IStorageItem2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageFolder2(): _impl_l1.IStorageFolder2 {
-        match (unsafe { query(_impl_l1.IStorageFolder2.descriptor()) }) {
+    public func asIStorageFolder2(): impl_p1.IStorageFolder2 {
+        match (unsafe { query(impl_p1.IStorageFolder2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIStorageItemPropertiesWithProvider(): _impl_l1.IStorageItemPropertiesWithProvider {
-        match (unsafe { query(_impl_l1.IStorageItemPropertiesWithProvider.descriptor()) }) {
+    public func asIStorageItemPropertiesWithProvider(): impl_p1.IStorageItemPropertiesWithProvider {
+        match (unsafe { query(impl_p1.IStorageItemPropertiesWithProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_MusicProperties(): _impl_l1.MusicProperties {
+    public unsafe func get_MusicProperties(): impl_p1.MusicProperties {
         return defaultInterface().get_MusicProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_VideoProperties(): _impl_l1.VideoProperties {
+    public unsafe func get_VideoProperties(): impl_p1.VideoProperties {
         return defaultInterface().get_VideoProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_ImageProperties(): _impl_l1.ImageProperties {
+    public unsafe func get_ImageProperties(): impl_p1.ImageProperties {
         return defaultInterface().get_ImageProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_DocumentProperties(): _impl_l1.DocumentProperties {
+    public unsafe func get_DocumentProperties(): impl_p1.DocumentProperties {
         return defaultInterface().get_DocumentProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func get_BasicProperties(): _impl_l0.BasicProperties {
+    public unsafe func get_BasicProperties(): impl_p0.BasicProperties {
         return defaultInterface().get_BasicProperties()
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.StorageItemThumbnail {
+    public unsafe func Thumbnail(): impl_p1.StorageItemThumbnail {
         return defaultInterface().Thumbnail()
     }
 
@@ -1080,48 +1091,48 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFolder().CreateFileAsyncOverloadDefaultOptions(desiredName)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFileAsync(desiredName: windows_core.HString, options: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CreateFileAsync(desiredName: windows_core.HString, options: impl_p0.CreationCollisionOption): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFolder().CreateFileAsync(desiredName, options)
     }
 
-    public unsafe func CreateFolderAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func CreateFolderAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageFolder().CreateFolderAsyncOverloadDefaultOptions(desiredName)
     }
 
-    public unsafe func CreateFolderAsync(desiredName: windows_core.HString, options: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func CreateFolderAsync(desiredName: windows_core.HString, options: impl_p0.CreationCollisionOption): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageFolder().CreateFolderAsync(desiredName, options)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetFileAsync(name: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileAsync(name: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageFolder().GetFileAsync(name)
     }
 
-    public unsafe func GetFolderAsync(name: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderAsync(name: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageFolder().GetFolderAsync(name)
     }
 
-    public unsafe func GetItemAsync(name: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemAsync(name: windows_core.HString): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return asIStorageFolder().GetItemAsync(name)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
+    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>> {
         return asIStorageFolder().GetFilesAsyncOverloadDefaultOptionsStartAndCount()
     }
 
     @When[Windows_Foundation_Collections == "on"]
-    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFolder>> {
+    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFolder>> {
         return asIStorageFolder().GetFoldersAsyncOverloadDefaultOptionsStartAndCount()
     }
 
     @When[Windows_Foundation_Collections == "on"]
-    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.IStorageItem>> {
+    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.IStorageItem>> {
         return asIStorageFolder().GetItemsAsyncOverloadDefaultStartAndCount()
     }
 
@@ -1129,7 +1140,7 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         return asIStorageItem().RenameAsyncOverloadDefaultOptions(desiredName)
     }
 
-    public unsafe func RenameAsync(desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncAction {
+    public unsafe func RenameAsync(desiredName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncAction {
         return asIStorageItem().RenameAsync(desiredName, option)
     }
 
@@ -1137,12 +1148,12 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         return asIStorageItem().DeleteAsyncOverloadDefaultOptions()
     }
 
-    public unsafe func DeleteAsync(option: _impl_l0.StorageDeleteOption): windows_future.IAsyncAction {
+    public unsafe func DeleteAsync(option: impl_p0.StorageDeleteOption): windows_future.IAsyncAction {
         return asIStorageItem().DeleteAsync(option)
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func GetBasicPropertiesAsync(): windows_future.IAsyncOperation<_impl_l0.BasicProperties> {
+    public unsafe func GetBasicPropertiesAsync(): windows_future.IAsyncOperation<impl_p0.BasicProperties> {
         return asIStorageItem().GetBasicPropertiesAsync()
     }
 
@@ -1154,7 +1165,7 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         return asIStorageItem().Path()
     }
 
-    public unsafe func Attributes(): _impl_l0.FileAttributes {
+    public unsafe func Attributes(): impl_p0.FileAttributes {
         return asIStorageItem().Attributes()
     }
 
@@ -1162,22 +1173,22 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         return asIStorageItem().DateCreated()
     }
 
-    public unsafe func IsOfType(type_: _impl_l0.StorageItemTypes): Bool {
+    public unsafe func IsOfType(type_: impl_p0.StorageItemTypes): Bool {
         return asIStorageItem().IsOfType(type_)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: impl_p0.ThumbnailMode): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: impl_p0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<_impl_l1.StorageItemThumbnail> {
+    public unsafe func GetThumbnailAsync(mode: impl_p0.ThumbnailMode, requestedSize: UInt32, options: impl_p0.ThumbnailOptions): windows_future.IAsyncOperation<impl_p1.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(mode, requestedSize, options)
     }
 
@@ -1194,96 +1205,96 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage_FileProperties == "on"]
-    public unsafe func Properties(): _impl_l1.StorageItemContentProperties {
+    public unsafe func Properties(): impl_p1.StorageItemContentProperties {
         return asIStorageItemProperties().Properties()
     }
 
-    public unsafe func GetIndexedStateAsync(): windows_future.IAsyncOperation<_impl_l0.IndexedState> {
+    public unsafe func GetIndexedStateAsync(): windows_future.IAsyncOperation<impl_p0.IndexedState> {
         return asIStorageFolderQueryOperations().GetIndexedStateAsync()
     }
 
-    public unsafe func CreateFileQueryOverloadDefault(): _impl_l1.StorageFileQueryResult {
+    public unsafe func CreateFileQueryOverloadDefault(): impl_p1.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQueryOverloadDefault()
     }
 
-    public unsafe func CreateFileQuery(query: _impl_l0.CommonFileQuery): _impl_l1.StorageFileQueryResult {
+    public unsafe func CreateFileQuery(query: impl_p0.CommonFileQuery): impl_p1.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQuery(query)
     }
 
-    public unsafe func CreateFileQueryWithOptions(queryOptions: _impl_l1.QueryOptions): _impl_l1.StorageFileQueryResult {
+    public unsafe func CreateFileQueryWithOptions(queryOptions: impl_p1.QueryOptions): impl_p1.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQueryWithOptions(queryOptions)
     }
 
-    public unsafe func CreateFolderQueryOverloadDefault(): _impl_l1.StorageFolderQueryResult {
+    public unsafe func CreateFolderQueryOverloadDefault(): impl_p1.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQueryOverloadDefault()
     }
 
-    public unsafe func CreateFolderQuery(query: _impl_l0.CommonFolderQuery): _impl_l1.StorageFolderQueryResult {
+    public unsafe func CreateFolderQuery(query: impl_p0.CommonFolderQuery): impl_p1.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQuery(query)
     }
 
-    public unsafe func CreateFolderQueryWithOptions(queryOptions: _impl_l1.QueryOptions): _impl_l1.StorageFolderQueryResult {
+    public unsafe func CreateFolderQueryWithOptions(queryOptions: impl_p1.QueryOptions): impl_p1.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQueryWithOptions(queryOptions)
     }
 
-    public unsafe func CreateItemQuery(): _impl_l1.StorageItemQueryResult {
+    public unsafe func CreateItemQuery(): impl_p1.StorageItemQueryResult {
         return asIStorageFolderQueryOperations().CreateItemQuery()
     }
 
-    public unsafe func CreateItemQueryWithOptions(queryOptions: _impl_l1.QueryOptions): _impl_l1.StorageItemQueryResult {
+    public unsafe func CreateItemQueryWithOptions(queryOptions: impl_p1.QueryOptions): impl_p1.StorageItemQueryResult {
         return asIStorageFolderQueryOperations().CreateItemQueryWithOptions(queryOptions)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFilesAsync(query: _impl_l0.CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
+    public unsafe func GetFilesAsync(query: impl_p0.CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsync(query, startIndex, maxItemsToRetrieve)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFileQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
+    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: impl_p0.CommonFileQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsyncOverloadDefaultStartAndCount(query)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func GetFoldersAsync(query: _impl_l0.CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFolder>> {
+    public unsafe func GetFoldersAsync(query: impl_p0.CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsync(query, startIndex, maxItemsToRetrieve)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFolderQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFolder>> {
+    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: impl_p0.CommonFolderQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsyncOverloadDefaultStartAndCount(query)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.IStorageItem>> {
+    public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.IStorageItem>> {
         return asIStorageFolderQueryOperations().GetItemsAsync(startIndex, maxItemsToRetrieve)
     }
 
-    public unsafe func AreQueryOptionsSupported(queryOptions: _impl_l1.QueryOptions): Bool {
+    public unsafe func AreQueryOptionsSupported(queryOptions: impl_p1.QueryOptions): Bool {
         return asIStorageFolderQueryOperations().AreQueryOptionsSupported(queryOptions)
     }
 
-    public unsafe func IsCommonFolderQuerySupported(query: _impl_l0.CommonFolderQuery): Bool {
+    public unsafe func IsCommonFolderQuerySupported(query: impl_p0.CommonFolderQuery): Bool {
         return asIStorageFolderQueryOperations().IsCommonFolderQuerySupported(query)
     }
 
-    public unsafe func IsCommonFileQuerySupported(query: _impl_l0.CommonFileQuery): Bool {
+    public unsafe func IsCommonFileQuerySupported(query: impl_p0.CommonFileQuery): Bool {
         return asIStorageFolderQueryOperations().IsCommonFileQuerySupported(query)
     }
 
-    public unsafe func GetParentAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetParentAsync(): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageItem2().GetParentAsync()
     }
 
-    public unsafe func IsEqual(item: _impl_l1.IStorageItem): Bool {
+    public unsafe func IsEqual(item: impl_p1.IStorageItem): Bool {
         return asIStorageItem2().IsEqual(item)
     }
 
-    public unsafe func TryGetItemAsync(name: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func TryGetItemAsync(name: windows_core.HString): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return asIStorageFolder2().TryGetItemAsync(name)
     }
 
-    public unsafe func Provider(): _impl_l1.StorageProvider {
+    public unsafe func Provider(): impl_p1.StorageProvider {
         return asIStorageItemPropertiesWithProvider().Provider()
     }
 }
@@ -1599,7 +1610,7 @@ public class FileInformationFactory <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public static unsafe func CreateWithMode(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode): FileInformationFactory {
+    public static unsafe func CreateWithMode(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode): FileInformationFactory {
         var result__: Option<FileInformationFactory> = Option<FileInformationFactory>.None
         try (factory__ = windows_core.factory<FileInformationFactory, IFileInformationFactoryFactory>().unwrap()) {
             result__ = Some(factory__.CreateWithMode(queryResult, mode))
@@ -1611,7 +1622,7 @@ public class FileInformationFactory <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public static unsafe func CreateWithModeAndSize(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32): FileInformationFactory {
+    public static unsafe func CreateWithModeAndSize(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32): FileInformationFactory {
         var result__: Option<FileInformationFactory> = Option<FileInformationFactory>.None
         try (factory__ = windows_core.factory<FileInformationFactory, IFileInformationFactoryFactory>().unwrap()) {
             result__ = Some(factory__.CreateWithModeAndSize(queryResult, mode, requestedThumbnailSize))
@@ -1623,7 +1634,7 @@ public class FileInformationFactory <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public static unsafe func CreateWithModeAndSizeAndOptions(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: _impl_l0.ThumbnailOptions): FileInformationFactory {
+    public static unsafe func CreateWithModeAndSizeAndOptions(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: impl_p0.ThumbnailOptions): FileInformationFactory {
         var result__: Option<FileInformationFactory> = Option<FileInformationFactory>.None
         try (factory__ = windows_core.factory<FileInformationFactory, IFileInformationFactoryFactory>().unwrap()) {
             result__ = Some(factory__.CreateWithModeAndSizeAndOptions(queryResult, mode, requestedThumbnailSize, thumbnailOptions))
@@ -1635,7 +1646,7 @@ public class FileInformationFactory <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public static unsafe func CreateWithModeAndSizeAndOptionsAndFlags(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: _impl_l0.ThumbnailOptions, delayLoad: Bool): FileInformationFactory {
+    public static unsafe func CreateWithModeAndSizeAndOptionsAndFlags(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: impl_p0.ThumbnailOptions, delayLoad: Bool): FileInformationFactory {
         var result__: Option<FileInformationFactory> = Option<FileInformationFactory>.None
         try (factory__ = windows_core.factory<FileInformationFactory, IFileInformationFactoryFactory>().unwrap()) {
             result__ = Some(factory__.CreateWithModeAndSizeAndOptionsAndFlags(queryResult, mode, requestedThumbnailSize, thumbnailOptions, delayLoad))
@@ -1670,19 +1681,19 @@ extend FileInformationFactory <: windows_core.HandleWinrtType<FileInformationFac
 public struct IFileInformationFactoryFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public var CreateWithMode: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.ThumbnailModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateWithMode: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.ThumbnailModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Search != "on"]
     public var CreateWithMode: UIntNative = UIntNative(0)
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public var CreateWithModeAndSize: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var CreateWithModeAndSize: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.ThumbnailModeAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Search != "on"]
     public var CreateWithModeAndSize: UIntNative = UIntNative(0)
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public var CreateWithModeAndSizeAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, _impl_l0.ThumbnailOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var CreateWithModeAndSizeAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.ThumbnailModeAbi, UInt32, impl_p0.ThumbnailOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Search != "on"]
     public var CreateWithModeAndSizeAndOptions: UIntNative = UIntNative(0)
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public var CreateWithModeAndSizeAndOptionsAndFlags: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, _impl_l0.ThumbnailOptionsAbi, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var CreateWithModeAndSizeAndOptionsAndFlags: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.ThumbnailModeAbi, UInt32, impl_p0.ThumbnailOptionsAbi, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Search != "on"]
     public var CreateWithModeAndSizeAndOptionsAndFlags: UIntNative = UIntNative(0)
     public init() {}
@@ -1724,7 +1735,7 @@ public class IFileInformationFactoryFactory <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileInformationFactoryFactory", IFileInformationFactoryFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileInformationFactoryFactoryVtbl", "IFileInformationFactoryFactory", "IFileInformationFactoryFactory_Impl", [InterfaceMethodSchema("CreateWithMode", 6, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<_impl_l1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "_impl_l0.ThumbnailModeAbi", "_impl_l0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSize", 7, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<_impl_l1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "_impl_l0.ThumbnailModeAbi", "_impl_l0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSizeAndOptions", 8, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<_impl_l1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "_impl_l0.ThumbnailModeAbi", "_impl_l0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("thumbnailOptions", "_impl_l0.ThumbnailOptionsAbi", "_impl_l0.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSizeAndOptionsAndFlags", 9, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<_impl_l1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "_impl_l0.ThumbnailModeAbi", "_impl_l0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("thumbnailOptions", "_impl_l0.ThumbnailOptionsAbi", "_impl_l0.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("delayLoad", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileInformationFactoryFactory", IFileInformationFactoryFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IFileInformationFactoryFactoryVtbl", "IFileInformationFactoryFactory", "IFileInformationFactoryFactory_Impl", [InterfaceMethodSchema("CreateWithMode", 6, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<impl_p1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "impl_p0.ThumbnailModeAbi", "impl_p0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSize", 7, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<impl_p1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "impl_p0.ThumbnailModeAbi", "impl_p0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSizeAndOptions", 8, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<impl_p1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "impl_p0.ThumbnailModeAbi", "impl_p0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("thumbnailOptions", "impl_p0.ThumbnailOptionsAbi", "impl_p0.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithModeAndSizeAndOptionsAndFlags", 9, [InterfaceParameterSchema("queryResult", "CPointer<Unit>", "InParam<impl_p1.IStorageQueryResultBase>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mode", "impl_p0.ThumbnailModeAbi", "impl_p0.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedThumbnailSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("thumbnailOptions", "impl_p0.ThumbnailOptionsAbi", "impl_p0.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("delayLoad", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileInformationFactory>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileInformationFactoryFactory.runtimeType())
         return schema
     }
@@ -1754,37 +1765,37 @@ public class IFileInformationFactoryFactory <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public unsafe func CreateWithMode(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode): FileInformationFactory {
+    public unsafe func CreateWithMode(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode): FileInformationFactory {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.CreateWithMode(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<_impl_l0.ThumbnailMode>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.CreateWithMode(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<impl_p0.ThumbnailMode>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return FileInformationFactory.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public unsafe func CreateWithModeAndSize(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32): FileInformationFactory {
+    public unsafe func CreateWithModeAndSize(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32): FileInformationFactory {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.CreateWithModeAndSize(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<_impl_l0.ThumbnailMode>()), requestedThumbnailSize, CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.CreateWithModeAndSize(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<impl_p0.ThumbnailMode>()), requestedThumbnailSize, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return FileInformationFactory.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public unsafe func CreateWithModeAndSizeAndOptions(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: _impl_l0.ThumbnailOptions): FileInformationFactory {
+    public unsafe func CreateWithModeAndSizeAndOptions(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: impl_p0.ThumbnailOptions): FileInformationFactory {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.CreateWithModeAndSizeAndOptions(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<_impl_l0.ThumbnailMode>()), requestedThumbnailSize, windows_core.projectTypedAbi(thumbnailOptions, windows_core.typeMarker<_impl_l0.ThumbnailOptions>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.CreateWithModeAndSizeAndOptions(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<impl_p0.ThumbnailMode>()), requestedThumbnailSize, windows_core.projectTypedAbi(thumbnailOptions, windows_core.typeMarker<impl_p0.ThumbnailOptions>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return FileInformationFactory.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Search == "on"]
-    public unsafe func CreateWithModeAndSizeAndOptionsAndFlags(queryResult: _impl_l1.IStorageQueryResultBase, mode: _impl_l0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: _impl_l0.ThumbnailOptions, delayLoad: Bool): FileInformationFactory {
+    public unsafe func CreateWithModeAndSizeAndOptionsAndFlags(queryResult: impl_p1.IStorageQueryResultBase, mode: impl_p0.ThumbnailMode, requestedThumbnailSize: UInt32, thumbnailOptions: impl_p0.ThumbnailOptions, delayLoad: Bool): FileInformationFactory {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.CreateWithModeAndSizeAndOptionsAndFlags(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<_impl_l0.ThumbnailMode>()), requestedThumbnailSize, windows_core.projectTypedAbi(thumbnailOptions, windows_core.typeMarker<_impl_l0.ThumbnailOptions>()), delayLoad, CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.CreateWithModeAndSizeAndOptionsAndFlags(asRaw(), queryResult.asRaw(), windows_core.projectTypedAbi(mode, windows_core.typeMarker<impl_p0.ThumbnailMode>()), requestedThumbnailSize, windows_core.projectTypedAbi(thumbnailOptions, windows_core.typeMarker<impl_p0.ThumbnailOptions>()), delayLoad, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return FileInformationFactory.fromAbiTake(result__)
     }

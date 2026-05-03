@@ -4,19 +4,31 @@
 package windows.UI.Shell
 
 import std.collection.*
+@When[Windows_UI_Shell == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Shell == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Shell == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Shell == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Shell == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Shell == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Shell == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Shell == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
+@When[Windows_UI_Shell == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_UI_Shell == "on" && Windows_UI_StartScreen == "on"]
 import windows.UI.StartScreen as UI_StartScreen
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_UI_Shell == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Shell == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Shell == "on"]
 import windows_future as windows_future
 
 
@@ -437,7 +449,7 @@ public class ITaskbarManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITaskbarManager", ITaskbarManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITaskbarManagerVtbl", "ITaskbarManager", "ITaskbarManager_Impl", [InterfaceMethodSchema("IsSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinningAllowed", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCurrentAppPinnedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAppListEntryPinnedAsync", 9, [InterfaceParameterSchema("appListEntry", "CPointer<Unit>", "InParam<_impl_l2.AppListEntry>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPinCurrentAppAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPinAppListEntryAsync", 11, [InterfaceParameterSchema("appListEntry", "CPointer<Unit>", "InParam<_impl_l2.AppListEntry>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITaskbarManager", ITaskbarManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITaskbarManagerVtbl", "ITaskbarManager", "ITaskbarManager_Impl", [InterfaceMethodSchema("IsSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPinningAllowed", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCurrentAppPinnedAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAppListEntryPinnedAsync", 9, [InterfaceParameterSchema("appListEntry", "CPointer<Unit>", "InParam<impl_p1.AppListEntry>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPinCurrentAppAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPinAppListEntryAsync", 11, [InterfaceParameterSchema("appListEntry", "CPointer<Unit>", "InParam<impl_p1.AppListEntry>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITaskbarManager.runtimeType())
         return schema
     }
@@ -491,7 +503,7 @@ public class ITaskbarManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func IsAppListEntryPinnedAsync(appListEntry: _impl_l2.AppListEntry): windows_future.IAsyncOperation<Bool> {
+    public unsafe func IsAppListEntryPinnedAsync(appListEntry: impl_p1.AppListEntry): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsAppListEntryPinnedAsync(asRaw(), appListEntry.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -508,7 +520,7 @@ public class ITaskbarManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func RequestPinAppListEntryAsync(appListEntry: _impl_l2.AppListEntry): windows_future.IAsyncOperation<Bool> {
+    public unsafe func RequestPinAppListEntryAsync(appListEntry: impl_p1.AppListEntry): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestPinAppListEntryAsync(asRaw(), appListEntry.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2773,7 +2785,7 @@ public class IWindowTabIconStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWindowTabIconStatics", IWindowTabIconStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowTabIconStaticsVtbl", "IWindowTabIconStatics", "IWindowTabIconStatics_Impl", [InterfaceMethodSchema("CreateFromFontGlyph", 6, [InterfaceParameterSchema("glyph", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontFamily", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromFontGlyphWithUri", 7, [InterfaceParameterSchema("glyph", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontFamily", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromImage", 8, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWindowTabIconStatics", IWindowTabIconStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowTabIconStaticsVtbl", "IWindowTabIconStatics", "IWindowTabIconStatics_Impl", [InterfaceMethodSchema("CreateFromFontGlyph", 6, [InterfaceParameterSchema("glyph", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontFamily", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromFontGlyphWithUri", 7, [InterfaceParameterSchema("glyph", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontFamily", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fontUri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromImage", 8, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTabIcon>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWindowTabIconStatics.runtimeType())
         return schema
     }
@@ -2819,7 +2831,7 @@ public class IWindowTabIconStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromImage(image: _impl_l1.IRandomAccessStreamReference): WindowTabIcon {
+    public unsafe func CreateFromImage(image: impl_p1.IRandomAccessStreamReference): WindowTabIcon {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromImage(asRaw(), image.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3347,7 +3359,7 @@ public class IWindowTabThumbnailRequestedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWindowTabThumbnailRequestedEventArgs", IWindowTabThumbnailRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowTabThumbnailRequestedEventArgsVtbl", "IWindowTabThumbnailRequestedEventArgs", "IWindowTabThumbnailRequestedEventArgs_Impl", [InterfaceMethodSchema("Tab", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTab>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedSize", 7, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapSizeAbi>", "OutSlot<Graphics_Imaging.BitmapSize>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Image", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCompositedOnWindow", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWindowTabThumbnailRequestedEventArgs", IWindowTabThumbnailRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWindowTabThumbnailRequestedEventArgsVtbl", "IWindowTabThumbnailRequestedEventArgs", "IWindowTabThumbnailRequestedEventArgs_Impl", [InterfaceMethodSchema("Tab", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WindowTab>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedSize", 7, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapSizeAbi>", "OutSlot<Graphics_Imaging.BitmapSize>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Image", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCompositedOnWindow", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWindowTabThumbnailRequestedEventArgs.runtimeType())
         return schema
     }
@@ -3394,16 +3406,16 @@ public class IWindowTabThumbnailRequestedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Image(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetImage(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -3638,7 +3650,7 @@ public class TaskbarManager <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func IsAppListEntryPinnedAsync(appListEntry: _impl_l2.AppListEntry): windows_future.IAsyncOperation<Bool> {
+    public unsafe func IsAppListEntryPinnedAsync(appListEntry: impl_p1.AppListEntry): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().IsAppListEntryPinnedAsync(appListEntry)
     }
 
@@ -3647,7 +3659,7 @@ public class TaskbarManager <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func RequestPinAppListEntryAsync(appListEntry: _impl_l2.AppListEntry): windows_future.IAsyncOperation<Bool> {
+    public unsafe func RequestPinAppListEntryAsync(appListEntry: impl_p1.AppListEntry): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().RequestPinAppListEntryAsync(appListEntry)
     }
 
@@ -4289,7 +4301,7 @@ public class WindowTabIcon <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromImage(image: _impl_l1.IRandomAccessStreamReference): WindowTabIcon {
+    public static unsafe func CreateFromImage(image: impl_p1.IRandomAccessStreamReference): WindowTabIcon {
         var result__: Option<WindowTabIcon> = Option<WindowTabIcon>.None
         try (factory__ = windows_core.factory<WindowTabIcon, IWindowTabIconStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromImage(image))
@@ -4756,12 +4768,12 @@ public class WindowTabThumbnailRequestedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Image()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         defaultInterface().SetImage(value)
     }
 

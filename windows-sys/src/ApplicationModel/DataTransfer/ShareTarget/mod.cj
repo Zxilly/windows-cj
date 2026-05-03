@@ -2,8 +2,4 @@
 package windows_sys.ApplicationModel.DataTransfer.ShareTarget
 
 @When[Windows_ApplicationModel_DataTransfer_ShareTarget == "on"]
-public import windows_sys._impl_l1.{IQuickLink, IQuickLinkVtbl, IShareOperation3, IShareOperation3Vtbl}
-@When[Windows_ApplicationModel_DataTransfer_ShareTarget == "on"]
-public import windows_sys._impl_l2.{IShareOperation, IShareOperationVtbl}
-@When[Windows_ApplicationModel_DataTransfer_ShareTarget == "on"]
-public import windows_sys._impl_l0.{IShareOperation2, IShareOperation2Vtbl}
+public import windows_sys.impl.s_967903364.{IQuickLink, IQuickLinkVtbl, IShareOperation, IShareOperation2, IShareOperation2Vtbl, IShareOperation3, IShareOperation3Vtbl, IShareOperationVtbl}

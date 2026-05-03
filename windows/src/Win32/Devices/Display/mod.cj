@@ -4,20 +4,37 @@
 package windows.Win32.Devices.Display
 
 import std.collection.*
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_polyfill.{packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
+@When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_OpenGL == "on"]
 import windows.Win32.Graphics.OpenGL as Win32_Graphics_OpenGL
+@When[Windows_Win32_Devices_Display == "on" && Windows_Win32_UI_ColorSystem == "on"]
 import windows.Win32.UI.ColorSystem as Win32_UI_ColorSystem
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_Display == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_Display == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Devices_Display == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Devices_Display == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_Devices_Display == "on"]
 import windows_core as windows_core
 
 
@@ -3407,7 +3424,7 @@ extend FONTSIM <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 public struct FONT_IMAGE_INFO {
-    public var FontSize: Win32__impl_l0.COORD = Win32__impl_l0.COORD()
+    public var FontSize: Win32_impl_p0.COORD = Win32_impl_p0.COORD()
     public var ImageBits: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
 }
@@ -3415,7 +3432,7 @@ public struct FONT_IMAGE_INFO {
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 @C
 public struct FONT_IMAGE_INFOAbi {
-    public var FontSize: Win32__impl_l0.COORDAbi = Win32__impl_l0.COORDAbi()
+    public var FontSize: Win32_impl_p0.COORDAbi = Win32_impl_p0.COORDAbi()
     public var ImageBits: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
 }
@@ -3427,13 +3444,13 @@ extend FONT_IMAGE_INFO <: windows_core.CopyType & windows_core.RuntimeType & win
     public static func signature(): String { "struct(Windows.Win32.Devices.Display.FONT_IMAGE_INFO;struct(Windows.Win32.System.Console.COORD;i2;i2);cinterface(IInspectable))" }
     public static func projectAbi(value: FONT_IMAGE_INFO): FONT_IMAGE_INFOAbi {
         var abi = FONT_IMAGE_INFOAbi()
-        abi.FontSize = windows_core.projectTypedAbi(value.FontSize, windows_core.typeMarker<Win32__impl_l0.COORD>())
+        abi.FontSize = windows_core.projectTypedAbi(value.FontSize, windows_core.typeMarker<Win32_impl_p0.COORD>())
         abi.ImageBits = value.ImageBits
         return abi
     }
     public static func assumeInitRef(abi: FONT_IMAGE_INFOAbi): FONT_IMAGE_INFO {
         var value = FONT_IMAGE_INFO()
-        value.FontSize = windows_core.fromTypedAbi(abi.FontSize, windows_core.typeMarker<Win32__impl_l0.COORD>()).unwrap()
+        value.FontSize = windows_core.fromTypedAbi(abi.FontSize, windows_core.typeMarker<Win32_impl_p0.COORD>()).unwrap()
         value.ImageBits = abi.ImageBits
         return value
     }
@@ -3446,8 +3463,8 @@ extend FONT_IMAGE_INFO <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 public struct FSCNTL_SCREEN_INFO {
-    public var Position: Win32__impl_l0.COORD = Win32__impl_l0.COORD()
-    public var ScreenSize: Win32__impl_l0.COORD = Win32__impl_l0.COORD()
+    public var Position: Win32_impl_p0.COORD = Win32_impl_p0.COORD()
+    public var ScreenSize: Win32_impl_p0.COORD = Win32_impl_p0.COORD()
     public var nNumberOfChars: UInt32 = 0u32
     public init() {}
 }
@@ -3455,8 +3472,8 @@ public struct FSCNTL_SCREEN_INFO {
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 @C
 public struct FSCNTL_SCREEN_INFOAbi {
-    public var Position: Win32__impl_l0.COORDAbi = Win32__impl_l0.COORDAbi()
-    public var ScreenSize: Win32__impl_l0.COORDAbi = Win32__impl_l0.COORDAbi()
+    public var Position: Win32_impl_p0.COORDAbi = Win32_impl_p0.COORDAbi()
+    public var ScreenSize: Win32_impl_p0.COORDAbi = Win32_impl_p0.COORDAbi()
     public var nNumberOfChars: UInt32 = 0u32
     public init() {}
 }
@@ -3468,15 +3485,15 @@ extend FSCNTL_SCREEN_INFO <: windows_core.CopyType & windows_core.RuntimeType & 
     public static func signature(): String { "struct(Windows.Win32.Devices.Display.FSCNTL_SCREEN_INFO;struct(Windows.Win32.System.Console.COORD;i2;i2);struct(Windows.Win32.System.Console.COORD;i2;i2);u4)" }
     public static func projectAbi(value: FSCNTL_SCREEN_INFO): FSCNTL_SCREEN_INFOAbi {
         var abi = FSCNTL_SCREEN_INFOAbi()
-        abi.Position = windows_core.projectTypedAbi(value.Position, windows_core.typeMarker<Win32__impl_l0.COORD>())
-        abi.ScreenSize = windows_core.projectTypedAbi(value.ScreenSize, windows_core.typeMarker<Win32__impl_l0.COORD>())
+        abi.Position = windows_core.projectTypedAbi(value.Position, windows_core.typeMarker<Win32_impl_p0.COORD>())
+        abi.ScreenSize = windows_core.projectTypedAbi(value.ScreenSize, windows_core.typeMarker<Win32_impl_p0.COORD>())
         abi.nNumberOfChars = value.nNumberOfChars
         return abi
     }
     public static func assumeInitRef(abi: FSCNTL_SCREEN_INFOAbi): FSCNTL_SCREEN_INFO {
         var value = FSCNTL_SCREEN_INFO()
-        value.Position = windows_core.fromTypedAbi(abi.Position, windows_core.typeMarker<Win32__impl_l0.COORD>()).unwrap()
-        value.ScreenSize = windows_core.fromTypedAbi(abi.ScreenSize, windows_core.typeMarker<Win32__impl_l0.COORD>()).unwrap()
+        value.Position = windows_core.fromTypedAbi(abi.Position, windows_core.typeMarker<Win32_impl_p0.COORD>()).unwrap()
+        value.ScreenSize = windows_core.fromTypedAbi(abi.ScreenSize, windows_core.typeMarker<Win32_impl_p0.COORD>()).unwrap()
         value.nNumberOfChars = abi.nNumberOfChars
         return value
     }
@@ -3567,16 +3584,16 @@ extend FSVIDEO_REVERSE_MOUSE_POINTER <: windows_core.CopyType & windows_core.Run
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 public struct FSVIDEO_SCREEN_INFORMATION {
-    public var ScreenSize: Win32__impl_l0.COORD = Win32__impl_l0.COORD()
-    public var FontSize: Win32__impl_l0.COORD = Win32__impl_l0.COORD()
+    public var ScreenSize: Win32_impl_p0.COORD = Win32_impl_p0.COORD()
+    public var FontSize: Win32_impl_p0.COORD = Win32_impl_p0.COORD()
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 @C
 public struct FSVIDEO_SCREEN_INFORMATIONAbi {
-    public var ScreenSize: Win32__impl_l0.COORDAbi = Win32__impl_l0.COORDAbi()
-    public var FontSize: Win32__impl_l0.COORDAbi = Win32__impl_l0.COORDAbi()
+    public var ScreenSize: Win32_impl_p0.COORDAbi = Win32_impl_p0.COORDAbi()
+    public var FontSize: Win32_impl_p0.COORDAbi = Win32_impl_p0.COORDAbi()
     public init() {}
 }
 
@@ -3587,14 +3604,14 @@ extend FSVIDEO_SCREEN_INFORMATION <: windows_core.CopyType & windows_core.Runtim
     public static func signature(): String { "struct(Windows.Win32.Devices.Display.FSVIDEO_SCREEN_INFORMATION;struct(Windows.Win32.System.Console.COORD;i2;i2);struct(Windows.Win32.System.Console.COORD;i2;i2))" }
     public static func projectAbi(value: FSVIDEO_SCREEN_INFORMATION): FSVIDEO_SCREEN_INFORMATIONAbi {
         var abi = FSVIDEO_SCREEN_INFORMATIONAbi()
-        abi.ScreenSize = windows_core.projectTypedAbi(value.ScreenSize, windows_core.typeMarker<Win32__impl_l0.COORD>())
-        abi.FontSize = windows_core.projectTypedAbi(value.FontSize, windows_core.typeMarker<Win32__impl_l0.COORD>())
+        abi.ScreenSize = windows_core.projectTypedAbi(value.ScreenSize, windows_core.typeMarker<Win32_impl_p0.COORD>())
+        abi.FontSize = windows_core.projectTypedAbi(value.FontSize, windows_core.typeMarker<Win32_impl_p0.COORD>())
         return abi
     }
     public static func assumeInitRef(abi: FSVIDEO_SCREEN_INFORMATIONAbi): FSVIDEO_SCREEN_INFORMATION {
         var value = FSVIDEO_SCREEN_INFORMATION()
-        value.ScreenSize = windows_core.fromTypedAbi(abi.ScreenSize, windows_core.typeMarker<Win32__impl_l0.COORD>()).unwrap()
-        value.FontSize = windows_core.fromTypedAbi(abi.FontSize, windows_core.typeMarker<Win32__impl_l0.COORD>()).unwrap()
+        value.ScreenSize = windows_core.fromTypedAbi(abi.ScreenSize, windows_core.typeMarker<Win32_impl_p0.COORD>()).unwrap()
+        value.FontSize = windows_core.fromTypedAbi(abi.FontSize, windows_core.typeMarker<Win32_impl_p0.COORD>()).unwrap()
         return value
     }
     public static func fromAbi(abi: FSVIDEO_SCREEN_INFORMATIONAbi): Result<FSVIDEO_SCREEN_INFORMATION> { Result<FSVIDEO_SCREEN_INFORMATION>.Ok(FSVIDEO_SCREEN_INFORMATION.assumeInitRef(abi)) }
@@ -6901,7 +6918,7 @@ public type PFN_DrvDeleteDeviceBitmap = CFunc<(DHSURF) -> Unit>
 public type PFN_DrvDeleteDeviceBitmapEx = CFunc<(DHSURF) -> Unit>
 
 @When[Windows_Win32_Devices_Display == "on" && (Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on")]
-public type PFN_DrvDeriveSurface = CFunc<(CPointer<Win32__impl_l1.DD_DIRECTDRAW_GLOBALAbi>, CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>) -> Win32_Graphics_Gdi.HBITMAP>
+public type PFN_DrvDeriveSurface = CFunc<(CPointer<Win32_impl_p1.DD_DIRECTDRAW_GLOBALAbi>, CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>) -> Win32_Graphics_Gdi.HBITMAP>
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_OpenGL == "on"]
 public type PFN_DrvDescribePixelFormat = CFunc<(DHPDEV, Int32, UInt32, CPointer<Win32_Graphics_OpenGL.PIXELFORMATDESCRIPTORAbi>) -> Int32>
@@ -6925,7 +6942,7 @@ public type PFN_DrvDisableSurface = CFunc<(DHPDEV) -> Unit>
 public type PFN_DrvDitherColor = CFunc<(DHPDEV, UInt32, UInt32, CPointer<UInt32>) -> UInt32>
 
 @When[Windows_Win32_Devices_Display == "on" && (Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on")]
-public type PFN_DrvEnableDirectDraw = CFunc<(DHPDEV, CPointer<Win32__impl_l2.DD_CALLBACKSAbi>, CPointer<Win32__impl_l2.DD_SURFACECALLBACKSAbi>, CPointer<Win32__impl_l2.DD_PALETTECALLBACKSAbi>) -> Int32>
+public type PFN_DrvEnableDirectDraw = CFunc<(DHPDEV, CPointer<Win32_impl_p3.DD_CALLBACKSAbi>, CPointer<Win32_impl_p3.DD_SURFACECALLBACKSAbi>, CPointer<Win32_impl_p2.DD_PALETTECALLBACKSAbi>) -> Int32>
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public type PFN_DrvEnablePDEV = CFunc<(CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>, CPointer<UInt16>, UInt32, CPointer<HSURF>, UInt32, CPointer<GDIINFOAbi>, UInt32, CPointer<DEVINFOAbi>, HDEV, CPointer<UInt16>, CPointer<Unit>) -> DHPDEV>
@@ -6937,7 +6954,7 @@ public type PFN_DrvEnableSurface = CFunc<(DHPDEV) -> HSURF>
 public type PFN_DrvFree = CFunc<(CPointer<Unit>, UIntNative) -> Unit>
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
-public type PFN_DrvGetDirectDrawInfo = CFunc<(DHPDEV, CPointer<Win32__impl_l2.DD_HALINFOAbi>, CPointer<UInt32>, CPointer<Win32__impl_l2.VIDEOMEMORYAbi>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>
+public type PFN_DrvGetDirectDrawInfo = CFunc<(DHPDEV, CPointer<Win32_impl_p3.DD_HALINFOAbi>, CPointer<UInt32>, CPointer<Win32_impl_p2.VIDEOMEMORYAbi>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>
 
 @When[Windows_Win32_Devices_Display == "on"]
 public type PFN_DrvGetGlyphMode = CFunc<(DHPDEV, CPointer<FONTOBJAbi>) -> UInt32>
@@ -10060,7 +10077,7 @@ extend Adapters <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 public struct CHAR_IMAGE_INFO {
-    public var CharInfo: Win32__impl_l0.CHAR_INFO = Win32__impl_l0.CHAR_INFO()
+    public var CharInfo: Win32_impl_p0.CHAR_INFO = Win32_impl_p0.CHAR_INFO()
     public var FontImageInfo: FONT_IMAGE_INFO = FONT_IMAGE_INFO()
     public init() {}
 }
@@ -10068,7 +10085,7 @@ public struct CHAR_IMAGE_INFO {
 @When[Windows_Win32_Devices_Display == "on" && Windows_Win32_System_Console == "on"]
 @C
 public struct CHAR_IMAGE_INFOAbi {
-    public var CharInfo: Win32__impl_l0.CHAR_INFOAbi = Win32__impl_l0.CHAR_INFOAbi()
+    public var CharInfo: Win32_impl_p0.CHAR_INFOAbi = Win32_impl_p0.CHAR_INFOAbi()
     public var FontImageInfo: FONT_IMAGE_INFOAbi = FONT_IMAGE_INFOAbi()
     public init() {}
 }
@@ -10080,13 +10097,13 @@ extend CHAR_IMAGE_INFO <: windows_core.CopyType & windows_core.RuntimeType & win
     public static func signature(): String { "struct(Windows.Win32.Devices.Display.CHAR_IMAGE_INFO;struct(Windows.Win32.System.Console.CHAR_INFO;_Char_e__Union;u2);struct(Windows.Win32.Devices.Display.FONT_IMAGE_INFO;struct(Windows.Win32.System.Console.COORD;i2;i2);cinterface(IInspectable)))" }
     public static func projectAbi(value: CHAR_IMAGE_INFO): CHAR_IMAGE_INFOAbi {
         var abi = CHAR_IMAGE_INFOAbi()
-        abi.CharInfo = windows_core.projectTypedAbi(value.CharInfo, windows_core.typeMarker<Win32__impl_l0.CHAR_INFO>())
+        abi.CharInfo = windows_core.projectTypedAbi(value.CharInfo, windows_core.typeMarker<Win32_impl_p0.CHAR_INFO>())
         abi.FontImageInfo = FONT_IMAGE_INFO.projectAbi(value.FontImageInfo)
         return abi
     }
     public static func assumeInitRef(abi: CHAR_IMAGE_INFOAbi): CHAR_IMAGE_INFO {
         var value = CHAR_IMAGE_INFO()
-        value.CharInfo = windows_core.fromTypedAbi(abi.CharInfo, windows_core.typeMarker<Win32__impl_l0.CHAR_INFO>()).unwrap()
+        value.CharInfo = windows_core.fromTypedAbi(abi.CharInfo, windows_core.typeMarker<Win32_impl_p0.CHAR_INFO>()).unwrap()
         value.FontImageInfo = FONT_IMAGE_INFO.assumeInitRef(abi.FontImageInfo)
         return value
     }

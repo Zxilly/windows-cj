@@ -4,14 +4,23 @@
 package windows.Storage.Compression
 
 import std.collection.*
+@When[Windows_Storage_Compression == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Storage_Compression == "on"]
 import windows_core as windows_core
+@When[Windows_Storage_Compression == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Storage_Compression == "on"]
 import windows_interface as windows_interface
+@When[Windows_Storage_Compression == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Storage_Compression == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Storage_Compression == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Storage_Compression == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Storage_Compression == "on"]
 import windows_future as windows_future
 
 
@@ -119,7 +128,7 @@ public class ICompressor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         if (iid == ICompressor.iid()) {
             return true
         }
-        for (ancestor in [_impl_l0.IOutputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p0.IOutputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -128,13 +137,13 @@ public class ICompressor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptor(): InterfaceDescriptor<ICompressor> {
-        var descriptor = InterfaceDescriptor<ICompressor>("ICompressor", ICompressor.iid(), IInspectable.descriptor(), [_impl_l0.IOutputStream.iid(), Foundation.IClosable.iid()], { raw => ICompressor.fromAbiTake(raw) }, { raw => ICompressor.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<ICompressor>("ICompressor", ICompressor.iid(), IInspectable.descriptor(), [impl_p0.IOutputStream.iid(), Foundation.IClosable.iid()], { raw => ICompressor.fromAbiTake(raw) }, { raw => ICompressor.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ICompressor.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompressor", ICompressor.iid(), _impl_l0.IOutputStream.descriptorSchema(), ["IOutputStream", "IClosable"], [_impl_l0.IOutputStream.iid(), Foundation.IClosable.iid()], "ICompressorVtbl", "ICompressor", "ICompressor_Impl", [InterfaceMethodSchema("FinishAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetachStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompressor", ICompressor.iid(), impl_p0.IOutputStream.descriptorSchema(), ["IOutputStream", "IClosable"], [impl_p0.IOutputStream.iid(), Foundation.IClosable.iid()], "ICompressorVtbl", "ICompressor", "ICompressor_Impl", [InterfaceMethodSchema("FinishAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetachStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICompressor.runtimeType())
         return schema
     }
@@ -159,8 +168,8 @@ public class ICompressor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIOutputStream(): _impl_l0.IOutputStream {
-        match (unsafe { query<_impl_l0.IOutputStream>(_impl_l0.IOutputStream.descriptor()) }) {
+    public func asIOutputStream(): impl_p0.IOutputStream {
+        match (unsafe { query<impl_p0.IOutputStream>(impl_p0.IOutputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIOutputStream: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -186,12 +195,12 @@ public class ICompressor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DetachStream(): _impl_l0.IOutputStream {
+    public unsafe func DetachStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DetachStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 }
 
@@ -235,7 +244,7 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
         if (iid == IDecompressor.iid()) {
             return true
         }
-        for (ancestor in [_impl_l0.IInputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [impl_p0.IInputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -244,13 +253,13 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IDecompressor> {
-        var descriptor = InterfaceDescriptor<IDecompressor>("IDecompressor", IDecompressor.iid(), IInspectable.descriptor(), [_impl_l0.IInputStream.iid(), Foundation.IClosable.iid()], { raw => IDecompressor.fromAbiTake(raw) }, { raw => IDecompressor.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IDecompressor>("IDecompressor", IDecompressor.iid(), IInspectable.descriptor(), [impl_p0.IInputStream.iid(), Foundation.IClosable.iid()], { raw => IDecompressor.fromAbiTake(raw) }, { raw => IDecompressor.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDecompressor.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDecompressor", IDecompressor.iid(), _impl_l0.IInputStream.descriptorSchema(), ["IInputStream", "IClosable"], [_impl_l0.IInputStream.iid(), Foundation.IClosable.iid()], "IDecompressorVtbl", "IDecompressor", "IDecompressor_Impl", [InterfaceMethodSchema("DetachStream", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDecompressor", IDecompressor.iid(), impl_p0.IInputStream.descriptorSchema(), ["IInputStream", "IClosable"], [impl_p0.IInputStream.iid(), Foundation.IClosable.iid()], "IDecompressorVtbl", "IDecompressor", "IDecompressor_Impl", [InterfaceMethodSchema("DetachStream", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDecompressor.runtimeType())
         return schema
     }
@@ -275,8 +284,8 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIInputStream(): _impl_l0.IInputStream {
-        match (unsafe { query<_impl_l0.IInputStream>(_impl_l0.IInputStream.descriptor()) }) {
+    public func asIInputStream(): impl_p0.IInputStream {
+        match (unsafe { query<impl_p0.IInputStream>(impl_p0.IInputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIInputStream: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -294,12 +303,12 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DetachStream(): _impl_l0.IInputStream {
+    public unsafe func DetachStream(): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DetachStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 }
 
@@ -333,7 +342,7 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     public static func descriptor(): InterfaceDescriptor<Compressor> {
-        let ancestors = [ICompressor.iid(), _impl_l0.IOutputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ICompressor.iid(), impl_p0.IOutputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<Compressor>("Compressor", ICompressor.iid(), ancestors, { raw => Compressor.fromAbiTake(raw) }, { raw => Compressor.viewOf(raw) })
     }
 
@@ -375,8 +384,8 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
-    public func asIOutputStream(): _impl_l0.IOutputStream {
-        match (unsafe { query(_impl_l0.IOutputStream.descriptor()) }) {
+    public func asIOutputStream(): impl_p0.IOutputStream {
+        match (unsafe { query(impl_p0.IOutputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -395,11 +404,11 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DetachStream(): _impl_l0.IOutputStream {
+    public unsafe func DetachStream(): impl_p0.IOutputStream {
         return defaultInterface().DetachStream()
     }
 
-    public unsafe func WriteAsync(buffer: _impl_l0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func WriteAsync(buffer: impl_p0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         return asIOutputStream().WriteAsync(buffer)
     }
 
@@ -412,7 +421,7 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateCompressor(underlyingStream: _impl_l0.IOutputStream): Compressor {
+    public static unsafe func CreateCompressor(underlyingStream: impl_p0.IOutputStream): Compressor {
         var result__: Option<Compressor> = Option<Compressor>.None
         try (factory__ = windows_core.factory<Compressor, ICompressorFactory>().unwrap()) {
             result__ = Some(factory__.CreateCompressor(underlyingStream))
@@ -424,7 +433,7 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateCompressorEx(underlyingStream: _impl_l0.IOutputStream, algorithm: CompressAlgorithm, blockSize: UInt32): Compressor {
+    public static unsafe func CreateCompressorEx(underlyingStream: impl_p0.IOutputStream, algorithm: CompressAlgorithm, blockSize: UInt32): Compressor {
         var result__: Option<Compressor> = Option<Compressor>.None
         try (factory__ = windows_core.factory<Compressor, ICompressorFactory>().unwrap()) {
             result__ = Some(factory__.CreateCompressorEx(underlyingStream, algorithm, blockSize))
@@ -481,7 +490,7 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public static func descriptor(): InterfaceDescriptor<Decompressor> {
-        let ancestors = [IDecompressor.iid(), _impl_l0.IInputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IDecompressor.iid(), impl_p0.IInputStream.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<Decompressor>("Decompressor", IDecompressor.iid(), ancestors, { raw => Decompressor.fromAbiTake(raw) }, { raw => Decompressor.viewOf(raw) })
     }
 
@@ -523,8 +532,8 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    public func asIInputStream(): _impl_l0.IInputStream {
-        match (unsafe { query(_impl_l0.IInputStream.descriptor()) }) {
+    public func asIInputStream(): impl_p0.IInputStream {
+        match (unsafe { query(impl_p0.IInputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -538,11 +547,11 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DetachStream(): _impl_l0.IInputStream {
+    public unsafe func DetachStream(): impl_p0.IInputStream {
         return defaultInterface().DetachStream()
     }
 
-    public unsafe func ReadAsync(buffer: _impl_l0.IBuffer, count: UInt32, options: _impl_l0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<_impl_l0.IBuffer, UInt32> {
+    public unsafe func ReadAsync(buffer: impl_p0.IBuffer, count: UInt32, options: impl_p0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<impl_p0.IBuffer, UInt32> {
         return asIInputStream().ReadAsync(buffer, count, options)
     }
 
@@ -551,7 +560,7 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateDecompressor(underlyingStream: _impl_l0.IInputStream): Decompressor {
+    public static unsafe func CreateDecompressor(underlyingStream: impl_p0.IInputStream): Decompressor {
         var result__: Option<Decompressor> = Option<Decompressor>.None
         try (factory__ = windows_core.factory<Decompressor, IDecompressorFactory>().unwrap()) {
             result__ = Some(factory__.CreateDecompressor(underlyingStream))
@@ -632,7 +641,7 @@ public class ICompressorFactory <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompressorFactory", ICompressorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompressorFactoryVtbl", "ICompressorFactory", "ICompressorFactory_Impl", [InterfaceMethodSchema("CreateCompressor", 6, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Compressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCompressorEx", 7, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("algorithm", "CompressAlgorithmAbi", "CompressAlgorithm", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("blockSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Compressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompressorFactory", ICompressorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompressorFactoryVtbl", "ICompressorFactory", "ICompressorFactory_Impl", [InterfaceMethodSchema("CreateCompressor", 6, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Compressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCompressorEx", 7, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("algorithm", "CompressAlgorithmAbi", "CompressAlgorithm", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("blockSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Compressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICompressorFactory.runtimeType())
         return schema
     }
@@ -662,7 +671,7 @@ public class ICompressorFactory <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateCompressor(underlyingStream: _impl_l0.IOutputStream): Compressor {
+    public unsafe func CreateCompressor(underlyingStream: impl_p0.IOutputStream): Compressor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCompressor(asRaw(), underlyingStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -671,7 +680,7 @@ public class ICompressorFactory <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateCompressorEx(underlyingStream: _impl_l0.IOutputStream, algorithm: CompressAlgorithm, blockSize: UInt32): Compressor {
+    public unsafe func CreateCompressorEx(underlyingStream: impl_p0.IOutputStream, algorithm: CompressAlgorithm, blockSize: UInt32): Compressor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCompressorEx(asRaw(), underlyingStream.asRaw(), windows_core.projectTypedAbi(algorithm, windows_core.typeMarker<CompressAlgorithm>()), blockSize, CPointer<CPointer<Unit>>(inout result__))
@@ -730,7 +739,7 @@ public class IDecompressorFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDecompressorFactory", IDecompressorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDecompressorFactoryVtbl", "IDecompressorFactory", "IDecompressorFactory_Impl", [InterfaceMethodSchema("CreateDecompressor", 6, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Decompressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDecompressorFactory", IDecompressorFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDecompressorFactoryVtbl", "IDecompressorFactory", "IDecompressorFactory_Impl", [InterfaceMethodSchema("CreateDecompressor", 6, [InterfaceParameterSchema("underlyingStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Decompressor>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDecompressorFactory.runtimeType())
         return schema
     }
@@ -760,7 +769,7 @@ public class IDecompressorFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateDecompressor(underlyingStream: _impl_l0.IInputStream): Decompressor {
+    public unsafe func CreateDecompressor(underlyingStream: impl_p0.IInputStream): Decompressor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDecompressor(asRaw(), underlyingStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))

@@ -4,9 +4,13 @@
 package windows.Win32.System.Recovery
 
 import std.collection.*
+@When[Windows_Win32_System_Recovery == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_Recovery == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Recovery == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Recovery == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 import windows.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
 
 

@@ -4,18 +4,31 @@
 package windows.Win32.System.WindowsProgramming
 
 import std.collection.*
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_libloading
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_WindowsProgramming == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WindowsProgramming == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_System_WindowsProgramming == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_WindowsProgramming == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WindowsProgramming == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_core as windows_core
 
 
@@ -1909,7 +1922,7 @@ public class IDeleteBrowsingHistory <: InterfaceWrapperBase & ComInterface {
 public struct IEditionUpgradeBrokerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Ole == "on"]
-    public var InitializeParentWindow: CFunc<(CPointer<Unit>, Win32__impl_l0.OLE_HANDLE) -> Int32> = { _, _ => 0 }
+    public var InitializeParentWindow: CFunc<(CPointer<Unit>, Win32_impl_p0.OLE_HANDLE) -> Int32> = { _, _ => 0 }
     public var UpdateOperatingSystem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ShowProductKeyUI: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var CanUpgrade: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1957,7 +1970,7 @@ public class IEditionUpgradeBroker <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Ole == "on"]
-    public unsafe func InitializeParentWindow(parentHandle: Win32__impl_l0.OLE_HANDLE): Int32 {
+    public unsafe func InitializeParentWindow(parentHandle: Win32_impl_p0.OLE_HANDLE): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InitializeParentWindow(__liveRaw, parentHandle)
@@ -2869,7 +2882,7 @@ extend JIT_DEBUG_INFO <: windows_core.CopyType & windows_core.RuntimeType & wind
 @When[Windows_Win32_System_WindowsProgramming == "on" && Windows_Win32_System_Kernel == "on"]
 public struct LDR_DATA_TABLE_ENTRY {
     public var Reserved1: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
-    public var InMemoryOrderLinks: Win32__impl_l0.LIST_ENTRY = Win32__impl_l0.LIST_ENTRY()
+    public var InMemoryOrderLinks: Win32_impl_p0.LIST_ENTRY = Win32_impl_p0.LIST_ENTRY()
     public var Reserved2: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
     public var DllBase: CPointer<Unit> = CPointer<Unit>()
     public var Reserved3: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
@@ -2885,7 +2898,7 @@ public struct LDR_DATA_TABLE_ENTRY {
 @C
 public struct LDR_DATA_TABLE_ENTRYAbi {
     public var Reserved1: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
-    public var InMemoryOrderLinks: Win32__impl_l0.LIST_ENTRYAbi = Win32__impl_l0.LIST_ENTRYAbi()
+    public var InMemoryOrderLinks: Win32_impl_p0.LIST_ENTRYAbi = Win32_impl_p0.LIST_ENTRYAbi()
     public var Reserved2: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
     public var DllBase: CPointer<Unit> = CPointer<Unit>()
     public var Reserved3: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
@@ -2905,7 +2918,7 @@ extend LDR_DATA_TABLE_ENTRY <: windows_core.CopyType & windows_core.RuntimeType 
     public static func projectAbi(value: LDR_DATA_TABLE_ENTRY): LDR_DATA_TABLE_ENTRYAbi {
         var abi = LDR_DATA_TABLE_ENTRYAbi()
         abi.Reserved1 = value.Reserved1
-        abi.InMemoryOrderLinks = windows_core.projectTypedAbi(value.InMemoryOrderLinks, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY>())
+        abi.InMemoryOrderLinks = windows_core.projectTypedAbi(value.InMemoryOrderLinks, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY>())
         abi.Reserved2 = value.Reserved2
         abi.DllBase = value.DllBase
         abi.Reserved3 = value.Reserved3
@@ -2919,7 +2932,7 @@ extend LDR_DATA_TABLE_ENTRY <: windows_core.CopyType & windows_core.RuntimeType 
     public static func assumeInitRef(abi: LDR_DATA_TABLE_ENTRYAbi): LDR_DATA_TABLE_ENTRY {
         var value = LDR_DATA_TABLE_ENTRY()
         value.Reserved1 = abi.Reserved1
-        value.InMemoryOrderLinks = windows_core.fromTypedAbi(abi.InMemoryOrderLinks, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY>()).unwrap()
+        value.InMemoryOrderLinks = windows_core.fromTypedAbi(abi.InMemoryOrderLinks, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY>()).unwrap()
         value.Reserved2 = abi.Reserved2
         value.DllBase = abi.DllBase
         value.Reserved3 = abi.Reserved3
@@ -5511,7 +5524,7 @@ public struct ICameraUIControlVtbl {
     public var GetCurrentViewType: CFunc<(CPointer<Unit>, CPointer<CameraUIControlViewTypeAbi>) -> Int32> = { _, _ => 0 }
     public var GetActiveItem: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var RemoveCapturedItem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5594,7 +5607,7 @@ public class ICameraUIControl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSelectedItems(ppSelectedItemPaths: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSelectedItems(ppSelectedItemPaths: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSelectedItems(__liveRaw, ppSelectedItemPaths)
@@ -8012,11 +8025,11 @@ public unsafe func Windows_GdiEntry13(): UInt32 {
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlAnsiStringToUnicodeString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32__impl_l0.STRINGAbi>, AllocateDestinationString: UInt8): Int32
+    func RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32_impl_p0.STRINGAbi>, AllocateDestinationString: UInt8): Int32
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlAnsiStringToUnicodeString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32__impl_l0.STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+public unsafe func Windows_RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32_impl_p0.STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
     return RtlAnsiStringToUnicodeString(DestinationString, SourceString, AllocateDestinationString)
 }
 
@@ -8032,21 +8045,21 @@ public unsafe func Windows_RtlCharToInteger(String: CPointer<Int8>, Base: UInt32
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlFreeAnsiString(AnsiString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
+    func RtlFreeAnsiString(AnsiString: CPointer<Win32_impl_p0.STRINGAbi>): Unit
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlFreeAnsiString(AnsiString: CPointer<Win32__impl_l0.STRINGAbi>): Unit {
+public unsafe func Windows_RtlFreeAnsiString(AnsiString: CPointer<Win32_impl_p0.STRINGAbi>): Unit {
     RtlFreeAnsiString(AnsiString)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeOemString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlFreeOemString(OemString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
+    func RtlFreeOemString(OemString: CPointer<Win32_impl_p0.STRINGAbi>): Unit
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeOemString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlFreeOemString(OemString: CPointer<Win32__impl_l0.STRINGAbi>): Unit {
+public unsafe func Windows_RtlFreeOemString(OemString: CPointer<Win32_impl_p0.STRINGAbi>): Unit {
     RtlFreeOemString(OemString)
 }
 
@@ -8072,41 +8085,41 @@ public unsafe func Windows_RtlGetReturnAddressHijackTarget(): UIntNative {
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlInitAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
+    func RtlInitAnsiString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlInitAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
+public unsafe func Windows_RtlInitAnsiString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
     RtlInitAnsiString(DestinationString, SourceString)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiStringEx == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlInitAnsiStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
+    func RtlInitAnsiStringEx(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiStringEx == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlInitAnsiStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
+public unsafe func Windows_RtlInitAnsiStringEx(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
     return RtlInitAnsiStringEx(DestinationString, SourceString)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlInitString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
+    func RtlInitString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlInitString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
+public unsafe func Windows_RtlInitString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
     RtlInitString(DestinationString, SourceString)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitStringEx == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlInitStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
+    func RtlInitStringEx(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitStringEx == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlInitStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
+public unsafe func Windows_RtlInitStringEx(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
     return RtlInitStringEx(DestinationString, SourceString)
 }
 
@@ -8122,11 +8135,11 @@ public unsafe func Windows_RtlInitUnicodeString(DestinationString: CPointer<Win3
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlIsNameLegalDOS8Dot3 == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32__impl_l0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8
+    func RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32_impl_p0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlIsNameLegalDOS8Dot3 == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32__impl_l0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8 {
+public unsafe func Windows_RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32_impl_p0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8 {
     return RtlIsNameLegalDOS8Dot3(Name, OemName, NameContainsSpaces)
 }
 
@@ -8162,21 +8175,21 @@ public unsafe func Windows_RtlTimeToSecondsSince1970(Time: CPointer<Int64>, Elap
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
+    func RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+public unsafe func Windows_RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
     return RtlUnicodeStringToAnsiString(DestinationString, SourceString, AllocateDestinationString)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToOemString == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
-    func RtlUnicodeStringToOemString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
+    func RtlUnicodeStringToOemString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToOemString == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_RtlUnicodeStringToOemString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+public unsafe func Windows_RtlUnicodeStringToOemString(DestinationString: CPointer<Win32_impl_p0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
     return RtlUnicodeStringToOemString(DestinationString, SourceString, AllocateDestinationString)
 }
 

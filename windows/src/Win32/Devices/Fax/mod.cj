@@ -4,16 +4,28 @@
 package windows.Win32.Devices.Fax
 
 import std.collection.*
+@When[Windows_Win32_Devices_Fax == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Fax == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Fax == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_Fax == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
+@When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_Fax == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_Fax == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Devices_Fax == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Devices_Fax == "on"]
@@ -5402,7 +5414,7 @@ extend FaxServer <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxActivityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IncomingMessages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RoutingMessages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var OutgoingMessages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -5444,7 +5456,7 @@ public class IFaxActivity <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxActivity> {
-        return InterfaceDescriptor<IFaxActivity>("IFaxActivity", IFaxActivity.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxActivityFromAbi, viewIFaxActivity)
+        return InterfaceDescriptor<IFaxActivity>("IFaxActivity", IFaxActivity.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxActivityFromAbi, viewIFaxActivity)
     }
 
     public unsafe func vtbl(): IFaxActivityVtbl {
@@ -5485,7 +5497,7 @@ public class IFaxActivity <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxActivityLoggingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var LogIncoming: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetLogIncoming: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var LogOutgoing: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5530,7 +5542,7 @@ public class IFaxActivityLogging <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxActivityLogging> {
-        return InterfaceDescriptor<IFaxActivityLogging>("IFaxActivityLogging", IFaxActivityLogging.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxActivityLoggingFromAbi, viewIFaxActivityLogging)
+        return InterfaceDescriptor<IFaxActivityLogging>("IFaxActivityLogging", IFaxActivityLogging.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxActivityLoggingFromAbi, viewIFaxActivityLogging)
     }
 
     public unsafe func vtbl(): IFaxActivityLoggingVtbl {
@@ -5589,7 +5601,7 @@ public class IFaxActivityLogging <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxConfigurationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UseArchive: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetUseArchive: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ArchiveLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5668,7 +5680,7 @@ public class IFaxConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxConfiguration> {
-        return InterfaceDescriptor<IFaxConfiguration>("IFaxConfiguration", IFaxConfiguration.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxConfigurationFromAbi, viewIFaxConfiguration)
+        return InterfaceDescriptor<IFaxConfiguration>("IFaxConfiguration", IFaxConfiguration.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxConfigurationFromAbi, viewIFaxConfiguration)
     }
 
     public unsafe func vtbl(): IFaxConfigurationVtbl {
@@ -5931,7 +5943,7 @@ public class IFaxConfiguration <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDeviceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var DeviceName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ProviderUniqueName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5939,7 +5951,7 @@ public struct IFaxDeviceVtbl {
     public var ReceivingNow: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SendingNow: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var UsedRoutingMethods: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var UsedRoutingMethods: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SendEnabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5955,9 +5967,9 @@ public struct IFaxDeviceVtbl {
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Save: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var UseRoutingMethod: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16) -> Int32> = { _, _, _ => 0 }
     public var RingingNow: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var AnswerCall: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -5997,7 +6009,7 @@ public class IFaxDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDevice> {
-        return InterfaceDescriptor<IFaxDevice>("IFaxDevice", IFaxDevice.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDeviceFromAbi, viewIFaxDevice)
+        return InterfaceDescriptor<IFaxDevice>("IFaxDevice", IFaxDevice.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDeviceFromAbi, viewIFaxDevice)
     }
 
     public unsafe func vtbl(): IFaxDeviceVtbl {
@@ -6041,7 +6053,7 @@ public class IFaxDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func UsedRoutingMethods(pvUsedRoutingMethods: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func UsedRoutingMethods(pvUsedRoutingMethods: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UsedRoutingMethods(__liveRaw, pvUsedRoutingMethods)
@@ -6132,14 +6144,14 @@ public class IFaxDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetExtensionProperty(bstrGUID: CPointer<UInt16>, pvProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetExtensionProperty(bstrGUID: CPointer<UInt16>, pvProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetExtensionProperty(__liveRaw, bstrGUID, pvProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtensionProperty(bstrGUID: CPointer<UInt16>, vProperty: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtensionProperty(bstrGUID: CPointer<UInt16>, vProperty: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtensionProperty(__liveRaw, bstrGUID, vProperty)
@@ -6167,7 +6179,7 @@ public class IFaxDevice <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDeviceIdsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -6211,7 +6223,7 @@ public class IFaxDeviceIds <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDeviceIds> {
-        return InterfaceDescriptor<IFaxDeviceIds>("IFaxDeviceIds", IFaxDeviceIds.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDeviceIdsFromAbi, viewIFaxDeviceIds)
+        return InterfaceDescriptor<IFaxDeviceIds>("IFaxDeviceIds", IFaxDeviceIds.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDeviceIdsFromAbi, viewIFaxDeviceIds)
     }
 
     public unsafe func vtbl(): IFaxDeviceIdsVtbl {
@@ -6259,7 +6271,7 @@ public class IFaxDeviceIds <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDeviceProviderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ImageName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var UniqueName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6272,7 +6284,7 @@ public struct IFaxDeviceProviderVtbl {
     public var Status: CFunc<(CPointer<Unit>, CPointer<FAX_PROVIDER_STATUS_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var InitErrorCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeviceIds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DeviceIds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -6309,7 +6321,7 @@ public class IFaxDeviceProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDeviceProvider> {
-        return InterfaceDescriptor<IFaxDeviceProvider>("IFaxDeviceProvider", IFaxDeviceProvider.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDeviceProviderFromAbi, viewIFaxDeviceProvider)
+        return InterfaceDescriptor<IFaxDeviceProvider>("IFaxDeviceProvider", IFaxDeviceProvider.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDeviceProviderFromAbi, viewIFaxDeviceProvider)
     }
 
     public unsafe func vtbl(): IFaxDeviceProviderVtbl {
@@ -6383,7 +6395,7 @@ public class IFaxDeviceProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeviceIds(pvDeviceIds: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DeviceIds(pvDeviceIds: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeviceIds(__liveRaw, pvDeviceIds)
@@ -6393,11 +6405,11 @@ public class IFaxDeviceProvider <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDeviceProvidersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6435,7 +6447,7 @@ public class IFaxDeviceProviders <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDeviceProviders> {
-        return InterfaceDescriptor<IFaxDeviceProviders>("IFaxDeviceProviders", IFaxDeviceProviders.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDeviceProvidersFromAbi, viewIFaxDeviceProviders)
+        return InterfaceDescriptor<IFaxDeviceProviders>("IFaxDeviceProviders", IFaxDeviceProviders.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDeviceProvidersFromAbi, viewIFaxDeviceProviders)
     }
 
     public unsafe func vtbl(): IFaxDeviceProvidersVtbl {
@@ -6450,7 +6462,7 @@ public class IFaxDeviceProviders <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxDeviceProvider: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxDeviceProvider: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxDeviceProvider)
@@ -6466,11 +6478,11 @@ public class IFaxDeviceProviders <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_ItemById: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -6509,7 +6521,7 @@ public class IFaxDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDevices> {
-        return InterfaceDescriptor<IFaxDevices>("IFaxDevices", IFaxDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDevicesFromAbi, viewIFaxDevices)
+        return InterfaceDescriptor<IFaxDevices>("IFaxDevices", IFaxDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDevicesFromAbi, viewIFaxDevices)
     }
 
     public unsafe func vtbl(): IFaxDevicesVtbl {
@@ -6524,7 +6536,7 @@ public class IFaxDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxDevice: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxDevice: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxDevice)
@@ -6546,7 +6558,7 @@ public class IFaxDevices <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxEventLoggingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InitEventsLevel: CFunc<(CPointer<Unit>, CPointer<FAX_LOG_LEVEL_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var SetInitEventsLevel: CFunc<(CPointer<Unit>, FAX_LOG_LEVEL_ENUMAbi) -> Int32> = { _, _ => 0 }
     public var InboundEventsLevel: CFunc<(CPointer<Unit>, CPointer<FAX_LOG_LEVEL_ENUMAbi>) -> Int32> = { _, _ => 0 }
@@ -6593,7 +6605,7 @@ public class IFaxEventLogging <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxEventLogging> {
-        return InterfaceDescriptor<IFaxEventLogging>("IFaxEventLogging", IFaxEventLogging.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxEventLoggingFromAbi, viewIFaxEventLogging)
+        return InterfaceDescriptor<IFaxEventLogging>("IFaxEventLogging", IFaxEventLogging.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxEventLoggingFromAbi, viewIFaxEventLogging)
     }
 
     public unsafe func vtbl(): IFaxEventLoggingVtbl {
@@ -6664,7 +6676,7 @@ public class IFaxEventLogging <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxInboundRoutingExtensionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ImageName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var UniqueName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6676,7 +6688,7 @@ public struct IFaxInboundRoutingExtensionVtbl {
     public var Status: CFunc<(CPointer<Unit>, CPointer<FAX_PROVIDER_STATUS_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var InitErrorCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Methods: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Methods: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -6713,7 +6725,7 @@ public class IFaxInboundRoutingExtension <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxInboundRoutingExtension> {
-        return InterfaceDescriptor<IFaxInboundRoutingExtension>("IFaxInboundRoutingExtension", IFaxInboundRoutingExtension.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxInboundRoutingExtensionFromAbi, viewIFaxInboundRoutingExtension)
+        return InterfaceDescriptor<IFaxInboundRoutingExtension>("IFaxInboundRoutingExtension", IFaxInboundRoutingExtension.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxInboundRoutingExtensionFromAbi, viewIFaxInboundRoutingExtension)
     }
 
     public unsafe func vtbl(): IFaxInboundRoutingExtensionVtbl {
@@ -6781,7 +6793,7 @@ public class IFaxInboundRoutingExtension <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Methods(pvMethods: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Methods(pvMethods: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Methods(__liveRaw, pvMethods)
@@ -6791,11 +6803,11 @@ public class IFaxInboundRoutingExtension <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxInboundRoutingExtensionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6833,7 +6845,7 @@ public class IFaxInboundRoutingExtensions <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxInboundRoutingExtensions> {
-        return InterfaceDescriptor<IFaxInboundRoutingExtensions>("IFaxInboundRoutingExtensions", IFaxInboundRoutingExtensions.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxInboundRoutingExtensionsFromAbi, viewIFaxInboundRoutingExtensions)
+        return InterfaceDescriptor<IFaxInboundRoutingExtensions>("IFaxInboundRoutingExtensions", IFaxInboundRoutingExtensions.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxInboundRoutingExtensionsFromAbi, viewIFaxInboundRoutingExtensions)
     }
 
     public unsafe func vtbl(): IFaxInboundRoutingExtensionsVtbl {
@@ -6848,7 +6860,7 @@ public class IFaxInboundRoutingExtensions <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxInboundRoutingExtension: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxInboundRoutingExtension: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxInboundRoutingExtension)
@@ -6864,7 +6876,7 @@ public class IFaxInboundRoutingExtensions <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxInboundRoutingMethodVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var get_GUID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var FunctionName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6910,7 +6922,7 @@ public class IFaxInboundRoutingMethod <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxInboundRoutingMethod> {
-        return InterfaceDescriptor<IFaxInboundRoutingMethod>("IFaxInboundRoutingMethod", IFaxInboundRoutingMethod.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxInboundRoutingMethodFromAbi, viewIFaxInboundRoutingMethod)
+        return InterfaceDescriptor<IFaxInboundRoutingMethod>("IFaxInboundRoutingMethod", IFaxInboundRoutingMethod.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxInboundRoutingMethodFromAbi, viewIFaxInboundRoutingMethod)
     }
 
     public unsafe func vtbl(): IFaxInboundRoutingMethodVtbl {
@@ -6975,11 +6987,11 @@ public class IFaxInboundRoutingMethod <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxInboundRoutingMethodsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7017,7 +7029,7 @@ public class IFaxInboundRoutingMethods <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxInboundRoutingMethods> {
-        return InterfaceDescriptor<IFaxInboundRoutingMethods>("IFaxInboundRoutingMethods", IFaxInboundRoutingMethods.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxInboundRoutingMethodsFromAbi, viewIFaxInboundRoutingMethods)
+        return InterfaceDescriptor<IFaxInboundRoutingMethods>("IFaxInboundRoutingMethods", IFaxInboundRoutingMethods.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxInboundRoutingMethodsFromAbi, viewIFaxInboundRoutingMethods)
     }
 
     public unsafe func vtbl(): IFaxInboundRoutingMethodsVtbl {
@@ -7032,7 +7044,7 @@ public class IFaxInboundRoutingMethods <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxInboundRoutingMethod: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxInboundRoutingMethod: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxInboundRoutingMethod)
@@ -7048,7 +7060,7 @@ public class IFaxInboundRoutingMethods <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingJobVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Size: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CurrentPage: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7104,7 +7116,7 @@ public class IFaxIncomingJob <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingJob> {
-        return InterfaceDescriptor<IFaxIncomingJob>("IFaxIncomingJob", IFaxIncomingJob.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingJobFromAbi, viewIFaxIncomingJob)
+        return InterfaceDescriptor<IFaxIncomingJob>("IFaxIncomingJob", IFaxIncomingJob.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingJobFromAbi, viewIFaxIncomingJob)
     }
 
     public unsafe func vtbl(): IFaxIncomingJobVtbl {
@@ -7229,11 +7241,11 @@ public class IFaxIncomingJob <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingJobsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7271,7 +7283,7 @@ public class IFaxIncomingJobs <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingJobs> {
-        return InterfaceDescriptor<IFaxIncomingJobs>("IFaxIncomingJobs", IFaxIncomingJobs.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingJobsFromAbi, viewIFaxIncomingJobs)
+        return InterfaceDescriptor<IFaxIncomingJobs>("IFaxIncomingJobs", IFaxIncomingJobs.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingJobsFromAbi, viewIFaxIncomingJobs)
     }
 
     public unsafe func vtbl(): IFaxIncomingJobsVtbl {
@@ -7286,7 +7298,7 @@ public class IFaxIncomingJobs <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxIncomingJob: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxIncomingJob: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxIncomingJob)
@@ -7302,7 +7314,7 @@ public class IFaxIncomingJobs <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingMessageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Pages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Size: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7352,7 +7364,7 @@ public class IFaxIncomingMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingMessage> {
-        return InterfaceDescriptor<IFaxIncomingMessage>("IFaxIncomingMessage", IFaxIncomingMessage.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingMessageFromAbi, viewIFaxIncomingMessage)
+        return InterfaceDescriptor<IFaxIncomingMessage>("IFaxIncomingMessage", IFaxIncomingMessage.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingMessageFromAbi, viewIFaxIncomingMessage)
     }
 
     public unsafe func vtbl(): IFaxIncomingMessageVtbl {
@@ -7601,7 +7613,7 @@ public class IFaxIncomingMessage2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingMessageIteratorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrefetchSize: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPrefetchSize: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -7644,7 +7656,7 @@ public class IFaxIncomingMessageIterator <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingMessageIterator> {
-        return InterfaceDescriptor<IFaxIncomingMessageIterator>("IFaxIncomingMessageIterator", IFaxIncomingMessageIterator.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingMessageIteratorFromAbi, viewIFaxIncomingMessageIterator)
+        return InterfaceDescriptor<IFaxIncomingMessageIterator>("IFaxIncomingMessageIterator", IFaxIncomingMessageIterator.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingMessageIteratorFromAbi, viewIFaxIncomingMessageIterator)
     }
 
     public unsafe func vtbl(): IFaxIncomingMessageIteratorVtbl {
@@ -7691,7 +7703,7 @@ public class IFaxIncomingMessageIterator <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Blocked: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetBlocked: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -7734,7 +7746,7 @@ public class IFaxIncomingQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingQueue> {
-        return InterfaceDescriptor<IFaxIncomingQueue>("IFaxIncomingQueue", IFaxIncomingQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingQueueFromAbi, viewIFaxIncomingQueue)
+        return InterfaceDescriptor<IFaxIncomingQueue>("IFaxIncomingQueue", IFaxIncomingQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingQueueFromAbi, viewIFaxIncomingQueue)
     }
 
     public unsafe func vtbl(): IFaxIncomingQueueVtbl {
@@ -7781,7 +7793,7 @@ public class IFaxIncomingQueue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxJobStatusVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<FAX_JOB_STATUS_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var Pages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Size: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -7835,7 +7847,7 @@ public class IFaxJobStatus <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxJobStatus> {
-        return InterfaceDescriptor<IFaxJobStatus>("IFaxJobStatus", IFaxJobStatus.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxJobStatusFromAbi, viewIFaxJobStatus)
+        return InterfaceDescriptor<IFaxJobStatus>("IFaxJobStatus", IFaxJobStatus.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxJobStatusFromAbi, viewIFaxJobStatus)
     }
 
     public unsafe func vtbl(): IFaxJobStatusVtbl {
@@ -7948,7 +7960,7 @@ public class IFaxJobStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxLoggingOptionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var EventLogging: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ActivityLogging: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -7987,7 +7999,7 @@ public class IFaxLoggingOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxLoggingOptions> {
-        return InterfaceDescriptor<IFaxLoggingOptions>("IFaxLoggingOptions", IFaxLoggingOptions.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxLoggingOptionsFromAbi, viewIFaxLoggingOptions)
+        return InterfaceDescriptor<IFaxLoggingOptions>("IFaxLoggingOptions", IFaxLoggingOptions.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxLoggingOptionsFromAbi, viewIFaxLoggingOptions)
     }
 
     public unsafe func vtbl(): IFaxLoggingOptionsVtbl {
@@ -8010,7 +8022,7 @@ public class IFaxLoggingOptions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutboundRoutingGroupVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<FAX_GROUP_STATUS_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var DeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -8050,7 +8062,7 @@ public class IFaxOutboundRoutingGroup <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutboundRoutingGroup> {
-        return InterfaceDescriptor<IFaxOutboundRoutingGroup>("IFaxOutboundRoutingGroup", IFaxOutboundRoutingGroup.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutboundRoutingGroupFromAbi, viewIFaxOutboundRoutingGroup)
+        return InterfaceDescriptor<IFaxOutboundRoutingGroup>("IFaxOutboundRoutingGroup", IFaxOutboundRoutingGroup.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutboundRoutingGroupFromAbi, viewIFaxOutboundRoutingGroup)
     }
 
     public unsafe func vtbl(): IFaxOutboundRoutingGroupVtbl {
@@ -8079,15 +8091,15 @@ public class IFaxOutboundRoutingGroup <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutboundRoutingGroupsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -8124,7 +8136,7 @@ public class IFaxOutboundRoutingGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutboundRoutingGroups> {
-        return InterfaceDescriptor<IFaxOutboundRoutingGroups>("IFaxOutboundRoutingGroups", IFaxOutboundRoutingGroups.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutboundRoutingGroupsFromAbi, viewIFaxOutboundRoutingGroups)
+        return InterfaceDescriptor<IFaxOutboundRoutingGroups>("IFaxOutboundRoutingGroups", IFaxOutboundRoutingGroups.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutboundRoutingGroupsFromAbi, viewIFaxOutboundRoutingGroups)
     }
 
     public unsafe func vtbl(): IFaxOutboundRoutingGroupsVtbl {
@@ -8139,7 +8151,7 @@ public class IFaxOutboundRoutingGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxOutboundRoutingGroup: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxOutboundRoutingGroup: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxOutboundRoutingGroup)
@@ -8158,7 +8170,7 @@ public class IFaxOutboundRoutingGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(vIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(vIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, vIndex)
@@ -8168,7 +8180,7 @@ public class IFaxOutboundRoutingGroups <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutboundRoutingRuleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CountryCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AreaCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<FAX_RULE_STATUS_ENUMAbi>) -> Int32> = { _, _ => 0 }
@@ -8216,7 +8228,7 @@ public class IFaxOutboundRoutingRule <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutboundRoutingRule> {
-        return InterfaceDescriptor<IFaxOutboundRoutingRule>("IFaxOutboundRoutingRule", IFaxOutboundRoutingRule.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutboundRoutingRuleFromAbi, viewIFaxOutboundRoutingRule)
+        return InterfaceDescriptor<IFaxOutboundRoutingRule>("IFaxOutboundRoutingRule", IFaxOutboundRoutingRule.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutboundRoutingRuleFromAbi, viewIFaxOutboundRoutingRule)
     }
 
     public unsafe func vtbl(): IFaxOutboundRoutingRuleVtbl {
@@ -8293,7 +8305,7 @@ public class IFaxOutboundRoutingRule <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutboundRoutingRulesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8338,7 +8350,7 @@ public class IFaxOutboundRoutingRules <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutboundRoutingRules> {
-        return InterfaceDescriptor<IFaxOutboundRoutingRules>("IFaxOutboundRoutingRules", IFaxOutboundRoutingRules.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutboundRoutingRulesFromAbi, viewIFaxOutboundRoutingRules)
+        return InterfaceDescriptor<IFaxOutboundRoutingRules>("IFaxOutboundRoutingRules", IFaxOutboundRoutingRules.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutboundRoutingRulesFromAbi, viewIFaxOutboundRoutingRules)
     }
 
     public unsafe func vtbl(): IFaxOutboundRoutingRulesVtbl {
@@ -8392,7 +8404,7 @@ public class IFaxOutboundRoutingRules <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxReceiptOptionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AuthenticationType: CFunc<(CPointer<Unit>, CPointer<FAX_SMTP_AUTHENTICATION_TYPE_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var SetAuthenticationType: CFunc<(CPointer<Unit>, FAX_SMTP_AUTHENTICATION_TYPE_ENUMAbi) -> Int32> = { _, _ => 0 }
     public var SMTPServer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8447,7 +8459,7 @@ public class IFaxReceiptOptions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxReceiptOptions> {
-        return InterfaceDescriptor<IFaxReceiptOptions>("IFaxReceiptOptions", IFaxReceiptOptions.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxReceiptOptionsFromAbi, viewIFaxReceiptOptions)
+        return InterfaceDescriptor<IFaxReceiptOptions>("IFaxReceiptOptions", IFaxReceiptOptions.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxReceiptOptionsFromAbi, viewIFaxReceiptOptions)
     }
 
     public unsafe func vtbl(): IFaxReceiptOptionsVtbl {
@@ -8566,7 +8578,7 @@ public class IFaxReceiptOptions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxRecipientVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FaxNumber: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFaxNumber: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8607,7 +8619,7 @@ public class IFaxRecipient <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxRecipient> {
-        return InterfaceDescriptor<IFaxRecipient>("IFaxRecipient", IFaxRecipient.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxRecipientFromAbi, viewIFaxRecipient)
+        return InterfaceDescriptor<IFaxRecipient>("IFaxRecipient", IFaxRecipient.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxRecipientFromAbi, viewIFaxRecipient)
     }
 
     public unsafe func vtbl(): IFaxRecipientVtbl {
@@ -8642,7 +8654,7 @@ public class IFaxRecipient <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxRecipientsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -8685,7 +8697,7 @@ public class IFaxRecipients <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxRecipients> {
-        return InterfaceDescriptor<IFaxRecipients>("IFaxRecipients", IFaxRecipients.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxRecipientsFromAbi, viewIFaxRecipients)
+        return InterfaceDescriptor<IFaxRecipients>("IFaxRecipients", IFaxRecipients.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxRecipientsFromAbi, viewIFaxRecipients)
     }
 
     public unsafe func vtbl(): IFaxRecipientsVtbl {
@@ -8727,11 +8739,11 @@ public class IFaxRecipients <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxSecurityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Descriptor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Descriptor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var GrantedRights: CFunc<(CPointer<Unit>, CPointer<FAX_ACCESS_RIGHTS_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Save: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -8773,7 +8785,7 @@ public class IFaxSecurity <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxSecurity> {
-        return InterfaceDescriptor<IFaxSecurity>("IFaxSecurity", IFaxSecurity.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxSecurityFromAbi, viewIFaxSecurity)
+        return InterfaceDescriptor<IFaxSecurity>("IFaxSecurity", IFaxSecurity.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxSecurityFromAbi, viewIFaxSecurity)
     }
 
     public unsafe func vtbl(): IFaxSecurityVtbl {
@@ -8781,14 +8793,14 @@ public class IFaxSecurity <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Descriptor(pvDescriptor: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Descriptor(pvDescriptor: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Descriptor(__liveRaw, pvDescriptor)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDescriptor(vDescriptor: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDescriptor(vDescriptor: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDescriptor(__liveRaw, vDescriptor)
@@ -8828,11 +8840,11 @@ public class IFaxSecurity <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxSecurity2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Descriptor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Descriptor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var GrantedRights: CFunc<(CPointer<Unit>, CPointer<FAX_ACCESS_RIGHTS_ENUM_2Abi>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Save: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -8874,7 +8886,7 @@ public class IFaxSecurity2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxSecurity2> {
-        return InterfaceDescriptor<IFaxSecurity2>("IFaxSecurity2", IFaxSecurity2.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxSecurity2FromAbi, viewIFaxSecurity2)
+        return InterfaceDescriptor<IFaxSecurity2>("IFaxSecurity2", IFaxSecurity2.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxSecurity2FromAbi, viewIFaxSecurity2)
     }
 
     public unsafe func vtbl(): IFaxSecurity2Vtbl {
@@ -8882,14 +8894,14 @@ public class IFaxSecurity2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Descriptor(pvDescriptor: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Descriptor(pvDescriptor: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Descriptor(__liveRaw, pvDescriptor)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDescriptor(vDescriptor: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDescriptor(vDescriptor: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDescriptor(__liveRaw, vDescriptor)
@@ -8929,7 +8941,7 @@ public class IFaxSecurity2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxSenderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BillingCode: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetBillingCode: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var City: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9000,7 +9012,7 @@ public class IFaxSender <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxSender> {
-        return InterfaceDescriptor<IFaxSender>("IFaxSender", IFaxSender.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxSenderFromAbi, viewIFaxSender)
+        return InterfaceDescriptor<IFaxSender>("IFaxSender", IFaxSender.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxSenderFromAbi, viewIFaxSender)
     }
 
     public unsafe func vtbl(): IFaxSenderVtbl {
@@ -9215,7 +9227,7 @@ public class IFaxSender <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxServerNotifyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -9252,7 +9264,7 @@ public class IFaxServerNotify <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxServerNotify> {
-        return InterfaceDescriptor<IFaxServerNotify>("IFaxServerNotify", IFaxServerNotify.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxServerNotifyFromAbi, viewIFaxServerNotify)
+        return InterfaceDescriptor<IFaxServerNotify>("IFaxServerNotify", IFaxServerNotify.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxServerNotifyFromAbi, viewIFaxServerNotify)
     }
 
     public unsafe func vtbl(): IFaxServerNotifyVtbl {
@@ -9418,7 +9430,7 @@ public type PFAXCONNECTFAXSERVERW = CFunc<(CPointer<UInt16>, CPointer<CPointer<U
 public type PFAXDEVABORTOPERATION = CFunc<(CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_UI_Controls == "on"]
-public type PFAXDEVCONFIGURE = CFunc<(CPointer<Win32__impl_l0.HPROPSHEETPAGE>) -> Int32>
+public type PFAXDEVCONFIGURE = CFunc<(CPointer<Win32_impl_p1.HPROPSHEETPAGE>) -> Int32>
 
 @When[Windows_Win32_Devices_Fax == "on"]
 public type PFAXDEVENDJOB = CFunc<(CPointer<Unit>) -> Int32>
@@ -10321,7 +10333,7 @@ extend FAX_ROUTE_CALLBACKROUTINES <: windows_core.CopyType & windows_core.Runtim
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountIncomingArchiveVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SizeLow: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SizeHigh: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -10363,7 +10375,7 @@ public class IFaxAccountIncomingArchive <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountIncomingArchive> {
-        return InterfaceDescriptor<IFaxAccountIncomingArchive>("IFaxAccountIncomingArchive", IFaxAccountIncomingArchive.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountIncomingArchiveFromAbi, viewIFaxAccountIncomingArchive)
+        return InterfaceDescriptor<IFaxAccountIncomingArchive>("IFaxAccountIncomingArchive", IFaxAccountIncomingArchive.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountIncomingArchiveFromAbi, viewIFaxAccountIncomingArchive)
     }
 
     public unsafe func vtbl(): IFaxAccountIncomingArchiveVtbl {
@@ -10404,7 +10416,7 @@ public class IFaxAccountIncomingArchive <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountIncomingQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetJobs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetJob: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -10443,7 +10455,7 @@ public class IFaxAccountIncomingQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountIncomingQueue> {
-        return InterfaceDescriptor<IFaxAccountIncomingQueue>("IFaxAccountIncomingQueue", IFaxAccountIncomingQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountIncomingQueueFromAbi, viewIFaxAccountIncomingQueue)
+        return InterfaceDescriptor<IFaxAccountIncomingQueue>("IFaxAccountIncomingQueue", IFaxAccountIncomingQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountIncomingQueueFromAbi, viewIFaxAccountIncomingQueue)
     }
 
     public unsafe func vtbl(): IFaxAccountIncomingQueueVtbl {
@@ -10466,7 +10478,7 @@ public class IFaxAccountIncomingQueue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxInboundRoutingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -10505,7 +10517,7 @@ public class IFaxInboundRouting <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxInboundRouting> {
-        return InterfaceDescriptor<IFaxInboundRouting>("IFaxInboundRouting", IFaxInboundRouting.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxInboundRoutingFromAbi, viewIFaxInboundRouting)
+        return InterfaceDescriptor<IFaxInboundRouting>("IFaxInboundRouting", IFaxInboundRouting.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxInboundRoutingFromAbi, viewIFaxInboundRouting)
     }
 
     public unsafe func vtbl(): IFaxInboundRoutingVtbl {
@@ -10528,7 +10540,7 @@ public class IFaxInboundRouting <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxIncomingArchiveVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UseArchive: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetUseArchive: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ArchiveFolder: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -10583,7 +10595,7 @@ public class IFaxIncomingArchive <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxIncomingArchive> {
-        return InterfaceDescriptor<IFaxIncomingArchive>("IFaxIncomingArchive", IFaxIncomingArchive.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxIncomingArchiveFromAbi, viewIFaxIncomingArchive)
+        return InterfaceDescriptor<IFaxIncomingArchive>("IFaxIncomingArchive", IFaxIncomingArchive.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxIncomingArchiveFromAbi, viewIFaxIncomingArchive)
     }
 
     public unsafe func vtbl(): IFaxIncomingArchiveVtbl {
@@ -10702,7 +10714,7 @@ public class IFaxIncomingArchive <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutboundRoutingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetRules: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -10741,7 +10753,7 @@ public class IFaxOutboundRouting <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutboundRouting> {
-        return InterfaceDescriptor<IFaxOutboundRouting>("IFaxOutboundRouting", IFaxOutboundRouting.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutboundRoutingFromAbi, viewIFaxOutboundRouting)
+        return InterfaceDescriptor<IFaxOutboundRouting>("IFaxOutboundRouting", IFaxOutboundRouting.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutboundRoutingFromAbi, viewIFaxOutboundRouting)
     }
 
     public unsafe func vtbl(): IFaxOutboundRoutingVtbl {
@@ -10764,7 +10776,7 @@ public class IFaxOutboundRouting <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingJobVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DocumentName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Pages: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10832,7 +10844,7 @@ public class IFaxOutgoingJob <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingJob> {
-        return InterfaceDescriptor<IFaxOutgoingJob>("IFaxOutgoingJob", IFaxOutgoingJob.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingJobFromAbi, viewIFaxOutgoingJob)
+        return InterfaceDescriptor<IFaxOutgoingJob>("IFaxOutgoingJob", IFaxOutgoingJob.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingJobFromAbi, viewIFaxOutgoingJob)
     }
 
     public unsafe func vtbl(): IFaxOutgoingJobVtbl {
@@ -11098,11 +11110,11 @@ public class IFaxOutgoingJob2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingJobsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -11140,7 +11152,7 @@ public class IFaxOutgoingJobs <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingJobs> {
-        return InterfaceDescriptor<IFaxOutgoingJobs>("IFaxOutgoingJobs", IFaxOutgoingJobs.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingJobsFromAbi, viewIFaxOutgoingJobs)
+        return InterfaceDescriptor<IFaxOutgoingJobs>("IFaxOutgoingJobs", IFaxOutgoingJobs.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingJobsFromAbi, viewIFaxOutgoingJobs)
     }
 
     public unsafe func vtbl(): IFaxOutgoingJobsVtbl {
@@ -11155,7 +11167,7 @@ public class IFaxOutgoingJobs <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxOutgoingJob: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxOutgoingJob: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxOutgoingJob)
@@ -11171,7 +11183,7 @@ public class IFaxOutgoingJobs <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingMessageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SubmissionId: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -11227,7 +11239,7 @@ public class IFaxOutgoingMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingMessage> {
-        return InterfaceDescriptor<IFaxOutgoingMessage>("IFaxOutgoingMessage", IFaxOutgoingMessage.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingMessageFromAbi, viewIFaxOutgoingMessage)
+        return InterfaceDescriptor<IFaxOutgoingMessage>("IFaxOutgoingMessage", IFaxOutgoingMessage.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingMessageFromAbi, viewIFaxOutgoingMessage)
     }
 
     public unsafe func vtbl(): IFaxOutgoingMessageVtbl {
@@ -11449,7 +11461,7 @@ public class IFaxOutgoingMessage2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingMessageIteratorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AtEOF: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var PrefetchSize: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -11492,7 +11504,7 @@ public class IFaxOutgoingMessageIterator <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingMessageIterator> {
-        return InterfaceDescriptor<IFaxOutgoingMessageIterator>("IFaxOutgoingMessageIterator", IFaxOutgoingMessageIterator.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingMessageIteratorFromAbi, viewIFaxOutgoingMessageIterator)
+        return InterfaceDescriptor<IFaxOutgoingMessageIterator>("IFaxOutgoingMessageIterator", IFaxOutgoingMessageIterator.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingMessageIteratorFromAbi, viewIFaxOutgoingMessageIterator)
     }
 
     public unsafe func vtbl(): IFaxOutgoingMessageIteratorVtbl {
@@ -11539,7 +11551,7 @@ public class IFaxOutgoingMessageIterator <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Blocked: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetBlocked: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Paused: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -11600,7 +11612,7 @@ public class IFaxOutgoingQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingQueue> {
-        return InterfaceDescriptor<IFaxOutgoingQueue>("IFaxOutgoingQueue", IFaxOutgoingQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingQueueFromAbi, viewIFaxOutgoingQueue)
+        return InterfaceDescriptor<IFaxOutgoingQueue>("IFaxOutgoingQueue", IFaxOutgoingQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingQueueFromAbi, viewIFaxOutgoingQueue)
     }
 
     public unsafe func vtbl(): IFaxOutgoingQueueVtbl {
@@ -11910,7 +11922,7 @@ extend STI_DIAG <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountOutgoingArchiveVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SizeLow: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SizeHigh: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -11952,7 +11964,7 @@ public class IFaxAccountOutgoingArchive <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountOutgoingArchive> {
-        return InterfaceDescriptor<IFaxAccountOutgoingArchive>("IFaxAccountOutgoingArchive", IFaxAccountOutgoingArchive.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountOutgoingArchiveFromAbi, viewIFaxAccountOutgoingArchive)
+        return InterfaceDescriptor<IFaxAccountOutgoingArchive>("IFaxAccountOutgoingArchive", IFaxAccountOutgoingArchive.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountOutgoingArchiveFromAbi, viewIFaxAccountOutgoingArchive)
     }
 
     public unsafe func vtbl(): IFaxAccountOutgoingArchiveVtbl {
@@ -11993,7 +12005,7 @@ public class IFaxAccountOutgoingArchive <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountOutgoingQueueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetJobs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetJob: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -12032,7 +12044,7 @@ public class IFaxAccountOutgoingQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountOutgoingQueue> {
-        return InterfaceDescriptor<IFaxAccountOutgoingQueue>("IFaxAccountOutgoingQueue", IFaxAccountOutgoingQueue.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountOutgoingQueueFromAbi, viewIFaxAccountOutgoingQueue)
+        return InterfaceDescriptor<IFaxAccountOutgoingQueue>("IFaxAccountOutgoingQueue", IFaxAccountOutgoingQueue.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountOutgoingQueueFromAbi, viewIFaxAccountOutgoingQueue)
     }
 
     public unsafe func vtbl(): IFaxAccountOutgoingQueueVtbl {
@@ -12055,7 +12067,7 @@ public class IFaxAccountOutgoingQueue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxOutgoingArchiveVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UseArchive: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetUseArchive: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ArchiveFolder: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -12110,7 +12122,7 @@ public class IFaxOutgoingArchive <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxOutgoingArchive> {
-        return InterfaceDescriptor<IFaxOutgoingArchive>("IFaxOutgoingArchive", IFaxOutgoingArchive.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxOutgoingArchiveFromAbi, viewIFaxOutgoingArchive)
+        return InterfaceDescriptor<IFaxOutgoingArchive>("IFaxOutgoingArchive", IFaxOutgoingArchive.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxOutgoingArchiveFromAbi, viewIFaxOutgoingArchive)
     }
 
     public unsafe func vtbl(): IFaxOutgoingArchiveVtbl {
@@ -13876,7 +13888,7 @@ public let wcharREASSIGN_RECIPIENTS_DELIMITER: UInt16 = 59u16
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountFoldersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OutgoingQueue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IncomingQueue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IncomingArchive: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -13917,7 +13929,7 @@ public class IFaxAccountFolders <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountFolders> {
-        return InterfaceDescriptor<IFaxAccountFolders>("IFaxAccountFolders", IFaxAccountFolders.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountFoldersFromAbi, viewIFaxAccountFolders)
+        return InterfaceDescriptor<IFaxAccountFolders>("IFaxAccountFolders", IFaxAccountFolders.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountFoldersFromAbi, viewIFaxAccountFolders)
     }
 
     public unsafe func vtbl(): IFaxAccountFoldersVtbl {
@@ -13952,7 +13964,7 @@ public class IFaxAccountFolders <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxFoldersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OutgoingQueue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IncomingQueue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IncomingArchive: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -13993,7 +14005,7 @@ public class IFaxFolders <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxFolders> {
-        return InterfaceDescriptor<IFaxFolders>("IFaxFolders", IFaxFolders.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxFoldersFromAbi, viewIFaxFolders)
+        return InterfaceDescriptor<IFaxFolders>("IFaxFolders", IFaxFolders.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxFoldersFromAbi, viewIFaxFolders)
     }
 
     public unsafe func vtbl(): IFaxFoldersVtbl {
@@ -14028,7 +14040,7 @@ public class IFaxFolders <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxServerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Connect: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ServerName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetDeviceProviders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -14047,14 +14059,14 @@ public struct IFaxServerVtbl {
     public var Security: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Disconnect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetExtensionProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var ListenToServerEvents: CFunc<(CPointer<Unit>, FAX_SERVER_EVENTS_TYPE_ENUMAbi) -> Int32> = { _, _ => 0 }
     public var RegisterDeviceProvider: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var UnregisterDeviceProvider: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RegisterInboundRoutingExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var RegisterInboundRoutingExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var UnregisterInboundRoutingExtension: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var RegisteredEvents: CFunc<(CPointer<Unit>, CPointer<FAX_SERVER_EVENTS_TYPE_ENUMAbi>) -> Int32> = { _, _ => 0 }
     public var APIVersion: CFunc<(CPointer<Unit>, CPointer<FAX_SERVER_APIVERSION_ENUMAbi>) -> Int32> = { _, _ => 0 }
@@ -14094,7 +14106,7 @@ public class IFaxServer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxServer> {
-        return InterfaceDescriptor<IFaxServer>("IFaxServer", IFaxServer.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxServerFromAbi, viewIFaxServer)
+        return InterfaceDescriptor<IFaxServer>("IFaxServer", IFaxServer.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxServerFromAbi, viewIFaxServer)
     }
 
     public unsafe func vtbl(): IFaxServerVtbl {
@@ -14204,14 +14216,14 @@ public class IFaxServer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetExtensionProperty(bstrGUID: CPointer<UInt16>, pvProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetExtensionProperty(bstrGUID: CPointer<UInt16>, pvProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetExtensionProperty(__liveRaw, bstrGUID, pvProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetExtensionProperty(bstrGUID: CPointer<UInt16>, vProperty: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetExtensionProperty(bstrGUID: CPointer<UInt16>, vProperty: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetExtensionProperty(__liveRaw, bstrGUID, vProperty)
@@ -14236,7 +14248,7 @@ public class IFaxServer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RegisterInboundRoutingExtension(bstrExtensionName: CPointer<UInt16>, bstrFriendlyName: CPointer<UInt16>, bstrImageName: CPointer<UInt16>, vMethods: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RegisterInboundRoutingExtension(bstrExtensionName: CPointer<UInt16>, bstrFriendlyName: CPointer<UInt16>, bstrImageName: CPointer<UInt16>, vMethods: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegisterInboundRoutingExtension(__liveRaw, bstrExtensionName, bstrFriendlyName, bstrImageName, vMethods)
@@ -14264,7 +14276,7 @@ public class IFaxServer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AccountName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Folders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ListenToAccountEvents: CFunc<(CPointer<Unit>, FAX_ACCOUNT_EVENTS_TYPE_ENUMAbi) -> Int32> = { _, _ => 0 }
@@ -14305,7 +14317,7 @@ public class IFaxAccount <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccount> {
-        return InterfaceDescriptor<IFaxAccount>("IFaxAccount", IFaxAccount.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountFromAbi, viewIFaxAccount)
+        return InterfaceDescriptor<IFaxAccount>("IFaxAccount", IFaxAccount.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountFromAbi, viewIFaxAccount)
     }
 
     public unsafe func vtbl(): IFaxAccountVtbl {
@@ -14340,11 +14352,11 @@ public class IFaxAccount <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -14382,7 +14394,7 @@ public class IFaxAccounts <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccounts> {
-        return InterfaceDescriptor<IFaxAccounts>("IFaxAccounts", IFaxAccounts.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountsFromAbi, viewIFaxAccounts)
+        return InterfaceDescriptor<IFaxAccounts>("IFaxAccounts", IFaxAccounts.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountsFromAbi, viewIFaxAccounts)
     }
 
     public unsafe func vtbl(): IFaxAccountsVtbl {
@@ -14397,7 +14409,7 @@ public class IFaxAccounts <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(vIndex: Win32__impl_l2.VARIANTAbi, pFaxAccount: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(vIndex: Win32_impl_p2.VARIANTAbi, pFaxAccount: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, vIndex, pFaxAccount)
@@ -14413,7 +14425,7 @@ public class IFaxAccounts <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxDocumentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Body: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Sender: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -14447,9 +14459,9 @@ public struct IFaxDocumentVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var putref_TapiConnection: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Submit: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Submit: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ConnectedSubmit: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var ConnectedSubmit: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttachFaxToReceipt: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAttachFaxToReceipt: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -14488,7 +14500,7 @@ public class IFaxDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxDocument> {
-        return InterfaceDescriptor<IFaxDocument>("IFaxDocument", IFaxDocument.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxDocumentFromAbi, viewIFaxDocument)
+        return InterfaceDescriptor<IFaxDocument>("IFaxDocument", IFaxDocument.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxDocumentFromAbi, viewIFaxDocument)
     }
 
     public unsafe func vtbl(): IFaxDocumentVtbl {
@@ -14678,14 +14690,14 @@ public class IFaxDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Submit(bstrFaxServerName: CPointer<UInt16>, pvFaxOutgoingJobIDs: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Submit(bstrFaxServerName: CPointer<UInt16>, pvFaxOutgoingJobIDs: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Submit(__liveRaw, bstrFaxServerName, pvFaxOutgoingJobIDs)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ConnectedSubmit(pFaxServer: CPointer<Unit>, pvFaxOutgoingJobIDs: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ConnectedSubmit(pFaxServer: CPointer<Unit>, pvFaxOutgoingJobIDs: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ConnectedSubmit(__liveRaw, pFaxServer, pvFaxOutgoingJobIDs)
@@ -14710,13 +14722,13 @@ public struct IFaxDocument2Vtbl {
     public var base_: IFaxDocumentVtbl = IFaxDocumentVtbl()
     public var SubmissionId: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Bodies: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Bodies: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetBodies: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetBodies: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Submit2: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Submit2: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ConnectedSubmit2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var ConnectedSubmit2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -14767,28 +14779,28 @@ public class IFaxDocument2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Bodies(pvBodies: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Bodies(pvBodies: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Bodies(__liveRaw, pvBodies)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetBodies(vBodies: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetBodies(vBodies: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetBodies(__liveRaw, vBodies)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Submit2(bstrFaxServerName: CPointer<UInt16>, pvFaxOutgoingJobIDs: CPointer<Win32__impl_l2.VARIANTAbi>, plErrorBodyFile: CPointer<Int32>): Int32 {
+    public unsafe func Submit2(bstrFaxServerName: CPointer<UInt16>, pvFaxOutgoingJobIDs: CPointer<Win32_impl_p2.VARIANTAbi>, plErrorBodyFile: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Submit2(__liveRaw, bstrFaxServerName, pvFaxOutgoingJobIDs, plErrorBodyFile)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ConnectedSubmit2(pFaxServer: CPointer<Unit>, pvFaxOutgoingJobIDs: CPointer<Win32__impl_l2.VARIANTAbi>, plErrorBodyFile: CPointer<Int32>): Int32 {
+    public unsafe func ConnectedSubmit2(pFaxServer: CPointer<Unit>, pvFaxOutgoingJobIDs: CPointer<Win32_impl_p2.VARIANTAbi>, plErrorBodyFile: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ConnectedSubmit2(__liveRaw, pFaxServer, pvFaxOutgoingJobIDs, plErrorBodyFile)
@@ -14798,7 +14810,7 @@ public class IFaxDocument2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountSetVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetAccounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetAccount: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var AddAccount: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -14839,7 +14851,7 @@ public class IFaxAccountSet <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountSet> {
-        return InterfaceDescriptor<IFaxAccountSet>("IFaxAccountSet", IFaxAccountSet.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountSetFromAbi, viewIFaxAccountSet)
+        return InterfaceDescriptor<IFaxAccountSet>("IFaxAccountSet", IFaxAccountSet.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountSetFromAbi, viewIFaxAccountSet)
     }
 
     public unsafe func vtbl(): IFaxAccountSetVtbl {
@@ -14950,7 +14962,7 @@ public class IFaxServer2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxServerNotify2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnIncomingJobAdded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var OnIncomingJobRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var OnIncomingJobChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
@@ -15013,7 +15025,7 @@ public class IFaxServerNotify2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxServerNotify2> {
-        return InterfaceDescriptor<IFaxServerNotify2>("IFaxServerNotify2", IFaxServerNotify2.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxServerNotify2FromAbi, viewIFaxServerNotify2)
+        return InterfaceDescriptor<IFaxServerNotify2>("IFaxServerNotify2", IFaxServerNotify2.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxServerNotify2FromAbi, viewIFaxServerNotify2)
     }
 
     public unsafe func vtbl(): IFaxServerNotify2Vtbl {
@@ -15180,7 +15192,7 @@ public class IFaxServerNotify2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Fax == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFaxAccountNotifyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnIncomingJobAdded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var OnIncomingJobRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var OnIncomingJobChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
@@ -15228,7 +15240,7 @@ public class IFaxAccountNotify <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFaxAccountNotify> {
-        return InterfaceDescriptor<IFaxAccountNotify>("IFaxAccountNotify", IFaxAccountNotify.iid(), Win32__impl_l2.IDispatch.iid(), takeIFaxAccountNotifyFromAbi, viewIFaxAccountNotify)
+        return InterfaceDescriptor<IFaxAccountNotify>("IFaxAccountNotify", IFaxAccountNotify.iid(), Win32_impl_p2.IDispatch.iid(), takeIFaxAccountNotifyFromAbi, viewIFaxAccountNotify)
     }
 
     public unsafe func vtbl(): IFaxAccountNotifyVtbl {

@@ -4,8 +4,11 @@
 package windows.Wdk.System.IO
 
 import std.collection.*
+@When[Windows_Wdk_System_IO == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_System_IO == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
+@When[Windows_Wdk_System_IO == "on"]
 import windows_core as windows_core
 
 

@@ -4,7 +4,9 @@
 package windows.UI.Xaml.Automation.Text
 
 import std.collection.*
+@When[Windows_UI_Xaml_Automation_Text == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_UI_Xaml_Automation_Text == "on"]
 import windows_core as windows_core
 
 

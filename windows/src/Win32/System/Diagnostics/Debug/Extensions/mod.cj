@@ -4,17 +4,30 @@
 package windows.Win32.System.Diagnostics.Debug.Extensions
 
 import std.collection.*
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Memory == "on"]
 import windows.Win32.System.Memory as Win32_System_Memory
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
@@ -246,7 +259,7 @@ extend CallingConventionKind <: windows_core.CopyType & windows_core.RuntimeType
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Kernel == "on"]
 public struct DBGKD_DEBUG_DATA_HEADER32 {
-    public var List: Win32__impl_l0.LIST_ENTRY32 = Win32__impl_l0.LIST_ENTRY32()
+    public var List: Win32_impl_p0.LIST_ENTRY32 = Win32_impl_p0.LIST_ENTRY32()
     public var OwnerTag: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public init() {}
@@ -255,7 +268,7 @@ public struct DBGKD_DEBUG_DATA_HEADER32 {
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Kernel == "on"]
 @C
 public struct DBGKD_DEBUG_DATA_HEADER32Abi {
-    public var List: Win32__impl_l0.LIST_ENTRY32Abi = Win32__impl_l0.LIST_ENTRY32Abi()
+    public var List: Win32_impl_p0.LIST_ENTRY32Abi = Win32_impl_p0.LIST_ENTRY32Abi()
     public var OwnerTag: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public init() {}
@@ -268,14 +281,14 @@ extend DBGKD_DEBUG_DATA_HEADER32 <: windows_core.CopyType & windows_core.Runtime
     public static func signature(): String { "struct(Windows.Win32.System.Diagnostics.Debug.Extensions.DBGKD_DEBUG_DATA_HEADER32;struct(Windows.Win32.System.Kernel.LIST_ENTRY32;u4;u4);u4;u4)" }
     public static func projectAbi(value: DBGKD_DEBUG_DATA_HEADER32): DBGKD_DEBUG_DATA_HEADER32Abi {
         var abi = DBGKD_DEBUG_DATA_HEADER32Abi()
-        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY32>())
+        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY32>())
         abi.OwnerTag = value.OwnerTag
         abi.Size = value.Size
         return abi
     }
     public static func assumeInitRef(abi: DBGKD_DEBUG_DATA_HEADER32Abi): DBGKD_DEBUG_DATA_HEADER32 {
         var value = DBGKD_DEBUG_DATA_HEADER32()
-        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY32>()).unwrap()
+        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY32>()).unwrap()
         value.OwnerTag = abi.OwnerTag
         value.Size = abi.Size
         return value
@@ -289,7 +302,7 @@ extend DBGKD_DEBUG_DATA_HEADER32 <: windows_core.CopyType & windows_core.Runtime
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Kernel == "on"]
 public struct DBGKD_DEBUG_DATA_HEADER64 {
-    public var List: Win32__impl_l0.LIST_ENTRY64 = Win32__impl_l0.LIST_ENTRY64()
+    public var List: Win32_impl_p0.LIST_ENTRY64 = Win32_impl_p0.LIST_ENTRY64()
     public var OwnerTag: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public init() {}
@@ -298,7 +311,7 @@ public struct DBGKD_DEBUG_DATA_HEADER64 {
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Kernel == "on"]
 @C
 public struct DBGKD_DEBUG_DATA_HEADER64Abi {
-    public var List: Win32__impl_l0.LIST_ENTRY64Abi = Win32__impl_l0.LIST_ENTRY64Abi()
+    public var List: Win32_impl_p0.LIST_ENTRY64Abi = Win32_impl_p0.LIST_ENTRY64Abi()
     public var OwnerTag: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public init() {}
@@ -311,14 +324,14 @@ extend DBGKD_DEBUG_DATA_HEADER64 <: windows_core.CopyType & windows_core.Runtime
     public static func signature(): String { "struct(Windows.Win32.System.Diagnostics.Debug.Extensions.DBGKD_DEBUG_DATA_HEADER64;struct(Windows.Win32.System.Kernel.LIST_ENTRY64;u8;u8);u4;u4)" }
     public static func projectAbi(value: DBGKD_DEBUG_DATA_HEADER64): DBGKD_DEBUG_DATA_HEADER64Abi {
         var abi = DBGKD_DEBUG_DATA_HEADER64Abi()
-        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY64>())
+        abi.List = windows_core.projectTypedAbi(value.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY64>())
         abi.OwnerTag = value.OwnerTag
         abi.Size = value.Size
         return abi
     }
     public static func assumeInitRef(abi: DBGKD_DEBUG_DATA_HEADER64Abi): DBGKD_DEBUG_DATA_HEADER64 {
         var value = DBGKD_DEBUG_DATA_HEADER64()
-        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32__impl_l0.LIST_ENTRY64>()).unwrap()
+        value.List = windows_core.fromTypedAbi(abi.List, windows_core.typeMarker<Win32_impl_p0.LIST_ENTRY64>()).unwrap()
         value.OwnerTag = abi.OwnerTag
         value.Size = abi.Size
         return value
@@ -4140,7 +4153,7 @@ extend DEBUG_LAST_EVENT_INFO_BREAKPOINT <: windows_core.CopyType & windows_core.
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Diagnostics_Debug == "on"]
 public struct DEBUG_LAST_EVENT_INFO_EXCEPTION {
-    public var ExceptionRecord: Win32__impl_l0.EXCEPTION_RECORD64 = Win32__impl_l0.EXCEPTION_RECORD64()
+    public var ExceptionRecord: Win32_impl_p0.EXCEPTION_RECORD64 = Win32_impl_p0.EXCEPTION_RECORD64()
     public var FirstChance: UInt32 = 0u32
     public init() {}
 }
@@ -4148,7 +4161,7 @@ public struct DEBUG_LAST_EVENT_INFO_EXCEPTION {
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct DEBUG_LAST_EVENT_INFO_EXCEPTIONAbi {
-    public var ExceptionRecord: Win32__impl_l0.EXCEPTION_RECORD64Abi = Win32__impl_l0.EXCEPTION_RECORD64Abi()
+    public var ExceptionRecord: Win32_impl_p0.EXCEPTION_RECORD64Abi = Win32_impl_p0.EXCEPTION_RECORD64Abi()
     public var FirstChance: UInt32 = 0u32
     public init() {}
 }
@@ -4160,13 +4173,13 @@ extend DEBUG_LAST_EVENT_INFO_EXCEPTION <: windows_core.CopyType & windows_core.R
     public static func signature(): String { "struct(Windows.Win32.System.Diagnostics.Debug.Extensions.DEBUG_LAST_EVENT_INFO_EXCEPTION;struct(Windows.Win32.System.Diagnostics.Debug.EXCEPTION_RECORD64;struct(Windows.Win32.Foundation.NTSTATUS;i4);u4;u8;u8;u4;u4;cinterface(IInspectable));u4)" }
     public static func projectAbi(value: DEBUG_LAST_EVENT_INFO_EXCEPTION): DEBUG_LAST_EVENT_INFO_EXCEPTIONAbi {
         var abi = DEBUG_LAST_EVENT_INFO_EXCEPTIONAbi()
-        abi.ExceptionRecord = windows_core.projectTypedAbi(value.ExceptionRecord, windows_core.typeMarker<Win32__impl_l0.EXCEPTION_RECORD64>())
+        abi.ExceptionRecord = windows_core.projectTypedAbi(value.ExceptionRecord, windows_core.typeMarker<Win32_impl_p0.EXCEPTION_RECORD64>())
         abi.FirstChance = value.FirstChance
         return abi
     }
     public static func assumeInitRef(abi: DEBUG_LAST_EVENT_INFO_EXCEPTIONAbi): DEBUG_LAST_EVENT_INFO_EXCEPTION {
         var value = DEBUG_LAST_EVENT_INFO_EXCEPTION()
-        value.ExceptionRecord = windows_core.fromTypedAbi(abi.ExceptionRecord, windows_core.typeMarker<Win32__impl_l0.EXCEPTION_RECORD64>()).unwrap()
+        value.ExceptionRecord = windows_core.fromTypedAbi(abi.ExceptionRecord, windows_core.typeMarker<Win32_impl_p0.EXCEPTION_RECORD64>()).unwrap()
         value.FirstChance = abi.FirstChance
         return value
     }
@@ -9014,7 +9027,7 @@ public struct IDebugDataSpaces3Vtbl {
     @When[Windows_Win32_System_Memory == "on"]
     public var QueryVirtual: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32_System_Memory.MEMORY_BASIC_INFORMATION64Abi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on"]
-    public var ReadImageNtHeaders: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>) -> Int32> = { _, _, _ => 0 }
+    public var ReadImageNtHeaders: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32_impl_p2.IMAGE_NT_HEADERS64Abi>) -> Int32> = { _, _, _ => 0 }
     public var ReadTagged: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var StartEnumTagged: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public var GetNextTagged: CFunc<(CPointer<Unit>, UInt64, CPointer<GUID>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -9220,7 +9233,7 @@ public class IDebugDataSpaces3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on"]
-    public unsafe func ReadImageNtHeaders(ImageBase: UInt64, Headers: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>): Int32 {
+    public unsafe func ReadImageNtHeaders(ImageBase: UInt64, Headers: CPointer<Win32_impl_p2.IMAGE_NT_HEADERS64Abi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadImageNtHeaders(__liveRaw, ImageBase, Headers)
@@ -9283,7 +9296,7 @@ public struct IDebugDataSpaces4Vtbl {
     @When[Windows_Win32_System_Memory == "on"]
     public var QueryVirtual: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32_System_Memory.MEMORY_BASIC_INFORMATION64Abi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on"]
-    public var ReadImageNtHeaders: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>) -> Int32> = { _, _, _ => 0 }
+    public var ReadImageNtHeaders: CFunc<(CPointer<Unit>, UInt64, CPointer<Win32_impl_p2.IMAGE_NT_HEADERS64Abi>) -> Int32> = { _, _, _ => 0 }
     public var ReadTagged: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var StartEnumTagged: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public var GetNextTagged: CFunc<(CPointer<Unit>, UInt64, CPointer<GUID>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -9499,7 +9512,7 @@ public class IDebugDataSpaces4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on"]
-    public unsafe func ReadImageNtHeaders(ImageBase: UInt64, Headers: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>): Int32 {
+    public unsafe func ReadImageNtHeaders(ImageBase: UInt64, Headers: CPointer<Win32_impl_p2.IMAGE_NT_HEADERS64Abi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadImageNtHeaders(__liveRaw, ImageBase, Headers)
@@ -10040,10 +10053,10 @@ public struct IDebugFailureAnalysis3Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var AddThreads: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AttributeGet: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var AttributeGet: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var AttributeGetName: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AttributeSet: CFunc<(CPointer<Unit>, UInt32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var AttributeSet: CFunc<(CPointer<Unit>, UInt32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var BlameApplication: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var BlameProcess: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -10251,7 +10264,7 @@ public class IDebugFailureAnalysis3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AttributeGet(nIndex: UInt32, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AttributeGet(nIndex: UInt32, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AttributeGet(__liveRaw, nIndex, pValue)
@@ -10264,7 +10277,7 @@ public class IDebugFailureAnalysis3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AttributeSet(nIndex: UInt32, Value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func AttributeSet(nIndex: UInt32, Value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AttributeSet(__liveRaw, nIndex, Value)
@@ -10882,7 +10895,7 @@ public struct IDebugHostTaggedUnionRangeEnumeratorVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -10934,7 +10947,7 @@ public class IDebugHostTaggedUnionRangeEnumerator <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetNext(pLow: CPointer<Win32__impl_l2.VARIANTAbi>, pHigh: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetNext(pLow: CPointer<Win32_impl_p2.VARIANTAbi>, pHigh: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetNext(__liveRaw, pLow, pHigh)
@@ -20052,7 +20065,7 @@ public type PWINDBG_GET_SYMBOL32 = CFunc<(UInt32, CPointer<UInt8>, CPointer<UInt
 public type PWINDBG_GET_SYMBOL64 = CFunc<(UInt64, CPointer<UInt8>, CPointer<UInt64>) -> Unit>
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
-public type PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>
+public type PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 public type PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>
@@ -20076,7 +20089,7 @@ public type PWINDBG_READ_PROCESS_MEMORY_ROUTINE32 = CFunc<(UInt32, CPointer<Unit
 public type PWINDBG_READ_PROCESS_MEMORY_ROUTINE64 = CFunc<(UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
-public type PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>
+public type PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 public type PWINDBG_STACKTRACE_ROUTINE = CFunc<(UInt32, UInt32, UInt32, CPointer<EXTSTACKTRACEAbi>, UInt32) -> UInt32>
@@ -22035,8 +22048,8 @@ public struct WINDBG_EXTENSION_APIS {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE = CFunc<(UIntNative, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE = CFunc<(UIntNative, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE = CFunc<(UInt32, UInt32, UInt32, CPointer<EXTSTACKTRACEAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -22053,8 +22066,8 @@ public struct WINDBG_EXTENSION_APISAbi {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE = CFunc<(UIntNative, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE = CFunc<(UIntNative, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE = CFunc<(UInt32, UInt32, UInt32, CPointer<EXTSTACKTRACEAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -22114,8 +22127,8 @@ public struct WINDBG_EXTENSION_APIS32 {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE32 = CFunc<(UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32 = CFunc<(UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE32 = CFunc<(UInt32, UInt32, UInt32, CPointer<EXTSTACKTRACE32Abi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -22132,8 +22145,8 @@ public struct WINDBG_EXTENSION_APIS32Abi {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE32 = CFunc<(UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32 = CFunc<(UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE32 = CFunc<(UInt32, UInt32, UInt32, CPointer<EXTSTACKTRACE32Abi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -22193,8 +22206,8 @@ public struct WINDBG_EXTENSION_APIS64 {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE64 = CFunc<(UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64 = CFunc<(UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE64 = CFunc<(UInt64, UInt64, UInt64, CPointer<EXTSTACKTRACE64Abi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -22211,8 +22224,8 @@ public struct WINDBG_EXTENSION_APIS64Abi {
     public var lpCheckControlCRoutine: PWINDBG_CHECK_CONTROL_C = CFunc<() -> UInt32>(CPointer<Unit>())
     public var lpReadProcessMemoryRoutine: PWINDBG_READ_PROCESS_MEMORY_ROUTINE64 = CFunc<(UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
     public var lpWriteProcessMemoryRoutine: PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64 = CFunc<(UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
-    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
-    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32__impl_l1.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpGetThreadContextRoutine: PWINDBG_GET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var lpSetThreadContextRoutine: PWINDBG_SET_THREAD_CONTEXT_ROUTINE = CFunc<(UInt32, CPointer<Win32_impl_p2.CONTEXTAbi>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpIoctlRoutine: PWINDBG_IOCTL_ROUTINE = CFunc<(UInt16, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
     public var lpStackTraceRoutine: PWINDBG_STACKTRACE_ROUTINE64 = CFunc<(UInt64, UInt64, UInt64, CPointer<EXTSTACKTRACE64Abi>, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
@@ -23931,9 +23944,9 @@ public class IDebugHostMemory4 <: InterfaceWrapperBase & ComInterface {
 public struct IDebugHostMemory5Vtbl {
     public var base_: IDebugHostMemory4Vtbl = IDebugHostMemory4Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReadIntrinsics: CFunc<(CPointer<Unit>, CPointer<Unit>, LocationAbi, UInt16, UInt64, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var ReadIntrinsics: CFunc<(CPointer<Unit>, CPointer<Unit>, LocationAbi, UInt16, UInt64, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReadOrdinalIntrinsics: CFunc<(CPointer<Unit>, CPointer<Unit>, LocationAbi, UInt64, UInt8, UInt64, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var ReadOrdinalIntrinsics: CFunc<(CPointer<Unit>, CPointer<Unit>, LocationAbi, UInt64, UInt8, UInt64, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt64>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -23978,14 +23991,14 @@ public class IDebugHostMemory5 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReadIntrinsics(context: CPointer<Unit>, location: LocationAbi, vt: UInt16, count: UInt64, vals: CPointer<Win32__impl_l2.VARIANTAbi>, intrinsicsRead: CPointer<UInt64>): Int32 {
+    public unsafe func ReadIntrinsics(context: CPointer<Unit>, location: LocationAbi, vt: UInt16, count: UInt64, vals: CPointer<Win32_impl_p2.VARIANTAbi>, intrinsicsRead: CPointer<UInt64>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadIntrinsics(__liveRaw, context, location, vt, count, vals, intrinsicsRead)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReadOrdinalIntrinsics(context: CPointer<Unit>, location: LocationAbi, ordinalSize: UInt64, ordinalIsSigned: UInt8, count: UInt64, vals: CPointer<Win32__impl_l2.VARIANTAbi>, intrinsicsRead: CPointer<UInt64>): Int32 {
+    public unsafe func ReadOrdinalIntrinsics(context: CPointer<Unit>, location: LocationAbi, ordinalSize: UInt64, ordinalIsSigned: UInt8, count: UInt64, vals: CPointer<Win32_impl_p2.VARIANTAbi>, intrinsicsRead: CPointer<UInt64>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadOrdinalIntrinsics(__liveRaw, context, location, ordinalSize, ordinalIsSigned, count, vals, intrinsicsRead)
@@ -27182,9 +27195,9 @@ public struct IDataModelManagerVtbl {
     public var CreateSyntheticObject: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateDataModelObject: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateIntrinsicObject: CFunc<(CPointer<Unit>, ModelObjectKindAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateIntrinsicObject: CFunc<(CPointer<Unit>, ModelObjectKindAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTypedIntrinsicObject: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateTypedIntrinsicObject: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetModelForTypeSignature: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetModelForType: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var RegisterModelForTypeSignature: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -27282,14 +27295,14 @@ public class IDataModelManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateIntrinsicObject(objectKind: ModelObjectKindAbi, intrinsicData: CPointer<Win32__impl_l2.VARIANTAbi>, object: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateIntrinsicObject(objectKind: ModelObjectKindAbi, intrinsicData: CPointer<Win32_impl_p2.VARIANTAbi>, object: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateIntrinsicObject(__liveRaw, objectKind, intrinsicData, object)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTypedIntrinsicObject(intrinsicData: CPointer<Win32__impl_l2.VARIANTAbi>, type_: CPointer<Unit>, object: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateTypedIntrinsicObject(intrinsicData: CPointer<Win32_impl_p2.VARIANTAbi>, type_: CPointer<Unit>, object: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTypedIntrinsicObject(__liveRaw, intrinsicData, type_, object)
@@ -27368,7 +27381,7 @@ public struct IDataModelManager2Vtbl {
     public var base_: IDataModelManagerVtbl = IDataModelManagerVtbl()
     public var AcquireSubNamespace: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateTypedIntrinsicObjectEx: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateTypedIntrinsicObjectEx: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -27419,7 +27432,7 @@ public class IDataModelManager2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateTypedIntrinsicObjectEx(context: CPointer<Unit>, intrinsicData: CPointer<Win32__impl_l2.VARIANTAbi>, type_: CPointer<Unit>, object: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateTypedIntrinsicObjectEx(context: CPointer<Unit>, intrinsicData: CPointer<Win32_impl_p2.VARIANTAbi>, type_: CPointer<Unit>, object: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateTypedIntrinsicObjectEx(__liveRaw, context, intrinsicData, type_, object)
@@ -41417,7 +41430,7 @@ public struct IDebugEventCallbacksVtbl {
     public var GetInterestMask: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Breakpoint: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, UInt32) -> Int32> = { _, _, _ => 0 }
+    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var CreateThread: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64) -> Int32> = { _, _, _, _ => 0 }
     public var ExitThread: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var CreateProcessA: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64, UInt32, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, UInt64, UInt64, UInt64) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
@@ -41485,7 +41498,7 @@ public class IDebugEventCallbacks <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public unsafe func Exception(Exception: CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32): Int32 {
+    public unsafe func Exception(Exception: CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Exception(__liveRaw, Exception, FirstChance)
@@ -41565,7 +41578,7 @@ public struct IDebugEventCallbacksWideVtbl {
     public var GetInterestMask: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Breakpoint: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, UInt32) -> Int32> = { _, _, _ => 0 }
+    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var CreateThread: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64) -> Int32> = { _, _, _, _ => 0 }
     public var ExitThread: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var CreateProcessA: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64, UInt32, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, UInt64, UInt64, UInt64) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
@@ -41633,7 +41646,7 @@ public class IDebugEventCallbacksWide <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public unsafe func Exception(Exception: CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32): Int32 {
+    public unsafe func Exception(Exception: CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Exception(__liveRaw, Exception, FirstChance)
@@ -41713,7 +41726,7 @@ public struct IDebugEventContextCallbacksVtbl {
     public var GetInterestMask: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Breakpoint: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Exception: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateThread: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var ExitThread: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var CreateProcessA: CFunc<(CPointer<Unit>, UInt64, UInt64, UInt64, UInt32, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, UInt64, UInt64, UInt64, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
@@ -41781,7 +41794,7 @@ public class IDebugEventContextCallbacks <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-    public unsafe func Exception(Exception: CPointer<Win32__impl_l0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32, Context: CPointer<Unit>, ContextSize: UInt32): Int32 {
+    public unsafe func Exception(Exception: CPointer<Win32_impl_p0.EXCEPTION_RECORD64Abi>, FirstChance: UInt32, Context: CPointer<Unit>, ContextSize: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Exception(__liveRaw, Exception, FirstChance, Context, ContextSize)
@@ -42047,7 +42060,7 @@ public class IDebugHostBaseClass2 <: InterfaceWrapperBase & ComInterface {
 public struct IDebugHostConstantVtbl {
     public var base_: IDebugHostSymbolVtbl = IDebugHostSymbolVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -42092,7 +42105,7 @@ public class IDebugHostConstant <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, value)
@@ -42106,7 +42119,7 @@ public struct IDebugHostDataVtbl {
     public var GetLocationKind: CFunc<(CPointer<Unit>, CPointer<LocationKindAbi>) -> Int32> = { _, _ => 0 }
     public var GetLocation: CFunc<(CPointer<Unit>, CPointer<LocationAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -42163,7 +42176,7 @@ public class IDebugHostData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, value)
@@ -42536,7 +42549,7 @@ public struct IDebugHostFieldVtbl {
     public var GetOffset: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public var GetLocation: CFunc<(CPointer<Unit>, CPointer<LocationAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -42599,7 +42612,7 @@ public class IDebugHostField <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, value)
@@ -44515,7 +44528,7 @@ public class IDebugHostType5 <: InterfaceWrapperBase & ComInterface {
 public struct IDebugHostType6Vtbl {
     public var base_: IDebugHostType5Vtbl = IDebugHostType5Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetTaggedUnionTag: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetTaggedUnionTag: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetTaggedUnionTagRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var UpcastToTaggedUnionType: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -44562,7 +44575,7 @@ public class IDebugHostType6 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetTaggedUnionTag(pTagType: CPointer<CPointer<Unit>>, pTagOffset: CPointer<UInt32>, pTagMask: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetTaggedUnionTag(pTagType: CPointer<CPointer<Unit>>, pTagOffset: CPointer<UInt32>, pTagMask: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTaggedUnionTag(__liveRaw, pTagType, pTagOffset, pTagMask)
@@ -45606,9 +45619,9 @@ public struct IModelObjectVtbl {
     public var GetContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetKind: CFunc<(CPointer<Unit>, CPointer<ModelObjectKindAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetIntrinsicValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetIntrinsicValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetIntrinsicValueAs: CFunc<(CPointer<Unit>, Win32__impl_l0.VARENUMAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetIntrinsicValueAs: CFunc<(CPointer<Unit>, Win32_impl_p1.VARENUMAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetKeyValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SetKeyValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var EnumerateKeyValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -45698,14 +45711,14 @@ public class IModelObject <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetIntrinsicValue(intrinsicData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetIntrinsicValue(intrinsicData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIntrinsicValue(__liveRaw, intrinsicData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetIntrinsicValueAs(vt: Win32__impl_l0.VARENUMAbi, intrinsicData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetIntrinsicValueAs(vt: Win32_impl_p1.VARENUMAbi, intrinsicData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIntrinsicValueAs(__liveRaw, vt, intrinsicData)

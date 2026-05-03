@@ -4,15 +4,25 @@
 package windows.Media.Import
 
 import std.collection.*
+@When[Windows_Media_Import == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Import == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Import == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Import == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Import == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Import == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Import == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Import == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Import == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Import == "on"]
 import windows_future as windows_future
 
 
@@ -2005,7 +2015,7 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPhotoImportItem", IPhotoImportItem.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportItemVtbl", "IPhotoImportItem", "IPhotoImportItem_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemKey", 7, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContentType", 8, [InterfaceParameterSchema("result", "CPointer<PhotoImportContentTypeAbi>", "OutSlot<PhotoImportContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SizeInBytes", 9, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Date", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Sibling", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSidecar>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Sidecars", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportSidecar>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VideoSegments", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportVideoSegment>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSelected", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSelected", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Thumbnail", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImportedFileNames", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeletedFileNames", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPhotoImportItem", IPhotoImportItem.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportItemVtbl", "IPhotoImportItem", "IPhotoImportItem_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemKey", 7, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContentType", 8, [InterfaceParameterSchema("result", "CPointer<PhotoImportContentTypeAbi>", "OutSlot<PhotoImportContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SizeInBytes", 9, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Date", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Sibling", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSidecar>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Sidecars", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportSidecar>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VideoSegments", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportVideoSegment>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSelected", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsSelected", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Thumbnail", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImportedFileNames", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeletedFileNames", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPhotoImportItem.runtimeType())
         return schema
     }
@@ -2115,12 +2125,12 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -2257,7 +2267,7 @@ public class PhotoImportItem <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Thumbnail()
     }
 
@@ -3534,7 +3544,7 @@ public class IPhotoImportSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPhotoImportSession", IPhotoImportSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IPhotoImportSessionVtbl", "IPhotoImportSession", "IPhotoImportSession_Impl", [InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SessionId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDestinationFolder", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DestinationFolder", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppendSessionDateToDestinationFolder", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppendSessionDateToDestinationFolder", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubfolderCreationMode", 13, [InterfaceParameterSchema("value", "PhotoImportSubfolderCreationModeAbi", "PhotoImportSubfolderCreationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SubfolderCreationMode", 14, [InterfaceParameterSchema("result", "CPointer<PhotoImportSubfolderCreationModeAbi>", "OutSlot<PhotoImportSubfolderCreationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDestinationFileNamePrefix", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DestinationFileNamePrefix", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindItemsAsync", 17, [InterfaceParameterSchema("contentTypeFilter", "PhotoImportContentTypeFilterAbi", "PhotoImportContentTypeFilter", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("itemSelectionMode", "PhotoImportItemSelectionModeAbi", "PhotoImportItemSelectionMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<PhotoImportFindItemsResult, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPhotoImportSession", IPhotoImportSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IPhotoImportSessionVtbl", "IPhotoImportSession", "IPhotoImportSession_Impl", [InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SessionId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDestinationFolder", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DestinationFolder", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppendSessionDateToDestinationFolder", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppendSessionDateToDestinationFolder", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubfolderCreationMode", 13, [InterfaceParameterSchema("value", "PhotoImportSubfolderCreationModeAbi", "PhotoImportSubfolderCreationMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SubfolderCreationMode", 14, [InterfaceParameterSchema("result", "CPointer<PhotoImportSubfolderCreationModeAbi>", "OutSlot<PhotoImportSubfolderCreationMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDestinationFileNamePrefix", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DestinationFileNamePrefix", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindItemsAsync", 17, [InterfaceParameterSchema("contentTypeFilter", "PhotoImportContentTypeFilterAbi", "PhotoImportContentTypeFilter", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("itemSelectionMode", "PhotoImportItemSelectionModeAbi", "PhotoImportItemSelectionMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<PhotoImportFindItemsResult, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPhotoImportSession.runtimeType())
         return schema
     }
@@ -3587,19 +3597,19 @@ public class IPhotoImportSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetDestinationFolder(value: _impl_l1.IStorageFolder): Unit {
+    public unsafe func SetDestinationFolder(value: impl_p1.IStorageFolder): Unit {
         let v = vtbl()
         let hr = v.SetDestinationFolder(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func DestinationFolder(): _impl_l1.IStorageFolder {
+    public unsafe func DestinationFolder(): impl_p1.IStorageFolder {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DestinationFolder(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFolder.fromAbiTake(result__)
+        return impl_p1.IStorageFolder.fromAbiTake(result__)
     }
 
     public unsafe func SetAppendSessionDateToDestinationFolder(value: Bool): Unit {
@@ -3722,7 +3732,7 @@ public class IPhotoImportSource <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPhotoImportSource", IPhotoImportSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportSourceVtbl", "IPhotoImportSource", "IPhotoImportSource_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Description", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Manufacturer", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Model", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SerialNumber", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionProtocol", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionTransport", 13, [InterfaceParameterSchema("result", "CPointer<PhotoImportConnectionTransportAbi>", "OutSlot<PhotoImportConnectionTransport>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Type", 14, [InterfaceParameterSchema("result", "CPointer<PhotoImportSourceTypeAbi>", "OutSlot<PhotoImportSourceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PowerSource", 15, [InterfaceParameterSchema("result", "CPointer<PhotoImportPowerSourceAbi>", "OutSlot<PhotoImportPowerSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryLevelPercent", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DateTime", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StorageMedia", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportStorageMedium>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLocked", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMassStorage", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateImportSession", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPhotoImportSource", IPhotoImportSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportSourceVtbl", "IPhotoImportSource", "IPhotoImportSource_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Description", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Manufacturer", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Model", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SerialNumber", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionProtocol", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionTransport", 13, [InterfaceParameterSchema("result", "CPointer<PhotoImportConnectionTransportAbi>", "OutSlot<PhotoImportConnectionTransport>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Type", 14, [InterfaceParameterSchema("result", "CPointer<PhotoImportSourceTypeAbi>", "OutSlot<PhotoImportSourceType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PowerSource", 15, [InterfaceParameterSchema("result", "CPointer<PhotoImportPowerSourceAbi>", "OutSlot<PhotoImportPowerSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryLevelPercent", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DateTime", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_future.DateTime>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StorageMedia", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PhotoImportStorageMedium>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsLocked", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMassStorage", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Thumbnail", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateImportSession", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PhotoImportSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPhotoImportSource.runtimeType())
         return schema
     }
@@ -3873,12 +3883,12 @@ public class IPhotoImportSource <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     public unsafe func CreateImportSession(): PhotoImportSession {
@@ -3941,7 +3951,7 @@ public class IPhotoImportSourceStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPhotoImportSourceStatics", IPhotoImportSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportSourceStaticsVtbl", "IPhotoImportSourceStatics", "IPhotoImportSourceStatics_Impl", [InterfaceMethodSchema("FromIdAsync", 6, [InterfaceParameterSchema("sourceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PhotoImportSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromFolderAsync", 7, [InterfaceParameterSchema("sourceRootFolder", "CPointer<Unit>", "InParam<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PhotoImportSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPhotoImportSourceStatics", IPhotoImportSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPhotoImportSourceStaticsVtbl", "IPhotoImportSourceStatics", "IPhotoImportSourceStatics_Impl", [InterfaceMethodSchema("FromIdAsync", 6, [InterfaceParameterSchema("sourceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PhotoImportSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromFolderAsync", 7, [InterfaceParameterSchema("sourceRootFolder", "CPointer<Unit>", "InParam<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PhotoImportSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPhotoImportSourceStatics.runtimeType())
         return schema
     }
@@ -3979,7 +3989,7 @@ public class IPhotoImportSourceStatics <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func FromFolderAsync(sourceRootFolder: _impl_l1.IStorageFolder): windows_future.IAsyncOperation<PhotoImportSource> {
+    public unsafe func FromFolderAsync(sourceRootFolder: impl_p1.IStorageFolder): windows_future.IAsyncOperation<PhotoImportSource> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FromFolderAsync(asRaw(), sourceRootFolder.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4747,12 +4757,12 @@ public class PhotoImportSession <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetDestinationFolder(value: _impl_l1.IStorageFolder): Unit {
+    public unsafe func SetDestinationFolder(value: impl_p1.IStorageFolder): Unit {
         defaultInterface().SetDestinationFolder(value)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func DestinationFolder(): _impl_l1.IStorageFolder {
+    public unsafe func DestinationFolder(): impl_p1.IStorageFolder {
         return defaultInterface().DestinationFolder()
     }
 
@@ -4938,7 +4948,7 @@ public class PhotoImportSource <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Thumbnail()
     }
 
@@ -4958,7 +4968,7 @@ public class PhotoImportSource <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func FromFolderAsync(sourceRootFolder: _impl_l1.IStorageFolder): windows_future.IAsyncOperation<PhotoImportSource> {
+    public static unsafe func FromFolderAsync(sourceRootFolder: impl_p1.IStorageFolder): windows_future.IAsyncOperation<PhotoImportSource> {
         var result__: Option<windows_future.IAsyncOperation<PhotoImportSource>> = Option<windows_future.IAsyncOperation<PhotoImportSource>>.None
         try (factory__ = windows_core.factory<PhotoImportSource, IPhotoImportSourceStatics>().unwrap()) {
             result__ = Some(factory__.FromFolderAsync(sourceRootFolder))

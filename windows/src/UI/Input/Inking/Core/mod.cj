@@ -4,17 +4,29 @@
 package windows.UI.Input.Inking.Core
 
 import std.collection.*
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Input_Inking_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Input_Inking_Core == "on" && Windows_UI_Input_Inking == "on"]
 import windows.UI.Input.Inking as UI_Input_Inking
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Input_Inking_Core == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_future as windows_future
+@When[Windows_UI_Input_Inking_Core == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -263,7 +275,7 @@ public class ICoreInkIndependentInputSource2 <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreInkIndependentInputSource2", ICoreInkIndependentInputSource2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkIndependentInputSource2Vtbl", "ICoreInkIndependentInputSource2", "ICoreInkIndependentInputSource2_Impl", [InterfaceMethodSchema("PointerCursor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.CoreCursor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPointerCursor", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.CoreCursor>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreInkIndependentInputSource2", ICoreInkIndependentInputSource2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkIndependentInputSource2Vtbl", "ICoreInkIndependentInputSource2", "ICoreInkIndependentInputSource2_Impl", [InterfaceMethodSchema("PointerCursor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.CoreCursor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPointerCursor", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.CoreCursor>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreInkIndependentInputSource2.runtimeType())
         return schema
     }
@@ -293,16 +305,16 @@ public class ICoreInkIndependentInputSource2 <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerCursor(): _impl_l1.CoreCursor {
+    public unsafe func PointerCursor(): impl_p1.CoreCursor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PointerCursor(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.CoreCursor.fromAbiTake(result__)
+        return impl_p1.CoreCursor.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func SetPointerCursor(value: _impl_l1.CoreCursor): Unit {
+    public unsafe func SetPointerCursor(value: impl_p1.CoreCursor): Unit {
         let v = vtbl()
         let hr = v.SetPointerCursor(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -367,7 +379,7 @@ public class ICoreInkPresenterHost <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreInkPresenterHost", ICoreInkPresenterHost.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkPresenterHostVtbl", "ICoreInkPresenterHost", "ICoreInkPresenterHost_Impl", [InterfaceMethodSchema("get_InkPresenter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Input_Inking.InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RootVisual", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ContainerVisual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRootVisual", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ContainerVisual>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreInkPresenterHost", ICoreInkPresenterHost.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkPresenterHostVtbl", "ICoreInkPresenterHost", "ICoreInkPresenterHost_Impl", [InterfaceMethodSchema("get_InkPresenter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Input_Inking.InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RootVisual", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ContainerVisual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRootVisual", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ContainerVisual>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreInkPresenterHost.runtimeType())
         return schema
     }
@@ -406,16 +418,16 @@ public class ICoreInkPresenterHost <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func RootVisual(): _impl_l1.ContainerVisual {
+    public unsafe func RootVisual(): impl_p1.ContainerVisual {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RootVisual(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ContainerVisual.fromAbiTake(result__)
+        return impl_p1.ContainerVisual.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetRootVisual(value: _impl_l1.ContainerVisual): Unit {
+    public unsafe func SetRootVisual(value: impl_p1.ContainerVisual): Unit {
         let v = vtbl()
         let hr = v.SetRootVisual(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -625,12 +637,12 @@ public class CoreInkPresenterHost <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func RootVisual(): _impl_l1.ContainerVisual {
+    public unsafe func RootVisual(): impl_p1.ContainerVisual {
         return defaultInterface().RootVisual()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetRootVisual(value: _impl_l1.ContainerVisual): Unit {
+    public unsafe func SetRootVisual(value: impl_p1.ContainerVisual): Unit {
         defaultInterface().SetRootVisual(value)
     }
 }
@@ -952,7 +964,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerEntering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerEntering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerEntering(handler)
     }
 
@@ -961,7 +973,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerHovering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerHovering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerHovering(handler)
     }
 
@@ -970,7 +982,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerExiting(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerExiting(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerExiting(handler)
     }
 
@@ -979,7 +991,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerPressing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerPressing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerPressing(handler)
     }
 
@@ -988,7 +1000,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerMoving(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerMoving(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerMoving(handler)
     }
 
@@ -997,7 +1009,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerReleasing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerReleasing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerReleasing(handler)
     }
 
@@ -1006,7 +1018,7 @@ public class CoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().PointerLost(handler)
     }
 
@@ -1366,7 +1378,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreInkIndependentInputSource", ICoreInkIndependentInputSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkIndependentInputSourceVtbl", "ICoreInkIndependentInputSource", "ICoreInkIndependentInputSource_Impl", [InterfaceMethodSchema("PointerEntering", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerEntering", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerHovering", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerHovering", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerExiting", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerExiting", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerPressing", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerPressing", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerMoving", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerMoving", 15, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerReleasing", 16, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerReleasing", 17, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerLost", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerLost", 19, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Input_Inking.InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreInkIndependentInputSource", ICoreInkIndependentInputSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreInkIndependentInputSourceVtbl", "ICoreInkIndependentInputSource", "ICoreInkIndependentInputSource_Impl", [InterfaceMethodSchema("PointerEntering", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerEntering", 7, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerHovering", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerHovering", 9, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerExiting", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerExiting", 11, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerPressing", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerPressing", 13, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerMoving", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerMoving", 15, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerReleasing", 16, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerReleasing", 17, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PointerLost", 18, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePointerLost", 19, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_InkPresenter", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Input_Inking.InkPresenter>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreInkIndependentInputSource.runtimeType())
         return schema
     }
@@ -1396,7 +1408,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerEntering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerEntering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerEntering(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1411,7 +1423,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerHovering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerHovering(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerHovering(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1426,7 +1438,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerExiting(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerExiting(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerExiting(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1441,7 +1453,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerPressing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerPressing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerPressing(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1456,7 +1468,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerMoving(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerMoving(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerMoving(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1471,7 +1483,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerReleasing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerReleasing(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerReleasing(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -1486,7 +1498,7 @@ public class ICoreInkIndependentInputSource <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, _impl_l1.PointerEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func PointerLost(handler: Foundation.TypedEventHandler<CoreInkIndependentInputSource, impl_p1.PointerEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.PointerLost(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))

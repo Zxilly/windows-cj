@@ -4,18 +4,32 @@
 package windows.Win32.UI.TextServices
 
 import std.collection.*
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
+@When[Windows_Win32_UI_TextServices == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_UI_TextServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_TextServices == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_UI_TextServices == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
 import windows.Win32.UI.Input.KeyboardAndMouse as Win32_UI_Input_KeyboardAndMouse
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_UI_TextServices == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_TextServices == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_TextServices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_UI_TextServices == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_UI_TextServices == "on"]
@@ -957,7 +971,7 @@ public struct IAccDictionaryVtbl {
     public var GetMnemonicString: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var LookupMnemonicTerm: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ConvertValueToString: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ConvertValueToString: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1026,7 +1040,7 @@ public class IAccDictionary <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ConvertValueToString(Term: CPointer<GUID>, lcid: UInt32, varValue: Win32__impl_l2.VARIANTAbi, pbstrResult: CPointer<CPointer<UInt16>>, plcid: CPointer<UInt32>): Int32 {
+    public unsafe func ConvertValueToString(Term: CPointer<GUID>, lcid: UInt32, varValue: Win32_impl_p2.VARIANTAbi, pbstrResult: CPointer<CPointer<UInt16>>, plcid: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ConvertValueToString(__liveRaw, Term, lcid, varValue, pbstrResult, plcid)
@@ -1279,7 +1293,7 @@ public class IClonableWrapper <: InterfaceWrapperBase & ComInterface {
 public struct ICoCreateLocallyVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CoCreateLocally: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>, CPointer<GUID>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CoCreateLocally: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>, CPointer<GUID>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1324,7 +1338,7 @@ public class ICoCreateLocally <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CoCreateLocally(rclsid: CPointer<GUID>, dwClsContext: UInt32, riid: CPointer<GUID>, punk: CPointer<CPointer<Unit>>, riidParam: CPointer<GUID>, punkParam: CPointer<Unit>, varParam: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func CoCreateLocally(rclsid: CPointer<GUID>, dwClsContext: UInt32, riid: CPointer<GUID>, punk: CPointer<CPointer<Unit>>, riidParam: CPointer<GUID>, punkParam: CPointer<Unit>, varParam: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CoCreateLocally(__liveRaw, rclsid, dwClsContext, riid, punk, riidParam, punkParam, varParam)
@@ -1336,7 +1350,7 @@ public class ICoCreateLocally <: InterfaceWrapperBase & ComInterface {
 public struct ICoCreatedLocallyVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LocalInit: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var LocalInit: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1381,7 +1395,7 @@ public class ICoCreatedLocally <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LocalInit(punkLocalObject: CPointer<Unit>, riidParam: CPointer<GUID>, punkParam: CPointer<Unit>, varParam: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func LocalInit(punkLocalObject: CPointer<Unit>, riidParam: CPointer<GUID>, punkParam: CPointer<Unit>, varParam: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LocalInit(__liveRaw, punkLocalObject, riidParam, punkParam, varParam)
@@ -2148,9 +2162,9 @@ public class ITfClientId <: InterfaceWrapperBase & ComInterface {
 public struct ITfCompartmentVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -2195,14 +2209,14 @@ public class ITfCompartment <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(tid: UInt32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(tid: UInt32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, tid, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, pvarValue)
@@ -3216,13 +3230,13 @@ public class ITfMenu <: InterfaceWrapperBase & ComInterface {
 public struct ITfMessagePumpVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var PeekMessageA: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var PeekMessageA: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetMessageA: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetMessageA: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var PeekMessageW: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var PeekMessageW: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetMessageW: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetMessageW: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Unit>, UInt32, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -3267,28 +3281,28 @@ public class ITfMessagePump <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func PeekMessageA(pMsg: CPointer<Win32__impl_l0.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, wRemoveMsg: UInt32, pfResult: CPointer<Int32>): Int32 {
+    public unsafe func PeekMessageA(pMsg: CPointer<Win32_impl_p1.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, wRemoveMsg: UInt32, pfResult: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekMessageA(__liveRaw, pMsg, hwnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg, pfResult)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetMessageA(pMsg: CPointer<Win32__impl_l0.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, pfResult: CPointer<Int32>): Int32 {
+    public unsafe func GetMessageA(pMsg: CPointer<Win32_impl_p1.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, pfResult: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMessageA(__liveRaw, pMsg, hwnd, wMsgFilterMin, wMsgFilterMax, pfResult)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func PeekMessageW(pMsg: CPointer<Win32__impl_l0.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, wRemoveMsg: UInt32, pfResult: CPointer<Int32>): Int32 {
+    public unsafe func PeekMessageW(pMsg: CPointer<Win32_impl_p1.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, wRemoveMsg: UInt32, pfResult: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PeekMessageW(__liveRaw, pMsg, hwnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg, pfResult)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetMessageW(pMsg: CPointer<Win32__impl_l0.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, pfResult: CPointer<Int32>): Int32 {
+    public unsafe func GetMessageW(pMsg: CPointer<Win32_impl_p1.MSGAbi>, hwnd: CPointer<Unit>, wMsgFilterMin: UInt32, wMsgFilterMax: UInt32, pfResult: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMessageW(__liveRaw, pMsg, hwnd, wMsgFilterMin, wMsgFilterMax, pfResult)
@@ -3355,7 +3369,7 @@ public class ITfMouseSink <: InterfaceWrapperBase & ComInterface {
 public struct ITfQueryEmbeddedVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l1.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -3400,7 +3414,7 @@ public class ITfQueryEmbedded <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32__impl_l1.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
+    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32_impl_p2.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryInsertEmbedded(__liveRaw, pguidService, pFormatEtc, pfInsertable)
@@ -3602,7 +3616,7 @@ public class ITfSourceSingle <: InterfaceWrapperBase & ComInterface {
 public struct ITfSystemLangBarItemVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetIcon: CFunc<(CPointer<Unit>, Win32__impl_l0.HICON) -> Int32> = { _, _ => 0 }
+    public var SetIcon: CFunc<(CPointer<Unit>, Win32_impl_p1.HICON) -> Int32> = { _, _ => 0 }
     public var SetTooltipString: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -3648,7 +3662,7 @@ public class ITfSystemLangBarItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetIcon(hIcon: Win32__impl_l0.HICON): Int32 {
+    public unsafe func SetIcon(hIcon: Win32_impl_p1.HICON): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetIcon(__liveRaw, hIcon)
@@ -5320,7 +5334,7 @@ extend TF_PRESERVEDKEY <: windows_core.CopyType & windows_core.RuntimeType & win
 @When[Windows_Win32_UI_TextServices == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public struct TF_PROPERTYVAL {
     public var guidId: GuidValue = GuidValue()
-    public var varValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var varValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -5328,7 +5342,7 @@ public struct TF_PROPERTYVAL {
 @C
 public struct TF_PROPERTYVALAbi {
     public var guidId: GUID = GUID()
-    public var varValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var varValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -5340,13 +5354,13 @@ extend TF_PROPERTYVAL <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func projectAbi(value: TF_PROPERTYVAL): TF_PROPERTYVALAbi {
         var abi = TF_PROPERTYVALAbi()
         abi.guidId = value.guidId.toRaw()
-        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: TF_PROPERTYVALAbi): TF_PROPERTYVAL {
         var value = TF_PROPERTYVAL()
         value.guidId = GuidValue(abi.guidId)
-        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: TF_PROPERTYVALAbi): Result<TF_PROPERTYVAL> { Result<TF_PROPERTYVAL>.Ok(TF_PROPERTYVAL.assumeInitRef(abi)) }
@@ -5417,7 +5431,7 @@ extend TKBLayoutType <: windows_core.CopyType & windows_core.RuntimeType & windo
 public struct TS_ATTRVAL {
     public var idAttr: GuidValue = GuidValue()
     public var dwOverlapId: UInt32 = 0u32
-    public var varValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var varValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -5426,7 +5440,7 @@ public struct TS_ATTRVAL {
 public struct TS_ATTRVALAbi {
     public var idAttr: GUID = GUID()
     public var dwOverlapId: UInt32 = 0u32
-    public var varValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var varValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -5439,14 +5453,14 @@ extend TS_ATTRVAL <: windows_core.CopyType & windows_core.RuntimeType & windows_
         var abi = TS_ATTRVALAbi()
         abi.idAttr = value.idAttr.toRaw()
         abi.dwOverlapId = value.dwOverlapId
-        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.varValue = windows_core.projectTypedAbi(value.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: TS_ATTRVALAbi): TS_ATTRVAL {
         var value = TS_ATTRVAL()
         value.idAttr = GuidValue(abi.idAttr)
         value.dwOverlapId = abi.dwOverlapId
-        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.varValue = windows_core.fromTypedAbi(abi.varValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: TS_ATTRVALAbi): Result<TS_ATTRVAL> { Result<TS_ATTRVAL>.Ok(TS_ATTRVAL.assumeInitRef(abi)) }
@@ -7501,7 +7515,7 @@ public struct ITfContextOwnerVtbl {
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<TS_STATUSAbi>) -> Int32> = { _, _ => 0 }
     public var GetWnd: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -7576,7 +7590,7 @@ public class ITfContextOwner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttribute(rguidAttribute: CPointer<GUID>, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttribute(rguidAttribute: CPointer<GUID>, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttribute(__liveRaw, rguidAttribute, pvarValue)
@@ -9092,7 +9106,7 @@ public struct ITfLangBarItemButtonVtbl {
     public var InitMenu: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var OnMenuSelect: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetIcon: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _ => 0 }
+    public var GetIcon: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _ => 0 }
     public var GetText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -9156,7 +9170,7 @@ public class ITfLangBarItemButton <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetIcon(phIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func GetIcon(phIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIcon(__liveRaw, phIcon)
@@ -10137,7 +10151,7 @@ public struct ITextStoreACPVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var GetEmbedded: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l1.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var InsertEmbedded: CFunc<(CPointer<Unit>, UInt32, Int32, Int32, CPointer<Unit>, CPointer<TS_TEXTCHANGEAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var InsertTextAtSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<Int32>, CPointer<Int32>, CPointer<TS_TEXTCHANGEAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -10269,7 +10283,7 @@ public class ITextStoreACP <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32__impl_l1.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
+    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32_impl_p2.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryInsertEmbedded(__liveRaw, pguidService, pFormatEtc, pfInsertable)
@@ -10383,7 +10397,7 @@ public struct ITextStoreACP2Vtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var GetEmbedded: CFunc<(CPointer<Unit>, Int32, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l1.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var InsertEmbedded: CFunc<(CPointer<Unit>, UInt32, Int32, Int32, CPointer<Unit>, CPointer<TS_TEXTCHANGEAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var InsertTextAtSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<Int32>, CPointer<Int32>, CPointer<TS_TEXTCHANGEAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -10514,7 +10528,7 @@ public class ITextStoreACP2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32__impl_l1.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
+    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32_impl_p2.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryInsertEmbedded(__liveRaw, pguidService, pFormatEtc, pfInsertable)
@@ -10637,7 +10651,7 @@ public struct ITextStoreAnchorVtbl {
     public var GetScreenExt: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.RECTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetWnd: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l1.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var QueryInsertEmbedded: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.FORMATETCAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var InsertTextAtSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var InsertEmbeddedAtSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -10835,7 +10849,7 @@ public class ITextStoreAnchor <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32__impl_l1.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
+    public unsafe func QueryInsertEmbedded(pguidService: CPointer<GUID>, pFormatEtc: CPointer<Win32_impl_p2.FORMATETCAbi>, pfInsertable: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryInsertEmbedded(__liveRaw, pguidService, pFormatEtc, pfInsertable)
@@ -14057,7 +14071,7 @@ public struct ITfPropertyVtbl {
     public var FindRange: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>, TfAnchorAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetValueStore: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -14115,7 +14129,7 @@ public class ITfProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(ec: UInt32, pRange: CPointer<Unit>, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(ec: UInt32, pRange: CPointer<Unit>, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, ec, pRange, pvarValue)
@@ -14135,7 +14149,7 @@ public struct ITfPropertyStoreVtbl {
     public var GetType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetDataType: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var OnTextUpdated: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var Shrink: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var Divide: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -14199,7 +14213,7 @@ public class ITfPropertyStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetData(pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetData(pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetData(__liveRaw, pvarValue)
@@ -14575,7 +14589,7 @@ public struct ITfReadOnlyPropertyVtbl {
     public var GetType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var EnumRanges: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -14633,7 +14647,7 @@ public class ITfReadOnlyProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(ec: UInt32, pRange: CPointer<Unit>, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(ec: UInt32, pRange: CPointer<Unit>, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, ec, pRange, pvarValue)

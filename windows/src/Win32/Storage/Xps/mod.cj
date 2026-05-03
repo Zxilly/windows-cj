@@ -4,17 +4,26 @@
 package windows.Win32.Storage.Xps
 
 import std.collection.*
+@When[Windows_Win32_Storage_Xps == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Xps == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Xps == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Xps == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Xps == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Xps == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Storage_Xps == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Storage_Xps == "on" && Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows.Win32.Storage.Packaging.Opc as Win32_Storage_Packaging_Opc
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Xps == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Xps == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Storage_Xps == "on" && Windows_Win32_Graphics_Gdi == "on"]
@@ -3732,7 +3741,7 @@ public struct IXpsSignatureVtbl {
     @When[Windows_Win32_Storage_Packaging_Opc == "on"]
     public var GetSignaturePartName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Verify: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<XPS_SIGNATURE_STATUSAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Verify: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<XPS_SIGNATURE_STATUSAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetPolicy: CFunc<(CPointer<Unit>, CPointer<XPS_SIGN_POLICYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Storage_Packaging_Opc == "on"]
     public var GetCustomObjectEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3823,7 +3832,7 @@ public class IXpsSignature <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Verify(x509Certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, sigStatus: CPointer<XPS_SIGNATURE_STATUSAbi>): Int32 {
+    public unsafe func Verify(x509Certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, sigStatus: CPointer<XPS_SIGNATURE_STATUSAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Verify(__liveRaw, x509Certificate, sigStatus)
@@ -5442,7 +5451,7 @@ public struct IXpsSignatureManagerVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var LoadPackageStream: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Sign: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var Sign: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Storage_Packaging_Opc == "on"]
     public var GetSignatureOriginPartName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Storage_Packaging_Opc == "on"]
@@ -5513,7 +5522,7 @@ public class IXpsSignatureManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Sign(signOptions: CPointer<Unit>, x509Certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, signature: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Sign(signOptions: CPointer<Unit>, x509Certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, signature: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Sign(__liveRaw, signOptions, x509Certificate, signature)

@@ -4,14 +4,23 @@
 package windows.ApplicationModel.Payments
 
 import std.collection.*
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Payments == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Payments == "on"]
 import windows_future as windows_future
 
 
@@ -5537,19 +5546,15 @@ public class PaymentRequestChangedHandler <: InterfaceWrapperBase & ComInterface
 extend PaymentRequestChangedHandler <: windows_core.Interface<PaymentRequestChangedHandler> {}
 
 @When[Windows_ApplicationModel_Payments == "on"]
-private open class PaymentRequestChangedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface PaymentRequestChangedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_ApplicationModel_Payments == "on"]
-private open class PaymentRequestChangedHandlerInvoker <: PaymentRequestChangedHandlerInvokerErased {
-    public open func Invoke(paymentRequest: InParam<PaymentRequest>, args: InParam<PaymentRequestChangedArgs>): Unit {
-        ()
-    }
+private interface PaymentRequestChangedHandlerInvoker <: PaymentRequestChangedHandlerInvokerErased {
+    public func Invoke(paymentRequest: InParam<PaymentRequest>, args: InParam<PaymentRequestChangedArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<PaymentRequest>(PaymentRequest.viewOf(arg0)), InParam<PaymentRequestChangedArgs>(PaymentRequestChangedArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -5569,7 +5574,7 @@ private class PaymentRequestChangedHandlerBox <: PaymentRequestChangedHandlerInv
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(paymentRequest: InParam<PaymentRequest>, args: InParam<PaymentRequestChangedArgs>): Unit {
+    public func Invoke(paymentRequest: InParam<PaymentRequest>, args: InParam<PaymentRequestChangedArgs>): Unit {
         invoke_(paymentRequest, args)
     }
 }

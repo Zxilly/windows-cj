@@ -4,17 +4,29 @@
 package windows.Web.AtomPub
 
 import std.collection.*
+@When[Windows_Web_AtomPub == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Web_AtomPub == "on"]
 import windows_core as windows_core
+@When[Windows_Web_AtomPub == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Web_AtomPub == "on"]
 import windows_interface as windows_interface
+@When[Windows_Web_AtomPub == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Web_AtomPub == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Web_AtomPub == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 import windows.Web.Syndication as Web_Syndication
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Web_AtomPub == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Web_AtomPub == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Web_AtomPub == "on"]
 import windows_collections as windows_collections
+@When[Windows_Web_AtomPub == "on"]
 import windows_future as windows_future
 
 
@@ -301,7 +313,7 @@ public class ResourceCollection <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 }
@@ -575,7 +587,7 @@ public class Workspace <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 }
@@ -831,7 +843,7 @@ public class ServiceDocument <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): _impl_l1.XmlDocument {
+    public unsafe func GetXmlDocument(format: Web_Syndication.SyndicationFormat): impl_p1.XmlDocument {
         return asISyndicationNode().GetXmlDocument(format)
     }
 }
@@ -943,7 +955,7 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAtomPubClient", IAtomPubClient.iid(), Web_Syndication.ISyndicationClient.descriptorSchema(), ["ISyndicationClient"], [Web_Syndication.ISyndicationClient.iid()], "IAtomPubClientVtbl", "IAtomPubClient", "IAtomPubClient_Impl", [InterfaceMethodSchema("RetrieveServiceDocumentAsync", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ServiceDocument, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveMediaResourceAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<_impl_l0.IInputStream, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveResourceAsync", 20, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateResourceAsync", 21, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateMediaResourceAsync", 22, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateMediaResourceAsync", 23, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateResourceAsync", 24, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateResourceItemAsync", 25, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteResourceAsync", 26, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteResourceItemAsync", 27, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CancelAsyncOperations", 28, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IAtomPubClient", IAtomPubClient.iid(), Web_Syndication.ISyndicationClient.descriptorSchema(), ["ISyndicationClient"], [Web_Syndication.ISyndicationClient.iid()], "IAtomPubClientVtbl", "IAtomPubClient", "IAtomPubClient_Impl", [InterfaceMethodSchema("RetrieveServiceDocumentAsync", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<ServiceDocument, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveMediaResourceAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<impl_p0.IInputStream, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RetrieveResourceAsync", 20, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.RetrievalProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateResourceAsync", 21, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateMediaResourceAsync", 22, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateMediaResourceAsync", 23, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mediaStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateResourceAsync", 24, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateResourceItemAsync", 25, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteResourceAsync", 26, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteResourceItemAsync", 27, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<Web_Syndication.SyndicationItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CancelAsyncOperations", 28, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IAtomPubClient.runtimeType())
         return schema
     }
@@ -989,12 +1001,12 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on"]
-    public unsafe func RetrieveMediaResourceAsync(uri: Foundation.Uri): windows_future.IAsyncOperationWithProgress<_impl_l0.IInputStream, Web_Syndication.RetrievalProgress> {
+    public unsafe func RetrieveMediaResourceAsync(uri: Foundation.Uri): windows_future.IAsyncOperationWithProgress<impl_p0.IInputStream, Web_Syndication.RetrievalProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RetrieveMediaResourceAsync(asRaw(), uri.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperationWithProgress<_impl_l0.IInputStream, Web_Syndication.RetrievalProgress>.fromAbiTake(result__)
+        return windows_future.IAsyncOperationWithProgress<impl_p0.IInputStream, Web_Syndication.RetrievalProgress>.fromAbiTake(result__)
     }
 
     @When[Windows_Web_Syndication == "on"]
@@ -1016,7 +1028,7 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on"]
-    public unsafe func CreateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, description: windows_core.HString, mediaStream: _impl_l0.IInputStream): windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress> {
+    public unsafe func CreateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, description: windows_core.HString, mediaStream: impl_p0.IInputStream): windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateMediaResourceAsync(asRaw(), uri.asRaw(), mediaType.asRaw(), description.asRaw(), mediaStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1025,7 +1037,7 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on"]
-    public unsafe func UpdateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, mediaStream: _impl_l0.IInputStream): windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress> {
+    public unsafe func UpdateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, mediaStream: impl_p0.IInputStream): windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UpdateMediaResourceAsync(asRaw(), uri.asRaw(), mediaType.asRaw(), mediaStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1172,7 +1184,7 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[(Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
-    public unsafe func RetrieveMediaResourceAsync(uri: Foundation.Uri): windows_future.IAsyncOperationWithProgress<_impl_l0.IInputStream, Web_Syndication.RetrievalProgress> {
+    public unsafe func RetrieveMediaResourceAsync(uri: Foundation.Uri): windows_future.IAsyncOperationWithProgress<impl_p0.IInputStream, Web_Syndication.RetrievalProgress> {
         return defaultInterface().RetrieveMediaResourceAsync(uri)
     }
 
@@ -1187,12 +1199,12 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[(Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
-    public unsafe func CreateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, description: windows_core.HString, mediaStream: _impl_l0.IInputStream): windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress> {
+    public unsafe func CreateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, description: windows_core.HString, mediaStream: impl_p0.IInputStream): windows_future.IAsyncOperationWithProgress<Web_Syndication.SyndicationItem, Web_Syndication.TransferProgress> {
         return defaultInterface().CreateMediaResourceAsync(uri, mediaType, description, mediaStream)
     }
 
     @When[(Windows_Storage_Streams == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
-    public unsafe func UpdateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, mediaStream: _impl_l0.IInputStream): windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress> {
+    public unsafe func UpdateMediaResourceAsync(uri: Foundation.Uri, mediaType: windows_core.HString, mediaStream: impl_p0.IInputStream): windows_future.IAsyncActionWithProgress<Web_Syndication.TransferProgress> {
         return defaultInterface().UpdateMediaResourceAsync(uri, mediaType, mediaStream)
     }
 
@@ -1222,22 +1234,22 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         return asISyndicationClient().ServerCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(value: impl_p0.PasswordCredential): Unit {
         asISyndicationClient().SetServerCredential(value)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         return asISyndicationClient().ProxyCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(value: impl_p0.PasswordCredential): Unit {
         asISyndicationClient().SetProxyCredential(value)
     }
 
@@ -1274,7 +1286,7 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
-    public static unsafe func CreateAtomPubClientWithCredentials(serverCredential: _impl_l0.PasswordCredential): AtomPubClient {
+    public static unsafe func CreateAtomPubClientWithCredentials(serverCredential: impl_p0.PasswordCredential): AtomPubClient {
         var result__: Option<AtomPubClient> = Option<AtomPubClient>.None
         try (factory__ = windows_core.factory<AtomPubClient, IAtomPubClientFactory>().unwrap()) {
             result__ = Some(factory__.CreateAtomPubClientWithCredentials(serverCredential))
@@ -1351,7 +1363,7 @@ public class IAtomPubClientFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAtomPubClientFactory", IAtomPubClientFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAtomPubClientFactoryVtbl", "IAtomPubClientFactory", "IAtomPubClientFactory_Impl", [InterfaceMethodSchema("CreateAtomPubClientWithCredentials", 6, [InterfaceParameterSchema("serverCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AtomPubClient>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAtomPubClientFactory", IAtomPubClientFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAtomPubClientFactoryVtbl", "IAtomPubClientFactory", "IAtomPubClientFactory_Impl", [InterfaceMethodSchema("CreateAtomPubClientWithCredentials", 6, [InterfaceParameterSchema("serverCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AtomPubClient>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAtomPubClientFactory.runtimeType())
         return schema
     }
@@ -1381,7 +1393,7 @@ public class IAtomPubClientFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
-    public unsafe func CreateAtomPubClientWithCredentials(serverCredential: _impl_l0.PasswordCredential): AtomPubClient {
+    public unsafe func CreateAtomPubClientWithCredentials(serverCredential: impl_p0.PasswordCredential): AtomPubClient {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateAtomPubClientWithCredentials(asRaw(), serverCredential.asRaw(), CPointer<CPointer<Unit>>(inout result__))

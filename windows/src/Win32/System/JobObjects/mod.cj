@@ -4,13 +4,20 @@
 package windows.Win32.System.JobObjects
 
 import std.collection.*
+@When[Windows_Win32_System_JobObjects == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_JobObjects == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_JobObjects == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_System_JobObjects == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_JobObjects == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_JobObjects == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_JobObjects == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_System_JobObjects == "on"]
@@ -322,7 +329,7 @@ extend JOBOBJECT_BASIC_ACCOUNTING_INFORMATION <: windows_core.CopyType & windows
 @When[Windows_Win32_System_JobObjects == "on" && Windows_Win32_System_Threading == "on"]
 public struct JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION {
     public var BasicInfo: JOBOBJECT_BASIC_ACCOUNTING_INFORMATION = JOBOBJECT_BASIC_ACCOUNTING_INFORMATION()
-    public var IoInfo: Win32__impl_l0.IO_COUNTERS = Win32__impl_l0.IO_COUNTERS()
+    public var IoInfo: Win32_impl_p1.IO_COUNTERS = Win32_impl_p1.IO_COUNTERS()
     public init() {}
 }
 
@@ -330,7 +337,7 @@ public struct JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION {
 @C
 public struct JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATIONAbi {
     public var BasicInfo: JOBOBJECT_BASIC_ACCOUNTING_INFORMATIONAbi = JOBOBJECT_BASIC_ACCOUNTING_INFORMATIONAbi()
-    public var IoInfo: Win32__impl_l0.IO_COUNTERSAbi = Win32__impl_l0.IO_COUNTERSAbi()
+    public var IoInfo: Win32_impl_p1.IO_COUNTERSAbi = Win32_impl_p1.IO_COUNTERSAbi()
     public init() {}
 }
 
@@ -342,13 +349,13 @@ extend JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION <: windows_core.CopyType & 
     public static func projectAbi(value: JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION): JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATIONAbi {
         var abi = JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATIONAbi()
         abi.BasicInfo = JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.projectAbi(value.BasicInfo)
-        abi.IoInfo = windows_core.projectTypedAbi(value.IoInfo, windows_core.typeMarker<Win32__impl_l0.IO_COUNTERS>())
+        abi.IoInfo = windows_core.projectTypedAbi(value.IoInfo, windows_core.typeMarker<Win32_impl_p1.IO_COUNTERS>())
         return abi
     }
     public static func assumeInitRef(abi: JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATIONAbi): JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION {
         var value = JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION()
         value.BasicInfo = JOBOBJECT_BASIC_ACCOUNTING_INFORMATION.assumeInitRef(abi.BasicInfo)
-        value.IoInfo = windows_core.fromTypedAbi(abi.IoInfo, windows_core.typeMarker<Win32__impl_l0.IO_COUNTERS>()).unwrap()
+        value.IoInfo = windows_core.fromTypedAbi(abi.IoInfo, windows_core.typeMarker<Win32_impl_p1.IO_COUNTERS>()).unwrap()
         return value
     }
     public static func fromAbi(abi: JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATIONAbi): Result<JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION> { Result<JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION>.Ok(JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION.assumeInitRef(abi)) }
@@ -1796,7 +1803,7 @@ extend JOBOBJECT_END_OF_JOB_TIME_INFORMATION <: windows_core.CopyType & windows_
 @When[Windows_Win32_System_JobObjects == "on" && Windows_Win32_System_Threading == "on"]
 public struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
     public var BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATION = JOBOBJECT_BASIC_LIMIT_INFORMATION()
-    public var IoInfo: Win32__impl_l0.IO_COUNTERS = Win32__impl_l0.IO_COUNTERS()
+    public var IoInfo: Win32_impl_p1.IO_COUNTERS = Win32_impl_p1.IO_COUNTERS()
     public var ProcessMemoryLimit: UIntNative = 0
     public var JobMemoryLimit: UIntNative = 0
     public var PeakProcessMemoryUsed: UIntNative = 0
@@ -1808,7 +1815,7 @@ public struct JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
 @C
 public struct JOBOBJECT_EXTENDED_LIMIT_INFORMATIONAbi {
     public var BasicLimitInformation: JOBOBJECT_BASIC_LIMIT_INFORMATIONAbi = JOBOBJECT_BASIC_LIMIT_INFORMATIONAbi()
-    public var IoInfo: Win32__impl_l0.IO_COUNTERSAbi = Win32__impl_l0.IO_COUNTERSAbi()
+    public var IoInfo: Win32_impl_p1.IO_COUNTERSAbi = Win32_impl_p1.IO_COUNTERSAbi()
     public var ProcessMemoryLimit: UIntNative = 0
     public var JobMemoryLimit: UIntNative = 0
     public var PeakProcessMemoryUsed: UIntNative = 0
@@ -1824,7 +1831,7 @@ extend JOBOBJECT_EXTENDED_LIMIT_INFORMATION <: windows_core.CopyType & windows_c
     public static func projectAbi(value: JOBOBJECT_EXTENDED_LIMIT_INFORMATION): JOBOBJECT_EXTENDED_LIMIT_INFORMATIONAbi {
         var abi = JOBOBJECT_EXTENDED_LIMIT_INFORMATIONAbi()
         abi.BasicLimitInformation = JOBOBJECT_BASIC_LIMIT_INFORMATION.projectAbi(value.BasicLimitInformation)
-        abi.IoInfo = windows_core.projectTypedAbi(value.IoInfo, windows_core.typeMarker<Win32__impl_l0.IO_COUNTERS>())
+        abi.IoInfo = windows_core.projectTypedAbi(value.IoInfo, windows_core.typeMarker<Win32_impl_p1.IO_COUNTERS>())
         abi.ProcessMemoryLimit = value.ProcessMemoryLimit
         abi.JobMemoryLimit = value.JobMemoryLimit
         abi.PeakProcessMemoryUsed = value.PeakProcessMemoryUsed
@@ -1834,7 +1841,7 @@ extend JOBOBJECT_EXTENDED_LIMIT_INFORMATION <: windows_core.CopyType & windows_c
     public static func assumeInitRef(abi: JOBOBJECT_EXTENDED_LIMIT_INFORMATIONAbi): JOBOBJECT_EXTENDED_LIMIT_INFORMATION {
         var value = JOBOBJECT_EXTENDED_LIMIT_INFORMATION()
         value.BasicLimitInformation = JOBOBJECT_BASIC_LIMIT_INFORMATION.assumeInitRef(abi.BasicLimitInformation)
-        value.IoInfo = windows_core.fromTypedAbi(abi.IoInfo, windows_core.typeMarker<Win32__impl_l0.IO_COUNTERS>()).unwrap()
+        value.IoInfo = windows_core.fromTypedAbi(abi.IoInfo, windows_core.typeMarker<Win32_impl_p1.IO_COUNTERS>()).unwrap()
         value.ProcessMemoryLimit = abi.ProcessMemoryLimit
         value.JobMemoryLimit = abi.JobMemoryLimit
         value.PeakProcessMemoryUsed = abi.PeakProcessMemoryUsed

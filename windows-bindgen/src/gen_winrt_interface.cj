@@ -23,7 +23,7 @@ public func generateWinrtInterface(
     let baseInterface = winmdFirstInterfaceType(index, fileIdx, row)
     let ancestors = winmdCollectInterfaceAncestors(index, fileIdx, row)
     let isExclusive = index.hasAttribute(TABLE_TYPE_DEF, fileIdx, row, "ExclusiveToAttribute")
-    let emitImplSurface = shouldEmitWinrtImplSurface(config, isExclusive)
+    let emitImplSurface = shouldEmitWinrtImplSurfaceForInterface(config, name, isExclusive)
     let typeTags = typeAvailabilityTags(namespace, name, fileIdx, row, arches)
     let definitionTags = architectureCfgTags(arches)
     let implSurfaceTags = winrtInterfaceImplSurfaceAvailabilityTags(index, fileIdx, row, typeTags, ancestors)
@@ -238,8 +238,16 @@ public func generateWinrtInterface(
     }
 }
 
+func shouldEmitWinrtImplSurfaceForInterface(config: BindgenConfig, name: String, isExclusive: Bool): Bool {
+    return shouldEmitWinrtImplSurface(config, isExclusive) || isWinrtAuthoringOverrideInterface(name, isExclusive)
+}
+
 func shouldEmitWinrtImplSurface(config: BindgenConfig, isExclusive: Bool): Bool {
     return config.implement || !isExclusive
+}
+
+func isWinrtAuthoringOverrideInterface(name: String, isExclusive: Bool): Bool {
+    return isExclusive && name.endsWith("Overrides")
 }
 
 func winrtInterfaceImplSurfaceAvailabilityTags(

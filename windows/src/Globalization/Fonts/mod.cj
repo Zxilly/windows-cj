@@ -4,13 +4,20 @@
 package windows.Globalization.Fonts
 
 import std.collection.*
+@When[Windows_Globalization_Fonts == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Globalization_Fonts == "on"]
 import windows_core as windows_core
+@When[Windows_Globalization_Fonts == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Globalization_Fonts == "on"]
 import windows_interface as windows_interface
+@When[Windows_Globalization_Fonts == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Globalization_Fonts == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_Globalization_Fonts == "on"]
+import windows.impl.p0 as impl_p0
 
 
 @When[Windows_Globalization_Fonts == "on"]
@@ -19,15 +26,15 @@ public struct ILanguageFontVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var FontFamily: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text == "on"]
-    public var get_FontWeight: CFunc<(CPointer<Unit>, CPointer<_impl_l0.FontWeightAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_FontWeight: CFunc<(CPointer<Unit>, CPointer<impl_p0.FontWeightAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text != "on"]
     public var get_FontWeight: UIntNative = UIntNative(0)
     @When[Windows_UI_Text == "on"]
-    public var get_FontStretch: CFunc<(CPointer<Unit>, CPointer<_impl_l0.FontStretchAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_FontStretch: CFunc<(CPointer<Unit>, CPointer<impl_p0.FontStretchAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text != "on"]
     public var get_FontStretch: UIntNative = UIntNative(0)
     @When[Windows_UI_Text == "on"]
-    public var get_FontStyle: CFunc<(CPointer<Unit>, CPointer<_impl_l0.FontStyleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_FontStyle: CFunc<(CPointer<Unit>, CPointer<impl_p0.FontStyleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Text != "on"]
     public var get_FontStyle: UIntNative = UIntNative(0)
     public var ScaleFactor: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -70,7 +77,7 @@ public class ILanguageFont <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILanguageFont", ILanguageFont.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILanguageFontVtbl", "ILanguageFont", "ILanguageFont_Impl", [InterfaceMethodSchema("FontFamily", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontWeight", 7, [InterfaceParameterSchema("result", "CPointer<_impl_l0.FontWeightAbi>", "OutSlot<_impl_l0.FontWeight>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontStretch", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.FontStretchAbi>", "OutSlot<_impl_l0.FontStretch>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontStyle", 9, [InterfaceParameterSchema("result", "CPointer<_impl_l0.FontStyleAbi>", "OutSlot<_impl_l0.FontStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleFactor", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILanguageFont", ILanguageFont.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILanguageFontVtbl", "ILanguageFont", "ILanguageFont_Impl", [InterfaceMethodSchema("FontFamily", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontWeight", 7, [InterfaceParameterSchema("result", "CPointer<impl_p0.FontWeightAbi>", "OutSlot<impl_p0.FontWeight>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontStretch", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.FontStretchAbi>", "OutSlot<impl_p0.FontStretch>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_FontStyle", 9, [InterfaceParameterSchema("result", "CPointer<impl_p0.FontStyleAbi>", "OutSlot<impl_p0.FontStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleFactor", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILanguageFont.runtimeType())
         return schema
     }
@@ -108,30 +115,30 @@ public class ILanguageFont <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontWeight(): _impl_l0.FontWeight {
+    public unsafe func get_FontWeight(): impl_p0.FontWeight {
         let v = vtbl()
-        var result__ = _impl_l0.FontWeightAbi()
-        let hr = v.get_FontWeight(asRaw(), CPointer<_impl_l0.FontWeightAbi>(inout result__))
+        var result__ = impl_p0.FontWeightAbi()
+        let hr = v.get_FontWeight(asRaw(), CPointer<impl_p0.FontWeightAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.FontWeight>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.FontWeight>()).unwrap()
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontStretch(): _impl_l0.FontStretch {
+    public unsafe func get_FontStretch(): impl_p0.FontStretch {
         let v = vtbl()
-        var result__ = _impl_l0.FontStretchAbi()
-        let hr = v.get_FontStretch(asRaw(), CPointer<_impl_l0.FontStretchAbi>(inout result__))
+        var result__ = impl_p0.FontStretchAbi()
+        let hr = v.get_FontStretch(asRaw(), CPointer<impl_p0.FontStretchAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.FontStretch>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.FontStretch>()).unwrap()
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontStyle(): _impl_l0.FontStyle {
+    public unsafe func get_FontStyle(): impl_p0.FontStyle {
         let v = vtbl()
-        var result__ = _impl_l0.FontStyleAbi()
-        let hr = v.get_FontStyle(asRaw(), CPointer<_impl_l0.FontStyleAbi>(inout result__))
+        var result__ = impl_p0.FontStyleAbi()
+        let hr = v.get_FontStyle(asRaw(), CPointer<impl_p0.FontStyleAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.FontStyle>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.FontStyle>()).unwrap()
     }
 
     public unsafe func ScaleFactor(): Float64 {
@@ -220,17 +227,17 @@ public class LanguageFont <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontWeight(): _impl_l0.FontWeight {
+    public unsafe func get_FontWeight(): impl_p0.FontWeight {
         return defaultInterface().get_FontWeight()
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontStretch(): _impl_l0.FontStretch {
+    public unsafe func get_FontStretch(): impl_p0.FontStretch {
         return defaultInterface().get_FontStretch()
     }
 
     @When[Windows_UI_Text == "on"]
-    public unsafe func get_FontStyle(): _impl_l0.FontStyle {
+    public unsafe func get_FontStyle(): impl_p0.FontStyle {
         return defaultInterface().get_FontStyle()
     }
 

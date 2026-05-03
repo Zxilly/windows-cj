@@ -4,14 +4,23 @@
 package windows.ApplicationModel.Store.LicenseManagement
 
 import std.collection.*
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Store_LicenseManagement == "on"]
 import windows_future as windows_future
 
 
@@ -655,7 +664,7 @@ public class ILicenseManagerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILicenseManagerStatics", ILicenseManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILicenseManagerStaticsVtbl", "ILicenseManagerStatics", "ILicenseManagerStatics_Impl", [InterfaceMethodSchema("AddLicenseAsync", 6, [InterfaceParameterSchema("license", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSatisfactionInfosAsync", 7, [InterfaceParameterSchema("contentIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LicenseSatisfactionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILicenseManagerStatics", ILicenseManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILicenseManagerStaticsVtbl", "ILicenseManagerStatics", "ILicenseManagerStatics_Impl", [InterfaceMethodSchema("AddLicenseAsync", 6, [InterfaceParameterSchema("license", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSatisfactionInfosAsync", 7, [InterfaceParameterSchema("contentIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LicenseSatisfactionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILicenseManagerStatics.runtimeType())
         return schema
     }
@@ -685,7 +694,7 @@ public class ILicenseManagerStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AddLicenseAsync(license: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func AddLicenseAsync(license: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AddLicenseAsync(asRaw(), license.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -727,7 +736,7 @@ public class LicenseManager <: windows_interface.RuntimeName & windows_core.Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func AddLicenseAsync(license: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public static unsafe func AddLicenseAsync(license: impl_p0.IBuffer): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<LicenseManager, ILicenseManagerStatics>().unwrap()) {
             result__ = Some(factory__.AddLicenseAsync(license))

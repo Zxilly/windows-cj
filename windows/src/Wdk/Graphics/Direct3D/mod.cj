@@ -4,19 +4,35 @@
 package windows.Wdk.Graphics.Direct3D
 
 import std.collection.*
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_core as windows_core
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_interface.{GUID}
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_interface as windows_interface
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_polyfill.{packedReadFloat32, packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat32, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_polyfill as windows_polyfill
-import windows.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
+import windows.Wdk.impl.p0 as Wdk_impl_p0
+@When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
+@When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Wdk_Graphics_Direct3D == "on"]
 import windows_core as windows_core
 
 
@@ -6782,13 +6798,13 @@ extend D3DHAL_CONTEXTCREATEDATA <: windows_core.CopyType & windows_core.RuntimeT
 public struct D3DHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDGbl: CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_GBLAbi> {
+    public mut prop lpDDGbl: CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_GBLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_GBLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_GBLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -6797,20 +6813,20 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_GBLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_GBLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop lpDDLcl: CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_LCLAbi> {
+    public mut prop lpDDLcl: CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -6819,7 +6835,7 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DIRECTDRAW_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DIRECTDRAW_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -6835,13 +6851,13 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
 public struct D3DHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDSLcl: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> {
+    public mut prop lpDDSLcl: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -6850,7 +6866,7 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -6866,13 +6882,13 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
 public struct D3DHAL_CONTEXTCREATEDATA__Anonymous3_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDSZLcl: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> {
+    public mut prop lpDDSZLcl: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -6881,7 +6897,7 @@ public struct D3DHAL_CONTEXTCREATEDATA__Anonymous3_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -8691,7 +8707,7 @@ extend D3DHAL_DP2LINESTRIP <: windows_core.CopyType & windows_core.RuntimeType &
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D9 == "on")]
 public struct D3DHAL_DP2MULTIPLYTRANSFORM {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE()
-    public var matrix: Win32__impl_l0.D3DMATRIX = Win32__impl_l0.D3DMATRIX()
+    public var matrix: Win32_impl_p0.D3DMATRIX = Win32_impl_p0.D3DMATRIX()
     public init() {}
 }
 
@@ -8699,7 +8715,7 @@ public struct D3DHAL_DP2MULTIPLYTRANSFORM {
 @C
 public struct D3DHAL_DP2MULTIPLYTRANSFORMAbi {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi()
-    public var matrix: Win32__impl_l0.D3DMATRIXAbi = Win32__impl_l0.D3DMATRIXAbi()
+    public var matrix: Win32_impl_p0.D3DMATRIXAbi = Win32_impl_p0.D3DMATRIXAbi()
     public init() {}
 }
 
@@ -8711,13 +8727,13 @@ extend D3DHAL_DP2MULTIPLYTRANSFORM <: windows_core.CopyType & windows_core.Runti
     public static func projectAbi(value: D3DHAL_DP2MULTIPLYTRANSFORM): D3DHAL_DP2MULTIPLYTRANSFORMAbi {
         var abi = D3DHAL_DP2MULTIPLYTRANSFORMAbi()
         abi.xfrmType = windows_core.projectTypedAbi(value.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>())
-        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>())
+        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>())
         return abi
     }
     public static func assumeInitRef(abi: D3DHAL_DP2MULTIPLYTRANSFORMAbi): D3DHAL_DP2MULTIPLYTRANSFORM {
         var value = D3DHAL_DP2MULTIPLYTRANSFORM()
         value.xfrmType = windows_core.fromTypedAbi(abi.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>()).unwrap()
-        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>()).unwrap()
+        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3DHAL_DP2MULTIPLYTRANSFORMAbi): Result<D3DHAL_DP2MULTIPLYTRANSFORM> { Result<D3DHAL_DP2MULTIPLYTRANSFORM>.Ok(D3DHAL_DP2MULTIPLYTRANSFORM.assumeInitRef(abi)) }
@@ -9869,7 +9885,7 @@ extend D3DHAL_DP2SETTEXLOD <: windows_core.CopyType & windows_core.RuntimeType &
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D9 == "on")]
 public struct D3DHAL_DP2SETTRANSFORM {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE()
-    public var matrix: Win32__impl_l0.D3DMATRIX = Win32__impl_l0.D3DMATRIX()
+    public var matrix: Win32_impl_p0.D3DMATRIX = Win32_impl_p0.D3DMATRIX()
     public init() {}
 }
 
@@ -9877,7 +9893,7 @@ public struct D3DHAL_DP2SETTRANSFORM {
 @C
 public struct D3DHAL_DP2SETTRANSFORMAbi {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi()
-    public var matrix: Win32__impl_l0.D3DMATRIXAbi = Win32__impl_l0.D3DMATRIXAbi()
+    public var matrix: Win32_impl_p0.D3DMATRIXAbi = Win32_impl_p0.D3DMATRIXAbi()
     public init() {}
 }
 
@@ -9889,13 +9905,13 @@ extend D3DHAL_DP2SETTRANSFORM <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func projectAbi(value: D3DHAL_DP2SETTRANSFORM): D3DHAL_DP2SETTRANSFORMAbi {
         var abi = D3DHAL_DP2SETTRANSFORMAbi()
         abi.xfrmType = windows_core.projectTypedAbi(value.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>())
-        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>())
+        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>())
         return abi
     }
     public static func assumeInitRef(abi: D3DHAL_DP2SETTRANSFORMAbi): D3DHAL_DP2SETTRANSFORM {
         var value = D3DHAL_DP2SETTRANSFORM()
         value.xfrmType = windows_core.fromTypedAbi(abi.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>()).unwrap()
-        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>()).unwrap()
+        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3DHAL_DP2SETTRANSFORMAbi): Result<D3DHAL_DP2SETTRANSFORM> { Result<D3DHAL_DP2SETTRANSFORM>.Ok(D3DHAL_DP2SETTRANSFORM.assumeInitRef(abi)) }
@@ -10849,7 +10865,7 @@ public struct D3DHAL_DRAWPRIMITIVES2DATA {
     public var dwhContext: UIntNative = 0
     public var dwFlags: UInt32 = 0u32
     public var dwVertexType: UInt32 = 0u32
-    public var lpDDCommands: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> = CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>()
+    public var lpDDCommands: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> = CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>()
     public var dwCommandOffset: UInt32 = 0u32
     public var dwCommandLength: UInt32 = 0u32
     public var Anonymous1: D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union = D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union()
@@ -10869,7 +10885,7 @@ public struct D3DHAL_DRAWPRIMITIVES2DATAAbi {
     public var dwhContext: UIntNative = 0
     public var dwFlags: UInt32 = 0u32
     public var dwVertexType: UInt32 = 0u32
-    public var lpDDCommands: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> = CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>()
+    public var lpDDCommands: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> = CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>()
     public var dwCommandOffset: UInt32 = 0u32
     public var dwCommandLength: UInt32 = 0u32
     public var Anonymous1: D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union = D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union()
@@ -10938,13 +10954,13 @@ extend D3DHAL_DRAWPRIMITIVES2DATA <: windows_core.CopyType & windows_core.Runtim
 public struct D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDVertex: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> {
+    public mut prop lpDDVertex: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -10953,7 +10969,7 @@ public struct D3DHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -11134,7 +11150,7 @@ public struct D3DHAL_GLOBALDRIVERDATA {
     public var dwNumVertices: UInt32 = 0u32
     public var dwNumClipVertices: UInt32 = 0u32
     public var dwNumTextureFormats: UInt32 = 0u32
-    public var lpTextureFormats: CPointer<Win32__impl_l1.DDSURFACEDESCAbi> = CPointer<Win32__impl_l1.DDSURFACEDESCAbi>()
+    public var lpTextureFormats: CPointer<Win32_impl_p1.DDSURFACEDESCAbi> = CPointer<Win32_impl_p1.DDSURFACEDESCAbi>()
     public init() {}
 }
 
@@ -11146,7 +11162,7 @@ public struct D3DHAL_GLOBALDRIVERDATAAbi {
     public var dwNumVertices: UInt32 = 0u32
     public var dwNumClipVertices: UInt32 = 0u32
     public var dwNumTextureFormats: UInt32 = 0u32
-    public var lpTextureFormats: CPointer<Win32__impl_l1.DDSURFACEDESCAbi> = CPointer<Win32__impl_l1.DDSURFACEDESCAbi>()
+    public var lpTextureFormats: CPointer<Win32_impl_p1.DDSURFACEDESCAbi> = CPointer<Win32_impl_p1.DDSURFACEDESCAbi>()
     public init() {}
 }
 
@@ -11187,9 +11203,9 @@ public struct D3DHAL_RENDERPRIMITIVEDATA {
     public var dwhContext: UIntNative = 0
     public var dwOffset: UInt32 = 0u32
     public var dwStatus: UInt32 = 0u32
-    public var lpExeBuf: Win32__impl_l2.IDirectDrawSurface = Win32__impl_l2.IDirectDrawSurface(CPointer<Unit>())
+    public var lpExeBuf: Win32_impl_p2.IDirectDrawSurface = Win32_impl_p2.IDirectDrawSurface(CPointer<Unit>())
     public var dwTLOffset: UInt32 = 0u32
-    public var lpTLBuf: Win32__impl_l2.IDirectDrawSurface = Win32__impl_l2.IDirectDrawSurface(CPointer<Unit>())
+    public var lpTLBuf: Win32_impl_p2.IDirectDrawSurface = Win32_impl_p2.IDirectDrawSurface(CPointer<Unit>())
     public var diInstruction: Win32_Graphics_Direct3D9.D3DINSTRUCTION = Win32_Graphics_Direct3D9.D3DINSTRUCTION()
     public var ddrval: Int32 = 0i32
     public init() {}
@@ -11231,9 +11247,9 @@ extend D3DHAL_RENDERPRIMITIVEDATA <: windows_core.CopyType & windows_core.Runtim
         value.dwhContext = abi.dwhContext
         value.dwOffset = abi.dwOffset
         value.dwStatus = abi.dwStatus
-        value.lpExeBuf = Win32__impl_l2.IDirectDrawSurface.fromAbiTake(abi.lpExeBuf)
+        value.lpExeBuf = Win32_impl_p2.IDirectDrawSurface.fromAbiTake(abi.lpExeBuf)
         value.dwTLOffset = abi.dwTLOffset
-        value.lpTLBuf = Win32__impl_l2.IDirectDrawSurface.fromAbiTake(abi.lpTLBuf)
+        value.lpTLBuf = Win32_impl_p2.IDirectDrawSurface.fromAbiTake(abi.lpTLBuf)
         value.diInstruction = windows_core.fromTypedAbi(abi.diInstruction, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DINSTRUCTION>()).unwrap()
         value.ddrval = abi.ddrval
         return value
@@ -11250,7 +11266,7 @@ public struct D3DHAL_RENDERSTATEDATA {
     public var dwhContext: UIntNative = 0
     public var dwOffset: UInt32 = 0u32
     public var dwCount: UInt32 = 0u32
-    public var lpExeBuf: Win32__impl_l2.IDirectDrawSurface = Win32__impl_l2.IDirectDrawSurface(CPointer<Unit>())
+    public var lpExeBuf: Win32_impl_p2.IDirectDrawSurface = Win32_impl_p2.IDirectDrawSurface(CPointer<Unit>())
     public var ddrval: Int32 = 0i32
     public init() {}
 }
@@ -11285,7 +11301,7 @@ extend D3DHAL_RENDERSTATEDATA <: windows_core.CopyType & windows_core.RuntimeTyp
         value.dwhContext = abi.dwhContext
         value.dwOffset = abi.dwOffset
         value.dwCount = abi.dwCount
-        value.lpExeBuf = Win32__impl_l2.IDirectDrawSurface.fromAbiTake(abi.lpExeBuf)
+        value.lpExeBuf = Win32_impl_p2.IDirectDrawSurface.fromAbiTake(abi.lpExeBuf)
         value.ddrval = abi.ddrval
         return value
     }
@@ -11393,13 +11409,13 @@ extend D3DHAL_SETRENDERTARGETDATA <: windows_core.CopyType & windows_core.Runtim
 public struct D3DHAL_SETRENDERTARGETDATA__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDSLcl: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> {
+    public mut prop lpDDSLcl: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -11408,7 +11424,7 @@ public struct D3DHAL_SETRENDERTARGETDATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -11424,13 +11440,13 @@ public struct D3DHAL_SETRENDERTARGETDATA__Anonymous1_e__Union {
 public struct D3DHAL_SETRENDERTARGETDATA__Anonymous2_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDSZLcl: CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi> {
+    public mut prop lpDDSZLcl: CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 return ptr.read()
             }
         }
@@ -11439,7 +11455,7 @@ public struct D3DHAL_SETRENDERTARGETDATA__Anonymous2_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DDRAWI_DDRAWSURFACE_LCLAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -11451,7 +11467,7 @@ public struct D3DHAL_SETRENDERTARGETDATA__Anonymous2_e__Union {
 @When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
 public struct D3DHAL_TEXTURECREATEDATA {
     public var dwhContext: UIntNative = 0
-    public var lpDDS: Win32__impl_l2.IDirectDrawSurface = Win32__impl_l2.IDirectDrawSurface(CPointer<Unit>())
+    public var lpDDS: Win32_impl_p2.IDirectDrawSurface = Win32_impl_p2.IDirectDrawSurface(CPointer<Unit>())
     public var dwHandle: UInt32 = 0u32
     public var ddrval: Int32 = 0i32
     public init() {}
@@ -11483,7 +11499,7 @@ extend D3DHAL_TEXTURECREATEDATA <: windows_core.CopyType & windows_core.RuntimeT
     public static func assumeInitRef(abi: D3DHAL_TEXTURECREATEDATAAbi): D3DHAL_TEXTURECREATEDATA {
         var value = D3DHAL_TEXTURECREATEDATA()
         value.dwhContext = abi.dwhContext
-        value.lpDDS = Win32__impl_l2.IDirectDrawSurface.fromAbiTake(abi.lpDDS)
+        value.lpDDS = Win32_impl_p2.IDirectDrawSurface.fromAbiTake(abi.lpDDS)
         value.dwHandle = abi.dwHandle
         value.ddrval = abi.ddrval
         return value
@@ -24310,7 +24326,7 @@ extend D3DKMT_OPENNATIVEFENCEFROMNTHANDLE <: windows_core.CopyType & windows_cor
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
 public struct D3DKMT_OPENNTHANDLEFROMNAME {
     public var dwDesiredAccess: UInt32 = 0u32
-    public var pObjAttrib: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>()
+    public var pObjAttrib: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>()
     public var hNtHandle: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -24319,7 +24335,7 @@ public struct D3DKMT_OPENNTHANDLEFROMNAME {
 @C
 public struct D3DKMT_OPENNTHANDLEFROMNAMEAbi {
     public var dwDesiredAccess: UInt32 = 0u32
-    public var pObjAttrib: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>()
+    public var pObjAttrib: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>()
     public var hNtHandle: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -24841,7 +24857,7 @@ extend D3DKMT_OPENSYNCOBJECTFROMNTHANDLE2__Anonymous_e__Union__MonitoredFence_e_
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
 public struct D3DKMT_OPENSYNCOBJECTNTHANDLEFROMNAME {
     public var dwDesiredAccess: UInt32 = 0u32
-    public var pObjAttrib: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>()
+    public var pObjAttrib: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>()
     public var hNtHandle: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -24850,7 +24866,7 @@ public struct D3DKMT_OPENSYNCOBJECTNTHANDLEFROMNAME {
 @C
 public struct D3DKMT_OPENSYNCOBJECTNTHANDLEFROMNAMEAbi {
     public var dwDesiredAccess: UInt32 = 0u32
-    public var pObjAttrib: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>()
+    public var pObjAttrib: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi> = CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>()
     public var hNtHandle: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -35624,13 +35640,13 @@ extend D3DNTHAL_CONTEXTCREATEDATA <: windows_core.CopyType & windows_core.Runtim
 public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDGbl: CPointer<Win32__impl_l1.DD_DIRECTDRAW_GLOBALAbi> {
+    public mut prop lpDDGbl: CPointer<Win32_impl_p1.DD_DIRECTDRAW_GLOBALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l1.DD_DIRECTDRAW_GLOBALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p1.DD_DIRECTDRAW_GLOBALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35639,20 +35655,20 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l1.DD_DIRECTDRAW_GLOBALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p1.DD_DIRECTDRAW_GLOBALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop lpDDLcl: CPointer<Win32__impl_l1.DD_DIRECTDRAW_LOCALAbi> {
+    public mut prop lpDDLcl: CPointer<Win32_impl_p2.DD_DIRECTDRAW_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l1.DD_DIRECTDRAW_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p2.DD_DIRECTDRAW_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35661,7 +35677,7 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l1.DD_DIRECTDRAW_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p2.DD_DIRECTDRAW_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -35677,13 +35693,13 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous1_e__Union {
 public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDS: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> {
+    public mut prop lpDDS: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35692,20 +35708,20 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop lpDDSLcl: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> {
+    public mut prop lpDDSLcl: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35714,7 +35730,7 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -35730,13 +35746,13 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous2_e__Union {
 public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous3_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDSZ: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> {
+    public mut prop lpDDSZ: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35745,20 +35761,20 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous3_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
         }
     }
 
-    public mut prop lpDDSZLcl: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> {
+    public mut prop lpDDSZLcl: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -35767,7 +35783,7 @@ public struct D3DNTHAL_CONTEXTCREATEDATA__Anonymous3_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -37528,7 +37544,7 @@ extend D3DNTHAL_DP2LINESTRIP <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D9 == "on")]
 public struct D3DNTHAL_DP2MULTIPLYTRANSFORM {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE()
-    public var matrix: Win32__impl_l0.D3DMATRIX = Win32__impl_l0.D3DMATRIX()
+    public var matrix: Win32_impl_p0.D3DMATRIX = Win32_impl_p0.D3DMATRIX()
     public init() {}
 }
 
@@ -37536,7 +37552,7 @@ public struct D3DNTHAL_DP2MULTIPLYTRANSFORM {
 @C
 public struct D3DNTHAL_DP2MULTIPLYTRANSFORMAbi {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi()
-    public var matrix: Win32__impl_l0.D3DMATRIXAbi = Win32__impl_l0.D3DMATRIXAbi()
+    public var matrix: Win32_impl_p0.D3DMATRIXAbi = Win32_impl_p0.D3DMATRIXAbi()
     public init() {}
 }
 
@@ -37548,13 +37564,13 @@ extend D3DNTHAL_DP2MULTIPLYTRANSFORM <: windows_core.CopyType & windows_core.Run
     public static func projectAbi(value: D3DNTHAL_DP2MULTIPLYTRANSFORM): D3DNTHAL_DP2MULTIPLYTRANSFORMAbi {
         var abi = D3DNTHAL_DP2MULTIPLYTRANSFORMAbi()
         abi.xfrmType = windows_core.projectTypedAbi(value.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>())
-        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>())
+        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>())
         return abi
     }
     public static func assumeInitRef(abi: D3DNTHAL_DP2MULTIPLYTRANSFORMAbi): D3DNTHAL_DP2MULTIPLYTRANSFORM {
         var value = D3DNTHAL_DP2MULTIPLYTRANSFORM()
         value.xfrmType = windows_core.fromTypedAbi(abi.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>()).unwrap()
-        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>()).unwrap()
+        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3DNTHAL_DP2MULTIPLYTRANSFORMAbi): Result<D3DNTHAL_DP2MULTIPLYTRANSFORM> { Result<D3DNTHAL_DP2MULTIPLYTRANSFORM>.Ok(D3DNTHAL_DP2MULTIPLYTRANSFORM.assumeInitRef(abi)) }
@@ -38751,7 +38767,7 @@ extend D3DNTHAL_DP2SETTEXLOD <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D9 == "on")]
 public struct D3DNTHAL_DP2SETTRANSFORM {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE()
-    public var matrix: Win32__impl_l0.D3DMATRIX = Win32__impl_l0.D3DMATRIX()
+    public var matrix: Win32_impl_p0.D3DMATRIX = Win32_impl_p0.D3DMATRIX()
     public init() {}
 }
 
@@ -38759,7 +38775,7 @@ public struct D3DNTHAL_DP2SETTRANSFORM {
 @C
 public struct D3DNTHAL_DP2SETTRANSFORMAbi {
     public var xfrmType: Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi = Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPEAbi()
-    public var matrix: Win32__impl_l0.D3DMATRIXAbi = Win32__impl_l0.D3DMATRIXAbi()
+    public var matrix: Win32_impl_p0.D3DMATRIXAbi = Win32_impl_p0.D3DMATRIXAbi()
     public init() {}
 }
 
@@ -38771,13 +38787,13 @@ extend D3DNTHAL_DP2SETTRANSFORM <: windows_core.CopyType & windows_core.RuntimeT
     public static func projectAbi(value: D3DNTHAL_DP2SETTRANSFORM): D3DNTHAL_DP2SETTRANSFORMAbi {
         var abi = D3DNTHAL_DP2SETTRANSFORMAbi()
         abi.xfrmType = windows_core.projectTypedAbi(value.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>())
-        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>())
+        abi.matrix = windows_core.projectTypedAbi(value.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>())
         return abi
     }
     public static func assumeInitRef(abi: D3DNTHAL_DP2SETTRANSFORMAbi): D3DNTHAL_DP2SETTRANSFORM {
         var value = D3DNTHAL_DP2SETTRANSFORM()
         value.xfrmType = windows_core.fromTypedAbi(abi.xfrmType, windows_core.typeMarker<Win32_Graphics_Direct3D9.D3DTRANSFORMSTATETYPE>()).unwrap()
-        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32__impl_l0.D3DMATRIX>()).unwrap()
+        value.matrix = windows_core.fromTypedAbi(abi.matrix, windows_core.typeMarker<Win32_impl_p0.D3DMATRIX>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3DNTHAL_DP2SETTRANSFORMAbi): Result<D3DNTHAL_DP2SETTRANSFORM> { Result<D3DNTHAL_DP2SETTRANSFORM>.Ok(D3DNTHAL_DP2SETTRANSFORM.assumeInitRef(abi)) }
@@ -39464,7 +39480,7 @@ public struct D3DNTHAL_DRAWPRIMITIVES2DATA {
     public var dwhContext: UIntNative = 0
     public var dwFlags: UInt32 = 0u32
     public var dwVertexType: UInt32 = 0u32
-    public var lpDDCommands: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
+    public var lpDDCommands: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
     public var dwCommandOffset: UInt32 = 0u32
     public var dwCommandLength: UInt32 = 0u32
     public var Anonymous1: D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union = D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union()
@@ -39484,7 +39500,7 @@ public struct D3DNTHAL_DRAWPRIMITIVES2DATAAbi {
     public var dwhContext: UIntNative = 0
     public var dwFlags: UInt32 = 0u32
     public var dwVertexType: UInt32 = 0u32
-    public var lpDDCommands: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
+    public var lpDDCommands: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
     public var dwCommandOffset: UInt32 = 0u32
     public var dwCommandLength: UInt32 = 0u32
     public var Anonymous1: D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union = D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union()
@@ -39553,13 +39569,13 @@ extend D3DNTHAL_DRAWPRIMITIVES2DATA <: windows_core.CopyType & windows_core.Runt
 public struct D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public mut prop lpDDVertex: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> {
+    public mut prop lpDDVertex: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 return ptr.read()
             }
         }
@@ -39568,7 +39584,7 @@ public struct D3DNTHAL_DRAWPRIMITIVES2DATA__Anonymous1_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>>(p)
+                let ptr = CPointer<CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }
@@ -39651,7 +39667,7 @@ public struct D3DNTHAL_GLOBALDRIVERDATA {
     public var dwNumVertices: UInt32 = 0u32
     public var dwNumClipVertices: UInt32 = 0u32
     public var dwNumTextureFormats: UInt32 = 0u32
-    public var lpTextureFormats: CPointer<Win32__impl_l1.DDSURFACEDESCAbi> = CPointer<Win32__impl_l1.DDSURFACEDESCAbi>()
+    public var lpTextureFormats: CPointer<Win32_impl_p1.DDSURFACEDESCAbi> = CPointer<Win32_impl_p1.DDSURFACEDESCAbi>()
     public init() {}
 }
 
@@ -39663,7 +39679,7 @@ public struct D3DNTHAL_GLOBALDRIVERDATAAbi {
     public var dwNumVertices: UInt32 = 0u32
     public var dwNumClipVertices: UInt32 = 0u32
     public var dwNumTextureFormats: UInt32 = 0u32
-    public var lpTextureFormats: CPointer<Win32__impl_l1.DDSURFACEDESCAbi> = CPointer<Win32__impl_l1.DDSURFACEDESCAbi>()
+    public var lpTextureFormats: CPointer<Win32_impl_p1.DDSURFACEDESCAbi> = CPointer<Win32_impl_p1.DDSURFACEDESCAbi>()
     public init() {}
 }
 
@@ -39745,8 +39761,8 @@ extend D3DNTHAL_SCENECAPTUREDATA <: windows_core.CopyType & windows_core.Runtime
 @When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
 public struct D3DNTHAL_SETRENDERTARGETDATA {
     public var dwhContext: UIntNative = 0
-    public var lpDDS: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
-    public var lpDDSZ: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
+    public var lpDDS: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
+    public var lpDDSZ: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
     public var ddrval: Int32 = 0i32
     public init() {}
 }
@@ -39755,8 +39771,8 @@ public struct D3DNTHAL_SETRENDERTARGETDATA {
 @C
 public struct D3DNTHAL_SETRENDERTARGETDATAAbi {
     public var dwhContext: UIntNative = 0
-    public var lpDDS: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
-    public var lpDDSZ: CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi> = CPointer<Win32__impl_l2.DD_SURFACE_LOCALAbi>()
+    public var lpDDS: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
+    public var lpDDSZ: CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi> = CPointer<Win32_impl_p3.DD_SURFACE_LOCALAbi>()
     public var ddrval: Int32 = 0i32
     public init() {}
 }
@@ -40273,7 +40289,7 @@ extend DDNT_GETFORMATCOUNTDATA <: windows_core.CopyType & windows_core.RuntimeTy
 public struct DDNT_GETFORMATDATA {
     public var gdi2: DDNT_GETDRIVERINFO2DATA = DDNT_GETDRIVERINFO2DATA()
     public var dwFormatIndex: UInt32 = 0u32
-    public var format: Win32__impl_l0.DDPIXELFORMAT = Win32__impl_l0.DDPIXELFORMAT()
+    public var format: Win32_impl_p0.DDPIXELFORMAT = Win32_impl_p0.DDPIXELFORMAT()
     public init() {}
 }
 
@@ -40282,7 +40298,7 @@ public struct DDNT_GETFORMATDATA {
 public struct DDNT_GETFORMATDATAAbi {
     public var gdi2: DDNT_GETDRIVERINFO2DATAAbi = DDNT_GETDRIVERINFO2DATAAbi()
     public var dwFormatIndex: UInt32 = 0u32
-    public var format: Win32__impl_l0.DDPIXELFORMATAbi = Win32__impl_l0.DDPIXELFORMATAbi()
+    public var format: Win32_impl_p0.DDPIXELFORMATAbi = Win32_impl_p0.DDPIXELFORMATAbi()
     public init() {}
 }
 
@@ -40295,14 +40311,14 @@ extend DDNT_GETFORMATDATA <: windows_core.CopyType & windows_core.RuntimeType & 
         var abi = DDNT_GETFORMATDATAAbi()
         abi.gdi2 = DDNT_GETDRIVERINFO2DATA.projectAbi(value.gdi2)
         abi.dwFormatIndex = value.dwFormatIndex
-        abi.format = windows_core.projectTypedAbi(value.format, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>())
+        abi.format = windows_core.projectTypedAbi(value.format, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>())
         return abi
     }
     public static func assumeInitRef(abi: DDNT_GETFORMATDATAAbi): DDNT_GETFORMATDATA {
         var value = DDNT_GETFORMATDATA()
         value.gdi2 = DDNT_GETDRIVERINFO2DATA.assumeInitRef(abi.gdi2)
         value.dwFormatIndex = abi.dwFormatIndex
-        value.format = windows_core.fromTypedAbi(abi.format, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>()).unwrap()
+        value.format = windows_core.fromTypedAbi(abi.format, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: DDNT_GETFORMATDATAAbi): Result<DDNT_GETFORMATDATA> { Result<DDNT_GETFORMATDATA>.Ok(DDNT_GETFORMATDATA.assumeInitRef(abi)) }
@@ -40539,7 +40555,7 @@ extend DD_GETFORMATCOUNTDATA <: windows_core.CopyType & windows_core.RuntimeType
 public struct DD_GETFORMATDATA {
     public var gdi2: DD_GETDRIVERINFO2DATA = DD_GETDRIVERINFO2DATA()
     public var dwFormatIndex: UInt32 = 0u32
-    public var format: Win32__impl_l0.DDPIXELFORMAT = Win32__impl_l0.DDPIXELFORMAT()
+    public var format: Win32_impl_p0.DDPIXELFORMAT = Win32_impl_p0.DDPIXELFORMAT()
     public init() {}
 }
 
@@ -40548,7 +40564,7 @@ public struct DD_GETFORMATDATA {
 public struct DD_GETFORMATDATAAbi {
     public var gdi2: DD_GETDRIVERINFO2DATAAbi = DD_GETDRIVERINFO2DATAAbi()
     public var dwFormatIndex: UInt32 = 0u32
-    public var format: Win32__impl_l0.DDPIXELFORMATAbi = Win32__impl_l0.DDPIXELFORMATAbi()
+    public var format: Win32_impl_p0.DDPIXELFORMATAbi = Win32_impl_p0.DDPIXELFORMATAbi()
     public init() {}
 }
 
@@ -40561,14 +40577,14 @@ extend DD_GETFORMATDATA <: windows_core.CopyType & windows_core.RuntimeType & wi
         var abi = DD_GETFORMATDATAAbi()
         abi.gdi2 = DD_GETDRIVERINFO2DATA.projectAbi(value.gdi2)
         abi.dwFormatIndex = value.dwFormatIndex
-        abi.format = windows_core.projectTypedAbi(value.format, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>())
+        abi.format = windows_core.projectTypedAbi(value.format, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>())
         return abi
     }
     public static func assumeInitRef(abi: DD_GETFORMATDATAAbi): DD_GETFORMATDATA {
         var value = DD_GETFORMATDATA()
         value.gdi2 = DD_GETDRIVERINFO2DATA.assumeInitRef(abi.gdi2)
         value.dwFormatIndex = abi.dwFormatIndex
-        value.format = windows_core.fromTypedAbi(abi.format, windows_core.typeMarker<Win32__impl_l0.DDPIXELFORMAT>()).unwrap()
+        value.format = windows_core.fromTypedAbi(abi.format, windows_core.typeMarker<Win32_impl_p0.DDPIXELFORMAT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: DD_GETFORMATDATAAbi): Result<DD_GETFORMATDATA> { Result<DD_GETFORMATDATA>.Ok(DD_GETFORMATDATA.assumeInitRef(abi)) }
@@ -46259,7 +46275,7 @@ public type PDXGK_GRAPHICSPOWER_UNREGISTER = CFunc<(CPointer<Unit>, CPointer<Uni
 public type PDXGK_INITIAL_COMPONENT_STATE = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt8, UInt32, GUID, UInt32) -> Unit>
 
 @When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_System_Power == "on"]
-public type PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32__impl_l0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>
+public type PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32_impl_p0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>
 
 @When[Windows_Wdk_Graphics_Direct3D == "on"]
 public type PDXGK_REMOVAL_NOTIFICATION = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>
@@ -46595,7 +46611,7 @@ public type PFND3DKMT_SHAREDPRIMARYLOCKNOTIFICATION = CFunc<(CPointer<D3DKMT_SHA
 public type PFND3DKMT_SHAREDPRIMARYUNLOCKNOTIFICATION = CFunc<(CPointer<D3DKMT_SHAREDPRIMARYUNLOCKNOTIFICATIONAbi>) -> Int32>
 
 @When[Windows_Wdk_Graphics_Direct3D == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
-public type PFND3DKMT_SHAREOBJECTS = CFunc<(UInt32, CPointer<UInt32>, CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
+public type PFND3DKMT_SHAREOBJECTS = CFunc<(UInt32, CPointer<UInt32>, CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Wdk_Graphics_Direct3D == "on"]
 public type PFND3DKMT_SIGNALSYNCHRONIZATIONOBJECT = CFunc<(CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTAbi>) -> Int32>
@@ -58626,7 +58642,7 @@ public struct DXGK_GPUCLOCKDATA {
 public struct DXGK_GRAPHICSPOWER_REGISTER_INPUT_V_1_2 {
     public var Version: UInt32 = 0u32
     public var PrivateHandle: CPointer<Unit> = CPointer<Unit>()
-    public var PowerNotificationCb: PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32__impl_l0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var PowerNotificationCb: PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32_impl_p0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var RemovalNotificationCb: PDXGK_REMOVAL_NOTIFICATION = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var FStateNotificationCb: PDXGK_FSTATE_NOTIFICATION = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var InitialComponentStateCb: PDXGK_INITIAL_COMPONENT_STATE = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt8, UInt32, GUID, UInt32) -> Unit>(CPointer<Unit>())
@@ -58638,7 +58654,7 @@ public struct DXGK_GRAPHICSPOWER_REGISTER_INPUT_V_1_2 {
 public struct DXGK_GRAPHICSPOWER_REGISTER_INPUT_V_1_2Abi {
     public var Version: UInt32 = 0u32
     public var PrivateHandle: CPointer<Unit> = CPointer<Unit>()
-    public var PowerNotificationCb: PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32__impl_l0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var PowerNotificationCb: PDXGK_POWER_NOTIFICATION = CFunc<(CPointer<Unit>, Win32_impl_p0.DEVICE_POWER_STATEAbi, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var RemovalNotificationCb: PDXGK_REMOVAL_NOTIFICATION = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var FStateNotificationCb: PDXGK_FSTATE_NOTIFICATION = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt8, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var InitialComponentStateCb: PDXGK_INITIAL_COMPONENT_STATE = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt8, UInt32, GUID, UInt32) -> Unit>(CPointer<Unit>())
@@ -58680,7 +58696,7 @@ extend DXGK_GRAPHICSPOWER_REGISTER_INPUT_V_1_2 <: windows_core.CopyType & window
 @When[Windows_Wdk_Graphics_Direct3D == "on" && Windows_Win32_System_Power == "on"]
 public struct DXGK_GRAPHICSPOWER_REGISTER_OUTPUT {
     public var DeviceHandle: CPointer<Unit> = CPointer<Unit>()
-    public var InitialGrfxPowerState: Win32__impl_l0.DEVICE_POWER_STATE = Win32__impl_l0.DEVICE_POWER_STATE()
+    public var InitialGrfxPowerState: Win32_impl_p0.DEVICE_POWER_STATE = Win32_impl_p0.DEVICE_POWER_STATE()
     public var SetSharedPowerComponentStateCb: PDXGK_SET_SHARED_POWER_COMPONENT_STATE = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>())
     public var UnregisterCb: PDXGK_GRAPHICSPOWER_UNREGISTER = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public init() {}
@@ -58690,7 +58706,7 @@ public struct DXGK_GRAPHICSPOWER_REGISTER_OUTPUT {
 @C
 public struct DXGK_GRAPHICSPOWER_REGISTER_OUTPUTAbi {
     public var DeviceHandle: CPointer<Unit> = CPointer<Unit>()
-    public var InitialGrfxPowerState: Win32__impl_l0.DEVICE_POWER_STATEAbi = Win32__impl_l0.DEVICE_POWER_STATEAbi()
+    public var InitialGrfxPowerState: Win32_impl_p0.DEVICE_POWER_STATEAbi = Win32_impl_p0.DEVICE_POWER_STATEAbi()
     public var SetSharedPowerComponentStateCb: PDXGK_SET_SHARED_POWER_COMPONENT_STATE = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>())
     public var UnregisterCb: PDXGK_GRAPHICSPOWER_UNREGISTER = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public init() {}
@@ -58704,7 +58720,7 @@ extend DXGK_GRAPHICSPOWER_REGISTER_OUTPUT <: windows_core.CopyType & windows_cor
     public static func projectAbi(value: DXGK_GRAPHICSPOWER_REGISTER_OUTPUT): DXGK_GRAPHICSPOWER_REGISTER_OUTPUTAbi {
         var abi = DXGK_GRAPHICSPOWER_REGISTER_OUTPUTAbi()
         abi.DeviceHandle = value.DeviceHandle
-        abi.InitialGrfxPowerState = windows_core.projectTypedAbi(value.InitialGrfxPowerState, windows_core.typeMarker<Win32__impl_l0.DEVICE_POWER_STATE>())
+        abi.InitialGrfxPowerState = windows_core.projectTypedAbi(value.InitialGrfxPowerState, windows_core.typeMarker<Win32_impl_p0.DEVICE_POWER_STATE>())
         abi.SetSharedPowerComponentStateCb = value.SetSharedPowerComponentStateCb
         abi.UnregisterCb = value.UnregisterCb
         return abi
@@ -58712,7 +58728,7 @@ extend DXGK_GRAPHICSPOWER_REGISTER_OUTPUT <: windows_core.CopyType & windows_cor
     public static func assumeInitRef(abi: DXGK_GRAPHICSPOWER_REGISTER_OUTPUTAbi): DXGK_GRAPHICSPOWER_REGISTER_OUTPUT {
         var value = DXGK_GRAPHICSPOWER_REGISTER_OUTPUT()
         value.DeviceHandle = abi.DeviceHandle
-        value.InitialGrfxPowerState = windows_core.fromTypedAbi(abi.InitialGrfxPowerState, windows_core.typeMarker<Win32__impl_l0.DEVICE_POWER_STATE>()).unwrap()
+        value.InitialGrfxPowerState = windows_core.fromTypedAbi(abi.InitialGrfxPowerState, windows_core.typeMarker<Win32_impl_p0.DEVICE_POWER_STATE>()).unwrap()
         value.SetSharedPowerComponentStateCb = abi.SetSharedPowerComponentStateCb
         value.UnregisterCb = abi.UnregisterCb
         return value
@@ -63404,11 +63420,11 @@ public unsafe func Windows_D3DKMTSetVidPnSourceOwner2(param0: CPointer<D3DKMT_SE
 @When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTShareObjects == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: hObjects len=param[0]
-    func D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32
+    func D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTShareObjects == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32 {
     return D3DKMTShareObjects(cObjects, hObjects, pObjectAttributes, dwDesiredAccess, phSharedNtHandle)
 }
 

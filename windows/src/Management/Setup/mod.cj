@@ -4,14 +4,23 @@
 package windows.Management.Setup
 
 import std.collection.*
+@When[Windows_Management_Setup == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Management_Setup == "on"]
 import windows_core as windows_core
+@When[Windows_Management_Setup == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Management_Setup == "on"]
 import windows_interface as windows_interface
+@When[Windows_Management_Setup == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Management_Setup == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Management_Setup == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Management_Setup == "on"]
 import windows_collections as windows_collections
+@When[Windows_Management_Setup == "on"]
 import windows_future as windows_future
 
 
@@ -1317,19 +1326,15 @@ public class DeploymentSessionHeartbeatRequested <: InterfaceWrapperBase & ComIn
 extend DeploymentSessionHeartbeatRequested <: windows_core.Interface<DeploymentSessionHeartbeatRequested> {}
 
 @When[Windows_Management_Setup == "on"]
-private open class DeploymentSessionHeartbeatRequestedInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface DeploymentSessionHeartbeatRequestedInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Management_Setup == "on"]
-private open class DeploymentSessionHeartbeatRequestedInvoker <: DeploymentSessionHeartbeatRequestedInvokerErased {
-    public open func Invoke(eventArgs: InParam<DeploymentSessionHeartbeatRequestedEventArgs>): Unit {
-        ()
-    }
+private interface DeploymentSessionHeartbeatRequestedInvoker <: DeploymentSessionHeartbeatRequestedInvokerErased {
+    public func Invoke(eventArgs: InParam<DeploymentSessionHeartbeatRequestedEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<DeploymentSessionHeartbeatRequestedEventArgs>(DeploymentSessionHeartbeatRequestedEventArgs.viewOf(arg0)))
         return S_OK.value
     }
@@ -1349,7 +1354,7 @@ private class DeploymentSessionHeartbeatRequestedBox <: DeploymentSessionHeartbe
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(eventArgs: InParam<DeploymentSessionHeartbeatRequestedEventArgs>): Unit {
+    public func Invoke(eventArgs: InParam<DeploymentSessionHeartbeatRequestedEventArgs>): Unit {
         invoke_(eventArgs)
     }
 }

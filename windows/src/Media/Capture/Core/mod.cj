@@ -2,4 +2,4 @@
 package windows.Media.Capture.Core
 
 @When[Windows_Media_Capture_Core == "on"]
-public import windows.Media._impl_l0.{IVariablePhotoCapturedEventArgs, IVariablePhotoCapturedEventArgsVtbl, IVariablePhotoSequenceCapture, IVariablePhotoSequenceCapture2, IVariablePhotoSequenceCapture2Vtbl, IVariablePhotoSequenceCaptureVtbl, VariablePhotoCapturedEventArgs, VariablePhotoSequenceCapture}
+public import windows.Media.impl.p0.{IVariablePhotoCapturedEventArgs, IVariablePhotoCapturedEventArgsVtbl, IVariablePhotoSequenceCapture, IVariablePhotoSequenceCapture2, IVariablePhotoSequenceCapture2Vtbl, IVariablePhotoSequenceCaptureVtbl, VariablePhotoCapturedEventArgs, VariablePhotoSequenceCapture}

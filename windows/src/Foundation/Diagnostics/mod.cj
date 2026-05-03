@@ -4,15 +4,25 @@
 package windows.Foundation.Diagnostics
 
 import std.collection.*
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_core as windows_core
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_interface as windows_interface
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Foundation_Diagnostics == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Foundation_Diagnostics == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_collections as windows_collections
+@When[Windows_Foundation_Diagnostics == "on"]
 import windows_future as windows_future
 
 
@@ -635,7 +645,7 @@ public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILogFileGeneratedEventArgsVtbl", "ILogFileGeneratedEventArgs", "ILogFileGeneratedEventArgs_Impl", [InterfaceMethodSchema("File", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILogFileGeneratedEventArgsVtbl", "ILogFileGeneratedEventArgs", "ILogFileGeneratedEventArgs_Impl", [InterfaceMethodSchema("File", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILogFileGeneratedEventArgs.runtimeType())
         return schema
     }
@@ -665,12 +675,12 @@ public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func File(): _impl_l1.StorageFile {
+    public unsafe func File(): impl_p1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.File(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageFile.fromAbiTake(result__)
+        return impl_p1.StorageFile.fromAbiTake(result__)
     }
 }
 
@@ -1039,7 +1049,7 @@ public class LogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func File(): _impl_l1.StorageFile {
+    public unsafe func File(): impl_p1.StorageFile {
         return defaultInterface().File()
     }
 }
@@ -3207,14 +3217,14 @@ public interface ILoggingSession_Impl <: ILoggingSession_ImplErased & Foundation
         }
     }
 
-    public func SaveToFileAsync(folder: InParam<_impl_l1.IStorageFolder>, fileName: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>
+    public func SaveToFileAsync(folder: InParam<impl_p1.IStorageFolder>, fileName: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>
 
     public func __winrtThunk_SaveToFileAsync(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.SaveToFileAsync(InParam<_impl_l1.IStorageFolder>(_impl_l1.IStorageFolder.viewOf(arg0)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg1)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Ok(value) =>
+        match (this.SaveToFileAsync(InParam<impl_p1.IStorageFolder>(impl_p1.IStorageFolder.viewOf(arg0)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg1)))) {
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -3222,7 +3232,7 @@ public interface ILoggingSession_Impl <: ILoggingSession_ImplErased & Foundation
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Err(error) =>
                 error.code().value
         }
     }
@@ -3311,7 +3321,7 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingSession", ILoggingSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "ILoggingSessionVtbl", "ILoggingSession", "ILoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveToFileAsync", 8, [InterfaceParameterSchema("folder", "CPointer<Unit>", "InParam<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fileName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevelAbi", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 11, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingSession", ILoggingSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "ILoggingSessionVtbl", "ILoggingSession", "ILoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveToFileAsync", 8, [InterfaceParameterSchema("folder", "CPointer<Unit>", "InParam<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fileName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevelAbi", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 11, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingSession.runtimeType())
         return schema
     }
@@ -3356,12 +3366,12 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveToFileAsync(folder: _impl_l1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveToFileAsync(folder: impl_p1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveToFileAsync(asRaw(), folder.asRaw(), fileName.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     public unsafe func AddLoggingChannel(loggingChannel: ILoggingChannel): Unit {
@@ -4196,14 +4206,14 @@ public interface IFileLoggingSession_Impl <: IFileLoggingSession_ImplErased & Fo
         }
     }
 
-    public func CloseAndSaveToFileAsync(): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>
+    public func CloseAndSaveToFileAsync(): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>
 
     public func __winrtThunk_CloseAndSaveToFileAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.CloseAndSaveToFileAsync()) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -4211,7 +4221,7 @@ public interface IFileLoggingSession_Impl <: IFileLoggingSession_ImplErased & Fo
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Err(error) =>
                 error.code().value
         }
     }
@@ -4293,7 +4303,7 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileLoggingSession", IFileLoggingSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IFileLoggingSessionVtbl", "IFileLoggingSession", "IFileLoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 8, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevelAbi", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CloseAndSaveToFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogFileGenerated", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLogFileGenerated", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileLoggingSession", IFileLoggingSession.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IFileLoggingSessionVtbl", "IFileLoggingSession", "IFileLoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 8, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevelAbi", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CloseAndSaveToFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogFileGenerated", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLogFileGenerated", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IFileLoggingSession.runtimeType())
         return schema
     }
@@ -4356,12 +4366,12 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CloseAndSaveToFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     public unsafe func LogFileGenerated(handler: Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>): windows_collections.EventRegistrationToken {
@@ -4586,7 +4596,7 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().CloseAndSaveToFileAsync()
     }
 
@@ -6795,7 +6805,7 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveToFileAsync(folder: _impl_l1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveToFileAsync(folder: impl_p1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().SaveToFileAsync(folder, fileName)
     }
 

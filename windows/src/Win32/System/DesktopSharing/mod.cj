@@ -4,14 +4,20 @@
 package windows.Win32.System.DesktopSharing
 
 import std.collection.*
+@When[Windows_Win32_System_DesktopSharing == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_DesktopSharing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_DesktopSharing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_DesktopSharing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_DesktopSharing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_DesktopSharing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_DesktopSharing == "on"]
@@ -771,12 +777,12 @@ public class IRDPSRAPIDebug <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIFrameBufferVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Width: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Height: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Bpp: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetFrameBufferBits: CFunc<(CPointer<Unit>, Int32, Int32, Int32, Int32, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetFrameBufferBits: CFunc<(CPointer<Unit>, Int32, Int32, Int32, Int32, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -813,7 +819,7 @@ public class IRDPSRAPIFrameBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIFrameBuffer> {
-        return InterfaceDescriptor<IRDPSRAPIFrameBuffer>("IRDPSRAPIFrameBuffer", IRDPSRAPIFrameBuffer.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIFrameBufferFromAbi, viewIRDPSRAPIFrameBuffer)
+        return InterfaceDescriptor<IRDPSRAPIFrameBuffer>("IRDPSRAPIFrameBuffer", IRDPSRAPIFrameBuffer.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIFrameBufferFromAbi, viewIRDPSRAPIFrameBuffer)
     }
 
     public unsafe func vtbl(): IRDPSRAPIFrameBufferVtbl {
@@ -839,7 +845,7 @@ public class IRDPSRAPIFrameBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetFrameBufferBits(x: Int32, y: Int32, Width: Int32, Heigth: Int32, ppBits: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetFrameBufferBits(x: Int32, y: Int32, Width: Int32, Heigth: Int32, ppBits: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFrameBufferBits(__liveRaw, x, y, Width, Heigth, ppBits)
@@ -849,7 +855,7 @@ public class IRDPSRAPIFrameBuffer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIInvitationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ConnectionString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GroupName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Password: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -893,7 +899,7 @@ public class IRDPSRAPIInvitation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIInvitation> {
-        return InterfaceDescriptor<IRDPSRAPIInvitation>("IRDPSRAPIInvitation", IRDPSRAPIInvitation.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIInvitationFromAbi, viewIRDPSRAPIInvitation)
+        return InterfaceDescriptor<IRDPSRAPIInvitation>("IRDPSRAPIInvitation", IRDPSRAPIInvitation.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIInvitationFromAbi, viewIRDPSRAPIInvitation)
     }
 
     public unsafe func vtbl(): IRDPSRAPIInvitationVtbl {
@@ -946,11 +952,11 @@ public class IRDPSRAPIInvitation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIInvitationManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CreateInvitation: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
@@ -989,7 +995,7 @@ public class IRDPSRAPIInvitationManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIInvitationManager> {
-        return InterfaceDescriptor<IRDPSRAPIInvitationManager>("IRDPSRAPIInvitationManager", IRDPSRAPIInvitationManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIInvitationManagerFromAbi, viewIRDPSRAPIInvitationManager)
+        return InterfaceDescriptor<IRDPSRAPIInvitationManager>("IRDPSRAPIInvitationManager", IRDPSRAPIInvitationManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIInvitationManagerFromAbi, viewIRDPSRAPIInvitationManager)
     }
 
     public unsafe func vtbl(): IRDPSRAPIInvitationManagerVtbl {
@@ -1004,7 +1010,7 @@ public class IRDPSRAPIInvitationManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(item: Win32__impl_l2.VARIANTAbi, ppInvitation: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(item: Win32_impl_p2.VARIANTAbi, ppInvitation: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, item, ppInvitation)
@@ -1136,11 +1142,11 @@ public class IRDPSRAPIPerfCounterLoggingManager <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPISessionPropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Property: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Property: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Property: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var put_Property: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -1177,7 +1183,7 @@ public class IRDPSRAPISessionProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPISessionProperties> {
-        return InterfaceDescriptor<IRDPSRAPISessionProperties>("IRDPSRAPISessionProperties", IRDPSRAPISessionProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPISessionPropertiesFromAbi, viewIRDPSRAPISessionProperties)
+        return InterfaceDescriptor<IRDPSRAPISessionProperties>("IRDPSRAPISessionProperties", IRDPSRAPISessionProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPISessionPropertiesFromAbi, viewIRDPSRAPISessionProperties)
     }
 
     public unsafe func vtbl(): IRDPSRAPISessionPropertiesVtbl {
@@ -1185,14 +1191,14 @@ public class IRDPSRAPISessionProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Property(PropertyName: CPointer<UInt16>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Property(PropertyName: CPointer<UInt16>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Property(__liveRaw, PropertyName, pVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Property(PropertyName: CPointer<UInt16>, newVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func put_Property(PropertyName: CPointer<UInt16>, newVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Property(__liveRaw, PropertyName, newVal)
@@ -1202,7 +1208,7 @@ public class IRDPSRAPISessionProperties <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPITcpConnectionInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Protocol: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LocalPort: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var LocalIP: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1244,7 +1250,7 @@ public class IRDPSRAPITcpConnectionInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPITcpConnectionInfo> {
-        return InterfaceDescriptor<IRDPSRAPITcpConnectionInfo>("IRDPSRAPITcpConnectionInfo", IRDPSRAPITcpConnectionInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPITcpConnectionInfoFromAbi, viewIRDPSRAPITcpConnectionInfo)
+        return InterfaceDescriptor<IRDPSRAPITcpConnectionInfo>("IRDPSRAPITcpConnectionInfo", IRDPSRAPITcpConnectionInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPITcpConnectionInfoFromAbi, viewIRDPSRAPITcpConnectionInfo)
     }
 
     public unsafe func vtbl(): IRDPSRAPITcpConnectionInfoVtbl {
@@ -1476,7 +1482,7 @@ public class IRDPSRAPITransportStreamEvents <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIVirtualChannelVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SendData: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var SetAccess: CFunc<(CPointer<Unit>, Int32, CHANNEL_ACCESS_ENUMAbi) -> Int32> = { _, _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1518,7 +1524,7 @@ public class IRDPSRAPIVirtualChannel <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIVirtualChannel> {
-        return InterfaceDescriptor<IRDPSRAPIVirtualChannel>("IRDPSRAPIVirtualChannel", IRDPSRAPIVirtualChannel.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIVirtualChannelFromAbi, viewIRDPSRAPIVirtualChannel)
+        return InterfaceDescriptor<IRDPSRAPIVirtualChannel>("IRDPSRAPIVirtualChannel", IRDPSRAPIVirtualChannel.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIVirtualChannelFromAbi, viewIRDPSRAPIVirtualChannel)
     }
 
     public unsafe func vtbl(): IRDPSRAPIVirtualChannelVtbl {
@@ -1559,11 +1565,11 @@ public class IRDPSRAPIVirtualChannel <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIVirtualChannelManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateVirtualChannel: CFunc<(CPointer<Unit>, CPointer<UInt16>, CHANNEL_PRIORITYAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1601,7 +1607,7 @@ public class IRDPSRAPIVirtualChannelManager <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIVirtualChannelManager> {
-        return InterfaceDescriptor<IRDPSRAPIVirtualChannelManager>("IRDPSRAPIVirtualChannelManager", IRDPSRAPIVirtualChannelManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIVirtualChannelManagerFromAbi, viewIRDPSRAPIVirtualChannelManager)
+        return InterfaceDescriptor<IRDPSRAPIVirtualChannelManager>("IRDPSRAPIVirtualChannelManager", IRDPSRAPIVirtualChannelManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIVirtualChannelManagerFromAbi, viewIRDPSRAPIVirtualChannelManager)
     }
 
     public unsafe func vtbl(): IRDPSRAPIVirtualChannelManagerVtbl {
@@ -1616,7 +1622,7 @@ public class IRDPSRAPIVirtualChannelManager <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(item: Win32__impl_l2.VARIANTAbi, pChannel: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(item: Win32_impl_p2.VARIANTAbi, pChannel: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, item, pChannel)
@@ -2561,7 +2567,7 @@ extend RDPViewer <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IRDPSessionEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -2598,7 +2604,7 @@ public class _IRDPSessionEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IRDPSessionEvents> {
-        return InterfaceDescriptor<_IRDPSessionEvents>("_IRDPSessionEvents", _IRDPSessionEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IRDPSessionEventsFromAbi, view_IRDPSessionEvents)
+        return InterfaceDescriptor<_IRDPSessionEvents>("_IRDPSessionEvents", _IRDPSessionEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IRDPSessionEventsFromAbi, view_IRDPSessionEvents)
     }
 
     public unsafe func vtbl(): _IRDPSessionEventsVtbl {
@@ -2672,7 +2678,7 @@ extend __ReferenceRemainingTypes__ <: windows_core.CopyType & windows_core.Runti
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIAttendeeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RemoteName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ControlLevel: CFunc<(CPointer<Unit>, CPointer<CTRL_LEVELAbi>) -> Int32> = { _, _ => 0 }
@@ -2718,7 +2724,7 @@ public class IRDPSRAPIAttendee <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIAttendee> {
-        return InterfaceDescriptor<IRDPSRAPIAttendee>("IRDPSRAPIAttendee", IRDPSRAPIAttendee.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIAttendeeFromAbi, viewIRDPSRAPIAttendee)
+        return InterfaceDescriptor<IRDPSRAPIAttendee>("IRDPSRAPIAttendee", IRDPSRAPIAttendee.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIAttendeeFromAbi, viewIRDPSRAPIAttendee)
     }
 
     public unsafe func vtbl(): IRDPSRAPIAttendeeVtbl {
@@ -2778,7 +2784,7 @@ public class IRDPSRAPIAttendee <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIAttendeeDisconnectInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Attendee: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Reason: CFunc<(CPointer<Unit>, CPointer<ATTENDEE_DISCONNECT_REASONAbi>) -> Int32> = { _, _ => 0 }
     public var Code: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2818,7 +2824,7 @@ public class IRDPSRAPIAttendeeDisconnectInfo <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIAttendeeDisconnectInfo> {
-        return InterfaceDescriptor<IRDPSRAPIAttendeeDisconnectInfo>("IRDPSRAPIAttendeeDisconnectInfo", IRDPSRAPIAttendeeDisconnectInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIAttendeeDisconnectInfoFromAbi, viewIRDPSRAPIAttendeeDisconnectInfo)
+        return InterfaceDescriptor<IRDPSRAPIAttendeeDisconnectInfo>("IRDPSRAPIAttendeeDisconnectInfo", IRDPSRAPIAttendeeDisconnectInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIAttendeeDisconnectInfoFromAbi, viewIRDPSRAPIAttendeeDisconnectInfo)
     }
 
     public unsafe func vtbl(): IRDPSRAPIAttendeeDisconnectInfoVtbl {
@@ -2847,7 +2853,7 @@ public class IRDPSRAPIAttendeeDisconnectInfo <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIAttendeeManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2887,7 +2893,7 @@ public class IRDPSRAPIAttendeeManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIAttendeeManager> {
-        return InterfaceDescriptor<IRDPSRAPIAttendeeManager>("IRDPSRAPIAttendeeManager", IRDPSRAPIAttendeeManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIAttendeeManagerFromAbi, viewIRDPSRAPIAttendeeManager)
+        return InterfaceDescriptor<IRDPSRAPIAttendeeManager>("IRDPSRAPIAttendeeManager", IRDPSRAPIAttendeeManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIAttendeeManagerFromAbi, viewIRDPSRAPIAttendeeManager)
     }
 
     public unsafe func vtbl(): IRDPSRAPIAttendeeManagerVtbl {
@@ -3105,7 +3111,7 @@ public class IRDPViewerInputSink <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Windows: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Shared: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -3148,7 +3154,7 @@ public class IRDPSRAPIApplication <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIApplication> {
-        return InterfaceDescriptor<IRDPSRAPIApplication>("IRDPSRAPIApplication", IRDPSRAPIApplication.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIApplicationFromAbi, viewIRDPSRAPIApplication)
+        return InterfaceDescriptor<IRDPSRAPIApplication>("IRDPSRAPIApplication", IRDPSRAPIApplication.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIApplicationFromAbi, viewIRDPSRAPIApplication)
     }
 
     public unsafe func vtbl(): IRDPSRAPIApplicationVtbl {
@@ -3195,7 +3201,7 @@ public class IRDPSRAPIApplication <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIApplicationFilterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Applications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Windows: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -3236,7 +3242,7 @@ public class IRDPSRAPIApplicationFilter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIApplicationFilter> {
-        return InterfaceDescriptor<IRDPSRAPIApplicationFilter>("IRDPSRAPIApplicationFilter", IRDPSRAPIApplicationFilter.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIApplicationFilterFromAbi, viewIRDPSRAPIApplicationFilter)
+        return InterfaceDescriptor<IRDPSRAPIApplicationFilter>("IRDPSRAPIApplicationFilter", IRDPSRAPIApplicationFilter.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIApplicationFilterFromAbi, viewIRDPSRAPIApplicationFilter)
     }
 
     public unsafe func vtbl(): IRDPSRAPIApplicationFilterVtbl {
@@ -3271,7 +3277,7 @@ public class IRDPSRAPIApplicationFilter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIApplicationListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3311,7 +3317,7 @@ public class IRDPSRAPIApplicationList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIApplicationList> {
-        return InterfaceDescriptor<IRDPSRAPIApplicationList>("IRDPSRAPIApplicationList", IRDPSRAPIApplicationList.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIApplicationListFromAbi, viewIRDPSRAPIApplicationList)
+        return InterfaceDescriptor<IRDPSRAPIApplicationList>("IRDPSRAPIApplicationList", IRDPSRAPIApplicationList.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIApplicationListFromAbi, viewIRDPSRAPIApplicationList)
     }
 
     public unsafe func vtbl(): IRDPSRAPIApplicationListVtbl {
@@ -3335,7 +3341,7 @@ public class IRDPSRAPIApplicationList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPISharingSessionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Open: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetColorDepth: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3386,7 +3392,7 @@ public class IRDPSRAPISharingSession <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPISharingSession> {
-        return InterfaceDescriptor<IRDPSRAPISharingSession>("IRDPSRAPISharingSession", IRDPSRAPISharingSession.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPISharingSessionFromAbi, viewIRDPSRAPISharingSession)
+        return InterfaceDescriptor<IRDPSRAPISharingSession>("IRDPSRAPISharingSession", IRDPSRAPISharingSession.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPISharingSessionFromAbi, viewIRDPSRAPISharingSession)
     }
 
     public unsafe func vtbl(): IRDPSRAPISharingSessionVtbl {
@@ -3550,7 +3556,7 @@ public class IRDPSRAPISharingSession2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIViewerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Connect: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var Disconnect: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Attendees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3601,7 +3607,7 @@ public class IRDPSRAPIViewer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIViewer> {
-        return InterfaceDescriptor<IRDPSRAPIViewer>("IRDPSRAPIViewer", IRDPSRAPIViewer.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIViewerFromAbi, viewIRDPSRAPIViewer)
+        return InterfaceDescriptor<IRDPSRAPIViewer>("IRDPSRAPIViewer", IRDPSRAPIViewer.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIViewerFromAbi, viewIRDPSRAPIViewer)
     }
 
     public unsafe func vtbl(): IRDPSRAPIViewerVtbl {
@@ -3696,7 +3702,7 @@ public class IRDPSRAPIViewer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIWindowVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Application: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Shared: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -3740,7 +3746,7 @@ public class IRDPSRAPIWindow <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIWindow> {
-        return InterfaceDescriptor<IRDPSRAPIWindow>("IRDPSRAPIWindow", IRDPSRAPIWindow.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIWindowFromAbi, viewIRDPSRAPIWindow)
+        return InterfaceDescriptor<IRDPSRAPIWindow>("IRDPSRAPIWindow", IRDPSRAPIWindow.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIWindowFromAbi, viewIRDPSRAPIWindow)
     }
 
     public unsafe func vtbl(): IRDPSRAPIWindowVtbl {
@@ -3793,7 +3799,7 @@ public class IRDPSRAPIWindow <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DesktopSharing == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRDPSRAPIWindowListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3833,7 +3839,7 @@ public class IRDPSRAPIWindowList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRDPSRAPIWindowList> {
-        return InterfaceDescriptor<IRDPSRAPIWindowList>("IRDPSRAPIWindowList", IRDPSRAPIWindowList.iid(), Win32__impl_l2.IDispatch.iid(), takeIRDPSRAPIWindowListFromAbi, viewIRDPSRAPIWindowList)
+        return InterfaceDescriptor<IRDPSRAPIWindowList>("IRDPSRAPIWindowList", IRDPSRAPIWindowList.iid(), Win32_impl_p2.IDispatch.iid(), takeIRDPSRAPIWindowListFromAbi, viewIRDPSRAPIWindowList)
     }
 
     public unsafe func vtbl(): IRDPSRAPIWindowListVtbl {

@@ -2,10 +2,10 @@
 package windows.Web.Http.Filters
 
 @When[Windows_Web_Http_Filters == "on"]
-public import windows._impl_l2.{HttpBaseProtocolFilter, HttpServerCustomValidationRequestedEventArgs, IHttpBaseProtocolFilter, IHttpBaseProtocolFilter4, IHttpBaseProtocolFilter4Vtbl, IHttpBaseProtocolFilterStatics, IHttpBaseProtocolFilterStaticsVtbl, IHttpBaseProtocolFilterVtbl, IHttpFilter, IHttpFilterVtbl, IHttpServerCustomValidationRequestedEventArgs, IHttpServerCustomValidationRequestedEventArgsVtbl}
+public import windows.impl.p2.{HttpBaseProtocolFilter, HttpServerCustomValidationRequestedEventArgs, IHttpBaseProtocolFilter4, IHttpBaseProtocolFilter4Vtbl, IHttpBaseProtocolFilterStatics, IHttpBaseProtocolFilterStaticsVtbl, IHttpFilter, IHttpFilterVtbl, IHttpServerCustomValidationRequestedEventArgs, IHttpServerCustomValidationRequestedEventArgsVtbl}
 @When[Windows_Web_Http_Filters == "on"]
-public import windows._impl_l1.{HttpCacheControl, IHttpBaseProtocolFilter5, IHttpBaseProtocolFilter5Vtbl}
+public import windows.impl.p1.{HttpCacheControl, IHttpBaseProtocolFilter, IHttpBaseProtocolFilter5, IHttpBaseProtocolFilter5Vtbl, IHttpBaseProtocolFilterVtbl}
 @When[Windows_Web_Http_Filters == "on"]
-public import windows._impl_l0.{HttpCacheReadBehavior, HttpCacheReadBehaviorAbi, HttpCacheReadBehavior_Default, HttpCacheReadBehavior_MostRecent, HttpCacheReadBehavior_NoCache, HttpCacheReadBehavior_OnlyFromCache, HttpCacheWriteBehavior, HttpCacheWriteBehaviorAbi, HttpCacheWriteBehavior_Default, HttpCacheWriteBehavior_NoCache, HttpCookieUsageBehavior, HttpCookieUsageBehaviorAbi, HttpCookieUsageBehavior_Default, HttpCookieUsageBehavior_NoCookies, IHttpBaseProtocolFilter2, IHttpBaseProtocolFilter2Vtbl, IHttpBaseProtocolFilter3, IHttpBaseProtocolFilter3Vtbl, IHttpCacheControl, IHttpCacheControlVtbl}
+public import windows.impl.p0.{HttpCacheReadBehavior, HttpCacheReadBehaviorAbi, HttpCacheReadBehavior_Default, HttpCacheReadBehavior_MostRecent, HttpCacheReadBehavior_NoCache, HttpCacheReadBehavior_OnlyFromCache, HttpCacheWriteBehavior, HttpCacheWriteBehaviorAbi, HttpCacheWriteBehavior_Default, HttpCacheWriteBehavior_NoCache, HttpCookieUsageBehavior, HttpCookieUsageBehaviorAbi, HttpCookieUsageBehavior_Default, HttpCookieUsageBehavior_NoCookies, IHttpBaseProtocolFilter2, IHttpBaseProtocolFilter2Vtbl, IHttpBaseProtocolFilter3, IHttpBaseProtocolFilter3Vtbl, IHttpCacheControl, IHttpCacheControlVtbl}
 @When[Windows_Web_Http_Filters == "on" && Windows_Web_Http == "on"]
-public import windows._impl_l2.{IHttpFilter_Impl, IHttpFilter_ImplErased}
+public import windows.impl.p2.{IHttpFilter_Impl, IHttpFilter_ImplErased}

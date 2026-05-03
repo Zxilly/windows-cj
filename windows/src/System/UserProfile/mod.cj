@@ -4,16 +4,27 @@
 package windows.System.UserProfile
 
 import std.collection.*
+@When[Windows_System_UserProfile == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_UserProfile == "on"]
 import windows_core as windows_core
+@When[Windows_System_UserProfile == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_UserProfile == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_UserProfile == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_UserProfile == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_UserProfile == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_System_UserProfile == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_System_UserProfile == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_System_UserProfile == "on"]
 import windows_collections as windows_collections
+@When[Windows_System_UserProfile == "on"]
 import windows_future as windows_future
 
 
@@ -122,7 +133,7 @@ public class IAdvertisingManagerForUser <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAdvertisingManagerForUser", IAdvertisingManagerForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAdvertisingManagerForUserVtbl", "IAdvertisingManagerForUser", "IAdvertisingManagerForUser_Impl", [InterfaceMethodSchema("AdvertisingId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAdvertisingManagerForUser", IAdvertisingManagerForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAdvertisingManagerForUserVtbl", "IAdvertisingManagerForUser", "IAdvertisingManagerForUser_Impl", [InterfaceMethodSchema("AdvertisingId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAdvertisingManagerForUser.runtimeType())
         return schema
     }
@@ -160,12 +171,12 @@ public class IAdvertisingManagerForUser <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -306,7 +317,7 @@ public class IAssignedAccessSettings <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAssignedAccessSettings", IAssignedAccessSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAssignedAccessSettingsVtbl", "IAssignedAccessSettings", "IAssignedAccessSettings_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSingleAppKioskMode", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAssignedAccessSettings", IAssignedAccessSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAssignedAccessSettingsVtbl", "IAssignedAccessSettings", "IAssignedAccessSettings_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSingleAppKioskMode", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAssignedAccessSettings.runtimeType())
         return schema
     }
@@ -352,12 +363,12 @@ public class IAssignedAccessSettings <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -412,7 +423,7 @@ public class IDiagnosticsSettings <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDiagnosticsSettings", IDiagnosticsSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDiagnosticsSettingsVtbl", "IDiagnosticsSettings", "IDiagnosticsSettings_Impl", [InterfaceMethodSchema("CanUseDiagnosticsToTailorExperiences", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDiagnosticsSettings", IDiagnosticsSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDiagnosticsSettingsVtbl", "IDiagnosticsSettings", "IDiagnosticsSettings_Impl", [InterfaceMethodSchema("CanUseDiagnosticsToTailorExperiences", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDiagnosticsSettings.runtimeType())
         return schema
     }
@@ -450,12 +461,12 @@ public class IDiagnosticsSettings <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -591,7 +602,7 @@ public struct IGlobalizationPreferencesForUserVtbl {
     public var Languages: UIntNative = UIntNative(0)
     public var HomeGeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization == "on"]
-    public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<impl_p0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization != "on"]
     public var WeekStartsOn: UIntNative = UIntNative(0)
     public init() {}
@@ -633,7 +644,7 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesForUser", IGlobalizationPreferencesForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesForUserVtbl", "IGlobalizationPreferencesForUser", "IGlobalizationPreferencesForUser_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Calendars", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clocks", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Currencies", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Languages", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HomeGeographicRegion", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WeekStartsOn", 12, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DayOfWeekAbi>", "OutSlot<_impl_l0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesForUser", IGlobalizationPreferencesForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesForUserVtbl", "IGlobalizationPreferencesForUser", "IGlobalizationPreferencesForUser_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Calendars", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clocks", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Currencies", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Languages", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HomeGeographicRegion", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WeekStartsOn", 12, [InterfaceParameterSchema("result", "CPointer<impl_p0.DayOfWeekAbi>", "OutSlot<impl_p0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGlobalizationPreferencesForUser.runtimeType())
         return schema
     }
@@ -663,12 +674,12 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -716,12 +727,12 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func WeekStartsOn(): _impl_l0.DayOfWeek {
+    public unsafe func WeekStartsOn(): impl_p0.DayOfWeek {
         let v = vtbl()
-        var result__ = _impl_l0.DayOfWeekAbi()
-        let hr = v.WeekStartsOn(asRaw(), CPointer<_impl_l0.DayOfWeekAbi>(inout result__))
+        var result__ = impl_p0.DayOfWeekAbi()
+        let hr = v.WeekStartsOn(asRaw(), CPointer<impl_p0.DayOfWeekAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DayOfWeek>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DayOfWeek>()).unwrap()
     }
 }
 
@@ -750,7 +761,7 @@ public struct IGlobalizationPreferencesStaticsVtbl {
     public var Languages: UIntNative = UIntNative(0)
     public var HomeGeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization == "on"]
-    public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<impl_p0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization != "on"]
     public var WeekStartsOn: UIntNative = UIntNative(0)
     public init() {}
@@ -792,7 +803,7 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesStatics", IGlobalizationPreferencesStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesStaticsVtbl", "IGlobalizationPreferencesStatics", "IGlobalizationPreferencesStatics_Impl", [InterfaceMethodSchema("Calendars", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clocks", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Currencies", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Languages", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HomeGeographicRegion", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WeekStartsOn", 11, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DayOfWeekAbi>", "OutSlot<_impl_l0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesStatics", IGlobalizationPreferencesStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesStaticsVtbl", "IGlobalizationPreferencesStatics", "IGlobalizationPreferencesStatics_Impl", [InterfaceMethodSchema("Calendars", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clocks", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Currencies", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Languages", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HomeGeographicRegion", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WeekStartsOn", 11, [InterfaceParameterSchema("result", "CPointer<impl_p0.DayOfWeekAbi>", "OutSlot<impl_p0.DayOfWeek>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGlobalizationPreferencesStatics.runtimeType())
         return schema
     }
@@ -866,12 +877,12 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func WeekStartsOn(): _impl_l0.DayOfWeek {
+    public unsafe func WeekStartsOn(): impl_p0.DayOfWeek {
         let v = vtbl()
-        var result__ = _impl_l0.DayOfWeekAbi()
-        let hr = v.WeekStartsOn(asRaw(), CPointer<_impl_l0.DayOfWeekAbi>(inout result__))
+        var result__ = impl_p0.DayOfWeekAbi()
+        let hr = v.WeekStartsOn(asRaw(), CPointer<impl_p0.DayOfWeekAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DayOfWeek>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DayOfWeek>()).unwrap()
     }
 }
 
@@ -1032,7 +1043,7 @@ public class ILockScreenStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILockScreenStatics", ILockScreenStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenStaticsVtbl", "ILockScreenStatics", "ILockScreenStatics_Impl", [InterfaceMethodSchema("OriginalImageFile", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetImageStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageFileAsync", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageStreamAsync", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILockScreenStatics", ILockScreenStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenStaticsVtbl", "ILockScreenStatics", "ILockScreenStatics_Impl", [InterfaceMethodSchema("OriginalImageFile", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetImageStream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageFileAsync", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageStreamAsync", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILockScreenStatics.runtimeType())
         return schema
     }
@@ -1070,16 +1081,16 @@ public class ILockScreenStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetImageStream(): _impl_l1.IRandomAccessStream {
+    public unsafe func GetImageStream(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetImageStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetImageFileAsync(value: _impl_l1.IStorageFile): windows_future.IAsyncAction {
+    public unsafe func SetImageFileAsync(value: impl_p1.IStorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetImageFileAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1088,7 +1099,7 @@ public class ILockScreenStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImageStreamAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func SetImageStreamAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetImageStreamAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1151,7 +1162,7 @@ public class IUserProfilePersonalizationSettings <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserProfilePersonalizationSettings", IUserProfilePersonalizationSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserProfilePersonalizationSettingsVtbl", "IUserProfilePersonalizationSettings", "IUserProfilePersonalizationSettings_Impl", [InterfaceMethodSchema("TrySetLockScreenImageAsync", 6, [InterfaceParameterSchema("imageFile", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetWallpaperImageAsync", 7, [InterfaceParameterSchema("imageFile", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserProfilePersonalizationSettings", IUserProfilePersonalizationSettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserProfilePersonalizationSettingsVtbl", "IUserProfilePersonalizationSettings", "IUserProfilePersonalizationSettings_Impl", [InterfaceMethodSchema("TrySetLockScreenImageAsync", 6, [InterfaceParameterSchema("imageFile", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetWallpaperImageAsync", 7, [InterfaceParameterSchema("imageFile", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserProfilePersonalizationSettings.runtimeType())
         return schema
     }
@@ -1181,7 +1192,7 @@ public class IUserProfilePersonalizationSettings <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TrySetLockScreenImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetLockScreenImageAsync(imageFile: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TrySetLockScreenImageAsync(asRaw(), imageFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1190,7 +1201,7 @@ public class IUserProfilePersonalizationSettings <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TrySetWallpaperImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetWallpaperImageAsync(imageFile: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TrySetWallpaperImageAsync(asRaw(), imageFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1461,7 +1472,7 @@ public class AdvertisingManagerForUser <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 }
@@ -1554,7 +1565,7 @@ public class GlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -1583,7 +1594,7 @@ public class GlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func WeekStartsOn(): _impl_l0.DayOfWeek {
+    public unsafe func WeekStartsOn(): impl_p0.DayOfWeek {
         return defaultInterface().WeekStartsOn()
     }
 }
@@ -1653,7 +1664,7 @@ public class IAdvertisingManagerStatics2 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAdvertisingManagerStatics2", IAdvertisingManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAdvertisingManagerStatics2Vtbl", "IAdvertisingManagerStatics2", "IAdvertisingManagerStatics2_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AdvertisingManagerForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAdvertisingManagerStatics2", IAdvertisingManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAdvertisingManagerStatics2Vtbl", "IAdvertisingManagerStatics2", "IAdvertisingManagerStatics2_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AdvertisingManagerForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAdvertisingManagerStatics2.runtimeType())
         return schema
     }
@@ -1683,7 +1694,7 @@ public class IAdvertisingManagerStatics2 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): AdvertisingManagerForUser {
+    public unsafe func GetForUser(user: impl_p1.User): AdvertisingManagerForUser {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1742,7 +1753,7 @@ public class IGlobalizationPreferencesStatics3 <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesStatics3", IGlobalizationPreferencesStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesStatics3Vtbl", "IGlobalizationPreferencesStatics3", "IGlobalizationPreferencesStatics3_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GlobalizationPreferencesForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGlobalizationPreferencesStatics3", IGlobalizationPreferencesStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGlobalizationPreferencesStatics3Vtbl", "IGlobalizationPreferencesStatics3", "IGlobalizationPreferencesStatics3_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GlobalizationPreferencesForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGlobalizationPreferencesStatics3.runtimeType())
         return schema
     }
@@ -1772,7 +1783,7 @@ public class IGlobalizationPreferencesStatics3 <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): GlobalizationPreferencesForUser {
+    public unsafe func GetForUser(user: impl_p1.User): GlobalizationPreferencesForUser {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1951,7 +1962,7 @@ public class IUserInformationStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserInformationStatics", IUserInformationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserInformationStaticsVtbl", "IUserInformationStatics", "IUserInformationStatics_Impl", [InterfaceMethodSchema("AccountPictureChangeEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NameAccessAllowed", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAccountPicture", 8, [InterfaceParameterSchema("kind", "AccountPictureKindAbi", "AccountPictureKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPictureAsync", 9, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPicturesAsync", 10, [InterfaceParameterSchema("smallImage", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("largeImage", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("video", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPictureFromStreamAsync", 11, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPicturesFromStreamsAsync", 12, [InterfaceParameterSchema("smallImage", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("largeImage", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("video", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccountPictureChanged", 13, [InterfaceParameterSchema("changeHandler", "CPointer<Unit>", "InParam<Foundation.EventHandler<IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAccountPictureChanged", 14, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDisplayNameAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFirstNameAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLastNameAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPrincipalNameAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSessionInitiationProtocolUriAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDomainNameAsync", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserInformationStatics", IUserInformationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserInformationStaticsVtbl", "IUserInformationStatics", "IUserInformationStatics_Impl", [InterfaceMethodSchema("AccountPictureChangeEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NameAccessAllowed", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAccountPicture", 8, [InterfaceParameterSchema("kind", "AccountPictureKindAbi", "AccountPictureKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPictureAsync", 9, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPicturesAsync", 10, [InterfaceParameterSchema("smallImage", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("largeImage", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("video", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPictureFromStreamAsync", 11, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAccountPicturesFromStreamsAsync", 12, [InterfaceParameterSchema("smallImage", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("largeImage", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("video", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SetAccountPictureResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AccountPictureChanged", 13, [InterfaceParameterSchema("changeHandler", "CPointer<Unit>", "InParam<Foundation.EventHandler<IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAccountPictureChanged", 14, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDisplayNameAsync", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFirstNameAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLastNameAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPrincipalNameAsync", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSessionInitiationProtocolUriAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Foundation.Uri>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDomainNameAsync", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserInformationStatics.runtimeType())
         return schema
     }
@@ -1997,16 +2008,16 @@ public class IUserInformationStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetAccountPicture(kind: AccountPictureKind): _impl_l1.IStorageFile {
+    public unsafe func GetAccountPicture(kind: AccountPictureKind): impl_p1.IStorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetAccountPicture(asRaw(), windows_core.projectTypedAbi(kind, windows_core.typeMarker<AccountPictureKind>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFile.fromAbiTake(result__)
+        return impl_p1.IStorageFile.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetAccountPictureAsync(image: _impl_l1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public unsafe func SetAccountPictureAsync(image: impl_p1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetAccountPictureAsync(asRaw(), image.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2015,7 +2026,7 @@ public class IUserInformationStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetAccountPicturesAsync(smallImage: _impl_l1.IStorageFile, largeImage: _impl_l1.IStorageFile, video: _impl_l1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public unsafe func SetAccountPicturesAsync(smallImage: impl_p1.IStorageFile, largeImage: impl_p1.IStorageFile, video: impl_p1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetAccountPicturesAsync(asRaw(), smallImage.asRaw(), largeImage.asRaw(), video.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2024,7 +2035,7 @@ public class IUserInformationStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetAccountPictureFromStreamAsync(image: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public unsafe func SetAccountPictureFromStreamAsync(image: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetAccountPictureFromStreamAsync(asRaw(), image.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2033,7 +2044,7 @@ public class IUserInformationStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetAccountPicturesFromStreamsAsync(smallImage: _impl_l1.IRandomAccessStream, largeImage: _impl_l1.IRandomAccessStream, video: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public unsafe func SetAccountPicturesFromStreamsAsync(smallImage: impl_p1.IRandomAccessStream, largeImage: impl_p1.IRandomAccessStream, video: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetAccountPicturesFromStreamsAsync(asRaw(), smallImage.asRaw(), largeImage.asRaw(), video.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2139,8 +2150,8 @@ public class LockScreen <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func GetImageStream(): _impl_l1.IRandomAccessStream {
-        var result__: Option<_impl_l1.IRandomAccessStream> = Option<_impl_l1.IRandomAccessStream>.None
+    public static unsafe func GetImageStream(): impl_p1.IRandomAccessStream {
+        var result__: Option<impl_p1.IRandomAccessStream> = Option<impl_p1.IRandomAccessStream>.None
         try (factory__ = windows_core.factory<LockScreen, ILockScreenStatics>().unwrap()) {
             result__ = Some(factory__.GetImageStream())
         }
@@ -2151,7 +2162,7 @@ public class LockScreen <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func SetImageFileAsync(value: _impl_l1.IStorageFile): windows_future.IAsyncAction {
+    public static unsafe func SetImageFileAsync(value: impl_p1.IStorageFile): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<LockScreen, ILockScreenStatics>().unwrap()) {
             result__ = Some(factory__.SetImageFileAsync(value))
@@ -2163,7 +2174,7 @@ public class LockScreen <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func SetImageStreamAsync(value: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public static unsafe func SetImageStreamAsync(value: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<LockScreen, ILockScreenStatics>().unwrap()) {
             result__ = Some(factory__.SetImageStreamAsync(value))
@@ -2240,8 +2251,8 @@ public class UserInformation <: windows_interface.RuntimeName & windows_core.Run
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func GetAccountPicture(kind: AccountPictureKind): _impl_l1.IStorageFile {
-        var result__: Option<_impl_l1.IStorageFile> = Option<_impl_l1.IStorageFile>.None
+    public static unsafe func GetAccountPicture(kind: AccountPictureKind): impl_p1.IStorageFile {
+        var result__: Option<impl_p1.IStorageFile> = Option<impl_p1.IStorageFile>.None
         try (factory__ = windows_core.factory<UserInformation, IUserInformationStatics>().unwrap()) {
             result__ = Some(factory__.GetAccountPicture(kind))
         }
@@ -2252,7 +2263,7 @@ public class UserInformation <: windows_interface.RuntimeName & windows_core.Run
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func SetAccountPictureAsync(image: _impl_l1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public static unsafe func SetAccountPictureAsync(image: impl_p1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
         var result__: Option<windows_future.IAsyncOperation<SetAccountPictureResult>> = Option<windows_future.IAsyncOperation<SetAccountPictureResult>>.None
         try (factory__ = windows_core.factory<UserInformation, IUserInformationStatics>().unwrap()) {
             result__ = Some(factory__.SetAccountPictureAsync(image))
@@ -2264,7 +2275,7 @@ public class UserInformation <: windows_interface.RuntimeName & windows_core.Run
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func SetAccountPicturesAsync(smallImage: _impl_l1.IStorageFile, largeImage: _impl_l1.IStorageFile, video: _impl_l1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public static unsafe func SetAccountPicturesAsync(smallImage: impl_p1.IStorageFile, largeImage: impl_p1.IStorageFile, video: impl_p1.IStorageFile): windows_future.IAsyncOperation<SetAccountPictureResult> {
         var result__: Option<windows_future.IAsyncOperation<SetAccountPictureResult>> = Option<windows_future.IAsyncOperation<SetAccountPictureResult>>.None
         try (factory__ = windows_core.factory<UserInformation, IUserInformationStatics>().unwrap()) {
             result__ = Some(factory__.SetAccountPicturesAsync(smallImage, largeImage, video))
@@ -2276,7 +2287,7 @@ public class UserInformation <: windows_interface.RuntimeName & windows_core.Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func SetAccountPictureFromStreamAsync(image: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public static unsafe func SetAccountPictureFromStreamAsync(image: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
         var result__: Option<windows_future.IAsyncOperation<SetAccountPictureResult>> = Option<windows_future.IAsyncOperation<SetAccountPictureResult>>.None
         try (factory__ = windows_core.factory<UserInformation, IUserInformationStatics>().unwrap()) {
             result__ = Some(factory__.SetAccountPictureFromStreamAsync(image))
@@ -2288,7 +2299,7 @@ public class UserInformation <: windows_interface.RuntimeName & windows_core.Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func SetAccountPicturesFromStreamsAsync(smallImage: _impl_l1.IRandomAccessStream, largeImage: _impl_l1.IRandomAccessStream, video: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
+    public static unsafe func SetAccountPicturesFromStreamsAsync(smallImage: impl_p1.IRandomAccessStream, largeImage: impl_p1.IRandomAccessStream, video: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<SetAccountPictureResult> {
         var result__: Option<windows_future.IAsyncOperation<SetAccountPictureResult>> = Option<windows_future.IAsyncOperation<SetAccountPictureResult>>.None
         try (factory__ = windows_core.factory<UserInformation, IUserInformationStatics>().unwrap()) {
             result__ = Some(factory__.SetAccountPicturesFromStreamsAsync(smallImage, largeImage, video))
@@ -2405,7 +2416,7 @@ public class AdvertisingManager <: windows_interface.RuntimeName & windows_core.
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): AdvertisingManagerForUser {
+    public static unsafe func GetForUser(user: impl_p1.User): AdvertisingManagerForUser {
         var result__: Option<AdvertisingManagerForUser> = Option<AdvertisingManagerForUser>.None
         try (factory__ = windows_core.factory<AdvertisingManager, IAdvertisingManagerStatics2>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -2531,8 +2542,8 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
     }
 
     @When[Windows_Globalization == "on"]
-    public static unsafe func WeekStartsOn(): _impl_l0.DayOfWeek {
-        var result__: Option<_impl_l0.DayOfWeek> = Option<_impl_l0.DayOfWeek>.None
+    public static unsafe func WeekStartsOn(): impl_p0.DayOfWeek {
+        var result__: Option<impl_p0.DayOfWeek> = Option<impl_p0.DayOfWeek>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics>().unwrap()) {
             result__ = Some(factory__.WeekStartsOn())
         }
@@ -2543,7 +2554,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): GlobalizationPreferencesForUser {
+    public static unsafe func GetForUser(user: impl_p1.User): GlobalizationPreferencesForUser {
         var result__: Option<GlobalizationPreferencesForUser> = Option<GlobalizationPreferencesForUser>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics3>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -2633,7 +2644,7 @@ public class AssignedAccessSettings <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -2649,7 +2660,7 @@ public class AssignedAccessSettings <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): AssignedAccessSettings {
+    public static unsafe func GetForUser(user: impl_p1.User): AssignedAccessSettings {
         var result__: Option<AssignedAccessSettings> = Option<AssignedAccessSettings>.None
         try (factory__ = windows_core.factory<AssignedAccessSettings, IAssignedAccessSettingsStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -2753,7 +2764,7 @@ public class DiagnosticsSettings <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -2769,7 +2780,7 @@ public class DiagnosticsSettings <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): DiagnosticsSettings {
+    public static unsafe func GetForUser(user: impl_p1.User): DiagnosticsSettings {
         var result__: Option<DiagnosticsSettings> = Option<DiagnosticsSettings>.None
         try (factory__ = windows_core.factory<DiagnosticsSettings, IDiagnosticsSettingsStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -2989,7 +3000,7 @@ public class IAssignedAccessSettingsStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAssignedAccessSettingsStatics", IAssignedAccessSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAssignedAccessSettingsStaticsVtbl", "IAssignedAccessSettingsStatics", "IAssignedAccessSettingsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AssignedAccessSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AssignedAccessSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAssignedAccessSettingsStatics", IAssignedAccessSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAssignedAccessSettingsStaticsVtbl", "IAssignedAccessSettingsStatics", "IAssignedAccessSettingsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AssignedAccessSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AssignedAccessSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAssignedAccessSettingsStatics.runtimeType())
         return schema
     }
@@ -3027,7 +3038,7 @@ public class IAssignedAccessSettingsStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): AssignedAccessSettings {
+    public unsafe func GetForUser(user: impl_p1.User): AssignedAccessSettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3087,7 +3098,7 @@ public class IDiagnosticsSettingsStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDiagnosticsSettingsStatics", IDiagnosticsSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDiagnosticsSettingsStaticsVtbl", "IDiagnosticsSettingsStatics", "IDiagnosticsSettingsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DiagnosticsSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DiagnosticsSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDiagnosticsSettingsStatics", IDiagnosticsSettingsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDiagnosticsSettingsStaticsVtbl", "IDiagnosticsSettingsStatics", "IDiagnosticsSettingsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DiagnosticsSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DiagnosticsSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDiagnosticsSettingsStatics.runtimeType())
         return schema
     }
@@ -3125,7 +3136,7 @@ public class IDiagnosticsSettingsStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): DiagnosticsSettings {
+    public unsafe func GetForUser(user: impl_p1.User): DiagnosticsSettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3390,12 +3401,12 @@ public class UserProfilePersonalizationSettings <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TrySetLockScreenImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetLockScreenImageAsync(imageFile: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySetLockScreenImageAsync(imageFile)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TrySetWallpaperImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetWallpaperImageAsync(imageFile: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySetWallpaperImageAsync(imageFile)
     }
 

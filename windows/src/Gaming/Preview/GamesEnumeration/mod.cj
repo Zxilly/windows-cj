@@ -4,15 +4,25 @@
 package windows.Gaming.Preview.GamesEnumeration
 
 import std.collection.*
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Gaming_Preview_GamesEnumeration == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_collections as windows_collections
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 import windows_future as windows_future
 
 
@@ -210,19 +220,15 @@ public class GameListRemovedEventHandler <: InterfaceWrapperBase & ComInterface 
 extend GameListRemovedEventHandler <: windows_core.Interface<GameListRemovedEventHandler> {}
 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
-private open class GameListRemovedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface GameListRemovedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
-private open class GameListRemovedEventHandlerInvoker <: GameListRemovedEventHandlerInvokerErased {
-    public open func Invoke(identifier: windows_core.HString): Unit {
-        ()
-    }
+private interface GameListRemovedEventHandlerInvoker <: GameListRemovedEventHandlerInvokerErased {
+    public func Invoke(identifier: windows_core.HString): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(windows_core.HString.viewOf(arg0))
         return S_OK.value
     }
@@ -242,7 +248,7 @@ private class GameListRemovedEventHandlerBox <: GameListRemovedEventHandlerInvok
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(identifier: windows_core.HString): Unit {
+    public func Invoke(identifier: windows_core.HString): Unit {
         invoke_(identifier)
     }
 }
@@ -374,14 +380,14 @@ public interface IGameListEntry_ImplErased {
 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on" && ((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IGameListEntry_Impl <: IGameListEntry_ImplErased {
-    public func DisplayInfo(): windows_core.Result<_impl_l1.AppDisplayInfo>
+    public func DisplayInfo(): windows_core.Result<impl_p1.AppDisplayInfo>
 
     public func __winrtThunk_DisplayInfo(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.DisplayInfo()) {
-            case Result<_impl_l1.AppDisplayInfo>.Ok(value) =>
+            case Result<impl_p1.AppDisplayInfo>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -389,7 +395,7 @@ public interface IGameListEntry_Impl <: IGameListEntry_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.AppDisplayInfo>.Err(error) =>
+            case Result<impl_p1.AppDisplayInfo>.Err(error) =>
                 error.code().value
         }
     }
@@ -506,7 +512,7 @@ public class IGameListEntry <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameListEntry", IGameListEntry.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameListEntryVtbl", "IGameListEntry", "IGameListEntry_Impl", [InterfaceMethodSchema("DisplayInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.AppDisplayInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Category", 8, [InterfaceParameterSchema("result", "CPointer<GameListCategoryAbi>", "OutSlot<GameListCategory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCategoryAsync", 10, [InterfaceParameterSchema("value", "GameListCategoryAbi", "GameListCategory", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameListEntry", IGameListEntry.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameListEntryVtbl", "IGameListEntry", "IGameListEntry_Impl", [InterfaceMethodSchema("DisplayInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.AppDisplayInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Category", 8, [InterfaceParameterSchema("result", "CPointer<GameListCategoryAbi>", "OutSlot<GameListCategory>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCategoryAsync", 10, [InterfaceParameterSchema("value", "GameListCategoryAbi", "GameListCategory", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameListEntry.runtimeType())
         return schema
     }
@@ -536,12 +542,12 @@ public class IGameListEntry <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func DisplayInfo(): _impl_l1.AppDisplayInfo {
+    public unsafe func DisplayInfo(): impl_p1.AppDisplayInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DisplayInfo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.AppDisplayInfo.fromAbiTake(result__)
+        return impl_p1.AppDisplayInfo.fromAbiTake(result__)
     }
 
     public unsafe func LaunchAsync(): windows_future.IAsyncOperation<Bool> {
@@ -1131,7 +1137,7 @@ public class IGameListEntry2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameListEntry2", IGameListEntry2.iid(), IGameListEntry.descriptorSchema(), ["IGameListEntry"], [IGameListEntry.iid()], "IGameListEntry2Vtbl", "IGameListEntry2", "IGameListEntry2_Impl", [InterfaceMethodSchema("LaunchableState", 11, [InterfaceParameterSchema("result", "CPointer<GameListEntryLaunchableStateAbi>", "OutSlot<GameListEntryLaunchableState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LauncherExecutable", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchParameters", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLauncherExecutableFileAsync", 14, [InterfaceParameterSchema("executableFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLauncherExecutableFileWithParamsAsync", 15, [InterfaceParameterSchema("executableFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("launchParams", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TitleId", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitleIdAsync", 17, [InterfaceParameterSchema("id", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_GameModeConfiguration", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameModeConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameListEntry2", IGameListEntry2.iid(), IGameListEntry.descriptorSchema(), ["IGameListEntry"], [IGameListEntry.iid()], "IGameListEntry2Vtbl", "IGameListEntry2", "IGameListEntry2_Impl", [InterfaceMethodSchema("LaunchableState", 11, [InterfaceParameterSchema("result", "CPointer<GameListEntryLaunchableStateAbi>", "OutSlot<GameListEntryLaunchableState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LauncherExecutable", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchParameters", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLauncherExecutableFileAsync", 14, [InterfaceParameterSchema("executableFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLauncherExecutableFileWithParamsAsync", 15, [InterfaceParameterSchema("executableFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("launchParams", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TitleId", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitleIdAsync", 17, [InterfaceParameterSchema("id", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_GameModeConfiguration", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GameModeConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameListEntry2.runtimeType())
         return schema
     }
@@ -1176,12 +1182,12 @@ public class IGameListEntry2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LauncherExecutable(): _impl_l1.IStorageFile {
+    public unsafe func LauncherExecutable(): impl_p1.IStorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LauncherExecutable(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFile.fromAbiTake(result__)
+        return impl_p1.IStorageFile.fromAbiTake(result__)
     }
 
     public unsafe func LaunchParameters(): windows_core.HString {
@@ -1193,7 +1199,7 @@ public class IGameListEntry2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetLauncherExecutableFileAsync(executableFile: _impl_l1.IStorageFile): windows_future.IAsyncAction {
+    public unsafe func SetLauncherExecutableFileAsync(executableFile: impl_p1.IStorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetLauncherExecutableFileAsync(asRaw(), executableFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1202,7 +1208,7 @@ public class IGameListEntry2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetLauncherExecutableFileWithParamsAsync(executableFile: _impl_l1.IStorageFile, launchParams: windows_core.HString): windows_future.IAsyncAction {
+    public unsafe func SetLauncherExecutableFileWithParamsAsync(executableFile: impl_p1.IStorageFile, launchParams: windows_core.HString): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetLauncherExecutableFileWithParamsAsync(asRaw(), executableFile.asRaw(), launchParams.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1308,7 +1314,7 @@ public class GameListEntry <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func DisplayInfo(): _impl_l1.AppDisplayInfo {
+    public unsafe func DisplayInfo(): impl_p1.AppDisplayInfo {
         return defaultInterface().DisplayInfo()
     }
 
@@ -1523,19 +1529,15 @@ public class GameListChangedEventHandler <: InterfaceWrapperBase & ComInterface 
 extend GameListChangedEventHandler <: windows_core.Interface<GameListChangedEventHandler> {}
 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
-private open class GameListChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface GameListChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
-private open class GameListChangedEventHandlerInvoker <: GameListChangedEventHandlerInvokerErased {
-    public open func Invoke(game: InParam<GameListEntry>): Unit {
-        ()
-    }
+private interface GameListChangedEventHandlerInvoker <: GameListChangedEventHandlerInvokerErased {
+    public func Invoke(game: InParam<GameListEntry>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<GameListEntry>(GameListEntry.viewOf(arg0)))
         return S_OK.value
     }
@@ -1555,7 +1557,7 @@ private class GameListChangedEventHandlerBox <: GameListChangedEventHandlerInvok
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(game: InParam<GameListEntry>): Unit {
+    public func Invoke(game: InParam<GameListEntry>): Unit {
         invoke_(game)
     }
 }

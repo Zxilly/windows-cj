@@ -4,14 +4,24 @@
 package windows.Win32.NetworkManagement.WindowsFirewall
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]
@@ -311,7 +321,7 @@ extend ICS_TARGETTYPE <: windows_core.CopyType & windows_core.RuntimeType & wind
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDynamicPortMappingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ExternalIPAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var RemoteHost: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ExternalPort: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -362,7 +372,7 @@ public class IDynamicPortMapping <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDynamicPortMapping> {
-        return InterfaceDescriptor<IDynamicPortMapping>("IDynamicPortMapping", IDynamicPortMapping.iid(), Win32__impl_l2.IDispatch.iid(), takeIDynamicPortMappingFromAbi, viewIDynamicPortMapping)
+        return InterfaceDescriptor<IDynamicPortMapping>("IDynamicPortMapping", IDynamicPortMapping.iid(), Win32_impl_p2.IDispatch.iid(), takeIDynamicPortMappingFromAbi, viewIDynamicPortMapping)
     }
 
     public unsafe func vtbl(): IDynamicPortMappingVtbl {
@@ -457,7 +467,7 @@ public class IDynamicPortMapping <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDynamicPortMappingCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -500,7 +510,7 @@ public class IDynamicPortMappingCollection <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IDynamicPortMappingCollection> {
-        return InterfaceDescriptor<IDynamicPortMappingCollection>("IDynamicPortMappingCollection", IDynamicPortMappingCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIDynamicPortMappingCollectionFromAbi, viewIDynamicPortMappingCollection)
+        return InterfaceDescriptor<IDynamicPortMappingCollection>("IDynamicPortMappingCollection", IDynamicPortMappingCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIDynamicPortMappingCollectionFromAbi, viewIDynamicPortMappingCollection)
     }
 
     public unsafe func vtbl(): IDynamicPortMappingCollectionVtbl {
@@ -544,7 +554,7 @@ public class IDynamicPortMappingCollection <: InterfaceWrapperBase & ComInterfac
 public struct IEnumNetSharingEveryConnectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -592,7 +602,7 @@ public class IEnumNetSharingEveryConnection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32__impl_l2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
+    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32_impl_p2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, celt, rgVar, pceltFetched)
@@ -622,7 +632,7 @@ public class IEnumNetSharingEveryConnection <: InterfaceWrapperBase & ComInterfa
 public struct IEnumNetSharingPortMappingVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -670,7 +680,7 @@ public class IEnumNetSharingPortMapping <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32__impl_l2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
+    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32_impl_p2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, celt, rgVar, pceltFetched)
@@ -700,7 +710,7 @@ public class IEnumNetSharingPortMapping <: InterfaceWrapperBase & ComInterface {
 public struct IEnumNetSharingPrivateConnectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -748,7 +758,7 @@ public class IEnumNetSharingPrivateConnection <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32__impl_l2.VARIANTAbi>, pCeltFetched: CPointer<UInt32>): Int32 {
+    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32_impl_p2.VARIANTAbi>, pCeltFetched: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, celt, rgVar, pCeltFetched)
@@ -778,7 +788,7 @@ public class IEnumNetSharingPrivateConnection <: InterfaceWrapperBase & ComInter
 public struct IEnumNetSharingPublicConnectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -826,7 +836,7 @@ public class IEnumNetSharingPublicConnection <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32__impl_l2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
+    public unsafe func Next(celt: UInt32, rgVar: CPointer<Win32_impl_p2.VARIANTAbi>, pceltFetched: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Next(__liveRaw, celt, rgVar, pceltFetched)
@@ -854,7 +864,7 @@ public class IEnumNetSharingPublicConnection <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INATEventManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var SetExternalIPAddressCallback: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -895,7 +905,7 @@ public class INATEventManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INATEventManager> {
-        return InterfaceDescriptor<INATEventManager>("INATEventManager", INATEventManager.iid(), Win32__impl_l2.IDispatch.iid(), takeINATEventManagerFromAbi, viewINATEventManager)
+        return InterfaceDescriptor<INATEventManager>("INATEventManager", INATEventManager.iid(), Win32_impl_p2.IDispatch.iid(), takeINATEventManagerFromAbi, viewINATEventManager)
     }
 
     public unsafe func vtbl(): INATEventManagerVtbl {
@@ -1295,7 +1305,7 @@ extend INET_FIREWALL_APP_CONTAINER <: windows_core.CopyType & windows_core.Runti
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwIcmpSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AllowOutboundDestinationUnreachable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAllowOutboundDestinationUnreachable: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var AllowRedirect: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -1352,7 +1362,7 @@ public class INetFwIcmpSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwIcmpSettings> {
-        return InterfaceDescriptor<INetFwIcmpSettings>("INetFwIcmpSettings", INetFwIcmpSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwIcmpSettingsFromAbi, viewINetFwIcmpSettings)
+        return InterfaceDescriptor<INetFwIcmpSettings>("INetFwIcmpSettings", INetFwIcmpSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwIcmpSettingsFromAbi, viewINetFwIcmpSettings)
     }
 
     public unsafe func vtbl(): INetFwIcmpSettingsVtbl {
@@ -1483,11 +1493,11 @@ public class INetFwIcmpSettings <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwProductVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RuleCategories: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var RuleCategories: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetRuleCategories: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetRuleCategories: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var PathToSignedProductExe: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1527,7 +1537,7 @@ public class INetFwProduct <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwProduct> {
-        return InterfaceDescriptor<INetFwProduct>("INetFwProduct", INetFwProduct.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwProductFromAbi, viewINetFwProduct)
+        return InterfaceDescriptor<INetFwProduct>("INetFwProduct", INetFwProduct.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwProductFromAbi, viewINetFwProduct)
     }
 
     public unsafe func vtbl(): INetFwProductVtbl {
@@ -1535,14 +1545,14 @@ public class INetFwProduct <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RuleCategories(ruleCategories: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RuleCategories(ruleCategories: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RuleCategories(__liveRaw, ruleCategories)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetRuleCategories(ruleCategories: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetRuleCategories(ruleCategories: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetRuleCategories(__liveRaw, ruleCategories)
@@ -1570,7 +1580,7 @@ public class INetFwProduct <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwProductsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Register: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1613,7 +1623,7 @@ public class INetFwProducts <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwProducts> {
-        return InterfaceDescriptor<INetFwProducts>("INetFwProducts", INetFwProducts.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwProductsFromAbi, viewINetFwProducts)
+        return InterfaceDescriptor<INetFwProducts>("INetFwProducts", INetFwProducts.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwProductsFromAbi, viewINetFwProducts)
     }
 
     public unsafe func vtbl(): INetFwProductsVtbl {
@@ -1650,7 +1660,7 @@ public class INetFwProducts <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingEveryConnectionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1690,7 +1700,7 @@ public class INetSharingEveryConnectionCollection <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingEveryConnectionCollection> {
-        return InterfaceDescriptor<INetSharingEveryConnectionCollection>("INetSharingEveryConnectionCollection", INetSharingEveryConnectionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingEveryConnectionCollectionFromAbi, viewINetSharingEveryConnectionCollection)
+        return InterfaceDescriptor<INetSharingEveryConnectionCollection>("INetSharingEveryConnectionCollection", INetSharingEveryConnectionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingEveryConnectionCollectionFromAbi, viewINetSharingEveryConnectionCollection)
     }
 
     public unsafe func vtbl(): INetSharingEveryConnectionCollectionVtbl {
@@ -1714,7 +1724,7 @@ public class INetSharingEveryConnectionCollection <: InterfaceWrapperBase & ComI
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingPortMappingCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1754,7 +1764,7 @@ public class INetSharingPortMappingCollection <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingPortMappingCollection> {
-        return InterfaceDescriptor<INetSharingPortMappingCollection>("INetSharingPortMappingCollection", INetSharingPortMappingCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingPortMappingCollectionFromAbi, viewINetSharingPortMappingCollection)
+        return InterfaceDescriptor<INetSharingPortMappingCollection>("INetSharingPortMappingCollection", INetSharingPortMappingCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingPortMappingCollectionFromAbi, viewINetSharingPortMappingCollection)
     }
 
     public unsafe func vtbl(): INetSharingPortMappingCollectionVtbl {
@@ -1778,7 +1788,7 @@ public class INetSharingPortMappingCollection <: InterfaceWrapperBase & ComInter
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingPortMappingPropsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IPProtocol: CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Int32> = { _, _ => 0 }
     public var ExternalPort: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1823,7 +1833,7 @@ public class INetSharingPortMappingProps <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingPortMappingProps> {
-        return InterfaceDescriptor<INetSharingPortMappingProps>("INetSharingPortMappingProps", INetSharingPortMappingProps.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingPortMappingPropsFromAbi, viewINetSharingPortMappingProps)
+        return InterfaceDescriptor<INetSharingPortMappingProps>("INetSharingPortMappingProps", INetSharingPortMappingProps.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingPortMappingPropsFromAbi, viewINetSharingPortMappingProps)
     }
 
     public unsafe func vtbl(): INetSharingPortMappingPropsVtbl {
@@ -1882,7 +1892,7 @@ public class INetSharingPortMappingProps <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingPrivateConnectionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1922,7 +1932,7 @@ public class INetSharingPrivateConnectionCollection <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingPrivateConnectionCollection> {
-        return InterfaceDescriptor<INetSharingPrivateConnectionCollection>("INetSharingPrivateConnectionCollection", INetSharingPrivateConnectionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingPrivateConnectionCollectionFromAbi, viewINetSharingPrivateConnectionCollection)
+        return InterfaceDescriptor<INetSharingPrivateConnectionCollection>("INetSharingPrivateConnectionCollection", INetSharingPrivateConnectionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingPrivateConnectionCollectionFromAbi, viewINetSharingPrivateConnectionCollection)
     }
 
     public unsafe func vtbl(): INetSharingPrivateConnectionCollectionVtbl {
@@ -1946,7 +1956,7 @@ public class INetSharingPrivateConnectionCollection <: InterfaceWrapperBase & Co
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingPublicConnectionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1986,7 +1996,7 @@ public class INetSharingPublicConnectionCollection <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingPublicConnectionCollection> {
-        return InterfaceDescriptor<INetSharingPublicConnectionCollection>("INetSharingPublicConnectionCollection", INetSharingPublicConnectionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingPublicConnectionCollectionFromAbi, viewINetSharingPublicConnectionCollection)
+        return InterfaceDescriptor<INetSharingPublicConnectionCollection>("INetSharingPublicConnectionCollection", INetSharingPublicConnectionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingPublicConnectionCollectionFromAbi, viewINetSharingPublicConnectionCollection)
     }
 
     public unsafe func vtbl(): INetSharingPublicConnectionCollectionVtbl {
@@ -2010,7 +2020,7 @@ public class INetSharingPublicConnectionCollection <: InterfaceWrapperBase & Com
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStaticPortMappingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ExternalIPAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ExternalPort: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var InternalPort: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2058,7 +2068,7 @@ public class IStaticPortMapping <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IStaticPortMapping> {
-        return InterfaceDescriptor<IStaticPortMapping>("IStaticPortMapping", IStaticPortMapping.iid(), Win32__impl_l2.IDispatch.iid(), takeIStaticPortMappingFromAbi, viewIStaticPortMapping)
+        return InterfaceDescriptor<IStaticPortMapping>("IStaticPortMapping", IStaticPortMapping.iid(), Win32_impl_p2.IDispatch.iid(), takeIStaticPortMappingFromAbi, viewIStaticPortMapping)
     }
 
     public unsafe func vtbl(): IStaticPortMappingVtbl {
@@ -2135,7 +2145,7 @@ public class IStaticPortMapping <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStaticPortMappingCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -2178,7 +2188,7 @@ public class IStaticPortMappingCollection <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IStaticPortMappingCollection> {
-        return InterfaceDescriptor<IStaticPortMappingCollection>("IStaticPortMappingCollection", IStaticPortMappingCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIStaticPortMappingCollectionFromAbi, viewIStaticPortMappingCollection)
+        return InterfaceDescriptor<IStaticPortMappingCollection>("IStaticPortMappingCollection", IStaticPortMappingCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIStaticPortMappingCollectionFromAbi, viewIStaticPortMappingCollection)
     }
 
     public unsafe func vtbl(): IStaticPortMappingCollectionVtbl {
@@ -2220,7 +2230,7 @@ public class IStaticPortMappingCollection <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUPnPNATVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StaticPortMappingCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DynamicPortMappingCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var NATEventManager: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2260,7 +2270,7 @@ public class IUPnPNAT <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUPnPNAT> {
-        return InterfaceDescriptor<IUPnPNAT>("IUPnPNAT", IUPnPNAT.iid(), Win32__impl_l2.IDispatch.iid(), takeIUPnPNATFromAbi, viewIUPnPNAT)
+        return InterfaceDescriptor<IUPnPNAT>("IUPnPNAT", IUPnPNAT.iid(), Win32_impl_p2.IDispatch.iid(), takeIUPnPNATFromAbi, viewIUPnPNAT)
     }
 
     public unsafe func vtbl(): IUPnPNATVtbl {
@@ -4204,7 +4214,7 @@ public struct INET_FIREWALL_AC_CHANGE__Anonymous_e__Union {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetConnectionPropsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Guid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DeviceName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4247,7 +4257,7 @@ public class INetConnectionProps <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetConnectionProps> {
-        return InterfaceDescriptor<INetConnectionProps>("INetConnectionProps", INetConnectionProps.iid(), Win32__impl_l2.IDispatch.iid(), takeINetConnectionPropsFromAbi, viewINetConnectionProps)
+        return InterfaceDescriptor<INetConnectionProps>("INetConnectionProps", INetConnectionProps.iid(), Win32_impl_p2.IDispatch.iid(), takeINetConnectionPropsFromAbi, viewINetConnectionProps)
     }
 
     public unsafe func vtbl(): INetConnectionPropsVtbl {
@@ -4294,7 +4304,7 @@ public class INetConnectionProps <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwAuthorizedApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ProcessImageFileName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4343,7 +4353,7 @@ public class INetFwAuthorizedApplication <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwAuthorizedApplication> {
-        return InterfaceDescriptor<INetFwAuthorizedApplication>("INetFwAuthorizedApplication", INetFwAuthorizedApplication.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwAuthorizedApplicationFromAbi, viewINetFwAuthorizedApplication)
+        return InterfaceDescriptor<INetFwAuthorizedApplication>("INetFwAuthorizedApplication", INetFwAuthorizedApplication.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwAuthorizedApplicationFromAbi, viewINetFwAuthorizedApplication)
     }
 
     public unsafe func vtbl(): INetFwAuthorizedApplicationVtbl {
@@ -4426,7 +4436,7 @@ public class INetFwAuthorizedApplication <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwAuthorizedApplicationsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -4469,7 +4479,7 @@ public class INetFwAuthorizedApplications <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwAuthorizedApplications> {
-        return InterfaceDescriptor<INetFwAuthorizedApplications>("INetFwAuthorizedApplications", INetFwAuthorizedApplications.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwAuthorizedApplicationsFromAbi, viewINetFwAuthorizedApplications)
+        return InterfaceDescriptor<INetFwAuthorizedApplications>("INetFwAuthorizedApplications", INetFwAuthorizedApplications.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwAuthorizedApplicationsFromAbi, viewINetFwAuthorizedApplications)
     }
 
     public unsafe func vtbl(): INetFwAuthorizedApplicationsVtbl {
@@ -4511,7 +4521,7 @@ public class INetFwAuthorizedApplications <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwOpenPortVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var IpVersion: CFunc<(CPointer<Unit>, CPointer<NET_FW_IP_VERSIONAbi>) -> Int32> = { _, _ => 0 }
@@ -4563,7 +4573,7 @@ public class INetFwOpenPort <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwOpenPort> {
-        return InterfaceDescriptor<INetFwOpenPort>("INetFwOpenPort", INetFwOpenPort.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwOpenPortFromAbi, viewINetFwOpenPort)
+        return InterfaceDescriptor<INetFwOpenPort>("INetFwOpenPort", INetFwOpenPort.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwOpenPortFromAbi, viewINetFwOpenPort)
     }
 
     public unsafe func vtbl(): INetFwOpenPortVtbl {
@@ -4664,7 +4674,7 @@ public class INetFwOpenPort <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwOpenPortsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, Int32, NET_FW_IP_PROTOCOLAbi) -> Int32> = { _, _, _ => 0 }
@@ -4707,7 +4717,7 @@ public class INetFwOpenPorts <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwOpenPorts> {
-        return InterfaceDescriptor<INetFwOpenPorts>("INetFwOpenPorts", INetFwOpenPorts.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwOpenPortsFromAbi, viewINetFwOpenPorts)
+        return InterfaceDescriptor<INetFwOpenPorts>("INetFwOpenPorts", INetFwOpenPorts.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwOpenPortsFromAbi, viewINetFwOpenPorts)
     }
 
     public unsafe func vtbl(): INetFwOpenPortsVtbl {
@@ -4749,7 +4759,7 @@ public class INetFwOpenPorts <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwRemoteAdminSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IpVersion: CFunc<(CPointer<Unit>, CPointer<NET_FW_IP_VERSIONAbi>) -> Int32> = { _, _ => 0 }
     public var SetIpVersion: CFunc<(CPointer<Unit>, NET_FW_IP_VERSIONAbi) -> Int32> = { _, _ => 0 }
     public var Scope: CFunc<(CPointer<Unit>, CPointer<NET_FW_SCOPEAbi>) -> Int32> = { _, _ => 0 }
@@ -4794,7 +4804,7 @@ public class INetFwRemoteAdminSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwRemoteAdminSettings> {
-        return InterfaceDescriptor<INetFwRemoteAdminSettings>("INetFwRemoteAdminSettings", INetFwRemoteAdminSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwRemoteAdminSettingsFromAbi, viewINetFwRemoteAdminSettings)
+        return InterfaceDescriptor<INetFwRemoteAdminSettings>("INetFwRemoteAdminSettings", INetFwRemoteAdminSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwRemoteAdminSettingsFromAbi, viewINetFwRemoteAdminSettings)
     }
 
     public unsafe func vtbl(): INetFwRemoteAdminSettingsVtbl {
@@ -4853,7 +4863,7 @@ public class INetFwRemoteAdminSettings <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwRuleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4877,9 +4887,9 @@ public struct INetFwRuleVtbl {
     public var Direction: CFunc<(CPointer<Unit>, CPointer<NET_FW_RULE_DIRECTIONAbi>) -> Int32> = { _, _ => 0 }
     public var SetDirection: CFunc<(CPointer<Unit>, NET_FW_RULE_DIRECTIONAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Interfaces: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Interfaces: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetInterfaces: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetInterfaces: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var InterfaceTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetInterfaceTypes: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -4928,7 +4938,7 @@ public class INetFwRule <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwRule> {
-        return InterfaceDescriptor<INetFwRule>("INetFwRule", INetFwRule.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwRuleFromAbi, viewINetFwRule)
+        return InterfaceDescriptor<INetFwRule>("INetFwRule", INetFwRule.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwRuleFromAbi, viewINetFwRule)
     }
 
     public unsafe func vtbl(): INetFwRuleVtbl {
@@ -5068,14 +5078,14 @@ public class INetFwRule <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Interfaces(interfaces: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Interfaces(interfaces: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Interfaces(__liveRaw, interfaces)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetInterfaces(interfaces: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetInterfaces(interfaces: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetInterfaces(__liveRaw, interfaces)
@@ -5351,7 +5361,7 @@ public class INetFwRule3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwRulesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -5394,7 +5404,7 @@ public class INetFwRules <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwRules> {
-        return InterfaceDescriptor<INetFwRules>("INetFwRules", INetFwRules.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwRulesFromAbi, viewINetFwRules)
+        return InterfaceDescriptor<INetFwRules>("INetFwRules", INetFwRules.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwRulesFromAbi, viewINetFwRules)
     }
 
     public unsafe func vtbl(): INetFwRulesVtbl {
@@ -5436,7 +5446,7 @@ public class INetFwRules <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwServiceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<NET_FW_SERVICE_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var Customized: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5485,7 +5495,7 @@ public class INetFwService <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwService> {
-        return InterfaceDescriptor<INetFwService>("INetFwService", INetFwService.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwServiceFromAbi, viewINetFwService)
+        return InterfaceDescriptor<INetFwService>("INetFwService", INetFwService.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwServiceFromAbi, viewINetFwService)
     }
 
     public unsafe func vtbl(): INetFwServiceVtbl {
@@ -5568,7 +5578,7 @@ public class INetFwService <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwServiceRestrictionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RestrictService: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int16, Int16) -> Int32> = { _, _, _, _, _ => 0 }
     public var ServiceRestricted: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     public var Rules: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5608,7 +5618,7 @@ public class INetFwServiceRestriction <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwServiceRestriction> {
-        return InterfaceDescriptor<INetFwServiceRestriction>("INetFwServiceRestriction", INetFwServiceRestriction.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwServiceRestrictionFromAbi, viewINetFwServiceRestriction)
+        return InterfaceDescriptor<INetFwServiceRestriction>("INetFwServiceRestriction", INetFwServiceRestriction.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwServiceRestrictionFromAbi, viewINetFwServiceRestriction)
     }
 
     public unsafe func vtbl(): INetFwServiceRestrictionVtbl {
@@ -5637,7 +5647,7 @@ public class INetFwServiceRestriction <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwServicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, NET_FW_SERVICE_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -5678,7 +5688,7 @@ public class INetFwServices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwServices> {
-        return InterfaceDescriptor<INetFwServices>("INetFwServices", INetFwServices.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwServicesFromAbi, viewINetFwServices)
+        return InterfaceDescriptor<INetFwServices>("INetFwServices", INetFwServices.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwServicesFromAbi, viewINetFwServices)
     }
 
     public unsafe func vtbl(): INetFwServicesVtbl {
@@ -5708,7 +5718,7 @@ public class INetFwServices <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingPortMappingVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Disable: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Enable: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5749,7 +5759,7 @@ public class INetSharingPortMapping <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingPortMapping> {
-        return InterfaceDescriptor<INetSharingPortMapping>("INetSharingPortMapping", INetSharingPortMapping.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingPortMappingFromAbi, viewINetSharingPortMapping)
+        return InterfaceDescriptor<INetSharingPortMapping>("INetSharingPortMapping", INetSharingPortMapping.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingPortMappingFromAbi, viewINetSharingPortMapping)
     }
 
     public unsafe func vtbl(): INetSharingPortMappingVtbl {
@@ -6168,14 +6178,14 @@ public class INetConnectionConnectUi <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwPolicy2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CurrentProfileTypes: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_FirewallEnabled: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var put_FirewallEnabled: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, Int16) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_ExcludedInterfaces: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_ExcludedInterfaces: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_ExcludedInterfaces: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var put_ExcludedInterfaces: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var get_BlockAllInboundTraffic: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var put_BlockAllInboundTraffic: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, Int16) -> Int32> = { _, _, _ => 0 }
     public var get_NotificationsDisabled: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPE2Abi, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
@@ -6229,7 +6239,7 @@ public class INetFwPolicy2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwPolicy2> {
-        return InterfaceDescriptor<INetFwPolicy2>("INetFwPolicy2", INetFwPolicy2.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwPolicy2FromAbi, viewINetFwPolicy2)
+        return InterfaceDescriptor<INetFwPolicy2>("INetFwPolicy2", INetFwPolicy2.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwPolicy2FromAbi, viewINetFwPolicy2)
     }
 
     public unsafe func vtbl(): INetFwPolicy2Vtbl {
@@ -6255,14 +6265,14 @@ public class INetFwPolicy2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_ExcludedInterfaces(profileType: NET_FW_PROFILE_TYPE2Abi, interfaces: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_ExcludedInterfaces(profileType: NET_FW_PROFILE_TYPE2Abi, interfaces: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_ExcludedInterfaces(__liveRaw, profileType, interfaces)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_ExcludedInterfaces(profileType: NET_FW_PROFILE_TYPE2Abi, interfaces: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func put_ExcludedInterfaces(profileType: NET_FW_PROFILE_TYPE2Abi, interfaces: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_ExcludedInterfaces(__liveRaw, profileType, interfaces)
@@ -6374,7 +6384,7 @@ public class INetFwPolicy2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwProfileVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<NET_FW_PROFILE_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var FirewallEnabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetFirewallEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -6425,7 +6435,7 @@ public class INetFwProfile <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwProfile> {
-        return InterfaceDescriptor<INetFwProfile>("INetFwProfile", INetFwProfile.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwProfileFromAbi, viewINetFwProfile)
+        return InterfaceDescriptor<INetFwProfile>("INetFwProfile", INetFwProfile.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwProfileFromAbi, viewINetFwProfile)
     }
 
     public unsafe func vtbl(): INetFwProfileVtbl {
@@ -6520,7 +6530,7 @@ public class INetFwProfile <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingConfigurationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SharingEnabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SharingConnectionType: CFunc<(CPointer<Unit>, CPointer<SHARINGCONNECTIONTYPEAbi>) -> Int32> = { _, _ => 0 }
     public var DisableSharing: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -6567,7 +6577,7 @@ public class INetSharingConfiguration <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingConfiguration> {
-        return InterfaceDescriptor<INetSharingConfiguration>("INetSharingConfiguration", INetSharingConfiguration.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingConfigurationFromAbi, viewINetSharingConfiguration)
+        return InterfaceDescriptor<INetSharingConfiguration>("INetSharingConfiguration", INetSharingConfiguration.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingConfigurationFromAbi, viewINetSharingConfiguration)
     }
 
     public unsafe func vtbl(): INetSharingConfigurationVtbl {
@@ -6638,7 +6648,7 @@ public class INetSharingConfiguration <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetSharingManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SharingInstalled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var get_EnumPublicConnections: CFunc<(CPointer<Unit>, SHARINGCONNECTION_ENUM_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var get_EnumPrivateConnections: CFunc<(CPointer<Unit>, SHARINGCONNECTION_ENUM_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -6681,7 +6691,7 @@ public class INetSharingManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetSharingManager> {
-        return InterfaceDescriptor<INetSharingManager>("INetSharingManager", INetSharingManager.iid(), Win32__impl_l2.IDispatch.iid(), takeINetSharingManagerFromAbi, viewINetSharingManager)
+        return InterfaceDescriptor<INetSharingManager>("INetSharingManager", INetSharingManager.iid(), Win32_impl_p2.IDispatch.iid(), takeINetSharingManagerFromAbi, viewINetSharingManager)
     }
 
     public unsafe func vtbl(): INetSharingManagerVtbl {
@@ -6859,7 +6869,7 @@ public class INetConnectionManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwPolicyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CurrentProfile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetProfileByType: CFunc<(CPointer<Unit>, NET_FW_PROFILE_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -6898,7 +6908,7 @@ public class INetFwPolicy <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwPolicy> {
-        return InterfaceDescriptor<INetFwPolicy>("INetFwPolicy", INetFwPolicy.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwPolicyFromAbi, viewINetFwPolicy)
+        return InterfaceDescriptor<INetFwPolicy>("INetFwPolicy", INetFwPolicy.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwPolicyFromAbi, viewINetFwPolicy)
     }
 
     public unsafe func vtbl(): INetFwPolicyVtbl {
@@ -6921,14 +6931,14 @@ public class INetFwPolicy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetFwMgrVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var LocalPolicy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentProfileType: CFunc<(CPointer<Unit>, CPointer<NET_FW_PROFILE_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var RestoreDefaults: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsPortAllowed: CFunc<(CPointer<Unit>, CPointer<UInt16>, NET_FW_IP_VERSIONAbi, Int32, CPointer<UInt16>, NET_FW_IP_PROTOCOLAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var IsPortAllowed: CFunc<(CPointer<Unit>, CPointer<UInt16>, NET_FW_IP_VERSIONAbi, Int32, CPointer<UInt16>, NET_FW_IP_PROTOCOLAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsIcmpTypeAllowed: CFunc<(CPointer<Unit>, NET_FW_IP_VERSIONAbi, CPointer<UInt16>, UInt8, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var IsIcmpTypeAllowed: CFunc<(CPointer<Unit>, NET_FW_IP_VERSIONAbi, CPointer<UInt16>, UInt8, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -6965,7 +6975,7 @@ public class INetFwMgr <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetFwMgr> {
-        return InterfaceDescriptor<INetFwMgr>("INetFwMgr", INetFwMgr.iid(), Win32__impl_l2.IDispatch.iid(), takeINetFwMgrFromAbi, viewINetFwMgr)
+        return InterfaceDescriptor<INetFwMgr>("INetFwMgr", INetFwMgr.iid(), Win32_impl_p2.IDispatch.iid(), takeINetFwMgrFromAbi, viewINetFwMgr)
     }
 
     public unsafe func vtbl(): INetFwMgrVtbl {
@@ -6991,14 +7001,14 @@ public class INetFwMgr <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsPortAllowed(imageFileName: CPointer<UInt16>, ipVersion: NET_FW_IP_VERSIONAbi, portNumber: Int32, localAddress: CPointer<UInt16>, ipProtocol: NET_FW_IP_PROTOCOLAbi, allowed: CPointer<Win32__impl_l2.VARIANTAbi>, restricted: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func IsPortAllowed(imageFileName: CPointer<UInt16>, ipVersion: NET_FW_IP_VERSIONAbi, portNumber: Int32, localAddress: CPointer<UInt16>, ipProtocol: NET_FW_IP_PROTOCOLAbi, allowed: CPointer<Win32_impl_p2.VARIANTAbi>, restricted: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsPortAllowed(__liveRaw, imageFileName, ipVersion, portNumber, localAddress, ipProtocol, allowed, restricted)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsIcmpTypeAllowed(ipVersion: NET_FW_IP_VERSIONAbi, localAddress: CPointer<UInt16>, type_: UInt8, allowed: CPointer<Win32__impl_l2.VARIANTAbi>, restricted: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func IsIcmpTypeAllowed(ipVersion: NET_FW_IP_VERSIONAbi, localAddress: CPointer<UInt16>, type_: UInt8, allowed: CPointer<Win32_impl_p2.VARIANTAbi>, restricted: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsIcmpTypeAllowed(__liveRaw, ipVersion, localAddress, type_, allowed, restricted)

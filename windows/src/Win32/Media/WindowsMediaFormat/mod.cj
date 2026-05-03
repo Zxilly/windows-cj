@@ -4,17 +4,26 @@
 package windows.Win32.Media.WindowsMediaFormat
 
 import std.collection.*
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue}
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
@@ -271,7 +280,7 @@ public struct INSNetSourceCreatorVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var GetNetSourceSharedNamespace: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetNetSourceAdminInterface: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetNetSourceAdminInterface: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetNumProtocolsSupported: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetProtocolName: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var Shutdown: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -346,7 +355,7 @@ public class INSNetSourceCreator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetNetSourceAdminInterface(pszStreamName: CPointer<UInt16>, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetNetSourceAdminInterface(pszStreamName: CPointer<UInt16>, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetNetSourceAdminInterface(__liveRaw, pszStreamName, pVal)
@@ -5170,7 +5179,7 @@ public struct WM_MEDIA_TYPE {
     public var bTemporalCompression: Int32 = 0i32
     public var lSampleSize: UInt32 = 0u32
     public var formattype: GuidValue = GuidValue()
-    public var pUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public var cbFormat: UInt32 = 0u32
     public var pbFormat: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
@@ -5217,7 +5226,7 @@ extend WM_MEDIA_TYPE <: windows_core.CopyType & windows_core.RuntimeType & windo
         value.bTemporalCompression = abi.bTemporalCompression
         value.lSampleSize = abi.lSampleSize
         value.formattype = GuidValue(abi.formattype)
-        value.pUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pUnk)
+        value.pUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pUnk)
         value.cbFormat = abi.cbFormat
         value.pbFormat = abi.pbFormat
         return value

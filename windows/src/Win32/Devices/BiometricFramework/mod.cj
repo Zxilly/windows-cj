@@ -4,14 +4,23 @@
 package windows.Win32.Devices.BiometricFramework
 
 import std.collection.*
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_libloading
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 
 

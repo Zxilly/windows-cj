@@ -4,18 +4,24 @@
 package windows.Win32.System.EventNotificationService
 
 import std.collection.*
+@When[Windows_Win32_System_EventNotificationService == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_EventNotificationService == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_EventNotificationService == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_EventNotificationService == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_EventNotificationService == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_EventNotificationService == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_EventNotificationService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISensLogonVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Logon: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Logoff: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var StartShell: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -59,7 +65,7 @@ public class ISensLogon <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISensLogon> {
-        return InterfaceDescriptor<ISensLogon>("ISensLogon", ISensLogon.iid(), Win32__impl_l2.IDispatch.iid(), takeISensLogonFromAbi, viewISensLogon)
+        return InterfaceDescriptor<ISensLogon>("ISensLogon", ISensLogon.iid(), Win32_impl_p2.IDispatch.iid(), takeISensLogonFromAbi, viewISensLogon)
     }
 
     public unsafe func vtbl(): ISensLogonVtbl {
@@ -112,7 +118,7 @@ public class ISensLogon <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_EventNotificationService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISensLogon2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Logon: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var Logoff: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var SessionDisconnect: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -154,7 +160,7 @@ public class ISensLogon2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISensLogon2> {
-        return InterfaceDescriptor<ISensLogon2>("ISensLogon2", ISensLogon2.iid(), Win32__impl_l2.IDispatch.iid(), takeISensLogon2FromAbi, viewISensLogon2)
+        return InterfaceDescriptor<ISensLogon2>("ISensLogon2", ISensLogon2.iid(), Win32_impl_p2.IDispatch.iid(), takeISensLogon2FromAbi, viewISensLogon2)
     }
 
     public unsafe func vtbl(): ISensLogon2Vtbl {
@@ -195,7 +201,7 @@ public class ISensLogon2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_EventNotificationService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISensOnNowVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OnACPower: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var OnBatteryPower: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var BatteryLow: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -235,7 +241,7 @@ public class ISensOnNow <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISensOnNow> {
-        return InterfaceDescriptor<ISensOnNow>("ISensOnNow", ISensOnNow.iid(), Win32__impl_l2.IDispatch.iid(), takeISensOnNowFromAbi, viewISensOnNow)
+        return InterfaceDescriptor<ISensOnNow>("ISensOnNow", ISensOnNow.iid(), Win32_impl_p2.IDispatch.iid(), takeISensOnNowFromAbi, viewISensOnNow)
     }
 
     public unsafe func vtbl(): ISensOnNowVtbl {
@@ -487,7 +493,7 @@ public let CONNECTION_AOL: UInt32 = 4u32
 @When[Windows_Win32_System_EventNotificationService == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISensNetworkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ConnectionMade: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<SENS_QOCINFOAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var ConnectionMadeNoQOCInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var ConnectionLost: CFunc<(CPointer<Unit>, CPointer<UInt16>, SENS_CONNECTION_TYPEAbi) -> Int32> = { _, _, _ => 0 }
@@ -529,7 +535,7 @@ public class ISensNetwork <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISensNetwork> {
-        return InterfaceDescriptor<ISensNetwork>("ISensNetwork", ISensNetwork.iid(), Win32__impl_l2.IDispatch.iid(), takeISensNetworkFromAbi, viewISensNetwork)
+        return InterfaceDescriptor<ISensNetwork>("ISensNetwork", ISensNetwork.iid(), Win32_impl_p2.IDispatch.iid(), takeISensNetworkFromAbi, viewISensNetwork)
     }
 
     public unsafe func vtbl(): ISensNetworkVtbl {

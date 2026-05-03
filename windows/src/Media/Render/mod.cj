@@ -4,7 +4,9 @@
 package windows.Media.Render
 
 import std.collection.*
+@When[Windows_Media_Render == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Media_Render == "on"]
 import windows_core as windows_core
 
 

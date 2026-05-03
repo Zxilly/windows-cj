@@ -4,11 +4,16 @@
 package windows.Win32.UI.HiDpi
 
 import std.collection.*
+@When[Windows_Win32_UI_HiDpi == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_UI_HiDpi == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_HiDpi == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_HiDpi == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_UI_HiDpi == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_UI_HiDpi == "on"]
@@ -396,11 +401,11 @@ extend PROCESS_DPI_AWARENESS <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AdjustWindowRectExForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32__impl_l0.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32__impl_l0.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32
+    func AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32_impl_p1.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32_impl_p1.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32
 }
 
 @When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AdjustWindowRectExForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32__impl_l0.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32__impl_l0.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32 {
+public unsafe func Windows_AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32_impl_p1.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32_impl_p1.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32 {
     return AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi)
 }
 
@@ -510,11 +515,11 @@ public unsafe func Windows_GetSystemDpiForProcess(hProcess: CPointer<Unit>): UIn
 @When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemMetricsForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func GetSystemMetricsForDpi(nIndex: Win32__impl_l0.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32
+    func GetSystemMetricsForDpi(nIndex: Win32_impl_p1.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32
 }
 
 @When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemMetricsForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_GetSystemMetricsForDpi(nIndex: Win32__impl_l0.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32 {
+public unsafe func Windows_GetSystemMetricsForDpi(nIndex: Win32_impl_p1.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32 {
     return GetSystemMetricsForDpi(nIndex, dpi)
 }
 
@@ -658,11 +663,11 @@ public unsafe func Windows_SystemParametersInfoForDpi(uiAction: UInt32, uiParam:
 @When[Windows_Win32_UI_HiDpi == "on" && UXTHEME == "on" && Windows_Win32_UI_HiDpi_OpenThemeDataForDpi == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
     // param-hint: hwnd optional
-    func OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32__impl_l0.HTHEME
+    func OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32_impl_p1.HTHEME
 }
 
 @When[Windows_Win32_UI_HiDpi == "on" && UXTHEME == "on" && Windows_Win32_UI_HiDpi_OpenThemeDataForDpi == "on" && Windows_Win32_UI_Controls == "on"]
-public unsafe func Windows_OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32__impl_l0.HTHEME {
+public unsafe func Windows_OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32_impl_p1.HTHEME {
     return OpenThemeDataForDpi(hwnd, pszClassList, dpi)
 }
 

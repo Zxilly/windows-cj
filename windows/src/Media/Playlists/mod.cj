@@ -4,15 +4,25 @@
 package windows.Media.Playlists
 
 import std.collection.*
+@When[Windows_Media_Playlists == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Playlists == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Playlists == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Playlists == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Playlists == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Playlists == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Playlists == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Media_Playlists == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Playlists == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Playlists == "on"]
 import windows_future as windows_future
 
 
@@ -114,11 +124,11 @@ public struct IPlaylistVtbl {
     public var Files: UIntNative = UIntNative(0)
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public var SaveAsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.NameCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var SaveAsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, impl_p0.NameCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SaveAsAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public var SaveAsWithFormatAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.NameCollisionOptionAbi, PlaylistFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var SaveAsWithFormatAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, impl_p0.NameCollisionOptionAbi, PlaylistFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SaveAsWithFormatAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -160,7 +170,7 @@ public class IPlaylist <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlaylist", IPlaylist.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlaylistVtbl", "IPlaylist", "IPlaylist_Impl", [InterfaceMethodSchema("Files", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsAsync", 8, [InterfaceParameterSchema("saveLocation", "CPointer<Unit>", "InParam<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("option", "_impl_l0.NameCollisionOptionAbi", "_impl_l0.NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsWithFormatAsync", 9, [InterfaceParameterSchema("saveLocation", "CPointer<Unit>", "InParam<_impl_l1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("option", "_impl_l0.NameCollisionOptionAbi", "_impl_l0.NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("playlistFormat", "PlaylistFormatAbi", "PlaylistFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlaylist", IPlaylist.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlaylistVtbl", "IPlaylist", "IPlaylist_Impl", [InterfaceMethodSchema("Files", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsAsync", 8, [InterfaceParameterSchema("saveLocation", "CPointer<Unit>", "InParam<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("option", "impl_p0.NameCollisionOptionAbi", "impl_p0.NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveAsWithFormatAsync", 9, [InterfaceParameterSchema("saveLocation", "CPointer<Unit>", "InParam<impl_p1.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("option", "impl_p0.NameCollisionOptionAbi", "impl_p0.NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("playlistFormat", "PlaylistFormatAbi", "PlaylistFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlaylist.runtimeType())
         return schema
     }
@@ -190,12 +200,12 @@ public class IPlaylist <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Files(): windows_collections.IVector<_impl_l1.StorageFile> {
+    public unsafe func Files(): windows_collections.IVector<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Files(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     public unsafe func SaveAsync(): windows_future.IAsyncAction {
@@ -207,21 +217,21 @@ public class IPlaylist <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsAsync(saveLocation: _impl_l1.IStorageFolder, desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveAsAsync(saveLocation: impl_p1.IStorageFolder, desiredName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.SaveAsAsync(asRaw(), saveLocation.asRaw(), desiredName.asRaw(), windows_core.projectTypedAbi(option, windows_core.typeMarker<_impl_l0.NameCollisionOption>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.SaveAsAsync(asRaw(), saveLocation.asRaw(), desiredName.asRaw(), windows_core.projectTypedAbi(option, windows_core.typeMarker<impl_p0.NameCollisionOption>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsWithFormatAsync(saveLocation: _impl_l1.IStorageFolder, desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption, playlistFormat: PlaylistFormat): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveAsWithFormatAsync(saveLocation: impl_p1.IStorageFolder, desiredName: windows_core.HString, option: impl_p0.NameCollisionOption, playlistFormat: PlaylistFormat): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.SaveAsWithFormatAsync(asRaw(), saveLocation.asRaw(), desiredName.asRaw(), windows_core.projectTypedAbi(option, windows_core.typeMarker<_impl_l0.NameCollisionOption>()), windows_core.projectTypedAbi(playlistFormat, windows_core.typeMarker<PlaylistFormat>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.SaveAsWithFormatAsync(asRaw(), saveLocation.asRaw(), desiredName.asRaw(), windows_core.projectTypedAbi(option, windows_core.typeMarker<impl_p0.NameCollisionOption>()), windows_core.projectTypedAbi(playlistFormat, windows_core.typeMarker<PlaylistFormat>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 }
 
@@ -275,7 +285,7 @@ public class IPlaylistStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlaylistStatics", IPlaylistStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlaylistStaticsVtbl", "IPlaylistStatics", "IPlaylistStatics_Impl", [InterfaceMethodSchema("LoadAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Playlist>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlaylistStatics", IPlaylistStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlaylistStaticsVtbl", "IPlaylistStatics", "IPlaylistStatics_Impl", [InterfaceMethodSchema("LoadAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Playlist>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlaylistStatics.runtimeType())
         return schema
     }
@@ -305,7 +315,7 @@ public class IPlaylistStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadAsync(file: _impl_l1.IStorageFile): windows_future.IAsyncOperation<Playlist> {
+    public unsafe func LoadAsync(file: impl_p1.IStorageFile): windows_future.IAsyncOperation<Playlist> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadAsync(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -394,7 +404,7 @@ public class Playlist <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func Files(): windows_collections.IVector<_impl_l1.StorageFile> {
+    public unsafe func Files(): windows_collections.IVector<impl_p1.StorageFile> {
         return defaultInterface().Files()
     }
 
@@ -403,17 +413,17 @@ public class Playlist <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsAsync(saveLocation: _impl_l1.IStorageFolder, desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveAsAsync(saveLocation: impl_p1.IStorageFolder, desiredName: windows_core.HString, option: impl_p0.NameCollisionOption): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().SaveAsAsync(saveLocation, desiredName, option)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SaveAsWithFormatAsync(saveLocation: _impl_l1.IStorageFolder, desiredName: windows_core.HString, option: _impl_l0.NameCollisionOption, playlistFormat: PlaylistFormat): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func SaveAsWithFormatAsync(saveLocation: impl_p1.IStorageFolder, desiredName: windows_core.HString, option: impl_p0.NameCollisionOption, playlistFormat: PlaylistFormat): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().SaveAsWithFormatAsync(saveLocation, desiredName, option, playlistFormat)
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadAsync(file: _impl_l1.IStorageFile): windows_future.IAsyncOperation<Playlist> {
+    public static unsafe func LoadAsync(file: impl_p1.IStorageFile): windows_future.IAsyncOperation<Playlist> {
         var result__: Option<windows_future.IAsyncOperation<Playlist>> = Option<windows_future.IAsyncOperation<Playlist>>.None
         try (factory__ = windows_core.factory<Playlist, IPlaylistStatics>().unwrap()) {
             result__ = Some(factory__.LoadAsync(file))

@@ -4,15 +4,24 @@
 package windows.Win32.Media.Audio.XAudio2
 
 import std.collection.*
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_polyfill.{packedReadFloat32, packedReadInt32, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat32, packedWriteInt32, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue}
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Audio_XAudio2 == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Media_Audio_XAudio2 == "on"]
@@ -1276,13 +1285,13 @@ extend XAPO_BUFFER_FLAGS <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct XAPO_LOCKFORPROCESS_PARAMETERS {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public mut prop pFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> {
+    public mut prop pFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
-                return packedReadValue<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>(base, 0, defaultValue)
+                let defaultValue: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
+                return packedReadValue<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -2655,14 +2664,14 @@ public struct XAUDIO2_DEBUG_CONFIGURATION {
 public struct XAUDIO2_EFFECT_DESCRIPTOR {
     public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
 
-    public mut prop pEffect: Win32__impl_l0.IUnknown {
+    public mut prop pEffect: Win32_impl_p0.IUnknown {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let defaultValue: CPointer<Unit> = CPointer<Unit>()
                 let raw = packedReadValue<CPointer<Unit>>(base, 0, defaultValue)
-                return Win32__impl_l0.IUnknown.fromAbiTake(raw)
+                return Win32_impl_p0.IUnknown.fromAbiTake(raw)
             }
         }
         set(val) {
@@ -3360,9 +3369,9 @@ public struct IXAPOVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetRegistrationProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<XAPO_REGISTRATION_PROPERTIES>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var IsInputFormatSupported: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
+    public var IsInputFormatSupported: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var IsOutputFormatSupported: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
+    public var IsOutputFormatSupported: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     @When[Windows_Win32_Media_Audio == "on"]
@@ -3421,14 +3430,14 @@ public class IXAPO <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func IsInputFormatSupported(pOutputFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pRequestedInputFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppSupportedInputFormat: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func IsInputFormatSupported(pOutputFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pRequestedInputFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, ppSupportedInputFormat: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsInputFormatSupported(__liveRaw, pOutputFormat, pRequestedInputFormat, ppSupportedInputFormat)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func IsOutputFormatSupported(pInputFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pRequestedOutputFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppSupportedOutputFormat: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func IsOutputFormatSupported(pInputFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pRequestedOutputFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, ppSupportedOutputFormat: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsOutputFormatSupported(__liveRaw, pInputFormat, pRequestedOutputFormat, ppSupportedOutputFormat)
@@ -4133,11 +4142,11 @@ public struct IXAudio2Vtbl {
     public var RegisterForCallbacks: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var UnregisterForCallbacks: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public var CreateSourceVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, UInt32, Float32, CPointer<Unit>, CPointer<XAUDIO2_VOICE_SENDS>, CPointer<XAUDIO2_EFFECT_CHAIN>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CreateSourceVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, UInt32, Float32, CPointer<Unit>, CPointer<XAUDIO2_VOICE_SENDS>, CPointer<XAUDIO2_EFFECT_CHAIN>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var CreateSubmixVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32, UInt32, UInt32, UInt32, CPointer<XAUDIO2_VOICE_SENDS>, CPointer<XAUDIO2_EFFECT_CHAIN>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public var CreateMasteringVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<XAUDIO2_EFFECT_CHAIN>, Win32_Media__impl_l0.AUDIO_STREAM_CATEGORYAbi) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CreateMasteringVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<XAUDIO2_EFFECT_CHAIN>, Win32_Media_impl_p0.AUDIO_STREAM_CATEGORYAbi) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var StartEngine: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var StopEngine: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var CommitChanges: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -4199,7 +4208,7 @@ public class IXAudio2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func CreateSourceVoice(ppSourceVoice: CPointer<CPointer<Unit>>, pSourceFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, Flags: UInt32, MaxFrequencyRatio: Float32, pCallback: CPointer<Unit>, pSendList: CPointer<XAUDIO2_VOICE_SENDS>, pEffectChain: CPointer<XAUDIO2_EFFECT_CHAIN>): Int32 {
+    public unsafe func CreateSourceVoice(ppSourceVoice: CPointer<CPointer<Unit>>, pSourceFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, Flags: UInt32, MaxFrequencyRatio: Float32, pCallback: CPointer<Unit>, pSendList: CPointer<XAUDIO2_VOICE_SENDS>, pEffectChain: CPointer<XAUDIO2_EFFECT_CHAIN>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateSourceVoice(__liveRaw, ppSourceVoice, pSourceFormat, Flags, MaxFrequencyRatio, pCallback, pSendList, pEffectChain)
@@ -4213,7 +4222,7 @@ public class IXAudio2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func CreateMasteringVoice(ppMasteringVoice: CPointer<CPointer<Unit>>, InputChannels: UInt32, InputSampleRate: UInt32, Flags: UInt32, szDeviceId: CPointer<UInt16>, pEffectChain: CPointer<XAUDIO2_EFFECT_CHAIN>, StreamCategory: Win32_Media__impl_l0.AUDIO_STREAM_CATEGORYAbi): Int32 {
+    public unsafe func CreateMasteringVoice(ppMasteringVoice: CPointer<CPointer<Unit>>, InputChannels: UInt32, InputSampleRate: UInt32, Flags: UInt32, szDeviceId: CPointer<UInt16>, pEffectChain: CPointer<XAUDIO2_EFFECT_CHAIN>, StreamCategory: Win32_Media_impl_p0.AUDIO_STREAM_CATEGORYAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateMasteringVoice(__liveRaw, ppMasteringVoice, InputChannels, InputSampleRate, Flags, szDeviceId, pEffectChain, StreamCategory)

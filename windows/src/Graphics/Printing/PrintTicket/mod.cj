@@ -4,15 +4,25 @@
 package windows.Graphics.Printing.PrintTicket
 
 import std.collection.*
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_future as windows_future
 
 
@@ -427,7 +437,7 @@ public class IPrintTicketParameterDefinition <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTicketParameterDefinition", IPrintTicketParameterDefinition.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketParameterDefinitionVtbl", "IPrintTicketParameterDefinition", "IPrintTicketParameterDefinition_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataType", 9, [InterfaceParameterSchema("result", "CPointer<PrintTicketParameterDataTypeAbi>", "OutSlot<PrintTicketParameterDataType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnitType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangeMin", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangeMax", 12, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTicketParameterDefinition", IPrintTicketParameterDefinition.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketParameterDefinitionVtbl", "IPrintTicketParameterDefinition", "IPrintTicketParameterDefinition_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataType", 9, [InterfaceParameterSchema("result", "CPointer<PrintTicketParameterDataTypeAbi>", "OutSlot<PrintTicketParameterDataType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnitType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangeMin", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangeMax", 12, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTicketParameterDefinition.runtimeType())
         return schema
     }
@@ -473,12 +483,12 @@ public class IPrintTicketParameterDefinition <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func DataType(): PrintTicketParameterDataType {
@@ -698,7 +708,7 @@ public class PrintTicketParameterDefinition <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -897,7 +907,7 @@ public class IPrintTicketOption <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTicketOption", IPrintTicketOption.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketOptionVtbl", "IPrintTicketOption", "IPrintTicketOption_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPropertyNode", 10, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScoredPropertyNode", 11, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPropertyValue", 12, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScoredPropertyValue", 13, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTicketOption", IPrintTicketOption.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketOptionVtbl", "IPrintTicketOption", "IPrintTicketOption_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPropertyNode", 10, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScoredPropertyNode", 11, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPropertyValue", 12, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScoredPropertyValue", 13, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTicketOption.runtimeType())
         return schema
     }
@@ -943,12 +953,12 @@ public class IPrintTicketOption <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func DisplayName(): windows_core.HString {
@@ -960,21 +970,21 @@ public class IPrintTicketOption <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): _impl_l1.IXmlNode {
+    public unsafe func GetPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPropertyNode(asRaw(), name.asRaw(), xmlNamespace.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetScoredPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): _impl_l1.IXmlNode {
+    public unsafe func GetScoredPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetScoredPropertyNode(asRaw(), name.asRaw(), xmlNamespace.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func GetPropertyValue(name: windows_core.HString, xmlNamespace: windows_core.HString): PrintTicketValue {
@@ -1048,7 +1058,7 @@ public class IPrintTicketParameterInitializer <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTicketParameterInitializer", IPrintTicketParameterInitializer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketParameterInitializerVtbl", "IPrintTicketParameterInitializer", "IPrintTicketParameterInitializer_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PrintTicketValue>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Value", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTicketParameterInitializer", IPrintTicketParameterInitializer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketParameterInitializerVtbl", "IPrintTicketParameterInitializer", "IPrintTicketParameterInitializer_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PrintTicketValue>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Value", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTicketParameterInitializer.runtimeType())
         return schema
     }
@@ -1094,12 +1104,12 @@ public class IPrintTicketParameterInitializer <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func SetValue(value: PrintTicketValue): Unit {
@@ -1198,7 +1208,7 @@ public class PrintTicketOption <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -1207,12 +1217,12 @@ public class PrintTicketOption <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): _impl_l1.IXmlNode {
+    public unsafe func GetPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): impl_p1.IXmlNode {
         return defaultInterface().GetPropertyNode(name, xmlNamespace)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetScoredPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): _impl_l1.IXmlNode {
+    public unsafe func GetScoredPropertyNode(name: windows_core.HString, xmlNamespace: windows_core.HString): impl_p1.IXmlNode {
         return defaultInterface().GetScoredPropertyNode(name, xmlNamespace)
     }
 
@@ -1321,7 +1331,7 @@ public class PrintTicketParameterInitializer <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -1410,7 +1420,7 @@ public class IPrintTicketFeature <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTicketFeature", IPrintTicketFeature.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketFeatureVtbl", "IPrintTicketFeature", "IPrintTicketFeature_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetOption", 10, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PrintTicketOption>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSelectedOption", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSelectedOption", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PrintTicketOption>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SelectionType", 14, [InterfaceParameterSchema("result", "CPointer<PrintTicketFeatureSelectionTypeAbi>", "OutSlot<PrintTicketFeatureSelectionType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTicketFeature", IPrintTicketFeature.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketFeatureVtbl", "IPrintTicketFeature", "IPrintTicketFeature_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetOption", 10, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<PrintTicketOption>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSelectedOption", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSelectedOption", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PrintTicketOption>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SelectionType", 14, [InterfaceParameterSchema("result", "CPointer<PrintTicketFeatureSelectionTypeAbi>", "OutSlot<PrintTicketFeatureSelectionType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTicketFeature.runtimeType())
         return schema
     }
@@ -1456,12 +1466,12 @@ public class IPrintTicketFeature <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func DisplayName(): windows_core.HString {
@@ -1593,7 +1603,7 @@ public class PrintTicketFeature <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -1707,7 +1717,7 @@ public class IPrintTicketCapabilities <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTicketCapabilities", IPrintTicketCapabilities.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketCapabilitiesVtbl", "IPrintTicketCapabilities", "IPrintTicketCapabilities_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentBindingFeature", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentCollateFeature", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentDuplexFeature", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentHolePunchFeature", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentInputBinFeature", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentNUpFeature", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentStapleFeature", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JobPasscodeFeature", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageBorderlessFeature", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaSizeFeature", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaTypeFeature", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOrientationFeature", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputColorFeature", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputQualityFeature", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageResolutionFeature", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFeature", 24, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetParameterDefinition", 25, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterDefinition>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTicketCapabilities", IPrintTicketCapabilities.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTicketCapabilitiesVtbl", "IPrintTicketCapabilities", "IPrintTicketCapabilities_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentBindingFeature", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentCollateFeature", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentDuplexFeature", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentHolePunchFeature", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentInputBinFeature", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentNUpFeature", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentStapleFeature", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JobPasscodeFeature", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageBorderlessFeature", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaSizeFeature", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaTypeFeature", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOrientationFeature", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputColorFeature", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputQualityFeature", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageResolutionFeature", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFeature", 24, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetParameterDefinition", 25, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterDefinition>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTicketCapabilities.runtimeType())
         return schema
     }
@@ -1753,12 +1763,12 @@ public class IPrintTicketCapabilities <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func DocumentBindingFeature(): PrintTicketFeature {
@@ -1979,7 +1989,7 @@ public class PrintTicketCapabilities <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -2142,7 +2152,7 @@ public class IWorkflowPrintTicket <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWorkflowPrintTicket", IWorkflowPrintTicket.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWorkflowPrintTicketVtbl", "IWorkflowPrintTicket", "IWorkflowPrintTicket_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCapabilities", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentBindingFeature", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentCollateFeature", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentDuplexFeature", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentHolePunchFeature", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentInputBinFeature", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentNUpFeature", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentStapleFeature", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JobPasscodeFeature", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageBorderlessFeature", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaSizeFeature", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaTypeFeature", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOrientationFeature", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputColorFeature", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputQualityFeature", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageResolutionFeature", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFeature", 25, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotifyXmlChangedAsync", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ValidateAsync", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WorkflowPrintTicketValidationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetParameterInitializer", 28, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetParameterInitializerAsInteger", 29, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("integerValue", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetParameterInitializerAsString", 30, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("stringValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MergeAndValidateTicket", 31, [InterfaceParameterSchema("deltaShemaTicket", "CPointer<Unit>", "InParam<WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWorkflowPrintTicket", IWorkflowPrintTicket.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWorkflowPrintTicketVtbl", "IWorkflowPrintTicket", "IWorkflowPrintTicket_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNamespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("XmlNode", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IXmlNode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCapabilities", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketCapabilities>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentBindingFeature", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentCollateFeature", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentDuplexFeature", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentHolePunchFeature", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentInputBinFeature", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentNUpFeature", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DocumentStapleFeature", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JobPasscodeFeature", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageBorderlessFeature", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaSizeFeature", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageMediaTypeFeature", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOrientationFeature", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputColorFeature", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageOutputQualityFeature", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PageResolutionFeature", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFeature", 25, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketFeature>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotifyXmlChangedAsync", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ValidateAsync", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WorkflowPrintTicketValidationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetParameterInitializer", 28, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetParameterInitializerAsInteger", 29, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("integerValue", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetParameterInitializerAsString", 30, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("xmlNamespace", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("stringValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTicketParameterInitializer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MergeAndValidateTicket", 31, [InterfaceParameterSchema("deltaShemaTicket", "CPointer<Unit>", "InParam<WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWorkflowPrintTicket.runtimeType())
         return schema
     }
@@ -2188,12 +2198,12 @@ public class IWorkflowPrintTicket <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.XmlNode(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IXmlNode.fromAbiTake(result__)
+        return impl_p1.IXmlNode.fromAbiTake(result__)
     }
 
     public unsafe func GetCapabilities(): PrintTicketCapabilities {
@@ -2431,7 +2441,7 @@ public class IWorkflowPrintTicketFactory <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWorkflowPrintTicketFactory", IWorkflowPrintTicketFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWorkflowPrintTicketFactoryVtbl", "IWorkflowPrintTicketFactory", "IWorkflowPrintTicketFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("printerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("printTicketStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWorkflowPrintTicketFactory", IWorkflowPrintTicketFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWorkflowPrintTicketFactoryVtbl", "IWorkflowPrintTicketFactory", "IWorkflowPrintTicketFactory_Impl", [InterfaceMethodSchema("CreateInstance", 6, [InterfaceParameterSchema("printerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("printTicketStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWorkflowPrintTicketFactory.runtimeType())
         return schema
     }
@@ -2461,7 +2471,7 @@ public class IWorkflowPrintTicketFactory <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateInstance(printerName: windows_core.HString, printTicketStream: _impl_l0.IInputStream): WorkflowPrintTicket {
+    public unsafe func CreateInstance(printerName: windows_core.HString, printTicketStream: impl_p0.IInputStream): WorkflowPrintTicket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInstance(asRaw(), printerName.asRaw(), printTicketStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2551,7 +2561,7 @@ public class WorkflowPrintTicket <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func XmlNode(): _impl_l1.IXmlNode {
+    public unsafe func XmlNode(): impl_p1.IXmlNode {
         return defaultInterface().XmlNode()
     }
 
@@ -2648,7 +2658,7 @@ public class WorkflowPrintTicket <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateInstance(printerName: windows_core.HString, printTicketStream: _impl_l0.IInputStream): WorkflowPrintTicket {
+    public static unsafe func CreateInstance(printerName: windows_core.HString, printTicketStream: impl_p0.IInputStream): WorkflowPrintTicket {
         var result__: Option<WorkflowPrintTicket> = Option<WorkflowPrintTicket>.None
         try (factory__ = windows_core.factory<WorkflowPrintTicket, IWorkflowPrintTicketFactory>().unwrap()) {
             result__ = Some(factory__.CreateInstance(printerName, printTicketStream))

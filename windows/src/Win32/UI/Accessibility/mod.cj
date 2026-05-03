@@ -4,14 +4,22 @@
 package windows.Win32.UI.Accessibility
 
 import std.collection.*
+@When[Windows_Win32_UI_Accessibility == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Accessibility == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Accessibility == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_Accessibility == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Accessibility == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_UI_Accessibility == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_Accessibility == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_Accessibility == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_UI_Accessibility == "on"]
@@ -1754,7 +1762,7 @@ public class IAccIdentity <: InterfaceWrapperBase & ComInterface {
 public struct IAccPropServerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPropValue: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, GUID, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetPropValue: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, GUID, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1799,7 +1807,7 @@ public class IAccPropServer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPropValue(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, idProp: GUID, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>, pfHasProp: CPointer<Int32>): Int32 {
+    public unsafe func GetPropValue(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, idProp: GUID, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>, pfHasProp: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropValue(__liveRaw, pIDString, dwIDStringLen, idProp, pvarValue, pfHasProp)
@@ -1811,28 +1819,28 @@ public class IAccPropServer <: InterfaceWrapperBase & ComInterface {
 public struct IAccPropServicesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPropValue: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, GUID, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetPropValue: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, GUID, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetPropServer: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<GUID>, Int32, CPointer<Unit>, AnnoScopeAbi) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var ClearProps: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<GUID>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetHwndProp: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, GUID, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var SetHwndProp: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, GUID, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SetHwndPropStr: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, GUID, CPointer<UInt16>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SetHwndPropServer: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<GUID>, Int32, CPointer<Unit>, AnnoScopeAbi) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var ClearHwndProps: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<GUID>, Int32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var ComposeHwndIdentityString: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var DecomposeHwndIdentityString: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetHmenuProp: CFunc<(CPointer<Unit>, Win32__impl_l0.HMENU, UInt32, GUID, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetHmenuProp: CFunc<(CPointer<Unit>, Win32_impl_p1.HMENU, UInt32, GUID, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetHmenuPropStr: CFunc<(CPointer<Unit>, Win32__impl_l0.HMENU, UInt32, GUID, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetHmenuPropStr: CFunc<(CPointer<Unit>, Win32_impl_p1.HMENU, UInt32, GUID, CPointer<UInt16>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetHmenuPropServer: CFunc<(CPointer<Unit>, Win32__impl_l0.HMENU, UInt32, CPointer<GUID>, Int32, CPointer<Unit>, AnnoScopeAbi) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var SetHmenuPropServer: CFunc<(CPointer<Unit>, Win32_impl_p1.HMENU, UInt32, CPointer<GUID>, Int32, CPointer<Unit>, AnnoScopeAbi) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var ClearHmenuProps: CFunc<(CPointer<Unit>, Win32__impl_l0.HMENU, UInt32, CPointer<GUID>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ClearHmenuProps: CFunc<(CPointer<Unit>, Win32_impl_p1.HMENU, UInt32, CPointer<GUID>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var ComposeHmenuIdentityString: CFunc<(CPointer<Unit>, Win32__impl_l0.HMENU, UInt32, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var ComposeHmenuIdentityString: CFunc<(CPointer<Unit>, Win32_impl_p1.HMENU, UInt32, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var DecomposeHmenuIdentityString: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<Win32__impl_l0.HMENU>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var DecomposeHmenuIdentityString: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<Win32_impl_p1.HMENU>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1877,7 +1885,7 @@ public class IAccPropServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPropValue(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, idProp: GUID, var_: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPropValue(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, idProp: GUID, var_: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPropValue(__liveRaw, pIDString, dwIDStringLen, idProp, var_)
@@ -1896,7 +1904,7 @@ public class IAccPropServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetHwndProp(hwnd: CPointer<Unit>, idObject: UInt32, idChild: UInt32, idProp: GUID, var_: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetHwndProp(hwnd: CPointer<Unit>, idObject: UInt32, idChild: UInt32, idProp: GUID, var_: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHwndProp(__liveRaw, hwnd, idObject, idChild, idProp, var_)
@@ -1933,42 +1941,42 @@ public class IAccPropServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetHmenuProp(hmenu: Win32__impl_l0.HMENU, idChild: UInt32, idProp: GUID, var_: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetHmenuProp(hmenu: Win32_impl_p1.HMENU, idChild: UInt32, idProp: GUID, var_: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHmenuProp(__liveRaw, hmenu, idChild, idProp, var_)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetHmenuPropStr(hmenu: Win32__impl_l0.HMENU, idChild: UInt32, idProp: GUID, str: CPointer<UInt16>): Int32 {
+    public unsafe func SetHmenuPropStr(hmenu: Win32_impl_p1.HMENU, idChild: UInt32, idProp: GUID, str: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHmenuPropStr(__liveRaw, hmenu, idChild, idProp, str)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetHmenuPropServer(hmenu: Win32__impl_l0.HMENU, idChild: UInt32, paProps: CPointer<GUID>, cProps: Int32, pServer: CPointer<Unit>, annoScope: AnnoScopeAbi): Int32 {
+    public unsafe func SetHmenuPropServer(hmenu: Win32_impl_p1.HMENU, idChild: UInt32, paProps: CPointer<GUID>, cProps: Int32, pServer: CPointer<Unit>, annoScope: AnnoScopeAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetHmenuPropServer(__liveRaw, hmenu, idChild, paProps, cProps, pServer, annoScope)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func ClearHmenuProps(hmenu: Win32__impl_l0.HMENU, idChild: UInt32, paProps: CPointer<GUID>, cProps: Int32): Int32 {
+    public unsafe func ClearHmenuProps(hmenu: Win32_impl_p1.HMENU, idChild: UInt32, paProps: CPointer<GUID>, cProps: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ClearHmenuProps(__liveRaw, hmenu, idChild, paProps, cProps)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func ComposeHmenuIdentityString(hmenu: Win32__impl_l0.HMENU, idChild: UInt32, ppIDString: CPointer<CPointer<UInt8>>, pdwIDStringLen: CPointer<UInt32>): Int32 {
+    public unsafe func ComposeHmenuIdentityString(hmenu: Win32_impl_p1.HMENU, idChild: UInt32, ppIDString: CPointer<CPointer<UInt8>>, pdwIDStringLen: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComposeHmenuIdentityString(__liveRaw, hmenu, idChild, ppIDString, pdwIDStringLen)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func DecomposeHmenuIdentityString(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, phmenu: CPointer<Win32__impl_l0.HMENU>, pidChild: CPointer<UInt32>): Int32 {
+    public unsafe func DecomposeHmenuIdentityString(pIDString: CPointer<UInt8>, dwIDStringLen: UInt32, phmenu: CPointer<Win32_impl_p1.HMENU>, pidChild: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DecomposeHmenuIdentityString(__liveRaw, pIDString, dwIDStringLen, phmenu, pidChild)
@@ -1978,48 +1986,48 @@ public class IAccPropServices <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Accessibility == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAccessibleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var accParent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var accChildCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accChild: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accChild: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accName: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accName: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accDescription: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accDescription: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accRole: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_accRole: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accState: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_accState: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accHelp: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accHelp: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accHelpTopic: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, Win32__impl_l2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var get_accHelpTopic: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, Win32_impl_p2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accKeyboardShortcut: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accKeyboardShortcut: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accFocus: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var accFocus: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accSelection: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var accSelection: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_accDefaultAction: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_accDefaultAction: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accSelect: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var accSelect: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accLocation: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var accLocation: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accNavigate: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var accNavigate: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accHitTest: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var accHitTest: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var accDoDefaultAction: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var accDoDefaultAction: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_accName: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
+    public var put_accName: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_accValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
+    public var put_accValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -2056,7 +2064,7 @@ public class IAccessible <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAccessible> {
-        return InterfaceDescriptor<IAccessible>("IAccessible", IAccessible.iid(), Win32__impl_l2.IDispatch.iid(), takeIAccessibleFromAbi, viewIAccessible)
+        return InterfaceDescriptor<IAccessible>("IAccessible", IAccessible.iid(), Win32_impl_p2.IDispatch.iid(), takeIAccessibleFromAbi, viewIAccessible)
     }
 
     public unsafe func vtbl(): IAccessibleVtbl {
@@ -2077,133 +2085,133 @@ public class IAccessible <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accChild(varChild: Win32__impl_l2.VARIANTAbi, ppdispChild: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_accChild(varChild: Win32_impl_p2.VARIANTAbi, ppdispChild: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accChild(__liveRaw, varChild, ppdispChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accName(varChild: Win32__impl_l2.VARIANTAbi, pszName: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accName(varChild: Win32_impl_p2.VARIANTAbi, pszName: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accName(__liveRaw, varChild, pszName)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accValue(varChild: Win32__impl_l2.VARIANTAbi, pszValue: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accValue(varChild: Win32_impl_p2.VARIANTAbi, pszValue: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accValue(__liveRaw, varChild, pszValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accDescription(varChild: Win32__impl_l2.VARIANTAbi, pszDescription: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accDescription(varChild: Win32_impl_p2.VARIANTAbi, pszDescription: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accDescription(__liveRaw, varChild, pszDescription)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accRole(varChild: Win32__impl_l2.VARIANTAbi, pvarRole: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_accRole(varChild: Win32_impl_p2.VARIANTAbi, pvarRole: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accRole(__liveRaw, varChild, pvarRole)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accState(varChild: Win32__impl_l2.VARIANTAbi, pvarState: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_accState(varChild: Win32_impl_p2.VARIANTAbi, pvarState: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accState(__liveRaw, varChild, pvarState)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accHelp(varChild: Win32__impl_l2.VARIANTAbi, pszHelp: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accHelp(varChild: Win32_impl_p2.VARIANTAbi, pszHelp: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accHelp(__liveRaw, varChild, pszHelp)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accHelpTopic(pszHelpFile: CPointer<CPointer<UInt16>>, varChild: Win32__impl_l2.VARIANTAbi, pidTopic: CPointer<Int32>): Int32 {
+    public unsafe func get_accHelpTopic(pszHelpFile: CPointer<CPointer<UInt16>>, varChild: Win32_impl_p2.VARIANTAbi, pidTopic: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accHelpTopic(__liveRaw, pszHelpFile, varChild, pidTopic)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accKeyboardShortcut(varChild: Win32__impl_l2.VARIANTAbi, pszKeyboardShortcut: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accKeyboardShortcut(varChild: Win32_impl_p2.VARIANTAbi, pszKeyboardShortcut: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accKeyboardShortcut(__liveRaw, varChild, pszKeyboardShortcut)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accFocus(pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func accFocus(pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accFocus(__liveRaw, pvarChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accSelection(pvarChildren: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func accSelection(pvarChildren: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accSelection(__liveRaw, pvarChildren)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_accDefaultAction(varChild: Win32__impl_l2.VARIANTAbi, pszDefaultAction: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_accDefaultAction(varChild: Win32_impl_p2.VARIANTAbi, pszDefaultAction: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_accDefaultAction(__liveRaw, varChild, pszDefaultAction)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accSelect(flagsSelect: Int32, varChild: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func accSelect(flagsSelect: Int32, varChild: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accSelect(__liveRaw, flagsSelect, varChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accLocation(pxLeft: CPointer<Int32>, pyTop: CPointer<Int32>, pcxWidth: CPointer<Int32>, pcyHeight: CPointer<Int32>, varChild: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func accLocation(pxLeft: CPointer<Int32>, pyTop: CPointer<Int32>, pcxWidth: CPointer<Int32>, pcyHeight: CPointer<Int32>, varChild: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accLocation(__liveRaw, pxLeft, pyTop, pcxWidth, pcyHeight, varChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accNavigate(navDir: Int32, varStart: Win32__impl_l2.VARIANTAbi, pvarEndUpAt: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func accNavigate(navDir: Int32, varStart: Win32_impl_p2.VARIANTAbi, pvarEndUpAt: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accNavigate(__liveRaw, navDir, varStart, pvarEndUpAt)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accHitTest(xLeft: Int32, yTop: Int32, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func accHitTest(xLeft: Int32, yTop: Int32, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accHitTest(__liveRaw, xLeft, yTop, pvarChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func accDoDefaultAction(varChild: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func accDoDefaultAction(varChild: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.accDoDefaultAction(__liveRaw, varChild)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_accName(varChild: Win32__impl_l2.VARIANTAbi, szName: CPointer<UInt16>): Int32 {
+    public unsafe func put_accName(varChild: Win32_impl_p2.VARIANTAbi, szName: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_accName(__liveRaw, varChild, szName)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_accValue(varChild: Win32__impl_l2.VARIANTAbi, szValue: CPointer<UInt16>): Int32 {
+    public unsafe func put_accValue(varChild: Win32_impl_p2.VARIANTAbi, szValue: CPointer<UInt16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_accValue(__liveRaw, varChild, szValue)
@@ -2272,7 +2280,7 @@ public struct IAccessibleWindowlessSiteVtbl {
     public var AcquireObjectIdRange: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var ReleaseObjectIdRange: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var QueryObjectIdRanges: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
+    public var QueryObjectIdRanges: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _ => 0 }
     public var GetParentAccessible: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2330,7 +2338,7 @@ public class IAccessibleWindowlessSite <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func QueryObjectIdRanges(pRangesOwner: CPointer<Unit>, psaRanges: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func QueryObjectIdRanges(pRangesOwner: CPointer<Unit>, psaRanges: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryObjectIdRanges(__liveRaw, pRangesOwner, psaRanges)
@@ -2412,9 +2420,9 @@ public struct IDragProviderVtbl {
     public var IsGrabbed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var DropEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var DropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var DropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetGrabbedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetGrabbedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -2471,14 +2479,14 @@ public class IDragProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func DropEffects(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func DropEffects(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DropEffects(__liveRaw, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetGrabbedItems(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetGrabbedItems(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGrabbedItems(__liveRaw, pRetVal)
@@ -2491,7 +2499,7 @@ public struct IDropTargetProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var DropTargetEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var DropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var DropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -2542,7 +2550,7 @@ public class IDropTargetProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func DropTargetEffects(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func DropTargetEffects(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DropTargetEffects(__liveRaw, pRetVal)
@@ -2690,7 +2698,7 @@ public struct ILegacyIAccessibleProviderVtbl {
     public var Help: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var KeyboardShortcut: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var DefaultAction: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2808,7 +2816,7 @@ public class ILegacyIAccessibleProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSelection(pvarSelectedChildren: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSelection(pvarSelectedChildren: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSelection(__liveRaw, pvarSelectedChildren)
@@ -2829,7 +2837,7 @@ public struct IMultipleViewProviderVtbl {
     public var SetCurrentView: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var CurrentView: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -2892,7 +2900,7 @@ public class IMultipleViewProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSupportedViews(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSupportedViews(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSupportedViews(__liveRaw, pRetVal)
@@ -3058,7 +3066,7 @@ public class IRangeValueProvider <: InterfaceWrapperBase & ComInterface {
 public struct IRawElementProviderHostingAccessiblesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetEmbeddedAccessibles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetEmbeddedAccessibles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3103,7 +3111,7 @@ public class IRawElementProviderHostingAccessibles <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetEmbeddedAccessibles(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetEmbeddedAccessibles(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEmbeddedAccessibles(__liveRaw, pRetVal)
@@ -3170,7 +3178,7 @@ public class IScrollItemProvider <: InterfaceWrapperBase & ComInterface {
 public struct ISelectionProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CanSelectMultiple: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var IsSelectionRequired: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3217,7 +3225,7 @@ public class ISelectionProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSelection(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSelection(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSelection(__liveRaw, pRetVal)
@@ -3242,9 +3250,9 @@ public struct ISpreadsheetItemProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var Formula: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3295,14 +3303,14 @@ public class ISpreadsheetItemProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetAnnotationObjects(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetAnnotationObjects(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAnnotationObjects(__liveRaw, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetAnnotationTypes(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetAnnotationTypes(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAnnotationTypes(__liveRaw, pRetVal)
@@ -3314,9 +3322,9 @@ public class ISpreadsheetItemProvider <: InterfaceWrapperBase & ComInterface {
 public struct ITableItemProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRowHeaderItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRowHeaderItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetColumnHeaderItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetColumnHeaderItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3361,14 +3369,14 @@ public class ITableItemProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRowHeaderItems(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRowHeaderItems(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRowHeaderItems(__liveRaw, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetColumnHeaderItems(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetColumnHeaderItems(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetColumnHeaderItems(__liveRaw, pRetVal)
@@ -3651,9 +3659,9 @@ public struct IUIAutomationDropTargetPatternVtbl {
     public var CurrentDropTargetEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CachedDropTargetEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CurrentDropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CurrentDropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CachedDropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CachedDropTargetEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3710,14 +3718,14 @@ public class IUIAutomationDropTargetPattern <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CurrentDropTargetEffects(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CurrentDropTargetEffects(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentDropTargetEffects(__liveRaw, retVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CachedDropTargetEffects(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CachedDropTargetEffects(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CachedDropTargetEffects(__liveRaw, retVal)
@@ -3863,10 +3871,10 @@ public struct IUIAutomationMultipleViewPatternVtbl {
     public var SetCurrentView: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var CurrentCurrentView: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetCurrentSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetCurrentSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CachedCurrentView: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetCachedSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetCachedSupportedViews: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -3929,7 +3937,7 @@ public class IUIAutomationMultipleViewPattern <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetCurrentSupportedViews(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetCurrentSupportedViews(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentSupportedViews(__liveRaw, retVal)
@@ -3942,7 +3950,7 @@ public class IUIAutomationMultipleViewPattern <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetCachedSupportedViews(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetCachedSupportedViews(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCachedSupportedViews(__liveRaw, retVal)
@@ -4068,7 +4076,7 @@ public struct IUIAutomationOrConditionVtbl {
     public var ChildCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetChildrenAsNativeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<CPointer<Unit>>>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4125,7 +4133,7 @@ public class IUIAutomationOrCondition <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetChildren(childArray: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetChildren(childArray: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetChildren(__liveRaw, childArray)
@@ -4700,10 +4708,10 @@ public class IVirtualizedItemProvider <: InterfaceWrapperBase & ComInterface {
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-public type LPFNACCESSIBLECHILDREN = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int32>) -> Int32>
+public type LPFNACCESSIBLECHILDREN = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int32>) -> Int32>
 
 @When[Windows_Win32_UI_Accessibility == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-public type LPFNACCESSIBLEOBJECTFROMPOINT = CFunc<(Win32_Foundation.POINTAbi, CPointer<CPointer<Unit>>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32>
+public type LPFNACCESSIBLEOBJECTFROMPOINT = CFunc<(Win32_Foundation.POINTAbi, CPointer<CPointer<Unit>>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32>
 
 @When[Windows_Win32_UI_Accessibility == "on"]
 public type LPFNACCESSIBLEOBJECTFROMWINDOW = CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
@@ -8811,8 +8819,8 @@ extend UiaAsyncContentLoadedEventArgs <: windows_core.CopyType & windows_core.Ru
 @When[Windows_Win32_UI_Accessibility == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public struct UiaChangeInfo {
     public var uiaId: Int32 = 0i32
-    public var payload: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
-    public var extraInfo: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var payload: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
+    public var extraInfo: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -8820,8 +8828,8 @@ public struct UiaChangeInfo {
 @C
 public struct UiaChangeInfoAbi {
     public var uiaId: Int32 = 0i32
-    public var payload: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
-    public var extraInfo: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var payload: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
+    public var extraInfo: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -8833,15 +8841,15 @@ extend UiaChangeInfo <: windows_core.CopyType & windows_core.RuntimeType & windo
     public static func projectAbi(value: UiaChangeInfo): UiaChangeInfoAbi {
         var abi = UiaChangeInfoAbi()
         abi.uiaId = value.uiaId
-        abi.payload = windows_core.projectTypedAbi(value.payload, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
-        abi.extraInfo = windows_core.projectTypedAbi(value.extraInfo, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.payload = windows_core.projectTypedAbi(value.payload, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
+        abi.extraInfo = windows_core.projectTypedAbi(value.extraInfo, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: UiaChangeInfoAbi): UiaChangeInfo {
         var value = UiaChangeInfo()
         value.uiaId = abi.uiaId
-        value.payload = windows_core.fromTypedAbi(abi.payload, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
-        value.extraInfo = windows_core.fromTypedAbi(abi.extraInfo, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.payload = windows_core.fromTypedAbi(abi.payload, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
+        value.extraInfo = windows_core.fromTypedAbi(abi.extraInfo, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: UiaChangeInfoAbi): Result<UiaChangeInfo> { Result<UiaChangeInfo>.Ok(UiaChangeInfo.assumeInitRef(abi)) }
@@ -8973,7 +8981,7 @@ extend UiaEventArgs <: windows_core.CopyType & windows_core.RuntimeType & window
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && Windows_Win32_System_Com == "on"]
-public type UiaEventCallback = CFunc<(CPointer<UiaEventArgsAbi>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<UInt16>) -> Unit>
+public type UiaEventCallback = CFunc<(CPointer<UiaEventArgsAbi>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<UInt16>) -> Unit>
 
 @When[Windows_Win32_UI_Accessibility == "on"]
 public struct UiaFindParams {
@@ -9105,8 +9113,8 @@ public struct UiaPropertyChangedEventArgs {
     public var Type: EventArgsType = EventArgsType()
     public var EventId: UIA_EVENT_ID = UIA_EVENT_ID()
     public var PropertyId: Int32 = 0i32
-    public var OldValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
-    public var NewValue: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var OldValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
+    public var NewValue: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -9116,8 +9124,8 @@ public struct UiaPropertyChangedEventArgsAbi {
     public var Type: EventArgsTypeAbi = EventArgsTypeAbi()
     public var EventId: UIA_EVENT_IDAbi = UIA_EVENT_IDAbi()
     public var PropertyId: Int32 = 0i32
-    public var OldValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
-    public var NewValue: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var OldValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
+    public var NewValue: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -9131,8 +9139,8 @@ extend UiaPropertyChangedEventArgs <: windows_core.CopyType & windows_core.Runti
         abi.Type = EventArgsType.projectAbi(value.Type)
         abi.EventId = UIA_EVENT_ID.projectAbi(value.EventId)
         abi.PropertyId = value.PropertyId
-        abi.OldValue = windows_core.projectTypedAbi(value.OldValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
-        abi.NewValue = windows_core.projectTypedAbi(value.NewValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.OldValue = windows_core.projectTypedAbi(value.OldValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
+        abi.NewValue = windows_core.projectTypedAbi(value.NewValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: UiaPropertyChangedEventArgsAbi): UiaPropertyChangedEventArgs {
@@ -9140,8 +9148,8 @@ extend UiaPropertyChangedEventArgs <: windows_core.CopyType & windows_core.Runti
         value.Type = EventArgsType.assumeInitRef(abi.Type)
         value.EventId = UIA_EVENT_ID.assumeInitRef(abi.EventId)
         value.PropertyId = abi.PropertyId
-        value.OldValue = windows_core.fromTypedAbi(abi.OldValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
-        value.NewValue = windows_core.fromTypedAbi(abi.NewValue, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.OldValue = windows_core.fromTypedAbi(abi.OldValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
+        value.NewValue = windows_core.fromTypedAbi(abi.NewValue, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: UiaPropertyChangedEventArgsAbi): Result<UiaPropertyChangedEventArgs> { Result<UiaPropertyChangedEventArgs>.Ok(UiaPropertyChangedEventArgs.assumeInitRef(abi)) }
@@ -9155,7 +9163,7 @@ extend UiaPropertyChangedEventArgs <: windows_core.CopyType & windows_core.Runti
 public struct UiaPropertyCondition {
     public var ConditionType_: ConditionType = ConditionType()
     public var PropertyId: UIA_PROPERTY_ID = UIA_PROPERTY_ID()
-    public var Value: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var Value: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public var Flags: PropertyConditionFlags = PropertyConditionFlags()
     public init() {}
 }
@@ -9165,7 +9173,7 @@ public struct UiaPropertyCondition {
 public struct UiaPropertyConditionAbi {
     public var ConditionType: ConditionTypeAbi = ConditionTypeAbi()
     public var PropertyId: UIA_PROPERTY_IDAbi = UIA_PROPERTY_IDAbi()
-    public var Value: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var Value: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public var Flags: PropertyConditionFlagsAbi = PropertyConditionFlagsAbi()
     public init() {}
 }
@@ -9179,7 +9187,7 @@ extend UiaPropertyCondition <: windows_core.CopyType & windows_core.RuntimeType 
         var abi = UiaPropertyConditionAbi()
         abi.ConditionType = ConditionType.projectAbi(value.ConditionType_)
         abi.PropertyId = UIA_PROPERTY_ID.projectAbi(value.PropertyId)
-        abi.Value = windows_core.projectTypedAbi(value.Value, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.Value = windows_core.projectTypedAbi(value.Value, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         abi.Flags = PropertyConditionFlags.projectAbi(value.Flags)
         return abi
     }
@@ -9187,7 +9195,7 @@ extend UiaPropertyCondition <: windows_core.CopyType & windows_core.RuntimeType 
         var value = UiaPropertyCondition()
         value.ConditionType_ = ConditionType.assumeInitRef(abi.ConditionType)
         value.PropertyId = UIA_PROPERTY_ID.assumeInitRef(abi.PropertyId)
-        value.Value = windows_core.fromTypedAbi(abi.Value, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.Value = windows_core.fromTypedAbi(abi.Value, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         value.Flags = PropertyConditionFlags.assumeInitRef(abi.Flags)
         return value
     }
@@ -9199,7 +9207,7 @@ extend UiaPropertyCondition <: windows_core.CopyType & windows_core.RuntimeType 
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && Windows_Win32_System_Com == "on"]
-public type UiaProviderCallback = CFunc<(CPointer<Unit>, ProviderTypeAbi) -> CPointer<Win32__impl_l1.SAFEARRAYAbi>>
+public type UiaProviderCallback = CFunc<(CPointer<Unit>, ProviderTypeAbi) -> CPointer<Win32_impl_p2.SAFEARRAYAbi>>
 
 @When[Windows_Win32_UI_Accessibility == "on"]
 public struct UiaRect {
@@ -9304,7 +9312,7 @@ public struct UiaTextEditTextChangedEventArgs {
     public var Type: EventArgsType = EventArgsType()
     public var EventId: Int32 = 0i32
     public var TextEditChangeType_: TextEditChangeType = TextEditChangeType()
-    public var pTextChange: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var pTextChange: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public init() {}
 }
 
@@ -9314,7 +9322,7 @@ public struct UiaTextEditTextChangedEventArgsAbi {
     public var Type: EventArgsTypeAbi = EventArgsTypeAbi()
     public var EventId: Int32 = 0i32
     public var TextEditChangeType: TextEditChangeTypeAbi = TextEditChangeTypeAbi()
-    public var pTextChange: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var pTextChange: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public init() {}
 }
 
@@ -9736,9 +9744,9 @@ extend HIGHCONTRASTW <: windows_core.CopyType & windows_core.RuntimeType & windo
 public struct IRawElementProviderAdviseEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var AdviseEventAdded: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var AdviseEventAdded: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var AdviseEventRemoved: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var AdviseEventRemoved: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -9783,14 +9791,14 @@ public class IRawElementProviderAdviseEvents <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func AdviseEventAdded(eventId: UIA_EVENT_IDAbi, propertyIDs: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func AdviseEventAdded(eventId: UIA_EVENT_IDAbi, propertyIDs: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AdviseEventAdded(__liveRaw, eventId, propertyIDs)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func AdviseEventRemoved(eventId: UIA_EVENT_IDAbi, propertyIDs: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func AdviseEventRemoved(eventId: UIA_EVENT_IDAbi, propertyIDs: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AdviseEventRemoved(__liveRaw, eventId, propertyIDs)
@@ -9805,7 +9813,7 @@ public struct IRawElementProviderSimpleVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var GetPatternProvider: CFunc<(CPointer<Unit>, UIA_PATTERN_IDAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var HostRawElementProvider: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -9864,7 +9872,7 @@ public class IRawElementProviderSimple <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPropertyValue(propertyId: UIA_PROPERTY_IDAbi, pRetVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPropertyValue(propertyId: UIA_PROPERTY_IDAbi, pRetVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertyValue(__liveRaw, propertyId, pRetVal)
@@ -9937,7 +9945,7 @@ public class IRawElementProviderSimple2 <: InterfaceWrapperBase & ComInterface {
 public struct IRawElementProviderSimple3Vtbl {
     public var base_: IRawElementProviderSimple2Vtbl = IRawElementProviderSimple2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetMetadataValue: CFunc<(CPointer<Unit>, Int32, UIA_METADATA_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetMetadataValue: CFunc<(CPointer<Unit>, Int32, UIA_METADATA_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -9982,7 +9990,7 @@ public class IRawElementProviderSimple3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetMetadataValue(targetId: Int32, metadataId: UIA_METADATA_IDAbi, returnVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetMetadataValue(targetId: Int32, metadataId: UIA_METADATA_IDAbi, returnVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMetadataValue(__liveRaw, targetId, metadataId, returnVal)
@@ -10533,9 +10541,9 @@ public class ISynchronizedInputProvider <: InterfaceWrapperBase & ComInterface {
 public struct ITableProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRowHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRowHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetColumnHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetColumnHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var RowOrColumnMajor: CFunc<(CPointer<Unit>, CPointer<RowOrColumnMajorAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -10581,14 +10589,14 @@ public class ITableProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRowHeaders(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRowHeaders(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRowHeaders(__liveRaw, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetColumnHeaders(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetColumnHeaders(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetColumnHeaders(__liveRaw, pRetVal)
@@ -10610,12 +10618,12 @@ public struct ITextRangeProviderVtbl {
     public var CompareEndpoints: CFunc<(CPointer<Unit>, TextPatternRangeEndpointAbi, CPointer<Unit>, TextPatternRangeEndpointAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var ExpandToEnclosingUnit: CFunc<(CPointer<Unit>, TextUnitAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindAttribute: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, Win32__impl_l2.VARIANTAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FindAttribute: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, Win32_impl_p2.VARIANTAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindText: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttributeValue: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttributeValue: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetBoundingRectangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetBoundingRectangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetEnclosingElement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetText: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Move: CFunc<(CPointer<Unit>, TextUnitAbi, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
@@ -10626,7 +10634,7 @@ public struct ITextRangeProviderVtbl {
     public var RemoveFromSelection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ScrollIntoView: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -10695,7 +10703,7 @@ public class ITextRangeProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindAttribute(attributeId: UIA_TEXTATTRIBUTE_IDAbi, val: Win32__impl_l2.VARIANTAbi, backward: Int32, pRetVal: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func FindAttribute(attributeId: UIA_TEXTATTRIBUTE_IDAbi, val: Win32_impl_p2.VARIANTAbi, backward: Int32, pRetVal: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAttribute(__liveRaw, attributeId, val, backward, pRetVal)
@@ -10708,14 +10716,14 @@ public class ITextRangeProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttributeValue(attributeId: UIA_TEXTATTRIBUTE_IDAbi, pRetVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttributeValue(attributeId: UIA_TEXTATTRIBUTE_IDAbi, pRetVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributeValue(__liveRaw, attributeId, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetBoundingRectangles(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetBoundingRectangles(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBoundingRectangles(__liveRaw, pRetVal)
@@ -10776,7 +10784,7 @@ public class ITextRangeProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetChildren(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetChildren(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetChildren(__liveRaw, pRetVal)
@@ -10997,7 +11005,7 @@ public struct IUIAutomationAndConditionVtbl {
     public var ChildCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetChildrenAsNativeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<CPointer<Unit>>>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11054,7 +11062,7 @@ public class IUIAutomationAndCondition <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetChildren(childArray: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetChildren(childArray: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetChildren(__liveRaw, childArray)
@@ -11296,7 +11304,7 @@ public struct IUIAutomationClientInfoSourceVtbl {
     public var RegisterClientConnectionCallback: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _, _ => 0 }
     public var UnregisterClientConnectionCallback: CFunc<(CPointer<Unit>, UInt64) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetConnectedClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetConnectedClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11353,7 +11361,7 @@ public class IUIAutomationClientInfoSource <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetConnectedClients(clients: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetConnectedClients(clients: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConnectedClients(__liveRaw, clients)
@@ -11366,7 +11374,7 @@ public struct IUIAutomationPropertyConditionVtbl {
     public var base_: IUIAutomationConditionVtbl = IUIAutomationConditionVtbl()
     public var PropertyId: CFunc<(CPointer<Unit>, CPointer<UIA_PROPERTY_IDAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PropertyValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PropertyValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var PropertyConditionFlags: CFunc<(CPointer<Unit>, CPointer<PropertyConditionFlagsAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -11418,7 +11426,7 @@ public class IUIAutomationPropertyCondition <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PropertyValue(propertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PropertyValue(propertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PropertyValue(__liveRaw, propertyValue)
@@ -11509,9 +11517,9 @@ public struct IUIAutomationProxyFactoryEntryVtbl {
     public var SetCanCheckBaseClass: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetNeedsAdviseEvents: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetWinEventsForAutomationEvent: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, UIA_PROPERTY_IDAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetWinEventsForAutomationEvent: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, UIA_PROPERTY_IDAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetWinEventsForAutomationEvent: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, UIA_PROPERTY_IDAbi, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetWinEventsForAutomationEvent: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, UIA_PROPERTY_IDAbi, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -11622,14 +11630,14 @@ public class IUIAutomationProxyFactoryEntry <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetWinEventsForAutomationEvent(eventId: UIA_EVENT_IDAbi, propertyId: UIA_PROPERTY_IDAbi, winEvents: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetWinEventsForAutomationEvent(eventId: UIA_EVENT_IDAbi, propertyId: UIA_PROPERTY_IDAbi, winEvents: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetWinEventsForAutomationEvent(__liveRaw, eventId, propertyId, winEvents)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetWinEventsForAutomationEvent(eventId: UIA_EVENT_IDAbi, propertyId: UIA_PROPERTY_IDAbi, winEvents: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetWinEventsForAutomationEvent(eventId: UIA_EVENT_IDAbi, propertyId: UIA_PROPERTY_IDAbi, winEvents: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetWinEventsForAutomationEvent(__liveRaw, eventId, propertyId, winEvents)
@@ -11642,12 +11650,12 @@ public struct IUIAutomationProxyFactoryMappingVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetTable: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetTable: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetEntry: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetTable: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetTable: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var InsertEntries: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
+    public var InsertEntries: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _ => 0 }
     public var InsertEntry: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var RemoveEntry: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var ClearTable: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -11702,7 +11710,7 @@ public class IUIAutomationProxyFactoryMapping <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetTable(table: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetTable(table: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTable(__liveRaw, table)
@@ -11715,14 +11723,14 @@ public class IUIAutomationProxyFactoryMapping <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetTable(factoryList: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetTable(factoryList: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTable(__liveRaw, factoryList)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func InsertEntries(before: UInt32, factoryList: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func InsertEntries(before: UInt32, factoryList: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InsertEntries(__liveRaw, before, factoryList)
@@ -13149,31 +13157,31 @@ public unsafe func Windows_AccSetRunningUtilityState(hwndApp: CPointer<Unit>, dw
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleChildren == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     // param-hint: rgvarChildren len=param[2]
-    func AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32__impl_l2.VARIANTAbi>, pcObtained: CPointer<Int32>): Int32
+    func AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32_impl_p2.VARIANTAbi>, pcObtained: CPointer<Int32>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleChildren == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32__impl_l2.VARIANTAbi>, pcObtained: CPointer<Int32>): Int32 {
+public unsafe func Windows_AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32_impl_p2.VARIANTAbi>, pcObtained: CPointer<Int32>): Int32 {
     return AccessibleChildren(paccContainer, iChildStart, cChildren, rgvarChildren, pcObtained)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return AccessibleObjectFromEvent(hwnd, dwId, dwChildId, ppacc, pvarChild)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromPoint == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINTAbi, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINTAbi, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromPoint == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINTAbi, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINTAbi, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return AccessibleObjectFromPoint(ptScreen, ppacc, pvarChild)
 }
 
@@ -13358,11 +13366,11 @@ public unsafe func Windows_InvokePattern_Invoke(hobj: HUIAPATTERNOBJECT): Int32 
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ItemContainerPattern_FindItemByProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32__impl_l2.VARIANTAbi, pFound: CPointer<HUIANODE>): Int32
+    func ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32_impl_p2.VARIANTAbi, pFound: CPointer<HUIANODE>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ItemContainerPattern_FindItemByProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32__impl_l2.VARIANTAbi, pFound: CPointer<HUIANODE>): Int32 {
+public unsafe func Windows_ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32_impl_p2.VARIANTAbi, pFound: CPointer<HUIANODE>): Int32 {
     return ItemContainerPattern_FindItemByProperty(hobj, hnodeStartAfter, propertyId, value, pFound)
 }
 
@@ -13518,21 +13526,21 @@ public unsafe func Windows_SynchronizedInputPattern_StartListening(hobj: HUIAPAT
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetSelection == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetSelection == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return TextPattern_GetSelection(hobj, pRetVal)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetVisibleRanges == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetVisibleRanges == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return TextPattern_GetVisibleRanges(hobj, pRetVal)
 }
 
@@ -13628,11 +13636,11 @@ public unsafe func Windows_TextRange_ExpandToEnclosingUnit(hobj: HUIATEXTRANGE, 
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindAttribute == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32__impl_l2.VARIANTAbi, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+    func TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32_impl_p2.VARIANTAbi, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindAttribute == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32__impl_l2.VARIANTAbi, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+public unsafe func Windows_TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32_impl_p2.VARIANTAbi, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
     return TextRange_FindAttribute(hobj, attributeId, val, backward, pRetVal)
 }
 
@@ -13648,31 +13656,31 @@ public unsafe func Windows_TextRange_FindText(hobj: HUIATEXTRANGE, text: CPointe
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetAttributeValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetAttributeValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return TextRange_GetAttributeValue(hobj, attributeId, pRetVal)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetBoundingRectangles == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetBoundingRectangles == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return TextRange_GetBoundingRectangles(hobj, pRetVal)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetChildren == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetChildren == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return TextRange_GetChildren(hobj, pRetVal)
 }
 
@@ -13858,11 +13866,11 @@ public unsafe func Windows_UiaEventRemoveWindow(hEvent: HUIAEVENT, hwnd: CPointe
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaFind == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParamsAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppOffsets: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructures: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParamsAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppOffsets: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructures: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaFind == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParamsAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppOffsets: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructures: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParamsAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppOffsets: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructures: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return UiaFind(hnode, pParams, pRequest, ppRequestedData, ppOffsets, ppTreeStructures)
 }
 
@@ -13888,11 +13896,11 @@ public unsafe func Windows_UiaGetPatternProvider(hnode: HUIANODE, patternId: Int
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return UiaGetPropertyValue(hnode, propertyId, pValue)
 }
 
@@ -13928,51 +13936,51 @@ public unsafe func Windows_UiaGetRootNode(phnode: CPointer<HUIANODE>): Int32 {
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRuntimeId == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32
+    func UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRuntimeId == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+public unsafe func Windows_UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
     return UiaGetRuntimeId(hnode, pruntimeId)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetUpdatedCache == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequestAbi>, normalizeState: NormalizeStateAbi, pNormalizeCondition: CPointer<UiaConditionAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+    func UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequestAbi>, normalizeState: NormalizeStateAbi, pNormalizeCondition: CPointer<UiaConditionAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetUpdatedCache == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequestAbi>, normalizeState: NormalizeStateAbi, pNormalizeCondition: CPointer<UiaConditionAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+public unsafe func Windows_UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequestAbi>, normalizeState: NormalizeStateAbi, pNormalizeCondition: CPointer<UiaConditionAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
     return UiaGetUpdatedCache(hnode, pRequest, normalizeState, pNormalizeCondition, ppRequestedData, ppTreeStructure)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHPatternObjectFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaHPatternObjectFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32
+    func UiaHPatternObjectFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHPatternObjectFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaHPatternObjectFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32 {
+public unsafe func Windows_UiaHPatternObjectFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32 {
     return UiaHPatternObjectFromVariant(pvar, phobj)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHTextRangeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaHTextRangeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phtextrange: CPointer<HUIATEXTRANGE>): Int32
+    func UiaHTextRangeFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phtextrange: CPointer<HUIATEXTRANGE>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHTextRangeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaHTextRangeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phtextrange: CPointer<HUIATEXTRANGE>): Int32 {
+public unsafe func Windows_UiaHTextRangeFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phtextrange: CPointer<HUIATEXTRANGE>): Int32 {
     return UiaHTextRangeFromVariant(pvar, phtextrange)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHUiaNodeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaHUiaNodeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phnode: CPointer<HUIANODE>): Int32
+    func UiaHUiaNodeFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phnode: CPointer<HUIANODE>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHUiaNodeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaHUiaNodeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANTAbi>, phnode: CPointer<HUIANODE>): Int32 {
+public unsafe func Windows_UiaHUiaNodeFromVariant(pvar: CPointer<Win32_impl_p2.VARIANTAbi>, phnode: CPointer<HUIANODE>): Int32 {
     return UiaHUiaNodeFromVariant(pvar, phnode)
 }
 
@@ -13998,11 +14006,11 @@ public unsafe func Windows_UiaHostProviderFromHwnd(hwnd: CPointer<Unit>, ppProvi
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaIAccessibleFromProvider == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32
+    func UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaIAccessibleFromProvider == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+public unsafe func Windows_UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
     return UiaIAccessibleFromProvider(pProvider, dwFlags, ppAccessible, pvarChild)
 }
 
@@ -14018,21 +14026,21 @@ public unsafe func Windows_UiaLookupId(type_: AutomationIdentifierTypeAbi, pGuid
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNavigate == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaNavigate(hnode: HUIANODE, direction: NavigateDirectionAbi, pCondition: CPointer<UiaConditionAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+    func UiaNavigate(hnode: HUIANODE, direction: NavigateDirectionAbi, pCondition: CPointer<UiaConditionAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNavigate == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaNavigate(hnode: HUIANODE, direction: NavigateDirectionAbi, pCondition: CPointer<UiaConditionAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+public unsafe func Windows_UiaNavigate(hnode: HUIANODE, direction: NavigateDirectionAbi, pCondition: CPointer<UiaConditionAbi>, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
     return UiaNavigate(hnode, direction, pCondition, pRequest, ppRequestedData, ppTreeStructure)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromFocus == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+    func UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromFocus == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+public unsafe func Windows_UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
     return UiaNodeFromFocus(pRequest, ppRequestedData, ppTreeStructure)
 }
 
@@ -14048,11 +14056,11 @@ public unsafe func Windows_UiaNodeFromHandle(hwnd: CPointer<Unit>, phnode: CPoin
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromPoint == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+    func UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromPoint == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+public unsafe func Windows_UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequestAbi>, ppRequestedData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
     return UiaNodeFromPoint(x, y, pRequest, ppRequestedData, ppTreeStructure)
 }
 
@@ -14139,11 +14147,11 @@ public unsafe func Windows_UiaRaiseAutomationEvent(pProvider: CPointer<Unit>, id
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationPropertyChangedEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
-    func UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, oldValue: Win32__impl_l2.VARIANTAbi, newValue: Win32__impl_l2.VARIANTAbi): Int32
+    func UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, oldValue: Win32_impl_p2.VARIANTAbi, newValue: Win32_impl_p2.VARIANTAbi): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationPropertyChangedEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-public unsafe func Windows_UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, oldValue: Win32__impl_l2.VARIANTAbi, newValue: Win32__impl_l2.VARIANTAbi): Int32 {
+public unsafe func Windows_UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, oldValue: Win32_impl_p2.VARIANTAbi, newValue: Win32_impl_p2.VARIANTAbi): Int32 {
     return UiaRaiseAutomationPropertyChangedEvent(pProvider, id, oldValue, newValue)
 }
 
@@ -14180,11 +14188,11 @@ public unsafe func Windows_UiaRaiseStructureChangedEvent(pProvider: CPointer<Uni
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseTextEditTextChangedEvent == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, pChangedData: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32
+    func UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, pChangedData: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseTextEditTextChangedEvent == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, pChangedData: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+public unsafe func Windows_UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, pChangedData: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
     return UiaRaiseTextEditTextChangedEvent(pProvider, textEditChangeType, pChangedData)
 }
 
@@ -14311,21 +14319,21 @@ public unsafe func Windows_NotifyWinEvent(event: UInt32, hwnd: CPointer<Unit>, i
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32
+    func RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32 {
+public unsafe func Windows_RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32 {
     return RegisterPointerInputTarget(hwnd, pointerType)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi, fObserve: Int32): Int32
+    func RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi, fObserve: Int32): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi, fObserve: Int32): Int32 {
+public unsafe func Windows_RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi, fObserve: Int32): Int32 {
     return RegisterPointerInputTargetEx(hwnd, pointerType, fObserve)
 }
 
@@ -14353,21 +14361,21 @@ public unsafe func Windows_UnhookWinEvent(hWinEventHook: HWINEVENTHOOK): Int32 {
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32
+    func UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32 {
+public unsafe func Windows_UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32 {
     return UnregisterPointerInputTarget(hwnd, pointerType)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32
+    func UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32
 }
 
 @When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi): Int32 {
+public unsafe func Windows_UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Win32_impl_p1.POINTER_INPUT_TYPEAbi): Int32 {
     return UnregisterPointerInputTargetEx(hwnd, pointerType)
 }
 
@@ -14615,7 +14623,7 @@ public struct IAccessibleExVtbl {
     public var GetObjectForChild: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetIAccessiblePair: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var ConvertReturnedElement: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -14673,7 +14681,7 @@ public class IAccessibleEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRuntimeId(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRuntimeId(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRuntimeId(__liveRaw, pRetVal)
@@ -14691,7 +14699,7 @@ public class IAccessibleEx <: InterfaceWrapperBase & ComInterface {
 public struct IAccessibleHostingElementProvidersVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetEmbeddedFragmentRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetEmbeddedFragmentRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetObjectIdForProvider: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -14737,7 +14745,7 @@ public class IAccessibleHostingElementProviders <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetEmbeddedFragmentRoots(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetEmbeddedFragmentRoots(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEmbeddedFragmentRoots(__liveRaw, pRetVal)
@@ -15045,7 +15053,7 @@ public class IGridProvider <: InterfaceWrapperBase & ComInterface {
 public struct IItemContainerProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindItemByProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FindItemByProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -15090,7 +15098,7 @@ public class IItemContainerProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindItemByProperty(pStartAfter: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, value: Win32__impl_l2.VARIANTAbi, pFound: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func FindItemByProperty(pStartAfter: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, value: Win32_impl_p2.VARIANTAbi, pFound: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindItemByProperty(__liveRaw, pStartAfter, propertyId, value, pFound)
@@ -15102,10 +15110,10 @@ public class IItemContainerProvider <: InterfaceWrapperBase & ComInterface {
 public struct IProxyProviderWinEventSinkVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddAutomationPropertyChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var AddAutomationPropertyChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var AddAutomationEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_EVENT_IDAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var AddStructureChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, StructureChangeTypeAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var AddStructureChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, StructureChangeTypeAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -15150,7 +15158,7 @@ public class IProxyProviderWinEventSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, newValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func AddAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: UIA_PROPERTY_IDAbi, newValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddAutomationPropertyChangedEvent(__liveRaw, pProvider, id, newValue)
@@ -15163,7 +15171,7 @@ public class IProxyProviderWinEventSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func AddStructureChangedEvent(pProvider: CPointer<Unit>, structureChangeType: StructureChangeTypeAbi, runtimeId: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func AddStructureChangedEvent(pProvider: CPointer<Unit>, structureChangeType: StructureChangeTypeAbi, runtimeId: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddStructureChangedEvent(__liveRaw, pProvider, structureChangeType, runtimeId)
@@ -15292,9 +15300,9 @@ public class ITextChildProvider <: InterfaceWrapperBase & ComInterface {
 public struct ITextProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetVisibleRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetVisibleRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var RangeFromChild: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RangeFromPoint: CFunc<(CPointer<Unit>, UiaPointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DocumentRange: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -15343,14 +15351,14 @@ public class ITextProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetSelection(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetSelection(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSelection(__liveRaw, pRetVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetVisibleRanges(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetVisibleRanges(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVisibleRanges(__liveRaw, pRetVal)
@@ -15838,10 +15846,10 @@ public struct IRawElementProviderFragmentVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var Navigate: CFunc<(CPointer<Unit>, NavigateDirectionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var BoundingRectangle: CFunc<(CPointer<Unit>, CPointer<UiaRectAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetEmbeddedFragmentRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetEmbeddedFragmentRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var SetFocus: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var FragmentRoot: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -15894,7 +15902,7 @@ public class IRawElementProviderFragment <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRuntimeId(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRuntimeId(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRuntimeId(__liveRaw, pRetVal)
@@ -15907,7 +15915,7 @@ public class IRawElementProviderFragment <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetEmbeddedFragmentRoots(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetEmbeddedFragmentRoots(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEmbeddedFragmentRoots(__liveRaw, pRetVal)
@@ -15994,7 +16002,7 @@ public struct IRawElementProviderWindowlessSiteVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetAdjacentFragment: CFunc<(CPointer<Unit>, NavigateDirectionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRuntimeIdPrefix: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRuntimeIdPrefix: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -16045,7 +16053,7 @@ public class IRawElementProviderWindowlessSite <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRuntimeIdPrefix(pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRuntimeIdPrefix(pRetVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRuntimeIdPrefix(__liveRaw, pRetVal)
@@ -16113,7 +16121,7 @@ public struct IUIAutomationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var CompareElements: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CompareRuntimeIds: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var CompareRuntimeIds: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetRootElement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ElementFromHandle: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ElementFromPoint: CFunc<(CPointer<Unit>, Win32_Foundation.POINTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -16133,23 +16141,23 @@ public struct IUIAutomationVtbl {
     public var CreateTrueCondition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateFalseCondition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreatePropertyCondition: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreatePropertyCondition: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreatePropertyConditionEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi, PropertyConditionFlagsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreatePropertyConditionEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi, PropertyConditionFlagsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateAndCondition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CreateAndConditionFromArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateAndConditionFromArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateAndConditionFromNativeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateOrCondition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CreateOrConditionFromArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateOrConditionFromArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateOrConditionFromNativeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateNotCondition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var AddAutomationEventHandler: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RemoveAutomationEventHandler: CFunc<(CPointer<Unit>, UIA_EVENT_IDAbi, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public var AddPropertyChangedEventHandlerNativeArray: CFunc<(CPointer<Unit>, CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<UIA_PROPERTY_IDAbi>, Int32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var AddPropertyChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var AddPropertyChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RemovePropertyChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var AddStructureChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     public var RemoveStructureChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -16157,25 +16165,25 @@ public struct IUIAutomationVtbl {
     public var RemoveFocusChangedEventHandler: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveAllEventHandlers: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var IntNativeArrayToSafeArray: CFunc<(CPointer<Unit>, CPointer<Int32>, Int32, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var IntNativeArrayToSafeArray: CFunc<(CPointer<Unit>, CPointer<Int32>, Int32, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var IntSafeArrayToNativeArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<CPointer<Int32>>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var IntSafeArrayToNativeArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<CPointer<Int32>>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RectToVariant: CFunc<(CPointer<Unit>, Win32_Foundation.RECTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var RectToVariant: CFunc<(CPointer<Unit>, Win32_Foundation.RECTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VariantToRect: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32_Foundation.RECTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var VariantToRect: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_Foundation.RECTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SafeArrayToRectNativeArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, CPointer<CPointer<Win32_Foundation.RECTAbi>>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var SafeArrayToRectNativeArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, CPointer<CPointer<Win32_Foundation.RECTAbi>>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateProxyFactoryEntry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ProxyFactoryMapping: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetPropertyProgrammaticName: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var GetPatternProgrammaticName: CFunc<(CPointer<Unit>, UIA_PATTERN_IDAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var PollForPotentialSupportedPatterns: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var PollForPotentialSupportedPatterns: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var PollForPotentialSupportedProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var PollForPotentialSupportedProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CheckNotSupported: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    public var CheckNotSupported: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var ReservedNotSupportedValue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -16232,7 +16240,7 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CompareRuntimeIds(runtimeId1: CPointer<Win32__impl_l1.SAFEARRAYAbi>, runtimeId2: CPointer<Win32__impl_l1.SAFEARRAYAbi>, areSame: CPointer<Int32>): Int32 {
+    public unsafe func CompareRuntimeIds(runtimeId1: CPointer<Win32_impl_p2.SAFEARRAYAbi>, runtimeId2: CPointer<Win32_impl_p2.SAFEARRAYAbi>, areSame: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompareRuntimeIds(__liveRaw, runtimeId1, runtimeId2, areSame)
@@ -16347,14 +16355,14 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreatePropertyCondition(propertyId: UIA_PROPERTY_IDAbi, value: Win32__impl_l2.VARIANTAbi, newCondition: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreatePropertyCondition(propertyId: UIA_PROPERTY_IDAbi, value: Win32_impl_p2.VARIANTAbi, newCondition: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePropertyCondition(__liveRaw, propertyId, value, newCondition)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreatePropertyConditionEx(propertyId: UIA_PROPERTY_IDAbi, value: Win32__impl_l2.VARIANTAbi, flags: PropertyConditionFlagsAbi, newCondition: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreatePropertyConditionEx(propertyId: UIA_PROPERTY_IDAbi, value: Win32_impl_p2.VARIANTAbi, flags: PropertyConditionFlagsAbi, newCondition: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreatePropertyConditionEx(__liveRaw, propertyId, value, flags, newCondition)
@@ -16367,7 +16375,7 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CreateAndConditionFromArray(conditions: CPointer<Win32__impl_l1.SAFEARRAYAbi>, newCondition: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateAndConditionFromArray(conditions: CPointer<Win32_impl_p2.SAFEARRAYAbi>, newCondition: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateAndConditionFromArray(__liveRaw, conditions, newCondition)
@@ -16386,7 +16394,7 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CreateOrConditionFromArray(conditions: CPointer<Win32__impl_l1.SAFEARRAYAbi>, newCondition: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateOrConditionFromArray(conditions: CPointer<Win32_impl_p2.SAFEARRAYAbi>, newCondition: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateOrConditionFromArray(__liveRaw, conditions, newCondition)
@@ -16423,7 +16431,7 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func AddPropertyChangedEventHandler(element: CPointer<Unit>, scope: TreeScopeAbi, cacheRequest: CPointer<Unit>, handler: CPointer<Unit>, propertyArray: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func AddPropertyChangedEventHandler(element: CPointer<Unit>, scope: TreeScopeAbi, cacheRequest: CPointer<Unit>, handler: CPointer<Unit>, propertyArray: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddPropertyChangedEventHandler(__liveRaw, element, scope, cacheRequest, handler, propertyArray)
@@ -16466,35 +16474,35 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func IntNativeArrayToSafeArray(array: CPointer<Int32>, arrayCount: Int32, safeArray: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func IntNativeArrayToSafeArray(array: CPointer<Int32>, arrayCount: Int32, safeArray: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IntNativeArrayToSafeArray(__liveRaw, array, arrayCount, safeArray)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func IntSafeArrayToNativeArray(intArray: CPointer<Win32__impl_l1.SAFEARRAYAbi>, array: CPointer<CPointer<Int32>>, arrayCount: CPointer<Int32>): Int32 {
+    public unsafe func IntSafeArrayToNativeArray(intArray: CPointer<Win32_impl_p2.SAFEARRAYAbi>, array: CPointer<CPointer<Int32>>, arrayCount: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IntSafeArrayToNativeArray(__liveRaw, intArray, array, arrayCount)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RectToVariant(rc: Win32_Foundation.RECTAbi, var_: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RectToVariant(rc: Win32_Foundation.RECTAbi, var_: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RectToVariant(__liveRaw, rc, var_)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VariantToRect(var_: Win32__impl_l2.VARIANTAbi, rc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    public unsafe func VariantToRect(var_: Win32_impl_p2.VARIANTAbi, rc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VariantToRect(__liveRaw, var_, rc)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SafeArrayToRectNativeArray(rects: CPointer<Win32__impl_l1.SAFEARRAYAbi>, rectArray: CPointer<CPointer<Win32_Foundation.RECTAbi>>, rectArrayCount: CPointer<Int32>): Int32 {
+    public unsafe func SafeArrayToRectNativeArray(rects: CPointer<Win32_impl_p2.SAFEARRAYAbi>, rectArray: CPointer<CPointer<Win32_Foundation.RECTAbi>>, rectArrayCount: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SafeArrayToRectNativeArray(__liveRaw, rects, rectArray, rectArrayCount)
@@ -16525,21 +16533,21 @@ public class IUIAutomation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func PollForPotentialSupportedPatterns(pElement: CPointer<Unit>, patternIds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, patternNames: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func PollForPotentialSupportedPatterns(pElement: CPointer<Unit>, patternIds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, patternNames: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PollForPotentialSupportedPatterns(__liveRaw, pElement, patternIds, patternNames)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func PollForPotentialSupportedProperties(pElement: CPointer<Unit>, propertyIds: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, propertyNames: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func PollForPotentialSupportedProperties(pElement: CPointer<Unit>, propertyIds: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, propertyNames: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PollForPotentialSupportedProperties(__liveRaw, pElement, propertyIds, propertyNames)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CheckNotSupported(value: Win32__impl_l2.VARIANTAbi, isNotSupported: CPointer<Int32>): Int32 {
+    public unsafe func CheckNotSupported(value: Win32_impl_p2.VARIANTAbi, isNotSupported: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CheckNotSupported(__liveRaw, value, isNotSupported)
@@ -17253,9 +17261,9 @@ public struct IUIAutomationDragPatternVtbl {
     public var CurrentDropEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CachedDropEffect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CurrentDropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CurrentDropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CachedDropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CachedDropEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetCurrentGrabbedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetCachedGrabbedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -17326,14 +17334,14 @@ public class IUIAutomationDragPattern <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CurrentDropEffects(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CurrentDropEffects(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentDropEffects(__liveRaw, retVal)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CachedDropEffects(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CachedDropEffects(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CachedDropEffects(__liveRaw, retVal)
@@ -17358,20 +17366,20 @@ public struct IUIAutomationElementVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var SetFocus: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetRuntimeId: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var FindFirst: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var FindAll: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var FindFirstBuildCache: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindAllBuildCache: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var BuildUpdatedCache: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCurrentPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetCurrentPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCurrentPropertyValueEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCurrentPropertyValueEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCachedPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetCachedPropertyValue: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCachedPropertyValueEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCachedPropertyValueEx: CFunc<(CPointer<Unit>, UIA_PROPERTY_IDAbi, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCurrentPatternAs: CFunc<(CPointer<Unit>, UIA_PATTERN_IDAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetCachedPatternAs: CFunc<(CPointer<Unit>, UIA_PATTERN_IDAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -17495,7 +17503,7 @@ public class IUIAutomationElement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetRuntimeId(runtimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetRuntimeId(runtimeId: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRuntimeId(__liveRaw, runtimeId)
@@ -17532,28 +17540,28 @@ public class IUIAutomationElement <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCurrentPropertyValue(propertyId: UIA_PROPERTY_IDAbi, retVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCurrentPropertyValue(propertyId: UIA_PROPERTY_IDAbi, retVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentPropertyValue(__liveRaw, propertyId, retVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCurrentPropertyValueEx(propertyId: UIA_PROPERTY_IDAbi, ignoreDefaultValue: Int32, retVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCurrentPropertyValueEx(propertyId: UIA_PROPERTY_IDAbi, ignoreDefaultValue: Int32, retVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentPropertyValueEx(__liveRaw, propertyId, ignoreDefaultValue, retVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCachedPropertyValue(propertyId: UIA_PROPERTY_IDAbi, retVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCachedPropertyValue(propertyId: UIA_PROPERTY_IDAbi, retVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCachedPropertyValue(__liveRaw, propertyId, retVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCachedPropertyValueEx(propertyId: UIA_PROPERTY_IDAbi, ignoreDefaultValue: Int32, retVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCachedPropertyValueEx(propertyId: UIA_PROPERTY_IDAbi, ignoreDefaultValue: Int32, retVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCachedPropertyValueEx(__liveRaw, propertyId, ignoreDefaultValue, retVal)
@@ -18155,13 +18163,13 @@ public struct IUIAutomationElement4Vtbl {
     public var CurrentSizeOfSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CurrentAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CurrentAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CurrentAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CachedPositionInSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CachedSizeOfSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CachedLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var CachedAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var CachedAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CachedAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -18225,7 +18233,7 @@ public class IUIAutomationElement4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CurrentAnnotationTypes(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CurrentAnnotationTypes(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CurrentAnnotationTypes(__liveRaw, retVal)
@@ -18256,7 +18264,7 @@ public class IUIAutomationElement4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func CachedAnnotationTypes(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func CachedAnnotationTypes(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CachedAnnotationTypes(__liveRaw, retVal)
@@ -18416,7 +18424,7 @@ public struct IUIAutomationElement7Vtbl {
     public var FindFirstWithOptionsBuildCache: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, TreeTraversalOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var FindAllWithOptionsBuildCache: CFunc<(CPointer<Unit>, TreeScopeAbi, CPointer<Unit>, CPointer<Unit>, TreeTraversalOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCurrentMetadataValue: CFunc<(CPointer<Unit>, Int32, UIA_METADATA_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCurrentMetadataValue: CFunc<(CPointer<Unit>, Int32, UIA_METADATA_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -18485,7 +18493,7 @@ public class IUIAutomationElement7 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCurrentMetadataValue(targetId: Int32, metadataId: UIA_METADATA_IDAbi, returnVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCurrentMetadataValue(targetId: Int32, metadataId: UIA_METADATA_IDAbi, returnVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentMetadataValue(__liveRaw, targetId, metadataId, returnVal)
@@ -19091,7 +19099,7 @@ public class IUIAutomationGridPattern <: InterfaceWrapperBase & ComInterface {
 public struct IUIAutomationItemContainerPatternVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindItemByProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FindItemByProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -19136,7 +19144,7 @@ public class IUIAutomationItemContainerPattern <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindItemByProperty(pStartAfter: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, value: Win32__impl_l2.VARIANTAbi, pFound: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func FindItemByProperty(pStartAfter: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, value: Win32_impl_p2.VARIANTAbi, pFound: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindItemByProperty(__liveRaw, pStartAfter, propertyId, value, pFound)
@@ -19419,7 +19427,7 @@ public class IUIAutomationNotificationEventHandler <: InterfaceWrapperBase & Com
 public struct IUIAutomationPropertyChangedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var HandlePropertyChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var HandlePropertyChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, UIA_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -19464,7 +19472,7 @@ public class IUIAutomationPropertyChangedEventHandler <: InterfaceWrapperBase & 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func HandlePropertyChangedEvent(sender: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, newValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func HandlePropertyChangedEvent(sender: CPointer<Unit>, propertyId: UIA_PROPERTY_IDAbi, newValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HandlePropertyChangedEvent(__liveRaw, sender, propertyId, newValue)
@@ -19769,11 +19777,11 @@ public struct IUIAutomationSpreadsheetItemPatternVtbl {
     public var CurrentFormula: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetCurrentAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetCurrentAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetCurrentAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var CachedFormula: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetCachedAnnotationObjects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetCachedAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetCachedAnnotationTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -19830,7 +19838,7 @@ public class IUIAutomationSpreadsheetItemPattern <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetCurrentAnnotationTypes(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetCurrentAnnotationTypes(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentAnnotationTypes(__liveRaw, retVal)
@@ -19849,7 +19857,7 @@ public class IUIAutomationSpreadsheetItemPattern <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetCachedAnnotationTypes(retVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetCachedAnnotationTypes(retVal: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCachedAnnotationTypes(__liveRaw, retVal)
@@ -19916,7 +19924,7 @@ public class IUIAutomationSpreadsheetPattern <: InterfaceWrapperBase & ComInterf
 public struct IUIAutomationStructureChangedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var HandleStructureChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, StructureChangeTypeAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var HandleStructureChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, StructureChangeTypeAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -19961,7 +19969,7 @@ public class IUIAutomationStructureChangedEventHandler <: InterfaceWrapperBase &
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func HandleStructureChangedEvent(sender: CPointer<Unit>, changeType: StructureChangeTypeAbi, runtimeId: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func HandleStructureChangedEvent(sender: CPointer<Unit>, changeType: StructureChangeTypeAbi, runtimeId: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HandleStructureChangedEvent(__liveRaw, sender, changeType, runtimeId)
@@ -20263,7 +20271,7 @@ public class IUIAutomationTextEditPattern <: InterfaceWrapperBase & ComInterface
 public struct IUIAutomationTextEditTextChangedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var HandleTextEditTextChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, TextEditChangeTypeAbi, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var HandleTextEditTextChangedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, TextEditChangeTypeAbi, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -20308,7 +20316,7 @@ public class IUIAutomationTextEditTextChangedEventHandler <: InterfaceWrapperBas
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func HandleTextEditTextChangedEvent(sender: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, eventStrings: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func HandleTextEditTextChangedEvent(sender: CPointer<Unit>, textEditChangeType: TextEditChangeTypeAbi, eventStrings: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HandleTextEditTextChangedEvent(__liveRaw, sender, textEditChangeType, eventStrings)
@@ -20476,12 +20484,12 @@ public struct IUIAutomationTextRangeVtbl {
     public var CompareEndpoints: CFunc<(CPointer<Unit>, TextPatternRangeEndpointAbi, CPointer<Unit>, TextPatternRangeEndpointAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var ExpandToEnclosingUnit: CFunc<(CPointer<Unit>, TextUnitAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindAttribute: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, Win32__impl_l2.VARIANTAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var FindAttribute: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, Win32_impl_p2.VARIANTAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindText: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttributeValue: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetAttributeValue: CFunc<(CPointer<Unit>, UIA_TEXTATTRIBUTE_IDAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetBoundingRectangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetBoundingRectangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetEnclosingElement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetText: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Move: CFunc<(CPointer<Unit>, TextUnitAbi, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
@@ -20560,7 +20568,7 @@ public class IUIAutomationTextRange <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindAttribute(attr: UIA_TEXTATTRIBUTE_IDAbi, val: Win32__impl_l2.VARIANTAbi, backward: Int32, found: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func FindAttribute(attr: UIA_TEXTATTRIBUTE_IDAbi, val: Win32_impl_p2.VARIANTAbi, backward: Int32, found: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAttribute(__liveRaw, attr, val, backward, found)
@@ -20573,14 +20581,14 @@ public class IUIAutomationTextRange <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttributeValue(attr: UIA_TEXTATTRIBUTE_IDAbi, value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttributeValue(attr: UIA_TEXTATTRIBUTE_IDAbi, value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributeValue(__liveRaw, attr, value)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetBoundingRectangles(boundingRects: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetBoundingRectangles(boundingRects: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBoundingRectangles(__liveRaw, boundingRects)
@@ -20709,7 +20717,7 @@ public struct IUIAutomationTextRange3Vtbl {
     public var GetEnclosingElementBuildCache: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetChildrenBuildCache: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetAttributeValues: CFunc<(CPointer<Unit>, CPointer<UIA_TEXTATTRIBUTE_IDAbi>, Int32, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetAttributeValues: CFunc<(CPointer<Unit>, CPointer<UIA_TEXTATTRIBUTE_IDAbi>, Int32, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -20766,7 +20774,7 @@ public class IUIAutomationTextRange3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetAttributeValues(attributeIds: CPointer<UIA_TEXTATTRIBUTE_IDAbi>, attributeIdCount: Int32, attributeValues: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetAttributeValues(attributeIds: CPointer<UIA_TEXTATTRIBUTE_IDAbi>, attributeIdCount: Int32, attributeValues: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributeValues(__liveRaw, attributeIds, attributeIdCount, attributeValues)

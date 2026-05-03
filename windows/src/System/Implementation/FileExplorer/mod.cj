@@ -4,15 +4,25 @@
 package windows.System.Implementation.FileExplorer
 
 import std.collection.*
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_core as windows_core
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Implementation_FileExplorer == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l2 as _impl_l2
+@When[Windows_System_Implementation_FileExplorer == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_collections as windows_collections
+@When[Windows_System_Implementation_FileExplorer == "on"]
 import windows_future as windows_future
 
 
@@ -154,14 +164,14 @@ public interface ISysStorageProviderHttpRequestProvider_ImplErased {
 
 @When[Windows_System_Implementation_FileExplorer == "on" && Windows_Web_Http == "on"]
 public interface ISysStorageProviderHttpRequestProvider_Impl <: ISysStorageProviderHttpRequestProvider_ImplErased {
-    public func SendRequestAsync(request: InParam<_impl_l2.HttpRequestMessage>): windows_core.Result<windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage>>
+    public func SendRequestAsync(request: InParam<impl_p2.HttpRequestMessage>): windows_core.Result<windows_future.IAsyncOperation<impl_p2.HttpResponseMessage>>
 
     public func __winrtThunk_SendRequestAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.SendRequestAsync(InParam<_impl_l2.HttpRequestMessage>(_impl_l2.HttpRequestMessage.viewOf(arg0)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage>>.Ok(value) =>
+        match (this.SendRequestAsync(InParam<impl_p2.HttpRequestMessage>(impl_p2.HttpRequestMessage.viewOf(arg0)))) {
+            case Result<windows_future.IAsyncOperation<impl_p2.HttpResponseMessage>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -169,7 +179,7 @@ public interface ISysStorageProviderHttpRequestProvider_Impl <: ISysStorageProvi
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p2.HttpResponseMessage>>.Err(error) =>
                 error.code().value
         }
     }
@@ -211,7 +221,7 @@ public class ISysStorageProviderHttpRequestProvider <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISysStorageProviderHttpRequestProvider", ISysStorageProviderHttpRequestProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISysStorageProviderHttpRequestProviderVtbl", "ISysStorageProviderHttpRequestProvider", "ISysStorageProviderHttpRequestProvider_Impl", [InterfaceMethodSchema("SendRequestAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISysStorageProviderHttpRequestProvider", ISysStorageProviderHttpRequestProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISysStorageProviderHttpRequestProviderVtbl", "ISysStorageProviderHttpRequestProvider", "ISysStorageProviderHttpRequestProvider_Impl", [InterfaceMethodSchema("SendRequestAsync", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p2.HttpResponseMessage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISysStorageProviderHttpRequestProvider.runtimeType())
         return schema
     }
@@ -241,12 +251,12 @@ public class ISysStorageProviderHttpRequestProvider <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func SendRequestAsync(request: _impl_l2.HttpRequestMessage): windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage> {
+    public unsafe func SendRequestAsync(request: impl_p2.HttpRequestMessage): windows_future.IAsyncOperation<impl_p2.HttpResponseMessage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendRequestAsync(asRaw(), request.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l2.HttpResponseMessage>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p2.HttpResponseMessage>.fromAbiTake(result__)
     }
 }
 

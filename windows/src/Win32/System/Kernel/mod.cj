@@ -2,26 +2,28 @@
 package windows.Win32.System.Kernel
 
 @When[Windows_Win32_System_Kernel == "on"]
-public import windows.Win32._impl_l0.{COMPARTMENT_ID, COMPARTMENT_IDAbi, COMPARTMENT_ID_DEFAULT_COMPARTMENT_ID, COMPARTMENT_ID_UNSPECIFIED_COMPARTMENT_ID, CSTRING, CSTRINGAbi, EVENT_TYPE, EVENT_TYPEAbi, EVENT_TYPE_NotificationEvent, EVENT_TYPE_SynchronizationEvent, EXCEPTION_DISPOSITION, EXCEPTION_DISPOSITIONAbi, EXCEPTION_DISPOSITION_ExceptionCollidedUnwind, EXCEPTION_DISPOSITION_ExceptionContinueExecution, EXCEPTION_DISPOSITION_ExceptionContinueSearch, EXCEPTION_DISPOSITION_ExceptionNestedException, LIST_ENTRY, LIST_ENTRY32, LIST_ENTRY32Abi, LIST_ENTRY64, LIST_ENTRY64Abi, LIST_ENTRYAbi, NT_PRODUCT_TYPE, NT_PRODUCT_TYPEAbi, NT_PRODUCT_TYPE_NtProductLanManNt, NT_PRODUCT_TYPE_NtProductServer, NT_PRODUCT_TYPE_NtProductWinNt, OBJECTID, OBJECTIDAbi, PROCESSOR_NUMBER, PROCESSOR_NUMBERAbi, QUAD, QUADAbi, RTL_BALANCED_NODE, RTL_BALANCED_NODEAbi, SINGLE_LIST_ENTRY, SINGLE_LIST_ENTRY32, SINGLE_LIST_ENTRY32Abi, SINGLE_LIST_ENTRYAbi, SLIST_ENTRY, SLIST_ENTRYAbi, STRING, STRING32, STRING32Abi, STRING64, STRING64Abi, STRINGAbi, SUITE_TYPE, SUITE_TYPEAbi, SUITE_TYPE_BackOffice, SUITE_TYPE_Blade, SUITE_TYPE_CommunicationServer, SUITE_TYPE_ComputeServer, SUITE_TYPE_DataCenter, SUITE_TYPE_EmbeddedNT, SUITE_TYPE_EmbeddedRestricted, SUITE_TYPE_Enterprise, SUITE_TYPE_MaxSuiteType, SUITE_TYPE_MultiUserTS, SUITE_TYPE_Personal, SUITE_TYPE_PhoneNT, SUITE_TYPE_SecurityAppliance, SUITE_TYPE_SingleUserTS, SUITE_TYPE_SmallBusiness, SUITE_TYPE_SmallBusinessRestricted, SUITE_TYPE_StorageServer, SUITE_TYPE_TerminalServer, SUITE_TYPE_WHServer, TIMER_TYPE, TIMER_TYPEAbi, TIMER_TYPE_NotificationTimer, TIMER_TYPE_SynchronizationTimer, WAIT_TYPE, WAIT_TYPEAbi, WAIT_TYPE_WaitAll, WAIT_TYPE_WaitAny, WAIT_TYPE_WaitDequeue, WAIT_TYPE_WaitDpc, WAIT_TYPE_WaitNotification, WNF_STATE_NAME, WNF_STATE_NAMEAbi}
+public import windows.Win32.impl.p0.{COMPARTMENT_ID, COMPARTMENT_IDAbi, COMPARTMENT_ID_DEFAULT_COMPARTMENT_ID, COMPARTMENT_ID_UNSPECIFIED_COMPARTMENT_ID, CSTRING, CSTRINGAbi, EVENT_TYPE, EVENT_TYPEAbi, EVENT_TYPE_NotificationEvent, EVENT_TYPE_SynchronizationEvent, EXCEPTION_DISPOSITION, EXCEPTION_DISPOSITIONAbi, EXCEPTION_DISPOSITION_ExceptionCollidedUnwind, EXCEPTION_DISPOSITION_ExceptionContinueExecution, EXCEPTION_DISPOSITION_ExceptionContinueSearch, EXCEPTION_DISPOSITION_ExceptionNestedException, LIST_ENTRY, LIST_ENTRY32, LIST_ENTRY32Abi, LIST_ENTRY64, LIST_ENTRY64Abi, LIST_ENTRYAbi, NT_PRODUCT_TYPE, NT_PRODUCT_TYPEAbi, NT_PRODUCT_TYPE_NtProductLanManNt, NT_PRODUCT_TYPE_NtProductServer, NT_PRODUCT_TYPE_NtProductWinNt, OBJECTID, OBJECTIDAbi, PROCESSOR_NUMBER, PROCESSOR_NUMBERAbi, QUAD, QUADAbi, RTL_BALANCED_NODE, RTL_BALANCED_NODEAbi, SINGLE_LIST_ENTRY, SINGLE_LIST_ENTRY32, SINGLE_LIST_ENTRY32Abi, SINGLE_LIST_ENTRYAbi, SLIST_ENTRY, SLIST_ENTRYAbi, STRING, STRING32, STRING32Abi, STRING64, STRING64Abi, STRINGAbi, SUITE_TYPE, SUITE_TYPEAbi, SUITE_TYPE_BackOffice, SUITE_TYPE_Blade, SUITE_TYPE_CommunicationServer, SUITE_TYPE_ComputeServer, SUITE_TYPE_DataCenter, SUITE_TYPE_EmbeddedNT, SUITE_TYPE_EmbeddedRestricted, SUITE_TYPE_Enterprise, SUITE_TYPE_MaxSuiteType, SUITE_TYPE_MultiUserTS, SUITE_TYPE_Personal, SUITE_TYPE_PhoneNT, SUITE_TYPE_SecurityAppliance, SUITE_TYPE_SingleUserTS, SUITE_TYPE_SmallBusiness, SUITE_TYPE_SmallBusinessRestricted, SUITE_TYPE_StorageServer, SUITE_TYPE_TerminalServer, SUITE_TYPE_WHServer, TIMER_TYPE, TIMER_TYPEAbi, TIMER_TYPE_NotificationTimer, TIMER_TYPE_SynchronizationTimer, WAIT_TYPE, WAIT_TYPEAbi, WAIT_TYPE_WaitAll, WAIT_TYPE_WaitAny, WAIT_TYPE_WaitDequeue, WAIT_TYPE_WaitDpc, WAIT_TYPE_WaitNotification, WNF_STATE_NAME, WNF_STATE_NAMEAbi}
 @When[Windows_Win32_System_Kernel == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
-public import windows.Win32._impl_l2.{EXCEPTION_REGISTRATION_RECORD, EXCEPTION_REGISTRATION_RECORDAbi, EXCEPTION_ROUTINE, NT_TIB, NT_TIBAbi}
+public import windows.Win32.impl.p3.{EXCEPTION_REGISTRATION_RECORD, EXCEPTION_REGISTRATION_RECORDAbi, NT_TIB, NT_TIBAbi}
+@When[Windows_Win32_System_Kernel == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public import windows.Win32.impl.p2.EXCEPTION_ROUTINE
 @When[Windows_Win32_System_Kernel == "on" && (arch == "x86_64" || arch == "aarch64")]
-public import windows.Win32._impl_l0.{FLOATING_SAVE_AREA, FLOATING_SAVE_AREAAbi}
+public import windows.Win32.impl.p0.{FLOATING_SAVE_AREA, FLOATING_SAVE_AREAAbi}
 @When[Windows_Win32_System_Kernel == "on"]
-public import windows.Win32._impl_l1.{MAXUCHAR, MAXULONG, MAXUSHORT, NULL64, OBJ_HANDLE_TAGBITS, RTL_BALANCED_NODE_RESERVED_PARENT_MASK}
+public import windows.Win32.impl.p2.{MAXUCHAR, MAXULONG, MAXUSHORT, NULL64, OBJ_HANDLE_TAGBITS, RTL_BALANCED_NODE_RESERVED_PARENT_MASK}
 @When[Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.SLIST_HEADER
+public import windows.Win32.impl.p2.SLIST_HEADER
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlFirstEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlFirstEntrySList
+public import windows.Win32.impl.p2.Windows_RtlFirstEntrySList
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInitializeSListHead == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlInitializeSListHead
+public import windows.Win32.impl.p2.Windows_RtlInitializeSListHead
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedFlushSList == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlInterlockedFlushSList
+public import windows.Win32.impl.p2.Windows_RtlInterlockedFlushSList
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPopEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlInterlockedPopEntrySList
+public import windows.Win32.impl.p2.Windows_RtlInterlockedPopEntrySList
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlInterlockedPushEntrySList
+public import windows.Win32.impl.p2.Windows_RtlInterlockedPushEntrySList
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushListSListEx == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlInterlockedPushListSListEx
+public import windows.Win32.impl.p2.Windows_RtlInterlockedPushListSListEx
 @When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlQueryDepthSList == "on" && (arch == "aarch64" || arch == "x86_64")]
-public import windows.Win32._impl_l1.Windows_RtlQueryDepthSList
+public import windows.Win32.impl.p2.Windows_RtlQueryDepthSList

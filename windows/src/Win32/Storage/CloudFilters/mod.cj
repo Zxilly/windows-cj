@@ -4,14 +4,23 @@
 package windows.Win32.Storage.CloudFilters
 
 import std.collection.*
+@When[Windows_Win32_Storage_CloudFilters == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_CloudFilters == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_CloudFilters == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Storage_CloudFilters == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_CorrelationVector == "on"]
 import windows.Win32.System.CorrelationVector as Win32_System_CorrelationVector
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_CloudFilters == "on"]
 import windows_core as windows_core
 
 
@@ -1330,7 +1339,7 @@ extend CF_FILE_RANGE <: windows_core.CopyType & windows_core.RuntimeType & windo
 
 @When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
 public struct CF_FS_METADATA {
-    public var BasicInfo: Win32__impl_l0.FILE_BASIC_INFO = Win32__impl_l0.FILE_BASIC_INFO()
+    public var BasicInfo: Win32_impl_p0.FILE_BASIC_INFO = Win32_impl_p0.FILE_BASIC_INFO()
     public var FileSize: Int64 = 0i64
     public init() {}
 }
@@ -1338,7 +1347,7 @@ public struct CF_FS_METADATA {
 @When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct CF_FS_METADATAAbi {
-    public var BasicInfo: Win32__impl_l0.FILE_BASIC_INFOAbi = Win32__impl_l0.FILE_BASIC_INFOAbi()
+    public var BasicInfo: Win32_impl_p0.FILE_BASIC_INFOAbi = Win32_impl_p0.FILE_BASIC_INFOAbi()
     public var FileSize: Int64 = 0i64
     public init() {}
 }
@@ -1350,13 +1359,13 @@ extend CF_FS_METADATA <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func signature(): String { "struct(Windows.Win32.Storage.CloudFilters.CF_FS_METADATA;struct(Windows.Win32.Storage.FileSystem.FILE_BASIC_INFO;i8;i8;i8;i8;u4);i8)" }
     public static func projectAbi(value: CF_FS_METADATA): CF_FS_METADATAAbi {
         var abi = CF_FS_METADATAAbi()
-        abi.BasicInfo = windows_core.projectTypedAbi(value.BasicInfo, windows_core.typeMarker<Win32__impl_l0.FILE_BASIC_INFO>())
+        abi.BasicInfo = windows_core.projectTypedAbi(value.BasicInfo, windows_core.typeMarker<Win32_impl_p0.FILE_BASIC_INFO>())
         abi.FileSize = value.FileSize
         return abi
     }
     public static func assumeInitRef(abi: CF_FS_METADATAAbi): CF_FS_METADATA {
         var value = CF_FS_METADATA()
-        value.BasicInfo = windows_core.fromTypedAbi(abi.BasicInfo, windows_core.typeMarker<Win32__impl_l0.FILE_BASIC_INFO>()).unwrap()
+        value.BasicInfo = windows_core.fromTypedAbi(abi.BasicInfo, windows_core.typeMarker<Win32_impl_p0.FILE_BASIC_INFO>()).unwrap()
         value.FileSize = abi.FileSize
         return value
     }
@@ -6032,21 +6041,21 @@ public unsafe func Windows_CfGetPlaceholderStateFromAttributeTag(FileAttributes:
 
 @When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFileInfo == "on" && Windows_Win32_Storage_FileSystem == "on"]
 foreign {
-    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Win32__impl_l0.FILE_INFO_BY_HANDLE_CLASSAbi): CF_PLACEHOLDER_STATEAbi
+    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Win32_impl_p0.FILE_INFO_BY_HANDLE_CLASSAbi): CF_PLACEHOLDER_STATEAbi
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFileInfo == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Win32__impl_l0.FILE_INFO_BY_HANDLE_CLASSAbi): CF_PLACEHOLDER_STATEAbi {
+public unsafe func Windows_CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Win32_impl_p0.FILE_INFO_BY_HANDLE_CLASSAbi): CF_PLACEHOLDER_STATEAbi {
     return CfGetPlaceholderStateFromFileInfo(InfoBuffer, InfoClass)
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFindData == "on" && Windows_Win32_Storage_FileSystem == "on"]
 foreign {
-    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>): CF_PLACEHOLDER_STATEAbi
+    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>): CF_PLACEHOLDER_STATEAbi
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFindData == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>): CF_PLACEHOLDER_STATEAbi {
+public unsafe func Windows_CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>): CF_PLACEHOLDER_STATEAbi {
     return CfGetPlaceholderStateFromFindData(FindData)
 }
 

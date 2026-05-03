@@ -4,16 +4,27 @@
 package windows.Security.DataProtection
 
 import std.collection.*
+@When[Windows_Security_DataProtection == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_DataProtection == "on"]
 import windows_core as windows_core
+@When[Windows_Security_DataProtection == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_DataProtection == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_DataProtection == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_DataProtection == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Security_DataProtection == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Security_DataProtection == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Security_DataProtection == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Security_DataProtection == "on"]
 import windows_collections as windows_collections
+@When[Windows_Security_DataProtection == "on"]
 import windows_future as windows_future
 
 
@@ -410,7 +421,7 @@ public class IUserDataBufferUnprotectResult <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserDataBufferUnprotectResult", IUserDataBufferUnprotectResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataBufferUnprotectResultVtbl", "IUserDataBufferUnprotectResult", "IUserDataBufferUnprotectResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<UserDataBufferUnprotectStatusAbi>", "OutSlot<UserDataBufferUnprotectStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectedBuffer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserDataBufferUnprotectResult", IUserDataBufferUnprotectResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataBufferUnprotectResultVtbl", "IUserDataBufferUnprotectResult", "IUserDataBufferUnprotectResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<UserDataBufferUnprotectStatusAbi>", "OutSlot<UserDataBufferUnprotectStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectedBuffer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserDataBufferUnprotectResult.runtimeType())
         return schema
     }
@@ -448,12 +459,12 @@ public class IUserDataBufferUnprotectResult <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectedBuffer(): _impl_l0.IBuffer {
+    public unsafe func UnprotectedBuffer(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UnprotectedBuffer(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -619,7 +630,7 @@ public class UserDataBufferUnprotectResult <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectedBuffer(): _impl_l0.IBuffer {
+    public unsafe func UnprotectedBuffer(): impl_p0.IBuffer {
         return defaultInterface().UnprotectedBuffer()
     }
 }
@@ -796,7 +807,7 @@ public class IUserDataProtectionManager <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserDataProtectionManager", IUserDataProtectionManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataProtectionManagerVtbl", "IUserDataProtectionManager", "IUserDataProtectionManager_Impl", [InterfaceMethodSchema("ProtectStorageItemAsync", 6, [InterfaceParameterSchema("storageItem", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStorageItemProtectionInfoAsync", 7, [InterfaceParameterSchema("storageItem", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProtectBufferAsync", 8, [InterfaceParameterSchema("unprotectedBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectBufferAsync", 9, [InterfaceParameterSchema("protectedBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataBufferUnprotectResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsContinuedDataAvailabilityExpected", 10, [InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataAvailabilityStateChanged", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<UserDataProtectionManager, UserDataAvailabilityStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDataAvailabilityStateChanged", 12, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserDataProtectionManager", IUserDataProtectionManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataProtectionManagerVtbl", "IUserDataProtectionManager", "IUserDataProtectionManager_Impl", [InterfaceMethodSchema("ProtectStorageItemAsync", 6, [InterfaceParameterSchema("storageItem", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStorageItemProtectionInfoAsync", 7, [InterfaceParameterSchema("storageItem", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProtectBufferAsync", 8, [InterfaceParameterSchema("unprotectedBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnprotectBufferAsync", 9, [InterfaceParameterSchema("protectedBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserDataBufferUnprotectResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsContinuedDataAvailabilityExpected", 10, [InterfaceParameterSchema("availability", "UserDataAvailabilityAbi", "UserDataAvailability", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DataAvailabilityStateChanged", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<UserDataProtectionManager, UserDataAvailabilityStateChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDataAvailabilityStateChanged", 12, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IUserDataProtectionManager.runtimeType())
         return schema
     }
@@ -826,7 +837,7 @@ public class IUserDataProtectionManager <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ProtectStorageItemAsync(storageItem: _impl_l1.IStorageItem, availability: UserDataAvailability): windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus> {
+    public unsafe func ProtectStorageItemAsync(storageItem: impl_p1.IStorageItem, availability: UserDataAvailability): windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProtectStorageItemAsync(asRaw(), storageItem.asRaw(), windows_core.projectTypedAbi(availability, windows_core.typeMarker<UserDataAvailability>()), CPointer<CPointer<Unit>>(inout result__))
@@ -835,7 +846,7 @@ public class IUserDataProtectionManager <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetStorageItemProtectionInfoAsync(storageItem: _impl_l1.IStorageItem): windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo> {
+    public unsafe func GetStorageItemProtectionInfoAsync(storageItem: impl_p1.IStorageItem): windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetStorageItemProtectionInfoAsync(asRaw(), storageItem.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -844,16 +855,16 @@ public class IUserDataProtectionManager <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectBufferAsync(unprotectedBuffer: _impl_l0.IBuffer, availability: UserDataAvailability): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func ProtectBufferAsync(unprotectedBuffer: impl_p0.IBuffer, availability: UserDataAvailability): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProtectBufferAsync(asRaw(), unprotectedBuffer.asRaw(), windows_core.projectTypedAbi(availability, windows_core.typeMarker<UserDataAvailability>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectBufferAsync(protectedBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UserDataBufferUnprotectResult> {
+    public unsafe func UnprotectBufferAsync(protectedBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UserDataBufferUnprotectResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UnprotectBufferAsync(asRaw(), protectedBuffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -935,7 +946,7 @@ public class IUserDataProtectionManagerStatics <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserDataProtectionManagerStatics", IUserDataProtectionManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataProtectionManagerStaticsVtbl", "IUserDataProtectionManagerStatics", "IUserDataProtectionManagerStatics_Impl", [InterfaceMethodSchema("TryGetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserDataProtectionManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryGetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserDataProtectionManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserDataProtectionManagerStatics", IUserDataProtectionManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserDataProtectionManagerStaticsVtbl", "IUserDataProtectionManagerStatics", "IUserDataProtectionManagerStatics_Impl", [InterfaceMethodSchema("TryGetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserDataProtectionManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryGetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserDataProtectionManager>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserDataProtectionManagerStatics.runtimeType())
         return schema
     }
@@ -973,7 +984,7 @@ public class IUserDataProtectionManagerStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_System == "on"]
-    public unsafe func TryGetForUser(user: _impl_l1.User): UserDataProtectionManager {
+    public unsafe func TryGetForUser(user: impl_p1.User): UserDataProtectionManager {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryGetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1055,22 +1066,22 @@ public class UserDataProtectionManager <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ProtectStorageItemAsync(storageItem: _impl_l1.IStorageItem, availability: UserDataAvailability): windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus> {
+    public unsafe func ProtectStorageItemAsync(storageItem: impl_p1.IStorageItem, availability: UserDataAvailability): windows_future.IAsyncOperation<UserDataStorageItemProtectionStatus> {
         return defaultInterface().ProtectStorageItemAsync(storageItem, availability)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetStorageItemProtectionInfoAsync(storageItem: _impl_l1.IStorageItem): windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo> {
+    public unsafe func GetStorageItemProtectionInfoAsync(storageItem: impl_p1.IStorageItem): windows_future.IAsyncOperation<UserDataStorageItemProtectionInfo> {
         return defaultInterface().GetStorageItemProtectionInfoAsync(storageItem)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ProtectBufferAsync(unprotectedBuffer: _impl_l0.IBuffer, availability: UserDataAvailability): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func ProtectBufferAsync(unprotectedBuffer: impl_p0.IBuffer, availability: UserDataAvailability): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().ProtectBufferAsync(unprotectedBuffer, availability)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UnprotectBufferAsync(protectedBuffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UserDataBufferUnprotectResult> {
+    public unsafe func UnprotectBufferAsync(protectedBuffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UserDataBufferUnprotectResult> {
         return defaultInterface().UnprotectBufferAsync(protectedBuffer)
     }
 
@@ -1098,7 +1109,7 @@ public class UserDataProtectionManager <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func TryGetForUser(user: _impl_l1.User): UserDataProtectionManager {
+    public static unsafe func TryGetForUser(user: impl_p1.User): UserDataProtectionManager {
         var result__: Option<UserDataProtectionManager> = Option<UserDataProtectionManager>.None
         try (factory__ = windows_core.factory<UserDataProtectionManager, IUserDataProtectionManagerStatics>().unwrap()) {
             result__ = Some(factory__.TryGetForUser(user))

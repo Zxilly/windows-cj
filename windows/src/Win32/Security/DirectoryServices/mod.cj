@@ -4,10 +4,14 @@
 package windows.Win32.Security.DirectoryServices
 
 import std.collection.*
+@When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Security_Authorization_UI == "on"]
 import windows.Win32.Security.Authorization.UI as Win32_Security_Authorization_UI
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Security_DirectoryServices == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Security == "on"]
@@ -44,11 +48,11 @@ public unsafe func Windows_DSCreateISecurityInfoObjectEx(pwszObjectPath: CPointe
 foreign {
     // param-hint: pfnReadSD optional
     // param-hint: pfnWriteSD optional
-    func DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32__impl_l0.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
+    func DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32_impl_p1.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
 }
 
 @When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateSecurityPage == "on" && Windows_Win32_Security == "on" && Windows_Win32_UI_Controls == "on"]
-public unsafe func Windows_DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32__impl_l0.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
+public unsafe func Windows_DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32_impl_p1.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
     return DSCreateSecurityPage(pwszObjectPath, pwszObjectClass, dwFlags, phPage, pfnReadSD, pfnWriteSD, lpContext)
 }
 
@@ -86,7 +90,7 @@ public type PFNDSCREATEISECINFO = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UIn
 public type PFNDSCREATEISECINFOEX = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<CPointer<Unit>>, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, IntNative) -> Int32>
 
 @When[Windows_Win32_Security_DirectoryServices == "on" && (Windows_Win32_Security == "on" && Windows_Win32_UI_Controls == "on")]
-public type PFNDSCREATESECPAGE = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<Win32__impl_l0.HPROPSHEETPAGE>, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, IntNative) -> Int32>
+public type PFNDSCREATESECPAGE = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<Win32_impl_p1.HPROPSHEETPAGE>, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, IntNative) -> Int32>
 
 @When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Security == "on"]
 public type PFNDSEDITSECURITY = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<UInt16>, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, IntNative) -> Int32>

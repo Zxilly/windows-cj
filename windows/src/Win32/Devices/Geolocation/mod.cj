@@ -4,14 +4,25 @@
 package windows.Win32.Devices.Geolocation
 
 import std.collection.*
+@When[Windows_Win32_Devices_Geolocation == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Geolocation == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Geolocation == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_Geolocation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_Devices_Sensors == "on"]
 import windows.Win32.Devices.Sensors as Win32_Devices_Sensors
+@When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_Geolocation == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_Geolocation == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Devices_Geolocation == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_Devices_Geolocation == "on"]
 import windows_core as windows_core
 
 
@@ -2913,7 +2924,7 @@ extend GNSS_V2UPL_NI_INFO <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDispCivicAddressReportVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddressLine1: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var AddressLine2: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var City: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -2958,7 +2969,7 @@ public class IDispCivicAddressReport <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDispCivicAddressReport> {
-        return InterfaceDescriptor<IDispCivicAddressReport>("IDispCivicAddressReport", IDispCivicAddressReport.iid(), Win32__impl_l2.IDispatch.iid(), takeIDispCivicAddressReportFromAbi, viewIDispCivicAddressReport)
+        return InterfaceDescriptor<IDispCivicAddressReport>("IDispCivicAddressReport", IDispCivicAddressReport.iid(), Win32_impl_p2.IDispatch.iid(), takeIDispCivicAddressReportFromAbi, viewIDispCivicAddressReport)
     }
 
     public unsafe func vtbl(): IDispCivicAddressReportVtbl {
@@ -3017,7 +3028,7 @@ public class IDispCivicAddressReport <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDispLatLongReportVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Latitude: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var Longitude: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var ErrorRadius: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -3060,7 +3071,7 @@ public class IDispLatLongReport <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDispLatLongReport> {
-        return InterfaceDescriptor<IDispLatLongReport>("IDispLatLongReport", IDispLatLongReport.iid(), Win32__impl_l2.IDispatch.iid(), takeIDispLatLongReportFromAbi, viewIDispLatLongReport)
+        return InterfaceDescriptor<IDispLatLongReport>("IDispLatLongReport", IDispLatLongReport.iid(), Win32_impl_p2.IDispatch.iid(), takeIDispLatLongReportFromAbi, viewIDispLatLongReport)
     }
 
     public unsafe func vtbl(): IDispLatLongReportVtbl {
@@ -3173,7 +3184,7 @@ public struct ILocationReportVtbl {
     public var GetSensorID: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetTimestamp: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.SYSTEMTIMEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -3230,7 +3241,7 @@ public class ILocationReport <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, pKey, pValue)
@@ -3240,7 +3251,7 @@ public class ILocationReport <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ILocationReportFactoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ListenForReports: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var StopListeningForReports: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -3285,7 +3296,7 @@ public class ILocationReportFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ILocationReportFactory> {
-        return InterfaceDescriptor<ILocationReportFactory>("ILocationReportFactory", ILocationReportFactory.iid(), Win32__impl_l2.IDispatch.iid(), takeILocationReportFactoryFromAbi, viewILocationReportFactory)
+        return InterfaceDescriptor<ILocationReportFactory>("ILocationReportFactory", ILocationReportFactory.iid(), Win32_impl_p2.IDispatch.iid(), takeILocationReportFactoryFromAbi, viewILocationReportFactory)
     }
 
     public unsafe func vtbl(): ILocationReportFactoryVtbl {
@@ -3500,7 +3511,7 @@ extend Location <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 @When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ICivicAddressReportFactoryEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -3537,7 +3548,7 @@ public class _ICivicAddressReportFactoryEvents <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<_ICivicAddressReportFactoryEvents> {
-        return InterfaceDescriptor<_ICivicAddressReportFactoryEvents>("_ICivicAddressReportFactoryEvents", _ICivicAddressReportFactoryEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_ICivicAddressReportFactoryEventsFromAbi, view_ICivicAddressReportFactoryEvents)
+        return InterfaceDescriptor<_ICivicAddressReportFactoryEvents>("_ICivicAddressReportFactoryEvents", _ICivicAddressReportFactoryEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_ICivicAddressReportFactoryEventsFromAbi, view_ICivicAddressReportFactoryEvents)
     }
 
     public unsafe func vtbl(): _ICivicAddressReportFactoryEventsVtbl {
@@ -3548,7 +3559,7 @@ public class _ICivicAddressReportFactoryEvents <: InterfaceWrapperBase & ComInte
 @When[Windows_Win32_Devices_Geolocation == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _ILatLongReportFactoryEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -3585,7 +3596,7 @@ public class _ILatLongReportFactoryEvents <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<_ILatLongReportFactoryEvents> {
-        return InterfaceDescriptor<_ILatLongReportFactoryEvents>("_ILatLongReportFactoryEvents", _ILatLongReportFactoryEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_ILatLongReportFactoryEventsFromAbi, view_ILatLongReportFactoryEvents)
+        return InterfaceDescriptor<_ILatLongReportFactoryEvents>("_ILatLongReportFactoryEvents", _ILatLongReportFactoryEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_ILatLongReportFactoryEventsFromAbi, view_ILatLongReportFactoryEvents)
     }
 
     public unsafe func vtbl(): _ILatLongReportFactoryEventsVtbl {

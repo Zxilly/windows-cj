@@ -4,21 +4,35 @@
 package windows.Graphics.Printing.PrintSupport
 
 import std.collection.*
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Printing_PrintSupport == "on" && Windows_Devices_Printers == "on"]
 import windows.Devices.Printers as Devices_Printers
+@When[Windows_Graphics_Printing_PrintSupport == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Printing_PrintSupport == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
 import windows.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket
+@When[Windows_Graphics_Printing_PrintSupport == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_Graphics_Printing_PrintSupport == "on" && Windows_UI_Shell == "on"]
 import windows.UI.Shell as UI_Shell
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Printing_PrintSupport == "on"]
 import windows_future as windows_future
 
 
@@ -287,7 +301,7 @@ public class IPrintSupportPrintDeviceCapabilitiesChangedEventArgs <: InterfaceWr
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintSupportPrintDeviceCapabilitiesChangedEventArgs", IPrintSupportPrintDeviceCapabilitiesChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrintDeviceCapabilitiesChangedEventArgsVtbl", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs_Impl", [InterfaceMethodSchema("GetCurrentPrintDeviceCapabilities", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePrintDeviceCapabilities", 7, [InterfaceParameterSchema("updatedPdc", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintSupportPrintDeviceCapabilitiesChangedEventArgs", IPrintSupportPrintDeviceCapabilitiesChangedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrintDeviceCapabilitiesChangedEventArgsVtbl", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs_Impl", [InterfaceMethodSchema("GetCurrentPrintDeviceCapabilities", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePrintDeviceCapabilities", 7, [InterfaceParameterSchema("updatedPdc", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintSupportPrintDeviceCapabilitiesChangedEventArgs.runtimeType())
         return schema
     }
@@ -317,16 +331,16 @@ public class IPrintSupportPrintDeviceCapabilitiesChangedEventArgs <: InterfaceWr
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetCurrentPrintDeviceCapabilities(): _impl_l1.XmlDocument {
+    public unsafe func GetCurrentPrintDeviceCapabilities(): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetCurrentPrintDeviceCapabilities(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func UpdatePrintDeviceCapabilities(updatedPdc: _impl_l1.XmlDocument): Unit {
+    public unsafe func UpdatePrintDeviceCapabilities(updatedPdc: impl_p1.XmlDocument): Unit {
         let v = vtbl()
         let hr = v.UpdatePrintDeviceCapabilities(asRaw(), updatedPdc.asRaw())
         HRESULT(hr).ok()
@@ -662,7 +676,7 @@ public class IPrintSupportSessionInfo <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintSupportSessionInfo", IPrintSupportSessionInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportSessionInfoVtbl", "IPrintSupportSessionInfo", "IPrintSupportSessionInfo_Impl", [InterfaceMethodSchema("SourceAppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Printer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppPrintDevice>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintSupportSessionInfo", IPrintSupportSessionInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportSessionInfoVtbl", "IPrintSupportSessionInfo", "IPrintSupportSessionInfo_Impl", [InterfaceMethodSchema("SourceAppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Printer", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Printers.IppPrintDevice>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintSupportSessionInfo.runtimeType())
         return schema
     }
@@ -692,12 +706,12 @@ public class IPrintSupportSessionInfo <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SourceAppInfo(): _impl_l2.AppInfo {
+    public unsafe func SourceAppInfo(): impl_p1.AppInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SourceAppInfo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.AppInfo.fromAbiTake(result__)
+        return impl_p1.AppInfo.fromAbiTake(result__)
     }
 
     @When[Windows_Devices_Printers == "on"]
@@ -1398,7 +1412,7 @@ public class PrintSupportSessionInfo <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SourceAppInfo(): _impl_l2.AppInfo {
+    public unsafe func SourceAppInfo(): impl_p1.AppInfo {
         return defaultInterface().SourceAppInfo()
     }
 
@@ -1645,7 +1659,7 @@ public class IPrintSupportAppInfo <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintSupportAppInfo", IPrintSupportAppInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportAppInfoVtbl", "IPrintSupportAppInfo", "IPrintSupportAppInfo_Impl", [InterfaceMethodSchema("get_AppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedContracts", 7, [InterfaceParameterSchema("result", "CPointer<PrintSupportAppContractsAbi>", "OutSlot<PrintSupportAppContracts>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintSupportAppInfo", IPrintSupportAppInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportAppInfoVtbl", "IPrintSupportAppInfo", "IPrintSupportAppInfo_Impl", [InterfaceMethodSchema("get_AppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedContracts", 7, [InterfaceParameterSchema("result", "CPointer<PrintSupportAppContractsAbi>", "OutSlot<PrintSupportAppContracts>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintSupportAppInfo.runtimeType())
         return schema
     }
@@ -1675,12 +1689,12 @@ public class IPrintSupportAppInfo <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_AppInfo(): _impl_l2.AppInfo {
+    public unsafe func get_AppInfo(): impl_p1.AppInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_AppInfo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.AppInfo.fromAbiTake(result__)
+        return impl_p1.AppInfo.fromAbiTake(result__)
     }
 
     public unsafe func SupportedContracts(): PrintSupportAppContracts {
@@ -2169,7 +2183,7 @@ public class IPrintSupportPrinterSelectedEventArgs <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintSupportPrinterSelectedEventArgs", IPrintSupportPrinterSelectedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrinterSelectedEventArgsVtbl", "IPrintSupportPrinterSelectedEventArgs", "IPrintSupportPrinterSelectedEventArgs_Impl", [InterfaceMethodSchema("SourceAppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrintTicket", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrintTicket", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAdditionalFeatures", 9, [InterfaceParameterSchema("features", "CPointer<Unit>", "InParam<windows_collections.IIterable<PrintSupportPrintTicketElement>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAdditionalParameters", 10, [InterfaceParameterSchema("parameters", "CPointer<Unit>", "InParam<windows_collections.IIterable<PrintSupportPrintTicketElement>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AllowedAdditionalFeaturesAndParametersCount", 11, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAdaptiveCard", 12, [InterfaceParameterSchema("adaptiveCard", "CPointer<Unit>", "InParam<UI_Shell.IAdaptiveCard>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintSupportPrinterSelectedEventArgs", IPrintSupportPrinterSelectedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrinterSelectedEventArgsVtbl", "IPrintSupportPrinterSelectedEventArgs", "IPrintSupportPrinterSelectedEventArgs_Impl", [InterfaceMethodSchema("SourceAppInfo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.AppInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PrintTicket", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrintTicket", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Graphics_Printing_PrintTicket.WorkflowPrintTicket>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAdditionalFeatures", 9, [InterfaceParameterSchema("features", "CPointer<Unit>", "InParam<windows_collections.IIterable<PrintSupportPrintTicketElement>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAdditionalParameters", 10, [InterfaceParameterSchema("parameters", "CPointer<Unit>", "InParam<windows_collections.IIterable<PrintSupportPrintTicketElement>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AllowedAdditionalFeaturesAndParametersCount", 11, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAdaptiveCard", 12, [InterfaceParameterSchema("adaptiveCard", "CPointer<Unit>", "InParam<UI_Shell.IAdaptiveCard>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintSupportPrinterSelectedEventArgs.runtimeType())
         return schema
     }
@@ -2199,12 +2213,12 @@ public class IPrintSupportPrinterSelectedEventArgs <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SourceAppInfo(): _impl_l2.AppInfo {
+    public unsafe func SourceAppInfo(): impl_p1.AppInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SourceAppInfo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.AppInfo.fromAbiTake(result__)
+        return impl_p1.AppInfo.fromAbiTake(result__)
     }
 
     @When[Windows_Graphics_Printing_PrintTicket == "on"]
@@ -2810,7 +2824,7 @@ public class PrintSupportPrinterSelectedEventArgs <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func SourceAppInfo(): _impl_l2.AppInfo {
+    public unsafe func SourceAppInfo(): impl_p1.AppInfo {
         return defaultInterface().SourceAppInfo()
     }
 
@@ -3483,7 +3497,7 @@ public class PrintSupportSettingsActivatedEventArgs <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<PrintSupportSettingsActivatedEventArgs> {
-        let ancestors = [IPrintSupportSettingsActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPrintSupportSettingsActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PrintSupportSettingsActivatedEventArgs>("PrintSupportSettingsActivatedEventArgs", IPrintSupportSettingsActivatedEventArgs.iid(), ancestors, { raw => PrintSupportSettingsActivatedEventArgs.fromAbiTake(raw) }, { raw => PrintSupportSettingsActivatedEventArgs.viewOf(raw) })
     }
 
@@ -3525,15 +3539,15 @@ public class PrintSupportSettingsActivatedEventArgs <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3547,20 +3561,20 @@ public class PrintSupportSettingsActivatedEventArgs <: InterfaceWrapperBase & Co
         return defaultInterface().GetDeferral()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -4135,7 +4149,7 @@ public class IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2 <: InterfaceW
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2", IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2Vtbl", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2_Impl", [InterfaceMethodSchema("SetSupportedPdlPassthroughContentTypes", 6, [InterfaceParameterSchema("supportedPdlContentTypes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResourceLanguage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentPrintDeviceResources", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePrintDeviceResources", 9, [InterfaceParameterSchema("updatedPdr", "CPointer<Unit>", "InParam<_impl_l1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPrintDeviceCapabilitiesUpdatePolicy", 10, [InterfaceParameterSchema("updatePolicy", "CPointer<Unit>", "InParam<PrintSupportPrintDeviceCapabilitiesUpdatePolicy>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2", IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2Vtbl", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2", "IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2_Impl", [InterfaceMethodSchema("SetSupportedPdlPassthroughContentTypes", 6, [InterfaceParameterSchema("supportedPdlContentTypes", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResourceLanguage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentPrintDeviceResources", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdatePrintDeviceResources", 9, [InterfaceParameterSchema("updatedPdr", "CPointer<Unit>", "InParam<impl_p1.XmlDocument>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetPrintDeviceCapabilitiesUpdatePolicy", 10, [InterfaceParameterSchema("updatePolicy", "CPointer<Unit>", "InParam<PrintSupportPrintDeviceCapabilitiesUpdatePolicy>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2.runtimeType())
         return schema
     }
@@ -4180,16 +4194,16 @@ public class IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2 <: InterfaceW
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetCurrentPrintDeviceResources(): _impl_l1.XmlDocument {
+    public unsafe func GetCurrentPrintDeviceResources(): impl_p1.XmlDocument {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetCurrentPrintDeviceResources(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.XmlDocument.fromAbiTake(result__)
+        return impl_p1.XmlDocument.fromAbiTake(result__)
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func UpdatePrintDeviceResources(updatedPdr: _impl_l1.XmlDocument): Unit {
+    public unsafe func UpdatePrintDeviceResources(updatedPdr: impl_p1.XmlDocument): Unit {
         let v = vtbl()
         let hr = v.UpdatePrintDeviceResources(asRaw(), updatedPdr.asRaw())
         HRESULT(hr).ok()
@@ -4369,7 +4383,7 @@ public class PrintSupportAppInfo <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_AppInfo(): _impl_l2.AppInfo {
+    public unsafe func get_AppInfo(): impl_p1.AppInfo {
         return defaultInterface().get_AppInfo()
     }
 
@@ -4694,12 +4708,12 @@ public class PrintSupportPrintDeviceCapabilitiesChangedEventArgs <: InterfaceWra
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func GetCurrentPrintDeviceCapabilities(): _impl_l1.XmlDocument {
+    public unsafe func GetCurrentPrintDeviceCapabilities(): impl_p1.XmlDocument {
         return defaultInterface().GetCurrentPrintDeviceCapabilities()
     }
 
     @When[Windows_Data_Xml_Dom == "on"]
-    public unsafe func UpdatePrintDeviceCapabilities(updatedPdc: _impl_l1.XmlDocument): Unit {
+    public unsafe func UpdatePrintDeviceCapabilities(updatedPdc: impl_p1.XmlDocument): Unit {
         defaultInterface().UpdatePrintDeviceCapabilities(updatedPdc)
     }
 

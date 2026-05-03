@@ -4,17 +4,29 @@
 package windows.Media.Casting
 
 import std.collection.*
+@When[Windows_Media_Casting == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Casting == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Casting == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Casting == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Casting == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Casting == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Casting == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_Casting == "on" && Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Casting == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Media_Casting == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Casting == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Casting == "on"]
 import windows_future as windows_future
 
 
@@ -1073,7 +1085,7 @@ public class CastingDevice <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Icon(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func Icon(): impl_p1.IRandomAccessStreamWithContentType {
         return defaultInterface().Icon()
     }
 
@@ -1119,7 +1131,7 @@ public class CastingDevice <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public static unsafe func DeviceInfoSupportsCastingAsync(device: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
+    public static unsafe func DeviceInfoSupportsCastingAsync(device: impl_p1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
         var result__: Option<windows_future.IAsyncOperation<Bool>> = Option<windows_future.IAsyncOperation<Bool>>.None
         try (factory__ = windows_core.factory<CastingDevice, ICastingDeviceStatics>().unwrap()) {
             result__ = Some(factory__.DeviceInfoSupportsCastingAsync(device))
@@ -1234,7 +1246,7 @@ public class CastingDevicePicker <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Appearance(): _impl_l0.DevicePickerAppearance {
+    public unsafe func Appearance(): impl_p0.DevicePickerAppearance {
         return defaultInterface().Appearance()
     }
 
@@ -1601,7 +1613,7 @@ public class ICastingDevice <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICastingDevice", ICastingDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDeviceVtbl", "ICastingDevice", "ICastingDevice_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FriendlyName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Icon", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedCastingPlaybackTypesAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<CastingPlaybackTypes>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCastingConnection", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CastingConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICastingDevice", ICastingDevice.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDeviceVtbl", "ICastingDevice", "ICastingDevice_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FriendlyName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Icon", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSupportedCastingPlaybackTypesAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<CastingPlaybackTypes>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCastingConnection", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CastingConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICastingDevice.runtimeType())
         return schema
     }
@@ -1647,12 +1659,12 @@ public class ICastingDevice <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Icon(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func Icon(): impl_p1.IRandomAccessStreamWithContentType {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Icon(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
     }
 
     public unsafe func GetSupportedCastingPlaybackTypesAsync(): windows_future.IAsyncOperation<CastingPlaybackTypes> {
@@ -1733,7 +1745,7 @@ public class ICastingDevicePicker <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICastingDevicePicker", ICastingDevicePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDevicePickerVtbl", "ICastingDevicePicker", "ICastingDevicePicker_Impl", [InterfaceMethodSchema("Filter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CastingDevicePickerFilter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Appearance", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.DevicePickerAppearance>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CastingDeviceSelected", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CastingDevicePicker, CastingDeviceSelectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCastingDeviceSelected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CastingDevicePickerDismissed", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CastingDevicePicker, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCastingDevicePickerDismissed", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Show", 12, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowWithPlacement", 13, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Hide", 14, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("ICastingDevicePicker", ICastingDevicePicker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDevicePickerVtbl", "ICastingDevicePicker", "ICastingDevicePicker_Impl", [InterfaceMethodSchema("Filter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CastingDevicePickerFilter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Appearance", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.DevicePickerAppearance>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CastingDeviceSelected", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CastingDevicePicker, CastingDeviceSelectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCastingDeviceSelected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CastingDevicePickerDismissed", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<CastingDevicePicker, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCastingDevicePickerDismissed", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Show", 12, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowWithPlacement", 13, [InterfaceParameterSchema("selection", "windows_future.RectAbi", "windows_future.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("preferredPlacement", "UI_Popups.PlacementAbi", "UI_Popups.Placement", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Hide", 14, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(ICastingDevicePicker.runtimeType())
         return schema
     }
@@ -1771,12 +1783,12 @@ public class ICastingDevicePicker <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Appearance(): _impl_l0.DevicePickerAppearance {
+    public unsafe func Appearance(): impl_p0.DevicePickerAppearance {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Appearance(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.DevicePickerAppearance.fromAbiTake(result__)
+        return impl_p0.DevicePickerAppearance.fromAbiTake(result__)
     }
 
     public unsafe func CastingDeviceSelected(handler: Foundation.TypedEventHandler<CastingDevicePicker, CastingDeviceSelectedEventArgs>): windows_collections.EventRegistrationToken {
@@ -1965,7 +1977,7 @@ public class ICastingDeviceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICastingDeviceStatics", ICastingDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDeviceStaticsVtbl", "ICastingDeviceStatics", "ICastingDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("type_", "CastingPlaybackTypesAbi", "CastingPlaybackTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelectorFromCastingSourceAsync", 7, [InterfaceParameterSchema("castingSource", "CPointer<Unit>", "InParam<CastingSource>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<CastingDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceInfoSupportsCastingAsync", 9, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICastingDeviceStatics", ICastingDeviceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICastingDeviceStaticsVtbl", "ICastingDeviceStatics", "ICastingDeviceStatics_Impl", [InterfaceMethodSchema("GetDeviceSelector", 6, [InterfaceParameterSchema("type_", "CastingPlaybackTypesAbi", "CastingPlaybackTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceSelectorFromCastingSourceAsync", 7, [InterfaceParameterSchema("castingSource", "CPointer<Unit>", "InParam<CastingSource>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromIdAsync", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<CastingDevice>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceInfoSupportsCastingAsync", 9, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICastingDeviceStatics.runtimeType())
         return schema
     }
@@ -2019,7 +2031,7 @@ public class ICastingDeviceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func DeviceInfoSupportsCastingAsync(device: _impl_l1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
+    public unsafe func DeviceInfoSupportsCastingAsync(device: impl_p1.DeviceInformation): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeviceInfoSupportsCastingAsync(asRaw(), device.asRaw(), CPointer<CPointer<Unit>>(inout result__))

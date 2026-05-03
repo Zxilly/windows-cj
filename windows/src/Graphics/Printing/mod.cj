@@ -4,15 +4,25 @@
 package windows.Graphics.Printing
 
 import std.collection.*
+@When[Windows_Graphics_Printing == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Graphics_Printing == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Printing == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Printing == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Printing == "on"]
 import windows_future as windows_future
 
 
@@ -5167,19 +5177,15 @@ public class PrintTaskSourceRequestedHandler <: InterfaceWrapperBase & ComInterf
 extend PrintTaskSourceRequestedHandler <: windows_core.Interface<PrintTaskSourceRequestedHandler> {}
 
 @When[Windows_Graphics_Printing == "on"]
-private open class PrintTaskSourceRequestedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface PrintTaskSourceRequestedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_Graphics_Printing == "on"]
-private open class PrintTaskSourceRequestedHandlerInvoker <: PrintTaskSourceRequestedHandlerInvokerErased {
-    public open func Invoke(args: InParam<PrintTaskSourceRequestedArgs>): Unit {
-        ()
-    }
+private interface PrintTaskSourceRequestedHandlerInvoker <: PrintTaskSourceRequestedHandlerInvokerErased {
+    public func Invoke(args: InParam<PrintTaskSourceRequestedArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<PrintTaskSourceRequestedArgs>(PrintTaskSourceRequestedArgs.viewOf(arg0)))
         return S_OK.value
     }
@@ -5199,7 +5205,7 @@ private class PrintTaskSourceRequestedHandlerBox <: PrintTaskSourceRequestedHand
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(args: InParam<PrintTaskSourceRequestedArgs>): Unit {
+    public func Invoke(args: InParam<PrintTaskSourceRequestedArgs>): Unit {
         invoke_(args)
     }
 }
@@ -5268,7 +5274,7 @@ public class IPrintTaskOptions <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTaskOptions", IPrintTaskOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTaskOptionsVtbl", "IPrintTaskOptions", "IPrintTaskOptions_Impl", [InterfaceMethodSchema("SetBordering", 6, [InterfaceParameterSchema("value", "PrintBorderingAbi", "PrintBordering", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Bordering", 7, [InterfaceParameterSchema("result", "CPointer<PrintBorderingAbi>", "OutSlot<PrintBordering>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPagePrintTicket", 8, [InterfaceParameterSchema("printPageInfo", "CPointer<Unit>", "InParam<PrintPageInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTaskOptions", IPrintTaskOptions.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTaskOptionsVtbl", "IPrintTaskOptions", "IPrintTaskOptions_Impl", [InterfaceMethodSchema("SetBordering", 6, [InterfaceParameterSchema("value", "PrintBorderingAbi", "PrintBordering", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Bordering", 7, [InterfaceParameterSchema("result", "CPointer<PrintBorderingAbi>", "OutSlot<PrintBordering>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPagePrintTicket", 8, [InterfaceParameterSchema("printPageInfo", "CPointer<Unit>", "InParam<PrintPageInfo>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTaskOptions.runtimeType())
         return schema
     }
@@ -5312,12 +5318,12 @@ public class IPrintTaskOptions <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetPagePrintTicket(printPageInfo: PrintPageInfo): _impl_l1.IRandomAccessStream {
+    public unsafe func GetPagePrintTicket(printPageInfo: PrintPageInfo): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPagePrintTicket(asRaw(), printPageInfo.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 }
 
@@ -5661,7 +5667,7 @@ public class IPrintTask <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintTask", IPrintTask.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTaskVtbl", "IPrintTask", "IPrintTask_Impl", [InterfaceMethodSchema("Properties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DataPackagePropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPrintDocumentSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTaskOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Previewing", 9, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePreviewing", 10, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Submitting", 11, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSubmitting", 12, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Progressing", 13, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, PrintTaskProgressingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveProgressing", 14, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Completed", 15, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, PrintTaskCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCompleted", 16, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintTask", IPrintTask.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintTaskVtbl", "IPrintTask", "IPrintTask_Impl", [InterfaceMethodSchema("Properties", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DataPackagePropertySet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Source", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPrintDocumentSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PrintTaskOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Previewing", 9, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePreviewing", 10, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Submitting", 11, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSubmitting", 12, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Progressing", 13, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, PrintTaskProgressingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveProgressing", 14, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Completed", 15, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PrintTask, PrintTaskCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCompleted", 16, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintTask.runtimeType())
         return schema
     }
@@ -5691,12 +5697,12 @@ public class IPrintTask <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
+    public unsafe func Properties(): impl_p1.DataPackagePropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Properties(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DataPackagePropertySet.fromAbiTake(result__)
+        return impl_p1.DataPackagePropertySet.fromAbiTake(result__)
     }
 
     public unsafe func Source(): IPrintDocumentSource {
@@ -6378,7 +6384,7 @@ public class PrintTask <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
+    public unsafe func Properties(): impl_p1.DataPackagePropertySet {
         return defaultInterface().Properties()
     }
 

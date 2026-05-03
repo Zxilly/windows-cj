@@ -4,14 +4,22 @@
 package windows.Win32.System.TaskScheduler
 
 import std.collection.*
+@When[Windows_Win32_System_TaskScheduler == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_TaskScheduler == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_TaskScheduler == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_TaskScheduler == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_TaskScheduler == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_TaskScheduler == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_TaskScheduler == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_TaskScheduler == "on"]
@@ -211,7 +219,7 @@ public class IEnumWorkItems <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IIdleSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IdleDuration: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetIdleDuration: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var WaitTimeout: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -256,7 +264,7 @@ public class IIdleSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IIdleSettings> {
-        return InterfaceDescriptor<IIdleSettings>("IIdleSettings", IIdleSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeIIdleSettingsFromAbi, viewIIdleSettings)
+        return InterfaceDescriptor<IIdleSettings>("IIdleSettings", IIdleSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeIIdleSettingsFromAbi, viewIIdleSettings)
     }
 
     public unsafe func vtbl(): IIdleSettingsVtbl {
@@ -315,7 +323,7 @@ public class IIdleSettings <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMaintenanceSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetPeriod: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Period: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDeadline: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -358,7 +366,7 @@ public class IMaintenanceSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMaintenanceSettings> {
-        return InterfaceDescriptor<IMaintenanceSettings>("IMaintenanceSettings", IMaintenanceSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeIMaintenanceSettingsFromAbi, viewIMaintenanceSettings)
+        return InterfaceDescriptor<IMaintenanceSettings>("IMaintenanceSettings", IMaintenanceSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeIMaintenanceSettingsFromAbi, viewIMaintenanceSettings)
     }
 
     public unsafe func vtbl(): IMaintenanceSettingsVtbl {
@@ -405,7 +413,7 @@ public class IMaintenanceSettings <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetworkSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -446,7 +454,7 @@ public class INetworkSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetworkSettings> {
-        return InterfaceDescriptor<INetworkSettings>("INetworkSettings", INetworkSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeINetworkSettingsFromAbi, viewINetworkSettings)
+        return InterfaceDescriptor<INetworkSettings>("INetworkSettings", INetworkSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeINetworkSettingsFromAbi, viewINetworkSettings)
     }
 
     public unsafe func vtbl(): INetworkSettingsVtbl {
@@ -481,7 +489,7 @@ public class INetworkSettings <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRegistrationInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Author: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -497,9 +505,9 @@ public struct IRegistrationInfoVtbl {
     public var URI: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetURI: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SecurityDescriptor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SecurityDescriptor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetSource: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -538,7 +546,7 @@ public class IRegistrationInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRegistrationInfo> {
-        return InterfaceDescriptor<IRegistrationInfo>("IRegistrationInfo", IRegistrationInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIRegistrationInfoFromAbi, viewIRegistrationInfo)
+        return InterfaceDescriptor<IRegistrationInfo>("IRegistrationInfo", IRegistrationInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIRegistrationInfoFromAbi, viewIRegistrationInfo)
     }
 
     public unsafe func vtbl(): IRegistrationInfoVtbl {
@@ -630,14 +638,14 @@ public class IRegistrationInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SecurityDescriptor(pSddl: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SecurityDescriptor(pSddl: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SecurityDescriptor(__liveRaw, pSddl)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSecurityDescriptor(sddl: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSecurityDescriptor(sddl: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSecurityDescriptor(__liveRaw, sddl)
@@ -659,7 +667,7 @@ public class IRegistrationInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRepetitionPatternVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Interval: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetInterval: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -702,7 +710,7 @@ public class IRepetitionPattern <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRepetitionPattern> {
-        return InterfaceDescriptor<IRepetitionPattern>("IRepetitionPattern", IRepetitionPattern.iid(), Win32__impl_l2.IDispatch.iid(), takeIRepetitionPatternFromAbi, viewIRepetitionPattern)
+        return InterfaceDescriptor<IRepetitionPattern>("IRepetitionPattern", IRepetitionPattern.iid(), Win32_impl_p2.IDispatch.iid(), takeIRepetitionPatternFromAbi, viewIRepetitionPattern)
     }
 
     public unsafe func vtbl(): IRepetitionPatternVtbl {
@@ -889,7 +897,7 @@ public class ITaskHandlerStatus <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskNamedValuePairVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -930,7 +938,7 @@ public class ITaskNamedValuePair <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskNamedValuePair> {
-        return InterfaceDescriptor<ITaskNamedValuePair>("ITaskNamedValuePair", ITaskNamedValuePair.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskNamedValuePairFromAbi, viewITaskNamedValuePair)
+        return InterfaceDescriptor<ITaskNamedValuePair>("ITaskNamedValuePair", ITaskNamedValuePair.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskNamedValuePairFromAbi, viewITaskNamedValuePair)
     }
 
     public unsafe func vtbl(): ITaskNamedValuePairVtbl {
@@ -965,7 +973,7 @@ public class ITaskNamedValuePair <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskSettings2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisallowStartOnRemoteAppSession: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetDisallowStartOnRemoteAppSession: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var UseUnifiedSchedulingEngine: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -1006,7 +1014,7 @@ public class ITaskSettings2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskSettings2> {
-        return InterfaceDescriptor<ITaskSettings2>("ITaskSettings2", ITaskSettings2.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskSettings2FromAbi, viewITaskSettings2)
+        return InterfaceDescriptor<ITaskSettings2>("ITaskSettings2", ITaskSettings2.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskSettings2FromAbi, viewITaskSettings2)
     }
 
     public unsafe func vtbl(): ITaskSettings2Vtbl {
@@ -2218,7 +2226,7 @@ extend WEEKLY <: windows_core.CopyType & windows_core.RuntimeType & windows_core
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IActionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<TASK_ACTION_TYPEAbi>) -> Int32> = { _, _ => 0 }
@@ -2258,7 +2266,7 @@ public class IAction <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAction> {
-        return InterfaceDescriptor<IAction>("IAction", IAction.iid(), Win32__impl_l2.IDispatch.iid(), takeIActionFromAbi, viewIAction)
+        return InterfaceDescriptor<IAction>("IAction", IAction.iid(), Win32_impl_p2.IDispatch.iid(), takeIActionFromAbi, viewIAction)
     }
 
     public unsafe func vtbl(): IActionVtbl {
@@ -2287,7 +2295,7 @@ public class IAction <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IActionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -2296,7 +2304,7 @@ public struct IActionCollectionVtbl {
     public var SetXmlText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Create: CFunc<(CPointer<Unit>, TASK_ACTION_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Context: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetContext: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -2336,7 +2344,7 @@ public class IActionCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IActionCollection> {
-        return InterfaceDescriptor<IActionCollection>("IActionCollection", IActionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIActionCollectionFromAbi, viewIActionCollection)
+        return InterfaceDescriptor<IActionCollection>("IActionCollection", IActionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIActionCollectionFromAbi, viewIActionCollection)
     }
 
     public unsafe func vtbl(): IActionCollectionVtbl {
@@ -2381,7 +2389,7 @@ public class IActionCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, index)
@@ -2637,7 +2645,7 @@ public class IExecAction2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrincipalVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -2686,7 +2694,7 @@ public class IPrincipal <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrincipal> {
-        return InterfaceDescriptor<IPrincipal>("IPrincipal", IPrincipal.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrincipalFromAbi, viewIPrincipal)
+        return InterfaceDescriptor<IPrincipal>("IPrincipal", IPrincipal.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrincipalFromAbi, viewIPrincipal)
     }
 
     public unsafe func vtbl(): IPrincipalVtbl {
@@ -2769,7 +2777,7 @@ public class IPrincipal <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPrincipal2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ProcessTokenSidType: CFunc<(CPointer<Unit>, CPointer<TASK_PROCESSTOKENSID_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var SetProcessTokenSidType: CFunc<(CPointer<Unit>, TASK_PROCESSTOKENSID_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var RequiredPrivilegeCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2811,7 +2819,7 @@ public class IPrincipal2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPrincipal2> {
-        return InterfaceDescriptor<IPrincipal2>("IPrincipal2", IPrincipal2.iid(), Win32__impl_l2.IDispatch.iid(), takeIPrincipal2FromAbi, viewIPrincipal2)
+        return InterfaceDescriptor<IPrincipal2>("IPrincipal2", IPrincipal2.iid(), Win32_impl_p2.IDispatch.iid(), takeIPrincipal2FromAbi, viewIPrincipal2)
     }
 
     public unsafe func vtbl(): IPrincipal2Vtbl {
@@ -2854,7 +2862,7 @@ public class IPrincipal2 <: InterfaceWrapperBase & ComInterface {
 public struct IProvideTaskPageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_UI_Controls == "on"]
-    public var GetPage: CFunc<(CPointer<Unit>, TASKPAGEAbi, Int32, CPointer<Win32__impl_l0.HPROPSHEETPAGE>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPage: CFunc<(CPointer<Unit>, TASKPAGEAbi, Int32, CPointer<Win32_impl_p1.HPROPSHEETPAGE>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -2899,7 +2907,7 @@ public class IProvideTaskPage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func GetPage(tpType: TASKPAGEAbi, fPersistChanges: Int32, phPage: CPointer<Win32__impl_l0.HPROPSHEETPAGE>): Int32 {
+    public unsafe func GetPage(tpType: TASKPAGEAbi, fPersistChanges: Int32, phPage: CPointer<Win32_impl_p1.HPROPSHEETPAGE>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPage(__liveRaw, tpType, fPersistChanges, phPage)
@@ -2909,7 +2917,7 @@ public class IProvideTaskPage <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRunningTaskVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var InstanceGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -2954,7 +2962,7 @@ public class IRunningTask <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRunningTask> {
-        return InterfaceDescriptor<IRunningTask>("IRunningTask", IRunningTask.iid(), Win32__impl_l2.IDispatch.iid(), takeIRunningTaskFromAbi, viewIRunningTask)
+        return InterfaceDescriptor<IRunningTask>("IRunningTask", IRunningTask.iid(), Win32_impl_p2.IDispatch.iid(), takeIRunningTaskFromAbi, viewIRunningTask)
     }
 
     public unsafe func vtbl(): IRunningTaskVtbl {
@@ -3013,10 +3021,10 @@ public class IRunningTask <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRunningTaskCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3055,7 +3063,7 @@ public class IRunningTaskCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRunningTaskCollection> {
-        return InterfaceDescriptor<IRunningTaskCollection>("IRunningTaskCollection", IRunningTaskCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIRunningTaskCollectionFromAbi, viewIRunningTaskCollection)
+        return InterfaceDescriptor<IRunningTaskCollection>("IRunningTaskCollection", IRunningTaskCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIRunningTaskCollectionFromAbi, viewIRunningTaskCollection)
     }
 
     public unsafe func vtbl(): IRunningTaskCollectionVtbl {
@@ -3069,7 +3077,7 @@ public class IRunningTaskCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(index: Win32__impl_l2.VARIANTAbi, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(index: Win32_impl_p2.VARIANTAbi, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, index, ppRunningTask)
@@ -3162,7 +3170,7 @@ public class IShowMessageAction <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskNamedValueCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -3206,7 +3214,7 @@ public class ITaskNamedValueCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskNamedValueCollection> {
-        return InterfaceDescriptor<ITaskNamedValueCollection>("ITaskNamedValueCollection", ITaskNamedValueCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskNamedValueCollectionFromAbi, viewITaskNamedValueCollection)
+        return InterfaceDescriptor<ITaskNamedValueCollection>("ITaskNamedValueCollection", ITaskNamedValueCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskNamedValueCollectionFromAbi, viewITaskNamedValueCollection)
     }
 
     public unsafe func vtbl(): ITaskNamedValueCollectionVtbl {
@@ -3254,7 +3262,7 @@ public class ITaskNamedValueCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AllowDemandStart: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAllowDemandStart: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var RestartInterval: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3331,7 +3339,7 @@ public class ITaskSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskSettings> {
-        return InterfaceDescriptor<ITaskSettings>("ITaskSettings", ITaskSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskSettingsFromAbi, viewITaskSettings)
+        return InterfaceDescriptor<ITaskSettings>("ITaskSettings", ITaskSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskSettingsFromAbi, viewITaskSettings)
     }
 
     public unsafe func vtbl(): ITaskSettingsVtbl {
@@ -3693,7 +3701,7 @@ public class ITaskSettings3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITriggerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<TASK_TRIGGER_TYPE2Abi>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -3743,7 +3751,7 @@ public class ITrigger <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITrigger> {
-        return InterfaceDescriptor<ITrigger>("ITrigger", ITrigger.iid(), Win32__impl_l2.IDispatch.iid(), takeITriggerFromAbi, viewITrigger)
+        return InterfaceDescriptor<ITrigger>("ITrigger", ITrigger.iid(), Win32_impl_p2.IDispatch.iid(), takeITriggerFromAbi, viewITrigger)
     }
 
     public unsafe func vtbl(): ITriggerVtbl {
@@ -3832,14 +3840,14 @@ public class ITrigger <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITriggerCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Create: CFunc<(CPointer<Unit>, TASK_TRIGGER_TYPE2Abi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -3877,7 +3885,7 @@ public class ITriggerCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITriggerCollection> {
-        return InterfaceDescriptor<ITriggerCollection>("ITriggerCollection", ITriggerCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeITriggerCollectionFromAbi, viewITriggerCollection)
+        return InterfaceDescriptor<ITriggerCollection>("ITriggerCollection", ITriggerCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeITriggerCollectionFromAbi, viewITriggerCollection)
     }
 
     public unsafe func vtbl(): ITriggerCollectionVtbl {
@@ -3910,7 +3918,7 @@ public class ITriggerCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, index)
@@ -4275,9 +4283,9 @@ public struct IEmailActionVtbl {
     public var Body: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Attachments: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var Attachments: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var SetAttachments: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var SetAttachments: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4430,14 +4438,14 @@ public class IEmailAction <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Attachments(pAttachements: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func Attachments(pAttachements: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Attachments(__liveRaw, pAttachements)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func SetAttachments(pAttachements: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func SetAttachments(pAttachements: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAttachments(__liveRaw, pAttachements)
@@ -5035,7 +5043,7 @@ public class ISessionStateChangeTrigger <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskDefinitionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RegistrationInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRegistrationInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Triggers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5086,7 +5094,7 @@ public class ITaskDefinition <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskDefinition> {
-        return InterfaceDescriptor<ITaskDefinition>("ITaskDefinition", ITaskDefinition.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskDefinitionFromAbi, viewITaskDefinition)
+        return InterfaceDescriptor<ITaskDefinition>("ITaskDefinition", ITaskDefinition.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskDefinitionFromAbi, viewITaskDefinition)
     }
 
     public unsafe func vtbl(): ITaskDefinitionVtbl {
@@ -5342,16 +5350,16 @@ extend TASK_TRIGGER <: windows_core.CopyType & windows_core.RuntimeType & window
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRegisteredTaskVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<TASK_STATEAbi>) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetEnabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Run: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Run: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RunEx: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, Int32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var RunEx: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, Int32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetInstances: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var LastRunTime: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var LastTaskResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -5399,7 +5407,7 @@ public class IRegisteredTask <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRegisteredTask> {
-        return InterfaceDescriptor<IRegisteredTask>("IRegisteredTask", IRegisteredTask.iid(), Win32__impl_l2.IDispatch.iid(), takeIRegisteredTaskFromAbi, viewIRegisteredTask)
+        return InterfaceDescriptor<IRegisteredTask>("IRegisteredTask", IRegisteredTask.iid(), Win32_impl_p2.IDispatch.iid(), takeIRegisteredTaskFromAbi, viewIRegisteredTask)
     }
 
     public unsafe func vtbl(): IRegisteredTaskVtbl {
@@ -5437,14 +5445,14 @@ public class IRegisteredTask <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Run(params: Win32__impl_l2.VARIANTAbi, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Run(params: Win32_impl_p2.VARIANTAbi, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Run(__liveRaw, params, ppRunningTask)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RunEx(params: Win32__impl_l2.VARIANTAbi, flags: Int32, sessionID: Int32, user: CPointer<UInt16>, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RunEx(params: Win32_impl_p2.VARIANTAbi, flags: Int32, sessionID: Int32, user: CPointer<UInt16>, ppRunningTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RunEx(__liveRaw, params, flags, sessionID, user, ppRunningTask)
@@ -5520,10 +5528,10 @@ public class IRegisteredTask <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRegisteredTaskCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -5562,7 +5570,7 @@ public class IRegisteredTaskCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRegisteredTaskCollection> {
-        return InterfaceDescriptor<IRegisteredTaskCollection>("IRegisteredTaskCollection", IRegisteredTaskCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIRegisteredTaskCollectionFromAbi, viewIRegisteredTaskCollection)
+        return InterfaceDescriptor<IRegisteredTaskCollection>("IRegisteredTaskCollection", IRegisteredTaskCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIRegisteredTaskCollectionFromAbi, viewIRegisteredTaskCollection)
     }
 
     public unsafe func vtbl(): IRegisteredTaskCollectionVtbl {
@@ -5576,7 +5584,7 @@ public class IRegisteredTaskCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(index: Win32__impl_l2.VARIANTAbi, ppRegisteredTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(index: Win32_impl_p2.VARIANTAbi, ppRegisteredTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, index, ppRegisteredTask)
@@ -6153,21 +6161,21 @@ public class ITaskScheduler <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskFolderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetFolder: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetFolders: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateFolder: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateFolder: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteFolder: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public var GetTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetTasks: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RegisterTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, TASK_LOGON_TYPEAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var RegisterTask: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, TASK_LOGON_TYPEAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RegisterTaskDefinition: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, TASK_LOGON_TYPEAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var RegisterTaskDefinition: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, TASK_LOGON_TYPEAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public var GetSecurityDescriptor: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -6206,7 +6214,7 @@ public class ITaskFolder <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskFolder> {
-        return InterfaceDescriptor<ITaskFolder>("ITaskFolder", ITaskFolder.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskFolderFromAbi, viewITaskFolder)
+        return InterfaceDescriptor<ITaskFolder>("ITaskFolder", ITaskFolder.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskFolderFromAbi, viewITaskFolder)
     }
 
     public unsafe func vtbl(): ITaskFolderVtbl {
@@ -6238,7 +6246,7 @@ public class ITaskFolder <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateFolder(subFolderName: CPointer<UInt16>, sddl: Win32__impl_l2.VARIANTAbi, ppFolder: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateFolder(subFolderName: CPointer<UInt16>, sddl: Win32_impl_p2.VARIANTAbi, ppFolder: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFolder(__liveRaw, subFolderName, sddl, ppFolder)
@@ -6269,14 +6277,14 @@ public class ITaskFolder <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RegisterTask(path: CPointer<UInt16>, xmlText: CPointer<UInt16>, flags: Int32, userId: Win32__impl_l2.VARIANTAbi, password: Win32__impl_l2.VARIANTAbi, logonType: TASK_LOGON_TYPEAbi, sddl: Win32__impl_l2.VARIANTAbi, ppTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RegisterTask(path: CPointer<UInt16>, xmlText: CPointer<UInt16>, flags: Int32, userId: Win32_impl_p2.VARIANTAbi, password: Win32_impl_p2.VARIANTAbi, logonType: TASK_LOGON_TYPEAbi, sddl: Win32_impl_p2.VARIANTAbi, ppTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegisterTask(__liveRaw, path, xmlText, flags, userId, password, logonType, sddl, ppTask)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RegisterTaskDefinition(path: CPointer<UInt16>, pDefinition: CPointer<Unit>, flags: Int32, userId: Win32__impl_l2.VARIANTAbi, password: Win32__impl_l2.VARIANTAbi, logonType: TASK_LOGON_TYPEAbi, sddl: Win32__impl_l2.VARIANTAbi, ppTask: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RegisterTaskDefinition(path: CPointer<UInt16>, pDefinition: CPointer<Unit>, flags: Int32, userId: Win32_impl_p2.VARIANTAbi, password: Win32_impl_p2.VARIANTAbi, logonType: TASK_LOGON_TYPEAbi, sddl: Win32_impl_p2.VARIANTAbi, ppTask: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RegisterTaskDefinition(__liveRaw, path, pDefinition, flags, userId, password, logonType, sddl, ppTask)
@@ -6298,10 +6306,10 @@ public class ITaskFolder <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskFolderCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -6340,7 +6348,7 @@ public class ITaskFolderCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskFolderCollection> {
-        return InterfaceDescriptor<ITaskFolderCollection>("ITaskFolderCollection", ITaskFolderCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskFolderCollectionFromAbi, viewITaskFolderCollection)
+        return InterfaceDescriptor<ITaskFolderCollection>("ITaskFolderCollection", ITaskFolderCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskFolderCollectionFromAbi, viewITaskFolderCollection)
     }
 
     public unsafe func vtbl(): ITaskFolderCollectionVtbl {
@@ -6354,7 +6362,7 @@ public class ITaskFolderCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(index: Win32__impl_l2.VARIANTAbi, ppFolder: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(index: Win32_impl_p2.VARIANTAbi, ppFolder: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, index, ppFolder)
@@ -6371,12 +6379,12 @@ public class ITaskFolderCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TaskScheduler == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITaskServiceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetFolder: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetRunningTasks: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var NewTask: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Connect: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Connect: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _, _ => 0 }
     public var Connected: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var TargetServer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ConnectedUser: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6418,7 +6426,7 @@ public class ITaskService <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITaskService> {
-        return InterfaceDescriptor<ITaskService>("ITaskService", ITaskService.iid(), Win32__impl_l2.IDispatch.iid(), takeITaskServiceFromAbi, viewITaskService)
+        return InterfaceDescriptor<ITaskService>("ITaskService", ITaskService.iid(), Win32_impl_p2.IDispatch.iid(), takeITaskServiceFromAbi, viewITaskService)
     }
 
     public unsafe func vtbl(): ITaskServiceVtbl {
@@ -6444,7 +6452,7 @@ public class ITaskService <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Connect(serverName: Win32__impl_l2.VARIANTAbi, user: Win32__impl_l2.VARIANTAbi, domain: Win32__impl_l2.VARIANTAbi, password: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Connect(serverName: Win32_impl_p2.VARIANTAbi, user: Win32_impl_p2.VARIANTAbi, domain: Win32_impl_p2.VARIANTAbi, password: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Connect(__liveRaw, serverName, user, domain, password)

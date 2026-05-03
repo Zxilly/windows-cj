@@ -4,17 +4,28 @@
 package windows.Win32.NetworkManagement.QoS
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_polyfill.{packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadValue, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteValue, unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
+@When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_QoS == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
@@ -2811,8 +2822,8 @@ extend TC_GEN_FILTER <: windows_core.CopyType & windows_core.RuntimeType & windo
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct TC_GEN_FLOW {
-    public var SendingFlowspec: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
-    public var ReceivingFlowspec: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
+    public var SendingFlowspec: Win32_impl_p0.FLOWSPEC = Win32_impl_p0.FLOWSPEC()
+    public var ReceivingFlowspec: Win32_impl_p0.FLOWSPEC = Win32_impl_p0.FLOWSPEC()
     public var TcObjectsLength: UInt32 = 0u32
     public var TcObjects: VArray<QOS_OBJECT_HDRAbi, $1> = VArray<QOS_OBJECT_HDRAbi, $1>(repeat: QOS_OBJECT_HDRAbi())
     public init() {}
@@ -2821,8 +2832,8 @@ public struct TC_GEN_FLOW {
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct TC_GEN_FLOWAbi {
-    public var SendingFlowspec: Win32__impl_l0.FLOWSPECAbi = Win32__impl_l0.FLOWSPECAbi()
-    public var ReceivingFlowspec: Win32__impl_l0.FLOWSPECAbi = Win32__impl_l0.FLOWSPECAbi()
+    public var SendingFlowspec: Win32_impl_p0.FLOWSPECAbi = Win32_impl_p0.FLOWSPECAbi()
+    public var ReceivingFlowspec: Win32_impl_p0.FLOWSPECAbi = Win32_impl_p0.FLOWSPECAbi()
     public var TcObjectsLength: UInt32 = 0u32
     public var TcObjects: VArray<QOS_OBJECT_HDRAbi, $1> = VArray<QOS_OBJECT_HDRAbi, $1>(repeat: QOS_OBJECT_HDRAbi())
     public init() {}
@@ -2835,16 +2846,16 @@ extend TC_GEN_FLOW <: windows_core.CopyType & windows_core.RuntimeType & windows
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.QoS.TC_GEN_FLOW;struct(Windows.Win32.Networking.WinSock.FLOWSPEC;u4;u4;u4;u4;u4;u4;u4;u4);struct(Windows.Win32.Networking.WinSock.FLOWSPEC;u4;u4;u4;u4;u4;u4;u4;u4);u4;cinterface(IInspectable))" }
     public static func projectAbi(value: TC_GEN_FLOW): TC_GEN_FLOWAbi {
         var abi = TC_GEN_FLOWAbi()
-        abi.SendingFlowspec = windows_core.projectTypedAbi(value.SendingFlowspec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>())
-        abi.ReceivingFlowspec = windows_core.projectTypedAbi(value.ReceivingFlowspec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>())
+        abi.SendingFlowspec = windows_core.projectTypedAbi(value.SendingFlowspec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>())
+        abi.ReceivingFlowspec = windows_core.projectTypedAbi(value.ReceivingFlowspec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>())
         abi.TcObjectsLength = value.TcObjectsLength
         abi.TcObjects = value.TcObjects
         return abi
     }
     public static func assumeInitRef(abi: TC_GEN_FLOWAbi): TC_GEN_FLOW {
         var value = TC_GEN_FLOW()
-        value.SendingFlowspec = windows_core.fromTypedAbi(abi.SendingFlowspec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>()).unwrap()
-        value.ReceivingFlowspec = windows_core.fromTypedAbi(abi.ReceivingFlowspec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>()).unwrap()
+        value.SendingFlowspec = windows_core.fromTypedAbi(abi.SendingFlowspec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>()).unwrap()
+        value.ReceivingFlowspec = windows_core.fromTypedAbi(abi.ReceivingFlowspec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>()).unwrap()
         value.TcObjectsLength = abi.TcObjectsLength
         value.TcObjects = abi.TcObjects
         return value
@@ -3384,7 +3395,7 @@ extend ENUMERATION_BUFFER <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct QOS_DESTADDR {
     public var ObjectHdr: QOS_OBJECT_HDR = QOS_OBJECT_HDR()
-    public var SocketAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var SocketAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public var SocketAddressLength: UInt32 = 0u32
     public init() {}
 }
@@ -3393,7 +3404,7 @@ public struct QOS_DESTADDR {
 @C
 public struct QOS_DESTADDRAbi {
     public var ObjectHdr: QOS_OBJECT_HDRAbi = QOS_OBJECT_HDRAbi()
-    public var SocketAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var SocketAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public var SocketAddressLength: UInt32 = 0u32
     public init() {}
 }
@@ -4133,11 +4144,11 @@ public unsafe func Windows_TcSetInterface(IfcHandle: CPointer<Unit>, pGuidParam:
 foreign {
     // param-hint: DestAddr optional
     // param-hint: Flags optional
-    func QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, TrafficType: QOS_TRAFFIC_TYPEAbi, Flags: UInt32, FlowId: CPointer<UInt32>): Int32
+    func QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32_impl_p0.SOCKET, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, TrafficType: QOS_TRAFFIC_TYPEAbi, Flags: UInt32, FlowId: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSAddSocketToFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, TrafficType: QOS_TRAFFIC_TYPEAbi, Flags: UInt32, FlowId: CPointer<UInt32>): Int32 {
+public unsafe func Windows_QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32_impl_p0.SOCKET, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, TrafficType: QOS_TRAFFIC_TYPEAbi, Flags: UInt32, FlowId: CPointer<UInt32>): Int32 {
     return QOSAddSocketToFlow(QOSHandle, Socket, DestAddr, TrafficType, Flags, FlowId)
 }
 
@@ -4213,11 +4224,11 @@ public unsafe func Windows_QOSQueryFlow(QOSHandle: CPointer<Unit>, FlowId: UInt3
 foreign {
     // param-hint: Socket optional
     // param-hint: Flags optional reserved
-    func QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32
+    func QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32_impl_p0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSRemoveSocketFromFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32 {
+public unsafe func Windows_QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32_impl_p0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32 {
     return QOSRemoveSocketFromFlow(QOSHandle, Socket, FlowId, Flags)
 }
 
@@ -4237,22 +4248,22 @@ public unsafe func Windows_QOSSetFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32,
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStartTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: Flags optional reserved
-    func QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, Flags: UInt32): Int32
+    func QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, Flags: UInt32): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStartTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, Flags: UInt32): Int32 {
+public unsafe func Windows_QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, Flags: UInt32): Int32 {
     return QOSStartTrackingClient(QOSHandle, DestAddr, Flags)
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStopTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: Flags optional reserved
-    func QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, Flags: UInt32): Int32
+    func QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, Flags: UInt32): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStopTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, Flags: UInt32): Int32 {
+public unsafe func Windows_QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32_impl_p1.SOCKADDRAbi>, Flags: UInt32): Int32 {
     return QOSStopTrackingClient(QOSHandle, DestAddr, Flags)
 }
 
@@ -5175,7 +5186,7 @@ public let WBCL_HASH_LEN_SHA1: UInt32 = 20u32
 
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct FLOWDESCRIPTOR {
-    public var FlowSpec: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
+    public var FlowSpec: Win32_impl_p0.FLOWSPEC = Win32_impl_p0.FLOWSPEC()
     public var NumFilters: UInt32 = 0u32
     public var FilterList: CPointer<RSVP_FILTERSPECAbi> = CPointer<RSVP_FILTERSPECAbi>()
     public init() {}
@@ -5184,7 +5195,7 @@ public struct FLOWDESCRIPTOR {
 @When[Windows_Win32_NetworkManagement_QoS == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct FLOWDESCRIPTORAbi {
-    public var FlowSpec: Win32__impl_l0.FLOWSPECAbi = Win32__impl_l0.FLOWSPECAbi()
+    public var FlowSpec: Win32_impl_p0.FLOWSPECAbi = Win32_impl_p0.FLOWSPECAbi()
     public var NumFilters: UInt32 = 0u32
     public var FilterList: CPointer<RSVP_FILTERSPECAbi> = CPointer<RSVP_FILTERSPECAbi>()
     public init() {}
@@ -5197,14 +5208,14 @@ extend FLOWDESCRIPTOR <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.QoS.FLOWDESCRIPTOR;struct(Windows.Win32.Networking.WinSock.FLOWSPEC;u4;u4;u4;u4;u4;u4;u4;u4);u4;cinterface(IInspectable))" }
     public static func projectAbi(value: FLOWDESCRIPTOR): FLOWDESCRIPTORAbi {
         var abi = FLOWDESCRIPTORAbi()
-        abi.FlowSpec = windows_core.projectTypedAbi(value.FlowSpec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>())
+        abi.FlowSpec = windows_core.projectTypedAbi(value.FlowSpec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>())
         abi.NumFilters = value.NumFilters
         abi.FilterList = value.FilterList
         return abi
     }
     public static func assumeInitRef(abi: FLOWDESCRIPTORAbi): FLOWDESCRIPTOR {
         var value = FLOWDESCRIPTOR()
-        value.FlowSpec = windows_core.fromTypedAbi(abi.FlowSpec, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>()).unwrap()
+        value.FlowSpec = windows_core.fromTypedAbi(abi.FlowSpec, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>()).unwrap()
         value.NumFilters = abi.NumFilters
         value.FilterList = abi.FilterList
         return value

@@ -4,15 +4,25 @@
 package windows.Win32.Devices.HumanInterfaceDevice
 
 import std.collection.*
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]
 import windows_core as windows_core
 
 
@@ -489,7 +499,7 @@ public struct DICONFIGUREDEVICESPARAMSA {
     public var lprgFormats: CPointer<DIACTIONFORMATAAbi> = CPointer<DIACTIONFORMATAAbi>()
     public var hwnd: CPointer<Unit> = CPointer<Unit>()
     public var dics: DICOLORSET = DICOLORSET()
-    public var lpUnkDDSTarget: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var lpUnkDDSTarget: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -533,7 +543,7 @@ extend DICONFIGUREDEVICESPARAMSA <: windows_core.CopyType & windows_core.Runtime
         value.lprgFormats = abi.lprgFormats
         value.hwnd = abi.hwnd
         value.dics = DICOLORSET.assumeInitRef(abi.dics)
-        value.lpUnkDDSTarget = Win32__impl_l0.IUnknown.fromAbiTake(abi.lpUnkDDSTarget)
+        value.lpUnkDDSTarget = Win32_impl_p0.IUnknown.fromAbiTake(abi.lpUnkDDSTarget)
         return value
     }
     public static func fromAbi(abi: DICONFIGUREDEVICESPARAMSAAbi): Result<DICONFIGUREDEVICESPARAMSA> { Result<DICONFIGUREDEVICESPARAMSA>.Ok(DICONFIGUREDEVICESPARAMSA.assumeInitRef(abi)) }
@@ -5489,7 +5499,7 @@ public struct DICONFIGUREDEVICESPARAMSW {
     public var lprgFormats: CPointer<DIACTIONFORMATWAbi> = CPointer<DIACTIONFORMATWAbi>()
     public var hwnd: CPointer<Unit> = CPointer<Unit>()
     public var dics: DICOLORSET = DICOLORSET()
-    public var lpUnkDDSTarget: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var lpUnkDDSTarget: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -5533,7 +5543,7 @@ extend DICONFIGUREDEVICESPARAMSW <: windows_core.CopyType & windows_core.Runtime
         value.lprgFormats = abi.lprgFormats
         value.hwnd = abi.hwnd
         value.dics = DICOLORSET.assumeInitRef(abi.dics)
-        value.lpUnkDDSTarget = Win32__impl_l0.IUnknown.fromAbiTake(abi.lpUnkDDSTarget)
+        value.lpUnkDDSTarget = Win32_impl_p0.IUnknown.fromAbiTake(abi.lpUnkDDSTarget)
         return value
     }
     public static func fromAbi(abi: DICONFIGUREDEVICESPARAMSWAbi): Result<DICONFIGUREDEVICESPARAMSW> { Result<DICONFIGUREDEVICESPARAMSW>.Ok(DICONFIGUREDEVICESPARAMSW.assumeInitRef(abi)) }

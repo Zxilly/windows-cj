@@ -4,16 +4,27 @@
 package windows.Services.Cortana
 
 import std.collection.*
+@When[Windows_Services_Cortana == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Services_Cortana == "on"]
 import windows_core as windows_core
+@When[Windows_Services_Cortana == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Services_Cortana == "on"]
 import windows_interface as windows_interface
+@When[Windows_Services_Cortana == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Services_Cortana == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Services_Cortana == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Services_Cortana == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Services_Cortana == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Services_Cortana == "on"]
 import windows_collections as windows_collections
+@When[Windows_Services_Cortana == "on"]
 import windows_future as windows_future
 
 
@@ -669,7 +680,7 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICortanaActionableInsights", ICortanaActionableInsights.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICortanaActionableInsightsVtbl", "ICortanaActionableInsights", "ICortanaActionableInsights_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAvailableAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForImageAsync", 8, [InterfaceParameterSchema("imageStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForImageWithOptionsAsync", 9, [InterfaceParameterSchema("imageStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForTextAsync", 10, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForTextWithOptionsAsync", 11, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsAsync", 12, [InterfaceParameterSchema("datapackage", "CPointer<Unit>", "InParam<_impl_l2.DataPackage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsWithOptionsAsync", 13, [InterfaceParameterSchema("datapackage", "CPointer<Unit>", "InParam<_impl_l2.DataPackage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICortanaActionableInsights", ICortanaActionableInsights.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICortanaActionableInsightsVtbl", "ICortanaActionableInsights", "ICortanaActionableInsights_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAvailableAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForImageAsync", 8, [InterfaceParameterSchema("imageStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForImageWithOptionsAsync", 9, [InterfaceParameterSchema("imageStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForTextAsync", 10, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsForTextWithOptionsAsync", 11, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsAsync", 12, [InterfaceParameterSchema("datapackage", "CPointer<Unit>", "InParam<impl_p2.DataPackage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowInsightsWithOptionsAsync", 13, [InterfaceParameterSchema("datapackage", "CPointer<Unit>", "InParam<impl_p2.DataPackage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<CortanaActionableInsightsOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICortanaActionableInsights.runtimeType())
         return schema
     }
@@ -699,12 +710,12 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     public unsafe func IsAvailableAsync(): windows_future.IAsyncOperation<Bool> {
@@ -716,7 +727,7 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowInsightsForImageAsync(imageStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsForImageAsync(imageStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowInsightsForImageAsync(asRaw(), imageStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -725,7 +736,7 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowInsightsForImageWithOptionsAsync(imageStream: _impl_l1.IRandomAccessStreamReference, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsForImageWithOptionsAsync(imageStream: impl_p1.IRandomAccessStreamReference, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowInsightsForImageWithOptionsAsync(asRaw(), imageStream.asRaw(), options.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -750,7 +761,7 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func ShowInsightsAsync(datapackage: _impl_l2.DataPackage): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsAsync(datapackage: impl_p2.DataPackage): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowInsightsAsync(asRaw(), datapackage.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -759,7 +770,7 @@ public class ICortanaActionableInsights <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func ShowInsightsWithOptionsAsync(datapackage: _impl_l2.DataPackage, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsWithOptionsAsync(datapackage: impl_p2.DataPackage, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowInsightsWithOptionsAsync(asRaw(), datapackage.asRaw(), options.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -841,7 +852,7 @@ public class CortanaActionableInsights <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -850,12 +861,12 @@ public class CortanaActionableInsights <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowInsightsForImageAsync(imageStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsForImageAsync(imageStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncAction {
         return defaultInterface().ShowInsightsForImageAsync(imageStream)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowInsightsForImageWithOptionsAsync(imageStream: _impl_l1.IRandomAccessStreamReference, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsForImageWithOptionsAsync(imageStream: impl_p1.IRandomAccessStreamReference, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
         return defaultInterface().ShowInsightsForImageWithOptionsAsync(imageStream, options)
     }
 
@@ -868,12 +879,12 @@ public class CortanaActionableInsights <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func ShowInsightsAsync(datapackage: _impl_l2.DataPackage): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsAsync(datapackage: impl_p2.DataPackage): windows_future.IAsyncAction {
         return defaultInterface().ShowInsightsAsync(datapackage)
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func ShowInsightsWithOptionsAsync(datapackage: _impl_l2.DataPackage, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
+    public unsafe func ShowInsightsWithOptionsAsync(datapackage: impl_p2.DataPackage, options: CortanaActionableInsightsOptions): windows_future.IAsyncAction {
         return defaultInterface().ShowInsightsWithOptionsAsync(datapackage, options)
     }
 
@@ -889,7 +900,7 @@ public class CortanaActionableInsights <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): CortanaActionableInsights {
+    public static unsafe func GetForUser(user: impl_p1.User): CortanaActionableInsights {
         var result__: Option<CortanaActionableInsights> = Option<CortanaActionableInsights>.None
         try (factory__ = windows_core.factory<CortanaActionableInsights, ICortanaActionableInsightsStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -1207,7 +1218,7 @@ public class ICortanaActionableInsightsStatics <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICortanaActionableInsightsStatics", ICortanaActionableInsightsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICortanaActionableInsightsStaticsVtbl", "ICortanaActionableInsightsStatics", "ICortanaActionableInsightsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CortanaActionableInsights>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CortanaActionableInsights>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICortanaActionableInsightsStatics", ICortanaActionableInsightsStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICortanaActionableInsightsStaticsVtbl", "ICortanaActionableInsightsStatics", "ICortanaActionableInsightsStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CortanaActionableInsights>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CortanaActionableInsights>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICortanaActionableInsightsStatics.runtimeType())
         return schema
     }
@@ -1245,7 +1256,7 @@ public class ICortanaActionableInsightsStatics <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): CortanaActionableInsights {
+    public unsafe func GetForUser(user: impl_p1.User): CortanaActionableInsights {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))

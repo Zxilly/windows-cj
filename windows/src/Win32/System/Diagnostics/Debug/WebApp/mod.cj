@@ -4,13 +4,20 @@
 package windows.Win32.System.Diagnostics.Debug.WebApp
 
 import std.collection.*
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 import windows.Win32.System.Diagnostics.Debug.ActiveScript as Win32_System_Diagnostics_Debug_ActiveScript
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on" && Windows_Win32_Web_MsHtml == "on"]
 import windows.Win32.Web.MsHtml as Win32_Web_MsHtml
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on"]
@@ -71,7 +78,7 @@ public class IWebApplicationActivation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Diagnostics_Debug_WebApp == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWebApplicationAuthoringModeVtbl {
-    public var base_: Win32__impl_l1.IServiceProviderVtbl = Win32__impl_l1.IServiceProviderVtbl()
+    public var base_: Win32_impl_p2.IServiceProviderVtbl = Win32_impl_p2.IServiceProviderVtbl()
     public var AuthoringClientBinary: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -109,7 +116,7 @@ public class IWebApplicationAuthoringMode <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IWebApplicationAuthoringMode> {
-        return InterfaceDescriptor<IWebApplicationAuthoringMode>("IWebApplicationAuthoringMode", IWebApplicationAuthoringMode.iid(), Win32__impl_l1.IServiceProvider.iid(), takeIWebApplicationAuthoringModeFromAbi, viewIWebApplicationAuthoringMode)
+        return InterfaceDescriptor<IWebApplicationAuthoringMode>("IWebApplicationAuthoringMode", IWebApplicationAuthoringMode.iid(), Win32_impl_p2.IServiceProvider.iid(), takeIWebApplicationAuthoringModeFromAbi, viewIWebApplicationAuthoringMode)
     }
 
     public unsafe func vtbl(): IWebApplicationAuthoringModeVtbl {

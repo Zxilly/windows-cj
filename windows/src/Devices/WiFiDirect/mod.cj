@@ -4,16 +4,27 @@
 package windows.Devices.WiFiDirect
 
 import std.collection.*
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_WiFiDirect == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_WiFiDirect == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_WiFiDirect == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_WiFiDirect == "on"]
 import windows_future as windows_future
 
 
@@ -161,7 +172,7 @@ public class IWiFiDirectConnectionRequest <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectConnectionRequest", IWiFiDirectConnectionRequest.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IWiFiDirectConnectionRequestVtbl", "IWiFiDirectConnectionRequest", "IWiFiDirectConnectionRequest_Impl", [InterfaceMethodSchema("get_DeviceInformation", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectConnectionRequest", IWiFiDirectConnectionRequest.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IWiFiDirectConnectionRequestVtbl", "IWiFiDirectConnectionRequest", "IWiFiDirectConnectionRequest_Impl", [InterfaceMethodSchema("get_DeviceInformation", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectConnectionRequest.runtimeType())
         return schema
     }
@@ -198,12 +209,12 @@ public class IWiFiDirectConnectionRequest <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func get_DeviceInformation(): _impl_l1.DeviceInformation {
+    public unsafe func get_DeviceInformation(): impl_p1.DeviceInformation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_DeviceInformation(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DeviceInformation.fromAbiTake(result__)
+        return impl_p1.DeviceInformation.fromAbiTake(result__)
     }
 }
 
@@ -271,7 +282,7 @@ public class IWiFiDirectInformationElement <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectInformationElement", IWiFiDirectInformationElement.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectInformationElementVtbl", "IWiFiDirectInformationElement", "IWiFiDirectInformationElement_Impl", [InterfaceMethodSchema("Oui", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOui", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OuiType", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOuiType", 9, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Value", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectInformationElement", IWiFiDirectInformationElement.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectInformationElementVtbl", "IWiFiDirectInformationElement", "IWiFiDirectInformationElement_Impl", [InterfaceMethodSchema("Oui", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOui", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OuiType", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOuiType", 9, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Value", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectInformationElement.runtimeType())
         return schema
     }
@@ -301,16 +312,16 @@ public class IWiFiDirectInformationElement <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Oui(): _impl_l0.IBuffer {
+    public unsafe func Oui(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Oui(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetOui(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetOui(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetOui(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -331,16 +342,16 @@ public class IWiFiDirectInformationElement <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Value(): _impl_l0.IBuffer {
+    public unsafe func Value(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetValue(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetValue(value: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.SetValue(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -405,7 +416,7 @@ public class IWiFiDirectLegacySettings <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectLegacySettings", IWiFiDirectLegacySettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectLegacySettingsVtbl", "IWiFiDirectLegacySettings", "IWiFiDirectLegacySettings_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Ssid", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSsid", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Passphrase", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPassphrase", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectLegacySettings", IWiFiDirectLegacySettings.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectLegacySettingsVtbl", "IWiFiDirectLegacySettings", "IWiFiDirectLegacySettings_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Ssid", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSsid", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Passphrase", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPassphrase", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectLegacySettings.runtimeType())
         return schema
     }
@@ -463,16 +474,16 @@ public class IWiFiDirectLegacySettings <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func Passphrase(): _impl_l0.PasswordCredential {
+    public unsafe func Passphrase(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Passphrase(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetPassphrase(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetPassphrase(value: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetPassphrase(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -733,7 +744,7 @@ public class WiFiDirectConnectionRequest <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func get_DeviceInformation(): _impl_l1.DeviceInformation {
+    public unsafe func get_DeviceInformation(): impl_p1.DeviceInformation {
         return defaultInterface().get_DeviceInformation()
     }
 
@@ -1011,12 +1022,12 @@ public class WiFiDirectLegacySettings <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func Passphrase(): _impl_l0.PasswordCredential {
+    public unsafe func Passphrase(): impl_p0.PasswordCredential {
         return defaultInterface().Passphrase()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetPassphrase(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetPassphrase(value: impl_p0.PasswordCredential): Unit {
         defaultInterface().SetPassphrase(value)
     }
 }
@@ -1386,7 +1397,7 @@ extend IWiFiDirectConnectionParameters2 <: windows_core.Interface<IWiFiDirectCon
 public struct IWiFiDirectConnectionParametersStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Devices_Enumeration == "on"]
-    public var GetDevicePairingKinds: CFunc<(CPointer<Unit>, WiFiDirectConfigurationMethodAbi, CPointer<_impl_l0.DevicePairingKindsAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetDevicePairingKinds: CFunc<(CPointer<Unit>, WiFiDirectConfigurationMethodAbi, CPointer<impl_p0.DevicePairingKindsAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Enumeration != "on"]
     public var GetDevicePairingKinds: UIntNative = UIntNative(0)
     public init() {}
@@ -1428,7 +1439,7 @@ public class IWiFiDirectConnectionParametersStatics <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectConnectionParametersStatics", IWiFiDirectConnectionParametersStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectConnectionParametersStaticsVtbl", "IWiFiDirectConnectionParametersStatics", "IWiFiDirectConnectionParametersStatics_Impl", [InterfaceMethodSchema("GetDevicePairingKinds", 6, [InterfaceParameterSchema("configurationMethod", "WiFiDirectConfigurationMethodAbi", "WiFiDirectConfigurationMethod", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<_impl_l0.DevicePairingKindsAbi>", "OutSlot<_impl_l0.DevicePairingKinds>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectConnectionParametersStatics", IWiFiDirectConnectionParametersStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectConnectionParametersStaticsVtbl", "IWiFiDirectConnectionParametersStatics", "IWiFiDirectConnectionParametersStatics_Impl", [InterfaceMethodSchema("GetDevicePairingKinds", 6, [InterfaceParameterSchema("configurationMethod", "WiFiDirectConfigurationMethodAbi", "WiFiDirectConfigurationMethod", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<impl_p0.DevicePairingKindsAbi>", "OutSlot<impl_p0.DevicePairingKinds>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectConnectionParametersStatics.runtimeType())
         return schema
     }
@@ -1458,12 +1469,12 @@ public class IWiFiDirectConnectionParametersStatics <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func GetDevicePairingKinds(configurationMethod: WiFiDirectConfigurationMethod): _impl_l0.DevicePairingKinds {
+    public unsafe func GetDevicePairingKinds(configurationMethod: WiFiDirectConfigurationMethod): impl_p0.DevicePairingKinds {
         let v = vtbl()
-        var result__ = _impl_l0.DevicePairingKindsAbi()
-        let hr = v.GetDevicePairingKinds(asRaw(), windows_core.projectTypedAbi(configurationMethod, windows_core.typeMarker<WiFiDirectConfigurationMethod>()), CPointer<_impl_l0.DevicePairingKindsAbi>(inout result__))
+        var result__ = impl_p0.DevicePairingKindsAbi()
+        let hr = v.GetDevicePairingKinds(asRaw(), windows_core.projectTypedAbi(configurationMethod, windows_core.typeMarker<WiFiDirectConfigurationMethod>()), CPointer<impl_p0.DevicePairingKindsAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DevicePairingKinds>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DevicePairingKinds>()).unwrap()
     }
 }
 
@@ -1678,7 +1689,7 @@ public class WiFiDirectConnectionParameters <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<WiFiDirectConnectionParameters> {
-        let ancestors = [IWiFiDirectConnectionParameters.iid(), _impl_l0.IDevicePairingSettings.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IWiFiDirectConnectionParameters.iid(), impl_p0.IDevicePairingSettings.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<WiFiDirectConnectionParameters>("WiFiDirectConnectionParameters", IWiFiDirectConnectionParameters.iid(), ancestors, { raw => WiFiDirectConnectionParameters.fromAbiTake(raw) }, { raw => WiFiDirectConnectionParameters.viewOf(raw) })
     }
 
@@ -1731,8 +1742,8 @@ public class WiFiDirectConnectionParameters <: InterfaceWrapperBase & ComInterfa
         }
     }
 
-    public func asIDevicePairingSettings(): _impl_l0.IDevicePairingSettings {
-        match (unsafe { query(_impl_l0.IDevicePairingSettings.descriptor()) }) {
+    public func asIDevicePairingSettings(): impl_p0.IDevicePairingSettings {
+        match (unsafe { query(impl_p0.IDevicePairingSettings.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1747,8 +1758,8 @@ public class WiFiDirectConnectionParameters <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public static unsafe func GetDevicePairingKinds(configurationMethod: WiFiDirectConfigurationMethod): _impl_l0.DevicePairingKinds {
-        var result__: Option<_impl_l0.DevicePairingKinds> = Option<_impl_l0.DevicePairingKinds>.None
+    public static unsafe func GetDevicePairingKinds(configurationMethod: WiFiDirectConfigurationMethod): impl_p0.DevicePairingKinds {
+        var result__: Option<impl_p0.DevicePairingKinds> = Option<impl_p0.DevicePairingKinds>.None
         try (factory__ = windows_core.factory<WiFiDirectConnectionParameters, IWiFiDirectConnectionParametersStatics>().unwrap()) {
             result__ = Some(factory__.GetDevicePairingKinds(configurationMethod))
         }
@@ -2282,7 +2293,7 @@ public class IWiFiDirectDevice <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectDevice", IWiFiDirectDevice.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IWiFiDirectDeviceVtbl", "IWiFiDirectDevice", "IWiFiDirectDevice_Impl", [InterfaceMethodSchema("ConnectionStatus", 7, [InterfaceParameterSchema("result", "CPointer<WiFiDirectConnectionStatusAbi>", "OutSlot<WiFiDirectConnectionStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionStatusChanged", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WiFiDirectDevice, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveConnectionStatusChanged", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetConnectionEndpointPairs", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.EndpointPair>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectDevice", IWiFiDirectDevice.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IWiFiDirectDeviceVtbl", "IWiFiDirectDevice", "IWiFiDirectDevice_Impl", [InterfaceMethodSchema("ConnectionStatus", 7, [InterfaceParameterSchema("result", "CPointer<WiFiDirectConnectionStatusAbi>", "OutSlot<WiFiDirectConnectionStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectionStatusChanged", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WiFiDirectDevice, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveConnectionStatusChanged", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetConnectionEndpointPairs", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.EndpointPair>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectDevice.runtimeType())
         return schema
     }
@@ -2349,12 +2360,12 @@ public class IWiFiDirectDevice <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
+    public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<impl_p1.EndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetConnectionEndpointPairs(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.EndpointPair>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.EndpointPair>.fromAbiTake(result__)
     }
 }
 
@@ -2600,7 +2611,7 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiDirectInformationElementStatics", IWiFiDirectInformationElementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectInformationElementStaticsVtbl", "IWiFiDirectInformationElementStatics", "IWiFiDirectInformationElementStatics_Impl", [InterfaceMethodSchema("CreateFromBuffer", 6, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<WiFiDirectInformationElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromDeviceInformation", 7, [InterfaceParameterSchema("deviceInformation", "CPointer<Unit>", "InParam<_impl_l1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<WiFiDirectInformationElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiDirectInformationElementStatics", IWiFiDirectInformationElementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiDirectInformationElementStaticsVtbl", "IWiFiDirectInformationElementStatics", "IWiFiDirectInformationElementStatics_Impl", [InterfaceMethodSchema("CreateFromBuffer", 6, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<WiFiDirectInformationElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromDeviceInformation", 7, [InterfaceParameterSchema("deviceInformation", "CPointer<Unit>", "InParam<impl_p1.DeviceInformation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<WiFiDirectInformationElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiDirectInformationElementStatics.runtimeType())
         return schema
     }
@@ -2630,7 +2641,7 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(buffer: _impl_l0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
+    public unsafe func CreateFromBuffer(buffer: impl_p0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2639,7 +2650,7 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func CreateFromDeviceInformation(deviceInformation: _impl_l1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
+    public unsafe func CreateFromDeviceInformation(deviceInformation: impl_p1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromDeviceInformation(asRaw(), deviceInformation.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3092,7 +3103,7 @@ public class WiFiDirectDevice <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
+    public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<impl_p1.EndpointPair> {
         return defaultInterface().GetConnectionEndpointPairs()
     }
 
@@ -3244,12 +3255,12 @@ public class WiFiDirectInformationElement <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Oui(): _impl_l0.IBuffer {
+    public unsafe func Oui(): impl_p0.IBuffer {
         return defaultInterface().Oui()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetOui(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetOui(value: impl_p0.IBuffer): Unit {
         defaultInterface().SetOui(value)
     }
 
@@ -3262,17 +3273,17 @@ public class WiFiDirectInformationElement <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Value(): _impl_l0.IBuffer {
+    public unsafe func Value(): impl_p0.IBuffer {
         return defaultInterface().Value()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetValue(value: _impl_l0.IBuffer): Unit {
+    public unsafe func SetValue(value: impl_p0.IBuffer): Unit {
         defaultInterface().SetValue(value)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(buffer: _impl_l0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
+    public static unsafe func CreateFromBuffer(buffer: impl_p0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
         var result__: Option<windows_collections.IVector<WiFiDirectInformationElement>> = Option<windows_collections.IVector<WiFiDirectInformationElement>>.None
         try (factory__ = windows_core.factory<WiFiDirectInformationElement, IWiFiDirectInformationElementStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(buffer))
@@ -3284,7 +3295,7 @@ public class WiFiDirectInformationElement <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
-    public static unsafe func CreateFromDeviceInformation(deviceInformation: _impl_l1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
+    public static unsafe func CreateFromDeviceInformation(deviceInformation: impl_p1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
         var result__: Option<windows_collections.IVector<WiFiDirectInformationElement>> = Option<windows_collections.IVector<WiFiDirectInformationElement>>.None
         try (factory__ = windows_core.factory<WiFiDirectInformationElement, IWiFiDirectInformationElementStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromDeviceInformation(deviceInformation))

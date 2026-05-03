@@ -4,15 +4,25 @@
 package windows.ApplicationModel.LockScreen
 
 import std.collection.*
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_LockScreen == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_LockScreen == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_LockScreen == "on"]
 import windows_future as windows_future
 
 
@@ -70,7 +80,7 @@ public class ILockScreenBadge <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILockScreenBadge", ILockScreenBadge.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenBadgeVtbl", "ILockScreenBadge", "ILockScreenBadge_Impl", [InterfaceMethodSchema("Logo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Glyph", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Number", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutomationName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchApp", 10, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("ILockScreenBadge", ILockScreenBadge.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenBadgeVtbl", "ILockScreenBadge", "ILockScreenBadge_Impl", [InterfaceMethodSchema("Logo", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Glyph", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Number", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutomationName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchApp", 10, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(ILockScreenBadge.runtimeType())
         return schema
     }
@@ -100,21 +110,21 @@ public class ILockScreenBadge <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Logo(): _impl_l1.IRandomAccessStream {
+    public unsafe func Logo(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Logo(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Glyph(): _impl_l1.IRandomAccessStream {
+    public unsafe func Glyph(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Glyph(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     public unsafe func Number(): Foundation.IReference<UInt32> {
@@ -296,12 +306,12 @@ public class LockScreenBadge <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Logo(): _impl_l1.IRandomAccessStream {
+    public unsafe func Logo(): impl_p1.IRandomAccessStream {
         return defaultInterface().Logo()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Glyph(): _impl_l1.IRandomAccessStream {
+    public unsafe func Glyph(): impl_p1.IRandomAccessStream {
         return defaultInterface().Glyph()
     }
 
@@ -869,7 +879,7 @@ public class ILockScreenInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILockScreenInfo", ILockScreenInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenInfoVtbl", "ILockScreenInfo", "ILockScreenInfo_Impl", [InterfaceMethodSchema("LockScreenImageChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLockScreenImageChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LockScreenImage", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BadgesChanged", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveBadgesChanged", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Badges", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<LockScreenBadge>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetailTextChanged", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDetailTextChanged", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DetailText", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlarmIconChanged", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAlarmIconChanged", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AlarmIcon", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILockScreenInfo", ILockScreenInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILockScreenInfoVtbl", "ILockScreenInfo", "ILockScreenInfo_Impl", [InterfaceMethodSchema("LockScreenImageChanged", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLockScreenImageChanged", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LockScreenImage", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BadgesChanged", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveBadgesChanged", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Badges", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<LockScreenBadge>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DetailTextChanged", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDetailTextChanged", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DetailText", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlarmIconChanged", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<LockScreenInfo, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAlarmIconChanged", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AlarmIcon", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILockScreenInfo.runtimeType())
         return schema
     }
@@ -913,12 +923,12 @@ public class ILockScreenInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LockScreenImage(): _impl_l1.IRandomAccessStream {
+    public unsafe func LockScreenImage(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LockScreenImage(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 
     public unsafe func BadgesChanged(handler: Foundation.TypedEventHandler<LockScreenInfo, IInspectable>): windows_collections.EventRegistrationToken {
@@ -982,12 +992,12 @@ public class ILockScreenInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AlarmIcon(): _impl_l1.IRandomAccessStream {
+    public unsafe func AlarmIcon(): impl_p1.IRandomAccessStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AlarmIcon(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStream.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStream.fromAbiTake(result__)
     }
 }
 
@@ -1183,7 +1193,7 @@ public class LockScreenInfo <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LockScreenImage(): _impl_l1.IRandomAccessStream {
+    public unsafe func LockScreenImage(): impl_p1.IRandomAccessStream {
         return defaultInterface().LockScreenImage()
     }
 
@@ -1222,7 +1232,7 @@ public class LockScreenInfo <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AlarmIcon(): _impl_l1.IRandomAccessStream {
+    public unsafe func AlarmIcon(): impl_p1.IRandomAccessStream {
         return defaultInterface().AlarmIcon()
     }
 }

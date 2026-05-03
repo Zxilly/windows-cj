@@ -4,6 +4,10 @@ import std.collection.*
 import std.fs.*
 import std.sort.*
 
+// Sole writer of cfg.toml. The catalog triplet
+// (cfg_list/features/link-options.toml) is emitted per sys package by
+// windows-bindgen and consumed here read-only.
+
 public func writeCfg(path: String, resolved: ArrayList<FeatureSpec>, defaults!: ArrayList<String> = ArrayList<String>()): Unit {
     ensureParentDir(path)
     let cfgText = buildCfgText(resolved, defaults)

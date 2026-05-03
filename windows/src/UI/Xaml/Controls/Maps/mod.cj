@@ -4,23 +4,41 @@
 package windows.UI.Xaml.Controls.Maps
 
 import std.collection.*
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Xaml_Controls_Maps == "on" && Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
+@When[Windows_UI_Xaml_Controls_Maps == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_Xaml_Controls_Maps == "on" && Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
+@When[Windows_UI_Xaml_Controls_Maps == "on" && Windows_Services_Maps_LocalSearch == "on"]
 import windows.Services.Maps.LocalSearch as Services_Maps_LocalSearch
+@When[Windows_UI_Xaml_Controls_Maps == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
-import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
+import windows.UI.Xaml.impl.p0 as UI_Xaml_impl_p0
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
+import windows.UI.Xaml.impl.p1 as UI_Xaml_impl_p1
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_future as windows_future
+@When[Windows_UI_Xaml_Controls_Maps == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -79,7 +97,7 @@ public class IMapBillboardStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapBillboardStatics", IMapBillboardStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapBillboardStaticsVtbl", "IMapBillboardStatics", "IMapBillboardStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CollisionBehaviorDesiredProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapBillboardStatics", IMapBillboardStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapBillboardStaticsVtbl", "IMapBillboardStatics", "IMapBillboardStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CollisionBehaviorDesiredProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapBillboardStatics.runtimeType())
         return schema
     }
@@ -109,30 +127,30 @@ public class IMapBillboardStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LocationProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.NormalizedAnchorPointProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CollisionBehaviorDesiredProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1002,7 +1020,7 @@ public class IMapControlStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics", IMapControlStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStaticsVtbl", "IMapControlStatics", "IMapControlStatics_Impl", [InterfaceMethodSchema("CenterProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChildrenProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ColorSchemeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DesiredPitchProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HeadingProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LandmarksVisibleProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadingStatusProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapServiceTokenProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PedestrianFeaturesVisibleProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PitchProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StyleProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrafficFlowVisibleProperty", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransformOriginProperty", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WatermarkModeProperty", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomLevelProperty", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapElementsProperty", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RoutesProperty", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TileSourcesProperty", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocationProperty", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocation", 25, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 26, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNormalizedAnchorPoint", 28, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 29, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml__impl_l0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics", IMapControlStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStaticsVtbl", "IMapControlStatics", "IMapControlStatics_Impl", [InterfaceMethodSchema("CenterProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChildrenProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ColorSchemeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DesiredPitchProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HeadingProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LandmarksVisibleProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadingStatusProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapServiceTokenProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PedestrianFeaturesVisibleProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PitchProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StyleProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrafficFlowVisibleProperty", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransformOriginProperty", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WatermarkModeProperty", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomLevelProperty", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapElementsProperty", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RoutesProperty", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TileSourcesProperty", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LocationProperty", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocation", 25, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 26, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 27, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNormalizedAnchorPoint", 28, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 29, [InterfaceParameterSchema("element", "CPointer<Unit>", "InParam<UI_Xaml_impl_p0.DependencyObject>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics.runtimeType())
         return schema
     }
@@ -1032,178 +1050,178 @@ public class IMapControlStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CenterProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CenterProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CenterProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ChildrenProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ChildrenProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ChildrenProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ColorSchemeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ColorSchemeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ColorSchemeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func DesiredPitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func DesiredPitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DesiredPitchProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func HeadingProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func HeadingProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.HeadingProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LandmarksVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LandmarksVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LandmarksVisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LoadingStatusProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LoadingStatusProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadingStatusProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapServiceTokenProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapServiceTokenProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapServiceTokenProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PedestrianFeaturesVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PedestrianFeaturesVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PedestrianFeaturesVisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PitchProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func StyleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StyleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StyleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TrafficFlowVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TrafficFlowVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TrafficFlowVisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TransformOriginProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TransformOriginProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TransformOriginProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func WatermarkModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func WatermarkModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.WatermarkModeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZoomLevelProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZoomLevelProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZoomLevelProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapElementsProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapElementsProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapElementsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func RoutesProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RoutesProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RoutesProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TileSourcesProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TileSourcesProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TileSourcesProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LocationProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func GetLocation(element: UI_Xaml__impl_l0.DependencyObject): Devices_Geolocation.Geopoint {
+    public unsafe func GetLocation(element: UI_Xaml_impl_p0.DependencyObject): Devices_Geolocation.Geopoint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetLocation(asRaw(), element.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1212,23 +1230,23 @@ public class IMapControlStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func SetLocation(element: UI_Xaml__impl_l0.DependencyObject, value: Devices_Geolocation.Geopoint): Unit {
+    public unsafe func SetLocation(element: UI_Xaml_impl_p0.DependencyObject, value: Devices_Geolocation.Geopoint): Unit {
         let v = vtbl()
         let hr = v.SetLocation(asRaw(), element.asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.NormalizedAnchorPointProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func GetNormalizedAnchorPoint(element: UI_Xaml__impl_l0.DependencyObject): windows_future.Point {
+    public unsafe func GetNormalizedAnchorPoint(element: UI_Xaml_impl_p0.DependencyObject): windows_future.Point {
         let v = vtbl()
         var result__ = windows_future.PointAbi()
         let hr = v.GetNormalizedAnchorPoint(asRaw(), element.asRaw(), CPointer<windows_future.PointAbi>(inout result__))
@@ -1237,7 +1255,7 @@ public class IMapControlStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetNormalizedAnchorPoint(element: UI_Xaml__impl_l0.DependencyObject, value: windows_future.Point): Unit {
+    public unsafe func SetNormalizedAnchorPoint(element: UI_Xaml_impl_p0.DependencyObject, value: windows_future.Point): Unit {
         let v = vtbl()
         let hr = v.SetNormalizedAnchorPoint(asRaw(), element.asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_future.Point>()))
         HRESULT(hr).ok()
@@ -1326,7 +1344,7 @@ public class IMapControlStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics2", IMapControlStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics2Vtbl", "IMapControlStatics2", "IMapControlStatics2_Impl", [InterfaceMethodSchema("BusinessLandmarksVisibleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitFeaturesVisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PanInteractionModeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RotateInteractionModeProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiltInteractionModeProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomInteractionModeProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Is3DSupportedProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsStreetsideSupportedProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SceneProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics2", IMapControlStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics2Vtbl", "IMapControlStatics2", "IMapControlStatics2_Impl", [InterfaceMethodSchema("BusinessLandmarksVisibleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitFeaturesVisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PanInteractionModeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RotateInteractionModeProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiltInteractionModeProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomInteractionModeProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Is3DSupportedProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsStreetsideSupportedProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SceneProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics2.runtimeType())
         return schema
     }
@@ -1356,84 +1374,84 @@ public class IMapControlStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func BusinessLandmarksVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func BusinessLandmarksVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.BusinessLandmarksVisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TransitFeaturesVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TransitFeaturesVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TransitFeaturesVisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PanInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PanInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PanInteractionModeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func RotateInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RotateInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RotateInteractionModeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TiltInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TiltInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TiltInteractionModeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZoomInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZoomInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZoomInteractionModeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func Is3DSupportedProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func Is3DSupportedProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Is3DSupportedProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func IsStreetsideSupportedProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func IsStreetsideSupportedProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsStreetsideSupportedProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SceneProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func SceneProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SceneProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1491,7 +1509,7 @@ public class IMapControlStatics4 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics4", IMapControlStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics4Vtbl", "IMapControlStatics4", "IMapControlStatics4_Impl", [InterfaceMethodSchema("BusinessLandmarksEnabledProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitFeaturesEnabledProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics4", IMapControlStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics4Vtbl", "IMapControlStatics4", "IMapControlStatics4_Impl", [InterfaceMethodSchema("BusinessLandmarksEnabledProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TransitFeaturesEnabledProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics4.runtimeType())
         return schema
     }
@@ -1521,21 +1539,21 @@ public class IMapControlStatics4 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func BusinessLandmarksEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func BusinessLandmarksEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.BusinessLandmarksEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TransitFeaturesEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TransitFeaturesEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TransitFeaturesEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1597,7 +1615,7 @@ public class IMapControlStatics5 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics5", IMapControlStatics5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics5Vtbl", "IMapControlStatics5", "IMapControlStatics5_Impl", [InterfaceMethodSchema("MapProjectionProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StyleSheetProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ViewPaddingProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics5", IMapControlStatics5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics5Vtbl", "IMapControlStatics5", "IMapControlStatics5_Impl", [InterfaceMethodSchema("MapProjectionProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StyleSheetProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ViewPaddingProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics5.runtimeType())
         return schema
     }
@@ -1627,30 +1645,30 @@ public class IMapControlStatics5 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapProjectionProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapProjectionProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapProjectionProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func StyleSheetProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StyleSheetProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StyleSheetProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ViewPaddingProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ViewPaddingProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ViewPaddingProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1704,7 +1722,7 @@ public class IMapControlStatics6 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics6", IMapControlStatics6.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics6Vtbl", "IMapControlStatics6", "IMapControlStatics6_Impl", [InterfaceMethodSchema("LayersProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics6", IMapControlStatics6.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics6Vtbl", "IMapControlStatics6", "IMapControlStatics6_Impl", [InterfaceMethodSchema("LayersProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics6.runtimeType())
         return schema
     }
@@ -1734,12 +1752,12 @@ public class IMapControlStatics6 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LayersProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LayersProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LayersProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1793,7 +1811,7 @@ public class IMapControlStatics7 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics7", IMapControlStatics7.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics7Vtbl", "IMapControlStatics7", "IMapControlStatics7_Impl", [InterfaceMethodSchema("RegionProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics7", IMapControlStatics7.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics7Vtbl", "IMapControlStatics7", "IMapControlStatics7_Impl", [InterfaceMethodSchema("RegionProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics7.runtimeType())
         return schema
     }
@@ -1823,12 +1841,12 @@ public class IMapControlStatics7 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func RegionProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RegionProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegionProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1894,7 +1912,7 @@ public class IMapControlStatics8 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControlStatics8", IMapControlStatics8.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics8Vtbl", "IMapControlStatics8", "IMapControlStatics8_Impl", [InterfaceMethodSchema("CanTiltDownProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanTiltUpProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanZoomInProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanZoomOutProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControlStatics8", IMapControlStatics8.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlStatics8Vtbl", "IMapControlStatics8", "IMapControlStatics8_Impl", [InterfaceMethodSchema("CanTiltDownProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanTiltUpProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanZoomInProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanZoomOutProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControlStatics8.runtimeType())
         return schema
     }
@@ -1924,39 +1942,39 @@ public class IMapControlStatics8 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CanTiltDownProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CanTiltDownProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CanTiltDownProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CanTiltUpProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CanTiltUpProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CanTiltUpProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CanZoomInProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CanZoomInProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CanZoomInProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CanZoomOutProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CanZoomOutProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CanZoomOutProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -2946,7 +2964,7 @@ public class IMapElement3DStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElement3DStatics", IMapElement3DStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElement3DStaticsVtbl", "IMapElement3DStatics", "IMapElement3DStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HeadingProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PitchProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RollProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElement3DStatics", IMapElement3DStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElement3DStaticsVtbl", "IMapElement3DStatics", "IMapElement3DStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HeadingProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PitchProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RollProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElement3DStatics.runtimeType())
         return schema
     }
@@ -2976,48 +2994,48 @@ public class IMapElement3DStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LocationProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func HeadingProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func HeadingProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.HeadingProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PitchProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func RollProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RollProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RollProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ScaleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ScaleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ScaleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3167,7 +3185,7 @@ public class IMapElementStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElementStatics", IMapElementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStaticsVtbl", "IMapElementStatics", "IMapElementStatics_Impl", [InterfaceMethodSchema("ZIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElementStatics", IMapElementStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStaticsVtbl", "IMapElementStatics", "IMapElementStatics_Impl", [InterfaceMethodSchema("ZIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElementStatics.runtimeType())
         return schema
     }
@@ -3197,21 +3215,21 @@ public class IMapElementStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZIndexProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.VisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3265,7 +3283,7 @@ public class IMapElementStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElementStatics2", IMapElementStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics2Vtbl", "IMapElementStatics2", "IMapElementStatics2_Impl", [InterfaceMethodSchema("MapTabIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElementStatics2", IMapElementStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics2Vtbl", "IMapElementStatics2", "IMapElementStatics2_Impl", [InterfaceMethodSchema("MapTabIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElementStatics2.runtimeType())
         return schema
     }
@@ -3295,12 +3313,12 @@ public class IMapElementStatics2 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapTabIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapTabIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapTabIndexProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3362,7 +3380,7 @@ public class IMapElementStatics3 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElementStatics3", IMapElementStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics3Vtbl", "IMapElementStatics3", "IMapElementStatics3_Impl", [InterfaceMethodSchema("MapStyleSheetEntryProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapStyleSheetEntryStateProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TagProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElementStatics3", IMapElementStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics3Vtbl", "IMapElementStatics3", "IMapElementStatics3_Impl", [InterfaceMethodSchema("MapStyleSheetEntryProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapStyleSheetEntryStateProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TagProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElementStatics3.runtimeType())
         return schema
     }
@@ -3392,30 +3410,30 @@ public class IMapElementStatics3 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapStyleSheetEntryProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapStyleSheetEntryProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapStyleSheetEntryProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapStyleSheetEntryStateProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapStyleSheetEntryStateProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapStyleSheetEntryStateProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TagProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TagProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TagProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3469,7 +3487,7 @@ public class IMapElementStatics4 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElementStatics4", IMapElementStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics4Vtbl", "IMapElementStatics4", "IMapElementStatics4_Impl", [InterfaceMethodSchema("IsEnabledProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElementStatics4", IMapElementStatics4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementStatics4Vtbl", "IMapElementStatics4", "IMapElementStatics4_Impl", [InterfaceMethodSchema("IsEnabledProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElementStatics4.runtimeType())
         return schema
     }
@@ -3499,12 +3517,12 @@ public class IMapElementStatics4 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func IsEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func IsEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3558,7 +3576,7 @@ public class IMapElementsLayerStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapElementsLayerStatics", IMapElementsLayerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementsLayerStaticsVtbl", "IMapElementsLayerStatics", "IMapElementsLayerStatics_Impl", [InterfaceMethodSchema("MapElementsProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapElementsLayerStatics", IMapElementsLayerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapElementsLayerStaticsVtbl", "IMapElementsLayerStatics", "IMapElementsLayerStatics_Impl", [InterfaceMethodSchema("MapElementsProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapElementsLayerStatics.runtimeType())
         return schema
     }
@@ -3588,12 +3606,12 @@ public class IMapElementsLayerStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapElementsProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapElementsProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapElementsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3663,7 +3681,7 @@ public class IMapIcon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapIcon", IMapIcon.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconVtbl", "IMapIcon", "IMapIcon_Impl", [InterfaceMethodSchema("Location", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPoint", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 11, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Image", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapIcon", IMapIcon.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconVtbl", "IMapIcon", "IMapIcon_Impl", [InterfaceMethodSchema("Location", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Title", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPoint", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 11, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Image", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IMapIcon.runtimeType())
         return schema
     }
@@ -3737,16 +3755,16 @@ public class IMapIcon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Image(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetImage(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -3811,7 +3829,7 @@ public class IMapIconStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapIconStatics", IMapIconStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconStaticsVtbl", "IMapIconStatics", "IMapIconStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TitleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapIconStatics", IMapIconStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconStaticsVtbl", "IMapIconStatics", "IMapIconStatics_Impl", [InterfaceMethodSchema("LocationProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TitleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPointProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapIconStatics.runtimeType())
         return schema
     }
@@ -3841,30 +3859,30 @@ public class IMapIconStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LocationProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TitleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TitleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TitleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.NormalizedAnchorPointProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -3918,7 +3936,7 @@ public class IMapIconStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapIconStatics2", IMapIconStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconStatics2Vtbl", "IMapIconStatics2", "IMapIconStatics2_Impl", [InterfaceMethodSchema("CollisionBehaviorDesiredProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapIconStatics2", IMapIconStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapIconStatics2Vtbl", "IMapIconStatics2", "IMapIconStatics2_Impl", [InterfaceMethodSchema("CollisionBehaviorDesiredProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapIconStatics2.runtimeType())
         return schema
     }
@@ -3948,12 +3966,12 @@ public class IMapIconStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CollisionBehaviorDesiredProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -4115,7 +4133,7 @@ public class IMapItemsControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapItemsControl", IMapItemsControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapItemsControlVtbl", "IMapItemsControl", "IMapItemsControl_Impl", [InterfaceMethodSchema("ItemsSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetItemsSource", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Items", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemTemplate", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l1.DataTemplate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetItemTemplate", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<UI_Xaml__impl_l1.DataTemplate>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapItemsControl", IMapItemsControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapItemsControlVtbl", "IMapItemsControl", "IMapItemsControl_Impl", [InterfaceMethodSchema("ItemsSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetItemsSource", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Items", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemTemplate", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p1.DataTemplate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetItemTemplate", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<UI_Xaml_impl_p1.DataTemplate>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IMapItemsControl.runtimeType())
         return schema
     }
@@ -4159,25 +4177,25 @@ public class IMapItemsControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func Items(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
+    public unsafe func Items(): windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Items(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>.fromAbiTake(result__)
+        return windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject>.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ItemTemplate(): UI_Xaml__impl_l1.DataTemplate {
+    public unsafe func ItemTemplate(): UI_Xaml_impl_p1.DataTemplate {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ItemTemplate(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l1.DataTemplate.fromAbiTake(result__)
+        return UI_Xaml_impl_p1.DataTemplate.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetItemTemplate(value: UI_Xaml__impl_l1.DataTemplate): Unit {
+    public unsafe func SetItemTemplate(value: UI_Xaml_impl_p1.DataTemplate): Unit {
         let v = vtbl()
         let hr = v.SetItemTemplate(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -4242,7 +4260,7 @@ public class IMapItemsControlStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapItemsControlStatics", IMapItemsControlStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapItemsControlStaticsVtbl", "IMapItemsControlStatics", "IMapItemsControlStatics_Impl", [InterfaceMethodSchema("ItemsSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemTemplateProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapItemsControlStatics", IMapItemsControlStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapItemsControlStaticsVtbl", "IMapItemsControlStatics", "IMapItemsControlStatics_Impl", [InterfaceMethodSchema("ItemsSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemTemplateProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapItemsControlStatics.runtimeType())
         return schema
     }
@@ -4272,30 +4290,30 @@ public class IMapItemsControlStatics <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ItemsSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ItemsSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ItemsSourceProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ItemsProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ItemsProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ItemsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ItemTemplateProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ItemTemplateProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ItemTemplateProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -4481,7 +4499,7 @@ public class IMapLayerStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapLayerStatics", IMapLayerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapLayerStaticsVtbl", "IMapLayerStatics", "IMapLayerStatics_Impl", [InterfaceMethodSchema("MapTabIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZIndexProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapLayerStatics", IMapLayerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapLayerStaticsVtbl", "IMapLayerStatics", "IMapLayerStatics_Impl", [InterfaceMethodSchema("MapTabIndexProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZIndexProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapLayerStatics.runtimeType())
         return schema
     }
@@ -4511,30 +4529,30 @@ public class IMapLayerStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func MapTabIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func MapTabIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.MapTabIndexProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.VisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZIndexProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -4941,7 +4959,7 @@ public class IMapPolygonStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapPolygonStatics", IMapPolygonStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapPolygonStaticsVtbl", "IMapPolygonStatics", "IMapPolygonStatics_Impl", [InterfaceMethodSchema("PathProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeThicknessProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashedProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapPolygonStatics", IMapPolygonStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapPolygonStaticsVtbl", "IMapPolygonStatics", "IMapPolygonStatics_Impl", [InterfaceMethodSchema("PathProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeThicknessProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashedProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapPolygonStatics.runtimeType())
         return schema
     }
@@ -4971,30 +4989,30 @@ public class IMapPolygonStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PathProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PathProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PathProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func StrokeThicknessProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeThicknessProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeThicknessProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func StrokeDashedProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeDashedProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashedProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -5208,7 +5226,7 @@ public class IMapPolylineStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapPolylineStatics", IMapPolylineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapPolylineStaticsVtbl", "IMapPolylineStatics", "IMapPolylineStatics_Impl", [InterfaceMethodSchema("PathProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashedProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapPolylineStatics", IMapPolylineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapPolylineStaticsVtbl", "IMapPolylineStatics", "IMapPolylineStatics_Impl", [InterfaceMethodSchema("PathProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashedProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapPolylineStatics.runtimeType())
         return schema
     }
@@ -5238,21 +5256,21 @@ public class IMapPolylineStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func PathProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PathProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PathProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func StrokeDashedProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeDashedProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashedProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -6656,7 +6674,7 @@ public class IMapTileSourceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapTileSourceStatics", IMapTileSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileSourceStaticsVtbl", "IMapTileSourceStatics", "IMapTileSourceStatics_Impl", [InterfaceMethodSchema("DataSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LayerProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomLevelRangeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BoundsProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AllowOverstretchProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsFadingEnabledProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsTransparencyEnabledProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsRetryEnabledProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZIndexProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TilePixelSizeProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapTileSourceStatics", IMapTileSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileSourceStaticsVtbl", "IMapTileSourceStatics", "IMapTileSourceStatics_Impl", [InterfaceMethodSchema("DataSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LayerProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZoomLevelRangeProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BoundsProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AllowOverstretchProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsFadingEnabledProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsTransparencyEnabledProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsRetryEnabledProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ZIndexProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TilePixelSizeProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VisibleProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapTileSourceStatics.runtimeType())
         return schema
     }
@@ -6686,102 +6704,102 @@ public class IMapTileSourceStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func DataSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func DataSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DataSourceProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func LayerProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func LayerProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LayerProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZoomLevelRangeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZoomLevelRangeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZoomLevelRangeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func BoundsProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func BoundsProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.BoundsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func AllowOverstretchProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func AllowOverstretchProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AllowOverstretchProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func IsFadingEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func IsFadingEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsFadingEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func IsTransparencyEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func IsTransparencyEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsTransparencyEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func IsRetryEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func IsRetryEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsRetryEnabledProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ZIndexProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func TilePixelSizeProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func TilePixelSizeProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TilePixelSizeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.VisibleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -6847,7 +6865,7 @@ public class IMapTileSourceStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapTileSourceStatics2", IMapTileSourceStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileSourceStatics2Vtbl", "IMapTileSourceStatics2", "IMapTileSourceStatics2_Impl", [InterfaceMethodSchema("AnimationStateProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoPlayProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameCountProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameDurationProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapTileSourceStatics2", IMapTileSourceStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileSourceStatics2Vtbl", "IMapTileSourceStatics2", "IMapTileSourceStatics2_Impl", [InterfaceMethodSchema("AnimationStateProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AutoPlayProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameCountProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameDurationProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapTileSourceStatics2.runtimeType())
         return schema
     }
@@ -6877,39 +6895,39 @@ public class IMapTileSourceStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func AnimationStateProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func AnimationStateProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AnimationStateProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func AutoPlayProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func AutoPlayProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AutoPlayProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func FrameCountProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func FrameCountProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FrameCountProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func FrameDurationProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func FrameDurationProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FrameDurationProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -8617,8 +8635,8 @@ public class MapInputEventArgs <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8804,8 +8822,8 @@ public class MapItemsControl <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8820,23 +8838,23 @@ public class MapItemsControl <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func Items(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
+    public unsafe func Items(): windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject> {
         return defaultInterface().Items()
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ItemTemplate(): UI_Xaml__impl_l1.DataTemplate {
+    public unsafe func ItemTemplate(): UI_Xaml_impl_p1.DataTemplate {
         return defaultInterface().ItemTemplate()
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetItemTemplate(value: UI_Xaml__impl_l1.DataTemplate): Unit {
+    public unsafe func SetItemTemplate(value: UI_Xaml_impl_p1.DataTemplate): Unit {
         defaultInterface().SetItemTemplate(value)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ItemsSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ItemsSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapItemsControl, IMapItemsControlStatics>().unwrap()) {
             result__ = Some(factory__.ItemsSourceProperty())
         }
@@ -8847,8 +8865,8 @@ public class MapItemsControl <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ItemsProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ItemsProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapItemsControl, IMapItemsControlStatics>().unwrap()) {
             result__ = Some(factory__.ItemsProperty())
         }
@@ -8859,8 +8877,8 @@ public class MapItemsControl <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ItemTemplateProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ItemTemplateProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapItemsControl, IMapItemsControlStatics>().unwrap()) {
             result__ = Some(factory__.ItemTemplateProperty())
         }
@@ -11066,7 +11084,7 @@ public class IMapTileBitmapRequest <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapTileBitmapRequest", IMapTileBitmapRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileBitmapRequestVtbl", "IMapTileBitmapRequest", "IMapTileBitmapRequest_Impl", [InterfaceMethodSchema("PixelData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPixelData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapTileBitmapRequestDeferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapTileBitmapRequest", IMapTileBitmapRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapTileBitmapRequestVtbl", "IMapTileBitmapRequest", "IMapTileBitmapRequest_Impl", [InterfaceMethodSchema("PixelData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPixelData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetDeferral", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapTileBitmapRequestDeferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapTileBitmapRequest.runtimeType())
         return schema
     }
@@ -11096,16 +11114,16 @@ public class IMapTileBitmapRequest <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PixelData(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func PixelData(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PixelData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPixelData(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetPixelData(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetPixelData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -11459,12 +11477,12 @@ public class MapTileBitmapRequest <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PixelData(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func PixelData(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().PixelData()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetPixelData(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetPixelData(value: impl_p1.IRandomAccessStreamReference): Unit {
         defaultInterface().SetPixelData(value)
     }
 
@@ -12132,8 +12150,8 @@ public class CustomMapTileDataSource <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -12254,8 +12272,8 @@ public class HttpMapTileDataSource <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -13177,7 +13195,7 @@ public class IMapBillboard <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapBillboard", IMapBillboard.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapBillboardVtbl", "IMapBillboard", "IMapBillboard_Impl", [InterfaceMethodSchema("Location", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPoint", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 9, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Image", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CollisionBehaviorDesired", 12, [InterfaceParameterSchema("result", "CPointer<MapElementCollisionBehaviorAbi>", "OutSlot<MapElementCollisionBehavior>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCollisionBehaviorDesired", 13, [InterfaceParameterSchema("value", "MapElementCollisionBehaviorAbi", "MapElementCollisionBehavior", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReferenceCamera", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapCamera>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapBillboard", IMapBillboard.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapBillboardVtbl", "IMapBillboard", "IMapBillboard_Impl", [InterfaceMethodSchema("Location", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLocation", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NormalizedAnchorPoint", 8, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNormalizedAnchorPoint", 9, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Image", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CollisionBehaviorDesired", 12, [InterfaceParameterSchema("result", "CPointer<MapElementCollisionBehaviorAbi>", "OutSlot<MapElementCollisionBehavior>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCollisionBehaviorDesired", 13, [InterfaceParameterSchema("value", "MapElementCollisionBehaviorAbi", "MapElementCollisionBehavior", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReferenceCamera", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapCamera>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapBillboard.runtimeType())
         return schema
     }
@@ -13237,16 +13255,16 @@ public class IMapBillboard <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Image(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetImage(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -13749,7 +13767,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControl", IMapControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlVtbl", "IMapControl", "IMapControl_Impl", [InterfaceMethodSchema("Center", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCenter", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Children", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ColorScheme", 9, [InterfaceParameterSchema("result", "CPointer<MapColorSchemeAbi>", "OutSlot<MapColorScheme>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetColorScheme", 10, [InterfaceParameterSchema("value", "MapColorSchemeAbi", "MapColorScheme", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DesiredPitch", 11, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDesiredPitch", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Heading", 13, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHeading", 14, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LandmarksVisible", 15, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLandmarksVisible", 16, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoadingStatus", 17, [InterfaceParameterSchema("result", "CPointer<MapLoadingStatusAbi>", "OutSlot<MapLoadingStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapServiceToken", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMapServiceToken", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxZoomLevel", 20, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MinZoomLevel", 21, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PedestrianFeaturesVisible", 22, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPedestrianFeaturesVisible", 23, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Pitch", 24, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Style", 25, [InterfaceParameterSchema("result", "CPointer<MapStyleAbi>", "OutSlot<MapStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStyle", 26, [InterfaceParameterSchema("value", "MapStyleAbi", "MapStyle", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TrafficFlowVisible", 27, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTrafficFlowVisible", 28, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransformOrigin", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransformOrigin", 30, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WatermarkMode", 31, [InterfaceParameterSchema("result", "CPointer<MapWatermarkModeAbi>", "OutSlot<MapWatermarkMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWatermarkMode", 32, [InterfaceParameterSchema("value", "MapWatermarkModeAbi", "MapWatermarkMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ZoomLevel", 33, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetZoomLevel", 34, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapElements", 35, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Routes", 36, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapRouteView>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TileSources", 37, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapTileSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CenterChanged", 38, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCenterChanged", 39, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HeadingChanged", 40, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadingChanged", 41, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoadingStatusChanged", 42, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLoadingStatusChanged", 43, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapDoubleTapped", 44, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapDoubleTapped", 45, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapHolding", 46, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapHolding", 47, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapTapped", 48, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapTapped", 49, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PitchChanged", 50, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePitchChanged", 51, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransformOriginChanged", 52, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTransformOriginChanged", 53, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ZoomLevelChanged", 54, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveZoomLevelChanged", 55, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindMapElementsAtOffset", 56, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocationFromOffset", 57, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("location", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetOffsetFromLocation", 58, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offset", "CPointer<windows_future.PointAbi>", "CPointer<windows_future.PointAbi>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsLocationInView", 59, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("isInView", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TrySetViewBoundsAsync", 60, [InterfaceParameterSchema("bounds", "CPointer<Unit>", "InParam<Devices_Geolocation.GeoboundingBox>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("margin", "CPointer<Unit>", "InParam<Foundation.IReference<UI_Xaml__impl_l0.Thickness>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "MapAnimationKindAbi", "MapAnimationKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterAsync", 61, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterAndZoomAsync", 62, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterZoomHeadingAndPitchAsync", 63, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("heading", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredPitch", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterZoomHeadingPitchAndAnimationAsync", 64, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("heading", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredPitch", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "MapAnimationKindAbi", "MapAnimationKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControl", IMapControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControlVtbl", "IMapControl", "IMapControl_Impl", [InterfaceMethodSchema("Center", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCenter", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Children", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ColorScheme", 9, [InterfaceParameterSchema("result", "CPointer<MapColorSchemeAbi>", "OutSlot<MapColorScheme>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetColorScheme", 10, [InterfaceParameterSchema("value", "MapColorSchemeAbi", "MapColorScheme", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DesiredPitch", 11, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDesiredPitch", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Heading", 13, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHeading", 14, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LandmarksVisible", 15, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLandmarksVisible", 16, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoadingStatus", 17, [InterfaceParameterSchema("result", "CPointer<MapLoadingStatusAbi>", "OutSlot<MapLoadingStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MapServiceToken", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMapServiceToken", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MaxZoomLevel", 20, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MinZoomLevel", 21, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PedestrianFeaturesVisible", 22, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPedestrianFeaturesVisible", 23, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Pitch", 24, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Style", 25, [InterfaceParameterSchema("result", "CPointer<MapStyleAbi>", "OutSlot<MapStyle>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStyle", 26, [InterfaceParameterSchema("value", "MapStyleAbi", "MapStyle", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TrafficFlowVisible", 27, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTrafficFlowVisible", 28, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransformOrigin", 29, [InterfaceParameterSchema("result", "CPointer<windows_future.PointAbi>", "OutSlot<windows_future.Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransformOrigin", 30, [InterfaceParameterSchema("value", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WatermarkMode", 31, [InterfaceParameterSchema("result", "CPointer<MapWatermarkModeAbi>", "OutSlot<MapWatermarkMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWatermarkMode", 32, [InterfaceParameterSchema("value", "MapWatermarkModeAbi", "MapWatermarkMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ZoomLevel", 33, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetZoomLevel", 34, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapElements", 35, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Routes", 36, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapRouteView>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TileSources", 37, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<MapTileSource>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CenterChanged", 38, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveCenterChanged", 39, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HeadingChanged", 40, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadingChanged", 41, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoadingStatusChanged", 42, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLoadingStatusChanged", 43, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapDoubleTapped", 44, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapDoubleTapped", 45, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapHolding", 46, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapHolding", 47, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapTapped", 48, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapInputEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapTapped", 49, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PitchChanged", 50, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePitchChanged", 51, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransformOriginChanged", 52, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTransformOriginChanged", 53, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ZoomLevelChanged", 54, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveZoomLevelChanged", 55, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindMapElementsAtOffset", 56, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocationFromOffset", 57, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("location", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetOffsetFromLocation", 58, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("offset", "CPointer<windows_future.PointAbi>", "CPointer<windows_future.PointAbi>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsLocationInView", 59, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("isInView", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TrySetViewBoundsAsync", 60, [InterfaceParameterSchema("bounds", "CPointer<Unit>", "InParam<Devices_Geolocation.GeoboundingBox>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("margin", "CPointer<Unit>", "InParam<Foundation.IReference<UI_Xaml_impl_p0.Thickness>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "MapAnimationKindAbi", "MapAnimationKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterAsync", 61, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterAndZoomAsync", 62, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterZoomHeadingAndPitchAsync", 63, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("heading", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredPitch", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetViewWithCenterZoomHeadingPitchAndAnimationAsync", 64, [InterfaceParameterSchema("center", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("zoomLevel", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("heading", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredPitch", "CPointer<Unit>", "InParam<Foundation.IReference<Float64>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("animation", "MapAnimationKindAbi", "MapAnimationKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControl.runtimeType())
         return schema
     }
@@ -13795,12 +13813,12 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func Children(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
+    public unsafe func Children(): windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Children(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>.fromAbiTake(result__)
+        return windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject>.fromAbiTake(result__)
     }
 
     public unsafe func ColorScheme(): MapColorScheme {
@@ -14173,7 +14191,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func TrySetViewBoundsAsync(bounds: Devices_Geolocation.GeoboundingBox, margin: Foundation.IReference<UI_Xaml__impl_l0.Thickness>, animation: MapAnimationKind): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetViewBoundsAsync(bounds: Devices_Geolocation.GeoboundingBox, margin: Foundation.IReference<UI_Xaml_impl_p0.Thickness>, animation: MapAnimationKind): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TrySetViewBoundsAsync(asRaw(), bounds.asRaw(), margin.asRaw(), windows_core.projectTypedAbi(animation, windows_core.typeMarker<MapAnimationKind>()), CPointer<CPointer<Unit>>(inout result__))
@@ -14797,11 +14815,11 @@ public struct IMapControl5Vtbl {
     public var StyleSheet: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStyleSheet: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml == "on"]
-    public var ViewPadding: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.ThicknessAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ViewPadding: CFunc<(CPointer<Unit>, CPointer<UI_Xaml_impl_p0.ThicknessAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var ViewPadding: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml == "on"]
-    public var SetViewPadding: CFunc<(CPointer<Unit>, UI_Xaml__impl_l0.ThicknessAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetViewPadding: CFunc<(CPointer<Unit>, UI_Xaml_impl_p0.ThicknessAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var SetViewPadding: UIntNative = UIntNative(0)
     public var MapContextRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -14860,7 +14878,7 @@ public class IMapControl5 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapControl5", IMapControl5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControl5Vtbl", "IMapControl5", "IMapControl5_Impl", [InterfaceMethodSchema("get_MapProjection", 6, [InterfaceParameterSchema("result", "CPointer<MapProjectionAbi>", "OutSlot<MapProjection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMapProjection", 7, [InterfaceParameterSchema("value", "MapProjectionAbi", "MapProjection", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StyleSheet", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapStyleSheet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStyleSheet", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<MapStyleSheet>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ViewPadding", 10, [InterfaceParameterSchema("result", "CPointer<UI_Xaml__impl_l0.ThicknessAbi>", "OutSlot<UI_Xaml__impl_l0.Thickness>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewPadding", 11, [InterfaceParameterSchema("value", "UI_Xaml__impl_l0.ThicknessAbi", "UI_Xaml__impl_l0.Thickness", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapContextRequested", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapContextRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapContextRequested", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindMapElementsAtOffsetWithRadius", 14, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("radius", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocationFromOffsetWithReferenceSystem", 15, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("desiredReferenceSystem", "Devices_Geolocation.AltitudeReferenceSystemAbi", "Devices_Geolocation.AltitudeReferenceSystem", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("location", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StartContinuousPan", 16, [InterfaceParameterSchema("horizontalPixelsPerSecond", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalPixelsPerSecond", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopContinuousPan", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TryPanAsync", 18, [InterfaceParameterSchema("horizontalPixels", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalPixels", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryPanToAsync", 19, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapControl5", IMapControl5.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapControl5Vtbl", "IMapControl5", "IMapControl5_Impl", [InterfaceMethodSchema("get_MapProjection", 6, [InterfaceParameterSchema("result", "CPointer<MapProjectionAbi>", "OutSlot<MapProjection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMapProjection", 7, [InterfaceParameterSchema("value", "MapProjectionAbi", "MapProjection", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StyleSheet", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MapStyleSheet>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStyleSheet", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<MapStyleSheet>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ViewPadding", 10, [InterfaceParameterSchema("result", "CPointer<UI_Xaml_impl_p0.ThicknessAbi>", "OutSlot<UI_Xaml_impl_p0.Thickness>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetViewPadding", 11, [InterfaceParameterSchema("value", "UI_Xaml_impl_p0.ThicknessAbi", "UI_Xaml_impl_p0.Thickness", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MapContextRequested", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MapControl, MapContextRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveMapContextRequested", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindMapElementsAtOffsetWithRadius", 14, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("radius", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<MapElement>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetLocationFromOffsetWithReferenceSystem", 15, [InterfaceParameterSchema("offset", "windows_future.PointAbi", "windows_future.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("desiredReferenceSystem", "Devices_Geolocation.AltitudeReferenceSystemAbi", "Devices_Geolocation.AltitudeReferenceSystem", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("location", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StartContinuousPan", 16, [InterfaceParameterSchema("horizontalPixelsPerSecond", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalPixelsPerSecond", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopContinuousPan", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TryPanAsync", 18, [InterfaceParameterSchema("horizontalPixels", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("verticalPixels", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryPanToAsync", 19, [InterfaceParameterSchema("location", "CPointer<Unit>", "InParam<Devices_Geolocation.Geopoint>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapControl5.runtimeType())
         return schema
     }
@@ -14918,18 +14936,18 @@ public class IMapControl5 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func ViewPadding(): UI_Xaml__impl_l0.Thickness {
+    public unsafe func ViewPadding(): UI_Xaml_impl_p0.Thickness {
         let v = vtbl()
-        var result__ = UI_Xaml__impl_l0.ThicknessAbi()
-        let hr = v.ViewPadding(asRaw(), CPointer<UI_Xaml__impl_l0.ThicknessAbi>(inout result__))
+        var result__ = UI_Xaml_impl_p0.ThicknessAbi()
+        let hr = v.ViewPadding(asRaw(), CPointer<UI_Xaml_impl_p0.ThicknessAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<UI_Xaml__impl_l0.Thickness>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<UI_Xaml_impl_p0.Thickness>()).unwrap()
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetViewPadding(value: UI_Xaml__impl_l0.Thickness): Unit {
+    public unsafe func SetViewPadding(value: UI_Xaml_impl_p0.Thickness): Unit {
         let v = vtbl()
-        let hr = v.SetViewPadding(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<UI_Xaml__impl_l0.Thickness>()))
+        let hr = v.SetViewPadding(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<UI_Xaml_impl_p0.Thickness>()))
         HRESULT(hr).ok()
     }
 
@@ -17076,7 +17094,7 @@ public class IMapModel3DStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMapModel3DStatics", IMapModel3DStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapModel3DStaticsVtbl", "IMapModel3DStatics", "IMapModel3DStatics_Impl", [InterfaceMethodSchema("CreateFrom3MFAsync", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MapModel3D>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFrom3MFWithShadingOptionAsync", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("shadingOption", "MapModel3DShadingOptionAbi", "MapModel3DShadingOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MapModel3D>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMapModel3DStatics", IMapModel3DStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMapModel3DStaticsVtbl", "IMapModel3DStatics", "IMapModel3DStatics_Impl", [InterfaceMethodSchema("CreateFrom3MFAsync", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MapModel3D>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFrom3MFWithShadingOptionAsync", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("shadingOption", "MapModel3DShadingOptionAbi", "MapModel3DShadingOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MapModel3D>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMapModel3DStatics.runtimeType())
         return schema
     }
@@ -17106,7 +17124,7 @@ public class IMapModel3DStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFrom3MFAsync(source: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<MapModel3D> {
+    public unsafe func CreateFrom3MFAsync(source: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<MapModel3D> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFrom3MFAsync(asRaw(), source.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -17115,7 +17133,7 @@ public class IMapModel3DStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFrom3MFWithShadingOptionAsync(source: _impl_l1.IRandomAccessStreamReference, shadingOption: MapModel3DShadingOption): windows_future.IAsyncOperation<MapModel3D> {
+    public unsafe func CreateFrom3MFWithShadingOptionAsync(source: impl_p1.IRandomAccessStreamReference, shadingOption: MapModel3DShadingOption): windows_future.IAsyncOperation<MapModel3D> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFrom3MFWithShadingOptionAsync(asRaw(), source.asRaw(), windows_core.projectTypedAbi(shadingOption, windows_core.typeMarker<MapModel3DShadingOption>()), CPointer<CPointer<Unit>>(inout result__))
@@ -18498,8 +18516,8 @@ public class LocalMapTileDataSource <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -18846,8 +18864,8 @@ public class MapBillboard <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -18872,12 +18890,12 @@ public class MapBillboard <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Image()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         defaultInterface().SetImage(value)
     }
 
@@ -18894,8 +18912,8 @@ public class MapBillboard <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapBillboard, IMapBillboardStatics>().unwrap()) {
             result__ = Some(factory__.LocationProperty())
         }
@@ -18906,8 +18924,8 @@ public class MapBillboard <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapBillboard, IMapBillboardStatics>().unwrap()) {
             result__ = Some(factory__.NormalizedAnchorPointProperty())
         }
@@ -18918,8 +18936,8 @@ public class MapBillboard <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapBillboard, IMapBillboardStatics>().unwrap()) {
             result__ = Some(factory__.CollisionBehaviorDesiredProperty())
         }
@@ -19028,8 +19046,8 @@ public class MapCamera <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -19284,7 +19302,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     public static func descriptor(): InterfaceDescriptor<MapControl> {
-        let ancestors = [IMapControl.iid(), _impl_l1.IAnimationObject.iid(), _impl_l0.IVisualElement.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IMapControl.iid(), impl_p1.IAnimationObject.iid(), impl_p0.IVisualElement.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<MapControl>("MapControl", IMapControl.iid(), ancestors, { raw => MapControl.fromAbiTake(raw) }, { raw => MapControl.viewOf(raw) })
     }
 
@@ -19337,43 +19355,43 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIVisualElement(): _impl_l0.IVisualElement {
-        match (unsafe { query(_impl_l0.IVisualElement.descriptor()) }) {
+    public func asIVisualElement(): impl_p0.IVisualElement {
+        match (unsafe { query(impl_p0.IVisualElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asControl(): UI_Xaml__impl_l1.Control {
-        match (unsafe { query(UI_Xaml__impl_l1.Control.descriptor()) }) {
+    public func asControl(): UI_Xaml_impl_p1.Control {
+        match (unsafe { query(UI_Xaml_impl_p1.Control.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asFrameworkElement(): UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): UI_Xaml_impl_p1.FrameworkElement {
+        match (unsafe { query(UI_Xaml_impl_p1.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): UI_Xaml_impl_p1.UIElement {
+        match (unsafe { query(UI_Xaml_impl_p1.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -19390,7 +19408,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func Children(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
+    public unsafe func Children(): windows_collections.IVector<UI_Xaml_impl_p0.DependencyObject> {
         return defaultInterface().Children()
     }
 
@@ -19606,7 +19624,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public unsafe func TrySetViewBoundsAsync(bounds: Devices_Geolocation.GeoboundingBox, margin: Foundation.IReference<UI_Xaml__impl_l0.Thickness>, animation: MapAnimationKind): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TrySetViewBoundsAsync(bounds: Devices_Geolocation.GeoboundingBox, margin: Foundation.IReference<UI_Xaml_impl_p0.Thickness>, animation: MapAnimationKind): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySetViewBoundsAsync(bounds, margin, animation)
     }
 
@@ -19630,13 +19648,13 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().TrySetViewWithCenterZoomHeadingPitchAndAnimationAsync(center, zoomLevel, heading, desiredPitch, animation)
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func RegionProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RegionProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics7>().unwrap()) {
             result__ = Some(factory__.RegionProperty())
         }
@@ -19647,8 +19665,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func BusinessLandmarksEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func BusinessLandmarksEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics4>().unwrap()) {
             result__ = Some(factory__.BusinessLandmarksEnabledProperty())
         }
@@ -19659,8 +19677,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TransitFeaturesEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TransitFeaturesEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics4>().unwrap()) {
             result__ = Some(factory__.TransitFeaturesEnabledProperty())
         }
@@ -19671,8 +19689,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CenterProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CenterProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.CenterProperty())
         }
@@ -19683,8 +19701,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ChildrenProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ChildrenProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.ChildrenProperty())
         }
@@ -19695,8 +19713,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ColorSchemeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ColorSchemeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.ColorSchemeProperty())
         }
@@ -19707,8 +19725,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func DesiredPitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func DesiredPitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.DesiredPitchProperty())
         }
@@ -19719,8 +19737,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func HeadingProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func HeadingProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.HeadingProperty())
         }
@@ -19731,8 +19749,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LandmarksVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LandmarksVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.LandmarksVisibleProperty())
         }
@@ -19743,8 +19761,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LoadingStatusProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LoadingStatusProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.LoadingStatusProperty())
         }
@@ -19755,8 +19773,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapServiceTokenProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapServiceTokenProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.MapServiceTokenProperty())
         }
@@ -19767,8 +19785,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PedestrianFeaturesVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PedestrianFeaturesVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.PedestrianFeaturesVisibleProperty())
         }
@@ -19779,8 +19797,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.PitchProperty())
         }
@@ -19791,8 +19809,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func StyleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StyleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.StyleProperty())
         }
@@ -19803,8 +19821,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TrafficFlowVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TrafficFlowVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.TrafficFlowVisibleProperty())
         }
@@ -19815,8 +19833,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TransformOriginProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TransformOriginProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.TransformOriginProperty())
         }
@@ -19827,8 +19845,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func WatermarkModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func WatermarkModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.WatermarkModeProperty())
         }
@@ -19839,8 +19857,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZoomLevelProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZoomLevelProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.ZoomLevelProperty())
         }
@@ -19851,8 +19869,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapElementsProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapElementsProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.MapElementsProperty())
         }
@@ -19863,8 +19881,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func RoutesProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RoutesProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.RoutesProperty())
         }
@@ -19875,8 +19893,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TileSourcesProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TileSourcesProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.TileSourcesProperty())
         }
@@ -19887,8 +19905,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.LocationProperty())
         }
@@ -19899,7 +19917,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public static unsafe func GetLocation(element: UI_Xaml__impl_l0.DependencyObject): Devices_Geolocation.Geopoint {
+    public static unsafe func GetLocation(element: UI_Xaml_impl_p0.DependencyObject): Devices_Geolocation.Geopoint {
         var result__: Option<Devices_Geolocation.Geopoint> = Option<Devices_Geolocation.Geopoint>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.GetLocation(element))
@@ -19911,7 +19929,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Devices_Geolocation == "on" && Windows_UI_Xaml == "on"]
-    public static unsafe func SetLocation(element: UI_Xaml__impl_l0.DependencyObject, value: Devices_Geolocation.Geopoint): Unit {
+    public static unsafe func SetLocation(element: UI_Xaml_impl_p0.DependencyObject, value: Devices_Geolocation.Geopoint): Unit {
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             factory__.SetLocation(element, value)
         }
@@ -19919,8 +19937,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.NormalizedAnchorPointProperty())
         }
@@ -19931,7 +19949,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func GetNormalizedAnchorPoint(element: UI_Xaml__impl_l0.DependencyObject): windows_future.Point {
+    public static unsafe func GetNormalizedAnchorPoint(element: UI_Xaml_impl_p0.DependencyObject): windows_future.Point {
         var result__: Option<windows_future.Point> = Option<windows_future.Point>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             result__ = Some(factory__.GetNormalizedAnchorPoint(element))
@@ -19943,7 +19961,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func SetNormalizedAnchorPoint(element: UI_Xaml__impl_l0.DependencyObject, value: windows_future.Point): Unit {
+    public static unsafe func SetNormalizedAnchorPoint(element: UI_Xaml_impl_p0.DependencyObject, value: windows_future.Point): Unit {
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics>().unwrap()) {
             factory__.SetNormalizedAnchorPoint(element, value)
         }
@@ -19951,8 +19969,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CanTiltDownProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CanTiltDownProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics8>().unwrap()) {
             result__ = Some(factory__.CanTiltDownProperty())
         }
@@ -19963,8 +19981,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CanTiltUpProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CanTiltUpProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics8>().unwrap()) {
             result__ = Some(factory__.CanTiltUpProperty())
         }
@@ -19975,8 +19993,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CanZoomInProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CanZoomInProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics8>().unwrap()) {
             result__ = Some(factory__.CanZoomInProperty())
         }
@@ -19987,8 +20005,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CanZoomOutProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CanZoomOutProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics8>().unwrap()) {
             result__ = Some(factory__.CanZoomOutProperty())
         }
@@ -19999,8 +20017,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LayersProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LayersProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics6>().unwrap()) {
             result__ = Some(factory__.LayersProperty())
         }
@@ -20011,8 +20029,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapProjectionProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapProjectionProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics5>().unwrap()) {
             result__ = Some(factory__.MapProjectionProperty())
         }
@@ -20023,8 +20041,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func StyleSheetProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StyleSheetProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics5>().unwrap()) {
             result__ = Some(factory__.StyleSheetProperty())
         }
@@ -20035,8 +20053,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ViewPaddingProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ViewPaddingProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics5>().unwrap()) {
             result__ = Some(factory__.ViewPaddingProperty())
         }
@@ -20047,8 +20065,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func BusinessLandmarksVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func BusinessLandmarksVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.BusinessLandmarksVisibleProperty())
         }
@@ -20059,8 +20077,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TransitFeaturesVisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TransitFeaturesVisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.TransitFeaturesVisibleProperty())
         }
@@ -20071,8 +20089,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PanInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PanInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.PanInteractionModeProperty())
         }
@@ -20083,8 +20101,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func RotateInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RotateInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.RotateInteractionModeProperty())
         }
@@ -20095,8 +20113,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TiltInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TiltInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.TiltInteractionModeProperty())
         }
@@ -20107,8 +20125,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZoomInteractionModeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZoomInteractionModeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.ZoomInteractionModeProperty())
         }
@@ -20119,8 +20137,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func Is3DSupportedProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func Is3DSupportedProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.Is3DSupportedProperty())
         }
@@ -20131,8 +20149,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func IsStreetsideSupportedProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func IsStreetsideSupportedProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.IsStreetsideSupportedProperty())
         }
@@ -20143,8 +20161,8 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func SceneProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func SceneProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapControl, IMapControlStatics2>().unwrap()) {
             result__ = Some(factory__.SceneProperty())
         }
@@ -20242,8 +20260,8 @@ public class MapControlDataHelper <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -20391,8 +20409,8 @@ public class MapCustomExperience <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -20498,8 +20516,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -20522,8 +20540,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapTabIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapTabIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics2>().unwrap()) {
             result__ = Some(factory__.MapTabIndexProperty())
         }
@@ -20534,8 +20552,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func IsEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func IsEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics4>().unwrap()) {
             result__ = Some(factory__.IsEnabledProperty())
         }
@@ -20546,8 +20564,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapStyleSheetEntryProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapStyleSheetEntryProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics3>().unwrap()) {
             result__ = Some(factory__.MapStyleSheetEntryProperty())
         }
@@ -20558,8 +20576,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapStyleSheetEntryStateProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapStyleSheetEntryStateProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics3>().unwrap()) {
             result__ = Some(factory__.MapStyleSheetEntryStateProperty())
         }
@@ -20570,8 +20588,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TagProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TagProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics3>().unwrap()) {
             result__ = Some(factory__.TagProperty())
         }
@@ -20582,8 +20600,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics>().unwrap()) {
             result__ = Some(factory__.ZIndexProperty())
         }
@@ -20594,8 +20612,8 @@ public class MapElement <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement, IMapElementStatics>().unwrap()) {
             result__ = Some(factory__.VisibleProperty())
         }
@@ -20723,8 +20741,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -20783,8 +20801,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement3D, IMapElement3DStatics>().unwrap()) {
             result__ = Some(factory__.LocationProperty())
         }
@@ -20795,8 +20813,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func HeadingProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func HeadingProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement3D, IMapElement3DStatics>().unwrap()) {
             result__ = Some(factory__.HeadingProperty())
         }
@@ -20807,8 +20825,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PitchProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PitchProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement3D, IMapElement3DStatics>().unwrap()) {
             result__ = Some(factory__.PitchProperty())
         }
@@ -20819,8 +20837,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func RollProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RollProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement3D, IMapElement3DStatics>().unwrap()) {
             result__ = Some(factory__.RollProperty())
         }
@@ -20831,8 +20849,8 @@ public class MapElement3D <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ScaleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ScaleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElement3D, IMapElement3DStatics>().unwrap()) {
             result__ = Some(factory__.ScaleProperty())
         }
@@ -21285,8 +21303,8 @@ public class MapElementsLayer <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -21335,8 +21353,8 @@ public class MapElementsLayer <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapElementsProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapElementsProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapElementsLayer, IMapElementsLayerStatics>().unwrap()) {
             result__ = Some(factory__.MapElementsProperty())
         }
@@ -21902,8 +21920,8 @@ public class MapIcon <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -21936,18 +21954,18 @@ public class MapIcon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Image(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Image(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().Image()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImage(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetImage(value: impl_p1.IRandomAccessStreamReference): Unit {
         defaultInterface().SetImage(value)
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LocationProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LocationProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapIcon, IMapIconStatics>().unwrap()) {
             result__ = Some(factory__.LocationProperty())
         }
@@ -21958,8 +21976,8 @@ public class MapIcon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TitleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TitleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapIcon, IMapIconStatics>().unwrap()) {
             result__ = Some(factory__.TitleProperty())
         }
@@ -21970,8 +21988,8 @@ public class MapIcon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func NormalizedAnchorPointProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapIcon, IMapIconStatics>().unwrap()) {
             result__ = Some(factory__.NormalizedAnchorPointProperty())
         }
@@ -21982,8 +22000,8 @@ public class MapIcon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func CollisionBehaviorDesiredProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapIcon, IMapIconStatics2>().unwrap()) {
             result__ = Some(factory__.CollisionBehaviorDesiredProperty())
         }
@@ -22081,8 +22099,8 @@ public class MapLayer <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -22113,8 +22131,8 @@ public class MapLayer <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func MapTabIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func MapTabIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapLayer, IMapLayerStatics>().unwrap()) {
             result__ = Some(factory__.MapTabIndexProperty())
         }
@@ -22125,8 +22143,8 @@ public class MapLayer <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapLayer, IMapLayerStatics>().unwrap()) {
             result__ = Some(factory__.VisibleProperty())
         }
@@ -22137,8 +22155,8 @@ public class MapLayer <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapLayer, IMapLayerStatics>().unwrap()) {
             result__ = Some(factory__.ZIndexProperty())
         }
@@ -22248,15 +22266,15 @@ public class MapModel3D <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFrom3MFAsync(source: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<MapModel3D> {
+    public static unsafe func CreateFrom3MFAsync(source: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<MapModel3D> {
         var result__: Option<windows_future.IAsyncOperation<MapModel3D>> = Option<windows_future.IAsyncOperation<MapModel3D>>.None
         try (factory__ = windows_core.factory<MapModel3D, IMapModel3DStatics>().unwrap()) {
             result__ = Some(factory__.CreateFrom3MFAsync(source))
@@ -22268,7 +22286,7 @@ public class MapModel3D <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFrom3MFWithShadingOptionAsync(source: _impl_l1.IRandomAccessStreamReference, shadingOption: MapModel3DShadingOption): windows_future.IAsyncOperation<MapModel3D> {
+    public static unsafe func CreateFrom3MFWithShadingOptionAsync(source: impl_p1.IRandomAccessStreamReference, shadingOption: MapModel3DShadingOption): windows_future.IAsyncOperation<MapModel3D> {
         var result__: Option<windows_future.IAsyncOperation<MapModel3D>> = Option<windows_future.IAsyncOperation<MapModel3D>>.None
         try (factory__ = windows_core.factory<MapModel3D, IMapModel3DStatics>().unwrap()) {
             result__ = Some(factory__.CreateFrom3MFWithShadingOptionAsync(source, shadingOption))
@@ -22397,8 +22415,8 @@ public class MapPolygon <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -22451,8 +22469,8 @@ public class MapPolygon <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PathProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PathProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapPolygon, IMapPolygonStatics>().unwrap()) {
             result__ = Some(factory__.PathProperty())
         }
@@ -22463,8 +22481,8 @@ public class MapPolygon <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func StrokeThicknessProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeThicknessProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapPolygon, IMapPolygonStatics>().unwrap()) {
             result__ = Some(factory__.StrokeThicknessProperty())
         }
@@ -22475,8 +22493,8 @@ public class MapPolygon <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func StrokeDashedProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeDashedProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapPolygon, IMapPolygonStatics>().unwrap()) {
             result__ = Some(factory__.StrokeDashedProperty())
         }
@@ -22592,8 +22610,8 @@ public class MapPolyline <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -22636,8 +22654,8 @@ public class MapPolyline <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func PathProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PathProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapPolyline, IMapPolylineStatics>().unwrap()) {
             result__ = Some(factory__.PathProperty())
         }
@@ -22648,8 +22666,8 @@ public class MapPolyline <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func StrokeDashedProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeDashedProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapPolyline, IMapPolylineStatics>().unwrap()) {
             result__ = Some(factory__.StrokeDashedProperty())
         }
@@ -22747,8 +22765,8 @@ public class MapRouteView <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -22880,8 +22898,8 @@ public class MapScene <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -23094,8 +23112,8 @@ public class MapStyleSheet <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -23392,8 +23410,8 @@ public class MapTileDataSource <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -23499,8 +23517,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -23597,8 +23615,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func DataSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func DataSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.DataSourceProperty())
         }
@@ -23609,8 +23627,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func LayerProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func LayerProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.LayerProperty())
         }
@@ -23621,8 +23639,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZoomLevelRangeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZoomLevelRangeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.ZoomLevelRangeProperty())
         }
@@ -23633,8 +23651,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func BoundsProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func BoundsProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.BoundsProperty())
         }
@@ -23645,8 +23663,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func AllowOverstretchProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func AllowOverstretchProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.AllowOverstretchProperty())
         }
@@ -23657,8 +23675,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func IsFadingEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func IsFadingEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.IsFadingEnabledProperty())
         }
@@ -23669,8 +23687,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func IsTransparencyEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func IsTransparencyEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.IsTransparencyEnabledProperty())
         }
@@ -23681,8 +23699,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func IsRetryEnabledProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func IsRetryEnabledProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.IsRetryEnabledProperty())
         }
@@ -23693,8 +23711,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func ZIndexProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func ZIndexProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.ZIndexProperty())
         }
@@ -23705,8 +23723,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func TilePixelSizeProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func TilePixelSizeProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.TilePixelSizeProperty())
         }
@@ -23717,8 +23735,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func VisibleProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func VisibleProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics>().unwrap()) {
             result__ = Some(factory__.VisibleProperty())
         }
@@ -23729,8 +23747,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func AnimationStateProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func AnimationStateProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics2>().unwrap()) {
             result__ = Some(factory__.AnimationStateProperty())
         }
@@ -23741,8 +23759,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func AutoPlayProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func AutoPlayProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics2>().unwrap()) {
             result__ = Some(factory__.AutoPlayProperty())
         }
@@ -23753,8 +23771,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func FrameCountProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func FrameCountProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics2>().unwrap()) {
             result__ = Some(factory__.FrameCountProperty())
         }
@@ -23765,8 +23783,8 @@ public class MapTileSource <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func FrameDurationProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func FrameDurationProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<MapTileSource, IMapTileSourceStatics2>().unwrap()) {
             result__ = Some(factory__.FrameDurationProperty())
         }
@@ -23933,8 +23951,8 @@ public class StreetsideExperience <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -24098,8 +24116,8 @@ public class StreetsidePanorama <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }

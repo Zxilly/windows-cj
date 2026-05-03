@@ -4,10 +4,15 @@
 package windows.Win32.Devices.Dvd
 
 import std.collection.*
+@When[Windows_Win32_Devices_Dvd == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Dvd == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Dvd == "on"]
 import windows_polyfill.{packedReadInt32, packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadInt64, unionReadUInt64, unionReadUInt8, unionWriteInt64, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_Devices_Dvd == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_Dvd == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

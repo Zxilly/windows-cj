@@ -4,15 +4,25 @@
 package windows.UI.Xaml.Printing
 
 import std.collection.*
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Xaml_Printing == "on" && Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
-import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
-import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
+@When[Windows_UI_Xaml_Printing == "on"]
+import windows.UI.Xaml.impl.p0 as UI_Xaml_impl_p0
+@When[Windows_UI_Xaml_Printing == "on"]
+import windows.UI.Xaml.impl.p1 as UI_Xaml_impl_p1
+@When[Windows_UI_Xaml_Printing == "on"]
 import windows_collections as windows_collections
 
 
@@ -335,7 +345,7 @@ public class IPrintDocumentStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintDocumentStatics", IPrintDocumentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintDocumentStaticsVtbl", "IPrintDocumentStatics", "IPrintDocumentStatics_Impl", [InterfaceMethodSchema("DocumentSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintDocumentStatics", IPrintDocumentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintDocumentStaticsVtbl", "IPrintDocumentStatics", "IPrintDocumentStatics_Impl", [InterfaceMethodSchema("DocumentSourceProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintDocumentStatics.runtimeType())
         return schema
     }
@@ -365,12 +375,12 @@ public class IPrintDocumentStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func DocumentSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func DocumentSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DocumentSourceProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -562,19 +572,15 @@ public class PaginateEventHandler <: InterfaceWrapperBase & ComInterface & windo
 extend PaginateEventHandler <: windows_core.Interface<PaginateEventHandler> {}
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class PaginateEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface PaginateEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class PaginateEventHandlerInvoker <: PaginateEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<PaginateEventArgs>): Unit {
-        ()
-    }
+private interface PaginateEventHandlerInvoker <: PaginateEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<PaginateEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<PaginateEventArgs>(PaginateEventArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -594,7 +600,7 @@ private class PaginateEventHandlerBox <: PaginateEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<PaginateEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<PaginateEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -849,19 +855,15 @@ public class AddPagesEventHandler <: InterfaceWrapperBase & ComInterface & windo
 extend AddPagesEventHandler <: windows_core.Interface<AddPagesEventHandler> {}
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class AddPagesEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface AddPagesEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class AddPagesEventHandlerInvoker <: AddPagesEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<AddPagesEventArgs>): Unit {
-        ()
-    }
+private interface AddPagesEventHandlerInvoker <: AddPagesEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<AddPagesEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<AddPagesEventArgs>(AddPagesEventArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -881,7 +883,7 @@ private class AddPagesEventHandlerBox <: AddPagesEventHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<AddPagesEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<AddPagesEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -1081,19 +1083,15 @@ public class GetPreviewPageEventHandler <: InterfaceWrapperBase & ComInterface &
 extend GetPreviewPageEventHandler <: windows_core.Interface<GetPreviewPageEventHandler> {}
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class GetPreviewPageEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface GetPreviewPageEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Xaml_Printing == "on"]
-private open class GetPreviewPageEventHandlerInvoker <: GetPreviewPageEventHandlerInvokerErased {
-    public open func Invoke(sender: InParam<IInspectable>, e: InParam<GetPreviewPageEventArgs>): Unit {
-        ()
-    }
+private interface GetPreviewPageEventHandlerInvoker <: GetPreviewPageEventHandlerInvokerErased {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<GetPreviewPageEventArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), InParam<GetPreviewPageEventArgs>(GetPreviewPageEventArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -1113,7 +1111,7 @@ private class GetPreviewPageEventHandlerBox <: GetPreviewPageEventHandlerInvoker
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, e: InParam<GetPreviewPageEventArgs>): Unit {
+    public func Invoke(sender: InParam<IInspectable>, e: InParam<GetPreviewPageEventArgs>): Unit {
         invoke_(sender, e)
     }
 }
@@ -1197,7 +1195,7 @@ public class IPrintDocument <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintDocument", IPrintDocument.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintDocumentVtbl", "IPrintDocument", "IPrintDocument_Impl", [InterfaceMethodSchema("DocumentSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing.IPrintDocumentSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Paginate", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<PaginateEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePaginate", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPreviewPage", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<GetPreviewPageEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveGetPreviewPage", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPages", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AddPagesEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAddPages", 12, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPage", 13, [InterfaceParameterSchema("pageVisual", "CPointer<Unit>", "InParam<UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddPagesComplete", 14, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetPreviewPageCount", 15, [InterfaceParameterSchema("count", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("type_", "PreviewPageCountTypeAbi", "PreviewPageCountType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPreviewPage", 16, [InterfaceParameterSchema("pageNumber", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("pageVisual", "CPointer<Unit>", "InParam<UI_Xaml__impl_l1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("InvalidatePreview", 17, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintDocument", IPrintDocument.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintDocumentVtbl", "IPrintDocument", "IPrintDocument_Impl", [InterfaceMethodSchema("DocumentSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Graphics_Printing.IPrintDocumentSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Paginate", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<PaginateEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePaginate", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPreviewPage", 9, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<GetPreviewPageEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveGetPreviewPage", 10, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPages", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AddPagesEventHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAddPages", 12, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPage", 13, [InterfaceParameterSchema("pageVisual", "CPointer<Unit>", "InParam<UI_Xaml_impl_p1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddPagesComplete", 14, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetPreviewPageCount", 15, [InterfaceParameterSchema("count", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("type_", "PreviewPageCountTypeAbi", "PreviewPageCountType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPreviewPage", 16, [InterfaceParameterSchema("pageNumber", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("pageVisual", "CPointer<Unit>", "InParam<UI_Xaml_impl_p1.UIElement>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("InvalidatePreview", 17, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IPrintDocument.runtimeType())
         return schema
     }
@@ -1278,7 +1276,7 @@ public class IPrintDocument <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func AddPage(pageVisual: UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func AddPage(pageVisual: UI_Xaml_impl_p1.UIElement): Unit {
         let v = vtbl()
         let hr = v.AddPage(asRaw(), pageVisual.asRaw())
         HRESULT(hr).ok()
@@ -1297,7 +1295,7 @@ public class IPrintDocument <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetPreviewPage(pageNumber: Int32, pageVisual: UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func SetPreviewPage(pageNumber: Int32, pageVisual: UI_Xaml_impl_p1.UIElement): Unit {
         let v = vtbl()
         let hr = v.SetPreviewPage(asRaw(), pageNumber, pageVisual.asRaw())
         HRESULT(hr).ok()
@@ -1467,8 +1465,8 @@ public class PrintDocument <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    public func asDependencyObject(): UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1504,7 +1502,7 @@ public class PrintDocument <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func AddPage(pageVisual: UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func AddPage(pageVisual: UI_Xaml_impl_p1.UIElement): Unit {
         defaultInterface().AddPage(pageVisual)
     }
 
@@ -1517,7 +1515,7 @@ public class PrintDocument <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public unsafe func SetPreviewPage(pageNumber: Int32, pageVisual: UI_Xaml__impl_l1.UIElement): Unit {
+    public unsafe func SetPreviewPage(pageNumber: Int32, pageVisual: UI_Xaml_impl_p1.UIElement): Unit {
         defaultInterface().SetPreviewPage(pageNumber, pageVisual)
     }
 
@@ -1526,8 +1524,8 @@ public class PrintDocument <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_UI_Xaml == "on"]
-    public static unsafe func DocumentSourceProperty(): UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<UI_Xaml__impl_l0.DependencyProperty> = Option<UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func DocumentSourceProperty(): UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<UI_Xaml_impl_p0.DependencyProperty> = Option<UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<PrintDocument, IPrintDocumentStatics>().unwrap()) {
             result__ = Some(factory__.DocumentSourceProperty())
         }

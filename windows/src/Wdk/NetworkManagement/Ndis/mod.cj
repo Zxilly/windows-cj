@@ -4,16 +4,27 @@
 package windows.Wdk.NetworkManagement.Ndis
 
 import std.collection.*
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_core as windows_core
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_interface.{GUID}
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_interface as windows_interface
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_polyfill as windows_polyfill
-import windows.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+import windows.Wdk.impl.p0 as Wdk_impl_p0
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 import windows_core as windows_core
 
 
@@ -2461,7 +2472,7 @@ extend NDIS_DEVICE_POWER_STATE <: windows_core.CopyType & windows_core.RuntimeTy
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
 public struct NDIS_DMA_BLOCK {
     public var MapRegisterBase: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationEvent: Wdk__impl_l0.KEVENT = Wdk__impl_l0.KEVENT()
+    public var AllocationEvent: Wdk_impl_p0.KEVENT = Wdk_impl_p0.KEVENT()
     public var SystemAdapterObject: CPointer<Unit> = CPointer<Unit>()
     public var Miniport: CPointer<Unit> = CPointer<Unit>()
     public var InProgress: UInt8 = 0u8
@@ -2472,7 +2483,7 @@ public struct NDIS_DMA_BLOCK {
 @C
 public struct NDIS_DMA_BLOCKAbi {
     public var MapRegisterBase: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationEvent: Wdk__impl_l0.KEVENTAbi = Wdk__impl_l0.KEVENTAbi()
+    public var AllocationEvent: Wdk_impl_p0.KEVENTAbi = Wdk_impl_p0.KEVENTAbi()
     public var SystemAdapterObject: CPointer<Unit> = CPointer<Unit>()
     public var Miniport: CPointer<Unit> = CPointer<Unit>()
     public var InProgress: UInt8 = 0u8
@@ -2487,7 +2498,7 @@ extend NDIS_DMA_BLOCK <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func projectAbi(value: NDIS_DMA_BLOCK): NDIS_DMA_BLOCKAbi {
         var abi = NDIS_DMA_BLOCKAbi()
         abi.MapRegisterBase = value.MapRegisterBase
-        abi.AllocationEvent = windows_core.projectTypedAbi(value.AllocationEvent, windows_core.typeMarker<Wdk__impl_l0.KEVENT>())
+        abi.AllocationEvent = windows_core.projectTypedAbi(value.AllocationEvent, windows_core.typeMarker<Wdk_impl_p0.KEVENT>())
         abi.SystemAdapterObject = value.SystemAdapterObject
         abi.Miniport = value.Miniport
         abi.InProgress = value.InProgress
@@ -2496,7 +2507,7 @@ extend NDIS_DMA_BLOCK <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func assumeInitRef(abi: NDIS_DMA_BLOCKAbi): NDIS_DMA_BLOCK {
         var value = NDIS_DMA_BLOCK()
         value.MapRegisterBase = abi.MapRegisterBase
-        value.AllocationEvent = windows_core.fromTypedAbi(abi.AllocationEvent, windows_core.typeMarker<Wdk__impl_l0.KEVENT>()).unwrap()
+        value.AllocationEvent = windows_core.fromTypedAbi(abi.AllocationEvent, windows_core.typeMarker<Wdk_impl_p0.KEVENT>()).unwrap()
         value.SystemAdapterObject = abi.SystemAdapterObject
         value.Miniport = abi.Miniport
         value.InProgress = abi.InProgress
@@ -2514,8 +2525,8 @@ public struct NDIS_DMA_DESCRIPTION {
     public var DemandMode: UInt8 = 0u8
     public var AutoInitialize: UInt8 = 0u8
     public var DmaChannelSpecified: UInt8 = 0u8
-    public var DmaWidth: Wdk__impl_l0.DMA_WIDTH = Wdk__impl_l0.DMA_WIDTH()
-    public var DmaSpeed: Wdk__impl_l0.DMA_SPEED = Wdk__impl_l0.DMA_SPEED()
+    public var DmaWidth: Wdk_impl_p0.DMA_WIDTH = Wdk_impl_p0.DMA_WIDTH()
+    public var DmaSpeed: Wdk_impl_p0.DMA_SPEED = Wdk_impl_p0.DMA_SPEED()
     public var DmaPort: UInt32 = 0u32
     public var DmaChannel: UInt32 = 0u32
     public init() {}
@@ -2527,8 +2538,8 @@ public struct NDIS_DMA_DESCRIPTIONAbi {
     public var DemandMode: UInt8 = 0u8
     public var AutoInitialize: UInt8 = 0u8
     public var DmaChannelSpecified: UInt8 = 0u8
-    public var DmaWidth: Wdk__impl_l0.DMA_WIDTHAbi = Wdk__impl_l0.DMA_WIDTHAbi()
-    public var DmaSpeed: Wdk__impl_l0.DMA_SPEEDAbi = Wdk__impl_l0.DMA_SPEEDAbi()
+    public var DmaWidth: Wdk_impl_p0.DMA_WIDTHAbi = Wdk_impl_p0.DMA_WIDTHAbi()
+    public var DmaSpeed: Wdk_impl_p0.DMA_SPEEDAbi = Wdk_impl_p0.DMA_SPEEDAbi()
     public var DmaPort: UInt32 = 0u32
     public var DmaChannel: UInt32 = 0u32
     public init() {}
@@ -2544,8 +2555,8 @@ extend NDIS_DMA_DESCRIPTION <: windows_core.CopyType & windows_core.RuntimeType 
         abi.DemandMode = value.DemandMode
         abi.AutoInitialize = value.AutoInitialize
         abi.DmaChannelSpecified = value.DmaChannelSpecified
-        abi.DmaWidth = windows_core.projectTypedAbi(value.DmaWidth, windows_core.typeMarker<Wdk__impl_l0.DMA_WIDTH>())
-        abi.DmaSpeed = windows_core.projectTypedAbi(value.DmaSpeed, windows_core.typeMarker<Wdk__impl_l0.DMA_SPEED>())
+        abi.DmaWidth = windows_core.projectTypedAbi(value.DmaWidth, windows_core.typeMarker<Wdk_impl_p0.DMA_WIDTH>())
+        abi.DmaSpeed = windows_core.projectTypedAbi(value.DmaSpeed, windows_core.typeMarker<Wdk_impl_p0.DMA_SPEED>())
         abi.DmaPort = value.DmaPort
         abi.DmaChannel = value.DmaChannel
         return abi
@@ -2555,8 +2566,8 @@ extend NDIS_DMA_DESCRIPTION <: windows_core.CopyType & windows_core.RuntimeType 
         value.DemandMode = abi.DemandMode
         value.AutoInitialize = abi.AutoInitialize
         value.DmaChannelSpecified = abi.DmaChannelSpecified
-        value.DmaWidth = windows_core.fromTypedAbi(abi.DmaWidth, windows_core.typeMarker<Wdk__impl_l0.DMA_WIDTH>()).unwrap()
-        value.DmaSpeed = windows_core.fromTypedAbi(abi.DmaSpeed, windows_core.typeMarker<Wdk__impl_l0.DMA_SPEED>()).unwrap()
+        value.DmaWidth = windows_core.fromTypedAbi(abi.DmaWidth, windows_core.typeMarker<Wdk_impl_p0.DMA_WIDTH>()).unwrap()
+        value.DmaSpeed = windows_core.fromTypedAbi(abi.DmaSpeed, windows_core.typeMarker<Wdk_impl_p0.DMA_SPEED>()).unwrap()
         value.DmaPort = abi.DmaPort
         value.DmaChannel = abi.DmaChannel
         return value
@@ -2624,14 +2635,14 @@ extend NDIS_ENVIRONMENT_TYPE <: windows_core.CopyType & windows_core.RuntimeType
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
 public struct NDIS_EVENT {
-    public var Event: Wdk__impl_l0.KEVENT = Wdk__impl_l0.KEVENT()
+    public var Event: Wdk_impl_p0.KEVENT = Wdk_impl_p0.KEVENT()
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
 @C
 public struct NDIS_EVENTAbi {
-    public var Event: Wdk__impl_l0.KEVENTAbi = Wdk__impl_l0.KEVENTAbi()
+    public var Event: Wdk_impl_p0.KEVENTAbi = Wdk_impl_p0.KEVENTAbi()
     public init() {}
 }
 
@@ -2642,12 +2653,12 @@ extend NDIS_EVENT <: windows_core.CopyType & windows_core.RuntimeType & windows_
     public static func signature(): String { "struct(Windows.Wdk.NetworkManagement.Ndis.NDIS_EVENT;struct(Windows.Wdk.Foundation.KEVENT;struct(Windows.Wdk.Foundation.DISPATCHER_HEADER;_Anonymous_e__Union;i4;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable)))))" }
     public static func projectAbi(value: NDIS_EVENT): NDIS_EVENTAbi {
         var abi = NDIS_EVENTAbi()
-        abi.Event = windows_core.projectTypedAbi(value.Event, windows_core.typeMarker<Wdk__impl_l0.KEVENT>())
+        abi.Event = windows_core.projectTypedAbi(value.Event, windows_core.typeMarker<Wdk_impl_p0.KEVENT>())
         return abi
     }
     public static func assumeInitRef(abi: NDIS_EVENTAbi): NDIS_EVENT {
         var value = NDIS_EVENT()
-        value.Event = windows_core.fromTypedAbi(abi.Event, windows_core.typeMarker<Wdk__impl_l0.KEVENT>()).unwrap()
+        value.Event = windows_core.fromTypedAbi(abi.Event, windows_core.typeMarker<Wdk_impl_p0.KEVENT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: NDIS_EVENTAbi): Result<NDIS_EVENT> { Result<NDIS_EVENT>.Ok(NDIS_EVENT.assumeInitRef(abi)) }
@@ -6546,16 +6557,16 @@ extend NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES <: windows_core.CopyType & windows_
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
 public struct NDIS_TIMER {
-    public var Timer: Wdk__impl_l0.KTIMER = Wdk__impl_l0.KTIMER()
-    public var Dpc: Wdk__impl_l0.KDPC = Wdk__impl_l0.KDPC()
+    public var Timer: Wdk_impl_p0.KTIMER = Wdk_impl_p0.KTIMER()
+    public var Dpc: Wdk_impl_p0.KDPC = Wdk_impl_p0.KDPC()
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
 @C
 public struct NDIS_TIMERAbi {
-    public var Timer: Wdk__impl_l0.KTIMERAbi = Wdk__impl_l0.KTIMERAbi()
-    public var Dpc: Wdk__impl_l0.KDPCAbi = Wdk__impl_l0.KDPCAbi()
+    public var Timer: Wdk_impl_p0.KTIMERAbi = Wdk_impl_p0.KTIMERAbi()
+    public var Dpc: Wdk_impl_p0.KDPCAbi = Wdk_impl_p0.KDPCAbi()
     public init() {}
 }
 
@@ -6566,14 +6577,14 @@ extend NDIS_TIMER <: windows_core.CopyType & windows_core.RuntimeType & windows_
     public static func signature(): String { "struct(Windows.Wdk.NetworkManagement.Ndis.NDIS_TIMER;struct(Windows.Wdk.System.SystemServices.KTIMER;struct(Windows.Wdk.Foundation.DISPATCHER_HEADER;_Anonymous_e__Union;i4;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable)));u8;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable));cinterface(IInspectable);u4);struct(Windows.Wdk.Foundation.KDPC;_Anonymous_e__Union;struct(Windows.Win32.System.Kernel.SINGLE_LIST_ENTRY;cinterface(IInspectable));us;Windows.Wdk.Foundation.PKDEFERRED_ROUTINE;cinterface(IInspectable);cinterface(IInspectable);cinterface(IInspectable);cinterface(IInspectable)))" }
     public static func projectAbi(value: NDIS_TIMER): NDIS_TIMERAbi {
         var abi = NDIS_TIMERAbi()
-        abi.Timer = windows_core.projectTypedAbi(value.Timer, windows_core.typeMarker<Wdk__impl_l0.KTIMER>())
-        abi.Dpc = windows_core.projectTypedAbi(value.Dpc, windows_core.typeMarker<Wdk__impl_l0.KDPC>())
+        abi.Timer = windows_core.projectTypedAbi(value.Timer, windows_core.typeMarker<Wdk_impl_p0.KTIMER>())
+        abi.Dpc = windows_core.projectTypedAbi(value.Dpc, windows_core.typeMarker<Wdk_impl_p0.KDPC>())
         return abi
     }
     public static func assumeInitRef(abi: NDIS_TIMERAbi): NDIS_TIMER {
         var value = NDIS_TIMER()
-        value.Timer = windows_core.fromTypedAbi(abi.Timer, windows_core.typeMarker<Wdk__impl_l0.KTIMER>()).unwrap()
-        value.Dpc = windows_core.fromTypedAbi(abi.Dpc, windows_core.typeMarker<Wdk__impl_l0.KDPC>()).unwrap()
+        value.Timer = windows_core.fromTypedAbi(abi.Timer, windows_core.typeMarker<Wdk_impl_p0.KTIMER>()).unwrap()
+        value.Dpc = windows_core.fromTypedAbi(abi.Dpc, windows_core.typeMarker<Wdk_impl_p0.KDPC>()).unwrap()
         return value
     }
     public static func fromAbi(abi: NDIS_TIMERAbi): Result<NDIS_TIMER> { Result<NDIS_TIMER>.Ok(NDIS_TIMER.assumeInitRef(abi)) }
@@ -9213,8 +9224,8 @@ public type W_CO_DELETE_VC_HANDLER = CFunc<() -> Int32>
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct CO_CALL_MANAGER_PARAMETERS {
-    public var Transmit: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
-    public var Receive: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
+    public var Transmit: Win32_impl_p0.FLOWSPEC = Win32_impl_p0.FLOWSPEC()
+    public var Receive: Win32_impl_p0.FLOWSPEC = Win32_impl_p0.FLOWSPEC()
     public var CallMgrSpecific: CO_SPECIFIC_PARAMETERS = CO_SPECIFIC_PARAMETERS()
     public init() {}
 }
@@ -9222,8 +9233,8 @@ public struct CO_CALL_MANAGER_PARAMETERS {
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct CO_CALL_MANAGER_PARAMETERSAbi {
-    public var Transmit: Win32__impl_l0.FLOWSPECAbi = Win32__impl_l0.FLOWSPECAbi()
-    public var Receive: Win32__impl_l0.FLOWSPECAbi = Win32__impl_l0.FLOWSPECAbi()
+    public var Transmit: Win32_impl_p0.FLOWSPECAbi = Win32_impl_p0.FLOWSPECAbi()
+    public var Receive: Win32_impl_p0.FLOWSPECAbi = Win32_impl_p0.FLOWSPECAbi()
     public var CallMgrSpecific: CO_SPECIFIC_PARAMETERSAbi = CO_SPECIFIC_PARAMETERSAbi()
     public init() {}
 }
@@ -9235,15 +9246,15 @@ extend CO_CALL_MANAGER_PARAMETERS <: windows_core.CopyType & windows_core.Runtim
     public static func signature(): String { "struct(Windows.Wdk.NetworkManagement.Ndis.CO_CALL_MANAGER_PARAMETERS;struct(Windows.Win32.Networking.WinSock.FLOWSPEC;u4;u4;u4;u4;u4;u4;u4;u4);struct(Windows.Win32.Networking.WinSock.FLOWSPEC;u4;u4;u4;u4;u4;u4;u4;u4);struct(Windows.Wdk.NetworkManagement.Ndis.CO_SPECIFIC_PARAMETERS;u4;u4;cinterface(IInspectable)))" }
     public static func projectAbi(value: CO_CALL_MANAGER_PARAMETERS): CO_CALL_MANAGER_PARAMETERSAbi {
         var abi = CO_CALL_MANAGER_PARAMETERSAbi()
-        abi.Transmit = windows_core.projectTypedAbi(value.Transmit, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>())
-        abi.Receive = windows_core.projectTypedAbi(value.Receive, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>())
+        abi.Transmit = windows_core.projectTypedAbi(value.Transmit, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>())
+        abi.Receive = windows_core.projectTypedAbi(value.Receive, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>())
         abi.CallMgrSpecific = CO_SPECIFIC_PARAMETERS.projectAbi(value.CallMgrSpecific)
         return abi
     }
     public static func assumeInitRef(abi: CO_CALL_MANAGER_PARAMETERSAbi): CO_CALL_MANAGER_PARAMETERS {
         var value = CO_CALL_MANAGER_PARAMETERS()
-        value.Transmit = windows_core.fromTypedAbi(abi.Transmit, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>()).unwrap()
-        value.Receive = windows_core.fromTypedAbi(abi.Receive, windows_core.typeMarker<Win32__impl_l0.FLOWSPEC>()).unwrap()
+        value.Transmit = windows_core.fromTypedAbi(abi.Transmit, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>()).unwrap()
+        value.Receive = windows_core.fromTypedAbi(abi.Receive, windows_core.typeMarker<Win32_impl_p0.FLOWSPEC>()).unwrap()
         value.CallMgrSpecific = CO_SPECIFIC_PARAMETERS.assumeInitRef(abi.CallMgrSpecific)
         return value
     }
@@ -10153,8 +10164,8 @@ extend NDIS_LINK_STATE <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
 public struct NDIS_MINIPORT_TIMER {
-    public var Timer: Wdk__impl_l0.KTIMER = Wdk__impl_l0.KTIMER()
-    public var Dpc: Wdk__impl_l0.KDPC = Wdk__impl_l0.KDPC()
+    public var Timer: Wdk_impl_p0.KTIMER = Wdk_impl_p0.KTIMER()
+    public var Dpc: Wdk_impl_p0.KDPC = Wdk_impl_p0.KDPC()
     public var MiniportTimerFunction: PNDIS_TIMER_FUNCTION = CFunc<() -> Unit>(CPointer<Unit>())
     public var MiniportTimerContext: CPointer<Unit> = CPointer<Unit>()
     public var Miniport: CPointer<NDIS_MINIPORT_BLOCKAbi> = CPointer<NDIS_MINIPORT_BLOCKAbi>()
@@ -10165,8 +10176,8 @@ public struct NDIS_MINIPORT_TIMER {
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
 @C
 public struct NDIS_MINIPORT_TIMERAbi {
-    public var Timer: Wdk__impl_l0.KTIMERAbi = Wdk__impl_l0.KTIMERAbi()
-    public var Dpc: Wdk__impl_l0.KDPCAbi = Wdk__impl_l0.KDPCAbi()
+    public var Timer: Wdk_impl_p0.KTIMERAbi = Wdk_impl_p0.KTIMERAbi()
+    public var Dpc: Wdk_impl_p0.KDPCAbi = Wdk_impl_p0.KDPCAbi()
     public var MiniportTimerFunction: PNDIS_TIMER_FUNCTION = CFunc<() -> Unit>(CPointer<Unit>())
     public var MiniportTimerContext: CPointer<Unit> = CPointer<Unit>()
     public var Miniport: CPointer<NDIS_MINIPORT_BLOCKAbi> = CPointer<NDIS_MINIPORT_BLOCKAbi>()
@@ -10181,8 +10192,8 @@ extend NDIS_MINIPORT_TIMER <: windows_core.CopyType & windows_core.RuntimeType &
     public static func signature(): String { "struct(Windows.Wdk.NetworkManagement.Ndis.NDIS_MINIPORT_TIMER;struct(Windows.Wdk.System.SystemServices.KTIMER;struct(Windows.Wdk.Foundation.DISPATCHER_HEADER;_Anonymous_e__Union;i4;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable)));u8;struct(Windows.Win32.System.Kernel.LIST_ENTRY;cinterface(IInspectable);cinterface(IInspectable));cinterface(IInspectable);u4);struct(Windows.Wdk.Foundation.KDPC;_Anonymous_e__Union;struct(Windows.Win32.System.Kernel.SINGLE_LIST_ENTRY;cinterface(IInspectable));us;Windows.Wdk.Foundation.PKDEFERRED_ROUTINE;cinterface(IInspectable);cinterface(IInspectable);cinterface(IInspectable);cinterface(IInspectable));Windows.Wdk.NetworkManagement.Ndis.PNDIS_TIMER_FUNCTION;cinterface(IInspectable);cinterface(IInspectable);cinterface(IInspectable))" }
     public static func projectAbi(value: NDIS_MINIPORT_TIMER): NDIS_MINIPORT_TIMERAbi {
         var abi = NDIS_MINIPORT_TIMERAbi()
-        abi.Timer = windows_core.projectTypedAbi(value.Timer, windows_core.typeMarker<Wdk__impl_l0.KTIMER>())
-        abi.Dpc = windows_core.projectTypedAbi(value.Dpc, windows_core.typeMarker<Wdk__impl_l0.KDPC>())
+        abi.Timer = windows_core.projectTypedAbi(value.Timer, windows_core.typeMarker<Wdk_impl_p0.KTIMER>())
+        abi.Dpc = windows_core.projectTypedAbi(value.Dpc, windows_core.typeMarker<Wdk_impl_p0.KDPC>())
         abi.MiniportTimerFunction = value.MiniportTimerFunction
         abi.MiniportTimerContext = value.MiniportTimerContext
         abi.Miniport = value.Miniport
@@ -10191,8 +10202,8 @@ extend NDIS_MINIPORT_TIMER <: windows_core.CopyType & windows_core.RuntimeType &
     }
     public static func assumeInitRef(abi: NDIS_MINIPORT_TIMERAbi): NDIS_MINIPORT_TIMER {
         var value = NDIS_MINIPORT_TIMER()
-        value.Timer = windows_core.fromTypedAbi(abi.Timer, windows_core.typeMarker<Wdk__impl_l0.KTIMER>()).unwrap()
-        value.Dpc = windows_core.fromTypedAbi(abi.Dpc, windows_core.typeMarker<Wdk__impl_l0.KDPC>()).unwrap()
+        value.Timer = windows_core.fromTypedAbi(abi.Timer, windows_core.typeMarker<Wdk_impl_p0.KTIMER>()).unwrap()
+        value.Dpc = windows_core.fromTypedAbi(abi.Dpc, windows_core.typeMarker<Wdk_impl_p0.KDPC>()).unwrap()
         value.MiniportTimerFunction = abi.MiniportTimerFunction
         value.MiniportTimerContext = abi.MiniportTimerContext
         value.Miniport = abi.Miniport
@@ -11479,21 +11490,21 @@ public unsafe func Windows_NdisCoGetTapiCallId(NdisVcHandle: CPointer<Unit>, Tap
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCompleteDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
 foreign {
-    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
+    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl_p0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCompleteDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
-public unsafe func Windows_NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
+public unsafe func Windows_NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl_p0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
     NdisCompleteDmaTransfer(Status, NdisDmaHandle, Buffer, Offset, Length, WriteToDevice)
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCopyBuffer == "on" && Windows_Wdk_Foundation == "on"]
 foreign {
-    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
+    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk_impl_p0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCopyBuffer == "on" && Windows_Wdk_Foundation == "on"]
-public unsafe func Windows_NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit {
+public unsafe func Windows_NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk_impl_p0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit {
     NdisCopyBuffer(Status, Buffer, PoolHandle, MemoryDescriptor, Offset, Length)
 }
 
@@ -11838,11 +11849,11 @@ foreign {
     // param-hint: NextDeviceObject optional
     // param-hint: AllocatedResources optional
     // param-hint: AllocatedResourcesTranslated optional
-    func NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>): Unit
+    func NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk_impl_p0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk_impl_p0.CM_RESOURCE_LISTAbi>>): Unit
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMGetDeviceProperty == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
-public unsafe func Windows_NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>): Unit {
+public unsafe func Windows_NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk_impl_p0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk_impl_p0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk_impl_p0.CM_RESOURCE_LISTAbi>>): Unit {
     NdisMGetDeviceProperty(MiniportAdapterHandle, PhysicalDeviceObject, FunctionalDeviceObject, NextDeviceObject, AllocatedResources, AllocatedResourcesTranslated)
 }
 
@@ -12130,11 +12141,11 @@ public unsafe func Windows_NdisSetTimerEx(NdisTimer: CPointer<NDIS_TIMERAbi>, Mi
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetupDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
 foreign {
-    func NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
+    func NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl_p0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetupDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
-public unsafe func Windows_NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
+public unsafe func Windows_NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl_p0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
     NdisSetupDmaTransfer(Status, NdisDmaHandle, Buffer, Offset, Length, WriteToDevice)
 }
 

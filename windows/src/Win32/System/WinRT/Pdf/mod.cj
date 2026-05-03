@@ -4,22 +4,32 @@
 package windows.Win32.System.WinRT.Pdf
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Pdf == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_Pdf == "on" && Windows_Win32_Graphics_Direct2D == "on"]
 import windows.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT_Pdf == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_WinRT_Pdf == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct PDF_RENDER_PARAMS {
-    public var SourceRect: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var SourceRect: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public var DestinationWidth: UInt32 = 0u32
     public var DestinationHeight: UInt32 = 0u32
-    public var BackgroundColor: Win32__impl_l0.D2D_COLOR_F = Win32__impl_l0.D2D_COLOR_F()
+    public var BackgroundColor: Win32_impl_p0.D2D_COLOR_F = Win32_impl_p0.D2D_COLOR_F()
     public var IgnoreHighContrast: UInt8 = 0u8
     public init() {}
 }
@@ -27,10 +37,10 @@ public struct PDF_RENDER_PARAMS {
 @When[Windows_Win32_System_WinRT_Pdf == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 @C
 public struct PDF_RENDER_PARAMSAbi {
-    public var SourceRect: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var SourceRect: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public var DestinationWidth: UInt32 = 0u32
     public var DestinationHeight: UInt32 = 0u32
-    public var BackgroundColor: Win32__impl_l0.D2D_COLOR_FAbi = Win32__impl_l0.D2D_COLOR_FAbi()
+    public var BackgroundColor: Win32_impl_p0.D2D_COLOR_FAbi = Win32_impl_p0.D2D_COLOR_FAbi()
     public var IgnoreHighContrast: UInt8 = 0u8
     public init() {}
 }
@@ -42,19 +52,19 @@ extend PDF_RENDER_PARAMS <: windows_core.CopyType & windows_core.RuntimeType & w
     public static func signature(): String { "struct(Windows.Win32.System.WinRT.Pdf.PDF_RENDER_PARAMS;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_RECT_F;f4;f4;f4;f4);u4;u4;struct(Windows.Win32.Graphics.Direct2D.Common.D2D_COLOR_F;f4;f4;f4;f4);struct(Windows.Win32.Foundation.BOOLEAN;u1))" }
     public static func projectAbi(value: PDF_RENDER_PARAMS): PDF_RENDER_PARAMSAbi {
         var abi = PDF_RENDER_PARAMSAbi()
-        abi.SourceRect = windows_core.projectTypedAbi(value.SourceRect, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.SourceRect = windows_core.projectTypedAbi(value.SourceRect, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         abi.DestinationWidth = value.DestinationWidth
         abi.DestinationHeight = value.DestinationHeight
-        abi.BackgroundColor = windows_core.projectTypedAbi(value.BackgroundColor, windows_core.typeMarker<Win32__impl_l0.D2D_COLOR_F>())
+        abi.BackgroundColor = windows_core.projectTypedAbi(value.BackgroundColor, windows_core.typeMarker<Win32_impl_p0.D2D_COLOR_F>())
         abi.IgnoreHighContrast = value.IgnoreHighContrast
         return abi
     }
     public static func assumeInitRef(abi: PDF_RENDER_PARAMSAbi): PDF_RENDER_PARAMS {
         var value = PDF_RENDER_PARAMS()
-        value.SourceRect = windows_core.fromTypedAbi(abi.SourceRect, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.SourceRect = windows_core.fromTypedAbi(abi.SourceRect, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         value.DestinationWidth = abi.DestinationWidth
         value.DestinationHeight = abi.DestinationHeight
-        value.BackgroundColor = windows_core.fromTypedAbi(abi.BackgroundColor, windows_core.typeMarker<Win32__impl_l0.D2D_COLOR_F>()).unwrap()
+        value.BackgroundColor = windows_core.fromTypedAbi(abi.BackgroundColor, windows_core.typeMarker<Win32_impl_p0.D2D_COLOR_F>()).unwrap()
         value.IgnoreHighContrast = abi.IgnoreHighContrast
         return value
     }

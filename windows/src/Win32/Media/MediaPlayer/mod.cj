@@ -4,18 +4,32 @@
 package windows.Win32.Media.MediaPlayer
 
 import std.collection.*
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_polyfill.{packedReadUInt32, packedReadValue, packedWriteUInt32, packedWriteValue}
+@When[Windows_Win32_Media_MediaPlayer == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_MediaPlayer == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_MediaPlayer == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Media_MediaPlayer == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_MediaPlayer == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_MediaPlayer == "on"]
@@ -2128,7 +2142,7 @@ extend FeedsManager <: windows_core.CopyType & windows_core.RuntimeType & window
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Xml: CFunc<(CPointer<Unit>, Int32, FEEDS_XML_SORT_PROPERTYAbi, FEEDS_XML_SORT_ORDERAbi, FEEDS_XML_FILTER_FLAGSAbi, FEEDS_XML_INCLUDE_FLAGSAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Rename: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -2213,7 +2227,7 @@ public class IFeed <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeed> {
-        return InterfaceDescriptor<IFeed>("IFeed", IFeed.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedFromAbi, viewIFeed)
+        return InterfaceDescriptor<IFeed>("IFeed", IFeed.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedFromAbi, viewIFeed)
     }
 
     public unsafe func vtbl(): IFeedVtbl {
@@ -2584,7 +2598,7 @@ public class IFeed2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedEnclosureVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Url: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Length: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2635,7 +2649,7 @@ public class IFeedEnclosure <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedEnclosure> {
-        return InterfaceDescriptor<IFeedEnclosure>("IFeedEnclosure", IFeedEnclosure.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedEnclosureFromAbi, viewIFeedEnclosure)
+        return InterfaceDescriptor<IFeedEnclosure>("IFeedEnclosure", IFeedEnclosure.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedEnclosureFromAbi, viewIFeedEnclosure)
     }
 
     public unsafe func vtbl(): IFeedEnclosureVtbl {
@@ -2725,7 +2739,7 @@ public class IFeedEnclosure <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Error: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var FeedDeleted: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var FeedRenamed: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
@@ -2770,7 +2784,7 @@ public class IFeedEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedEvents> {
-        return InterfaceDescriptor<IFeedEvents>("IFeedEvents", IFeedEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedEventsFromAbi, viewIFeedEvents)
+        return InterfaceDescriptor<IFeedEvents>("IFeedEvents", IFeedEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedEventsFromAbi, viewIFeedEvents)
     }
 
     public unsafe func vtbl(): IFeedEventsVtbl {
@@ -2829,7 +2843,7 @@ public class IFeedEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedFolderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Feeds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -2892,7 +2906,7 @@ public class IFeedFolder <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedFolder> {
-        return InterfaceDescriptor<IFeedFolder>("IFeedFolder", IFeedFolder.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedFolderFromAbi, viewIFeedFolder)
+        return InterfaceDescriptor<IFeedFolder>("IFeedFolder", IFeedFolder.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedFolderFromAbi, viewIFeedFolder)
     }
 
     public unsafe func vtbl(): IFeedFolderVtbl {
@@ -3019,7 +3033,7 @@ public class IFeedFolder <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedFolderEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Error: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var FolderAdded: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var FolderDeleted: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -3072,7 +3086,7 @@ public class IFeedFolderEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedFolderEvents> {
-        return InterfaceDescriptor<IFeedFolderEvents>("IFeedFolderEvents", IFeedFolderEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedFolderEventsFromAbi, viewIFeedFolderEvents)
+        return InterfaceDescriptor<IFeedFolderEvents>("IFeedFolderEvents", IFeedFolderEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedFolderEventsFromAbi, viewIFeedFolderEvents)
     }
 
     public unsafe func vtbl(): IFeedFolderEventsVtbl {
@@ -3179,7 +3193,7 @@ public class IFeedFolderEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Xml: CFunc<(CPointer<Unit>, FEEDS_XML_INCLUDE_FLAGSAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Link: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3235,7 +3249,7 @@ public class IFeedItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedItem> {
-        return InterfaceDescriptor<IFeedItem>("IFeedItem", IFeedItem.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedItemFromAbi, viewIFeedItem)
+        return InterfaceDescriptor<IFeedItem>("IFeedItem", IFeedItem.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedItemFromAbi, viewIFeedItem)
     }
 
     public unsafe func vtbl(): IFeedItemVtbl {
@@ -3405,7 +3419,7 @@ public class IFeedItem2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedsEnumVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3447,7 +3461,7 @@ public class IFeedsEnum <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedsEnum> {
-        return InterfaceDescriptor<IFeedsEnum>("IFeedsEnum", IFeedsEnum.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedsEnumFromAbi, viewIFeedsEnum)
+        return InterfaceDescriptor<IFeedsEnum>("IFeedsEnum", IFeedsEnum.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedsEnumFromAbi, viewIFeedsEnum)
     }
 
     public unsafe func vtbl(): IFeedsEnumVtbl {
@@ -3478,7 +3492,7 @@ public class IFeedsEnum <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFeedsManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var RootFolder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsSubscribed: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
@@ -3535,7 +3549,7 @@ public class IFeedsManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFeedsManager> {
-        return InterfaceDescriptor<IFeedsManager>("IFeedsManager", IFeedsManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIFeedsManagerFromAbi, viewIFeedsManager)
+        return InterfaceDescriptor<IFeedsManager>("IFeedsManager", IFeedsManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIFeedsManagerFromAbi, viewIFeedsManager)
     }
 
     public unsafe func vtbl(): IFeedsManagerVtbl {
@@ -3708,7 +3722,7 @@ public class IWMPAudioRenderConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPClosedCaptionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SAMIStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetSAMIStyle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SAMILang: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3753,7 +3767,7 @@ public class IWMPClosedCaption <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPClosedCaption> {
-        return InterfaceDescriptor<IWMPClosedCaption>("IWMPClosedCaption", IWMPClosedCaption.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPClosedCaptionFromAbi, viewIWMPClosedCaption)
+        return InterfaceDescriptor<IWMPClosedCaption>("IWMPClosedCaption", IWMPClosedCaption.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPClosedCaptionFromAbi, viewIWMPClosedCaption)
     }
 
     public unsafe func vtbl(): IWMPClosedCaptionVtbl {
@@ -4047,7 +4061,7 @@ public class IWMPConvert <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPDVDVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_isAvailable: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var domain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var topMenu: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -4090,7 +4104,7 @@ public class IWMPDVD <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPDVD> {
-        return InterfaceDescriptor<IWMPDVD>("IWMPDVD", IWMPDVD.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPDVDFromAbi, viewIWMPDVD)
+        return InterfaceDescriptor<IWMPDVD>("IWMPDVD", IWMPDVD.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPDVDFromAbi, viewIWMPDVD)
     }
 
     public unsafe func vtbl(): IWMPDVDVtbl {
@@ -4137,11 +4151,11 @@ public class IWMPDVD <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPErrorItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var errorCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var errorDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var errorContext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var errorContext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var remedy: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var customUrl: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4180,7 +4194,7 @@ public class IWMPErrorItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPErrorItem> {
-        return InterfaceDescriptor<IWMPErrorItem>("IWMPErrorItem", IWMPErrorItem.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPErrorItemFromAbi, viewIWMPErrorItem)
+        return InterfaceDescriptor<IWMPErrorItem>("IWMPErrorItem", IWMPErrorItem.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPErrorItemFromAbi, viewIWMPErrorItem)
     }
 
     public unsafe func vtbl(): IWMPErrorItemVtbl {
@@ -4200,7 +4214,7 @@ public class IWMPErrorItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func errorContext(pvarContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func errorContext(pvarContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.errorContext(__liveRaw, pvarContext)
@@ -4481,7 +4495,7 @@ public class IWMPMediaPluginRegistrar <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPMetadataPictureVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var mimeType: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var pictureType: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4522,7 +4536,7 @@ public class IWMPMetadataPicture <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPMetadataPicture> {
-        return InterfaceDescriptor<IWMPMetadataPicture>("IWMPMetadataPicture", IWMPMetadataPicture.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPMetadataPictureFromAbi, viewIWMPMetadataPicture)
+        return InterfaceDescriptor<IWMPMetadataPicture>("IWMPMetadataPicture", IWMPMetadataPicture.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPMetadataPictureFromAbi, viewIWMPMetadataPicture)
     }
 
     public unsafe func vtbl(): IWMPMetadataPictureVtbl {
@@ -4557,7 +4571,7 @@ public class IWMPMetadataPicture <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPMetadataTextVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var text: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4596,7 +4610,7 @@ public class IWMPMetadataText <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPMetadataText> {
-        return InterfaceDescriptor<IWMPMetadataText>("IWMPMetadataText", IWMPMetadataText.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPMetadataTextFromAbi, viewIWMPMetadataText)
+        return InterfaceDescriptor<IWMPMetadataText>("IWMPMetadataText", IWMPMetadataText.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPMetadataTextFromAbi, viewIWMPMetadataText)
     }
 
     public unsafe func vtbl(): IWMPMetadataTextVtbl {
@@ -4619,7 +4633,7 @@ public class IWMPMetadataText <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPNetworkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var bandWidth: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var recoveredPackets: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var sourceProtocol: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4684,7 +4698,7 @@ public class IWMPNetwork <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPNetwork> {
-        return InterfaceDescriptor<IWMPNetwork>("IWMPNetwork", IWMPNetwork.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPNetworkFromAbi, viewIWMPNetwork)
+        return InterfaceDescriptor<IWMPNetwork>("IWMPNetwork", IWMPNetwork.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPNetworkFromAbi, viewIWMPNetwork)
     }
 
     public unsafe func vtbl(): IWMPNetworkVtbl {
@@ -5194,7 +5208,7 @@ public class IWMPNodeWindowlessHost <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPPlayerApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var switchToPlayerApplication: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var switchToControl: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var playerDocked: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5235,7 +5249,7 @@ public class IWMPPlayerApplication <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPPlayerApplication> {
-        return InterfaceDescriptor<IWMPPlayerApplication>("IWMPPlayerApplication", IWMPPlayerApplication.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPPlayerApplicationFromAbi, viewIWMPPlayerApplication)
+        return InterfaceDescriptor<IWMPPlayerApplication>("IWMPPlayerApplication", IWMPPlayerApplication.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPPlayerApplicationFromAbi, viewIWMPPlayerApplication)
     }
 
     public unsafe func vtbl(): IWMPPlayerApplicationVtbl {
@@ -5456,7 +5470,7 @@ public class IWMPPluginEnable <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPQueryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var addCondition: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var beginNextGroup: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -5495,7 +5509,7 @@ public class IWMPQuery <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPQuery> {
-        return InterfaceDescriptor<IWMPQuery>("IWMPQuery", IWMPQuery.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPQueryFromAbi, viewIWMPQuery)
+        return InterfaceDescriptor<IWMPQuery>("IWMPQuery", IWMPQuery.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPQueryFromAbi, viewIWMPQuery)
     }
 
     public unsafe func vtbl(): IWMPQueryVtbl {
@@ -5658,7 +5672,7 @@ public class IWMPRenderConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_isAvailable: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var autoStart: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetautoStart: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -5718,7 +5732,7 @@ public class IWMPSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPSettings> {
-        return InterfaceDescriptor<IWMPSettings>("IWMPSettings", IWMPSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPSettingsFromAbi, viewIWMPSettings)
+        return InterfaceDescriptor<IWMPSettings>("IWMPSettings", IWMPSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPSettingsFromAbi, viewIWMPSettings)
     }
 
     public unsafe func vtbl(): IWMPSettingsVtbl {
@@ -5991,7 +6005,7 @@ public class IWMPSkinManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPStringCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -6030,7 +6044,7 @@ public class IWMPStringCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPStringCollection> {
-        return InterfaceDescriptor<IWMPStringCollection>("IWMPStringCollection", IWMPStringCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPStringCollectionFromAbi, viewIWMPStringCollection)
+        return InterfaceDescriptor<IWMPStringCollection>("IWMPStringCollection", IWMPStringCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPStringCollectionFromAbi, viewIWMPStringCollection)
     }
 
     public unsafe func vtbl(): IWMPStringCollectionVtbl {
@@ -6058,7 +6072,7 @@ public struct IWMPStringCollection2Vtbl {
     public var getItemInfo: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var getAttributeCountByType: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var getItemInfoByType: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var getItemInfoByType: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -6121,7 +6135,7 @@ public class IWMPStringCollection2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func getItemInfoByType(lCollectionIndex: Int32, bstrType: CPointer<UInt16>, bstrLanguage: CPointer<UInt16>, lAttributeIndex: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func getItemInfoByType(lCollectionIndex: Int32, bstrType: CPointer<UInt16>, bstrLanguage: CPointer<UInt16>, lAttributeIndex: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getItemInfoByType(__liveRaw, lCollectionIndex, bstrType, bstrLanguage, lAttributeIndex, pvarValue)
@@ -9109,7 +9123,7 @@ extend WindowsMediaPlayer <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _WMPOCXEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -9146,7 +9160,7 @@ public class _WMPOCXEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_WMPOCXEvents> {
-        return InterfaceDescriptor<_WMPOCXEvents>("_WMPOCXEvents", _WMPOCXEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_WMPOCXEventsFromAbi, view_WMPOCXEvents)
+        return InterfaceDescriptor<_WMPOCXEvents>("_WMPOCXEvents", _WMPOCXEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_WMPOCXEventsFromAbi, view_WMPOCXEvents)
     }
 
     public unsafe func vtbl(): _WMPOCXEventsVtbl {
@@ -9304,7 +9318,7 @@ public class IWMPContentContainerList <: InterfaceWrapperBase & ComInterface {
 public struct IWMPContentPartnerCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Notify: CFunc<(CPointer<Unit>, WMPCallbackNotificationAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Notify: CFunc<(CPointer<Unit>, WMPCallbackNotificationAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var BuyComplete: CFunc<(CPointer<Unit>, Int32, UInt32) -> Int32> = { _, _, _ => 0 }
     public var DownloadTrack: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetCatalogVersion: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -9317,7 +9331,7 @@ public struct IWMPContentPartnerCallbackVtbl {
     public var RefreshLicenseComplete: CFunc<(CPointer<Unit>, UInt32, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var ShowPopup: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VerifyPermissionComplete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var VerifyPermissionComplete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -9362,7 +9376,7 @@ public class IWMPContentPartnerCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Notify(type_: WMPCallbackNotificationAbi, pContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Notify(type_: WMPCallbackNotificationAbi, pContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Notify(__liveRaw, type_, pContext)
@@ -9435,7 +9449,7 @@ public class IWMPContentPartnerCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VerifyPermissionComplete(bstrPermission: CPointer<UInt16>, pContext: CPointer<Win32__impl_l2.VARIANTAbi>, hrPermission: Int32): Int32 {
+    public unsafe func VerifyPermissionComplete(bstrPermission: CPointer<UInt16>, pContext: CPointer<Win32_impl_p2.VARIANTAbi>, hrPermission: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VerifyPermissionComplete(__liveRaw, bstrPermission, pContext, hrPermission)
@@ -9445,7 +9459,7 @@ public class IWMPContentPartnerCallback <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPDownloadItemVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var sourceURL: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var size: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var type_: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -9490,7 +9504,7 @@ public class IWMPDownloadItem <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPDownloadItem> {
-        return InterfaceDescriptor<IWMPDownloadItem>("IWMPDownloadItem", IWMPDownloadItem.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPDownloadItemFromAbi, viewIWMPDownloadItem)
+        return InterfaceDescriptor<IWMPDownloadItem>("IWMPDownloadItem", IWMPDownloadItem.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPDownloadItemFromAbi, viewIWMPDownloadItem)
     }
 
     public unsafe func vtbl(): IWMPDownloadItemVtbl {
@@ -9731,7 +9745,7 @@ public class IWMPEffects <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPErrorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var clearErrorQueue: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var errorCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var get_item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -9772,7 +9786,7 @@ public class IWMPError <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPError> {
-        return InterfaceDescriptor<IWMPError>("IWMPError", IWMPError.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPErrorFromAbi, viewIWMPError)
+        return InterfaceDescriptor<IWMPError>("IWMPError", IWMPError.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPErrorFromAbi, viewIWMPError)
     }
 
     public unsafe func vtbl(): IWMPErrorVtbl {
@@ -11326,40 +11340,40 @@ public struct IWMPContentPartnerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var SetCallback: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Notify: CFunc<(CPointer<Unit>, WMPPartnerNotificationAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Notify: CFunc<(CPointer<Unit>, WMPPartnerNotificationAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetItemInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetItemInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetContentPartnerInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetContentPartnerInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCommands: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<WMPContextMenuInfoAbi>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var GetCommands: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<WMPContextMenuInfoAbi>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InvokeCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var InvokeCommand: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var CanBuySilent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Int16>) -> Int32> = { _, _, _, _ => 0 }
     public var Buy: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetStreamingURL: CFunc<(CPointer<Unit>, WMPStreamingTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetStreamingURL: CFunc<(CPointer<Unit>, WMPStreamingTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var Download: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var DownloadTrackComplete: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RefreshLicense: CFunc<(CPointer<Unit>, UInt32, Int16, CPointer<UInt16>, WMPStreamingTypeAbi, UInt32, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var RefreshLicense: CFunc<(CPointer<Unit>, UInt32, Int16, CPointer<UInt16>, WMPStreamingTypeAbi, UInt32, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCatalogURL: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var GetCatalogURL: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetTemplate: CFunc<(CPointer<Unit>, WMPTaskTypeAbi, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, CPointer<WMPTemplateSizeAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var GetTemplate: CFunc<(CPointer<Unit>, WMPTaskTypeAbi, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, CPointer<WMPTemplateSizeAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     public var UpdateDevice: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetListContents: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetListContents: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Login: CFunc<(CPointer<Unit>, Win32__impl_l0.BLOBAbi, Win32__impl_l0.BLOBAbi, Int16, Int16) -> Int32> = { _, _, _, _, _ => 0 }
+    public var Login: CFunc<(CPointer<Unit>, Win32_impl_p0.BLOBAbi, Win32_impl_p0.BLOBAbi, Int16, Int16) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var Authenticate: CFunc<(CPointer<Unit>, Win32__impl_l0.BLOBAbi, Win32__impl_l0.BLOBAbi) -> Int32> = { _, _, _ => 0 }
+    public var Authenticate: CFunc<(CPointer<Unit>, Win32_impl_p0.BLOBAbi, Win32_impl_p0.BLOBAbi) -> Int32> = { _, _, _ => 0 }
     public var Logout: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SendMessage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var StationEvent: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, UInt32, UInt32, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var CompareContainerListPrices: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var VerifyPermission: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var VerifyPermission: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -11410,35 +11424,35 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Notify(type_: WMPPartnerNotificationAbi, pContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Notify(type_: WMPPartnerNotificationAbi, pContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Notify(__liveRaw, type_, pContext)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetItemInfo(bstrInfoName: CPointer<UInt16>, pContext: CPointer<Win32__impl_l2.VARIANTAbi>, pData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetItemInfo(bstrInfoName: CPointer<UInt16>, pContext: CPointer<Win32_impl_p2.VARIANTAbi>, pData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItemInfo(__liveRaw, bstrInfoName, pContext, pData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetContentPartnerInfo(bstrInfoName: CPointer<UInt16>, pData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetContentPartnerInfo(bstrInfoName: CPointer<UInt16>, pData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetContentPartnerInfo(__liveRaw, bstrInfoName, pData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCommands(location: CPointer<UInt16>, pLocationContext: CPointer<Win32__impl_l2.VARIANTAbi>, itemLocation: CPointer<UInt16>, cItemIDs: UInt32, prgItemIDs: CPointer<UInt32>, pcItemIDs: CPointer<UInt32>, pprgItems: CPointer<CPointer<WMPContextMenuInfoAbi>>): Int32 {
+    public unsafe func GetCommands(location: CPointer<UInt16>, pLocationContext: CPointer<Win32_impl_p2.VARIANTAbi>, itemLocation: CPointer<UInt16>, cItemIDs: UInt32, prgItemIDs: CPointer<UInt32>, pcItemIDs: CPointer<UInt32>, pprgItems: CPointer<CPointer<WMPContextMenuInfoAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCommands(__liveRaw, location, pLocationContext, itemLocation, cItemIDs, prgItemIDs, pcItemIDs, pprgItems)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InvokeCommand(dwCommandID: UInt32, location: CPointer<UInt16>, pLocationContext: CPointer<Win32__impl_l2.VARIANTAbi>, itemLocation: CPointer<UInt16>, cItemIDs: UInt32, rgItemIDs: CPointer<UInt32>): Int32 {
+    public unsafe func InvokeCommand(dwCommandID: UInt32, location: CPointer<UInt16>, pLocationContext: CPointer<Win32_impl_p2.VARIANTAbi>, itemLocation: CPointer<UInt16>, cItemIDs: UInt32, rgItemIDs: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InvokeCommand(__liveRaw, dwCommandID, location, pLocationContext, itemLocation, cItemIDs, rgItemIDs)
@@ -11457,7 +11471,7 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetStreamingURL(st: WMPStreamingTypeAbi, pStreamContext: CPointer<Win32__impl_l2.VARIANTAbi>, pbstrURL: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func GetStreamingURL(st: WMPStreamingTypeAbi, pStreamContext: CPointer<Win32_impl_p2.VARIANTAbi>, pbstrURL: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStreamingURL(__liveRaw, st, pStreamContext, pbstrURL)
@@ -11476,21 +11490,21 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RefreshLicense(dwCookie: UInt32, fLocal: Int16, bstrURL: CPointer<UInt16>, type_: WMPStreamingTypeAbi, contentID: UInt32, bstrRefreshReason: CPointer<UInt16>, pReasonContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func RefreshLicense(dwCookie: UInt32, fLocal: Int16, bstrURL: CPointer<UInt16>, type_: WMPStreamingTypeAbi, contentID: UInt32, bstrRefreshReason: CPointer<UInt16>, pReasonContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RefreshLicense(__liveRaw, dwCookie, fLocal, bstrURL, type_, contentID, bstrRefreshReason, pReasonContext)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCatalogURL(dwCatalogVersion: UInt32, dwCatalogSchemaVersion: UInt32, catalogLCID: UInt32, pdwNewCatalogVersion: CPointer<UInt32>, pbstrCatalogURL: CPointer<CPointer<UInt16>>, pExpirationDate: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCatalogURL(dwCatalogVersion: UInt32, dwCatalogSchemaVersion: UInt32, catalogLCID: UInt32, pdwNewCatalogVersion: CPointer<UInt32>, pbstrCatalogURL: CPointer<CPointer<UInt16>>, pExpirationDate: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCatalogURL(__liveRaw, dwCatalogVersion, dwCatalogSchemaVersion, catalogLCID, pdwNewCatalogVersion, pbstrCatalogURL, pExpirationDate)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetTemplate(task: WMPTaskTypeAbi, location: CPointer<UInt16>, pContext: CPointer<Win32__impl_l2.VARIANTAbi>, clickLocation: CPointer<UInt16>, pClickContext: CPointer<Win32__impl_l2.VARIANTAbi>, bstrFilter: CPointer<UInt16>, bstrViewParams: CPointer<UInt16>, pbstrTemplateURL: CPointer<CPointer<UInt16>>, pTemplateSize: CPointer<WMPTemplateSizeAbi>): Int32 {
+    public unsafe func GetTemplate(task: WMPTaskTypeAbi, location: CPointer<UInt16>, pContext: CPointer<Win32_impl_p2.VARIANTAbi>, clickLocation: CPointer<UInt16>, pClickContext: CPointer<Win32_impl_p2.VARIANTAbi>, bstrFilter: CPointer<UInt16>, bstrViewParams: CPointer<UInt16>, pbstrTemplateURL: CPointer<CPointer<UInt16>>, pTemplateSize: CPointer<WMPTemplateSizeAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTemplate(__liveRaw, task, location, pContext, clickLocation, pClickContext, bstrFilter, bstrViewParams, pbstrTemplateURL, pTemplateSize)
@@ -11503,21 +11517,21 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetListContents(location: CPointer<UInt16>, pContext: CPointer<Win32__impl_l2.VARIANTAbi>, bstrListType: CPointer<UInt16>, bstrParams: CPointer<UInt16>, dwListCookie: UInt32): Int32 {
+    public unsafe func GetListContents(location: CPointer<UInt16>, pContext: CPointer<Win32_impl_p2.VARIANTAbi>, bstrListType: CPointer<UInt16>, bstrParams: CPointer<UInt16>, dwListCookie: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetListContents(__liveRaw, location, pContext, bstrListType, bstrParams, dwListCookie)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Login(userInfo: Win32__impl_l0.BLOBAbi, pwdInfo: Win32__impl_l0.BLOBAbi, fUsedCachedCreds: Int16, fOkToCache: Int16): Int32 {
+    public unsafe func Login(userInfo: Win32_impl_p0.BLOBAbi, pwdInfo: Win32_impl_p0.BLOBAbi, fUsedCachedCreds: Int16, fOkToCache: Int16): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Login(__liveRaw, userInfo, pwdInfo, fUsedCachedCreds, fOkToCache)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Authenticate(userInfo: Win32__impl_l0.BLOBAbi, pwdInfo: Win32__impl_l0.BLOBAbi): Int32 {
+    public unsafe func Authenticate(userInfo: Win32_impl_p0.BLOBAbi, pwdInfo: Win32_impl_p0.BLOBAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Authenticate(__liveRaw, userInfo, pwdInfo)
@@ -11548,7 +11562,7 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func VerifyPermission(bstrPermission: CPointer<UInt16>, pContext: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func VerifyPermission(bstrPermission: CPointer<UInt16>, pContext: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VerifyPermission(__liveRaw, bstrPermission, pContext)
@@ -11558,7 +11572,7 @@ public class IWMPContentPartner <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPDownloadCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -11601,7 +11615,7 @@ public class IWMPDownloadCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPDownloadCollection> {
-        return InterfaceDescriptor<IWMPDownloadCollection>("IWMPDownloadCollection", IWMPDownloadCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPDownloadCollectionFromAbi, viewIWMPDownloadCollection)
+        return InterfaceDescriptor<IWMPDownloadCollection>("IWMPDownloadCollection", IWMPDownloadCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPDownloadCollectionFromAbi, viewIWMPDownloadCollection)
     }
 
     public unsafe func vtbl(): IWMPDownloadCollectionVtbl {
@@ -11648,7 +11662,7 @@ public class IWMPDownloadCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPDownloadManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var getDownloadCollection: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var createDownloadCollection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -11687,7 +11701,7 @@ public class IWMPDownloadManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPDownloadManager> {
-        return InterfaceDescriptor<IWMPDownloadManager>("IWMPDownloadManager", IWMPDownloadManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPDownloadManagerFromAbi, viewIWMPDownloadManager)
+        return InterfaceDescriptor<IWMPDownloadManager>("IWMPDownloadManager", IWMPDownloadManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPDownloadManagerFromAbi, viewIWMPDownloadManager)
     }
 
     public unsafe func vtbl(): IWMPDownloadManagerVtbl {
@@ -11892,7 +11906,7 @@ public class IWMPPlugin <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPCdromVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var driveSpecifier: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var playlist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var eject: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -11932,7 +11946,7 @@ public class IWMPCdrom <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPCdrom> {
-        return InterfaceDescriptor<IWMPCdrom>("IWMPCdrom", IWMPCdrom.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPCdromFromAbi, viewIWMPCdrom)
+        return InterfaceDescriptor<IWMPCdrom>("IWMPCdrom", IWMPCdrom.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPCdromFromAbi, viewIWMPCdrom)
     }
 
     public unsafe func vtbl(): IWMPCdromVtbl {
@@ -12107,7 +12121,7 @@ public class IWMPCdromBurn <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPCdromCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var getByDriveSpecifier: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -12147,7 +12161,7 @@ public class IWMPCdromCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPCdromCollection> {
-        return InterfaceDescriptor<IWMPCdromCollection>("IWMPCdromCollection", IWMPCdromCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPCdromCollectionFromAbi, viewIWMPCdromCollection)
+        return InterfaceDescriptor<IWMPCdromCollection>("IWMPCdromCollection", IWMPCdromCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPCdromCollectionFromAbi, viewIWMPCdromCollection)
     }
 
     public unsafe func vtbl(): IWMPCdromCollectionVtbl {
@@ -12176,7 +12190,7 @@ public class IWMPCdromCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPControlsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_isAvailable: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var play: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -12229,7 +12243,7 @@ public class IWMPControls <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPControls> {
-        return InterfaceDescriptor<IWMPControls>("IWMPControls", IWMPControls.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPControlsFromAbi, viewIWMPControls)
+        return InterfaceDescriptor<IWMPControls>("IWMPControls", IWMPControls.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPControlsFromAbi, viewIWMPControls)
     }
 
     public unsafe func vtbl(): IWMPControlsVtbl {
@@ -12509,7 +12523,7 @@ public class IWMPControls3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPCoreVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var URL: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetURL: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -12567,7 +12581,7 @@ public class IWMPCore <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPCore> {
-        return InterfaceDescriptor<IWMPCore>("IWMPCore", IWMPCore.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPCoreFromAbi, viewIWMPCore)
+        return InterfaceDescriptor<IWMPCore>("IWMPCore", IWMPCore.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPCoreFromAbi, viewIWMPCore)
     }
 
     public unsafe func vtbl(): IWMPCoreVtbl {
@@ -13294,7 +13308,7 @@ public class IWMPLibraryServices <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPMediaVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_isIdentical: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var sourceURL: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -13349,7 +13363,7 @@ public class IWMPMedia <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPMedia> {
-        return InterfaceDescriptor<IWMPMedia>("IWMPMedia", IWMPMedia.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPMediaFromAbi, viewIWMPMedia)
+        return InterfaceDescriptor<IWMPMedia>("IWMPMedia", IWMPMedia.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPMediaFromAbi, viewIWMPMedia)
     }
 
     public unsafe func vtbl(): IWMPMediaVtbl {
@@ -13526,7 +13540,7 @@ public struct IWMPMedia3Vtbl {
     public var base_: IWMPMedia2Vtbl = IWMPMedia2Vtbl()
     public var getAttributeCountByType: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var getItemInfoByType: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var getItemInfoByType: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -13577,7 +13591,7 @@ public class IWMPMedia3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func getItemInfoByType(bstrType: CPointer<UInt16>, bstrLanguage: CPointer<UInt16>, lIndex: Int32, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func getItemInfoByType(bstrType: CPointer<UInt16>, bstrLanguage: CPointer<UInt16>, lIndex: Int32, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getItemInfoByType(__liveRaw, bstrType, bstrLanguage, lIndex, pvarValue)
@@ -13587,7 +13601,7 @@ public class IWMPMedia3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPMediaCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var add: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var getAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var getByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -13636,7 +13650,7 @@ public class IWMPMediaCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPMediaCollection> {
-        return InterfaceDescriptor<IWMPMediaCollection>("IWMPMediaCollection", IWMPMediaCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPMediaCollectionFromAbi, viewIWMPMediaCollection)
+        return InterfaceDescriptor<IWMPMediaCollection>("IWMPMediaCollection", IWMPMediaCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPMediaCollectionFromAbi, viewIWMPMediaCollection)
     }
 
     public unsafe func vtbl(): IWMPMediaCollectionVtbl {
@@ -14316,7 +14330,7 @@ public class IWMPPlayer4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPPlaylistVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Setname: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -14367,7 +14381,7 @@ public class IWMPPlaylist <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPPlaylist> {
-        return InterfaceDescriptor<IWMPPlaylist>("IWMPPlaylist", IWMPPlaylist.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPPlaylistFromAbi, viewIWMPPlaylist)
+        return InterfaceDescriptor<IWMPPlaylist>("IWMPPlaylist", IWMPPlaylist.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPPlaylistFromAbi, viewIWMPPlaylist)
     }
 
     public unsafe func vtbl(): IWMPPlaylistVtbl {
@@ -14462,7 +14476,7 @@ public class IWMPPlaylist <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPPlaylistArrayVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -14501,7 +14515,7 @@ public class IWMPPlaylistArray <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPPlaylistArray> {
-        return InterfaceDescriptor<IWMPPlaylistArray>("IWMPPlaylistArray", IWMPPlaylistArray.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPPlaylistArrayFromAbi, viewIWMPPlaylistArray)
+        return InterfaceDescriptor<IWMPPlaylistArray>("IWMPPlaylistArray", IWMPPlaylistArray.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPPlaylistArrayFromAbi, viewIWMPPlaylistArray)
     }
 
     public unsafe func vtbl(): IWMPPlaylistArrayVtbl {
@@ -14524,7 +14538,7 @@ public class IWMPPlaylistArray <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_MediaPlayer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWMPPlaylistCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var newPlaylist: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var getAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var getByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -14568,7 +14582,7 @@ public class IWMPPlaylistCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWMPPlaylistCollection> {
-        return InterfaceDescriptor<IWMPPlaylistCollection>("IWMPPlaylistCollection", IWMPPlaylistCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWMPPlaylistCollectionFromAbi, viewIWMPPlaylistCollection)
+        return InterfaceDescriptor<IWMPPlaylistCollection>("IWMPPlaylistCollection", IWMPPlaylistCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWMPPlaylistCollectionFromAbi, viewIWMPPlaylistCollection)
     }
 
     public unsafe func vtbl(): IWMPPlaylistCollectionVtbl {
@@ -14627,11 +14641,11 @@ public struct IWMPPluginUIVtbl {
     public var Destroy: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var DisplayPropertyPage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>) -> Int32> = { _, _ => 0 }
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -14700,21 +14714,21 @@ public class IWMPPluginUI <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProperty(pwszName: CPointer<UInt16>, pvarProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProperty(pwszName: CPointer<UInt16>, pvarProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, pwszName, pvarProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProperty(pwszName: CPointer<UInt16>, pvarProperty: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetProperty(pwszName: CPointer<UInt16>, pvarProperty: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, pwszName, pvarProperty)
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TranslateAccelerator(lpmsg: CPointer<Win32__impl_l0.MSGAbi>): Int32 {
+    public unsafe func TranslateAccelerator(lpmsg: CPointer<Win32_impl_p1.MSGAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TranslateAccelerator(__liveRaw, lpmsg)

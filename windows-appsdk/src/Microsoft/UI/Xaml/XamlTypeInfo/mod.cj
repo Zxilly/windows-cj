@@ -4,13 +4,21 @@
 package windows_appsdk.Microsoft.UI.Xaml.XamlTypeInfo
 
 import std.collection.*
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on" && Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
+@When[Microsoft_UI_Xaml_XamlTypeInfo == "on" && Microsoft_UI_Xaml_Markup == "on"]
 import windows_appsdk.Microsoft.UI.Xaml.Markup as Microsoft_UI_Xaml_Markup
 
 

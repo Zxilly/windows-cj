@@ -4,12 +4,19 @@
 package windows.ApplicationModel.Preview
 
 import std.collection.*
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Preview == "on"]
 import windows_collections as windows_collections
 
 

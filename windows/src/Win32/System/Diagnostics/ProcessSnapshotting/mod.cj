@@ -4,11 +4,16 @@
 package windows.Win32.System.Diagnostics.ProcessSnapshotting
 
 import std.collection.*
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && Windows_Win32_System_Memory == "on"]
 import windows.Win32.System.Memory as Win32_System_Memory
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on"]
@@ -1950,7 +1955,7 @@ public struct PSS_THREAD_ENTRY {
     public var Flags: PSS_THREAD_FLAGS = PSS_THREAD_FLAGS()
     public var SuspendCount: UInt16 = 0u16
     public var SizeOfContextRecord: UInt16 = 0u16
-    public var ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi> = CPointer<Win32__impl_l1.CONTEXTAbi>()
+    public var ContextRecord: CPointer<Win32_impl_p2.CONTEXTAbi> = CPointer<Win32_impl_p2.CONTEXTAbi>()
     public init() {}
 }
 
@@ -1975,7 +1980,7 @@ public struct PSS_THREAD_ENTRYAbi {
     public var Flags: PSS_THREAD_FLAGSAbi = PSS_THREAD_FLAGSAbi()
     public var SuspendCount: UInt16 = 0u16
     public var SizeOfContextRecord: UInt16 = 0u16
-    public var ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi> = CPointer<Win32__impl_l1.CONTEXTAbi>()
+    public var ContextRecord: CPointer<Win32_impl_p2.CONTEXTAbi> = CPointer<Win32_impl_p2.CONTEXTAbi>()
     public init() {}
 }
 

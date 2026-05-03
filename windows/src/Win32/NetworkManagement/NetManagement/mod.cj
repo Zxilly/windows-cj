@@ -4,16 +4,29 @@
 package windows.Win32.NetworkManagement.NetManagement
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_libloading
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_NetManagement == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_NetManagement == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_NetworkManagement_NetManagement == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_NetworkManagement_NetManagement == "on"]
 import windows_core as windows_core
 
 
@@ -14917,7 +14930,7 @@ public type WORKERFUNCTION = CFunc<(CPointer<Unit>) -> Unit>
 @When[Windows_Win32_NetworkManagement_NetManagement == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct DSREG_JOIN_INFO {
     public var joinType: DSREG_JOIN_TYPE = DSREG_JOIN_TYPE()
-    public var pJoinCertificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
+    public var pJoinCertificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
     public var pszDeviceId: CPointer<UInt16> = CPointer<UInt16>()
     public var pszIdpDomain: CPointer<UInt16> = CPointer<UInt16>()
     public var pszTenantId: CPointer<UInt16> = CPointer<UInt16>()
@@ -14935,7 +14948,7 @@ public struct DSREG_JOIN_INFO {
 @C
 public struct DSREG_JOIN_INFOAbi {
     public var joinType: DSREG_JOIN_TYPEAbi = DSREG_JOIN_TYPEAbi()
-    public var pJoinCertificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
+    public var pJoinCertificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
     public var pszDeviceId: CPointer<UInt16> = CPointer<UInt16>()
     public var pszIdpDomain: CPointer<UInt16> = CPointer<UInt16>()
     public var pszTenantId: CPointer<UInt16> = CPointer<UInt16>()

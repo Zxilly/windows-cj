@@ -4,15 +4,24 @@
 package windows.Win32.NetworkManagement.NetworkPolicyServer
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on"]
@@ -2060,13 +2069,13 @@ extend IPFILTERPROPERTIES <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISdoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var GetPropertyInfo: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PutProperty: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PutProperty: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var ResetProperty: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Apply: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Restore: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -2108,7 +2117,7 @@ public class ISdo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISdo> {
-        return InterfaceDescriptor<ISdo>("ISdo", ISdo.iid(), Win32__impl_l2.IDispatch.iid(), takeISdoFromAbi, viewISdo)
+        return InterfaceDescriptor<ISdo>("ISdo", ISdo.iid(), Win32_impl_p2.IDispatch.iid(), takeISdoFromAbi, viewISdo)
     }
 
     public unsafe func vtbl(): ISdoVtbl {
@@ -2123,14 +2132,14 @@ public class ISdo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProperty(Id: Int32, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetProperty(Id: Int32, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, Id, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PutProperty(Id: Int32, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PutProperty(Id: Int32, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PutProperty(__liveRaw, Id, pValue)
@@ -2165,7 +2174,7 @@ public class ISdo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISdoCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2175,7 +2184,7 @@ public struct ISdoCollectionVtbl {
     public var Reload: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsNameUnique: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2214,7 +2223,7 @@ public class ISdoCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISdoCollection> {
-        return InterfaceDescriptor<ISdoCollection>("ISdoCollection", ISdoCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeISdoCollectionFromAbi, viewISdoCollection)
+        return InterfaceDescriptor<ISdoCollection>("ISdoCollection", ISdoCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeISdoCollectionFromAbi, viewISdoCollection)
     }
 
     public unsafe func vtbl(): ISdoCollectionVtbl {
@@ -2260,7 +2269,7 @@ public class ISdoCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(Name: CPointer<Win32__impl_l2.VARIANTAbi>, pItem: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Item(Name: CPointer<Win32_impl_p2.VARIANTAbi>, pItem: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, Name, pItem)
@@ -2277,13 +2286,13 @@ public class ISdoCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISdoDictionaryOldVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnumAttributes: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var EnumAttributes: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetAttributeInfo: CFunc<(CPointer<Unit>, ATTRIBUTEIDAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetAttributeInfo: CFunc<(CPointer<Unit>, ATTRIBUTEIDAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnumAttributeValues: CFunc<(CPointer<Unit>, ATTRIBUTEIDAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var EnumAttributeValues: CFunc<(CPointer<Unit>, ATTRIBUTEIDAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var CreateAttribute: CFunc<(CPointer<Unit>, ATTRIBUTEIDAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetAttributeID: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<ATTRIBUTEIDAbi>) -> Int32> = { _, _, _ => 0 }
@@ -2323,7 +2332,7 @@ public class ISdoDictionaryOld <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISdoDictionaryOld> {
-        return InterfaceDescriptor<ISdoDictionaryOld>("ISdoDictionaryOld", ISdoDictionaryOld.iid(), Win32__impl_l2.IDispatch.iid(), takeISdoDictionaryOldFromAbi, viewISdoDictionaryOld)
+        return InterfaceDescriptor<ISdoDictionaryOld>("ISdoDictionaryOld", ISdoDictionaryOld.iid(), Win32_impl_p2.IDispatch.iid(), takeISdoDictionaryOldFromAbi, viewISdoDictionaryOld)
     }
 
     public unsafe func vtbl(): ISdoDictionaryOldVtbl {
@@ -2331,21 +2340,21 @@ public class ISdoDictionaryOld <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnumAttributes(Id: CPointer<Win32__impl_l2.VARIANTAbi>, pValues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnumAttributes(Id: CPointer<Win32_impl_p2.VARIANTAbi>, pValues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumAttributes(__liveRaw, Id, pValues)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetAttributeInfo(Id: ATTRIBUTEIDAbi, pInfoIDs: CPointer<Win32__impl_l2.VARIANTAbi>, pInfoValues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetAttributeInfo(Id: ATTRIBUTEIDAbi, pInfoIDs: CPointer<Win32_impl_p2.VARIANTAbi>, pInfoValues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAttributeInfo(__liveRaw, Id, pInfoIDs, pInfoValues)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnumAttributeValues(Id: ATTRIBUTEIDAbi, pValueIds: CPointer<Win32__impl_l2.VARIANTAbi>, pValuesDesc: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnumAttributeValues(Id: ATTRIBUTEIDAbi, pValueIds: CPointer<Win32_impl_p2.VARIANTAbi>, pValuesDesc: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumAttributeValues(__liveRaw, Id, pValueIds, pValuesDesc)
@@ -2368,7 +2377,7 @@ public class ISdoDictionaryOld <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISdoMachineVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Attach: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetDictionarySDO: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2418,7 +2427,7 @@ public class ISdoMachine <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISdoMachine> {
-        return InterfaceDescriptor<ISdoMachine>("ISdoMachine", ISdoMachine.iid(), Win32__impl_l2.IDispatch.iid(), takeISdoMachineFromAbi, viewISdoMachine)
+        return InterfaceDescriptor<ISdoMachine>("ISdoMachine", ISdoMachine.iid(), Win32_impl_p2.IDispatch.iid(), takeISdoMachineFromAbi, viewISdoMachine)
     }
 
     public unsafe func vtbl(): ISdoMachineVtbl {
@@ -2576,7 +2585,7 @@ public class ISdoMachine2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_NetworkManagement_NetworkPolicyServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISdoServiceControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StartService: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var StopService: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetServiceStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2617,7 +2626,7 @@ public class ISdoServiceControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISdoServiceControl> {
-        return InterfaceDescriptor<ISdoServiceControl>("ISdoServiceControl", ISdoServiceControl.iid(), Win32__impl_l2.IDispatch.iid(), takeISdoServiceControlFromAbi, viewISdoServiceControl)
+        return InterfaceDescriptor<ISdoServiceControl>("ISdoServiceControl", ISdoServiceControl.iid(), Win32_impl_p2.IDispatch.iid(), takeISdoServiceControlFromAbi, viewISdoServiceControl)
     }
 
     public unsafe func vtbl(): ISdoServiceControlVtbl {

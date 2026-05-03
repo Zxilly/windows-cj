@@ -4,14 +4,24 @@
 package windows.Win32.Storage.Vss
 
 import std.collection.*
+@When[Windows_Win32_Storage_Vss == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Vss == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Vss == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Vss == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Vss == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Vss == "on" && Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows.Win32.Storage.VirtualDiskService as Win32_Storage_VirtualDiskService
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Vss == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Vss == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Storage_Vss == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Storage_Vss == "on"]
@@ -4789,7 +4799,7 @@ public struct IVssFileShareSnapshotProviderVtbl {
     public var IsPathSupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var IsPathSnapshotted: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSnapshotProperty: CFunc<(CPointer<Unit>, GUID, VSS_SNAPSHOT_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var SetSnapshotProperty: CFunc<(CPointer<Unit>, GUID, VSS_SNAPSHOT_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -4876,7 +4886,7 @@ public class IVssFileShareSnapshotProvider <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSnapshotProperty(SnapshotId: GUID, eSnapshotPropertyId: VSS_SNAPSHOT_PROPERTY_IDAbi, vProperty: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSnapshotProperty(SnapshotId: GUID, eSnapshotPropertyId: VSS_SNAPSHOT_PROPERTY_IDAbi, vProperty: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSnapshotProperty(__liveRaw, SnapshotId, eSnapshotPropertyId, vProperty)
@@ -4966,7 +4976,7 @@ public struct IVssSoftwareSnapshotProviderVtbl {
     public var IsVolumeSupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var IsVolumeSnapshotted: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSnapshotProperty: CFunc<(CPointer<Unit>, GUID, VSS_SNAPSHOT_PROPERTY_IDAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var SetSnapshotProperty: CFunc<(CPointer<Unit>, GUID, VSS_SNAPSHOT_PROPERTY_IDAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var RevertToSnapshot: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     public var QueryRevertStatus: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -5055,7 +5065,7 @@ public class IVssSoftwareSnapshotProvider <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSnapshotProperty(SnapshotId: GUID, eSnapshotPropertyId: VSS_SNAPSHOT_PROPERTY_IDAbi, vProperty: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSnapshotProperty(SnapshotId: GUID, eSnapshotPropertyId: VSS_SNAPSHOT_PROPERTY_IDAbi, vProperty: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSnapshotProperty(__liveRaw, SnapshotId, eSnapshotPropertyId, vProperty)

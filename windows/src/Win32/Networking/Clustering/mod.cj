@@ -4,20 +4,37 @@
 package windows.Win32.Networking.Clustering
 
 import std.collection.*
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_libloading
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Services == "on"]
 import windows.Win32.System.Services as Win32_System_Services
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_Clustering == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_Clustering == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Networking_Clustering == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Networking_Clustering == "on"]
 import windows_core as windows_core
 
 
@@ -12246,7 +12263,7 @@ public struct IGetClusterUIInfoVtbl {
     @When[Windows_Win32_Graphics_Gdi == "on"]
     public var GetFont: CFunc<(CPointer<Unit>) -> Win32_Graphics_Gdi.HFONT> = { _ => CPointer<Unit>() }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetIcon: CFunc<(CPointer<Unit>) -> Win32__impl_l0.HICON> = { _ => CPointer<Unit>() }
+    public var GetIcon: CFunc<(CPointer<Unit>) -> Win32_impl_p1.HICON> = { _ => CPointer<Unit>() }
     public init() {}
 }
 
@@ -12310,7 +12327,7 @@ public class IGetClusterUIInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetIcon(): Win32__impl_l0.HICON {
+    public unsafe func GetIcon(): Win32_impl_p1.HICON {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIcon(__liveRaw)
@@ -12320,16 +12337,16 @@ public class IGetClusterUIInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusCryptoKeysVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12366,7 +12383,7 @@ public class ISClusCryptoKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusCryptoKeys> {
-        return InterfaceDescriptor<ISClusCryptoKeys>("ISClusCryptoKeys", ISClusCryptoKeys.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusCryptoKeysFromAbi, viewISClusCryptoKeys)
+        return InterfaceDescriptor<ISClusCryptoKeys>("ISClusCryptoKeys", ISClusCryptoKeys.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusCryptoKeysFromAbi, viewISClusCryptoKeys)
     }
 
     public unsafe func vtbl(): ISClusCryptoKeysVtbl {
@@ -12393,7 +12410,7 @@ public class ISClusCryptoKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, pbstrCyrptoKey: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, pbstrCyrptoKey: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, pbstrCyrptoKey)
@@ -12406,7 +12423,7 @@ public class ISClusCryptoKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -12416,7 +12433,7 @@ public class ISClusCryptoKeys <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPartitionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Flags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var DeviceName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var VolumeLabel: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -12460,7 +12477,7 @@ public class ISClusPartition <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusPartition> {
-        return InterfaceDescriptor<ISClusPartition>("ISClusPartition", ISClusPartition.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPartitionFromAbi, viewISClusPartition)
+        return InterfaceDescriptor<ISClusPartition>("ISClusPartition", ISClusPartition.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPartitionFromAbi, viewISClusPartition)
     }
 
     public unsafe func vtbl(): ISClusPartitionVtbl {
@@ -12596,12 +12613,12 @@ public class ISClusPartitionEx <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPartitionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -12638,7 +12655,7 @@ public class ISClusPartitions <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusPartitions> {
-        return InterfaceDescriptor<ISClusPartitions>("ISClusPartitions", ISClusPartitions.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPartitionsFromAbi, viewISClusPartitions)
+        return InterfaceDescriptor<ISClusPartitions>("ISClusPartitions", ISClusPartitions.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPartitionsFromAbi, viewISClusPartitions)
     }
 
     public unsafe func vtbl(): ISClusPartitionsVtbl {
@@ -12659,7 +12676,7 @@ public class ISClusPartitions <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppPartition: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppPartition: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppPartition)
@@ -12669,16 +12686,16 @@ public class ISClusPartitions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPropertyValueDataVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var CreateItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12715,7 +12732,7 @@ public class ISClusPropertyValueData <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusPropertyValueData> {
-        return InterfaceDescriptor<ISClusPropertyValueData>("ISClusPropertyValueData", ISClusPropertyValueData.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPropertyValueDataFromAbi, viewISClusPropertyValueData)
+        return InterfaceDescriptor<ISClusPropertyValueData>("ISClusPropertyValueData", ISClusPropertyValueData.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPropertyValueDataFromAbi, viewISClusPropertyValueData)
     }
 
     public unsafe func vtbl(): ISClusPropertyValueDataVtbl {
@@ -12736,21 +12753,21 @@ public class ISClusPropertyValueData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateItem(varValue: Win32__impl_l2.VARIANTAbi, pvarData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CreateItem(varValue: Win32_impl_p2.VARIANTAbi, pvarData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateItem(__liveRaw, varValue, pvarData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -12760,7 +12777,7 @@ public class ISClusPropertyValueData <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusRefObjectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Handle: CFunc<(CPointer<Unit>, CPointer<UIntNative>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -12798,7 +12815,7 @@ public class ISClusRefObject <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusRefObject> {
-        return InterfaceDescriptor<ISClusRefObject>("ISClusRefObject", ISClusRefObject.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusRefObjectFromAbi, viewISClusRefObject)
+        return InterfaceDescriptor<ISClusRefObject>("ISClusRefObject", ISClusRefObject.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusRefObjectFromAbi, viewISClusRefObject)
     }
 
     public unsafe func vtbl(): ISClusRefObjectVtbl {
@@ -12815,16 +12832,16 @@ public class ISClusRefObject <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusRegistryKeysVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12861,7 +12878,7 @@ public class ISClusRegistryKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusRegistryKeys> {
-        return InterfaceDescriptor<ISClusRegistryKeys>("ISClusRegistryKeys", ISClusRegistryKeys.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusRegistryKeysFromAbi, viewISClusRegistryKeys)
+        return InterfaceDescriptor<ISClusRegistryKeys>("ISClusRegistryKeys", ISClusRegistryKeys.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusRegistryKeysFromAbi, viewISClusRegistryKeys)
     }
 
     public unsafe func vtbl(): ISClusRegistryKeysVtbl {
@@ -12888,7 +12905,7 @@ public class ISClusRegistryKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, pbstrRegistryKey: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, pbstrRegistryKey: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, pbstrRegistryKey)
@@ -12901,7 +12918,7 @@ public class ISClusRegistryKeys <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -12911,15 +12928,15 @@ public class ISClusRegistryKeys <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusScsiAddressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PortNumber: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PortNumber: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PathId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PathId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var TargetId: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var TargetId: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Lun: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Lun: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12956,7 +12973,7 @@ public class ISClusScsiAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusScsiAddress> {
-        return InterfaceDescriptor<ISClusScsiAddress>("ISClusScsiAddress", ISClusScsiAddress.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusScsiAddressFromAbi, viewISClusScsiAddress)
+        return InterfaceDescriptor<ISClusScsiAddress>("ISClusScsiAddress", ISClusScsiAddress.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusScsiAddressFromAbi, viewISClusScsiAddress)
     }
 
     public unsafe func vtbl(): ISClusScsiAddressVtbl {
@@ -12964,28 +12981,28 @@ public class ISClusScsiAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PortNumber(pvarPortNumber: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PortNumber(pvarPortNumber: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PortNumber(__liveRaw, pvarPortNumber)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PathId(pvarPathId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PathId(pvarPathId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PathId(__liveRaw, pvarPathId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func TargetId(pvarTargetId: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func TargetId(pvarTargetId: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TargetId(__liveRaw, pvarTargetId)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Lun(pvarLun: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Lun(pvarLun: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Lun(__liveRaw, pvarLun)
@@ -12995,7 +13012,7 @@ public class ISClusScsiAddress <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusVersionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var MajorVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var MinorVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -13006,7 +13023,7 @@ public struct ISClusVersionVtbl {
     public var ClusterLowestVersion: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Flags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MixedVersion: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var MixedVersion: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -13043,7 +13060,7 @@ public class ISClusVersion <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusVersion> {
-        return InterfaceDescriptor<ISClusVersion>("ISClusVersion", ISClusVersion.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusVersionFromAbi, viewISClusVersion)
+        return InterfaceDescriptor<ISClusVersion>("ISClusVersion", ISClusVersion.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusVersionFromAbi, viewISClusVersion)
     }
 
     public unsafe func vtbl(): ISClusVersionVtbl {
@@ -13105,7 +13122,7 @@ public class ISClusVersion <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MixedVersion(pvarMixedVersion: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func MixedVersion(pvarMixedVersion: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MixedVersion(__liveRaw, pvarMixedVersion)
@@ -13115,13 +13132,13 @@ public class ISClusVersion <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusterNamesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var DomainName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -13159,7 +13176,7 @@ public class ISClusterNames <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusterNames> {
-        return InterfaceDescriptor<ISClusterNames>("ISClusterNames", ISClusterNames.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusterNamesFromAbi, viewISClusterNames)
+        return InterfaceDescriptor<ISClusterNames>("ISClusterNames", ISClusterNames.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusterNamesFromAbi, viewISClusterNames)
     }
 
     public unsafe func vtbl(): ISClusterNamesVtbl {
@@ -13186,7 +13203,7 @@ public class ISClusterNames <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, pbstrClusterName: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, pbstrClusterName: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, pbstrClusterName)
@@ -13202,13 +13219,13 @@ public class ISClusterNames <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISDomainNamesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -13245,7 +13262,7 @@ public class ISDomainNames <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISDomainNames> {
-        return InterfaceDescriptor<ISDomainNames>("ISDomainNames", ISDomainNames.iid(), Win32__impl_l2.IDispatch.iid(), takeISDomainNamesFromAbi, viewISDomainNames)
+        return InterfaceDescriptor<ISDomainNames>("ISDomainNames", ISDomainNames.iid(), Win32_impl_p2.IDispatch.iid(), takeISDomainNamesFromAbi, viewISDomainNames)
     }
 
     public unsafe func vtbl(): ISDomainNamesVtbl {
@@ -13272,7 +13289,7 @@ public class ISDomainNames <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, pbstrDomainName: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, pbstrDomainName: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, pbstrDomainName)
@@ -17985,7 +18002,7 @@ extend GET_OPERATION_CONTEXT_PARAMS <: windows_core.CopyType & windows_core.Runt
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusDiskVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Signature: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ScsiAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DiskNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -18026,7 +18043,7 @@ public class ISClusDisk <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusDisk> {
-        return InterfaceDescriptor<ISClusDisk>("ISClusDisk", ISClusDisk.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusDiskFromAbi, viewISClusDisk)
+        return InterfaceDescriptor<ISClusDisk>("ISClusDisk", ISClusDisk.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusDiskFromAbi, viewISClusDisk)
     }
 
     public unsafe func vtbl(): ISClusDiskVtbl {
@@ -18061,12 +18078,12 @@ public class ISClusDisk <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusDisksVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -18103,7 +18120,7 @@ public class ISClusDisks <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusDisks> {
-        return InterfaceDescriptor<ISClusDisks>("ISClusDisks", ISClusDisks.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusDisksFromAbi, viewISClusDisks)
+        return InterfaceDescriptor<ISClusDisks>("ISClusDisks", ISClusDisks.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusDisksFromAbi, viewISClusDisks)
     }
 
     public unsafe func vtbl(): ISClusDisksVtbl {
@@ -18124,7 +18141,7 @@ public class ISClusDisks <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppDisk: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppDisk: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppDisk)
@@ -18134,11 +18151,11 @@ public class ISClusDisks <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPropertyValueVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<CLUSTER_PROPERTY_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, CLUSTER_PROPERTY_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var Format: CFunc<(CPointer<Unit>, CPointer<CLUSTER_PROPERTY_FORMATAbi>) -> Int32> = { _, _ => 0 }
@@ -18182,7 +18199,7 @@ public class ISClusPropertyValue <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusPropertyValue> {
-        return InterfaceDescriptor<ISClusPropertyValue>("ISClusPropertyValue", ISClusPropertyValue.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPropertyValueFromAbi, viewISClusPropertyValue)
+        return InterfaceDescriptor<ISClusPropertyValue>("ISClusPropertyValue", ISClusPropertyValue.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPropertyValueFromAbi, viewISClusPropertyValue)
     }
 
     public unsafe func vtbl(): ISClusPropertyValueVtbl {
@@ -18190,14 +18207,14 @@ public class ISClusPropertyValue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(varValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValue(varValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, varValue)
@@ -18249,16 +18266,16 @@ public class ISClusPropertyValue <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPropertyValuesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -18295,7 +18312,7 @@ public class ISClusPropertyValues <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusPropertyValues> {
-        return InterfaceDescriptor<ISClusPropertyValues>("ISClusPropertyValues", ISClusPropertyValues.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPropertyValuesFromAbi, viewISClusPropertyValues)
+        return InterfaceDescriptor<ISClusPropertyValues>("ISClusPropertyValues", ISClusPropertyValues.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPropertyValuesFromAbi, viewISClusPropertyValues)
     }
 
     public unsafe func vtbl(): ISClusPropertyValuesVtbl {
@@ -18316,21 +18333,21 @@ public class ISClusPropertyValues <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppPropertyValue: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppPropertyValue: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateItem(bstrName: CPointer<UInt16>, varValue: Win32__impl_l2.VARIANTAbi, ppPropertyValue: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateItem(bstrName: CPointer<UInt16>, varValue: Win32_impl_p2.VARIANTAbi, ppPropertyValue: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateItem(__liveRaw, bstrName, varValue, ppPropertyValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -24977,27 +24994,27 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Length: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ValueCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<CLUSTER_PROPERTY_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, CLUSTER_PROPERTY_TYPEAbi) -> Int32> = { _, _ => 0 }
     public var Format: CFunc<(CPointer<Unit>, CPointer<CLUSTER_PROPERTY_FORMATAbi>) -> Int32> = { _, _ => 0 }
     public var SetFormat: CFunc<(CPointer<Unit>, CLUSTER_PROPERTY_FORMATAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Private: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Private: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Common: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Common: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var UseDefaultValue: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -25035,7 +25052,7 @@ public class ISClusProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusProperty> {
-        return InterfaceDescriptor<ISClusProperty>("ISClusProperty", ISClusProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPropertyFromAbi, viewISClusProperty)
+        return InterfaceDescriptor<ISClusProperty>("ISClusProperty", ISClusProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPropertyFromAbi, viewISClusProperty)
     }
 
     public unsafe func vtbl(): ISClusPropertyVtbl {
@@ -25067,14 +25084,14 @@ public class ISClusProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pvarValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pvarValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pvarValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(varValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetValue(varValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, varValue)
@@ -25105,28 +25122,28 @@ public class ISClusProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReadOnly(pvarReadOnly: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ReadOnly(pvarReadOnly: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadOnly(__liveRaw, pvarReadOnly)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Private(pvarPrivate: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Private(pvarPrivate: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Private(__liveRaw, pvarPrivate)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Common(pvarCommon: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Common(pvarCommon: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Common(__liveRaw, pvarCommon)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Modified(pvarModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Modified(pvarModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Modified(__liveRaw, pvarModified)
@@ -25962,27 +25979,27 @@ public struct CLUSPROP_BUFFER_HELPER {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusPropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var UseDefaultValue: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var UseDefaultValue: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SaveChanges: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SaveChanges: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Private: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Private: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Common: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Common: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -26019,7 +26036,7 @@ public class ISClusProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusProperties> {
-        return InterfaceDescriptor<ISClusProperties>("ISClusProperties", ISClusProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusPropertiesFromAbi, viewISClusProperties)
+        return InterfaceDescriptor<ISClusProperties>("ISClusProperties", ISClusProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusPropertiesFromAbi, viewISClusProperties)
     }
 
     public unsafe func vtbl(): ISClusPropertiesVtbl {
@@ -26046,56 +26063,56 @@ public class ISClusProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusProperty: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusProperty: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateItem(bstrName: CPointer<UInt16>, varValue: Win32__impl_l2.VARIANTAbi, pProperty: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateItem(bstrName: CPointer<UInt16>, varValue: Win32_impl_p2.VARIANTAbi, pProperty: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateItem(__liveRaw, bstrName, varValue, pProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func UseDefaultValue(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func UseDefaultValue(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UseDefaultValue(__liveRaw, varIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SaveChanges(pvarStatusCode: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SaveChanges(pvarStatusCode: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SaveChanges(__liveRaw, pvarStatusCode)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ReadOnly(pvarReadOnly: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ReadOnly(pvarReadOnly: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadOnly(__liveRaw, pvarReadOnly)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Private(pvarPrivate: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Private(pvarPrivate: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Private(__liveRaw, pvarPrivate)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Common(pvarCommon: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Common(pvarCommon: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Common(__liveRaw, pvarCommon)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Modified(pvarModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Modified(pvarModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Modified(__liveRaw, pvarModified)
@@ -26111,7 +26128,7 @@ public type PSTARTUP_ROUTINE = CFunc<(CPointer<UInt16>, UInt32, UInt32, PSET_RES
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusApplicationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DomainNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_ClusterNames: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var OpenCluster: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -26151,7 +26168,7 @@ public class ISClusApplication <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusApplication> {
-        return InterfaceDescriptor<ISClusApplication>("ISClusApplication", ISClusApplication.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusApplicationFromAbi, viewISClusApplication)
+        return InterfaceDescriptor<ISClusApplication>("ISClusApplication", ISClusApplication.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusApplicationFromAbi, viewISClusApplication)
     }
 
     public unsafe func vtbl(): ISClusApplicationVtbl {
@@ -26180,7 +26197,7 @@ public class ISClusApplication <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNetInterfaceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -26225,7 +26242,7 @@ public class ISClusNetInterface <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNetInterface> {
-        return InterfaceDescriptor<ISClusNetInterface>("ISClusNetInterface", ISClusNetInterface.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNetInterfaceFromAbi, viewISClusNetInterface)
+        return InterfaceDescriptor<ISClusNetInterface>("ISClusNetInterface", ISClusNetInterface.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNetInterfaceFromAbi, viewISClusNetInterface)
     }
 
     public unsafe func vtbl(): ISClusNetInterfaceVtbl {
@@ -26284,13 +26301,13 @@ public class ISClusNetInterface <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNetInterfacesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -26327,7 +26344,7 @@ public class ISClusNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNetInterfaces> {
-        return InterfaceDescriptor<ISClusNetInterfaces>("ISClusNetInterfaces", ISClusNetInterfaces.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNetInterfacesFromAbi, viewISClusNetInterfaces)
+        return InterfaceDescriptor<ISClusNetInterfaces>("ISClusNetInterfaces", ISClusNetInterfaces.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNetInterfacesFromAbi, viewISClusNetInterfaces)
     }
 
     public unsafe func vtbl(): ISClusNetInterfacesVtbl {
@@ -26354,7 +26371,7 @@ public class ISClusNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusNetInterface)
@@ -26364,7 +26381,7 @@ public class ISClusNetInterfaces <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNetworkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -26412,7 +26429,7 @@ public class ISClusNetwork <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNetwork> {
-        return InterfaceDescriptor<ISClusNetwork>("ISClusNetwork", ISClusNetwork.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNetworkFromAbi, viewISClusNetwork)
+        return InterfaceDescriptor<ISClusNetwork>("ISClusNetwork", ISClusNetwork.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNetworkFromAbi, viewISClusNetwork)
     }
 
     public unsafe func vtbl(): ISClusNetworkVtbl {
@@ -26489,13 +26506,13 @@ public class ISClusNetwork <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNetworkNetInterfacesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -26532,7 +26549,7 @@ public class ISClusNetworkNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNetworkNetInterfaces> {
-        return InterfaceDescriptor<ISClusNetworkNetInterfaces>("ISClusNetworkNetInterfaces", ISClusNetworkNetInterfaces.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNetworkNetInterfacesFromAbi, viewISClusNetworkNetInterfaces)
+        return InterfaceDescriptor<ISClusNetworkNetInterfaces>("ISClusNetworkNetInterfaces", ISClusNetworkNetInterfaces.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNetworkNetInterfacesFromAbi, viewISClusNetworkNetInterfaces)
     }
 
     public unsafe func vtbl(): ISClusNetworkNetInterfacesVtbl {
@@ -26559,7 +26576,7 @@ public class ISClusNetworkNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusNetInterface)
@@ -26569,13 +26586,13 @@ public class ISClusNetworkNetInterfaces <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNetworksVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -26612,7 +26629,7 @@ public class ISClusNetworks <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNetworks> {
-        return InterfaceDescriptor<ISClusNetworks>("ISClusNetworks", ISClusNetworks.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNetworksFromAbi, viewISClusNetworks)
+        return InterfaceDescriptor<ISClusNetworks>("ISClusNetworks", ISClusNetworks.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNetworksFromAbi, viewISClusNetworks)
     }
 
     public unsafe func vtbl(): ISClusNetworksVtbl {
@@ -26639,7 +26656,7 @@ public class ISClusNetworks <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusNetwork: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusNetwork: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusNetwork)
@@ -26649,7 +26666,7 @@ public class ISClusNetworks <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNodeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -26700,7 +26717,7 @@ public class ISClusNode <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNode> {
-        return InterfaceDescriptor<ISClusNode>("ISClusNode", ISClusNode.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNodeFromAbi, viewISClusNode)
+        return InterfaceDescriptor<ISClusNode>("ISClusNode", ISClusNode.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNodeFromAbi, viewISClusNode)
     }
 
     public unsafe func vtbl(): ISClusNodeVtbl {
@@ -26795,13 +26812,13 @@ public class ISClusNode <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNodeNetInterfacesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -26838,7 +26855,7 @@ public class ISClusNodeNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNodeNetInterfaces> {
-        return InterfaceDescriptor<ISClusNodeNetInterfaces>("ISClusNodeNetInterfaces", ISClusNodeNetInterfaces.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNodeNetInterfacesFromAbi, viewISClusNodeNetInterfaces)
+        return InterfaceDescriptor<ISClusNodeNetInterfaces>("ISClusNodeNetInterfaces", ISClusNodeNetInterfaces.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNodeNetInterfacesFromAbi, viewISClusNodeNetInterfaces)
     }
 
     public unsafe func vtbl(): ISClusNodeNetInterfacesVtbl {
@@ -26865,7 +26882,7 @@ public class ISClusNodeNetInterfaces <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusNetInterface: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusNetInterface)
@@ -26875,13 +26892,13 @@ public class ISClusNodeNetInterfaces <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusNodesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -26918,7 +26935,7 @@ public class ISClusNodes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusNodes> {
-        return InterfaceDescriptor<ISClusNodes>("ISClusNodes", ISClusNodes.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusNodesFromAbi, viewISClusNodes)
+        return InterfaceDescriptor<ISClusNodes>("ISClusNodes", ISClusNodes.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusNodesFromAbi, viewISClusNodes)
     }
 
     public unsafe func vtbl(): ISClusNodesVtbl {
@@ -26945,7 +26962,7 @@ public class ISClusNodes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppNode)
@@ -26955,19 +26972,19 @@ public class ISClusNodes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResDependenciesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CLUSTER_RESOURCE_CREATE_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -27004,7 +27021,7 @@ public class ISClusResDependencies <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResDependencies> {
-        return InterfaceDescriptor<ISClusResDependencies>("ISClusResDependencies", ISClusResDependencies.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResDependenciesFromAbi, viewISClusResDependencies)
+        return InterfaceDescriptor<ISClusResDependencies>("ISClusResDependencies", ISClusResDependencies.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResDependenciesFromAbi, viewISClusResDependencies)
     }
 
     public unsafe func vtbl(): ISClusResDependenciesVtbl {
@@ -27031,7 +27048,7 @@ public class ISClusResDependencies <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResource)
@@ -27044,7 +27061,7 @@ public class ISClusResDependencies <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -27057,7 +27074,7 @@ public class ISClusResDependencies <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -27067,19 +27084,19 @@ public class ISClusResDependencies <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResDependentsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CLUSTER_RESOURCE_CREATE_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -27116,7 +27133,7 @@ public class ISClusResDependents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResDependents> {
-        return InterfaceDescriptor<ISClusResDependents>("ISClusResDependents", ISClusResDependents.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResDependentsFromAbi, viewISClusResDependents)
+        return InterfaceDescriptor<ISClusResDependents>("ISClusResDependents", ISClusResDependents.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResDependentsFromAbi, viewISClusResDependents)
     }
 
     public unsafe func vtbl(): ISClusResDependentsVtbl {
@@ -27143,7 +27160,7 @@ public class ISClusResDependents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResource)
@@ -27156,7 +27173,7 @@ public class ISClusResDependents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -27169,7 +27186,7 @@ public class ISClusResDependents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
@@ -27179,7 +27196,7 @@ public class ISClusResDependents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResGroupVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -27193,11 +27210,11 @@ public struct ISClusResGroupVtbl {
     public var PreferredOwnerNodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Online: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Online: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Move: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Move: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Offline: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Offline: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Cluster: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -27235,7 +27252,7 @@ public class ISClusResGroup <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResGroup> {
-        return InterfaceDescriptor<ISClusResGroup>("ISClusResGroup", ISClusResGroup.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResGroupFromAbi, viewISClusResGroup)
+        return InterfaceDescriptor<ISClusResGroup>("ISClusResGroup", ISClusResGroup.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResGroupFromAbi, viewISClusResGroup)
     }
 
     public unsafe func vtbl(): ISClusResGroupVtbl {
@@ -27315,21 +27332,21 @@ public class ISClusResGroup <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Online(varTimeout: Win32__impl_l2.VARIANTAbi, varNode: Win32__impl_l2.VARIANTAbi, pvarPending: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Online(varTimeout: Win32_impl_p2.VARIANTAbi, varNode: Win32_impl_p2.VARIANTAbi, pvarPending: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Online(__liveRaw, varTimeout, varNode, pvarPending)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Move(varTimeout: Win32__impl_l2.VARIANTAbi, varNode: Win32__impl_l2.VARIANTAbi, pvarPending: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Move(varTimeout: Win32_impl_p2.VARIANTAbi, varNode: Win32_impl_p2.VARIANTAbi, pvarPending: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Move(__liveRaw, varTimeout, varNode, pvarPending)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Offline(varTimeout: Win32__impl_l2.VARIANTAbi, pvarPending: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Offline(varTimeout: Win32_impl_p2.VARIANTAbi, pvarPending: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Offline(__liveRaw, varTimeout, pvarPending)
@@ -27345,18 +27362,18 @@ public class ISClusResGroup <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResGroupPreferredOwnerNodesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var InsertItem: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SaveChanges: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -27395,7 +27412,7 @@ public class ISClusResGroupPreferredOwnerNodes <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResGroupPreferredOwnerNodes> {
-        return InterfaceDescriptor<ISClusResGroupPreferredOwnerNodes>("ISClusResGroupPreferredOwnerNodes", ISClusResGroupPreferredOwnerNodes.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResGroupPreferredOwnerNodesFromAbi, viewISClusResGroupPreferredOwnerNodes)
+        return InterfaceDescriptor<ISClusResGroupPreferredOwnerNodes>("ISClusResGroupPreferredOwnerNodes", ISClusResGroupPreferredOwnerNodes.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResGroupPreferredOwnerNodesFromAbi, viewISClusResGroupPreferredOwnerNodes)
     }
 
     public unsafe func vtbl(): ISClusResGroupPreferredOwnerNodesVtbl {
@@ -27422,7 +27439,7 @@ public class ISClusResGroupPreferredOwnerNodes <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppNode)
@@ -27435,14 +27452,14 @@ public class ISClusResGroupPreferredOwnerNodes <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Modified(pvarModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Modified(pvarModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Modified(__liveRaw, pvarModified)
@@ -27464,16 +27481,16 @@ public class ISClusResGroupPreferredOwnerNodes <: InterfaceWrapperBase & ComInte
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResGroupResourcesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CLUSTER_RESOURCE_CREATE_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -27510,7 +27527,7 @@ public class ISClusResGroupResources <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResGroupResources> {
-        return InterfaceDescriptor<ISClusResGroupResources>("ISClusResGroupResources", ISClusResGroupResources.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResGroupResourcesFromAbi, viewISClusResGroupResources)
+        return InterfaceDescriptor<ISClusResGroupResources>("ISClusResGroupResources", ISClusResGroupResources.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResGroupResourcesFromAbi, viewISClusResGroupResources)
     }
 
     public unsafe func vtbl(): ISClusResGroupResourcesVtbl {
@@ -27537,7 +27554,7 @@ public class ISClusResGroupResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResource)
@@ -27550,7 +27567,7 @@ public class ISClusResGroupResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -27560,16 +27577,16 @@ public class ISClusResGroupResources <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResGroupsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -27606,7 +27623,7 @@ public class ISClusResGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResGroups> {
-        return InterfaceDescriptor<ISClusResGroups>("ISClusResGroups", ISClusResGroups.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResGroupsFromAbi, viewISClusResGroups)
+        return InterfaceDescriptor<ISClusResGroups>("ISClusResGroups", ISClusResGroups.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResGroupsFromAbi, viewISClusResGroups)
     }
 
     public unsafe func vtbl(): ISClusResGroupsVtbl {
@@ -27633,7 +27650,7 @@ public class ISClusResGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResGroup: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResGroup: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResGroup)
@@ -27646,7 +27663,7 @@ public class ISClusResGroups <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -27656,18 +27673,18 @@ public class ISClusResGroups <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResPossibleOwnerNodesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var AddItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RemoveItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var RemoveItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Modified: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -27704,7 +27721,7 @@ public class ISClusResPossibleOwnerNodes <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResPossibleOwnerNodes> {
-        return InterfaceDescriptor<ISClusResPossibleOwnerNodes>("ISClusResPossibleOwnerNodes", ISClusResPossibleOwnerNodes.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResPossibleOwnerNodesFromAbi, viewISClusResPossibleOwnerNodes)
+        return InterfaceDescriptor<ISClusResPossibleOwnerNodes>("ISClusResPossibleOwnerNodes", ISClusResPossibleOwnerNodes.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResPossibleOwnerNodesFromAbi, viewISClusResPossibleOwnerNodes)
     }
 
     public unsafe func vtbl(): ISClusResPossibleOwnerNodesVtbl {
@@ -27731,7 +27748,7 @@ public class ISClusResPossibleOwnerNodes <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppNode)
@@ -27744,14 +27761,14 @@ public class ISClusResPossibleOwnerNodes <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RemoveItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func RemoveItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemoveItem(__liveRaw, varIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Modified(pvarModified: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Modified(pvarModified: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Modified(__liveRaw, pvarModified)
@@ -27761,7 +27778,7 @@ public class ISClusResPossibleOwnerNodes <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResTypeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -27808,7 +27825,7 @@ public class ISClusResType <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResType> {
-        return InterfaceDescriptor<ISClusResType>("ISClusResType", ISClusResType.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResTypeFromAbi, viewISClusResType)
+        return InterfaceDescriptor<ISClusResType>("ISClusResType", ISClusResType.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResTypeFromAbi, viewISClusResType)
     }
 
     public unsafe func vtbl(): ISClusResTypeVtbl {
@@ -27879,13 +27896,13 @@ public class ISClusResType <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResTypePossibleOwnerNodesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -27922,7 +27939,7 @@ public class ISClusResTypePossibleOwnerNodes <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResTypePossibleOwnerNodes> {
-        return InterfaceDescriptor<ISClusResTypePossibleOwnerNodes>("ISClusResTypePossibleOwnerNodes", ISClusResTypePossibleOwnerNodes.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResTypePossibleOwnerNodesFromAbi, viewISClusResTypePossibleOwnerNodes)
+        return InterfaceDescriptor<ISClusResTypePossibleOwnerNodes>("ISClusResTypePossibleOwnerNodes", ISClusResTypePossibleOwnerNodes.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResTypePossibleOwnerNodesFromAbi, viewISClusResTypePossibleOwnerNodes)
     }
 
     public unsafe func vtbl(): ISClusResTypePossibleOwnerNodesVtbl {
@@ -27949,7 +27966,7 @@ public class ISClusResTypePossibleOwnerNodes <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppNode)
@@ -27959,16 +27976,16 @@ public class ISClusResTypePossibleOwnerNodes <: InterfaceWrapperBase & ComInterf
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResTypeResourcesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CLUSTER_RESOURCE_CREATE_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -28005,7 +28022,7 @@ public class ISClusResTypeResources <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResTypeResources> {
-        return InterfaceDescriptor<ISClusResTypeResources>("ISClusResTypeResources", ISClusResTypeResources.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResTypeResourcesFromAbi, viewISClusResTypeResources)
+        return InterfaceDescriptor<ISClusResTypeResources>("ISClusResTypeResources", ISClusResTypeResources.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResTypeResourcesFromAbi, viewISClusResTypeResources)
     }
 
     public unsafe func vtbl(): ISClusResTypeResourcesVtbl {
@@ -28032,7 +28049,7 @@ public class ISClusResTypeResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResource)
@@ -28045,7 +28062,7 @@ public class ISClusResTypeResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -28055,16 +28072,16 @@ public class ISClusResTypeResources <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResTypesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -28101,7 +28118,7 @@ public class ISClusResTypes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResTypes> {
-        return InterfaceDescriptor<ISClusResTypes>("ISClusResTypes", ISClusResTypes.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResTypesFromAbi, viewISClusResTypes)
+        return InterfaceDescriptor<ISClusResTypes>("ISClusResTypes", ISClusResTypes.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResTypesFromAbi, viewISClusResTypes)
     }
 
     public unsafe func vtbl(): ISClusResTypesVtbl {
@@ -28128,7 +28145,7 @@ public class ISClusResTypes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResType: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResType: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResType)
@@ -28141,7 +28158,7 @@ public class ISClusResTypes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -28151,7 +28168,7 @@ public class ISClusResTypes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResourceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -28165,14 +28182,14 @@ public struct ISClusResourceVtbl {
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Fail: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Online: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Online: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Offline: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Offline: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var ChangeResourceGroup: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AddResourceNode: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveResourceNode: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CanResourceBeDependent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var CanResourceBeDependent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var PossibleOwnerNodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Dependencies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Dependents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -28223,7 +28240,7 @@ public class ISClusResource <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResource> {
-        return InterfaceDescriptor<ISClusResource>("ISClusResource", ISClusResource.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResourceFromAbi, viewISClusResource)
+        return InterfaceDescriptor<ISClusResource>("ISClusResource", ISClusResource.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResourceFromAbi, viewISClusResource)
     }
 
     public unsafe func vtbl(): ISClusResourceVtbl {
@@ -28303,14 +28320,14 @@ public class ISClusResource <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Online(nTimeout: Int32, pvarPending: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Online(nTimeout: Int32, pvarPending: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Online(__liveRaw, nTimeout, pvarPending)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Offline(nTimeout: Int32, pvarPending: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Offline(nTimeout: Int32, pvarPending: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Offline(__liveRaw, nTimeout, pvarPending)
@@ -28335,7 +28352,7 @@ public class ISClusResource <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CanResourceBeDependent(pResource: CPointer<Unit>, pvarDependent: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func CanResourceBeDependent(pResource: CPointer<Unit>, pvarDependent: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CanResourceBeDependent(__liveRaw, pResource, pvarDependent)
@@ -28429,16 +28446,16 @@ public class ISClusResource <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusResourcesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateItem: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CLUSTER_RESOURCE_CREATE_FLAGSAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DeleteItem: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var DeleteItem: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -28475,7 +28492,7 @@ public class ISClusResources <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISClusResources> {
-        return InterfaceDescriptor<ISClusResources>("ISClusResources", ISClusResources.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusResourcesFromAbi, viewISClusResources)
+        return InterfaceDescriptor<ISClusResources>("ISClusResources", ISClusResources.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusResourcesFromAbi, viewISClusResources)
     }
 
     public unsafe func vtbl(): ISClusResourcesVtbl {
@@ -28502,7 +28519,7 @@ public class ISClusResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, ppClusResource: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, ppClusResource)
@@ -28515,7 +28532,7 @@ public class ISClusResources <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DeleteItem(varIndex: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DeleteItem(varIndex: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteItem(__liveRaw, varIndex)
@@ -28525,7 +28542,7 @@ public class ISClusResources <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_Clustering == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISClusterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CommonProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PrivateProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommonROProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -28583,7 +28600,7 @@ public class ISCluster <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISCluster> {
-        return InterfaceDescriptor<ISCluster>("ISCluster", ISCluster.iid(), Win32__impl_l2.IDispatch.iid(), takeISClusterFromAbi, viewISCluster)
+        return InterfaceDescriptor<ISCluster>("ISCluster", ISCluster.iid(), Win32_impl_p2.IDispatch.iid(), takeISClusterFromAbi, viewISCluster)
     }
 
     public unsafe func vtbl(): ISClusterVtbl {

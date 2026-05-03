@@ -4,13 +4,21 @@
 package windows.ApplicationModel.Calls.Provider
 
 import std.collection.*
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Calls_Provider == "on"]
 import windows_future as windows_future
 
 
@@ -298,7 +306,7 @@ public class IPhoneCallOrigin3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPhoneCallOrigin3", IPhoneCallOrigin3.iid(), IPhoneCallOrigin2.descriptorSchema(), ["IPhoneCallOrigin2", "IPhoneCallOrigin"], [IPhoneCallOrigin2.iid(), IPhoneCallOrigin.iid()], "IPhoneCallOrigin3Vtbl", "IPhoneCallOrigin3", "IPhoneCallOrigin3_Impl", [InterfaceMethodSchema("DisplayPicture", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayPicture", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPhoneCallOrigin3", IPhoneCallOrigin3.iid(), IPhoneCallOrigin2.descriptorSchema(), ["IPhoneCallOrigin2", "IPhoneCallOrigin"], [IPhoneCallOrigin2.iid(), IPhoneCallOrigin.iid()], "IPhoneCallOrigin3Vtbl", "IPhoneCallOrigin3", "IPhoneCallOrigin3_Impl", [InterfaceMethodSchema("DisplayPicture", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayPicture", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPhoneCallOrigin3.runtimeType())
         return schema
     }
@@ -342,16 +350,16 @@ public class IPhoneCallOrigin3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func DisplayPicture(): _impl_l1.StorageFile {
+    public unsafe func DisplayPicture(): impl_p1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DisplayPicture(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.StorageFile.fromAbiTake(result__)
+        return impl_p1.StorageFile.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func SetDisplayPicture(value: _impl_l1.StorageFile): Unit {
+    public unsafe func SetDisplayPicture(value: impl_p1.StorageFile): Unit {
         let v = vtbl()
         let hr = v.SetDisplayPicture(asRaw(), value.asRaw())
         HRESULT(hr).ok()

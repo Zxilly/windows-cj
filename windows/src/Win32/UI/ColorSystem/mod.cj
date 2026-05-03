@@ -4,14 +4,24 @@
 package windows.Win32.UI.ColorSystem
 
 import std.collection.*
+@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_libloading
+@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_ColorSystem == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_ColorSystem == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_UI_ColorSystem == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_ColorSystem == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_UI_ColorSystem == "on"]
@@ -4350,7 +4360,7 @@ public struct COLORMATCHSETUPA {
     public var ccPrinterProfile: UInt32 = 0u32
     public var pTargetProfile: CPointer<UInt8> = CPointer<UInt8>()
     public var ccTargetProfile: UInt32 = 0u32
-    public var lpfnHook: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var lpfnHook: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var lpfnApplyCallback: PCMSCALLBACKA = CFunc<(CPointer<COLORMATCHSETUPAAbi>, IntNative) -> Int32>(CPointer<Unit>())
     public var lParamApplyCallback: IntNative = 0
@@ -4375,7 +4385,7 @@ public struct COLORMATCHSETUPAAbi {
     public var ccPrinterProfile: UInt32 = 0u32
     public var pTargetProfile: CPointer<UInt8> = CPointer<UInt8>()
     public var ccTargetProfile: UInt32 = 0u32
-    public var lpfnHook: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var lpfnHook: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var lpfnApplyCallback: PCMSCALLBACKA = CFunc<(CPointer<COLORMATCHSETUPAAbi>, IntNative) -> Int32>(CPointer<Unit>())
     public var lParamApplyCallback: IntNative = 0
@@ -4457,7 +4467,7 @@ public struct COLORMATCHSETUPW {
     public var ccPrinterProfile: UInt32 = 0u32
     public var pTargetProfile: CPointer<UInt16> = CPointer<UInt16>()
     public var ccTargetProfile: UInt32 = 0u32
-    public var lpfnHook: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var lpfnHook: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var lpfnApplyCallback: PCMSCALLBACKW = CFunc<(CPointer<COLORMATCHSETUPWAbi>, IntNative) -> Int32>(CPointer<Unit>())
     public var lParamApplyCallback: IntNative = 0
@@ -4482,7 +4492,7 @@ public struct COLORMATCHSETUPWAbi {
     public var ccPrinterProfile: UInt32 = 0u32
     public var pTargetProfile: CPointer<UInt16> = CPointer<UInt16>()
     public var ccTargetProfile: UInt32 = 0u32
-    public var lpfnHook: Win32__impl_l0.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
+    public var lpfnHook: Win32_impl_p1.DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>(CPointer<Unit>())
     public var lParam: IntNative = 0
     public var lpfnApplyCallback: PCMSCALLBACKW = CFunc<(CPointer<COLORMATCHSETUPWAbi>, IntNative) -> Int32>(CPointer<Unit>())
     public var lParamApplyCallback: IntNative = 0

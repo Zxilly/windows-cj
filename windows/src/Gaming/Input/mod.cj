@@ -4,17 +4,29 @@
 package windows.Gaming.Input
 
 import std.collection.*
+@When[Windows_Gaming_Input == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Gaming_Input == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_Input == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_Input == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_Input == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_Input == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Gaming_Input == "on" && Windows_Devices_Haptics == "on"]
 import windows.Devices.Haptics as Devices_Haptics
+@When[Windows_Gaming_Input == "on" && Windows_Devices_Power == "on"]
 import windows.Devices.Power as Devices_Power
+@When[Windows_Gaming_Input == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Gaming_Input == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
 import windows.Gaming.Input.ForceFeedback as Gaming_Input_ForceFeedback
-import windows._impl_l1 as _impl_l1
+@When[Windows_Gaming_Input == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Gaming_Input == "on"]
 import windows_collections as windows_collections
 
 
@@ -1924,13 +1936,13 @@ public interface IGameController_Impl <: IGameController_ImplErased {
         }
     }
 
-    public func UserChanged(value: InParam<Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>>): windows_core.Result<windows_collections.EventRegistrationToken>
+    public func UserChanged(value: InParam<Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>>): windows_core.Result<windows_collections.EventRegistrationToken>
 
     public func __winrtThunk_UserChanged(arg0: CPointer<Unit>, result__: CPointer<windows_collections.EventRegistrationTokenAbi>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.UserChanged(InParam<Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>>(Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>.viewOf(arg0)))) {
+        match (this.UserChanged(InParam<Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>>(Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>.viewOf(arg0)))) {
             case Result<windows_collections.EventRegistrationToken>.Ok(value) =>
                 unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<windows_collections.EventRegistrationToken>())) }
                 S_OK.value
@@ -1985,14 +1997,14 @@ public interface IGameController_Impl <: IGameController_ImplErased {
         }
     }
 
-    public func get_User(): windows_core.Result<_impl_l1.User>
+    public func get_User(): windows_core.Result<impl_p1.User>
 
     public func __winrtThunk_get_User(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_User()) {
-            case Result<_impl_l1.User>.Ok(value) =>
+            case Result<impl_p1.User>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -2000,7 +2012,7 @@ public interface IGameController_Impl <: IGameController_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.User>.Err(error) =>
+            case Result<impl_p1.User>.Err(error) =>
                 error.code().value
         }
     }
@@ -2042,7 +2054,7 @@ public class IGameController <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGameController", IGameController.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameControllerVtbl", "IGameController", "IGameController_Impl", [InterfaceMethodSchema("HeadsetConnected", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, Headset>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadsetConnected", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HeadsetDisconnected", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, Headset>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadsetDisconnected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UserChanged", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUserChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_Headset", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Headset>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsWireless", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGameController", IGameController.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGameControllerVtbl", "IGameController", "IGameController_Impl", [InterfaceMethodSchema("HeadsetConnected", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, Headset>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadsetConnected", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("HeadsetDisconnected", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, Headset>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveHeadsetDisconnected", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UserChanged", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUserChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_Headset", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Headset>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsWireless", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGameController.runtimeType())
         return schema
     }
@@ -2100,7 +2112,7 @@ public class IGameController <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.UserChanged(asRaw(), value.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -2131,12 +2143,12 @@ public class IGameController <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -3267,7 +3279,7 @@ public class ArcadeStick <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -3284,7 +3296,7 @@ public class ArcadeStick <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 
@@ -3483,7 +3495,7 @@ public class FlightStick <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -3500,7 +3512,7 @@ public class FlightStick <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 
@@ -3699,7 +3711,7 @@ public class Gamepad <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -3716,7 +3728,7 @@ public class Gamepad <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 
@@ -5068,7 +5080,7 @@ public class RacingWheel <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -5085,7 +5097,7 @@ public class RacingWheel <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 
@@ -5309,7 +5321,7 @@ public class RawGameController <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -5326,7 +5338,7 @@ public class RawGameController <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 
@@ -5525,7 +5537,7 @@ public class UINavigationController <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_System == "on"]
-    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, _impl_l1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func UserChanged(value: Foundation.TypedEventHandler<IGameController, impl_p1.UserChangedEventArgs>): windows_collections.EventRegistrationToken {
         return asIGameController().UserChanged(value)
     }
 
@@ -5542,7 +5554,7 @@ public class UINavigationController <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIGameController().get_User()
     }
 

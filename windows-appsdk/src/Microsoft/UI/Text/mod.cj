@@ -4,15 +4,25 @@
 package windows_appsdk.Microsoft.UI.Text
 
 import std.collection.*
+@When[Microsoft_UI_Text == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Text == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Text == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Text == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Text == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Text == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Text == "on" && Windows_Storage_Streams == "on"]
 import windows.Storage.Streams as Storage_Streams
+@When[Microsoft_UI_Text == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Microsoft_UI_Text == "on" && Windows_UI_Text == "on"]
 import windows.UI.Text as UI_Text
+@When[Microsoft_UI_Text == "on"]
 import windows_future as windows_future
 
 

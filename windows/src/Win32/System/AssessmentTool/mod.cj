@@ -4,15 +4,26 @@
 package windows.Win32.System.AssessmentTool
 
 import std.collection.*
+@When[Windows_Win32_System_AssessmentTool == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_AssessmentTool == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_AssessmentTool == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_AssessmentTool == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_UI_Accessibility == "on"]
 import windows.Win32.UI.Accessibility as Win32_UI_Accessibility
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_AssessmentTool == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_AssessmentTool == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_AssessmentTool == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_AssessmentTool == "on"]
@@ -259,7 +270,7 @@ public class IAccessibleWinSAT <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IProvideWinSATAssessmentInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Score: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -299,7 +310,7 @@ public class IProvideWinSATAssessmentInfo <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IProvideWinSATAssessmentInfo> {
-        return InterfaceDescriptor<IProvideWinSATAssessmentInfo>("IProvideWinSATAssessmentInfo", IProvideWinSATAssessmentInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIProvideWinSATAssessmentInfoFromAbi, viewIProvideWinSATAssessmentInfo)
+        return InterfaceDescriptor<IProvideWinSATAssessmentInfo>("IProvideWinSATAssessmentInfo", IProvideWinSATAssessmentInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIProvideWinSATAssessmentInfoFromAbi, viewIProvideWinSATAssessmentInfo)
     }
 
     public unsafe func vtbl(): IProvideWinSATAssessmentInfoVtbl {
@@ -328,7 +339,7 @@ public class IProvideWinSATAssessmentInfo <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IQueryAllWinSATAssessmentsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_Data_Xml_MsXml == "on"]
     public var get_AllXML: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -367,7 +378,7 @@ public class IQueryAllWinSATAssessments <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IQueryAllWinSATAssessments> {
-        return InterfaceDescriptor<IQueryAllWinSATAssessments>("IQueryAllWinSATAssessments", IQueryAllWinSATAssessments.iid(), Win32__impl_l2.IDispatch.iid(), takeIQueryAllWinSATAssessmentsFromAbi, viewIQueryAllWinSATAssessments)
+        return InterfaceDescriptor<IQueryAllWinSATAssessments>("IQueryAllWinSATAssessments", IQueryAllWinSATAssessments.iid(), Win32_impl_p2.IDispatch.iid(), takeIQueryAllWinSATAssessmentsFromAbi, viewIQueryAllWinSATAssessments)
     }
 
     public unsafe func vtbl(): IQueryAllWinSATAssessmentsVtbl {
@@ -762,11 +773,11 @@ public class IInitiateWinSATAssessment <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IProvideWinSATResultsInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetAssessmentInfo: CFunc<(CPointer<Unit>, WINSAT_ASSESSMENT_TYPEAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var AssessmentState: CFunc<(CPointer<Unit>, CPointer<WINSAT_ASSESSMENT_STATEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AssessmentDateTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AssessmentDateTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SystemRating: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var RatingStateDesc: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -805,7 +816,7 @@ public class IProvideWinSATResultsInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IProvideWinSATResultsInfo> {
-        return InterfaceDescriptor<IProvideWinSATResultsInfo>("IProvideWinSATResultsInfo", IProvideWinSATResultsInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIProvideWinSATResultsInfoFromAbi, viewIProvideWinSATResultsInfo)
+        return InterfaceDescriptor<IProvideWinSATResultsInfo>("IProvideWinSATResultsInfo", IProvideWinSATResultsInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIProvideWinSATResultsInfoFromAbi, viewIProvideWinSATResultsInfo)
     }
 
     public unsafe func vtbl(): IProvideWinSATResultsInfoVtbl {
@@ -825,7 +836,7 @@ public class IProvideWinSATResultsInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AssessmentDateTime(fileTime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AssessmentDateTime(fileTime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AssessmentDateTime(__liveRaw, fileTime)
@@ -959,7 +970,7 @@ public class IQueryOEMWinSATCustomization <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_System_AssessmentTool == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IQueryRecentWinSATAssessmentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_Data_Xml_MsXml == "on"]
     public var get_XML: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Info: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -999,7 +1010,7 @@ public class IQueryRecentWinSATAssessment <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IQueryRecentWinSATAssessment> {
-        return InterfaceDescriptor<IQueryRecentWinSATAssessment>("IQueryRecentWinSATAssessment", IQueryRecentWinSATAssessment.iid(), Win32__impl_l2.IDispatch.iid(), takeIQueryRecentWinSATAssessmentFromAbi, viewIQueryRecentWinSATAssessment)
+        return InterfaceDescriptor<IQueryRecentWinSATAssessment>("IQueryRecentWinSATAssessment", IQueryRecentWinSATAssessment.iid(), Win32_impl_p2.IDispatch.iid(), takeIQueryRecentWinSATAssessmentFromAbi, viewIQueryRecentWinSATAssessment)
     }
 
     public unsafe func vtbl(): IQueryRecentWinSATAssessmentVtbl {

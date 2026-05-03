@@ -4,7 +4,9 @@
 package windows.Win32.System.Search.Common
 
 import std.collection.*
+@When[Windows_Win32_System_Search_Common == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_Search_Common == "on"]
 import windows_core as windows_core
 
 

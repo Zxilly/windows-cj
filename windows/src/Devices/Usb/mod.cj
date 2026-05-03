@@ -4,15 +4,25 @@
 package windows.Devices.Usb
 
 import std.collection.*
+@When[Windows_Devices_Usb == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Usb == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Usb == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Usb == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Usb == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Usb == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Usb == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_Usb == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Usb == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Usb == "on"]
 import windows_future as windows_future
 
 
@@ -177,7 +187,7 @@ public class IUsbDescriptor <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbDescriptor", IUsbDescriptor.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbDescriptorVtbl", "IUsbDescriptor", "IUsbDescriptor_Impl", [InterfaceMethodSchema("Length", 6, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DescriptorType", 7, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadDescriptorBuffer", 8, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbDescriptor", IUsbDescriptor.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbDescriptorVtbl", "IUsbDescriptor", "IUsbDescriptor_Impl", [InterfaceMethodSchema("Length", 6, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DescriptorType", 7, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReadDescriptorBuffer", 8, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbDescriptor.runtimeType())
         return schema
     }
@@ -223,7 +233,7 @@ public class IUsbDescriptor <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReadDescriptorBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func ReadDescriptorBuffer(buffer: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.ReadDescriptorBuffer(asRaw(), buffer.asRaw())
         HRESULT(hr).ok()
@@ -731,7 +741,7 @@ public class IUsbInterruptInEventArgs <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbInterruptInEventArgs", IUsbInterruptInEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbInterruptInEventArgsVtbl", "IUsbInterruptInEventArgs", "IUsbInterruptInEventArgs_Impl", [InterfaceMethodSchema("InterruptData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbInterruptInEventArgs", IUsbInterruptInEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbInterruptInEventArgsVtbl", "IUsbInterruptInEventArgs", "IUsbInterruptInEventArgs_Impl", [InterfaceMethodSchema("InterruptData", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbInterruptInEventArgs.runtimeType())
         return schema
     }
@@ -761,12 +771,12 @@ public class IUsbInterruptInEventArgs <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InterruptData(): _impl_l0.IBuffer {
+    public unsafe func InterruptData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.InterruptData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -971,7 +981,7 @@ public class UsbDescriptor <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ReadDescriptorBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func ReadDescriptorBuffer(buffer: impl_p0.IBuffer): Unit {
         defaultInterface().ReadDescriptorBuffer(buffer)
     }
 }
@@ -1359,7 +1369,7 @@ public class UsbInterruptInEventArgs <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InterruptData(): _impl_l0.IBuffer {
+    public unsafe func InterruptData(): impl_p0.IBuffer {
         return defaultInterface().InterruptData()
     }
 }
@@ -2511,7 +2521,7 @@ public class IUsbBulkInPipe <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbBulkInPipe", IUsbBulkInPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbBulkInPipeVtbl", "IUsbBulkInPipe", "IUsbBulkInPipe_Impl", [InterfaceMethodSchema("MaxTransferSizeBytes", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EndpointDescriptor", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbBulkInEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetReadOptions", 9, [InterfaceParameterSchema("value", "UsbReadOptionsAbi", "UsbReadOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReadOptions", 10, [InterfaceParameterSchema("result", "CPointer<UsbReadOptionsAbi>", "OutSlot<UsbReadOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FlushBuffer", 11, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("InputStream", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbBulkInPipe", IUsbBulkInPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbBulkInPipeVtbl", "IUsbBulkInPipe", "IUsbBulkInPipe_Impl", [InterfaceMethodSchema("MaxTransferSizeBytes", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EndpointDescriptor", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbBulkInEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetReadOptions", 9, [InterfaceParameterSchema("value", "UsbReadOptionsAbi", "UsbReadOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ReadOptions", 10, [InterfaceParameterSchema("result", "CPointer<UsbReadOptionsAbi>", "OutSlot<UsbReadOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FlushBuffer", 11, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("InputStream", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbBulkInPipe.runtimeType())
         return schema
     }
@@ -2585,12 +2595,12 @@ public class IUsbBulkInPipe <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InputStream(): _impl_l0.IInputStream {
+    public unsafe func InputStream(): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.InputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 }
 
@@ -2751,7 +2761,7 @@ public class IUsbBulkOutPipe <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbBulkOutPipe", IUsbBulkOutPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbBulkOutPipeVtbl", "IUsbBulkOutPipe", "IUsbBulkOutPipe_Impl", [InterfaceMethodSchema("EndpointDescriptor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbBulkOutEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWriteOptions", 8, [InterfaceParameterSchema("value", "UsbWriteOptionsAbi", "UsbWriteOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WriteOptions", 9, [InterfaceParameterSchema("result", "CPointer<UsbWriteOptionsAbi>", "OutSlot<UsbWriteOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbBulkOutPipe", IUsbBulkOutPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbBulkOutPipeVtbl", "IUsbBulkOutPipe", "IUsbBulkOutPipe_Impl", [InterfaceMethodSchema("EndpointDescriptor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbBulkOutEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWriteOptions", 8, [InterfaceParameterSchema("value", "UsbWriteOptionsAbi", "UsbWriteOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WriteOptions", 9, [InterfaceParameterSchema("result", "CPointer<UsbWriteOptionsAbi>", "OutSlot<UsbWriteOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbBulkOutPipe.runtimeType())
         return schema
     }
@@ -2811,12 +2821,12 @@ public class IUsbBulkOutPipe <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OutputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 }
 
@@ -3092,7 +3102,7 @@ public class IUsbDevice <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbDevice", IUsbDevice.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IUsbDeviceVtbl", "IUsbDevice", "IUsbDevice_Impl", [InterfaceMethodSchema("SendControlOutTransferAsync", 7, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlOutTransferAsyncNoBuffer", 8, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlInTransferAsync", 9, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlInTransferAsyncNoBuffer", 10, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultInterface", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbInterface>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceDescriptor", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbDeviceDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Configuration", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbDevice", IUsbDevice.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IUsbDeviceVtbl", "IUsbDevice", "IUsbDevice_Impl", [InterfaceMethodSchema("SendControlOutTransferAsync", 7, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlOutTransferAsyncNoBuffer", 8, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlInTransferAsync", 9, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SendControlInTransferAsyncNoBuffer", 10, [InterfaceParameterSchema("setupPacket", "CPointer<Unit>", "InParam<UsbSetupPacket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p0.IBuffer>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DefaultInterface", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbInterface>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceDescriptor", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbDeviceDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Configuration", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbDevice.runtimeType())
         return schema
     }
@@ -3129,7 +3139,7 @@ public class IUsbDevice <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlOutTransferAsync(setupPacket: UsbSetupPacket, buffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UInt32> {
+    public unsafe func SendControlOutTransferAsync(setupPacket: UsbSetupPacket, buffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendControlOutTransferAsync(asRaw(), setupPacket.asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3146,21 +3156,21 @@ public class IUsbDevice <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlInTransferAsync(setupPacket: UsbSetupPacket, buffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func SendControlInTransferAsync(setupPacket: UsbSetupPacket, buffer: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendControlInTransferAsync(asRaw(), setupPacket.asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlInTransferAsyncNoBuffer(setupPacket: UsbSetupPacket): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func SendControlInTransferAsyncNoBuffer(setupPacket: UsbSetupPacket): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SendControlInTransferAsyncNoBuffer(asRaw(), setupPacket.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p0.IBuffer>.fromAbiTake(result__)
     }
 
     public unsafe func DefaultInterface(): UsbInterface {
@@ -4355,7 +4365,7 @@ public class IUsbInterruptOutPipe <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbInterruptOutPipe", IUsbInterruptOutPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbInterruptOutPipeVtbl", "IUsbInterruptOutPipe", "IUsbInterruptOutPipe_Impl", [InterfaceMethodSchema("EndpointDescriptor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbInterruptOutEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWriteOptions", 8, [InterfaceParameterSchema("value", "UsbWriteOptionsAbi", "UsbWriteOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WriteOptions", 9, [InterfaceParameterSchema("result", "CPointer<UsbWriteOptionsAbi>", "OutSlot<UsbWriteOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbInterruptOutPipe", IUsbInterruptOutPipe.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbInterruptOutPipeVtbl", "IUsbInterruptOutPipe", "IUsbInterruptOutPipe_Impl", [InterfaceMethodSchema("EndpointDescriptor", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbInterruptOutEndpointDescriptor>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearStallAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWriteOptions", 8, [InterfaceParameterSchema("value", "UsbWriteOptionsAbi", "UsbWriteOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WriteOptions", 9, [InterfaceParameterSchema("result", "CPointer<UsbWriteOptionsAbi>", "OutSlot<UsbWriteOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OutputStream", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbInterruptOutPipe.runtimeType())
         return schema
     }
@@ -4415,12 +4425,12 @@ public class IUsbInterruptOutPipe <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OutputStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IOutputStream.fromAbiTake(result__)
+        return impl_p0.IOutputStream.fromAbiTake(result__)
     }
 }
 
@@ -4474,7 +4484,7 @@ public class IUsbSetupPacketFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUsbSetupPacketFactory", IUsbSetupPacketFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbSetupPacketFactoryVtbl", "IUsbSetupPacketFactory", "IUsbSetupPacketFactory_Impl", [InterfaceMethodSchema("CreateWithEightByteBuffer", 6, [InterfaceParameterSchema("eightByteBuffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbSetupPacket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUsbSetupPacketFactory", IUsbSetupPacketFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUsbSetupPacketFactoryVtbl", "IUsbSetupPacketFactory", "IUsbSetupPacketFactory_Impl", [InterfaceMethodSchema("CreateWithEightByteBuffer", 6, [InterfaceParameterSchema("eightByteBuffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UsbSetupPacket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUsbSetupPacketFactory.runtimeType())
         return schema
     }
@@ -4504,7 +4514,7 @@ public class IUsbSetupPacketFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateWithEightByteBuffer(eightByteBuffer: _impl_l0.IBuffer): UsbSetupPacket {
+    public unsafe func CreateWithEightByteBuffer(eightByteBuffer: impl_p0.IBuffer): UsbSetupPacket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWithEightByteBuffer(asRaw(), eightByteBuffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4710,7 +4720,7 @@ public class UsbBulkInPipe <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func InputStream(): _impl_l0.IInputStream {
+    public unsafe func InputStream(): impl_p0.IInputStream {
         return defaultInterface().InputStream()
     }
 }
@@ -4919,7 +4929,7 @@ public class UsbBulkOutPipe <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         return defaultInterface().OutputStream()
     }
 }
@@ -5247,7 +5257,7 @@ public class UsbDevice <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlOutTransferAsync(setupPacket: UsbSetupPacket, buffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<UInt32> {
+    public unsafe func SendControlOutTransferAsync(setupPacket: UsbSetupPacket, buffer: impl_p0.IBuffer): windows_future.IAsyncOperation<UInt32> {
         return defaultInterface().SendControlOutTransferAsync(setupPacket, buffer)
     }
 
@@ -5256,12 +5266,12 @@ public class UsbDevice <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlInTransferAsync(setupPacket: UsbSetupPacket, buffer: _impl_l0.IBuffer): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func SendControlInTransferAsync(setupPacket: UsbSetupPacket, buffer: impl_p0.IBuffer): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().SendControlInTransferAsync(setupPacket, buffer)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SendControlInTransferAsyncNoBuffer(setupPacket: UsbSetupPacket): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
+    public unsafe func SendControlInTransferAsyncNoBuffer(setupPacket: UsbSetupPacket): windows_future.IAsyncOperation<impl_p0.IBuffer> {
         return defaultInterface().SendControlInTransferAsyncNoBuffer(setupPacket)
     }
 
@@ -6268,7 +6278,7 @@ public class UsbInterruptOutPipe <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func OutputStream(): _impl_l0.IOutputStream {
+    public unsafe func OutputStream(): impl_p0.IOutputStream {
         return defaultInterface().OutputStream()
     }
 }
@@ -6412,7 +6422,7 @@ public class UsbSetupPacket <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateWithEightByteBuffer(eightByteBuffer: _impl_l0.IBuffer): UsbSetupPacket {
+    public static unsafe func CreateWithEightByteBuffer(eightByteBuffer: impl_p0.IBuffer): UsbSetupPacket {
         var result__: Option<UsbSetupPacket> = Option<UsbSetupPacket>.None
         try (factory__ = windows_core.factory<UsbSetupPacket, IUsbSetupPacketFactory>().unwrap()) {
             result__ = Some(factory__.CreateWithEightByteBuffer(eightByteBuffer))

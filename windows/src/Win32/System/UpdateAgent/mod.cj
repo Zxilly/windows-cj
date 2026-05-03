@@ -4,13 +4,20 @@
 package windows.Win32.System.UpdateAgent
 
 import std.collection.*
+@When[Windows_Win32_System_UpdateAgent == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_UpdateAgent == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_UpdateAgent == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_UpdateAgent == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_UpdateAgent == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_UpdateAgent == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_UpdateAgent == "on"]
@@ -1668,11 +1675,11 @@ extend DownloadType <: windows_core.CopyType & windows_core.RuntimeType & window
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAutomaticUpdatesResultsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastSearchSuccessDate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastSearchSuccessDate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LastInstallationSuccessDate: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LastInstallationSuccessDate: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1709,7 +1716,7 @@ public class IAutomaticUpdatesResults <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAutomaticUpdatesResults> {
-        return InterfaceDescriptor<IAutomaticUpdatesResults>("IAutomaticUpdatesResults", IAutomaticUpdatesResults.iid(), Win32__impl_l2.IDispatch.iid(), takeIAutomaticUpdatesResultsFromAbi, viewIAutomaticUpdatesResults)
+        return InterfaceDescriptor<IAutomaticUpdatesResults>("IAutomaticUpdatesResults", IAutomaticUpdatesResults.iid(), Win32_impl_p2.IDispatch.iid(), takeIAutomaticUpdatesResultsFromAbi, viewIAutomaticUpdatesResults)
     }
 
     public unsafe func vtbl(): IAutomaticUpdatesResultsVtbl {
@@ -1717,14 +1724,14 @@ public class IAutomaticUpdatesResults <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastSearchSuccessDate(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastSearchSuccessDate(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastSearchSuccessDate(__liveRaw, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LastInstallationSuccessDate(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LastInstallationSuccessDate(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LastInstallationSuccessDate(__liveRaw, retval)
@@ -1734,7 +1741,7 @@ public class IAutomaticUpdatesResults <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAutomaticUpdatesSettingsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var NotificationLevel: CFunc<(CPointer<Unit>, CPointer<AutomaticUpdatesNotificationLevelAbi>) -> Int32> = { _, _ => 0 }
     public var SetNotificationLevel: CFunc<(CPointer<Unit>, AutomaticUpdatesNotificationLevelAbi) -> Int32> = { _, _ => 0 }
     public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -1781,7 +1788,7 @@ public class IAutomaticUpdatesSettings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAutomaticUpdatesSettings> {
-        return InterfaceDescriptor<IAutomaticUpdatesSettings>("IAutomaticUpdatesSettings", IAutomaticUpdatesSettings.iid(), Win32__impl_l2.IDispatch.iid(), takeIAutomaticUpdatesSettingsFromAbi, viewIAutomaticUpdatesSettings)
+        return InterfaceDescriptor<IAutomaticUpdatesSettings>("IAutomaticUpdatesSettings", IAutomaticUpdatesSettings.iid(), Win32_impl_p2.IDispatch.iid(), takeIAutomaticUpdatesSettingsFromAbi, viewIAutomaticUpdatesSettings)
     }
 
     public unsafe func vtbl(): IAutomaticUpdatesSettingsVtbl {
@@ -1997,7 +2004,7 @@ public class IAutomaticUpdatesSettings3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadCompletedCallbackArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -2034,7 +2041,7 @@ public class IDownloadCompletedCallbackArgs <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadCompletedCallbackArgs> {
-        return InterfaceDescriptor<IDownloadCompletedCallbackArgs>("IDownloadCompletedCallbackArgs", IDownloadCompletedCallbackArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadCompletedCallbackArgsFromAbi, viewIDownloadCompletedCallbackArgs)
+        return InterfaceDescriptor<IDownloadCompletedCallbackArgs>("IDownloadCompletedCallbackArgs", IDownloadCompletedCallbackArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadCompletedCallbackArgsFromAbi, viewIDownloadCompletedCallbackArgs)
     }
 
     public unsafe func vtbl(): IDownloadCompletedCallbackArgsVtbl {
@@ -2045,7 +2052,7 @@ public class IDownloadCompletedCallbackArgs <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IImageInformationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AltText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Height: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -2086,7 +2093,7 @@ public class IImageInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IImageInformation> {
-        return InterfaceDescriptor<IImageInformation>("IImageInformation", IImageInformation.iid(), Win32__impl_l2.IDispatch.iid(), takeIImageInformationFromAbi, viewIImageInformation)
+        return InterfaceDescriptor<IImageInformation>("IImageInformation", IImageInformation.iid(), Win32_impl_p2.IDispatch.iid(), takeIImageInformationFromAbi, viewIImageInformation)
     }
 
     public unsafe func vtbl(): IImageInformationVtbl {
@@ -2121,7 +2128,7 @@ public class IImageInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationCompletedCallbackArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -2158,7 +2165,7 @@ public class IInstallationCompletedCallbackArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationCompletedCallbackArgs> {
-        return InterfaceDescriptor<IInstallationCompletedCallbackArgs>("IInstallationCompletedCallbackArgs", IInstallationCompletedCallbackArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationCompletedCallbackArgsFromAbi, viewIInstallationCompletedCallbackArgs)
+        return InterfaceDescriptor<IInstallationCompletedCallbackArgs>("IInstallationCompletedCallbackArgs", IInstallationCompletedCallbackArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationCompletedCallbackArgsFromAbi, viewIInstallationCompletedCallbackArgs)
     }
 
     public unsafe func vtbl(): IInstallationCompletedCallbackArgsVtbl {
@@ -2169,7 +2176,7 @@ public class IInstallationCompletedCallbackArgs <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISearchCompletedCallbackArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -2206,7 +2213,7 @@ public class ISearchCompletedCallbackArgs <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<ISearchCompletedCallbackArgs> {
-        return InterfaceDescriptor<ISearchCompletedCallbackArgs>("ISearchCompletedCallbackArgs", ISearchCompletedCallbackArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeISearchCompletedCallbackArgsFromAbi, viewISearchCompletedCallbackArgs)
+        return InterfaceDescriptor<ISearchCompletedCallbackArgs>("ISearchCompletedCallbackArgs", ISearchCompletedCallbackArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeISearchCompletedCallbackArgsFromAbi, viewISearchCompletedCallbackArgs)
     }
 
     public unsafe func vtbl(): ISearchCompletedCallbackArgsVtbl {
@@ -2217,9 +2224,9 @@ public class ISearchCompletedCallbackArgs <: InterfaceWrapperBase & ComInterface
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISearchJobVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsCompleted: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var CleanUp: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var RequestAbort: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -2259,7 +2266,7 @@ public class ISearchJob <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISearchJob> {
-        return InterfaceDescriptor<ISearchJob>("ISearchJob", ISearchJob.iid(), Win32__impl_l2.IDispatch.iid(), takeISearchJobFromAbi, viewISearchJob)
+        return InterfaceDescriptor<ISearchJob>("ISearchJob", ISearchJob.iid(), Win32_impl_p2.IDispatch.iid(), takeISearchJobFromAbi, viewISearchJob)
     }
 
     public unsafe func vtbl(): ISearchJobVtbl {
@@ -2267,7 +2274,7 @@ public class ISearchJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AsyncState(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AsyncState(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AsyncState(__liveRaw, retval)
@@ -2295,7 +2302,7 @@ public class ISearchJob <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IStringCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var put_Item: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -2343,7 +2350,7 @@ public class IStringCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IStringCollection> {
-        return InterfaceDescriptor<IStringCollection>("IStringCollection", IStringCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIStringCollectionFromAbi, viewIStringCollection)
+        return InterfaceDescriptor<IStringCollection>("IStringCollection", IStringCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIStringCollectionFromAbi, viewIStringCollection)
     }
 
     public unsafe func vtbl(): IStringCollectionVtbl {
@@ -2415,7 +2422,7 @@ public class IStringCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISystemInformationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var OemHardwareSupportLink: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var RebootRequired: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2454,7 +2461,7 @@ public class ISystemInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISystemInformation> {
-        return InterfaceDescriptor<ISystemInformation>("ISystemInformation", ISystemInformation.iid(), Win32__impl_l2.IDispatch.iid(), takeISystemInformationFromAbi, viewISystemInformation)
+        return InterfaceDescriptor<ISystemInformation>("ISystemInformation", ISystemInformation.iid(), Win32_impl_p2.IDispatch.iid(), takeISystemInformationFromAbi, viewISystemInformation)
     }
 
     public unsafe func vtbl(): ISystemInformationVtbl {
@@ -2477,7 +2484,7 @@ public class ISystemInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateDownloadContentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DownloadUrl: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2515,7 +2522,7 @@ public class IUpdateDownloadContent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateDownloadContent> {
-        return InterfaceDescriptor<IUpdateDownloadContent>("IUpdateDownloadContent", IUpdateDownloadContent.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateDownloadContentFromAbi, viewIUpdateDownloadContent)
+        return InterfaceDescriptor<IUpdateDownloadContent>("IUpdateDownloadContent", IUpdateDownloadContent.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateDownloadContentFromAbi, viewIUpdateDownloadContent)
     }
 
     public unsafe func vtbl(): IUpdateDownloadContentVtbl {
@@ -2587,7 +2594,7 @@ public class IUpdateDownloadContent2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateDownloadContentCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2628,7 +2635,7 @@ public class IUpdateDownloadContentCollection <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateDownloadContentCollection> {
-        return InterfaceDescriptor<IUpdateDownloadContentCollection>("IUpdateDownloadContentCollection", IUpdateDownloadContentCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateDownloadContentCollectionFromAbi, viewIUpdateDownloadContentCollection)
+        return InterfaceDescriptor<IUpdateDownloadContentCollection>("IUpdateDownloadContentCollection", IUpdateDownloadContentCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateDownloadContentCollectionFromAbi, viewIUpdateDownloadContentCollection)
     }
 
     public unsafe func vtbl(): IUpdateDownloadContentCollectionVtbl {
@@ -2658,7 +2665,7 @@ public class IUpdateDownloadContentCollection <: InterfaceWrapperBase & ComInter
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateIdentityVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RevisionNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var UpdateID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2697,7 +2704,7 @@ public class IUpdateIdentity <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateIdentity> {
-        return InterfaceDescriptor<IUpdateIdentity>("IUpdateIdentity", IUpdateIdentity.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateIdentityFromAbi, viewIUpdateIdentity)
+        return InterfaceDescriptor<IUpdateIdentity>("IUpdateIdentity", IUpdateIdentity.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateIdentityFromAbi, viewIUpdateIdentity)
     }
 
     public unsafe func vtbl(): IUpdateIdentityVtbl {
@@ -2775,10 +2782,10 @@ public class IUpdateLockdown <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateServiceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ContentValidationCert: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ContentValidationCert: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var ExpirationDate: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var IsManaged: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsRegisteredWithAU: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -2826,7 +2833,7 @@ public class IUpdateService <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateService> {
-        return InterfaceDescriptor<IUpdateService>("IUpdateService", IUpdateService.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateServiceFromAbi, viewIUpdateService)
+        return InterfaceDescriptor<IUpdateService>("IUpdateService", IUpdateService.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateServiceFromAbi, viewIUpdateService)
     }
 
     public unsafe func vtbl(): IUpdateServiceVtbl {
@@ -2840,7 +2847,7 @@ public class IUpdateService <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ContentValidationCert(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ContentValidationCert(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ContentValidationCert(__liveRaw, retval)
@@ -2971,7 +2978,7 @@ public class IUpdateService2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateServiceCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3012,7 +3019,7 @@ public class IUpdateServiceCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateServiceCollection> {
-        return InterfaceDescriptor<IUpdateServiceCollection>("IUpdateServiceCollection", IUpdateServiceCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateServiceCollectionFromAbi, viewIUpdateServiceCollection)
+        return InterfaceDescriptor<IUpdateServiceCollection>("IUpdateServiceCollection", IUpdateServiceCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateServiceCollectionFromAbi, viewIUpdateServiceCollection)
     }
 
     public unsafe func vtbl(): IUpdateServiceCollectionVtbl {
@@ -3042,7 +3049,7 @@ public class IUpdateServiceCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateServiceManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Services: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AddService: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var RegisterServiceWithAU: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -3050,7 +3057,7 @@ public struct IUpdateServiceManagerVtbl {
     public var UnregisterServiceWithAU: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var AddScanPackageService: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOption: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var SetOption: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -3087,7 +3094,7 @@ public class IUpdateServiceManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateServiceManager> {
-        return InterfaceDescriptor<IUpdateServiceManager>("IUpdateServiceManager", IUpdateServiceManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateServiceManagerFromAbi, viewIUpdateServiceManager)
+        return InterfaceDescriptor<IUpdateServiceManager>("IUpdateServiceManager", IUpdateServiceManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateServiceManagerFromAbi, viewIUpdateServiceManager)
     }
 
     public unsafe func vtbl(): IUpdateServiceManagerVtbl {
@@ -3131,7 +3138,7 @@ public class IUpdateServiceManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOption(optionName: CPointer<UInt16>, optionValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetOption(optionName: CPointer<UInt16>, optionValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOption(__liveRaw, optionName, optionValue)
@@ -3141,7 +3148,7 @@ public class IUpdateServiceManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWebProxyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Address: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetAddress: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var BypassList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3193,7 +3200,7 @@ public class IWebProxy <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWebProxy> {
-        return InterfaceDescriptor<IWebProxy>("IWebProxy", IWebProxy.iid(), Win32__impl_l2.IDispatch.iid(), takeIWebProxyFromAbi, viewIWebProxy)
+        return InterfaceDescriptor<IWebProxy>("IWebProxy", IWebProxy.iid(), Win32_impl_p2.IDispatch.iid(), takeIWebProxyFromAbi, viewIWebProxy)
     }
 
     public unsafe func vtbl(): IWebProxyVtbl {
@@ -3289,7 +3296,7 @@ public class IWebProxy <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsDriverUpdateEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DriverClass: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DriverHardwareID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DriverManufacturer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3334,7 +3341,7 @@ public class IWindowsDriverUpdateEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsDriverUpdateEntry> {
-        return InterfaceDescriptor<IWindowsDriverUpdateEntry>("IWindowsDriverUpdateEntry", IWindowsDriverUpdateEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsDriverUpdateEntryFromAbi, viewIWindowsDriverUpdateEntry)
+        return InterfaceDescriptor<IWindowsDriverUpdateEntry>("IWindowsDriverUpdateEntry", IWindowsDriverUpdateEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsDriverUpdateEntryFromAbi, viewIWindowsDriverUpdateEntry)
     }
 
     public unsafe func vtbl(): IWindowsDriverUpdateEntryVtbl {
@@ -3393,7 +3400,7 @@ public class IWindowsDriverUpdateEntry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsDriverUpdateEntryCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3434,7 +3441,7 @@ public class IWindowsDriverUpdateEntryCollection <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsDriverUpdateEntryCollection> {
-        return InterfaceDescriptor<IWindowsDriverUpdateEntryCollection>("IWindowsDriverUpdateEntryCollection", IWindowsDriverUpdateEntryCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsDriverUpdateEntryCollectionFromAbi, viewIWindowsDriverUpdateEntryCollection)
+        return InterfaceDescriptor<IWindowsDriverUpdateEntryCollection>("IWindowsDriverUpdateEntryCollection", IWindowsDriverUpdateEntryCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsDriverUpdateEntryCollectionFromAbi, viewIWindowsDriverUpdateEntryCollection)
     }
 
     public unsafe func vtbl(): IWindowsDriverUpdateEntryCollectionVtbl {
@@ -3464,9 +3471,9 @@ public class IWindowsDriverUpdateEntryCollection <: InterfaceWrapperBase & ComIn
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWindowsUpdateAgentInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetInfo: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetInfo: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -3503,7 +3510,7 @@ public class IWindowsUpdateAgentInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWindowsUpdateAgentInfo> {
-        return InterfaceDescriptor<IWindowsUpdateAgentInfo>("IWindowsUpdateAgentInfo", IWindowsUpdateAgentInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIWindowsUpdateAgentInfoFromAbi, viewIWindowsUpdateAgentInfo)
+        return InterfaceDescriptor<IWindowsUpdateAgentInfo>("IWindowsUpdateAgentInfo", IWindowsUpdateAgentInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIWindowsUpdateAgentInfoFromAbi, viewIWindowsUpdateAgentInfo)
     }
 
     public unsafe func vtbl(): IWindowsUpdateAgentInfoVtbl {
@@ -3511,7 +3518,7 @@ public class IWindowsUpdateAgentInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetInfo(varInfoIdentifier: Win32__impl_l2.VARIANTAbi, retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetInfo(varInfoIdentifier: Win32_impl_p2.VARIANTAbi, retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInfo(__liveRaw, varInfoIdentifier, retval)
@@ -4495,7 +4502,7 @@ extend WindowsUpdateAgentInfo <: windows_core.CopyType & windows_core.RuntimeTyp
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAutomaticUpdatesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DetectNow: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -4539,7 +4546,7 @@ public class IAutomaticUpdates <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAutomaticUpdates> {
-        return InterfaceDescriptor<IAutomaticUpdates>("IAutomaticUpdates", IAutomaticUpdates.iid(), Win32__impl_l2.IDispatch.iid(), takeIAutomaticUpdatesFromAbi, viewIAutomaticUpdates)
+        return InterfaceDescriptor<IAutomaticUpdates>("IAutomaticUpdates", IAutomaticUpdates.iid(), Win32_impl_p2.IDispatch.iid(), takeIAutomaticUpdatesFromAbi, viewIAutomaticUpdates)
     }
 
     public unsafe func vtbl(): IAutomaticUpdatesVtbl {
@@ -4647,7 +4654,7 @@ public class IAutomaticUpdates2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationAgentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RecordInstallationResult: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4685,7 +4692,7 @@ public class IInstallationAgent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationAgent> {
-        return InterfaceDescriptor<IInstallationAgent>("IInstallationAgent", IInstallationAgent.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationAgentFromAbi, viewIInstallationAgent)
+        return InterfaceDescriptor<IInstallationAgent>("IInstallationAgent", IInstallationAgent.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationAgentFromAbi, viewIInstallationAgent)
     }
 
     public unsafe func vtbl(): IInstallationAgentVtbl {
@@ -4702,7 +4709,7 @@ public class IInstallationAgent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationBehaviorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CanRequestUserInput: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Impact: CFunc<(CPointer<Unit>, CPointer<InstallationImpactAbi>) -> Int32> = { _, _ => 0 }
     public var RebootBehavior: CFunc<(CPointer<Unit>, CPointer<InstallationRebootBehaviorAbi>) -> Int32> = { _, _ => 0 }
@@ -4743,7 +4750,7 @@ public class IInstallationBehavior <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationBehavior> {
-        return InterfaceDescriptor<IInstallationBehavior>("IInstallationBehavior", IInstallationBehavior.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationBehaviorFromAbi, viewIInstallationBehavior)
+        return InterfaceDescriptor<IInstallationBehavior>("IInstallationBehavior", IInstallationBehavior.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationBehaviorFromAbi, viewIInstallationBehavior)
     }
 
     public unsafe func vtbl(): IInstallationBehaviorVtbl {
@@ -4833,7 +4840,7 @@ public class ISearchCompletedCallback <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateDownloadResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4872,7 +4879,7 @@ public class IUpdateDownloadResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateDownloadResult> {
-        return InterfaceDescriptor<IUpdateDownloadResult>("IUpdateDownloadResult", IUpdateDownloadResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateDownloadResultFromAbi, viewIUpdateDownloadResult)
+        return InterfaceDescriptor<IUpdateDownloadResult>("IUpdateDownloadResult", IUpdateDownloadResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateDownloadResultFromAbi, viewIUpdateDownloadResult)
     }
 
     public unsafe func vtbl(): IUpdateDownloadResultVtbl {
@@ -4895,7 +4902,7 @@ public class IUpdateDownloadResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateExceptionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Context: CFunc<(CPointer<Unit>, CPointer<UpdateExceptionContextAbi>) -> Int32> = { _, _ => 0 }
@@ -4935,7 +4942,7 @@ public class IUpdateException <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateException> {
-        return InterfaceDescriptor<IUpdateException>("IUpdateException", IUpdateException.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateExceptionFromAbi, viewIUpdateException)
+        return InterfaceDescriptor<IUpdateException>("IUpdateException", IUpdateException.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateExceptionFromAbi, viewIUpdateException)
     }
 
     public unsafe func vtbl(): IUpdateExceptionVtbl {
@@ -4964,7 +4971,7 @@ public class IUpdateException <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateExceptionCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5005,7 +5012,7 @@ public class IUpdateExceptionCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateExceptionCollection> {
-        return InterfaceDescriptor<IUpdateExceptionCollection>("IUpdateExceptionCollection", IUpdateExceptionCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateExceptionCollectionFromAbi, viewIUpdateExceptionCollection)
+        return InterfaceDescriptor<IUpdateExceptionCollection>("IUpdateExceptionCollection", IUpdateExceptionCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateExceptionCollectionFromAbi, viewIUpdateExceptionCollection)
     }
 
     public unsafe func vtbl(): IUpdateExceptionCollectionVtbl {
@@ -5035,7 +5042,7 @@ public class IUpdateExceptionCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateHistoryEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Operation: CFunc<(CPointer<Unit>, CPointer<UpdateOperationAbi>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -5086,7 +5093,7 @@ public class IUpdateHistoryEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateHistoryEntry> {
-        return InterfaceDescriptor<IUpdateHistoryEntry>("IUpdateHistoryEntry", IUpdateHistoryEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateHistoryEntryFromAbi, viewIUpdateHistoryEntry)
+        return InterfaceDescriptor<IUpdateHistoryEntry>("IUpdateHistoryEntry", IUpdateHistoryEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateHistoryEntryFromAbi, viewIUpdateHistoryEntry)
     }
 
     public unsafe func vtbl(): IUpdateHistoryEntryVtbl {
@@ -5181,7 +5188,7 @@ public class IUpdateHistoryEntry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateHistoryEntryCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5222,7 +5229,7 @@ public class IUpdateHistoryEntryCollection <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateHistoryEntryCollection> {
-        return InterfaceDescriptor<IUpdateHistoryEntryCollection>("IUpdateHistoryEntryCollection", IUpdateHistoryEntryCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateHistoryEntryCollectionFromAbi, viewIUpdateHistoryEntryCollection)
+        return InterfaceDescriptor<IUpdateHistoryEntryCollection>("IUpdateHistoryEntryCollection", IUpdateHistoryEntryCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateHistoryEntryCollectionFromAbi, viewIUpdateHistoryEntryCollection)
     }
 
     public unsafe func vtbl(): IUpdateHistoryEntryCollectionVtbl {
@@ -5252,7 +5259,7 @@ public class IUpdateHistoryEntryCollection <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateInstallationResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RebootRequired: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
@@ -5292,7 +5299,7 @@ public class IUpdateInstallationResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateInstallationResult> {
-        return InterfaceDescriptor<IUpdateInstallationResult>("IUpdateInstallationResult", IUpdateInstallationResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateInstallationResultFromAbi, viewIUpdateInstallationResult)
+        return InterfaceDescriptor<IUpdateInstallationResult>("IUpdateInstallationResult", IUpdateInstallationResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateInstallationResultFromAbi, viewIUpdateInstallationResult)
     }
 
     public unsafe func vtbl(): IUpdateInstallationResultVtbl {
@@ -5321,7 +5328,7 @@ public class IUpdateInstallationResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateServiceRegistrationVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RegistrationState: CFunc<(CPointer<Unit>, CPointer<UpdateServiceRegistrationStateAbi>) -> Int32> = { _, _ => 0 }
     public var ServiceID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IsPendingRegistrationWithAU: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5362,7 +5369,7 @@ public class IUpdateServiceRegistration <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateServiceRegistration> {
-        return InterfaceDescriptor<IUpdateServiceRegistration>("IUpdateServiceRegistration", IUpdateServiceRegistration.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateServiceRegistrationFromAbi, viewIUpdateServiceRegistration)
+        return InterfaceDescriptor<IUpdateServiceRegistration>("IUpdateServiceRegistration", IUpdateServiceRegistration.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateServiceRegistrationFromAbi, viewIUpdateServiceRegistration)
     }
 
     public unsafe func vtbl(): IUpdateServiceRegistrationVtbl {
@@ -5397,7 +5404,7 @@ public class IUpdateServiceRegistration <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadProgressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CurrentUpdateBytesDownloaded: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.DECIMALAbi>) -> Int32> = { _, _ => 0 }
     public var CurrentUpdateBytesToDownload: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.DECIMALAbi>) -> Int32> = { _, _ => 0 }
     public var CurrentUpdateIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -5443,7 +5450,7 @@ public class IDownloadProgress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadProgress> {
-        return InterfaceDescriptor<IDownloadProgress>("IDownloadProgress", IDownloadProgress.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadProgressFromAbi, viewIDownloadProgress)
+        return InterfaceDescriptor<IDownloadProgress>("IDownloadProgress", IDownloadProgress.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadProgressFromAbi, viewIDownloadProgress)
     }
 
     public unsafe func vtbl(): IDownloadProgressVtbl {
@@ -5508,7 +5515,7 @@ public class IDownloadProgress <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadProgressChangedCallbackArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5546,7 +5553,7 @@ public class IDownloadProgressChangedCallbackArgs <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadProgressChangedCallbackArgs> {
-        return InterfaceDescriptor<IDownloadProgressChangedCallbackArgs>("IDownloadProgressChangedCallbackArgs", IDownloadProgressChangedCallbackArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadProgressChangedCallbackArgsFromAbi, viewIDownloadProgressChangedCallbackArgs)
+        return InterfaceDescriptor<IDownloadProgressChangedCallbackArgs>("IDownloadProgressChangedCallbackArgs", IDownloadProgressChangedCallbackArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadProgressChangedCallbackArgsFromAbi, viewIDownloadProgressChangedCallbackArgs)
     }
 
     public unsafe func vtbl(): IDownloadProgressChangedCallbackArgsVtbl {
@@ -5563,7 +5570,7 @@ public class IDownloadProgressChangedCallbackArgs <: InterfaceWrapperBase & ComI
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
     public var GetUpdateResult: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -5603,7 +5610,7 @@ public class IDownloadResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadResult> {
-        return InterfaceDescriptor<IDownloadResult>("IDownloadResult", IDownloadResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadResultFromAbi, viewIDownloadResult)
+        return InterfaceDescriptor<IDownloadResult>("IDownloadResult", IDownloadResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadResultFromAbi, viewIDownloadResult)
     }
 
     public unsafe func vtbl(): IDownloadResultVtbl {
@@ -5632,7 +5639,7 @@ public class IDownloadResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationProgressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CurrentUpdateIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CurrentUpdatePercentComplete: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PercentComplete: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -5673,7 +5680,7 @@ public class IInstallationProgress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationProgress> {
-        return InterfaceDescriptor<IInstallationProgress>("IInstallationProgress", IInstallationProgress.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationProgressFromAbi, viewIInstallationProgress)
+        return InterfaceDescriptor<IInstallationProgress>("IInstallationProgress", IInstallationProgress.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationProgressFromAbi, viewIInstallationProgress)
     }
 
     public unsafe func vtbl(): IInstallationProgressVtbl {
@@ -5708,7 +5715,7 @@ public class IInstallationProgress <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationProgressChangedCallbackArgsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5746,7 +5753,7 @@ public class IInstallationProgressChangedCallbackArgs <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationProgressChangedCallbackArgs> {
-        return InterfaceDescriptor<IInstallationProgressChangedCallbackArgs>("IInstallationProgressChangedCallbackArgs", IInstallationProgressChangedCallbackArgs.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationProgressChangedCallbackArgsFromAbi, viewIInstallationProgressChangedCallbackArgs)
+        return InterfaceDescriptor<IInstallationProgressChangedCallbackArgs>("IInstallationProgressChangedCallbackArgs", IInstallationProgressChangedCallbackArgs.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationProgressChangedCallbackArgsFromAbi, viewIInstallationProgressChangedCallbackArgs)
     }
 
     public unsafe func vtbl(): IInstallationProgressChangedCallbackArgsVtbl {
@@ -5763,7 +5770,7 @@ public class IInstallationProgressChangedCallbackArgs <: InterfaceWrapperBase & 
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var HResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RebootRequired: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
@@ -5804,7 +5811,7 @@ public class IInstallationResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationResult> {
-        return InterfaceDescriptor<IInstallationResult>("IInstallationResult", IInstallationResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationResultFromAbi, viewIInstallationResult)
+        return InterfaceDescriptor<IInstallationResult>("IInstallationResult", IInstallationResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationResultFromAbi, viewIInstallationResult)
     }
 
     public unsafe func vtbl(): IInstallationResultVtbl {
@@ -5970,7 +5977,7 @@ public class IUpdateServiceManager2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICategoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CategoryID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6016,7 +6023,7 @@ public class ICategory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICategory> {
-        return InterfaceDescriptor<ICategory>("ICategory", ICategory.iid(), Win32__impl_l2.IDispatch.iid(), takeICategoryFromAbi, viewICategory)
+        return InterfaceDescriptor<ICategory>("ICategory", ICategory.iid(), Win32_impl_p2.IDispatch.iid(), takeICategoryFromAbi, viewICategory)
     }
 
     public unsafe func vtbl(): ICategoryVtbl {
@@ -6081,7 +6088,7 @@ public class ICategory <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICategoryCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6122,7 +6129,7 @@ public class ICategoryCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICategoryCollection> {
-        return InterfaceDescriptor<ICategoryCollection>("ICategoryCollection", ICategoryCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeICategoryCollectionFromAbi, viewICategoryCollection)
+        return InterfaceDescriptor<ICategoryCollection>("ICategoryCollection", ICategoryCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeICategoryCollectionFromAbi, viewICategoryCollection)
     }
 
     public unsafe func vtbl(): ICategoryCollectionVtbl {
@@ -6207,9 +6214,9 @@ public class IDownloadCompletedCallback <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadJobVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsCompleted: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CleanUp: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -6251,7 +6258,7 @@ public class IDownloadJob <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadJob> {
-        return InterfaceDescriptor<IDownloadJob>("IDownloadJob", IDownloadJob.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadJobFromAbi, viewIDownloadJob)
+        return InterfaceDescriptor<IDownloadJob>("IDownloadJob", IDownloadJob.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadJobFromAbi, viewIDownloadJob)
     }
 
     public unsafe func vtbl(): IDownloadJobVtbl {
@@ -6259,7 +6266,7 @@ public class IDownloadJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AsyncState(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AsyncState(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AsyncState(__liveRaw, retval)
@@ -6409,9 +6416,9 @@ public class IInstallationCompletedCallback <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInstallationJobVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var AsyncState: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var IsCompleted: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CleanUp: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -6453,7 +6460,7 @@ public class IInstallationJob <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInstallationJob> {
-        return InterfaceDescriptor<IInstallationJob>("IInstallationJob", IInstallationJob.iid(), Win32__impl_l2.IDispatch.iid(), takeIInstallationJobFromAbi, viewIInstallationJob)
+        return InterfaceDescriptor<IInstallationJob>("IInstallationJob", IInstallationJob.iid(), Win32_impl_p2.IDispatch.iid(), takeIInstallationJobFromAbi, viewIInstallationJob)
     }
 
     public unsafe func vtbl(): IInstallationJobVtbl {
@@ -6461,7 +6468,7 @@ public class IInstallationJob <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AsyncState(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func AsyncState(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AsyncState(__liveRaw, retval)
@@ -6556,7 +6563,7 @@ public class IInstallationProgressChangedCallback <: InterfaceWrapperBase & ComI
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISearchResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<OperationResultCodeAbi>) -> Int32> = { _, _ => 0 }
     public var RootCategories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6597,7 +6604,7 @@ public class ISearchResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISearchResult> {
-        return InterfaceDescriptor<ISearchResult>("ISearchResult", ISearchResult.iid(), Win32__impl_l2.IDispatch.iid(), takeISearchResultFromAbi, viewISearchResult)
+        return InterfaceDescriptor<ISearchResult>("ISearchResult", ISearchResult.iid(), Win32_impl_p2.IDispatch.iid(), takeISearchResultFromAbi, viewISearchResult)
     }
 
     public unsafe func vtbl(): ISearchResultVtbl {
@@ -6632,14 +6639,14 @@ public class ISearchResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var AutoSelectOnWebSites: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var BundledUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanRequireSource: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Categories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Deadline: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Deadline: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DeltaCompressedContentAvailable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var DeltaCompressedContentPreferred: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6715,7 +6722,7 @@ public class IUpdate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdate> {
-        return InterfaceDescriptor<IUpdate>("IUpdate", IUpdate.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateFromAbi, viewIUpdate)
+        return InterfaceDescriptor<IUpdate>("IUpdate", IUpdate.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateFromAbi, viewIUpdate)
     }
 
     public unsafe func vtbl(): IUpdateVtbl {
@@ -6753,7 +6760,7 @@ public class IUpdate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Deadline(retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Deadline(retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Deadline(__liveRaw, retval)
@@ -7245,7 +7252,7 @@ public class IUpdate5 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var put_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -7293,7 +7300,7 @@ public class IUpdateCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateCollection> {
-        return InterfaceDescriptor<IUpdateCollection>("IUpdateCollection", IUpdateCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateCollectionFromAbi, viewIUpdateCollection)
+        return InterfaceDescriptor<IUpdateCollection>("IUpdateCollection", IUpdateCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateCollectionFromAbi, viewIUpdateCollection)
     }
 
     public unsafe func vtbl(): IUpdateCollectionVtbl {
@@ -7365,7 +7372,7 @@ public class IUpdateCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateDownloaderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ClientApplicationID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetClientApplicationID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var IsForced: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -7375,7 +7382,7 @@ public struct IUpdateDownloaderVtbl {
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetUpdates: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BeginDownload: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var BeginDownload: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Download: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EndDownload: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -7414,7 +7421,7 @@ public class IUpdateDownloader <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateDownloader> {
-        return InterfaceDescriptor<IUpdateDownloader>("IUpdateDownloader", IUpdateDownloader.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateDownloaderFromAbi, viewIUpdateDownloader)
+        return InterfaceDescriptor<IUpdateDownloader>("IUpdateDownloader", IUpdateDownloader.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateDownloaderFromAbi, viewIUpdateDownloader)
     }
 
     public unsafe func vtbl(): IUpdateDownloaderVtbl {
@@ -7470,7 +7477,7 @@ public class IUpdateDownloader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BeginDownload(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32__impl_l2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func BeginDownload(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32_impl_p2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginDownload(__liveRaw, onProgressChanged, onCompleted, state, retval)
@@ -7494,7 +7501,7 @@ public class IUpdateDownloader <: InterfaceWrapperBase & ComInterface {
 public struct IUpdateDownloaderExVtbl {
     public var base_: IUpdateDownloaderVtbl = IUpdateDownloaderVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BeginDownload2: CFunc<(CPointer<Unit>, DownloadTypeAbi, CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var BeginDownload2: CFunc<(CPointer<Unit>, DownloadTypeAbi, CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var Download2: CFunc<(CPointer<Unit>, DownloadTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -7540,7 +7547,7 @@ public class IUpdateDownloaderEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BeginDownload2(downloadType: DownloadTypeAbi, onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32__impl_l2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func BeginDownload2(downloadType: DownloadTypeAbi, onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32_impl_p2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginDownload2(__liveRaw, downloadType, onProgressChanged, onCompleted, state, retval)
@@ -7558,9 +7565,9 @@ public class IUpdateDownloaderEx <: InterfaceWrapperBase & ComInterface {
 public struct IUpdateExVtbl {
     public var base_: IUpdate5Vtbl = IUpdate5Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_ExtendedStaticProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_ExtendedStaticProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EvaluateExtendedDynamicProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var EvaluateExtendedDynamicProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -7605,14 +7612,14 @@ public class IUpdateEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_ExtendedStaticProperty(propertyName: CPointer<UInt16>, retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_ExtendedStaticProperty(propertyName: CPointer<UInt16>, retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_ExtendedStaticProperty(__liveRaw, propertyName, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EvaluateExtendedDynamicProperty(propertyName: CPointer<UInt16>, retval: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EvaluateExtendedDynamicProperty(propertyName: CPointer<UInt16>, retval: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EvaluateExtendedDynamicProperty(__liveRaw, propertyName, retval)
@@ -7677,7 +7684,7 @@ public class IUpdateHistoryEntry2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateInstallerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ClientApplicationID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetClientApplicationID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var IsForced: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -7691,9 +7698,9 @@ public struct IUpdateInstallerVtbl {
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetUpdates: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BeginInstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var BeginInstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BeginUninstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var BeginUninstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var EndInstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EndUninstall: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Install: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -7739,7 +7746,7 @@ public class IUpdateInstaller <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateInstaller> {
-        return InterfaceDescriptor<IUpdateInstaller>("IUpdateInstaller", IUpdateInstaller.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateInstallerFromAbi, viewIUpdateInstaller)
+        return InterfaceDescriptor<IUpdateInstaller>("IUpdateInstaller", IUpdateInstaller.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateInstallerFromAbi, viewIUpdateInstaller)
     }
 
     public unsafe func vtbl(): IUpdateInstallerVtbl {
@@ -7809,14 +7816,14 @@ public class IUpdateInstaller <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BeginInstall(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32__impl_l2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func BeginInstall(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32_impl_p2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginInstall(__liveRaw, onProgressChanged, onCompleted, state, retval)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BeginUninstall(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32__impl_l2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func BeginUninstall(onProgressChanged: CPointer<Unit>, onCompleted: CPointer<Unit>, state: Win32_impl_p2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginUninstall(__liveRaw, onProgressChanged, onCompleted, state, retval)
@@ -8059,7 +8066,7 @@ public class IUpdateInstaller4 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateSearcherVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CanAutomaticallyUpgradeService: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetCanAutomaticallyUpgradeService: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ClientApplicationID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8069,7 +8076,7 @@ public struct IUpdateSearcherVtbl {
     public var ServerSelection: CFunc<(CPointer<Unit>, CPointer<ServerSelectionAbi>) -> Int32> = { _, _ => 0 }
     public var SetServerSelection: CFunc<(CPointer<Unit>, ServerSelectionAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BeginSearch: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var BeginSearch: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var EndSearch: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EscapeString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var QueryHistory: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -8115,7 +8122,7 @@ public class IUpdateSearcher <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateSearcher> {
-        return InterfaceDescriptor<IUpdateSearcher>("IUpdateSearcher", IUpdateSearcher.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateSearcherFromAbi, viewIUpdateSearcher)
+        return InterfaceDescriptor<IUpdateSearcher>("IUpdateSearcher", IUpdateSearcher.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateSearcherFromAbi, viewIUpdateSearcher)
     }
 
     public unsafe func vtbl(): IUpdateSearcherVtbl {
@@ -8171,7 +8178,7 @@ public class IUpdateSearcher <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BeginSearch(criteria: CPointer<UInt16>, onCompleted: CPointer<Unit>, state: Win32__impl_l2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func BeginSearch(criteria: CPointer<UInt16>, onCompleted: CPointer<Unit>, state: Win32_impl_p2.VARIANTAbi, retval: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginSearch(__liveRaw, criteria, onCompleted, state, retval)
@@ -8359,7 +8366,7 @@ public class IUpdateSearcher3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_UpdateAgent == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IUpdateSessionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ClientApplicationID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetClientApplicationID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ReadOnly: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -8404,7 +8411,7 @@ public class IUpdateSession <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUpdateSession> {
-        return InterfaceDescriptor<IUpdateSession>("IUpdateSession", IUpdateSession.iid(), Win32__impl_l2.IDispatch.iid(), takeIUpdateSessionFromAbi, viewIUpdateSession)
+        return InterfaceDescriptor<IUpdateSession>("IUpdateSession", IUpdateSession.iid(), Win32_impl_p2.IDispatch.iid(), takeIUpdateSessionFromAbi, viewIUpdateSession)
     }
 
     public unsafe func vtbl(): IUpdateSessionVtbl {

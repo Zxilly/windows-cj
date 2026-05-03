@@ -4,17 +4,28 @@
 package windows.Win32.System.WinRT.Printing
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Printing == "on"]
 import windows_core.{RuntimeType}
+@When[Windows_Win32_System_WinRT_Printing == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_Printing == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
+@When[Windows_Win32_System_WinRT_Printing == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_Graphics_Printing == "on"]
 import windows.Win32.Graphics.Printing as Win32_Graphics_Printing
+@When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_Storage_Xps == "on"]
 import windows.Win32.Storage.Xps as Win32_Storage_Xps
+@When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_Storage_Xps_Printing == "on"]
 import windows.Win32.Storage.Xps.Printing as Win32_Storage_Xps_Printing
+@When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_WinRT_Printing == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Printing == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_WinRT_Printing == "on" && Windows_Win32_System_WinRT == "on"]

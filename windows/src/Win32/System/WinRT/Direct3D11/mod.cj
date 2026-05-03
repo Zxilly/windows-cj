@@ -4,12 +4,20 @@
 package windows.Win32.System.WinRT.Direct3D11
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_WinRT_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_System_WinRT_Direct3D11_CreateDirect3D11DeviceFromDXGIDevice == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on"]

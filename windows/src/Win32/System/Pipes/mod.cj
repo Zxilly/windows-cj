@@ -4,12 +4,18 @@
 package windows.Win32.System.Pipes
 
 import std.collection.*
+@When[Windows_Win32_System_Pipes == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_Pipes == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Pipes == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Pipes == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_Pipes == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_Pipes == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_System_Pipes == "on"]
@@ -156,22 +162,22 @@ public unsafe func Windows_ConnectNamedPipe(hNamedPipe: CPointer<Unit>, lpOverla
 foreign {
     // param-hint: lpSecurityAttributes optional
     // pinvoke-hint: SetLastError
-    func CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+    func CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32_impl_p0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
 }
 
 @When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeA == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+public unsafe func Windows_CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32_impl_p0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
     return CreateNamedPipeA(lpName, dwOpenMode, dwPipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes)
 }
 
 @When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
 foreign {
     // param-hint: lpSecurityAttributes optional
-    func CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+    func CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32_impl_p0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
 }
 
 @When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+public unsafe func Windows_CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32_impl_p0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
     return CreateNamedPipeW(lpName, dwOpenMode, dwPipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes)
 }
 

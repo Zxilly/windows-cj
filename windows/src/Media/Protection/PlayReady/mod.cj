@@ -4,16 +4,27 @@
 package windows.Media.Protection.PlayReady
 
 import std.collection.*
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows.Media._impl_l0 as Media__impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Protection_PlayReady == "on"]
+import windows.Media.impl.p0 as Media_impl_p0
+@When[Windows_Media_Protection_PlayReady == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Protection_PlayReady == "on"]
 import windows_future as windows_future
 
 
@@ -773,14 +784,14 @@ public interface INDStartResult_ImplErased {
 
 @When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Core == "on"]
 public interface INDStartResult_Impl <: INDStartResult_ImplErased {
-    public func get_MediaStreamSource(): windows_core.Result<Media__impl_l0.MediaStreamSource>
+    public func get_MediaStreamSource(): windows_core.Result<Media_impl_p0.MediaStreamSource>
 
     public func __winrtThunk_get_MediaStreamSource(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.get_MediaStreamSource()) {
-            case Result<Media__impl_l0.MediaStreamSource>.Ok(value) =>
+            case Result<Media_impl_p0.MediaStreamSource>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -788,7 +799,7 @@ public interface INDStartResult_Impl <: INDStartResult_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<Media__impl_l0.MediaStreamSource>.Err(error) =>
+            case Result<Media_impl_p0.MediaStreamSource>.Err(error) =>
                 error.code().value
         }
     }
@@ -830,7 +841,7 @@ public class INDStartResult <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INDStartResult", INDStartResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStartResultVtbl", "INDStartResult", "INDStartResult_Impl", [InterfaceMethodSchema("get_MediaStreamSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media__impl_l0.MediaStreamSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INDStartResult", INDStartResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStartResultVtbl", "INDStartResult", "INDStartResult_Impl", [InterfaceMethodSchema("get_MediaStreamSource", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media_impl_p0.MediaStreamSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INDStartResult.runtimeType())
         return schema
     }
@@ -860,12 +871,12 @@ public class INDStartResult <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func get_MediaStreamSource(): Media__impl_l0.MediaStreamSource {
+    public unsafe func get_MediaStreamSource(): Media_impl_p0.MediaStreamSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_MediaStreamSource(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Media__impl_l0.MediaStreamSource.fromAbiTake(result__)
+        return Media_impl_p0.MediaStreamSource.fromAbiTake(result__)
     }
 }
 
@@ -925,13 +936,13 @@ public interface INDStorageFileHelper_ImplErased {
 
 @When[Windows_Media_Protection_PlayReady == "on" && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
 public interface INDStorageFileHelper_Impl <: INDStorageFileHelper_ImplErased {
-    public func GetFileURLs(file: InParam<_impl_l1.IStorageFile>): windows_core.Result<windows_collections.IVector<windows_core.HString>>
+    public func GetFileURLs(file: InParam<impl_p1.IStorageFile>): windows_core.Result<windows_collections.IVector<windows_core.HString>>
 
     public func __winrtThunk_GetFileURLs(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.GetFileURLs(InParam<_impl_l1.IStorageFile>(_impl_l1.IStorageFile.viewOf(arg0)))) {
+        match (this.GetFileURLs(InParam<impl_p1.IStorageFile>(impl_p1.IStorageFile.viewOf(arg0)))) {
             case Result<windows_collections.IVector<windows_core.HString>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -982,7 +993,7 @@ public class INDStorageFileHelper <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INDStorageFileHelper", INDStorageFileHelper.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStorageFileHelperVtbl", "INDStorageFileHelper", "INDStorageFileHelper_Impl", [InterfaceMethodSchema("GetFileURLs", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INDStorageFileHelper", INDStorageFileHelper.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStorageFileHelperVtbl", "INDStorageFileHelper", "INDStorageFileHelper_Impl", [InterfaceMethodSchema("GetFileURLs", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INDStorageFileHelper.runtimeType())
         return schema
     }
@@ -1012,7 +1023,7 @@ public class INDStorageFileHelper <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func GetFileURLs(file: _impl_l1.IStorageFile): windows_collections.IVector<windows_core.HString> {
+    public unsafe func GetFileURLs(file: impl_p1.IStorageFile): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFileURLs(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2712,7 +2723,7 @@ public class NDStorageFileHelper <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
-    public unsafe func GetFileURLs(file: _impl_l1.IStorageFile): windows_collections.IVector<windows_core.HString> {
+    public unsafe func GetFileURLs(file: impl_p1.IStorageFile): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetFileURLs(file)
     }
 }
@@ -4293,10 +4304,10 @@ public interface INDStreamParserNotifier_Impl <: INDStreamParserNotifier_ImplEra
         }
     }
 
-    public func OnMediaStreamDescriptorCreated(audioStreamDescriptors: InParam<windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>>, videoStreamDescriptors: InParam<windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>>): windows_core.Result<Unit>
+    public func OnMediaStreamDescriptorCreated(audioStreamDescriptors: InParam<windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>>, videoStreamDescriptors: InParam<windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>>): windows_core.Result<Unit>
 
     public func __winrtThunk_OnMediaStreamDescriptorCreated(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        match (this.OnMediaStreamDescriptorCreated(InParam<windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>>(windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>.viewOf(arg0)), InParam<windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>>(windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>.viewOf(arg1)))) {
+        match (this.OnMediaStreamDescriptorCreated(InParam<windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>>(windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>.viewOf(arg0)), InParam<windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>>(windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>.viewOf(arg1)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4304,10 +4315,10 @@ public interface INDStreamParserNotifier_Impl <: INDStreamParserNotifier_ImplEra
         }
     }
 
-    public func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: InParam<Media__impl_l0.MediaStreamSample>, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): windows_core.Result<Unit>
+    public func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: InParam<Media_impl_p0.MediaStreamSample>, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): windows_core.Result<Unit>
 
     public func __winrtThunk_OnSampleParsed(arg0: UInt32, arg1: NDMediaStreamTypeAbi, arg2: CPointer<Unit>, arg3: Int64, arg4: NDClosedCaptionFormatAbi, arg5Size: UInt32, arg5: CPointer<UInt8>): Int32 {
-        match (this.OnSampleParsed(arg0, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<NDMediaStreamType>()), InParam<Media__impl_l0.MediaStreamSample>(Media__impl_l0.MediaStreamSample.viewOf(arg2)), arg3, windows_core.assumeInitTypedAbi(arg4, windows_core.typeMarker<NDClosedCaptionFormat>()), arg5Size, arg5)) {
+        match (this.OnSampleParsed(arg0, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<NDMediaStreamType>()), InParam<Media_impl_p0.MediaStreamSample>(Media_impl_p0.MediaStreamSample.viewOf(arg2)), arg3, windows_core.assumeInitTypedAbi(arg4, windows_core.typeMarker<NDClosedCaptionFormat>()), arg5Size, arg5)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4315,10 +4326,10 @@ public interface INDStreamParserNotifier_Impl <: INDStreamParserNotifier_ImplEra
         }
     }
 
-    public func OnBeginSetupDecryptor(descriptor: InParam<Media__impl_l0.IMediaStreamDescriptor>, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): windows_core.Result<Unit>
+    public func OnBeginSetupDecryptor(descriptor: InParam<Media_impl_p0.IMediaStreamDescriptor>, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): windows_core.Result<Unit>
 
     public func __winrtThunk_OnBeginSetupDecryptor(arg0: CPointer<Unit>, arg1: GUID, arg2Size: UInt32, arg2: CPointer<UInt8>): Int32 {
-        match (this.OnBeginSetupDecryptor(InParam<Media__impl_l0.IMediaStreamDescriptor>(Media__impl_l0.IMediaStreamDescriptor.viewOf(arg0)), GuidValue(arg1), arg2Size, arg2)) {
+        match (this.OnBeginSetupDecryptor(InParam<Media_impl_p0.IMediaStreamDescriptor>(Media_impl_p0.IMediaStreamDescriptor.viewOf(arg0)), GuidValue(arg1), arg2Size, arg2)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4363,7 +4374,7 @@ public class INDStreamParserNotifier <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INDStreamParserNotifier", INDStreamParserNotifier.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStreamParserNotifierVtbl", "INDStreamParserNotifier", "INDStreamParserNotifier_Impl", [InterfaceMethodSchema("OnContentIDReceived", 6, [InterfaceParameterSchema("licenseFetchDescriptor", "CPointer<Unit>", "InParam<INDLicenseFetchDescriptor>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnMediaStreamDescriptorCreated", 7, [InterfaceParameterSchema("audioStreamDescriptors", "CPointer<Unit>", "InParam<windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("videoStreamDescriptors", "CPointer<Unit>", "InParam<windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnSampleParsed", 8, [InterfaceParameterSchema("streamID", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("streamType", "NDMediaStreamTypeAbi", "NDMediaStreamType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("streamSample", "CPointer<Unit>", "InParam<Media__impl_l0.MediaStreamSample>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pts", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("ccFormat", "NDClosedCaptionFormatAbi", "NDClosedCaptionFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("ccDataBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OnBeginSetupDecryptor", 9, [InterfaceParameterSchema("descriptor", "CPointer<Unit>", "InParam<Media__impl_l0.IMediaStreamDescriptor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyID", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("proBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INDStreamParserNotifier", INDStreamParserNotifier.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStreamParserNotifierVtbl", "INDStreamParserNotifier", "INDStreamParserNotifier_Impl", [InterfaceMethodSchema("OnContentIDReceived", 6, [InterfaceParameterSchema("licenseFetchDescriptor", "CPointer<Unit>", "InParam<INDLicenseFetchDescriptor>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnMediaStreamDescriptorCreated", 7, [InterfaceParameterSchema("audioStreamDescriptors", "CPointer<Unit>", "InParam<windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("videoStreamDescriptors", "CPointer<Unit>", "InParam<windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("OnSampleParsed", 8, [InterfaceParameterSchema("streamID", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("streamType", "NDMediaStreamTypeAbi", "NDMediaStreamType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("streamSample", "CPointer<Unit>", "InParam<Media_impl_p0.MediaStreamSample>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pts", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("ccFormat", "NDClosedCaptionFormatAbi", "NDClosedCaptionFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("ccDataBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OnBeginSetupDecryptor", 9, [InterfaceParameterSchema("descriptor", "CPointer<Unit>", "InParam<Media_impl_p0.IMediaStreamDescriptor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("keyID", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("proBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(INDStreamParserNotifier.runtimeType())
         return schema
     }
@@ -4399,21 +4410,21 @@ public class INDStreamParserNotifier <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
-    public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>): Unit {
+    public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>): Unit {
         let v = vtbl()
         let hr = v.OnMediaStreamDescriptorCreated(asRaw(), audioStreamDescriptors.asRaw(), videoStreamDescriptors.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: Media__impl_l0.MediaStreamSample, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): Unit {
+    public unsafe func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: Media_impl_p0.MediaStreamSample, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): Unit {
         let v = vtbl()
         let hr = v.OnSampleParsed(asRaw(), streamID, windows_core.projectTypedAbi(streamType, windows_core.typeMarker<NDMediaStreamType>()), streamSample.asRaw(), pts, windows_core.projectTypedAbi(ccFormat, windows_core.typeMarker<NDClosedCaptionFormat>()), ccDataBytesSize, ccDataBytes)
         HRESULT(hr).ok()
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func OnBeginSetupDecryptor(descriptor: Media__impl_l0.IMediaStreamDescriptor, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): Unit {
+    public unsafe func OnBeginSetupDecryptor(descriptor: Media_impl_p0.IMediaStreamDescriptor, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): Unit {
         let v = vtbl()
         let hr = v.OnBeginSetupDecryptor(asRaw(), descriptor.asRaw(), keyID.toRaw(), proBytesSize, proBytes)
         HRESULT(hr).ok()
@@ -5106,7 +5117,7 @@ public struct IPlayReadyServiceRequestVtbl {
         if (iid == IPlayReadyServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -5137,7 +5148,7 @@ public interface IPlayReadyServiceRequest_ImplErased {
 }
 
 @When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
-public interface IPlayReadyServiceRequest_Impl <: IPlayReadyServiceRequest_ImplErased & Media__impl_l0.IMediaProtectionServiceRequest_Impl {
+public interface IPlayReadyServiceRequest_Impl <: IPlayReadyServiceRequest_ImplErased & Media_impl_p0.IMediaProtectionServiceRequest_Impl {
     public func get_Uri(): windows_core.Result<Foundation.Uri>
 
     public func __winrtThunk_get_Uri(result__: CPointer<CPointer<Unit>>): Int32 {
@@ -5348,7 +5359,7 @@ public class IPlayReadyServiceRequest <: InterfaceWrapperBase & ComInterface & R
         if (iid == IPlayReadyServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -5357,13 +5368,13 @@ public class IPlayReadyServiceRequest <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyServiceRequest>("IPlayReadyServiceRequest", IPlayReadyServiceRequest.iid(), IInspectable.descriptor(), [Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyServiceRequest>("IPlayReadyServiceRequest", IPlayReadyServiceRequest.iid(), IInspectable.descriptor(), [Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyServiceRequest", IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.descriptorSchema(), ["IMediaProtectionServiceRequest"], [Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyServiceRequestVtbl", "IPlayReadyServiceRequest", "IPlayReadyServiceRequest_Impl", [InterfaceMethodSchema("get_Uri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResponseCustomData", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChallengeCustomData", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetChallengeCustomData", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("BeginServiceRequest", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NextServiceRequest", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPlayReadyServiceRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateManualEnablingChallenge", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadySoapMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessManualEnablingResponse", 16, [InterfaceParameterSchema("responseBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.HResultAbi>", "OutSlot<windows_future.HResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyServiceRequest", IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.descriptorSchema(), ["IMediaProtectionServiceRequest"], [Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyServiceRequestVtbl", "IPlayReadyServiceRequest", "IPlayReadyServiceRequest_Impl", [InterfaceMethodSchema("get_Uri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ResponseCustomData", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChallengeCustomData", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetChallengeCustomData", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("BeginServiceRequest", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NextServiceRequest", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPlayReadyServiceRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateManualEnablingChallenge", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadySoapMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ProcessManualEnablingResponse", 16, [InterfaceParameterSchema("responseBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows_future.HResultAbi>", "OutSlot<windows_future.HResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyServiceRequest.runtimeType())
         return schema
     }
@@ -5388,8 +5399,8 @@ public class IPlayReadyServiceRequest <: InterfaceWrapperBase & ComInterface & R
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -5919,17 +5930,17 @@ public class NDStreamParserNotifier <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
-    public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>): Unit {
+    public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media_impl_p0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media_impl_p0.VideoStreamDescriptor>): Unit {
         defaultInterface().OnMediaStreamDescriptorCreated(audioStreamDescriptors, videoStreamDescriptors)
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: Media__impl_l0.MediaStreamSample, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): Unit {
+    public unsafe func OnSampleParsed(streamID: UInt32, streamType: NDMediaStreamType, streamSample: Media_impl_p0.MediaStreamSample, pts: Int64, ccFormat: NDClosedCaptionFormat, ccDataBytesSize: UInt32, ccDataBytes: CPointer<UInt8>): Unit {
         defaultInterface().OnSampleParsed(streamID, streamType, streamSample, pts, ccFormat, ccDataBytesSize, ccDataBytes)
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func OnBeginSetupDecryptor(descriptor: Media__impl_l0.IMediaStreamDescriptor, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): Unit {
+    public unsafe func OnBeginSetupDecryptor(descriptor: Media_impl_p0.IMediaStreamDescriptor, keyID: GuidValue, proBytesSize: UInt32, proBytes: CPointer<UInt8>): Unit {
         defaultInterface().OnBeginSetupDecryptor(descriptor, keyID, proBytesSize, proBytes)
     }
 }
@@ -6853,13 +6864,13 @@ public interface INDStreamParser_Impl <: INDStreamParser_ImplErased {
         }
     }
 
-    public func GetStreamInformation(descriptor: InParam<Media__impl_l0.IMediaStreamDescriptor>, streamType: CPointer<NDMediaStreamTypeAbi>): windows_core.Result<UInt32>
+    public func GetStreamInformation(descriptor: InParam<Media_impl_p0.IMediaStreamDescriptor>, streamType: CPointer<NDMediaStreamTypeAbi>): windows_core.Result<UInt32>
 
     public func __winrtThunk_GetStreamInformation(arg0: CPointer<Unit>, arg1: CPointer<NDMediaStreamTypeAbi>, result__: CPointer<UInt32>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.GetStreamInformation(InParam<Media__impl_l0.IMediaStreamDescriptor>(Media__impl_l0.IMediaStreamDescriptor.viewOf(arg0)), arg1)) {
+        match (this.GetStreamInformation(InParam<Media_impl_p0.IMediaStreamDescriptor>(Media_impl_p0.IMediaStreamDescriptor.viewOf(arg0)), arg1)) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
@@ -6947,7 +6958,7 @@ public class INDStreamParser <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INDStreamParser", INDStreamParser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStreamParserVtbl", "INDStreamParser", "INDStreamParser_Impl", [InterfaceMethodSchema("ParseData", 6, [InterfaceParameterSchema("dataBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetStreamInformation", 7, [InterfaceParameterSchema("descriptor", "CPointer<Unit>", "InParam<Media__impl_l0.IMediaStreamDescriptor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("streamType", "CPointer<NDMediaStreamTypeAbi>", "CPointer<NDMediaStreamTypeAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BeginOfStream", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("EndOfStream", 9, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Notifier", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NDStreamParserNotifier>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INDStreamParser", INDStreamParser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INDStreamParserVtbl", "INDStreamParser", "INDStreamParser_Impl", [InterfaceMethodSchema("ParseData", 6, [InterfaceParameterSchema("dataBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetStreamInformation", 7, [InterfaceParameterSchema("descriptor", "CPointer<Unit>", "InParam<Media_impl_p0.IMediaStreamDescriptor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("streamType", "CPointer<NDMediaStreamTypeAbi>", "CPointer<NDMediaStreamTypeAbi>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BeginOfStream", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("EndOfStream", 9, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Notifier", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NDStreamParserNotifier>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INDStreamParser.runtimeType())
         return schema
     }
@@ -6983,7 +6994,7 @@ public class INDStreamParser <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Media_Core == "on"]
-    public unsafe func GetStreamInformation(descriptor: Media__impl_l0.IMediaStreamDescriptor, streamType: CPointer<NDMediaStreamTypeAbi>): UInt32 {
+    public unsafe func GetStreamInformation(descriptor: Media_impl_p0.IMediaStreamDescriptor, streamType: CPointer<NDMediaStreamTypeAbi>): UInt32 {
         let v = vtbl()
         var result__ = 0u32
         let hr = v.GetStreamInformation(asRaw(), descriptor.asRaw(), streamType, CPointer<UInt32>(inout result__))
@@ -7054,7 +7065,7 @@ public class IPlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInt
         if (iid == IPlayReadyDomainJoinServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7063,13 +7074,13 @@ public class IPlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyDomainJoinServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyDomainJoinServiceRequest>("IPlayReadyDomainJoinServiceRequest", IPlayReadyDomainJoinServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyDomainJoinServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyDomainJoinServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyDomainJoinServiceRequest>("IPlayReadyDomainJoinServiceRequest", IPlayReadyDomainJoinServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyDomainJoinServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyDomainJoinServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyDomainJoinServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyDomainJoinServiceRequest", IPlayReadyDomainJoinServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyDomainJoinServiceRequestVtbl", "IPlayReadyDomainJoinServiceRequest", "IPlayReadyDomainJoinServiceRequest_Impl", [InterfaceMethodSchema("DomainAccountId", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainAccountId", 18, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainFriendlyName", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainFriendlyName", 20, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainServiceId", 21, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 22, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyDomainJoinServiceRequest", IPlayReadyDomainJoinServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyDomainJoinServiceRequestVtbl", "IPlayReadyDomainJoinServiceRequest", "IPlayReadyDomainJoinServiceRequest_Impl", [InterfaceMethodSchema("DomainAccountId", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainAccountId", 18, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainFriendlyName", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainFriendlyName", 20, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainServiceId", 21, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 22, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyDomainJoinServiceRequest.runtimeType())
         return schema
     }
@@ -7101,8 +7112,8 @@ public class IPlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7195,7 +7206,7 @@ public class IPlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComIn
         if (iid == IPlayReadyDomainLeaveServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7204,13 +7215,13 @@ public class IPlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyDomainLeaveServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyDomainLeaveServiceRequest>("IPlayReadyDomainLeaveServiceRequest", IPlayReadyDomainLeaveServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyDomainLeaveServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyDomainLeaveServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyDomainLeaveServiceRequest>("IPlayReadyDomainLeaveServiceRequest", IPlayReadyDomainLeaveServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyDomainLeaveServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyDomainLeaveServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyDomainLeaveServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyDomainLeaveServiceRequest", IPlayReadyDomainLeaveServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyDomainLeaveServiceRequestVtbl", "IPlayReadyDomainLeaveServiceRequest", "IPlayReadyDomainLeaveServiceRequest_Impl", [InterfaceMethodSchema("DomainAccountId", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainAccountId", 18, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainServiceId", 19, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 20, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyDomainLeaveServiceRequest", IPlayReadyDomainLeaveServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyDomainLeaveServiceRequestVtbl", "IPlayReadyDomainLeaveServiceRequest", "IPlayReadyDomainLeaveServiceRequest_Impl", [InterfaceMethodSchema("DomainAccountId", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainAccountId", 18, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainServiceId", 19, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 20, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyDomainLeaveServiceRequest.runtimeType())
         return schema
     }
@@ -7242,8 +7253,8 @@ public class IPlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComIn
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7318,7 +7329,7 @@ public class IPlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase &
         if (iid == IPlayReadyIndividualizationServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7327,13 +7338,13 @@ public class IPlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyIndividualizationServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyIndividualizationServiceRequest>("IPlayReadyIndividualizationServiceRequest", IPlayReadyIndividualizationServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyIndividualizationServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyIndividualizationServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyIndividualizationServiceRequest>("IPlayReadyIndividualizationServiceRequest", IPlayReadyIndividualizationServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyIndividualizationServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyIndividualizationServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyIndividualizationServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyIndividualizationServiceRequest", IPlayReadyIndividualizationServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyIndividualizationServiceRequestVtbl", "IPlayReadyIndividualizationServiceRequest", "IPlayReadyIndividualizationServiceRequest_Impl", [])
+        var schema = InterfaceDescriptorSchema("IPlayReadyIndividualizationServiceRequest", IPlayReadyIndividualizationServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyIndividualizationServiceRequestVtbl", "IPlayReadyIndividualizationServiceRequest", "IPlayReadyIndividualizationServiceRequest_Impl", [])
         schema.runtimeTypeContract = Some(IPlayReadyIndividualizationServiceRequest.runtimeType())
         return schema
     }
@@ -7365,8 +7376,8 @@ public class IPlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase &
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7415,7 +7426,7 @@ public class IPlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Co
         if (iid == IPlayReadyMeteringReportServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7424,13 +7435,13 @@ public class IPlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyMeteringReportServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyMeteringReportServiceRequest>("IPlayReadyMeteringReportServiceRequest", IPlayReadyMeteringReportServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyMeteringReportServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyMeteringReportServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyMeteringReportServiceRequest>("IPlayReadyMeteringReportServiceRequest", IPlayReadyMeteringReportServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyMeteringReportServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyMeteringReportServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyMeteringReportServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyMeteringReportServiceRequest", IPlayReadyMeteringReportServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyMeteringReportServiceRequestVtbl", "IPlayReadyMeteringReportServiceRequest", "IPlayReadyMeteringReportServiceRequest_Impl", [InterfaceMethodSchema("MeteringCertificate", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMeteringCertificate", 18, [InterfaceParameterSchema("meteringCertBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyMeteringReportServiceRequest", IPlayReadyMeteringReportServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyMeteringReportServiceRequestVtbl", "IPlayReadyMeteringReportServiceRequest", "IPlayReadyMeteringReportServiceRequest_Impl", [InterfaceMethodSchema("MeteringCertificate", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMeteringCertificate", 18, [InterfaceParameterSchema("meteringCertBytes", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyMeteringReportServiceRequest.runtimeType())
         return schema
     }
@@ -7462,8 +7473,8 @@ public class IPlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7525,7 +7536,7 @@ public class IPlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInt
         if (iid == IPlayReadyRevocationServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7534,13 +7545,13 @@ public class IPlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyRevocationServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyRevocationServiceRequest>("IPlayReadyRevocationServiceRequest", IPlayReadyRevocationServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyRevocationServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyRevocationServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyRevocationServiceRequest>("IPlayReadyRevocationServiceRequest", IPlayReadyRevocationServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyRevocationServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyRevocationServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyRevocationServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyRevocationServiceRequest", IPlayReadyRevocationServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyRevocationServiceRequestVtbl", "IPlayReadyRevocationServiceRequest", "IPlayReadyRevocationServiceRequest_Impl", [])
+        var schema = InterfaceDescriptorSchema("IPlayReadyRevocationServiceRequest", IPlayReadyRevocationServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyRevocationServiceRequestVtbl", "IPlayReadyRevocationServiceRequest", "IPlayReadyRevocationServiceRequest_Impl", [])
         schema.runtimeTypeContract = Some(IPlayReadyRevocationServiceRequest.runtimeType())
         return schema
     }
@@ -7572,8 +7583,8 @@ public class IPlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -7650,7 +7661,7 @@ public struct IPlayReadySecureStopServiceRequestVtbl {
         if (iid == IPlayReadySecureStopServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7673,7 +7684,7 @@ public interface IPlayReadySecureStopServiceRequest_ImplErased {
 }
 
 @When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
-public interface IPlayReadySecureStopServiceRequest_Impl <: IPlayReadySecureStopServiceRequest_ImplErased & IPlayReadyServiceRequest_Impl & Media__impl_l0.IMediaProtectionServiceRequest_Impl {
+public interface IPlayReadySecureStopServiceRequest_Impl <: IPlayReadySecureStopServiceRequest_ImplErased & IPlayReadyServiceRequest_Impl & Media_impl_p0.IMediaProtectionServiceRequest_Impl {
     public func SessionID(): windows_core.Result<GuidValue>
 
     public func __winrtThunk_SessionID(result__: CPointer<GUID>): Int32 {
@@ -7943,7 +7954,7 @@ public class IPlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInt
         if (iid == IPlayReadySecureStopServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -7952,13 +7963,13 @@ public class IPlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadySecureStopServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadySecureStopServiceRequest>("IPlayReadySecureStopServiceRequest", IPlayReadySecureStopServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadySecureStopServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadySecureStopServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadySecureStopServiceRequest>("IPlayReadySecureStopServiceRequest", IPlayReadySecureStopServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadySecureStopServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadySecureStopServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadySecureStopServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadySecureStopServiceRequest", IPlayReadySecureStopServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadySecureStopServiceRequestVtbl", "IPlayReadySecureStopServiceRequest", "IPlayReadySecureStopServiceRequest_Impl", [InterfaceMethodSchema("SessionID", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartTime", 18, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateTime", 19, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Stopped", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublisherCertificate", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadySecureStopServiceRequest", IPlayReadySecureStopServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadySecureStopServiceRequestVtbl", "IPlayReadySecureStopServiceRequest", "IPlayReadySecureStopServiceRequest_Impl", [InterfaceMethodSchema("SessionID", 17, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartTime", 18, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateTime", 19, [InterfaceParameterSchema("result", "CPointer<windows_future.DateTimeAbi>", "OutSlot<windows_future.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Stopped", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PublisherCertificate", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadySecureStopServiceRequest.runtimeType())
         return schema
     }
@@ -7990,8 +8001,8 @@ public class IPlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -8192,7 +8203,7 @@ public class PlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyDomainJoinServiceRequest> {
-        let ancestors = [IPlayReadyDomainJoinServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyDomainJoinServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyDomainJoinServiceRequest>("PlayReadyDomainJoinServiceRequest", IPlayReadyDomainJoinServiceRequest.iid(), ancestors, { raw => PlayReadyDomainJoinServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyDomainJoinServiceRequest.viewOf(raw) })
     }
 
@@ -8248,8 +8259,8 @@ public class PlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8378,7 +8389,7 @@ public class PlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyDomainLeaveServiceRequest> {
-        let ancestors = [IPlayReadyDomainLeaveServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyDomainLeaveServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyDomainLeaveServiceRequest>("PlayReadyDomainLeaveServiceRequest", IPlayReadyDomainLeaveServiceRequest.iid(), ancestors, { raw => PlayReadyDomainLeaveServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyDomainLeaveServiceRequest.viewOf(raw) })
     }
 
@@ -8434,8 +8445,8 @@ public class PlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComInt
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8556,7 +8567,7 @@ public class PlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyIndividualizationServiceRequest> {
-        let ancestors = [IPlayReadyIndividualizationServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyIndividualizationServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyIndividualizationServiceRequest>("PlayReadyIndividualizationServiceRequest", IPlayReadyIndividualizationServiceRequest.iid(), ancestors, { raw => PlayReadyIndividualizationServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyIndividualizationServiceRequest.viewOf(raw) })
     }
 
@@ -8612,8 +8623,8 @@ public class PlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8718,7 +8729,7 @@ public class PlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyMeteringReportServiceRequest> {
-        let ancestors = [IPlayReadyMeteringReportServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyMeteringReportServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyMeteringReportServiceRequest>("PlayReadyMeteringReportServiceRequest", IPlayReadyMeteringReportServiceRequest.iid(), ancestors, { raw => PlayReadyMeteringReportServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyMeteringReportServiceRequest.viewOf(raw) })
     }
 
@@ -8774,8 +8785,8 @@ public class PlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Com
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -8888,7 +8899,7 @@ public class PlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyRevocationServiceRequest> {
-        let ancestors = [IPlayReadyRevocationServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyRevocationServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyRevocationServiceRequest>("PlayReadyRevocationServiceRequest", IPlayReadyRevocationServiceRequest.iid(), ancestors, { raw => PlayReadyRevocationServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyRevocationServiceRequest.viewOf(raw) })
     }
 
@@ -8944,8 +8955,8 @@ public class PlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -10721,7 +10732,7 @@ public struct IPlayReadyLicenseAcquisitionServiceRequestVtbl {
         if (iid == IPlayReadyLicenseAcquisitionServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -10742,7 +10753,7 @@ public interface IPlayReadyLicenseAcquisitionServiceRequest_ImplErased {
 }
 
 @When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
-public interface IPlayReadyLicenseAcquisitionServiceRequest_Impl <: IPlayReadyLicenseAcquisitionServiceRequest_ImplErased & IPlayReadyServiceRequest_Impl & Media__impl_l0.IMediaProtectionServiceRequest_Impl {
+public interface IPlayReadyLicenseAcquisitionServiceRequest_Impl <: IPlayReadyLicenseAcquisitionServiceRequest_ImplErased & IPlayReadyServiceRequest_Impl & Media_impl_p0.IMediaProtectionServiceRequest_Impl {
     public func ContentHeader(): windows_core.Result<PlayReadyContentHeader>
 
     public func __winrtThunk_ContentHeader(result__: CPointer<CPointer<Unit>>): Int32 {
@@ -10992,7 +11003,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase 
         if (iid == IPlayReadyLicenseAcquisitionServiceRequest.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -11001,13 +11012,13 @@ public class IPlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase 
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest> {
-        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest>("IPlayReadyLicenseAcquisitionServiceRequest", IPlayReadyLicenseAcquisitionServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest>("IPlayReadyLicenseAcquisitionServiceRequest", IPlayReadyLicenseAcquisitionServiceRequest.iid(), IInspectable.descriptor(), [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest", IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequestVtbl", "IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyLicenseAcquisitionServiceRequest_Impl", [InterfaceMethodSchema("ContentHeader", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadyContentHeader>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentHeader", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PlayReadyContentHeader>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainServiceId", 19, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 20, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest", IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.descriptorSchema(), ["IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequestVtbl", "IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyLicenseAcquisitionServiceRequest_Impl", [InterfaceMethodSchema("ContentHeader", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadyContentHeader>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentHeader", 18, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<PlayReadyContentHeader>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainServiceId", 19, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainServiceId", 20, [InterfaceParameterSchema("value", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest.runtimeType())
         return schema
     }
@@ -11039,8 +11050,8 @@ public class IPlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase 
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -11116,7 +11127,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest2 <: InterfaceWrapperBase
         if (iid == IPlayReadyLicenseAcquisitionServiceRequest2.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -11125,13 +11136,13 @@ public class IPlayReadyLicenseAcquisitionServiceRequest2 <: InterfaceWrapperBase
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest2> {
-        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest2>("IPlayReadyLicenseAcquisitionServiceRequest2", IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IInspectable.descriptor(), [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest2.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest2.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest2>("IPlayReadyLicenseAcquisitionServiceRequest2", IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IInspectable.descriptor(), [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest2.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest2", IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.descriptorSchema(), ["IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequest2Vtbl", "IPlayReadyLicenseAcquisitionServiceRequest2", "IPlayReadyLicenseAcquisitionServiceRequest2_Impl", [InterfaceMethodSchema("SessionId", 21, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest2", IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.descriptorSchema(), ["IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequest2Vtbl", "IPlayReadyLicenseAcquisitionServiceRequest2", "IPlayReadyLicenseAcquisitionServiceRequest2_Impl", [InterfaceMethodSchema("SessionId", 21, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest2.runtimeType())
         return schema
     }
@@ -11170,8 +11181,8 @@ public class IPlayReadyLicenseAcquisitionServiceRequest2 <: InterfaceWrapperBase
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -11230,7 +11241,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
         if (iid == IPlayReadyLicenseAcquisitionServiceRequest3.iid()) {
             return true
         }
-        for (ancestor in [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -11239,13 +11250,13 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
     }
 
     public static func descriptor(): InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest3> {
-        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest3>("IPlayReadyLicenseAcquisitionServiceRequest3", IPlayReadyLicenseAcquisitionServiceRequest3.iid(), IInspectable.descriptor(), [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest3.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest3.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPlayReadyLicenseAcquisitionServiceRequest3>("IPlayReadyLicenseAcquisitionServiceRequest3", IPlayReadyLicenseAcquisitionServiceRequest3.iid(), IInspectable.descriptor(), [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], { raw => IPlayReadyLicenseAcquisitionServiceRequest3.fromAbiTake(raw) }, { raw => IPlayReadyLicenseAcquisitionServiceRequest3.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest3.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest3", IPlayReadyLicenseAcquisitionServiceRequest3.iid(), IPlayReadyLicenseAcquisitionServiceRequest2.descriptorSchema(), ["IPlayReadyLicenseAcquisitionServiceRequest2", "IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequest3Vtbl", "IPlayReadyLicenseAcquisitionServiceRequest3", "IPlayReadyLicenseAcquisitionServiceRequest3_Impl", [InterfaceMethodSchema("CreateLicenseIterable", 22, [InterfaceParameterSchema("contentHeader", "CPointer<Unit>", "InParam<PlayReadyContentHeader>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fullyEvaluated", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadyLicenseIterable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseAcquisitionServiceRequest3", IPlayReadyLicenseAcquisitionServiceRequest3.iid(), IPlayReadyLicenseAcquisitionServiceRequest2.descriptorSchema(), ["IPlayReadyLicenseAcquisitionServiceRequest2", "IPlayReadyLicenseAcquisitionServiceRequest", "IPlayReadyServiceRequest", "IMediaProtectionServiceRequest"], [IPlayReadyLicenseAcquisitionServiceRequest2.iid(), IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid()], "IPlayReadyLicenseAcquisitionServiceRequest3Vtbl", "IPlayReadyLicenseAcquisitionServiceRequest3", "IPlayReadyLicenseAcquisitionServiceRequest3_Impl", [InterfaceMethodSchema("CreateLicenseIterable", 22, [InterfaceParameterSchema("contentHeader", "CPointer<Unit>", "InParam<PlayReadyContentHeader>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fullyEvaluated", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PlayReadyLicenseIterable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyLicenseAcquisitionServiceRequest3.runtimeType())
         return schema
     }
@@ -11291,8 +11302,8 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query<Media__impl_l0.IMediaProtectionServiceRequest>(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query<Media_impl_p0.IMediaProtectionServiceRequest>(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw Exception("asIMediaProtectionServiceRequest: QueryInterface failed (E_NOINTERFACE)")
         }
@@ -11573,10 +11584,10 @@ public interface IPlayReadyLicenseSession_Impl <: IPlayReadyLicenseSession_ImplE
         }
     }
 
-    public func ConfigureMediaProtectionManager(mpm: InParam<Media__impl_l0.MediaProtectionManager>): windows_core.Result<Unit>
+    public func ConfigureMediaProtectionManager(mpm: InParam<Media_impl_p0.MediaProtectionManager>): windows_core.Result<Unit>
 
     public func __winrtThunk_ConfigureMediaProtectionManager(arg0: CPointer<Unit>): Int32 {
-        match (this.ConfigureMediaProtectionManager(InParam<Media__impl_l0.MediaProtectionManager>(Media__impl_l0.MediaProtectionManager.viewOf(arg0)))) {
+        match (this.ConfigureMediaProtectionManager(InParam<Media_impl_p0.MediaProtectionManager>(Media_impl_p0.MediaProtectionManager.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -11621,7 +11632,7 @@ public class IPlayReadyLicenseSession <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseSession", IPlayReadyLicenseSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlayReadyLicenseSessionVtbl", "IPlayReadyLicenseSession", "IPlayReadyLicenseSession_Impl", [InterfaceMethodSchema("CreateLAServiceRequest", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPlayReadyLicenseAcquisitionServiceRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfigureMediaProtectionManager", 7, [InterfaceParameterSchema("mpm", "CPointer<Unit>", "InParam<Media__impl_l0.MediaProtectionManager>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPlayReadyLicenseSession", IPlayReadyLicenseSession.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPlayReadyLicenseSessionVtbl", "IPlayReadyLicenseSession", "IPlayReadyLicenseSession_Impl", [InterfaceMethodSchema("CreateLAServiceRequest", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IPlayReadyLicenseAcquisitionServiceRequest>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConfigureMediaProtectionManager", 7, [InterfaceParameterSchema("mpm", "CPointer<Unit>", "InParam<Media_impl_p0.MediaProtectionManager>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPlayReadyLicenseSession.runtimeType())
         return schema
     }
@@ -11659,7 +11670,7 @@ public class IPlayReadyLicenseSession <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Media_Protection == "on"]
-    public unsafe func ConfigureMediaProtectionManager(mpm: Media__impl_l0.MediaProtectionManager): Unit {
+    public unsafe func ConfigureMediaProtectionManager(mpm: Media_impl_p0.MediaProtectionManager): Unit {
         let v = vtbl()
         let hr = v.ConfigureMediaProtectionManager(asRaw(), mpm.asRaw())
         HRESULT(hr).ok()
@@ -11766,7 +11777,7 @@ public interface IPlayReadyLicenseSession2_Impl <: IPlayReadyLicenseSession2_Imp
     }
 
     public func __winrtThunk_ConfigureMediaProtectionManager(arg0: CPointer<Unit>): Int32 {
-        match (this.ConfigureMediaProtectionManager(InParam<Media__impl_l0.MediaProtectionManager>(Media__impl_l0.MediaProtectionManager.viewOf(arg0)))) {
+        match (this.ConfigureMediaProtectionManager(InParam<Media_impl_p0.MediaProtectionManager>(Media_impl_p0.MediaProtectionManager.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -12956,7 +12967,7 @@ public class PlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadyLicenseAcquisitionServiceRequest> {
-        let ancestors = [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadyLicenseAcquisitionServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadyLicenseAcquisitionServiceRequest>("PlayReadyLicenseAcquisitionServiceRequest", IPlayReadyLicenseAcquisitionServiceRequest.iid(), ancestors, { raw => PlayReadyLicenseAcquisitionServiceRequest.fromAbiTake(raw) }, { raw => PlayReadyLicenseAcquisitionServiceRequest.viewOf(raw) })
     }
 
@@ -13012,8 +13023,8 @@ public class PlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase &
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -13335,7 +13346,7 @@ public class PlayReadyLicenseSession <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Media_Protection == "on"]
-    public unsafe func ConfigureMediaProtectionManager(mpm: Media__impl_l0.MediaProtectionManager): Unit {
+    public unsafe func ConfigureMediaProtectionManager(mpm: Media_impl_p0.MediaProtectionManager): Unit {
         defaultInterface().ConfigureMediaProtectionManager(mpm)
     }
 
@@ -13510,7 +13521,7 @@ public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<PlayReadySecureStopServiceRequest> {
-        let ancestors = [IPlayReadySecureStopServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media__impl_l0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IPlayReadySecureStopServiceRequest.iid(), IPlayReadyServiceRequest.iid(), Media_impl_p0.IMediaProtectionServiceRequest.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<PlayReadySecureStopServiceRequest>("PlayReadySecureStopServiceRequest", IPlayReadySecureStopServiceRequest.iid(), ancestors, { raw => PlayReadySecureStopServiceRequest.fromAbiTake(raw) }, { raw => PlayReadySecureStopServiceRequest.viewOf(raw) })
     }
 
@@ -13555,8 +13566,8 @@ public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIMediaProtectionServiceRequest(): Media__impl_l0.IMediaProtectionServiceRequest {
-        match (unsafe { query(Media__impl_l0.IMediaProtectionServiceRequest.descriptor()) }) {
+    public func asIMediaProtectionServiceRequest(): Media_impl_p0.IMediaProtectionServiceRequest {
+        match (unsafe { query(Media_impl_p0.IMediaProtectionServiceRequest.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }

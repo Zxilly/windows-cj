@@ -4,16 +4,28 @@
 package windows.Win32.UI.TabletPC
 
 import std.collection.*
+@When[Windows_Win32_UI_TabletPC == "on"]
 import windows_libloading
+@When[Windows_Win32_UI_TabletPC == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_TabletPC == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_TabletPC == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_TabletPC == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_UI_TabletPC == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_TabletPC == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_TabletPC == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_UI_TabletPC == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_UI_TabletPC == "on"]
@@ -4416,7 +4428,7 @@ public class IGestureRecognizer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -4453,7 +4465,7 @@ public class IInk <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInk> {
-        return InterfaceDescriptor<IInk>("IInk", IInk.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkFromAbi, viewIInk)
+        return InterfaceDescriptor<IInk>("IInk", IInk.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkFromAbi, viewIInk)
     }
 
     public unsafe func vtbl(): IInkVtbl {
@@ -4464,12 +4476,12 @@ public class IInk <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkExtendedPropertyVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Guid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Data: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Data: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetData: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetData: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4506,7 +4518,7 @@ public class IInkExtendedProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkExtendedProperty> {
-        return InterfaceDescriptor<IInkExtendedProperty>("IInkExtendedProperty", IInkExtendedProperty.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkExtendedPropertyFromAbi, viewIInkExtendedProperty)
+        return InterfaceDescriptor<IInkExtendedProperty>("IInkExtendedProperty", IInkExtendedProperty.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkExtendedPropertyFromAbi, viewIInkExtendedProperty)
     }
 
     public unsafe func vtbl(): IInkExtendedPropertyVtbl {
@@ -4520,14 +4532,14 @@ public class IInkExtendedProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Data(Data: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Data(Data: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Data(__liveRaw, Data)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetData(Data: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetData(Data: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetData(__liveRaw, Data)
@@ -4537,10 +4549,10 @@ public class IInkExtendedProperty <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizer2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var UnicodeRanges: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var UnicodeRanges: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4577,7 +4589,7 @@ public class IInkRecognizer2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizer2> {
-        return InterfaceDescriptor<IInkRecognizer2>("IInkRecognizer2", IInkRecognizer2.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizer2FromAbi, viewIInkRecognizer2)
+        return InterfaceDescriptor<IInkRecognizer2>("IInkRecognizer2", IInkRecognizer2.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizer2FromAbi, viewIInkRecognizer2)
     }
 
     public unsafe func vtbl(): IInkRecognizer2Vtbl {
@@ -4591,7 +4603,7 @@ public class IInkRecognizer2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func UnicodeRanges(UnicodeRanges: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func UnicodeRanges(UnicodeRanges: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UnicodeRanges(__liveRaw, UnicodeRanges)
@@ -4601,11 +4613,11 @@ public class IInkRecognizer2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizerContext2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var EnabledUnicodeRanges: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var EnabledUnicodeRanges: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetEnabledUnicodeRanges: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetEnabledUnicodeRanges: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4642,7 +4654,7 @@ public class IInkRecognizerContext2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizerContext2> {
-        return InterfaceDescriptor<IInkRecognizerContext2>("IInkRecognizerContext2", IInkRecognizerContext2.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizerContext2FromAbi, viewIInkRecognizerContext2)
+        return InterfaceDescriptor<IInkRecognizerContext2>("IInkRecognizerContext2", IInkRecognizerContext2.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizerContext2FromAbi, viewIInkRecognizerContext2)
     }
 
     public unsafe func vtbl(): IInkRecognizerContext2Vtbl {
@@ -4650,14 +4662,14 @@ public class IInkRecognizerContext2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func EnabledUnicodeRanges(UnicodeRanges: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func EnabledUnicodeRanges(UnicodeRanges: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnabledUnicodeRanges(__liveRaw, UnicodeRanges)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetEnabledUnicodeRanges(UnicodeRanges: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetEnabledUnicodeRanges(UnicodeRanges: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetEnabledUnicodeRanges(__liveRaw, UnicodeRanges)
@@ -4667,7 +4679,7 @@ public class IInkRecognizerContext2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRectangleVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Top: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetTop: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Left: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4716,7 +4728,7 @@ public class IInkRectangle <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRectangle> {
-        return InterfaceDescriptor<IInkRectangle>("IInkRectangle", IInkRectangle.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRectangleFromAbi, viewIInkRectangle)
+        return InterfaceDescriptor<IInkRectangle>("IInkRectangle", IInkRectangle.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRectangleFromAbi, viewIInkRectangle)
     }
 
     public unsafe func vtbl(): IInkRectangleVtbl {
@@ -4799,7 +4811,7 @@ public class IInkRectangle <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkTablet3Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var IsMultiTouch: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var MaximumCursors: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4838,7 +4850,7 @@ public class IInkTablet3 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkTablet3> {
-        return InterfaceDescriptor<IInkTablet3>("IInkTablet3", IInkTablet3.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkTablet3FromAbi, viewIInkTablet3)
+        return InterfaceDescriptor<IInkTablet3>("IInkTablet3", IInkTablet3.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkTablet3FromAbi, viewIInkTablet3)
     }
 
     public unsafe func vtbl(): IInkTablet3Vtbl {
@@ -4861,7 +4873,7 @@ public class IInkTablet3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkTransformVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Translate: CFunc<(CPointer<Unit>, Float32, Float32) -> Int32> = { _, _, _ => 0 }
     public var Rotate: CFunc<(CPointer<Unit>, Float32, Float32, Float32) -> Int32> = { _, _, _, _ => 0 }
@@ -4922,7 +4934,7 @@ public class IInkTransform <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkTransform> {
-        return InterfaceDescriptor<IInkTransform>("IInkTransform", IInkTransform.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkTransformFromAbi, viewIInkTransform)
+        return InterfaceDescriptor<IInkTransform>("IInkTransform", IInkTransform.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkTransformFromAbi, viewIInkTransform)
     }
 
     public unsafe func vtbl(): IInkTransformVtbl {
@@ -5067,7 +5079,7 @@ public class IInkTransform <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkWordListVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddWord: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var RemoveWord: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Merge: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -5107,7 +5119,7 @@ public class IInkWordList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkWordList> {
-        return InterfaceDescriptor<IInkWordList>("IInkWordList", IInkWordList.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkWordListFromAbi, viewIInkWordList)
+        return InterfaceDescriptor<IInkWordList>("IInkWordList", IInkWordList.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkWordListFromAbi, viewIInkWordList)
     }
 
     public unsafe func vtbl(): IInkWordListVtbl {
@@ -5136,7 +5148,7 @@ public class IInkWordList <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkWordList2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AddWords: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5174,7 +5186,7 @@ public class IInkWordList2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkWordList2> {
-        return InterfaceDescriptor<IInkWordList2>("IInkWordList2", IInkWordList2.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkWordList2FromAbi, viewIInkWordList2)
+        return InterfaceDescriptor<IInkWordList2>("IInkWordList2", IInkWordList2.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkWordList2FromAbi, viewIInkWordList2)
     }
 
     public unsafe func vtbl(): IInkWordList2Vtbl {
@@ -5499,7 +5511,7 @@ public class IRealTimeStylus3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ISketchInkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -5536,7 +5548,7 @@ public class ISketchInk <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ISketchInk> {
-        return InterfaceDescriptor<ISketchInk>("ISketchInk", ISketchInk.iid(), Win32__impl_l2.IDispatch.iid(), takeISketchInkFromAbi, viewISketchInk)
+        return InterfaceDescriptor<ISketchInk>("ISketchInk", ISketchInk.iid(), Win32_impl_p2.IDispatch.iid(), takeISketchInkFromAbi, viewISketchInk)
     }
 
     public unsafe func vtbl(): ISketchInkVtbl {
@@ -10582,7 +10594,7 @@ extend VisualState <: windows_core.CopyType & windows_core.RuntimeType & windows
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkCollectorEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10619,7 +10631,7 @@ public class _IInkCollectorEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkCollectorEvents> {
-        return InterfaceDescriptor<_IInkCollectorEvents>("_IInkCollectorEvents", _IInkCollectorEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkCollectorEventsFromAbi, view_IInkCollectorEvents)
+        return InterfaceDescriptor<_IInkCollectorEvents>("_IInkCollectorEvents", _IInkCollectorEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkCollectorEventsFromAbi, view_IInkCollectorEvents)
     }
 
     public unsafe func vtbl(): _IInkCollectorEventsVtbl {
@@ -10630,7 +10642,7 @@ public class _IInkCollectorEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkEditEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10667,7 +10679,7 @@ public class _IInkEditEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkEditEvents> {
-        return InterfaceDescriptor<_IInkEditEvents>("_IInkEditEvents", _IInkEditEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkEditEventsFromAbi, view_IInkEditEvents)
+        return InterfaceDescriptor<_IInkEditEvents>("_IInkEditEvents", _IInkEditEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkEditEventsFromAbi, view_IInkEditEvents)
     }
 
     public unsafe func vtbl(): _IInkEditEventsVtbl {
@@ -10678,7 +10690,7 @@ public class _IInkEditEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10715,7 +10727,7 @@ public class _IInkEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkEvents> {
-        return InterfaceDescriptor<_IInkEvents>("_IInkEvents", _IInkEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkEventsFromAbi, view_IInkEvents)
+        return InterfaceDescriptor<_IInkEvents>("_IInkEvents", _IInkEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkEventsFromAbi, view_IInkEvents)
     }
 
     public unsafe func vtbl(): _IInkEventsVtbl {
@@ -10726,7 +10738,7 @@ public class _IInkEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkOverlayEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10763,7 +10775,7 @@ public class _IInkOverlayEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkOverlayEvents> {
-        return InterfaceDescriptor<_IInkOverlayEvents>("_IInkOverlayEvents", _IInkOverlayEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkOverlayEventsFromAbi, view_IInkOverlayEvents)
+        return InterfaceDescriptor<_IInkOverlayEvents>("_IInkOverlayEvents", _IInkOverlayEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkOverlayEventsFromAbi, view_IInkOverlayEvents)
     }
 
     public unsafe func vtbl(): _IInkOverlayEventsVtbl {
@@ -10774,7 +10786,7 @@ public class _IInkOverlayEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkPictureEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10811,7 +10823,7 @@ public class _IInkPictureEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkPictureEvents> {
-        return InterfaceDescriptor<_IInkPictureEvents>("_IInkPictureEvents", _IInkPictureEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkPictureEventsFromAbi, view_IInkPictureEvents)
+        return InterfaceDescriptor<_IInkPictureEvents>("_IInkPictureEvents", _IInkPictureEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkPictureEventsFromAbi, view_IInkPictureEvents)
     }
 
     public unsafe func vtbl(): _IInkPictureEventsVtbl {
@@ -10822,7 +10834,7 @@ public class _IInkPictureEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkRecognitionEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10859,7 +10871,7 @@ public class _IInkRecognitionEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkRecognitionEvents> {
-        return InterfaceDescriptor<_IInkRecognitionEvents>("_IInkRecognitionEvents", _IInkRecognitionEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkRecognitionEventsFromAbi, view_IInkRecognitionEvents)
+        return InterfaceDescriptor<_IInkRecognitionEvents>("_IInkRecognitionEvents", _IInkRecognitionEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkRecognitionEventsFromAbi, view_IInkRecognitionEvents)
     }
 
     public unsafe func vtbl(): _IInkRecognitionEventsVtbl {
@@ -10870,7 +10882,7 @@ public class _IInkRecognitionEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IInkStrokesEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10907,7 +10919,7 @@ public class _IInkStrokesEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IInkStrokesEvents> {
-        return InterfaceDescriptor<_IInkStrokesEvents>("_IInkStrokesEvents", _IInkStrokesEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IInkStrokesEventsFromAbi, view_IInkStrokesEvents)
+        return InterfaceDescriptor<_IInkStrokesEvents>("_IInkStrokesEvents", _IInkStrokesEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IInkStrokesEventsFromAbi, view_IInkStrokesEvents)
     }
 
     public unsafe func vtbl(): _IInkStrokesEventsVtbl {
@@ -10918,7 +10930,7 @@ public class _IInkStrokesEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IMathInputControlEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -10955,7 +10967,7 @@ public class _IMathInputControlEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IMathInputControlEvents> {
-        return InterfaceDescriptor<_IMathInputControlEvents>("_IMathInputControlEvents", _IMathInputControlEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IMathInputControlEventsFromAbi, view_IMathInputControlEvents)
+        return InterfaceDescriptor<_IMathInputControlEvents>("_IMathInputControlEvents", _IMathInputControlEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IMathInputControlEventsFromAbi, view_IMathInputControlEvents)
     }
 
     public unsafe func vtbl(): _IMathInputControlEventsVtbl {
@@ -10966,7 +10978,7 @@ public class _IMathInputControlEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IPenInputPanelEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -11003,7 +11015,7 @@ public class _IPenInputPanelEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IPenInputPanelEvents> {
-        return InterfaceDescriptor<_IPenInputPanelEvents>("_IPenInputPanelEvents", _IPenInputPanelEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IPenInputPanelEventsFromAbi, view_IPenInputPanelEvents)
+        return InterfaceDescriptor<_IPenInputPanelEvents>("_IPenInputPanelEvents", _IPenInputPanelEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IPenInputPanelEventsFromAbi, view_IPenInputPanelEvents)
     }
 
     public unsafe func vtbl(): _IPenInputPanelEventsVtbl {
@@ -11014,7 +11026,7 @@ public class _IPenInputPanelEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCursorButtonVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<InkCursorButtonStateAbi>) -> Int32> = { _, _ => 0 }
@@ -11054,7 +11066,7 @@ public class IInkCursorButton <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCursorButton> {
-        return InterfaceDescriptor<IInkCursorButton>("IInkCursorButton", IInkCursorButton.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCursorButtonFromAbi, viewIInkCursorButton)
+        return InterfaceDescriptor<IInkCursorButton>("IInkCursorButton", IInkCursorButton.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCursorButtonFromAbi, viewIInkCursorButton)
     }
 
     public unsafe func vtbl(): IInkCursorButtonVtbl {
@@ -11083,12 +11095,12 @@ public class IInkCursorButton <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCursorButtonsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -11125,7 +11137,7 @@ public class IInkCursorButtons <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCursorButtons> {
-        return InterfaceDescriptor<IInkCursorButtons>("IInkCursorButtons", IInkCursorButtons.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCursorButtonsFromAbi, viewIInkCursorButtons)
+        return InterfaceDescriptor<IInkCursorButtons>("IInkCursorButtons", IInkCursorButtons.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCursorButtonsFromAbi, viewIInkCursorButtons)
     }
 
     public unsafe func vtbl(): IInkCursorButtonsVtbl {
@@ -11146,7 +11158,7 @@ public class IInkCursorButtons <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(Identifier: Win32__impl_l2.VARIANTAbi, Button: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Item(Identifier: Win32_impl_p2.VARIANTAbi, Button: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, Identifier, Button)
@@ -11156,16 +11168,16 @@ public class IInkCursorButtons <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkExtendedPropertiesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var DoesPropertyExist: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -11204,7 +11216,7 @@ public class IInkExtendedProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkExtendedProperties> {
-        return InterfaceDescriptor<IInkExtendedProperties>("IInkExtendedProperties", IInkExtendedProperties.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkExtendedPropertiesFromAbi, viewIInkExtendedProperties)
+        return InterfaceDescriptor<IInkExtendedProperties>("IInkExtendedProperties", IInkExtendedProperties.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkExtendedPropertiesFromAbi, viewIInkExtendedProperties)
     }
 
     public unsafe func vtbl(): IInkExtendedPropertiesVtbl {
@@ -11225,21 +11237,21 @@ public class IInkExtendedProperties <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(Identifier: Win32__impl_l2.VARIANTAbi, Item: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Item(Identifier: Win32_impl_p2.VARIANTAbi, Item: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, Identifier, Item)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(Guid: CPointer<UInt16>, Data: Win32__impl_l2.VARIANTAbi, InkExtendedProperty: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Add(Guid: CPointer<UInt16>, Data: Win32_impl_p2.VARIANTAbi, InkExtendedProperty: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, Guid, Data, InkExtendedProperty)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Identifier: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Identifier: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Identifier)
@@ -11261,7 +11273,7 @@ public class IInkExtendedProperties <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkGestureVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Confidence: CFunc<(CPointer<Unit>, CPointer<InkRecognitionConfidenceAbi>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<InkApplicationGestureAbi>) -> Int32> = { _, _ => 0 }
     public var GetHotPoint: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -11301,7 +11313,7 @@ public class IInkGesture <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkGesture> {
-        return InterfaceDescriptor<IInkGesture>("IInkGesture", IInkGesture.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkGestureFromAbi, viewIInkGesture)
+        return InterfaceDescriptor<IInkGesture>("IInkGesture", IInkGesture.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkGestureFromAbi, viewIInkGesture)
     }
 
     public unsafe func vtbl(): IInkGestureVtbl {
@@ -11420,7 +11432,7 @@ public class IInkLineInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizerGuideVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var WritingBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetWritingBox: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var DrawnBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -11469,7 +11481,7 @@ public class IInkRecognizerGuide <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizerGuide> {
-        return InterfaceDescriptor<IInkRecognizerGuide>("IInkRecognizerGuide", IInkRecognizerGuide.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizerGuideFromAbi, viewIInkRecognizerGuide)
+        return InterfaceDescriptor<IInkRecognizerGuide>("IInkRecognizerGuide", IInkRecognizerGuide.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizerGuideFromAbi, viewIInkRecognizerGuide)
     }
 
     public unsafe func vtbl(): IInkRecognizerGuideVtbl {
@@ -11552,7 +11564,7 @@ public class IInkRecognizerGuide <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkTabletVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var PlugAndPlayId: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var MaximumInputRectangle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -11595,7 +11607,7 @@ public class IInkTablet <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkTablet> {
-        return InterfaceDescriptor<IInkTablet>("IInkTablet", IInkTablet.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkTabletFromAbi, viewIInkTablet)
+        return InterfaceDescriptor<IInkTablet>("IInkTablet", IInkTablet.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkTabletFromAbi, viewIInkTablet)
     }
 
     public unsafe func vtbl(): IInkTabletVtbl {
@@ -11642,7 +11654,7 @@ public class IInkTablet <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkTablet2Vtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DeviceKind: CFunc<(CPointer<Unit>, CPointer<TabletDeviceKindAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -11680,7 +11692,7 @@ public class IInkTablet2 <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkTablet2> {
-        return InterfaceDescriptor<IInkTablet2>("IInkTablet2", IInkTablet2.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkTablet2FromAbi, viewIInkTablet2)
+        return InterfaceDescriptor<IInkTablet2>("IInkTablet2", IInkTablet2.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkTablet2FromAbi, viewIInkTablet2)
     }
 
     public unsafe func vtbl(): IInkTablet2Vtbl {
@@ -11697,7 +11709,7 @@ public class IInkTablet2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkTabletsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -11740,7 +11752,7 @@ public class IInkTablets <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkTablets> {
-        return InterfaceDescriptor<IInkTablets>("IInkTablets", IInkTablets.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkTabletsFromAbi, viewIInkTablets)
+        return InterfaceDescriptor<IInkTablets>("IInkTablets", IInkTablets.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkTabletsFromAbi, viewIInkTablets)
     }
 
     public unsafe func vtbl(): IInkTabletsVtbl {
@@ -11782,7 +11794,7 @@ public class IInkTablets <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPenInputPanelVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Busy: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Factoid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFactoid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -11844,7 +11856,7 @@ public class IPenInputPanel <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPenInputPanel> {
-        return InterfaceDescriptor<IPenInputPanel>("IPenInputPanel", IPenInputPanel.iid(), Win32__impl_l2.IDispatch.iid(), takeIPenInputPanelFromAbi, viewIPenInputPanel)
+        return InterfaceDescriptor<IPenInputPanel>("IPenInputPanel", IPenInputPanel.iid(), Win32_impl_p2.IDispatch.iid(), takeIPenInputPanelFromAbi, viewIPenInputPanel)
     }
 
     public unsafe func vtbl(): IPenInputPanelVtbl {
@@ -12079,9 +12091,9 @@ public struct ITextInputPanelEventSinkVtbl {
     public var InPlaceVisibilityChanging: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _ => 0 }
     public var InPlaceVisibilityChanged: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var TextInserting: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var TextInserting: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var TextInserted: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var TextInserted: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12186,14 +12198,14 @@ public class ITextInputPanelEventSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func TextInserting(Ink: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func TextInserting(Ink: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TextInserting(__liveRaw, Ink)
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func TextInserted(Ink: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func TextInserted(Ink: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TextInserted(__liveRaw, Ink)
@@ -12411,7 +12423,7 @@ extend RECO_LATTICE_PROPERTIES <: windows_core.CopyType & windows_core.RuntimeTy
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDrawingAttributesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Color: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetColor: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Width: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
@@ -12468,7 +12480,7 @@ public class IInkDrawingAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDrawingAttributes> {
-        return InterfaceDescriptor<IInkDrawingAttributes>("IInkDrawingAttributes", IInkDrawingAttributes.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDrawingAttributesFromAbi, viewIInkDrawingAttributes)
+        return InterfaceDescriptor<IInkDrawingAttributes>("IInkDrawingAttributes", IInkDrawingAttributes.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDrawingAttributesFromAbi, viewIInkDrawingAttributes)
     }
 
     public unsafe func vtbl(): IInkDrawingAttributesVtbl {
@@ -13069,7 +13081,7 @@ public class IDynamicRenderer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCursorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Inverted: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -13113,7 +13125,7 @@ public class IInkCursor <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCursor> {
-        return InterfaceDescriptor<IInkCursor>("IInkCursor", IInkCursor.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCursorFromAbi, viewIInkCursor)
+        return InterfaceDescriptor<IInkCursor>("IInkCursor", IInkCursor.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCursorFromAbi, viewIInkCursor)
     }
 
     public unsafe func vtbl(): IInkCursorVtbl {
@@ -13166,7 +13178,7 @@ public class IInkCursor <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCursorsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -13207,7 +13219,7 @@ public class IInkCursors <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCursors> {
-        return InterfaceDescriptor<IInkCursors>("IInkCursors", IInkCursors.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCursorsFromAbi, viewIInkCursors)
+        return InterfaceDescriptor<IInkCursors>("IInkCursors", IInkCursors.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCursorsFromAbi, viewIInkCursors)
     }
 
     public unsafe func vtbl(): IInkCursorsVtbl {
@@ -14512,20 +14524,20 @@ public let InkCollectorDefaultMargin: Int32 = -2147483648i32
 
 @When[Windows_Win32_UI_TabletPC == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Controls == "on")]
 public struct IEC_GESTUREINFO {
-    public var nmhdr: Win32__impl_l0.NMHDR = Win32__impl_l0.NMHDR()
+    public var nmhdr: Win32_impl_p1.NMHDR = Win32_impl_p1.NMHDR()
     public var Cursor: IInkCursor = IInkCursor(CPointer<Unit>())
     public var Strokes: IInkStrokes = IInkStrokes(CPointer<Unit>())
-    public var Gestures: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var Gestures: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
 @When[Windows_Win32_UI_TabletPC == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Controls == "on")]
 @C
 public struct IEC_GESTUREINFOAbi {
-    public var nmhdr: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
+    public var nmhdr: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
     public var Cursor: CPointer<Unit> = CPointer<Unit>()
     public var Strokes: CPointer<Unit> = CPointer<Unit>()
-    public var Gestures: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var Gestures: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -14536,18 +14548,18 @@ extend IEC_GESTUREINFO <: windows_core.CopyType & windows_core.RuntimeType & win
     public static func signature(): String { "struct(Windows.Win32.UI.TabletPC.IEC_GESTUREINFO;struct(Windows.Win32.UI.Controls.NMHDR;struct(Windows.Win32.Foundation.HWND;cinterface(IInspectable));us;u4);{AD30C630-40C5-4350-8405-9C71012FC558};{F1F4C9D8-590A-4963-B3AE-1935671BB6F3};struct(Windows.Win32.System.Variant.VARIANT;_Anonymous_e__Union))" }
     public static func projectAbi(value: IEC_GESTUREINFO): IEC_GESTUREINFOAbi {
         var abi = IEC_GESTUREINFOAbi()
-        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>())
+        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>())
         abi.Cursor = value.Cursor.asRaw()
         abi.Strokes = value.Strokes.asRaw()
-        abi.Gestures = windows_core.projectTypedAbi(value.Gestures, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.Gestures = windows_core.projectTypedAbi(value.Gestures, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: IEC_GESTUREINFOAbi): IEC_GESTUREINFO {
         var value = IEC_GESTUREINFO()
-        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
         value.Cursor = IInkCursor.fromAbiTake(abi.Cursor)
         value.Strokes = IInkStrokes.fromAbiTake(abi.Strokes)
-        value.Gestures = windows_core.fromTypedAbi(abi.Gestures, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.Gestures = windows_core.fromTypedAbi(abi.Gestures, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: IEC_GESTUREINFOAbi): Result<IEC_GESTUREINFO> { Result<IEC_GESTUREINFO>.Ok(IEC_GESTUREINFO.assumeInitRef(abi)) }
@@ -14559,7 +14571,7 @@ extend IEC_GESTUREINFO <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_UI_Controls == "on"]
 public struct IEC_RECOGNITIONRESULTINFO {
-    public var nmhdr: Win32__impl_l0.NMHDR = Win32__impl_l0.NMHDR()
+    public var nmhdr: Win32_impl_p1.NMHDR = Win32_impl_p1.NMHDR()
     public var RecognitionResult: IInkRecognitionResult = IInkRecognitionResult(CPointer<Unit>())
     public init() {}
 }
@@ -14567,7 +14579,7 @@ public struct IEC_RECOGNITIONRESULTINFO {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_UI_Controls == "on"]
 @C
 public struct IEC_RECOGNITIONRESULTINFOAbi {
-    public var nmhdr: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
+    public var nmhdr: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
     public var RecognitionResult: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -14579,13 +14591,13 @@ extend IEC_RECOGNITIONRESULTINFO <: windows_core.CopyType & windows_core.Runtime
     public static func signature(): String { "struct(Windows.Win32.UI.TabletPC.IEC_RECOGNITIONRESULTINFO;struct(Windows.Win32.UI.Controls.NMHDR;struct(Windows.Win32.Foundation.HWND;cinterface(IInspectable));us;u4);{3BC129A8-86CD-45AD-BDE8-E0D32D61C16D})" }
     public static func projectAbi(value: IEC_RECOGNITIONRESULTINFO): IEC_RECOGNITIONRESULTINFOAbi {
         var abi = IEC_RECOGNITIONRESULTINFOAbi()
-        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>())
+        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>())
         abi.RecognitionResult = value.RecognitionResult.asRaw()
         return abi
     }
     public static func assumeInitRef(abi: IEC_RECOGNITIONRESULTINFOAbi): IEC_RECOGNITIONRESULTINFO {
         var value = IEC_RECOGNITIONRESULTINFO()
-        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
         value.RecognitionResult = IInkRecognitionResult.fromAbiTake(abi.RecognitionResult)
         return value
     }
@@ -14598,7 +14610,7 @@ extend IEC_RECOGNITIONRESULTINFO <: windows_core.CopyType & windows_core.Runtime
 
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_UI_Controls == "on"]
 public struct IEC_STROKEINFO {
-    public var nmhdr: Win32__impl_l0.NMHDR = Win32__impl_l0.NMHDR()
+    public var nmhdr: Win32_impl_p1.NMHDR = Win32_impl_p1.NMHDR()
     public var Cursor: IInkCursor = IInkCursor(CPointer<Unit>())
     public var Stroke: IInkStrokeDisp = IInkStrokeDisp(CPointer<Unit>())
     public init() {}
@@ -14607,7 +14619,7 @@ public struct IEC_STROKEINFO {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_UI_Controls == "on"]
 @C
 public struct IEC_STROKEINFOAbi {
-    public var nmhdr: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
+    public var nmhdr: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
     public var Cursor: CPointer<Unit> = CPointer<Unit>()
     public var Stroke: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -14620,14 +14632,14 @@ extend IEC_STROKEINFO <: windows_core.CopyType & windows_core.RuntimeType & wind
     public static func signature(): String { "struct(Windows.Win32.UI.TabletPC.IEC_STROKEINFO;struct(Windows.Win32.UI.Controls.NMHDR;struct(Windows.Win32.Foundation.HWND;cinterface(IInspectable));us;u4);{AD30C630-40C5-4350-8405-9C71012FC558};{43242FEA-91D1-4A72-963E-FBB91829CFA2})" }
     public static func projectAbi(value: IEC_STROKEINFO): IEC_STROKEINFOAbi {
         var abi = IEC_STROKEINFOAbi()
-        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>())
+        abi.nmhdr = windows_core.projectTypedAbi(value.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>())
         abi.Cursor = value.Cursor.asRaw()
         abi.Stroke = value.Stroke.asRaw()
         return abi
     }
     public static func assumeInitRef(abi: IEC_STROKEINFOAbi): IEC_STROKEINFO {
         var value = IEC_STROKEINFO()
-        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+        value.nmhdr = windows_core.fromTypedAbi(abi.nmhdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
         value.Cursor = IInkCursor.fromAbiTake(abi.Cursor)
         value.Stroke = IInkStrokeDisp.fromAbiTake(abi.Stroke)
         return value
@@ -14644,7 +14656,7 @@ extend IEC_STROKEINFO <: windows_core.CopyType & windows_core.RuntimeType & wind
 public struct IHandwrittenTextInsertionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var InsertRecognitionResultsArray: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var InsertRecognitionResultsArray: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var InsertInkRecognitionResult: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -14690,7 +14702,7 @@ public class IHandwrittenTextInsertion <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func InsertRecognitionResultsArray(psaAlternates: CPointer<Win32__impl_l1.SAFEARRAYAbi>, locale: UInt32, fAlternateContainsAutoSpacingInformation: Int32): Int32 {
+    public unsafe func InsertRecognitionResultsArray(psaAlternates: CPointer<Win32_impl_p2.SAFEARRAYAbi>, locale: UInt32, fAlternateContainsAutoSpacingInformation: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InsertRecognitionResultsArray(__liveRaw, psaAlternates, locale, fAlternateContainsAutoSpacingInformation)
@@ -14706,7 +14718,7 @@ public class IHandwrittenTextInsertion <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCollectorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var hWnd: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var SethWnd: CFunc<(CPointer<Unit>, IntNative) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -14725,9 +14737,9 @@ public struct IInkCollectorVtbl {
     public var DynamicRendering: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetDynamicRendering: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var MouseIcon: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
@@ -14788,7 +14800,7 @@ public class IInkCollector <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCollector> {
-        return InterfaceDescriptor<IInkCollector>("IInkCollector", IInkCollector.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCollectorFromAbi, viewIInkCollector)
+        return InterfaceDescriptor<IInkCollector>("IInkCollector", IInkCollector.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCollectorFromAbi, viewIInkCollector)
     }
 
     public unsafe func vtbl(): IInkCollectorVtbl {
@@ -14898,14 +14910,14 @@ public class IInkCollector <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DesiredPacketDescription(__liveRaw, PacketGuids)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDesiredPacketDescription(__liveRaw, PacketGuids)
@@ -15044,15 +15056,15 @@ public class IInkCollector <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkCustomStrokesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -15090,7 +15102,7 @@ public class IInkCustomStrokes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkCustomStrokes> {
-        return InterfaceDescriptor<IInkCustomStrokes>("IInkCustomStrokes", IInkCustomStrokes.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkCustomStrokesFromAbi, viewIInkCustomStrokes)
+        return InterfaceDescriptor<IInkCustomStrokes>("IInkCustomStrokes", IInkCustomStrokes.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkCustomStrokesFromAbi, viewIInkCustomStrokes)
     }
 
     public unsafe func vtbl(): IInkCustomStrokesVtbl {
@@ -15111,7 +15123,7 @@ public class IInkCustomStrokes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Item(Identifier: Win32__impl_l2.VARIANTAbi, Strokes: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Item(Identifier: Win32_impl_p2.VARIANTAbi, Strokes: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Item(__liveRaw, Identifier, Strokes)
@@ -15124,7 +15136,7 @@ public class IInkCustomStrokes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Identifier: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Identifier: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Identifier)
@@ -15140,7 +15152,7 @@ public class IInkCustomStrokes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDispVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Dirty: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -15156,17 +15168,17 @@ public struct IInkDispVtbl {
     public var HitTestCircle: CFunc<(CPointer<Unit>, Int32, Int32, Float32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var HitTestWithRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>, Float32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var HitTestWithLasso: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Float32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var HitTestWithLasso: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Float32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var NearestPoint: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Float32>, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateStrokes: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var CreateStrokes: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var AddStrokesAtRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Save: CFunc<(CPointer<Unit>, InkPersistenceFormatAbi, InkPersistenceCompressionModeAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Save: CFunc<(CPointer<Unit>, InkPersistenceFormatAbi, InkPersistenceCompressionModeAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Load: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Load: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CreateStroke: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var CreateStroke: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var ClipboardCopyWithRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>, InkClipboardFormatsAbi, InkClipboardModesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -15211,7 +15223,7 @@ public class IInkDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDisp> {
-        return InterfaceDescriptor<IInkDisp>("IInkDisp", IInkDisp.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDispFromAbi, viewIInkDisp)
+        return InterfaceDescriptor<IInkDisp>("IInkDisp", IInkDisp.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDispFromAbi, viewIInkDisp)
     }
 
     public unsafe func vtbl(): IInkDispVtbl {
@@ -15303,7 +15315,7 @@ public class IInkDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func HitTestWithLasso(Points: Win32__impl_l2.VARIANTAbi, IntersectPercent: Float32, LassoPoints: CPointer<Win32__impl_l2.VARIANTAbi>, Strokes: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func HitTestWithLasso(Points: Win32_impl_p2.VARIANTAbi, IntersectPercent: Float32, LassoPoints: CPointer<Win32_impl_p2.VARIANTAbi>, Strokes: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HitTestWithLasso(__liveRaw, Points, IntersectPercent, LassoPoints, Strokes)
@@ -15316,7 +15328,7 @@ public class IInkDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateStrokes(StrokeIds: Win32__impl_l2.VARIANTAbi, Strokes: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateStrokes(StrokeIds: Win32_impl_p2.VARIANTAbi, Strokes: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateStrokes(__liveRaw, StrokeIds, Strokes)
@@ -15329,21 +15341,21 @@ public class IInkDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Save(PersistenceFormat: InkPersistenceFormatAbi, CompressionMode: InkPersistenceCompressionModeAbi, Data: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Save(PersistenceFormat: InkPersistenceFormatAbi, CompressionMode: InkPersistenceCompressionModeAbi, Data: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Save(__liveRaw, PersistenceFormat, CompressionMode, Data)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Load(Data: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Load(Data: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Load(__liveRaw, Data)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CreateStroke(PacketData: Win32__impl_l2.VARIANTAbi, PacketDescription: Win32__impl_l2.VARIANTAbi, Stroke: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateStroke(PacketData: Win32_impl_p2.VARIANTAbi, PacketDescription: Win32_impl_p2.VARIANTAbi, Stroke: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateStroke(__liveRaw, PacketData, PacketDescription, Stroke)
@@ -15381,7 +15393,7 @@ public class IInkDisp <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDividerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_Strokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RecognizerContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -15425,7 +15437,7 @@ public class IInkDivider <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDivider> {
-        return InterfaceDescriptor<IInkDivider>("IInkDivider", IInkDivider.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDividerFromAbi, viewIInkDivider)
+        return InterfaceDescriptor<IInkDivider>("IInkDivider", IInkDivider.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDividerFromAbi, viewIInkDivider)
     }
 
     public unsafe func vtbl(): IInkDividerVtbl {
@@ -15478,7 +15490,7 @@ public class IInkDivider <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDivisionResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ResultByType: CFunc<(CPointer<Unit>, InkDivisionTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -15517,7 +15529,7 @@ public class IInkDivisionResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDivisionResult> {
-        return InterfaceDescriptor<IInkDivisionResult>("IInkDivisionResult", IInkDivisionResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDivisionResultFromAbi, viewIInkDivisionResult)
+        return InterfaceDescriptor<IInkDivisionResult>("IInkDivisionResult", IInkDivisionResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDivisionResultFromAbi, viewIInkDivisionResult)
     }
 
     public unsafe func vtbl(): IInkDivisionResultVtbl {
@@ -15540,7 +15552,7 @@ public class IInkDivisionResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDivisionUnitVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DivisionType: CFunc<(CPointer<Unit>, CPointer<InkDivisionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var RecognizedString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -15581,7 +15593,7 @@ public class IInkDivisionUnit <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDivisionUnit> {
-        return InterfaceDescriptor<IInkDivisionUnit>("IInkDivisionUnit", IInkDivisionUnit.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDivisionUnitFromAbi, viewIInkDivisionUnit)
+        return InterfaceDescriptor<IInkDivisionUnit>("IInkDivisionUnit", IInkDivisionUnit.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDivisionUnitFromAbi, viewIInkDivisionUnit)
     }
 
     public unsafe func vtbl(): IInkDivisionUnitVtbl {
@@ -15616,7 +15628,7 @@ public class IInkDivisionUnit <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkDivisionUnitsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -15657,7 +15669,7 @@ public class IInkDivisionUnits <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkDivisionUnits> {
-        return InterfaceDescriptor<IInkDivisionUnits>("IInkDivisionUnits", IInkDivisionUnits.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkDivisionUnitsFromAbi, viewIInkDivisionUnits)
+        return InterfaceDescriptor<IInkDivisionUnits>("IInkDivisionUnits", IInkDivisionUnits.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkDivisionUnitsFromAbi, viewIInkDivisionUnits)
     }
 
     public unsafe func vtbl(): IInkDivisionUnitsVtbl {
@@ -15687,7 +15699,7 @@ public class IInkDivisionUnits <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkEditVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<InkEditStatusAbi>) -> Int32> = { _, _ => 0 }
     public var UseMouseForInput: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetUseMouseForInput: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -15704,9 +15716,9 @@ public struct IInkEditVtbl {
     public var Factoid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetFactoid: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelInks: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelInks: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelInks: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelInks: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var SelInksDisplayMode: CFunc<(CPointer<Unit>, CPointer<InkDisplayModeAbi>) -> Int32> = { _, _ => 0 }
     public var SetSelInksDisplayMode: CFunc<(CPointer<Unit>, InkDisplayModeAbi) -> Int32> = { _, _ => 0 }
     public var Recognize: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -15719,7 +15731,7 @@ public struct IInkEditVtbl {
     public var BorderStyle: CFunc<(CPointer<Unit>, CPointer<BorderStyleConstantsAbi>) -> Int32> = { _, _ => 0 }
     public var SetBorderStyle: CFunc<(CPointer<Unit>, BorderStyleConstantsAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
-    public var Hwnd: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.OLE_HANDLE>) -> Int32> = { _, _ => 0 }
+    public var Hwnd: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.OLE_HANDLE>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var Font: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
@@ -15747,37 +15759,37 @@ public struct IInkEditVtbl {
     public var DisableNoScroll: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetDisableNoScroll: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelAlignment: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelAlignment: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelAlignment: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelAlignment: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelBold: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelBold: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelBold: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelBold: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelItalic: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelItalic: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelItalic: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelItalic: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelUnderline: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelUnderline: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelUnderline: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelUnderline: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelColor: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelColor: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelColor: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelColor: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelFontName: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelFontName: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelFontName: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelFontName: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelFontSize: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelFontSize: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelFontSize: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelFontSize: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelCharOffset: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelCharOffset: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetSelCharOffset: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetSelCharOffset: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var TextRTF: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetTextRTF: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SelStart: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -15825,7 +15837,7 @@ public class IInkEdit <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkEdit> {
-        return InterfaceDescriptor<IInkEdit>("IInkEdit", IInkEdit.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkEditFromAbi, viewIInkEdit)
+        return InterfaceDescriptor<IInkEdit>("IInkEdit", IInkEdit.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkEditFromAbi, viewIInkEdit)
     }
 
     public unsafe func vtbl(): IInkEditVtbl {
@@ -15923,14 +15935,14 @@ public class IInkEdit <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelInks(pSelInk: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelInks(pSelInk: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelInks(__liveRaw, pSelInk)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelInks(SelInk: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelInks(SelInk: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelInks(__liveRaw, SelInk)
@@ -16003,7 +16015,7 @@ public class IInkEdit <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Ole == "on"]
-    public unsafe func Hwnd(pohHwnd: CPointer<Win32__impl_l0.OLE_HANDLE>): Int32 {
+    public unsafe func Hwnd(pohHwnd: CPointer<Win32_impl_p0.OLE_HANDLE>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Hwnd(__liveRaw, pohHwnd)
@@ -16141,112 +16153,112 @@ public class IInkEdit <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelAlignment(pvarSelAlignment: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelAlignment(pvarSelAlignment: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelAlignment(__liveRaw, pvarSelAlignment)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelAlignment(pvarSelAlignment: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelAlignment(pvarSelAlignment: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelAlignment(__liveRaw, pvarSelAlignment)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelBold(pvarSelBold: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelBold(pvarSelBold: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelBold(__liveRaw, pvarSelBold)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelBold(pvarSelBold: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelBold(pvarSelBold: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelBold(__liveRaw, pvarSelBold)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelItalic(pvarSelItalic: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelItalic(pvarSelItalic: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelItalic(__liveRaw, pvarSelItalic)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelItalic(pvarSelItalic: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelItalic(pvarSelItalic: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelItalic(__liveRaw, pvarSelItalic)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelUnderline(pvarSelUnderline: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelUnderline(pvarSelUnderline: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelUnderline(__liveRaw, pvarSelUnderline)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelUnderline(pvarSelUnderline: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelUnderline(pvarSelUnderline: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelUnderline(__liveRaw, pvarSelUnderline)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelColor(pvarSelColor: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelColor(pvarSelColor: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelColor(__liveRaw, pvarSelColor)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelColor(pvarSelColor: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelColor(pvarSelColor: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelColor(__liveRaw, pvarSelColor)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelFontName(pvarSelFontName: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelFontName(pvarSelFontName: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelFontName(__liveRaw, pvarSelFontName)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelFontName(pvarSelFontName: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelFontName(pvarSelFontName: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelFontName(__liveRaw, pvarSelFontName)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelFontSize(pvarSelFontSize: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelFontSize(pvarSelFontSize: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelFontSize(__liveRaw, pvarSelFontSize)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelFontSize(pvarSelFontSize: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelFontSize(pvarSelFontSize: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelFontSize(__liveRaw, pvarSelFontSize)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelCharOffset(pvarSelCharOffset: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelCharOffset(pvarSelCharOffset: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelCharOffset(__liveRaw, pvarSelCharOffset)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetSelCharOffset(pvarSelCharOffset: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetSelCharOffset(pvarSelCharOffset: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSelCharOffset(__liveRaw, pvarSelCharOffset)
@@ -16322,7 +16334,7 @@ public class IInkEdit <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkOverlayVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var hWnd: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var SethWnd: CFunc<(CPointer<Unit>, IntNative) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -16341,9 +16353,9 @@ public struct IInkOverlayVtbl {
     public var DynamicRendering: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetDynamicRendering: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var MouseIcon: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
@@ -16418,7 +16430,7 @@ public class IInkOverlay <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkOverlay> {
-        return InterfaceDescriptor<IInkOverlay>("IInkOverlay", IInkOverlay.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkOverlayFromAbi, viewIInkOverlay)
+        return InterfaceDescriptor<IInkOverlay>("IInkOverlay", IInkOverlay.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkOverlayFromAbi, viewIInkOverlay)
     }
 
     public unsafe func vtbl(): IInkOverlayVtbl {
@@ -16528,14 +16540,14 @@ public class IInkOverlay <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DesiredPacketDescription(__liveRaw, PacketGuids)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDesiredPacketDescription(__liveRaw, PacketGuids)
@@ -16758,7 +16770,7 @@ public class IInkOverlay <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkPictureVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var hWnd: CFunc<(CPointer<Unit>, CPointer<IntNative>) -> Int32> = { _, _ => 0 }
     public var DefaultDrawingAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_DefaultDrawingAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -16774,9 +16786,9 @@ public struct IInkPictureVtbl {
     public var DynamicRendering: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetDynamicRendering: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var DesiredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetDesiredPacketDescription: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var MouseIcon: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
@@ -16862,7 +16874,7 @@ public class IInkPicture <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkPicture> {
-        return InterfaceDescriptor<IInkPicture>("IInkPicture", IInkPicture.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkPictureFromAbi, viewIInkPicture)
+        return InterfaceDescriptor<IInkPicture>("IInkPicture", IInkPicture.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkPictureFromAbi, viewIInkPicture)
     }
 
     public unsafe func vtbl(): IInkPictureVtbl {
@@ -16954,14 +16966,14 @@ public class IInkPicture <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func DesiredPacketDescription(PacketGuids: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DesiredPacketDescription(__liveRaw, PacketGuids)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetDesiredPacketDescription(PacketGuids: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDesiredPacketDescription(__liveRaw, PacketGuids)
@@ -17235,17 +17247,17 @@ public class IInkPicture <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognitionAlternateVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var String: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Confidence: CFunc<(CPointer<Unit>, CPointer<InkRecognitionConfidenceAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Baseline: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Baseline: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Midline: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Midline: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Ascender: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Ascender: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Descender: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Descender: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var LineNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var LineAlternates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -17255,7 +17267,7 @@ public struct IInkRecognitionAlternateVtbl {
     public var GetTextRangeFromStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var AlternatesWithConstantPropertyValues: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPropertyValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPropertyValue: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -17292,7 +17304,7 @@ public class IInkRecognitionAlternate <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognitionAlternate> {
-        return InterfaceDescriptor<IInkRecognitionAlternate>("IInkRecognitionAlternate", IInkRecognitionAlternate.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognitionAlternateFromAbi, viewIInkRecognitionAlternate)
+        return InterfaceDescriptor<IInkRecognitionAlternate>("IInkRecognitionAlternate", IInkRecognitionAlternate.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognitionAlternateFromAbi, viewIInkRecognitionAlternate)
     }
 
     public unsafe func vtbl(): IInkRecognitionAlternateVtbl {
@@ -17312,28 +17324,28 @@ public class IInkRecognitionAlternate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Baseline(Baseline: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Baseline(Baseline: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Baseline(__liveRaw, Baseline)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Midline(Midline: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Midline(Midline: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Midline(__liveRaw, Midline)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Ascender(Ascender: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Ascender(Ascender: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Ascender(__liveRaw, Ascender)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Descender(Descender: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Descender(Descender: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Descender(__liveRaw, Descender)
@@ -17388,7 +17400,7 @@ public class IInkRecognitionAlternate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPropertyValue(PropertyType: CPointer<UInt16>, PropertyValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPropertyValue(PropertyType: CPointer<UInt16>, PropertyValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertyValue(__liveRaw, PropertyType, PropertyValue)
@@ -17398,7 +17410,7 @@ public class IInkRecognitionAlternate <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognitionAlternatesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -17440,7 +17452,7 @@ public class IInkRecognitionAlternates <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognitionAlternates> {
-        return InterfaceDescriptor<IInkRecognitionAlternates>("IInkRecognitionAlternates", IInkRecognitionAlternates.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognitionAlternatesFromAbi, viewIInkRecognitionAlternates)
+        return InterfaceDescriptor<IInkRecognitionAlternates>("IInkRecognitionAlternates", IInkRecognitionAlternates.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognitionAlternatesFromAbi, viewIInkRecognitionAlternates)
     }
 
     public unsafe func vtbl(): IInkRecognitionAlternatesVtbl {
@@ -17476,7 +17488,7 @@ public class IInkRecognitionAlternates <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognitionResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var TopString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var TopAlternate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TopConfidence: CFunc<(CPointer<Unit>, CPointer<InkRecognitionConfidenceAbi>) -> Int32> = { _, _ => 0 }
@@ -17520,7 +17532,7 @@ public class IInkRecognitionResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognitionResult> {
-        return InterfaceDescriptor<IInkRecognitionResult>("IInkRecognitionResult", IInkRecognitionResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognitionResultFromAbi, viewIInkRecognitionResult)
+        return InterfaceDescriptor<IInkRecognitionResult>("IInkRecognitionResult", IInkRecognitionResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognitionResultFromAbi, viewIInkRecognitionResult)
     }
 
     public unsafe func vtbl(): IInkRecognitionResultVtbl {
@@ -17573,16 +17585,16 @@ public class IInkRecognitionResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Vendor: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Capabilities: CFunc<(CPointer<Unit>, CPointer<InkRecognizerCapabilitiesAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Languages: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Languages: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SupportedProperties: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SupportedProperties: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PreferredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PreferredPacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var CreateRecognizerContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -17620,7 +17632,7 @@ public class IInkRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizer> {
-        return InterfaceDescriptor<IInkRecognizer>("IInkRecognizer", IInkRecognizer.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizerFromAbi, viewIInkRecognizer)
+        return InterfaceDescriptor<IInkRecognizer>("IInkRecognizer", IInkRecognizer.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizerFromAbi, viewIInkRecognizer)
     }
 
     public unsafe func vtbl(): IInkRecognizerVtbl {
@@ -17646,21 +17658,21 @@ public class IInkRecognizer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Languages(Languages: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Languages(Languages: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Languages(__liveRaw, Languages)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SupportedProperties(SupportedProperties: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SupportedProperties(SupportedProperties: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedProperties(__liveRaw, SupportedProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PreferredPacketDescription(PreferredPacketDescription: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PreferredPacketDescription(PreferredPacketDescription: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PreferredPacketDescription(__liveRaw, PreferredPacketDescription)
@@ -17676,7 +17688,7 @@ public class IInkRecognizer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizerContextVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_Strokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CharacterAutoCompletionMode: CFunc<(CPointer<Unit>, CPointer<InkRecognizerCharacterAutoCompletionModeAbi>) -> Int32> = { _, _ => 0 }
@@ -17698,9 +17710,9 @@ public struct IInkRecognizerContextVtbl {
     public var StopBackgroundRecognition: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var EndInkInput: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BackgroundRecognize: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var BackgroundRecognize: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BackgroundRecognizeWithAlternates: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var BackgroundRecognizeWithAlternates: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsStringSupported: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -17739,7 +17751,7 @@ public class IInkRecognizerContext <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizerContext> {
-        return InterfaceDescriptor<IInkRecognizerContext>("IInkRecognizerContext", IInkRecognizerContext.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizerContextFromAbi, viewIInkRecognizerContext)
+        return InterfaceDescriptor<IInkRecognizerContext>("IInkRecognizerContext", IInkRecognizerContext.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizerContextFromAbi, viewIInkRecognizerContext)
     }
 
     public unsafe func vtbl(): IInkRecognizerContextVtbl {
@@ -17867,14 +17879,14 @@ public class IInkRecognizerContext <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BackgroundRecognize(CustomData: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func BackgroundRecognize(CustomData: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BackgroundRecognize(__liveRaw, CustomData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BackgroundRecognizeWithAlternates(CustomData: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func BackgroundRecognizeWithAlternates(CustomData: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BackgroundRecognizeWithAlternates(__liveRaw, CustomData)
@@ -17896,7 +17908,7 @@ public class IInkRecognizerContext <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRecognizersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -17938,7 +17950,7 @@ public class IInkRecognizers <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRecognizers> {
-        return InterfaceDescriptor<IInkRecognizers>("IInkRecognizers", IInkRecognizers.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRecognizersFromAbi, viewIInkRecognizers)
+        return InterfaceDescriptor<IInkRecognizers>("IInkRecognizers", IInkRecognizers.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRecognizersFromAbi, viewIInkRecognizers)
     }
 
     public unsafe func vtbl(): IInkRecognizersVtbl {
@@ -17974,7 +17986,7 @@ public class IInkRecognizers <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkRendererVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetViewTransform: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SetViewTransform: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetObjectTransform: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -17984,9 +17996,9 @@ public struct IInkRendererVtbl {
     public var PixelToInkSpace: CFunc<(CPointer<Unit>, IntNative, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var InkSpaceToPixel: CFunc<(CPointer<Unit>, IntNative, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PixelToInkSpaceFromPoints: CFunc<(CPointer<Unit>, IntNative, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var PixelToInkSpaceFromPoints: CFunc<(CPointer<Unit>, IntNative, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var InkSpaceToPixelFromPoints: CFunc<(CPointer<Unit>, IntNative, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var InkSpaceToPixelFromPoints: CFunc<(CPointer<Unit>, IntNative, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Measure: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var MeasureStroke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Move: CFunc<(CPointer<Unit>, Float32, Float32) -> Int32> = { _, _, _ => 0 }
@@ -18028,7 +18040,7 @@ public class IInkRenderer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkRenderer> {
-        return InterfaceDescriptor<IInkRenderer>("IInkRenderer", IInkRenderer.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkRendererFromAbi, viewIInkRenderer)
+        return InterfaceDescriptor<IInkRenderer>("IInkRenderer", IInkRenderer.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkRendererFromAbi, viewIInkRenderer)
     }
 
     public unsafe func vtbl(): IInkRendererVtbl {
@@ -18084,14 +18096,14 @@ public class IInkRenderer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PixelToInkSpaceFromPoints(hDC: IntNative, Points: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PixelToInkSpaceFromPoints(hDC: IntNative, Points: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PixelToInkSpaceFromPoints(__liveRaw, hDC, Points)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func InkSpaceToPixelFromPoints(hDC: IntNative, Points: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func InkSpaceToPixelFromPoints(hDC: IntNative, Points: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InkSpaceToPixelFromPoints(__liveRaw, hDC, Points)
@@ -18131,47 +18143,47 @@ public class IInkRenderer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkStrokeDispVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ID: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BezierPoints: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BezierPoints: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var DrawingAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var putref_DrawingAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Ink: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PolylineCusps: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PolylineCusps: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var BezierCusps: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var BezierCusps: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SelfIntersections: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var SelfIntersections: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var PacketCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var PacketSize: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PacketDescription: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Deleted: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var GetBoundingBox: CFunc<(CPointer<Unit>, InkBoundingBoxModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var FindIntersections: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var FindIntersections: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetRectangleIntersections: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetRectangleIntersections: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Clip: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var HitTestCircle: CFunc<(CPointer<Unit>, Int32, Int32, Float32, CPointer<Int16>) -> Int32> = { _, _, _, _, _ => 0 }
     public var NearestPoint: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Float32>, CPointer<Float32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Split: CFunc<(CPointer<Unit>, Float32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetPacketDescriptionPropertyMetrics: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>, CPointer<Int32>, CPointer<TabletPropertyMetricUnitAbi>, CPointer<Float32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPoints: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPoints: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPoints: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetPoints: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPacketData: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPacketData: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPacketValuesByProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetPacketValuesByProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPacketValuesByProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var SetPacketValuesByProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetFlattenedBezierPoints: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetFlattenedBezierPoints: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Transform: CFunc<(CPointer<Unit>, CPointer<Unit>, Int16) -> Int32> = { _, _, _ => 0 }
     public var ScaleToRectangle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Move: CFunc<(CPointer<Unit>, Float32, Float32) -> Int32> = { _, _, _ => 0 }
@@ -18214,7 +18226,7 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkStrokeDisp> {
-        return InterfaceDescriptor<IInkStrokeDisp>("IInkStrokeDisp", IInkStrokeDisp.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkStrokeDispFromAbi, viewIInkStrokeDisp)
+        return InterfaceDescriptor<IInkStrokeDisp>("IInkStrokeDisp", IInkStrokeDisp.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkStrokeDispFromAbi, viewIInkStrokeDisp)
     }
 
     public unsafe func vtbl(): IInkStrokeDispVtbl {
@@ -18228,7 +18240,7 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BezierPoints(Points: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BezierPoints(Points: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BezierPoints(__liveRaw, Points)
@@ -18259,21 +18271,21 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PolylineCusps(Cusps: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PolylineCusps(Cusps: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PolylineCusps(__liveRaw, Cusps)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func BezierCusps(Cusps: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func BezierCusps(Cusps: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BezierCusps(__liveRaw, Cusps)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SelfIntersections(Intersections: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SelfIntersections(Intersections: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SelfIntersections(__liveRaw, Intersections)
@@ -18292,7 +18304,7 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PacketDescription(PacketDescription: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PacketDescription(PacketDescription: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PacketDescription(__liveRaw, PacketDescription)
@@ -18311,14 +18323,14 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func FindIntersections(Strokes: CPointer<Unit>, Intersections: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func FindIntersections(Strokes: CPointer<Unit>, Intersections: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindIntersections(__liveRaw, Strokes, Intersections)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetRectangleIntersections(Rectangle: CPointer<Unit>, Intersections: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetRectangleIntersections(Rectangle: CPointer<Unit>, Intersections: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRectangleIntersections(__liveRaw, Rectangle, Intersections)
@@ -18355,42 +18367,42 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPoints(Index: Int32, Count: Int32, Points: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPoints(Index: Int32, Count: Int32, Points: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPoints(__liveRaw, Index, Count, Points)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPoints(Points: Win32__impl_l2.VARIANTAbi, Index: Int32, Count: Int32, NumberOfPointsSet: CPointer<Int32>): Int32 {
+    public unsafe func SetPoints(Points: Win32_impl_p2.VARIANTAbi, Index: Int32, Count: Int32, NumberOfPointsSet: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPoints(__liveRaw, Points, Index, Count, NumberOfPointsSet)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPacketData(Index: Int32, Count: Int32, PacketData: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPacketData(Index: Int32, Count: Int32, PacketData: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPacketData(__liveRaw, Index, Count, PacketData)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPacketValuesByProperty(PropertyName: CPointer<UInt16>, Index: Int32, Count: Int32, PacketValues: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPacketValuesByProperty(PropertyName: CPointer<UInt16>, Index: Int32, Count: Int32, PacketValues: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPacketValuesByProperty(__liveRaw, PropertyName, Index, Count, PacketValues)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPacketValuesByProperty(bstrPropertyName: CPointer<UInt16>, PacketValues: Win32__impl_l2.VARIANTAbi, Index: Int32, Count: Int32, NumberOfPacketsSet: CPointer<Int32>): Int32 {
+    public unsafe func SetPacketValuesByProperty(bstrPropertyName: CPointer<UInt16>, PacketValues: Win32_impl_p2.VARIANTAbi, Index: Int32, Count: Int32, NumberOfPacketsSet: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPacketValuesByProperty(__liveRaw, bstrPropertyName, PacketValues, Index, Count, NumberOfPacketsSet)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetFlattenedBezierPoints(FittingError: Int32, FlattenedBezierPoints: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetFlattenedBezierPoints(FittingError: Int32, FlattenedBezierPoints: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFlattenedBezierPoints(__liveRaw, FittingError, FlattenedBezierPoints)
@@ -18436,7 +18448,7 @@ public class IInkStrokeDisp <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IInkStrokesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -18494,7 +18506,7 @@ public class IInkStrokes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IInkStrokes> {
-        return InterfaceDescriptor<IInkStrokes>("IInkStrokes", IInkStrokes.iid(), Win32__impl_l2.IDispatch.iid(), takeIInkStrokesFromAbi, viewIInkStrokes)
+        return InterfaceDescriptor<IInkStrokes>("IInkStrokes", IInkStrokes.iid(), Win32_impl_p2.IDispatch.iid(), takeIInkStrokesFromAbi, viewIInkStrokes)
     }
 
     public unsafe func vtbl(): IInkStrokesVtbl {
@@ -18626,7 +18638,7 @@ public class IInkStrokes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_TabletPC == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMathInputControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Show: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Hide: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsVisible: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -18681,7 +18693,7 @@ public class IMathInputControl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMathInputControl> {
-        return InterfaceDescriptor<IMathInputControl>("IMathInputControl", IMathInputControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIMathInputControlFromAbi, viewIMathInputControl)
+        return InterfaceDescriptor<IMathInputControl>("IMathInputControl", IMathInputControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIMathInputControlFromAbi, viewIMathInputControl)
     }
 
     public unsafe func vtbl(): IMathInputControlVtbl {

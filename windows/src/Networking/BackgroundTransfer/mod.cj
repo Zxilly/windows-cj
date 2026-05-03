@@ -4,16 +4,27 @@
 package windows.Networking.BackgroundTransfer
 
 import std.collection.*
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_BackgroundTransfer == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Networking_BackgroundTransfer == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_BackgroundTransfer == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows_future as windows_future
 
 
@@ -580,14 +591,14 @@ public interface IBackgroundTransferBase_Impl <: IBackgroundTransferBase_ImplEra
         }
     }
 
-    public func ServerCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func ServerCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_ServerCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.ServerCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -595,15 +606,15 @@ public interface IBackgroundTransferBase_Impl <: IBackgroundTransferBase_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func SetServerCredential(credential: InParam<_impl_l0.PasswordCredential>): windows_core.Result<Unit>
+    public func SetServerCredential(credential: InParam<impl_p0.PasswordCredential>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetServerCredential(arg0: CPointer<Unit>): Int32 {
-        match (this.SetServerCredential(InParam<_impl_l0.PasswordCredential>(_impl_l0.PasswordCredential.viewOf(arg0)))) {
+        match (this.SetServerCredential(InParam<impl_p0.PasswordCredential>(impl_p0.PasswordCredential.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -611,14 +622,14 @@ public interface IBackgroundTransferBase_Impl <: IBackgroundTransferBase_ImplEra
         }
     }
 
-    public func ProxyCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func ProxyCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_ProxyCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.ProxyCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -626,15 +637,15 @@ public interface IBackgroundTransferBase_Impl <: IBackgroundTransferBase_ImplEra
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func SetProxyCredential(credential: InParam<_impl_l0.PasswordCredential>): windows_core.Result<Unit>
+    public func SetProxyCredential(credential: InParam<impl_p0.PasswordCredential>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetProxyCredential(arg0: CPointer<Unit>): Int32 {
-        match (this.SetProxyCredential(InParam<_impl_l0.PasswordCredential>(_impl_l0.PasswordCredential.viewOf(arg0)))) {
+        match (this.SetProxyCredential(InParam<impl_p0.PasswordCredential>(impl_p0.PasswordCredential.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -767,7 +778,7 @@ public class IBackgroundTransferBase <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundTransferBase", IBackgroundTransferBase.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferBaseVtbl", "IBackgroundTransferBase", "IBackgroundTransferBase_Impl", [InterfaceMethodSchema("SetRequestHeader", 6, [InterfaceParameterSchema("headerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("headerValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ServerCredential", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetServerCredential", 8, [InterfaceParameterSchema("credential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProxyCredential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetProxyCredential", 10, [InterfaceParameterSchema("credential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Method", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMethod", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Group", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGroup", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CostPolicy", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundTransferCostPolicyAbi>", "OutSlot<BackgroundTransferCostPolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCostPolicy", 16, [InterfaceParameterSchema("value", "BackgroundTransferCostPolicyAbi", "BackgroundTransferCostPolicy", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundTransferBase", IBackgroundTransferBase.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferBaseVtbl", "IBackgroundTransferBase", "IBackgroundTransferBase_Impl", [InterfaceMethodSchema("SetRequestHeader", 6, [InterfaceParameterSchema("headerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("headerValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ServerCredential", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetServerCredential", 8, [InterfaceParameterSchema("credential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ProxyCredential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetProxyCredential", 10, [InterfaceParameterSchema("credential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Method", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMethod", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Group", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGroup", 14, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CostPolicy", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundTransferCostPolicyAbi>", "OutSlot<BackgroundTransferCostPolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCostPolicy", 16, [InterfaceParameterSchema("value", "BackgroundTransferCostPolicyAbi", "BackgroundTransferCostPolicy", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundTransferBase.runtimeType())
         return schema
     }
@@ -803,32 +814,32 @@ public class IBackgroundTransferBase <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ServerCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(credential: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetServerCredential(asRaw(), credential.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ProxyCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(credential: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetProxyCredential(asRaw(), credential.asRaw())
         HRESULT(hr).ok()
@@ -929,7 +940,7 @@ public class IBackgroundTransferCompletionGroup <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundTransferCompletionGroup", IBackgroundTransferCompletionGroup.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferCompletionGroupVtbl", "IBackgroundTransferCompletionGroup", "IBackgroundTransferCompletionGroup_Impl", [InterfaceMethodSchema("Trigger", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBackgroundTrigger>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Enable", 8, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundTransferCompletionGroup", IBackgroundTransferCompletionGroup.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferCompletionGroupVtbl", "IBackgroundTransferCompletionGroup", "IBackgroundTransferCompletionGroup_Impl", [InterfaceMethodSchema("Trigger", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBackgroundTrigger>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabled", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Enable", 8, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundTransferCompletionGroup.runtimeType())
         return schema
     }
@@ -959,12 +970,12 @@ public class IBackgroundTransferCompletionGroup <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_ApplicationModel_Background == "on"]
-    public unsafe func Trigger(): _impl_l0.IBackgroundTrigger {
+    public unsafe func Trigger(): impl_p0.IBackgroundTrigger {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Trigger(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBackgroundTrigger.fromAbiTake(result__)
+        return impl_p0.IBackgroundTrigger.fromAbiTake(result__)
     }
 
     public unsafe func IsEnabled(): Bool {
@@ -1034,7 +1045,7 @@ public class IBackgroundTransferContentPart <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundTransferContentPart", IBackgroundTransferContentPart.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferContentPartVtbl", "IBackgroundTransferContentPart", "IBackgroundTransferContentPart_Impl", [InterfaceMethodSchema("SetHeader", 6, [InterfaceParameterSchema("headerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("headerValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetText", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetFile", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundTransferContentPart", IBackgroundTransferContentPart.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferContentPartVtbl", "IBackgroundTransferContentPart", "IBackgroundTransferContentPart_Impl", [InterfaceMethodSchema("SetHeader", 6, [InterfaceParameterSchema("headerName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("headerValue", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetText", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetFile", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundTransferContentPart.runtimeType())
         return schema
     }
@@ -1076,7 +1087,7 @@ public class IBackgroundTransferContentPart <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetFile(value: _impl_l1.IStorageFile): Unit {
+    public unsafe func SetFile(value: impl_p1.IStorageFile): Unit {
         let v = vtbl()
         let hr = v.SetFile(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1091,7 +1102,7 @@ extend IBackgroundTransferContentPart <: windows_core.Interface<IBackgroundTrans
 public struct IBackgroundTransferErrorStaticMethodsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Web == "on"]
-    public var GetStatus: CFunc<(CPointer<Unit>, Int32, CPointer<_impl_l0.WebErrorStatusAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetStatus: CFunc<(CPointer<Unit>, Int32, CPointer<impl_p0.WebErrorStatusAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Web != "on"]
     public var GetStatus: UIntNative = UIntNative(0)
     public init() {}
@@ -1133,7 +1144,7 @@ public class IBackgroundTransferErrorStaticMethods <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundTransferErrorStaticMethods", IBackgroundTransferErrorStaticMethods.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferErrorStaticMethodsVtbl", "IBackgroundTransferErrorStaticMethods", "IBackgroundTransferErrorStaticMethods_Impl", [InterfaceMethodSchema("GetStatus", 6, [InterfaceParameterSchema("hresult", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<_impl_l0.WebErrorStatusAbi>", "OutSlot<_impl_l0.WebErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundTransferErrorStaticMethods", IBackgroundTransferErrorStaticMethods.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferErrorStaticMethodsVtbl", "IBackgroundTransferErrorStaticMethods", "IBackgroundTransferErrorStaticMethods_Impl", [InterfaceMethodSchema("GetStatus", 6, [InterfaceParameterSchema("hresult", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<impl_p0.WebErrorStatusAbi>", "OutSlot<impl_p0.WebErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundTransferErrorStaticMethods.runtimeType())
         return schema
     }
@@ -1163,12 +1174,12 @@ public class IBackgroundTransferErrorStaticMethods <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func GetStatus(hresult: Int32): _impl_l0.WebErrorStatus {
+    public unsafe func GetStatus(hresult: Int32): impl_p0.WebErrorStatus {
         let v = vtbl()
-        var result__ = _impl_l0.WebErrorStatusAbi()
-        let hr = v.GetStatus(asRaw(), hresult, CPointer<_impl_l0.WebErrorStatusAbi>(inout result__))
+        var result__ = impl_p0.WebErrorStatusAbi()
+        let hr = v.GetStatus(asRaw(), hresult, CPointer<impl_p0.WebErrorStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.WebErrorStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.WebErrorStatus>()).unwrap()
     }
 }
 
@@ -2607,7 +2618,7 @@ public class BackgroundTransferCompletionGroup <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_ApplicationModel_Background == "on"]
-    public unsafe func Trigger(): _impl_l0.IBackgroundTrigger {
+    public unsafe func Trigger(): impl_p0.IBackgroundTrigger {
         return defaultInterface().Trigger()
     }
 
@@ -2659,8 +2670,8 @@ public class BackgroundTransferError <: windows_interface.RuntimeName & windows_
     }
 
     @When[Windows_Web == "on"]
-    public static unsafe func GetStatus(hresult: Int32): _impl_l0.WebErrorStatus {
-        var result__: Option<_impl_l0.WebErrorStatus> = Option<_impl_l0.WebErrorStatus>.None
+    public static unsafe func GetStatus(hresult: Int32): impl_p0.WebErrorStatus {
+        var result__: Option<impl_p0.WebErrorStatus> = Option<impl_p0.WebErrorStatus>.None
         try (factory__ = windows_core.factory<BackgroundTransferError, IBackgroundTransferErrorStaticMethods>().unwrap()) {
             result__ = Some(factory__.GetStatus(hresult))
         }
@@ -3150,14 +3161,14 @@ public interface IBackgroundTransferOperation_Impl <: IBackgroundTransferOperati
         }
     }
 
-    public func GetResultStreamAt(position: UInt64): windows_core.Result<_impl_l0.IInputStream>
+    public func GetResultStreamAt(position: UInt64): windows_core.Result<impl_p0.IInputStream>
 
     public func __winrtThunk_GetResultStreamAt(arg0: UInt64, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetResultStreamAt(arg0)) {
-            case Result<_impl_l0.IInputStream>.Ok(value) =>
+            case Result<impl_p0.IInputStream>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -3165,7 +3176,7 @@ public interface IBackgroundTransferOperation_Impl <: IBackgroundTransferOperati
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.IInputStream>.Err(error) =>
+            case Result<impl_p0.IInputStream>.Err(error) =>
                 error.code().value
         }
     }
@@ -3227,7 +3238,7 @@ public class IBackgroundTransferOperation <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundTransferOperation", IBackgroundTransferOperation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferOperationVtbl", "IBackgroundTransferOperation", "IBackgroundTransferOperation_Impl", [InterfaceMethodSchema("Guid", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Method", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Group", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CostPolicy", 10, [InterfaceParameterSchema("result", "CPointer<BackgroundTransferCostPolicyAbi>", "OutSlot<BackgroundTransferCostPolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCostPolicy", 11, [InterfaceParameterSchema("value", "BackgroundTransferCostPolicyAbi", "BackgroundTransferCostPolicy", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetResultStreamAt", 12, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResponseInformation", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResponseInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundTransferOperation", IBackgroundTransferOperation.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundTransferOperationVtbl", "IBackgroundTransferOperation", "IBackgroundTransferOperation_Impl", [InterfaceMethodSchema("Guid", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestedUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Method", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Group", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CostPolicy", 10, [InterfaceParameterSchema("result", "CPointer<BackgroundTransferCostPolicyAbi>", "OutSlot<BackgroundTransferCostPolicy>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCostPolicy", 11, [InterfaceParameterSchema("value", "BackgroundTransferCostPolicyAbi", "BackgroundTransferCostPolicy", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetResultStreamAt", 12, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResponseInformation", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ResponseInformation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundTransferOperation.runtimeType())
         return schema
     }
@@ -3303,12 +3314,12 @@ public class IBackgroundTransferOperation <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetResultStreamAt(position: UInt64): _impl_l0.IInputStream {
+    public unsafe func GetResultStreamAt(position: UInt64): impl_p0.IInputStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetResultStreamAt(asRaw(), position, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IInputStream.fromAbiTake(result__)
+        return impl_p0.IInputStream.fromAbiTake(result__)
     }
 
     public unsafe func GetResponseInformation(): ResponseInformation {
@@ -3496,17 +3507,17 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateDownload(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile): DownloadOperation {
+    public unsafe func CreateDownload(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile): DownloadOperation {
         return defaultInterface().CreateDownload(uri, resultFile)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateDownloadFromFile(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile, requestBodyFile: _impl_l1.IStorageFile): DownloadOperation {
+    public unsafe func CreateDownloadFromFile(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile, requestBodyFile: impl_p1.IStorageFile): DownloadOperation {
         return defaultInterface().CreateDownloadFromFile(uri, resultFile, requestBodyFile)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CreateDownloadAsync(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile, requestBodyStream: _impl_l0.IInputStream): windows_future.IAsyncOperation<DownloadOperation> {
+    public unsafe func CreateDownloadAsync(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile, requestBodyStream: impl_p0.IInputStream): windows_future.IAsyncOperation<DownloadOperation> {
         return defaultInterface().CreateDownloadAsync(uri, resultFile, requestBodyStream)
     }
 
@@ -3515,22 +3526,22 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         return asIBackgroundTransferBase().ServerCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(credential: impl_p0.PasswordCredential): Unit {
         asIBackgroundTransferBase().SetServerCredential(credential)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         return asIBackgroundTransferBase().ProxyCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(credential: impl_p0.PasswordCredential): Unit {
         asIBackgroundTransferBase().SetProxyCredential(credential)
     }
 
@@ -3823,7 +3834,7 @@ public class BackgroundTransferContentPart <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetFile(value: _impl_l1.IStorageFile): Unit {
+    public unsafe func SetFile(value: impl_p1.IStorageFile): Unit {
         defaultInterface().SetFile(value)
     }
 
@@ -4067,12 +4078,12 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateUpload(uri: Foundation.Uri, sourceFile: _impl_l1.IStorageFile): UploadOperation {
+    public unsafe func CreateUpload(uri: Foundation.Uri, sourceFile: impl_p1.IStorageFile): UploadOperation {
         return defaultInterface().CreateUpload(uri, sourceFile)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateUploadFromStreamAsync(uri: Foundation.Uri, sourceStream: _impl_l0.IInputStream): windows_future.IAsyncOperation<UploadOperation> {
+    public unsafe func CreateUploadFromStreamAsync(uri: Foundation.Uri, sourceStream: impl_p0.IInputStream): windows_future.IAsyncOperation<UploadOperation> {
         return defaultInterface().CreateUploadFromStreamAsync(uri, sourceStream)
     }
 
@@ -4096,22 +4107,22 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ServerCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ServerCredential(): impl_p0.PasswordCredential {
         return asIBackgroundTransferBase().ServerCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetServerCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetServerCredential(credential: impl_p0.PasswordCredential): Unit {
         asIBackgroundTransferBase().SetServerCredential(credential)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ProxyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func ProxyCredential(): impl_p0.PasswordCredential {
         return asIBackgroundTransferBase().ProxyCredential()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetProxyCredential(credential: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetProxyCredential(credential: impl_p0.PasswordCredential): Unit {
         asIBackgroundTransferBase().SetProxyCredential(credential)
     }
 
@@ -4301,7 +4312,7 @@ public class DownloadOperation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ResultFile(): _impl_l1.IStorageFile {
+    public unsafe func ResultFile(): impl_p1.IStorageFile {
         return defaultInterface().ResultFile()
     }
 
@@ -4350,7 +4361,7 @@ public class DownloadOperation <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetResultStreamAt(position: UInt64): _impl_l0.IInputStream {
+    public unsafe func GetResultStreamAt(position: UInt64): impl_p0.IInputStream {
         return asIBackgroundTransferOperation().GetResultStreamAt(position)
     }
 
@@ -4445,7 +4456,7 @@ public class IBackgroundDownloader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundDownloader", IBackgroundDownloader.iid(), IBackgroundTransferBase.descriptorSchema(), ["IBackgroundTransferBase"], [IBackgroundTransferBase.iid()], "IBackgroundDownloaderVtbl", "IBackgroundDownloader", "IBackgroundDownloader_Impl", [InterfaceMethodSchema("CreateDownload", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DownloadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDownloadFromFile", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("requestBodyFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DownloadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDownloadAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("requestBodyStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundDownloader", IBackgroundDownloader.iid(), IBackgroundTransferBase.descriptorSchema(), ["IBackgroundTransferBase"], [IBackgroundTransferBase.iid()], "IBackgroundDownloaderVtbl", "IBackgroundDownloader", "IBackgroundDownloader_Impl", [InterfaceMethodSchema("CreateDownload", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DownloadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDownloadFromFile", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("requestBodyFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DownloadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDownloadAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("resultFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("requestBodyStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundDownloader.runtimeType())
         return schema
     }
@@ -4482,7 +4493,7 @@ public class IBackgroundDownloader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateDownload(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile): DownloadOperation {
+    public unsafe func CreateDownload(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile): DownloadOperation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDownload(asRaw(), uri.asRaw(), resultFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4491,7 +4502,7 @@ public class IBackgroundDownloader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateDownloadFromFile(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile, requestBodyFile: _impl_l1.IStorageFile): DownloadOperation {
+    public unsafe func CreateDownloadFromFile(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile, requestBodyFile: impl_p1.IStorageFile): DownloadOperation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDownloadFromFile(asRaw(), uri.asRaw(), resultFile.asRaw(), requestBodyFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4500,7 +4511,7 @@ public class IBackgroundDownloader <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CreateDownloadAsync(uri: Foundation.Uri, resultFile: _impl_l1.IStorageFile, requestBodyStream: _impl_l0.IInputStream): windows_future.IAsyncOperation<DownloadOperation> {
+    public unsafe func CreateDownloadAsync(uri: Foundation.Uri, resultFile: impl_p1.IStorageFile, requestBodyStream: impl_p0.IInputStream): windows_future.IAsyncOperation<DownloadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDownloadAsync(asRaw(), uri.asRaw(), resultFile.asRaw(), requestBodyStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4589,7 +4600,7 @@ public class IBackgroundDownloader2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundDownloader2", IBackgroundDownloader2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundDownloader2Vtbl", "IBackgroundDownloader2", "IBackgroundDownloader2_Impl", [InterfaceMethodSchema("TransferGroup", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BackgroundTransferGroup>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferGroup", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<BackgroundTransferGroup>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessToastNotification", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessToastNotification", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureToastNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureToastNotification", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessTileNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessTileNotification", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureTileNotification", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureTileNotification", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundDownloader2", IBackgroundDownloader2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundDownloader2Vtbl", "IBackgroundDownloader2", "IBackgroundDownloader2_Impl", [InterfaceMethodSchema("TransferGroup", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BackgroundTransferGroup>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferGroup", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<BackgroundTransferGroup>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessToastNotification", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessToastNotification", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureToastNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureToastNotification", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessTileNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessTileNotification", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureTileNotification", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureTileNotification", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundDownloader2.runtimeType())
         return schema
     }
@@ -4633,64 +4644,64 @@ public class IBackgroundDownloader2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SuccessToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func SuccessToastNotification(): impl_p1.ToastNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SuccessToastNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ToastNotification.fromAbiTake(result__)
+        return impl_p1.ToastNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetSuccessToastNotification(value: _impl_l1.ToastNotification): Unit {
+    public unsafe func SetSuccessToastNotification(value: impl_p1.ToastNotification): Unit {
         let v = vtbl()
         let hr = v.SetSuccessToastNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func FailureToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func FailureToastNotification(): impl_p1.ToastNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FailureToastNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ToastNotification.fromAbiTake(result__)
+        return impl_p1.ToastNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetFailureToastNotification(value: _impl_l1.ToastNotification): Unit {
+    public unsafe func SetFailureToastNotification(value: impl_p1.ToastNotification): Unit {
         let v = vtbl()
         let hr = v.SetFailureToastNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SuccessTileNotification(): _impl_l1.TileNotification {
+    public unsafe func SuccessTileNotification(): impl_p1.TileNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SuccessTileNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.TileNotification.fromAbiTake(result__)
+        return impl_p1.TileNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetSuccessTileNotification(value: _impl_l1.TileNotification): Unit {
+    public unsafe func SetSuccessTileNotification(value: impl_p1.TileNotification): Unit {
         let v = vtbl()
         let hr = v.SetSuccessTileNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func FailureTileNotification(): _impl_l1.TileNotification {
+    public unsafe func FailureTileNotification(): impl_p1.TileNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FailureTileNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.TileNotification.fromAbiTake(result__)
+        return impl_p1.TileNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetFailureTileNotification(value: _impl_l1.TileNotification): Unit {
+    public unsafe func SetFailureTileNotification(value: impl_p1.TileNotification): Unit {
         let v = vtbl()
         let hr = v.SetFailureTileNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -5494,7 +5505,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundUploader", IBackgroundUploader.iid(), IBackgroundTransferBase.descriptorSchema(), ["IBackgroundTransferBase"], [IBackgroundTransferBase.iid()], "IBackgroundUploaderVtbl", "IBackgroundUploader", "IBackgroundUploader_Impl", [InterfaceMethodSchema("CreateUpload", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sourceFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UploadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadFromStreamAsync", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sourceStream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithFormDataAndAutoBoundaryAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithSubTypeAsync", 20, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("subType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithSubTypeAndBoundaryAsync", 21, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("subType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("boundary", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundUploader", IBackgroundUploader.iid(), IBackgroundTransferBase.descriptorSchema(), ["IBackgroundTransferBase"], [IBackgroundTransferBase.iid()], "IBackgroundUploaderVtbl", "IBackgroundUploader", "IBackgroundUploader_Impl", [InterfaceMethodSchema("CreateUpload", 17, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sourceFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UploadOperation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadFromStreamAsync", 18, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sourceStream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithFormDataAndAutoBoundaryAsync", 19, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithSubTypeAsync", 20, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("subType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUploadWithSubTypeAndBoundaryAsync", 21, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("parts", "CPointer<Unit>", "InParam<windows_collections.IIterable<BackgroundTransferContentPart>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("subType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("boundary", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundUploader.runtimeType())
         return schema
     }
@@ -5531,7 +5542,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CreateUpload(uri: Foundation.Uri, sourceFile: _impl_l1.IStorageFile): UploadOperation {
+    public unsafe func CreateUpload(uri: Foundation.Uri, sourceFile: impl_p1.IStorageFile): UploadOperation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUpload(asRaw(), uri.asRaw(), sourceFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5540,7 +5551,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateUploadFromStreamAsync(uri: Foundation.Uri, sourceStream: _impl_l0.IInputStream): windows_future.IAsyncOperation<UploadOperation> {
+    public unsafe func CreateUploadFromStreamAsync(uri: Foundation.Uri, sourceStream: impl_p0.IInputStream): windows_future.IAsyncOperation<UploadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUploadFromStreamAsync(asRaw(), uri.asRaw(), sourceStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5656,7 +5667,7 @@ public class IBackgroundUploader2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBackgroundUploader2", IBackgroundUploader2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundUploader2Vtbl", "IBackgroundUploader2", "IBackgroundUploader2_Impl", [InterfaceMethodSchema("TransferGroup", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BackgroundTransferGroup>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferGroup", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<BackgroundTransferGroup>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessToastNotification", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessToastNotification", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureToastNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureToastNotification", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessTileNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessTileNotification", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureTileNotification", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureTileNotification", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBackgroundUploader2", IBackgroundUploader2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBackgroundUploader2Vtbl", "IBackgroundUploader2", "IBackgroundUploader2_Impl", [InterfaceMethodSchema("TransferGroup", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BackgroundTransferGroup>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferGroup", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<BackgroundTransferGroup>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessToastNotification", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessToastNotification", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureToastNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureToastNotification", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SuccessTileNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSuccessTileNotification", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("FailureTileNotification", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFailureTileNotification", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.TileNotification>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IBackgroundUploader2.runtimeType())
         return schema
     }
@@ -5700,64 +5711,64 @@ public class IBackgroundUploader2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SuccessToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func SuccessToastNotification(): impl_p1.ToastNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SuccessToastNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ToastNotification.fromAbiTake(result__)
+        return impl_p1.ToastNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetSuccessToastNotification(value: _impl_l1.ToastNotification): Unit {
+    public unsafe func SetSuccessToastNotification(value: impl_p1.ToastNotification): Unit {
         let v = vtbl()
         let hr = v.SetSuccessToastNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func FailureToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func FailureToastNotification(): impl_p1.ToastNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FailureToastNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ToastNotification.fromAbiTake(result__)
+        return impl_p1.ToastNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetFailureToastNotification(value: _impl_l1.ToastNotification): Unit {
+    public unsafe func SetFailureToastNotification(value: impl_p1.ToastNotification): Unit {
         let v = vtbl()
         let hr = v.SetFailureToastNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SuccessTileNotification(): _impl_l1.TileNotification {
+    public unsafe func SuccessTileNotification(): impl_p1.TileNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SuccessTileNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.TileNotification.fromAbiTake(result__)
+        return impl_p1.TileNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetSuccessTileNotification(value: _impl_l1.TileNotification): Unit {
+    public unsafe func SetSuccessTileNotification(value: impl_p1.TileNotification): Unit {
         let v = vtbl()
         let hr = v.SetSuccessTileNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func FailureTileNotification(): _impl_l1.TileNotification {
+    public unsafe func FailureTileNotification(): impl_p1.TileNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FailureTileNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.TileNotification.fromAbiTake(result__)
+        return impl_p1.TileNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func SetFailureTileNotification(value: _impl_l1.TileNotification): Unit {
+    public unsafe func SetFailureTileNotification(value: impl_p1.TileNotification): Unit {
         let v = vtbl()
         let hr = v.SetFailureTileNotification(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -6189,7 +6200,7 @@ public class IDownloadOperation <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDownloadOperation", IDownloadOperation.iid(), IBackgroundTransferOperation.descriptorSchema(), ["IBackgroundTransferOperation"], [IBackgroundTransferOperation.iid()], "IDownloadOperationVtbl", "IDownloadOperation", "IDownloadOperation_Impl", [InterfaceMethodSchema("ResultFile", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Progress", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundDownloadProgressAbi>", "OutSlot<BackgroundDownloadProgress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DownloadOperation, DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AttachAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DownloadOperation, DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Pause", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Resume", 19, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IDownloadOperation", IDownloadOperation.iid(), IBackgroundTransferOperation.descriptorSchema(), ["IBackgroundTransferOperation"], [IBackgroundTransferOperation.iid()], "IDownloadOperationVtbl", "IDownloadOperation", "IDownloadOperation_Impl", [InterfaceMethodSchema("ResultFile", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Progress", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundDownloadProgressAbi>", "OutSlot<BackgroundDownloadProgress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DownloadOperation, DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AttachAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<DownloadOperation, DownloadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Pause", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Resume", 19, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IDownloadOperation.runtimeType())
         return schema
     }
@@ -6226,12 +6237,12 @@ public class IDownloadOperation <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func ResultFile(): _impl_l1.IStorageFile {
+    public unsafe func ResultFile(): impl_p1.IStorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ResultFile(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFile.fromAbiTake(result__)
+        return impl_p1.IStorageFile.fromAbiTake(result__)
     }
 
     public unsafe func Progress(): BackgroundDownloadProgress {
@@ -6423,7 +6434,7 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDownloadOperation3", IDownloadOperation3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDownloadOperation3Vtbl", "IDownloadOperation3", "IDownloadOperation3_Impl", [InterfaceMethodSchema("IsRandomAccessRequired", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsRandomAccessRequired", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetResultRandomAccessStreamReference", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDownloadedRanges", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<BackgroundTransferFileRange>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangesDownloaded", 10, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DownloadOperation, BackgroundTransferRangesDownloadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRangesDownloaded", 11, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetRequestedUri", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RecoverableWebErrorStatuses", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l0.WebErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentWebErrorStatus", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<_impl_l0.WebErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDownloadOperation3", IDownloadOperation3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDownloadOperation3Vtbl", "IDownloadOperation3", "IDownloadOperation3_Impl", [InterfaceMethodSchema("IsRandomAccessRequired", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsRandomAccessRequired", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetResultRandomAccessStreamReference", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDownloadedRanges", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<BackgroundTransferFileRange>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RangesDownloaded", 10, [InterfaceParameterSchema("eventHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<DownloadOperation, BackgroundTransferRangesDownloadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRangesDownloaded", 11, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetRequestedUri", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RecoverableWebErrorStatuses", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p0.WebErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentWebErrorStatus", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<impl_p0.WebErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDownloadOperation3.runtimeType())
         return schema
     }
@@ -6467,12 +6478,12 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetResultRandomAccessStreamReference(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func GetResultRandomAccessStreamReference(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetResultRandomAccessStreamReference(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -6505,21 +6516,21 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Web == "on"]
-    public unsafe func RecoverableWebErrorStatuses(): windows_collections.IVector<_impl_l0.WebErrorStatus> {
+    public unsafe func RecoverableWebErrorStatuses(): windows_collections.IVector<impl_p0.WebErrorStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RecoverableWebErrorStatuses(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l0.WebErrorStatus>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p0.WebErrorStatus>.fromAbiTake(result__)
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func CurrentWebErrorStatus(): Foundation.IReference<_impl_l0.WebErrorStatus> {
+    public unsafe func CurrentWebErrorStatus(): Foundation.IReference<impl_p0.WebErrorStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CurrentWebErrorStatus(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Foundation.IReference<_impl_l0.WebErrorStatus>.fromAbiTake(result__)
+        return Foundation.IReference<impl_p0.WebErrorStatus>.fromAbiTake(result__)
     }
 }
 
@@ -6581,7 +6592,7 @@ public class IUploadOperation <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUploadOperation", IUploadOperation.iid(), IBackgroundTransferOperation.descriptorSchema(), ["IBackgroundTransferOperation"], [IBackgroundTransferOperation.iid()], "IUploadOperationVtbl", "IUploadOperation", "IUploadOperation_Impl", [InterfaceMethodSchema("SourceFile", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Progress", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundUploadProgressAbi>", "OutSlot<BackgroundUploadProgress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UploadOperation, UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AttachAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UploadOperation, UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUploadOperation", IUploadOperation.iid(), IBackgroundTransferOperation.descriptorSchema(), ["IBackgroundTransferOperation"], [IBackgroundTransferOperation.iid()], "IUploadOperationVtbl", "IUploadOperation", "IUploadOperation_Impl", [InterfaceMethodSchema("SourceFile", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Progress", 15, [InterfaceParameterSchema("result", "CPointer<BackgroundUploadProgressAbi>", "OutSlot<BackgroundUploadProgress>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UploadOperation, UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AttachAsync", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<UploadOperation, UploadOperation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUploadOperation.runtimeType())
         return schema
     }
@@ -6618,12 +6629,12 @@ public class IUploadOperation <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SourceFile(): _impl_l1.IStorageFile {
+    public unsafe func SourceFile(): impl_p1.IStorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SourceFile(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFile.fromAbiTake(result__)
+        return impl_p1.IStorageFile.fromAbiTake(result__)
     }
 
     public unsafe func Progress(): BackgroundUploadProgress {
@@ -6823,7 +6834,7 @@ public class UploadOperation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SourceFile(): _impl_l1.IStorageFile {
+    public unsafe func SourceFile(): impl_p1.IStorageFile {
         return defaultInterface().SourceFile()
     }
 
@@ -6864,7 +6875,7 @@ public class UploadOperation <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetResultStreamAt(position: UInt64): _impl_l0.IInputStream {
+    public unsafe func GetResultStreamAt(position: UInt64): impl_p0.IInputStream {
         return asIBackgroundTransferOperation().GetResultStreamAt(position)
     }
 

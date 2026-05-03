@@ -4,15 +4,25 @@
 package windows.ApplicationModel.Wallet.System
 
 import std.collection.*
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Wallet_System == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Wallet_System == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Wallet_System == "on"]
 import windows_future as windows_future
 
 
@@ -136,7 +146,7 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWalletItemSystemStore", IWalletItemSystemStore.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWalletItemSystemStoreVtbl", "IWalletItemSystemStore", "IWalletItemSystemStore_Impl", [InterfaceMethodSchema("GetItemsAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteAsync", 7, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<_impl_l1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImportItemAsync", 8, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.WalletItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppStatusForItem", 9, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<_impl_l1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<WalletItemAppAssociationAbi>", "OutSlot<WalletItemAppAssociation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchAppForItemAsync", 10, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<_impl_l1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWalletItemSystemStore", IWalletItemSystemStore.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWalletItemSystemStoreVtbl", "IWalletItemSystemStore", "IWalletItemSystemStore_Impl", [InterfaceMethodSchema("GetItemsAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.WalletItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteAsync", 7, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<impl_p1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImportItemAsync", 8, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.WalletItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppStatusForItem", 9, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<impl_p1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<WalletItemAppAssociationAbi>", "OutSlot<WalletItemAppAssociation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LaunchAppForItemAsync", 10, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<impl_p1.WalletItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWalletItemSystemStore.runtimeType())
         return schema
     }
@@ -166,16 +176,16 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>> {
+    public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.WalletItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetItemsAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.WalletItem>>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func DeleteAsync(item: _impl_l1.WalletItem): windows_future.IAsyncAction {
+    public unsafe func DeleteAsync(item: impl_p1.WalletItem): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeleteAsync(asRaw(), item.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -184,16 +194,16 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_ApplicationModel_Wallet == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ImportItemAsync(stream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<_impl_l1.WalletItem> {
+    public unsafe func ImportItemAsync(stream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<impl_p1.WalletItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ImportItemAsync(asRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.WalletItem>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.WalletItem>.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func GetAppStatusForItem(item: _impl_l1.WalletItem): WalletItemAppAssociation {
+    public unsafe func GetAppStatusForItem(item: impl_p1.WalletItem): WalletItemAppAssociation {
         let v = vtbl()
         var result__ = WalletItemAppAssociationAbi()
         let hr = v.GetAppStatusForItem(asRaw(), item.asRaw(), CPointer<WalletItemAppAssociationAbi>(inout result__))
@@ -202,7 +212,7 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func LaunchAppForItemAsync(item: _impl_l1.WalletItem): windows_future.IAsyncOperation<Bool> {
+    public unsafe func LaunchAppForItemAsync(item: impl_p1.WalletItem): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LaunchAppForItemAsync(asRaw(), item.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -461,27 +471,27 @@ public class WalletItemSystemStore <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>> {
+    public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p1.WalletItem>> {
         return defaultInterface().GetItemsAsync()
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func DeleteAsync(item: _impl_l1.WalletItem): windows_future.IAsyncAction {
+    public unsafe func DeleteAsync(item: impl_p1.WalletItem): windows_future.IAsyncAction {
         return defaultInterface().DeleteAsync(item)
     }
 
     @When[Windows_ApplicationModel_Wallet == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func ImportItemAsync(stream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<_impl_l1.WalletItem> {
+    public unsafe func ImportItemAsync(stream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<impl_p1.WalletItem> {
         return defaultInterface().ImportItemAsync(stream)
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func GetAppStatusForItem(item: _impl_l1.WalletItem): WalletItemAppAssociation {
+    public unsafe func GetAppStatusForItem(item: impl_p1.WalletItem): WalletItemAppAssociation {
         return defaultInterface().GetAppStatusForItem(item)
     }
 
     @When[Windows_ApplicationModel_Wallet == "on"]
-    public unsafe func LaunchAppForItemAsync(item: _impl_l1.WalletItem): windows_future.IAsyncOperation<Bool> {
+    public unsafe func LaunchAppForItemAsync(item: impl_p1.WalletItem): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().LaunchAppForItemAsync(item)
     }
 }

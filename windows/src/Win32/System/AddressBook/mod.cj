@@ -4,16 +4,24 @@
 package windows.Win32.System.AddressBook
 
 import std.collection.*
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32}
+@When[Windows_Win32_System_AddressBook == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_AddressBook == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_AddressBook == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_AddressBook == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_AddressBook == "on"]
@@ -1934,7 +1942,7 @@ extend SComparePropsRestriction <: windows_core.CopyType & windows_core.RuntimeT
 @When[Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on"]
 public struct SCurrencyArray {
     public var cValues: UInt32 = 0u32
-    public var lpcur: CPointer<Win32__impl_l0.CY> = CPointer<Win32__impl_l0.CY>()
+    public var lpcur: CPointer<Win32_impl_p0.CY> = CPointer<Win32_impl_p0.CY>()
     public init() {}
 }
 
@@ -1942,7 +1950,7 @@ public struct SCurrencyArray {
 @C
 public struct SCurrencyArrayAbi {
     public var cValues: UInt32 = 0u32
-    public var lpcur: CPointer<Win32__impl_l0.CY> = CPointer<Win32__impl_l0.CY>()
+    public var lpcur: CPointer<Win32_impl_p0.CY> = CPointer<Win32_impl_p0.CY>()
     public init() {}
 }
 
@@ -2780,13 +2788,13 @@ public struct __UPV {
         }
     }
 
-    public mut prop cur: Win32__impl_l0.CY {
+    public mut prop cur: Win32_impl_p0.CY {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.CY>(p)
+                let ptr = CPointer<Win32_impl_p0.CY>(p)
                 return ptr.read()
             }
         }
@@ -2795,7 +2803,7 @@ public struct __UPV {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.CY>(p)
+                let ptr = CPointer<Win32_impl_p0.CY>(p)
                 ptr.write(val)
                 _raw = rawStorage
             }

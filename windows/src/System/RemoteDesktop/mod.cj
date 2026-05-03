@@ -4,11 +4,17 @@
 package windows.System.RemoteDesktop
 
 import std.collection.*
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_core as windows_core
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_RemoteDesktop == "on"]
 import windows_polyfill as windows_polyfill
 
 

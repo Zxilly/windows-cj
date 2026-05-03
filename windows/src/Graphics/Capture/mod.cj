@@ -4,20 +4,35 @@
 package windows.Graphics.Capture
 
 import std.collection.*
+@When[Windows_Graphics_Capture == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Capture == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Capture == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Capture == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Capture == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Capture == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Capture == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Capture == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
+@When[Windows_Graphics_Capture == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
+@When[Windows_Graphics_Capture == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
+@When[Windows_Graphics_Capture == "on" && Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows.Security.Authorization.AppCapabilityAccess as Security_Authorization_AppCapabilityAccess
+@When[Windows_Graphics_Capture == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Capture == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Capture == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Capture == "on"]
 import windows_future as windows_future
 
 
@@ -1413,7 +1428,7 @@ public class Direct3D11CaptureFramePool <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_DispatcherQueue(): _impl_l1.DispatcherQueue {
+    public unsafe func get_DispatcherQueue(): impl_p1.DispatcherQueue {
         return defaultInterface().get_DispatcherQueue()
     }
 
@@ -1551,7 +1566,7 @@ public class GraphicsCaptureItem <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func CreateFromVisual(visual: _impl_l1.Visual): GraphicsCaptureItem {
+    public static unsafe func CreateFromVisual(visual: impl_p1.Visual): GraphicsCaptureItem {
         var result__: Option<GraphicsCaptureItem> = Option<GraphicsCaptureItem>.None
         try (factory__ = windows_core.factory<GraphicsCaptureItem, IGraphicsCaptureItemStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromVisual(visual))
@@ -1763,7 +1778,7 @@ public class IDirect3D11CaptureFramePool <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDirect3D11CaptureFramePool", IDirect3D11CaptureFramePool.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDirect3D11CaptureFramePoolVtbl", "IDirect3D11CaptureFramePool", "IDirect3D11CaptureFramePool_Impl", [InterfaceMethodSchema("Recreate", 6, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DDevice>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pixelFormat", "Graphics_DirectX.DirectXPixelFormatAbi", "Graphics_DirectX.DirectXPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("numberOfBuffers", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("size", "Graphics.SizeInt32Abi", "Graphics.SizeInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TryGetNextFrame", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Direct3D11CaptureFrame>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameArrived", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<Direct3D11CaptureFramePool, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameArrived", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CreateCaptureSession", 10, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<GraphicsCaptureItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GraphicsCaptureSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DispatcherQueue", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.DispatcherQueue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDirect3D11CaptureFramePool", IDirect3D11CaptureFramePool.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDirect3D11CaptureFramePoolVtbl", "IDirect3D11CaptureFramePool", "IDirect3D11CaptureFramePool_Impl", [InterfaceMethodSchema("Recreate", 6, [InterfaceParameterSchema("device", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DDevice>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pixelFormat", "Graphics_DirectX.DirectXPixelFormatAbi", "Graphics_DirectX.DirectXPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("numberOfBuffers", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("size", "Graphics.SizeInt32Abi", "Graphics.SizeInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TryGetNextFrame", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Direct3D11CaptureFrame>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FrameArrived", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<Direct3D11CaptureFramePool, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameArrived", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CreateCaptureSession", 10, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<GraphicsCaptureItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GraphicsCaptureSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_DispatcherQueue", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.DispatcherQueue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDirect3D11CaptureFramePool.runtimeType())
         return schema
     }
@@ -1830,12 +1845,12 @@ public class IDirect3D11CaptureFramePool <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_DispatcherQueue(): _impl_l1.DispatcherQueue {
+    public unsafe func get_DispatcherQueue(): impl_p1.DispatcherQueue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_DispatcherQueue(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.DispatcherQueue.fromAbiTake(result__)
+        return impl_p1.DispatcherQueue.fromAbiTake(result__)
     }
 }
 
@@ -2181,7 +2196,7 @@ public class IGraphicsCaptureItemStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGraphicsCaptureItemStatics", IGraphicsCaptureItemStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGraphicsCaptureItemStaticsVtbl", "IGraphicsCaptureItemStatics", "IGraphicsCaptureItemStatics_Impl", [InterfaceMethodSchema("CreateFromVisual", 6, [InterfaceParameterSchema("visual", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GraphicsCaptureItem>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGraphicsCaptureItemStatics", IGraphicsCaptureItemStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IGraphicsCaptureItemStaticsVtbl", "IGraphicsCaptureItemStatics", "IGraphicsCaptureItemStatics_Impl", [InterfaceMethodSchema("CreateFromVisual", 6, [InterfaceParameterSchema("visual", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<GraphicsCaptureItem>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGraphicsCaptureItemStatics.runtimeType())
         return schema
     }
@@ -2211,7 +2226,7 @@ public class IGraphicsCaptureItemStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func CreateFromVisual(visual: _impl_l1.Visual): GraphicsCaptureItem {
+    public unsafe func CreateFromVisual(visual: impl_p1.Visual): GraphicsCaptureItem {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromVisual(asRaw(), visual.asRaw(), CPointer<CPointer<Unit>>(inout result__))

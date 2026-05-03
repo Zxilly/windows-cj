@@ -4,15 +4,25 @@
 package windows_appsdk.Microsoft.UI.Xaml.Controls.AnimatedVisuals
 
 import std.collection.*
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_core.{HRESULT, IGenericFactory, RuntimeType}
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_interface.{ComInterface, GUID, IActivationFactory, IInspectable, IUnknown, InterfaceDescriptor, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on" && Microsoft_UI_Composition == "on"]
 import windows_appsdk.Microsoft.UI.Composition as Microsoft_UI_Composition
-import windows_appsdk.Microsoft.UI.Xaml._impl_l0 as Microsoft_UI_Xaml__impl_l0
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
+import windows_appsdk.Microsoft.UI.Xaml.impl.p0 as Microsoft_UI_Xaml_impl_p0
+@When[Microsoft_UI_Xaml_Controls_AnimatedVisuals == "on"]
 import windows_collections as windows_collections
 
 
@@ -35,7 +45,7 @@ public class AnimatedAcceptVisualSource <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -43,12 +53,12 @@ public class AnimatedAcceptVisualSource <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedAcceptVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedAcceptVisualSource>("AnimatedAcceptVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedAcceptVisualSource.fromAbiTake(raw) }, { raw => AnimatedAcceptVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedAcceptVisualSource>("AnimatedAcceptVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedAcceptVisualSource.fromAbiTake(raw) }, { raw => AnimatedAcceptVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -63,7 +73,7 @@ public class AnimatedAcceptVisualSource <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedAcceptVisualSource", AnimatedAcceptVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedAcceptVisualSource", AnimatedAcceptVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -89,22 +99,22 @@ public class AnimatedAcceptVisualSource <: InterfaceWrapperBase & ComInterface &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -156,7 +166,7 @@ public class AnimatedBackVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -164,12 +174,12 @@ public class AnimatedBackVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedBackVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedBackVisualSource>("AnimatedBackVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedBackVisualSource.fromAbiTake(raw) }, { raw => AnimatedBackVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedBackVisualSource>("AnimatedBackVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedBackVisualSource.fromAbiTake(raw) }, { raw => AnimatedBackVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -184,7 +194,7 @@ public class AnimatedBackVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedBackVisualSource", AnimatedBackVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedBackVisualSource", AnimatedBackVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -210,22 +220,22 @@ public class AnimatedBackVisualSource <: InterfaceWrapperBase & ComInterface & w
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -277,7 +287,7 @@ public class AnimatedChevronDownSmallVisualSource <: InterfaceWrapperBase & ComI
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -285,12 +295,12 @@ public class AnimatedChevronDownSmallVisualSource <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedChevronDownSmallVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedChevronDownSmallVisualSource>("AnimatedChevronDownSmallVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronDownSmallVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedChevronDownSmallVisualSource>("AnimatedChevronDownSmallVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronDownSmallVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -305,7 +315,7 @@ public class AnimatedChevronDownSmallVisualSource <: InterfaceWrapperBase & ComI
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronDownSmallVisualSource", AnimatedChevronDownSmallVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronDownSmallVisualSource", AnimatedChevronDownSmallVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -331,22 +341,22 @@ public class AnimatedChevronDownSmallVisualSource <: InterfaceWrapperBase & ComI
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -398,7 +408,7 @@ public class AnimatedChevronRightDownSmallVisualSource <: InterfaceWrapperBase &
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -406,12 +416,12 @@ public class AnimatedChevronRightDownSmallVisualSource <: InterfaceWrapperBase &
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedChevronRightDownSmallVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedChevronRightDownSmallVisualSource>("AnimatedChevronRightDownSmallVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronRightDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronRightDownSmallVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedChevronRightDownSmallVisualSource>("AnimatedChevronRightDownSmallVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronRightDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronRightDownSmallVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -426,7 +436,7 @@ public class AnimatedChevronRightDownSmallVisualSource <: InterfaceWrapperBase &
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronRightDownSmallVisualSource", AnimatedChevronRightDownSmallVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronRightDownSmallVisualSource", AnimatedChevronRightDownSmallVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -452,22 +462,22 @@ public class AnimatedChevronRightDownSmallVisualSource <: InterfaceWrapperBase &
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -519,7 +529,7 @@ public class AnimatedChevronUpDownSmallVisualSource <: InterfaceWrapperBase & Co
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -527,12 +537,12 @@ public class AnimatedChevronUpDownSmallVisualSource <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedChevronUpDownSmallVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedChevronUpDownSmallVisualSource>("AnimatedChevronUpDownSmallVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronUpDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronUpDownSmallVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedChevronUpDownSmallVisualSource>("AnimatedChevronUpDownSmallVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedChevronUpDownSmallVisualSource.fromAbiTake(raw) }, { raw => AnimatedChevronUpDownSmallVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -547,7 +557,7 @@ public class AnimatedChevronUpDownSmallVisualSource <: InterfaceWrapperBase & Co
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronUpDownSmallVisualSource", AnimatedChevronUpDownSmallVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedChevronUpDownSmallVisualSource", AnimatedChevronUpDownSmallVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -573,22 +583,22 @@ public class AnimatedChevronUpDownSmallVisualSource <: InterfaceWrapperBase & Co
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -640,7 +650,7 @@ public class AnimatedFindVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -648,12 +658,12 @@ public class AnimatedFindVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedFindVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedFindVisualSource>("AnimatedFindVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedFindVisualSource.fromAbiTake(raw) }, { raw => AnimatedFindVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedFindVisualSource>("AnimatedFindVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedFindVisualSource.fromAbiTake(raw) }, { raw => AnimatedFindVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -668,7 +678,7 @@ public class AnimatedFindVisualSource <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedFindVisualSource", AnimatedFindVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedFindVisualSource", AnimatedFindVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -694,22 +704,22 @@ public class AnimatedFindVisualSource <: InterfaceWrapperBase & ComInterface & w
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -761,7 +771,7 @@ public class AnimatedGlobalNavigationButtonVisualSource <: InterfaceWrapperBase 
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -769,12 +779,12 @@ public class AnimatedGlobalNavigationButtonVisualSource <: InterfaceWrapperBase 
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedGlobalNavigationButtonVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedGlobalNavigationButtonVisualSource>("AnimatedGlobalNavigationButtonVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedGlobalNavigationButtonVisualSource.fromAbiTake(raw) }, { raw => AnimatedGlobalNavigationButtonVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedGlobalNavigationButtonVisualSource>("AnimatedGlobalNavigationButtonVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedGlobalNavigationButtonVisualSource.fromAbiTake(raw) }, { raw => AnimatedGlobalNavigationButtonVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -789,7 +799,7 @@ public class AnimatedGlobalNavigationButtonVisualSource <: InterfaceWrapperBase 
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedGlobalNavigationButtonVisualSource", AnimatedGlobalNavigationButtonVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedGlobalNavigationButtonVisualSource", AnimatedGlobalNavigationButtonVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -815,22 +825,22 @@ public class AnimatedGlobalNavigationButtonVisualSource <: InterfaceWrapperBase 
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 
@@ -882,7 +892,7 @@ public class AnimatedSettingsVisualSource <: InterfaceWrapperBase & ComInterface
     }
 
     public static func iid(): GUID {
-        Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid()
+        Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid()
     }
 
     public static func runtimeName(): String {
@@ -890,12 +900,12 @@ public class AnimatedSettingsVisualSource <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<AnimatedSettingsVisualSource> {
-        let ancestors = [Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<AnimatedSettingsVisualSource>("AnimatedSettingsVisualSource", Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedSettingsVisualSource.fromAbiTake(raw) }, { raw => AnimatedSettingsVisualSource.viewOf(raw) })
+        let ancestors = [Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<AnimatedSettingsVisualSource>("AnimatedSettingsVisualSource", Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid(), ancestors, { raw => AnimatedSettingsVisualSource.fromAbiTake(raw) }, { raw => AnimatedSettingsVisualSource.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -910,7 +920,7 @@ public class AnimatedSettingsVisualSource <: InterfaceWrapperBase & ComInterface
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedSettingsVisualSource", AnimatedSettingsVisualSource.signature(), Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.iid())
+        RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedSettingsVisualSource", AnimatedSettingsVisualSource.signature(), Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -936,22 +946,22 @@ public class AnimatedSettingsVisualSource <: InterfaceWrapperBase & ComInterface
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource.descriptor()) }) {
+    public func asIAnimatedVisualSource(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2 {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.IAnimatedVisualSource2.descriptor()) }) {
+    public func asIAnimatedVisualSource2(): Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2 {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.IAnimatedVisualSource2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Composition == "on"]
-    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml__impl_l0.IAnimatedVisual {
+    public unsafe func TryCreateAnimatedVisual(compositor: Microsoft_UI_Composition.Compositor, diagnostics: CPointer<CPointer<Unit>>): Microsoft_UI_Xaml_impl_p0.IAnimatedVisual {
         return defaultInterface().TryCreateAnimatedVisual(compositor, diagnostics)
     }
 

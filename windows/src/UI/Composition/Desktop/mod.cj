@@ -4,14 +4,22 @@
 package windows.UI.Composition.Desktop
 
 import std.collection.*
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Composition_Desktop == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Composition_Desktop == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Composition_Desktop == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_UI_Composition_Desktop == "on"]
@@ -126,7 +134,7 @@ public class DesktopWindowTarget <: InterfaceWrapperBase & ComInterface & window
     }
 
     public static func descriptor(): InterfaceDescriptor<DesktopWindowTarget> {
-        let ancestors = [IDesktopWindowTarget.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IDesktopWindowTarget.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<DesktopWindowTarget>("DesktopWindowTarget", IDesktopWindowTarget.iid(), ancestors, { raw => DesktopWindowTarget.fromAbiTake(raw) }, { raw => DesktopWindowTarget.viewOf(raw) })
     }
 
@@ -175,22 +183,22 @@ public class DesktopWindowTarget <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionTarget(): _impl_l1.CompositionTarget {
-        match (unsafe { query(_impl_l1.CompositionTarget.descriptor()) }) {
+    public func asCompositionTarget(): impl_p1.CompositionTarget {
+        match (unsafe { query(impl_p1.CompositionTarget.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -204,7 +212,7 @@ public class DesktopWindowTarget <: InterfaceWrapperBase & ComInterface & window
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }

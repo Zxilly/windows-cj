@@ -4,7 +4,9 @@
 package windows.Gaming.Preview
 
 import std.collection.*
+@When[Windows_Gaming_Preview == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Gaming_Preview == "on"]
 import windows_core as windows_core
 
 

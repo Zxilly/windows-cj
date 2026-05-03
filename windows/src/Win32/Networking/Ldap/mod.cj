@@ -4,11 +4,17 @@
 package windows.Win32.Networking.Ldap
 
 import std.collection.*
+@When[Windows_Win32_Networking_Ldap == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_Ldap == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_Ldap == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_Ldap == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_Ldap == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Networking_Ldap == "on"]
 import windows_core as windows_core
 
 
@@ -926,13 +932,13 @@ public type NOTIFYOFNEWCONNECTION = CFunc<(CPointer<LDAPAbi>, CPointer<LDAPAbi>,
 public type PLDAPSearch = CPointer<Unit>
 
 @When[Windows_Win32_Networking_Ldap == "on" && (Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on")]
-public type QUERYCLIENTCERT = CFunc<(CPointer<LDAPAbi>, CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> UInt8>
+public type QUERYCLIENTCERT = CFunc<(CPointer<LDAPAbi>, CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> UInt8>
 
 @When[Windows_Win32_Networking_Ldap == "on"]
 public type QUERYFORCONNECTION = CFunc<(CPointer<LDAPAbi>, CPointer<LDAPAbi>, CPointer<UInt16>, CPointer<UInt8>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<LDAPAbi>>) -> UInt32>
 
 @When[Windows_Win32_Networking_Ldap == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type VERIFYSERVERCERT = CFunc<(CPointer<LDAPAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> UInt8>
+public type VERIFYSERVERCERT = CFunc<(CPointer<LDAPAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> UInt8>
 
 @When[Windows_Win32_Networking_Ldap == "on"]
 public type DEREFERENCECONNECTION = CFunc<(CPointer<LDAPAbi>, CPointer<LDAPAbi>) -> UInt32>

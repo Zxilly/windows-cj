@@ -4,17 +4,29 @@
 package windows.Media.Miracast
 
 import std.collection.*
+@When[Windows_Media_Miracast == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media_Miracast == "on"]
 import windows_core as windows_core
+@When[Windows_Media_Miracast == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media_Miracast == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media_Miracast == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media_Miracast == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media_Miracast == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media_Miracast == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
-import windows.Media._impl_l0 as Media__impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Media_Miracast == "on"]
+import windows.Media.impl.p0 as Media_impl_p0
+@When[Windows_Media_Miracast == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media_Miracast == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media_Miracast == "on"]
 import windows_future as windows_future
 
 
@@ -1930,7 +1942,7 @@ public class IMiracastReceiver <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMiracastReceiver", IMiracastReceiver.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverVtbl", "IMiracastReceiver", "IMiracastReceiver_Impl", [InterfaceMethodSchema("GetDefaultSettings", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentSettings", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentSettingsAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverSettings>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectAllAndApplySettings", 9, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<MiracastReceiverSettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverApplySettingsResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectAllAndApplySettingsAsync", 10, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<MiracastReceiverSettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverApplySettingsResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStatus", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStatusAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusChanged", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiver, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusChanged", 14, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CreateSession", 15, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<_impl_l1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSessionAsync", 16, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<_impl_l1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverSession>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearKnownTransmitters", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RemoveKnownTransmitter", 18, [InterfaceParameterSchema("transmitter", "CPointer<Unit>", "InParam<MiracastTransmitter>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMiracastReceiver", IMiracastReceiver.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverVtbl", "IMiracastReceiver", "IMiracastReceiver_Impl", [InterfaceMethodSchema("GetDefaultSettings", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentSettings", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentSettingsAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverSettings>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectAllAndApplySettings", 9, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<MiracastReceiverSettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverApplySettingsResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectAllAndApplySettingsAsync", 10, [InterfaceParameterSchema("settings", "CPointer<Unit>", "InParam<MiracastReceiverSettings>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverApplySettingsResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStatus", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStatusAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StatusChanged", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiver, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStatusChanged", 14, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CreateSession", 15, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<impl_p1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSessionAsync", 16, [InterfaceParameterSchema("view", "CPointer<Unit>", "InParam<impl_p1.CoreApplicationView>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<MiracastReceiverSession>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearKnownTransmitters", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RemoveKnownTransmitter", 18, [InterfaceParameterSchema("transmitter", "CPointer<Unit>", "InParam<MiracastTransmitter>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IMiracastReceiver.runtimeType())
         return schema
     }
@@ -2030,7 +2042,7 @@ public class IMiracastReceiver <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func CreateSession(view: _impl_l1.CoreApplicationView): MiracastReceiverSession {
+    public unsafe func CreateSession(view: impl_p1.CoreApplicationView): MiracastReceiverSession {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSession(asRaw(), view.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2039,7 +2051,7 @@ public class IMiracastReceiver <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func CreateSessionAsync(view: _impl_l1.CoreApplicationView): windows_future.IAsyncOperation<MiracastReceiverSession> {
+    public unsafe func CreateSessionAsync(view: impl_p1.CoreApplicationView): windows_future.IAsyncOperation<MiracastReceiverSession> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSessionAsync(asRaw(), view.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2384,7 +2396,7 @@ public class IMiracastReceiverCursorImageChannel <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMiracastReceiverCursorImageChannel", IMiracastReceiverCursorImageChannel.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverCursorImageChannelVtbl", "IMiracastReceiverCursorImageChannel", "IMiracastReceiverCursorImageChannel_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxImageSize", 7, [InterfaceParameterSchema("result", "CPointer<Graphics.SizeInt32Abi>", "OutSlot<Graphics.SizeInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 8, [InterfaceParameterSchema("result", "CPointer<Graphics.PointInt32Abi>", "OutSlot<Graphics.PointInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageStream", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageStreamChanged", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiverCursorImageChannel, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveImageStreamChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionChanged", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiverCursorImageChannel, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePositionChanged", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMiracastReceiverCursorImageChannel", IMiracastReceiverCursorImageChannel.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverCursorImageChannelVtbl", "IMiracastReceiverCursorImageChannel", "IMiracastReceiverCursorImageChannel_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxImageSize", 7, [InterfaceParameterSchema("result", "CPointer<Graphics.SizeInt32Abi>", "OutSlot<Graphics.SizeInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 8, [InterfaceParameterSchema("result", "CPointer<Graphics.PointInt32Abi>", "OutSlot<Graphics.PointInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageStream", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageStreamChanged", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiverCursorImageChannel, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveImageStreamChanged", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionChanged", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<MiracastReceiverCursorImageChannel, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePositionChanged", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMiracastReceiverCursorImageChannel.runtimeType())
         return schema
     }
@@ -2440,12 +2452,12 @@ public class IMiracastReceiverCursorImageChannel <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ImageStream(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func ImageStream(): impl_p1.IRandomAccessStreamWithContentType {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ImageStream(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamWithContentType.fromAbiTake(result__)
     }
 
     public unsafe func ImageStreamChanged(handler: Foundation.TypedEventHandler<MiracastReceiverCursorImageChannel, IInspectable>): windows_collections.EventRegistrationToken {
@@ -2977,7 +2989,7 @@ public class IMiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBas
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMiracastReceiverMediaSourceCreatedEventArgs", IMiracastReceiverMediaSourceCreatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverMediaSourceCreatedEventArgsVtbl", "IMiracastReceiverMediaSourceCreatedEventArgs", "IMiracastReceiverMediaSourceCreatedEventArgs_Impl", [InterfaceMethodSchema("Connection", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_MediaSource", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media__impl_l0.MediaSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CursorImageChannelSettings", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverCursorImageChannelSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMiracastReceiverMediaSourceCreatedEventArgs", IMiracastReceiverMediaSourceCreatedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IMiracastReceiverMediaSourceCreatedEventArgsVtbl", "IMiracastReceiverMediaSourceCreatedEventArgs", "IMiracastReceiverMediaSourceCreatedEventArgs_Impl", [InterfaceMethodSchema("Connection", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_MediaSource", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media_impl_p0.MediaSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CursorImageChannelSettings", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MiracastReceiverCursorImageChannelSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferral", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMiracastReceiverMediaSourceCreatedEventArgs.runtimeType())
         return schema
     }
@@ -3015,12 +3027,12 @@ public class IMiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBas
     }
 
     @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
-    public unsafe func get_MediaSource(): Media__impl_l0.MediaSource {
+    public unsafe func get_MediaSource(): Media_impl_p0.MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_MediaSource(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Media__impl_l0.MediaSource.fromAbiTake(result__)
+        return Media_impl_p0.MediaSource.fromAbiTake(result__)
     }
 
     public unsafe func CursorImageChannelSettings(): MiracastReceiverCursorImageChannelSettings {
@@ -3598,12 +3610,12 @@ public class MiracastReceiver <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func CreateSession(view: _impl_l1.CoreApplicationView): MiracastReceiverSession {
+    public unsafe func CreateSession(view: impl_p1.CoreApplicationView): MiracastReceiverSession {
         return defaultInterface().CreateSession(view)
     }
 
     @When[Windows_ApplicationModel_Core == "on"]
-    public unsafe func CreateSessionAsync(view: _impl_l1.CoreApplicationView): windows_future.IAsyncOperation<MiracastReceiverSession> {
+    public unsafe func CreateSessionAsync(view: impl_p1.CoreApplicationView): windows_future.IAsyncOperation<MiracastReceiverSession> {
         return defaultInterface().CreateSessionAsync(view)
     }
 
@@ -3957,7 +3969,7 @@ public class MiracastReceiverCursorImageChannel <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ImageStream(): _impl_l1.IRandomAccessStreamWithContentType {
+    public unsafe func ImageStream(): impl_p1.IRandomAccessStreamWithContentType {
         return defaultInterface().ImageStream()
     }
 
@@ -4490,7 +4502,7 @@ public class MiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBase
     }
 
     @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
-    public unsafe func get_MediaSource(): Media__impl_l0.MediaSource {
+    public unsafe func get_MediaSource(): Media_impl_p0.MediaSource {
         return defaultInterface().get_MediaSource()
     }
 

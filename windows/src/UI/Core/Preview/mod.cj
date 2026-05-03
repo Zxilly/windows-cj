@@ -4,14 +4,23 @@
 package windows.UI.Core.Preview
 
 import std.collection.*
+@When[Windows_UI_Core_Preview == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Core_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Core_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Core_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Core_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Core_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Core_Preview == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Core_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Core_Preview == "on"]
 import windows_collections as windows_collections
 
 
@@ -138,7 +147,7 @@ public class ICoreAppWindowPreviewStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICoreAppWindowPreviewStatics", ICoreAppWindowPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreAppWindowPreviewStaticsVtbl", "ICoreAppWindowPreviewStatics", "ICoreAppWindowPreviewStatics_Impl", [InterfaceMethodSchema("GetIdFromWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<_impl_l1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICoreAppWindowPreviewStatics", ICoreAppWindowPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICoreAppWindowPreviewStaticsVtbl", "ICoreAppWindowPreviewStatics", "ICoreAppWindowPreviewStatics_Impl", [InterfaceMethodSchema("GetIdFromWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<impl_p1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICoreAppWindowPreviewStatics.runtimeType())
         return schema
     }
@@ -168,7 +177,7 @@ public class ICoreAppWindowPreviewStatics <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_UI_WindowManagement == "on"]
-    public unsafe func GetIdFromWindow(window: _impl_l1.AppWindow): Int32 {
+    public unsafe func GetIdFromWindow(window: impl_p1.AppWindow): Int32 {
         let v = vtbl()
         var result__ = 0i32
         let hr = v.GetIdFromWindow(asRaw(), window.asRaw(), CPointer<Int32>(inout result__))
@@ -451,7 +460,7 @@ public class CoreAppWindowPreview <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_UI_WindowManagement == "on"]
-    public static unsafe func GetIdFromWindow(window: _impl_l1.AppWindow): Int32 {
+    public static unsafe func GetIdFromWindow(window: impl_p1.AppWindow): Int32 {
         var result__: Option<Int32> = Option<Int32>.None
         try (factory__ = windows_core.factory<CoreAppWindowPreview, ICoreAppWindowPreviewStatics>().unwrap()) {
             result__ = Some(factory__.GetIdFromWindow(window))

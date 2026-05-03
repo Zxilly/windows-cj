@@ -4,13 +4,20 @@
 package windows.Win32.Security.AppLocker
 
 import std.collection.*
+@When[Windows_Win32_Security_AppLocker == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_AppLocker == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_AppLocker == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Security_AppLocker == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Security_AppLocker == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security_Cryptography == "on"]
@@ -23,7 +30,7 @@ public struct SAFER_CODE_PROPERTIES_V1 {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
     public var dwImageHashSize: UInt32 = 0u32
     public var ImageSize: Int64 = 0i64
-    public var HashAlgorithm: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var HashAlgorithm: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0u32
@@ -41,7 +48,7 @@ public struct SAFER_CODE_PROPERTIES_V1Abi {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
     public var dwImageHashSize: UInt32 = 0u32
     public var ImageSize: Int64 = 0i64
-    public var HashAlgorithm: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var HashAlgorithm: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0u32
@@ -63,7 +70,7 @@ extend SAFER_CODE_PROPERTIES_V1 <: windows_core.CopyType & windows_core.RuntimeT
         abi.ImageHash = value.ImageHash
         abi.dwImageHashSize = value.dwImageHashSize
         abi.ImageSize = value.ImageSize
-        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.pByteBlock = value.pByteBlock
         abi.hWndParent = value.hWndParent
         abi.dwWVTUIChoice = value.dwWVTUIChoice
@@ -79,7 +86,7 @@ extend SAFER_CODE_PROPERTIES_V1 <: windows_core.CopyType & windows_core.RuntimeT
         value.ImageHash = abi.ImageHash
         value.dwImageHashSize = abi.dwImageHashSize
         value.ImageSize = abi.ImageSize
-        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.pByteBlock = abi.pByteBlock
         value.hWndParent = abi.hWndParent
         value.dwWVTUIChoice = abi.dwWVTUIChoice
@@ -102,7 +109,7 @@ public struct SAFER_CODE_PROPERTIES_V2 {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
     public var dwImageHashSize: UInt32 = 0u32
     public var ImageSize: Int64 = 0i64
-    public var HashAlgorithm: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var HashAlgorithm: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0u32
@@ -125,7 +132,7 @@ public struct SAFER_CODE_PROPERTIES_V2Abi {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
     public var dwImageHashSize: UInt32 = 0u32
     public var ImageSize: Int64 = 0i64
-    public var HashAlgorithm: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var HashAlgorithm: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0u32
@@ -152,7 +159,7 @@ extend SAFER_CODE_PROPERTIES_V2 <: windows_core.CopyType & windows_core.RuntimeT
         abi.ImageHash = value.ImageHash
         abi.dwImageHashSize = value.dwImageHashSize
         abi.ImageSize = value.ImageSize
-        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.pByteBlock = value.pByteBlock
         abi.hWndParent = value.hWndParent
         abi.dwWVTUIChoice = value.dwWVTUIChoice
@@ -173,7 +180,7 @@ extend SAFER_CODE_PROPERTIES_V2 <: windows_core.CopyType & windows_core.RuntimeT
         value.ImageHash = abi.ImageHash
         value.dwImageHashSize = abi.dwImageHashSize
         value.ImageSize = abi.ImageSize
-        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.pByteBlock = abi.pByteBlock
         value.hWndParent = abi.hWndParent
         value.dwWVTUIChoice = abi.dwWVTUIChoice
@@ -841,7 +848,7 @@ public struct SAFER_HASH_IDENTIFICATION {
     public var FriendlyName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
     public var HashSize: UInt32 = 0u32
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
-    public var HashAlgorithm: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var HashAlgorithm: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public var ImageSize: Int64 = 0i64
     public var dwSaferFlags: UInt32 = 0u32
     public init() {}
@@ -855,7 +862,7 @@ public struct SAFER_HASH_IDENTIFICATIONAbi {
     public var FriendlyName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
     public var HashSize: UInt32 = 0u32
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
-    public var HashAlgorithm: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var HashAlgorithm: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public var ImageSize: Int64 = 0i64
     public var dwSaferFlags: UInt32 = 0u32
     public init() {}
@@ -873,7 +880,7 @@ extend SAFER_HASH_IDENTIFICATION <: windows_core.CopyType & windows_core.Runtime
         abi.FriendlyName = value.FriendlyName
         abi.HashSize = value.HashSize
         abi.ImageHash = value.ImageHash
-        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         abi.ImageSize = value.ImageSize
         abi.dwSaferFlags = value.dwSaferFlags
         return abi
@@ -885,7 +892,7 @@ extend SAFER_HASH_IDENTIFICATION <: windows_core.CopyType & windows_core.Runtime
         value.FriendlyName = abi.FriendlyName
         value.HashSize = abi.HashSize
         value.ImageHash = abi.ImageHash
-        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         value.ImageSize = abi.ImageSize
         value.dwSaferFlags = abi.dwSaferFlags
         return value
@@ -902,7 +909,7 @@ public struct SAFER_HASH_IDENTIFICATION2 {
     public var hashIdentification: SAFER_HASH_IDENTIFICATION = SAFER_HASH_IDENTIFICATION()
     public var HashSize: UInt32 = 0u32
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
-    public var HashAlgorithm: Win32__impl_l0.ALG_ID = Win32__impl_l0.ALG_ID()
+    public var HashAlgorithm: Win32_impl_p0.ALG_ID = Win32_impl_p0.ALG_ID()
     public init() {}
 }
 
@@ -912,7 +919,7 @@ public struct SAFER_HASH_IDENTIFICATION2Abi {
     public var hashIdentification: SAFER_HASH_IDENTIFICATIONAbi = SAFER_HASH_IDENTIFICATIONAbi()
     public var HashSize: UInt32 = 0u32
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
-    public var HashAlgorithm: Win32__impl_l0.ALG_IDAbi = Win32__impl_l0.ALG_IDAbi()
+    public var HashAlgorithm: Win32_impl_p0.ALG_IDAbi = Win32_impl_p0.ALG_IDAbi()
     public init() {}
 }
 
@@ -926,7 +933,7 @@ extend SAFER_HASH_IDENTIFICATION2 <: windows_core.CopyType & windows_core.Runtim
         abi.hashIdentification = SAFER_HASH_IDENTIFICATION.projectAbi(value.hashIdentification)
         abi.HashSize = value.HashSize
         abi.ImageHash = value.ImageHash
-        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>())
+        abi.HashAlgorithm = windows_core.projectTypedAbi(value.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>())
         return abi
     }
     public static func assumeInitRef(abi: SAFER_HASH_IDENTIFICATION2Abi): SAFER_HASH_IDENTIFICATION2 {
@@ -934,7 +941,7 @@ extend SAFER_HASH_IDENTIFICATION2 <: windows_core.CopyType & windows_core.Runtim
         value.hashIdentification = SAFER_HASH_IDENTIFICATION.assumeInitRef(abi.hashIdentification)
         value.HashSize = abi.HashSize
         value.ImageHash = abi.ImageHash
-        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32__impl_l0.ALG_ID>()).unwrap()
+        value.HashAlgorithm = windows_core.fromTypedAbi(abi.HashAlgorithm, windows_core.typeMarker<Win32_impl_p0.ALG_ID>()).unwrap()
         return value
     }
     public static func fromAbi(abi: SAFER_HASH_IDENTIFICATION2Abi): Result<SAFER_HASH_IDENTIFICATION2> { Result<SAFER_HASH_IDENTIFICATION2>.Ok(SAFER_HASH_IDENTIFICATION2.assumeInitRef(abi)) }

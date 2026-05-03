@@ -4,17 +4,29 @@
 package windows.UI.Notifications.Management
 
 import std.collection.*
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Notifications_Management == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_UI_Notifications_Management == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Notifications_Management == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Notifications_Management == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Notifications_Management == "on"]
 import windows_future as windows_future
 
 
@@ -87,7 +99,7 @@ public struct IUserNotificationListenerVtbl {
     public var NotificationChanged: UIntNative = UIntNative(0)
     public var RemoveNotificationChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
-    public var GetNotificationsAsync: CFunc<(CPointer<Unit>, _impl_l0.NotificationKindsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetNotificationsAsync: CFunc<(CPointer<Unit>, impl_p0.NotificationKindsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on" || Windows_UI_Notifications != "on"]
     public var GetNotificationsAsync: UIntNative = UIntNative(0)
     @When[Windows_UI_Notifications == "on"]
@@ -135,7 +147,7 @@ public class IUserNotificationListener <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserNotificationListener", IUserNotificationListener.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserNotificationListenerVtbl", "IUserNotificationListener", "IUserNotificationListener_Impl", [InterfaceMethodSchema("RequestAccessAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserNotificationListenerAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAccessStatus", 7, [InterfaceParameterSchema("result", "CPointer<UserNotificationListenerAccessStatusAbi>", "OutSlot<UserNotificationListenerAccessStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotificationChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<UserNotificationListener, _impl_l1.UserNotificationChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNotificationChanged", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetNotificationsAsync", 10, [InterfaceParameterSchema("kinds", "_impl_l0.NotificationKindsAbi", "_impl_l0.NotificationKinds", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNotification", 11, [InterfaceParameterSchema("notificationId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.UserNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearNotifications", 12, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RemoveNotification", 13, [InterfaceParameterSchema("notificationId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserNotificationListener", IUserNotificationListener.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserNotificationListenerVtbl", "IUserNotificationListener", "IUserNotificationListener_Impl", [InterfaceMethodSchema("RequestAccessAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<UserNotificationListenerAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAccessStatus", 7, [InterfaceParameterSchema("result", "CPointer<UserNotificationListenerAccessStatusAbi>", "OutSlot<UserNotificationListenerAccessStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotificationChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<UserNotificationListener, impl_p1.UserNotificationChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNotificationChanged", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetNotificationsAsync", 10, [InterfaceParameterSchema("kinds", "impl_p0.NotificationKindsAbi", "impl_p0.NotificationKinds", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p2.UserNotification>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetNotification", 11, [InterfaceParameterSchema("notificationId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.UserNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearNotifications", 12, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RemoveNotification", 13, [InterfaceParameterSchema("notificationId", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IUserNotificationListener.runtimeType())
         return schema
     }
@@ -181,7 +193,7 @@ public class IUserNotificationListener <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func NotificationChanged(handler: Foundation.TypedEventHandler<UserNotificationListener, _impl_l1.UserNotificationChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func NotificationChanged(handler: Foundation.TypedEventHandler<UserNotificationListener, impl_p1.UserNotificationChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
         let hr = v.NotificationChanged(asRaw(), handler.asRaw(), CPointer<windows_collections.EventRegistrationTokenAbi>(inout result__))
@@ -196,21 +208,21 @@ public class IUserNotificationListener <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
-    public unsafe func GetNotificationsAsync(kinds: _impl_l0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>> {
+    public unsafe func GetNotificationsAsync(kinds: impl_p0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p2.UserNotification>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.GetNotificationsAsync(asRaw(), windows_core.projectTypedAbi(kinds, windows_core.typeMarker<_impl_l0.NotificationKinds>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.GetNotificationsAsync(asRaw(), windows_core.projectTypedAbi(kinds, windows_core.typeMarker<impl_p0.NotificationKinds>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p2.UserNotification>>.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func GetNotification(notificationId: UInt32): _impl_l2.UserNotification {
+    public unsafe func GetNotification(notificationId: UInt32): impl_p2.UserNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetNotification(asRaw(), notificationId, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.UserNotification.fromAbiTake(result__)
+        return impl_p2.UserNotification.fromAbiTake(result__)
     }
 
     public unsafe func ClearNotifications(): Unit {
@@ -392,7 +404,7 @@ public class UserNotificationListener <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func NotificationChanged(handler: Foundation.TypedEventHandler<UserNotificationListener, _impl_l1.UserNotificationChangedEventArgs>): windows_collections.EventRegistrationToken {
+    public unsafe func NotificationChanged(handler: Foundation.TypedEventHandler<UserNotificationListener, impl_p1.UserNotificationChangedEventArgs>): windows_collections.EventRegistrationToken {
         return defaultInterface().NotificationChanged(handler)
     }
 
@@ -401,12 +413,12 @@ public class UserNotificationListener <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
-    public unsafe func GetNotificationsAsync(kinds: _impl_l0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>> {
+    public unsafe func GetNotificationsAsync(kinds: impl_p0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<impl_p2.UserNotification>> {
         return defaultInterface().GetNotificationsAsync(kinds)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func GetNotification(notificationId: UInt32): _impl_l2.UserNotification {
+    public unsafe func GetNotification(notificationId: UInt32): impl_p2.UserNotification {
         return defaultInterface().GetNotification(notificationId)
     }
 

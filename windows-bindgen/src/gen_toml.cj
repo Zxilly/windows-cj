@@ -3,11 +3,14 @@ package windows_bindgen
 import std.collection.*
 import std.sync.*
 
-// Collect feature metadata from namespaces/modules and generate manifest files.
+// Collect feature metadata from namespaces/modules and write the catalog
+// triplet (cfg_list.toml, features.toml, link-options.toml) per generated
+// sys package. The downstream cfg.toml is the responsibility of
+// windows-cfggen; this file must not write or merge cfg.toml directly.
 
 public class FeatureCollector {
-    public let featureToDeps: HashMap<String, ArrayList<String>> = HashMap<String, ArrayList<String>>()
     public let featureToLinks: HashMap<String, ArrayList<String>> = HashMap<String, ArrayList<String>>()
+    public let featureToDeps: HashMap<String, ArrayList<String>> = HashMap<String, ArrayList<String>>()
     public let featureOrder: ArrayList<String> = ArrayList<String>()
     public let namespaces: ArrayList<String> = ArrayList<String>()
     private let mutex_: Mutex = Mutex()
@@ -21,13 +24,6 @@ public class FeatureCollector {
         mutex_.unlock()
     }
 
-    public func addNamespaceDependency(namespace: String, dependencyNamespace: String): Unit {
-        mutex_.lock()
-        registerNamespace(this, namespace)
-        addNamespaceDependencyLocked(this, namespace, dependencyNamespace)
-        mutex_.unlock()
-    }
-
     public func addBinding(namespace: String, moduleName: String): Unit {
         let namespaceFeature = namespaceToFeature(namespace)
         let moduleFeature = moduleToFeature(moduleName)
@@ -36,10 +32,8 @@ public class FeatureCollector {
         registerNamespace(this, namespace)
         ensureFeature(this, namespaceFeature)
         ensureFeature(this, moduleFeature)
-        if (!featureToLinks.contains(moduleFeature)) {
-            featureToLinks[moduleFeature] = ArrayList<String>()
-        }
-        addUnique(featureToLinks[moduleFeature], moduleLinkName(moduleName))
+        addFeatureDependencyUnlocked(this, namespaceFeature, moduleFeature)
+        addModuleLink(this, moduleName)
         mutex_.unlock()
     }
 
@@ -59,21 +53,32 @@ public class FeatureCollector {
         ensureFeature(this, namespaceFeature)
         ensureFeature(this, moduleFeature)
         ensureFeature(this, functionFeature)
-        ensureDeps(this, functionFeature)
-        if (!namespaceFeature.isEmpty() && namespaceFeature != functionFeature) {
-            addUnique(featureToDeps[functionFeature], namespaceFeature)
-        }
-        if (!moduleFeature.isEmpty() && moduleFeature != namespaceFeature && moduleFeature != functionFeature) {
-            addUnique(featureToDeps[functionFeature], moduleFeature)
-        }
+        addFeatureDependencyUnlocked(this, functionFeature, namespaceFeature)
+        addFeatureDependencyUnlocked(this, functionFeature, moduleFeature)
         if (runtimeResolver) {
-            addFunctionModuleDependency(this, functionFeature, "kernel32.dll")
+            let resolverFeature = moduleToFeature("kernel32.dll")
+            ensureFeature(this, resolverFeature)
+            addFeatureDependencyUnlocked(this, functionFeature, resolverFeature)
+            addModuleLink(this, "kernel32.dll")
         }
-        addConditionFeatureDependencies(this, functionFeature, tags)
-        if (!featureToLinks.contains(moduleFeature)) {
-            featureToLinks[moduleFeature] = ArrayList<String>()
-        }
-        addUnique(featureToLinks[moduleFeature], moduleLinkName(moduleName))
+        addAvailabilityTagDependencies(this, functionFeature, tags)
+        addModuleLink(this, moduleName)
+        mutex_.unlock()
+    }
+
+    public func addNamespaceDependency(namespace: String, dependencyNamespace: String): Unit {
+        let feature = namespaceToFeature(namespace)
+        let dependency = namespaceToFeature(dependencyNamespace)
+
+        mutex_.lock()
+        registerNamespace(this, namespace)
+        addFeatureDependencyUnlocked(this, feature, dependency)
+        mutex_.unlock()
+    }
+
+    public func addFeatureDependency(feature: String, dependency: String): Unit {
+        mutex_.lock()
+        addFeatureDependencyUnlocked(this, feature, dependency)
         mutex_.unlock()
     }
 
@@ -137,15 +142,12 @@ public class FeatureCollector {
     }
 }
 
-func addFunctionModuleDependency(
+func addModuleLink(
     collector: FeatureCollector,
-    functionFeature: String,
     moduleName: String
 ): Unit {
     let moduleFeature = moduleToFeature(moduleName)
     ensureFeature(collector, moduleFeature)
-    ensureDeps(collector, functionFeature)
-    addUnique(collector.featureToDeps[functionFeature], moduleFeature)
     if (!collector.featureToLinks.contains(moduleFeature)) {
         collector.featureToLinks[moduleFeature] = ArrayList<String>()
     }
@@ -153,14 +155,11 @@ func addFunctionModuleDependency(
 }
 
 func ensureFeature(collector: FeatureCollector, feature: String): Unit {
+    if (feature.isEmpty()) {
+        return
+    }
     if (!containsStr(collector.featureOrder, feature)) {
         collector.featureOrder.add(feature)
-    }
-}
-
-func ensureDeps(collector: FeatureCollector, feature: String): Unit {
-    if (!collector.featureToDeps.contains(feature)) {
-        collector.featureToDeps[feature] = ArrayList<String>()
     }
 }
 
@@ -175,114 +174,78 @@ func registerNamespace(collector: FeatureCollector, namespace: String): Unit {
 
 func ensureNamespaceFeatureChain(collector: FeatureCollector, namespace: String): Unit {
     let chain = namespaceFeatureChain(namespace)
-    var i: Int64 = 0
-    while (i < Int64(chain.size)) {
-        ensureFeature(collector, chain[i])
-        if (i > 0) {
-            ensureDeps(collector, chain[i])
-            addUnique(collector.featureToDeps[chain[i]], chain[i - 1])
-        }
-        i += 1
-    }
-    ensureNamespaceRootDeps(collector)
-}
-
-func ensureNamespaceRootDeps(collector: FeatureCollector): Unit {
-    if (containsStr(collector.featureOrder, "Windows_Win32") &&
-        containsStr(collector.featureOrder, "Windows_Win32_Foundation")) {
-        ensureDeps(collector, "Windows_Win32")
-        addUnique(collector.featureToDeps["Windows_Win32"], "Windows_Win32_Foundation")
-    }
-    if (containsStr(collector.featureOrder, "Windows_Wdk") &&
-        containsStr(collector.featureOrder, "Windows_Win32_Foundation")) {
-        ensureDeps(collector, "Windows_Wdk")
-        addUnique(collector.featureToDeps["Windows_Wdk"], "Windows_Win32_Foundation")
-    }
-    if (containsStr(collector.featureOrder, "Windows_Foundation")) {
-        for (feature in collector.featureOrder) {
-            if (isHighLevelRootFeature(feature)) {
-                ensureDeps(collector, feature)
-                addUnique(collector.featureToDeps[feature], "Windows_Foundation")
-            }
-        }
+    for (feature in chain) {
+        ensureFeature(collector, feature)
     }
 }
 
-func addNamespaceDependencyLocked(
-    collector: FeatureCollector,
-    namespace: String,
-    dependencyNamespace: String
-): Unit {
-    if (namespace.isEmpty() || dependencyNamespace.isEmpty() || namespace == dependencyNamespace) {
+func addFeatureDependencyUnlocked(collector: FeatureCollector, feature: String, dependency: String): Unit {
+    if (feature.isEmpty() || dependency.isEmpty() || feature == dependency) {
         return
     }
-
-    let namespaceFeature = namespaceToFeature(namespace)
-    let dependencyFeature = namespaceToFeature(dependencyNamespace)
-    if (namespaceFeature == dependencyFeature) {
-        return
+    ensureFeature(collector, feature)
+    if (!collector.featureToDeps.contains(feature)) {
+        collector.featureToDeps[feature] = ArrayList<String>()
     }
-
-    ensureNamespaceFeatureChain(collector, namespace)
-    ensureNamespaceFeatureChain(collector, dependencyNamespace)
-    ensureDeps(collector, namespaceFeature)
-    addUnique(collector.featureToDeps[namespaceFeature], dependencyFeature)
+    addUnique(collector.featureToDeps[feature], dependency)
 }
 
-func addConditionFeatureDependencies(
+func addAvailabilityTagDependencies(
     collector: FeatureCollector,
     feature: String,
     tags: ArrayList<String>
 ): Unit {
     for (tag in tags) {
-        let dependencies = cfgFeatureNamesInCondition(tag)
-        for (dependency in dependencies) {
-            if (dependency == feature || dependency == "arch") {
-                continue
-            }
-            ensureFeature(collector, dependency)
-            ensureDeps(collector, feature)
-            addUnique(collector.featureToDeps[feature], dependency)
+        addPositiveFeatureConditionDependencies(collector, feature, tag)
+    }
+}
+
+let positiveFeatureConditionSuffix = " == \"on\""
+
+func addPositiveFeatureConditionDependencies(
+    collector: FeatureCollector,
+    feature: String,
+    condition: String
+): Unit {
+    var searchStart: Int64 = 0
+    while (searchStart < Int64(condition.size)) {
+        match (condition.indexOf(positiveFeatureConditionSuffix, searchStart)) {
+            case Some(pos) =>
+                addFeatureDependencyBeforeComparison(collector, feature, condition, pos)
+                searchStart = pos + Int64(positiveFeatureConditionSuffix.size)
+            case None => return
         }
     }
 }
 
-func cfgFeatureNamesInCondition(condition: String): ArrayList<String> {
-    let result = ArrayList<String>()
-    var token = ""
+func addFeatureDependencyBeforeComparison(
+    collector: FeatureCollector,
+    feature: String,
+    condition: String,
+    comparisonStart: Int64
+): Unit {
+    if (comparisonStart <= 0) {
+        return
+    }
     let bytes = condition.toArray()
-    var i: Int64 = 0
-    while (i < Int64(bytes.size)) {
-        let ch = bytes[i]
-        if (isCfgTokenByte(ch)) {
-            token += String.fromUtf8(Array<Byte>(1, {_ => ch}))
-        } else {
-            addCfgFeatureToken(result, token)
-            token = ""
-        }
-        i += 1
+    var start = comparisonStart - 1
+    while (start >= 0 && isCfgFeatureNameByte(bytes[start])) {
+        start -= 1
     }
-    addCfgFeatureToken(result, token)
-    return result
-}
-
-func addCfgFeatureToken(result: ArrayList<String>, token: String): Unit {
-    if (token.isEmpty() || token == "on" || token == "off" || token == "arch" ||
-        token == "x86_64" || token == "aarch64") {
+    let featureStart = start + 1
+    if (featureStart >= comparisonStart) {
         return
     }
-    let first = token[0]
-    if (!((first >= b'A' && first <= b'Z') || first == b'_')) {
+    let dependency = String.fromUtf8(bytes[featureStart..comparisonStart])
+    if (dependency == "arch") {
         return
     }
-    addUnique(result, token)
+    addFeatureDependencyUnlocked(collector, feature, dependency)
 }
 
-func isCfgTokenByte(ch: Byte): Bool {
-    return (ch >= b'a' && ch <= b'z') ||
-        (ch >= b'A' && ch <= b'Z') ||
-        (ch >= b'0' && ch <= b'9') ||
-        ch == b'_'
+func isCfgFeatureNameByte(ch: Byte): Bool {
+    return (ch >= b'A' && ch <= b'Z') || (ch >= b'a' && ch <= b'z') ||
+        (ch >= b'0' && ch <= b'9') || ch == b'_'
 }
 
 func addUnique(list: ArrayList<String>, value: String): Unit {
@@ -399,24 +362,6 @@ func containsStr(list: ArrayList<String>, s: String): Bool {
         }
     }
     return false
-}
-
-func isHighLevelRootFeature(feature: String): Bool {
-    if (!feature.startsWith("Windows_")) {
-        return false
-    }
-    if (feature == "Windows_Foundation" || feature == "Windows_Win32" || feature == "Windows_Wdk") {
-        return false
-    }
-
-    let bytes = feature.toArray()
-    var underscoreCount: Int64 = 0
-    for (ch in bytes) {
-        if (ch == b'_') {
-            underscoreCount += 1
-        }
-    }
-    return underscoreCount == 1
 }
 
 func namespaceFeatureChain(namespace: String): ArrayList<String> {

@@ -4,16 +4,26 @@
 package windows.Win32.NetworkManagement.NetworkDiagnosticsFramework
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_polyfill.{unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]
@@ -1731,11 +1741,11 @@ foreign {
     // param-hint: Invitation optional
     // param-hint: Addresses optional
     // param-hint: appId optional
-    func NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32__impl_l2.SOCKET_ADDRESS_LISTAbi>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+    func NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32_impl_p2.SOCKET_ADDRESS_LISTAbi>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateGroupingIncident == "on" && Windows_Win32_Networking_WinSock == "on"]
-public unsafe func Windows_NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32__impl_l2.SOCKET_ADDRESS_LISTAbi>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32_impl_p2.SOCKET_ADDRESS_LISTAbi>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
     return NdfCreateGroupingIncident(CloudName, GroupName, Identity, Invitation, Addresses, appId, handle)
 }
 
@@ -1808,11 +1818,11 @@ foreign {
     // param-hint: host optional
     // param-hint: appId optional
     // param-hint: userId optional
-    func NdfCreateWinSockIncident(sock: Win32__impl_l0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SIDAbi>, handle: CPointer<CPointer<Unit>>): Int32
+    func NdfCreateWinSockIncident(sock: Win32_impl_p0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SIDAbi>, handle: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWinSockIncident == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_NdfCreateWinSockIncident(sock: Win32__impl_l0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SIDAbi>, handle: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_NdfCreateWinSockIncident(sock: Win32_impl_p0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SIDAbi>, handle: CPointer<CPointer<Unit>>): Int32 {
     return NdfCreateWinSockIncident(sock, host, port, appId, userId, handle)
 }
 

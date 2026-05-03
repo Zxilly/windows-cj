@@ -4,15 +4,24 @@
 package windows.Win32.Networking.WinHttp
 
 import std.collection.*
+@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows_libloading
+@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_WinHttp == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_WinHttp == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_WinHttp == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Networking_WinHttp == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Networking_WinHttp == "on"]
@@ -60,7 +69,7 @@ public struct IWinHttpRequestEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var OnResponseStart: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Unit> = { _, _, _ => () }
     @When[Windows_Win32_System_Com == "on"]
-    public var OnResponseDataAvailable: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Unit> = { _, _ => () }
+    public var OnResponseDataAvailable: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Unit> = { _, _ => () }
     public var OnResponseFinished: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var OnError: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>) -> Unit> = { _, _, _ => () }
     public init() {}
@@ -113,7 +122,7 @@ public class IWinHttpRequestEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func OnResponseDataAvailable(Data: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Unit {
+    public unsafe func OnResponseDataAvailable(Data: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.OnResponseDataAvailable(__liveRaw, Data)
@@ -391,8 +400,8 @@ extend WINHTTP_CONNECTION_GROUP <: windows_core.CopyType & windows_core.RuntimeT
 @When[Windows_Win32_Networking_WinHttp == "on" && (arch == "x86_64" && Windows_Win32_Networking_WinSock == "on" || arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")]
 public struct WINHTTP_CONNECTION_INFO {
     public var cbSize: UInt32 = 0u32
-    public var LocalAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
-    public var RemoteAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var LocalAddress: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
+    public var RemoteAddress: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public init() {}
 }
 
@@ -400,8 +409,8 @@ public struct WINHTTP_CONNECTION_INFO {
 @C
 public struct WINHTTP_CONNECTION_INFOAbi {
     public var cbSize: UInt32 = 0u32
-    public var LocalAddress: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
-    public var RemoteAddress: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var LocalAddress: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
+    public var RemoteAddress: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public init() {}
 }
 
@@ -413,15 +422,15 @@ extend WINHTTP_CONNECTION_INFO <: windows_core.CopyType & windows_core.RuntimeTy
     public static func projectAbi(value: WINHTTP_CONNECTION_INFO): WINHTTP_CONNECTION_INFOAbi {
         var abi = WINHTTP_CONNECTION_INFOAbi()
         abi.cbSize = value.cbSize
-        abi.LocalAddress = windows_core.projectTypedAbi(value.LocalAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
-        abi.RemoteAddress = windows_core.projectTypedAbi(value.RemoteAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.LocalAddress = windows_core.projectTypedAbi(value.LocalAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
+        abi.RemoteAddress = windows_core.projectTypedAbi(value.RemoteAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         return abi
     }
     public static func assumeInitRef(abi: WINHTTP_CONNECTION_INFOAbi): WINHTTP_CONNECTION_INFO {
         var value = WINHTTP_CONNECTION_INFO()
         value.cbSize = abi.cbSize
-        value.LocalAddress = windows_core.fromTypedAbi(abi.LocalAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
-        value.RemoteAddress = windows_core.fromTypedAbi(abi.RemoteAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.LocalAddress = windows_core.fromTypedAbi(abi.LocalAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
+        value.RemoteAddress = windows_core.fromTypedAbi(abi.RemoteAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: WINHTTP_CONNECTION_INFOAbi): Result<WINHTTP_CONNECTION_INFO> { Result<WINHTTP_CONNECTION_INFO>.Ok(WINHTTP_CONNECTION_INFO.assumeInitRef(abi)) }
@@ -2786,30 +2795,30 @@ extend WinHttpRequestSslErrorFlags <: windows_core.CopyType & windows_core.Runti
 @When[Windows_Win32_Networking_WinHttp == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWinHttpRequestVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetProxy: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var SetProxy: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var SetCredentials: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Open: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var Open: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var SetRequestHeader: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var GetResponseHeader: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var GetAllResponseHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Send: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Send: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var StatusText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ResponseText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ResponseBody: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ResponseBody: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ResponseStream: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ResponseStream: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Option: CFunc<(CPointer<Unit>, WinHttpRequestOptionAbi, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Option: CFunc<(CPointer<Unit>, WinHttpRequestOptionAbi, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Option: CFunc<(CPointer<Unit>, WinHttpRequestOptionAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var put_Option: CFunc<(CPointer<Unit>, WinHttpRequestOptionAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var WaitForResponse: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
+    public var WaitForResponse: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     public var Abort: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetTimeouts: CFunc<(CPointer<Unit>, Int32, Int32, Int32, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetClientCertificate: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -2850,7 +2859,7 @@ public class IWinHttpRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWinHttpRequest> {
-        return InterfaceDescriptor<IWinHttpRequest>("IWinHttpRequest", IWinHttpRequest.iid(), Win32__impl_l2.IDispatch.iid(), takeIWinHttpRequestFromAbi, viewIWinHttpRequest)
+        return InterfaceDescriptor<IWinHttpRequest>("IWinHttpRequest", IWinHttpRequest.iid(), Win32_impl_p2.IDispatch.iid(), takeIWinHttpRequestFromAbi, viewIWinHttpRequest)
     }
 
     public unsafe func vtbl(): IWinHttpRequestVtbl {
@@ -2858,7 +2867,7 @@ public class IWinHttpRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetProxy(ProxySetting: Int32, ProxyServer: Win32__impl_l2.VARIANTAbi, BypassList: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetProxy(ProxySetting: Int32, ProxyServer: Win32_impl_p2.VARIANTAbi, BypassList: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProxy(__liveRaw, ProxySetting, ProxyServer, BypassList)
@@ -2871,7 +2880,7 @@ public class IWinHttpRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Open(Method: CPointer<UInt16>, Url: CPointer<UInt16>, Async: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Open(Method: CPointer<UInt16>, Url: CPointer<UInt16>, Async: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Open(__liveRaw, Method, Url, Async)
@@ -2896,7 +2905,7 @@ public class IWinHttpRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Send(Body: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Send(Body: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Send(__liveRaw, Body)
@@ -2921,35 +2930,35 @@ public class IWinHttpRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ResponseBody(Body: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ResponseBody(Body: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResponseBody(__liveRaw, Body)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ResponseStream(Body: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ResponseStream(Body: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResponseStream(__liveRaw, Body)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Option(Option: WinHttpRequestOptionAbi, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Option(Option: WinHttpRequestOptionAbi, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Option(__liveRaw, Option, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Option(Option: WinHttpRequestOptionAbi, Value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func put_Option(Option: WinHttpRequestOptionAbi, Value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Option(__liveRaw, Option, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func WaitForResponse(Timeout: Win32__impl_l2.VARIANTAbi, Succeeded: CPointer<Int16>): Int32 {
+    public unsafe func WaitForResponse(Timeout: Win32_impl_p2.VARIANTAbi, Succeeded: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WaitForResponse(__liveRaw, Timeout, Succeeded)

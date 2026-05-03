@@ -4,13 +4,20 @@
 package windows.UI.Input.Preview
 
 import std.collection.*
+@When[Windows_UI_Input_Preview == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Input_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Input_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Input_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Input_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Input_Preview == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Input_Preview == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_UI_Input_Preview == "on"]
@@ -60,7 +67,7 @@ public class IInputActivationListenerPreviewStatics <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInputActivationListenerPreviewStatics", IInputActivationListenerPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInputActivationListenerPreviewStaticsVtbl", "IInputActivationListenerPreviewStatics", "IInputActivationListenerPreviewStatics_Impl", [InterfaceMethodSchema("CreateForApplicationWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<_impl_l1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.InputActivationListener>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInputActivationListenerPreviewStatics", IInputActivationListenerPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInputActivationListenerPreviewStaticsVtbl", "IInputActivationListenerPreviewStatics", "IInputActivationListenerPreviewStatics_Impl", [InterfaceMethodSchema("CreateForApplicationWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<impl_p1.AppWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.InputActivationListener>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInputActivationListenerPreviewStatics.runtimeType())
         return schema
     }
@@ -90,12 +97,12 @@ public class IInputActivationListenerPreviewStatics <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_UI_Input == "on" && Windows_UI_WindowManagement == "on"]
-    public unsafe func CreateForApplicationWindow(window: _impl_l1.AppWindow): _impl_l1.InputActivationListener {
+    public unsafe func CreateForApplicationWindow(window: impl_p1.AppWindow): impl_p1.InputActivationListener {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForApplicationWindow(asRaw(), window.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.InputActivationListener.fromAbiTake(result__)
+        return impl_p1.InputActivationListener.fromAbiTake(result__)
     }
 }
 
@@ -123,8 +130,8 @@ public class InputActivationListenerPreview <: windows_interface.RuntimeName & w
     }
 
     @When[Windows_UI_Input == "on" && Windows_UI_WindowManagement == "on"]
-    public static unsafe func CreateForApplicationWindow(window: _impl_l1.AppWindow): _impl_l1.InputActivationListener {
-        var result__: Option<_impl_l1.InputActivationListener> = Option<_impl_l1.InputActivationListener>.None
+    public static unsafe func CreateForApplicationWindow(window: impl_p1.AppWindow): impl_p1.InputActivationListener {
+        var result__: Option<impl_p1.InputActivationListener> = Option<impl_p1.InputActivationListener>.None
         try (factory__ = windows_core.factory<InputActivationListenerPreview, IInputActivationListenerPreviewStatics>().unwrap()) {
             result__ = Some(factory__.CreateForApplicationWindow(window))
         }

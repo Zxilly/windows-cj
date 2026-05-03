@@ -4,15 +4,22 @@
 package windows_appsdk.Microsoft.UI.Xaml.Shapes
 
 import std.collection.*
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI_Xaml_Shapes == "on" && Microsoft_UI_Composition == "on"]
 import windows_appsdk.Microsoft.UI.Composition as Microsoft_UI_Composition
-import windows_appsdk.Microsoft.UI.Xaml._impl_l0 as Microsoft_UI_Xaml__impl_l0
-import windows_appsdk.Microsoft.UI.Xaml._impl_l1 as Microsoft_UI_Xaml__impl_l1
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+import windows_appsdk.Microsoft.UI.Xaml.impl.p0 as Microsoft_UI_Xaml_impl_p0
 
 
 @When[Microsoft_UI_Xaml_Shapes == "on"]
@@ -290,7 +297,7 @@ public class ILineStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILineStatics", ILineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineStaticsVtbl", "ILineStatics", "ILineStatics_Impl", [InterfaceMethodSchema("X1Property", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Y1Property", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("X2Property", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Y2Property", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILineStatics", ILineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILineStaticsVtbl", "ILineStatics", "ILineStatics_Impl", [InterfaceMethodSchema("X1Property", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Y1Property", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("X2Property", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Y2Property", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILineStatics.runtimeType())
         return schema
     }
@@ -320,39 +327,39 @@ public class ILineStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func X1Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func X1Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.X1Property(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func Y1Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func Y1Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Y1Property(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func X2Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func X2Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.X2Property(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func Y2Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func Y2Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Y2Property(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -410,7 +417,7 @@ public class IPath <: InterfaceWrapperBase & ComInterface & RuntimeName & window
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPath", IPath.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPathVtbl", "IPath", "IPath_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.Geometry>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.Geometry>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPath", IPath.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPathVtbl", "IPath", "IPath_Impl", [InterfaceMethodSchema("Data", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.Geometry>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetData", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.Geometry>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPath.runtimeType())
         return schema
     }
@@ -440,16 +447,16 @@ public class IPath <: InterfaceWrapperBase & ComInterface & RuntimeName & window
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Data(): Microsoft_UI_Xaml__impl_l0.Geometry {
+    public unsafe func Data(): Microsoft_UI_Xaml_impl_p0.Geometry {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Data(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.Geometry.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.Geometry.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetData(value: Microsoft_UI_Xaml__impl_l0.Geometry): Unit {
+    public unsafe func SetData(value: Microsoft_UI_Xaml_impl_p0.Geometry): Unit {
         let v = vtbl()
         let hr = v.SetData(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -506,7 +513,7 @@ public class IPathStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPathStatics", IPathStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPathStaticsVtbl", "IPathStatics", "IPathStatics_Impl", [InterfaceMethodSchema("DataProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPathStatics", IPathStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPathStaticsVtbl", "IPathStatics", "IPathStatics_Impl", [InterfaceMethodSchema("DataProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPathStatics.runtimeType())
         return schema
     }
@@ -536,12 +543,12 @@ public class IPathStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func DataProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func DataProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DataProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -553,11 +560,11 @@ extend IPathStatics <: windows_core.Interface<IPathStatics> {}
 public struct IPolygonVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var get_FillRule: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_FillRule: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var get_FillRule: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetFillRule: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetFillRule: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetFillRule: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
@@ -607,7 +614,7 @@ public class IPolygon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPolygon", IPolygon.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolygonVtbl", "IPolygon", "IPolygon_Impl", [InterfaceMethodSchema("get_FillRule", 6, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.FillRule>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFillRule", 7, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.FillRuleAbi", "Microsoft_UI_Xaml__impl_l0.FillRule", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Points", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PointCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPoints", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.PointCollection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPolygon", IPolygon.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolygonVtbl", "IPolygon", "IPolygon_Impl", [InterfaceMethodSchema("get_FillRule", 6, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.FillRule>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFillRule", 7, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.FillRuleAbi", "Microsoft_UI_Xaml_impl_p0.FillRule", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Points", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PointCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPoints", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.PointCollection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPolygon.runtimeType())
         return schema
     }
@@ -637,32 +644,32 @@ public class IPolygon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_FillRule(): Microsoft_UI_Xaml__impl_l0.FillRule {
+    public unsafe func get_FillRule(): Microsoft_UI_Xaml_impl_p0.FillRule {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.FillRuleAbi()
-        let hr = v.get_FillRule(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.FillRuleAbi()
+        let hr = v.get_FillRule(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.FillRule>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.FillRule>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFillRule(value: Microsoft_UI_Xaml__impl_l0.FillRule): Unit {
+    public unsafe func SetFillRule(value: Microsoft_UI_Xaml_impl_p0.FillRule): Unit {
         let v = vtbl()
-        let hr = v.SetFillRule(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.FillRule>()))
+        let hr = v.SetFillRule(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.FillRule>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Points(): Microsoft_UI_Xaml__impl_l0.PointCollection {
+    public unsafe func Points(): Microsoft_UI_Xaml_impl_p0.PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Points(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.PointCollection.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.PointCollection.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetPoints(value: Microsoft_UI_Xaml__impl_l0.PointCollection): Unit {
+    public unsafe func SetPoints(value: Microsoft_UI_Xaml_impl_p0.PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -723,7 +730,7 @@ public class IPolygonStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPolygonStatics", IPolygonStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolygonStaticsVtbl", "IPolygonStatics", "IPolygonStatics_Impl", [InterfaceMethodSchema("FillRuleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PointsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPolygonStatics", IPolygonStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolygonStaticsVtbl", "IPolygonStatics", "IPolygonStatics_Impl", [InterfaceMethodSchema("FillRuleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PointsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPolygonStatics.runtimeType())
         return schema
     }
@@ -753,21 +760,21 @@ public class IPolygonStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func FillRuleProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func FillRuleProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FillRuleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func PointsProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PointsProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PointsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -779,11 +786,11 @@ extend IPolygonStatics <: windows_core.Interface<IPolygonStatics> {}
 public struct IPolylineVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var get_FillRule: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_FillRule: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var get_FillRule: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetFillRule: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetFillRule: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetFillRule: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
@@ -833,7 +840,7 @@ public class IPolyline <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPolyline", IPolyline.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolylineVtbl", "IPolyline", "IPolyline_Impl", [InterfaceMethodSchema("get_FillRule", 6, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.FillRule>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFillRule", 7, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.FillRuleAbi", "Microsoft_UI_Xaml__impl_l0.FillRule", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Points", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PointCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPoints", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.PointCollection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPolyline", IPolyline.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolylineVtbl", "IPolyline", "IPolyline_Impl", [InterfaceMethodSchema("get_FillRule", 6, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.FillRule>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFillRule", 7, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.FillRuleAbi", "Microsoft_UI_Xaml_impl_p0.FillRule", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Points", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PointCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPoints", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.PointCollection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPolyline.runtimeType())
         return schema
     }
@@ -863,32 +870,32 @@ public class IPolyline <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_FillRule(): Microsoft_UI_Xaml__impl_l0.FillRule {
+    public unsafe func get_FillRule(): Microsoft_UI_Xaml_impl_p0.FillRule {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.FillRuleAbi()
-        let hr = v.get_FillRule(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.FillRuleAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.FillRuleAbi()
+        let hr = v.get_FillRule(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.FillRuleAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.FillRule>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.FillRule>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFillRule(value: Microsoft_UI_Xaml__impl_l0.FillRule): Unit {
+    public unsafe func SetFillRule(value: Microsoft_UI_Xaml_impl_p0.FillRule): Unit {
         let v = vtbl()
-        let hr = v.SetFillRule(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.FillRule>()))
+        let hr = v.SetFillRule(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.FillRule>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Points(): Microsoft_UI_Xaml__impl_l0.PointCollection {
+    public unsafe func Points(): Microsoft_UI_Xaml_impl_p0.PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Points(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.PointCollection.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.PointCollection.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetPoints(value: Microsoft_UI_Xaml__impl_l0.PointCollection): Unit {
+    public unsafe func SetPoints(value: Microsoft_UI_Xaml_impl_p0.PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -949,7 +956,7 @@ public class IPolylineStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPolylineStatics", IPolylineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolylineStaticsVtbl", "IPolylineStatics", "IPolylineStatics_Impl", [InterfaceMethodSchema("FillRuleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PointsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPolylineStatics", IPolylineStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPolylineStaticsVtbl", "IPolylineStatics", "IPolylineStatics_Impl", [InterfaceMethodSchema("FillRuleProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PointsProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPolylineStatics.runtimeType())
         return schema
     }
@@ -979,21 +986,21 @@ public class IPolylineStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func FillRuleProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func FillRuleProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FillRuleProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func PointsProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func PointsProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PointsProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1159,7 +1166,7 @@ public class IRectangleStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRectangleStatics", IRectangleStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRectangleStaticsVtbl", "IRectangleStatics", "IRectangleStatics_Impl", [InterfaceMethodSchema("RadiusXProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RadiusYProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRectangleStatics", IRectangleStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRectangleStaticsVtbl", "IRectangleStatics", "IRectangleStatics_Impl", [InterfaceMethodSchema("RadiusXProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RadiusYProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRectangleStatics.runtimeType())
         return schema
     }
@@ -1189,21 +1196,21 @@ public class IRectangleStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func RadiusXProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RadiusXProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RadiusXProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func RadiusYProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func RadiusYProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RadiusYProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1235,37 +1242,37 @@ public struct IShapeVtbl {
     public var StrokeThickness: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStrokeThickness: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var StrokeStartLineCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var StrokeStartLineCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var StrokeStartLineCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetStrokeStartLineCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetStrokeStartLineCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetStrokeStartLineCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var StrokeEndLineCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var StrokeEndLineCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var StrokeEndLineCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetStrokeEndLineCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetStrokeEndLineCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetStrokeEndLineCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var StrokeLineJoin: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var StrokeLineJoin: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var StrokeLineJoin: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetStrokeLineJoin: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetStrokeLineJoin: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetStrokeLineJoin: UIntNative = UIntNative(0)
     public var StrokeDashOffset: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStrokeDashOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var StrokeDashCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var StrokeDashCap: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var StrokeDashCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetStrokeDashCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetStrokeDashCap: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetStrokeDashCap: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
@@ -1277,11 +1284,11 @@ public struct IShapeVtbl {
     @When[Microsoft_UI_Xaml_Media != "on" || Windows_Foundation_Collections != "on"]
     public var SetStrokeDashArray: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var get_Stretch: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml__impl_l0.StretchAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_Stretch: CFunc<(CPointer<Unit>, CPointer<Microsoft_UI_Xaml_impl_p0.StretchAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var get_Stretch: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public var SetStretch: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml__impl_l0.StretchAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetStretch: CFunc<(CPointer<Unit>, Microsoft_UI_Xaml_impl_p0.StretchAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Microsoft_UI_Xaml_Media != "on"]
     public var SetStretch: UIntNative = UIntNative(0)
     @When[Microsoft_UI_Xaml_Media == "on"]
@@ -1331,7 +1338,7 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IShape", IShape.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IShapeVtbl", "IShape", "IShape_Impl", [InterfaceMethodSchema("Fill", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.Brush>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFill", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.Brush>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stroke", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.Brush>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStroke", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.Brush>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StrokeMiterLimit", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeMiterLimit", 11, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeThickness", 12, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeThickness", 13, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeStartLineCap", 14, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeStartLineCap", 15, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.PenLineCapAbi", "Microsoft_UI_Xaml__impl_l0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeEndLineCap", 16, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeEndLineCap", 17, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.PenLineCapAbi", "Microsoft_UI_Xaml__impl_l0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeLineJoin", 18, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PenLineJoin>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeLineJoin", 19, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi", "Microsoft_UI_Xaml__impl_l0.PenLineJoin", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashOffset", 20, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashOffset", 21, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashCap", 22, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashCap", 23, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.PenLineCapAbi", "Microsoft_UI_Xaml__impl_l0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashArray", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DoubleCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashArray", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml__impl_l0.DoubleCollection>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_Stretch", 26, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml__impl_l0.StretchAbi>", "OutSlot<Microsoft_UI_Xaml__impl_l0.Stretch>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStretch", 27, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml__impl_l0.StretchAbi", "Microsoft_UI_Xaml__impl_l0.Stretch", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GeometryTransform", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.Transform>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAlphaMask", 29, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionBrush>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IShape", IShape.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IShapeVtbl", "IShape", "IShape_Impl", [InterfaceMethodSchema("Fill", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.Brush>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFill", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.Brush>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stroke", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.Brush>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStroke", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.Brush>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StrokeMiterLimit", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeMiterLimit", 11, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeThickness", 12, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeThickness", 13, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeStartLineCap", 14, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeStartLineCap", 15, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.PenLineCapAbi", "Microsoft_UI_Xaml_impl_p0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeEndLineCap", 16, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeEndLineCap", 17, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.PenLineCapAbi", "Microsoft_UI_Xaml_impl_p0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeLineJoin", 18, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PenLineJoin>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeLineJoin", 19, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi", "Microsoft_UI_Xaml_impl_p0.PenLineJoin", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashOffset", 20, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashOffset", 21, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashCap", 22, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.PenLineCap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashCap", 23, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.PenLineCapAbi", "Microsoft_UI_Xaml_impl_p0.PenLineCap", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StrokeDashArray", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DoubleCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStrokeDashArray", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Microsoft_UI_Xaml_impl_p0.DoubleCollection>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_Stretch", 26, [InterfaceParameterSchema("result", "CPointer<Microsoft_UI_Xaml_impl_p0.StretchAbi>", "OutSlot<Microsoft_UI_Xaml_impl_p0.Stretch>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStretch", 27, [InterfaceParameterSchema("value", "Microsoft_UI_Xaml_impl_p0.StretchAbi", "Microsoft_UI_Xaml_impl_p0.Stretch", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GeometryTransform", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.Transform>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAlphaMask", 29, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Composition.CompositionBrush>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IShape.runtimeType())
         return schema
     }
@@ -1361,32 +1368,32 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Fill(): Microsoft_UI_Xaml__impl_l0.Brush {
+    public unsafe func Fill(): Microsoft_UI_Xaml_impl_p0.Brush {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Fill(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.Brush.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.Brush.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFill(value: Microsoft_UI_Xaml__impl_l0.Brush): Unit {
+    public unsafe func SetFill(value: Microsoft_UI_Xaml_impl_p0.Brush): Unit {
         let v = vtbl()
         let hr = v.SetFill(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Stroke(): Microsoft_UI_Xaml__impl_l0.Brush {
+    public unsafe func Stroke(): Microsoft_UI_Xaml_impl_p0.Brush {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Stroke(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.Brush.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.Brush.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStroke(value: Microsoft_UI_Xaml__impl_l0.Brush): Unit {
+    public unsafe func SetStroke(value: Microsoft_UI_Xaml_impl_p0.Brush): Unit {
         let v = vtbl()
         let hr = v.SetStroke(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1421,50 +1428,50 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeStartLineCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
+    public unsafe func StrokeStartLineCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.PenLineCapAbi()
-        let hr = v.StrokeStartLineCap(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.PenLineCapAbi()
+        let hr = v.StrokeStartLineCap(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeStartLineCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
+    public unsafe func SetStrokeStartLineCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         let v = vtbl()
-        let hr = v.SetStrokeStartLineCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()))
-        HRESULT(hr).ok()
-    }
-
-    @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeEndLineCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
-        let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.PenLineCapAbi()
-        let hr = v.StrokeEndLineCap(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>(inout result__))
-        HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()).unwrap()
-    }
-
-    @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeEndLineCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
-        let v = vtbl()
-        let hr = v.SetStrokeEndLineCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()))
+        let hr = v.SetStrokeStartLineCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeLineJoin(): Microsoft_UI_Xaml__impl_l0.PenLineJoin {
+    public unsafe func StrokeEndLineCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi()
-        let hr = v.StrokeLineJoin(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.PenLineJoinAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.PenLineCapAbi()
+        let hr = v.StrokeEndLineCap(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineJoin>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeLineJoin(value: Microsoft_UI_Xaml__impl_l0.PenLineJoin): Unit {
+    public unsafe func SetStrokeEndLineCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         let v = vtbl()
-        let hr = v.SetStrokeLineJoin(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineJoin>()))
+        let hr = v.SetStrokeEndLineCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()))
+        HRESULT(hr).ok()
+    }
+
+    @When[Microsoft_UI_Xaml_Media == "on"]
+    public unsafe func StrokeLineJoin(): Microsoft_UI_Xaml_impl_p0.PenLineJoin {
+        let v = vtbl()
+        var result__ = Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi()
+        let hr = v.StrokeLineJoin(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.PenLineJoinAbi>(inout result__))
+        HRESULT(hr).ok()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineJoin>()).unwrap()
+    }
+
+    @When[Microsoft_UI_Xaml_Media == "on"]
+    public unsafe func SetStrokeLineJoin(value: Microsoft_UI_Xaml_impl_p0.PenLineJoin): Unit {
+        let v = vtbl()
+        let hr = v.SetStrokeLineJoin(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineJoin>()))
         HRESULT(hr).ok()
     }
 
@@ -1483,60 +1490,60 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeDashCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
+    public unsafe func StrokeDashCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.PenLineCapAbi()
-        let hr = v.StrokeDashCap(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.PenLineCapAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.PenLineCapAbi()
+        let hr = v.StrokeDashCap(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.PenLineCapAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeDashCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
+    public unsafe func SetStrokeDashCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         let v = vtbl()
-        let hr = v.SetStrokeDashCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.PenLineCap>()))
+        let hr = v.SetStrokeDashCap(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.PenLineCap>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func StrokeDashArray(): Microsoft_UI_Xaml__impl_l0.DoubleCollection {
+    public unsafe func StrokeDashArray(): Microsoft_UI_Xaml_impl_p0.DoubleCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashArray(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DoubleCollection.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DoubleCollection.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetStrokeDashArray(value: Microsoft_UI_Xaml__impl_l0.DoubleCollection): Unit {
+    public unsafe func SetStrokeDashArray(value: Microsoft_UI_Xaml_impl_p0.DoubleCollection): Unit {
         let v = vtbl()
         let hr = v.SetStrokeDashArray(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_Stretch(): Microsoft_UI_Xaml__impl_l0.Stretch {
+    public unsafe func get_Stretch(): Microsoft_UI_Xaml_impl_p0.Stretch {
         let v = vtbl()
-        var result__ = Microsoft_UI_Xaml__impl_l0.StretchAbi()
-        let hr = v.get_Stretch(asRaw(), CPointer<Microsoft_UI_Xaml__impl_l0.StretchAbi>(inout result__))
+        var result__ = Microsoft_UI_Xaml_impl_p0.StretchAbi()
+        let hr = v.get_Stretch(asRaw(), CPointer<Microsoft_UI_Xaml_impl_p0.StretchAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.Stretch>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.Stretch>()).unwrap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStretch(value: Microsoft_UI_Xaml__impl_l0.Stretch): Unit {
+    public unsafe func SetStretch(value: Microsoft_UI_Xaml_impl_p0.Stretch): Unit {
         let v = vtbl()
-        let hr = v.SetStretch(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml__impl_l0.Stretch>()))
+        let hr = v.SetStretch(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Microsoft_UI_Xaml_impl_p0.Stretch>()))
         HRESULT(hr).ok()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func GeometryTransform(): Microsoft_UI_Xaml__impl_l0.Transform {
+    public unsafe func GeometryTransform(): Microsoft_UI_Xaml_impl_p0.Transform {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GeometryTransform(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.Transform.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.Transform.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Composition == "on"]
@@ -1639,7 +1646,7 @@ public class IShapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IShapeStatics", IShapeStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IShapeStaticsVtbl", "IShapeStatics", "IShapeStatics_Impl", [InterfaceMethodSchema("FillProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeMiterLimitProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeThicknessProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeStartLineCapProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeEndLineCapProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeLineJoinProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashOffsetProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashCapProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashArrayProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StretchProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml__impl_l0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IShapeStatics", IShapeStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IShapeStaticsVtbl", "IShapeStatics", "IShapeStatics_Impl", [InterfaceMethodSchema("FillProperty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeProperty", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeMiterLimitProperty", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeThicknessProperty", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeStartLineCapProperty", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeEndLineCapProperty", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeLineJoinProperty", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashOffsetProperty", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashCapProperty", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StrokeDashArrayProperty", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StretchProperty", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Microsoft_UI_Xaml_impl_p0.DependencyProperty>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IShapeStatics.runtimeType())
         return schema
     }
@@ -1669,102 +1676,102 @@ public class IShapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func FillProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func FillProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FillProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeMiterLimitProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeMiterLimitProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeMiterLimitProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeThicknessProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeThicknessProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeThicknessProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeStartLineCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeStartLineCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeStartLineCapProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeEndLineCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeEndLineCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeEndLineCapProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeLineJoinProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeLineJoinProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeLineJoinProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeDashOffsetProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeDashOffsetProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashOffsetProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeDashCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeDashCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashCapProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StrokeDashArrayProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StrokeDashArrayProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StrokeDashArrayProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public unsafe func StretchProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
+    public unsafe func StretchProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StretchProperty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Microsoft_UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
+        return Microsoft_UI_Xaml_impl_p0.DependencyProperty.fromAbiTake(result__)
     }
 }
 
@@ -1879,22 +1886,22 @@ public class Ellipse <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2205,22 +2212,22 @@ public class Line <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2267,8 +2274,8 @@ public class Line <: InterfaceWrapperBase & ComInterface & windows_interface.Run
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func X1Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func X1Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Line, ILineStatics>().unwrap()) {
             result__ = Some(factory__.X1Property())
         }
@@ -2279,8 +2286,8 @@ public class Line <: InterfaceWrapperBase & ComInterface & windows_interface.Run
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func Y1Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func Y1Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Line, ILineStatics>().unwrap()) {
             result__ = Some(factory__.Y1Property())
         }
@@ -2291,8 +2298,8 @@ public class Line <: InterfaceWrapperBase & ComInterface & windows_interface.Run
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func X2Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func X2Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Line, ILineStatics>().unwrap()) {
             result__ = Some(factory__.X2Property())
         }
@@ -2303,8 +2310,8 @@ public class Line <: InterfaceWrapperBase & ComInterface & windows_interface.Run
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func Y2Property(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func Y2Property(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Line, ILineStatics>().unwrap()) {
             result__ = Some(factory__.Y2Property())
         }
@@ -2430,34 +2437,34 @@ public class Path <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Data(): Microsoft_UI_Xaml__impl_l0.Geometry {
+    public unsafe func Data(): Microsoft_UI_Xaml_impl_p0.Geometry {
         return defaultInterface().Data()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetData(value: Microsoft_UI_Xaml__impl_l0.Geometry): Unit {
+    public unsafe func SetData(value: Microsoft_UI_Xaml_impl_p0.Geometry): Unit {
         defaultInterface().SetData(value)
     }
 
@@ -2470,8 +2477,8 @@ public class Path <: InterfaceWrapperBase & ComInterface & windows_interface.Run
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func DataProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func DataProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Path, IPathStatics>().unwrap()) {
             result__ = Some(factory__.DataProperty())
         }
@@ -2620,44 +2627,44 @@ public class Polygon <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_FillRule(): Microsoft_UI_Xaml__impl_l0.FillRule {
+    public unsafe func get_FillRule(): Microsoft_UI_Xaml_impl_p0.FillRule {
         return defaultInterface().get_FillRule()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFillRule(value: Microsoft_UI_Xaml__impl_l0.FillRule): Unit {
+    public unsafe func SetFillRule(value: Microsoft_UI_Xaml_impl_p0.FillRule): Unit {
         defaultInterface().SetFillRule(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Points(): Microsoft_UI_Xaml__impl_l0.PointCollection {
+    public unsafe func Points(): Microsoft_UI_Xaml_impl_p0.PointCollection {
         return defaultInterface().Points()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetPoints(value: Microsoft_UI_Xaml__impl_l0.PointCollection): Unit {
+    public unsafe func SetPoints(value: Microsoft_UI_Xaml_impl_p0.PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
 
@@ -2670,8 +2677,8 @@ public class Polygon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func FillRuleProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func FillRuleProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Polygon, IPolygonStatics>().unwrap()) {
             result__ = Some(factory__.FillRuleProperty())
         }
@@ -2682,8 +2689,8 @@ public class Polygon <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func PointsProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PointsProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Polygon, IPolygonStatics>().unwrap()) {
             result__ = Some(factory__.PointsProperty())
         }
@@ -2820,44 +2827,44 @@ public class Polyline <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_FillRule(): Microsoft_UI_Xaml__impl_l0.FillRule {
+    public unsafe func get_FillRule(): Microsoft_UI_Xaml_impl_p0.FillRule {
         return defaultInterface().get_FillRule()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFillRule(value: Microsoft_UI_Xaml__impl_l0.FillRule): Unit {
+    public unsafe func SetFillRule(value: Microsoft_UI_Xaml_impl_p0.FillRule): Unit {
         defaultInterface().SetFillRule(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func Points(): Microsoft_UI_Xaml__impl_l0.PointCollection {
+    public unsafe func Points(): Microsoft_UI_Xaml_impl_p0.PointCollection {
         return defaultInterface().Points()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetPoints(value: Microsoft_UI_Xaml__impl_l0.PointCollection): Unit {
+    public unsafe func SetPoints(value: Microsoft_UI_Xaml_impl_p0.PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
 
@@ -2870,8 +2877,8 @@ public class Polyline <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func FillRuleProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func FillRuleProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Polyline, IPolylineStatics>().unwrap()) {
             result__ = Some(factory__.FillRuleProperty())
         }
@@ -2882,8 +2889,8 @@ public class Polyline <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func PointsProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func PointsProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Polyline, IPolylineStatics>().unwrap()) {
             result__ = Some(factory__.PointsProperty())
         }
@@ -3020,22 +3027,22 @@ public class Rectangle <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3066,8 +3073,8 @@ public class Rectangle <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func RadiusXProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RadiusXProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Rectangle, IRectangleStatics>().unwrap()) {
             result__ = Some(factory__.RadiusXProperty())
         }
@@ -3078,8 +3085,8 @@ public class Rectangle <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func RadiusYProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func RadiusYProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Rectangle, IRectangleStatics>().unwrap()) {
             result__ = Some(factory__.RadiusYProperty())
         }
@@ -3198,44 +3205,44 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
         }
     }
 
-    public func asFrameworkElement(): Microsoft_UI_Xaml__impl_l1.FrameworkElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.FrameworkElement.descriptor()) }) {
+    public func asFrameworkElement(): Microsoft_UI_Xaml_impl_p0.FrameworkElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.FrameworkElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asUIElement(): Microsoft_UI_Xaml__impl_l1.UIElement {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l1.UIElement.descriptor()) }) {
+    public func asUIElement(): Microsoft_UI_Xaml_impl_p0.UIElement {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.UIElement.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asDependencyObject(): Microsoft_UI_Xaml__impl_l0.DependencyObject {
-        match (unsafe { query(Microsoft_UI_Xaml__impl_l0.DependencyObject.descriptor()) }) {
+    public func asDependencyObject(): Microsoft_UI_Xaml_impl_p0.DependencyObject {
+        match (unsafe { query(Microsoft_UI_Xaml_impl_p0.DependencyObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Fill(): Microsoft_UI_Xaml__impl_l0.Brush {
+    public unsafe func Fill(): Microsoft_UI_Xaml_impl_p0.Brush {
         return defaultInterface().Fill()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetFill(value: Microsoft_UI_Xaml__impl_l0.Brush): Unit {
+    public unsafe func SetFill(value: Microsoft_UI_Xaml_impl_p0.Brush): Unit {
         defaultInterface().SetFill(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func Stroke(): Microsoft_UI_Xaml__impl_l0.Brush {
+    public unsafe func Stroke(): Microsoft_UI_Xaml_impl_p0.Brush {
         return defaultInterface().Stroke()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStroke(value: Microsoft_UI_Xaml__impl_l0.Brush): Unit {
+    public unsafe func SetStroke(value: Microsoft_UI_Xaml_impl_p0.Brush): Unit {
         defaultInterface().SetStroke(value)
     }
 
@@ -3256,32 +3263,32 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeStartLineCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
+    public unsafe func StrokeStartLineCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         return defaultInterface().StrokeStartLineCap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeStartLineCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
+    public unsafe func SetStrokeStartLineCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         defaultInterface().SetStrokeStartLineCap(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeEndLineCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
+    public unsafe func StrokeEndLineCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         return defaultInterface().StrokeEndLineCap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeEndLineCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
+    public unsafe func SetStrokeEndLineCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         defaultInterface().SetStrokeEndLineCap(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeLineJoin(): Microsoft_UI_Xaml__impl_l0.PenLineJoin {
+    public unsafe func StrokeLineJoin(): Microsoft_UI_Xaml_impl_p0.PenLineJoin {
         return defaultInterface().StrokeLineJoin()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeLineJoin(value: Microsoft_UI_Xaml__impl_l0.PenLineJoin): Unit {
+    public unsafe func SetStrokeLineJoin(value: Microsoft_UI_Xaml_impl_p0.PenLineJoin): Unit {
         defaultInterface().SetStrokeLineJoin(value)
     }
 
@@ -3294,37 +3301,37 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func StrokeDashCap(): Microsoft_UI_Xaml__impl_l0.PenLineCap {
+    public unsafe func StrokeDashCap(): Microsoft_UI_Xaml_impl_p0.PenLineCap {
         return defaultInterface().StrokeDashCap()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStrokeDashCap(value: Microsoft_UI_Xaml__impl_l0.PenLineCap): Unit {
+    public unsafe func SetStrokeDashCap(value: Microsoft_UI_Xaml_impl_p0.PenLineCap): Unit {
         defaultInterface().SetStrokeDashCap(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func StrokeDashArray(): Microsoft_UI_Xaml__impl_l0.DoubleCollection {
+    public unsafe func StrokeDashArray(): Microsoft_UI_Xaml_impl_p0.DoubleCollection {
         return defaultInterface().StrokeDashArray()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func SetStrokeDashArray(value: Microsoft_UI_Xaml__impl_l0.DoubleCollection): Unit {
+    public unsafe func SetStrokeDashArray(value: Microsoft_UI_Xaml_impl_p0.DoubleCollection): Unit {
         defaultInterface().SetStrokeDashArray(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func get_Stretch(): Microsoft_UI_Xaml__impl_l0.Stretch {
+    public unsafe func get_Stretch(): Microsoft_UI_Xaml_impl_p0.Stretch {
         return defaultInterface().get_Stretch()
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func SetStretch(value: Microsoft_UI_Xaml__impl_l0.Stretch): Unit {
+    public unsafe func SetStretch(value: Microsoft_UI_Xaml_impl_p0.Stretch): Unit {
         defaultInterface().SetStretch(value)
     }
 
     @When[Microsoft_UI_Xaml_Media == "on"]
-    public unsafe func GeometryTransform(): Microsoft_UI_Xaml__impl_l0.Transform {
+    public unsafe func GeometryTransform(): Microsoft_UI_Xaml_impl_p0.Transform {
         return defaultInterface().GeometryTransform()
     }
 
@@ -3342,8 +3349,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func FillProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func FillProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.FillProperty())
         }
@@ -3354,8 +3361,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeProperty())
         }
@@ -3366,8 +3373,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeMiterLimitProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeMiterLimitProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeMiterLimitProperty())
         }
@@ -3378,8 +3385,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeThicknessProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeThicknessProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeThicknessProperty())
         }
@@ -3390,8 +3397,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeStartLineCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeStartLineCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeStartLineCapProperty())
         }
@@ -3402,8 +3409,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeEndLineCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeEndLineCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeEndLineCapProperty())
         }
@@ -3414,8 +3421,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeLineJoinProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeLineJoinProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeLineJoinProperty())
         }
@@ -3426,8 +3433,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeDashOffsetProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeDashOffsetProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeDashOffsetProperty())
         }
@@ -3438,8 +3445,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeDashCapProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeDashCapProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeDashCapProperty())
         }
@@ -3450,8 +3457,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StrokeDashArrayProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StrokeDashArrayProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StrokeDashArrayProperty())
         }
@@ -3462,8 +3469,8 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
     }
 
     @When[Microsoft_UI_Xaml == "on"]
-    public static unsafe func StretchProperty(): Microsoft_UI_Xaml__impl_l0.DependencyProperty {
-        var result__: Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty> = Option<Microsoft_UI_Xaml__impl_l0.DependencyProperty>.None
+    public static unsafe func StretchProperty(): Microsoft_UI_Xaml_impl_p0.DependencyProperty {
+        var result__: Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty> = Option<Microsoft_UI_Xaml_impl_p0.DependencyProperty>.None
         try (factory__ = windows_core.factory<Shape, IShapeStatics>().unwrap()) {
             result__ = Some(factory__.StretchProperty())
         }

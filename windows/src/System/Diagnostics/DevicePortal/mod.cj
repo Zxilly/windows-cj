@@ -4,16 +4,27 @@
 package windows.System.Diagnostics.DevicePortal
 
 import std.collection.*
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_core as windows_core
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_interface as windows_interface
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_System_Diagnostics_DevicePortal == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_System_Diagnostics_DevicePortal == "on"]
 import windows_collections as windows_collections
 
 
@@ -219,7 +230,7 @@ public class IDevicePortalConnectionRequestReceivedEventArgs <: InterfaceWrapper
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDevicePortalConnectionRequestReceivedEventArgs", IDevicePortalConnectionRequestReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalConnectionRequestReceivedEventArgsVtbl", "IDevicePortalConnectionRequestReceivedEventArgs", "IDevicePortalConnectionRequestReceivedEventArgs_Impl", [InterfaceMethodSchema("RequestMessage", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseMessage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDevicePortalConnectionRequestReceivedEventArgs", IDevicePortalConnectionRequestReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalConnectionRequestReceivedEventArgsVtbl", "IDevicePortalConnectionRequestReceivedEventArgs", "IDevicePortalConnectionRequestReceivedEventArgs_Impl", [InterfaceMethodSchema("RequestMessage", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ResponseMessage", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDevicePortalConnectionRequestReceivedEventArgs.runtimeType())
         return schema
     }
@@ -249,21 +260,21 @@ public class IDevicePortalConnectionRequestReceivedEventArgs <: InterfaceWrapper
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func RequestMessage(): _impl_l2.HttpRequestMessage {
+    public unsafe func RequestMessage(): impl_p2.HttpRequestMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestMessage(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpRequestMessage.fromAbiTake(result__)
+        return impl_p2.HttpRequestMessage.fromAbiTake(result__)
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func ResponseMessage(): _impl_l2.HttpResponseMessage {
+    public unsafe func ResponseMessage(): impl_p2.HttpResponseMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ResponseMessage(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpResponseMessage.fromAbiTake(result__)
+        return impl_p2.HttpResponseMessage.fromAbiTake(result__)
     }
 }
 
@@ -279,11 +290,11 @@ public struct IDevicePortalWebSocketConnectionVtbl {
     @When[Windows_Networking_Sockets != "on" || Windows_Web_Http != "on"]
     public var GetServerMessageWebSocketForRequest: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public var GetServerMessageWebSocketForRequest2: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.SocketMessageTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetServerMessageWebSocketForRequest2: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.SocketMessageTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on" || Windows_Web_Http != "on"]
     public var GetServerMessageWebSocketForRequest2: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public var GetServerMessageWebSocketForRequest3: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.SocketMessageTypeAbi, CPointer<Unit>, UInt32, UInt32, _impl_l0.MessageWebSocketReceiveModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetServerMessageWebSocketForRequest3: CFunc<(CPointer<Unit>, CPointer<Unit>, impl_p0.SocketMessageTypeAbi, CPointer<Unit>, UInt32, UInt32, impl_p0.MessageWebSocketReceiveModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on" || Windows_Web_Http != "on"]
     public var GetServerMessageWebSocketForRequest3: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
@@ -333,7 +344,7 @@ public class IDevicePortalWebSocketConnection <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDevicePortalWebSocketConnection", IDevicePortalWebSocketConnection.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalWebSocketConnectionVtbl", "IDevicePortalWebSocketConnection", "IDevicePortalWebSocketConnection_Impl", [InterfaceMethodSchema("GetServerMessageWebSocketForRequest", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerMessageWebSocketForRequest2", 7, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageType", "_impl_l0.SocketMessageTypeAbi", "_impl_l0.SocketMessageType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerMessageWebSocketForRequest3", 8, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageType", "_impl_l0.SocketMessageTypeAbi", "_impl_l0.SocketMessageType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outboundBufferSizeInBytes", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxMessageSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("receiveMode", "_impl_l0.MessageWebSocketReceiveModeAbi", "_impl_l0.MessageWebSocketReceiveMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerStreamWebSocketForRequest", 9, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ServerStreamWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerStreamWebSocketForRequest2", 10, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outboundBufferSizeInBytes", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("noDelay", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ServerStreamWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDevicePortalWebSocketConnection", IDevicePortalWebSocketConnection.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalWebSocketConnectionVtbl", "IDevicePortalWebSocketConnection", "IDevicePortalWebSocketConnection_Impl", [InterfaceMethodSchema("GetServerMessageWebSocketForRequest", 6, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerMessageWebSocketForRequest2", 7, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageType", "impl_p0.SocketMessageTypeAbi", "impl_p0.SocketMessageType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerMessageWebSocketForRequest3", 8, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("messageType", "impl_p0.SocketMessageTypeAbi", "impl_p0.SocketMessageType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outboundBufferSizeInBytes", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxMessageSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("receiveMode", "impl_p0.MessageWebSocketReceiveModeAbi", "impl_p0.MessageWebSocketReceiveMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ServerMessageWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerStreamWebSocketForRequest", 9, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ServerStreamWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetServerStreamWebSocketForRequest2", 10, [InterfaceParameterSchema("request", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("protocol", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("outboundBufferSizeInBytes", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("noDelay", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ServerStreamWebSocket>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDevicePortalWebSocketConnection.runtimeType())
         return schema
     }
@@ -363,48 +374,48 @@ public class IDevicePortalWebSocketConnection <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public unsafe func GetServerMessageWebSocketForRequest(request: _impl_l2.HttpRequestMessage): _impl_l1.ServerMessageWebSocket {
+    public unsafe func GetServerMessageWebSocketForRequest(request: impl_p2.HttpRequestMessage): impl_p1.ServerMessageWebSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetServerMessageWebSocketForRequest(asRaw(), request.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ServerMessageWebSocket.fromAbiTake(result__)
+        return impl_p1.ServerMessageWebSocket.fromAbiTake(result__)
     }
 
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public unsafe func GetServerMessageWebSocketForRequest2(request: _impl_l2.HttpRequestMessage, messageType: _impl_l0.SocketMessageType, protocol: windows_core.HString): _impl_l1.ServerMessageWebSocket {
+    public unsafe func GetServerMessageWebSocketForRequest2(request: impl_p2.HttpRequestMessage, messageType: impl_p0.SocketMessageType, protocol: windows_core.HString): impl_p1.ServerMessageWebSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.GetServerMessageWebSocketForRequest2(asRaw(), request.asRaw(), windows_core.projectTypedAbi(messageType, windows_core.typeMarker<_impl_l0.SocketMessageType>()), protocol.asRaw(), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.GetServerMessageWebSocketForRequest2(asRaw(), request.asRaw(), windows_core.projectTypedAbi(messageType, windows_core.typeMarker<impl_p0.SocketMessageType>()), protocol.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ServerMessageWebSocket.fromAbiTake(result__)
+        return impl_p1.ServerMessageWebSocket.fromAbiTake(result__)
     }
 
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public unsafe func GetServerMessageWebSocketForRequest3(request: _impl_l2.HttpRequestMessage, messageType: _impl_l0.SocketMessageType, protocol: windows_core.HString, outboundBufferSizeInBytes: UInt32, maxMessageSize: UInt32, receiveMode: _impl_l0.MessageWebSocketReceiveMode): _impl_l1.ServerMessageWebSocket {
+    public unsafe func GetServerMessageWebSocketForRequest3(request: impl_p2.HttpRequestMessage, messageType: impl_p0.SocketMessageType, protocol: windows_core.HString, outboundBufferSizeInBytes: UInt32, maxMessageSize: UInt32, receiveMode: impl_p0.MessageWebSocketReceiveMode): impl_p1.ServerMessageWebSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.GetServerMessageWebSocketForRequest3(asRaw(), request.asRaw(), windows_core.projectTypedAbi(messageType, windows_core.typeMarker<_impl_l0.SocketMessageType>()), protocol.asRaw(), outboundBufferSizeInBytes, maxMessageSize, windows_core.projectTypedAbi(receiveMode, windows_core.typeMarker<_impl_l0.MessageWebSocketReceiveMode>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.GetServerMessageWebSocketForRequest3(asRaw(), request.asRaw(), windows_core.projectTypedAbi(messageType, windows_core.typeMarker<impl_p0.SocketMessageType>()), protocol.asRaw(), outboundBufferSizeInBytes, maxMessageSize, windows_core.projectTypedAbi(receiveMode, windows_core.typeMarker<impl_p0.MessageWebSocketReceiveMode>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ServerMessageWebSocket.fromAbiTake(result__)
+        return impl_p1.ServerMessageWebSocket.fromAbiTake(result__)
     }
 
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public unsafe func GetServerStreamWebSocketForRequest(request: _impl_l2.HttpRequestMessage): _impl_l1.ServerStreamWebSocket {
+    public unsafe func GetServerStreamWebSocketForRequest(request: impl_p2.HttpRequestMessage): impl_p1.ServerStreamWebSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetServerStreamWebSocketForRequest(asRaw(), request.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ServerStreamWebSocket.fromAbiTake(result__)
+        return impl_p1.ServerStreamWebSocket.fromAbiTake(result__)
     }
 
     @When[Windows_Networking_Sockets == "on" && Windows_Web_Http == "on"]
-    public unsafe func GetServerStreamWebSocketForRequest2(request: _impl_l2.HttpRequestMessage, protocol: windows_core.HString, outboundBufferSizeInBytes: UInt32, noDelay: Bool): _impl_l1.ServerStreamWebSocket {
+    public unsafe func GetServerStreamWebSocketForRequest2(request: impl_p2.HttpRequestMessage, protocol: windows_core.HString, outboundBufferSizeInBytes: UInt32, noDelay: Bool): impl_p1.ServerStreamWebSocket {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetServerStreamWebSocketForRequest2(asRaw(), request.asRaw(), protocol.asRaw(), outboundBufferSizeInBytes, noDelay, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ServerStreamWebSocket.fromAbiTake(result__)
+        return impl_p1.ServerStreamWebSocket.fromAbiTake(result__)
     }
 }
 
@@ -680,12 +691,12 @@ public class DevicePortalConnectionRequestReceivedEventArgs <: InterfaceWrapperB
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func RequestMessage(): _impl_l2.HttpRequestMessage {
+    public unsafe func RequestMessage(): impl_p2.HttpRequestMessage {
         return defaultInterface().RequestMessage()
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func ResponseMessage(): _impl_l2.HttpResponseMessage {
+    public unsafe func ResponseMessage(): impl_p2.HttpResponseMessage {
         return defaultInterface().ResponseMessage()
     }
 }
@@ -794,7 +805,7 @@ public class DevicePortalConnection <: InterfaceWrapperBase & ComInterface & win
     }
 
     @When[Windows_ApplicationModel_AppService == "on"]
-    public static unsafe func GetForAppServiceConnection(appServiceConnection: _impl_l2.AppServiceConnection): DevicePortalConnection {
+    public static unsafe func GetForAppServiceConnection(appServiceConnection: impl_p1.AppServiceConnection): DevicePortalConnection {
         var result__: Option<DevicePortalConnection> = Option<DevicePortalConnection>.None
         try (factory__ = windows_core.factory<DevicePortalConnection, IDevicePortalConnectionStatics>().unwrap()) {
             result__ = Some(factory__.GetForAppServiceConnection(appServiceConnection))
@@ -979,7 +990,7 @@ public class IDevicePortalConnectionStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDevicePortalConnectionStatics", IDevicePortalConnectionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalConnectionStaticsVtbl", "IDevicePortalConnectionStatics", "IDevicePortalConnectionStatics_Impl", [InterfaceMethodSchema("GetForAppServiceConnection", 6, [InterfaceParameterSchema("appServiceConnection", "CPointer<Unit>", "InParam<_impl_l2.AppServiceConnection>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DevicePortalConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDevicePortalConnectionStatics", IDevicePortalConnectionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDevicePortalConnectionStaticsVtbl", "IDevicePortalConnectionStatics", "IDevicePortalConnectionStatics_Impl", [InterfaceMethodSchema("GetForAppServiceConnection", 6, [InterfaceParameterSchema("appServiceConnection", "CPointer<Unit>", "InParam<impl_p1.AppServiceConnection>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DevicePortalConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDevicePortalConnectionStatics.runtimeType())
         return schema
     }
@@ -1009,7 +1020,7 @@ public class IDevicePortalConnectionStatics <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_ApplicationModel_AppService == "on"]
-    public unsafe func GetForAppServiceConnection(appServiceConnection: _impl_l2.AppServiceConnection): DevicePortalConnection {
+    public unsafe func GetForAppServiceConnection(appServiceConnection: impl_p1.AppServiceConnection): DevicePortalConnection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForAppServiceConnection(asRaw(), appServiceConnection.asRaw(), CPointer<CPointer<Unit>>(inout result__))

@@ -4,7 +4,9 @@
 package windows_appsdk.Microsoft.Foundation
 
 import std.collection.*
+@When[Microsoft_Foundation == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Microsoft_Foundation == "on"]
 import windows_core as windows_core
 
 

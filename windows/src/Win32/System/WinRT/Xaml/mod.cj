@@ -4,13 +4,24 @@
 package windows.Win32.System.WinRT.Xaml
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Xaml == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_WinRT_Xaml == "on"]
@@ -83,7 +94,7 @@ public class IDesktopWindowXamlSourceNative <: InterfaceWrapperBase & ComInterfa
 public struct IDesktopWindowXamlSourceNative2Vtbl {
     public var base_: IDesktopWindowXamlSourceNativeVtbl = IDesktopWindowXamlSourceNativeVtbl()
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var PreTranslateMessage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    public var PreTranslateMessage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -128,7 +139,7 @@ public class IDesktopWindowXamlSourceNative2 <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func PreTranslateMessage(message: CPointer<Win32__impl_l0.MSGAbi>, result: CPointer<Int32>): Int32 {
+    public unsafe func PreTranslateMessage(message: CPointer<Win32_impl_p1.MSGAbi>, result: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PreTranslateMessage(__liveRaw, message, result)

@@ -4,19 +4,33 @@
 package windows.Web.UI.Interop
 
 import std.collection.*
+@When[Windows_Web_UI_Interop == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Web_UI_Interop == "on"]
 import windows_core as windows_core
+@When[Windows_Web_UI_Interop == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Web_UI_Interop == "on"]
 import windows_interface as windows_interface
+@When[Windows_Web_UI_Interop == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Web_UI_Interop == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Web_UI_Interop == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Web_UI_Interop == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_Web_UI_Interop == "on" && Windows_Web_UI == "on"]
 import windows.Web.UI as Web_UI
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Web_UI_Interop == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Web_UI_Interop == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Web_UI_Interop == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Web_UI_Interop == "on"]
 import windows_collections as windows_collections
+@When[Windows_Web_UI_Interop == "on"]
 import windows_future as windows_future
 
 
@@ -193,15 +207,15 @@ extend WebViewControlProcessCapabilityState <: windows_core.CopyType & windows_c
 public struct IWebViewControlAcceleratorKeyPressedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_UI_Core == "on"]
-    public var EventType: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CoreAcceleratorKeyEventTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var EventType: CFunc<(CPointer<Unit>, CPointer<impl_p0.CoreAcceleratorKeyEventTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core != "on"]
     public var EventType: UIntNative = UIntNative(0)
     @When[Windows_System == "on"]
-    public var get_VirtualKey: CFunc<(CPointer<Unit>, CPointer<_impl_l0.VirtualKeyAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_VirtualKey: CFunc<(CPointer<Unit>, CPointer<impl_p0.VirtualKeyAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var get_VirtualKey: UIntNative = UIntNative(0)
     @When[Windows_UI_Core == "on"]
-    public var KeyStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CorePhysicalKeyStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var KeyStatus: CFunc<(CPointer<Unit>, CPointer<impl_p0.CorePhysicalKeyStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Core != "on"]
     public var KeyStatus: UIntNative = UIntNative(0)
     public var RoutingStage: CFunc<(CPointer<Unit>, CPointer<WebViewControlAcceleratorKeyRoutingStageAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -246,7 +260,7 @@ public class IWebViewControlAcceleratorKeyPressedEventArgs <: InterfaceWrapperBa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebViewControlAcceleratorKeyPressedEventArgs", IWebViewControlAcceleratorKeyPressedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlAcceleratorKeyPressedEventArgsVtbl", "IWebViewControlAcceleratorKeyPressedEventArgs", "IWebViewControlAcceleratorKeyPressedEventArgs_Impl", [InterfaceMethodSchema("EventType", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CoreAcceleratorKeyEventTypeAbi>", "OutSlot<_impl_l0.CoreAcceleratorKeyEventType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_VirtualKey", 7, [InterfaceParameterSchema("result", "CPointer<_impl_l0.VirtualKeyAbi>", "OutSlot<_impl_l0.VirtualKey>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("KeyStatus", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.CorePhysicalKeyStatusAbi>", "OutSlot<_impl_l0.CorePhysicalKeyStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RoutingStage", 9, [InterfaceParameterSchema("result", "CPointer<WebViewControlAcceleratorKeyRoutingStageAbi>", "OutSlot<WebViewControlAcceleratorKeyRoutingStage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Handled", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHandled", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebViewControlAcceleratorKeyPressedEventArgs", IWebViewControlAcceleratorKeyPressedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlAcceleratorKeyPressedEventArgsVtbl", "IWebViewControlAcceleratorKeyPressedEventArgs", "IWebViewControlAcceleratorKeyPressedEventArgs_Impl", [InterfaceMethodSchema("EventType", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.CoreAcceleratorKeyEventTypeAbi>", "OutSlot<impl_p0.CoreAcceleratorKeyEventType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_VirtualKey", 7, [InterfaceParameterSchema("result", "CPointer<impl_p0.VirtualKeyAbi>", "OutSlot<impl_p0.VirtualKey>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("KeyStatus", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.CorePhysicalKeyStatusAbi>", "OutSlot<impl_p0.CorePhysicalKeyStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RoutingStage", 9, [InterfaceParameterSchema("result", "CPointer<WebViewControlAcceleratorKeyRoutingStageAbi>", "OutSlot<WebViewControlAcceleratorKeyRoutingStage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Handled", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHandled", 11, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IWebViewControlAcceleratorKeyPressedEventArgs.runtimeType())
         return schema
     }
@@ -276,30 +290,30 @@ public class IWebViewControlAcceleratorKeyPressedEventArgs <: InterfaceWrapperBa
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func EventType(): _impl_l0.CoreAcceleratorKeyEventType {
+    public unsafe func EventType(): impl_p0.CoreAcceleratorKeyEventType {
         let v = vtbl()
-        var result__ = _impl_l0.CoreAcceleratorKeyEventTypeAbi()
-        let hr = v.EventType(asRaw(), CPointer<_impl_l0.CoreAcceleratorKeyEventTypeAbi>(inout result__))
+        var result__ = impl_p0.CoreAcceleratorKeyEventTypeAbi()
+        let hr = v.EventType(asRaw(), CPointer<impl_p0.CoreAcceleratorKeyEventTypeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CoreAcceleratorKeyEventType>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CoreAcceleratorKeyEventType>()).unwrap()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_VirtualKey(): _impl_l0.VirtualKey {
+    public unsafe func get_VirtualKey(): impl_p0.VirtualKey {
         let v = vtbl()
-        var result__ = _impl_l0.VirtualKeyAbi()
-        let hr = v.get_VirtualKey(asRaw(), CPointer<_impl_l0.VirtualKeyAbi>(inout result__))
+        var result__ = impl_p0.VirtualKeyAbi()
+        let hr = v.get_VirtualKey(asRaw(), CPointer<impl_p0.VirtualKeyAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.VirtualKey>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.VirtualKey>()).unwrap()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func KeyStatus(): _impl_l0.CorePhysicalKeyStatus {
+    public unsafe func KeyStatus(): impl_p0.CorePhysicalKeyStatus {
         let v = vtbl()
-        var result__ = _impl_l0.CorePhysicalKeyStatusAbi()
-        let hr = v.KeyStatus(asRaw(), CPointer<_impl_l0.CorePhysicalKeyStatusAbi>(inout result__))
+        var result__ = impl_p0.CorePhysicalKeyStatusAbi()
+        let hr = v.KeyStatus(asRaw(), CPointer<impl_p0.CorePhysicalKeyStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.CorePhysicalKeyStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.CorePhysicalKeyStatus>()).unwrap()
     }
 
     public unsafe func RoutingStage(): WebViewControlAcceleratorKeyRoutingStage {
@@ -587,17 +601,17 @@ public class WebViewControlAcceleratorKeyPressedEventArgs <: InterfaceWrapperBas
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func EventType(): _impl_l0.CoreAcceleratorKeyEventType {
+    public unsafe func EventType(): impl_p0.CoreAcceleratorKeyEventType {
         return defaultInterface().EventType()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_VirtualKey(): _impl_l0.VirtualKey {
+    public unsafe func get_VirtualKey(): impl_p0.VirtualKey {
         return defaultInterface().get_VirtualKey()
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func KeyStatus(): _impl_l0.CorePhysicalKeyStatus {
+    public unsafe func KeyStatus(): impl_p0.CorePhysicalKeyStatus {
         return defaultInterface().KeyStatus()
     }
 
@@ -1511,12 +1525,12 @@ public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: _impl_l1.IUriToStreamResolver): Unit {
+    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: impl_p1.IUriToStreamResolver): Unit {
         defaultInterface().NavigateToLocalStreamUri(source, streamResolver)
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func NavigateWithHttpRequestMessage(requestMessage: _impl_l2.HttpRequestMessage): Unit {
+    public unsafe func NavigateWithHttpRequestMessage(requestMessage: impl_p2.HttpRequestMessage): Unit {
         defaultInterface().NavigateWithHttpRequestMessage(requestMessage)
     }
 
@@ -1526,12 +1540,12 @@ public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CapturePreviewToStreamAsync(stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func CapturePreviewToStreamAsync(stream: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         return defaultInterface().CapturePreviewToStreamAsync(stream)
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<_impl_l2.DataPackage> {
+    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<impl_p2.DataPackage> {
         return defaultInterface().CaptureSelectedContentToDataPackageAsync()
     }
 

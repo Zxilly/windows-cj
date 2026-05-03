@@ -4,15 +4,25 @@
 package windows.Graphics.Printing.OptionDetails
 
 import std.collection.*
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Printing_OptionDetails == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Printing_OptionDetails == "on" && Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Printing_OptionDetails == "on"]
 import windows_collections as windows_collections
 
 
@@ -704,7 +714,7 @@ public class IPrintCustomItemListOptionDetails2 <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPrintCustomItemListOptionDetails2", IPrintCustomItemListOptionDetails2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintCustomItemListOptionDetails2Vtbl", "IPrintCustomItemListOptionDetails2", "IPrintCustomItemListOptionDetails2_Impl", [InterfaceMethodSchema("AddItem", 6, [InterfaceParameterSchema("itemId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("icon", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPrintCustomItemListOptionDetails2", IPrintCustomItemListOptionDetails2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPrintCustomItemListOptionDetails2Vtbl", "IPrintCustomItemListOptionDetails2", "IPrintCustomItemListOptionDetails2_Impl", [InterfaceMethodSchema("AddItem", 6, [InterfaceParameterSchema("itemId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("displayName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("description", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("icon", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamWithContentType>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IPrintCustomItemListOptionDetails2.runtimeType())
         return schema
     }
@@ -734,7 +744,7 @@ public class IPrintCustomItemListOptionDetails2 <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func AddItem(itemId: windows_core.HString, displayName: windows_core.HString, description: windows_core.HString, icon: _impl_l1.IRandomAccessStreamWithContentType): Unit {
+    public unsafe func AddItem(itemId: windows_core.HString, displayName: windows_core.HString, description: windows_core.HString, icon: impl_p1.IRandomAccessStreamWithContentType): Unit {
         let v = vtbl()
         let hr = v.AddItem(asRaw(), itemId.asRaw(), displayName.asRaw(), description.asRaw(), icon.asRaw())
         HRESULT(hr).ok()

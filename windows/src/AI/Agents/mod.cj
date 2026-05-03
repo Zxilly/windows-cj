@@ -4,7 +4,9 @@
 package windows.AI.Agents
 
 import std.collection.*
+@When[Windows_AI_Agents == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_AI_Agents == "on"]
 import windows_core as windows_core
 
 

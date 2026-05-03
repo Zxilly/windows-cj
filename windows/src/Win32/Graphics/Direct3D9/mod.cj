@@ -4,16 +4,26 @@
 package windows.Win32.Graphics.Direct3D9
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_polyfill.{unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32}
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Direct3D9 == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on" && (arch == "x86_64" || arch == "aarch64")]
@@ -3086,16 +3096,16 @@ extend D3DLIGHTINGCAPS <: windows_core.CopyType & windows_core.RuntimeType & win
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct D3DLIGHTINGELEMENT {
-    public var dvPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var dvNormal: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var dvPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var dvNormal: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 @C
 public struct D3DLIGHTINGELEMENTAbi {
-    public var dvPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var dvNormal: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var dvPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var dvNormal: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public init() {}
 }
 
@@ -3106,14 +3116,14 @@ extend D3DLIGHTINGELEMENT <: windows_core.CopyType & windows_core.RuntimeType & 
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct3D9.D3DLIGHTINGELEMENT;struct(Windows.Win32.Graphics.Direct3D.D3DVECTOR;f4;f4;f4);struct(Windows.Win32.Graphics.Direct3D.D3DVECTOR;f4;f4;f4))" }
     public static func projectAbi(value: D3DLIGHTINGELEMENT): D3DLIGHTINGELEMENTAbi {
         var abi = D3DLIGHTINGELEMENTAbi()
-        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.dvNormal = windows_core.projectTypedAbi(value.dvNormal, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.dvNormal = windows_core.projectTypedAbi(value.dvNormal, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         return abi
     }
     public static func assumeInitRef(abi: D3DLIGHTINGELEMENTAbi): D3DLIGHTINGELEMENT {
         var value = D3DLIGHTINGELEMENT()
-        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.dvNormal = windows_core.fromTypedAbi(abi.dvNormal, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.dvNormal = windows_core.fromTypedAbi(abi.dvNormal, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3DLIGHTINGELEMENTAbi): Result<D3DLIGHTINGELEMENT> { Result<D3DLIGHTINGELEMENT>.Ok(D3DLIGHTINGELEMENT.assumeInitRef(abi)) }
@@ -10618,10 +10628,10 @@ extend D3D_OMAC <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 }
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
-public type LPD3DENUMPIXELFORMATSCALLBACK = CFunc<(CPointer<Win32__impl_l0.DDPIXELFORMATAbi>, CPointer<Unit>) -> Int32>
+public type LPD3DENUMPIXELFORMATSCALLBACK = CFunc<(CPointer<Win32_impl_p0.DDPIXELFORMATAbi>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
-public type LPD3DENUMTEXTUREFORMATSCALLBACK = CFunc<(CPointer<Win32__impl_l1.DDSURFACEDESCAbi>, CPointer<Unit>) -> Int32>
+public type LPD3DENUMTEXTUREFORMATSCALLBACK = CFunc<(CPointer<Win32_impl_p1.DDSURFACEDESCAbi>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on"]
 public type LPD3DVALIDATECALLBACK = CFunc<(CPointer<Unit>, UInt32) -> Int32>
@@ -12063,8 +12073,8 @@ public struct D3DLIGHT {
     public var dwSize: UInt32 = 0u32
     public var dltType: D3DLIGHTTYPE = D3DLIGHTTYPE()
     public var dcvColor: D3DCOLORVALUE = D3DCOLORVALUE()
-    public var dvPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var dvDirection: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var dvPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var dvDirection: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12081,8 +12091,8 @@ public struct D3DLIGHTAbi {
     public var dwSize: UInt32 = 0u32
     public var dltType: D3DLIGHTTYPEAbi = D3DLIGHTTYPEAbi()
     public var dcvColor: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
-    public var dvPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var dvDirection: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var dvPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var dvDirection: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12103,8 +12113,8 @@ extend D3DLIGHT <: windows_core.CopyType & windows_core.RuntimeType & windows_co
         abi.dwSize = value.dwSize
         abi.dltType = D3DLIGHTTYPE.projectAbi(value.dltType)
         abi.dcvColor = D3DCOLORVALUE.projectAbi(value.dcvColor)
-        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.dvRange = value.dvRange
         abi.dvFalloff = value.dvFalloff
         abi.dvAttenuation0 = value.dvAttenuation0
@@ -12119,8 +12129,8 @@ extend D3DLIGHT <: windows_core.CopyType & windows_core.RuntimeType & windows_co
         value.dwSize = abi.dwSize
         value.dltType = D3DLIGHTTYPE.assumeInitRef(abi.dltType)
         value.dcvColor = D3DCOLORVALUE.assumeInitRef(abi.dcvColor)
-        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.dvRange = abi.dvRange
         value.dvFalloff = abi.dvFalloff
         value.dvAttenuation0 = abi.dvAttenuation0
@@ -12142,8 +12152,8 @@ public struct D3DLIGHT2 {
     public var dwSize: UInt32 = 0u32
     public var dltType: D3DLIGHTTYPE = D3DLIGHTTYPE()
     public var dcvColor: D3DCOLORVALUE = D3DCOLORVALUE()
-    public var dvPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var dvDirection: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var dvPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var dvDirection: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12161,8 +12171,8 @@ public struct D3DLIGHT2Abi {
     public var dwSize: UInt32 = 0u32
     public var dltType: D3DLIGHTTYPEAbi = D3DLIGHTTYPEAbi()
     public var dcvColor: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
-    public var dvPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var dvDirection: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var dvPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var dvDirection: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12184,8 +12194,8 @@ extend D3DLIGHT2 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.dwSize = value.dwSize
         abi.dltType = D3DLIGHTTYPE.projectAbi(value.dltType)
         abi.dcvColor = D3DCOLORVALUE.projectAbi(value.dcvColor)
-        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.dvRange = value.dvRange
         abi.dvFalloff = value.dvFalloff
         abi.dvAttenuation0 = value.dvAttenuation0
@@ -12201,8 +12211,8 @@ extend D3DLIGHT2 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.dwSize = abi.dwSize
         value.dltType = D3DLIGHTTYPE.assumeInitRef(abi.dltType)
         value.dcvColor = D3DCOLORVALUE.assumeInitRef(abi.dcvColor)
-        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.dvRange = abi.dvRange
         value.dvFalloff = abi.dvFalloff
         value.dvAttenuation0 = abi.dvAttenuation0
@@ -12226,8 +12236,8 @@ public struct D3DLIGHT7 {
     public var dcvDiffuse: D3DCOLORVALUE = D3DCOLORVALUE()
     public var dcvSpecular: D3DCOLORVALUE = D3DCOLORVALUE()
     public var dcvAmbient: D3DCOLORVALUE = D3DCOLORVALUE()
-    public var dvPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var dvDirection: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var dvPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var dvDirection: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12245,8 +12255,8 @@ public struct D3DLIGHT7Abi {
     public var dcvDiffuse: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
     public var dcvSpecular: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
     public var dcvAmbient: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
-    public var dvPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var dvDirection: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var dvPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var dvDirection: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var dvRange: Float32 = 0.0f32
     public var dvFalloff: Float32 = 0.0f32
     public var dvAttenuation0: Float32 = 0.0f32
@@ -12268,8 +12278,8 @@ extend D3DLIGHT7 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.dcvDiffuse = D3DCOLORVALUE.projectAbi(value.dcvDiffuse)
         abi.dcvSpecular = D3DCOLORVALUE.projectAbi(value.dcvSpecular)
         abi.dcvAmbient = D3DCOLORVALUE.projectAbi(value.dcvAmbient)
-        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.dvPosition = windows_core.projectTypedAbi(value.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.dvDirection = windows_core.projectTypedAbi(value.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.dvRange = value.dvRange
         abi.dvFalloff = value.dvFalloff
         abi.dvAttenuation0 = value.dvAttenuation0
@@ -12285,8 +12295,8 @@ extend D3DLIGHT7 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.dcvDiffuse = D3DCOLORVALUE.assumeInitRef(abi.dcvDiffuse)
         value.dcvSpecular = D3DCOLORVALUE.assumeInitRef(abi.dcvSpecular)
         value.dcvAmbient = D3DCOLORVALUE.assumeInitRef(abi.dcvAmbient)
-        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.dvPosition = windows_core.fromTypedAbi(abi.dvPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.dvDirection = windows_core.fromTypedAbi(abi.dvDirection, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.dvRange = abi.dvRange
         value.dvFalloff = abi.dvFalloff
         value.dvAttenuation0 = abi.dvAttenuation0
@@ -12309,8 +12319,8 @@ public struct D3DLIGHT9 {
     public var Diffuse: D3DCOLORVALUE = D3DCOLORVALUE()
     public var Specular: D3DCOLORVALUE = D3DCOLORVALUE()
     public var Ambient: D3DCOLORVALUE = D3DCOLORVALUE()
-    public var Position: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var Direction: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var Position: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var Direction: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var Range: Float32 = 0.0f32
     public var Falloff: Float32 = 0.0f32
     public var Attenuation0: Float32 = 0.0f32
@@ -12328,8 +12338,8 @@ public struct D3DLIGHT9Abi {
     public var Diffuse: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
     public var Specular: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
     public var Ambient: D3DCOLORVALUEAbi = D3DCOLORVALUEAbi()
-    public var Position: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var Direction: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var Position: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var Direction: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var Range: Float32 = 0.0f32
     public var Falloff: Float32 = 0.0f32
     public var Attenuation0: Float32 = 0.0f32
@@ -12351,8 +12361,8 @@ extend D3DLIGHT9 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         abi.Diffuse = D3DCOLORVALUE.projectAbi(value.Diffuse)
         abi.Specular = D3DCOLORVALUE.projectAbi(value.Specular)
         abi.Ambient = D3DCOLORVALUE.projectAbi(value.Ambient)
-        abi.Position = windows_core.projectTypedAbi(value.Position, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.Direction = windows_core.projectTypedAbi(value.Direction, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.Position = windows_core.projectTypedAbi(value.Position, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.Direction = windows_core.projectTypedAbi(value.Direction, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.Range = value.Range
         abi.Falloff = value.Falloff
         abi.Attenuation0 = value.Attenuation0
@@ -12368,8 +12378,8 @@ extend D3DLIGHT9 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
         value.Diffuse = D3DCOLORVALUE.assumeInitRef(abi.Diffuse)
         value.Specular = D3DCOLORVALUE.assumeInitRef(abi.Specular)
         value.Ambient = D3DCOLORVALUE.assumeInitRef(abi.Ambient)
-        value.Position = windows_core.fromTypedAbi(abi.Position, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.Direction = windows_core.fromTypedAbi(abi.Direction, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.Position = windows_core.fromTypedAbi(abi.Position, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.Direction = windows_core.fromTypedAbi(abi.Direction, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.Range = abi.Range
         value.Falloff = abi.Falloff
         value.Attenuation0 = abi.Attenuation0
@@ -15190,11 +15200,11 @@ public struct IDirect3DDevice9Vtbl {
     public var EndScene: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>, UInt32, CPointer<D3DRECTAbi>, UInt32, UInt32, Float32, UInt32) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var SetTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32__impl_l0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32_impl_p0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32__impl_l0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32_impl_p0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var MultiplyTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32__impl_l0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
+    public var MultiplyTransform: CFunc<(CPointer<Unit>, D3DTRANSFORMSTATETYPEAbi, CPointer<Win32_impl_p0.D3DMATRIXAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetViewport: CFunc<(CPointer<Unit>, CPointer<D3DVIEWPORT9Abi>) -> Int32> = { _, _ => 0 }
     public var GetViewport: CFunc<(CPointer<Unit>, CPointer<D3DVIEWPORT9Abi>) -> Int32> = { _, _ => 0 }
     public var SetMaterial: CFunc<(CPointer<Unit>, CPointer<D3DMATERIAL9Abi>) -> Int32> = { _, _ => 0 }
@@ -15562,21 +15572,21 @@ public class IDirect3DDevice9 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func SetTransform(State: D3DTRANSFORMSTATETYPEAbi, pMatrix: CPointer<Win32__impl_l0.D3DMATRIXAbi>): Int32 {
+    public unsafe func SetTransform(State: D3DTRANSFORMSTATETYPEAbi, pMatrix: CPointer<Win32_impl_p0.D3DMATRIXAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTransform(__liveRaw, State, pMatrix)
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetTransform(State: D3DTRANSFORMSTATETYPEAbi, pMatrix: CPointer<Win32__impl_l0.D3DMATRIXAbi>): Int32 {
+    public unsafe func GetTransform(State: D3DTRANSFORMSTATETYPEAbi, pMatrix: CPointer<Win32_impl_p0.D3DMATRIXAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTransform(__liveRaw, State, pMatrix)
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func MultiplyTransform(param0: D3DTRANSFORMSTATETYPEAbi, param1: CPointer<Win32__impl_l0.D3DMATRIXAbi>): Int32 {
+    public unsafe func MultiplyTransform(param0: D3DTRANSFORMSTATETYPEAbi, param1: CPointer<Win32_impl_p0.D3DMATRIXAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MultiplyTransform(__liveRaw, param0, param1)

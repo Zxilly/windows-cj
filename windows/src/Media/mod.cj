@@ -4,19 +4,31 @@
 package windows.Media
 
 import std.collection.*
+@When[Windows_Media == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Media == "on"]
 import windows_core as windows_core
+@When[Windows_Media == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Media == "on"]
 import windows_interface as windows_interface
+@When[Windows_Media == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Media == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Media == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Media == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
+@When[Windows_Media == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
+@When[Windows_Media == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Media == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Media == "on"]
 import windows_collections as windows_collections
+@When[Windows_Media == "on"]
 import windows_future as windows_future
 
 
@@ -736,7 +748,7 @@ public class IMediaExtensionManager2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMediaExtensionManager2", IMediaExtensionManager2.iid(), IMediaExtensionManager.descriptorSchema(), ["IMediaExtensionManager"], [IMediaExtensionManager.iid()], "IMediaExtensionManager2Vtbl", "IMediaExtensionManager2", "IMediaExtensionManager2_Impl", [InterfaceMethodSchema("RegisterMediaExtensionForAppService", 18, [InterfaceParameterSchema("extension", "CPointer<Unit>", "InParam<IMediaExtension>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("connection", "CPointer<Unit>", "InParam<_impl_l2.AppServiceConnection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMediaExtensionManager2", IMediaExtensionManager2.iid(), IMediaExtensionManager.descriptorSchema(), ["IMediaExtensionManager"], [IMediaExtensionManager.iid()], "IMediaExtensionManager2Vtbl", "IMediaExtensionManager2", "IMediaExtensionManager2_Impl", [InterfaceMethodSchema("RegisterMediaExtensionForAppService", 18, [InterfaceParameterSchema("extension", "CPointer<Unit>", "InParam<IMediaExtension>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("connection", "CPointer<Unit>", "InParam<impl_p1.AppServiceConnection>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IMediaExtensionManager2.runtimeType())
         return schema
     }
@@ -773,7 +785,7 @@ public class IMediaExtensionManager2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_ApplicationModel_AppService == "on"]
-    public unsafe func RegisterMediaExtensionForAppService(extension: IMediaExtension, connection: _impl_l2.AppServiceConnection): Unit {
+    public unsafe func RegisterMediaExtensionForAppService(extension: IMediaExtension, connection: impl_p1.AppServiceConnection): Unit {
         let v = vtbl()
         let hr = v.RegisterMediaExtensionForAppService(asRaw(), extension.asRaw(), connection.asRaw())
         HRESULT(hr).ok()
@@ -5380,7 +5392,7 @@ public class ISystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISystemMediaTransportControlsDisplayUpdater", ISystemMediaTransportControlsDisplayUpdater.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemMediaTransportControlsDisplayUpdaterVtbl", "ISystemMediaTransportControlsDisplayUpdater", "ISystemMediaTransportControlsDisplayUpdater_Impl", [InterfaceMethodSchema("Type", 6, [InterfaceParameterSchema("result", "CPointer<MediaPlaybackTypeAbi>", "OutSlot<MediaPlaybackType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetType", 7, [InterfaceParameterSchema("value", "MediaPlaybackTypeAbi", "MediaPlaybackType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppMediaId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppMediaId", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Thumbnail", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.RandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.RandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MusicProperties", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MusicDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VideoProperties", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VideoDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageProperties", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyFromFileAsync", 15, [InterfaceParameterSchema("type_", "MediaPlaybackTypeAbi", "MediaPlaybackType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearAll", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Update", 17, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("ISystemMediaTransportControlsDisplayUpdater", ISystemMediaTransportControlsDisplayUpdater.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISystemMediaTransportControlsDisplayUpdaterVtbl", "ISystemMediaTransportControlsDisplayUpdater", "ISystemMediaTransportControlsDisplayUpdater_Impl", [InterfaceMethodSchema("Type", 6, [InterfaceParameterSchema("result", "CPointer<MediaPlaybackTypeAbi>", "OutSlot<MediaPlaybackType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetType", 7, [InterfaceParameterSchema("value", "MediaPlaybackTypeAbi", "MediaPlaybackType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AppMediaId", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppMediaId", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Thumbnail", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.RandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.RandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("MusicProperties", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MusicDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VideoProperties", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VideoDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ImageProperties", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ImageDisplayProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyFromFileAsync", 15, [InterfaceParameterSchema("type_", "MediaPlaybackTypeAbi", "MediaPlaybackType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ClearAll", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Update", 17, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(ISystemMediaTransportControlsDisplayUpdater.runtimeType())
         return schema
     }
@@ -5438,16 +5450,16 @@ public class ISystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.RandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.RandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.RandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.RandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetThumbnail(value: _impl_l1.RandomAccessStreamReference): Unit {
+    public unsafe func SetThumbnail(value: impl_p1.RandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetThumbnail(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -5478,7 +5490,7 @@ public class ISystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CopyFromFileAsync(asRaw(), windows_core.projectTypedAbi(type_, windows_core.typeMarker<MediaPlaybackType>()), source.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6085,12 +6097,12 @@ public class SystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.RandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.RandomAccessStreamReference {
         return defaultInterface().Thumbnail()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetThumbnail(value: _impl_l1.RandomAccessStreamReference): Unit {
+    public unsafe func SetThumbnail(value: impl_p1.RandomAccessStreamReference): Unit {
         defaultInterface().SetThumbnail(value)
     }
 
@@ -6107,7 +6119,7 @@ public class SystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
+    public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: impl_p1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().CopyFromFileAsync(type_, source)
     }
 

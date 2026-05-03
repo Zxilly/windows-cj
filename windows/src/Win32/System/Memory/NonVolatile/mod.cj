@@ -4,7 +4,9 @@
 package windows.Win32.System.Memory.NonVolatile
 
 import std.collection.*
+@When[Windows_Win32_System_Memory_NonVolatile == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Memory_NonVolatile == "on"]
 import windows_core as windows_core
 
 

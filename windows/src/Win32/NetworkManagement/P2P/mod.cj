@@ -4,22 +4,33 @@
 package windows.Win32.NetworkManagement.P2P
 
 import std.collection.*
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct DRT_ADDRESS {
-    public var socketAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var socketAddress: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public var flags: UInt32 = 0u32
     public var nearness: Int32 = 0i32
     public var latency: UInt32 = 0u32
@@ -29,7 +40,7 @@ public struct DRT_ADDRESS {
 @When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct DRT_ADDRESSAbi {
-    public var socketAddress: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var socketAddress: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public var flags: UInt32 = 0u32
     public var nearness: Int32 = 0i32
     public var latency: UInt32 = 0u32
@@ -43,7 +54,7 @@ extend DRT_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType & windows
     public static func signature(): String { "struct(Windows.Win32.NetworkManagement.P2P.DRT_ADDRESS;struct(Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);cinterface(IInspectable);i8;cinterface(IInspectable));u4;i4;u4)" }
     public static func projectAbi(value: DRT_ADDRESS): DRT_ADDRESSAbi {
         var abi = DRT_ADDRESSAbi()
-        abi.socketAddress = windows_core.projectTypedAbi(value.socketAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.socketAddress = windows_core.projectTypedAbi(value.socketAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         abi.flags = value.flags
         abi.nearness = value.nearness
         abi.latency = value.latency
@@ -51,7 +62,7 @@ extend DRT_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
     public static func assumeInitRef(abi: DRT_ADDRESSAbi): DRT_ADDRESS {
         var value = DRT_ADDRESS()
-        value.socketAddress = windows_core.fromTypedAbi(abi.socketAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.socketAddress = windows_core.fromTypedAbi(abi.socketAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         value.flags = abi.flags
         value.nearness = abi.nearness
         value.latency = abi.latency
@@ -239,7 +250,7 @@ extend DRT_BOOTSTRAP_PROVIDER <: windows_core.CopyType & windows_core.RuntimeTyp
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
-public type DRT_BOOTSTRAP_RESOLVE_CALLBACK = CFunc<(Int32, CPointer<Unit>, CPointer<Win32__impl_l2.SOCKET_ADDRESS_LISTAbi>, Int32) -> Unit>
+public type DRT_BOOTSTRAP_RESOLVE_CALLBACK = CFunc<(Int32, CPointer<Unit>, CPointer<Win32_impl_p2.SOCKET_ADDRESS_LISTAbi>, Int32) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public struct DRT_DATA {
@@ -1350,7 +1361,7 @@ extend PEERDIST_STATUS_INFO <: windows_core.CopyType & windows_core.RuntimeType 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct PEER_ADDRESS {
     public var dwSize: UInt32 = 0u32
-    public var sin6: Win32__impl_l1.SOCKADDR_IN6 = Win32__impl_l1.SOCKADDR_IN6()
+    public var sin6: Win32_impl_p1.SOCKADDR_IN6 = Win32_impl_p1.SOCKADDR_IN6()
     public init() {}
 }
 
@@ -1358,7 +1369,7 @@ public struct PEER_ADDRESS {
 @C
 public struct PEER_ADDRESSAbi {
     public var dwSize: UInt32 = 0u32
-    public var sin6: Win32__impl_l1.SOCKADDR_IN6Abi = Win32__impl_l1.SOCKADDR_IN6Abi()
+    public var sin6: Win32_impl_p1.SOCKADDR_IN6Abi = Win32_impl_p1.SOCKADDR_IN6Abi()
     public init() {}
 }
 
@@ -1370,13 +1381,13 @@ extend PEER_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType & window
     public static func projectAbi(value: PEER_ADDRESS): PEER_ADDRESSAbi {
         var abi = PEER_ADDRESSAbi()
         abi.dwSize = value.dwSize
-        abi.sin6 = windows_core.projectTypedAbi(value.sin6, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_IN6>())
+        abi.sin6 = windows_core.projectTypedAbi(value.sin6, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_IN6>())
         return abi
     }
     public static func assumeInitRef(abi: PEER_ADDRESSAbi): PEER_ADDRESS {
         var value = PEER_ADDRESS()
         value.dwSize = abi.dwSize
-        value.sin6 = windows_core.fromTypedAbi(abi.sin6, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_IN6>()).unwrap()
+        value.sin6 = windows_core.fromTypedAbi(abi.sin6, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_IN6>()).unwrap()
         return value
     }
     public static func fromAbi(abi: PEER_ADDRESSAbi): Result<PEER_ADDRESS> { Result<PEER_ADDRESS>.Ok(PEER_ADDRESS.assumeInitRef(abi)) }
@@ -1749,7 +1760,7 @@ public struct PEER_CREDENTIAL_INFO {
     public var dwSize: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
     public var pwzFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi>()
+    public var pPublicKey: CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi>()
     public var pwzIssuerPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzIssuerFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
     public var ftValidityStart: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
@@ -1765,7 +1776,7 @@ public struct PEER_CREDENTIAL_INFOAbi {
     public var dwSize: UInt32 = 0u32
     public var dwFlags: UInt32 = 0u32
     public var pwzFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi>()
+    public var pPublicKey: CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi>()
     public var pwzIssuerPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzIssuerFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
     public var ftValidityStart: Win32_Foundation.FILETIMEAbi = Win32_Foundation.FILETIMEAbi()
@@ -2829,7 +2840,7 @@ public struct PEER_INVITATION_INFO {
     public var pRoles: CPointer<GUID> = CPointer<GUID>()
     public var cClassifiers: UInt32 = 0u32
     public var ppwzClassifiers: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var pSubjectPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi>()
+    public var pSubjectPublicKey: CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi>()
     public var authScheme: PEER_GROUP_AUTHENTICATION_SCHEME = PEER_GROUP_AUTHENTICATION_SCHEME()
     public init() {}
 }
@@ -2854,7 +2865,7 @@ public struct PEER_INVITATION_INFOAbi {
     public var pRoles: CPointer<GUID> = CPointer<GUID>()
     public var cClassifiers: UInt32 = 0u32
     public var ppwzClassifiers: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var pSubjectPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFOAbi>()
+    public var pSubjectPublicKey: CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi> = CPointer<Win32_impl_p2.CERT_PUBLIC_KEY_INFOAbi>()
     public var authScheme: PEER_GROUP_AUTHENTICATION_SCHEMEAbi = PEER_GROUP_AUTHENTICATION_SCHEMEAbi()
     public init() {}
 }
@@ -3399,7 +3410,7 @@ extend PEER_PEOPLE_NEAR_ME <: windows_core.CopyType & windows_core.RuntimeType &
 public struct PEER_PNRP_ENDPOINT_INFO {
     public var pwzPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0u32
-    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>> = CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>()
+    public var ppAddresses: CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>> = CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>>()
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATA = PEER_DATA()
     public init() {}
@@ -3410,7 +3421,7 @@ public struct PEER_PNRP_ENDPOINT_INFO {
 public struct PEER_PNRP_ENDPOINT_INFOAbi {
     public var pwzPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0u32
-    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>> = CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>()
+    public var ppAddresses: CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>> = CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>>()
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATAAbi = PEER_DATAAbi()
     public init() {}
@@ -3451,7 +3462,7 @@ public struct PEER_PNRP_REGISTRATION_INFO {
     public var pwzCloudName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzPublishingIdentity: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0u32
-    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>> = CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>()
+    public var ppAddresses: CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>> = CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>>()
     public var wPort: UInt16 = 0u16
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATA = PEER_DATA()
@@ -3464,7 +3475,7 @@ public struct PEER_PNRP_REGISTRATION_INFOAbi {
     public var pwzCloudName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzPublishingIdentity: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0u32
-    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>> = CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>()
+    public var ppAddresses: CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>> = CPointer<CPointer<Win32_impl_p1.SOCKADDRAbi>>()
     public var wPort: UInt16 = 0u16
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATAAbi = PEER_DATAAbi()
@@ -4617,7 +4628,7 @@ extend DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct <: windows_cor
 @When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct {
     public var cntAddress: UInt32 = 0u32
-    public var pAddresses: CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi> = CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>()
+    public var pAddresses: CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi> = CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>()
     public init() {}
 }
 
@@ -4625,7 +4636,7 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootst
 @C
 public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__StructAbi {
     public var cntAddress: UInt32 = 0u32
-    public var pAddresses: CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi> = CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>()
+    public var pAddresses: CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi> = CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>()
     public init() {}
 }
 
@@ -5829,7 +5840,7 @@ public struct PNRPINFO_V1 {
     public var dwLifetime: UInt32 = 0u32
     public var enResolveCriteria: PNRP_RESOLVE_CRITERIA = PNRP_RESOLVE_CRITERIA()
     public var dwFlags: UInt32 = 0u32
-    public var saHint: Win32__impl_l1.SOCKET_ADDRESS = Win32__impl_l1.SOCKET_ADDRESS()
+    public var saHint: Win32_impl_p2.SOCKET_ADDRESS = Win32_impl_p2.SOCKET_ADDRESS()
     public var enNameState: PNRP_REGISTERED_ID_STATE = PNRP_REGISTERED_ID_STATE()
     public init() {}
 }
@@ -5844,7 +5855,7 @@ public struct PNRPINFO_V1Abi {
     public var dwLifetime: UInt32 = 0u32
     public var enResolveCriteria: PNRP_RESOLVE_CRITERIAAbi = PNRP_RESOLVE_CRITERIAAbi()
     public var dwFlags: UInt32 = 0u32
-    public var saHint: Win32__impl_l1.SOCKET_ADDRESSAbi = Win32__impl_l1.SOCKET_ADDRESSAbi()
+    public var saHint: Win32_impl_p2.SOCKET_ADDRESSAbi = Win32_impl_p2.SOCKET_ADDRESSAbi()
     public var enNameState: PNRP_REGISTERED_ID_STATEAbi = PNRP_REGISTERED_ID_STATEAbi()
     public init() {}
 }
@@ -5863,7 +5874,7 @@ extend PNRPINFO_V1 <: windows_core.CopyType & windows_core.RuntimeType & windows
         abi.dwLifetime = value.dwLifetime
         abi.enResolveCriteria = PNRP_RESOLVE_CRITERIA.projectAbi(value.enResolveCriteria)
         abi.dwFlags = value.dwFlags
-        abi.saHint = windows_core.projectTypedAbi(value.saHint, windows_core.typeMarker<Win32__impl_l1.SOCKET_ADDRESS>())
+        abi.saHint = windows_core.projectTypedAbi(value.saHint, windows_core.typeMarker<Win32_impl_p2.SOCKET_ADDRESS>())
         abi.enNameState = PNRP_REGISTERED_ID_STATE.projectAbi(value.enNameState)
         return abi
     }
@@ -5876,7 +5887,7 @@ extend PNRPINFO_V1 <: windows_core.CopyType & windows_core.RuntimeType & windows
         value.dwLifetime = abi.dwLifetime
         value.enResolveCriteria = PNRP_RESOLVE_CRITERIA.assumeInitRef(abi.enResolveCriteria)
         value.dwFlags = abi.dwFlags
-        value.saHint = windows_core.fromTypedAbi(abi.saHint, windows_core.typeMarker<Win32__impl_l1.SOCKET_ADDRESS>()).unwrap()
+        value.saHint = windows_core.fromTypedAbi(abi.saHint, windows_core.typeMarker<Win32_impl_p2.SOCKET_ADDRESS>()).unwrap()
         value.enNameState = PNRP_REGISTERED_ID_STATE.assumeInitRef(abi.enNameState)
         return value
     }
@@ -5896,7 +5907,7 @@ public struct PNRPINFO_V2 {
     public var dwLifetime: UInt32 = 0u32
     public var enResolveCriteria: PNRP_RESOLVE_CRITERIA = PNRP_RESOLVE_CRITERIA()
     public var dwFlags: UInt32 = 0u32
-    public var saHint: Win32__impl_l1.SOCKET_ADDRESS = Win32__impl_l1.SOCKET_ADDRESS()
+    public var saHint: Win32_impl_p2.SOCKET_ADDRESS = Win32_impl_p2.SOCKET_ADDRESS()
     public var enNameState: PNRP_REGISTERED_ID_STATE = PNRP_REGISTERED_ID_STATE()
     public var enExtendedPayloadType: PNRP_EXTENDED_PAYLOAD_TYPE = PNRP_EXTENDED_PAYLOAD_TYPE()
     public var Anonymous: PNRPINFO_V2__Anonymous_e__Union = PNRPINFO_V2__Anonymous_e__Union()
@@ -5913,7 +5924,7 @@ public struct PNRPINFO_V2Abi {
     public var dwLifetime: UInt32 = 0u32
     public var enResolveCriteria: PNRP_RESOLVE_CRITERIAAbi = PNRP_RESOLVE_CRITERIAAbi()
     public var dwFlags: UInt32 = 0u32
-    public var saHint: Win32__impl_l1.SOCKET_ADDRESSAbi = Win32__impl_l1.SOCKET_ADDRESSAbi()
+    public var saHint: Win32_impl_p2.SOCKET_ADDRESSAbi = Win32_impl_p2.SOCKET_ADDRESSAbi()
     public var enNameState: PNRP_REGISTERED_ID_STATEAbi = PNRP_REGISTERED_ID_STATEAbi()
     public var enExtendedPayloadType: PNRP_EXTENDED_PAYLOAD_TYPEAbi = PNRP_EXTENDED_PAYLOAD_TYPEAbi()
     public var Anonymous: PNRPINFO_V2__Anonymous_e__Union = PNRPINFO_V2__Anonymous_e__Union()
@@ -5934,7 +5945,7 @@ extend PNRPINFO_V2 <: windows_core.CopyType & windows_core.RuntimeType & windows
         abi.dwLifetime = value.dwLifetime
         abi.enResolveCriteria = PNRP_RESOLVE_CRITERIA.projectAbi(value.enResolveCriteria)
         abi.dwFlags = value.dwFlags
-        abi.saHint = windows_core.projectTypedAbi(value.saHint, windows_core.typeMarker<Win32__impl_l1.SOCKET_ADDRESS>())
+        abi.saHint = windows_core.projectTypedAbi(value.saHint, windows_core.typeMarker<Win32_impl_p2.SOCKET_ADDRESS>())
         abi.enNameState = PNRP_REGISTERED_ID_STATE.projectAbi(value.enNameState)
         abi.enExtendedPayloadType = PNRP_EXTENDED_PAYLOAD_TYPE.projectAbi(value.enExtendedPayloadType)
         abi.Anonymous = value.Anonymous
@@ -5949,7 +5960,7 @@ extend PNRPINFO_V2 <: windows_core.CopyType & windows_core.RuntimeType & windows
         value.dwLifetime = abi.dwLifetime
         value.enResolveCriteria = PNRP_RESOLVE_CRITERIA.assumeInitRef(abi.enResolveCriteria)
         value.dwFlags = abi.dwFlags
-        value.saHint = windows_core.fromTypedAbi(abi.saHint, windows_core.typeMarker<Win32__impl_l1.SOCKET_ADDRESS>()).unwrap()
+        value.saHint = windows_core.fromTypedAbi(abi.saHint, windows_core.typeMarker<Win32_impl_p2.SOCKET_ADDRESS>()).unwrap()
         value.enNameState = PNRP_REGISTERED_ID_STATE.assumeInitRef(abi.enNameState)
         value.enExtendedPayloadType = PNRP_EXTENDED_PAYLOAD_TYPE.assumeInitRef(abi.enExtendedPayloadType)
         value.Anonymous = abi.Anonymous
@@ -5969,15 +5980,15 @@ extend PNRPINFO_V2 <: windows_core.CopyType & windows_core.RuntimeType & windows
 public struct PNRPINFO_V2__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public mut prop blobPayload: Win32__impl_l0.BLOB {
+    public mut prop blobPayload: Win32_impl_p0.BLOB {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.BLOBAbi>(p)
+                let ptr = CPointer<Win32_impl_p0.BLOBAbi>(p)
                 let raw = ptr.read()
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.BLOB>()).unwrap()
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p0.BLOB>()).unwrap()
             }
         }
         set(val) {
@@ -5985,8 +5996,8 @@ public struct PNRPINFO_V2__Anonymous_e__Union {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let p = base
-                let ptr = CPointer<Win32__impl_l0.BLOBAbi>(p)
-                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.BLOB>()))
+                let ptr = CPointer<Win32_impl_p0.BLOBAbi>(p)
+                ptr.write(windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p0.BLOB>()))
                 _raw = rawStorage
             }
         }
@@ -8396,22 +8407,22 @@ public unsafe func Windows_DrtUpdateKey(hKeyRegistration: CPointer<Unit>, pAppDa
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKey == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func DrtCreateDerivedKey(pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pKey: CPointer<DRT_DATAAbi>): Int32
+    func DrtCreateDerivedKey(pLocalCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pKey: CPointer<DRT_DATAAbi>): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKey == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_DrtCreateDerivedKey(pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pKey: CPointer<DRT_DATAAbi>): Int32 {
+public unsafe func Windows_DrtCreateDerivedKey(pLocalCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pKey: CPointer<DRT_DATAAbi>): Int32 {
     return DrtCreateDerivedKey(pLocalCert, pKey)
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKeySecurityProvider == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: pLocalCert optional
-    func DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDERAbi>>): Int32
+    func DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pLocalCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDERAbi>>): Int32
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKeySecurityProvider == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDERAbi>>): Int32 {
+public unsafe func Windows_DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, pLocalCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDERAbi>>): Int32 {
     return DrtCreateDerivedKeySecurityProvider(pRootCert, pLocalCert, ppSecurityProvider)
 }
 

@@ -4,10 +4,15 @@
 package windows.Win32.Graphics.Gdi
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedWriteUInt16, packedWriteUInt32, unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

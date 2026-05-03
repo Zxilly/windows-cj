@@ -4,20 +4,35 @@
 package windows_webview2.Microsoft.Web.WebView2.Core
 
 import std.collection.*
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_core as windows_core
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_ApplicationModel_DataTransfer == "on"]
 import windows.ApplicationModel.DataTransfer as ApplicationModel_DataTransfer
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_ApplicationModel_DataTransfer_DragDrop_Core == "on"]
 import windows.ApplicationModel.DataTransfer.DragDrop.Core as ApplicationModel_DataTransfer_DragDrop_Core
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_Security_Cryptography_Certificates == "on"]
 import windows.Security.Cryptography.Certificates as Security_Cryptography_Certificates
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_Storage_Streams == "on"]
 import windows.Storage.Streams as Storage_Streams
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Microsoft_Web_WebView2_Core == "on" && Windows_UI_Core == "on"]
 import windows.UI.Core as UI_Core
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_Web_WebView2_Core == "on"]
 import windows_future as windows_future
 
 

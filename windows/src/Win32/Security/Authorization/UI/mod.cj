@@ -4,15 +4,26 @@
 package windows.Win32.Security.Authorization.UI
 
 import std.collection.*
+@When[Windows_Win32_Security_Authorization_UI == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_Authorization_UI == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_Authorization_UI == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Security_Authorization_UI == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_Authorization_UI == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_Authorization_UI == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Security_Authorization_UI == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Security_Authorization_UI == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Security_Authorization_UI == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Security_Authorization_UI == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Security_Authorization_UI == "on" && Windows_Win32_Security == "on"]
@@ -190,7 +201,7 @@ public class ISecurityInformation2 <: InterfaceWrapperBase & ComInterface {
 public struct ISecurityObjectTypeInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization == "on"]
-    public var GetInheritSource: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Security.ACLAbi>, CPointer<CPointer<Win32__impl_l0.INHERITED_FROMAAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetInheritSource: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Security.ACLAbi>, CPointer<CPointer<Win32_impl_p0.INHERITED_FROMAAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -235,7 +246,7 @@ public class ISecurityObjectTypeInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization == "on"]
-    public unsafe func GetInheritSource(si: UInt32, pACL: CPointer<Win32_Security.ACLAbi>, ppInheritArray: CPointer<CPointer<Win32__impl_l0.INHERITED_FROMAAbi>>): Int32 {
+    public unsafe func GetInheritSource(si: UInt32, pACL: CPointer<Win32_Security.ACLAbi>, ppInheritArray: CPointer<CPointer<Win32_impl_p0.INHERITED_FROMAAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInheritSource(__liveRaw, si, pACL, ppInheritArray)
@@ -795,7 +806,7 @@ extend SI_PAGE_TYPE <: windows_core.CopyType & windows_core.RuntimeType & window
 public struct IEffectivePermission2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization == "on"]
-    public var ComputeEffectivePermissionWithSecondarySecurity: CFunc<(CPointer<Unit>, Win32_Security.PSID, Win32_Security.PSID, CPointer<UInt16>, CPointer<SECURITY_OBJECTAbi>, UInt32, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<Win32__impl_l0.AUTHZ_SID_OPERATIONAbi>, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<Win32__impl_l0.AUTHZ_SID_OPERATIONAbi>, CPointer<Win32__impl_l1.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, CPointer<Win32__impl_l0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, CPointer<Win32__impl_l1.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, CPointer<Win32__impl_l0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, CPointer<EFFPERM_RESULT_LISTAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var ComputeEffectivePermissionWithSecondarySecurity: CFunc<(CPointer<Unit>, Win32_Security.PSID, Win32_Security.PSID, CPointer<UInt16>, CPointer<SECURITY_OBJECTAbi>, UInt32, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<Win32_impl_p0.AUTHZ_SID_OPERATIONAbi>, CPointer<Win32_Security.TOKEN_GROUPSAbi>, CPointer<Win32_impl_p0.AUTHZ_SID_OPERATIONAbi>, CPointer<Win32_impl_p2.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, CPointer<Win32_impl_p0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, CPointer<Win32_impl_p2.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, CPointer<Win32_impl_p0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, CPointer<EFFPERM_RESULT_LISTAbi>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -840,7 +851,7 @@ public class IEffectivePermission2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization == "on"]
-    public unsafe func ComputeEffectivePermissionWithSecondarySecurity(pSid: Win32_Security.PSID, pDeviceSid: Win32_Security.PSID, pszServerName: CPointer<UInt16>, pSecurityObjects: CPointer<SECURITY_OBJECTAbi>, dwSecurityObjectCount: UInt32, pUserGroups: CPointer<Win32_Security.TOKEN_GROUPSAbi>, pAuthzUserGroupsOperations: CPointer<Win32__impl_l0.AUTHZ_SID_OPERATIONAbi>, pDeviceGroups: CPointer<Win32_Security.TOKEN_GROUPSAbi>, pAuthzDeviceGroupsOperations: CPointer<Win32__impl_l0.AUTHZ_SID_OPERATIONAbi>, pAuthzUserClaims: CPointer<Win32__impl_l1.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pAuthzUserClaimsOperations: CPointer<Win32__impl_l0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, pAuthzDeviceClaims: CPointer<Win32__impl_l1.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pAuthzDeviceClaimsOperations: CPointer<Win32__impl_l0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, pEffpermResultLists: CPointer<EFFPERM_RESULT_LISTAbi>): Int32 {
+    public unsafe func ComputeEffectivePermissionWithSecondarySecurity(pSid: Win32_Security.PSID, pDeviceSid: Win32_Security.PSID, pszServerName: CPointer<UInt16>, pSecurityObjects: CPointer<SECURITY_OBJECTAbi>, dwSecurityObjectCount: UInt32, pUserGroups: CPointer<Win32_Security.TOKEN_GROUPSAbi>, pAuthzUserGroupsOperations: CPointer<Win32_impl_p0.AUTHZ_SID_OPERATIONAbi>, pDeviceGroups: CPointer<Win32_Security.TOKEN_GROUPSAbi>, pAuthzDeviceGroupsOperations: CPointer<Win32_impl_p0.AUTHZ_SID_OPERATIONAbi>, pAuthzUserClaims: CPointer<Win32_impl_p2.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pAuthzUserClaimsOperations: CPointer<Win32_impl_p0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, pAuthzDeviceClaims: CPointer<Win32_impl_p2.AUTHZ_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pAuthzDeviceClaimsOperations: CPointer<Win32_impl_p0.AUTHZ_SECURITY_ATTRIBUTE_OPERATIONAbi>, pEffpermResultLists: CPointer<EFFPERM_RESULT_LISTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputeEffectivePermissionWithSecondarySecurity(__liveRaw, pSid, pDeviceSid, pszServerName, pSecurityObjects, dwSecurityObjectCount, pUserGroups, pAuthzUserGroupsOperations, pDeviceGroups, pAuthzDeviceGroupsOperations, pAuthzUserClaims, pAuthzUserClaimsOperations, pAuthzDeviceClaims, pAuthzDeviceClaimsOperations, pEffpermResultLists)
@@ -1033,7 +1044,7 @@ public struct ISecurityInformationVtbl {
     @When[Windows_Win32_Security == "on"]
     public var GetInheritTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<SI_INHERIT_TYPEAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_Controls == "on"]
-    public var PropertySheetPageCallback: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.PSPCB_MESSAGEAbi, SI_PAGE_TYPEAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var PropertySheetPageCallback: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p1.PSPCB_MESSAGEAbi, SI_PAGE_TYPEAbi) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1117,7 +1128,7 @@ public class ISecurityInformation <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func PropertySheetPageCallback(hwnd: CPointer<Unit>, uMsg: Win32__impl_l0.PSPCB_MESSAGEAbi, uPage: SI_PAGE_TYPEAbi): Int32 {
+    public unsafe func PropertySheetPageCallback(hwnd: CPointer<Unit>, uMsg: Win32_impl_p1.PSPCB_MESSAGEAbi, uPage: SI_PAGE_TYPEAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PropertySheetPageCallback(__liveRaw, hwnd, uMsg, uPage)
@@ -1127,11 +1138,11 @@ public class ISecurityInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_CreateSecurityPage == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func CreateSecurityPage(psi: CPointer<Unit>): Win32__impl_l0.HPROPSHEETPAGE
+    func CreateSecurityPage(psi: CPointer<Unit>): Win32_impl_p1.HPROPSHEETPAGE
 }
 
 @When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_CreateSecurityPage == "on" && Windows_Win32_UI_Controls == "on"]
-public unsafe func Windows_CreateSecurityPage(psi: CPointer<Unit>): Win32__impl_l0.HPROPSHEETPAGE {
+public unsafe func Windows_CreateSecurityPage(psi: CPointer<Unit>): Win32_impl_p1.HPROPSHEETPAGE {
     return CreateSecurityPage(psi)
 }
 

@@ -4,17 +4,29 @@
 package windows.Devices.PointOfService.Provider
 
 import std.collection.*
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_PointOfService_Provider == "on" && Windows_Devices_PointOfService == "on"]
 import windows.Devices.PointOfService as Devices_PointOfService
+@When[Windows_Devices_PointOfService_Provider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Devices_PointOfService_Provider == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_PointOfService_Provider == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_PointOfService_Provider == "on"]
 import windows_future as windows_future
 
 
@@ -1762,7 +1774,7 @@ public class IBarcodeScannerVideoFrame <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBarcodeScannerVideoFrame", IBarcodeScannerVideoFrame.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerVideoFrameVtbl", "IBarcodeScannerVideoFrame", "IBarcodeScannerVideoFrame_Impl", [InterfaceMethodSchema("Format", 6, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapPixelFormatAbi>", "OutSlot<Graphics_Imaging.BitmapPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Width", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Height", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBarcodeScannerVideoFrame", IBarcodeScannerVideoFrame.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBarcodeScannerVideoFrameVtbl", "IBarcodeScannerVideoFrame", "IBarcodeScannerVideoFrame_Impl", [InterfaceMethodSchema("Format", 6, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapPixelFormatAbi>", "OutSlot<Graphics_Imaging.BitmapPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Width", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Height", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBarcodeScannerVideoFrame.runtimeType())
         return schema
     }
@@ -1817,12 +1829,12 @@ public class IBarcodeScannerVideoFrame <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PixelData(): _impl_l0.IBuffer {
+    public unsafe func PixelData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PixelData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -2935,7 +2947,7 @@ public class BarcodeScannerVideoFrame <: InterfaceWrapperBase & ComInterface & w
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func PixelData(): _impl_l0.IBuffer {
+    public unsafe func PixelData(): impl_p0.IBuffer {
         return defaultInterface().PixelData()
     }
 

@@ -4,16 +4,26 @@
 package windows.Win32.Data.HtmlHelp
 
 import std.collection.*
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Data_HtmlHelp == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Data_HtmlHelp == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Data_HtmlHelp == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Data_HtmlHelp == "on" && HHCTRL_OCX == "on" && Windows_Win32_Data_HtmlHelp_HtmlHelpA == "on"]
@@ -662,7 +672,7 @@ public struct CProperty__Anonymous_e__Union {
 
 @When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_UI_Controls == "on"]
 public struct HHN_NOTIFY {
-    public var hdr: Win32__impl_l0.NMHDR = Win32__impl_l0.NMHDR()
+    public var hdr: Win32_impl_p1.NMHDR = Win32_impl_p1.NMHDR()
     public var pszUrl: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
 }
@@ -670,7 +680,7 @@ public struct HHN_NOTIFY {
 @When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_UI_Controls == "on"]
 @C
 public struct HHN_NOTIFYAbi {
-    public var hdr: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
+    public var hdr: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
     public var pszUrl: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
 }
@@ -682,13 +692,13 @@ extend HHN_NOTIFY <: windows_core.CopyType & windows_core.RuntimeType & windows_
     public static func signature(): String { "struct(Windows.Win32.Data.HtmlHelp.HHN_NOTIFY;struct(Windows.Win32.UI.Controls.NMHDR;struct(Windows.Win32.Foundation.HWND;cinterface(IInspectable));us;u4);struct(Windows.Win32.Foundation.PSTR;cinterface(IInspectable)))" }
     public static func projectAbi(value: HHN_NOTIFY): HHN_NOTIFYAbi {
         var abi = HHN_NOTIFYAbi()
-        abi.hdr = windows_core.projectTypedAbi(value.hdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>())
+        abi.hdr = windows_core.projectTypedAbi(value.hdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>())
         abi.pszUrl = value.pszUrl
         return abi
     }
     public static func assumeInitRef(abi: HHN_NOTIFYAbi): HHN_NOTIFY {
         var value = HHN_NOTIFY()
-        value.hdr = windows_core.fromTypedAbi(abi.hdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+        value.hdr = windows_core.fromTypedAbi(abi.hdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
         value.pszUrl = abi.pszUrl
         return value
     }
@@ -1509,7 +1519,7 @@ public class IITDatabase <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IITPropListVtbl {
-    public var base_: Win32__impl_l2.IPersistStreamInitVtbl = Win32__impl_l2.IPersistStreamInitVtbl()
+    public var base_: Win32_impl_p2.IPersistStreamInitVtbl = Win32_impl_p2.IPersistStreamInitVtbl()
     public var Set: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var Set2: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public var Set3: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
@@ -1565,7 +1575,7 @@ public class IITPropList <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IITPropList> {
-        return InterfaceDescriptor<IITPropList>("IITPropList", IITPropList.iid(), Win32__impl_l2.IPersistStreamInit.iid(), takeIITPropListFromAbi, viewIITPropList)
+        return InterfaceDescriptor<IITPropList>("IITPropList", IITPropList.iid(), Win32_impl_p2.IPersistStreamInit.iid(), takeIITPropListFromAbi, viewIITPropList)
     }
 
     public unsafe func vtbl(): IITPropListVtbl {
@@ -2055,7 +2065,7 @@ extend ROWSTATUS <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 
 @When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_UI_Controls == "on"]
 public struct HHNTRACK {
-    public var hdr: Win32__impl_l0.NMHDR = Win32__impl_l0.NMHDR()
+    public var hdr: Win32_impl_p1.NMHDR = Win32_impl_p1.NMHDR()
     public var pszCurUrl: CPointer<UInt8> = CPointer<UInt8>()
     public var idAction: Int32 = 0i32
     public var phhWinType: CPointer<HH_WINTYPEAbi> = CPointer<HH_WINTYPEAbi>()
@@ -2065,7 +2075,7 @@ public struct HHNTRACK {
 @When[Windows_Win32_Data_HtmlHelp == "on" && Windows_Win32_UI_Controls == "on"]
 @C
 public struct HHNTRACKAbi {
-    public var hdr: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
+    public var hdr: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
     public var pszCurUrl: CPointer<UInt8> = CPointer<UInt8>()
     public var idAction: Int32 = 0i32
     public var phhWinType: CPointer<HH_WINTYPEAbi> = CPointer<HH_WINTYPEAbi>()
@@ -2079,7 +2089,7 @@ extend HHNTRACK <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     public static func signature(): String { "struct(Windows.Win32.Data.HtmlHelp.HHNTRACK;struct(Windows.Win32.UI.Controls.NMHDR;struct(Windows.Win32.Foundation.HWND;cinterface(IInspectable));us;u4);struct(Windows.Win32.Foundation.PSTR;cinterface(IInspectable));i4;cinterface(IInspectable))" }
     public static func projectAbi(value: HHNTRACK): HHNTRACKAbi {
         var abi = HHNTRACKAbi()
-        abi.hdr = windows_core.projectTypedAbi(value.hdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>())
+        abi.hdr = windows_core.projectTypedAbi(value.hdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>())
         abi.pszCurUrl = value.pszCurUrl
         abi.idAction = value.idAction
         abi.phhWinType = value.phhWinType
@@ -2087,7 +2097,7 @@ extend HHNTRACK <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     }
     public static func assumeInitRef(abi: HHNTRACKAbi): HHNTRACK {
         var value = HHNTRACK()
-        value.hdr = windows_core.fromTypedAbi(abi.hdr, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+        value.hdr = windows_core.fromTypedAbi(abi.hdr, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
         value.pszCurUrl = abi.pszCurUrl
         value.idAction = abi.idAction
         value.phhWinType = abi.phhWinType
@@ -2103,7 +2113,7 @@ extend HHNTRACK <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 @When[Windows_Win32_Data_HtmlHelp == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public struct HH_GLOBAL_PROPERTY {
     public var id: HH_GPROPID = HH_GPROPID()
-    public var var_: Win32__impl_l2.VARIANT = Win32__impl_l2.VARIANT()
+    public var var_: Win32_impl_p2.VARIANT = Win32_impl_p2.VARIANT()
     public init() {}
 }
 
@@ -2111,7 +2121,7 @@ public struct HH_GLOBAL_PROPERTY {
 @C
 public struct HH_GLOBAL_PROPERTYAbi {
     public var id: HH_GPROPIDAbi = HH_GPROPIDAbi()
-    public var var_: Win32__impl_l2.VARIANTAbi = Win32__impl_l2.VARIANTAbi()
+    public var var_: Win32_impl_p2.VARIANTAbi = Win32_impl_p2.VARIANTAbi()
     public init() {}
 }
 
@@ -2123,13 +2133,13 @@ extend HH_GLOBAL_PROPERTY <: windows_core.CopyType & windows_core.RuntimeType & 
     public static func projectAbi(value: HH_GLOBAL_PROPERTY): HH_GLOBAL_PROPERTYAbi {
         var abi = HH_GLOBAL_PROPERTYAbi()
         abi.id = HH_GPROPID.projectAbi(value.id)
-        abi.var_ = windows_core.projectTypedAbi(value.var_, windows_core.typeMarker<Win32__impl_l2.VARIANT>())
+        abi.var_ = windows_core.projectTypedAbi(value.var_, windows_core.typeMarker<Win32_impl_p2.VARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: HH_GLOBAL_PROPERTYAbi): HH_GLOBAL_PROPERTY {
         var value = HH_GLOBAL_PROPERTY()
         value.id = HH_GPROPID.assumeInitRef(abi.id)
-        value.var_ = windows_core.fromTypedAbi(abi.var_, windows_core.typeMarker<Win32__impl_l2.VARIANT>()).unwrap()
+        value.var_ = windows_core.fromTypedAbi(abi.var_, windows_core.typeMarker<Win32_impl_p2.VARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: HH_GLOBAL_PROPERTYAbi): Result<HH_GLOBAL_PROPERTY> { Result<HH_GLOBAL_PROPERTY>.Ok(HH_GLOBAL_PROPERTY.assumeInitRef(abi)) }

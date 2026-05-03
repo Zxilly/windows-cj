@@ -4,13 +4,21 @@
 package windows.Win32.Security.Credentials
 
 import std.collection.*
+@When[Windows_Win32_Security_Credentials == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_Credentials == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_Credentials == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Security_Credentials == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Security_Credentials == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Security_Credentials == "on"]
 import windows_core as windows_core
 
 
@@ -2667,7 +2675,7 @@ public struct OPENCARDNAME_EXA {
     public var dwFlags: UInt32 = 0u32
     public var lpstrTitle: CPointer<UInt8> = CPointer<UInt8>()
     public var lpstrSearchDesc: CPointer<UInt8> = CPointer<UInt8>()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAAAbi> = CPointer<OPENCARD_SEARCH_CRITERIAAAbi>()
     public var lpfnConnect: LPOCNCONNPROCA = CFunc<(UIntNative, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()
@@ -2691,7 +2699,7 @@ public struct OPENCARDNAME_EXAAbi {
     public var dwFlags: UInt32 = 0u32
     public var lpstrTitle: CPointer<UInt8> = CPointer<UInt8>()
     public var lpstrSearchDesc: CPointer<UInt8> = CPointer<UInt8>()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAAAbi> = CPointer<OPENCARD_SEARCH_CRITERIAAAbi>()
     public var lpfnConnect: LPOCNCONNPROCA = CFunc<(UIntNative, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()
@@ -2770,7 +2778,7 @@ public struct OPENCARDNAME_EXW {
     public var dwFlags: UInt32 = 0u32
     public var lpstrTitle: CPointer<UInt16> = CPointer<UInt16>()
     public var lpstrSearchDesc: CPointer<UInt16> = CPointer<UInt16>()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAWAbi> = CPointer<OPENCARD_SEARCH_CRITERIAWAbi>()
     public var lpfnConnect: LPOCNCONNPROCW = CFunc<(UIntNative, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()
@@ -2794,7 +2802,7 @@ public struct OPENCARDNAME_EXWAbi {
     public var dwFlags: UInt32 = 0u32
     public var lpstrTitle: CPointer<UInt16> = CPointer<UInt16>()
     public var lpstrSearchDesc: CPointer<UInt16> = CPointer<UInt16>()
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAWAbi> = CPointer<OPENCARD_SEARCH_CRITERIAWAbi>()
     public var lpfnConnect: LPOCNCONNPROCW = CFunc<(UIntNative, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()

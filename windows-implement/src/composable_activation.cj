@@ -1,0 +1,209 @@
+package windows_implement
+
+import windows_interface.*
+
+public func queryComposableInner(
+    innerRaw: CPointer<Unit>,
+    iid: GUID,
+    resultSlot: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe {
+        if (resultSlot.isNull()) {
+            return E_POINTER
+        }
+        if (innerRaw.isNull()) {
+            resultSlot.write(CPointer<Unit>())
+            return E_NOINTERFACE
+        }
+
+        var requestedIid = iid
+        let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(innerRaw).read()
+        if (vtblPtr.isNull()) {
+            resultSlot.write(CPointer<Unit>())
+            return E_NOINTERFACE
+        }
+
+        let hr = vtblPtr.read().QueryInterface(innerRaw, CPointer<GUID>(inout requestedIid), resultSlot)
+        if (hr != S_OK) {
+            resultSlot.write(CPointer<Unit>())
+        }
+        hr
+    }
+}
+
+func closeComposableActivationState<TOuter, TBase>(
+    outer: ComObject<TOuter>,
+    baseObject: TBase,
+    innerObject: IInspectable,
+    closed: Bool
+): Bool where TBase <: ComInterface & Resource {
+    if (closed) {
+        return true
+    }
+    outer.runtime.clearQueryInterfaceFallback()
+    innerObject.close()
+    baseObject.close()
+    outer.releaseBase()
+    true
+}
+
+public class ComposableActivation<TOuter, TBase> <: Resource where TBase <: ComInterface & Resource {
+    public let outer: ComObject<TOuter>
+    public let baseObject: TBase
+    private let innerObject: IInspectable
+    private var closed: Bool = false
+
+    public init(outer: ComObject<TOuter>, baseObject: TBase, innerObject: IInspectable) {
+        this.outer = outer
+        this.baseObject = baseObject
+        this.innerObject = innerObject
+        this.outer.runtime.setQueryInterfaceFallback({ iid, resultSlot =>
+            let innerRawValue = this.innerRaw()
+            if (innerRawValue.isNotNull()) {
+                return queryComposableInner(innerRawValue, iid, resultSlot)
+            }
+            queryComposableInner(this.baseRaw(), iid, resultSlot)
+        })
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        outer.asRaw()
+    }
+
+    public func outerInspectable(): IInspectable {
+        IInspectable.viewOf(asRaw())
+    }
+
+    public func baseRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        baseObject.asRaw()
+    }
+
+    public func innerRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        innerObject.asRaw()
+    }
+
+    public func innerInspectable(): IInspectable {
+        IInspectable.viewOf(innerRaw())
+    }
+
+    public func queryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (closed) {
+            unsafe {
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
+                }
+            }
+            return E_NOINTERFACE
+        }
+        outer.queryInterfaceBase(iid, resultSlot)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        closed = closeComposableActivationState(outer, baseObject, innerObject, closed)
+    }
+
+    ~init() {
+        closed = closeComposableActivationState(outer, baseObject, innerObject, closed)
+    }
+}
+
+public func createComposableOuter<TOuter>(
+    outer: TOuter,
+    schemas: Array<InterfaceDescriptorSchema>,
+    agile!: Bool = true
+): ComObject<TOuter> {
+    createComObjectFromSchemas(outer, schemas, agile: agile)
+}
+
+public func createComposableOuter<TOuter>(
+    outer: TOuter,
+    schemas: Array<InterfaceDescriptorSchema>,
+    vtblPtrs: Array<CPointer<Unit>>,
+    agile!: Bool = true
+): ComObject<TOuter> {
+    createComObjectFromSchemas(outer, schemas, vtblPtrs, agile: agile)
+}
+
+public func activateComposable<TOuter, TBase>(
+    outer: ComObject<TOuter>,
+    activate: (IInspectable, CPointer<CPointer<Unit>>) -> TBase
+): ComposableActivation<TOuter, TBase> where TBase <: ComInterface & Resource {
+    var innerRaw = CPointer<Unit>()
+    let baseObject = activate(IInspectable.viewOf(outer.asRaw()), CPointer<CPointer<Unit>>(inout innerRaw))
+    let innerObject = if (innerRaw.isNull()) {
+        IInspectable.viewOf(CPointer<Unit>())
+    } else {
+        IInspectable.fromAbiTake(innerRaw)
+    }
+    ComposableActivation<TOuter, TBase>(outer, baseObject, innerObject)
+}
+
+public func activateComposable<TOuter, TBase>(
+    outer: TOuter,
+    schemas: Array<InterfaceDescriptorSchema>,
+    activate: (IInspectable, CPointer<CPointer<Unit>>) -> TBase,
+    agile!: Bool = true
+): ComposableActivation<TOuter, TBase> where TBase <: ComInterface & Resource {
+    activateComposable(createComposableOuter(outer, schemas, agile: agile), activate)
+}
+
+public func activateComposable<TOuter, TBase>(
+    outer: TOuter,
+    schemas: Array<InterfaceDescriptorSchema>,
+    vtblPtrs: Array<CPointer<Unit>>,
+    activate: (IInspectable, CPointer<CPointer<Unit>>) -> TBase,
+    agile!: Bool = true
+): ComposableActivation<TOuter, TBase> where TBase <: ComInterface & Resource {
+    activateComposable(createComposableOuter(outer, schemas, vtblPtrs, agile: agile), activate)
+}
+
+let COMPOSABLE_ACTIVATION_SELF_CHECK_IID = GUID(
+    0x4A2D4A7Bu32,
+    0x53D6u16,
+    0x4AE7u16,
+    0x9Du8,
+    0xA1u8,
+    0x66u8,
+    0x21u8,
+    0xAAu8,
+    0x6Eu8,
+    0x01u8,
+    0xB2u8
+)
+
+class ComposableActivationSelfCheckOuter {}
+class ComposableActivationSelfCheckInner {}
+
+public func composableActivationSelfCheck(): Bool {
+    let outer = createComObject(ComposableActivationSelfCheckOuter(), [IID_IINSPECTABLE])
+    let inner = createComObject(ComposableActivationSelfCheckInner(), [COMPOSABLE_ACTIVATION_SELF_CHECK_IID])
+    let activation = activateComposable(outer, { _, innerSlot =>
+        let raw = inner.asRaw()
+        IUnknown(raw).addRef()
+        unsafe { innerSlot.write(raw) }
+        IUnknown(raw).addRef()
+        IInspectable.fromAbiTake(raw)
+    })
+
+    var delegated = CPointer<Unit>()
+    let hr = activation.queryInterface(COMPOSABLE_ACTIVATION_SELF_CHECK_IID, CPointer<CPointer<Unit>>(inout delegated))
+    if (delegated.isNotNull()) {
+        IUnknown.fromAbiTake(delegated).close()
+    }
+    activation.close()
+    inner.releaseBase()
+    hr == S_OK && delegated.isNotNull()
+}

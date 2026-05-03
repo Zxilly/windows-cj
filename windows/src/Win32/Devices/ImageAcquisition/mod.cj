@@ -4,17 +4,30 @@
 package windows.Win32.Devices.ImageAcquisition
 
 import std.collection.*
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_polyfill.{unionReadFloat32, unionReadInt32, unionWriteFloat32, unionWriteInt32}
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_ImageAcquisition == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_ImageAcquisition == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Devices_ImageAcquisition == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Devices_ImageAcquisition == "on"]
@@ -2822,11 +2835,11 @@ public class IWiaNotifyDevMgr <: InterfaceWrapperBase & ComInterface {
 public struct IWiaPropertyStorageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var ReadMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var ReadMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var WriteMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
+    public var WriteMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var DeleteMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>) -> Int32> = { _, _, _ => 0 }
+    public var DeleteMultiple: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>) -> Int32> = { _, _, _ => 0 }
     public var ReadPropertyNames: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var WritePropertyNames: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeletePropertyNames: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
@@ -2837,9 +2850,9 @@ public struct IWiaPropertyStorageVtbl {
     public var SetTimes: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.FILETIMEAbi>, CPointer<Win32_Foundation.FILETIMEAbi>, CPointer<Win32_Foundation.FILETIMEAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var SetClass: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Stat: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.STATPROPSETSTGAbi>) -> Int32> = { _, _ => 0 }
+    public var Stat: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.STATPROPSETSTGAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetPropertyAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>, CPointer<UInt32>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetPropertyAttributes: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>, CPointer<UInt32>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetPropertyStream: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2889,21 +2902,21 @@ public class IWiaPropertyStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func ReadMultiple(cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgpropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func ReadMultiple(cpspec: UInt32, rgpspec: CPointer<Win32_impl_p2.PROPSPECAbi>, rgpropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadMultiple(__liveRaw, cpspec, rgpspec, rgpropvar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func WriteMultiple(cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgpropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>, propidNameFirst: UInt32): Int32 {
+    public unsafe func WriteMultiple(cpspec: UInt32, rgpspec: CPointer<Win32_impl_p2.PROPSPECAbi>, rgpropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>, propidNameFirst: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WriteMultiple(__liveRaw, cpspec, rgpspec, rgpropvar, propidNameFirst)
     }
 
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func DeleteMultiple(cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>): Int32 {
+    public unsafe func DeleteMultiple(cpspec: UInt32, rgpspec: CPointer<Win32_impl_p2.PROPSPECAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeleteMultiple(__liveRaw, cpspec, rgpspec)
@@ -2959,14 +2972,14 @@ public class IWiaPropertyStorage <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Stat(pstatpsstg: CPointer<Win32__impl_l0.STATPROPSETSTGAbi>): Int32 {
+    public unsafe func Stat(pstatpsstg: CPointer<Win32_impl_p0.STATPROPSETSTGAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Stat(__liveRaw, pstatpsstg)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetPropertyAttributes(cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgflags: CPointer<UInt32>, rgpropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetPropertyAttributes(cpspec: UInt32, rgpspec: CPointer<Win32_impl_p2.PROPSPECAbi>, rgflags: CPointer<UInt32>, rgpropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertyAttributes(__liveRaw, cpspec, rgpspec, rgflags, rgpropvar)
@@ -4109,7 +4122,7 @@ extend WIA_PROPERTY_CONTEXT <: windows_core.CopyType & windows_core.RuntimeType 
 @When[Windows_Win32_Devices_ImageAcquisition == "on" && Windows_Win32_System_Variant == "on"]
 public struct WIA_PROPERTY_INFO {
     public var lAccessFlags: UInt32 = 0u32
-    public var vt: Win32__impl_l0.VARENUM = Win32__impl_l0.VARENUM()
+    public var vt: Win32_impl_p1.VARENUM = Win32_impl_p1.VARENUM()
     public var ValidVal: WIA_PROPERTY_INFO__ValidVal_e__Union = WIA_PROPERTY_INFO__ValidVal_e__Union()
     public init() {}
 }
@@ -4118,7 +4131,7 @@ public struct WIA_PROPERTY_INFO {
 @C
 public struct WIA_PROPERTY_INFOAbi {
     public var lAccessFlags: UInt32 = 0u32
-    public var vt: Win32__impl_l0.VARENUMAbi = Win32__impl_l0.VARENUMAbi()
+    public var vt: Win32_impl_p1.VARENUMAbi = Win32_impl_p1.VARENUMAbi()
     public var ValidVal: WIA_PROPERTY_INFO__ValidVal_e__Union = WIA_PROPERTY_INFO__ValidVal_e__Union()
     public init() {}
 }
@@ -4131,14 +4144,14 @@ extend WIA_PROPERTY_INFO <: windows_core.CopyType & windows_core.RuntimeType & w
     public static func projectAbi(value: WIA_PROPERTY_INFO): WIA_PROPERTY_INFOAbi {
         var abi = WIA_PROPERTY_INFOAbi()
         abi.lAccessFlags = value.lAccessFlags
-        abi.vt = windows_core.projectTypedAbi(value.vt, windows_core.typeMarker<Win32__impl_l0.VARENUM>())
+        abi.vt = windows_core.projectTypedAbi(value.vt, windows_core.typeMarker<Win32_impl_p1.VARENUM>())
         abi.ValidVal = value.ValidVal
         return abi
     }
     public static func assumeInitRef(abi: WIA_PROPERTY_INFOAbi): WIA_PROPERTY_INFO {
         var value = WIA_PROPERTY_INFO()
         value.lAccessFlags = abi.lAccessFlags
-        value.vt = windows_core.fromTypedAbi(abi.vt, windows_core.typeMarker<Win32__impl_l0.VARENUM>()).unwrap()
+        value.vt = windows_core.fromTypedAbi(abi.vt, windows_core.typeMarker<Win32_impl_p1.VARENUM>()).unwrap()
         value.ValidVal = abi.ValidVal
         return value
     }
@@ -5253,7 +5266,7 @@ public class IEnumWIA_FORMAT_INFO <: InterfaceWrapperBase & ComInterface {
 public struct IWiaDataTransferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-    public var idtGetData: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.STGMEDIUMAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var idtGetData: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.STGMEDIUMAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var idtGetBandedData: CFunc<(CPointer<Unit>, CPointer<WIA_DATA_TRANSFER_INFOAbi>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var idtQueryGetData: CFunc<(CPointer<Unit>, CPointer<WIA_FORMAT_INFOAbi>) -> Int32> = { _, _ => 0 }
     public var idtEnumWIA_FORMAT_INFO: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -5302,7 +5315,7 @@ public class IWiaDataTransfer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func idtGetData(pMedium: CPointer<Win32__impl_l2.STGMEDIUMAbi>, pIWiaDataCallback: CPointer<Unit>): Int32 {
+    public unsafe func idtGetData(pMedium: CPointer<Win32_impl_p3.STGMEDIUMAbi>, pIWiaDataCallback: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.idtGetData(__liveRaw, pMedium, pIWiaDataCallback)
@@ -7162,10 +7175,10 @@ public struct IWiaMiniDrvVtbl {
     public var drvAcquireItemData: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<MINIDRV_TRANSFER_CONTEXTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var drvInitItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var drvValidateItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var drvValidateItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var drvWriteItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<MINIDRV_TRANSFER_CONTEXTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var drvReadItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, UInt32, CPointer<Win32__impl_l1.PROPSPECAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var drvReadItemProperties: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, UInt32, CPointer<Win32_impl_p2.PROPSPECAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var drvLockWiaDevice: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var drvUnLockWiaDevice: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var drvAnalyzeItem: CFunc<(CPointer<Unit>, CPointer<UInt8>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
@@ -7240,7 +7253,7 @@ public class IWiaMiniDrv <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func drvValidateItemProperties(__MIDL__IWiaMiniDrv0016: CPointer<UInt8>, __MIDL__IWiaMiniDrv0017: Int32, __MIDL__IWiaMiniDrv0018: UInt32, __MIDL__IWiaMiniDrv0019: CPointer<Win32__impl_l1.PROPSPECAbi>, __MIDL__IWiaMiniDrv0020: CPointer<Int32>): Int32 {
+    public unsafe func drvValidateItemProperties(__MIDL__IWiaMiniDrv0016: CPointer<UInt8>, __MIDL__IWiaMiniDrv0017: Int32, __MIDL__IWiaMiniDrv0018: UInt32, __MIDL__IWiaMiniDrv0019: CPointer<Win32_impl_p2.PROPSPECAbi>, __MIDL__IWiaMiniDrv0020: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.drvValidateItemProperties(__liveRaw, __MIDL__IWiaMiniDrv0016, __MIDL__IWiaMiniDrv0017, __MIDL__IWiaMiniDrv0018, __MIDL__IWiaMiniDrv0019, __MIDL__IWiaMiniDrv0020)
@@ -7253,7 +7266,7 @@ public class IWiaMiniDrv <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func drvReadItemProperties(__MIDL__IWiaMiniDrv0025: CPointer<UInt8>, __MIDL__IWiaMiniDrv0026: Int32, __MIDL__IWiaMiniDrv0027: UInt32, __MIDL__IWiaMiniDrv0028: CPointer<Win32__impl_l1.PROPSPECAbi>, __MIDL__IWiaMiniDrv0029: CPointer<Int32>): Int32 {
+    public unsafe func drvReadItemProperties(__MIDL__IWiaMiniDrv0025: CPointer<UInt8>, __MIDL__IWiaMiniDrv0026: Int32, __MIDL__IWiaMiniDrv0027: UInt32, __MIDL__IWiaMiniDrv0028: CPointer<Win32_impl_p2.PROPSPECAbi>, __MIDL__IWiaMiniDrv0029: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.drvReadItemProperties(__liveRaw, __MIDL__IWiaMiniDrv0025, __MIDL__IWiaMiniDrv0026, __MIDL__IWiaMiniDrv0027, __MIDL__IWiaMiniDrv0028, __MIDL__IWiaMiniDrv0029)
@@ -7520,7 +7533,7 @@ public struct IWiaUIExtensionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var DeviceDialog: CFunc<(CPointer<Unit>, CPointer<DEVICEDIALOGDATAAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l0.HICON>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p1.HICON>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on"]
     public var GetDeviceBitmapLogo: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_Graphics_Gdi.HBITMAP>, UInt32, UInt32) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
@@ -7573,7 +7586,7 @@ public class IWiaUIExtension <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetDeviceIcon(bstrDeviceId: CPointer<UInt16>, phIcon: CPointer<Win32__impl_l0.HICON>, nSize: UInt32): Int32 {
+    public unsafe func GetDeviceIcon(bstrDeviceId: CPointer<UInt16>, phIcon: CPointer<Win32_impl_p1.HICON>, nSize: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDeviceIcon(__liveRaw, bstrDeviceId, phIcon, nSize)
@@ -7593,7 +7606,7 @@ public struct IWiaUIExtension2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var DeviceDialog: CFunc<(CPointer<Unit>, CPointer<DEVICEDIALOGDATA2Abi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l0.HICON>, UInt32) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDeviceIcon: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p1.HICON>, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7644,7 +7657,7 @@ public class IWiaUIExtension2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetDeviceIcon(bstrDeviceId: CPointer<UInt16>, phIcon: CPointer<Win32__impl_l0.HICON>, nSize: UInt32): Int32 {
+    public unsafe func GetDeviceIcon(bstrDeviceId: CPointer<UInt16>, phIcon: CPointer<Win32_impl_p1.HICON>, nSize: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDeviceIcon(__liveRaw, bstrDeviceId, phIcon, nSize)

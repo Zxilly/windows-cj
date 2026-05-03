@@ -2,8 +2,4 @@
 package windows_sys.Storage.Pickers.Provider
 
 @When[Windows_Storage_Pickers_Provider == "on"]
-public import windows_sys._impl_l0.{AddFileResult, AddFileResult_Added, AddFileResult_AlreadyAdded, AddFileResult_NotAllowed, AddFileResult_Unavailable, FileSelectionMode, FileSelectionMode_Multiple, FileSelectionMode_Single, IFileRemovedEventArgs, IFileRemovedEventArgsVtbl, IPickerClosingDeferral, IPickerClosingDeferralVtbl, ITargetFileRequestDeferral, ITargetFileRequestDeferralVtbl, SetFileNameResult, SetFileNameResult_NotAllowed, SetFileNameResult_Succeeded, SetFileNameResult_Unavailable}
-@When[Windows_Storage_Pickers_Provider == "on"]
-public import windows_sys._impl_l1.{IFileOpenPickerUI, IFileOpenPickerUIVtbl, IPickerClosingEventArgs, IPickerClosingEventArgsVtbl, IPickerClosingOperation, IPickerClosingOperationVtbl, ITargetFileRequest, ITargetFileRequestVtbl, ITargetFileRequestedEventArgs, ITargetFileRequestedEventArgsVtbl}
-@When[Windows_Storage_Pickers_Provider == "on"]
-public import windows_sys._impl_l2.{IFileSavePickerUI, IFileSavePickerUIVtbl}
+public import windows_sys.impl.s_967903364.{AddFileResult, AddFileResult_Added, AddFileResult_AlreadyAdded, AddFileResult_NotAllowed, AddFileResult_Unavailable, FileSelectionMode, FileSelectionMode_Multiple, FileSelectionMode_Single, IFileOpenPickerUI, IFileOpenPickerUIVtbl, IFileRemovedEventArgs, IFileRemovedEventArgsVtbl, IFileSavePickerUI, IFileSavePickerUIVtbl, IPickerClosingDeferral, IPickerClosingDeferralVtbl, IPickerClosingEventArgs, IPickerClosingEventArgsVtbl, IPickerClosingOperation, IPickerClosingOperationVtbl, ITargetFileRequest, ITargetFileRequestDeferral, ITargetFileRequestDeferralVtbl, ITargetFileRequestVtbl, ITargetFileRequestedEventArgs, ITargetFileRequestedEventArgsVtbl, SetFileNameResult, SetFileNameResult_NotAllowed, SetFileNameResult_Succeeded, SetFileNameResult_Unavailable}

@@ -2,70 +2,66 @@
 package windows_sys.Win32.UI.Input.Pointer
 
 @When[Windows_Win32_UI_Input_Pointer == "on"]
-public import windows_sys.Win32._impl_l0.{HSYNTHETICPOINTERDEVICE, INPUT_INJECTION_VALUE, INPUT_TRANSFORM, POINTER_BUTTON_CHANGE_TYPE, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIFTHBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIFTHBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIRSTBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIRSTBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FOURTHBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FOURTHBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_NONE, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_SECONDBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_SECONDBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_THIRDBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_THIRDBUTTON_UP, POINTER_DEVICE_CURSOR_TYPE, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_ERASER, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_MAX, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_TIP, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_UNKNOWN, POINTER_DEVICE_PROPERTY, POINTER_DEVICE_TYPE, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_EXTERNAL_PEN, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_INTEGRATED_PEN, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_MAX, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_TOUCH, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_TOUCH_PAD, POINTER_FEEDBACK_MODE, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_DEFAULT, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_INDIRECT, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_NONE, POINTER_FLAGS, POINTER_FLAGS_POINTER_FLAG_CANCELED, POINTER_FLAGS_POINTER_FLAG_CAPTURECHANGED, POINTER_FLAGS_POINTER_FLAG_CONFIDENCE, POINTER_FLAGS_POINTER_FLAG_DOWN, POINTER_FLAGS_POINTER_FLAG_FIFTHBUTTON, POINTER_FLAGS_POINTER_FLAG_FIRSTBUTTON, POINTER_FLAGS_POINTER_FLAG_FOURTHBUTTON, POINTER_FLAGS_POINTER_FLAG_HASTRANSFORM, POINTER_FLAGS_POINTER_FLAG_HWHEEL, POINTER_FLAGS_POINTER_FLAG_INCONTACT, POINTER_FLAGS_POINTER_FLAG_INRANGE, POINTER_FLAGS_POINTER_FLAG_NEW, POINTER_FLAGS_POINTER_FLAG_NONE, POINTER_FLAGS_POINTER_FLAG_PRIMARY, POINTER_FLAGS_POINTER_FLAG_SECONDBUTTON, POINTER_FLAGS_POINTER_FLAG_THIRDBUTTON, POINTER_FLAGS_POINTER_FLAG_UP, POINTER_FLAGS_POINTER_FLAG_UPDATE, POINTER_FLAGS_POINTER_FLAG_WHEEL, TOUCH_FEEDBACK_MODE, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_DEFAULT, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_INDIRECT, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_NONE}
-@When[Windows_Win32_UI_Input_Pointer == "on"]
-public import windows_sys.Win32._impl_l1.POINTER_DEVICE_CURSOR_INFO
+public import windows_sys.Win32.impl.{HSYNTHETICPOINTERDEVICE, INPUT_INJECTION_VALUE, INPUT_TRANSFORM, POINTER_BUTTON_CHANGE_TYPE, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIFTHBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIFTHBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIRSTBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FIRSTBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FOURTHBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_FOURTHBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_NONE, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_SECONDBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_SECONDBUTTON_UP, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_THIRDBUTTON_DOWN, POINTER_BUTTON_CHANGE_TYPE_POINTER_CHANGE_THIRDBUTTON_UP, POINTER_DEVICE_CURSOR_INFO, POINTER_DEVICE_CURSOR_TYPE, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_ERASER, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_MAX, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_TIP, POINTER_DEVICE_CURSOR_TYPE_POINTER_DEVICE_CURSOR_TYPE_UNKNOWN, POINTER_DEVICE_PROPERTY, POINTER_DEVICE_TYPE, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_EXTERNAL_PEN, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_INTEGRATED_PEN, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_MAX, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_TOUCH, POINTER_DEVICE_TYPE_POINTER_DEVICE_TYPE_TOUCH_PAD, POINTER_FEEDBACK_MODE, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_DEFAULT, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_INDIRECT, POINTER_FEEDBACK_MODE_POINTER_FEEDBACK_NONE, POINTER_FLAGS, POINTER_FLAGS_POINTER_FLAG_CANCELED, POINTER_FLAGS_POINTER_FLAG_CAPTURECHANGED, POINTER_FLAGS_POINTER_FLAG_CONFIDENCE, POINTER_FLAGS_POINTER_FLAG_DOWN, POINTER_FLAGS_POINTER_FLAG_FIFTHBUTTON, POINTER_FLAGS_POINTER_FLAG_FIRSTBUTTON, POINTER_FLAGS_POINTER_FLAG_FOURTHBUTTON, POINTER_FLAGS_POINTER_FLAG_HASTRANSFORM, POINTER_FLAGS_POINTER_FLAG_HWHEEL, POINTER_FLAGS_POINTER_FLAG_INCONTACT, POINTER_FLAGS_POINTER_FLAG_INRANGE, POINTER_FLAGS_POINTER_FLAG_NEW, POINTER_FLAGS_POINTER_FLAG_NONE, POINTER_FLAGS_POINTER_FLAG_PRIMARY, POINTER_FLAGS_POINTER_FLAG_SECONDBUTTON, POINTER_FLAGS_POINTER_FLAG_THIRDBUTTON, POINTER_FLAGS_POINTER_FLAG_UP, POINTER_FLAGS_POINTER_FLAG_UPDATE, POINTER_FLAGS_POINTER_FLAG_WHEEL, TOUCH_FEEDBACK_MODE, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_DEFAULT, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_INDIRECT, TOUCH_FEEDBACK_MODE_TOUCH_FEEDBACK_NONE}
 @When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_Graphics_Gdi == "on"]
-public import windows_sys.Win32._impl_l1.POINTER_DEVICE_INFO
+public import windows_sys.Win32.impl.POINTER_DEVICE_INFO
 @When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l1.{POINTER_INFO, POINTER_PEN_INFO, POINTER_TOUCH_INFO}
-@When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.POINTER_TYPE_INFO
+public import windows_sys.Win32.impl.{POINTER_INFO, POINTER_PEN_INFO, POINTER_TOUCH_INFO, POINTER_TYPE_INFO}
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_DestroySyntheticPointerDevice == "on"]
-public import windows_sys.Win32._impl_l2.Windows_DestroySyntheticPointerDevice
+public import windows_sys.Win32.impl.Windows_DestroySyntheticPointerDevice
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_EnableMouseInPointer == "on"]
-public import windows_sys.Win32._impl_l2.Windows_EnableMouseInPointer
+public import windows_sys.Win32.impl.Windows_EnableMouseInPointer
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerCursorId == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerCursorId
+public import windows_sys.Win32.impl.Windows_GetPointerCursorId
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDevice == "on" && Windows_Win32_Graphics_Gdi == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerDevice
+public import windows_sys.Win32.impl.Windows_GetPointerDevice
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceCursors == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceCursors
+public import windows_sys.Win32.impl.Windows_GetPointerDeviceCursors
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceProperties == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceProperties
+public import windows_sys.Win32.impl.Windows_GetPointerDeviceProperties
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceRects == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceRects
+public import windows_sys.Win32.impl.Windows_GetPointerDeviceRects
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDevices == "on" && Windows_Win32_Graphics_Gdi == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerDevices
+public import windows_sys.Win32.impl.Windows_GetPointerDevices
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameInfo
+public import windows_sys.Win32.impl.Windows_GetPointerFrameInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerFrameInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFramePenInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFramePenInfo
+public import windows_sys.Win32.impl.Windows_GetPointerFramePenInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFramePenInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFramePenInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerFramePenInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameTouchInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameTouchInfo
+public import windows_sys.Win32.impl.Windows_GetPointerFrameTouchInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameTouchInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameTouchInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerFrameTouchInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerInfo
+public import windows_sys.Win32.impl.Windows_GetPointerInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInputTransform == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerInputTransform
+public import windows_sys.Win32.impl.Windows_GetPointerInputTransform
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerPenInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerPenInfo
+public import windows_sys.Win32.impl.Windows_GetPointerPenInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerPenInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerPenInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerPenInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerTouchInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerTouchInfo
+public import windows_sys.Win32.impl.Windows_GetPointerTouchInfo
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerTouchInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerTouchInfoHistory
+public import windows_sys.Win32.impl.Windows_GetPointerTouchInfoHistory
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerType == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetPointerType
+public import windows_sys.Win32.impl.Windows_GetPointerType
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetRawPointerDeviceData == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetRawPointerDeviceData
+public import windows_sys.Win32.impl.Windows_GetRawPointerDeviceData
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetUnpredictedMessagePos == "on"]
-public import windows_sys.Win32._impl_l2.Windows_GetUnpredictedMessagePos
+public import windows_sys.Win32.impl.Windows_GetUnpredictedMessagePos
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InitializeTouchInjection == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InitializeTouchInjection
+public import windows_sys.Win32.impl.Windows_InitializeTouchInjection
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InjectSyntheticPointerInput == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InjectSyntheticPointerInput
+public import windows_sys.Win32.impl.Windows_InjectSyntheticPointerInput
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InjectTouchInput == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public import windows_sys.Win32._impl_l2.Windows_InjectTouchInput
+public import windows_sys.Win32.impl.Windows_InjectTouchInput
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_IsMouseInPointerEnabled == "on"]
-public import windows_sys.Win32._impl_l2.Windows_IsMouseInPointerEnabled
+public import windows_sys.Win32.impl.Windows_IsMouseInPointerEnabled
 @When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_SkipPointerFrameMessages == "on"]
-public import windows_sys.Win32._impl_l2.Windows_SkipPointerFrameMessages
+public import windows_sys.Win32.impl.Windows_SkipPointerFrameMessages

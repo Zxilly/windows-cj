@@ -4,14 +4,22 @@
 package windows.Win32.Security.Authentication.Identity.Provider
 
 import std.collection.*
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Security_Authentication_Identity_Provider == "on"]
@@ -784,13 +792,13 @@ public class IIdentityAuthentication <: InterfaceWrapperBase & ComInterface {
 public struct IIdentityProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetIdentityEnum: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetIdentityEnum: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-    public var Create: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
     public var Import: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Delete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Delete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
     public var FindByUniqueID: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
@@ -841,14 +849,14 @@ public class IIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetIdentityEnum(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppIdentityEnum: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GetIdentityEnum(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, ppIdentityEnum: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIdentityEnum(__liveRaw, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-    public unsafe func Create(lpszUserName: CPointer<UInt16>, ppPropertyStore: CPointer<CPointer<Unit>>, pKeywordsToAdd: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Create(lpszUserName: CPointer<UInt16>, ppPropertyStore: CPointer<CPointer<Unit>>, pKeywordsToAdd: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, lpszUserName, ppPropertyStore, pKeywordsToAdd)
@@ -862,7 +870,7 @@ public class IIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Delete(lpszUniqueID: CPointer<UInt16>, pKeywordsToDelete: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Delete(lpszUniqueID: CPointer<UInt16>, pKeywordsToDelete: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Delete(__liveRaw, lpszUniqueID, pKeywordsToDelete)
@@ -905,7 +913,7 @@ public struct IIdentityStoreVtbl {
     public var AddToCache: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>) -> Int32> = { _, _, _ => 0 }
     public var ConvertToSid: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>, UInt16, CPointer<UInt8>, CPointer<UInt16>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var EnumerateIdentities: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var EnumerateIdentities: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -976,7 +984,7 @@ public class IIdentityStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func EnumerateIdentities(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppIdentityEnum: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func EnumerateIdentities(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, ppIdentityEnum: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EnumerateIdentities(__liveRaw, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum)
@@ -1150,7 +1158,7 @@ public struct AsyncIConnectedIdentityProviderVtbl {
     @When[Windows_Win32_System_Com == "on"]
     public var Begin_GetUrl: CFunc<(CPointer<Unit>, IDENTITY_URLAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Finish_GetUrl: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
+    public var Finish_GetUrl: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var Begin_GetAccountState: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Finish_GetAccountState: CFunc<(CPointer<Unit>, CPointer<ACCOUNT_STATEAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1240,7 +1248,7 @@ public class AsyncIConnectedIdentityProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Finish_GetUrl(PostData: CPointer<Win32__impl_l2.VARIANTAbi>, Url: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func Finish_GetUrl(PostData: CPointer<Win32_impl_p2.VARIANTAbi>, Url: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Finish_GetUrl(__liveRaw, PostData, Url)
@@ -1264,18 +1272,18 @@ public class AsyncIConnectedIdentityProvider <: InterfaceWrapperBase & ComInterf
 public struct AsyncIIdentityProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Begin_GetIdentityEnum: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Begin_GetIdentityEnum: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Finish_GetIdentityEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Begin_Create: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Begin_Create: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
     public var Finish_Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
     public var Begin_Import: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Finish_Import: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Begin_Delete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Begin_Delete: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Finish_Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Begin_FindByUniqueID: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
@@ -1331,7 +1339,7 @@ public class AsyncIIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Begin_GetIdentityEnum(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Begin_GetIdentityEnum(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Begin_GetIdentityEnum(__liveRaw, eIdentityType, pFilterkey, pFilterPropVarValue)
@@ -1345,7 +1353,7 @@ public class AsyncIIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Begin_Create(lpszUserName: CPointer<UInt16>, pKeywordsToAdd: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Begin_Create(lpszUserName: CPointer<UInt16>, pKeywordsToAdd: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Begin_Create(__liveRaw, lpszUserName, pKeywordsToAdd)
@@ -1372,7 +1380,7 @@ public class AsyncIIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Begin_Delete(lpszUniqueID: CPointer<UInt16>, pKeywordsToDelete: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Begin_Delete(lpszUniqueID: CPointer<UInt16>, pKeywordsToDelete: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Begin_Delete(__liveRaw, lpszUniqueID, pKeywordsToDelete)
@@ -1449,7 +1457,7 @@ public struct AsyncIIdentityStoreVtbl {
     public var Begin_ConvertToSid: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>, UInt16, CPointer<UInt8>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Finish_ConvertToSid: CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Begin_EnumerateIdentities: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Begin_EnumerateIdentities: CFunc<(CPointer<Unit>, IDENTITY_TYPEAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var Finish_EnumerateIdentities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Begin_Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1547,7 +1555,7 @@ public class AsyncIIdentityStore <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Begin_EnumerateIdentities(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Begin_EnumerateIdentities(eIdentityType: IDENTITY_TYPEAbi, pFilterkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pFilterPropVarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Begin_EnumerateIdentities(__liveRaw, eIdentityType, pFilterkey, pFilterPropVarValue)
@@ -1581,7 +1589,7 @@ public struct IConnectedIdentityProviderVtbl {
     public var DisconnectIdentity: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var IsConnected: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetUrl: CFunc<(CPointer<Unit>, IDENTITY_URLAbi, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetUrl: CFunc<(CPointer<Unit>, IDENTITY_URLAbi, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetAccountState: CFunc<(CPointer<Unit>, CPointer<ACCOUNT_STATEAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1645,7 +1653,7 @@ public class IConnectedIdentityProvider <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetUrl(Identifier: IDENTITY_URLAbi, Context: CPointer<Unit>, PostData: CPointer<Win32__impl_l2.VARIANTAbi>, Url: CPointer<CPointer<UInt16>>): Int32 {
+    public unsafe func GetUrl(Identifier: IDENTITY_URLAbi, Context: CPointer<Unit>, PostData: CPointer<Win32_impl_p2.VARIANTAbi>, Url: CPointer<CPointer<UInt16>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUrl(__liveRaw, Identifier, Context, PostData, Url)

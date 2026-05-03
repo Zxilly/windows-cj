@@ -4,15 +4,25 @@
 package windows.Gaming.Input.Preview
 
 import std.collection.*
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Gaming_Input_Preview == "on" && Windows_Gaming_Input == "on"]
 import windows.Gaming.Input as Gaming_Input
+@When[Windows_Gaming_Input_Preview == "on" && Windows_Gaming_Input_Custom == "on"]
 import windows.Gaming.Input.Custom as Gaming_Input_Custom
-import windows._impl_l1 as _impl_l1
+@When[Windows_Gaming_Input_Preview == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Gaming_Input_Preview == "on"]
 import windows_collections as windows_collections
 
 
@@ -795,7 +805,7 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILegacyGipGameControllerProvider", ILegacyGipGameControllerProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILegacyGipGameControllerProviderVtbl", "ILegacyGipGameControllerProvider", "ILegacyGipGameControllerProvider_Impl", [InterfaceMethodSchema("BatteryChargingState", 6, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryChargingStateAbi>", "OutSlot<GameControllerBatteryChargingState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryKind", 7, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryKindAbi>", "OutSlot<GameControllerBatteryKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryLevel", 8, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryLevelAbi>", "OutSlot<GameControllerBatteryLevel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceFirmwareCorruptionState", 9, [InterfaceParameterSchema("result", "CPointer<GameControllerFirmwareCorruptReasonAbi>", "OutSlot<GameControllerFirmwareCorruptReason>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsFirmwareCorrupted", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsInterfaceSupported", 11, [InterfaceParameterSchema("interfaceId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSyntheticDevice", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreferredTypes", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ExecuteCommand", 14, [InterfaceParameterSchema("command", "DeviceCommandAbi", "DeviceCommand", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetHomeLedIntensity", 15, [InterfaceParameterSchema("intensity", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetExtendedDeviceInfo", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHeadsetOperation", 17, [InterfaceParameterSchema("operation", "HeadsetOperationAbi", "HeadsetOperation", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetHeadsetOperation", 18, [InterfaceParameterSchema("operation", "HeadsetOperationAbi", "HeadsetOperation", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppCompatVersion", 19, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStandardControllerButtonRemapping", 20, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("previous", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("remapping", "CPointer<Unit>", "InParam<windows_collections.IMapView<RemappingButtonCategory, IInspectable>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetStandardControllerButtonRemapping", 21, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("previous", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<RemappingButtonCategory, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILegacyGipGameControllerProvider", ILegacyGipGameControllerProvider.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILegacyGipGameControllerProviderVtbl", "ILegacyGipGameControllerProvider", "ILegacyGipGameControllerProvider_Impl", [InterfaceMethodSchema("BatteryChargingState", 6, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryChargingStateAbi>", "OutSlot<GameControllerBatteryChargingState>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryKind", 7, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryKindAbi>", "OutSlot<GameControllerBatteryKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BatteryLevel", 8, [InterfaceParameterSchema("result", "CPointer<GameControllerBatteryLevelAbi>", "OutSlot<GameControllerBatteryLevel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeviceFirmwareCorruptionState", 9, [InterfaceParameterSchema("result", "CPointer<GameControllerFirmwareCorruptReasonAbi>", "OutSlot<GameControllerFirmwareCorruptReason>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsFirmwareCorrupted", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsInterfaceSupported", 11, [InterfaceParameterSchema("interfaceId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSyntheticDevice", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreferredTypes", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ExecuteCommand", 14, [InterfaceParameterSchema("command", "DeviceCommandAbi", "DeviceCommand", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetHomeLedIntensity", 15, [InterfaceParameterSchema("intensity", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetExtendedDeviceInfo", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHeadsetOperation", 17, [InterfaceParameterSchema("operation", "HeadsetOperationAbi", "HeadsetOperation", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetHeadsetOperation", 18, [InterfaceParameterSchema("operation", "HeadsetOperationAbi", "HeadsetOperation", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt8>>", "OutSlot<CPointer<UInt8>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AppCompatVersion", 19, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStandardControllerButtonRemapping", 20, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("previous", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("remapping", "CPointer<Unit>", "InParam<windows_collections.IMapView<RemappingButtonCategory, IInspectable>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetStandardControllerButtonRemapping", 21, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("previous", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<RemappingButtonCategory, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILegacyGipGameControllerProvider.runtimeType())
         return schema
     }
@@ -934,14 +944,14 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public unsafe func SetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
+    public unsafe func SetStandardControllerButtonRemapping(user: impl_p1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
         let v = vtbl()
         let hr = v.SetStandardControllerButtonRemapping(asRaw(), user.asRaw(), previous, remapping.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public unsafe func GetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
+    public unsafe func GetStandardControllerButtonRemapping(user: impl_p1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetStandardControllerButtonRemapping(asRaw(), user.asRaw(), previous, CPointer<CPointer<Unit>>(inout result__))
@@ -1020,7 +1030,7 @@ public class ILegacyGipGameControllerProviderStatics <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILegacyGipGameControllerProviderStatics", ILegacyGipGameControllerProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILegacyGipGameControllerProviderStaticsVtbl", "ILegacyGipGameControllerProviderStatics", "ILegacyGipGameControllerProviderStatics_Impl", [InterfaceMethodSchema("FromGameController", 6, [InterfaceParameterSchema("controller", "CPointer<Unit>", "InParam<Gaming_Input.IGameController>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LegacyGipGameControllerProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromGameControllerProvider", 7, [InterfaceParameterSchema("provider", "CPointer<Unit>", "InParam<Gaming_Input_Custom.IGameControllerProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LegacyGipGameControllerProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PairPilotToCopilot", 8, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pilotControllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("copilotControllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ClearPairing", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsPilot", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCopilot", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILegacyGipGameControllerProviderStatics", ILegacyGipGameControllerProviderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILegacyGipGameControllerProviderStaticsVtbl", "ILegacyGipGameControllerProviderStatics", "ILegacyGipGameControllerProviderStatics_Impl", [InterfaceMethodSchema("FromGameController", 6, [InterfaceParameterSchema("controller", "CPointer<Unit>", "InParam<Gaming_Input.IGameController>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LegacyGipGameControllerProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FromGameControllerProvider", 7, [InterfaceParameterSchema("provider", "CPointer<Unit>", "InParam<Gaming_Input_Custom.IGameControllerProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LegacyGipGameControllerProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PairPilotToCopilot", 8, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("pilotControllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("copilotControllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ClearPairing", 9, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsPilot", 10, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCopilot", 11, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("controllerProviderId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILegacyGipGameControllerProviderStatics.runtimeType())
         return schema
     }
@@ -1068,21 +1078,21 @@ public class ILegacyGipGameControllerProviderStatics <: InterfaceWrapperBase & C
     }
 
     @When[Windows_System == "on"]
-    public unsafe func PairPilotToCopilot(user: _impl_l1.User, pilotControllerProviderId: windows_core.HString, copilotControllerProviderId: windows_core.HString): Unit {
+    public unsafe func PairPilotToCopilot(user: impl_p1.User, pilotControllerProviderId: windows_core.HString, copilotControllerProviderId: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.PairPilotToCopilot(asRaw(), user.asRaw(), pilotControllerProviderId.asRaw(), copilotControllerProviderId.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func ClearPairing(user: _impl_l1.User, controllerProviderId: windows_core.HString): Unit {
+    public unsafe func ClearPairing(user: impl_p1.User, controllerProviderId: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.ClearPairing(asRaw(), user.asRaw(), controllerProviderId.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsPilot(user: _impl_l1.User, controllerProviderId: windows_core.HString): windows_core.HString {
+    public unsafe func IsPilot(user: impl_p1.User, controllerProviderId: windows_core.HString): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsPilot(asRaw(), user.asRaw(), controllerProviderId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1091,7 +1101,7 @@ public class ILegacyGipGameControllerProviderStatics <: InterfaceWrapperBase & C
     }
 
     @When[Windows_System == "on"]
-    public unsafe func IsCopilot(user: _impl_l1.User, controllerProviderId: windows_core.HString): windows_core.HString {
+    public unsafe func IsCopilot(user: impl_p1.User, controllerProviderId: windows_core.HString): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IsCopilot(asRaw(), user.asRaw(), controllerProviderId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1230,12 +1240,12 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public unsafe func SetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
+    public unsafe func SetStandardControllerButtonRemapping(user: impl_p1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
         defaultInterface().SetStandardControllerButtonRemapping(user, previous, remapping)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
-    public unsafe func GetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
+    public unsafe func GetStandardControllerButtonRemapping(user: impl_p1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
         return defaultInterface().GetStandardControllerButtonRemapping(user, previous)
     }
 
@@ -1264,7 +1274,7 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func PairPilotToCopilot(user: _impl_l1.User, pilotControllerProviderId: windows_core.HString, copilotControllerProviderId: windows_core.HString): Unit {
+    public static unsafe func PairPilotToCopilot(user: impl_p1.User, pilotControllerProviderId: windows_core.HString, copilotControllerProviderId: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<LegacyGipGameControllerProvider, ILegacyGipGameControllerProviderStatics>().unwrap()) {
             factory__.PairPilotToCopilot(user, pilotControllerProviderId, copilotControllerProviderId)
         }
@@ -1272,7 +1282,7 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func ClearPairing(user: _impl_l1.User, controllerProviderId: windows_core.HString): Unit {
+    public static unsafe func ClearPairing(user: impl_p1.User, controllerProviderId: windows_core.HString): Unit {
         try (factory__ = windows_core.factory<LegacyGipGameControllerProvider, ILegacyGipGameControllerProviderStatics>().unwrap()) {
             factory__.ClearPairing(user, controllerProviderId)
         }
@@ -1280,7 +1290,7 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func IsPilot(user: _impl_l1.User, controllerProviderId: windows_core.HString): windows_core.HString {
+    public static unsafe func IsPilot(user: impl_p1.User, controllerProviderId: windows_core.HString): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<LegacyGipGameControllerProvider, ILegacyGipGameControllerProviderStatics>().unwrap()) {
             result__ = Some(factory__.IsPilot(user, controllerProviderId))
@@ -1292,7 +1302,7 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func IsCopilot(user: _impl_l1.User, controllerProviderId: windows_core.HString): windows_core.HString {
+    public static unsafe func IsCopilot(user: impl_p1.User, controllerProviderId: windows_core.HString): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<LegacyGipGameControllerProvider, ILegacyGipGameControllerProviderStatics>().unwrap()) {
             result__ = Some(factory__.IsCopilot(user, controllerProviderId))

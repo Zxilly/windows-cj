@@ -4,16 +4,27 @@
 package windows.UI.Composition.Interactions
 
 import std.collection.*
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Composition_Interactions == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_Composition_Interactions == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_Composition_Interactions == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Composition_Interactions == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -76,7 +87,7 @@ public class ICompositionConditionalValue <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompositionConditionalValue", ICompositionConditionalValue.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionConditionalValueVtbl", "ICompositionConditionalValue", "ICompositionConditionalValue_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Value", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompositionConditionalValue", ICompositionConditionalValue.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionConditionalValueVtbl", "ICompositionConditionalValue", "ICompositionConditionalValue_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Value", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ICompositionConditionalValue.runtimeType())
         return schema
     }
@@ -106,32 +117,32 @@ public class ICompositionConditionalValue <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Condition(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetCondition(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Value(): _impl_l1.ExpressionAnimation {
+    public unsafe func Value(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetValue(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetValue(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetValue(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -896,7 +907,7 @@ public class IInteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaMotion", IInteractionTrackerInertiaMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaMotionVtbl", "IInteractionTrackerInertiaMotion", "IInteractionTrackerInertiaMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Motion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaMotion", IInteractionTrackerInertiaMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaMotionVtbl", "IInteractionTrackerInertiaMotion", "IInteractionTrackerInertiaMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Motion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaMotion.runtimeType())
         return schema
     }
@@ -926,32 +937,32 @@ public class IInteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Condition(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetCondition(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Motion(): _impl_l1.ExpressionAnimation {
+    public unsafe func Motion(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Motion(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetMotion(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetMotion(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetMotion(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1020,7 +1031,7 @@ public class IInteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaNaturalMotion", IInteractionTrackerInertiaNaturalMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaNaturalMotionVtbl", "IInteractionTrackerInertiaNaturalMotion", "IInteractionTrackerInertiaNaturalMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NaturalMotion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ScalarNaturalMotionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNaturalMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ScalarNaturalMotionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaNaturalMotion", IInteractionTrackerInertiaNaturalMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaNaturalMotionVtbl", "IInteractionTrackerInertiaNaturalMotion", "IInteractionTrackerInertiaNaturalMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NaturalMotion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ScalarNaturalMotionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNaturalMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ScalarNaturalMotionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaNaturalMotion.runtimeType())
         return schema
     }
@@ -1050,32 +1061,32 @@ public class IInteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & C
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Condition(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetCondition(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func NaturalMotion(): _impl_l1.ScalarNaturalMotionAnimation {
+    public unsafe func NaturalMotion(): impl_p1.ScalarNaturalMotionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.NaturalMotion(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ScalarNaturalMotionAnimation.fromAbiTake(result__)
+        return impl_p1.ScalarNaturalMotionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetNaturalMotion(value: _impl_l1.ScalarNaturalMotionAnimation): Unit {
+    public unsafe func SetNaturalMotion(value: impl_p1.ScalarNaturalMotionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetNaturalMotion(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1144,7 +1155,7 @@ public class IInteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaRestingValue", IInteractionTrackerInertiaRestingValue.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaRestingValueVtbl", "IInteractionTrackerInertiaRestingValue", "IInteractionTrackerInertiaRestingValue_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RestingValue", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRestingValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaRestingValue", IInteractionTrackerInertiaRestingValue.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaRestingValueVtbl", "IInteractionTrackerInertiaRestingValue", "IInteractionTrackerInertiaRestingValue_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("RestingValue", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRestingValue", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaRestingValue.runtimeType())
         return schema
     }
@@ -1174,32 +1185,32 @@ public class IInteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Condition(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetCondition(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func RestingValue(): _impl_l1.ExpressionAnimation {
+    public unsafe func RestingValue(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RestingValue(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetRestingValue(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetRestingValue(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetRestingValue(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2103,7 +2114,7 @@ public class IInteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperB
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerVector2InertiaNaturalMotion", IInteractionTrackerVector2InertiaNaturalMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVector2InertiaNaturalMotionVtbl", "IInteractionTrackerVector2InertiaNaturalMotion", "IInteractionTrackerVector2InertiaNaturalMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NaturalMotion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Vector2NaturalMotionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNaturalMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.Vector2NaturalMotionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerVector2InertiaNaturalMotion", IInteractionTrackerVector2InertiaNaturalMotion.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVector2InertiaNaturalMotionVtbl", "IInteractionTrackerVector2InertiaNaturalMotion", "IInteractionTrackerVector2InertiaNaturalMotion_Impl", [InterfaceMethodSchema("Condition", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCondition", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.ExpressionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NaturalMotion", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Vector2NaturalMotionAnimation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetNaturalMotion", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.Vector2NaturalMotionAnimation>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerVector2InertiaNaturalMotion.runtimeType())
         return schema
     }
@@ -2133,32 +2144,32 @@ public class IInteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperB
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Condition(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ExpressionAnimation.fromAbiTake(result__)
+        return impl_p1.ExpressionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetCondition(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func NaturalMotion(): _impl_l1.Vector2NaturalMotionAnimation {
+    public unsafe func NaturalMotion(): impl_p1.Vector2NaturalMotionAnimation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.NaturalMotion(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Vector2NaturalMotionAnimation.fromAbiTake(result__)
+        return impl_p1.Vector2NaturalMotionAnimation.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetNaturalMotion(value: _impl_l1.Vector2NaturalMotionAnimation): Unit {
+    public unsafe func SetNaturalMotion(value: impl_p1.Vector2NaturalMotionAnimation): Unit {
         let v = vtbl()
         let hr = v.SetNaturalMotion(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2751,7 +2762,7 @@ public class InteractionTrackerInertiaModifier <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerInertiaModifier> {
-        let ancestors = [IInteractionTrackerInertiaModifier.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerInertiaModifier.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerInertiaModifier>("InteractionTrackerInertiaModifier", IInteractionTrackerInertiaModifier.iid(), ancestors, { raw => InteractionTrackerInertiaModifier.fromAbiTake(raw) }, { raw => InteractionTrackerInertiaModifier.viewOf(raw) })
     }
 
@@ -2800,15 +2811,15 @@ public class InteractionTrackerInertiaModifier <: InterfaceWrapperBase & ComInte
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -2818,7 +2829,7 @@ public class InteractionTrackerInertiaModifier <: InterfaceWrapperBase & ComInte
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -3326,7 +3337,7 @@ public class InteractionTrackerVector2InertiaModifier <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerVector2InertiaModifier> {
-        let ancestors = [IInteractionTrackerVector2InertiaModifier.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerVector2InertiaModifier.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerVector2InertiaModifier>("InteractionTrackerVector2InertiaModifier", IInteractionTrackerVector2InertiaModifier.iid(), ancestors, { raw => InteractionTrackerVector2InertiaModifier.fromAbiTake(raw) }, { raw => InteractionTrackerVector2InertiaModifier.viewOf(raw) })
     }
 
@@ -3375,15 +3386,15 @@ public class InteractionTrackerVector2InertiaModifier <: InterfaceWrapperBase & 
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3393,7 +3404,7 @@ public class InteractionTrackerVector2InertiaModifier <: InterfaceWrapperBase & 
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -3503,7 +3514,7 @@ public class CompositionInteractionSourceCollection <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<CompositionInteractionSourceCollection> {
-        let ancestors = [ICompositionInteractionSourceCollection.iid(), windows_collections.IIterable<ICompositionInteractionSource>.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ICompositionInteractionSourceCollection.iid(), windows_collections.IIterable<ICompositionInteractionSource>.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<CompositionInteractionSourceCollection>("CompositionInteractionSourceCollection", ICompositionInteractionSourceCollection.iid(), ancestors, { raw => CompositionInteractionSourceCollection.fromAbiTake(raw) }, { raw => CompositionInteractionSourceCollection.viewOf(raw) })
     }
 
@@ -3559,15 +3570,15 @@ public class CompositionInteractionSourceCollection <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -3605,7 +3616,7 @@ public class CompositionInteractionSourceCollection <: InterfaceWrapperBase & Co
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -4108,7 +4119,7 @@ public class IVisualInteractionSource <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVisualInteractionSource", IVisualInteractionSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceVtbl", "IVisualInteractionSource", "IVisualInteractionSource_Impl", [InterfaceMethodSchema("IsPositionXRailsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsPositionXRailsEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsPositionYRailsEnabled", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsPositionYRailsEnabled", 9, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ManipulationRedirectionMode", 10, [InterfaceParameterSchema("result", "CPointer<VisualInteractionSourceRedirectionModeAbi>", "OutSlot<VisualInteractionSourceRedirectionMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetManipulationRedirectionMode", 11, [InterfaceParameterSchema("value", "VisualInteractionSourceRedirectionModeAbi", "VisualInteractionSourceRedirectionMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionXChainingMode", 12, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionXChainingMode", 13, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionXSourceMode", 14, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionXSourceMode", 15, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionYChainingMode", 16, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionYChainingMode", 17, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionYSourceMode", 18, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionYSourceMode", 19, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScaleChainingMode", 20, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleChainingMode", 21, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScaleSourceMode", 22, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleSourceMode", 23, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Source", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryRedirectForManipulation", 25, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<_impl_l1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVisualInteractionSource", IVisualInteractionSource.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceVtbl", "IVisualInteractionSource", "IVisualInteractionSource_Impl", [InterfaceMethodSchema("IsPositionXRailsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsPositionXRailsEnabled", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IsPositionYRailsEnabled", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsPositionYRailsEnabled", 9, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ManipulationRedirectionMode", 10, [InterfaceParameterSchema("result", "CPointer<VisualInteractionSourceRedirectionModeAbi>", "OutSlot<VisualInteractionSourceRedirectionMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetManipulationRedirectionMode", 11, [InterfaceParameterSchema("value", "VisualInteractionSourceRedirectionModeAbi", "VisualInteractionSourceRedirectionMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionXChainingMode", 12, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionXChainingMode", 13, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionXSourceMode", 14, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionXSourceMode", 15, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionYChainingMode", 16, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionYChainingMode", 17, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PositionYSourceMode", 18, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionYSourceMode", 19, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScaleChainingMode", 20, [InterfaceParameterSchema("result", "CPointer<InteractionChainingModeAbi>", "OutSlot<InteractionChainingMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleChainingMode", 21, [InterfaceParameterSchema("value", "InteractionChainingModeAbi", "InteractionChainingMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScaleSourceMode", 22, [InterfaceParameterSchema("result", "CPointer<InteractionSourceModeAbi>", "OutSlot<InteractionSourceMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleSourceMode", 23, [InterfaceParameterSchema("value", "InteractionSourceModeAbi", "InteractionSourceMode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Source", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Visual>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryRedirectForManipulation", 25, [InterfaceParameterSchema("pointerPoint", "CPointer<Unit>", "InParam<impl_p1.PointerPoint>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IVisualInteractionSource.runtimeType())
         return schema
     }
@@ -4264,16 +4275,16 @@ public class IVisualInteractionSource <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Source(): _impl_l1.Visual {
+    public unsafe func Source(): impl_p1.Visual {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Source(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Visual.fromAbiTake(result__)
+        return impl_p1.Visual.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func TryRedirectForManipulation(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func TryRedirectForManipulation(pointerPoint: impl_p1.PointerPoint): Unit {
         let v = vtbl()
         let hr = v.TryRedirectForManipulation(asRaw(), pointerPoint.asRaw())
         HRESULT(hr).ok()
@@ -4310,7 +4321,7 @@ public class InteractionSourceConfiguration <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionSourceConfiguration> {
-        let ancestors = [IInteractionSourceConfiguration.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionSourceConfiguration.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionSourceConfiguration>("InteractionSourceConfiguration", IInteractionSourceConfiguration.iid(), ancestors, { raw => InteractionSourceConfiguration.fromAbiTake(raw) }, { raw => InteractionSourceConfiguration.viewOf(raw) })
     }
 
@@ -4359,15 +4370,15 @@ public class InteractionSourceConfiguration <: InterfaceWrapperBase & ComInterfa
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -4401,7 +4412,7 @@ public class InteractionSourceConfiguration <: InterfaceWrapperBase & ComInterfa
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 }
@@ -4536,7 +4547,7 @@ public class CompositionConditionalValue <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<CompositionConditionalValue> {
-        let ancestors = [ICompositionConditionalValue.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [ICompositionConditionalValue.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<CompositionConditionalValue>("CompositionConditionalValue", ICompositionConditionalValue.iid(), ancestors, { raw => CompositionConditionalValue.fromAbiTake(raw) }, { raw => CompositionConditionalValue.viewOf(raw) })
     }
 
@@ -4585,37 +4596,37 @@ public class CompositionConditionalValue <: InterfaceWrapperBase & ComInterface 
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         return defaultInterface().Condition()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetCondition(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Value(): _impl_l1.ExpressionAnimation {
+    public unsafe func Value(): impl_p1.ExpressionAnimation {
         return defaultInterface().Value()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetValue(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetValue(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetValue(value)
     }
 
@@ -4623,12 +4634,12 @@ public class CompositionConditionalValue <: InterfaceWrapperBase & ComInterface 
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): CompositionConditionalValue {
+    public static unsafe func Create(compositor: impl_p1.Compositor): CompositionConditionalValue {
         var result__: Option<CompositionConditionalValue> = Option<CompositionConditionalValue>.None
         try (factory__ = windows_core.factory<CompositionConditionalValue, ICompositionConditionalValueStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -4705,7 +4716,7 @@ public class ICompositionConditionalValueStatics <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICompositionConditionalValueStatics", ICompositionConditionalValueStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionConditionalValueStaticsVtbl", "ICompositionConditionalValueStatics", "ICompositionConditionalValueStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionConditionalValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICompositionConditionalValueStatics", ICompositionConditionalValueStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICompositionConditionalValueStaticsVtbl", "ICompositionConditionalValueStatics", "ICompositionConditionalValueStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionConditionalValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICompositionConditionalValueStatics.runtimeType())
         return schema
     }
@@ -4735,7 +4746,7 @@ public class ICompositionConditionalValueStatics <: InterfaceWrapperBase & ComIn
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): CompositionConditionalValue {
+    public unsafe func Create(compositor: impl_p1.Compositor): CompositionConditionalValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4880,7 +4891,7 @@ public class IInteractionTracker <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTracker", IInteractionTracker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVtbl", "IInteractionTracker", "IInteractionTracker_Impl", [InterfaceMethodSchema("InteractionSources", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionInteractionSourceCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPositionRoundingSuggested", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxPosition", 8, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxPosition", 9, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MaxScale", 10, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxScale", 11, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MinPosition", 12, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMinPosition", 13, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MinScale", 14, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMinScale", 15, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NaturalRestingPosition", 16, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NaturalRestingScale", 17, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Owner", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInteractionTrackerOwner>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 19, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PositionInertiaDecayRate", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_numerics.Vector3>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionInertiaDecayRate", 21, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<windows_numerics.Vector3>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PositionVelocityInPixelsPerSecond", 22, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Scale", 23, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleInertiaDecayRate", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Float32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleInertiaDecayRate", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<Float32>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ScaleVelocityInPercentPerSecond", 26, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdjustPositionXIfGreaterThanThreshold", 27, [InterfaceParameterSchema("adjustment", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("positionThreshold", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AdjustPositionYIfGreaterThanThreshold", 28, [InterfaceParameterSchema("adjustment", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("positionThreshold", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConfigurePositionXInertiaModifiers", 29, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConfigurePositionYInertiaModifiers", 30, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConfigureScaleInertiaModifiers", 31, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TryUpdatePosition", 32, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionBy", 33, [InterfaceParameterSchema("amount", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionWithAnimation", 34, [InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<_impl_l1.CompositionAnimation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionWithAdditionalVelocity", 35, [InterfaceParameterSchema("velocityInPixelsPerSecond", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScale", 36, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScaleWithAnimation", 37, [InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<_impl_l1.CompositionAnimation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScaleWithAdditionalVelocity", 38, [InterfaceParameterSchema("velocityInPercentPerSecond", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTracker", IInteractionTracker.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVtbl", "IInteractionTracker", "IInteractionTracker_Impl", [InterfaceMethodSchema("InteractionSources", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CompositionInteractionSourceCollection>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPositionRoundingSuggested", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxPosition", 8, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxPosition", 9, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MaxScale", 10, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMaxScale", 11, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MinPosition", 12, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMinPosition", 13, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MinScale", 14, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMinScale", 15, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NaturalRestingPosition", 16, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NaturalRestingScale", 17, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Owner", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInteractionTrackerOwner>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 19, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PositionInertiaDecayRate", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<windows_numerics.Vector3>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPositionInertiaDecayRate", 21, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<windows_numerics.Vector3>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PositionVelocityInPixelsPerSecond", 22, [InterfaceParameterSchema("result", "CPointer<windows_numerics.Vector3Abi>", "OutSlot<windows_numerics.Vector3>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Scale", 23, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScaleInertiaDecayRate", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<Float32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetScaleInertiaDecayRate", 25, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<Float32>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ScaleVelocityInPercentPerSecond", 26, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdjustPositionXIfGreaterThanThreshold", 27, [InterfaceParameterSchema("adjustment", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("positionThreshold", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AdjustPositionYIfGreaterThanThreshold", 28, [InterfaceParameterSchema("adjustment", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("positionThreshold", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConfigurePositionXInertiaModifiers", 29, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConfigurePositionYInertiaModifiers", 30, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ConfigureScaleInertiaModifiers", 31, [InterfaceParameterSchema("modifiers", "CPointer<Unit>", "InParam<windows_collections.IIterable<InteractionTrackerInertiaModifier>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TryUpdatePosition", 32, [InterfaceParameterSchema("value", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionBy", 33, [InterfaceParameterSchema("amount", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionWithAnimation", 34, [InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<impl_p1.CompositionAnimation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdatePositionWithAdditionalVelocity", 35, [InterfaceParameterSchema("velocityInPixelsPerSecond", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScale", 36, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScaleWithAnimation", 37, [InterfaceParameterSchema("animation", "CPointer<Unit>", "InParam<impl_p1.CompositionAnimation>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryUpdateScaleWithAdditionalVelocity", 38, [InterfaceParameterSchema("velocityInPercentPerSecond", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("centerPoint", "windows_numerics.Vector3Abi", "windows_numerics.Vector3", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTracker.runtimeType())
         return schema
     }
@@ -5126,7 +5137,7 @@ public class IInteractionTracker <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func TryUpdatePositionWithAnimation(animation: _impl_l1.CompositionAnimation): Int32 {
+    public unsafe func TryUpdatePositionWithAnimation(animation: impl_p1.CompositionAnimation): Int32 {
         let v = vtbl()
         var result__ = 0i32
         let hr = v.TryUpdatePositionWithAnimation(asRaw(), animation.asRaw(), CPointer<Int32>(inout result__))
@@ -5153,7 +5164,7 @@ public class IInteractionTracker <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Foundation_Numerics == "on" && Windows_UI_Composition == "on"]
-    public unsafe func TryUpdateScaleWithAnimation(animation: _impl_l1.CompositionAnimation, centerPoint: windows_numerics.Vector3): Int32 {
+    public unsafe func TryUpdateScaleWithAnimation(animation: impl_p1.CompositionAnimation, centerPoint: windows_numerics.Vector3): Int32 {
         let v = vtbl()
         var result__ = 0i32
         let hr = v.TryUpdateScaleWithAnimation(asRaw(), animation.asRaw(), windows_core.projectTypedAbi(centerPoint, windows_core.typeMarker<windows_numerics.Vector3>()), CPointer<Int32>(inout result__))
@@ -5319,7 +5330,7 @@ public class IInteractionTrackerInertiaMotionStatics <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaMotionStatics", IInteractionTrackerInertiaMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaMotionStaticsVtbl", "IInteractionTrackerInertiaMotionStatics", "IInteractionTrackerInertiaMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaMotionStatics", IInteractionTrackerInertiaMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaMotionStaticsVtbl", "IInteractionTrackerInertiaMotionStatics", "IInteractionTrackerInertiaMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaMotionStatics.runtimeType())
         return schema
     }
@@ -5349,7 +5360,7 @@ public class IInteractionTrackerInertiaMotionStatics <: InterfaceWrapperBase & C
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaMotion {
+    public unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaMotion {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5408,7 +5419,7 @@ public class IInteractionTrackerInertiaNaturalMotionStatics <: InterfaceWrapperB
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaNaturalMotionStatics", IInteractionTrackerInertiaNaturalMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaNaturalMotionStaticsVtbl", "IInteractionTrackerInertiaNaturalMotionStatics", "IInteractionTrackerInertiaNaturalMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaNaturalMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaNaturalMotionStatics", IInteractionTrackerInertiaNaturalMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaNaturalMotionStaticsVtbl", "IInteractionTrackerInertiaNaturalMotionStatics", "IInteractionTrackerInertiaNaturalMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaNaturalMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaNaturalMotionStatics.runtimeType())
         return schema
     }
@@ -5438,7 +5449,7 @@ public class IInteractionTrackerInertiaNaturalMotionStatics <: InterfaceWrapperB
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaNaturalMotion {
+    public unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaNaturalMotion {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5497,7 +5508,7 @@ public class IInteractionTrackerInertiaRestingValueStatics <: InterfaceWrapperBa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaRestingValueStatics", IInteractionTrackerInertiaRestingValueStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaRestingValueStaticsVtbl", "IInteractionTrackerInertiaRestingValueStatics", "IInteractionTrackerInertiaRestingValueStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaRestingValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerInertiaRestingValueStatics", IInteractionTrackerInertiaRestingValueStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerInertiaRestingValueStaticsVtbl", "IInteractionTrackerInertiaRestingValueStatics", "IInteractionTrackerInertiaRestingValueStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerInertiaRestingValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerInertiaRestingValueStatics.runtimeType())
         return schema
     }
@@ -5527,7 +5538,7 @@ public class IInteractionTrackerInertiaRestingValueStatics <: InterfaceWrapperBa
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaRestingValue {
+    public unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaRestingValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5854,7 +5865,7 @@ public class IInteractionTrackerStatics <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerStatics", IInteractionTrackerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerStaticsVtbl", "IInteractionTrackerStatics", "IInteractionTrackerStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTracker>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithOwner", 7, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("owner", "CPointer<Unit>", "InParam<IInteractionTrackerOwner>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTracker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerStatics", IInteractionTrackerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerStaticsVtbl", "IInteractionTrackerStatics", "IInteractionTrackerStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTracker>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithOwner", 7, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("owner", "CPointer<Unit>", "InParam<IInteractionTrackerOwner>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTracker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerStatics.runtimeType())
         return schema
     }
@@ -5884,7 +5895,7 @@ public class IInteractionTrackerStatics <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): InteractionTracker {
+    public unsafe func Create(compositor: impl_p1.Compositor): InteractionTracker {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5893,7 +5904,7 @@ public class IInteractionTrackerStatics <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func CreateWithOwner(compositor: _impl_l1.Compositor, owner: IInteractionTrackerOwner): InteractionTracker {
+    public unsafe func CreateWithOwner(compositor: impl_p1.Compositor, owner: IInteractionTrackerOwner): InteractionTracker {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWithOwner(asRaw(), compositor.asRaw(), owner.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6044,7 +6055,7 @@ public class IInteractionTrackerVector2InertiaNaturalMotionStatics <: InterfaceW
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInteractionTrackerVector2InertiaNaturalMotionStatics", IInteractionTrackerVector2InertiaNaturalMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVector2InertiaNaturalMotionStaticsVtbl", "IInteractionTrackerVector2InertiaNaturalMotionStatics", "IInteractionTrackerVector2InertiaNaturalMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<_impl_l1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerVector2InertiaNaturalMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInteractionTrackerVector2InertiaNaturalMotionStatics", IInteractionTrackerVector2InertiaNaturalMotionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IInteractionTrackerVector2InertiaNaturalMotionStaticsVtbl", "IInteractionTrackerVector2InertiaNaturalMotionStatics", "IInteractionTrackerVector2InertiaNaturalMotionStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("compositor", "CPointer<Unit>", "InParam<impl_p1.Compositor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<InteractionTrackerVector2InertiaNaturalMotion>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInteractionTrackerVector2InertiaNaturalMotionStatics.runtimeType())
         return schema
     }
@@ -6074,7 +6085,7 @@ public class IInteractionTrackerVector2InertiaNaturalMotionStatics <: InterfaceW
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerVector2InertiaNaturalMotion {
+    public unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerVector2InertiaNaturalMotion {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), compositor.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6330,7 +6341,7 @@ public class IVisualInteractionSourceStatics <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVisualInteractionSourceStatics", IVisualInteractionSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceStaticsVtbl", "IVisualInteractionSourceStatics", "IVisualInteractionSourceStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VisualInteractionSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVisualInteractionSourceStatics", IVisualInteractionSourceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceStaticsVtbl", "IVisualInteractionSourceStatics", "IVisualInteractionSourceStatics_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p1.Visual>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VisualInteractionSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVisualInteractionSourceStatics.runtimeType())
         return schema
     }
@@ -6360,7 +6371,7 @@ public class IVisualInteractionSourceStatics <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Create(source: _impl_l1.Visual): VisualInteractionSource {
+    public unsafe func Create(source: impl_p1.Visual): VisualInteractionSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), source.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6419,7 +6430,7 @@ public class IVisualInteractionSourceStatics2 <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVisualInteractionSourceStatics2", IVisualInteractionSourceStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceStatics2Vtbl", "IVisualInteractionSourceStatics2", "IVisualInteractionSourceStatics2_Impl", [InterfaceMethodSchema("CreateFromIVisualElement", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l0.IVisualElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VisualInteractionSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVisualInteractionSourceStatics2", IVisualInteractionSourceStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVisualInteractionSourceStatics2Vtbl", "IVisualInteractionSourceStatics2", "IVisualInteractionSourceStatics2_Impl", [InterfaceMethodSchema("CreateFromIVisualElement", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p0.IVisualElement>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VisualInteractionSource>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVisualInteractionSourceStatics2.runtimeType())
         return schema
     }
@@ -6449,7 +6460,7 @@ public class IVisualInteractionSourceStatics2 <: InterfaceWrapperBase & ComInter
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func CreateFromIVisualElement(source: _impl_l0.IVisualElement): VisualInteractionSource {
+    public unsafe func CreateFromIVisualElement(source: impl_p0.IVisualElement): VisualInteractionSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromIVisualElement(asRaw(), source.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6488,7 +6499,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTracker> {
-        let ancestors = [IInteractionTracker.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTracker.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTracker>("InteractionTracker", IInteractionTracker.iid(), ancestors, { raw => InteractionTracker.fromAbiTake(raw) }, { raw => InteractionTracker.viewOf(raw) })
     }
 
@@ -6537,15 +6548,15 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6678,7 +6689,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func TryUpdatePositionWithAnimation(animation: _impl_l1.CompositionAnimation): Int32 {
+    public unsafe func TryUpdatePositionWithAnimation(animation: impl_p1.CompositionAnimation): Int32 {
         return defaultInterface().TryUpdatePositionWithAnimation(animation)
     }
 
@@ -6693,7 +6704,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Foundation_Numerics == "on" && Windows_UI_Composition == "on"]
-    public unsafe func TryUpdateScaleWithAnimation(animation: _impl_l1.CompositionAnimation, centerPoint: windows_numerics.Vector3): Int32 {
+    public unsafe func TryUpdateScaleWithAnimation(animation: impl_p1.CompositionAnimation, centerPoint: windows_numerics.Vector3): Int32 {
         return defaultInterface().TryUpdateScaleWithAnimation(animation, centerPoint)
     }
 
@@ -6706,7 +6717,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
@@ -6729,7 +6740,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): InteractionTracker {
+    public static unsafe func Create(compositor: impl_p1.Compositor): InteractionTracker {
         var result__: Option<InteractionTracker> = Option<InteractionTracker>.None
         try (factory__ = windows_core.factory<InteractionTracker, IInteractionTrackerStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -6741,7 +6752,7 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func CreateWithOwner(compositor: _impl_l1.Compositor, owner: IInteractionTrackerOwner): InteractionTracker {
+    public static unsafe func CreateWithOwner(compositor: impl_p1.Compositor, owner: IInteractionTrackerOwner): InteractionTracker {
         var result__: Option<InteractionTracker> = Option<InteractionTracker>.None
         try (factory__ = windows_core.factory<InteractionTracker, IInteractionTrackerStatics>().unwrap()) {
             result__ = Some(factory__.CreateWithOwner(compositor, owner))
@@ -6798,7 +6809,7 @@ public class InteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerInertiaMotion> {
-        let ancestors = [IInteractionTrackerInertiaMotion.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerInertiaMotion.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerInertiaMotion>("InteractionTrackerInertiaMotion", IInteractionTrackerInertiaMotion.iid(), ancestors, { raw => InteractionTrackerInertiaMotion.fromAbiTake(raw) }, { raw => InteractionTrackerInertiaMotion.viewOf(raw) })
     }
 
@@ -6847,8 +6858,8 @@ public class InteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInterf
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6861,30 +6872,30 @@ public class InteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInterf
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         return defaultInterface().Condition()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetCondition(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Motion(): _impl_l1.ExpressionAnimation {
+    public unsafe func Motion(): impl_p1.ExpressionAnimation {
         return defaultInterface().Motion()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetMotion(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetMotion(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetMotion(value)
     }
 
@@ -6892,12 +6903,12 @@ public class InteractionTrackerInertiaMotion <: InterfaceWrapperBase & ComInterf
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaMotion {
+    public static unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaMotion {
         var result__: Option<InteractionTrackerInertiaMotion> = Option<InteractionTrackerInertiaMotion>.None
         try (factory__ = windows_core.factory<InteractionTrackerInertiaMotion, IInteractionTrackerInertiaMotionStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -6954,7 +6965,7 @@ public class InteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerInertiaNaturalMotion> {
-        let ancestors = [IInteractionTrackerInertiaNaturalMotion.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerInertiaNaturalMotion.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerInertiaNaturalMotion>("InteractionTrackerInertiaNaturalMotion", IInteractionTrackerInertiaNaturalMotion.iid(), ancestors, { raw => InteractionTrackerInertiaNaturalMotion.fromAbiTake(raw) }, { raw => InteractionTrackerInertiaNaturalMotion.viewOf(raw) })
     }
 
@@ -7003,8 +7014,8 @@ public class InteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7017,30 +7028,30 @@ public class InteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & Co
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         return defaultInterface().Condition()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetCondition(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func NaturalMotion(): _impl_l1.ScalarNaturalMotionAnimation {
+    public unsafe func NaturalMotion(): impl_p1.ScalarNaturalMotionAnimation {
         return defaultInterface().NaturalMotion()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetNaturalMotion(value: _impl_l1.ScalarNaturalMotionAnimation): Unit {
+    public unsafe func SetNaturalMotion(value: impl_p1.ScalarNaturalMotionAnimation): Unit {
         defaultInterface().SetNaturalMotion(value)
     }
 
@@ -7048,12 +7059,12 @@ public class InteractionTrackerInertiaNaturalMotion <: InterfaceWrapperBase & Co
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaNaturalMotion {
+    public static unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaNaturalMotion {
         var result__: Option<InteractionTrackerInertiaNaturalMotion> = Option<InteractionTrackerInertiaNaturalMotion>.None
         try (factory__ = windows_core.factory<InteractionTrackerInertiaNaturalMotion, IInteractionTrackerInertiaNaturalMotionStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -7110,7 +7121,7 @@ public class InteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerInertiaRestingValue> {
-        let ancestors = [IInteractionTrackerInertiaRestingValue.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerInertiaRestingValue.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerInertiaRestingValue>("InteractionTrackerInertiaRestingValue", IInteractionTrackerInertiaRestingValue.iid(), ancestors, { raw => InteractionTrackerInertiaRestingValue.fromAbiTake(raw) }, { raw => InteractionTrackerInertiaRestingValue.viewOf(raw) })
     }
 
@@ -7159,8 +7170,8 @@ public class InteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Com
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7173,30 +7184,30 @@ public class InteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Com
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         return defaultInterface().Condition()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetCondition(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func RestingValue(): _impl_l1.ExpressionAnimation {
+    public unsafe func RestingValue(): impl_p1.ExpressionAnimation {
         return defaultInterface().RestingValue()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetRestingValue(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetRestingValue(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetRestingValue(value)
     }
 
@@ -7204,12 +7215,12 @@ public class InteractionTrackerInertiaRestingValue <: InterfaceWrapperBase & Com
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerInertiaRestingValue {
+    public static unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerInertiaRestingValue {
         var result__: Option<InteractionTrackerInertiaRestingValue> = Option<InteractionTrackerInertiaRestingValue>.None
         try (factory__ = windows_core.factory<InteractionTrackerInertiaRestingValue, IInteractionTrackerInertiaRestingValueStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -7266,7 +7277,7 @@ public class InteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperBa
     }
 
     public static func descriptor(): InterfaceDescriptor<InteractionTrackerVector2InertiaNaturalMotion> {
-        let ancestors = [IInteractionTrackerVector2InertiaNaturalMotion.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IInteractionTrackerVector2InertiaNaturalMotion.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<InteractionTrackerVector2InertiaNaturalMotion>("InteractionTrackerVector2InertiaNaturalMotion", IInteractionTrackerVector2InertiaNaturalMotion.iid(), ancestors, { raw => InteractionTrackerVector2InertiaNaturalMotion.fromAbiTake(raw) }, { raw => InteractionTrackerVector2InertiaNaturalMotion.viewOf(raw) })
     }
 
@@ -7315,8 +7326,8 @@ public class InteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperBa
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7329,30 +7340,30 @@ public class InteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperBa
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Condition(): _impl_l1.ExpressionAnimation {
+    public unsafe func Condition(): impl_p1.ExpressionAnimation {
         return defaultInterface().Condition()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetCondition(value: _impl_l1.ExpressionAnimation): Unit {
+    public unsafe func SetCondition(value: impl_p1.ExpressionAnimation): Unit {
         defaultInterface().SetCondition(value)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func NaturalMotion(): _impl_l1.Vector2NaturalMotionAnimation {
+    public unsafe func NaturalMotion(): impl_p1.Vector2NaturalMotionAnimation {
         return defaultInterface().NaturalMotion()
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func SetNaturalMotion(value: _impl_l1.Vector2NaturalMotionAnimation): Unit {
+    public unsafe func SetNaturalMotion(value: impl_p1.Vector2NaturalMotionAnimation): Unit {
         defaultInterface().SetNaturalMotion(value)
     }
 
@@ -7360,12 +7371,12 @@ public class InteractionTrackerVector2InertiaNaturalMotion <: InterfaceWrapperBa
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(compositor: _impl_l1.Compositor): InteractionTrackerVector2InertiaNaturalMotion {
+    public static unsafe func Create(compositor: impl_p1.Compositor): InteractionTrackerVector2InertiaNaturalMotion {
         var result__: Option<InteractionTrackerVector2InertiaNaturalMotion> = Option<InteractionTrackerVector2InertiaNaturalMotion>.None
         try (factory__ = windows_core.factory<InteractionTrackerVector2InertiaNaturalMotion, IInteractionTrackerVector2InertiaNaturalMotionStatics>().unwrap()) {
             result__ = Some(factory__.Create(compositor))
@@ -7422,7 +7433,7 @@ public class VisualInteractionSource <: InterfaceWrapperBase & ComInterface & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<VisualInteractionSource> {
-        let ancestors = [IVisualInteractionSource.iid(), ICompositionInteractionSource.iid(), Foundation.IClosable.iid(), _impl_l1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IVisualInteractionSource.iid(), ICompositionInteractionSource.iid(), Foundation.IClosable.iid(), impl_p1.IAnimationObject.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<VisualInteractionSource>("VisualInteractionSource", IVisualInteractionSource.iid(), ancestors, { raw => VisualInteractionSource.fromAbiTake(raw) }, { raw => VisualInteractionSource.viewOf(raw) })
     }
 
@@ -7478,15 +7489,15 @@ public class VisualInteractionSource <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    public func asIAnimationObject(): _impl_l1.IAnimationObject {
-        match (unsafe { query(_impl_l1.IAnimationObject.descriptor()) }) {
+    public func asIAnimationObject(): impl_p1.IAnimationObject {
+        match (unsafe { query(impl_p1.IAnimationObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asCompositionObject(): _impl_l1.CompositionObject {
-        match (unsafe { query(_impl_l1.CompositionObject.descriptor()) }) {
+    public func asCompositionObject(): impl_p1.CompositionObject {
+        match (unsafe { query(impl_p1.CompositionObject.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -7565,12 +7576,12 @@ public class VisualInteractionSource <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_UI_Composition == "on"]
-    public unsafe func Source(): _impl_l1.Visual {
+    public unsafe func Source(): impl_p1.Visual {
         return defaultInterface().Source()
     }
 
     @When[Windows_UI_Input == "on"]
-    public unsafe func TryRedirectForManipulation(pointerPoint: _impl_l1.PointerPoint): Unit {
+    public unsafe func TryRedirectForManipulation(pointerPoint: impl_p1.PointerPoint): Unit {
         defaultInterface().TryRedirectForManipulation(pointerPoint)
     }
 
@@ -7578,12 +7589,12 @@ public class VisualInteractionSource <: InterfaceWrapperBase & ComInterface & wi
         asIClosable().Close()
     }
 
-    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: _impl_l1.AnimationPropertyInfo): Unit {
+    public unsafe func PopulatePropertyInfo(propertyName: windows_core.HString, propertyInfo: impl_p1.AnimationPropertyInfo): Unit {
         asIAnimationObject().PopulatePropertyInfo(propertyName, propertyInfo)
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func Create(source: _impl_l1.Visual): VisualInteractionSource {
+    public static unsafe func Create(source: impl_p1.Visual): VisualInteractionSource {
         var result__: Option<VisualInteractionSource> = Option<VisualInteractionSource>.None
         try (factory__ = windows_core.factory<VisualInteractionSource, IVisualInteractionSourceStatics>().unwrap()) {
             result__ = Some(factory__.Create(source))
@@ -7595,7 +7606,7 @@ public class VisualInteractionSource <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_UI_Composition == "on"]
-    public static unsafe func CreateFromIVisualElement(source: _impl_l0.IVisualElement): VisualInteractionSource {
+    public static unsafe func CreateFromIVisualElement(source: impl_p0.IVisualElement): VisualInteractionSource {
         var result__: Option<VisualInteractionSource> = Option<VisualInteractionSource>.None
         try (factory__ = windows_core.factory<VisualInteractionSource, IVisualInteractionSourceStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromIVisualElement(source))

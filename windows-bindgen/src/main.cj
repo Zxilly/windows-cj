@@ -341,15 +341,6 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     config.resolveGeneratedPackages(index, typeMap)
     logStage("generated-packages", stageStart4)
 
-    if (config.usesLayeredImpl && config.usesSubpackageLayout()) {
-        let stageStart5 = MonoTime.now()
-        let namespaceGraph = buildNamespaceDependencyGraph(index, typeMap)
-        let namespaceComponents = computeNamespaceComponents(typeMap.namespaces(), namespaceGraph)
-        config.layerAssignment = Some(computeLayerAssignment(index, typeMap, namespaceComponents,
-            config.outputRootPackageName(), config.targetBucketSize))
-        logStage("layer-assignment", stageStart5)
-    }
-
     let stageStart6 = MonoTime.now()
     let typeTree = TypeTree(typeMap)
     let namespaces = typeTree.flattenNamespaces()
@@ -395,7 +386,7 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     if (config.usesSubpackageLayout()) {
         let stageStart11 = MonoTime.now()
         writeNamespaceFacades(fileWriter, generatedFiles, config, index)
-        writePackageLayerStubs(fileWriter, generatedFiles, config)
+        writeSubpackageStubs(fileWriter, generatedFiles, config)
         logStage("write-facades+stubs", stageStart11)
     } else if (config.packageOutput) {
         let stageStart11b = MonoTime.now()
@@ -415,6 +406,7 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     if (!config.link.isEmpty()) {
         writeArtifact(artifactWriter, "libraries.cj", libraryCollector.generateSource(config.noComment))
     }
+    writeBindgenLayoutReports(artifactWriter, config)
     logStage("write-artifacts", stageStart12)
     clearBindgenContext()
 
@@ -612,100 +604,66 @@ func writeNamespacePreludeForPackage(
         case GenerationMode.Sys => ()
     }
     if (needsLibLoading) {
-        w.writeLine("import windows_libloading")
+        writeGuardedImportLine(w, namespace, "windows_libloading", "import windows_libloading")
     }
     for (pkg in supportPackagesForMode(mode)) {
         let used = supportSymbolsFor(namespace, pkg)
         if (!used.isEmpty()) {
-            w.writeLine("import ${pkg}.{${joinStrings(used, ", ")}}")
-            w.writeLine("import ${pkg} as ${importedPackageQualifier(pkg)}")
+            writeGuardedImportLine(w, namespace, pkg, "import ${pkg}.{${joinStrings(used, ", ")}}")
+            writeGuardedImportLine(w, namespace, pkg, "import ${pkg} as ${importedPackageQualifier(pkg)}")
         }
     }
     for (packageImport in packageImports) {
         if (packageImport == packageName) {
             continue
         }
-        if (!shouldWritePackageImportForPackage(packageName, packageImport)) {
-            continue
-        }
-        if (shouldGuardLayerImportToFacade(packageName, packageImport)) {
-            let importTags = config.packageImportAvailabilityTags(packageImport)
-            if (!importTags.isEmpty()) {
-                writeAvailabilityForTags(w, "", importTags)
-            }
-        }
-        w.writeLine("import ${packageImport} as ${importedPackageQualifier(packageImport)}")
+        writeGuardedImportLine(w, namespace, packageImport,
+            "import ${packageImport} as ${importedPackageQualifier(packageImport)}")
     }
     w.writeBlankLine()
 }
 
-func shouldGuardLayerImportToFacade(packageName: String, packageImport: String): Bool {
-    if (layerPackageIndex(packageName) < 0) {
-        return false
+func writeGuardedImportLine(
+    w: CodeWriter,
+    namespace: String,
+    packageImport: String,
+    line: String
+): Unit {
+    let condition = guardedPackageImportCondition(namespace, packageImport)
+    if (!condition.isEmpty()) {
+        w.writeLine("@When[${condition}]")
     }
-    if (layerPackageIndex(packageImport) >= 0) {
-        return false
-    }
-    let prefix = layerPackagePrefix(packageName)
-    let dot = "${prefix}."
-    if (!startsWith(packageImport, dot)) {
-        return false
-    }
-    let arr = packageImport.toArray()
-    let prefixLen = Int64(dot.toArray().size)
-    let relative = String.fromUtf8(arr[prefixLen..Int64(arr.size)])
-    if (relative.isEmpty()) {
-        return false
-    }
-    if (startsWith(relative, "Win32.") || startsWith(relative, "Wdk.") || relative == "Win32" || relative == "Wdk") {
-        return false
-    }
-    return true
+    w.writeLine(line)
 }
 
-func shouldWritePackageImportForPackage(packageName: String, packageImport: String): Bool {
-    let packageLayer = layerPackageIndex(packageName)
-    if (packageLayer < 0) {
-        return true
-    }
-    let importLayer = layerPackageIndex(packageImport)
-    if (importLayer < 0) {
-        return true
-    }
-    if (layerPackagePrefix(packageName) != layerPackagePrefix(packageImport)) {
-        return true
-    }
-    return importLayer <= packageLayer
-}
+func guardedPackageImportCondition(namespace: String, packageImport: String): String {
+    let conditions = ArrayList<String>()
+    let namespaceFeature = namespaceToFeature(namespace)
+    addUniqueImportCondition(conditions, namespaceFeature)
 
-func layerPackagePrefix(packageName: String): String {
-    match (packageName.indexOf("._impl_l", 0)) {
-        case Some(pos) =>
-            let arr = packageName.toArray()
-            return String.fromUtf8(arr[0..pos])
-        case None => return packageName
-    }
-}
-
-func layerPackageIndex(packageName: String): Int64 {
-    match (packageName.indexOf("._impl_l", 0)) {
-        case Some(pos) =>
-            let arr = packageName.toArray()
-            var i = pos + Int64("._impl_l".toArray().size)
-            var value: Int64 = 0
-            var hasDigit = false
-            while (i < Int64(arr.size)) {
-                let ch = arr[i]
-                if (ch < b'0' || ch > b'9') {
-                    return if (hasDigit) { value } else { -1 }
-                }
-                value = value * 10 + Int64(ch - b'0')
-                hasDigit = true
-                i += 1
+    match (packageImportToFeatureNamespace(packageImport)) {
+        case Some(dependencyNamespace) =>
+            let dependencyFeature = namespaceToFeature(dependencyNamespace)
+            if (dependencyFeature != namespaceFeature) {
+                addUniqueImportCondition(conditions, dependencyFeature)
             }
-            return if (hasDigit) { value } else { -1 }
-        case None => return -1
+        case None => ()
     }
+
+    return joinStrings(conditions, " && ")
+}
+
+func addUniqueImportCondition(conditions: ArrayList<String>, feature: String): Unit {
+    if (feature.isEmpty()) {
+        return
+    }
+    let condition = "${feature} == \"on\""
+    for (existing in conditions) {
+        if (existing == condition) {
+            return
+        }
+    }
+    conditions.add(condition)
 }
 
 func supportPackagesForMode(mode: GenerationMode): ArrayList<String> {
@@ -755,7 +713,9 @@ func emitNamespaceTable(
         perTypeFragments)
     let bodyText = bodyWriter.toString()
     let packageImports = collectNamespacePackageImports(index, namespace, projectedTypes, config)
-    registerNamespaceFeatureDependenciesForPackageImports(features, namespace, packageImports)
+    recordNamespaceFeatureDependencies(features, namespace, packageImports)
+    let namespaceDependencies = collectNamespaceFeatureDependencies(index, namespace, projectedTypes, config)
+    recordNamespaceDependencies(features, namespace, namespaceDependencies)
     let exports = collectProjectedPublicExports(index, namespace, projectedTypes, mode, config)
     let exportOwners = collectProjectedPublicExportOwners(index, namespace, projectedTypes, mode, config)
 
@@ -774,19 +734,6 @@ func emitNamespaceTable(
         exportOwners, packageImports)
 }
 
-func registerNamespaceFeatureDependenciesForPackageImports(
-    features: FeatureCollector,
-    namespace: String,
-    packageImports: ArrayList<String>
-): Unit {
-    for (packageImport in packageImports) {
-        match (packageImportToFeatureNamespace(packageImport)) {
-            case Some(dependencyNamespace) => features.addNamespaceDependency(namespace, dependencyNamespace)
-            case None => ()
-        }
-    }
-}
-
 func packageImportToFeatureNamespace(packageImport: String): Option<String> {
     let parts = splitString(packageImport, b'.')
     if (parts.size <= 1) {
@@ -801,14 +748,35 @@ func packageImportToFeatureNamespace(packageImport: String): Option<String> {
         i += 1
     }
     let relative = joinStrings(relativeParts, ".")
-    if (relative.isEmpty() || relative == "impl" || relative.endsWith(".impl")) {
+    if (relative.isEmpty() || relative == "impl" || relative.endsWith(".impl") ||
+        relative.startsWith("impl.") || relative.indexOf(".impl.", 0).isSome()) {
         return None
     }
-    if (relative.startsWith("_impl_l") || relative.indexOf("._impl_l", 0).isSome()) {
-        return None
-    }
-
     return Some(packageImportFeatureNamespace(rootPackage, relative))
+}
+
+func recordNamespaceFeatureDependencies(
+    features: FeatureCollector,
+    namespace: String,
+    packageImports: ArrayList<String>
+): Unit {
+    for (packageImport in packageImports) {
+        match (packageImportToFeatureNamespace(packageImport)) {
+            case Some(dependencyNamespace) =>
+                features.addNamespaceDependency(namespace, dependencyNamespace)
+            case None => ()
+        }
+    }
+}
+
+func recordNamespaceDependencies(
+    features: FeatureCollector,
+    namespace: String,
+    dependencies: ArrayList<String>
+): Unit {
+    for (dependencyNamespace in dependencies) {
+        features.addNamespaceDependency(namespace, dependencyNamespace)
+    }
 }
 
 func collectNamespacePackageImports(
@@ -870,6 +838,57 @@ func collectNamespacePackageImports(
     return result
 }
 
+func collectNamespaceFeatureDependencies(
+    index: TypeIndex,
+    namespace: String,
+    projectedTypes: ArrayList<BindgenType>,
+    config: BindgenConfig
+): ArrayList<String> {
+    let result = ArrayList<String>()
+    let _ = config
+    match (bindgenContext()) {
+        case Some(context) => for (projectedType in projectedTypes) {
+            let entry = bindgenTypeEntry(projectedType)
+            let dependencies = collectTypeDependencies(index, entry.fileIdx, entry.row)
+            for (dependency in dependencies) {
+                let dependencyName = dependency.definition()
+                if (dependencyName.namespace.isEmpty() || dependencyName.namespace == namespace ||
+                    dependencyName.namespace == "System") {
+                    continue
+                }
+
+                if (context.typeMap.containsType(dependencyName)) {
+                    addNamespaceDependency(result, dependencyName.namespace)
+                    continue
+                }
+
+                if (context.config.isForcedLocalType(dependencyName.namespace, trimTick(dependencyName.name))) {
+                    continue
+                }
+
+                if (context.references.containsType(dependencyName.namespace, trimTick(dependencyName.name))) {
+                    addNamespaceDependency(result, dependencyName.namespace)
+                }
+            }
+        }
+        case None => ()
+    }
+    sortStrings(result)
+    return result
+}
+
+func addNamespaceDependency(values: ArrayList<String>, dependencyNamespace: String): Unit {
+    if (dependencyNamespace.isEmpty()) {
+        return
+    }
+    for (value in values) {
+        if (value == dependencyNamespace) {
+            return
+        }
+    }
+    values.add(dependencyNamespace)
+}
+
 func writeGeneratedNamespaceFiles(
     fileWriter: FileWriter,
     generatedFiles: ArrayList<NamespaceGenerationResult>,
@@ -877,111 +896,8 @@ func writeGeneratedNamespaceFiles(
 ): Unit {
     parallelForEach<NamespaceGenerationResult>(generatedFiles, config.jobs, {generated =>
         cleanupNamespaceOutputs(fileWriter, generated.namespace, config)
-        if (!(config.namespaceHasLayeredTypes(generated.namespace) &&
-            emitTypesGroupedByLayer(fileWriter, generated, config))) {
-            fileWriter.writeFile(generated.relativePath, generated.content)
-        }
+        fileWriter.writeFile(generated.relativePath, generated.content)
     })
-}
-
-func emitTypesGroupedByLayer(
-    fileWriter: FileWriter,
-    generated: NamespaceGenerationResult,
-    config: BindgenConfig
-): Bool {
-    if (generated.perTypeFragments.isEmpty()) {
-        return false
-    }
-
-    match (config.layerAssignment) {
-        case Some(assignment) =>
-            let typesByStem = HashMap<String, ArrayList<String>>()
-            let stemOrder = ArrayList<String>()
-            // Iterate over a deterministically-ordered key list. Cangjie HashMap
-            // does not guarantee iteration order; without this sort the merge
-            // order of fragments for namespaces that have multiple types per
-            // bucket (e.g. arch-divergent CONTEXT structs) becomes
-            // non-deterministic between runs.
-            let sortedFragmentTypeNames = ArrayList<String>()
-            for ((typeName, _) in generated.perTypeFragments) {
-                sortedFragmentTypeNames.add(typeName)
-            }
-            sortStrings(sortedFragmentTypeNames)
-            for (typeName in sortedFragmentTypeNames) {
-                match (assignment.bucketStemFor(generated.namespace, typeName)) {
-                    case Some(stem) =>
-                        if (!typesByStem.contains(stem)) {
-                            typesByStem[stem] = ArrayList<String>()
-                            stemOrder.add(stem)
-                        }
-                        typesByStem[stem].add(typeName)
-                    case None => return false
-                }
-            }
-
-            sortStrings(stemOrder)
-            for (stem in stemOrder) {
-                let typeNames = typesByStem[stem]
-                if (typeNames.isEmpty()) {
-                    continue
-                }
-                sortStrings(typeNames)
-                let firstTypeName = typeNames[0]
-                let packageName = config.packageNameForType(generated.namespace, firstTypeName)
-                let fragments = ArrayList<String>()
-                for (typeName in typeNames) {
-                    fragments.add(generated.perTypeFragments[typeName])
-                }
-                let packageImports = packageImportsUsedByFragments(packageName, generated.packageImports, fragments)
-                let needsLibLoading = fragmentsContainText(fragments, "windows_libloading.")
-                let prelude = CodeWriter()
-                writeNamespacePreludeForPackage(prelude, generated.namespace, packageName, packageImports,
-                    generated.mode, config, needsLibLoading: needsLibLoading)
-
-                let w = CodeWriter()
-                w.writeRaw(prelude.toString())
-                for (fragment in fragments) {
-                    w.writeRaw(fragment)
-                }
-                fileWriter.writeFile(config.outputRelativePathForType(generated.namespace, firstTypeName), w.toString())
-            }
-            return true
-        case None => return false
-    }
-}
-
-func packageImportsUsedByFragments(
-    packageName: String,
-    packageImports: ArrayList<String>,
-    fragments: ArrayList<String>
-): ArrayList<String> {
-    let result = ArrayList<String>()
-    for (packageImport in packageImports) {
-        if (packageImport == packageName) {
-            continue
-        }
-        if (!shouldWritePackageImportForPackage(packageName, packageImport)) {
-            continue
-        }
-        let aliasUse = "${importedPackageQualifier(packageImport)}."
-        if (!fragmentsContainText(fragments, aliasUse)) {
-            continue
-        }
-        if (!containsPackageImport(result, packageImport)) {
-            result.add(packageImport)
-        }
-    }
-    sortStrings(result)
-    return result
-}
-
-func fragmentsContainText(fragments: ArrayList<String>, needle: String): Bool {
-    for (fragment in fragments) {
-        if (fragment.indexOf(needle, 0).isSome()) {
-            return true
-        }
-    }
-    return false
 }
 
 func writeNamespaceFacades(
@@ -1330,7 +1246,7 @@ func stripPrefix(value: String, prefix: String): Option<String> {
     return Some(String.fromUtf8(valueArr[prefixLen..Int64(valueArr.size)]))
 }
 
-func writePackageLayerStubs(
+func writeSubpackageStubs(
     fileWriter: FileWriter,
     generatedFiles: ArrayList<NamespaceGenerationResult>,
     config: BindgenConfig
@@ -1342,10 +1258,9 @@ func writePackageLayerStubs(
     requiredPackages.add(rootPackage)
 
     for (generated in generatedFiles) {
-        if (config.namespaceHasLayeredTypes(generated.namespace) && !generated.perTypeFragments.isEmpty()) {
+        if (config.namespaceHasPartitionedTypes(generated.namespace) && !generated.perTypeFragments.isEmpty()) {
             let realStem = groupedFileStemForNamespace(generated.namespace,
                 config.packageNamespaceForNamespace(generated.namespace))
-            // Sort type names so package chain registration order is stable.
             let sortedTypeNames = ArrayList<String>()
             for ((typeName, _) in generated.perTypeFragments) {
                 sortedTypeNames.add(typeName)
@@ -1493,6 +1408,8 @@ func cleanupNamespaceOutputs(
         return
     }
 
+    removeFileIfExists("${fileWriter.outputDir}/${config.outputRelativePathForNamespace(namespace)}")
+    removeFileIfExists("${fileWriter.outputDir}/${config.facadeOutputRelativePathForNamespace(namespace)}")
     for (relativePath in namespaceOutputCandidatePaths(namespace)) {
         removeFileIfExists("${fileWriter.outputDir}/${relativePath}")
     }
@@ -1505,7 +1422,7 @@ func namespaceOutputCandidatePaths(namespace: String): ArrayList<String> {
     let parts = splitString(namespace, b'.')
     if (parts.size > 1) {
         var prefixLength: Int64 = Int64(parts.size) - 1
-        while (prefixLength >= 2) {
+        while (prefixLength >= 1) {
             let prefixParts = ArrayList<String>()
             var index: Int64 = 0
             while (index < prefixLength) {
@@ -1636,6 +1553,17 @@ func findWinmdDir(): String {
 func writeArtifact(fileWriter: FileWriter, relativePath: String, content: String): Unit {
     let table = TextArtifactTable(relativePath, TokenStream.fromString(content))
     fileWriter.writeFile(relativePath, toTokenStream(table).toString())
+}
+
+func writeBindgenLayoutReports(fileWriter: FileWriter, config: BindgenConfig): Unit {
+    match (config.packageLayout) {
+        case Some(layout) =>
+            let reportRoot = "target/windows-cj-bindgen-report"
+            writeArtifact(fileWriter, "${reportRoot}/layout.json", layout.layoutJson())
+            writeArtifact(fileWriter, "${reportRoot}/package-graph.dot", layout.packageGraphDot())
+            writeArtifact(fileWriter, "${reportRoot}/scc-report.md", layout.sccReportMarkdown())
+        case None => ()
+    }
 }
 
 func collectProjectedPublicExports(

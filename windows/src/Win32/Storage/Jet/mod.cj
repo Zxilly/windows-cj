@@ -4,10 +4,15 @@
 package windows.Win32.Storage.Jet
 
 import std.collection.*
+@When[Windows_Win32_Storage_Jet == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Jet == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Jet == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
+@When[Windows_Win32_Storage_Jet == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Storage_Jet == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
 import windows.Win32.Storage.StructuredStorage as Win32_Storage_StructuredStorage
 
 

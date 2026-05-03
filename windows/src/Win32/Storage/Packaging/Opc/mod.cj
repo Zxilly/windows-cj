@@ -4,15 +4,22 @@
 package windows.Win32.Storage.Packaging.Opc
 
 import std.collection.*
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Storage_Packaging_Opc == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Storage_Packaging_Opc == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Storage_Packaging_Opc == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Storage_Packaging_Opc == "on"]
@@ -227,7 +234,7 @@ public struct IOpcCertificateEnumeratorVtbl {
     public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var MovePrevious: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var GetCurrent: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetCurrent: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -285,7 +292,7 @@ public class IOpcCertificateEnumerator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func GetCurrent(certificate: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+    public unsafe func GetCurrent(certificate: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrent(__liveRaw, certificate)
@@ -303,9 +310,9 @@ public class IOpcCertificateEnumerator <: InterfaceWrapperBase & ComInterface {
 public struct IOpcCertificateSetVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>) -> Int32> = { _, _ => 0 }
     public var GetEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -351,14 +358,14 @@ public class IOpcCertificateSet <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Add(certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+    public unsafe func Add(certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, certificate)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Remove(certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>): Int32 {
+    public unsafe func Remove(certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, certificate)
@@ -1939,9 +1946,9 @@ public struct IOpcDigitalSignatureManagerVtbl {
     public var RemoveSignature: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CreateSigningOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Validate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<OPC_SIGNATURE_VALIDATION_RESULTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Validate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<OPC_SIGNATURE_VALIDATION_RESULTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var Sign: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var Sign: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ReplaceSignatureXml: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt8>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2017,14 +2024,14 @@ public class IOpcDigitalSignatureManager <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Validate(signature: CPointer<Unit>, certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, validationResult: CPointer<OPC_SIGNATURE_VALIDATION_RESULTAbi>): Int32 {
+    public unsafe func Validate(signature: CPointer<Unit>, certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, validationResult: CPointer<OPC_SIGNATURE_VALIDATION_RESULTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Validate(__liveRaw, signature, certificate, validationResult)
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func Sign(certificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, signingOptions: CPointer<Unit>, digitalSignature: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Sign(certificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, signingOptions: CPointer<Unit>, digitalSignature: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Sign(__liveRaw, certificate, signingOptions, digitalSignature)
@@ -3417,7 +3424,7 @@ public class IOpcSigningOptions <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Storage_Packaging_Opc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IOpcUriVtbl {
-    public var base_: Win32__impl_l1.IUriVtbl = Win32__impl_l1.IUriVtbl()
+    public var base_: Win32_impl_p2.IUriVtbl = Win32_impl_p2.IUriVtbl()
     public var GetRelationshipsPartUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetRelativeUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3459,7 +3466,7 @@ public class IOpcUri <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IOpcUri> {
-        return InterfaceDescriptor<IOpcUri>("IOpcUri", IOpcUri.iid(), Win32__impl_l1.IUri.iid(), takeIOpcUriFromAbi, viewIOpcUri)
+        return InterfaceDescriptor<IOpcUri>("IOpcUri", IOpcUri.iid(), Win32_impl_p2.IUri.iid(), takeIOpcUriFromAbi, viewIOpcUri)
     }
 
     public unsafe func vtbl(): IOpcUriVtbl {

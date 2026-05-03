@@ -4,13 +4,20 @@
 package windows.Win32.Gaming
 
 import std.collection.*
+@When[Windows_Win32_Gaming == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Gaming == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Gaming == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Gaming == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Gaming == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Gaming == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Gaming == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Gaming == "on"]

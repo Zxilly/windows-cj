@@ -4,20 +4,36 @@
 package windows.Win32.Web.InternetExplorer
 
 import std.collection.*
+@When[Windows_Win32_Web_InternetExplorer == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Web_InternetExplorer == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Web_InternetExplorer == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Web_InternetExplorer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
+@When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_Web_MsHtml == "on"]
 import windows.Win32.Web.MsHtml as Win32_Web_MsHtml
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Web_InternetExplorer == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Web_InternetExplorer == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Web_InternetExplorer == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Web_InternetExplorer == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Web_InternetExplorer == "on"]
@@ -905,7 +921,7 @@ public class IActiveXUIHandlerSite3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IAnchorClickVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ProcOnClick: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -943,7 +959,7 @@ public class IAnchorClick <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAnchorClick> {
-        return InterfaceDescriptor<IAnchorClick>("IAnchorClick", IAnchorClick.iid(), Win32__impl_l2.IDispatch.iid(), takeIAnchorClickFromAbi, viewIAnchorClick)
+        return InterfaceDescriptor<IAnchorClick>("IAnchorClick", IAnchorClick.iid(), Win32_impl_p2.IDispatch.iid(), takeIAnchorClickFromAbi, viewIAnchorClick)
     }
 
     public unsafe func vtbl(): IAnchorClickVtbl {
@@ -1084,7 +1100,7 @@ public class ICaretPositionProvider <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDeviceRectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -1121,7 +1137,7 @@ public class IDeviceRect <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDeviceRect> {
-        return InterfaceDescriptor<IDeviceRect>("IDeviceRect", IDeviceRect.iid(), Win32__impl_l2.IDispatch.iid(), takeIDeviceRectFromAbi, viewIDeviceRect)
+        return InterfaceDescriptor<IDeviceRect>("IDeviceRect", IDeviceRect.iid(), Win32_impl_p2.IDispatch.iid(), takeIDeviceRectFromAbi, viewIDeviceRect)
     }
 
     public unsafe func vtbl(): IDeviceRectVtbl {
@@ -1260,7 +1276,7 @@ public class IDocObjectService <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDownloadBehaviorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var startDownload: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -1299,7 +1315,7 @@ public class IDownloadBehavior <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDownloadBehavior> {
-        return InterfaceDescriptor<IDownloadBehavior>("IDownloadBehavior", IDownloadBehavior.iid(), Win32__impl_l2.IDispatch.iid(), takeIDownloadBehaviorFromAbi, viewIDownloadBehavior)
+        return InterfaceDescriptor<IDownloadBehavior>("IDownloadBehavior", IDownloadBehavior.iid(), Win32_impl_p2.IDispatch.iid(), takeIDownloadBehaviorFromAbi, viewIDownloadBehavior)
     }
 
     public unsafe func vtbl(): IDownloadBehaviorVtbl {
@@ -1319,7 +1335,7 @@ public class IDownloadBehavior <: InterfaceWrapperBase & ComInterface {
 public struct IDownloadManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
-    public var Download: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, CPointer<Win32__impl_l2.BINDINFOAbi>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var Download: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, CPointer<Win32_impl_p3.BINDINFOAbi>, CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1364,7 +1380,7 @@ public class IDownloadManager <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func Download(pmk: CPointer<Unit>, pbc: CPointer<Unit>, dwBindVerb: UInt32, grfBINDF: Int32, pBindInfo: CPointer<Win32__impl_l2.BINDINFOAbi>, pszHeaders: CPointer<UInt16>, pszRedir: CPointer<UInt16>, uiCP: UInt32): Int32 {
+    public unsafe func Download(pmk: CPointer<Unit>, pbc: CPointer<Unit>, dwBindVerb: UInt32, grfBINDF: Int32, pBindInfo: CPointer<Win32_impl_p3.BINDINFOAbi>, pszHeaders: CPointer<UInt16>, pszRedir: CPointer<UInt16>, uiCP: UInt32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Download(__liveRaw, pmk, pbc, dwBindVerb, grfBINDF, pBindInfo, pszHeaders, pszRedir, uiCP)
@@ -1728,13 +1744,13 @@ public class IHTMLPersistData <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IHTMLPersistDataOMVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var XMLDocument: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var getAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var getAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var setAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var setAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var removeAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1772,7 +1788,7 @@ public class IHTMLPersistDataOM <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IHTMLPersistDataOM> {
-        return InterfaceDescriptor<IHTMLPersistDataOM>("IHTMLPersistDataOM", IHTMLPersistDataOM.iid(), Win32__impl_l2.IDispatch.iid(), takeIHTMLPersistDataOMFromAbi, viewIHTMLPersistDataOM)
+        return InterfaceDescriptor<IHTMLPersistDataOM>("IHTMLPersistDataOM", IHTMLPersistDataOM.iid(), Win32_impl_p2.IDispatch.iid(), takeIHTMLPersistDataOMFromAbi, viewIHTMLPersistDataOM)
     }
 
     public unsafe func vtbl(): IHTMLPersistDataOMVtbl {
@@ -1787,14 +1803,14 @@ public class IHTMLPersistDataOM <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func getAttribute(name: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func getAttribute(name: CPointer<UInt16>, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getAttribute(__liveRaw, name, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func setAttribute(name: CPointer<UInt16>, value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func setAttribute(name: CPointer<UInt16>, value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.setAttribute(__liveRaw, name, value)
@@ -1810,15 +1826,15 @@ public class IHTMLPersistDataOM <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IHTMLUserDataOMVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var XMLDocument: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var save: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var load: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var getAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var getAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var setAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var setAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     public var removeAttribute: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Setexpires: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var expires: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1858,7 +1874,7 @@ public class IHTMLUserDataOM <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IHTMLUserDataOM> {
-        return InterfaceDescriptor<IHTMLUserDataOM>("IHTMLUserDataOM", IHTMLUserDataOM.iid(), Win32__impl_l2.IDispatch.iid(), takeIHTMLUserDataOMFromAbi, viewIHTMLUserDataOM)
+        return InterfaceDescriptor<IHTMLUserDataOM>("IHTMLUserDataOM", IHTMLUserDataOM.iid(), Win32_impl_p2.IDispatch.iid(), takeIHTMLUserDataOMFromAbi, viewIHTMLUserDataOM)
     }
 
     public unsafe func vtbl(): IHTMLUserDataOMVtbl {
@@ -1885,14 +1901,14 @@ public class IHTMLUserDataOM <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func getAttribute(name: CPointer<UInt16>, pValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func getAttribute(name: CPointer<UInt16>, pValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.getAttribute(__liveRaw, name, pValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func setAttribute(name: CPointer<UInt16>, value: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func setAttribute(name: CPointer<UInt16>, value: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.setAttribute(__liveRaw, name, value)
@@ -1920,7 +1936,7 @@ public class IHTMLUserDataOM <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IHeaderFooterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var htmlHead: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var htmlFoot: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SettextHead: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -1979,7 +1995,7 @@ public class IHeaderFooter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IHeaderFooter> {
-        return InterfaceDescriptor<IHeaderFooter>("IHeaderFooter", IHeaderFooter.iid(), Win32__impl_l2.IDispatch.iid(), takeIHeaderFooterFromAbi, viewIHeaderFooter)
+        return InterfaceDescriptor<IHeaderFooter>("IHeaderFooter", IHeaderFooter.iid(), Win32_impl_p2.IDispatch.iid(), takeIHeaderFooterFromAbi, viewIHeaderFooter)
     }
 
     public unsafe func vtbl(): IHeaderFooterVtbl {
@@ -2184,7 +2200,7 @@ public class IHeaderFooter2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IHomePageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var navigateHomePage: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var setHomePage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var isHomePage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
@@ -2224,7 +2240,7 @@ public class IHomePage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IHomePage> {
-        return InterfaceDescriptor<IHomePage>("IHomePage", IHomePage.iid(), Win32__impl_l2.IDispatch.iid(), takeIHomePageFromAbi, viewIHomePage)
+        return InterfaceDescriptor<IHomePage>("IHomePage", IHomePage.iid(), Win32_impl_p2.IDispatch.iid(), takeIHomePageFromAbi, viewIHomePage)
     }
 
     public unsafe func vtbl(): IHomePageVtbl {
@@ -2322,7 +2338,7 @@ public class IHomePageSetting <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IIEWebDriverManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ExecuteCommand: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2360,7 +2376,7 @@ public class IIEWebDriverManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IIEWebDriverManager> {
-        return InterfaceDescriptor<IIEWebDriverManager>("IIEWebDriverManager", IIEWebDriverManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIIEWebDriverManagerFromAbi, viewIIEWebDriverManager)
+        return InterfaceDescriptor<IIEWebDriverManager>("IIEWebDriverManager", IIEWebDriverManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIIEWebDriverManagerFromAbi, viewIIEWebDriverManager)
     }
 
     public unsafe func vtbl(): IIEWebDriverManagerVtbl {
@@ -2377,12 +2393,12 @@ public class IIEWebDriverManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IIEWebDriverSiteVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var WindowOperation: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var DetachWebdriver: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetCapabilityValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCapabilityValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -2419,7 +2435,7 @@ public class IIEWebDriverSite <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IIEWebDriverSite> {
-        return InterfaceDescriptor<IIEWebDriverSite>("IIEWebDriverSite", IIEWebDriverSite.iid(), Win32__impl_l2.IDispatch.iid(), takeIIEWebDriverSiteFromAbi, viewIIEWebDriverSite)
+        return InterfaceDescriptor<IIEWebDriverSite>("IIEWebDriverSite", IIEWebDriverSite.iid(), Win32_impl_p2.IDispatch.iid(), takeIIEWebDriverSiteFromAbi, viewIIEWebDriverSite)
     }
 
     public unsafe func vtbl(): IIEWebDriverSiteVtbl {
@@ -2440,7 +2456,7 @@ public class IIEWebDriverSite <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetCapabilityValue(pUnkWD: CPointer<Unit>, capName: CPointer<UInt16>, capValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetCapabilityValue(pUnkWD: CPointer<Unit>, capName: CPointer<UInt16>, capValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCapabilityValue(__liveRaw, pUnkWD, capName, capValue)
@@ -2668,7 +2684,7 @@ public class IImageDecodeFilter <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IIntelliFormsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Setenabled: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2707,7 +2723,7 @@ public class IIntelliForms <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IIntelliForms> {
-        return InterfaceDescriptor<IIntelliForms>("IIntelliForms", IIntelliForms.iid(), Win32__impl_l2.IDispatch.iid(), takeIIntelliFormsFromAbi, viewIIntelliForms)
+        return InterfaceDescriptor<IIntelliForms>("IIntelliForms", IIntelliForms.iid(), Win32_impl_p2.IDispatch.iid(), takeIIntelliFormsFromAbi, viewIIntelliForms)
     }
 
     public unsafe func vtbl(): IIntelliFormsVtbl {
@@ -2840,13 +2856,13 @@ public class IInternetExplorerManager2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ILayoutRectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var SetnextRect: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var nextRect: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetcontentSrc: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetcontentSrc: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var contentSrc: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var contentSrc: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SethonorPageBreaks: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var honorPageBreaks: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SethonorPageRules: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -2893,7 +2909,7 @@ public class ILayoutRect <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ILayoutRect> {
-        return InterfaceDescriptor<ILayoutRect>("ILayoutRect", ILayoutRect.iid(), Win32__impl_l2.IDispatch.iid(), takeILayoutRectFromAbi, viewILayoutRect)
+        return InterfaceDescriptor<ILayoutRect>("ILayoutRect", ILayoutRect.iid(), Win32_impl_p2.IDispatch.iid(), takeILayoutRectFromAbi, viewILayoutRect)
     }
 
     public unsafe func vtbl(): ILayoutRectVtbl {
@@ -2913,14 +2929,14 @@ public class ILayoutRect <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetcontentSrc(varContentSrc: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetcontentSrc(varContentSrc: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetcontentSrc(__liveRaw, varContentSrc)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func contentSrc(pvarContentSrc: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func contentSrc(pvarContentSrc: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.contentSrc(__liveRaw, pvarContentSrc)
@@ -3353,7 +3369,7 @@ public class IPeerFactory <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPersistHistoryVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var LoadHistory: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -3396,7 +3412,7 @@ public class IPersistHistory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPersistHistory> {
-        return InterfaceDescriptor<IPersistHistory>("IPersistHistory", IPersistHistory.iid(), Win32__impl_l1.IPersist.iid(), takeIPersistHistoryFromAbi, viewIPersistHistory)
+        return InterfaceDescriptor<IPersistHistory>("IPersistHistory", IPersistHistory.iid(), Win32_impl_p2.IPersist.iid(), takeIPersistHistoryFromAbi, viewIPersistHistory)
     }
 
     public unsafe func vtbl(): IPersistHistoryVtbl {
@@ -4437,7 +4453,7 @@ public class ITargetNotify2 <: InterfaceWrapperBase & ComInterface {
 public struct ITimerSinkVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var OnTimer: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var OnTimer: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -4482,7 +4498,7 @@ public class ITimerSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func OnTimer(vtimeAdvise: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func OnTimer(vtimeAdvise: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnTimer(__liveRaw, vtimeAdvise)
@@ -4611,7 +4627,7 @@ public class ITridentTouchInputSite <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Ole == "on"]
 @C
 public struct IUrlHistoryNotifyVtbl {
-    public var base_: Win32__impl_l2.IOleCommandTargetVtbl = Win32__impl_l2.IOleCommandTargetVtbl()
+    public var base_: Win32_impl_p3.IOleCommandTargetVtbl = Win32_impl_p3.IOleCommandTargetVtbl()
     public init() {}
 }
 
@@ -4648,7 +4664,7 @@ public class IUrlHistoryNotify <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUrlHistoryNotify> {
-        return InterfaceDescriptor<IUrlHistoryNotify>("IUrlHistoryNotify", IUrlHistoryNotify.iid(), Win32__impl_l2.IOleCommandTarget.iid(), takeIUrlHistoryNotifyFromAbi, viewIUrlHistoryNotify)
+        return InterfaceDescriptor<IUrlHistoryNotify>("IUrlHistoryNotify", IUrlHistoryNotify.iid(), Win32_impl_p3.IOleCommandTarget.iid(), takeIUrlHistoryNotifyFromAbi, viewIUrlHistoryNotify)
     }
 
     public unsafe func vtbl(): IUrlHistoryNotifyVtbl {
@@ -5148,7 +5164,7 @@ extend InternetExplorerManager <: windows_core.CopyType & windows_core.RuntimeTy
 @When[Windows_Win32_Web_InternetExplorer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IwfoldersVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var navigate: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public var navigateFrame: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -5189,7 +5205,7 @@ public class Iwfolders <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<Iwfolders> {
-        return InterfaceDescriptor<Iwfolders>("Iwfolders", Iwfolders.iid(), Win32__impl_l2.IDispatch.iid(), takeIwfoldersFromAbi, viewIwfolders)
+        return InterfaceDescriptor<Iwfolders>("Iwfolders", Iwfolders.iid(), Win32_impl_p2.IDispatch.iid(), takeIwfoldersFromAbi, viewIwfolders)
     }
 
     public unsafe func vtbl(): IwfoldersVtbl {
@@ -5825,21 +5841,21 @@ public unsafe func Windows_IEDisassociateThreadWithTab(dwTabThreadID: UInt32, dw
 
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEFindFirstFile == "on" && Windows_Win32_Storage_FileSystem == "on"]
 foreign {
-    func IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>): CPointer<Unit>
+    func IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>): CPointer<Unit>
 }
 
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEFindFirstFile == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>): CPointer<Unit> {
+public unsafe func Windows_IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>): CPointer<Unit> {
     return IEFindFirstFile(lpFileName, lpFindFileData)
 }
 
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetFileAttributesEx == "on" && Windows_Win32_Storage_FileSystem == "on"]
 foreign {
-    func IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Win32__impl_l0.GET_FILEEX_INFO_LEVELSAbi, lpFileInformation: CPointer<Unit>): Int32
+    func IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Win32_impl_p0.GET_FILEEX_INFO_LEVELSAbi, lpFileInformation: CPointer<Unit>): Int32
 }
 
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetFileAttributesEx == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Win32__impl_l0.GET_FILEEX_INFO_LEVELSAbi, lpFileInformation: CPointer<Unit>): Int32 {
+public unsafe func Windows_IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Win32_impl_p0.GET_FILEEX_INFO_LEVELSAbi, lpFileInformation: CPointer<Unit>): Int32 {
     return IEGetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation)
 }
 
@@ -5917,11 +5933,11 @@ public unsafe func Windows_IEIsProtectedModeURL(lpwstrUrl: CPointer<UInt16>): In
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IELaunchURL == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
     // param-hint: lpInfo optional
-    func IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32__impl_l0.PROCESS_INFORMATIONAbi>, lpInfo: CPointer<Unit>): Int32
+    func IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32_impl_p1.PROCESS_INFORMATIONAbi>, lpInfo: CPointer<Unit>): Int32
 }
 
 @When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IELaunchURL == "on" && Windows_Win32_System_Threading == "on"]
-public unsafe func Windows_IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32__impl_l0.PROCESS_INFORMATIONAbi>, lpInfo: CPointer<Unit>): Int32 {
+public unsafe func Windows_IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32_impl_p1.PROCESS_INFORMATIONAbi>, lpInfo: CPointer<Unit>): Int32 {
     return IELaunchURL(lpwstrUrl, lpProcInfo, lpInfo)
 }
 
@@ -7780,11 +7796,11 @@ public class ITargetEmbedding <: InterfaceWrapperBase & ComInterface {
 public struct ITimerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Advise: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var Advise: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var Unadvise: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Freeze: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetTime: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetTime: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -7829,7 +7845,7 @@ public class ITimer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Advise(vtimeMin: Win32__impl_l2.VARIANTAbi, vtimeMax: Win32__impl_l2.VARIANTAbi, vtimeInterval: Win32__impl_l2.VARIANTAbi, dwFlags: UInt32, pTimerSink: CPointer<Unit>, pdwCookie: CPointer<UInt32>): Int32 {
+    public unsafe func Advise(vtimeMin: Win32_impl_p2.VARIANTAbi, vtimeMax: Win32_impl_p2.VARIANTAbi, vtimeInterval: Win32_impl_p2.VARIANTAbi, dwFlags: UInt32, pTimerSink: CPointer<Unit>, pdwCookie: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Advise(__liveRaw, vtimeMin, vtimeMax, vtimeInterval, dwFlags, pTimerSink, pdwCookie)
@@ -7848,7 +7864,7 @@ public class ITimer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetTime(pvtime: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetTime(pvtime: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTime(__liveRaw, pvtime)
@@ -8143,7 +8159,7 @@ public struct IOpenServiceActivityVtbl {
     public var GetCategoryName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetIconPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetIcon: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _, _ => 0 }
+    public var GetIcon: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _, _ => 0 }
     public var GetDescriptionFilePath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetDownloadUrl: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetInstallUrl: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8265,7 +8281,7 @@ public class IOpenServiceActivity <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetIcon(fSmallIcon: Int32, phIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func GetIcon(fSmallIcon: Int32, phIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetIcon(__liveRaw, fSmallIcon, phIcon)

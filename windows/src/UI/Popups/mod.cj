@@ -4,13 +4,21 @@
 package windows.UI.Popups
 
 import std.collection.*
+@When[Windows_UI_Popups == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_UI_Popups == "on"]
 import windows_core as windows_core
+@When[Windows_UI_Popups == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_Popups == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_Popups == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_Popups == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_Popups == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_Popups == "on"]
 import windows_future as windows_future
 
 
@@ -1433,19 +1441,15 @@ public class UICommandInvokedHandler <: InterfaceWrapperBase & ComInterface & wi
 extend UICommandInvokedHandler <: windows_core.Interface<UICommandInvokedHandler> {}
 
 @When[Windows_UI_Popups == "on"]
-private open class UICommandInvokedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface UICommandInvokedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_Popups == "on"]
-private open class UICommandInvokedHandlerInvoker <: UICommandInvokedHandlerInvokerErased {
-    public open func Invoke(command: InParam<IUICommand>): Unit {
-        ()
-    }
+private interface UICommandInvokedHandlerInvoker <: UICommandInvokedHandlerInvokerErased {
+    public func Invoke(command: InParam<IUICommand>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<IUICommand>(IUICommand.viewOf(arg0)))
         return S_OK.value
     }
@@ -1465,7 +1469,7 @@ private class UICommandInvokedHandlerBox <: UICommandInvokedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(command: InParam<IUICommand>): Unit {
+    public func Invoke(command: InParam<IUICommand>): Unit {
         invoke_(command)
     }
 }

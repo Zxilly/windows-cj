@@ -4,19 +4,33 @@
 package windows_appsdk.Microsoft.Windows.AI.Imaging
 
 import std.collection.*
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_core as windows_core
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_Windows_AI_Imaging == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_Windows_AI_Imaging == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
+@When[Microsoft_Windows_AI_Imaging == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
+@When[Microsoft_Windows_AI_Imaging == "on" && Microsoft_Graphics_Imaging == "on"]
 import windows_appsdk.Microsoft.Graphics.Imaging as Microsoft_Graphics_Imaging
+@When[Microsoft_Windows_AI_Imaging == "on" && Microsoft_Windows_AI == "on"]
 import windows_appsdk.Microsoft.Windows.AI as Microsoft_Windows_AI
+@When[Microsoft_Windows_AI_Imaging == "on" && Microsoft_Windows_AI_ContentSafety == "on"]
 import windows_appsdk.Microsoft.Windows.AI.ContentSafety as Microsoft_Windows_AI_ContentSafety
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_Windows_AI_Imaging == "on"]
 import windows_future as windows_future
 
 

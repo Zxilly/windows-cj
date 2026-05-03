@@ -4,16 +4,27 @@
 package windows.ApplicationModel.VoiceCommands
 
 import std.collection.*
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_VoiceCommands == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_VoiceCommands == "on"]
 import windows_future as windows_future
 
 
@@ -69,7 +80,7 @@ public class IVoiceCommand <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVoiceCommand", IVoiceCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandVtbl", "IVoiceCommand", "IVoiceCommand_Impl", [InterfaceMethodSchema("CommandName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_SpeechRecognitionResult", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.SpeechRecognitionResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVoiceCommand", IVoiceCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandVtbl", "IVoiceCommand", "IVoiceCommand_Impl", [InterfaceMethodSchema("CommandName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_SpeechRecognitionResult", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.SpeechRecognitionResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVoiceCommand.runtimeType())
         return schema
     }
@@ -116,12 +127,12 @@ public class IVoiceCommand <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Media_SpeechRecognition == "on"]
-    public unsafe func get_SpeechRecognitionResult(): _impl_l1.SpeechRecognitionResult {
+    public unsafe func get_SpeechRecognitionResult(): impl_p1.SpeechRecognitionResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_SpeechRecognitionResult(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.SpeechRecognitionResult.fromAbiTake(result__)
+        return impl_p1.SpeechRecognitionResult.fromAbiTake(result__)
     }
 }
 
@@ -507,7 +518,7 @@ public class VoiceCommand <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Media_SpeechRecognition == "on"]
-    public unsafe func get_SpeechRecognitionResult(): _impl_l1.SpeechRecognitionResult {
+    public unsafe func get_SpeechRecognitionResult(): impl_p1.SpeechRecognitionResult {
         return defaultInterface().get_SpeechRecognitionResult()
     }
 }
@@ -1129,7 +1140,7 @@ public class IVoiceCommandContentTile <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVoiceCommandContentTile", IVoiceCommandContentTile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandContentTileVtbl", "IVoiceCommandContentTile", "IVoiceCommandContentTile_Impl", [InterfaceMethodSchema("Title", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine1", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine1", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine2", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine2", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine3", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine3", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Image", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppContext", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppContext", 17, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppLaunchArgument", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppLaunchArgument", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ContentTileType", 20, [InterfaceParameterSchema("result", "CPointer<VoiceCommandContentTileTypeAbi>", "OutSlot<VoiceCommandContentTileType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentTileType", 21, [InterfaceParameterSchema("value", "VoiceCommandContentTileTypeAbi", "VoiceCommandContentTileType", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVoiceCommandContentTile", IVoiceCommandContentTile.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandContentTileVtbl", "IVoiceCommandContentTile", "IVoiceCommandContentTile_Impl", [InterfaceMethodSchema("Title", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine1", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine1", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine2", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine2", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TextLine3", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTextLine3", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Image", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImage", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppContext", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppContext", 17, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AppLaunchArgument", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAppLaunchArgument", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ContentTileType", 20, [InterfaceParameterSchema("result", "CPointer<VoiceCommandContentTileTypeAbi>", "OutSlot<VoiceCommandContentTileType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetContentTileType", 21, [InterfaceParameterSchema("value", "VoiceCommandContentTileTypeAbi", "VoiceCommandContentTileType", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IVoiceCommandContentTile.runtimeType())
         return schema
     }
@@ -1215,16 +1226,16 @@ public class IVoiceCommandContentTile <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Image(): _impl_l1.IStorageFile {
+    public unsafe func Image(): impl_p1.IStorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Image(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IStorageFile.fromAbiTake(result__)
+        return impl_p1.IStorageFile.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetImage(value: _impl_l1.IStorageFile): Unit {
+    public unsafe func SetImage(value: impl_p1.IStorageFile): Unit {
         let v = vtbl()
         let hr = v.SetImage(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1327,7 +1338,7 @@ public class IVoiceCommandDefinitionManagerStatics <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVoiceCommandDefinitionManagerStatics", IVoiceCommandDefinitionManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandDefinitionManagerStaticsVtbl", "IVoiceCommandDefinitionManagerStatics", "IVoiceCommandDefinitionManagerStatics_Impl", [InterfaceMethodSchema("InstallCommandDefinitionsFromStorageFileAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InstalledCommandDefinitions", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVoiceCommandDefinitionManagerStatics", IVoiceCommandDefinitionManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandDefinitionManagerStaticsVtbl", "IVoiceCommandDefinitionManagerStatics", "IVoiceCommandDefinitionManagerStatics_Impl", [InterfaceMethodSchema("InstallCommandDefinitionsFromStorageFileAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("InstalledCommandDefinitions", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVoiceCommandDefinitionManagerStatics.runtimeType())
         return schema
     }
@@ -1357,7 +1368,7 @@ public class IVoiceCommandDefinitionManagerStatics <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncAction {
+    public unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: impl_p1.StorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.InstallCommandDefinitionsFromStorageFileAsync(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1583,12 +1594,12 @@ public class VoiceCommandContentTile <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Image(): _impl_l1.IStorageFile {
+    public unsafe func Image(): impl_p1.IStorageFile {
         return defaultInterface().Image()
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func SetImage(value: _impl_l1.IStorageFile): Unit {
+    public unsafe func SetImage(value: impl_p1.IStorageFile): Unit {
         defaultInterface().SetImage(value)
     }
 
@@ -1656,7 +1667,7 @@ public class VoiceCommandDefinitionManager <: windows_interface.RuntimeName & wi
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncAction {
+    public static unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: impl_p1.StorageFile): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<VoiceCommandDefinitionManager, IVoiceCommandDefinitionManagerStatics>().unwrap()) {
             result__ = Some(factory__.InstallCommandDefinitionsFromStorageFileAsync(file))
@@ -2179,7 +2190,7 @@ public class IVoiceCommandServiceConnection <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVoiceCommandServiceConnection", IVoiceCommandServiceConnection.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandServiceConnectionVtbl", "IVoiceCommandServiceConnection", "IVoiceCommandServiceConnection_Impl", [InterfaceMethodSchema("GetVoiceCommandAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommand>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestConfirmationAsync", 7, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommandConfirmationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDisambiguationAsync", 8, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommandDisambiguationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportProgressAsync", 9, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportSuccessAsync", 10, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailureAsync", 11, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAppLaunchAsync", 12, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Language", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Language>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VoiceCommandCompleted", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VoiceCommandServiceConnection, VoiceCommandCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveVoiceCommandCompleted", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVoiceCommandServiceConnection", IVoiceCommandServiceConnection.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandServiceConnectionVtbl", "IVoiceCommandServiceConnection", "IVoiceCommandServiceConnection_Impl", [InterfaceMethodSchema("GetVoiceCommandAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommand>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestConfirmationAsync", 7, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommandConfirmationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDisambiguationAsync", 8, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VoiceCommandDisambiguationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportProgressAsync", 9, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportSuccessAsync", 10, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailureAsync", 11, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAppLaunchAsync", 12, [InterfaceParameterSchema("response", "CPointer<Unit>", "InParam<VoiceCommandResponse>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Language", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Language>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("VoiceCommandCompleted", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VoiceCommandServiceConnection, VoiceCommandCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveVoiceCommandCompleted", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IVoiceCommandServiceConnection.runtimeType())
         return schema
     }
@@ -2265,12 +2276,12 @@ public class IVoiceCommandServiceConnection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func get_Language(): _impl_l1.Language {
+    public unsafe func get_Language(): impl_p1.Language {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Language(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Language.fromAbiTake(result__)
+        return impl_p1.Language.fromAbiTake(result__)
     }
 
     public unsafe func VoiceCommandCompleted(handler: Foundation.TypedEventHandler<VoiceCommandServiceConnection, VoiceCommandCompletedEventArgs>): windows_collections.EventRegistrationToken {
@@ -2338,7 +2349,7 @@ public class IVoiceCommandServiceConnectionStatics <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVoiceCommandServiceConnectionStatics", IVoiceCommandServiceConnectionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandServiceConnectionStaticsVtbl", "IVoiceCommandServiceConnectionStatics", "IVoiceCommandServiceConnectionStatics_Impl", [InterfaceMethodSchema("FromAppServiceTriggerDetails", 6, [InterfaceParameterSchema("triggerDetails", "CPointer<Unit>", "InParam<_impl_l2.AppServiceTriggerDetails>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VoiceCommandServiceConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVoiceCommandServiceConnectionStatics", IVoiceCommandServiceConnectionStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVoiceCommandServiceConnectionStaticsVtbl", "IVoiceCommandServiceConnectionStatics", "IVoiceCommandServiceConnectionStatics_Impl", [InterfaceMethodSchema("FromAppServiceTriggerDetails", 6, [InterfaceParameterSchema("triggerDetails", "CPointer<Unit>", "InParam<impl_p2.AppServiceTriggerDetails>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VoiceCommandServiceConnection>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVoiceCommandServiceConnectionStatics.runtimeType())
         return schema
     }
@@ -2368,7 +2379,7 @@ public class IVoiceCommandServiceConnectionStatics <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel_AppService == "on"]
-    public unsafe func FromAppServiceTriggerDetails(triggerDetails: _impl_l2.AppServiceTriggerDetails): VoiceCommandServiceConnection {
+    public unsafe func FromAppServiceTriggerDetails(triggerDetails: impl_p2.AppServiceTriggerDetails): VoiceCommandServiceConnection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FromAppServiceTriggerDetails(asRaw(), triggerDetails.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2652,7 +2663,7 @@ public class VoiceCommandServiceConnection <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Globalization == "on"]
-    public unsafe func get_Language(): _impl_l1.Language {
+    public unsafe func get_Language(): impl_p1.Language {
         return defaultInterface().get_Language()
     }
 
@@ -2665,7 +2676,7 @@ public class VoiceCommandServiceConnection <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_ApplicationModel_AppService == "on"]
-    public static unsafe func FromAppServiceTriggerDetails(triggerDetails: _impl_l2.AppServiceTriggerDetails): VoiceCommandServiceConnection {
+    public static unsafe func FromAppServiceTriggerDetails(triggerDetails: impl_p2.AppServiceTriggerDetails): VoiceCommandServiceConnection {
         var result__: Option<VoiceCommandServiceConnection> = Option<VoiceCommandServiceConnection>.None
         try (factory__ = windows_core.factory<VoiceCommandServiceConnection, IVoiceCommandServiceConnectionStatics>().unwrap()) {
             result__ = Some(factory__.FromAppServiceTriggerDetails(triggerDetails))

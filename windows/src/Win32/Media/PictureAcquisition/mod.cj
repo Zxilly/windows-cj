@@ -4,15 +4,26 @@
 package windows.Win32.Media.PictureAcquisition
 
 import std.collection.*
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_PictureAcquisition == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_PictureAcquisition == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_PictureAcquisition == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_PictureAcquisition == "on"]
@@ -349,9 +360,9 @@ public struct IPhotoAcquireItemVtbl {
     @When[Windows_Win32_Graphics_Gdi == "on"]
     public var GetThumbnail: CFunc<(CPointer<Unit>, Win32_Foundation.SIZEAbi, CPointer<Win32_Graphics_Gdi.HBITMAP>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetStream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanDelete: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -415,14 +426,14 @@ public class IPhotoAcquireItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, key, pv)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, key, pv)
@@ -1103,7 +1114,7 @@ public struct IPhotoProgressDialogVtbl {
     public var IsCheckboxChecked: CFunc<(CPointer<Unit>, PROGRESS_DIALOG_CHECKBOX_IDAbi, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetCaption: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var SetImage: CFunc<(CPointer<Unit>, PROGRESS_DIALOG_IMAGE_TYPEAbi, Win32__impl_l0.HICON, Win32_Graphics_Gdi.HBITMAP) -> Int32> = { _, _, _, _ => 0 }
+    public var SetImage: CFunc<(CPointer<Unit>, PROGRESS_DIALOG_IMAGE_TYPEAbi, Win32_impl_p1.HICON, Win32_Graphics_Gdi.HBITMAP) -> Int32> = { _, _, _, _ => 0 }
     public var SetPercentComplete: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetProgressText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetActionLinkCallback: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1111,7 +1122,7 @@ public struct IPhotoProgressDialogVtbl {
     public var ShowActionLink: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var IsCancelled: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetUserInput: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetUserInput: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1216,7 +1227,7 @@ public class IPhotoProgressDialog <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func SetImage(nImageType: PROGRESS_DIALOG_IMAGE_TYPEAbi, hIcon: Win32__impl_l0.HICON, hBitmap: Win32_Graphics_Gdi.HBITMAP): Int32 {
+    public unsafe func SetImage(nImageType: PROGRESS_DIALOG_IMAGE_TYPEAbi, hIcon: Win32_impl_p1.HICON, hBitmap: Win32_Graphics_Gdi.HBITMAP): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetImage(__liveRaw, nImageType, hIcon, hBitmap)
@@ -1259,7 +1270,7 @@ public class IPhotoProgressDialog <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetUserInput(riidType: CPointer<GUID>, pUnknown: CPointer<Unit>, pPropVarResult: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pPropVarDefault: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetUserInput(riidType: CPointer<GUID>, pUnknown: CPointer<Unit>, pPropVarResult: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pPropVarDefault: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUserInput(__liveRaw, riidType, pUnknown, pPropVarResult, pPropVarDefault)
@@ -1280,7 +1291,7 @@ public struct IUserInputStringVtbl {
     public var GetMruCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetMruEntryAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetImage: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Graphics_Gdi.HBITMAP>, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetImage: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Graphics_Gdi.HBITMAP>, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1379,7 +1390,7 @@ public class IUserInputString <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetImage(nSize: UInt32, phBitmap: CPointer<Win32_Graphics_Gdi.HBITMAP>, phIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func GetImage(nSize: UInt32, phBitmap: CPointer<Win32_Graphics_Gdi.HBITMAP>, phIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetImage(__liveRaw, nSize, phBitmap, phIcon)
@@ -1558,7 +1569,7 @@ public struct IPhotoAcquireProgressCBVtbl {
     public var GetDeleteAfterAcquire: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ErrorAdvise: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, ERROR_ADVISE_MESSAGE_TYPEAbi, CPointer<ERROR_ADVISE_RESULTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetUserInput: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetUserInput: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1711,7 +1722,7 @@ public class IPhotoAcquireProgressCB <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetUserInput(riidType: CPointer<GUID>, pUnknown: CPointer<Unit>, pPropVarResult: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pPropVarDefault: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetUserInput(riidType: CPointer<GUID>, pUnknown: CPointer<Unit>, pPropVarResult: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pPropVarDefault: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUserInput(__liveRaw, riidType, pUnknown, pPropVarResult, pPropVarDefault)
@@ -1724,7 +1735,7 @@ public struct IPhotoAcquireSourceVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetFriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetDeviceIcons: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32__impl_l0.HICON>, CPointer<Win32__impl_l0.HICON>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDeviceIcons: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_impl_p1.HICON>, CPointer<Win32_impl_p1.HICON>) -> Int32> = { _, _, _, _ => 0 }
     public var InitializeItemList: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetItemCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetItemAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1781,7 +1792,7 @@ public class IPhotoAcquireSource <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetDeviceIcons(nSize: UInt32, phLargeIcon: CPointer<Win32__impl_l0.HICON>, phSmallIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    public unsafe func GetDeviceIcons(nSize: UInt32, phLargeIcon: CPointer<Win32_impl_p1.HICON>, phSmallIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDeviceIcons(__liveRaw, nSize, phLargeIcon, phSmallIcon)

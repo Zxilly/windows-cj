@@ -4,17 +4,28 @@
 package windows.Win32.UI.Ribbon
 
 import std.collection.*
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+@When[Windows_Win32_UI_Ribbon == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_UI_Ribbon == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_Ribbon == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_UI_Ribbon == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_Ribbon == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_UI_Ribbon == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_UI_Ribbon == "on"]
@@ -317,7 +328,7 @@ public class IUIRibbon <: InterfaceWrapperBase & ComInterface {
 public struct IUISimplePropertySetVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -362,7 +373,7 @@ public class IUISimplePropertySet <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, key, value)
@@ -1573,9 +1584,9 @@ public class IUICollectionChangedEvent <: InterfaceWrapperBase & ComInterface {
 public struct IUICommandHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Execute: CFunc<(CPointer<Unit>, UInt32, UI_EXECUTIONVERBAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Execute: CFunc<(CPointer<Unit>, UInt32, UI_EXECUTIONVERBAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var UpdateProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var UpdateProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -1620,14 +1631,14 @@ public class IUICommandHandler <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Execute(commandId: UInt32, verb: UI_EXECUTIONVERBAbi, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, currentValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, commandExecutionProperties: CPointer<Unit>): Int32 {
+    public unsafe func Execute(commandId: UInt32, verb: UI_EXECUTIONVERBAbi, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, currentValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, commandExecutionProperties: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Execute(__liveRaw, commandId, verb, key, currentValue, commandExecutionProperties)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func UpdateProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, currentValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, newValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func UpdateProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, currentValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, newValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UpdateProperty(__liveRaw, commandId, key, currentValue, newValue)
@@ -1970,9 +1981,9 @@ public struct IUIFrameworkVtbl {
     public var LoadUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     public var GetView: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetUICommandProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetUICommandProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetUICommandProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var SetUICommandProperty: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var InvalidateUICommand: CFunc<(CPointer<Unit>, UInt32, UI_INVALIDATIONSAbi, CPointer<Win32_Foundation.PROPERTYKEYAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var FlushPendingInvalidations: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetModes: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -2044,14 +2055,14 @@ public class IUIFramework <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetUICommandProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetUICommandProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUICommandProperty(__liveRaw, commandId, key, value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetUICommandProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetUICommandProperty(commandId: UInt32, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, value: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetUICommandProperty(__liveRaw, commandId, key, value)

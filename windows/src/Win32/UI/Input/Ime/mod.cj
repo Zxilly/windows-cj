@@ -4,17 +4,30 @@
 package windows.Win32.UI.Input.Ime
 
 import std.collection.*
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
+@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_UI_Input_Ime == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_Input_Ime == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_UI_Input_Ime == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
 import windows.Win32.UI.Input.KeyboardAndMouse as Win32_UI_Input_KeyboardAndMouse
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_UI_Input_Ime == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_Input_Ime == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_Input_Ime == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_UI_Input_Ime == "on"]
@@ -654,7 +667,7 @@ public struct IActiveIMMMessagePumpOwnerVtbl {
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var End: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var OnTranslateMessage: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.MSGAbi>) -> Int32> = { _, _ => 0 }
+    public var OnTranslateMessage: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.MSGAbi>) -> Int32> = { _, _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Resume: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -713,7 +726,7 @@ public class IActiveIMMMessagePumpOwner <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func OnTranslateMessage(pMsg: CPointer<Win32__impl_l0.MSGAbi>): Int32 {
+    public unsafe func OnTranslateMessage(pMsg: CPointer<Win32_impl_p1.MSGAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnTranslateMessage(__liveRaw, pMsg)
@@ -873,7 +886,7 @@ public class IEnumInputContext <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Input_Ime == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IFEClassFactoryVtbl {
-    public var base_: Win32__impl_l1.IClassFactoryVtbl = Win32__impl_l1.IClassFactoryVtbl()
+    public var base_: Win32_impl_p2.IClassFactoryVtbl = Win32_impl_p2.IClassFactoryVtbl()
     public init() {}
 }
 
@@ -910,7 +923,7 @@ public class IFEClassFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IFEClassFactory> {
-        return InterfaceDescriptor<IFEClassFactory>("IFEClassFactory", IFEClassFactory.iid(), Win32__impl_l1.IClassFactory.iid(), takeIFEClassFactoryFromAbi, viewIFEClassFactory)
+        return InterfaceDescriptor<IFEClassFactory>("IFEClassFactory", IFEClassFactory.iid(), Win32_impl_p2.IClassFactory.iid(), takeIFEClassFactoryFromAbi, viewIFEClassFactory)
     }
 
     public unsafe func vtbl(): IFEClassFactoryVtbl {
@@ -923,7 +936,7 @@ public class IFEClassFactory <: InterfaceWrapperBase & ComInterface {
 public struct IImePlugInDictDictionaryListVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetDictionariesInUse: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDictionariesInUse: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteDictionary: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -969,7 +982,7 @@ public class IImePlugInDictDictionaryList <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetDictionariesInUse(prgDictionaryGUID: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, prgDateCreated: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>, prgfEncrypted: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetDictionariesInUse(prgDictionaryGUID: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, prgDateCreated: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>, prgfEncrypted: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDictionariesInUse(__liveRaw, prgDictionaryGUID, prgDateCreated, prgfEncrypted)
@@ -1047,7 +1060,7 @@ public struct IMEAPPLETCFG {
     public var wchTitleFontFace: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
     public var dwCharSet: UInt32 = 0u32
     public var iCategory: Int32 = 0i32
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var langID: UInt16 = 0u16
     public var dummy: UInt16 = 0u16
     public var lReserved1: IntNative = 0
@@ -1062,7 +1075,7 @@ public struct IMEAPPLETCFGAbi {
     public var wchTitleFontFace: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
     public var dwCharSet: UInt32 = 0u32
     public var iCategory: Int32 = 0i32
-    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var hIcon: Win32_impl_p1.HICON = CPointer<Unit>()
     public var langID: UInt16 = 0u16
     public var dummy: UInt16 = 0u16
     public var lReserved1: IntNative = 0

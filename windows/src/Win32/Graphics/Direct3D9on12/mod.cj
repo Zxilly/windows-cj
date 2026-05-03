@@ -4,20 +4,28 @@
 package windows.Win32.Graphics.Direct3D9on12
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Graphics_Direct3D9on12 == "on" && Windows_Win32_System_Com == "on"]
 public struct D3D9ON12_ARGS {
     public var Enable9On12: Int32 = 0i32
-    public var pD3D12Device: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pD3D12Device: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public var ppD3D12Queues: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
     public var NumQueues: UInt32 = 0u32
     public var NodeMask: UInt32 = 0u32
@@ -52,7 +60,7 @@ extend D3D9ON12_ARGS <: windows_core.CopyType & windows_core.RuntimeType & windo
     public static func assumeInitRef(abi: D3D9ON12_ARGSAbi): D3D9ON12_ARGS {
         var value = D3D9ON12_ARGS()
         value.Enable9On12 = abi.Enable9On12
-        value.pD3D12Device = Win32__impl_l0.IUnknown.fromAbiTake(abi.pD3D12Device)
+        value.pD3D12Device = Win32_impl_p0.IUnknown.fromAbiTake(abi.pD3D12Device)
         value.ppD3D12Queues = abi.ppD3D12Queues
         value.NumQueues = abi.NumQueues
         value.NodeMask = abi.NodeMask

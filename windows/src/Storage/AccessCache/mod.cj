@@ -4,15 +4,25 @@
 package windows.Storage.AccessCache
 
 import std.collection.*
+@When[Windows_Storage_AccessCache == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Storage_AccessCache == "on"]
 import windows_core as windows_core
+@When[Windows_Storage_AccessCache == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Storage_AccessCache == "on"]
 import windows_interface as windows_interface
+@When[Windows_Storage_AccessCache == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Storage_AccessCache == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Storage_AccessCache == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
+@When[Windows_Storage_AccessCache == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Storage_AccessCache == "on"]
 import windows_collections as windows_collections
+@When[Windows_Storage_AccessCache == "on"]
 import windows_future as windows_future
 
 
@@ -719,13 +729,13 @@ public interface IStorageItemAccessList_ImplErased {
 
 @When[Windows_Storage_AccessCache == "on" && ((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErased {
-    public func AddOverloadDefaultMetadata(file: InParam<_impl_l1.IStorageItem>): windows_core.Result<windows_core.HString>
+    public func AddOverloadDefaultMetadata(file: InParam<impl_p1.IStorageItem>): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_AddOverloadDefaultMetadata(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.AddOverloadDefaultMetadata(InParam<_impl_l1.IStorageItem>(_impl_l1.IStorageItem.viewOf(arg0)))) {
+        match (this.AddOverloadDefaultMetadata(InParam<impl_p1.IStorageItem>(impl_p1.IStorageItem.viewOf(arg0)))) {
             case Result<windows_core.HString>.Ok(value) =>
                 let raw = value.intoRaw()
                 if (raw.isNull()) {
@@ -739,13 +749,13 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
         }
     }
 
-    public func Add(file: InParam<_impl_l1.IStorageItem>, metadata: InParam<windows_core.HString>): windows_core.Result<windows_core.HString>
+    public func Add(file: InParam<impl_p1.IStorageItem>, metadata: InParam<windows_core.HString>): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_Add(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Add(InParam<_impl_l1.IStorageItem>(_impl_l1.IStorageItem.viewOf(arg0)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg1)))) {
+        match (this.Add(InParam<impl_p1.IStorageItem>(impl_p1.IStorageItem.viewOf(arg0)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg1)))) {
             case Result<windows_core.HString>.Ok(value) =>
                 let raw = value.intoRaw()
                 if (raw.isNull()) {
@@ -759,10 +769,10 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
         }
     }
 
-    public func AddOrReplaceOverloadDefaultMetadata(token: InParam<windows_core.HString>, file: InParam<_impl_l1.IStorageItem>): windows_core.Result<Unit>
+    public func AddOrReplaceOverloadDefaultMetadata(token: InParam<windows_core.HString>, file: InParam<impl_p1.IStorageItem>): windows_core.Result<Unit>
 
     public func __winrtThunk_AddOrReplaceOverloadDefaultMetadata(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        match (this.AddOrReplaceOverloadDefaultMetadata(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<_impl_l1.IStorageItem>(_impl_l1.IStorageItem.viewOf(arg1)))) {
+        match (this.AddOrReplaceOverloadDefaultMetadata(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<impl_p1.IStorageItem>(impl_p1.IStorageItem.viewOf(arg1)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -770,10 +780,10 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
         }
     }
 
-    public func AddOrReplace(token: InParam<windows_core.HString>, file: InParam<_impl_l1.IStorageItem>, metadata: InParam<windows_core.HString>): windows_core.Result<Unit>
+    public func AddOrReplace(token: InParam<windows_core.HString>, file: InParam<impl_p1.IStorageItem>, metadata: InParam<windows_core.HString>): windows_core.Result<Unit>
 
     public func __winrtThunk_AddOrReplace(arg0: CPointer<Unit>, arg1: CPointer<Unit>, arg2: CPointer<Unit>): Int32 {
-        match (this.AddOrReplace(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<_impl_l1.IStorageItem>(_impl_l1.IStorageItem.viewOf(arg1)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg2)))) {
+        match (this.AddOrReplace(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<impl_p1.IStorageItem>(impl_p1.IStorageItem.viewOf(arg1)), InParam<windows_core.HString>(windows_core.HString.viewOf(arg2)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -781,14 +791,14 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
         }
     }
 
-    public func GetItemAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>
+    public func GetItemAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>
 
     public func __winrtThunk_GetItemAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetItemAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -796,19 +806,19 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func GetFileAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>
+    public func GetFileAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>
 
     public func __winrtThunk_GetFileAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetFileAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -816,19 +826,19 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func GetFolderAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>
+    public func GetFolderAsync(token: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>
 
     public func __winrtThunk_GetFolderAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetFolderAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -836,19 +846,19 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func GetItemWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>
+    public func GetItemWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>
 
     public func __winrtThunk_GetItemWithOptionsAsync(arg0: CPointer<Unit>, arg1: AccessCacheOptionsAbi, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetItemWithOptionsAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AccessCacheOptions>()))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -856,19 +866,19 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.IStorageItem>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func GetFileWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>
+    public func GetFileWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>
 
     public func __winrtThunk_GetFileWithOptionsAsync(arg0: CPointer<Unit>, arg1: AccessCacheOptionsAbi, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetFileWithOptionsAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AccessCacheOptions>()))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -876,19 +886,19 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFile>>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func GetFolderWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>
+    public func GetFolderWithOptionsAsync(token: InParam<windows_core.HString>, options: AccessCacheOptions): windows_core.Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>
 
     public func __winrtThunk_GetFolderWithOptionsAsync(arg0: CPointer<Unit>, arg1: AccessCacheOptionsAbi, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.GetFolderWithOptionsAsync(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AccessCacheOptions>()))) {
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -896,7 +906,7 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p1.StorageFolder>>.Err(error) =>
                 error.code().value
         }
     }
@@ -938,13 +948,13 @@ public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErase
         }
     }
 
-    public func CheckAccess(file: InParam<_impl_l1.IStorageItem>): windows_core.Result<Bool>
+    public func CheckAccess(file: InParam<impl_p1.IStorageItem>): windows_core.Result<Bool>
 
     public func __winrtThunk_CheckAccess(arg0: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.CheckAccess(InParam<_impl_l1.IStorageItem>(_impl_l1.IStorageItem.viewOf(arg0)))) {
+        match (this.CheckAccess(InParam<impl_p1.IStorageItem>(impl_p1.IStorageItem.viewOf(arg0)))) {
             case Result<Bool>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
@@ -1025,7 +1035,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemAccessList", IStorageItemAccessList.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageItemAccessListVtbl", "IStorageItemAccessList", "IStorageItemAccessList_Impl", [InterfaceMethodSchema("AddOverloadDefaultMetadata", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Add", 7, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddOrReplaceOverloadDefaultMetadata", 8, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddOrReplace", 9, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetItemAsync", 10, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileAsync", 11, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFolderAsync", 12, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemWithOptionsAsync", 13, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileWithOptionsAsync", 14, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFolderWithOptionsAsync", 15, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Remove", 16, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ContainsItem", 17, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clear", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("CheckAccess", 19, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Entries", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AccessListEntryView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaximumItemsAllowed", 21, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemAccessList", IStorageItemAccessList.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageItemAccessListVtbl", "IStorageItemAccessList", "IStorageItemAccessList_Impl", [InterfaceMethodSchema("AddOverloadDefaultMetadata", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Add", 7, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddOrReplaceOverloadDefaultMetadata", 8, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddOrReplace", 9, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetItemAsync", 10, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileAsync", 11, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFolderAsync", 12, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemWithOptionsAsync", 13, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileWithOptionsAsync", 14, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFolderWithOptionsAsync", 15, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "AccessCacheOptionsAbi", "AccessCacheOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p1.StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Remove", 16, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ContainsItem", 17, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Clear", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("CheckAccess", 19, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Entries", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AccessListEntryView>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaximumItemsAllowed", 21, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemAccessList.runtimeType())
         return schema
     }
@@ -1055,7 +1065,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOverloadDefaultMetadata(file: _impl_l1.IStorageItem): windows_core.HString {
+    public unsafe func AddOverloadDefaultMetadata(file: impl_p1.IStorageItem): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AddOverloadDefaultMetadata(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1064,7 +1074,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Add(file: _impl_l1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
+    public unsafe func Add(file: impl_p1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Add(asRaw(), file.asRaw(), metadata.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1073,71 +1083,71 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: _impl_l1.IStorageItem): Unit {
+    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: impl_p1.IStorageItem): Unit {
         let v = vtbl()
         let hr = v.AddOrReplaceOverloadDefaultMetadata(asRaw(), token.asRaw(), file.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplace(token: windows_core.HString, file: _impl_l1.IStorageItem, metadata: windows_core.HString): Unit {
+    public unsafe func AddOrReplace(token: windows_core.HString, file: impl_p1.IStorageItem, metadata: windows_core.HString): Unit {
         let v = vtbl()
         let hr = v.AddOrReplace(asRaw(), token.asRaw(), file.asRaw(), metadata.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetItemAsync(asRaw(), token.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.IStorageItem>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.IStorageItem>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFileAsync(asRaw(), token.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFolderAsync(asRaw(), token.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFolder>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFolder>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetItemWithOptionsAsync(asRaw(), token.asRaw(), windows_core.projectTypedAbi(options, windows_core.typeMarker<AccessCacheOptions>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.IStorageItem>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.IStorageItem>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFileWithOptionsAsync(asRaw(), token.asRaw(), windows_core.projectTypedAbi(options, windows_core.typeMarker<AccessCacheOptions>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFile>.fromAbiTake(result__)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFolderWithOptionsAsync(asRaw(), token.asRaw(), windows_core.projectTypedAbi(options, windows_core.typeMarker<AccessCacheOptions>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l1.StorageFolder>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p1.StorageFolder>.fromAbiTake(result__)
     }
 
     public unsafe func Remove(token: windows_core.HString): Unit {
@@ -1161,7 +1171,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CheckAccess(file: _impl_l1.IStorageItem): Bool {
+    public unsafe func CheckAccess(file: impl_p1.IStorageItem): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.CheckAccess(asRaw(), file.asRaw(), CPointer<Bool>(inout result__))
@@ -1398,52 +1408,52 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOverloadDefaultMetadata(file: _impl_l1.IStorageItem): windows_core.HString {
+    public unsafe func AddOverloadDefaultMetadata(file: impl_p1.IStorageItem): windows_core.HString {
         return defaultInterface().AddOverloadDefaultMetadata(file)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Add(file: _impl_l1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
+    public unsafe func Add(file: impl_p1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
         return defaultInterface().Add(file, metadata)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: _impl_l1.IStorageItem): Unit {
+    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: impl_p1.IStorageItem): Unit {
         defaultInterface().AddOrReplaceOverloadDefaultMetadata(token, file)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplace(token: windows_core.HString, file: _impl_l1.IStorageItem, metadata: windows_core.HString): Unit {
+    public unsafe func AddOrReplace(token: windows_core.HString, file: impl_p1.IStorageItem, metadata: windows_core.HString): Unit {
         defaultInterface().AddOrReplace(token, file, metadata)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return defaultInterface().GetItemAsync(token)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().GetFileAsync(token)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return defaultInterface().GetFolderAsync(token)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return defaultInterface().GetItemWithOptionsAsync(token, options)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return defaultInterface().GetFileWithOptionsAsync(token, options)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return defaultInterface().GetFolderWithOptionsAsync(token, options)
     }
 
@@ -1460,7 +1470,7 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CheckAccess(file: _impl_l1.IStorageItem): Bool {
+    public unsafe func CheckAccess(file: impl_p1.IStorageItem): Bool {
         return defaultInterface().CheckAccess(file)
     }
 
@@ -1637,7 +1647,7 @@ public class IStorageApplicationPermissionsStatics2 <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageApplicationPermissionsStatics2", IStorageApplicationPermissionsStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageApplicationPermissionsStatics2Vtbl", "IStorageApplicationPermissionsStatics2", "IStorageApplicationPermissionsStatics2_Impl", [InterfaceMethodSchema("GetFutureAccessListForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemAccessList>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetMostRecentlyUsedListForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemMostRecentlyUsedList>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageApplicationPermissionsStatics2", IStorageApplicationPermissionsStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorageApplicationPermissionsStatics2Vtbl", "IStorageApplicationPermissionsStatics2", "IStorageApplicationPermissionsStatics2_Impl", [InterfaceMethodSchema("GetFutureAccessListForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemAccessList>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetMostRecentlyUsedListForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemMostRecentlyUsedList>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageApplicationPermissionsStatics2.runtimeType())
         return schema
     }
@@ -1667,7 +1677,7 @@ public class IStorageApplicationPermissionsStatics2 <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetFutureAccessListForUser(user: _impl_l1.User): StorageItemAccessList {
+    public unsafe func GetFutureAccessListForUser(user: impl_p1.User): StorageItemAccessList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetFutureAccessListForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1676,7 +1686,7 @@ public class IStorageApplicationPermissionsStatics2 <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetMostRecentlyUsedListForUser(user: _impl_l1.User): StorageItemMostRecentlyUsedList {
+    public unsafe func GetMostRecentlyUsedListForUser(user: impl_p1.User): StorageItemMostRecentlyUsedList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetMostRecentlyUsedListForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1848,7 +1858,7 @@ public class IStorageItemMostRecentlyUsedList2 <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemMostRecentlyUsedList2", IStorageItemMostRecentlyUsedList2.iid(), IStorageItemMostRecentlyUsedList.descriptorSchema(), ["IStorageItemMostRecentlyUsedList", "IStorageItemAccessList"], [IStorageItemMostRecentlyUsedList.iid(), IStorageItemAccessList.iid()], "IStorageItemMostRecentlyUsedList2Vtbl", "IStorageItemMostRecentlyUsedList2", "IStorageItemMostRecentlyUsedList2_Impl", [InterfaceMethodSchema("AddWithMetadataAndVisibility", 24, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visibility", "RecentStorageItemVisibilityAbi", "RecentStorageItemVisibility", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddOrReplaceWithMetadataAndVisibility", 25, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visibility", "RecentStorageItemVisibilityAbi", "RecentStorageItemVisibility", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemMostRecentlyUsedList2", IStorageItemMostRecentlyUsedList2.iid(), IStorageItemMostRecentlyUsedList.descriptorSchema(), ["IStorageItemMostRecentlyUsedList", "IStorageItemAccessList"], [IStorageItemMostRecentlyUsedList.iid(), IStorageItemAccessList.iid()], "IStorageItemMostRecentlyUsedList2Vtbl", "IStorageItemMostRecentlyUsedList2", "IStorageItemMostRecentlyUsedList2_Impl", [InterfaceMethodSchema("AddWithMetadataAndVisibility", 24, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visibility", "RecentStorageItemVisibilityAbi", "RecentStorageItemVisibility", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddOrReplaceWithMetadataAndVisibility", 25, [InterfaceParameterSchema("token", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("metadata", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("visibility", "RecentStorageItemVisibilityAbi", "RecentStorageItemVisibility", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemMostRecentlyUsedList2.runtimeType())
         return schema
     }
@@ -1892,7 +1902,7 @@ public class IStorageItemMostRecentlyUsedList2 <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddWithMetadataAndVisibility(file: _impl_l1.IStorageItem, metadata: windows_core.HString, visibility: RecentStorageItemVisibility): windows_core.HString {
+    public unsafe func AddWithMetadataAndVisibility(file: impl_p1.IStorageItem, metadata: windows_core.HString, visibility: RecentStorageItemVisibility): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AddWithMetadataAndVisibility(asRaw(), file.asRaw(), metadata.asRaw(), windows_core.projectTypedAbi(visibility, windows_core.typeMarker<RecentStorageItemVisibility>()), CPointer<CPointer<Unit>>(inout result__))
@@ -1901,7 +1911,7 @@ public class IStorageItemMostRecentlyUsedList2 <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplaceWithMetadataAndVisibility(token: windows_core.HString, file: _impl_l1.IStorageItem, metadata: windows_core.HString, visibility: RecentStorageItemVisibility): Unit {
+    public unsafe func AddOrReplaceWithMetadataAndVisibility(token: windows_core.HString, file: impl_p1.IStorageItem, metadata: windows_core.HString, visibility: RecentStorageItemVisibility): Unit {
         let v = vtbl()
         let hr = v.AddOrReplaceWithMetadataAndVisibility(asRaw(), token.asRaw(), file.asRaw(), metadata.asRaw(), windows_core.projectTypedAbi(visibility, windows_core.typeMarker<RecentStorageItemVisibility>()))
         HRESULT(hr).ok()
@@ -1954,7 +1964,7 @@ public class StorageApplicationPermissions <: windows_interface.RuntimeName & wi
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetFutureAccessListForUser(user: _impl_l1.User): StorageItemAccessList {
+    public static unsafe func GetFutureAccessListForUser(user: impl_p1.User): StorageItemAccessList {
         var result__: Option<StorageItemAccessList> = Option<StorageItemAccessList>.None
         try (factory__ = windows_core.factory<StorageApplicationPermissions, IStorageApplicationPermissionsStatics2>().unwrap()) {
             result__ = Some(factory__.GetFutureAccessListForUser(user))
@@ -1966,7 +1976,7 @@ public class StorageApplicationPermissions <: windows_interface.RuntimeName & wi
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetMostRecentlyUsedListForUser(user: _impl_l1.User): StorageItemMostRecentlyUsedList {
+    public static unsafe func GetMostRecentlyUsedListForUser(user: impl_p1.User): StorageItemMostRecentlyUsedList {
         var result__: Option<StorageItemMostRecentlyUsedList> = Option<StorageItemMostRecentlyUsedList>.None
         try (factory__ = windows_core.factory<StorageApplicationPermissions, IStorageApplicationPermissionsStatics2>().unwrap()) {
             result__ = Some(factory__.GetMostRecentlyUsedListForUser(user))
@@ -2059,52 +2069,52 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOverloadDefaultMetadata(file: _impl_l1.IStorageItem): windows_core.HString {
+    public unsafe func AddOverloadDefaultMetadata(file: impl_p1.IStorageItem): windows_core.HString {
         return asIStorageItemAccessList().AddOverloadDefaultMetadata(file)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func Add(file: _impl_l1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
+    public unsafe func Add(file: impl_p1.IStorageItem, metadata: windows_core.HString): windows_core.HString {
         return asIStorageItemAccessList().Add(file, metadata)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: _impl_l1.IStorageItem): Unit {
+    public unsafe func AddOrReplaceOverloadDefaultMetadata(token: windows_core.HString, file: impl_p1.IStorageItem): Unit {
         asIStorageItemAccessList().AddOrReplaceOverloadDefaultMetadata(token, file)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func AddOrReplace(token: windows_core.HString, file: _impl_l1.IStorageItem, metadata: windows_core.HString): Unit {
+    public unsafe func AddOrReplace(token: windows_core.HString, file: impl_p1.IStorageItem, metadata: windows_core.HString): Unit {
         asIStorageItemAccessList().AddOrReplace(token, file, metadata)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return asIStorageItemAccessList().GetItemAsync(token)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageItemAccessList().GetFileAsync(token)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderAsync(token: windows_core.HString): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageItemAccessList().GetFolderAsync(token)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.IStorageItem> {
+    public unsafe func GetItemWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.IStorageItem> {
         return asIStorageItemAccessList().GetItemWithOptionsAsync(token, options)
     }
 
     @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
+    public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFile> {
         return asIStorageItemAccessList().GetFileWithOptionsAsync(token, options)
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFolder> {
+    public unsafe func GetFolderWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<impl_p1.StorageFolder> {
         return asIStorageItemAccessList().GetFolderWithOptionsAsync(token, options)
     }
 
@@ -2121,7 +2131,7 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func CheckAccess(file: _impl_l1.IStorageItem): Bool {
+    public unsafe func CheckAccess(file: impl_p1.IStorageItem): Bool {
         return asIStorageItemAccessList().CheckAccess(file)
     }
 

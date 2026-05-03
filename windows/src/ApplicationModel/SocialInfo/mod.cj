@@ -4,16 +4,27 @@
 package windows.ApplicationModel.SocialInfo
 
 import std.collection.*
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l0 as _impl_l0
+@When[Windows_ApplicationModel_SocialInfo == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_future as windows_future
 
 
@@ -200,7 +211,7 @@ public class ISocialItemThumbnail <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISocialItemThumbnail", ISocialItemThumbnail.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISocialItemThumbnailVtbl", "ISocialItemThumbnail", "ISocialItemThumbnail_Impl", [InterfaceMethodSchema("TargetUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTargetUri", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ImageUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_BitmapSize", 10, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapSizeAbi>", "OutSlot<Graphics_Imaging.BitmapSize>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBitmapSize", 11, [InterfaceParameterSchema("value", "Graphics_Imaging.BitmapSizeAbi", "Graphics_Imaging.BitmapSize", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetImageAsync", 12, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISocialItemThumbnail", ISocialItemThumbnail.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISocialItemThumbnailVtbl", "ISocialItemThumbnail", "ISocialItemThumbnail_Impl", [InterfaceMethodSchema("TargetUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTargetUri", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ImageUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetImageUri", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_BitmapSize", 10, [InterfaceParameterSchema("result", "CPointer<Graphics_Imaging.BitmapSizeAbi>", "OutSlot<Graphics_Imaging.BitmapSize>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetBitmapSize", 11, [InterfaceParameterSchema("value", "Graphics_Imaging.BitmapSizeAbi", "Graphics_Imaging.BitmapSize", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetImageAsync", 12, [InterfaceParameterSchema("image", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISocialItemThumbnail.runtimeType())
         return schema
     }
@@ -274,7 +285,7 @@ public class ISocialItemThumbnail <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImageAsync(image: _impl_l0.IInputStream): windows_future.IAsyncAction {
+    public unsafe func SetImageAsync(image: impl_p0.IInputStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetImageAsync(asRaw(), image.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -898,7 +909,7 @@ public class SocialItemThumbnail <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetImageAsync(image: _impl_l0.IInputStream): windows_future.IAsyncAction {
+    public unsafe func SetImageAsync(image: impl_p0.IInputStream): windows_future.IAsyncAction {
         return defaultInterface().SetImageAsync(image)
     }
 }

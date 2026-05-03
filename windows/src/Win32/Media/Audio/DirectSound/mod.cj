@@ -4,23 +4,30 @@
 package windows.Win32.Media.Audio.DirectSound
 
 import std.collection.*
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Audio_DirectSound == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Media_Audio_DirectSound == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct DS3DBUFFER {
     public var dwSize: UInt32 = 0u32
-    public var vPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var vVelocity: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var vPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var vVelocity: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var dwInsideConeAngle: UInt32 = 0u32
     public var dwOutsideConeAngle: UInt32 = 0u32
-    public var vConeOrientation: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var vConeOrientation: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var lConeOutsideVolume: Int32 = 0i32
     public var flMinDistance: Float32 = 0.0f32
     public var flMaxDistance: Float32 = 0.0f32
@@ -32,11 +39,11 @@ public struct DS3DBUFFER {
 @C
 public struct DS3DBUFFERAbi {
     public var dwSize: UInt32 = 0u32
-    public var vPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var vVelocity: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var vPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var vVelocity: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var dwInsideConeAngle: UInt32 = 0u32
     public var dwOutsideConeAngle: UInt32 = 0u32
-    public var vConeOrientation: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var vConeOrientation: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var lConeOutsideVolume: Int32 = 0i32
     public var flMinDistance: Float32 = 0.0f32
     public var flMaxDistance: Float32 = 0.0f32
@@ -52,11 +59,11 @@ extend DS3DBUFFER <: windows_core.CopyType & windows_core.RuntimeType & windows_
     public static func projectAbi(value: DS3DBUFFER): DS3DBUFFERAbi {
         var abi = DS3DBUFFERAbi()
         abi.dwSize = value.dwSize
-        abi.vPosition = windows_core.projectTypedAbi(value.vPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.vVelocity = windows_core.projectTypedAbi(value.vVelocity, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.vPosition = windows_core.projectTypedAbi(value.vPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.vVelocity = windows_core.projectTypedAbi(value.vVelocity, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.dwInsideConeAngle = value.dwInsideConeAngle
         abi.dwOutsideConeAngle = value.dwOutsideConeAngle
-        abi.vConeOrientation = windows_core.projectTypedAbi(value.vConeOrientation, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.vConeOrientation = windows_core.projectTypedAbi(value.vConeOrientation, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.lConeOutsideVolume = value.lConeOutsideVolume
         abi.flMinDistance = value.flMinDistance
         abi.flMaxDistance = value.flMaxDistance
@@ -66,11 +73,11 @@ extend DS3DBUFFER <: windows_core.CopyType & windows_core.RuntimeType & windows_
     public static func assumeInitRef(abi: DS3DBUFFERAbi): DS3DBUFFER {
         var value = DS3DBUFFER()
         value.dwSize = abi.dwSize
-        value.vPosition = windows_core.fromTypedAbi(abi.vPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.vVelocity = windows_core.fromTypedAbi(abi.vVelocity, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.vPosition = windows_core.fromTypedAbi(abi.vPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.vVelocity = windows_core.fromTypedAbi(abi.vVelocity, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.dwInsideConeAngle = abi.dwInsideConeAngle
         value.dwOutsideConeAngle = abi.dwOutsideConeAngle
-        value.vConeOrientation = windows_core.fromTypedAbi(abi.vConeOrientation, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.vConeOrientation = windows_core.fromTypedAbi(abi.vConeOrientation, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.lConeOutsideVolume = abi.lConeOutsideVolume
         value.flMinDistance = abi.flMinDistance
         value.flMaxDistance = abi.flMaxDistance
@@ -87,10 +94,10 @@ extend DS3DBUFFER <: windows_core.CopyType & windows_core.RuntimeType & windows_
 @When[Windows_Win32_Media_Audio_DirectSound == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct DS3DLISTENER {
     public var dwSize: UInt32 = 0u32
-    public var vPosition: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var vVelocity: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var vOrientFront: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
-    public var vOrientTop: Win32__impl_l0.D3DVECTOR = Win32__impl_l0.D3DVECTOR()
+    public var vPosition: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var vVelocity: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var vOrientFront: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
+    public var vOrientTop: Win32_impl_p0.D3DVECTOR = Win32_impl_p0.D3DVECTOR()
     public var flDistanceFactor: Float32 = 0.0f32
     public var flRolloffFactor: Float32 = 0.0f32
     public var flDopplerFactor: Float32 = 0.0f32
@@ -101,10 +108,10 @@ public struct DS3DLISTENER {
 @C
 public struct DS3DLISTENERAbi {
     public var dwSize: UInt32 = 0u32
-    public var vPosition: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var vVelocity: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var vOrientFront: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
-    public var vOrientTop: Win32__impl_l0.D3DVECTORAbi = Win32__impl_l0.D3DVECTORAbi()
+    public var vPosition: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var vVelocity: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var vOrientFront: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
+    public var vOrientTop: Win32_impl_p0.D3DVECTORAbi = Win32_impl_p0.D3DVECTORAbi()
     public var flDistanceFactor: Float32 = 0.0f32
     public var flRolloffFactor: Float32 = 0.0f32
     public var flDopplerFactor: Float32 = 0.0f32
@@ -119,10 +126,10 @@ extend DS3DLISTENER <: windows_core.CopyType & windows_core.RuntimeType & window
     public static func projectAbi(value: DS3DLISTENER): DS3DLISTENERAbi {
         var abi = DS3DLISTENERAbi()
         abi.dwSize = value.dwSize
-        abi.vPosition = windows_core.projectTypedAbi(value.vPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.vVelocity = windows_core.projectTypedAbi(value.vVelocity, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.vOrientFront = windows_core.projectTypedAbi(value.vOrientFront, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
-        abi.vOrientTop = windows_core.projectTypedAbi(value.vOrientTop, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>())
+        abi.vPosition = windows_core.projectTypedAbi(value.vPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.vVelocity = windows_core.projectTypedAbi(value.vVelocity, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.vOrientFront = windows_core.projectTypedAbi(value.vOrientFront, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
+        abi.vOrientTop = windows_core.projectTypedAbi(value.vOrientTop, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>())
         abi.flDistanceFactor = value.flDistanceFactor
         abi.flRolloffFactor = value.flRolloffFactor
         abi.flDopplerFactor = value.flDopplerFactor
@@ -131,10 +138,10 @@ extend DS3DLISTENER <: windows_core.CopyType & windows_core.RuntimeType & window
     public static func assumeInitRef(abi: DS3DLISTENERAbi): DS3DLISTENER {
         var value = DS3DLISTENER()
         value.dwSize = abi.dwSize
-        value.vPosition = windows_core.fromTypedAbi(abi.vPosition, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.vVelocity = windows_core.fromTypedAbi(abi.vVelocity, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.vOrientFront = windows_core.fromTypedAbi(abi.vOrientFront, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
-        value.vOrientTop = windows_core.fromTypedAbi(abi.vOrientTop, windows_core.typeMarker<Win32__impl_l0.D3DVECTOR>()).unwrap()
+        value.vPosition = windows_core.fromTypedAbi(abi.vPosition, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.vVelocity = windows_core.fromTypedAbi(abi.vVelocity, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.vOrientFront = windows_core.fromTypedAbi(abi.vOrientFront, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
+        value.vOrientTop = windows_core.fromTypedAbi(abi.vOrientTop, windows_core.typeMarker<Win32_impl_p0.D3DVECTOR>()).unwrap()
         value.flDistanceFactor = abi.flDistanceFactor
         value.flRolloffFactor = abi.flRolloffFactor
         value.flDopplerFactor = abi.flDopplerFactor
@@ -243,7 +250,7 @@ public struct DSBUFFERDESC {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public var guid3DAlgorithm: GuidValue = GuidValue()
     public init() {}
 }
@@ -255,7 +262,7 @@ public struct DSBUFFERDESCAbi {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public var guid3DAlgorithm: GUID = GUID()
     public init() {}
 }
@@ -298,7 +305,7 @@ public struct DSBUFFERDESC1 {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public init() {}
 }
 
@@ -309,7 +316,7 @@ public struct DSBUFFERDESC1Abi {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public init() {}
 }
 
@@ -523,7 +530,7 @@ public struct DSCBUFFERDESC1 {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public init() {}
 }
 
@@ -534,7 +541,7 @@ public struct DSCBUFFERDESC1Abi {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public init() {}
 }
 
@@ -1290,15 +1297,15 @@ public struct IDirectSound3DBufferVtbl {
     public var GetAllParameters: CFunc<(CPointer<Unit>, CPointer<DS3DBUFFERAbi>) -> Int32> = { _, _ => 0 }
     public var GetConeAngles: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetConeOrientation: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
+    public var GetConeOrientation: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
     public var GetConeOutsideVolume: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetMaxDistance: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var GetMinDistance: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var GetMode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
+    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetVelocity: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
+    public var GetVelocity: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
     public var SetAllParameters: CFunc<(CPointer<Unit>, CPointer<DS3DBUFFERAbi>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var SetConeAngles: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
@@ -1366,7 +1373,7 @@ public class IDirectSound3DBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetConeOrientation(pvOrientation: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetConeOrientation(pvOrientation: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConeOrientation(__liveRaw, pvOrientation)
@@ -1397,14 +1404,14 @@ public class IDirectSound3DBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetPosition(pvPosition: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetPosition(pvPosition: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPosition(__liveRaw, pvPosition)
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetVelocity(pvVelocity: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetVelocity(pvVelocity: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVelocity(__liveRaw, pvVelocity)
@@ -1475,12 +1482,12 @@ public struct IDirectSound3DListenerVtbl {
     public var GetDistanceFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var GetDopplerFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetOrientation: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetOrientation: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
+    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
     public var GetRolloffFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetVelocity: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
+    public var GetVelocity: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3DVECTORAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
     public var SetAllParameters: CFunc<(CPointer<Unit>, CPointer<DS3DLISTENERAbi>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var SetDistanceFactor: CFunc<(CPointer<Unit>, Float32, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -1553,14 +1560,14 @@ public class IDirectSound3DListener <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetOrientation(pvOrientFront: CPointer<Win32__impl_l0.D3DVECTORAbi>, pvOrientTop: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetOrientation(pvOrientFront: CPointer<Win32_impl_p0.D3DVECTORAbi>, pvOrientTop: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetOrientation(__liveRaw, pvOrientFront, pvOrientTop)
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetPosition(pvPosition: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetPosition(pvPosition: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPosition(__liveRaw, pvPosition)
@@ -1573,7 +1580,7 @@ public class IDirectSound3DListener <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetVelocity(pvVelocity: CPointer<Win32__impl_l0.D3DVECTORAbi>): Int32 {
+    public unsafe func GetVelocity(pvVelocity: CPointer<Win32_impl_p0.D3DVECTORAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetVelocity(__liveRaw, pvVelocity)
@@ -2427,7 +2434,7 @@ public struct DSCBUFFERDESC {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public var dwFXCount: UInt32 = 0u32
     public var lpDSCFXDesc: CPointer<DSCEFFECTDESCAbi> = CPointer<DSCEFFECTDESCAbi>()
     public init() {}
@@ -2440,7 +2447,7 @@ public struct DSCBUFFERDESCAbi {
     public var dwFlags: UInt32 = 0u32
     public var dwBufferBytes: UInt32 = 0u32
     public var dwReserved: UInt32 = 0u32
-    public var lpwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX> = CPointer<Win32_Media__impl_l0.WAVEFORMATEX>()
+    public var lpwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX> = CPointer<Win32_Media_impl_p0.WAVEFORMATEX>()
     public var dwFXCount: UInt32 = 0u32
     public var lpDSCFXDesc: CPointer<DSCEFFECTDESCAbi> = CPointer<DSCEFFECTDESCAbi>()
     public init() {}
@@ -3359,7 +3366,7 @@ public struct IDirectSoundBufferVtbl {
     public var GetCaps: CFunc<(CPointer<Unit>, CPointer<DSBCAPSAbi>) -> Int32> = { _, _ => 0 }
     public var GetCurrentPosition: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetVolume: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetPan: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetFrequency: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -3370,7 +3377,7 @@ public struct IDirectSoundBufferVtbl {
     public var Play: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var SetCurrentPosition: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
+    public var SetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _ => 0 }
     public var SetVolume: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetPan: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetFrequency: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -3433,7 +3440,7 @@ public class IDirectSoundBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, dwSizeAllocated: UInt32, pdwSizeWritten: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormat(pwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, dwSizeAllocated: UInt32, pdwSizeWritten: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pwfxFormat, dwSizeAllocated, pdwSizeWritten)
@@ -3489,7 +3496,7 @@ public class IDirectSoundBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetFormat(pcfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetFormat(pcfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetFormat(__liveRaw, pcfxFormat)
@@ -3679,7 +3686,7 @@ public struct IDirectSoundCaptureBufferVtbl {
     public var GetCaps: CFunc<(CPointer<Unit>, CPointer<DSCBCAPSAbi>) -> Int32> = { _, _ => 0 }
     public var GetCurrentPosition: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
     public var Initialize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<DSCBUFFERDESCAbi>) -> Int32> = { _, _, _ => 0 }
@@ -3743,7 +3750,7 @@ public class IDirectSoundCaptureBuffer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, dwSizeAllocated: UInt32, pdwSizeWritten: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormat(pwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, dwSizeAllocated: UInt32, pdwSizeWritten: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pwfxFormat, dwSizeAllocated, pdwSizeWritten)

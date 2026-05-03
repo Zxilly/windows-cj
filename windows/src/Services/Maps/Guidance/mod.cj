@@ -4,17 +4,29 @@
 package windows.Services.Maps.Guidance
 
 import std.collection.*
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_core as windows_core
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_interface as windows_interface
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Services_Maps_Guidance == "on" && Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
+@When[Windows_Services_Maps_Guidance == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Services_Maps_Guidance == "on" && Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
+@When[Windows_Services_Maps_Guidance == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_collections as windows_collections
+@When[Windows_Services_Maps_Guidance == "on"]
 import windows_future as windows_future
 
 

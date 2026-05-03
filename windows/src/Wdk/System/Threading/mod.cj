@@ -4,12 +4,19 @@
 package windows.Wdk.System.Threading
 
 import std.collection.*
+@When[Windows_Wdk_System_Threading == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Wdk_System_Threading == "on"]
 import windows_core as windows_core
-import windows.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Wdk_System_Threading == "on"]
+import windows.Wdk.impl.p0 as Wdk_impl_p0
+@When[Windows_Wdk_System_Threading == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_System_Threading == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 import windows.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Wdk_System_Threading == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Wdk_System_Threading == "on"]
 import windows_core as windows_core
 
 
@@ -525,42 +532,42 @@ public unsafe func Windows_NtCancelTimer(TimerHandle: CPointer<Unit>, CurrentSta
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
     // param-hint: ObjectAttributes optional
-    func NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32__impl_l0.TIMER_TYPEAbi): Int32
+    func NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32_impl_p0.TIMER_TYPEAbi): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32__impl_l0.TIMER_TYPEAbi): Int32 {
+public unsafe func Windows_NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32_impl_p0.TIMER_TYPEAbi): Int32 {
     return NtCreateTimer(TimerHandle, DesiredAccess, ObjectAttributes, TimerType)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return NtOpenEvent(EventHandle, DesiredAccess, ObjectAttributes)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 foreign {
     // param-hint: ClientId optional
-    func NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32
+    func NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
-public unsafe func Windows_NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32 {
+public unsafe func Windows_NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32 {
     return NtOpenProcess(ProcessHandle, DesiredAccess, ObjectAttributes, ClientId)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return NtOpenTimer(TimerHandle, DesiredAccess, ObjectAttributes)
 }
 
@@ -601,11 +608,11 @@ foreign {
     // param-hint: TimerContext optional
     // param-hint: Period optional
     // param-hint: PreviousState optional
-    func NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
+    func NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk_impl_p0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
-public unsafe func Windows_NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
+public unsafe func Windows_NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk_impl_p0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
     return NtSetTimer(TimerHandle, DueTime, TimerApcRoutine, TimerContext, ResumeTimer, Period, PreviousState)
 }
 
@@ -655,42 +662,42 @@ public unsafe func Windows_ZwCancelTimer(TimerHandle: CPointer<Unit>, CurrentSta
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
     // param-hint: ObjectAttributes optional
-    func ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32__impl_l0.TIMER_TYPEAbi): Int32
+    func ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32_impl_p0.TIMER_TYPEAbi): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
-public unsafe func Windows_ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32__impl_l0.TIMER_TYPEAbi): Int32 {
+public unsafe func Windows_ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, TimerType: Win32_impl_p0.TIMER_TYPEAbi): Int32 {
     return ZwCreateTimer(TimerHandle, DesiredAccess, ObjectAttributes, TimerType)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return ZwOpenEvent(EventHandle, DesiredAccess, ObjectAttributes)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 foreign {
     // param-hint: ClientId optional
-    func ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32
+    func ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
-public unsafe func Windows_ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32 {
+public unsafe func Windows_ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_IDAbi>): Int32 {
     return ZwOpenProcess(ProcessHandle, DesiredAccess, ObjectAttributes, ClientId)
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return ZwOpenTimer(TimerHandle, DesiredAccess, ObjectAttributes)
 }
 
@@ -731,11 +738,11 @@ foreign {
     // param-hint: TimerContext optional
     // param-hint: Period optional
     // param-hint: PreviousState optional
-    func ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
+    func ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk_impl_p0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
 }
 
 @When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
-public unsafe func Windows_ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
+public unsafe func Windows_ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk_impl_p0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
     return ZwSetTimer(TimerHandle, DueTime, TimerApcRoutine, TimerContext, ResumeTimer, Period, PreviousState)
 }
 

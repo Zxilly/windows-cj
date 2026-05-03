@@ -4,15 +4,25 @@
 package windows.Security.Authentication.Identity.Provider
 
 import std.collection.*
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Security_Authentication_Identity_Provider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_collections as windows_collections
+@When[Windows_Security_Authentication_Identity_Provider == "on"]
 import windows_future as windows_future
 
 
@@ -66,7 +76,7 @@ public class ISecondaryAuthenticationFactorInfo <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorInfo", ISecondaryAuthenticationFactorInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorInfoVtbl", "ISecondaryAuthenticationFactorInfo", "ISecondaryAuthenticationFactorInfo_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceFriendlyName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceModelNumber", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceConfigurationData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorInfo", ISecondaryAuthenticationFactorInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorInfoVtbl", "ISecondaryAuthenticationFactorInfo", "ISecondaryAuthenticationFactorInfo_Impl", [InterfaceMethodSchema("DeviceId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceFriendlyName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceModelNumber", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceConfigurationData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorInfo.runtimeType())
         return schema
     }
@@ -120,12 +130,12 @@ public class ISecondaryAuthenticationFactorInfo <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceConfigurationData(): _impl_l0.IBuffer {
+    public unsafe func DeviceConfigurationData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeviceConfigurationData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -180,7 +190,7 @@ public class ISecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorRegistration", ISecondaryAuthenticationFactorRegistration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorRegistrationVtbl", "ISecondaryAuthenticationFactorRegistration", "ISecondaryAuthenticationFactorRegistration_Impl", [InterfaceMethodSchema("FinishRegisteringDeviceAsync", 6, [InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AbortRegisteringDeviceAsync", 7, [InterfaceParameterSchema("errorLogMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorRegistration", ISecondaryAuthenticationFactorRegistration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorRegistrationVtbl", "ISecondaryAuthenticationFactorRegistration", "ISecondaryAuthenticationFactorRegistration_Impl", [InterfaceMethodSchema("FinishRegisteringDeviceAsync", 6, [InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AbortRegisteringDeviceAsync", 7, [InterfaceParameterSchema("errorLogMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorRegistration.runtimeType())
         return schema
     }
@@ -210,7 +220,7 @@ public class ISecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func FinishRegisteringDeviceAsync(deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func FinishRegisteringDeviceAsync(deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FinishRegisteringDeviceAsync(asRaw(), deviceConfigurationData.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1049,7 +1059,7 @@ public class ISecondaryAuthenticationFactorAuthentication <: InterfaceWrapperBas
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorAuthentication", ISecondaryAuthenticationFactorAuthentication.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorAuthenticationVtbl", "ISecondaryAuthenticationFactorAuthentication", "ISecondaryAuthenticationFactorAuthentication_Impl", [InterfaceMethodSchema("ServiceAuthenticationHmac", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SessionNonce", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceNonce", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceConfigurationData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FinishAuthenticationAsync", 10, [InterfaceParameterSchema("deviceHmac", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sessionHmac", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AbortAuthenticationAsync", 11, [InterfaceParameterSchema("errorLogMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorAuthentication", ISecondaryAuthenticationFactorAuthentication.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorAuthenticationVtbl", "ISecondaryAuthenticationFactorAuthentication", "ISecondaryAuthenticationFactorAuthentication_Impl", [InterfaceMethodSchema("ServiceAuthenticationHmac", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SessionNonce", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceNonce", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeviceConfigurationData", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FinishAuthenticationAsync", 10, [InterfaceParameterSchema("deviceHmac", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("sessionHmac", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AbortAuthenticationAsync", 11, [InterfaceParameterSchema("errorLogMessage", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorAuthentication.runtimeType())
         return schema
     }
@@ -1079,43 +1089,43 @@ public class ISecondaryAuthenticationFactorAuthentication <: InterfaceWrapperBas
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ServiceAuthenticationHmac(): _impl_l0.IBuffer {
+    public unsafe func ServiceAuthenticationHmac(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ServiceAuthenticationHmac(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SessionNonce(): _impl_l0.IBuffer {
+    public unsafe func SessionNonce(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SessionNonce(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceNonce(): _impl_l0.IBuffer {
+    public unsafe func DeviceNonce(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeviceNonce(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceConfigurationData(): _impl_l0.IBuffer {
+    public unsafe func DeviceConfigurationData(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DeviceConfigurationData(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func FinishAuthenticationAsync(deviceHmac: _impl_l0.IBuffer, sessionHmac: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus> {
+    public unsafe func FinishAuthenticationAsync(deviceHmac: impl_p0.IBuffer, sessionHmac: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FinishAuthenticationAsync(asRaw(), deviceHmac.asRaw(), sessionHmac.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1288,7 +1298,7 @@ public class ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationS
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics", ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStaticsVtbl", "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics", "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics_Impl", [InterfaceMethodSchema("RegisterDevicePresenceMonitoringAsync", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceInstancePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("monitoringMode", "SecondaryAuthenticationFactorDevicePresenceMonitoringModeAbi", "SecondaryAuthenticationFactorDevicePresenceMonitoringMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDevicePresenceMonitoringWithNewDeviceAsync", 7, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceInstancePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("monitoringMode", "SecondaryAuthenticationFactorDevicePresenceMonitoringModeAbi", "SecondaryAuthenticationFactorDevicePresenceMonitoringMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("deviceFriendlyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceModelNumber", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnregisterDevicePresenceMonitoringAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDevicePresenceMonitoringSupported", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics", ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStaticsVtbl", "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics", "ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics_Impl", [InterfaceMethodSchema("RegisterDevicePresenceMonitoringAsync", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceInstancePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("monitoringMode", "SecondaryAuthenticationFactorDevicePresenceMonitoringModeAbi", "SecondaryAuthenticationFactorDevicePresenceMonitoringMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDevicePresenceMonitoringWithNewDeviceAsync", 7, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceInstancePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("monitoringMode", "SecondaryAuthenticationFactorDevicePresenceMonitoringModeAbi", "SecondaryAuthenticationFactorDevicePresenceMonitoringMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("deviceFriendlyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceModelNumber", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnregisterDevicePresenceMonitoringAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsDevicePresenceMonitoringSupported", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics.runtimeType())
         return schema
     }
@@ -1326,7 +1336,7 @@ public class ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationS
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RegisterDevicePresenceMonitoringWithNewDeviceAsync(deviceId: windows_core.HString, deviceInstancePath: windows_core.HString, monitoringMode: SecondaryAuthenticationFactorDevicePresenceMonitoringMode, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus> {
+    public unsafe func RegisterDevicePresenceMonitoringWithNewDeviceAsync(deviceId: windows_core.HString, deviceInstancePath: windows_core.HString, monitoringMode: SecondaryAuthenticationFactorDevicePresenceMonitoringMode, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegisterDevicePresenceMonitoringWithNewDeviceAsync(asRaw(), deviceId.asRaw(), deviceInstancePath.asRaw(), windows_core.projectTypedAbi(monitoringMode, windows_core.typeMarker<SecondaryAuthenticationFactorDevicePresenceMonitoringMode>()), deviceFriendlyName.asRaw(), deviceModelNumber.asRaw(), deviceConfigurationData.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1651,7 +1661,7 @@ public class SecondaryAuthenticationFactorInfo <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceConfigurationData(): _impl_l0.IBuffer {
+    public unsafe func DeviceConfigurationData(): impl_p0.IBuffer {
         return defaultInterface().DeviceConfigurationData()
     }
 }
@@ -1996,7 +2006,7 @@ public class ISecondaryAuthenticationFactorAuthenticationStatics <: InterfaceWra
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorAuthenticationStatics", ISecondaryAuthenticationFactorAuthenticationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorAuthenticationStaticsVtbl", "ISecondaryAuthenticationFactorAuthenticationStatics", "ISecondaryAuthenticationFactorAuthenticationStatics_Impl", [InterfaceMethodSchema("ShowNotificationMessageAsync", 6, [InterfaceParameterSchema("deviceName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "SecondaryAuthenticationFactorAuthenticationMessageAbi", "SecondaryAuthenticationFactorAuthenticationMessage", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAuthenticationAsync", 7, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceAuthenticationNonce", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationStageChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.EventHandler<SecondaryAuthenticationFactorAuthenticationStageChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAuthenticationStageChanged", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetAuthenticationStageInfoAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationStageInfo>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorAuthenticationStatics", ISecondaryAuthenticationFactorAuthenticationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorAuthenticationStaticsVtbl", "ISecondaryAuthenticationFactorAuthenticationStatics", "ISecondaryAuthenticationFactorAuthenticationStatics_Impl", [InterfaceMethodSchema("ShowNotificationMessageAsync", 6, [InterfaceParameterSchema("deviceName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("message", "SecondaryAuthenticationFactorAuthenticationMessageAbi", "SecondaryAuthenticationFactorAuthenticationMessage", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartAuthenticationAsync", 7, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("serviceAuthenticationNonce", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AuthenticationStageChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.EventHandler<SecondaryAuthenticationFactorAuthenticationStageChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAuthenticationStageChanged", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetAuthenticationStageInfoAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationStageInfo>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorAuthenticationStatics.runtimeType())
         return schema
     }
@@ -2034,7 +2044,7 @@ public class ISecondaryAuthenticationFactorAuthenticationStatics <: InterfaceWra
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func StartAuthenticationAsync(deviceId: windows_core.HString, serviceAuthenticationNonce: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult> {
+    public unsafe func StartAuthenticationAsync(deviceId: windows_core.HString, serviceAuthenticationNonce: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StartAuthenticationAsync(asRaw(), deviceId.asRaw(), serviceAuthenticationNonce.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2218,7 +2228,7 @@ public class ISecondaryAuthenticationFactorRegistrationStatics <: InterfaceWrapp
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorRegistrationStatics", ISecondaryAuthenticationFactorRegistrationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorRegistrationStaticsVtbl", "ISecondaryAuthenticationFactorRegistrationStatics", "ISecondaryAuthenticationFactorRegistrationStatics_Impl", [InterfaceMethodSchema("RequestStartRegisteringDeviceAsync", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilities", "SecondaryAuthenticationFactorDeviceCapabilitiesAbi", "SecondaryAuthenticationFactorDeviceCapabilities", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("deviceFriendlyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceModelNumber", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceKey", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mutualAuthenticationKey", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindAllRegisteredDeviceInfoAsync", 7, [InterfaceParameterSchema("queryType", "SecondaryAuthenticationFactorDeviceFindScopeAbi", "SecondaryAuthenticationFactorDeviceFindScope", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnregisterDeviceAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateDeviceConfigurationDataAsync", 9, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISecondaryAuthenticationFactorRegistrationStatics", ISecondaryAuthenticationFactorRegistrationStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISecondaryAuthenticationFactorRegistrationStaticsVtbl", "ISecondaryAuthenticationFactorRegistrationStatics", "ISecondaryAuthenticationFactorRegistrationStatics_Impl", [InterfaceMethodSchema("RequestStartRegisteringDeviceAsync", 6, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("capabilities", "SecondaryAuthenticationFactorDeviceCapabilitiesAbi", "SecondaryAuthenticationFactorDeviceCapabilities", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("deviceFriendlyName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceModelNumber", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceKey", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mutualAuthenticationKey", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FindAllRegisteredDeviceInfoAsync", 7, [InterfaceParameterSchema("queryType", "SecondaryAuthenticationFactorDeviceFindScopeAbi", "SecondaryAuthenticationFactorDeviceFindScope", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnregisterDeviceAsync", 8, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateDeviceConfigurationDataAsync", 9, [InterfaceParameterSchema("deviceId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deviceConfigurationData", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISecondaryAuthenticationFactorRegistrationStatics.runtimeType())
         return schema
     }
@@ -2248,7 +2258,7 @@ public class ISecondaryAuthenticationFactorRegistrationStatics <: InterfaceWrapp
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RequestStartRegisteringDeviceAsync(deviceId: windows_core.HString, capabilities: SecondaryAuthenticationFactorDeviceCapabilities, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceKey: _impl_l0.IBuffer, mutualAuthenticationKey: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult> {
+    public unsafe func RequestStartRegisteringDeviceAsync(deviceId: windows_core.HString, capabilities: SecondaryAuthenticationFactorDeviceCapabilities, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceKey: impl_p0.IBuffer, mutualAuthenticationKey: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestStartRegisteringDeviceAsync(asRaw(), deviceId.asRaw(), windows_core.projectTypedAbi(capabilities, windows_core.typeMarker<SecondaryAuthenticationFactorDeviceCapabilities>()), deviceFriendlyName.asRaw(), deviceModelNumber.asRaw(), deviceKey.asRaw(), mutualAuthenticationKey.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2274,7 +2284,7 @@ public class ISecondaryAuthenticationFactorRegistrationStatics <: InterfaceWrapp
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UpdateDeviceConfigurationDataAsync(deviceId: windows_core.HString, deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func UpdateDeviceConfigurationDataAsync(deviceId: windows_core.HString, deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UpdateDeviceConfigurationDataAsync(asRaw(), deviceId.asRaw(), deviceConfigurationData.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2356,27 +2366,27 @@ public class SecondaryAuthenticationFactorAuthentication <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ServiceAuthenticationHmac(): _impl_l0.IBuffer {
+    public unsafe func ServiceAuthenticationHmac(): impl_p0.IBuffer {
         return defaultInterface().ServiceAuthenticationHmac()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SessionNonce(): _impl_l0.IBuffer {
+    public unsafe func SessionNonce(): impl_p0.IBuffer {
         return defaultInterface().SessionNonce()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceNonce(): _impl_l0.IBuffer {
+    public unsafe func DeviceNonce(): impl_p0.IBuffer {
         return defaultInterface().DeviceNonce()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DeviceConfigurationData(): _impl_l0.IBuffer {
+    public unsafe func DeviceConfigurationData(): impl_p0.IBuffer {
         return defaultInterface().DeviceConfigurationData()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func FinishAuthenticationAsync(deviceHmac: _impl_l0.IBuffer, sessionHmac: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus> {
+    public unsafe func FinishAuthenticationAsync(deviceHmac: impl_p0.IBuffer, sessionHmac: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorFinishAuthenticationStatus> {
         return defaultInterface().FinishAuthenticationAsync(deviceHmac, sessionHmac)
     }
 
@@ -2396,7 +2406,7 @@ public class SecondaryAuthenticationFactorAuthentication <: InterfaceWrapperBase
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func StartAuthenticationAsync(deviceId: windows_core.HString, serviceAuthenticationNonce: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult> {
+    public static unsafe func StartAuthenticationAsync(deviceId: windows_core.HString, serviceAuthenticationNonce: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult> {
         var result__: Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult>> = Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorAuthenticationResult>>.None
         try (factory__ = windows_core.factory<SecondaryAuthenticationFactorAuthentication, ISecondaryAuthenticationFactorAuthenticationStatics>().unwrap()) {
             result__ = Some(factory__.StartAuthenticationAsync(deviceId, serviceAuthenticationNonce))
@@ -2621,7 +2631,7 @@ public class SecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func FinishRegisteringDeviceAsync(deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func FinishRegisteringDeviceAsync(deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncAction {
         return defaultInterface().FinishRegisteringDeviceAsync(deviceConfigurationData)
     }
 
@@ -2630,7 +2640,7 @@ public class SecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func RequestStartRegisteringDeviceAsync(deviceId: windows_core.HString, capabilities: SecondaryAuthenticationFactorDeviceCapabilities, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceKey: _impl_l0.IBuffer, mutualAuthenticationKey: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult> {
+    public static unsafe func RequestStartRegisteringDeviceAsync(deviceId: windows_core.HString, capabilities: SecondaryAuthenticationFactorDeviceCapabilities, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceKey: impl_p0.IBuffer, mutualAuthenticationKey: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult> {
         var result__: Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult>> = Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult>>.None
         try (factory__ = windows_core.factory<SecondaryAuthenticationFactorRegistration, ISecondaryAuthenticationFactorRegistrationStatics>().unwrap()) {
             result__ = Some(factory__.RequestStartRegisteringDeviceAsync(deviceId, capabilities, deviceFriendlyName, deviceModelNumber, deviceKey, mutualAuthenticationKey))
@@ -2665,7 +2675,7 @@ public class SecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func UpdateDeviceConfigurationDataAsync(deviceId: windows_core.HString, deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public static unsafe func UpdateDeviceConfigurationDataAsync(deviceId: windows_core.HString, deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<SecondaryAuthenticationFactorRegistration, ISecondaryAuthenticationFactorRegistrationStatics>().unwrap()) {
             result__ = Some(factory__.UpdateDeviceConfigurationDataAsync(deviceId, deviceConfigurationData))
@@ -2688,7 +2698,7 @@ public class SecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func RegisterDevicePresenceMonitoringWithNewDeviceAsync(deviceId: windows_core.HString, deviceInstancePath: windows_core.HString, monitoringMode: SecondaryAuthenticationFactorDevicePresenceMonitoringMode, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceConfigurationData: _impl_l0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus> {
+    public static unsafe func RegisterDevicePresenceMonitoringWithNewDeviceAsync(deviceId: windows_core.HString, deviceInstancePath: windows_core.HString, monitoringMode: SecondaryAuthenticationFactorDevicePresenceMonitoringMode, deviceFriendlyName: windows_core.HString, deviceModelNumber: windows_core.HString, deviceConfigurationData: impl_p0.IBuffer): windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus> {
         var result__: Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>> = Option<windows_future.IAsyncOperation<SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus>>.None
         try (factory__ = windows_core.factory<SecondaryAuthenticationFactorRegistration, ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics>().unwrap()) {
             result__ = Some(factory__.RegisterDevicePresenceMonitoringWithNewDeviceAsync(deviceId, deviceInstancePath, monitoringMode, deviceFriendlyName, deviceModelNumber, deviceConfigurationData))

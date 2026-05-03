@@ -4,16 +4,27 @@
 package windows.Devices.WiFi
 
 import std.collection.*
+@When[Windows_Devices_WiFi == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_WiFi == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_WiFi == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_WiFi == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_WiFi == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_WiFi == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_WiFi == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Devices_WiFi == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_WiFi == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Devices_WiFi == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_WiFi == "on"]
 import windows_future as windows_future
 
 
@@ -803,7 +814,7 @@ public class IWiFiAvailableNetwork <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiAvailableNetwork", IWiFiAvailableNetwork.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAvailableNetworkVtbl", "IWiFiAvailableNetwork", "IWiFiAvailableNetwork_Impl", [InterfaceMethodSchema("Uptime", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Ssid", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Bssid", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChannelCenterFrequencyInKilohertz", 9, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkRssiInDecibelMilliwatts", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SignalBars", 11, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkKind", 12, [InterfaceParameterSchema("result", "CPointer<WiFiNetworkKindAbi>", "OutSlot<WiFiNetworkKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PhyKind", 13, [InterfaceParameterSchema("result", "CPointer<WiFiPhyKindAbi>", "OutSlot<WiFiPhyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SecuritySettings", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.NetworkSecuritySettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BeaconInterval", 15, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsWiFiDirect", 16, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiAvailableNetwork", IWiFiAvailableNetwork.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAvailableNetworkVtbl", "IWiFiAvailableNetwork", "IWiFiAvailableNetwork_Impl", [InterfaceMethodSchema("Uptime", 6, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Ssid", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Bssid", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ChannelCenterFrequencyInKilohertz", 9, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkRssiInDecibelMilliwatts", 10, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SignalBars", 11, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkKind", 12, [InterfaceParameterSchema("result", "CPointer<WiFiNetworkKindAbi>", "OutSlot<WiFiNetworkKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PhyKind", 13, [InterfaceParameterSchema("result", "CPointer<WiFiPhyKindAbi>", "OutSlot<WiFiPhyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SecuritySettings", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.NetworkSecuritySettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BeaconInterval", 15, [InterfaceParameterSchema("result", "CPointer<windows_future.TimeSpanAbi>", "OutSlot<windows_future.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsWiFiDirect", 16, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiAvailableNetwork.runtimeType())
         return schema
     }
@@ -897,12 +908,12 @@ public class IWiFiAvailableNetwork <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func SecuritySettings(): _impl_l1.NetworkSecuritySettings {
+    public unsafe func SecuritySettings(): impl_p1.NetworkSecuritySettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SecuritySettings(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.NetworkSecuritySettings.fromAbiTake(result__)
+        return impl_p1.NetworkSecuritySettings.fromAbiTake(result__)
     }
 
     public unsafe func BeaconInterval(): windows_future.TimeSpan {
@@ -1158,7 +1169,7 @@ public class IWiFiOnDemandHotspotNetworkProperties <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiOnDemandHotspotNetworkProperties", IWiFiOnDemandHotspotNetworkProperties.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiOnDemandHotspotNetworkPropertiesVtbl", "IWiFiOnDemandHotspotNetworkProperties", "IWiFiOnDemandHotspotNetworkProperties_Impl", [InterfaceMethodSchema("DisplayName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Availability", 8, [InterfaceParameterSchema("result", "CPointer<WiFiOnDemandHotspotAvailabilityAbi>", "OutSlot<WiFiOnDemandHotspotAvailability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAvailability", 9, [InterfaceParameterSchema("value", "WiFiOnDemandHotspotAvailabilityAbi", "WiFiOnDemandHotspotAvailability", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemainingBatteryPercent", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRemainingBatteryPercent", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CellularBars", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<WiFiOnDemandHotspotCellularBars>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCellularBars", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<WiFiOnDemandHotspotCellularBars>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsMetered", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsMetered", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Ssid", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSsid", 17, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Password", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPassword", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiOnDemandHotspotNetworkProperties", IWiFiOnDemandHotspotNetworkProperties.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiOnDemandHotspotNetworkPropertiesVtbl", "IWiFiOnDemandHotspotNetworkProperties", "IWiFiOnDemandHotspotNetworkProperties_Impl", [InterfaceMethodSchema("DisplayName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDisplayName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Availability", 8, [InterfaceParameterSchema("result", "CPointer<WiFiOnDemandHotspotAvailabilityAbi>", "OutSlot<WiFiOnDemandHotspotAvailability>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAvailability", 9, [InterfaceParameterSchema("value", "WiFiOnDemandHotspotAvailabilityAbi", "WiFiOnDemandHotspotAvailability", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemainingBatteryPercent", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRemainingBatteryPercent", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<UInt32>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CellularBars", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IReference<WiFiOnDemandHotspotCellularBars>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCellularBars", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<Foundation.IReference<WiFiOnDemandHotspotCellularBars>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("IsMetered", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIsMetered", 15, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Ssid", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSsid", 17, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Password", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPassword", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiOnDemandHotspotNetworkProperties.runtimeType())
         return schema
     }
@@ -1272,16 +1283,16 @@ public class IWiFiOnDemandHotspotNetworkProperties <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func Password(): _impl_l0.PasswordCredential {
+    public unsafe func Password(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Password(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetPassword(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetPassword(value: impl_p0.PasswordCredential): Unit {
         let v = vtbl()
         let hr = v.SetPassword(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1491,7 +1502,7 @@ public class WiFiAvailableNetwork <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func SecuritySettings(): _impl_l1.NetworkSecuritySettings {
+    public unsafe func SecuritySettings(): impl_p1.NetworkSecuritySettings {
         return defaultInterface().SecuritySettings()
     }
 
@@ -1824,12 +1835,12 @@ public class WiFiOnDemandHotspotNetworkProperties <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func Password(): _impl_l0.PasswordCredential {
+    public unsafe func Password(): impl_p0.PasswordCredential {
         return defaultInterface().Password()
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func SetPassword(value: _impl_l0.PasswordCredential): Unit {
+    public unsafe func SetPassword(value: impl_p0.PasswordCredential): Unit {
         defaultInterface().SetPassword(value)
     }
 }
@@ -1997,7 +2008,7 @@ public class IWiFiAdapter2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiAdapter2", IWiFiAdapter2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAdapter2Vtbl", "IWiFiAdapter2", "IWiFiAdapter2_Impl", [InterfaceMethodSchema("GetWpsConfigurationAsync", 6, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiWpsConfigurationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAndSsidAndConnectionMethodAsync", 7, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("ssid", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("connectionMethod", "WiFiConnectionMethodAbi", "WiFiConnectionMethod", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiAdapter2", IWiFiAdapter2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAdapter2Vtbl", "IWiFiAdapter2", "IWiFiAdapter2_Impl", [InterfaceMethodSchema("GetWpsConfigurationAsync", 6, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiWpsConfigurationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAndSsidAndConnectionMethodAsync", 7, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("ssid", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("connectionMethod", "WiFiConnectionMethodAbi", "WiFiConnectionMethod", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWiFiAdapter2.runtimeType())
         return schema
     }
@@ -2035,7 +2046,7 @@ public class IWiFiAdapter2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectWithPasswordCredentialAndSsidAndConnectionMethodAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: _impl_l0.PasswordCredential, ssid: windows_core.HString, connectionMethod: WiFiConnectionMethod): windows_future.IAsyncOperation<WiFiConnectionResult> {
+    public unsafe func ConnectWithPasswordCredentialAndSsidAndConnectionMethodAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: impl_p0.PasswordCredential, ssid: windows_core.HString, connectionMethod: WiFiConnectionMethod): windows_future.IAsyncOperation<WiFiConnectionResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConnectWithPasswordCredentialAndSsidAndConnectionMethodAsync(asRaw(), availableNetwork.asRaw(), windows_core.projectTypedAbi(reconnectionKind, windows_core.typeMarker<WiFiReconnectionKind>()), passwordCredential.asRaw(), ssid.asRaw(), windows_core.projectTypedAbi(connectionMethod, windows_core.typeMarker<WiFiConnectionMethod>()), CPointer<CPointer<Unit>>(inout result__))
@@ -2404,7 +2415,7 @@ public class IWiFiAdapter <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWiFiAdapter", IWiFiAdapter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAdapterVtbl", "IWiFiAdapter", "IWiFiAdapter_Impl", [InterfaceMethodSchema("get_NetworkAdapter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkReport", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WiFiNetworkReport>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AvailableNetworksChanged", 9, [InterfaceParameterSchema("args", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WiFiAdapter, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAvailableNetworksChanged", 10, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConnectAsync", 11, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAsync", 12, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAndSsidAsync", 13, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("ssid", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Disconnect", 14, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IWiFiAdapter", IWiFiAdapter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWiFiAdapterVtbl", "IWiFiAdapter", "IWiFiAdapter_Impl", [InterfaceMethodSchema("get_NetworkAdapter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ScanAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NetworkReport", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WiFiNetworkReport>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AvailableNetworksChanged", 9, [InterfaceParameterSchema("args", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<WiFiAdapter, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAvailableNetworksChanged", 10, [InterfaceParameterSchema("eventCookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ConnectAsync", 11, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAsync", 12, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectWithPasswordCredentialAndSsidAsync", 13, [InterfaceParameterSchema("availableNetwork", "CPointer<Unit>", "InParam<WiFiAvailableNetwork>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("reconnectionKind", "WiFiReconnectionKindAbi", "WiFiReconnectionKind", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("ssid", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<WiFiConnectionResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Disconnect", 14, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IWiFiAdapter.runtimeType())
         return schema
     }
@@ -2434,12 +2445,12 @@ public class IWiFiAdapter <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_NetworkAdapter(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.NetworkAdapter.fromAbiTake(result__)
+        return impl_p1.NetworkAdapter.fromAbiTake(result__)
     }
 
     public unsafe func ScanAsync(): windows_future.IAsyncAction {
@@ -2481,7 +2492,7 @@ public class IWiFiAdapter <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectWithPasswordCredentialAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: _impl_l0.PasswordCredential): windows_future.IAsyncOperation<WiFiConnectionResult> {
+    public unsafe func ConnectWithPasswordCredentialAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: impl_p0.PasswordCredential): windows_future.IAsyncOperation<WiFiConnectionResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConnectWithPasswordCredentialAsync(asRaw(), availableNetwork.asRaw(), windows_core.projectTypedAbi(reconnectionKind, windows_core.typeMarker<WiFiReconnectionKind>()), passwordCredential.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2490,7 +2501,7 @@ public class IWiFiAdapter <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectWithPasswordCredentialAndSsidAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: _impl_l0.PasswordCredential, ssid: windows_core.HString): windows_future.IAsyncOperation<WiFiConnectionResult> {
+    public unsafe func ConnectWithPasswordCredentialAndSsidAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: impl_p0.PasswordCredential, ssid: windows_core.HString): windows_future.IAsyncOperation<WiFiConnectionResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConnectWithPasswordCredentialAndSsidAsync(asRaw(), availableNetwork.asRaw(), windows_core.projectTypedAbi(reconnectionKind, windows_core.typeMarker<WiFiReconnectionKind>()), passwordCredential.asRaw(), ssid.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2889,7 +2900,7 @@ public class WiFiAdapter <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Networking_Connectivity == "on"]
-    public unsafe func get_NetworkAdapter(): _impl_l1.NetworkAdapter {
+    public unsafe func get_NetworkAdapter(): impl_p1.NetworkAdapter {
         return defaultInterface().get_NetworkAdapter()
     }
 
@@ -2914,12 +2925,12 @@ public class WiFiAdapter <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectWithPasswordCredentialAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: _impl_l0.PasswordCredential): windows_future.IAsyncOperation<WiFiConnectionResult> {
+    public unsafe func ConnectWithPasswordCredentialAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: impl_p0.PasswordCredential): windows_future.IAsyncOperation<WiFiConnectionResult> {
         return defaultInterface().ConnectWithPasswordCredentialAsync(availableNetwork, reconnectionKind, passwordCredential)
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectWithPasswordCredentialAndSsidAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: _impl_l0.PasswordCredential, ssid: windows_core.HString): windows_future.IAsyncOperation<WiFiConnectionResult> {
+    public unsafe func ConnectWithPasswordCredentialAndSsidAsync(availableNetwork: WiFiAvailableNetwork, reconnectionKind: WiFiReconnectionKind, passwordCredential: impl_p0.PasswordCredential, ssid: windows_core.HString): windows_future.IAsyncOperation<WiFiConnectionResult> {
         return defaultInterface().ConnectWithPasswordCredentialAndSsidAsync(availableNetwork, reconnectionKind, passwordCredential, ssid)
     }
 

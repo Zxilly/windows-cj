@@ -4,25 +4,44 @@
 package windows.Win32.Media.MediaFoundation
 
 import std.collection.*
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_libloading
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadFloat64, unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteFloat64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_Media_DxMediaObjects == "on"]
 import windows.Win32.Media.DxMediaObjects as Win32_Media_DxMediaObjects
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
+@When[Windows_Win32_Media_MediaFoundation == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_MediaFoundation == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_MediaFoundation == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_MediaFoundation == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
@@ -278,7 +297,7 @@ public struct AM_MEDIA_TYPE {
     public var bTemporalCompression: Int32 = 0i32
     public var lSampleSize: UInt32 = 0u32
     public var formattype: GuidValue = GuidValue()
-    public var pUnk: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pUnk: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public var cbFormat: UInt32 = 0u32
     public var pbFormat: CPointer<UInt8> = CPointer<UInt8>()
     public init() {}
@@ -325,7 +344,7 @@ extend AM_MEDIA_TYPE <: windows_core.CopyType & windows_core.RuntimeType & windo
         value.bTemporalCompression = abi.bTemporalCompression
         value.lSampleSize = abi.lSampleSize
         value.formattype = GuidValue(abi.formattype)
-        value.pUnk = Win32__impl_l0.IUnknown.fromAbiTake(abi.pUnk)
+        value.pUnk = Win32_impl_p0.IUnknown.fromAbiTake(abi.pUnk)
         value.cbFormat = abi.cbFormat
         value.pbFormat = abi.pbFormat
         return value
@@ -32820,20 +32839,20 @@ public struct ICodecAPIVtbl {
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var IsModifiable: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetParameterRange: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetParameterRange: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetParameterValues: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32__impl_l2.VARIANTAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetParameterValues: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Win32_impl_p2.VARIANTAbi>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetDefaultValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetDefaultValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetValue: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var RegisterForEvent: CFunc<(CPointer<Unit>, CPointer<GUID>, IntNative) -> Int32> = { _, _, _ => 0 }
     public var UnregisterForEvent: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var SetAllDefaults: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetValueWithNotify: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<GUID>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetValueWithNotify: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<GUID>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetAllDefaultsWithNotify: CFunc<(CPointer<Unit>, CPointer<CPointer<GUID>>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetAllSettings: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -32897,35 +32916,35 @@ public class ICodecAPI <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetParameterRange(Api: CPointer<GUID>, ValueMin: CPointer<Win32__impl_l2.VARIANTAbi>, ValueMax: CPointer<Win32__impl_l2.VARIANTAbi>, SteppingDelta: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetParameterRange(Api: CPointer<GUID>, ValueMin: CPointer<Win32_impl_p2.VARIANTAbi>, ValueMax: CPointer<Win32_impl_p2.VARIANTAbi>, SteppingDelta: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetParameterRange(__liveRaw, Api, ValueMin, ValueMax, SteppingDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetParameterValues(Api: CPointer<GUID>, Values: CPointer<CPointer<Win32__impl_l2.VARIANTAbi>>, ValuesCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetParameterValues(Api: CPointer<GUID>, Values: CPointer<CPointer<Win32_impl_p2.VARIANTAbi>>, ValuesCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetParameterValues(__liveRaw, Api, Values, ValuesCount)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetDefaultValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetDefaultValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultValue(__liveRaw, Api, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, Api, Value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValue(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetValue(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValue(__liveRaw, Api, Value)
@@ -32950,7 +32969,7 @@ public class ICodecAPI <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetValueWithNotify(Api: CPointer<GUID>, Value: CPointer<Win32__impl_l2.VARIANTAbi>, ChangedParam: CPointer<CPointer<GUID>>, ChangedParamCount: CPointer<UInt32>): Int32 {
+    public unsafe func SetValueWithNotify(Api: CPointer<GUID>, Value: CPointer<Win32_impl_p2.VARIANTAbi>, ChangedParam: CPointer<CPointer<GUID>>, ChangedParamCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetValueWithNotify(__liveRaw, Api, Value, ChangedParam, ChangedParamCount)
@@ -37766,14 +37785,14 @@ public struct IMFMetadataVtbl {
     public var SetLanguage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetAllLanguages: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetAllLanguages: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeleteProperty: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetAllPropertyNames: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetAllPropertyNames: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -37830,21 +37849,21 @@ public class IMFMetadata <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetAllLanguages(ppvLanguages: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetAllLanguages(ppvLanguages: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllLanguages(__liveRaw, ppvLanguages)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetProperty(pwszName: CPointer<UInt16>, ppvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetProperty(pwszName: CPointer<UInt16>, ppvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetProperty(__liveRaw, pwszName, ppvValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetProperty(pwszName: CPointer<UInt16>, ppvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetProperty(pwszName: CPointer<UInt16>, ppvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, pwszName, ppvValue)
@@ -37857,7 +37876,7 @@ public class IMFMetadata <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetAllPropertyNames(ppvNames: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetAllPropertyNames(ppvNames: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllPropertyNames(__liveRaw, ppvNames)
@@ -39023,7 +39042,7 @@ public struct IMFSAMIStyleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetStyleCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetStyles: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetStyles: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SetSelectedStyle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetSelectedStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -39076,7 +39095,7 @@ public class IMFSAMIStyle <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetStyles(pPropVarStyleArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetStyles(pPropVarStyleArray: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStyles(__liveRaw, pPropVarStyleArray)
@@ -39300,7 +39319,7 @@ public class IMFSecureChannel <: InterfaceWrapperBase & ComInterface {
 public struct IMFSeekInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetNearestKeyFrames: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetNearestKeyFrames: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -39345,7 +39364,7 @@ public class IMFSeekInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetNearestKeyFrames(pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarPreviousKeyFrame: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarNextKeyFrame: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetNearestKeyFrames(pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarPreviousKeyFrame: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarNextKeyFrame: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetNearestKeyFrames(__liveRaw, pguidTimeFormat, pvarStartPosition, pvarPreviousKeyFrame, pvarNextKeyFrame)
@@ -39759,9 +39778,9 @@ public struct IMFSpatialAudioObjectBufferVtbl {
     public var SetID: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var GetID: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetType: CFunc<(CPointer<Unit>, Win32_Media__impl_l0.AudioObjectTypeAbi) -> Int32> = { _, _ => 0 }
+    public var SetType: CFunc<(CPointer<Unit>, Win32_Media_impl_p0.AudioObjectTypeAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetType: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.AudioObjectTypeAbi>) -> Int32> = { _, _ => 0 }
+    public var GetType: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.AudioObjectTypeAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
     public var GetMetadataItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -39820,14 +39839,14 @@ public class IMFSpatialAudioObjectBuffer <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetType(type_: Win32_Media__impl_l0.AudioObjectTypeAbi): Int32 {
+    public unsafe func SetType(type_: Win32_Media_impl_p0.AudioObjectTypeAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetType(__liveRaw, type_)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetType(pType: CPointer<Win32_Media__impl_l0.AudioObjectTypeAbi>): Int32 {
+    public unsafe func GetType(pType: CPointer<Win32_Media_impl_p0.AudioObjectTypeAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetType(__liveRaw, pType)
@@ -68326,10 +68345,10 @@ public class IMFAsyncCallbackLogging <: InterfaceWrapperBase & ComInterface {
 public struct IMFAttributesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetItemType: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<MF_ATTRIBUTE_TYPEAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var CompareItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var CompareItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var Compare: CFunc<(CPointer<Unit>, CPointer<Unit>, MF_ATTRIBUTES_MATCH_TYPEAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetUINT32: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetUINT64: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<UInt64>) -> Int32> = { _, _, _ => 0 }
@@ -68343,7 +68362,7 @@ public struct IMFAttributesVtbl {
     public var GetAllocatedBlob: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<UInt8>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public var GetUnknown: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetItem: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var DeleteItem: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var DeleteAllItems: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetUINT32: CFunc<(CPointer<Unit>, CPointer<GUID>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -68358,7 +68377,7 @@ public struct IMFAttributesVtbl {
     public var UnlockStore: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetItemByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetItemByIndex: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var CopyAllItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -68404,7 +68423,7 @@ public class IMFAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetItem(guidKey: CPointer<GUID>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetItem(guidKey: CPointer<GUID>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItem(__liveRaw, guidKey, pValue)
@@ -68417,7 +68436,7 @@ public class IMFAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func CompareItem(guidKey: CPointer<GUID>, Value: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pbResult: CPointer<Int32>): Int32 {
+    public unsafe func CompareItem(guidKey: CPointer<GUID>, Value: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pbResult: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompareItem(__liveRaw, guidKey, Value, pbResult)
@@ -68496,7 +68515,7 @@ public class IMFAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetItem(guidKey: CPointer<GUID>, Value: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetItem(guidKey: CPointer<GUID>, Value: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetItem(__liveRaw, guidKey, Value)
@@ -68576,7 +68595,7 @@ public class IMFAttributes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetItemByIndex(unIndex: UInt32, pguidKey: CPointer<GUID>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetItemByIndex(unIndex: UInt32, pguidKey: CPointer<GUID>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItemByIndex(__liveRaw, unIndex, pguidKey, pValue)
@@ -70684,7 +70703,7 @@ public struct IMFMediaEventVtbl {
     public var GetExtendedType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -70747,7 +70766,7 @@ public class IMFMediaEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetValue(pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetValue(pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValue(__liveRaw, pvValue)
@@ -70763,7 +70782,7 @@ public struct IMFMediaEventGeneratorVtbl {
     public var BeginGetEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var EndGetEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var QueueEvent: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, Int32, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var QueueEvent: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, Int32, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -70827,7 +70846,7 @@ public class IMFMediaEventGenerator <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func QueueEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func QueueEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueueEvent(__liveRaw, met, guidExtendedType, hrStatus, pvValue)
@@ -70844,7 +70863,7 @@ public struct IMFMediaEventQueueVtbl {
     public var EndGetEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var QueueEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var QueueEventParamVar: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, Int32, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var QueueEventParamVar: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, Int32, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var QueueEventParamUnk: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Shutdown: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -70917,7 +70936,7 @@ public class IMFMediaEventQueue <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func QueueEventParamVar(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func QueueEventParamVar(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueueEventParamVar(__liveRaw, met, guidExtendedType, hrStatus, pvValue)
@@ -73854,12 +73873,12 @@ public struct IMFSourceReaderVtbl {
     public var GetCurrentMediaType: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetCurrentMediaType: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetCurrentPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetCurrentPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var ReadSample: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var Flush: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var GetServiceForStream: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -73934,7 +73953,7 @@ public class IMFSourceReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetCurrentPosition(guidTimeFormat: CPointer<GUID>, varPosition: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetCurrentPosition(guidTimeFormat: CPointer<GUID>, varPosition: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCurrentPosition(__liveRaw, guidTimeFormat, varPosition)
@@ -73959,7 +73978,7 @@ public class IMFSourceReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetPresentationAttribute(dwStreamIndex: UInt32, guidAttribute: CPointer<GUID>, pvarAttribute: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetPresentationAttribute(dwStreamIndex: UInt32, guidAttribute: CPointer<GUID>, pvarAttribute: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPresentationAttribute(__liveRaw, dwStreamIndex, guidAttribute, pvarAttribute)
@@ -74344,12 +74363,12 @@ public class IMFStreamDescriptor <: InterfaceWrapperBase & ComInterface {
 public struct IMFTimecodeTranslateVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var BeginConvertTimecodeToHNS: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
+    public var BeginConvertTimecodeToHNS: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public var EndConvertTimecodeToHNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var BeginConvertHNSToTimecode: CFunc<(CPointer<Unit>, Int64, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var EndConvertHNSToTimecode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var EndConvertHNSToTimecode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -74394,7 +74413,7 @@ public class IMFTimecodeTranslate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func BeginConvertTimecodeToHNS(pPropVarTimecode: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pCallback: CPointer<Unit>, punkState: CPointer<Unit>): Int32 {
+    public unsafe func BeginConvertTimecodeToHNS(pPropVarTimecode: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pCallback: CPointer<Unit>, punkState: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BeginConvertTimecodeToHNS(__liveRaw, pPropVarTimecode, pCallback, punkState)
@@ -74414,7 +74433,7 @@ public class IMFTimecodeTranslate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func EndConvertHNSToTimecode(pResult: CPointer<Unit>, pPropVarTimecode: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func EndConvertHNSToTimecode(pResult: CPointer<Unit>, pPropVarTimecode: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EndConvertHNSToTimecode(__liveRaw, pResult, pPropVarTimecode)
@@ -82655,7 +82674,7 @@ public class IMFActivate <: InterfaceWrapperBase & ComInterface {
 public struct IMFAudioMediaTypeVtbl {
     public var base_: IMFMediaTypeVtbl = IMFMediaTypeVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetAudioFormat: CFunc<(CPointer<Unit>) -> CPointer<Win32_Media__impl_l0.WAVEFORMATEX>> = { _ => CPointer<Win32_Media__impl_l0.WAVEFORMATEX>() }
+    public var GetAudioFormat: CFunc<(CPointer<Unit>) -> CPointer<Win32_Media_impl_p0.WAVEFORMATEX>> = { _ => CPointer<Win32_Media_impl_p0.WAVEFORMATEX>() }
     public init() {}
 }
 
@@ -82700,7 +82719,7 @@ public class IMFAudioMediaType <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetAudioFormat(): CPointer<Win32_Media__impl_l0.WAVEFORMATEX> {
+    public unsafe func GetAudioFormat(): CPointer<Win32_Media_impl_p0.WAVEFORMATEX> {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAudioFormat(__liveRaw)
@@ -84006,7 +84025,7 @@ public struct IMFMediaEngineExVtbl {
     public var base_: IMFMediaEngineVtbl = IMFMediaEngineVtbl()
     public var SetSourceFromByteStream: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetStatistics: CFunc<(CPointer<Unit>, MF_MEDIA_ENGINE_STATISTICAbi, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetStatistics: CFunc<(CPointer<Unit>, MF_MEDIA_ENGINE_STATISTICAbi, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var UpdateVideoStream: CFunc<(CPointer<Unit>, CPointer<MFVideoNormalizedRectAbi>, CPointer<Win32_Foundation.RECTAbi>, CPointer<MFARGBAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetBalance: CFunc<(CPointer<Unit>) -> Float64> = { _ => 0.0 }
     public var SetBalance: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
@@ -84014,10 +84033,10 @@ public struct IMFMediaEngineExVtbl {
     public var FrameStep: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var GetResourceCharacteristics: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetNumberOfStreams: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetStreamAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetStreamAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetStreamSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetStreamSelection: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _ => 0 }
     public var ApplyStreamSelections: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -84096,7 +84115,7 @@ public class IMFMediaEngineEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetStatistics(StatisticID: MF_MEDIA_ENGINE_STATISTICAbi, pStatistic: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetStatistics(StatisticID: MF_MEDIA_ENGINE_STATISTICAbi, pStatistic: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStatistics(__liveRaw, StatisticID, pStatistic)
@@ -84139,7 +84158,7 @@ public class IMFMediaEngineEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetPresentationAttribute(guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetPresentationAttribute(guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPresentationAttribute(__liveRaw, guidMFAttribute, pvValue)
@@ -84152,7 +84171,7 @@ public class IMFMediaEngineEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetStreamAttribute(dwStreamIndex: UInt32, guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetStreamAttribute(dwStreamIndex: UInt32, guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStreamAttribute(__liveRaw, dwStreamIndex, guidMFAttribute, pvValue)
@@ -89130,7 +89149,7 @@ public struct IMFMediaSessionVtbl {
     public var SetTopology: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var ClearTopologies: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Start: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Start: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -89194,7 +89213,7 @@ public class IMFMediaSession <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Start(pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Start(pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Start(__liveRaw, pguidTimeFormat, pvarStartPosition)
@@ -89250,7 +89269,7 @@ public struct IMFMediaSourceVtbl {
     public var GetCharacteristics: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CreatePresentationDescriptor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var Start: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var Start: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Shutdown: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -89310,7 +89329,7 @@ public class IMFMediaSource <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func Start(pPresentationDescriptor: CPointer<Unit>, pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func Start(pPresentationDescriptor: CPointer<Unit>, pguidTimeFormat: CPointer<GUID>, pvarStartPosition: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Start(__liveRaw, pPresentationDescriptor, pguidTimeFormat, pvarStartPosition)
@@ -92395,7 +92414,7 @@ public struct IMFASFIndexerVtbl {
     public var GetIndexStatus: CFunc<(CPointer<Unit>, CPointer<ASF_INDEX_IDENTIFIERAbi>, CPointer<Int32>, CPointer<UInt8>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var SetIndexStatus: CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetSeekPositionForValue: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<ASF_INDEX_IDENTIFIERAbi>, CPointer<UInt64>, CPointer<Int64>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var GetSeekPositionForValue: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<ASF_INDEX_IDENTIFIERAbi>, CPointer<UInt64>, CPointer<Int64>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GenerateIndexEntries: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CommitIndex: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetIndexWriteSpace: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
@@ -92492,7 +92511,7 @@ public class IMFASFIndexer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetSeekPositionForValue(pvarValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pIndexIdentifier: CPointer<ASF_INDEX_IDENTIFIERAbi>, pcbOffsetWithinData: CPointer<UInt64>, phnsApproxTime: CPointer<Int64>, pdwPayloadNumberOfStreamWithinPacket: CPointer<UInt32>): Int32 {
+    public unsafe func GetSeekPositionForValue(pvarValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pIndexIdentifier: CPointer<ASF_INDEX_IDENTIFIERAbi>, pcbOffsetWithinData: CPointer<UInt64>, phnsApproxTime: CPointer<Int64>, pdwPayloadNumberOfStreamWithinPacket: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSeekPositionForValue(__liveRaw, pvarValue, pIndexIdentifier, pcbOffsetWithinData, phnsApproxTime, pdwPayloadNumberOfStreamWithinPacket)
@@ -94026,11 +94045,11 @@ public unsafe func Windows_MFCreateSampleGrabberSinkActivate(pIMFMediaType: CPoi
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSegmentOffset == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSegmentOffset == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return MFCreateSequencerSegmentOffset(dwId, hnsOffset, pvarSegmentOffset)
 }
 
@@ -94555,11 +94574,11 @@ public unsafe func Windows_MFCreateAttributes(ppMFAttributes: CPointer<CPointer<
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioMediaType == "on" && Windows_Win32_Media_Audio == "on"]
 foreign {
-    func MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32
+    func MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioMediaType == "on" && Windows_Win32_Media_Audio == "on"]
-public unsafe func Windows_MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32 {
     return MFCreateAudioMediaType(pAudioFormat, ppIAudioMediaType)
 }
 
@@ -94729,11 +94748,11 @@ public unsafe func Windows_MFCreateMediaBufferWrapper(pBuffer: CPointer<Unit>, c
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: pvValue optional
-    func MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32
+    func MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32 {
     return MFCreateMediaEvent(met, guidExtendedType, hrStatus, pvValue, ppEvent)
 }
 
@@ -94994,11 +95013,11 @@ public unsafe func Windows_MFCreateWICBitmapBuffer(riid: CPointer<GUID>, punkSur
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWaveFormatExFromMFMediaType == "on" && Windows_Win32_Media_Audio == "on"]
 foreign {
     // param-hint: pcbSize optional
-    func MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32
+    func MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWaveFormatExFromMFMediaType == "on" && Windows_Win32_Media_Audio == "on"]
-public unsafe func Windows_MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32 {
+public unsafe func Windows_MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32 {
     return MFCreateWaveFormatExFromMFMediaType(pMFType, ppWF, pcbSize, Flags)
 }
 
@@ -95127,21 +95146,21 @@ public unsafe func Windows_MFGetStrideForBitmapInfoHeader(format: UInt32, dwWidt
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedMimeTypes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedMimeTypes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return MFGetSupportedMimeTypes(pPropVarMimeTypeArray)
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedSchemes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedSchemes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return MFGetSupportedSchemes(pPropVarSchemeArray)
 }
 
@@ -95320,11 +95339,11 @@ public unsafe func Windows_MFInitMediaTypeFromVideoInfoHeader2(pMFType: CPointer
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromWaveFormatEx == "on" && Windows_Win32_Media_Audio == "on"]
 foreign {
     // param-hint: pWaveFormat bytes=param[2]
-    func MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, cbBufSize: UInt32): Int32
+    func MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, cbBufSize: UInt32): Int32
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromWaveFormatEx == "on" && Windows_Win32_Media_Audio == "on"]
-public unsafe func Windows_MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, cbBufSize: UInt32): Int32 {
+public unsafe func Windows_MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, cbBufSize: UInt32): Int32 {
     return MFInitMediaTypeFromWaveFormatEx(pMFType, pWaveFormat, cbBufSize)
 }
 
@@ -97962,21 +97981,21 @@ public struct IMFPMediaItemVtbl {
     public var GetUserData: CFunc<(CPointer<Unit>, CPointer<UIntNative>) -> Int32> = { _, _ => 0 }
     public var SetUserData: CFunc<(CPointer<Unit>, UIntNative) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetStartStopPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetStartStopPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetStartStopPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var SetStartStopPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _, _ => 0 }
     public var HasVideo: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var HasAudio: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var IsProtected: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetDuration: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetDuration: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetNumberOfStreams: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetStreamSelection: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetStreamSelection: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetStreamAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetStreamAttribute: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPresentationAttribute: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var GetCharacteristics: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var SetStreamSink: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -98057,14 +98076,14 @@ public class IMFPMediaItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetStartStopPosition(pguidStartPositionType: CPointer<GUID>, pvStartValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pguidStopPositionType: CPointer<GUID>, pvStopValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetStartStopPosition(pguidStartPositionType: CPointer<GUID>, pvStartValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pguidStopPositionType: CPointer<GUID>, pvStopValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStartStopPosition(__liveRaw, pguidStartPositionType, pvStartValue, pguidStopPositionType, pvStopValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetStartStopPosition(pguidStartPositionType: CPointer<GUID>, pvStartValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pguidStopPositionType: CPointer<GUID>, pvStopValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetStartStopPosition(pguidStartPositionType: CPointer<GUID>, pvStartValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pguidStopPositionType: CPointer<GUID>, pvStopValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetStartStopPosition(__liveRaw, pguidStartPositionType, pvStartValue, pguidStopPositionType, pvStopValue)
@@ -98089,7 +98108,7 @@ public class IMFPMediaItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetDuration(guidPositionType: CPointer<GUID>, pvDurationValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetDuration(guidPositionType: CPointer<GUID>, pvDurationValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDuration(__liveRaw, guidPositionType, pvDurationValue)
@@ -98114,14 +98133,14 @@ public class IMFPMediaItem <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetStreamAttribute(dwStreamIndex: UInt32, guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetStreamAttribute(dwStreamIndex: UInt32, guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStreamAttribute(__liveRaw, dwStreamIndex, guidMFAttribute, pvValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetPresentationAttribute(guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetPresentationAttribute(guidMFAttribute: CPointer<GUID>, pvValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPresentationAttribute(__liveRaw, guidMFAttribute, pvValue)
@@ -98157,11 +98176,11 @@ public struct IMFPMediaPlayerVtbl {
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var FrameStep: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var SetPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPosition: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetDuration: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetDuration: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var SetRate: CFunc<(CPointer<Unit>, Float32) -> Int32> = { _, _ => 0 }
     public var GetRate: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var GetSupportedRates: CFunc<(CPointer<Unit>, Int32, CPointer<Float32>, CPointer<Float32>) -> Int32> = { _, _, _, _ => 0 }
@@ -98262,21 +98281,21 @@ public class IMFPMediaPlayer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func SetPosition(guidPositionType: CPointer<GUID>, pvPositionValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func SetPosition(guidPositionType: CPointer<GUID>, pvPositionValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPosition(__liveRaw, guidPositionType, pvPositionValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetPosition(guidPositionType: CPointer<GUID>, pvPositionValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetPosition(guidPositionType: CPointer<GUID>, pvPositionValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPosition(__liveRaw, guidPositionType, pvPositionValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetDuration(guidPositionType: CPointer<GUID>, pvDurationValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetDuration(guidPositionType: CPointer<GUID>, pvDurationValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDuration(__liveRaw, guidPositionType, pvDurationValue)
@@ -98526,7 +98545,7 @@ public struct IMFStreamSinkVtbl {
     public var GetMediaTypeHandler: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProcessSample: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var PlaceMarker: CFunc<(CPointer<Unit>, MFSTREAMSINK_MARKER_TYPEAbi, CPointer<Win32__impl_l2.PROPVARIANTAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var PlaceMarker: CFunc<(CPointer<Unit>, MFSTREAMSINK_MARKER_TYPEAbi, CPointer<Win32_impl_p3.PROPVARIANTAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var Flush: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -98596,7 +98615,7 @@ public class IMFStreamSink <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func PlaceMarker(eMarkerType: MFSTREAMSINK_MARKER_TYPEAbi, pvarMarkerValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, pvarContextValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func PlaceMarker(eMarkerType: MFSTREAMSINK_MARKER_TYPEAbi, pvarMarkerValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, pvarContextValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PlaceMarker(__liveRaw, eMarkerType, pvarMarkerValue, pvarContextValue)
@@ -98725,7 +98744,7 @@ public struct MFP_EVENT_HEADER {
     public var hrEvent: Int32 = 0i32
     public var pMediaPlayer: IMFPMediaPlayer = IMFPMediaPlayer(CPointer<Unit>())
     public var eState: MFP_MEDIAPLAYER_STATE = MFP_MEDIAPLAYER_STATE()
-    public var pPropertyStore: Win32__impl_l2.IPropertyStore = Win32__impl_l2.IPropertyStore(CPointer<Unit>())
+    public var pPropertyStore: Win32_impl_p3.IPropertyStore = Win32_impl_p3.IPropertyStore(CPointer<Unit>())
     public init() {}
 }
 
@@ -98760,7 +98779,7 @@ extend MFP_EVENT_HEADER <: windows_core.CopyType & windows_core.RuntimeType & wi
         value.hrEvent = abi.hrEvent
         value.pMediaPlayer = IMFPMediaPlayer.fromAbiTake(abi.pMediaPlayer)
         value.eState = MFP_MEDIAPLAYER_STATE.assumeInitRef(abi.eState)
-        value.pPropertyStore = Win32__impl_l2.IPropertyStore.fromAbiTake(abi.pPropertyStore)
+        value.pPropertyStore = Win32_impl_p3.IPropertyStore.fromAbiTake(abi.pPropertyStore)
         return value
     }
     public static func fromAbi(abi: MFP_EVENT_HEADERAbi): Result<MFP_EVENT_HEADER> { Result<MFP_EVENT_HEADER>.Ok(MFP_EVENT_HEADER.assumeInitRef(abi)) }

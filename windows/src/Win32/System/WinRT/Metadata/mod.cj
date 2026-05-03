@@ -4,18 +4,29 @@
 package windows.Win32.System.WinRT.Metadata
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_polyfill.{packedReadUInt32, packedReadUInt8, packedWriteUInt32, packedWriteUInt8, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_WinRT_Metadata == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_Metadata == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
-import windows._impl_l0 as _impl_l0
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Win32_System_WinRT_Metadata == "on"]
 import windows_collections as windows_collections
 
 
@@ -4922,9 +4933,9 @@ public class IMetaDataDispenser <: InterfaceWrapperBase & ComInterface {
 public struct IMetaDataDispenserExVtbl {
     public var base_: IMetaDataDispenserVtbl = IMetaDataDispenserVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetOption: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SetOption: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetOption: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetOption: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var OpenScopeOnITypeInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetCORSystemDirectory: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -4974,14 +4985,14 @@ public class IMetaDataDispenserEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetOption(optionid: CPointer<GUID>, value: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SetOption(optionid: CPointer<GUID>, value: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOption(__liveRaw, optionid, value)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetOption(optionid: CPointer<GUID>, pvalue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetOption(optionid: CPointer<GUID>, pvalue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetOption(__liveRaw, optionid, pvalue)

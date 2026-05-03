@@ -4,15 +4,26 @@
 package windows.Win32.System.Com.Marshal
 
 import std.collection.*
+@When[Windows_Win32_System_Com_Marshal == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_System_Com_Marshal == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Com_Marshal == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Com_Marshal == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Com_Marshal == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Com_Marshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Com_Marshal == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Com_Marshal == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_Com_Marshal == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_Com_Marshal == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_Com_Marshal == "on"]
@@ -162,9 +173,9 @@ public class IMarshal2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_Com_Marshal == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMarshalingStreamVtbl {
-    public var base_: Win32__impl_l1.IStreamVtbl = Win32__impl_l1.IStreamVtbl()
+    public var base_: Win32_impl_p2.IStreamVtbl = Win32_impl_p2.IStreamVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetMarshalingContextAttribute: CFunc<(CPointer<Unit>, Win32__impl_l0.CO_MARSHALING_CONTEXT_ATTRIBUTESAbi, CPointer<UIntNative>) -> Int32> = { _, _, _ => 0 }
+    public var GetMarshalingContextAttribute: CFunc<(CPointer<Unit>, Win32_impl_p0.CO_MARSHALING_CONTEXT_ATTRIBUTESAbi, CPointer<UIntNative>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -201,7 +212,7 @@ public class IMarshalingStream <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMarshalingStream> {
-        return InterfaceDescriptor<IMarshalingStream>("IMarshalingStream", IMarshalingStream.iid(), Win32__impl_l1.IStream.iid(), takeIMarshalingStreamFromAbi, viewIMarshalingStream)
+        return InterfaceDescriptor<IMarshalingStream>("IMarshalingStream", IMarshalingStream.iid(), Win32_impl_p2.IStream.iid(), takeIMarshalingStreamFromAbi, viewIMarshalingStream)
     }
 
     public unsafe func vtbl(): IMarshalingStreamVtbl {
@@ -209,7 +220,7 @@ public class IMarshalingStream <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetMarshalingContextAttribute(attribute: Win32__impl_l0.CO_MARSHALING_CONTEXT_ATTRIBUTESAbi, pAttributeValue: CPointer<UIntNative>): Int32 {
+    public unsafe func GetMarshalingContextAttribute(attribute: Win32_impl_p0.CO_MARSHALING_CONTEXT_ATTRIBUTESAbi, pAttributeValue: CPointer<UIntNative>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMarshalingContextAttribute(__liveRaw, attribute, pAttributeValue)
@@ -446,81 +457,81 @@ public unsafe func Windows_CoUnmarshalInterface(pStm: CPointer<Unit>, riid: CPoi
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HACCEL>): Unit
+    func HACCEL_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HACCEL>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HACCEL>): Unit {
+public unsafe func Windows_HACCEL_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HACCEL>): Unit {
     HACCEL_UserFree(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HACCEL>): Unit
+    func HACCEL_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HACCEL>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HACCEL>): Unit {
+public unsafe func Windows_HACCEL_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HACCEL>): Unit {
     HACCEL_UserFree64(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8>
+    func HACCEL_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8> {
+public unsafe func Windows_HACCEL_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8> {
     return HACCEL_UserMarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8>
+    func HACCEL_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8> {
+public unsafe func Windows_HACCEL_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8> {
     return HACCEL_UserMarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HACCEL>): UInt32
+    func HACCEL_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HACCEL>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HACCEL>): UInt32 {
+public unsafe func Windows_HACCEL_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HACCEL>): UInt32 {
     return HACCEL_UserSize(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HACCEL>): UInt32
+    func HACCEL_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HACCEL>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HACCEL>): UInt32 {
+public unsafe func Windows_HACCEL_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HACCEL>): UInt32 {
     return HACCEL_UserSize64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8>
+    func HACCEL_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8> {
+public unsafe func Windows_HACCEL_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8> {
     return HACCEL_UserUnmarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HACCEL_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8>
+    func HACCEL_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HACCEL_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HACCEL_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HACCEL>): CPointer<UInt8> {
+public unsafe func Windows_HACCEL_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HACCEL>): CPointer<UInt8> {
     return HACCEL_UserUnmarshal64(param0, param1, param2)
 }
 
@@ -766,161 +777,161 @@ public unsafe func Windows_HGLOBAL_UserUnmarshal64(param0: CPointer<UInt32>, par
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HICON>): Unit
+    func HICON_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HICON>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HICON>): Unit {
+public unsafe func Windows_HICON_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HICON>): Unit {
     HICON_UserFree(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HICON>): Unit
+    func HICON_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HICON>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HICON>): Unit {
+public unsafe func Windows_HICON_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HICON>): Unit {
     HICON_UserFree64(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8>
+    func HICON_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8> {
+public unsafe func Windows_HICON_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8> {
     return HICON_UserMarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8>
+    func HICON_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8> {
+public unsafe func Windows_HICON_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8> {
     return HICON_UserMarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HICON>): UInt32
+    func HICON_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HICON>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HICON>): UInt32 {
+public unsafe func Windows_HICON_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HICON>): UInt32 {
     return HICON_UserSize(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HICON>): UInt32
+    func HICON_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HICON>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HICON>): UInt32 {
+public unsafe func Windows_HICON_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HICON>): UInt32 {
     return HICON_UserSize64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8>
+    func HICON_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8> {
+public unsafe func Windows_HICON_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8> {
     return HICON_UserUnmarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HICON_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8>
+    func HICON_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HICON_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HICON_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HICON>): CPointer<UInt8> {
+public unsafe func Windows_HICON_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HICON>): CPointer<UInt8> {
     return HICON_UserUnmarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HMENU>): Unit
+    func HMENU_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HMENU>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserFree == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HMENU>): Unit {
+public unsafe func Windows_HMENU_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HMENU>): Unit {
     HMENU_UserFree(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HMENU>): Unit
+    func HMENU_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HMENU>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserFree64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l0.HMENU>): Unit {
+public unsafe func Windows_HMENU_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p1.HMENU>): Unit {
     HMENU_UserFree64(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8>
+    func HMENU_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserMarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8> {
+public unsafe func Windows_HMENU_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8> {
     return HMENU_UserMarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8>
+    func HMENU_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserMarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8> {
+public unsafe func Windows_HMENU_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8> {
     return HMENU_UserMarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HMENU>): UInt32
+    func HMENU_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HMENU>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserSize == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HMENU>): UInt32 {
+public unsafe func Windows_HMENU_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HMENU>): UInt32 {
     return HMENU_UserSize(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HMENU>): UInt32
+    func HMENU_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HMENU>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserSize64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l0.HMENU>): UInt32 {
+public unsafe func Windows_HMENU_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p1.HMENU>): UInt32 {
     return HMENU_UserSize64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8>
+    func HMENU_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserUnmarshal == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8> {
+public unsafe func Windows_HMENU_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8> {
     return HMENU_UserUnmarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    func HMENU_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8>
+    func HMENU_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_HMENU_UserUnmarshal64 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_HMENU_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l0.HMENU>): CPointer<UInt8> {
+public unsafe func Windows_HMENU_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p1.HMENU>): CPointer<UInt8> {
     return HMENU_UserUnmarshal64(param0, param1, param2)
 }
 
@@ -1086,81 +1097,81 @@ public unsafe func Windows_HWND_UserUnmarshal64(param0: CPointer<UInt32>, param1
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l2.STGMEDIUMAbi>): Unit
+    func STGMEDIUM_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p3.STGMEDIUMAbi>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l2.STGMEDIUMAbi>): Unit {
+public unsafe func Windows_STGMEDIUM_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p3.STGMEDIUMAbi>): Unit {
     STGMEDIUM_UserFree(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l2.STGMEDIUMAbi>): Unit
+    func STGMEDIUM_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p3.STGMEDIUMAbi>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32__impl_l2.STGMEDIUMAbi>): Unit {
+public unsafe func Windows_STGMEDIUM_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_impl_p3.STGMEDIUMAbi>): Unit {
     STGMEDIUM_UserFree64(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8>
+    func STGMEDIUM_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8> {
+public unsafe func Windows_STGMEDIUM_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8> {
     return STGMEDIUM_UserMarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8>
+    func STGMEDIUM_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8> {
+public unsafe func Windows_STGMEDIUM_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8> {
     return STGMEDIUM_UserMarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): UInt32
+    func STGMEDIUM_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): UInt32 {
+public unsafe func Windows_STGMEDIUM_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): UInt32 {
     return STGMEDIUM_UserSize(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): UInt32
+    func STGMEDIUM_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): UInt32 {
+public unsafe func Windows_STGMEDIUM_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): UInt32 {
     return STGMEDIUM_UserSize64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8>
+    func STGMEDIUM_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8> {
+public unsafe func Windows_STGMEDIUM_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8> {
     return STGMEDIUM_UserUnmarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func STGMEDIUM_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8>
+    func STGMEDIUM_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLE32 == "on" && Windows_Win32_System_Com_Marshal_STGMEDIUM_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_STGMEDIUM_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32__impl_l2.STGMEDIUMAbi>): CPointer<UInt8> {
+public unsafe func Windows_STGMEDIUM_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_impl_p3.STGMEDIUMAbi>): CPointer<UInt8> {
     return STGMEDIUM_UserUnmarshal64(param0, param1, param2)
 }
 
@@ -1246,81 +1257,81 @@ public unsafe func Windows_BSTR_UserUnmarshal64(param0: CPointer<UInt32>, param1
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserFree == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserFree(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Unit
+    func LPSAFEARRAY_UserFree(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserFree == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserFree(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Unit {
+public unsafe func Windows_LPSAFEARRAY_UserFree(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Unit {
     LPSAFEARRAY_UserFree(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserFree64 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserFree64(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Unit
+    func LPSAFEARRAY_UserFree64(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Unit
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserFree64 == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserFree64(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Unit {
+public unsafe func Windows_LPSAFEARRAY_UserFree64(param0: CPointer<UInt32>, param1: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Unit {
     LPSAFEARRAY_UserFree64(param0, param1)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserMarshal == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8>
+    func LPSAFEARRAY_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserMarshal == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8> {
+public unsafe func Windows_LPSAFEARRAY_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8> {
     return LPSAFEARRAY_UserMarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserMarshal64 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8>
+    func LPSAFEARRAY_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserMarshal64 == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8> {
+public unsafe func Windows_LPSAFEARRAY_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8> {
     return LPSAFEARRAY_UserMarshal64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserSize == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): UInt32
+    func LPSAFEARRAY_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserSize == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): UInt32 {
+public unsafe func Windows_LPSAFEARRAY_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): UInt32 {
     return LPSAFEARRAY_UserSize(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserSize64 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): UInt32
+    func LPSAFEARRAY_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): UInt32
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserSize64 == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): UInt32 {
+public unsafe func Windows_LPSAFEARRAY_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): UInt32 {
     return LPSAFEARRAY_UserSize64(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserUnmarshal == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8>
+    func LPSAFEARRAY_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserUnmarshal == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8> {
+public unsafe func Windows_LPSAFEARRAY_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8> {
     return LPSAFEARRAY_UserUnmarshal(param0, param1, param2)
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserUnmarshal64 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func LPSAFEARRAY_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8>
+    func LPSAFEARRAY_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8>
 }
 
 @When[Windows_Win32_System_Com_Marshal == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_Marshal_LPSAFEARRAY_UserUnmarshal64 == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_LPSAFEARRAY_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): CPointer<UInt8> {
+public unsafe func Windows_LPSAFEARRAY_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): CPointer<UInt8> {
     return LPSAFEARRAY_UserUnmarshal64(param0, param1, param2)
 }
 

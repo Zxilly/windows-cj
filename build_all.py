@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
-"""Build bindgen, regenerate windows-sys, and optionally build the live module."""
+"""Build bindgen, regenerate windows-sys, and optionally build the live module.
+
+Pipeline order:
+1. windows-bindgen (catalog metadata: cfg_list/features/link-options.toml)
+2. windows-cfggen  (consumes catalogs + workspace [windows-cj].features ->
+                    cfg.toml at workspace root, mirrored into each consumer
+                    package because cjc resolves `--cfg .` against its own
+                    execution directory rather than the workspace root)
+3. windows-sys cjpm build
+"""
 
 from __future__ import annotations
 
 import argparse
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -12,6 +22,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent
 BINDGEN = ROOT / "windows-bindgen"
+CFGGEN = ROOT / "windows-cfggen"
 SYS = ROOT / "windows-sys"
 LIVE_SYS_SRC = SYS / "src"
 WINMD_INPUTS = (
@@ -25,6 +36,30 @@ GENERATED_ROOT_ARTIFACTS = (
     SYS / "link-options.toml",
 )
 GENERATED_SENTINEL = ".windows-cj-generated-output"
+
+# Packages whose cjpm.toml carries `--cfg .` and therefore expect cfg.toml in
+# the package directory. The cfggen output is mirrored into each one so that
+# `cjpm build` works whether invoked from the workspace root or from a member.
+CFG_CONSUMER_PACKAGES = (
+    "windows",
+    "windows-appsdk",
+    "windows-appsdk-sys",
+    "windows-collections",
+    "windows-future",
+    "windows-numerics",
+    "windows-sys",
+    "windows-webview2",
+    "windows-webview2-sys",
+)
+
+# Catalog roots that pair (features.toml, link-options.toml, cfg_list.toml).
+# Passed to windows-cfggen so it can merge feature universes across multiple
+# generated sys packages.
+CATALOG_ROOTS = (
+    SYS,
+    ROOT / "windows-appsdk-sys",
+    ROOT / "windows-webview2-sys",
+)
 
 ENV = dict(os.environ)
 ENV["cjHeapSize"] = os.environ.get("cjHeapSize", "32GB")
@@ -112,6 +147,16 @@ def parse_args() -> argparse.Namespace:
         "--skip-c-abi-audit",
         action="store_true",
         help="Skip the @C ABI ownership audit after generation.",
+    )
+    parser.add_argument(
+        "--skip-cfggen",
+        action="store_true",
+        help="Skip running windows-cfggen after regenerating bindings.",
+    )
+    parser.add_argument(
+        "--skip-cfggen-build",
+        action="store_true",
+        help="Skip rebuilding windows-cfggen before invoking it.",
     )
     args = parser.parse_args()
     if args.bindgen_jobs <= 0:
@@ -270,6 +315,42 @@ def audit_c_abi() -> None:
         sys.exit(result.returncode)
 
 
+def build_cfggen() -> None:
+    print("[cfggen] build windows-cfggen", flush=True)
+    result = run(["cjpm", "build"], CFGGEN)
+    if result.returncode != 0:
+        print("windows-cfggen build failed", flush=True)
+        sys.exit(result.returncode)
+
+
+def run_cfggen() -> None:
+    print("[cfggen] generate cfg.toml", flush=True)
+    command = ["cjpm", "run", "--", "gen", "--workspace-root", str(ROOT), "--out-dir", str(ROOT)]
+    for catalog_root in CATALOG_ROOTS:
+        if not catalog_root.exists():
+            continue
+        command.extend(["--catalog-root", str(catalog_root)])
+    result = run(command, CFGGEN)
+    if result.returncode != 0:
+        print("windows-cfggen run failed", flush=True)
+        sys.exit(result.returncode)
+    distribute_cfg_toml()
+
+
+def distribute_cfg_toml() -> None:
+    source = ROOT / "cfg.toml"
+    if not source.exists():
+        print(f"cfg.toml was not generated at {source}", flush=True)
+        sys.exit(1)
+    for package_name in CFG_CONSUMER_PACKAGES:
+        target_dir = ROOT / package_name
+        if not target_dir.exists():
+            continue
+        target = target_dir / "cfg.toml"
+        shutil.copyfile(source, target)
+    print(f"[cfggen] distributed cfg.toml to {len(CFG_CONSUMER_PACKAGES)} consumer packages", flush=True)
+
+
 def main() -> None:
     args = parse_args()
     out_path = Path(args.out)
@@ -288,6 +369,15 @@ def main() -> None:
         print("[audit] skipping C ABI ownership (--skip-c-abi-audit)", flush=True)
     else:
         audit_c_abi()
+
+    if args.skip_cfggen:
+        print("[cfggen] skipping (--skip-cfggen)", flush=True)
+    else:
+        if not args.skip_cfggen_build:
+            build_cfggen()
+        else:
+            print("[cfggen] skipping cfggen build (--skip-cfggen-build)", flush=True)
+        run_cfggen()
 
     if should_build_live_sys(out_path, filters, args):
         build_live_sys(args.sys_build_jobs)

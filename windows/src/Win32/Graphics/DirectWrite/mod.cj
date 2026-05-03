@@ -4,17 +4,30 @@
 package windows.Win32.Graphics.DirectWrite
 
 import std.collection.*
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_polyfill.{unionReadUInt8, unionWriteUInt8}
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_DirectWrite == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_DirectWrite == "on" && Windows_Win32_Globalization == "on"]
 import windows.Win32.Globalization as Win32_Globalization
+@When[Windows_Win32_Graphics_DirectWrite == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Graphics_DirectWrite == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Graphics_DirectWrite == "on"]
@@ -2103,7 +2116,7 @@ public struct DWRITE_GLYPH_IMAGE_DATA {
     public var imageDataSize: UInt32 = 0u32
     public var uniqueDataId: UInt32 = 0u32
     public var pixelsPerEm: UInt32 = 0u32
-    public var pixelSize: Win32__impl_l0.D2D_SIZE_U = Win32__impl_l0.D2D_SIZE_U()
+    public var pixelSize: Win32_impl_p0.D2D_SIZE_U = Win32_impl_p0.D2D_SIZE_U()
     public var horizontalLeftOrigin: Win32_Foundation.POINT = Win32_Foundation.POINT()
     public var horizontalRightOrigin: Win32_Foundation.POINT = Win32_Foundation.POINT()
     public var verticalTopOrigin: Win32_Foundation.POINT = Win32_Foundation.POINT()
@@ -2118,7 +2131,7 @@ public struct DWRITE_GLYPH_IMAGE_DATAAbi {
     public var imageDataSize: UInt32 = 0u32
     public var uniqueDataId: UInt32 = 0u32
     public var pixelsPerEm: UInt32 = 0u32
-    public var pixelSize: Win32__impl_l0.D2D_SIZE_UAbi = Win32__impl_l0.D2D_SIZE_UAbi()
+    public var pixelSize: Win32_impl_p0.D2D_SIZE_UAbi = Win32_impl_p0.D2D_SIZE_UAbi()
     public var horizontalLeftOrigin: Win32_Foundation.POINTAbi = Win32_Foundation.POINTAbi()
     public var horizontalRightOrigin: Win32_Foundation.POINTAbi = Win32_Foundation.POINTAbi()
     public var verticalTopOrigin: Win32_Foundation.POINTAbi = Win32_Foundation.POINTAbi()
@@ -2137,7 +2150,7 @@ extend DWRITE_GLYPH_IMAGE_DATA <: windows_core.CopyType & windows_core.RuntimeTy
         abi.imageDataSize = value.imageDataSize
         abi.uniqueDataId = value.uniqueDataId
         abi.pixelsPerEm = value.pixelsPerEm
-        abi.pixelSize = windows_core.projectTypedAbi(value.pixelSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>())
+        abi.pixelSize = windows_core.projectTypedAbi(value.pixelSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>())
         abi.horizontalLeftOrigin = windows_core.projectTypedAbi(value.horizontalLeftOrigin, windows_core.typeMarker<Win32_Foundation.POINT>())
         abi.horizontalRightOrigin = windows_core.projectTypedAbi(value.horizontalRightOrigin, windows_core.typeMarker<Win32_Foundation.POINT>())
         abi.verticalTopOrigin = windows_core.projectTypedAbi(value.verticalTopOrigin, windows_core.typeMarker<Win32_Foundation.POINT>())
@@ -2150,7 +2163,7 @@ extend DWRITE_GLYPH_IMAGE_DATA <: windows_core.CopyType & windows_core.RuntimeTy
         value.imageDataSize = abi.imageDataSize
         value.uniqueDataId = abi.uniqueDataId
         value.pixelsPerEm = abi.pixelsPerEm
-        value.pixelSize = windows_core.fromTypedAbi(abi.pixelSize, windows_core.typeMarker<Win32__impl_l0.D2D_SIZE_U>()).unwrap()
+        value.pixelSize = windows_core.fromTypedAbi(abi.pixelSize, windows_core.typeMarker<Win32_impl_p0.D2D_SIZE_U>()).unwrap()
         value.horizontalLeftOrigin = windows_core.fromTypedAbi(abi.horizontalLeftOrigin, windows_core.typeMarker<Win32_Foundation.POINT>()).unwrap()
         value.horizontalRightOrigin = windows_core.fromTypedAbi(abi.horizontalRightOrigin, windows_core.typeMarker<Win32_Foundation.POINT>()).unwrap()
         value.verticalTopOrigin = windows_core.fromTypedAbi(abi.verticalTopOrigin, windows_core.typeMarker<Win32_Foundation.POINT>()).unwrap()
@@ -8949,7 +8962,7 @@ extend DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_GLYPH <: windows_core.CopyType & w
 @When[Windows_Win32_Graphics_DirectWrite == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 public struct DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH {
     public var glyphIndex: UInt32 = 0u32
-    public var clipBox: Win32__impl_l0.D2D_RECT_F = Win32__impl_l0.D2D_RECT_F()
+    public var clipBox: Win32_impl_p0.D2D_RECT_F = Win32_impl_p0.D2D_RECT_F()
     public init() {}
 }
 
@@ -8957,7 +8970,7 @@ public struct DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH {
 @C
 public struct DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPHAbi {
     public var glyphIndex: UInt32 = 0u32
-    public var clipBox: Win32__impl_l0.D2D_RECT_FAbi = Win32__impl_l0.D2D_RECT_FAbi()
+    public var clipBox: Win32_impl_p0.D2D_RECT_FAbi = Win32_impl_p0.D2D_RECT_FAbi()
     public init() {}
 }
 
@@ -8969,13 +8982,13 @@ extend DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH <: windows_core.CopyTy
     public static func projectAbi(value: DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH): DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPHAbi {
         var abi = DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPHAbi()
         abi.glyphIndex = value.glyphIndex
-        abi.clipBox = windows_core.projectTypedAbi(value.clipBox, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>())
+        abi.clipBox = windows_core.projectTypedAbi(value.clipBox, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>())
         return abi
     }
     public static func assumeInitRef(abi: DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPHAbi): DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH {
         var value = DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH()
         value.glyphIndex = abi.glyphIndex
-        value.clipBox = windows_core.fromTypedAbi(abi.clipBox, windows_core.typeMarker<Win32__impl_l0.D2D_RECT_F>()).unwrap()
+        value.clipBox = windows_core.fromTypedAbi(abi.clipBox, windows_core.typeMarker<Win32_impl_p0.D2D_RECT_F>()).unwrap()
         return value
     }
     public static func fromAbi(abi: DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPHAbi): Result<DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH> { Result<DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH>.Ok(DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH.assumeInitRef(abi)) }
@@ -9339,7 +9352,7 @@ public class IDWriteLocalFontFileLoader <: InterfaceWrapperBase & ComInterface {
 public struct IDWritePaintReaderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var SetCurrentGlyph: CFunc<(CPointer<Unit>, UInt32, CPointer<DWRITE_PAINT_ELEMENTAbi>, UInt32, CPointer<Win32__impl_l0.D2D_RECT_FAbi>, CPointer<DWRITE_PAINT_ATTRIBUTESAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var SetCurrentGlyph: CFunc<(CPointer<Unit>, UInt32, CPointer<DWRITE_PAINT_ELEMENTAbi>, UInt32, CPointer<Win32_impl_p0.D2D_RECT_FAbi>, CPointer<DWRITE_PAINT_ATTRIBUTESAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SetTextColor: CFunc<(CPointer<Unit>, CPointer<DWRITE_COLOR_FAbi>) -> Int32> = { _, _ => 0 }
     public var SetColorPaletteIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var SetCustomColorPalette: CFunc<(CPointer<Unit>, CPointer<DWRITE_COLOR_FAbi>, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -9349,7 +9362,7 @@ public struct IDWritePaintReaderVtbl {
     public var MoveToNextSibling: CFunc<(CPointer<Unit>, CPointer<DWRITE_PAINT_ELEMENTAbi>, UInt32) -> Int32> = { _, _, _ => 0 }
     public var MoveToParent: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var GetGradientStops: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetGradientStops: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var GetGradientStopColors: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<DWRITE_PAINT_COLORAbi>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -9395,7 +9408,7 @@ public class IDWritePaintReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func SetCurrentGlyph(glyphIndex: UInt32, paintElement: CPointer<DWRITE_PAINT_ELEMENTAbi>, structSize: UInt32, clipBox: CPointer<Win32__impl_l0.D2D_RECT_FAbi>, glyphAttributes: CPointer<DWRITE_PAINT_ATTRIBUTESAbi>): Int32 {
+    public unsafe func SetCurrentGlyph(glyphIndex: UInt32, paintElement: CPointer<DWRITE_PAINT_ELEMENTAbi>, structSize: UInt32, clipBox: CPointer<Win32_impl_p0.D2D_RECT_FAbi>, glyphAttributes: CPointer<DWRITE_PAINT_ATTRIBUTESAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetCurrentGlyph(__liveRaw, glyphIndex, paintElement, structSize, clipBox, glyphAttributes)
@@ -9440,7 +9453,7 @@ public class IDWritePaintReader <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func GetGradientStops(firstGradientStopIndex: UInt32, gradientStopCount: UInt32, gradientStops: CPointer<Win32__impl_l1.D2D1_GRADIENT_STOPAbi>): Int32 {
+    public unsafe func GetGradientStops(firstGradientStopIndex: UInt32, gradientStopCount: UInt32, gradientStops: CPointer<Win32_impl_p1.D2D1_GRADIENT_STOPAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGradientStops(__liveRaw, firstGradientStopIndex, gradientStopCount, gradientStops)
@@ -11459,11 +11472,11 @@ public class IDWriteFactory3 <: InterfaceWrapperBase & ComInterface {
 public struct IDWriteFactory4Vtbl {
     public var base_: IDWriteFactory3Vtbl = IDWriteFactory3Vtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var TranslateColorGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<DWRITE_GLYPH_RUNAbi>, CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, DWRITE_GLYPH_IMAGE_FORMATSAbi, DWRITE_MEASURING_MODEAbi, CPointer<DWRITE_MATRIXAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var TranslateColorGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<DWRITE_GLYPH_RUNAbi>, CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, DWRITE_GLYPH_IMAGE_FORMATSAbi, DWRITE_MEASURING_MODEAbi, CPointer<DWRITE_MATRIXAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputeGlyphOrigins: CFunc<(CPointer<Unit>, CPointer<DWRITE_GLYPH_RUNAbi>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var ComputeGlyphOrigins: CFunc<(CPointer<Unit>, CPointer<DWRITE_GLYPH_RUNAbi>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var ComputeGlyphOrigins2: CFunc<(CPointer<Unit>, CPointer<DWRITE_GLYPH_RUNAbi>, DWRITE_MEASURING_MODEAbi, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<DWRITE_MATRIXAbi>, CPointer<Win32__impl_l0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var ComputeGlyphOrigins2: CFunc<(CPointer<Unit>, CPointer<DWRITE_GLYPH_RUNAbi>, DWRITE_MEASURING_MODEAbi, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<DWRITE_MATRIXAbi>, CPointer<Win32_impl_p0.D2D_POINT_2FAbi>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -11508,21 +11521,21 @@ public class IDWriteFactory4 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func TranslateColorGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, desiredGlyphImageFormats: DWRITE_GLYPH_IMAGE_FORMATSAbi, measuringMode: DWRITE_MEASURING_MODEAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, colorPaletteIndex: UInt32, colorLayers: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func TranslateColorGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, desiredGlyphImageFormats: DWRITE_GLYPH_IMAGE_FORMATSAbi, measuringMode: DWRITE_MEASURING_MODEAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, colorPaletteIndex: UInt32, colorLayers: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TranslateColorGlyphRun(__liveRaw, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, measuringMode, worldAndDpiTransform, colorPaletteIndex, colorLayers)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputeGlyphOrigins(glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphOrigins: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Int32 {
+    public unsafe func ComputeGlyphOrigins(glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphOrigins: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputeGlyphOrigins(__liveRaw, glyphRun, baselineOrigin, glyphOrigins)
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func ComputeGlyphOrigins2(glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, measuringMode: DWRITE_MEASURING_MODEAbi, baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, glyphOrigins: CPointer<Win32__impl_l0.D2D_POINT_2FAbi>): Int32 {
+    public unsafe func ComputeGlyphOrigins2(glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, measuringMode: DWRITE_MEASURING_MODEAbi, baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, glyphOrigins: CPointer<Win32_impl_p0.D2D_POINT_2FAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ComputeGlyphOrigins2(__liveRaw, glyphRun, measuringMode, baselineOrigin, worldAndDpiTransform, glyphOrigins)
@@ -11776,7 +11789,7 @@ public class IDWriteFactory7 <: InterfaceWrapperBase & ComInterface {
 public struct IDWriteFactory8Vtbl {
     public var base_: IDWriteFactory7Vtbl = IDWriteFactory7Vtbl()
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public var TranslateColorGlyphRun: CFunc<(CPointer<Unit>, Win32__impl_l0.D2D_POINT_2FAbi, CPointer<DWRITE_GLYPH_RUNAbi>, CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, DWRITE_GLYPH_IMAGE_FORMATSAbi, DWRITE_PAINT_FEATURE_LEVELAbi, DWRITE_MEASURING_MODEAbi, CPointer<DWRITE_MATRIXAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var TranslateColorGlyphRun: CFunc<(CPointer<Unit>, Win32_impl_p0.D2D_POINT_2FAbi, CPointer<DWRITE_GLYPH_RUNAbi>, CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, DWRITE_GLYPH_IMAGE_FORMATSAbi, DWRITE_PAINT_FEATURE_LEVELAbi, DWRITE_MEASURING_MODEAbi, CPointer<DWRITE_MATRIXAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -11821,7 +11834,7 @@ public class IDWriteFactory8 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct2D_Common == "on"]
-    public unsafe func TranslateColorGlyphRun(baselineOrigin: Win32__impl_l0.D2D_POINT_2FAbi, glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, desiredGlyphImageFormats: DWRITE_GLYPH_IMAGE_FORMATSAbi, paintFeatureLevel: DWRITE_PAINT_FEATURE_LEVELAbi, measuringMode: DWRITE_MEASURING_MODEAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, colorPaletteIndex: UInt32, colorEnumerator: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func TranslateColorGlyphRun(baselineOrigin: Win32_impl_p0.D2D_POINT_2FAbi, glyphRun: CPointer<DWRITE_GLYPH_RUNAbi>, glyphRunDescription: CPointer<DWRITE_GLYPH_RUN_DESCRIPTIONAbi>, desiredGlyphImageFormats: DWRITE_GLYPH_IMAGE_FORMATSAbi, paintFeatureLevel: DWRITE_PAINT_FEATURE_LEVELAbi, measuringMode: DWRITE_MEASURING_MODEAbi, worldAndDpiTransform: CPointer<DWRITE_MATRIXAbi>, colorPaletteIndex: UInt32, colorEnumerator: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TranslateColorGlyphRun(__liveRaw, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, paintFeatureLevel, measuringMode, worldAndDpiTransform, colorPaletteIndex, colorEnumerator)

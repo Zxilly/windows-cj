@@ -4,15 +4,25 @@
 package windows.Win32.Devices.Sensors
 
 import std.collection.*
+@When[Windows_Win32_Devices_Sensors == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Sensors == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_Sensors == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_Sensors == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_Sensors == "on" && Windows_Win32_Devices_PortableDevices == "on"]
 import windows.Win32.Devices.PortableDevices as Win32_Devices_PortableDevices
+@When[Windows_Win32_Devices_Sensors == "on" && Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
+@When[Windows_Win32_Devices_Sensors == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_Sensors == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_Sensors == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_Devices_Sensors == "on"]
 import windows_core as windows_core
 
 
@@ -453,7 +463,7 @@ public struct ISensorDataReportVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetTimestamp: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.SYSTEMTIMEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetSensorValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetSensorValue: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Devices_PortableDevices == "on"]
     public var GetSensorValues: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -506,7 +516,7 @@ public class ISensorDataReport <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetSensorValue(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetSensorValue(pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSensorValue(__liveRaw, pKey, pValue)
@@ -1216,7 +1226,7 @@ extend SENSOR_STATE <: windows_core.CopyType & windows_core.RuntimeType & window
 @When[Windows_Win32_Devices_Sensors == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
 public struct SENSOR_VALUE_PAIR {
     public var Key: Win32_Foundation.PROPERTYKEY = Win32_Foundation.PROPERTYKEY()
-    public var Value: Win32__impl_l2.PROPVARIANT = Win32__impl_l2.PROPVARIANT()
+    public var Value: Win32_impl_p3.PROPVARIANT = Win32_impl_p3.PROPVARIANT()
     public init() {}
 }
 
@@ -1224,7 +1234,7 @@ public struct SENSOR_VALUE_PAIR {
 @C
 public struct SENSOR_VALUE_PAIRAbi {
     public var Key: Win32_Foundation.PROPERTYKEYAbi = Win32_Foundation.PROPERTYKEYAbi()
-    public var Value: Win32__impl_l2.PROPVARIANTAbi = Win32__impl_l2.PROPVARIANTAbi()
+    public var Value: Win32_impl_p3.PROPVARIANTAbi = Win32_impl_p3.PROPVARIANTAbi()
     public init() {}
 }
 
@@ -1236,13 +1246,13 @@ extend SENSOR_VALUE_PAIR <: windows_core.CopyType & windows_core.RuntimeType & w
     public static func projectAbi(value: SENSOR_VALUE_PAIR): SENSOR_VALUE_PAIRAbi {
         var abi = SENSOR_VALUE_PAIRAbi()
         abi.Key = windows_core.projectTypedAbi(value.Key, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>())
-        abi.Value = windows_core.projectTypedAbi(value.Value, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>())
+        abi.Value = windows_core.projectTypedAbi(value.Value, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>())
         return abi
     }
     public static func assumeInitRef(abi: SENSOR_VALUE_PAIRAbi): SENSOR_VALUE_PAIR {
         var value = SENSOR_VALUE_PAIR()
         value.Key = windows_core.fromTypedAbi(abi.Key, windows_core.typeMarker<Win32_Foundation.PROPERTYKEY>()).unwrap()
-        value.Value = windows_core.fromTypedAbi(abi.Value, windows_core.typeMarker<Win32__impl_l2.PROPVARIANT>()).unwrap()
+        value.Value = windows_core.fromTypedAbi(abi.Value, windows_core.typeMarker<Win32_impl_p3.PROPVARIANT>()).unwrap()
         return value
     }
     public static func fromAbi(abi: SENSOR_VALUE_PAIRAbi): Result<SENSOR_VALUE_PAIR> { Result<SENSOR_VALUE_PAIR>.Ok(SENSOR_VALUE_PAIR.assumeInitRef(abi)) }
@@ -2080,21 +2090,21 @@ public unsafe func Windows_GetPerformanceTime(TimeMs: CPointer<UInt32>): Int32 {
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromCLSIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: members len=param[1]
-    func InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromCLSIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return InitPropVariantFromCLSIDArray(members, size, ppropvar)
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return InitPropVariantFromFloat(fltVal, ppropvar)
 }
 
@@ -2251,11 +2261,11 @@ public unsafe func Windows_PropKeyFindKeyGetNthUshort(pList: CPointer<SENSOR_COL
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return PropKeyFindKeyGetPropVariant(pList, pKey, TypeCheck, pValue)
 }
 
@@ -2281,11 +2291,11 @@ public unsafe func Windows_PropKeyFindKeyGetUshort(pList: CPointer<SENSOR_COLLEC
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeySetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeySetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, TypeCheck: UInt8, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return PropKeyFindKeySetPropVariant(pList, pKey, TypeCheck, pValue)
 }
 
@@ -2295,11 +2305,11 @@ foreign {
     // param-hint: PropVariantSize optional
     // param-hint: PropVariantPointer optional
     // param-hint: RemappedType optional
-    func PropVariantGetInformation(PropVariantValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>): Int32
+    func PropVariantGetInformation(PropVariantValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropVariantGetInformation == "on" && Windows_Win32_Devices_Properties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_PropVariantGetInformation(PropVariantValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>): Int32 {
+public unsafe func Windows_PropVariantGetInformation(PropVariantValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>): Int32 {
     return PropVariantGetInformation(PropVariantValue, PropVariantOffset, PropVariantSize, PropVariantPointer, RemappedType)
 }
 
@@ -2327,11 +2337,11 @@ public unsafe func Windows_PropertiesListGetFillableCount(BufferSizeBytes: UInt3
 foreign {
     // param-hint: pKey optional
     // param-hint: pValue optional
-    func SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+    func SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32
 }
 
 @When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SensorCollectionGetAt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-public unsafe func Windows_SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+public unsafe func Windows_SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LISTAbi>, pKey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pValue: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
     return SensorCollectionGetAt(Index, pSensorsList, pKey, pValue)
 }
 
@@ -2370,7 +2380,7 @@ public struct ISensorVtbl {
     public var GetType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GetFriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32__impl_l2.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetProperty: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.PROPERTYKEYAbi>, CPointer<Win32_impl_p3.PROPVARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Devices_PortableDevices == "on"]
     public var GetProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Devices_PortableDevices == "on"]
@@ -2452,7 +2462,7 @@ public class ISensor <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-    public unsafe func GetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pProperty: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    public unsafe func GetProperty(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pProperty: CPointer<Win32_impl_p3.PROPVARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProperty(__liveRaw, key, pProperty)

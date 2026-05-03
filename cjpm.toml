@@ -27,4 +27,5 @@ members = [
 ]
 
 [windows-cj]
-features = []
+# Smoke baseline. Add namespaces from windows-sys/features.toml as needed.
+features = ["Windows_Win32_Foundation"]

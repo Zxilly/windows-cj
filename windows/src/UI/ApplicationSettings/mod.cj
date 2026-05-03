@@ -4,17 +4,29 @@
 package windows.UI.ApplicationSettings
 
 import std.collection.*
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_core as windows_core
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_interface as windows_interface
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_UI_ApplicationSettings == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_UI_ApplicationSettings == "on" && Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_UI_ApplicationSettings == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_UI_ApplicationSettings == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_collections as windows_collections
+@When[Windows_UI_ApplicationSettings == "on"]
 import windows_future as windows_future
 
 
@@ -96,7 +108,7 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs2 <: InterfaceWrappe
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAccountsSettingsPaneCommandsRequestedEventArgs2", IAccountsSettingsPaneCommandsRequestedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAccountsSettingsPaneCommandsRequestedEventArgs2Vtbl", "IAccountsSettingsPaneCommandsRequestedEventArgs2", "IAccountsSettingsPaneCommandsRequestedEventArgs2_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAccountsSettingsPaneCommandsRequestedEventArgs2", IAccountsSettingsPaneCommandsRequestedEventArgs2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAccountsSettingsPaneCommandsRequestedEventArgs2Vtbl", "IAccountsSettingsPaneCommandsRequestedEventArgs2", "IAccountsSettingsPaneCommandsRequestedEventArgs2_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAccountsSettingsPaneCommandsRequestedEventArgs2.runtimeType())
         return schema
     }
@@ -126,12 +138,12 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs2 <: InterfaceWrappe
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -272,7 +284,7 @@ public class IAccountsSettingsPaneStatics3 <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAccountsSettingsPaneStatics3", IAccountsSettingsPaneStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAccountsSettingsPaneStatics3Vtbl", "IAccountsSettingsPaneStatics3", "IAccountsSettingsPaneStatics3_Impl", [InterfaceMethodSchema("ShowManageAccountsForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowAddAccountForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAccountsSettingsPaneStatics3", IAccountsSettingsPaneStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IAccountsSettingsPaneStatics3Vtbl", "IAccountsSettingsPaneStatics3", "IAccountsSettingsPaneStatics3_Impl", [InterfaceMethodSchema("ShowManageAccountsForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowAddAccountForUserAsync", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAccountsSettingsPaneStatics3.runtimeType())
         return schema
     }
@@ -302,7 +314,7 @@ public class IAccountsSettingsPaneStatics3 <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_System == "on"]
-    public unsafe func ShowManageAccountsForUserAsync(user: _impl_l1.User): windows_future.IAsyncAction {
+    public unsafe func ShowManageAccountsForUserAsync(user: impl_p1.User): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowManageAccountsForUserAsync(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -311,7 +323,7 @@ public class IAccountsSettingsPaneStatics3 <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_System == "on"]
-    public unsafe func ShowAddAccountForUserAsync(user: _impl_l1.User): windows_future.IAsyncAction {
+    public unsafe func ShowAddAccountForUserAsync(user: impl_p1.User): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ShowAddAccountForUserAsync(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -855,7 +867,7 @@ public class AccountsSettingsPane <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func ShowManageAccountsForUserAsync(user: _impl_l1.User): windows_future.IAsyncAction {
+    public static unsafe func ShowManageAccountsForUserAsync(user: impl_p1.User): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<AccountsSettingsPane, IAccountsSettingsPaneStatics3>().unwrap()) {
             result__ = Some(factory__.ShowManageAccountsForUserAsync(user))
@@ -867,7 +879,7 @@ public class AccountsSettingsPane <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func ShowAddAccountForUserAsync(user: _impl_l1.User): windows_future.IAsyncAction {
+    public static unsafe func ShowAddAccountForUserAsync(user: impl_p1.User): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<AccountsSettingsPane, IAccountsSettingsPaneStatics3>().unwrap()) {
             result__ = Some(factory__.ShowAddAccountForUserAsync(user))
@@ -1119,7 +1131,7 @@ public class CredentialCommand <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_PasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func get_PasswordCredential(): impl_p0.PasswordCredential {
         return defaultInterface().get_PasswordCredential()
     }
 
@@ -1128,7 +1140,7 @@ public class CredentialCommand <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func CreateCredentialCommand(passwordCredential: _impl_l0.PasswordCredential): CredentialCommand {
+    public static unsafe func CreateCredentialCommand(passwordCredential: impl_p0.PasswordCredential): CredentialCommand {
         var result__: Option<CredentialCommand> = Option<CredentialCommand>.None
         try (factory__ = windows_core.factory<CredentialCommand, ICredentialCommandFactory>().unwrap()) {
             result__ = Some(factory__.CreateCredentialCommand(passwordCredential))
@@ -1140,7 +1152,7 @@ public class CredentialCommand <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func CreateCredentialCommandWithHandler(passwordCredential: _impl_l0.PasswordCredential, deleted: CredentialCommandCredentialDeletedHandler): CredentialCommand {
+    public static unsafe func CreateCredentialCommandWithHandler(passwordCredential: impl_p0.PasswordCredential, deleted: CredentialCommandCredentialDeletedHandler): CredentialCommand {
         var result__: Option<CredentialCommand> = Option<CredentialCommand>.None
         try (factory__ = windows_core.factory<CredentialCommand, ICredentialCommandFactory>().unwrap()) {
             result__ = Some(factory__.CreateCredentialCommandWithHandler(passwordCredential, deleted))
@@ -1247,19 +1259,15 @@ public class CredentialCommandCredentialDeletedHandler <: InterfaceWrapperBase &
 extend CredentialCommandCredentialDeletedHandler <: windows_core.Interface<CredentialCommandCredentialDeletedHandler> {}
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class CredentialCommandCredentialDeletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface CredentialCommandCredentialDeletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class CredentialCommandCredentialDeletedHandlerInvoker <: CredentialCommandCredentialDeletedHandlerInvokerErased {
-    public open func Invoke(command: InParam<CredentialCommand>): Unit {
-        ()
-    }
+private interface CredentialCommandCredentialDeletedHandlerInvoker <: CredentialCommandCredentialDeletedHandlerInvokerErased {
+    public func Invoke(command: InParam<CredentialCommand>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<CredentialCommand>(CredentialCommand.viewOf(arg0)))
         return S_OK.value
     }
@@ -1279,7 +1287,7 @@ private class CredentialCommandCredentialDeletedHandlerBox <: CredentialCommandC
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(command: InParam<CredentialCommand>): Unit {
+    public func Invoke(command: InParam<CredentialCommand>): Unit {
         invoke_(command)
     }
 }
@@ -1790,7 +1798,7 @@ public class ICredentialCommand <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICredentialCommand", ICredentialCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialCommandVtbl", "ICredentialCommand", "ICredentialCommand_Impl", [InterfaceMethodSchema("get_PasswordCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialDeleted", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommandCredentialDeletedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICredentialCommand", ICredentialCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialCommandVtbl", "ICredentialCommand", "ICredentialCommand_Impl", [InterfaceMethodSchema("get_PasswordCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CredentialDeleted", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommandCredentialDeletedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICredentialCommand.runtimeType())
         return schema
     }
@@ -1820,12 +1828,12 @@ public class ICredentialCommand <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_PasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func get_PasswordCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_PasswordCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     public unsafe func CredentialDeleted(): CredentialCommandCredentialDeletedHandler {
@@ -1891,7 +1899,7 @@ public class ICredentialCommandFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICredentialCommandFactory", ICredentialCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialCommandFactoryVtbl", "ICredentialCommandFactory", "ICredentialCommandFactory_Impl", [InterfaceMethodSchema("CreateCredentialCommand", 6, [InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCredentialCommandWithHandler", 7, [InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deleted", "CPointer<Unit>", "InParam<CredentialCommandCredentialDeletedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICredentialCommandFactory", ICredentialCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICredentialCommandFactoryVtbl", "ICredentialCommandFactory", "ICredentialCommandFactory_Impl", [InterfaceMethodSchema("CreateCredentialCommand", 6, [InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCredentialCommandWithHandler", 7, [InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("deleted", "CPointer<Unit>", "InParam<CredentialCommandCredentialDeletedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<CredentialCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICredentialCommandFactory.runtimeType())
         return schema
     }
@@ -1921,7 +1929,7 @@ public class ICredentialCommandFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func CreateCredentialCommand(passwordCredential: _impl_l0.PasswordCredential): CredentialCommand {
+    public unsafe func CreateCredentialCommand(passwordCredential: impl_p0.PasswordCredential): CredentialCommand {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCredentialCommand(asRaw(), passwordCredential.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1930,7 +1938,7 @@ public class ICredentialCommandFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func CreateCredentialCommandWithHandler(passwordCredential: _impl_l0.PasswordCredential, deleted: CredentialCommandCredentialDeletedHandler): CredentialCommand {
+    public unsafe func CreateCredentialCommandWithHandler(passwordCredential: impl_p0.PasswordCredential, deleted: CredentialCommandCredentialDeletedHandler): CredentialCommand {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCredentialCommandWithHandler(asRaw(), passwordCredential.asRaw(), deleted.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2536,7 +2544,7 @@ public class IWebAccountCommand <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebAccountCommand", IWebAccountCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountCommandVtbl", "IWebAccountCommand", "IWebAccountCommand_Impl", [InterfaceMethodSchema("get_WebAccount", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invoked", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountCommandInvokedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Actions", 8, [InterfaceParameterSchema("result", "CPointer<SupportedWebAccountActionsAbi>", "OutSlot<SupportedWebAccountActions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebAccountCommand", IWebAccountCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountCommandVtbl", "IWebAccountCommand", "IWebAccountCommand_Impl", [InterfaceMethodSchema("get_WebAccount", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.WebAccount>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invoked", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountCommandInvokedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Actions", 8, [InterfaceParameterSchema("result", "CPointer<SupportedWebAccountActionsAbi>", "OutSlot<SupportedWebAccountActions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebAccountCommand.runtimeType())
         return schema
     }
@@ -2566,12 +2574,12 @@ public class IWebAccountCommand <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_WebAccount(): _impl_l1.WebAccount {
+    public unsafe func get_WebAccount(): impl_p1.WebAccount {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_WebAccount(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.WebAccount.fromAbiTake(result__)
+        return impl_p1.WebAccount.fromAbiTake(result__)
     }
 
     public unsafe func Invoked(): WebAccountCommandInvokedHandler {
@@ -2641,7 +2649,7 @@ public class IWebAccountCommandFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebAccountCommandFactory", IWebAccountCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountCommandFactoryVtbl", "IWebAccountCommandFactory", "IWebAccountCommandFactory_Impl", [InterfaceMethodSchema("CreateWebAccountCommand", 6, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("invoked", "CPointer<Unit>", "InParam<WebAccountCommandInvokedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("actions", "SupportedWebAccountActionsAbi", "SupportedWebAccountActions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebAccountCommandFactory", IWebAccountCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountCommandFactoryVtbl", "IWebAccountCommandFactory", "IWebAccountCommandFactory_Impl", [InterfaceMethodSchema("CreateWebAccountCommand", 6, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<impl_p1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("invoked", "CPointer<Unit>", "InParam<WebAccountCommandInvokedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("actions", "SupportedWebAccountActionsAbi", "SupportedWebAccountActions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebAccountCommandFactory.runtimeType())
         return schema
     }
@@ -2671,7 +2679,7 @@ public class IWebAccountCommandFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func CreateWebAccountCommand(webAccount: _impl_l1.WebAccount, invoked: WebAccountCommandInvokedHandler, actions: SupportedWebAccountActions): WebAccountCommand {
+    public unsafe func CreateWebAccountCommand(webAccount: impl_p1.WebAccount, invoked: WebAccountCommandInvokedHandler, actions: SupportedWebAccountActions): WebAccountCommand {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWebAccountCommand(asRaw(), webAccount.asRaw(), invoked.asRaw(), windows_core.projectTypedAbi(actions, windows_core.typeMarker<SupportedWebAccountActions>()), CPointer<CPointer<Unit>>(inout result__))
@@ -2731,7 +2739,7 @@ public class IWebAccountProviderCommand <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebAccountProviderCommand", IWebAccountProviderCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountProviderCommandVtbl", "IWebAccountProviderCommand", "IWebAccountProviderCommand_Impl", [InterfaceMethodSchema("get_WebAccountProvider", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.WebAccountProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invoked", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountProviderCommandInvokedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebAccountProviderCommand", IWebAccountProviderCommand.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountProviderCommandVtbl", "IWebAccountProviderCommand", "IWebAccountProviderCommand_Impl", [InterfaceMethodSchema("get_WebAccountProvider", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.WebAccountProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Invoked", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountProviderCommandInvokedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebAccountProviderCommand.runtimeType())
         return schema
     }
@@ -2761,12 +2769,12 @@ public class IWebAccountProviderCommand <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_WebAccountProvider(): _impl_l1.WebAccountProvider {
+    public unsafe func get_WebAccountProvider(): impl_p1.WebAccountProvider {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_WebAccountProvider(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.WebAccountProvider.fromAbiTake(result__)
+        return impl_p1.WebAccountProvider.fromAbiTake(result__)
     }
 
     public unsafe func Invoked(): WebAccountProviderCommandInvokedHandler {
@@ -2828,7 +2836,7 @@ public class IWebAccountProviderCommandFactory <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebAccountProviderCommandFactory", IWebAccountProviderCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountProviderCommandFactoryVtbl", "IWebAccountProviderCommandFactory", "IWebAccountProviderCommandFactory_Impl", [InterfaceMethodSchema("CreateWebAccountProviderCommand", 6, [InterfaceParameterSchema("webAccountProvider", "CPointer<Unit>", "InParam<_impl_l1.WebAccountProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("invoked", "CPointer<Unit>", "InParam<WebAccountProviderCommandInvokedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountProviderCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebAccountProviderCommandFactory", IWebAccountProviderCommandFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebAccountProviderCommandFactoryVtbl", "IWebAccountProviderCommandFactory", "IWebAccountProviderCommandFactory_Impl", [InterfaceMethodSchema("CreateWebAccountProviderCommand", 6, [InterfaceParameterSchema("webAccountProvider", "CPointer<Unit>", "InParam<impl_p1.WebAccountProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("invoked", "CPointer<Unit>", "InParam<WebAccountProviderCommandInvokedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebAccountProviderCommand>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebAccountProviderCommandFactory.runtimeType())
         return schema
     }
@@ -2858,7 +2866,7 @@ public class IWebAccountProviderCommandFactory <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func CreateWebAccountProviderCommand(webAccountProvider: _impl_l1.WebAccountProvider, invoked: WebAccountProviderCommandInvokedHandler): WebAccountProviderCommand {
+    public unsafe func CreateWebAccountProviderCommand(webAccountProvider: impl_p1.WebAccountProvider, invoked: WebAccountProviderCommandInvokedHandler): WebAccountProviderCommand {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWebAccountProviderCommand(asRaw(), webAccountProvider.asRaw(), invoked.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3366,7 +3374,7 @@ public class WebAccountCommand <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_WebAccount(): _impl_l1.WebAccount {
+    public unsafe func get_WebAccount(): impl_p1.WebAccount {
         return defaultInterface().get_WebAccount()
     }
 
@@ -3379,7 +3387,7 @@ public class WebAccountCommand <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func CreateWebAccountCommand(webAccount: _impl_l1.WebAccount, invoked: WebAccountCommandInvokedHandler, actions: SupportedWebAccountActions): WebAccountCommand {
+    public static unsafe func CreateWebAccountCommand(webAccount: impl_p1.WebAccount, invoked: WebAccountCommandInvokedHandler, actions: SupportedWebAccountActions): WebAccountCommand {
         var result__: Option<WebAccountCommand> = Option<WebAccountCommand>.None
         try (factory__ = windows_core.factory<WebAccountCommand, IWebAccountCommandFactory>().unwrap()) {
             result__ = Some(factory__.CreateWebAccountCommand(webAccount, invoked, actions))
@@ -3486,19 +3494,15 @@ public class WebAccountCommandInvokedHandler <: InterfaceWrapperBase & ComInterf
 extend WebAccountCommandInvokedHandler <: windows_core.Interface<WebAccountCommandInvokedHandler> {}
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class WebAccountCommandInvokedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface WebAccountCommandInvokedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class WebAccountCommandInvokedHandlerInvoker <: WebAccountCommandInvokedHandlerInvokerErased {
-    public open func Invoke(command: InParam<WebAccountCommand>, args: InParam<WebAccountInvokedArgs>): Unit {
-        ()
-    }
+private interface WebAccountCommandInvokedHandlerInvoker <: WebAccountCommandInvokedHandlerInvokerErased {
+    public func Invoke(command: InParam<WebAccountCommand>, args: InParam<WebAccountInvokedArgs>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(InParam<WebAccountCommand>(WebAccountCommand.viewOf(arg0)), InParam<WebAccountInvokedArgs>(WebAccountInvokedArgs.viewOf(arg1)))
         return S_OK.value
     }
@@ -3518,7 +3522,7 @@ private class WebAccountCommandInvokedHandlerBox <: WebAccountCommandInvokedHand
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(command: InParam<WebAccountCommand>, args: InParam<WebAccountInvokedArgs>): Unit {
+    public func Invoke(command: InParam<WebAccountCommand>, args: InParam<WebAccountInvokedArgs>): Unit {
         invoke_(command, args)
     }
 }
@@ -3604,7 +3608,7 @@ public class WebAccountProviderCommand <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func get_WebAccountProvider(): _impl_l1.WebAccountProvider {
+    public unsafe func get_WebAccountProvider(): impl_p1.WebAccountProvider {
         return defaultInterface().get_WebAccountProvider()
     }
 
@@ -3613,7 +3617,7 @@ public class WebAccountProviderCommand <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func CreateWebAccountProviderCommand(webAccountProvider: _impl_l1.WebAccountProvider, invoked: WebAccountProviderCommandInvokedHandler): WebAccountProviderCommand {
+    public static unsafe func CreateWebAccountProviderCommand(webAccountProvider: impl_p1.WebAccountProvider, invoked: WebAccountProviderCommandInvokedHandler): WebAccountProviderCommand {
         var result__: Option<WebAccountProviderCommand> = Option<WebAccountProviderCommand>.None
         try (factory__ = windows_core.factory<WebAccountProviderCommand, IWebAccountProviderCommandFactory>().unwrap()) {
             result__ = Some(factory__.CreateWebAccountProviderCommand(webAccountProvider, invoked))
@@ -3720,19 +3724,15 @@ public class WebAccountProviderCommandInvokedHandler <: InterfaceWrapperBase & C
 extend WebAccountProviderCommandInvokedHandler <: windows_core.Interface<WebAccountProviderCommandInvokedHandler> {}
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class WebAccountProviderCommandInvokedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface WebAccountProviderCommandInvokedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32
 }
 
 @When[Windows_UI_ApplicationSettings == "on"]
-private open class WebAccountProviderCommandInvokedHandlerInvoker <: WebAccountProviderCommandInvokedHandlerInvokerErased {
-    public open func Invoke(command: InParam<WebAccountProviderCommand>): Unit {
-        ()
-    }
+private interface WebAccountProviderCommandInvokedHandlerInvoker <: WebAccountProviderCommandInvokedHandlerInvokerErased {
+    public func Invoke(command: InParam<WebAccountProviderCommand>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         this.Invoke(InParam<WebAccountProviderCommand>(WebAccountProviderCommand.viewOf(arg0)))
         return S_OK.value
     }
@@ -3752,7 +3752,7 @@ private class WebAccountProviderCommandInvokedHandlerBox <: WebAccountProviderCo
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(command: InParam<WebAccountProviderCommand>): Unit {
+    public func Invoke(command: InParam<WebAccountProviderCommand>): Unit {
         invoke_(command)
     }
 }

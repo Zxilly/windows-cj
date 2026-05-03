@@ -4,17 +4,27 @@
 package windows.Win32.System.Rpc
 
 import std.collection.*
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_polyfill.{unionReadInt16, unionReadInt32, unionReadUInt64, unionWriteInt16, unionWriteInt32, unionWriteUInt64}
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Rpc == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Rpc == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_core as windows_core
 
 
@@ -3557,7 +3567,7 @@ public struct NDR_USER_MARSHAL_INFO_LEVEL1 {
     public var BufferSize: UInt32 = 0u32
     public var pfnAllocate: IntNative = 0
     public var pfnFree: IntNative = 0
-    public var pRpcChannelBuffer: Win32__impl_l1.IRpcChannelBuffer = Win32__impl_l1.IRpcChannelBuffer(CPointer<Unit>())
+    public var pRpcChannelBuffer: Win32_impl_p2.IRpcChannelBuffer = Win32_impl_p2.IRpcChannelBuffer(CPointer<Unit>())
     public var Reserved: VArray<UIntNative, $5> = VArray<UIntNative, $5>(repeat: 0)
     public init() {}
 }
@@ -3595,7 +3605,7 @@ extend NDR_USER_MARSHAL_INFO_LEVEL1 <: windows_core.CopyType & windows_core.Runt
         value.BufferSize = abi.BufferSize
         value.pfnAllocate = abi.pfnAllocate
         value.pfnFree = abi.pfnFree
-        value.pRpcChannelBuffer = Win32__impl_l1.IRpcChannelBuffer.fromAbiTake(abi.pRpcChannelBuffer)
+        value.pRpcChannelBuffer = Win32_impl_p2.IRpcChannelBuffer.fromAbiTake(abi.pRpcChannelBuffer)
         value.Reserved = abi.Reserved
         return value
     }
@@ -5780,7 +5790,7 @@ public struct RPC_SECURITY_QOS {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public init() {}
 }
 
@@ -5790,7 +5800,7 @@ public struct RPC_SECURITY_QOSAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public init() {}
 }
 
@@ -5804,7 +5814,7 @@ extend RPC_SECURITY_QOS <: windows_core.CopyType & windows_core.RuntimeType & wi
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         return abi
     }
     public static func assumeInitRef(abi: RPC_SECURITY_QOSAbi): RPC_SECURITY_QOS {
@@ -5812,7 +5822,7 @@ extend RPC_SECURITY_QOS <: windows_core.CopyType & windows_core.RuntimeType & wi
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         return value
     }
     public static func fromAbi(abi: RPC_SECURITY_QOSAbi): Result<RPC_SECURITY_QOS> { Result<RPC_SECURITY_QOS>.Ok(RPC_SECURITY_QOS.assumeInitRef(abi)) }
@@ -8148,7 +8158,7 @@ public struct RPC_SECURITY_QOS_V2_A {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V2_A__u_e__Union = RPC_SECURITY_QOS_V2_A__u_e__Union()
     public init() {}
@@ -8160,7 +8170,7 @@ public struct RPC_SECURITY_QOS_V2_AAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V2_A__u_e__Union = RPC_SECURITY_QOS_V2_A__u_e__Union()
     public init() {}
@@ -8176,7 +8186,7 @@ extend RPC_SECURITY_QOS_V2_A <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         return abi
@@ -8186,7 +8196,7 @@ extend RPC_SECURITY_QOS_V2_A <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         return value
@@ -8234,7 +8244,7 @@ public struct RPC_SECURITY_QOS_V2_W {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V2_W__u_e__Union = RPC_SECURITY_QOS_V2_W__u_e__Union()
     public init() {}
@@ -8246,7 +8256,7 @@ public struct RPC_SECURITY_QOS_V2_WAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V2_W__u_e__Union = RPC_SECURITY_QOS_V2_W__u_e__Union()
     public init() {}
@@ -8262,7 +8272,7 @@ extend RPC_SECURITY_QOS_V2_W <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         return abi
@@ -8272,7 +8282,7 @@ extend RPC_SECURITY_QOS_V2_W <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         return value
@@ -8320,7 +8330,7 @@ public struct RPC_SECURITY_QOS_V3_A {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V3_A__u_e__Union = RPC_SECURITY_QOS_V3_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8333,7 +8343,7 @@ public struct RPC_SECURITY_QOS_V3_AAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V3_A__u_e__Union = RPC_SECURITY_QOS_V3_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8350,7 +8360,7 @@ extend RPC_SECURITY_QOS_V3_A <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8361,7 +8371,7 @@ extend RPC_SECURITY_QOS_V3_A <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -8410,7 +8420,7 @@ public struct RPC_SECURITY_QOS_V3_W {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V3_W__u_e__Union = RPC_SECURITY_QOS_V3_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8423,7 +8433,7 @@ public struct RPC_SECURITY_QOS_V3_WAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V3_W__u_e__Union = RPC_SECURITY_QOS_V3_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8440,7 +8450,7 @@ extend RPC_SECURITY_QOS_V3_W <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8451,7 +8461,7 @@ extend RPC_SECURITY_QOS_V3_W <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -8500,7 +8510,7 @@ public struct RPC_SECURITY_QOS_V4_A {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V4_A__u_e__Union = RPC_SECURITY_QOS_V4_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8514,7 +8524,7 @@ public struct RPC_SECURITY_QOS_V4_AAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V4_A__u_e__Union = RPC_SECURITY_QOS_V4_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8532,7 +8542,7 @@ extend RPC_SECURITY_QOS_V4_A <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8544,7 +8554,7 @@ extend RPC_SECURITY_QOS_V4_A <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -8594,7 +8604,7 @@ public struct RPC_SECURITY_QOS_V4_W {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V4_W__u_e__Union = RPC_SECURITY_QOS_V4_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8608,7 +8618,7 @@ public struct RPC_SECURITY_QOS_V4_WAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V4_W__u_e__Union = RPC_SECURITY_QOS_V4_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8626,7 +8636,7 @@ extend RPC_SECURITY_QOS_V4_W <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8638,7 +8648,7 @@ extend RPC_SECURITY_QOS_V4_W <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -8688,7 +8698,7 @@ public struct RPC_SECURITY_QOS_V5_A {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V5_A__u_e__Union = RPC_SECURITY_QOS_V5_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8703,7 +8713,7 @@ public struct RPC_SECURITY_QOS_V5_AAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V5_A__u_e__Union = RPC_SECURITY_QOS_V5_A__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8722,7 +8732,7 @@ extend RPC_SECURITY_QOS_V5_A <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8735,7 +8745,7 @@ extend RPC_SECURITY_QOS_V5_A <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -8786,7 +8796,7 @@ public struct RPC_SECURITY_QOS_V5_W {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
     public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVEL = Win32__impl_l0.RPC_C_IMP_LEVEL()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVEL = Win32_impl_p0.RPC_C_IMP_LEVEL()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
     public var u: RPC_SECURITY_QOS_V5_W__u_e__Union = RPC_SECURITY_QOS_V5_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8801,7 +8811,7 @@ public struct RPC_SECURITY_QOS_V5_WAbi {
     public var Version: UInt32 = 0u32
     public var Capabilities: RPC_C_QOS_CAPABILITIESAbi = RPC_C_QOS_CAPABILITIESAbi()
     public var IdentityTracking: RPC_C_QOS_IDENTITYAbi = RPC_C_QOS_IDENTITYAbi()
-    public var ImpersonationType: Win32__impl_l0.RPC_C_IMP_LEVELAbi = Win32__impl_l0.RPC_C_IMP_LEVELAbi()
+    public var ImpersonationType: Win32_impl_p0.RPC_C_IMP_LEVELAbi = Win32_impl_p0.RPC_C_IMP_LEVELAbi()
     public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPEAbi = RPC_C_AUTHN_INFO_TYPEAbi()
     public var u: RPC_SECURITY_QOS_V5_W__u_e__Union = RPC_SECURITY_QOS_V5_W__u_e__Union()
     public var Sid: CPointer<Unit> = CPointer<Unit>()
@@ -8820,7 +8830,7 @@ extend RPC_SECURITY_QOS_V5_W <: windows_core.CopyType & windows_core.RuntimeType
         abi.Version = value.Version
         abi.Capabilities = RPC_C_QOS_CAPABILITIES.projectAbi(value.Capabilities)
         abi.IdentityTracking = RPC_C_QOS_IDENTITY.projectAbi(value.IdentityTracking)
-        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>())
+        abi.ImpersonationType = windows_core.projectTypedAbi(value.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>())
         abi.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.projectAbi(value.AdditionalSecurityInfoType)
         abi.u = value.u
         abi.Sid = value.Sid
@@ -8833,7 +8843,7 @@ extend RPC_SECURITY_QOS_V5_W <: windows_core.CopyType & windows_core.RuntimeType
         value.Version = abi.Version
         value.Capabilities = RPC_C_QOS_CAPABILITIES.assumeInitRef(abi.Capabilities)
         value.IdentityTracking = RPC_C_QOS_IDENTITY.assumeInitRef(abi.IdentityTracking)
-        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32__impl_l0.RPC_C_IMP_LEVEL>()).unwrap()
+        value.ImpersonationType = windows_core.fromTypedAbi(abi.ImpersonationType, windows_core.typeMarker<Win32_impl_p0.RPC_C_IMP_LEVEL>()).unwrap()
         value.AdditionalSecurityInfoType = RPC_C_AUTHN_INFO_TYPE.assumeInitRef(abi.AdditionalSecurityInfoType)
         value.u = abi.u
         value.Sid = abi.Sid
@@ -13660,21 +13670,21 @@ public unsafe func Windows_RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: In
 
 @When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameA == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
 }
 
 @When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+public unsafe func Windows_RpcCertGeneratePrincipalNameA(Context: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
     return RpcCertGeneratePrincipalNameA(Context, Flags, pBuffer)
 }
 
 @When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameW == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
 }
 
 @When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+public unsafe func Windows_RpcCertGeneratePrincipalNameW(Context: CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
     return RpcCertGeneratePrincipalNameW(Context, Flags, pBuffer)
 }
 
@@ -16031,7 +16041,7 @@ public struct MIDL_STUB_MESSAGE {
     public var pvDestContext: CPointer<Unit> = CPointer<Unit>()
     public var SavedContextHandles: CPointer<CPointer<NDR_SCONTEXTAbi>> = CPointer<CPointer<NDR_SCONTEXTAbi>>()
     public var ParamNumber: Int32 = 0i32
-    public var pRpcChannelBuffer: Win32__impl_l1.IRpcChannelBuffer = Win32__impl_l1.IRpcChannelBuffer(CPointer<Unit>())
+    public var pRpcChannelBuffer: Win32_impl_p2.IRpcChannelBuffer = Win32_impl_p2.IRpcChannelBuffer(CPointer<Unit>())
     public var pArrayInfo: CPointer<ARRAY_INFOAbi> = CPointer<ARRAY_INFOAbi>()
     public var SizePtrCountArray: CPointer<UInt32> = CPointer<UInt32>()
     public var SizePtrOffsetArray: CPointer<UInt32> = CPointer<UInt32>()
@@ -16228,7 +16238,7 @@ extend MIDL_STUB_MESSAGE <: windows_core.CopyType & windows_core.RuntimeType & w
         value.pvDestContext = abi.pvDestContext
         value.SavedContextHandles = abi.SavedContextHandles
         value.ParamNumber = abi.ParamNumber
-        value.pRpcChannelBuffer = Win32__impl_l1.IRpcChannelBuffer.fromAbiTake(abi.pRpcChannelBuffer)
+        value.pRpcChannelBuffer = Win32_impl_p2.IRpcChannelBuffer.fromAbiTake(abi.pRpcChannelBuffer)
         value.pArrayInfo = abi.pArrayInfo
         value.SizePtrCountArray = abi.SizePtrCountArray
         value.SizePtrOffsetArray = abi.SizePtrOffsetArray

@@ -4,16 +4,27 @@
 package windows.Networking.ServiceDiscovery.Dnssd
 
 import std.collection.*
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
 import windows_future as windows_future
 
 
@@ -192,7 +203,7 @@ public class IDnssdRegistrationResult <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDnssdRegistrationResult", IDnssdRegistrationResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdRegistrationResultVtbl", "IDnssdRegistrationResult", "IDnssdRegistrationResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<DnssdRegistrationStatusAbi>", "OutSlot<DnssdRegistrationStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IPAddress", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasInstanceNameChanged", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDnssdRegistrationResult", IDnssdRegistrationResult.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdRegistrationResultVtbl", "IDnssdRegistrationResult", "IDnssdRegistrationResult_Impl", [InterfaceMethodSchema("Status", 6, [InterfaceParameterSchema("result", "CPointer<DnssdRegistrationStatusAbi>", "OutSlot<DnssdRegistrationStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IPAddress", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HasInstanceNameChanged", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDnssdRegistrationResult.runtimeType())
         return schema
     }
@@ -230,12 +241,12 @@ public class IDnssdRegistrationResult <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func IPAddress(): _impl_l1.HostName {
+    public unsafe func IPAddress(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.IPAddress(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func HasInstanceNameChanged(): Bool {
@@ -342,7 +353,7 @@ public class DnssdRegistrationResult <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func IPAddress(): _impl_l1.HostName {
+    public unsafe func IPAddress(): impl_p1.HostName {
         return defaultInterface().IPAddress()
     }
 
@@ -452,7 +463,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDnssdServiceInstance", IDnssdServiceInstance.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdServiceInstanceVtbl", "IDnssdServiceInstance", "IDnssdServiceInstance_Impl", [InterfaceMethodSchema("DnssdServiceInstanceName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDnssdServiceInstanceName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_HostName", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHostName", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Port", 10, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPort", 11, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Priority", 12, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPriority", 13, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Weight", 14, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWeight", 15, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TextAttributes", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterStreamSocketListenerAsync", 17, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<_impl_l2.StreamSocketListener>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterStreamSocketListenerAsync2", 18, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<_impl_l2.StreamSocketListener>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDatagramSocketAsync", 19, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<_impl_l2.DatagramSocket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDatagramSocketAsync2", 20, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<_impl_l2.DatagramSocket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<_impl_l1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDnssdServiceInstance", IDnssdServiceInstance.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdServiceInstanceVtbl", "IDnssdServiceInstance", "IDnssdServiceInstance_Impl", [InterfaceMethodSchema("DnssdServiceInstanceName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDnssdServiceInstanceName", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("get_HostName", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetHostName", 9, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Port", 10, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPort", 11, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Priority", 12, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPriority", 13, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Weight", 14, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWeight", 15, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TextAttributes", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMap<windows_core.HString, windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterStreamSocketListenerAsync", 17, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<impl_p2.StreamSocketListener>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterStreamSocketListenerAsync2", 18, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<impl_p2.StreamSocketListener>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDatagramSocketAsync", 19, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<impl_p1.DatagramSocket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RegisterDatagramSocketAsync2", 20, [InterfaceParameterSchema("socket", "CPointer<Unit>", "InParam<impl_p1.DatagramSocket>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("adapter", "CPointer<Unit>", "InParam<impl_p1.NetworkAdapter>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<DnssdRegistrationResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDnssdServiceInstance.runtimeType())
         return schema
     }
@@ -496,16 +507,16 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func get_HostName(): _impl_l1.HostName {
+    public unsafe func get_HostName(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_HostName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetHostName(value: _impl_l1.HostName): Unit {
+    public unsafe func SetHostName(value: impl_p1.HostName): Unit {
         let v = vtbl()
         let hr = v.SetHostName(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -563,7 +574,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterStreamSocketListenerAsync(socket: _impl_l2.StreamSocketListener): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterStreamSocketListenerAsync(socket: impl_p2.StreamSocketListener): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegisterStreamSocketListenerAsync(asRaw(), socket.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -572,7 +583,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking_Connectivity == "on" && Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterStreamSocketListenerAsync2(socket: _impl_l2.StreamSocketListener, adapter: _impl_l1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterStreamSocketListenerAsync2(socket: impl_p2.StreamSocketListener, adapter: impl_p1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegisterStreamSocketListenerAsync2(asRaw(), socket.asRaw(), adapter.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -581,7 +592,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterDatagramSocketAsync(socket: _impl_l2.DatagramSocket): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterDatagramSocketAsync(socket: impl_p1.DatagramSocket): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegisterDatagramSocketAsync(asRaw(), socket.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -590,7 +601,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Networking_Connectivity == "on" && Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterDatagramSocketAsync2(socket: _impl_l2.DatagramSocket, adapter: _impl_l1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterDatagramSocketAsync2(socket: impl_p1.DatagramSocket, adapter: impl_p1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RegisterDatagramSocketAsync2(asRaw(), socket.asRaw(), adapter.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -687,12 +698,12 @@ public class DnssdServiceInstance <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func get_HostName(): _impl_l1.HostName {
+    public unsafe func get_HostName(): impl_p1.HostName {
         return defaultInterface().get_HostName()
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetHostName(value: _impl_l1.HostName): Unit {
+    public unsafe func SetHostName(value: impl_p1.HostName): Unit {
         defaultInterface().SetHostName(value)
     }
 
@@ -726,22 +737,22 @@ public class DnssdServiceInstance <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterStreamSocketListenerAsync(socket: _impl_l2.StreamSocketListener): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterStreamSocketListenerAsync(socket: impl_p2.StreamSocketListener): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         return defaultInterface().RegisterStreamSocketListenerAsync(socket)
     }
 
     @When[Windows_Networking_Connectivity == "on" && Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterStreamSocketListenerAsync2(socket: _impl_l2.StreamSocketListener, adapter: _impl_l1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterStreamSocketListenerAsync2(socket: impl_p2.StreamSocketListener, adapter: impl_p1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         return defaultInterface().RegisterStreamSocketListenerAsync2(socket, adapter)
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterDatagramSocketAsync(socket: _impl_l2.DatagramSocket): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterDatagramSocketAsync(socket: impl_p1.DatagramSocket): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         return defaultInterface().RegisterDatagramSocketAsync(socket)
     }
 
     @When[Windows_Networking_Connectivity == "on" && Windows_Networking_Sockets == "on"]
-    public unsafe func RegisterDatagramSocketAsync2(socket: _impl_l2.DatagramSocket, adapter: _impl_l1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
+    public unsafe func RegisterDatagramSocketAsync2(socket: impl_p1.DatagramSocket, adapter: impl_p1.NetworkAdapter): windows_future.IAsyncOperation<DnssdRegistrationResult> {
         return defaultInterface().RegisterDatagramSocketAsync2(socket, adapter)
     }
 
@@ -750,7 +761,7 @@ public class DnssdServiceInstance <: InterfaceWrapperBase & ComInterface & windo
     }
 
     @When[Windows_Networking == "on"]
-    public static unsafe func Create(dnssdServiceInstanceName: windows_core.HString, hostName: _impl_l1.HostName, port: UInt16): DnssdServiceInstance {
+    public static unsafe func Create(dnssdServiceInstanceName: windows_core.HString, hostName: impl_p1.HostName, port: UInt16): DnssdServiceInstance {
         var result__: Option<DnssdServiceInstance> = Option<DnssdServiceInstance>.None
         try (factory__ = windows_core.factory<DnssdServiceInstance, IDnssdServiceInstanceFactory>().unwrap()) {
             result__ = Some(factory__.Create(dnssdServiceInstanceName, hostName, port))
@@ -1074,7 +1085,7 @@ public class IDnssdServiceInstanceFactory <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDnssdServiceInstanceFactory", IDnssdServiceInstanceFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdServiceInstanceFactoryVtbl", "IDnssdServiceInstanceFactory", "IDnssdServiceInstanceFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("dnssdServiceInstanceName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostName", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("port", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DnssdServiceInstance>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDnssdServiceInstanceFactory", IDnssdServiceInstanceFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IDnssdServiceInstanceFactoryVtbl", "IDnssdServiceInstanceFactory", "IDnssdServiceInstanceFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("dnssdServiceInstanceName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("hostName", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("port", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<DnssdServiceInstance>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDnssdServiceInstanceFactory.runtimeType())
         return schema
     }
@@ -1104,7 +1115,7 @@ public class IDnssdServiceInstanceFactory <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func Create(dnssdServiceInstanceName: windows_core.HString, hostName: _impl_l1.HostName, port: UInt16): DnssdServiceInstance {
+    public unsafe func Create(dnssdServiceInstanceName: windows_core.HString, hostName: impl_p1.HostName, port: UInt16): DnssdServiceInstance {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), dnssdServiceInstanceName.asRaw(), hostName.asRaw(), port, CPointer<CPointer<Unit>>(inout result__))

@@ -4,15 +4,24 @@
 package windows.Win32.System.Hypervisor
 
 import std.collection.*
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_polyfill.{unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+@When[Windows_Win32_System_Hypervisor == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_Hypervisor == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Hypervisor == "on" && Windows_Win32_System_HostComputeSystem == "on"]
 import windows.Win32.System.HostComputeSystem as Win32_System_HostComputeSystem
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_System_Hypervisor == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_System_Hypervisor == "on"]
@@ -1587,7 +1596,7 @@ extend REGISTER_ID <: windows_core.CopyType & windows_core.RuntimeType & windows
 
 @When[Windows_Win32_System_Hypervisor == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct SOCKADDR_HV {
-    public var Family: Win32__impl_l0.ADDRESS_FAMILY = Win32__impl_l0.ADDRESS_FAMILY()
+    public var Family: Win32_impl_p0.ADDRESS_FAMILY = Win32_impl_p0.ADDRESS_FAMILY()
     public var Reserved: UInt16 = 0u16
     public var VmId: GuidValue = GuidValue()
     public var ServiceId: GuidValue = GuidValue()
@@ -1597,7 +1606,7 @@ public struct SOCKADDR_HV {
 @When[Windows_Win32_System_Hypervisor == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct SOCKADDR_HVAbi {
-    public var Family: Win32__impl_l0.ADDRESS_FAMILYAbi = Win32__impl_l0.ADDRESS_FAMILYAbi()
+    public var Family: Win32_impl_p0.ADDRESS_FAMILYAbi = Win32_impl_p0.ADDRESS_FAMILYAbi()
     public var Reserved: UInt16 = 0u16
     public var VmId: GUID = GUID()
     public var ServiceId: GUID = GUID()
@@ -1611,7 +1620,7 @@ extend SOCKADDR_HV <: windows_core.CopyType & windows_core.RuntimeType & windows
     public static func signature(): String { "struct(Windows.Win32.System.Hypervisor.SOCKADDR_HV;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);u2;g16;g16)" }
     public static func projectAbi(value: SOCKADDR_HV): SOCKADDR_HVAbi {
         var abi = SOCKADDR_HVAbi()
-        abi.Family = windows_core.projectTypedAbi(value.Family, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>())
+        abi.Family = windows_core.projectTypedAbi(value.Family, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>())
         abi.Reserved = value.Reserved
         abi.VmId = value.VmId.toRaw()
         abi.ServiceId = value.ServiceId.toRaw()
@@ -1619,7 +1628,7 @@ extend SOCKADDR_HV <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
     public static func assumeInitRef(abi: SOCKADDR_HVAbi): SOCKADDR_HV {
         var value = SOCKADDR_HV()
-        value.Family = windows_core.fromTypedAbi(abi.Family, windows_core.typeMarker<Win32__impl_l0.ADDRESS_FAMILY>()).unwrap()
+        value.Family = windows_core.fromTypedAbi(abi.Family, windows_core.typeMarker<Win32_impl_p0.ADDRESS_FAMILY>()).unwrap()
         value.Reserved = abi.Reserved
         value.VmId = GuidValue(abi.VmId)
         value.ServiceId = GuidValue(abi.ServiceId)
@@ -14265,11 +14274,11 @@ public unsafe func Windows_WHvSetVirtualProcessorXsaveState(Partition: WHV_PARTI
 
 @When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVpciDevicePowerState == "on" && Windows_Win32_System_Power == "on"]
 foreign {
-    func WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32__impl_l0.DEVICE_POWER_STATEAbi): Int32
+    func WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32_impl_p0.DEVICE_POWER_STATEAbi): Int32
 }
 
 @When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVpciDevicePowerState == "on" && Windows_Win32_System_Power == "on"]
-public unsafe func Windows_WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32__impl_l0.DEVICE_POWER_STATEAbi): Int32 {
+public unsafe func Windows_WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32_impl_p0.DEVICE_POWER_STATEAbi): Int32 {
     return WHvSetVpciDevicePowerState(Partition, LogicalDeviceId, PowerState)
 }
 

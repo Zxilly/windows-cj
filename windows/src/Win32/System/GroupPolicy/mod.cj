@@ -4,17 +4,30 @@
 package windows.Win32.System.GroupPolicy
 
 import std.collection.*
+@When[Windows_Win32_System_GroupPolicy == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_GroupPolicy == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_GroupPolicy == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_GroupPolicy == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Wmi == "on"]
 import windows.Win32.System.Wmi as Win32_System_Wmi
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_GroupPolicy == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_GroupPolicy == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_System_GroupPolicy == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_GroupPolicy == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_System_GroupPolicy == "on"]
@@ -2507,7 +2520,7 @@ public class IGPEInformation <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMAsyncCancelVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Cancel: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -2545,7 +2558,7 @@ public class IGPMAsyncCancel <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMAsyncCancel> {
-        return InterfaceDescriptor<IGPMAsyncCancel>("IGPMAsyncCancel", IGPMAsyncCancel.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMAsyncCancelFromAbi, viewIGPMAsyncCancel)
+        return InterfaceDescriptor<IGPMAsyncCancel>("IGPMAsyncCancel", IGPMAsyncCancel.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMAsyncCancelFromAbi, viewIGPMAsyncCancel)
     }
 
     public unsafe func vtbl(): IGPMAsyncCancelVtbl {
@@ -2562,10 +2575,10 @@ public class IGPMAsyncCancel <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMBackupCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2604,7 +2617,7 @@ public class IGPMBackupCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMBackupCollection> {
-        return InterfaceDescriptor<IGPMBackupCollection>("IGPMBackupCollection", IGPMBackupCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMBackupCollectionFromAbi, viewIGPMBackupCollection)
+        return InterfaceDescriptor<IGPMBackupCollection>("IGPMBackupCollection", IGPMBackupCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMBackupCollectionFromAbi, viewIGPMBackupCollection)
     }
 
     public unsafe func vtbl(): IGPMBackupCollectionVtbl {
@@ -2618,7 +2631,7 @@ public class IGPMBackupCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -2635,10 +2648,10 @@ public class IGPMBackupCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMCSECollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2677,7 +2690,7 @@ public class IGPMCSECollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMCSECollection> {
-        return InterfaceDescriptor<IGPMCSECollection>("IGPMCSECollection", IGPMCSECollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMCSECollectionFromAbi, viewIGPMCSECollection)
+        return InterfaceDescriptor<IGPMCSECollection>("IGPMCSECollection", IGPMCSECollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMCSECollectionFromAbi, viewIGPMCSECollection)
     }
 
     public unsafe func vtbl(): IGPMCSECollectionVtbl {
@@ -2691,7 +2704,7 @@ public class IGPMCSECollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -2708,7 +2721,7 @@ public class IGPMCSECollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMClientSideExtensionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IsUserEnabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -2749,7 +2762,7 @@ public class IGPMClientSideExtension <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMClientSideExtension> {
-        return InterfaceDescriptor<IGPMClientSideExtension>("IGPMClientSideExtension", IGPMClientSideExtension.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMClientSideExtensionFromAbi, viewIGPMClientSideExtension)
+        return InterfaceDescriptor<IGPMClientSideExtension>("IGPMClientSideExtension", IGPMClientSideExtension.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMClientSideExtensionFromAbi, viewIGPMClientSideExtension)
     }
 
     public unsafe func vtbl(): IGPMClientSideExtensionVtbl {
@@ -2784,7 +2797,7 @@ public class IGPMClientSideExtension <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMConstantsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var PermGPOApply: CFunc<(CPointer<Unit>, CPointer<GPMPermissionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var PermGPORead: CFunc<(CPointer<Unit>, CPointer<GPMPermissionTypeAbi>) -> Int32> = { _, _ => 0 }
     public var PermGPOEdit: CFunc<(CPointer<Unit>, CPointer<GPMPermissionTypeAbi>) -> Int32> = { _, _ => 0 }
@@ -2881,7 +2894,7 @@ public class IGPMConstants <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMConstants> {
-        return InterfaceDescriptor<IGPMConstants>("IGPMConstants", IGPMConstants.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMConstantsFromAbi, viewIGPMConstants)
+        return InterfaceDescriptor<IGPMConstants>("IGPMConstants", IGPMConstants.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMConstantsFromAbi, viewIGPMConstants)
     }
 
     public unsafe func vtbl(): IGPMConstantsVtbl {
@@ -3405,10 +3418,10 @@ public class IGPMConstants2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMGPOCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3447,7 +3460,7 @@ public class IGPMGPOCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMGPOCollection> {
-        return InterfaceDescriptor<IGPMGPOCollection>("IGPMGPOCollection", IGPMGPOCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMGPOCollectionFromAbi, viewIGPMGPOCollection)
+        return InterfaceDescriptor<IGPMGPOCollection>("IGPMGPOCollection", IGPMGPOCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMGPOCollectionFromAbi, viewIGPMGPOCollection)
     }
 
     public unsafe func vtbl(): IGPMGPOCollectionVtbl {
@@ -3461,7 +3474,7 @@ public class IGPMGPOCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3478,10 +3491,10 @@ public class IGPMGPOCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMGPOLinksCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3520,7 +3533,7 @@ public class IGPMGPOLinksCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMGPOLinksCollection> {
-        return InterfaceDescriptor<IGPMGPOLinksCollection>("IGPMGPOLinksCollection", IGPMGPOLinksCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMGPOLinksCollectionFromAbi, viewIGPMGPOLinksCollection)
+        return InterfaceDescriptor<IGPMGPOLinksCollection>("IGPMGPOLinksCollection", IGPMGPOLinksCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMGPOLinksCollectionFromAbi, viewIGPMGPOLinksCollection)
     }
 
     public unsafe func vtbl(): IGPMGPOLinksCollectionVtbl {
@@ -3534,7 +3547,7 @@ public class IGPMGPOLinksCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3551,7 +3564,7 @@ public class IGPMGPOLinksCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMMapEntryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Destination: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DestinationOption: CFunc<(CPointer<Unit>, CPointer<GPMDestinationOptionAbi>) -> Int32> = { _, _ => 0 }
@@ -3592,7 +3605,7 @@ public class IGPMMapEntry <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMMapEntry> {
-        return InterfaceDescriptor<IGPMMapEntry>("IGPMMapEntry", IGPMMapEntry.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMMapEntryFromAbi, viewIGPMMapEntry)
+        return InterfaceDescriptor<IGPMMapEntry>("IGPMMapEntry", IGPMMapEntry.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMMapEntryFromAbi, viewIGPMMapEntry)
     }
 
     public unsafe func vtbl(): IGPMMapEntryVtbl {
@@ -3627,10 +3640,10 @@ public class IGPMMapEntry <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMMapEntryCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3669,7 +3682,7 @@ public class IGPMMapEntryCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMMapEntryCollection> {
-        return InterfaceDescriptor<IGPMMapEntryCollection>("IGPMMapEntryCollection", IGPMMapEntryCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMMapEntryCollectionFromAbi, viewIGPMMapEntryCollection)
+        return InterfaceDescriptor<IGPMMapEntryCollection>("IGPMMapEntryCollection", IGPMMapEntryCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMMapEntryCollectionFromAbi, viewIGPMMapEntryCollection)
     }
 
     public unsafe func vtbl(): IGPMMapEntryCollectionVtbl {
@@ -3683,7 +3696,7 @@ public class IGPMMapEntryCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3700,10 +3713,10 @@ public class IGPMMapEntryCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMSOMCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3742,7 +3755,7 @@ public class IGPMSOMCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMSOMCollection> {
-        return InterfaceDescriptor<IGPMSOMCollection>("IGPMSOMCollection", IGPMSOMCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMSOMCollectionFromAbi, viewIGPMSOMCollection)
+        return InterfaceDescriptor<IGPMSOMCollection>("IGPMSOMCollection", IGPMSOMCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMSOMCollectionFromAbi, viewIGPMSOMCollection)
     }
 
     public unsafe func vtbl(): IGPMSOMCollectionVtbl {
@@ -3756,7 +3769,7 @@ public class IGPMSOMCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3773,9 +3786,9 @@ public class IGPMSOMCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMSearchCriteriaVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, GPMSearchPropertyAbi, GPMSearchOperationAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, GPMSearchPropertyAbi, GPMSearchOperationAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -3812,7 +3825,7 @@ public class IGPMSearchCriteria <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMSearchCriteria> {
-        return InterfaceDescriptor<IGPMSearchCriteria>("IGPMSearchCriteria", IGPMSearchCriteria.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMSearchCriteriaFromAbi, viewIGPMSearchCriteria)
+        return InterfaceDescriptor<IGPMSearchCriteria>("IGPMSearchCriteria", IGPMSearchCriteria.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMSearchCriteriaFromAbi, viewIGPMSearchCriteria)
     }
 
     public unsafe func vtbl(): IGPMSearchCriteriaVtbl {
@@ -3820,7 +3833,7 @@ public class IGPMSearchCriteria <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(searchProperty: GPMSearchPropertyAbi, searchOperation: GPMSearchOperationAbi, varValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Add(searchProperty: GPMSearchPropertyAbi, searchOperation: GPMSearchOperationAbi, varValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, searchProperty, searchOperation, varValue)
@@ -3830,10 +3843,10 @@ public class IGPMSearchCriteria <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStarterGPOBackupCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3872,7 +3885,7 @@ public class IGPMStarterGPOBackupCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStarterGPOBackupCollection> {
-        return InterfaceDescriptor<IGPMStarterGPOBackupCollection>("IGPMStarterGPOBackupCollection", IGPMStarterGPOBackupCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStarterGPOBackupCollectionFromAbi, viewIGPMStarterGPOBackupCollection)
+        return InterfaceDescriptor<IGPMStarterGPOBackupCollection>("IGPMStarterGPOBackupCollection", IGPMStarterGPOBackupCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStarterGPOBackupCollectionFromAbi, viewIGPMStarterGPOBackupCollection)
     }
 
     public unsafe func vtbl(): IGPMStarterGPOBackupCollectionVtbl {
@@ -3886,7 +3899,7 @@ public class IGPMStarterGPOBackupCollection <: InterfaceWrapperBase & ComInterfa
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3903,10 +3916,10 @@ public class IGPMStarterGPOBackupCollection <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStarterGPOCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3945,7 +3958,7 @@ public class IGPMStarterGPOCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStarterGPOCollection> {
-        return InterfaceDescriptor<IGPMStarterGPOCollection>("IGPMStarterGPOCollection", IGPMStarterGPOCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStarterGPOCollectionFromAbi, viewIGPMStarterGPOCollection)
+        return InterfaceDescriptor<IGPMStarterGPOCollection>("IGPMStarterGPOCollection", IGPMStarterGPOCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStarterGPOCollectionFromAbi, viewIGPMStarterGPOCollection)
     }
 
     public unsafe func vtbl(): IGPMStarterGPOCollectionVtbl {
@@ -3959,7 +3972,7 @@ public class IGPMStarterGPOCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -3976,7 +3989,7 @@ public class IGPMStarterGPOCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStatusMessageVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ObjectPath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var ErrorCode: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ExtensionName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4019,7 +4032,7 @@ public class IGPMStatusMessage <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStatusMessage> {
-        return InterfaceDescriptor<IGPMStatusMessage>("IGPMStatusMessage", IGPMStatusMessage.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStatusMessageFromAbi, viewIGPMStatusMessage)
+        return InterfaceDescriptor<IGPMStatusMessage>("IGPMStatusMessage", IGPMStatusMessage.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStatusMessageFromAbi, viewIGPMStatusMessage)
     }
 
     public unsafe func vtbl(): IGPMStatusMessageVtbl {
@@ -4066,10 +4079,10 @@ public class IGPMStatusMessage <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStatusMsgCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4108,7 +4121,7 @@ public class IGPMStatusMsgCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStatusMsgCollection> {
-        return InterfaceDescriptor<IGPMStatusMsgCollection>("IGPMStatusMsgCollection", IGPMStatusMsgCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStatusMsgCollectionFromAbi, viewIGPMStatusMsgCollection)
+        return InterfaceDescriptor<IGPMStatusMsgCollection>("IGPMStatusMsgCollection", IGPMStatusMsgCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStatusMsgCollectionFromAbi, viewIGPMStatusMsgCollection)
     }
 
     public unsafe func vtbl(): IGPMStatusMsgCollectionVtbl {
@@ -4122,7 +4135,7 @@ public class IGPMStatusMsgCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -4139,7 +4152,7 @@ public class IGPMStatusMsgCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMTrusteeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var TrusteeSid: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var TrusteeName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var TrusteeDomain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -4181,7 +4194,7 @@ public class IGPMTrustee <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMTrustee> {
-        return InterfaceDescriptor<IGPMTrustee>("IGPMTrustee", IGPMTrustee.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMTrusteeFromAbi, viewIGPMTrustee)
+        return InterfaceDescriptor<IGPMTrustee>("IGPMTrustee", IGPMTrustee.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMTrusteeFromAbi, viewIGPMTrustee)
     }
 
     public unsafe func vtbl(): IGPMTrusteeVtbl {
@@ -4222,10 +4235,10 @@ public class IGPMTrustee <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMWMIFilterCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4264,7 +4277,7 @@ public class IGPMWMIFilterCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMWMIFilterCollection> {
-        return InterfaceDescriptor<IGPMWMIFilterCollection>("IGPMWMIFilterCollection", IGPMWMIFilterCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMWMIFilterCollectionFromAbi, viewIGPMWMIFilterCollection)
+        return InterfaceDescriptor<IGPMWMIFilterCollection>("IGPMWMIFilterCollection", IGPMWMIFilterCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMWMIFilterCollectionFromAbi, viewIGPMWMIFilterCollection)
     }
 
     public unsafe func vtbl(): IGPMWMIFilterCollectionVtbl {
@@ -4278,7 +4291,7 @@ public class IGPMWMIFilterCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -4315,7 +4328,7 @@ public struct IGroupPolicyObjectVtbl {
     public var GetType: CFunc<(CPointer<Unit>, CPointer<GROUP_POLICY_OBJECT_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var GetMachineName: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_Controls == "on"]
-    public var GetPropertySheetPages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l0.HPROPSHEETPAGE>>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var GetPropertySheetPages: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p1.HPROPSHEETPAGE>>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -4463,7 +4476,7 @@ public class IGroupPolicyObject <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_Controls == "on"]
-    public unsafe func GetPropertySheetPages(hPages: CPointer<CPointer<Win32__impl_l0.HPROPSHEETPAGE>>, uPageCount: CPointer<UInt32>): Int32 {
+    public unsafe func GetPropertySheetPages(hPages: CPointer<CPointer<Win32_impl_p1.HPROPSHEETPAGE>>, uPageCount: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertySheetPages(__liveRaw, hPages, uPageCount)
@@ -4925,7 +4938,7 @@ public type PFNSTATUSMESSAGECALLBACK = CFunc<(Int32, CPointer<UInt16>) -> UInt32
 public struct RSOP_TARGET {
     public var pwszAccountName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwszNewSOM: CPointer<UInt16> = CPointer<UInt16>()
-    public var psaSecurityGroups: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var psaSecurityGroups: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public var pRsopToken: CPointer<Unit> = CPointer<Unit>()
     public var pGPOList: CPointer<GROUP_POLICY_OBJECTAAbi> = CPointer<GROUP_POLICY_OBJECTAAbi>()
     public var pWbemServices: Win32_System_Wmi.IWbemServices = Win32_System_Wmi.IWbemServices(CPointer<Unit>())
@@ -4937,7 +4950,7 @@ public struct RSOP_TARGET {
 public struct RSOP_TARGETAbi {
     public var pwszAccountName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwszNewSOM: CPointer<UInt16> = CPointer<UInt16>()
-    public var psaSecurityGroups: CPointer<Win32__impl_l1.SAFEARRAYAbi> = CPointer<Win32__impl_l1.SAFEARRAYAbi>()
+    public var psaSecurityGroups: CPointer<Win32_impl_p2.SAFEARRAYAbi> = CPointer<Win32_impl_p2.SAFEARRAYAbi>()
     public var pRsopToken: CPointer<Unit> = CPointer<Unit>()
     public var pGPOList: CPointer<GROUP_POLICY_OBJECTAAbi> = CPointer<GROUP_POLICY_OBJECTAAbi>()
     public var pWbemServices: CPointer<Unit> = CPointer<Unit>()
@@ -5117,9 +5130,9 @@ extend GPOBROWSEINFO <: windows_core.CopyType & windows_core.RuntimeType & windo
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMAsyncProgressVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Status: CFunc<(CPointer<Unit>, Int32, Int32, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Status: CFunc<(CPointer<Unit>, Int32, Int32, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -5156,7 +5169,7 @@ public class IGPMAsyncProgress <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMAsyncProgress> {
-        return InterfaceDescriptor<IGPMAsyncProgress>("IGPMAsyncProgress", IGPMAsyncProgress.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMAsyncProgressFromAbi, viewIGPMAsyncProgress)
+        return InterfaceDescriptor<IGPMAsyncProgress>("IGPMAsyncProgress", IGPMAsyncProgress.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMAsyncProgressFromAbi, viewIGPMAsyncProgress)
     }
 
     public unsafe func vtbl(): IGPMAsyncProgressVtbl {
@@ -5164,7 +5177,7 @@ public class IGPMAsyncProgress <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Status(lProgressNumerator: Int32, lProgressDenominator: Int32, hrStatus: Int32, pResult: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMStatusMsgCollection: CPointer<Unit>): Int32 {
+    public unsafe func Status(lProgressNumerator: Int32, lProgressDenominator: Int32, hrStatus: Int32, pResult: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMStatusMsgCollection: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Status(__liveRaw, lProgressNumerator, lProgressDenominator, hrStatus, pResult, ppIGPMStatusMsgCollection)
@@ -5174,13 +5187,13 @@ public class IGPMAsyncProgress <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMBackupDirExVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BackupDir: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var BackupType: CFunc<(CPointer<Unit>, CPointer<GPMBackupTypeAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetBackup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetBackup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SearchBackups: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var SearchBackups: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -5217,7 +5230,7 @@ public class IGPMBackupDirEx <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMBackupDirEx> {
-        return InterfaceDescriptor<IGPMBackupDirEx>("IGPMBackupDirEx", IGPMBackupDirEx.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMBackupDirExFromAbi, viewIGPMBackupDirEx)
+        return InterfaceDescriptor<IGPMBackupDirEx>("IGPMBackupDirEx", IGPMBackupDirEx.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMBackupDirExFromAbi, viewIGPMBackupDirEx)
     }
 
     public unsafe func vtbl(): IGPMBackupDirExVtbl {
@@ -5237,14 +5250,14 @@ public class IGPMBackupDirEx <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetBackup(bstrID: CPointer<UInt16>, pvarBackup: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetBackup(bstrID: CPointer<UInt16>, pvarBackup: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBackup(__liveRaw, bstrID, pvarBackup)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SearchBackups(pIGPMSearchCriteria: CPointer<Unit>, pvarBackupCollection: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func SearchBackups(pIGPMSearchCriteria: CPointer<Unit>, pvarBackupCollection: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SearchBackups(__liveRaw, pIGPMSearchCriteria, pvarBackupCollection)
@@ -5254,7 +5267,7 @@ public class IGPMBackupDirEx <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMPermissionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Inherited: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Inheritable: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Denied: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -5296,7 +5309,7 @@ public class IGPMPermission <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMPermission> {
-        return InterfaceDescriptor<IGPMPermission>("IGPMPermission", IGPMPermission.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMPermissionFromAbi, viewIGPMPermission)
+        return InterfaceDescriptor<IGPMPermission>("IGPMPermission", IGPMPermission.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMPermissionFromAbi, viewIGPMPermission)
     }
 
     public unsafe func vtbl(): IGPMPermissionVtbl {
@@ -5337,10 +5350,10 @@ public class IGPMPermission <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMResultVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Result: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Result: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var OverallStatus: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
 }
@@ -5378,7 +5391,7 @@ public class IGPMResult <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMResult> {
-        return InterfaceDescriptor<IGPMResult>("IGPMResult", IGPMResult.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMResultFromAbi, viewIGPMResult)
+        return InterfaceDescriptor<IGPMResult>("IGPMResult", IGPMResult.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMResultFromAbi, viewIGPMResult)
     }
 
     public unsafe func vtbl(): IGPMResultVtbl {
@@ -5392,7 +5405,7 @@ public class IGPMResult <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Result(pvarResult: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Result(pvarResult: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Result(__liveRaw, pvarResult)
@@ -5408,10 +5421,10 @@ public class IGPMResult <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMSecurityInfoVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -5453,7 +5466,7 @@ public class IGPMSecurityInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMSecurityInfo> {
-        return InterfaceDescriptor<IGPMSecurityInfo>("IGPMSecurityInfo", IGPMSecurityInfo.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMSecurityInfoFromAbi, viewIGPMSecurityInfo)
+        return InterfaceDescriptor<IGPMSecurityInfo>("IGPMSecurityInfo", IGPMSecurityInfo.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMSecurityInfoFromAbi, viewIGPMSecurityInfo)
     }
 
     public unsafe func vtbl(): IGPMSecurityInfoVtbl {
@@ -5467,7 +5480,7 @@ public class IGPMSecurityInfo <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func get_Item(lIndex: Int32, pVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, lIndex, pVal)
@@ -5502,7 +5515,7 @@ public class IGPMSecurityInfo <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStarterGPOVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5518,13 +5531,13 @@ public struct IGPMStarterGPOVtbl {
     public var StarterGPOVersion: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Save: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, Int16, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var Save: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, Int16, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Backup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Backup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CopyTo: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CopyTo: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GenerateReportToFile: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetSecurityInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSecurityInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -5564,7 +5577,7 @@ public class IGPMStarterGPO <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStarterGPO> {
-        return InterfaceDescriptor<IGPMStarterGPO>("IGPMStarterGPO", IGPMStarterGPO.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStarterGPOFromAbi, viewIGPMStarterGPO)
+        return InterfaceDescriptor<IGPMStarterGPO>("IGPMStarterGPO", IGPMStarterGPO.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStarterGPOFromAbi, viewIGPMStarterGPO)
     }
 
     public unsafe func vtbl(): IGPMStarterGPOVtbl {
@@ -5656,28 +5669,28 @@ public class IGPMStarterGPO <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Save(bstrSaveFile: CPointer<UInt16>, bOverwrite: Int16, bSaveAsSystem: Int16, bstrLanguage: CPointer<Win32__impl_l2.VARIANTAbi>, bstrAuthor: CPointer<Win32__impl_l2.VARIANTAbi>, bstrProduct: CPointer<Win32__impl_l2.VARIANTAbi>, bstrUniqueID: CPointer<Win32__impl_l2.VARIANTAbi>, bstrVersion: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Save(bstrSaveFile: CPointer<UInt16>, bOverwrite: Int16, bSaveAsSystem: Int16, bstrLanguage: CPointer<Win32_impl_p2.VARIANTAbi>, bstrAuthor: CPointer<Win32_impl_p2.VARIANTAbi>, bstrProduct: CPointer<Win32_impl_p2.VARIANTAbi>, bstrUniqueID: CPointer<Win32_impl_p2.VARIANTAbi>, bstrVersion: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Save(__liveRaw, bstrSaveFile, bOverwrite, bSaveAsSystem, bstrLanguage, bstrAuthor, bstrProduct, bstrUniqueID, bstrVersion, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Backup(bstrBackupDir: CPointer<UInt16>, bstrComment: CPointer<UInt16>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Backup(bstrBackupDir: CPointer<UInt16>, bstrComment: CPointer<UInt16>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Backup(__liveRaw, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CopyTo(pvarNewDisplayName: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CopyTo(pvarNewDisplayName: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyTo(__liveRaw, pvarNewDisplayName, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -5705,7 +5718,7 @@ public class IGPMStarterGPO <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMStarterGPOBackupVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BackupDir: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Comment: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -5716,7 +5729,7 @@ public struct IGPMStarterGPOBackupVtbl {
     public var Type: CFunc<(CPointer<Unit>, CPointer<GPMStarterGPOTypeAbi>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GenerateReportToFile: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -5754,7 +5767,7 @@ public class IGPMStarterGPOBackup <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMStarterGPOBackup> {
-        return InterfaceDescriptor<IGPMStarterGPOBackup>("IGPMStarterGPOBackup", IGPMStarterGPOBackup.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMStarterGPOBackupFromAbi, viewIGPMStarterGPOBackup)
+        return InterfaceDescriptor<IGPMStarterGPOBackup>("IGPMStarterGPOBackup", IGPMStarterGPOBackup.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMStarterGPOBackupFromAbi, viewIGPMStarterGPOBackup)
     }
 
     public unsafe func vtbl(): IGPMStarterGPOBackupVtbl {
@@ -5816,7 +5829,7 @@ public class IGPMStarterGPOBackup <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -5832,14 +5845,14 @@ public class IGPMStarterGPOBackup <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMWMIFilterVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetQueryList: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var GetQueryList: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var GetSecurityInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSecurityInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -5878,7 +5891,7 @@ public class IGPMWMIFilter <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMWMIFilter> {
-        return InterfaceDescriptor<IGPMWMIFilter>("IGPMWMIFilter", IGPMWMIFilter.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMWMIFilterFromAbi, viewIGPMWMIFilter)
+        return InterfaceDescriptor<IGPMWMIFilter>("IGPMWMIFilter", IGPMWMIFilter.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMWMIFilterFromAbi, viewIGPMWMIFilter)
     }
 
     public unsafe func vtbl(): IGPMWMIFilterVtbl {
@@ -5916,7 +5929,7 @@ public class IGPMWMIFilter <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetQueryList(pQryList: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetQueryList(pQryList: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetQueryList(__liveRaw, pQryList)
@@ -6076,11 +6089,11 @@ public unsafe func Windows_GetLocalManagedApplications(bUserApps: Int32, pdwApps
 @When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplicationCategories == "on" && Windows_Win32_UI_Shell == "on"]
 foreign {
     // param-hint: dwReserved optional reserved
-    func GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32__impl_l1.APPCATEGORYINFOLISTAbi>): UInt32
+    func GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32_impl_p2.APPCATEGORYINFOLISTAbi>): UInt32
 }
 
 @When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplicationCategories == "on" && Windows_Win32_UI_Shell == "on"]
-public unsafe func Windows_GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32__impl_l1.APPCATEGORYINFOLISTAbi>): UInt32 {
+public unsafe func Windows_GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32_impl_p2.APPCATEGORYINFOLISTAbi>): UInt32 {
     return GetManagedApplicationCategories(dwReserved, pAppCategory)
 }
 
@@ -6566,7 +6579,7 @@ public let GPO_BROWSE_SENDAPPLYONEDIT: UInt32 = 64u32
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMBackupVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GPOID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GPODomain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6576,7 +6589,7 @@ public struct IGPMBackupVtbl {
     public var BackupDir: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GenerateReportToFile: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -6614,7 +6627,7 @@ public class IGPMBackup <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMBackup> {
-        return InterfaceDescriptor<IGPMBackup>("IGPMBackup", IGPMBackup.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMBackupFromAbi, viewIGPMBackup)
+        return InterfaceDescriptor<IGPMBackup>("IGPMBackup", IGPMBackup.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMBackupFromAbi, viewIGPMBackup)
     }
 
     public unsafe func vtbl(): IGPMBackupVtbl {
@@ -6670,7 +6683,7 @@ public class IGPMBackup <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -6686,7 +6699,7 @@ public class IGPMBackup <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMBackupDirVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var BackupDirectory: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetBackup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SearchBackups: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -6726,7 +6739,7 @@ public class IGPMBackupDir <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMBackupDir> {
-        return InterfaceDescriptor<IGPMBackupDir>("IGPMBackupDir", IGPMBackupDir.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMBackupDirFromAbi, viewIGPMBackupDir)
+        return InterfaceDescriptor<IGPMBackupDir>("IGPMBackupDir", IGPMBackupDir.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMBackupDirFromAbi, viewIGPMBackupDir)
     }
 
     public unsafe func vtbl(): IGPMBackupDirVtbl {
@@ -6755,16 +6768,16 @@ public class IGPMBackupDir <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMMigrationTableVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Save: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var AddEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, GPMEntryTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var AddEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, GPMEntryTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteEntry: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var UpdateDestination: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    public var UpdateDestination: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Validate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetEntries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -6803,7 +6816,7 @@ public class IGPMMigrationTable <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMMigrationTable> {
-        return InterfaceDescriptor<IGPMMigrationTable>("IGPMMigrationTable", IGPMMigrationTable.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMMigrationTableFromAbi, viewIGPMMigrationTable)
+        return InterfaceDescriptor<IGPMMigrationTable>("IGPMMigrationTable", IGPMMigrationTable.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMMigrationTableFromAbi, viewIGPMMigrationTable)
     }
 
     public unsafe func vtbl(): IGPMMigrationTableVtbl {
@@ -6817,14 +6830,14 @@ public class IGPMMigrationTable <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(lFlags: Int32, var_: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Add(lFlags: Int32, var_: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, lFlags, var_)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func AddEntry(bstrSource: CPointer<UInt16>, gpmEntryType: GPMEntryTypeAbi, pvarDestination: CPointer<Win32__impl_l2.VARIANTAbi>, ppEntry: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func AddEntry(bstrSource: CPointer<UInt16>, gpmEntryType: GPMEntryTypeAbi, pvarDestination: CPointer<Win32_impl_p2.VARIANTAbi>, ppEntry: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddEntry(__liveRaw, bstrSource, gpmEntryType, pvarDestination, ppEntry)
@@ -6843,7 +6856,7 @@ public class IGPMMigrationTable <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func UpdateDestination(bstrSource: CPointer<UInt16>, pvarDestination: CPointer<Win32__impl_l2.VARIANTAbi>, ppEntry: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func UpdateDestination(bstrSource: CPointer<UInt16>, pvarDestination: CPointer<Win32_impl_p2.VARIANTAbi>, ppEntry: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UpdateDestination(__liveRaw, bstrSource, pvarDestination, ppEntry)
@@ -6865,7 +6878,7 @@ public class IGPMMigrationTable <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMRSOPVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Mode: CFunc<(CPointer<Unit>, CPointer<GPMRSOPModeAbi>) -> Int32> = { _, _ => 0 }
     public var Namespace: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetLoggingComputer: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -6885,31 +6898,31 @@ public struct IGPMRSOPVtbl {
     public var SetPlanningUserSOM: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var PlanningUserSOM: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPlanningUserWMIFilters: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPlanningUserWMIFilters: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PlanningUserWMIFilters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PlanningUserWMIFilters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPlanningUserSecurityGroups: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPlanningUserSecurityGroups: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PlanningUserSecurityGroups: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PlanningUserSecurityGroups: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var SetPlanningComputer: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var PlanningComputer: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetPlanningComputerSOM: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var PlanningComputerSOM: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPlanningComputerWMIFilters: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPlanningComputerWMIFilters: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PlanningComputerWMIFilters: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PlanningComputerWMIFilters: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var SetPlanningComputerSecurityGroups: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var SetPlanningComputerSecurityGroups: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var PlanningComputerSecurityGroups: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var PlanningComputerSecurityGroups: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LoggingEnumerateUsers: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var LoggingEnumerateUsers: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var CreateQueryResults: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ReleaseQueryResults: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GenerateReportToFile: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -6947,7 +6960,7 @@ public class IGPMRSOP <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMRSOP> {
-        return InterfaceDescriptor<IGPMRSOP>("IGPMRSOP", IGPMRSOP.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMRSOPFromAbi, viewIGPMRSOP)
+        return InterfaceDescriptor<IGPMRSOP>("IGPMRSOP", IGPMRSOP.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMRSOPFromAbi, viewIGPMRSOP)
     }
 
     public unsafe func vtbl(): IGPMRSOPVtbl {
@@ -7063,28 +7076,28 @@ public class IGPMRSOP <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPlanningUserWMIFilters(varVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPlanningUserWMIFilters(varVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPlanningUserWMIFilters(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PlanningUserWMIFilters(varVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PlanningUserWMIFilters(varVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PlanningUserWMIFilters(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPlanningUserSecurityGroups(varVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPlanningUserSecurityGroups(varVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPlanningUserSecurityGroups(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PlanningUserSecurityGroups(varVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PlanningUserSecurityGroups(varVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PlanningUserSecurityGroups(__liveRaw, varVal)
@@ -7115,35 +7128,35 @@ public class IGPMRSOP <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPlanningComputerWMIFilters(varVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPlanningComputerWMIFilters(varVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPlanningComputerWMIFilters(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PlanningComputerWMIFilters(varVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PlanningComputerWMIFilters(varVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PlanningComputerWMIFilters(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func SetPlanningComputerSecurityGroups(varVal: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func SetPlanningComputerSecurityGroups(varVal: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetPlanningComputerSecurityGroups(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func PlanningComputerSecurityGroups(varVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func PlanningComputerSecurityGroups(varVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PlanningComputerSecurityGroups(__liveRaw, varVal)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LoggingEnumerateUsers(varVal: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func LoggingEnumerateUsers(varVal: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoggingEnumerateUsers(__liveRaw, varVal)
@@ -7162,7 +7175,7 @@ public class IGPMRSOP <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -7178,7 +7191,7 @@ public class IGPMRSOP <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetDomain: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetBackupDir: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetSitesContainer: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -7227,7 +7240,7 @@ public class IGPM <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPM> {
-        return InterfaceDescriptor<IGPM>("IGPM", IGPM.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMFromAbi, viewIGPM)
+        return InterfaceDescriptor<IGPM>("IGPM", IGPM.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMFromAbi, viewIGPM)
     }
 
     public unsafe func vtbl(): IGPMVtbl {
@@ -7372,14 +7385,14 @@ public class IGPM2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMDomainVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DomainController: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var CreateGPO: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetGPO: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SearchGPOs: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RestoreGPO: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var RestoreGPO: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetSOM: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SearchSOMs: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetWMIFilter: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -7420,7 +7433,7 @@ public class IGPMDomain <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMDomain> {
-        return InterfaceDescriptor<IGPMDomain>("IGPMDomain", IGPMDomain.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMDomainFromAbi, viewIGPMDomain)
+        return InterfaceDescriptor<IGPMDomain>("IGPMDomain", IGPMDomain.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMDomainFromAbi, viewIGPMDomain)
     }
 
     public unsafe func vtbl(): IGPMDomainVtbl {
@@ -7458,7 +7471,7 @@ public class IGPMDomain <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RestoreGPO(pIGPMBackup: CPointer<Unit>, lDCFlags: Int32, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RestoreGPO(pIGPMBackup: CPointer<Unit>, lDCFlags: Int32, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RestoreGPO(__liveRaw, pIGPMBackup, lDCFlags, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -7498,9 +7511,9 @@ public struct IGPMDomain2Vtbl {
     public var GetStarterGPO: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SearchStarterGPOs: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var LoadStarterGPO: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var LoadStarterGPO: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var RestoreStarterGPO: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var RestoreStarterGPO: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -7569,14 +7582,14 @@ public class IGPMDomain2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func LoadStarterGPO(bstrLoadFile: CPointer<UInt16>, bOverwrite: Int16, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func LoadStarterGPO(bstrLoadFile: CPointer<UInt16>, bOverwrite: Int16, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoadStarterGPO(__liveRaw, bstrLoadFile, bOverwrite, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func RestoreStarterGPO(pIGPMTmplBackup: CPointer<Unit>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func RestoreStarterGPO(pIGPMTmplBackup: CPointer<Unit>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RestoreStarterGPO(__liveRaw, pIGPMTmplBackup, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -7588,7 +7601,7 @@ public class IGPMDomain2 <: InterfaceWrapperBase & ComInterface {
 public struct IGPMDomain3Vtbl {
     public var base_: IGPMDomain2Vtbl = IGPMDomain2Vtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var InfrastructureDC: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetInfrastructureDC: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetInfrastructureFlags: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -7636,7 +7649,7 @@ public class IGPMDomain3 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -7664,7 +7677,7 @@ public class IGPMDomain3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMGPOVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -7686,14 +7699,14 @@ public struct IGPMGPOVtbl {
     public var SetSecurityInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Backup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var Backup: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Import: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    public var Import: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GenerateReport: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GenerateReportToFile: CFunc<(CPointer<Unit>, GPMReportTypeAbi, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CopyTo: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    public var CopyTo: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var SetSecurityDescriptor: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -7736,7 +7749,7 @@ public class IGPMGPO <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMGPO> {
-        return InterfaceDescriptor<IGPMGPO>("IGPMGPO", IGPMGPO.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMGPOFromAbi, viewIGPMGPO)
+        return InterfaceDescriptor<IGPMGPO>("IGPMGPO", IGPMGPO.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMGPOFromAbi, viewIGPMGPO)
     }
 
     public unsafe func vtbl(): IGPMGPOVtbl {
@@ -7864,21 +7877,21 @@ public class IGPMGPO <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Backup(bstrBackupDir: CPointer<UInt16>, bstrComment: CPointer<UInt16>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Backup(bstrBackupDir: CPointer<UInt16>, bstrComment: CPointer<UInt16>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Backup(__liveRaw, bstrBackupDir, bstrComment, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Import(lFlags: Int32, pIGPMBackup: CPointer<Unit>, pvarMigrationTable: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Import(lFlags: Int32, pIGPMBackup: CPointer<Unit>, pvarMigrationTable: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Import(__liveRaw, lFlags, pIGPMBackup, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GenerateReport(gpmReportType: GPMReportTypeAbi, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GenerateReport(__liveRaw, gpmReportType, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -7891,7 +7904,7 @@ public class IGPMGPO <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CopyTo(lFlags: Int32, pIGPMDomain: CPointer<Unit>, pvarNewDisplayName: CPointer<Win32__impl_l2.VARIANTAbi>, pvarMigrationTable: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32__impl_l2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32__impl_l2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CopyTo(lFlags: Int32, pIGPMDomain: CPointer<Unit>, pvarNewDisplayName: CPointer<Win32_impl_p2.VARIANTAbi>, pvarMigrationTable: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMProgress: CPointer<Win32_impl_p2.VARIANTAbi>, pvarGPMCancel: CPointer<Win32_impl_p2.VARIANTAbi>, ppIGPMResult: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CopyTo(__liveRaw, lFlags, pIGPMDomain, pvarNewDisplayName, pvarMigrationTable, pvarGPMProgress, pvarGPMCancel, ppIGPMResult)
@@ -8058,7 +8071,7 @@ public class IGPMGPO3 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMGPOLinkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GPOID: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GPODomain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -8104,7 +8117,7 @@ public class IGPMGPOLink <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMGPOLink> {
-        return InterfaceDescriptor<IGPMGPOLink>("IGPMGPOLink", IGPMGPOLink.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMGPOLinkFromAbi, viewIGPMGPOLink)
+        return InterfaceDescriptor<IGPMGPOLink>("IGPMGPOLink", IGPMGPOLink.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMGPOLinkFromAbi, viewIGPMGPOLink)
     }
 
     public unsafe func vtbl(): IGPMGPOLinkVtbl {
@@ -8169,7 +8182,7 @@ public class IGPMGPOLink <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMSOMVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GPOInheritanceBlocked: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetGPOInheritanceBlocked: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8216,7 +8229,7 @@ public class IGPMSOM <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMSOM> {
-        return InterfaceDescriptor<IGPMSOM>("IGPMSOM", IGPMSOM.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMSOMFromAbi, viewIGPMSOM)
+        return InterfaceDescriptor<IGPMSOM>("IGPMSOM", IGPMSOM.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMSOMFromAbi, viewIGPMSOM)
     }
 
     public unsafe func vtbl(): IGPMSOMVtbl {
@@ -8287,7 +8300,7 @@ public class IGPMSOM <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_GroupPolicy == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IGPMSitesContainerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var DomainController: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Forest: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -8329,7 +8342,7 @@ public class IGPMSitesContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IGPMSitesContainer> {
-        return InterfaceDescriptor<IGPMSitesContainer>("IGPMSitesContainer", IGPMSitesContainer.iid(), Win32__impl_l2.IDispatch.iid(), takeIGPMSitesContainerFromAbi, viewIGPMSitesContainer)
+        return InterfaceDescriptor<IGPMSitesContainer>("IGPMSitesContainer", IGPMSitesContainer.iid(), Win32_impl_p2.IDispatch.iid(), takeIGPMSitesContainerFromAbi, viewIGPMSitesContainer)
     }
 
     public unsafe func vtbl(): IGPMSitesContainerVtbl {

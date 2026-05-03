@@ -4,10 +4,15 @@
 package windows.Win32.System.DataExchange
 
 import std.collection.*
+@When[Windows_Win32_System_DataExchange == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_DataExchange == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_DataExchange == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_DataExchange == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_System_DataExchange == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 

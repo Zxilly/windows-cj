@@ -4,19 +4,34 @@
 package windows.Win32.Networking.WinInet
 
 import std.collection.*
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_Networking_WinInet == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Networking_WinInet == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_WinInet == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Networking_WinInet == "on" && Windows_Win32_Networking_WinHttp == "on"]
 import windows.Win32.Networking.WinHttp as Win32_Networking_WinHttp
+@When[Windows_Win32_Networking_WinInet == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
+@When[Windows_Win32_Networking_WinInet == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_WinInet == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_WinInet == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Networking_WinInet == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Networking_WinInet == "on"]
@@ -4353,11 +4368,11 @@ extend INTERNET_SECURITY_CONNECTION_INFO <: windows_core.CopyType & windows_core
 @When[Windows_Win32_Networking_WinInet == "on" && (Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on")]
 public struct INTERNET_SECURITY_INFO {
     public var dwSize: UInt32 = 0u32
-    public var pCertificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
-    public var pcCertChain: CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>()
+    public var pCertificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
+    public var pcCertChain: CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>()
     public var connectionInfo: Win32_Security_Authentication_Identity.SecPkgContext_ConnectionInfo = Win32_Security_Authentication_Identity.SecPkgContext_ConnectionInfo()
     public var cipherInfo: Win32_Security_Authentication_Identity.SecPkgContext_CipherInfo = Win32_Security_Authentication_Identity.SecPkgContext_CipherInfo()
-    public var pcUnverifiedCertChain: CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>()
+    public var pcUnverifiedCertChain: CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>()
     public var channelBindingToken: Win32_Security_Authentication_Identity.SecPkgContext_Bindings = Win32_Security_Authentication_Identity.SecPkgContext_Bindings()
     public init() {}
 }
@@ -4366,11 +4381,11 @@ public struct INTERNET_SECURITY_INFO {
 @C
 public struct INTERNET_SECURITY_INFOAbi {
     public var dwSize: UInt32 = 0u32
-    public var pCertificate: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
-    public var pcCertChain: CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>()
+    public var pCertificate: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
+    public var pcCertChain: CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>()
     public var connectionInfo: Win32_Security_Authentication_Identity.SecPkgContext_ConnectionInfoAbi = Win32_Security_Authentication_Identity.SecPkgContext_ConnectionInfoAbi()
     public var cipherInfo: Win32_Security_Authentication_Identity.SecPkgContext_CipherInfoAbi = Win32_Security_Authentication_Identity.SecPkgContext_CipherInfoAbi()
-    public var pcUnverifiedCertChain: CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>()
+    public var pcUnverifiedCertChain: CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi> = CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>()
     public var channelBindingToken: Win32_Security_Authentication_Identity.SecPkgContext_BindingsAbi = Win32_Security_Authentication_Identity.SecPkgContext_BindingsAbi()
     public init() {}
 }
@@ -7819,11 +7834,11 @@ foreign {
     // param-hint: lpFindFileData optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
-    func FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+    func FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileA == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+public unsafe func Windows_FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
     return FtpFindFirstFileA(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
 }
 
@@ -7833,11 +7848,11 @@ foreign {
     // param-hint: lpFindFileData optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
-    func FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+    func FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileW == "on" && Windows_Win32_Storage_FileSystem == "on"]
-public unsafe func Windows_FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+public unsafe func Windows_FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32_impl_p0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
     return FtpFindFirstFileW(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
 }
 
@@ -8700,11 +8715,11 @@ public unsafe func Windows_InternalInternetGetCookie(lpszUrl: CPointer<UInt8>, l
 foreign {
     // param-hint: lpstr len=param[2]
     // param-hint: dwReserved optional reserved
-    func InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+    func InternetAlgIdToStringA(ai: Win32_impl_p0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+public unsafe func Windows_InternetAlgIdToStringA(ai: Win32_impl_p0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
     return InternetAlgIdToStringA(ai, lpstr, lpdwstrLength, dwReserved)
 }
 
@@ -8712,11 +8727,11 @@ public unsafe func Windows_InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, 
 foreign {
     // param-hint: lpstr len=param[2]
     // param-hint: dwReserved optional reserved
-    func InternetAlgIdToStringW(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+    func InternetAlgIdToStringW(ai: Win32_impl_p0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_InternetAlgIdToStringW(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+public unsafe func Windows_InternetAlgIdToStringW(ai: Win32_impl_p0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
     return InternetAlgIdToStringW(ai, lpstr, lpdwstrLength, dwReserved)
 }
 
@@ -9258,31 +9273,31 @@ public unsafe func Windows_InternetGetProxyForUrl(hInternet: CPointer<Unit>, pcw
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURL == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+    func InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURL == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+public unsafe func Windows_InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
     return InternetGetSecurityInfoByURL(lpszURL, ppCertChain, pdwSecureFlags)
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLA == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+    func InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLA == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+public unsafe func Windows_InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
     return InternetGetSecurityInfoByURLA(lpszURL, ppCertChain, pdwSecureFlags)
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLW == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+    func InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLW == "on" && Windows_Win32_Security_Cryptography == "on"]
-public unsafe func Windows_InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+public unsafe func Windows_InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32_impl_p3.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
     return InternetGetSecurityInfoByURLW(lpszURL, ppCertChain, pdwSecureFlags)
 }
 

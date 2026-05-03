@@ -4,11 +4,16 @@
 package windows.Win32.Graphics.Printing.PrintTicket
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]

@@ -4,10 +4,15 @@
 package windows.Wdk.System.OfflineRegistry
 
 import std.collection.*
+@When[Windows_Wdk_System_OfflineRegistry == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Wdk_System_OfflineRegistry == "on"]
 import windows_core as windows_core
+@When[Windows_Wdk_System_OfflineRegistry == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_System_OfflineRegistry == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Wdk_System_OfflineRegistry == "on"]
 import windows_core as windows_core
 
 

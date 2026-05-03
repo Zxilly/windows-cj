@@ -4,15 +4,25 @@
 package windows.Data.Pdf
 
 import std.collection.*
+@When[Windows_Data_Pdf == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Data_Pdf == "on"]
 import windows_core as windows_core
+@When[Windows_Data_Pdf == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Data_Pdf == "on"]
 import windows_interface as windows_interface
+@When[Windows_Data_Pdf == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Data_Pdf == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Data_Pdf == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Data_Pdf == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l1 as _impl_l1
+@When[Windows_Data_Pdf == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Data_Pdf == "on"]
 import windows_future as windows_future
 
 
@@ -691,7 +701,7 @@ public class IPdfPage <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPdfPage", IPdfPage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPdfPageVtbl", "IPdfPage", "IPdfPage_Impl", [InterfaceMethodSchema("RenderToStreamAsync", 6, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RenderWithOptionsToStreamAsync", 7, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<PdfPageRenderOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreparePageAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Index", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Size", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Dimensions", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PdfPageDimensions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Rotation", 12, [InterfaceParameterSchema("result", "CPointer<PdfPageRotationAbi>", "OutSlot<PdfPageRotation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreferredZoom", 13, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPdfPage", IPdfPage.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPdfPageVtbl", "IPdfPage", "IPdfPage_Impl", [InterfaceMethodSchema("RenderToStreamAsync", 6, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RenderWithOptionsToStreamAsync", 7, [InterfaceParameterSchema("outputStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<PdfPageRenderOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreparePageAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Index", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Size", 10, [InterfaceParameterSchema("result", "CPointer<windows_future.SizeAbi>", "OutSlot<windows_future.Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Dimensions", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PdfPageDimensions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Rotation", 12, [InterfaceParameterSchema("result", "CPointer<PdfPageRotationAbi>", "OutSlot<PdfPageRotation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreferredZoom", 13, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPdfPage.runtimeType())
         return schema
     }
@@ -721,7 +731,7 @@ public class IPdfPage <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RenderToStreamAsync(outputStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func RenderToStreamAsync(outputStream: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RenderToStreamAsync(asRaw(), outputStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -730,7 +740,7 @@ public class IPdfPage <: InterfaceWrapperBase & ComInterface & RuntimeName & win
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RenderWithOptionsToStreamAsync(outputStream: _impl_l1.IRandomAccessStream, options: PdfPageRenderOptions): windows_future.IAsyncAction {
+    public unsafe func RenderWithOptionsToStreamAsync(outputStream: impl_p1.IRandomAccessStream, options: PdfPageRenderOptions): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RenderWithOptionsToStreamAsync(asRaw(), outputStream.asRaw(), options.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -867,12 +877,12 @@ public class PdfPage <: InterfaceWrapperBase & ComInterface & windows_interface.
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RenderToStreamAsync(outputStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func RenderToStreamAsync(outputStream: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         return defaultInterface().RenderToStreamAsync(outputStream)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func RenderWithOptionsToStreamAsync(outputStream: _impl_l1.IRandomAccessStream, options: PdfPageRenderOptions): windows_future.IAsyncAction {
+    public unsafe func RenderWithOptionsToStreamAsync(outputStream: impl_p1.IRandomAccessStream, options: PdfPageRenderOptions): windows_future.IAsyncAction {
         return defaultInterface().RenderWithOptionsToStreamAsync(outputStream, options)
     }
 
@@ -1085,7 +1095,7 @@ public class IPdfDocumentStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPdfDocumentStatics", IPdfDocumentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPdfDocumentStaticsVtbl", "IPdfDocumentStatics", "IPdfDocumentStatics_Impl", [InterfaceMethodSchema("LoadFromFileAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFileWithPasswordAsync", 7, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamAsync", 8, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithPasswordAsync", 9, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPdfDocumentStatics", IPdfDocumentStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPdfDocumentStaticsVtbl", "IPdfDocumentStatics", "IPdfDocumentStatics_Impl", [InterfaceMethodSchema("LoadFromFileAsync", 6, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFileWithPasswordAsync", 7, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamAsync", 8, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithPasswordAsync", 9, [InterfaceParameterSchema("inputStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("password", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PdfDocument>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPdfDocumentStatics.runtimeType())
         return schema
     }
@@ -1115,7 +1125,7 @@ public class IPdfDocumentStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadFromFileAsync(file: _impl_l1.IStorageFile): windows_future.IAsyncOperation<PdfDocument> {
+    public unsafe func LoadFromFileAsync(file: impl_p1.IStorageFile): windows_future.IAsyncOperation<PdfDocument> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromFileAsync(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1124,7 +1134,7 @@ public class IPdfDocumentStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadFromFileWithPasswordAsync(file: _impl_l1.IStorageFile, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
+    public unsafe func LoadFromFileWithPasswordAsync(file: impl_p1.IStorageFile, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromFileWithPasswordAsync(asRaw(), file.asRaw(), password.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1133,7 +1143,7 @@ public class IPdfDocumentStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStreamAsync(inputStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<PdfDocument> {
+    public unsafe func LoadFromStreamAsync(inputStream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<PdfDocument> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStreamAsync(asRaw(), inputStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1142,7 +1152,7 @@ public class IPdfDocumentStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStreamWithPasswordAsync(inputStream: _impl_l1.IRandomAccessStream, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
+    public unsafe func LoadFromStreamWithPasswordAsync(inputStream: impl_p1.IRandomAccessStream, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStreamWithPasswordAsync(asRaw(), inputStream.asRaw(), password.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1236,7 +1246,7 @@ public class PdfDocument <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadFromFileAsync(file: _impl_l1.IStorageFile): windows_future.IAsyncOperation<PdfDocument> {
+    public static unsafe func LoadFromFileAsync(file: impl_p1.IStorageFile): windows_future.IAsyncOperation<PdfDocument> {
         var result__: Option<windows_future.IAsyncOperation<PdfDocument>> = Option<windows_future.IAsyncOperation<PdfDocument>>.None
         try (factory__ = windows_core.factory<PdfDocument, IPdfDocumentStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromFileAsync(file))
@@ -1248,7 +1258,7 @@ public class PdfDocument <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadFromFileWithPasswordAsync(file: _impl_l1.IStorageFile, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
+    public static unsafe func LoadFromFileWithPasswordAsync(file: impl_p1.IStorageFile, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
         var result__: Option<windows_future.IAsyncOperation<PdfDocument>> = Option<windows_future.IAsyncOperation<PdfDocument>>.None
         try (factory__ = windows_core.factory<PdfDocument, IPdfDocumentStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromFileWithPasswordAsync(file, password))
@@ -1260,7 +1270,7 @@ public class PdfDocument <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStreamAsync(inputStream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<PdfDocument> {
+    public static unsafe func LoadFromStreamAsync(inputStream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<PdfDocument> {
         var result__: Option<windows_future.IAsyncOperation<PdfDocument>> = Option<windows_future.IAsyncOperation<PdfDocument>>.None
         try (factory__ = windows_core.factory<PdfDocument, IPdfDocumentStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStreamAsync(inputStream))
@@ -1272,7 +1282,7 @@ public class PdfDocument <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStreamWithPasswordAsync(inputStream: _impl_l1.IRandomAccessStream, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
+    public static unsafe func LoadFromStreamWithPasswordAsync(inputStream: impl_p1.IRandomAccessStream, password: windows_core.HString): windows_future.IAsyncOperation<PdfDocument> {
         var result__: Option<windows_future.IAsyncOperation<PdfDocument>> = Option<windows_future.IAsyncOperation<PdfDocument>>.None
         try (factory__ = windows_core.factory<PdfDocument, IPdfDocumentStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStreamWithPasswordAsync(inputStream, password))

@@ -4,7 +4,9 @@
 package windows_appsdk.Microsoft.Graphics.DirectX
 
 import std.collection.*
+@When[Microsoft_Graphics_DirectX == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Microsoft_Graphics_DirectX == "on"]
 import windows_core as windows_core
 
 

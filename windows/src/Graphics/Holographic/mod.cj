@@ -4,20 +4,35 @@
 package windows.Graphics.Holographic
 
 import std.collection.*
+@When[Windows_Graphics_Holographic == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Holographic == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Holographic == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Holographic == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Holographic == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Holographic == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Holographic == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Holographic == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
+@When[Windows_Graphics_Holographic == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
+@When[Windows_Graphics_Holographic == "on" && Windows_Perception == "on"]
 import windows.Perception as Perception
+@When[Windows_Graphics_Holographic == "on" && Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Holographic == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Holographic == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Holographic == "on"]
 import windows_future as windows_future
+@When[Windows_Graphics_Holographic == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -4732,7 +4747,7 @@ public class HolographicSpace <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_UI_Core == "on"]
-    public static unsafe func CreateForCoreWindow(window: _impl_l1.CoreWindow): HolographicSpace {
+    public static unsafe func CreateForCoreWindow(window: impl_p1.CoreWindow): HolographicSpace {
         var result__: Option<HolographicSpace> = Option<HolographicSpace>.None
         try (factory__ = windows_core.factory<HolographicSpace, IHolographicSpaceStatics>().unwrap()) {
             result__ = Some(factory__.CreateForCoreWindow(window))
@@ -6712,7 +6727,7 @@ public class IHolographicSpaceStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHolographicSpaceStatics", IHolographicSpaceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHolographicSpaceStaticsVtbl", "IHolographicSpaceStatics", "IHolographicSpaceStatics_Impl", [InterfaceMethodSchema("CreateForCoreWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<_impl_l1.CoreWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HolographicSpace>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHolographicSpaceStatics", IHolographicSpaceStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHolographicSpaceStaticsVtbl", "IHolographicSpaceStatics", "IHolographicSpaceStatics_Impl", [InterfaceMethodSchema("CreateForCoreWindow", 6, [InterfaceParameterSchema("window", "CPointer<Unit>", "InParam<impl_p1.CoreWindow>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<HolographicSpace>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHolographicSpaceStatics.runtimeType())
         return schema
     }
@@ -6742,7 +6757,7 @@ public class IHolographicSpaceStatics <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_UI_Core == "on"]
-    public unsafe func CreateForCoreWindow(window: _impl_l1.CoreWindow): HolographicSpace {
+    public unsafe func CreateForCoreWindow(window: impl_p1.CoreWindow): HolographicSpace {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForCoreWindow(asRaw(), window.asRaw(), CPointer<CPointer<Unit>>(inout result__))

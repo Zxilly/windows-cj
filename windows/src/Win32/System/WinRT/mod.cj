@@ -4,16 +4,26 @@
 package windows.Win32.System.WinRT
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_WinRT == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
+@When[Windows_Win32_System_WinRT == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT == "on" && Windows_Win32_System_Com_Marshal == "on"]
 import windows.Win32.System.Com.Marshal as Win32_System_Com_Marshal
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
-import windows._impl_l1 as _impl_l1
+@When[Windows_Win32_System_WinRT == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
+@When[Windows_Win32_System_WinRT == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_Win32_System_WinRT == "on"]

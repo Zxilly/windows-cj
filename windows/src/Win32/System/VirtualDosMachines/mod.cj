@@ -4,13 +4,20 @@
 package windows.Win32.System.VirtualDosMachines
 
 import std.collection.*
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue}
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_VirtualDosMachines == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_VirtualDosMachines == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_VirtualDosMachines == "on"]
@@ -205,7 +212,7 @@ public let VDMADDR_PM16: UInt32 = 4u32
 public let VDMADDR_PM32: UInt32 = 16u32
 
 @When[Windows_Win32_System_VirtualDosMachines == "on" && (Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Threading == "on")]
-public type DEBUGEVENTPROC = CFunc<(CPointer<Win32__impl_l1.DEBUG_EVENTAbi>, CPointer<Unit>) -> UInt32>
+public type DEBUGEVENTPROC = CFunc<(CPointer<Win32_impl_p2.DEBUG_EVENTAbi>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_System_VirtualDosMachines == "on"]
 // packed(4)
@@ -740,7 +747,7 @@ public struct VDMCONTEXT {
     public var Dr3: UInt32 = 0u32
     public var Dr6: UInt32 = 0u32
     public var Dr7: UInt32 = 0u32
-    public var FloatSave: Win32__impl_l0.FLOATING_SAVE_AREA = Win32__impl_l0.FLOATING_SAVE_AREA()
+    public var FloatSave: Win32_impl_p0.FLOATING_SAVE_AREA = Win32_impl_p0.FLOATING_SAVE_AREA()
     public var SegGs: UInt32 = 0u32
     public var SegFs: UInt32 = 0u32
     public var SegEs: UInt32 = 0u32
@@ -771,7 +778,7 @@ public struct VDMCONTEXTAbi {
     public var Dr3: UInt32 = 0u32
     public var Dr6: UInt32 = 0u32
     public var Dr7: UInt32 = 0u32
-    public var FloatSave: Win32__impl_l0.FLOATING_SAVE_AREAAbi = Win32__impl_l0.FLOATING_SAVE_AREAAbi()
+    public var FloatSave: Win32_impl_p0.FLOATING_SAVE_AREAAbi = Win32_impl_p0.FLOATING_SAVE_AREAAbi()
     public var SegGs: UInt32 = 0u32
     public var SegFs: UInt32 = 0u32
     public var SegEs: UInt32 = 0u32
@@ -806,7 +813,7 @@ extend VDMCONTEXT <: windows_core.CopyType & windows_core.RuntimeType & windows_
         abi.Dr3 = value.Dr3
         abi.Dr6 = value.Dr6
         abi.Dr7 = value.Dr7
-        abi.FloatSave = windows_core.projectTypedAbi(value.FloatSave, windows_core.typeMarker<Win32__impl_l0.FLOATING_SAVE_AREA>())
+        abi.FloatSave = windows_core.projectTypedAbi(value.FloatSave, windows_core.typeMarker<Win32_impl_p0.FLOATING_SAVE_AREA>())
         abi.SegGs = value.SegGs
         abi.SegFs = value.SegFs
         abi.SegEs = value.SegEs
@@ -835,7 +842,7 @@ extend VDMCONTEXT <: windows_core.CopyType & windows_core.RuntimeType & windows_
         value.Dr3 = abi.Dr3
         value.Dr6 = abi.Dr6
         value.Dr7 = abi.Dr7
-        value.FloatSave = windows_core.fromTypedAbi(abi.FloatSave, windows_core.typeMarker<Win32__impl_l0.FLOATING_SAVE_AREA>()).unwrap()
+        value.FloatSave = windows_core.fromTypedAbi(abi.FloatSave, windows_core.typeMarker<Win32_impl_p0.FLOATING_SAVE_AREA>()).unwrap()
         value.SegGs = abi.SegGs
         value.SegFs = abi.SegFs
         value.SegEs = abi.SegEs
@@ -871,7 +878,7 @@ public struct VDMCONTEXT_WITHOUT_XSAVE {
     public var Dr3: UInt32 = 0u32
     public var Dr6: UInt32 = 0u32
     public var Dr7: UInt32 = 0u32
-    public var FloatSave: Win32__impl_l0.FLOATING_SAVE_AREA = Win32__impl_l0.FLOATING_SAVE_AREA()
+    public var FloatSave: Win32_impl_p0.FLOATING_SAVE_AREA = Win32_impl_p0.FLOATING_SAVE_AREA()
     public var SegGs: UInt32 = 0u32
     public var SegFs: UInt32 = 0u32
     public var SegEs: UInt32 = 0u32
@@ -901,7 +908,7 @@ public struct VDMCONTEXT_WITHOUT_XSAVEAbi {
     public var Dr3: UInt32 = 0u32
     public var Dr6: UInt32 = 0u32
     public var Dr7: UInt32 = 0u32
-    public var FloatSave: Win32__impl_l0.FLOATING_SAVE_AREAAbi = Win32__impl_l0.FLOATING_SAVE_AREAAbi()
+    public var FloatSave: Win32_impl_p0.FLOATING_SAVE_AREAAbi = Win32_impl_p0.FLOATING_SAVE_AREAAbi()
     public var SegGs: UInt32 = 0u32
     public var SegFs: UInt32 = 0u32
     public var SegEs: UInt32 = 0u32
@@ -935,7 +942,7 @@ extend VDMCONTEXT_WITHOUT_XSAVE <: windows_core.CopyType & windows_core.RuntimeT
         abi.Dr3 = value.Dr3
         abi.Dr6 = value.Dr6
         abi.Dr7 = value.Dr7
-        abi.FloatSave = windows_core.projectTypedAbi(value.FloatSave, windows_core.typeMarker<Win32__impl_l0.FLOATING_SAVE_AREA>())
+        abi.FloatSave = windows_core.projectTypedAbi(value.FloatSave, windows_core.typeMarker<Win32_impl_p0.FLOATING_SAVE_AREA>())
         abi.SegGs = value.SegGs
         abi.SegFs = value.SegFs
         abi.SegEs = value.SegEs
@@ -963,7 +970,7 @@ extend VDMCONTEXT_WITHOUT_XSAVE <: windows_core.CopyType & windows_core.RuntimeT
         value.Dr3 = abi.Dr3
         value.Dr6 = abi.Dr6
         value.Dr7 = abi.Dr7
-        value.FloatSave = windows_core.fromTypedAbi(abi.FloatSave, windows_core.typeMarker<Win32__impl_l0.FLOATING_SAVE_AREA>()).unwrap()
+        value.FloatSave = windows_core.fromTypedAbi(abi.FloatSave, windows_core.typeMarker<Win32_impl_p0.FLOATING_SAVE_AREA>()).unwrap()
         value.SegGs = abi.SegGs
         value.SegFs = abi.SegFs
         value.SegEs = abi.SegEs
@@ -1221,7 +1228,7 @@ public type VDMMODULEFIRSTPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer
 public type VDMMODULENEXTPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<MODULEENTRY>, DEBUGEVENTPROC, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_System_VirtualDosMachines == "on" && (Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Threading == "on")]
-public type VDMPROCESSEXCEPTIONPROC = CFunc<(CPointer<Win32__impl_l1.DEBUG_EVENTAbi>) -> Int32>
+public type VDMPROCESSEXCEPTIONPROC = CFunc<(CPointer<Win32_impl_p2.DEBUG_EVENTAbi>) -> Int32>
 
 @When[Windows_Win32_System_VirtualDosMachines == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")) || arch == "aarch64" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")))]
 public type VDMSETCONTEXTPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<VDMCONTEXTAbi>) -> Int32>

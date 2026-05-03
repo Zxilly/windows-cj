@@ -4,17 +4,28 @@
 package windows.Win32.System.WinRT.Composition
 
 import std.collection.*
+@When[Windows_Win32_System_WinRT_Composition == "on"]
 import windows_core.{RuntimeType}
+@When[Windows_Win32_System_WinRT_Composition == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_WinRT_Composition == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
+@When[Windows_Win32_System_WinRT_Composition == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_WinRT_Composition == "on" && Windows_UI_Composition_Desktop == "on"]
 import windows.UI.Composition.Desktop as UI_Composition_Desktop
+@When[Windows_Win32_System_WinRT_Composition == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_WinRT_Composition == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Win32_System_WinRT_Composition == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_WinRT_Composition == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_System_WinRT_Composition == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Win32_System_WinRT_Composition == "on"]
+import windows.impl.p1 as impl_p1
 
 
 @When[Windows_Win32_System_WinRT_Composition == "on" && Windows_Win32_System_WinRT == "on"]
@@ -619,7 +630,7 @@ public class IDesktopWindowTargetInterop <: InterfaceWrapperBase & ComInterface 
 public struct IVisualInteractionSourceInteropVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TryRedirectForManipulation: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.POINTER_INFOAbi>) -> Int32> = { _, _ => 0 }
+    public var TryRedirectForManipulation: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.POINTER_INFOAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -664,7 +675,7 @@ public class IVisualInteractionSourceInterop <: InterfaceWrapperBase & ComInterf
     }
 
     @When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TryRedirectForManipulation(pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32 {
+    public unsafe func TryRedirectForManipulation(pointerInfo: CPointer<Win32_impl_p2.POINTER_INFOAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryRedirectForManipulation(__liveRaw, pointerInfo)

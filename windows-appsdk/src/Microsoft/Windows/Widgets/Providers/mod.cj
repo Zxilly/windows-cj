@@ -4,16 +4,27 @@
 package windows_appsdk.Microsoft.Windows.Widgets.Providers
 
 import std.collection.*
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_core as windows_core
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_Windows_Widgets_Providers == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Microsoft_Windows_Widgets_Providers == "on" && Windows_Storage_Streams == "on"]
 import windows.Storage.Streams as Storage_Streams
+@When[Microsoft_Windows_Widgets_Providers == "on" && Microsoft_Windows_Widgets == "on"]
 import windows_appsdk.Microsoft.Windows.Widgets as Microsoft_Windows_Widgets
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_collections as windows_collections
+@When[Microsoft_Windows_Widgets_Providers == "on"]
 import windows_future as windows_future
 
 

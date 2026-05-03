@@ -4,17 +4,27 @@
 package windows.Services.Store
 
 import std.collection.*
+@When[Windows_Services_Store == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Services_Store == "on"]
 import windows_core as windows_core
+@When[Windows_Services_Store == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Services_Store == "on"]
 import windows_interface as windows_interface
+@When[Windows_Services_Store == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Services_Store == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Services_Store == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Services_Store == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Services_Store == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Services_Store == "on"]
 import windows_collections as windows_collections
+@When[Windows_Services_Store == "on"]
 import windows_future as windows_future
 
 
@@ -633,7 +643,7 @@ public class IStorePackageUpdate <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorePackageUpdate", IStorePackageUpdate.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorePackageUpdateVtbl", "IStorePackageUpdate", "IStorePackageUpdate_Impl", [InterfaceMethodSchema("get_Package", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Mandatory", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorePackageUpdate", IStorePackageUpdate.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStorePackageUpdateVtbl", "IStorePackageUpdate", "IStorePackageUpdate_Impl", [InterfaceMethodSchema("get_Package", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Mandatory", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorePackageUpdate.runtimeType())
         return schema
     }
@@ -663,12 +673,12 @@ public class IStorePackageUpdate <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     public unsafe func Mandatory(): Bool {
@@ -1315,7 +1325,7 @@ extend IStoreSendRequestResult <: windows_core.Interface<IStoreSendRequestResult
 public struct IStoreSendRequestResult2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     @When[Windows_Web_Http == "on"]
-    public var get_HttpStatusCode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.HttpStatusCodeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_HttpStatusCode: CFunc<(CPointer<Unit>, CPointer<impl_p0.HttpStatusCodeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web_Http != "on"]
     public var get_HttpStatusCode: UIntNative = UIntNative(0)
     public init() {}
@@ -1357,7 +1367,7 @@ public class IStoreSendRequestResult2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreSendRequestResult2", IStoreSendRequestResult2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreSendRequestResult2Vtbl", "IStoreSendRequestResult2", "IStoreSendRequestResult2_Impl", [InterfaceMethodSchema("get_HttpStatusCode", 6, [InterfaceParameterSchema("result", "CPointer<_impl_l0.HttpStatusCodeAbi>", "OutSlot<_impl_l0.HttpStatusCode>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreSendRequestResult2", IStoreSendRequestResult2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreSendRequestResult2Vtbl", "IStoreSendRequestResult2", "IStoreSendRequestResult2_Impl", [InterfaceMethodSchema("get_HttpStatusCode", 6, [InterfaceParameterSchema("result", "CPointer<impl_p0.HttpStatusCodeAbi>", "OutSlot<impl_p0.HttpStatusCode>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreSendRequestResult2.runtimeType())
         return schema
     }
@@ -1387,12 +1397,12 @@ public class IStoreSendRequestResult2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func get_HttpStatusCode(): _impl_l0.HttpStatusCode {
+    public unsafe func get_HttpStatusCode(): impl_p0.HttpStatusCode {
         let v = vtbl()
-        var result__ = _impl_l0.HttpStatusCodeAbi()
-        let hr = v.get_HttpStatusCode(asRaw(), CPointer<_impl_l0.HttpStatusCodeAbi>(inout result__))
+        var result__ = impl_p0.HttpStatusCodeAbi()
+        let hr = v.get_HttpStatusCode(asRaw(), CPointer<impl_p0.HttpStatusCodeAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.HttpStatusCode>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.HttpStatusCode>()).unwrap()
     }
 }
 
@@ -2132,7 +2142,7 @@ public class StorePackageUpdate <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 
@@ -5584,7 +5594,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreContext", IStoreContext.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContextVtbl", "IStoreContext", "IStoreContext_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OfflineLicensesChanged", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<StoreContext, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveOfflineLicensesChanged", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetCustomerPurchaseIdAsync", 9, [InterfaceParameterSchema("serviceTicket", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("publisherUserId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCustomerCollectionsIdAsync", 10, [InterfaceParameterSchema("serviceTicket", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("publisherUserId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppLicenseAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreAppLicense>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductForCurrentAppAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductsAsync", 13, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreProductsAsync", 14, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreProductsWithPagingAsync", 15, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxItemsToRetrievePerPage", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductPagedQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUserCollectionAsync", 16, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUserCollectionWithPagingAsync", 17, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxItemsToRetrievePerPage", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductPagedQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportConsumableFulfillmentAsync", 18, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("quantity", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("trackingId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreConsumableResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetConsumableBalanceRemainingAsync", 19, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreConsumableResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AcquireStoreLicenseForOptionalPackageAsync", 20, [InterfaceParameterSchema("optionalPackage", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPurchaseAsync", 21, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StorePurchaseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPurchaseWithPurchasePropertiesAsync", 22, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storePurchaseProperties", "CPointer<Unit>", "InParam<StorePurchaseProperties>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StorePurchaseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppAndOptionalStorePackageUpdatesAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StorePackageUpdate>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadStorePackageUpdatesAsync", 24, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackageUpdatesAsync", 25, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackagesAsync", 26, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreContext", IStoreContext.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContextVtbl", "IStoreContext", "IStoreContext_Impl", [InterfaceMethodSchema("get_User", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OfflineLicensesChanged", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<StoreContext, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveOfflineLicensesChanged", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetCustomerPurchaseIdAsync", 9, [InterfaceParameterSchema("serviceTicket", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("publisherUserId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCustomerCollectionsIdAsync", 10, [InterfaceParameterSchema("serviceTicket", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("publisherUserId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppLicenseAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreAppLicense>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductForCurrentAppAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductsAsync", 13, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreProductsAsync", 14, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreProductsWithPagingAsync", 15, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxItemsToRetrievePerPage", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductPagedQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUserCollectionAsync", 16, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUserCollectionWithPagingAsync", 17, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxItemsToRetrievePerPage", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductPagedQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportConsumableFulfillmentAsync", 18, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("quantity", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("trackingId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreConsumableResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetConsumableBalanceRemainingAsync", 19, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreConsumableResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AcquireStoreLicenseForOptionalPackageAsync", 20, [InterfaceParameterSchema("optionalPackage", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPurchaseAsync", 21, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StorePurchaseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestPurchaseWithPurchasePropertiesAsync", 22, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storePurchaseProperties", "CPointer<Unit>", "InParam<StorePurchaseProperties>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StorePurchaseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAppAndOptionalStorePackageUpdatesAsync", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StorePackageUpdate>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadStorePackageUpdatesAsync", 24, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackageUpdatesAsync", 25, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackagesAsync", 26, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreContext.runtimeType())
         return schema
     }
@@ -5614,12 +5624,12 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     public unsafe func OfflineLicensesChanged(handler: Foundation.TypedEventHandler<StoreContext, IInspectable>): windows_collections.EventRegistrationToken {
@@ -5730,7 +5740,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func AcquireStoreLicenseForOptionalPackageAsync(optionalPackage: _impl_l2.Package): windows_future.IAsyncOperation<StoreAcquireLicenseResult> {
+    public unsafe func AcquireStoreLicenseForOptionalPackageAsync(optionalPackage: impl_p1.Package): windows_future.IAsyncOperation<StoreAcquireLicenseResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AcquireStoreLicenseForOptionalPackageAsync(asRaw(), optionalPackage.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5841,7 +5851,7 @@ public class IStoreContext2 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreContext2", IStoreContext2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContext2Vtbl", "IStoreContext2", "IStoreContext2_Impl", [InterfaceMethodSchema("FindStoreProductForPackageAsync", 6, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreContext2", IStoreContext2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContext2Vtbl", "IStoreContext2", "IStoreContext2_Impl", [InterfaceMethodSchema("FindStoreProductForPackageAsync", 6, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreContext2.runtimeType())
         return schema
     }
@@ -5871,7 +5881,7 @@ public class IStoreContext2 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
-    public unsafe func FindStoreProductForPackageAsync(productKinds: windows_collections.IIterable<windows_core.HString>, package_: _impl_l2.Package): windows_future.IAsyncOperation<StoreProductResult> {
+    public unsafe func FindStoreProductForPackageAsync(productKinds: windows_collections.IIterable<windows_core.HString>, package_: impl_p1.Package): windows_future.IAsyncOperation<StoreProductResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.FindStoreProductForPackageAsync(asRaw(), productKinds.asRaw(), package_.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5970,7 +5980,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreContext3", IStoreContext3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContext3Vtbl", "IStoreContext3", "IStoreContext3_Impl", [InterfaceMethodSchema("CanSilentlyDownloadStorePackageUpdates", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySilentDownloadStorePackageUpdatesAsync", 7, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySilentDownloadAndInstallStorePackageUpdatesAsync", 8, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanAcquireStoreLicenseForOptionalPackageAsync", 9, [InterfaceParameterSchema("optionalPackage", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreCanAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanAcquireStoreLicenseAsync", 10, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreCanAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductsWithOptionsAsync", 11, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeProductOptions", "CPointer<Unit>", "InParam<StoreProductOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreQueueItemsAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreQueueItemsAsync", 13, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync", 14, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storePackageInstallOptions", "CPointer<Unit>", "InParam<StorePackageInstallOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DownloadAndInstallStorePackagesAsync", 15, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestUninstallStorePackageAsync", 16, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestUninstallStorePackageByStoreIdAsync", 17, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UninstallStorePackageAsync", 18, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<_impl_l2.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UninstallStorePackageByStoreIdAsync", 19, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreContext3", IStoreContext3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContext3Vtbl", "IStoreContext3", "IStoreContext3_Impl", [InterfaceMethodSchema("CanSilentlyDownloadStorePackageUpdates", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySilentDownloadStorePackageUpdatesAsync", 7, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySilentDownloadAndInstallStorePackageUpdatesAsync", 8, [InterfaceParameterSchema("storePackageUpdates", "CPointer<Unit>", "InParam<windows_collections.IIterable<StorePackageUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanAcquireStoreLicenseForOptionalPackageAsync", 9, [InterfaceParameterSchema("optionalPackage", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreCanAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanAcquireStoreLicenseAsync", 10, [InterfaceParameterSchema("productStoreId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreCanAcquireLicenseResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreProductsWithOptionsAsync", 11, [InterfaceParameterSchema("productKinds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storeProductOptions", "CPointer<Unit>", "InParam<StoreProductOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreProductQueryResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetAssociatedStoreQueueItemsAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStoreQueueItemsAsync", 13, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync", 14, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("storePackageInstallOptions", "CPointer<Unit>", "InParam<StorePackageInstallOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DownloadAndInstallStorePackagesAsync", 15, [InterfaceParameterSchema("storeIds", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestUninstallStorePackageAsync", 16, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestUninstallStorePackageByStoreIdAsync", 17, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UninstallStorePackageAsync", 18, [InterfaceParameterSchema("package_", "CPointer<Unit>", "InParam<impl_p1.Package>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UninstallStorePackageByStoreIdAsync", 19, [InterfaceParameterSchema("storeId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<StoreUninstallStorePackageResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreContext3.runtimeType())
         return schema
     }
@@ -6026,7 +6036,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func CanAcquireStoreLicenseForOptionalPackageAsync(optionalPackage: _impl_l2.Package): windows_future.IAsyncOperation<StoreCanAcquireLicenseResult> {
+    public unsafe func CanAcquireStoreLicenseForOptionalPackageAsync(optionalPackage: impl_p1.Package): windows_future.IAsyncOperation<StoreCanAcquireLicenseResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CanAcquireStoreLicenseForOptionalPackageAsync(asRaw(), optionalPackage.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6088,7 +6098,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func RequestUninstallStorePackageAsync(package_: _impl_l2.Package): windows_future.IAsyncOperation<StoreUninstallStorePackageResult> {
+    public unsafe func RequestUninstallStorePackageAsync(package_: impl_p1.Package): windows_future.IAsyncOperation<StoreUninstallStorePackageResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestUninstallStorePackageAsync(asRaw(), package_.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6105,7 +6115,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func UninstallStorePackageAsync(package_: _impl_l2.Package): windows_future.IAsyncOperation<StoreUninstallStorePackageResult> {
+    public unsafe func UninstallStorePackageAsync(package_: impl_p1.Package): windows_future.IAsyncOperation<StoreUninstallStorePackageResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UninstallStorePackageAsync(asRaw(), package_.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6382,7 +6392,7 @@ public class IStoreContextStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStoreContextStatics", IStoreContextStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContextStaticsVtbl", "IStoreContextStatics", "IStoreContextStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StoreContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StoreContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStoreContextStatics", IStoreContextStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IStoreContextStaticsVtbl", "IStoreContextStatics", "IStoreContextStatics_Impl", [InterfaceMethodSchema("GetDefault", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StoreContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StoreContext>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStoreContextStatics.runtimeType())
         return schema
     }
@@ -6420,7 +6430,7 @@ public class IStoreContextStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): StoreContext {
+    public unsafe func GetForUser(user: impl_p1.User): StoreContext {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6488,7 +6498,7 @@ public class IStorePackageLicense <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorePackageLicense", IStorePackageLicense.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IStorePackageLicenseVtbl", "IStorePackageLicense", "IStorePackageLicense_Impl", [InterfaceMethodSchema("LicenseLost", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<StorePackageLicense, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLicenseLost", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_Package", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsValid", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReleaseLicense", 11, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorePackageLicense", IStorePackageLicense.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "IStorePackageLicenseVtbl", "IStorePackageLicense", "IStorePackageLicense_Impl", [InterfaceMethodSchema("LicenseLost", 7, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<StorePackageLicense, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLicenseLost", 8, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("get_Package", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Package>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsValid", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReleaseLicense", 11, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IStorePackageLicense.runtimeType())
         return schema
     }
@@ -6539,12 +6549,12 @@ public class IStorePackageLicense <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Package(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.Package.fromAbiTake(result__)
+        return impl_p1.Package.fromAbiTake(result__)
     }
 
     public unsafe func IsValid(): Bool {
@@ -8071,7 +8081,7 @@ public class StoreContext <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -8133,7 +8143,7 @@ public class StoreContext <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func AcquireStoreLicenseForOptionalPackageAsync(optionalPackage: _impl_l2.Package): windows_future.IAsyncOperation<StoreAcquireLicenseResult> {
+    public unsafe func AcquireStoreLicenseForOptionalPackageAsync(optionalPackage: impl_p1.Package): windows_future.IAsyncOperation<StoreAcquireLicenseResult> {
         return defaultInterface().AcquireStoreLicenseForOptionalPackageAsync(optionalPackage)
     }
 
@@ -8177,7 +8187,7 @@ public class StoreContext <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): StoreContext {
+    public static unsafe func GetForUser(user: impl_p1.User): StoreContext {
         var result__: Option<StoreContext> = Option<StoreContext>.None
         try (factory__ = windows_core.factory<StoreContext, IStoreContextStatics>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -8292,7 +8302,7 @@ public class StorePackageLicense <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_ApplicationModel == "on"]
-    public unsafe func get_Package(): _impl_l2.Package {
+    public unsafe func get_Package(): impl_p1.Package {
         return defaultInterface().get_Package()
     }
 

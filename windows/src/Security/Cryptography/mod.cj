@@ -4,13 +4,20 @@
 package windows.Security.Cryptography
 
 import std.collection.*
+@When[Windows_Security_Cryptography == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Security_Cryptography == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Cryptography == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Cryptography == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Cryptography == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Cryptography == "on"]
 import windows_polyfill as windows_polyfill
-import windows._impl_l0 as _impl_l0
+@When[Windows_Security_Cryptography == "on"]
+import windows.impl.p0 as impl_p0
 
 
 @When[Windows_Security_Cryptography == "on"]
@@ -154,7 +161,7 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ICryptographicBufferStatics", ICryptographicBufferStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICryptographicBufferStaticsVtbl", "ICryptographicBufferStatics", "ICryptographicBufferStatics_Impl", [InterfaceMethodSchema("Compare", 6, [InterfaceParameterSchema("object1", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("object2", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateRandom", 7, [InterfaceParameterSchema("length", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateRandomNumber", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromByteArray", 9, [InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyToByteArray", 10, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<CPointer<UInt8>>", "CPointer<CPointer<UInt8>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DecodeFromHexString", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodeToHexString", 12, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DecodeFromBase64String", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodeToBase64String", 14, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertStringToBinary", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("encoding", "BinaryStringEncodingAbi", "BinaryStringEncoding", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertBinaryToString", 16, [InterfaceParameterSchema("encoding", "BinaryStringEncodingAbi", "BinaryStringEncoding", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ICryptographicBufferStatics", ICryptographicBufferStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ICryptographicBufferStaticsVtbl", "ICryptographicBufferStatics", "ICryptographicBufferStatics_Impl", [InterfaceMethodSchema("Compare", 6, [InterfaceParameterSchema("object1", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("object2", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateRandom", 7, [InterfaceParameterSchema("length", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GenerateRandomNumber", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromByteArray", 9, [InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyToByteArray", 10, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("value", "CPointer<CPointer<UInt8>>", "CPointer<CPointer<UInt8>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DecodeFromHexString", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodeToHexString", 12, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DecodeFromBase64String", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EncodeToBase64String", 14, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertStringToBinary", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("encoding", "BinaryStringEncodingAbi", "BinaryStringEncoding", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertBinaryToString", 16, [InterfaceParameterSchema("encoding", "BinaryStringEncodingAbi", "BinaryStringEncoding", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ICryptographicBufferStatics.runtimeType())
         return schema
     }
@@ -184,7 +191,7 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Compare(object1: _impl_l0.IBuffer, object2: _impl_l0.IBuffer): Bool {
+    public unsafe func Compare(object1: impl_p0.IBuffer, object2: impl_p0.IBuffer): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.Compare(asRaw(), object1.asRaw(), object2.asRaw(), CPointer<Bool>(inout result__))
@@ -193,12 +200,12 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GenerateRandom(length: UInt32): _impl_l0.IBuffer {
+    public unsafe func GenerateRandom(length: UInt32): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GenerateRandom(asRaw(), length, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func GenerateRandomNumber(): UInt32 {
@@ -210,32 +217,32 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromByteArray(valueSize: UInt32, value: CPointer<UInt8>): _impl_l0.IBuffer {
+    public unsafe func CreateFromByteArray(valueSize: UInt32, value: CPointer<UInt8>): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromByteArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyToByteArray(buffer: _impl_l0.IBuffer, value: CPointer<CPointer<UInt8>>): Unit {
+    public unsafe func CopyToByteArray(buffer: impl_p0.IBuffer, value: CPointer<CPointer<UInt8>>): Unit {
         let v = vtbl()
         let hr = v.CopyToByteArray(asRaw(), buffer.asRaw(), value)
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DecodeFromHexString(value: windows_core.HString): _impl_l0.IBuffer {
+    public unsafe func DecodeFromHexString(value: windows_core.HString): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DecodeFromHexString(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func EncodeToHexString(buffer: _impl_l0.IBuffer): windows_core.HString {
+    public unsafe func EncodeToHexString(buffer: impl_p0.IBuffer): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.EncodeToHexString(asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -244,16 +251,16 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DecodeFromBase64String(value: windows_core.HString): _impl_l0.IBuffer {
+    public unsafe func DecodeFromBase64String(value: windows_core.HString): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DecodeFromBase64String(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func EncodeToBase64String(buffer: _impl_l0.IBuffer): windows_core.HString {
+    public unsafe func EncodeToBase64String(buffer: impl_p0.IBuffer): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.EncodeToBase64String(asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -262,16 +269,16 @@ public class ICryptographicBufferStatics <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ConvertStringToBinary(value: windows_core.HString, encoding: BinaryStringEncoding): _impl_l0.IBuffer {
+    public unsafe func ConvertStringToBinary(value: windows_core.HString, encoding: BinaryStringEncoding): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConvertStringToBinary(asRaw(), value.asRaw(), windows_core.projectTypedAbi(encoding, windows_core.typeMarker<BinaryStringEncoding>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ConvertBinaryToString(encoding: BinaryStringEncoding, buffer: _impl_l0.IBuffer): windows_core.HString {
+    public unsafe func ConvertBinaryToString(encoding: BinaryStringEncoding, buffer: impl_p0.IBuffer): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConvertBinaryToString(asRaw(), windows_core.projectTypedAbi(encoding, windows_core.typeMarker<BinaryStringEncoding>()), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -304,7 +311,7 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func Compare(object1: _impl_l0.IBuffer, object2: _impl_l0.IBuffer): Bool {
+    public static unsafe func Compare(object1: impl_p0.IBuffer, object2: impl_p0.IBuffer): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.Compare(object1, object2))
@@ -316,8 +323,8 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func GenerateRandom(length: UInt32): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func GenerateRandom(length: UInt32): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.GenerateRandom(length))
         }
@@ -339,8 +346,8 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromByteArray(valueSize: UInt32, value: CPointer<UInt8>): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func CreateFromByteArray(valueSize: UInt32, value: CPointer<UInt8>): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.CreateFromByteArray(valueSize, value))
         }
@@ -351,7 +358,7 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CopyToByteArray(buffer: _impl_l0.IBuffer, value: CPointer<CPointer<UInt8>>): Unit {
+    public static unsafe func CopyToByteArray(buffer: impl_p0.IBuffer, value: CPointer<CPointer<UInt8>>): Unit {
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             factory__.CopyToByteArray(buffer, value)
         }
@@ -359,8 +366,8 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func DecodeFromHexString(value: windows_core.HString): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func DecodeFromHexString(value: windows_core.HString): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.DecodeFromHexString(value))
         }
@@ -371,7 +378,7 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func EncodeToHexString(buffer: _impl_l0.IBuffer): windows_core.HString {
+    public static unsafe func EncodeToHexString(buffer: impl_p0.IBuffer): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.EncodeToHexString(buffer))
@@ -383,8 +390,8 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func DecodeFromBase64String(value: windows_core.HString): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func DecodeFromBase64String(value: windows_core.HString): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.DecodeFromBase64String(value))
         }
@@ -395,7 +402,7 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func EncodeToBase64String(buffer: _impl_l0.IBuffer): windows_core.HString {
+    public static unsafe func EncodeToBase64String(buffer: impl_p0.IBuffer): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.EncodeToBase64String(buffer))
@@ -407,8 +414,8 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func ConvertStringToBinary(value: windows_core.HString, encoding: BinaryStringEncoding): _impl_l0.IBuffer {
-        var result__: Option<_impl_l0.IBuffer> = Option<_impl_l0.IBuffer>.None
+    public static unsafe func ConvertStringToBinary(value: windows_core.HString, encoding: BinaryStringEncoding): impl_p0.IBuffer {
+        var result__: Option<impl_p0.IBuffer> = Option<impl_p0.IBuffer>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.ConvertStringToBinary(value, encoding))
         }
@@ -419,7 +426,7 @@ public class CryptographicBuffer <: windows_interface.RuntimeName & windows_core
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func ConvertBinaryToString(encoding: BinaryStringEncoding, buffer: _impl_l0.IBuffer): windows_core.HString {
+    public static unsafe func ConvertBinaryToString(encoding: BinaryStringEncoding, buffer: impl_p0.IBuffer): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<CryptographicBuffer, ICryptographicBufferStatics>().unwrap()) {
             result__ = Some(factory__.ConvertBinaryToString(encoding, buffer))

@@ -4,10 +4,15 @@
 package windows.Wdk.System.Memory
 
 import std.collection.*
+@When[Windows_Wdk_System_Memory == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Wdk_System_Memory == "on"]
 import windows_core as windows_core
-import windows.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Wdk_System_Memory == "on"]
+import windows.Wdk.impl.p0 as Wdk_impl_p0
+@When[Windows_Wdk_System_Memory == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Wdk_System_Memory == "on"]
 import windows_core as windows_core
 
 
@@ -78,11 +83,11 @@ public unsafe func Windows_NtMapViewOfSection(SectionHandle: CPointer<Unit>, Pro
 
 @When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return NtOpenSection(SectionHandle, DesiredAccess, ObjectAttributes)
 }
 
@@ -110,11 +115,11 @@ public unsafe func Windows_ZwMapViewOfSection(SectionHandle: CPointer<Unit>, Pro
 
 @When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+    func ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32
 }
 
 @When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
-public unsafe func Windows_ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+public unsafe func Windows_ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl_p0.OBJECT_ATTRIBUTESAbi>): Int32 {
     return ZwOpenSection(SectionHandle, DesiredAccess, ObjectAttributes)
 }
 

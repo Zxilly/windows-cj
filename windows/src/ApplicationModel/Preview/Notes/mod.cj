@@ -4,16 +4,27 @@
 package windows.ApplicationModel.Preview.Notes
 
 import std.collection.*
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Preview_Notes == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_Preview_Notes == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-import windows._impl_l0 as _impl_l0
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Preview_Notes == "on"]
 import windows_future as windows_future
 
 
@@ -667,7 +678,7 @@ public class INotesWindowManagerPreview2 <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INotesWindowManagerPreview2", INotesWindowManagerPreview2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INotesWindowManagerPreview2Vtbl", "INotesWindowManagerPreview2", "INotesWindowManagerPreview2_Impl", [InterfaceMethodSchema("ShowNoteRelativeToWithOptions", 6, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("anchorNoteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<NotesWindowManagerPreviewShowNoteOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowNoteWithPlacementWithOptions", 7, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<NotesWindowManagerPreviewShowNoteOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetFocusToPreviousView", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetThumbnailImageForTaskSwitcherAsync", 9, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INotesWindowManagerPreview2", INotesWindowManagerPreview2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INotesWindowManagerPreview2Vtbl", "INotesWindowManagerPreview2", "INotesWindowManagerPreview2_Impl", [InterfaceMethodSchema("ShowNoteRelativeToWithOptions", 6, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("anchorNoteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<NotesWindowManagerPreviewShowNoteOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ShowNoteWithPlacementWithOptions", 7, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<NotesWindowManagerPreviewShowNoteOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetFocusToPreviousView", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetThumbnailImageForTaskSwitcherAsync", 9, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<Graphics_Imaging.SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INotesWindowManagerPreview2.runtimeType())
         return schema
     }
@@ -703,7 +714,7 @@ public class INotesWindowManagerPreview2 <: InterfaceWrapperBase & ComInterface 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowNoteWithPlacementWithOptions(noteViewId: Int32, data: _impl_l0.IBuffer, options: NotesWindowManagerPreviewShowNoteOptions): Unit {
+    public unsafe func ShowNoteWithPlacementWithOptions(noteViewId: Int32, data: impl_p0.IBuffer, options: NotesWindowManagerPreviewShowNoteOptions): Unit {
         let v = vtbl()
         let hr = v.ShowNoteWithPlacementWithOptions(asRaw(), noteViewId, data.asRaw(), options.asRaw())
         HRESULT(hr).ok()
@@ -795,7 +806,7 @@ public class INotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INotesWindowManagerPreview", INotesWindowManagerPreview.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INotesWindowManagerPreviewVtbl", "INotesWindowManagerPreview", "INotesWindowManagerPreview_Impl", [InterfaceMethodSchema("IsScreenLocked", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowNote", 7, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowNoteRelativeTo", 8, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("anchorNoteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowNoteWithPlacement", 9, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("HideNote", 10, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetNotePlacement", 11, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetNoteSize", 12, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("size", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFocusToNextView", 13, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetNotesThumbnailAsync", 14, [InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SystemLockStateChanged", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSystemLockStateChanged", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NotePlacementChanged", 17, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, NotePlacementChangedPreviewEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNotePlacementChanged", 18, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NoteVisibilityChanged", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, NoteVisibilityChangedPreviewEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNoteVisibilityChanged", 20, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INotesWindowManagerPreview", INotesWindowManagerPreview.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INotesWindowManagerPreviewVtbl", "INotesWindowManagerPreview", "INotesWindowManagerPreview_Impl", [InterfaceMethodSchema("IsScreenLocked", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ShowNote", 7, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowNoteRelativeTo", 8, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("anchorNoteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ShowNoteWithPlacement", 9, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("HideNote", 10, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetNotePlacement", 11, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrySetNoteSize", 12, [InterfaceParameterSchema("noteViewId", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("size", "windows_future.SizeAbi", "windows_future.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFocusToNextView", 13, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetNotesThumbnailAsync", 14, [InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SystemLockStateChanged", 15, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveSystemLockStateChanged", 16, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NotePlacementChanged", 17, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, NotePlacementChangedPreviewEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNotePlacementChanged", 18, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NoteVisibilityChanged", 19, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NotesWindowManagerPreview, NoteVisibilityChangedPreviewEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNoteVisibilityChanged", 20, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(INotesWindowManagerPreview.runtimeType())
         return schema
     }
@@ -845,7 +856,7 @@ public class INotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowNoteWithPlacement(noteViewId: Int32, data: _impl_l0.IBuffer): Unit {
+    public unsafe func ShowNoteWithPlacement(noteViewId: Int32, data: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.ShowNoteWithPlacement(asRaw(), noteViewId, data.asRaw())
         HRESULT(hr).ok()
@@ -858,12 +869,12 @@ public class INotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetNotePlacement(noteViewId: Int32): _impl_l0.IBuffer {
+    public unsafe func GetNotePlacement(noteViewId: Int32): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetNotePlacement(asRaw(), noteViewId, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func TrySetNoteSize(noteViewId: Int32, size: windows_future.Size): Bool {
@@ -881,7 +892,7 @@ public class INotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetNotesThumbnailAsync(thumbnail: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func SetNotesThumbnailAsync(thumbnail: impl_p0.IBuffer): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SetNotesThumbnailAsync(asRaw(), thumbnail.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1102,7 +1113,7 @@ public class NotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ShowNoteWithPlacement(noteViewId: Int32, data: _impl_l0.IBuffer): Unit {
+    public unsafe func ShowNoteWithPlacement(noteViewId: Int32, data: impl_p0.IBuffer): Unit {
         defaultInterface().ShowNoteWithPlacement(noteViewId, data)
     }
 
@@ -1111,7 +1122,7 @@ public class NotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetNotePlacement(noteViewId: Int32): _impl_l0.IBuffer {
+    public unsafe func GetNotePlacement(noteViewId: Int32): impl_p0.IBuffer {
         return defaultInterface().GetNotePlacement(noteViewId)
     }
 
@@ -1124,7 +1135,7 @@ public class NotesWindowManagerPreview <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetNotesThumbnailAsync(thumbnail: _impl_l0.IBuffer): windows_future.IAsyncAction {
+    public unsafe func SetNotesThumbnailAsync(thumbnail: impl_p0.IBuffer): windows_future.IAsyncAction {
         return defaultInterface().SetNotesThumbnailAsync(thumbnail)
     }
 

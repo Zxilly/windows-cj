@@ -4,18 +4,31 @@
 package windows.Perception.Spatial
 
 import std.collection.*
+@When[Windows_Perception_Spatial == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Perception_Spatial == "on"]
 import windows_core as windows_core
+@When[Windows_Perception_Spatial == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Perception_Spatial == "on"]
 import windows_interface as windows_interface
+@When[Windows_Perception_Spatial == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Perception_Spatial == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Perception_Spatial == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Perception_Spatial == "on" && Windows_Perception == "on"]
 import windows.Perception as Perception
-import windows._impl_l0 as _impl_l0
-import windows._impl_l2 as _impl_l2
+@When[Windows_Perception_Spatial == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Perception_Spatial == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Perception_Spatial == "on"]
 import windows_collections as windows_collections
+@When[Windows_Perception_Spatial == "on"]
 import windows_future as windows_future
+@When[Windows_Perception_Spatial == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -1851,7 +1864,7 @@ public class ISpatialAnchorExporter <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISpatialAnchorExporter", ISpatialAnchorExporter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialAnchorExporterVtbl", "ISpatialAnchorExporter", "ISpatialAnchorExporter_Impl", [InterfaceMethodSchema("GetAnchorExportSufficiencyAsync", 6, [InterfaceParameterSchema("anchor", "CPointer<Unit>", "InParam<SpatialAnchor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("purpose", "SpatialAnchorExportPurposeAbi", "SpatialAnchorExportPurpose", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SpatialAnchorExportSufficiency>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryExportAnchorAsync", 7, [InterfaceParameterSchema("anchor", "CPointer<Unit>", "InParam<SpatialAnchor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("purpose", "SpatialAnchorExportPurposeAbi", "SpatialAnchorExportPurpose", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISpatialAnchorExporter", ISpatialAnchorExporter.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialAnchorExporterVtbl", "ISpatialAnchorExporter", "ISpatialAnchorExporter_Impl", [InterfaceMethodSchema("GetAnchorExportSufficiencyAsync", 6, [InterfaceParameterSchema("anchor", "CPointer<Unit>", "InParam<SpatialAnchor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("purpose", "SpatialAnchorExportPurposeAbi", "SpatialAnchorExportPurpose", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SpatialAnchorExportSufficiency>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryExportAnchorAsync", 7, [InterfaceParameterSchema("anchor", "CPointer<Unit>", "InParam<SpatialAnchor>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("purpose", "SpatialAnchorExportPurposeAbi", "SpatialAnchorExportPurpose", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISpatialAnchorExporter.runtimeType())
         return schema
     }
@@ -1889,7 +1902,7 @@ public class ISpatialAnchorExporter <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TryExportAnchorAsync(anchor: SpatialAnchor, purpose: SpatialAnchorExportPurpose, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryExportAnchorAsync(anchor: SpatialAnchor, purpose: SpatialAnchorExportPurpose, stream: impl_p0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryExportAnchorAsync(asRaw(), anchor.asRaw(), windows_core.projectTypedAbi(purpose, windows_core.typeMarker<SpatialAnchorExportPurpose>()), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2355,7 +2368,7 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISpatialAnchorTransferManagerStatics", ISpatialAnchorTransferManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialAnchorTransferManagerStaticsVtbl", "ISpatialAnchorTransferManagerStatics", "ISpatialAnchorTransferManagerStatics_Impl", [InterfaceMethodSchema("TryImportAnchorsAsync", 6, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryExportAnchorsAsync", 7, [InterfaceParameterSchema("anchors", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SpatialPerceptionAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISpatialAnchorTransferManagerStatics", ISpatialAnchorTransferManagerStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialAnchorTransferManagerStaticsVtbl", "ISpatialAnchorTransferManagerStatics", "ISpatialAnchorTransferManagerStatics_Impl", [InterfaceMethodSchema("TryImportAnchorsAsync", 6, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryExportAnchorsAsync", 7, [InterfaceParameterSchema("anchors", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p0.IOutputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestAccessAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SpatialPerceptionAccessStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISpatialAnchorTransferManagerStatics.runtimeType())
         return schema
     }
@@ -2385,7 +2398,7 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryImportAnchorsAsync(stream: _impl_l0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
+    public unsafe func TryImportAnchorsAsync(stream: impl_p0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryImportAnchorsAsync(asRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2394,7 +2407,7 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: impl_p0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryExportAnchorsAsync(asRaw(), anchors.asRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3157,7 +3170,7 @@ public class ISpatialEntityStoreStatics <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISpatialEntityStoreStatics", ISpatialEntityStoreStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialEntityStoreStaticsVtbl", "ISpatialEntityStoreStatics", "ISpatialEntityStoreStatics_Impl", [InterfaceMethodSchema("IsSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryGetForRemoteSystemSession", 7, [InterfaceParameterSchema("session", "CPointer<Unit>", "InParam<_impl_l2.RemoteSystemSession>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SpatialEntityStore>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISpatialEntityStoreStatics", ISpatialEntityStoreStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISpatialEntityStoreStaticsVtbl", "ISpatialEntityStoreStatics", "ISpatialEntityStoreStatics_Impl", [InterfaceMethodSchema("IsSupported", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TryGetForRemoteSystemSession", 7, [InterfaceParameterSchema("session", "CPointer<Unit>", "InParam<impl_p2.RemoteSystemSession>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SpatialEntityStore>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISpatialEntityStoreStatics.runtimeType())
         return schema
     }
@@ -3195,7 +3208,7 @@ public class ISpatialEntityStoreStatics <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_System_RemoteSystems == "on"]
-    public unsafe func TryGetForRemoteSystemSession(session: _impl_l2.RemoteSystemSession): SpatialEntityStore {
+    public unsafe func TryGetForRemoteSystemSession(session: impl_p2.RemoteSystemSession): SpatialEntityStore {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryGetForRemoteSystemSession(asRaw(), session.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4457,7 +4470,7 @@ public class SpatialAnchorExporter <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func TryExportAnchorAsync(anchor: SpatialAnchor, purpose: SpatialAnchorExportPurpose, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
+    public unsafe func TryExportAnchorAsync(anchor: SpatialAnchor, purpose: SpatialAnchorExportPurpose, stream: impl_p0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TryExportAnchorAsync(anchor, purpose, stream)
     }
 
@@ -4660,7 +4673,7 @@ public class SpatialAnchorTransferManager <: windows_interface.RuntimeName & win
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func TryImportAnchorsAsync(stream: _impl_l0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
+    public static unsafe func TryImportAnchorsAsync(stream: impl_p0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>>.None
         try (factory__ = windows_core.factory<SpatialAnchorTransferManager, ISpatialAnchorTransferManagerStatics>().unwrap()) {
             result__ = Some(factory__.TryImportAnchorsAsync(stream))
@@ -4672,7 +4685,7 @@ public class SpatialAnchorTransferManager <: windows_interface.RuntimeName & win
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
+    public static unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: impl_p0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         var result__: Option<windows_future.IAsyncOperation<Bool>> = Option<windows_future.IAsyncOperation<Bool>>.None
         try (factory__ = windows_core.factory<SpatialAnchorTransferManager, ISpatialAnchorTransferManagerStatics>().unwrap()) {
             result__ = Some(factory__.TryExportAnchorsAsync(anchors, stream))
@@ -5325,7 +5338,7 @@ public class SpatialEntityStore <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_System_RemoteSystems == "on"]
-    public static unsafe func TryGetForRemoteSystemSession(session: _impl_l2.RemoteSystemSession): SpatialEntityStore {
+    public static unsafe func TryGetForRemoteSystemSession(session: impl_p2.RemoteSystemSession): SpatialEntityStore {
         var result__: Option<SpatialEntityStore> = Option<SpatialEntityStore>.None
         try (factory__ = windows_core.factory<SpatialEntityStore, ISpatialEntityStoreStatics>().unwrap()) {
             result__ = Some(factory__.TryGetForRemoteSystemSession(session))

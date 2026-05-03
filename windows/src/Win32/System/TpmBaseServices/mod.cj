@@ -4,11 +4,17 @@
 package windows.Win32.System.TpmBaseServices
 
 import std.collection.*
+@When[Windows_Win32_System_TpmBaseServices == "on"]
 import windows_libloading
+@When[Windows_Win32_System_TpmBaseServices == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_TpmBaseServices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_TpmBaseServices == "on"]
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_System_TpmBaseServices == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_TpmBaseServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

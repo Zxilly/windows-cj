@@ -4,15 +4,24 @@
 package windows.Win32.AI.MachineLearning.WinML
 
 import std.collection.*
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_AI_MachineLearning_WinML == "on"]

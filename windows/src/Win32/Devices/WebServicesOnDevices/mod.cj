@@ -4,14 +4,22 @@
 package windows.Win32.Devices.WebServicesOnDevices
 
 import std.collection.*
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on"]
@@ -588,7 +596,7 @@ public class IWSDOutboundAttachment <: InterfaceWrapperBase & ComInterface {
 public struct IWSDSSLClientCertificateVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public var GetClientCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetClientCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>) -> Int32> = { _, _ => 0 }
     public var GetMappedAccessToken: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -634,7 +642,7 @@ public class IWSDSSLClientCertificate <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Security_Cryptography == "on"]
-    public unsafe func GetClientCertificate(ppCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>): Int32 {
+    public unsafe func GetClientCertificate(ppCertContext: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetClientCertificate(__liveRaw, ppCertContext)
@@ -1764,10 +1772,10 @@ extend WSD_PROTOCOL_TYPE <: windows_core.CopyType & windows_core.RuntimeType & w
 
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WSD_SECURITY_CERT_VALIDATION {
-    public var certMatchArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var certMatchArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwCertMatchArrayCount: UInt32 = 0u32
-    public var hCertMatchStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
-    public var hCertIssuerStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hCertMatchStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
+    public var hCertIssuerStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwCertCheckOptions: UInt32 = 0u32
     public var pszCNGHashAlgId: CPointer<UInt16> = CPointer<UInt16>()
     public var pbCertHash: CPointer<UInt8> = CPointer<UInt8>()
@@ -1778,10 +1786,10 @@ public struct WSD_SECURITY_CERT_VALIDATION {
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct WSD_SECURITY_CERT_VALIDATIONAbi {
-    public var certMatchArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var certMatchArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwCertMatchArrayCount: UInt32 = 0u32
-    public var hCertMatchStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
-    public var hCertIssuerStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hCertMatchStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
+    public var hCertIssuerStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwCertCheckOptions: UInt32 = 0u32
     public var pszCNGHashAlgId: CPointer<UInt16> = CPointer<UInt16>()
     public var pbCertHash: CPointer<UInt8> = CPointer<UInt8>()
@@ -1827,10 +1835,10 @@ extend WSD_SECURITY_CERT_VALIDATION <: windows_core.CopyType & windows_core.Runt
 
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WSD_SECURITY_CERT_VALIDATION_V1 {
-    public var certMatchArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var certMatchArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwCertMatchArrayCount: UInt32 = 0u32
-    public var hCertMatchStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
-    public var hCertIssuerStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hCertMatchStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
+    public var hCertIssuerStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwCertCheckOptions: UInt32 = 0u32
     public init() {}
 }
@@ -1838,10 +1846,10 @@ public struct WSD_SECURITY_CERT_VALIDATION_V1 {
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct WSD_SECURITY_CERT_VALIDATION_V1Abi {
-    public var certMatchArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var certMatchArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwCertMatchArrayCount: UInt32 = 0u32
-    public var hCertMatchStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
-    public var hCertIssuerStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hCertMatchStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
+    public var hCertIssuerStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwCertCheckOptions: UInt32 = 0u32
     public init() {}
 }
@@ -1878,9 +1886,9 @@ extend WSD_SECURITY_CERT_VALIDATION_V1 <: windows_core.CopyType & windows_core.R
 
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WSD_SECURITY_SIGNATURE_VALIDATION {
-    public var signingCertArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var signingCertArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwSigningCertArrayCount: UInt32 = 0u32
-    public var hSigningCertStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hSigningCertStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwFlags: UInt32 = 0u32
     public init() {}
 }
@@ -1888,9 +1896,9 @@ public struct WSD_SECURITY_SIGNATURE_VALIDATION {
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct WSD_SECURITY_SIGNATURE_VALIDATIONAbi {
-    public var signingCertArray: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var signingCertArray: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var dwSigningCertArrayCount: UInt32 = 0u32
-    public var hSigningCertStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var hSigningCertStore: Win32_impl_p0.HCERTSTORE = CPointer<Unit>()
     public var dwFlags: UInt32 = 0u32
     public init() {}
 }
@@ -2240,9 +2248,9 @@ public class IWSDHttpMessageParameters <: InterfaceWrapperBase & ComInterface {
 public struct IWSDUdpAddressVtbl {
     public var base_: IWSDTransportAddressVtbl = IWSDTransportAddressVtbl()
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public var SetSockaddr: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>) -> Int32> = { _, _ => 0 }
+    public var SetSockaddr: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public var GetSockaddr: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>) -> Int32> = { _, _ => 0 }
+    public var GetSockaddr: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>) -> Int32> = { _, _ => 0 }
     public var SetExclusive: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var GetExclusive: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var SetMessageType: CFunc<(CPointer<Unit>, WSDUdpMessageTypeAbi) -> Int32> = { _, _ => 0 }
@@ -2295,14 +2303,14 @@ public class IWSDUdpAddress <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public unsafe func SetSockaddr(pSockAddr: CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>): Int32 {
+    public unsafe func SetSockaddr(pSockAddr: CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetSockaddr(__liveRaw, pSockAddr)
     }
 
     @When[Windows_Win32_Networking_WinSock == "on"]
-    public unsafe func GetSockaddr(pSockAddr: CPointer<Win32__impl_l1.SOCKADDR_STORAGEAbi>): Int32 {
+    public unsafe func GetSockaddr(pSockAddr: CPointer<Win32_impl_p1.SOCKADDR_STORAGEAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSockaddr(__liveRaw, pSockAddr)
@@ -5426,7 +5434,7 @@ extend WSD_EVENTING_DELIVERY_MODE_PUSH <: windows_core.CopyType & windows_core.R
 public struct WSD_HANDLER_CONTEXT {
     public var Handler: PWSD_SOAP_MESSAGE_HANDLER = CFunc<(CPointer<Unit>, CPointer<WSD_EVENTAbi>) -> Int32>(CPointer<Unit>())
     public var PVoid: CPointer<Unit> = CPointer<Unit>()
-    public var Unknown: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var Unknown: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -5455,7 +5463,7 @@ extend WSD_HANDLER_CONTEXT <: windows_core.CopyType & windows_core.RuntimeType &
         var value = WSD_HANDLER_CONTEXT()
         value.Handler = abi.Handler
         value.PVoid = abi.PVoid
-        value.Unknown = Win32__impl_l0.IUnknown.fromAbiTake(abi.Unknown)
+        value.Unknown = Win32_impl_p0.IUnknown.fromAbiTake(abi.Unknown)
         return value
     }
     public static func fromAbi(abi: WSD_HANDLER_CONTEXTAbi): Result<WSD_HANDLER_CONTEXT> { Result<WSD_HANDLER_CONTEXT>.Ok(WSD_HANDLER_CONTEXT.assumeInitRef(abi)) }

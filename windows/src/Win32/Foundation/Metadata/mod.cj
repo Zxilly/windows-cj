@@ -4,7 +4,9 @@
 package windows.Win32.Foundation.Metadata
 
 import std.collection.*
+@When[Windows_Win32_Foundation_Metadata == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_Win32_Foundation_Metadata == "on"]
 import windows_core as windows_core
 
 

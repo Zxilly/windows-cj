@@ -4,13 +4,22 @@
 package windows.Win32.Networking.NetworkListManager
 
 import std.collection.*
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Networking_NetworkListManager == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Networking_NetworkListManager == "on"]
@@ -1313,7 +1322,7 @@ public class INetworkCostManager <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumNetworkConnectionsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -1356,7 +1365,7 @@ public class IEnumNetworkConnections <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumNetworkConnections> {
-        return InterfaceDescriptor<IEnumNetworkConnections>("IEnumNetworkConnections", IEnumNetworkConnections.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumNetworkConnectionsFromAbi, viewIEnumNetworkConnections)
+        return InterfaceDescriptor<IEnumNetworkConnections>("IEnumNetworkConnections", IEnumNetworkConnections.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumNetworkConnectionsFromAbi, viewIEnumNetworkConnections)
     }
 
     public unsafe func vtbl(): IEnumNetworkConnectionsVtbl {
@@ -1398,7 +1407,7 @@ public class IEnumNetworkConnections <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEnumNetworksVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
@@ -1441,7 +1450,7 @@ public class IEnumNetworks <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEnumNetworks> {
-        return InterfaceDescriptor<IEnumNetworks>("IEnumNetworks", IEnumNetworks.iid(), Win32__impl_l2.IDispatch.iid(), takeIEnumNetworksFromAbi, viewIEnumNetworks)
+        return InterfaceDescriptor<IEnumNetworks>("IEnumNetworks", IEnumNetworks.iid(), Win32_impl_p2.IDispatch.iid(), takeIEnumNetworksFromAbi, viewIEnumNetworks)
     }
 
     public unsafe func vtbl(): IEnumNetworksVtbl {
@@ -1483,7 +1492,7 @@ public class IEnumNetworks <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetworkVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -1533,7 +1542,7 @@ public class INetwork <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetwork> {
-        return InterfaceDescriptor<INetwork>("INetwork", INetwork.iid(), Win32__impl_l2.IDispatch.iid(), takeINetworkFromAbi, viewINetwork)
+        return InterfaceDescriptor<INetwork>("INetwork", INetwork.iid(), Win32_impl_p2.IDispatch.iid(), takeINetworkFromAbi, viewINetwork)
     }
 
     public unsafe func vtbl(): INetworkVtbl {
@@ -1677,7 +1686,7 @@ public class INetwork2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetworkConnectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetNetwork: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsConnectedToInternet: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var IsConnected: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
@@ -1721,7 +1730,7 @@ public class INetworkConnection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetworkConnection> {
-        return InterfaceDescriptor<INetworkConnection>("INetworkConnection", INetworkConnection.iid(), Win32__impl_l2.IDispatch.iid(), takeINetworkConnectionFromAbi, viewINetworkConnection)
+        return InterfaceDescriptor<INetworkConnection>("INetworkConnection", INetworkConnection.iid(), Win32_impl_p2.IDispatch.iid(), takeINetworkConnectionFromAbi, viewINetworkConnection)
     }
 
     public unsafe func vtbl(): INetworkConnectionVtbl {
@@ -1829,7 +1838,7 @@ public class INetworkConnection2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Networking_NetworkListManager == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct INetworkListManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetNetworks: CFunc<(CPointer<Unit>, NLM_ENUM_NETWORKAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetNetwork: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetNetworkConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1875,7 +1884,7 @@ public class INetworkListManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<INetworkListManager> {
-        return InterfaceDescriptor<INetworkListManager>("INetworkListManager", INetworkListManager.iid(), Win32__impl_l2.IDispatch.iid(), takeINetworkListManagerFromAbi, viewINetworkListManager)
+        return InterfaceDescriptor<INetworkListManager>("INetworkListManager", INetworkListManager.iid(), Win32_impl_p2.IDispatch.iid(), takeINetworkListManagerFromAbi, viewINetworkListManager)
     }
 
     public unsafe func vtbl(): INetworkListManagerVtbl {

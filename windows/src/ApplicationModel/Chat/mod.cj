@@ -4,16 +4,27 @@
 package windows.ApplicationModel.Chat
 
 import std.collection.*
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Chat == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows.Media._impl_l0 as Media__impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Chat == "on"]
+import windows.Media.impl.p0 as Media_impl_p0
+@When[Windows_ApplicationModel_Chat == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Chat == "on"]
 import windows_future as windows_future
 
 
@@ -1368,7 +1379,7 @@ public class IChatMessageAttachment <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IChatMessageAttachment", IChatMessageAttachment.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageAttachmentVtbl", "IChatMessageAttachment", "IChatMessageAttachment_Impl", [InterfaceMethodSchema("DataStreamReference", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataStreamReference", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GroupId", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGroupId", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MimeType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMimeType", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Text", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IChatMessageAttachment", IChatMessageAttachment.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageAttachmentVtbl", "IChatMessageAttachment", "IChatMessageAttachment_Impl", [InterfaceMethodSchema("DataStreamReference", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDataStreamReference", 7, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GroupId", 8, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGroupId", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("MimeType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetMimeType", 11, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Text", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetText", 13, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IChatMessageAttachment.runtimeType())
         return schema
     }
@@ -1398,16 +1409,16 @@ public class IChatMessageAttachment <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DataStreamReference(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func DataStreamReference(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DataStreamReference(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetDataStreamReference(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetDataStreamReference(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetDataStreamReference(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -1519,7 +1530,7 @@ public class IChatMessageAttachment2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IChatMessageAttachment2", IChatMessageAttachment2.iid(), IChatMessageAttachment.descriptorSchema(), ["IChatMessageAttachment"], [IChatMessageAttachment.iid()], "IChatMessageAttachment2Vtbl", "IChatMessageAttachment2", "IChatMessageAttachment2_Impl", [InterfaceMethodSchema("Thumbnail", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TransferProgress", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferProgress", 17, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OriginalFileName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOriginalFileName", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IChatMessageAttachment2", IChatMessageAttachment2.iid(), IChatMessageAttachment.descriptorSchema(), ["IChatMessageAttachment"], [IChatMessageAttachment.iid()], "IChatMessageAttachment2Vtbl", "IChatMessageAttachment2", "IChatMessageAttachment2_Impl", [InterfaceMethodSchema("Thumbnail", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetThumbnail", 15, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("TransferProgress", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransferProgress", 17, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OriginalFileName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOriginalFileName", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IChatMessageAttachment2.runtimeType())
         return schema
     }
@@ -1556,16 +1567,16 @@ public class IChatMessageAttachment2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func Thumbnail(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func Thumbnail(): impl_p1.IRandomAccessStreamReference {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Thumbnail(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
+        return impl_p1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetThumbnail(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetThumbnail(value: impl_p1.IRandomAccessStreamReference): Unit {
         let v = vtbl()
         let hr = v.SetThumbnail(asRaw(), value.asRaw())
         HRESULT(hr).ok()
@@ -2040,7 +2051,7 @@ public class IChatMessageTransportConfiguration <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IChatMessageTransportConfiguration", IChatMessageTransportConfiguration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageTransportConfigurationVtbl", "IChatMessageTransportConfiguration", "IChatMessageTransportConfiguration_Impl", [InterfaceMethodSchema("MaxAttachmentCount", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxMessageSizeInKilobytes", 7, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxRecipientCount", 8, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedVideoFormat", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media__impl_l0.MediaEncodingProfile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ExtendedProperties", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IChatMessageTransportConfiguration", IChatMessageTransportConfiguration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageTransportConfigurationVtbl", "IChatMessageTransportConfiguration", "IChatMessageTransportConfiguration_Impl", [InterfaceMethodSchema("MaxAttachmentCount", 6, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxMessageSizeInKilobytes", 7, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MaxRecipientCount", 8, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SupportedVideoFormat", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Media_impl_p0.MediaEncodingProfile>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ExtendedProperties", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IMapView<windows_core.HString, IInspectable>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IChatMessageTransportConfiguration.runtimeType())
         return schema
     }
@@ -2094,12 +2105,12 @@ public class IChatMessageTransportConfiguration <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_Media_MediaProperties == "on"]
-    public unsafe func SupportedVideoFormat(): Media__impl_l0.MediaEncodingProfile {
+    public unsafe func SupportedVideoFormat(): Media_impl_p0.MediaEncodingProfile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SupportedVideoFormat(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return Media__impl_l0.MediaEncodingProfile.fromAbiTake(result__)
+        return Media_impl_p0.MediaEncodingProfile.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on"]
@@ -4208,7 +4219,7 @@ public class ChatMessageTransportConfiguration <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_Media_MediaProperties == "on"]
-    public unsafe func SupportedVideoFormat(): Media__impl_l0.MediaEncodingProfile {
+    public unsafe func SupportedVideoFormat(): Media_impl_p0.MediaEncodingProfile {
         return defaultInterface().SupportedVideoFormat()
     }
 
@@ -5226,7 +5237,7 @@ public class IChatSyncManager <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IChatSyncManager", IChatSyncManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatSyncManagerVtbl", "IChatSyncManager", "IChatSyncManager_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ChatSyncConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AssociateAccountAsync", 7, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnassociateAccountAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAccountAssociated", 9, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartSync", 10, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetConfigurationAsync", 11, [InterfaceParameterSchema("configuration", "CPointer<Unit>", "InParam<ChatSyncConfiguration>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IChatSyncManager", IChatSyncManager.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatSyncManagerVtbl", "IChatSyncManager", "IChatSyncManager_Impl", [InterfaceMethodSchema("Configuration", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ChatSyncConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AssociateAccountAsync", 7, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<impl_p1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UnassociateAccountAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsAccountAssociated", 9, [InterfaceParameterSchema("webAccount", "CPointer<Unit>", "InParam<impl_p1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartSync", 10, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("SetConfigurationAsync", 11, [InterfaceParameterSchema("configuration", "CPointer<Unit>", "InParam<ChatSyncConfiguration>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IChatSyncManager.runtimeType())
         return schema
     }
@@ -5264,7 +5275,7 @@ public class IChatSyncManager <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func AssociateAccountAsync(webAccount: _impl_l1.WebAccount): windows_future.IAsyncAction {
+    public unsafe func AssociateAccountAsync(webAccount: impl_p1.WebAccount): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AssociateAccountAsync(asRaw(), webAccount.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5281,7 +5292,7 @@ public class IChatSyncManager <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func IsAccountAssociated(webAccount: _impl_l1.WebAccount): Bool {
+    public unsafe func IsAccountAssociated(webAccount: impl_p1.WebAccount): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.IsAccountAssociated(asRaw(), webAccount.asRaw(), CPointer<Bool>(inout result__))
@@ -6083,7 +6094,7 @@ public class ChatSyncManager <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func AssociateAccountAsync(webAccount: _impl_l1.WebAccount): windows_future.IAsyncAction {
+    public unsafe func AssociateAccountAsync(webAccount: impl_p1.WebAccount): windows_future.IAsyncAction {
         return defaultInterface().AssociateAccountAsync(webAccount)
     }
 
@@ -6092,7 +6103,7 @@ public class ChatSyncManager <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func IsAccountAssociated(webAccount: _impl_l1.WebAccount): Bool {
+    public unsafe func IsAccountAssociated(webAccount: impl_p1.WebAccount): Bool {
         return defaultInterface().IsAccountAssociated(webAccount)
     }
 
@@ -6834,12 +6845,12 @@ public class ChatMessageAttachment <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func DataStreamReference(): _impl_l1.IRandomAccessStreamReference {
+    public unsafe func DataStreamReference(): impl_p1.IRandomAccessStreamReference {
         return defaultInterface().DataStreamReference()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func SetDataStreamReference(value: _impl_l1.IRandomAccessStreamReference): Unit {
+    public unsafe func SetDataStreamReference(value: impl_p1.IRandomAccessStreamReference): Unit {
         defaultInterface().SetDataStreamReference(value)
     }
 
@@ -6868,7 +6879,7 @@ public class ChatMessageAttachment <: InterfaceWrapperBase & ComInterface & wind
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateChatMessageAttachment(mimeType: windows_core.HString, dataStreamReference: _impl_l1.IRandomAccessStreamReference): ChatMessageAttachment {
+    public static unsafe func CreateChatMessageAttachment(mimeType: windows_core.HString, dataStreamReference: impl_p1.IRandomAccessStreamReference): ChatMessageAttachment {
         var result__: Option<ChatMessageAttachment> = Option<ChatMessageAttachment>.None
         try (factory__ = windows_core.factory<ChatMessageAttachment, IChatMessageAttachmentFactory>().unwrap()) {
             result__ = Some(factory__.CreateChatMessageAttachment(mimeType, dataStreamReference))
@@ -8747,7 +8758,7 @@ public class IChatMessageAttachmentFactory <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IChatMessageAttachmentFactory", IChatMessageAttachmentFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageAttachmentFactoryVtbl", "IChatMessageAttachmentFactory", "IChatMessageAttachmentFactory_Impl", [InterfaceMethodSchema("CreateChatMessageAttachment", 6, [InterfaceParameterSchema("mimeType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dataStreamReference", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ChatMessageAttachment>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IChatMessageAttachmentFactory", IChatMessageAttachmentFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IChatMessageAttachmentFactoryVtbl", "IChatMessageAttachmentFactory", "IChatMessageAttachmentFactory_Impl", [InterfaceMethodSchema("CreateChatMessageAttachment", 6, [InterfaceParameterSchema("mimeType", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dataStreamReference", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<ChatMessageAttachment>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IChatMessageAttachmentFactory.runtimeType())
         return schema
     }
@@ -8777,7 +8788,7 @@ public class IChatMessageAttachmentFactory <: InterfaceWrapperBase & ComInterfac
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateChatMessageAttachment(mimeType: windows_core.HString, dataStreamReference: _impl_l1.IRandomAccessStreamReference): ChatMessageAttachment {
+    public unsafe func CreateChatMessageAttachment(mimeType: windows_core.HString, dataStreamReference: impl_p1.IRandomAccessStreamReference): ChatMessageAttachment {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateChatMessageAttachment(asRaw(), mimeType.asRaw(), dataStreamReference.asRaw(), CPointer<CPointer<Unit>>(inout result__))

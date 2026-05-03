@@ -4,13 +4,21 @@
 package windows_appsdk.Microsoft.UI
 
 import std.collection.*
+@When[Microsoft_UI == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Microsoft_UI == "on"]
 import windows_core as windows_core
+@When[Microsoft_UI == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Microsoft_UI == "on"]
 import windows_interface as windows_interface
+@When[Microsoft_UI == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Microsoft_UI == "on"]
 import windows_polyfill as windows_polyfill
+@When[Microsoft_UI == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Microsoft_UI == "on"]
 import windows_collections as windows_collections
 
 
@@ -91,19 +99,15 @@ public class ClosableNotifierHandler <: InterfaceWrapperBase & ComInterface & wi
 extend ClosableNotifierHandler <: windows_core.Interface<ClosableNotifierHandler> {}
 
 @When[Microsoft_UI == "on"]
-private open class ClosableNotifierHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(): Int32 {
-        E_NOTIMPL.value
-    }
+private interface ClosableNotifierHandlerInvokerErased {
+    public func __winrtThunk_Invoke(): Int32
 }
 
 @When[Microsoft_UI == "on"]
-private open class ClosableNotifierHandlerInvoker <: ClosableNotifierHandlerInvokerErased {
-    public open func Invoke(): Unit {
-        ()
-    }
+private interface ClosableNotifierHandlerInvoker <: ClosableNotifierHandlerInvokerErased {
+    public func Invoke(): Unit
 
-    public override func __winrtThunk_Invoke(): Int32 {
+    public func __winrtThunk_Invoke(): Int32 {
         this.Invoke()
         return S_OK.value
     }
@@ -123,7 +127,7 @@ private class ClosableNotifierHandlerBox <: ClosableNotifierHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(): Unit {
+    public func Invoke(): Unit {
         invoke_()
     }
 }

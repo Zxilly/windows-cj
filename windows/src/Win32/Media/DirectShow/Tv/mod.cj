@@ -4,22 +4,38 @@
 package windows.Win32.Media.DirectShow.Tv
 
 import std.collection.*
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Media_DirectShow == "on"]
 import windows.Win32.Media.DirectShow as Win32_Media_DirectShow
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Media_KernelStreaming == "on"]
 import windows.Win32.Media.KernelStreaming as Win32_Media_KernelStreaming
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_Media_DirectShow_Tv == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_Media_DirectShow_Tv == "on"]
@@ -8310,7 +8326,7 @@ public class ICaptionServiceDescriptor <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentTypeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_Media_DirectShow == "on"]
     public var Category: CFunc<(CPointer<Unit>, CPointer<Win32_Media_DirectShow.ComponentCategoryAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_DirectShow == "on"]
@@ -8368,7 +8384,7 @@ public class IComponentType <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponentType> {
-        return InterfaceDescriptor<IComponentType>("IComponentType", IComponentType.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentTypeFromAbi, viewIComponentType)
+        return InterfaceDescriptor<IComponentType>("IComponentType", IComponentType.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentTypeFromAbi, viewIComponentType)
     }
 
     public unsafe func vtbl(): IComponentTypeVtbl {
@@ -8703,7 +8719,7 @@ public class IDTFilterConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IDTFilterEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -8740,7 +8756,7 @@ public class IDTFilterEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IDTFilterEvents> {
-        return InterfaceDescriptor<IDTFilterEvents>("IDTFilterEvents", IDTFilterEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeIDTFilterEventsFromAbi, viewIDTFilterEvents)
+        return InterfaceDescriptor<IDTFilterEvents>("IDTFilterEvents", IDTFilterEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeIDTFilterEventsFromAbi, viewIDTFilterEvents)
     }
 
     public unsafe func vtbl(): IDTFilterEventsVtbl {
@@ -11527,7 +11543,7 @@ public struct IESIsdbCasResponseEventVtbl {
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var GetDataLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetResponseData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetResponseData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11590,7 +11606,7 @@ public class IESIsdbCasResponseEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetResponseData(pbData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetResponseData(pbData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetResponseData(__liveRaw, pbData)
@@ -11611,7 +11627,7 @@ public struct IESLicenseRenewalResultEventVtbl {
     public var GetRenewalHResult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetEntitlementTokenLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetEntitlementToken: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetEntitlementToken: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetExpiryDate: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -11711,7 +11727,7 @@ public class IESLicenseRenewalResultEvent <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetEntitlementToken(pbData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetEntitlementToken(pbData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEntitlementToken(__liveRaw, pbData)
@@ -11731,7 +11747,7 @@ public struct IESOpenMmiEventVtbl {
     public var GetDialogNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetDialogType: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetDialogData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetDialogData: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public var GetDialogStringData: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -11789,7 +11805,7 @@ public class IESOpenMmiEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetDialogData(pbData: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetDialogData(pbData: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDialogData(__liveRaw, pbData)
@@ -11883,7 +11899,7 @@ public class IESRequestTunerEvent <: InterfaceWrapperBase & ComInterface {
 public struct IESValueUpdatedEventVtbl {
     public var base_: Win32_Media_DirectShow.IESEventVtbl = Win32_Media_DirectShow.IESEventVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var GetValueNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
+    public var GetValueNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -11928,7 +11944,7 @@ public class IESValueUpdatedEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetValueNames(pbstrNames: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetValueNames(pbstrNames: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetValueNames(__liveRaw, pbstrNames)
@@ -12002,7 +12018,7 @@ public class IETFilterConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IETFilterEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -12039,7 +12055,7 @@ public class IETFilterEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IETFilterEvents> {
-        return InterfaceDescriptor<IETFilterEvents>("IETFilterEvents", IETFilterEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeIETFilterEventsFromAbi, viewIETFilterEvents)
+        return InterfaceDescriptor<IETFilterEvents>("IETFilterEvents", IETFilterEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeIETFilterEventsFromAbi, viewIETFilterEvents)
     }
 
     public unsafe func vtbl(): IETFilterEventsVtbl {
@@ -12126,7 +12142,7 @@ public class IEnumComponentTypes <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IEvalRatVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var get_BlockedRatingAttributes: CFunc<(CPointer<Unit>, EnTvRat_SystemAbi, EnTvRat_GenericLevelAbi, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var put_BlockedRatingAttributes: CFunc<(CPointer<Unit>, EnTvRat_SystemAbi, EnTvRat_GenericLevelAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var BlockUnRated: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -12169,7 +12185,7 @@ public class IEvalRat <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IEvalRat> {
-        return InterfaceDescriptor<IEvalRat>("IEvalRat", IEvalRat.iid(), Win32__impl_l2.IDispatch.iid(), takeIEvalRatFromAbi, viewIEvalRat)
+        return InterfaceDescriptor<IEvalRat>("IEvalRat", IEvalRat.iid(), Win32_impl_p2.IDispatch.iid(), takeIEvalRatFromAbi, viewIEvalRat)
     }
 
     public unsafe func vtbl(): IEvalRatVtbl {
@@ -12412,17 +12428,17 @@ public struct IGuideDataEventVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GuideDataAcquired: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ProgramChanged: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ProgramChanged: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ServiceChanged: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ServiceChanged: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ScheduleEntryChanged: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ScheduleEntryChanged: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ProgramDeleted: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ProgramDeleted: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ServiceDeleted: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ServiceDeleted: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ScheduleDeleted: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var ScheduleDeleted: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12473,42 +12489,42 @@ public class IGuideDataEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ProgramChanged(varProgramDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ProgramChanged(varProgramDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProgramChanged(__liveRaw, varProgramDescriptionID)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ServiceChanged(varServiceDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ServiceChanged(varServiceDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServiceChanged(__liveRaw, varServiceDescriptionID)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ScheduleEntryChanged(varScheduleEntryDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ScheduleEntryChanged(varScheduleEntryDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ScheduleEntryChanged(__liveRaw, varScheduleEntryDescriptionID)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ProgramDeleted(varProgramDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ProgramDeleted(varProgramDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProgramDeleted(__liveRaw, varProgramDescriptionID)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ServiceDeleted(varServiceDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ServiceDeleted(varServiceDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServiceDeleted(__liveRaw, varServiceDescriptionID)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ScheduleDeleted(varScheduleEntryDescriptionID: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func ScheduleDeleted(varScheduleEntryDescriptionID: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ScheduleDeleted(__liveRaw, varScheduleEntryDescriptionID)
@@ -12522,7 +12538,7 @@ public struct IGuideDataPropertyVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Language: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -12579,7 +12595,7 @@ public class IGuideDataProperty <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Value(pvar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Value(pvar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Value(__liveRaw, pvar)
@@ -14163,7 +14179,7 @@ public class ILanguageComponentType <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ILocatorVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CarrierFrequency: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetCarrierFrequency: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Media_DirectShow == "on"]
@@ -14225,7 +14241,7 @@ public class ILocator <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ILocator> {
-        return InterfaceDescriptor<ILocator>("ILocator", ILocator.iid(), Win32__impl_l2.IDispatch.iid(), takeILocatorFromAbi, viewILocator)
+        return InterfaceDescriptor<ILocator>("ILocator", ILocator.iid(), Win32_impl_p2.IDispatch.iid(), takeILocatorFromAbi, viewILocator)
     }
 
     public unsafe func vtbl(): ILocatorVtbl {
@@ -14542,7 +14558,7 @@ public class IMPEG2_TIF_CONTROL <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSEventBinderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Bind: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Unbind: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -14582,7 +14598,7 @@ public class IMSEventBinder <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSEventBinder> {
-        return InterfaceDescriptor<IMSEventBinder>("IMSEventBinder", IMSEventBinder.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSEventBinderFromAbi, viewIMSEventBinder)
+        return InterfaceDescriptor<IMSEventBinder>("IMSEventBinder", IMSEventBinder.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSEventBinderFromAbi, viewIMSEventBinder)
     }
 
     public unsafe func vtbl(): IMSEventBinderVtbl {
@@ -14606,7 +14622,7 @@ public class IMSEventBinder <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidDeviceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPower: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
@@ -14652,7 +14668,7 @@ public class IMSVidDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidDevice> {
-        return InterfaceDescriptor<IMSVidDevice>("IMSVidDevice", IMSVidDevice.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidDeviceFromAbi, viewIMSVidDevice)
+        return InterfaceDescriptor<IMSVidDevice>("IMSVidDevice", IMSVidDevice.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidDeviceFromAbi, viewIMSVidDevice)
     }
 
     public unsafe func vtbl(): IMSVidDeviceVtbl {
@@ -14772,7 +14788,7 @@ public class IMSVidDevice2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidDeviceEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StateChange: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -14810,7 +14826,7 @@ public class IMSVidDeviceEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidDeviceEvent> {
-        return InterfaceDescriptor<IMSVidDeviceEvent>("IMSVidDeviceEvent", IMSVidDeviceEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidDeviceEventFromAbi, viewIMSVidDeviceEvent)
+        return InterfaceDescriptor<IMSVidDeviceEvent>("IMSVidDeviceEvent", IMSVidDeviceEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidDeviceEventFromAbi, viewIMSVidDeviceEvent)
     }
 
     public unsafe func vtbl(): IMSVidDeviceEventVtbl {
@@ -14923,15 +14939,15 @@ public class IMSVidFeatureEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidFeaturesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -14968,7 +14984,7 @@ public class IMSVidFeatures <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidFeatures> {
-        return InterfaceDescriptor<IMSVidFeatures>("IMSVidFeatures", IMSVidFeatures.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidFeaturesFromAbi, viewIMSVidFeatures)
+        return InterfaceDescriptor<IMSVidFeatures>("IMSVidFeatures", IMSVidFeatures.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidFeaturesFromAbi, viewIMSVidFeatures)
     }
 
     public unsafe func vtbl(): IMSVidFeaturesVtbl {
@@ -14989,7 +15005,7 @@ public class IMSVidFeatures <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(v: Win32__impl_l2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(v: Win32_impl_p2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, v, pDB)
@@ -15002,7 +15018,7 @@ public class IMSVidFeatures <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(v: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(v: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, v)
@@ -15118,9 +15134,9 @@ public class IMSVidGraphSegmentUserInput <: InterfaceWrapperBase & ComInterface 
 public struct IMSVidInputDeviceVtbl {
     public var base_: IMSVidDeviceVtbl = IMSVidDeviceVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var IsViewable: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
+    public var IsViewable: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var View: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var View: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -15165,14 +15181,14 @@ public class IMSVidInputDevice <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func IsViewable(v: CPointer<Win32__impl_l2.VARIANTAbi>, pfViewable: CPointer<Int16>): Int32 {
+    public unsafe func IsViewable(v: CPointer<Win32_impl_p2.VARIANTAbi>, pfViewable: CPointer<Int16>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IsViewable(__liveRaw, v, pfViewable)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func View(v: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func View(v: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.View(__liveRaw, v)
@@ -15182,7 +15198,7 @@ public class IMSVidInputDevice <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidInputDeviceEventVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -15219,7 +15235,7 @@ public class IMSVidInputDeviceEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidInputDeviceEvent> {
-        return InterfaceDescriptor<IMSVidInputDeviceEvent>("IMSVidInputDeviceEvent", IMSVidInputDeviceEvent.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidInputDeviceEventFromAbi, viewIMSVidInputDeviceEvent)
+        return InterfaceDescriptor<IMSVidInputDeviceEvent>("IMSVidInputDeviceEvent", IMSVidInputDeviceEvent.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidInputDeviceEventFromAbi, viewIMSVidInputDeviceEvent)
     }
 
     public unsafe func vtbl(): IMSVidInputDeviceEventVtbl {
@@ -15230,15 +15246,15 @@ public class IMSVidInputDeviceEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidInputDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -15275,7 +15291,7 @@ public class IMSVidInputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidInputDevices> {
-        return InterfaceDescriptor<IMSVidInputDevices>("IMSVidInputDevices", IMSVidInputDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidInputDevicesFromAbi, viewIMSVidInputDevices)
+        return InterfaceDescriptor<IMSVidInputDevices>("IMSVidInputDevices", IMSVidInputDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidInputDevicesFromAbi, viewIMSVidInputDevices)
     }
 
     public unsafe func vtbl(): IMSVidInputDevicesVtbl {
@@ -15296,7 +15312,7 @@ public class IMSVidInputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(v: Win32__impl_l2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(v: Win32_impl_p2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, v, pDB)
@@ -15309,7 +15325,7 @@ public class IMSVidInputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(v: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(v: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, v)
@@ -15415,15 +15431,15 @@ public class IMSVidOutputDeviceEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidOutputDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -15460,7 +15476,7 @@ public class IMSVidOutputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidOutputDevices> {
-        return InterfaceDescriptor<IMSVidOutputDevices>("IMSVidOutputDevices", IMSVidOutputDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidOutputDevicesFromAbi, viewIMSVidOutputDevices)
+        return InterfaceDescriptor<IMSVidOutputDevices>("IMSVidOutputDevices", IMSVidOutputDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidOutputDevicesFromAbi, viewIMSVidOutputDevices)
     }
 
     public unsafe func vtbl(): IMSVidOutputDevicesVtbl {
@@ -15481,7 +15497,7 @@ public class IMSVidOutputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(v: Win32__impl_l2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(v: Win32_impl_p2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, v, pDB)
@@ -15494,7 +15510,7 @@ public class IMSVidOutputDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(v: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(v: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, v)
@@ -15504,7 +15520,7 @@ public class IMSVidOutputDevices <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidRectVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Top: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetTop: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Left: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -15552,7 +15568,7 @@ public class IMSVidRect <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidRect> {
-        return InterfaceDescriptor<IMSVidRect>("IMSVidRect", IMSVidRect.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidRectFromAbi, viewIMSVidRect)
+        return InterfaceDescriptor<IMSVidRect>("IMSVidRect", IMSVidRect.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidRectFromAbi, viewIMSVidRect)
     }
 
     public unsafe func vtbl(): IMSVidRectVtbl {
@@ -16028,7 +16044,7 @@ public class IMSVidVideoRendererEvent2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidWebDVDAdmVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ChangePassword: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var SaveParentalLevel: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var SaveParentalCountry: CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
@@ -16079,7 +16095,7 @@ public class IMSVidWebDVDAdm <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidWebDVDAdm> {
-        return InterfaceDescriptor<IMSVidWebDVDAdm>("IMSVidWebDVDAdm", IMSVidWebDVDAdm.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidWebDVDAdmFromAbi, viewIMSVidWebDVDAdm)
+        return InterfaceDescriptor<IMSVidWebDVDAdm>("IMSVidWebDVDAdm", IMSVidWebDVDAdm.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidWebDVDAdmFromAbi, viewIMSVidWebDVDAdm)
     }
 
     public unsafe func vtbl(): IMSVidWebDVDAdmVtbl {
@@ -16757,12 +16773,12 @@ public class IPTFilterLicenseRenewal <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPersistTuneXmlVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     public var InitNew: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Load: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Load: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Save: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Save: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -16799,7 +16815,7 @@ public class IPersistTuneXml <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPersistTuneXml> {
-        return InterfaceDescriptor<IPersistTuneXml>("IPersistTuneXml", IPersistTuneXml.iid(), Win32__impl_l1.IPersist.iid(), takeIPersistTuneXmlFromAbi, viewIPersistTuneXml)
+        return InterfaceDescriptor<IPersistTuneXml>("IPersistTuneXml", IPersistTuneXml.iid(), Win32_impl_p2.IPersist.iid(), takeIPersistTuneXmlFromAbi, viewIPersistTuneXml)
     }
 
     public unsafe func vtbl(): IPersistTuneXmlVtbl {
@@ -16813,14 +16829,14 @@ public class IPersistTuneXml <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Load(varValue: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Load(varValue: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Load(__liveRaw, varValue)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Save(pvarFragment: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Save(pvarFragment: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Save(__liveRaw, pvarFragment)
@@ -16832,7 +16848,7 @@ public class IPersistTuneXml <: InterfaceWrapperBase & ComInterface {
 public struct IPersistTuneXmlUtilityVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Deserialize: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var Deserialize: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -16877,7 +16893,7 @@ public class IPersistTuneXmlUtility <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Deserialize(varValue: Win32__impl_l2.VARIANTAbi, ppObject: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func Deserialize(varValue: Win32_impl_p2.VARIANTAbi, ppObject: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Deserialize(__liveRaw, varValue, ppObject)
@@ -18519,7 +18535,7 @@ public class IXDSCodecConfig <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IXDSCodecEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -18556,7 +18572,7 @@ public class IXDSCodecEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IXDSCodecEvents> {
-        return InterfaceDescriptor<IXDSCodecEvents>("IXDSCodecEvents", IXDSCodecEvents.iid(), Win32__impl_l2.IDispatch.iid(), takeIXDSCodecEventsFromAbi, viewIXDSCodecEvents)
+        return InterfaceDescriptor<IXDSCodecEvents>("IXDSCodecEvents", IXDSCodecEvents.iid(), Win32_impl_p2.IDispatch.iid(), takeIXDSCodecEventsFromAbi, viewIXDSCodecEvents)
     }
 
     public unsafe func vtbl(): IXDSCodecEventsVtbl {
@@ -18567,7 +18583,7 @@ public class IXDSCodecEvents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IXDSToRatVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Init: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ParseXDSBytePair: CFunc<(CPointer<Unit>, UInt8, UInt8, CPointer<EnTvRat_SystemAbi>, CPointer<EnTvRat_GenericLevelAbi>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
@@ -18606,7 +18622,7 @@ public class IXDSToRat <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IXDSToRat> {
-        return InterfaceDescriptor<IXDSToRat>("IXDSToRat", IXDSToRat.iid(), Win32__impl_l2.IDispatch.iid(), takeIXDSToRatFromAbi, viewIXDSToRat)
+        return InterfaceDescriptor<IXDSToRat>("IXDSToRat", IXDSToRat.iid(), Win32_impl_p2.IDispatch.iid(), takeIXDSToRatFromAbi, viewIXDSToRat)
     }
 
     public unsafe func vtbl(): IXDSToRatVtbl {
@@ -32891,7 +32907,7 @@ extend XDSToRat <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct _IMSVidCtlEventsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -32928,7 +32944,7 @@ public class _IMSVidCtlEvents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<_IMSVidCtlEvents> {
-        return InterfaceDescriptor<_IMSVidCtlEvents>("_IMSVidCtlEvents", _IMSVidCtlEvents.iid(), Win32__impl_l2.IDispatch.iid(), take_IMSVidCtlEventsFromAbi, view_IMSVidCtlEvents)
+        return InterfaceDescriptor<_IMSVidCtlEvents>("_IMSVidCtlEvents", _IMSVidCtlEvents.iid(), Win32_impl_p2.IDispatch.iid(), take_IMSVidCtlEventsFromAbi, view_IMSVidCtlEvents)
     }
 
     public unsafe func vtbl(): _IMSVidCtlEventsVtbl {
@@ -33573,7 +33589,7 @@ public class IAnalogLocator <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var DescLangID: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -33621,7 +33637,7 @@ public class IComponent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponent> {
-        return InterfaceDescriptor<IComponent>("IComponent", IComponent.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentFromAbi, viewIComponent)
+        return InterfaceDescriptor<IComponent>("IComponent", IComponent.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentFromAbi, viewIComponent)
     }
 
     public unsafe func vtbl(): IComponentVtbl {
@@ -33688,19 +33704,19 @@ public class IComponent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentTypesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnumComponentTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var put_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -33738,7 +33754,7 @@ public class IComponentTypes <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponentTypes> {
-        return InterfaceDescriptor<IComponentTypes>("IComponentTypes", IComponentTypes.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentTypesFromAbi, viewIComponentTypes)
+        return InterfaceDescriptor<IComponentTypes>("IComponentTypes", IComponentTypes.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentTypesFromAbi, viewIComponentTypes)
     }
 
     public unsafe func vtbl(): IComponentTypesVtbl {
@@ -33765,28 +33781,28 @@ public class IComponentTypes <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Win32__impl_l2.VARIANTAbi, ComponentType: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(Index: Win32_impl_p2.VARIANTAbi, ComponentType: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, ComponentType)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Item(Index: Win32__impl_l2.VARIANTAbi, ComponentType: CPointer<Unit>): Int32 {
+    public unsafe func put_Item(Index: Win32_impl_p2.VARIANTAbi, ComponentType: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Item(__liveRaw, Index, ComponentType)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(ComponentType: CPointer<Unit>, NewIndex: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Add(ComponentType: CPointer<Unit>, NewIndex: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, ComponentType, NewIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Index)
@@ -34645,15 +34661,15 @@ public class IMSVidAudioRenderer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidAudioRendererDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -34690,7 +34706,7 @@ public class IMSVidAudioRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidAudioRendererDevices> {
-        return InterfaceDescriptor<IMSVidAudioRendererDevices>("IMSVidAudioRendererDevices", IMSVidAudioRendererDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidAudioRendererDevicesFromAbi, viewIMSVidAudioRendererDevices)
+        return InterfaceDescriptor<IMSVidAudioRendererDevices>("IMSVidAudioRendererDevices", IMSVidAudioRendererDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidAudioRendererDevicesFromAbi, viewIMSVidAudioRendererDevices)
     }
 
     public unsafe func vtbl(): IMSVidAudioRendererDevicesVtbl {
@@ -34711,7 +34727,7 @@ public class IMSVidAudioRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(v: Win32__impl_l2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(v: Win32_impl_p2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, v, pDB)
@@ -34724,7 +34740,7 @@ public class IMSVidAudioRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(v: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(v: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, v)
@@ -35616,7 +35632,7 @@ public class IMSVidPlaybackEvent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidStreamBufferRecordingControlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var StartTime: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetStartTime: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var StopTime: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -35662,7 +35678,7 @@ public class IMSVidStreamBufferRecordingControl <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidStreamBufferRecordingControl> {
-        return InterfaceDescriptor<IMSVidStreamBufferRecordingControl>("IMSVidStreamBufferRecordingControl", IMSVidStreamBufferRecordingControl.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidStreamBufferRecordingControlFromAbi, viewIMSVidStreamBufferRecordingControl)
+        return InterfaceDescriptor<IMSVidStreamBufferRecordingControl>("IMSVidStreamBufferRecordingControl", IMSVidStreamBufferRecordingControl.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidStreamBufferRecordingControlFromAbi, viewIMSVidStreamBufferRecordingControl)
     }
 
     public unsafe func vtbl(): IMSVidStreamBufferRecordingControlVtbl {
@@ -36430,15 +36446,15 @@ public class IMSVidVideoRenderer2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidVideoRendererDevicesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -36475,7 +36491,7 @@ public class IMSVidVideoRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidVideoRendererDevices> {
-        return InterfaceDescriptor<IMSVidVideoRendererDevices>("IMSVidVideoRendererDevices", IMSVidVideoRendererDevices.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidVideoRendererDevicesFromAbi, viewIMSVidVideoRendererDevices)
+        return InterfaceDescriptor<IMSVidVideoRendererDevices>("IMSVidVideoRendererDevices", IMSVidVideoRendererDevices.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidVideoRendererDevicesFromAbi, viewIMSVidVideoRendererDevices)
     }
 
     public unsafe func vtbl(): IMSVidVideoRendererDevicesVtbl {
@@ -36496,7 +36512,7 @@ public class IMSVidVideoRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(v: Win32__impl_l2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(v: Win32_impl_p2.VARIANTAbi, pDB: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, v, pDB)
@@ -36509,7 +36525,7 @@ public class IMSVidVideoRendererDevices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(v: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(v: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, v)
@@ -37298,7 +37314,7 @@ public class IMSVidWebDVD2 <: InterfaceWrapperBase & ComInterface {
 public struct IMSVidWebDVDEventVtbl {
     public var base_: IMSVidPlaybackEventVtbl = IMSVidPlaybackEventVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var DVDNotify: CFunc<(CPointer<Unit>, Int32, Win32__impl_l2.VARIANTAbi, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
+    public var DVDNotify: CFunc<(CPointer<Unit>, Int32, Win32_impl_p2.VARIANTAbi, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _, _, _ => 0 }
     public var PlayForwards: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var PlayBackwards: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var ShowMenu: CFunc<(CPointer<Unit>, DVDMenuIDConstantsAbi, Int16) -> Int32> = { _, _, _ => 0 }
@@ -37365,7 +37381,7 @@ public class IMSVidWebDVDEvent <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func DVDNotify(lEventCode: Int32, lParam1: Win32__impl_l2.VARIANTAbi, lParam2: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func DVDNotify(lEventCode: Int32, lParam1: Win32_impl_p2.VARIANTAbi, lParam2: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DVDNotify(__liveRaw, lEventCode, lParam1, lParam2)
@@ -38692,20 +38708,20 @@ public class IATSCLocator2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnumComponents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var put_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -38742,7 +38758,7 @@ public class IComponents <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponents> {
-        return InterfaceDescriptor<IComponents>("IComponents", IComponents.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentsFromAbi, viewIComponents)
+        return InterfaceDescriptor<IComponents>("IComponents", IComponents.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentsFromAbi, viewIComponents)
     }
 
     public unsafe func vtbl(): IComponentsVtbl {
@@ -38769,21 +38785,21 @@ public class IComponents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Win32__impl_l2.VARIANTAbi, ppComponent: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(Index: Win32_impl_p2.VARIANTAbi, ppComponent: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, ppComponent)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(Component: CPointer<Unit>, NewIndex: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Add(Component: CPointer<Unit>, NewIndex: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, Component, NewIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Index)
@@ -38796,7 +38812,7 @@ public class IComponents <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Item(Index: Win32__impl_l2.VARIANTAbi, ppComponent: CPointer<Unit>): Int32 {
+    public unsafe func put_Item(Index: Win32_impl_p2.VARIANTAbi, ppComponent: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Item(__liveRaw, Index, ppComponent)
@@ -38806,17 +38822,17 @@ public class IComponents <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentsOldVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnumComponents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -38854,7 +38870,7 @@ public class IComponentsOld <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponentsOld> {
-        return InterfaceDescriptor<IComponentsOld>("IComponentsOld", IComponentsOld.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentsOldFromAbi, viewIComponentsOld)
+        return InterfaceDescriptor<IComponentsOld>("IComponentsOld", IComponentsOld.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentsOldFromAbi, viewIComponentsOld)
     }
 
     public unsafe func vtbl(): IComponentsOldVtbl {
@@ -38881,21 +38897,21 @@ public class IComponentsOld <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(Index: Win32__impl_l2.VARIANTAbi, ppComponent: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(Index: Win32_impl_p2.VARIANTAbi, ppComponent: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, Index, ppComponent)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(Component: CPointer<Unit>, NewIndex: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Add(Component: CPointer<Unit>, NewIndex: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, Component, NewIndex)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Index)
@@ -39754,7 +39770,7 @@ public class IIsdbSeriesDescriptor <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidCtlVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AutoSize: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var SetAutoSize: CFunc<(CPointer<Unit>, Int16) -> Int32> = { _, _ => 0 }
     public var BackColor: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -39790,7 +39806,7 @@ public struct IMSVidCtlVtbl {
     public var SetFeaturesActive: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<MSVidCtlStateListAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var View: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var View: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public var Build: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Run: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -39799,7 +39815,7 @@ public struct IMSVidCtlVtbl {
     public var DisableVideo: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var DisableAudio: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var ViewNext: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var ViewNext: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -39836,7 +39852,7 @@ public class IMSVidCtl <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidCtl> {
-        return InterfaceDescriptor<IMSVidCtl>("IMSVidCtl", IMSVidCtl.iid(), Win32__impl_l2.IDispatch.iid(), takeIMSVidCtlFromAbi, viewIMSVidCtl)
+        return InterfaceDescriptor<IMSVidCtl>("IMSVidCtl", IMSVidCtl.iid(), Win32_impl_p2.IDispatch.iid(), takeIMSVidCtlFromAbi, viewIMSVidCtl)
     }
 
     public unsafe func vtbl(): IMSVidCtlVtbl {
@@ -40048,7 +40064,7 @@ public class IMSVidCtl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func View(v: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func View(v: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.View(__liveRaw, v)
@@ -40097,7 +40113,7 @@ public class IMSVidCtl <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func ViewNext(v: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func ViewNext(v: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ViewNext(__liveRaw, v)
@@ -45296,11 +45312,11 @@ public struct IGuideDataVtbl {
     @When[Windows_Win32_System_Ole == "on"]
     public var GetGuideProgramIDs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetProgramProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var GetProgramProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var GetScheduleEntryIDs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetScheduleEntryProperties: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var GetScheduleEntryProperties: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -45364,7 +45380,7 @@ public class IGuideData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetProgramProperties(varProgramDescriptionID: Win32__impl_l2.VARIANTAbi, ppEnumProperties: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GetProgramProperties(varProgramDescriptionID: Win32_impl_p2.VARIANTAbi, ppEnumProperties: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetProgramProperties(__liveRaw, varProgramDescriptionID, ppEnumProperties)
@@ -45378,7 +45394,7 @@ public class IGuideData <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetScheduleEntryProperties(varScheduleEntryDescriptionID: Win32__impl_l2.VARIANTAbi, ppEnumProperties: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func GetScheduleEntryProperties(varScheduleEntryDescriptionID: Win32_impl_p2.VARIANTAbi, ppEnumProperties: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetScheduleEntryProperties(__liveRaw, varScheduleEntryDescriptionID, ppEnumProperties)
@@ -46514,7 +46530,7 @@ public class IMPEG2TuneRequest <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMPEG2TuneRequestFactoryVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateTuneRequest: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -46552,7 +46568,7 @@ public class IMPEG2TuneRequestFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMPEG2TuneRequestFactory> {
-        return InterfaceDescriptor<IMPEG2TuneRequestFactory>("IMPEG2TuneRequestFactory", IMPEG2TuneRequestFactory.iid(), Win32__impl_l2.IDispatch.iid(), takeIMPEG2TuneRequestFactoryFromAbi, viewIMPEG2TuneRequestFactory)
+        return InterfaceDescriptor<IMPEG2TuneRequestFactory>("IMPEG2TuneRequestFactory", IMPEG2TuneRequestFactory.iid(), Win32_impl_p2.IDispatch.iid(), takeIMPEG2TuneRequestFactoryFromAbi, viewIMPEG2TuneRequestFactory)
     }
 
     public unsafe func vtbl(): IMPEG2TuneRequestFactoryVtbl {
@@ -46866,7 +46882,7 @@ public class IMSVidCompositionSegment <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IMSVidGraphSegmentVtbl {
-    public var base_: Win32__impl_l1.IPersistVtbl = Win32__impl_l1.IPersistVtbl()
+    public var base_: Win32_impl_p2.IPersistVtbl = Win32_impl_p2.IPersistVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var Init: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -46921,7 +46937,7 @@ public class IMSVidGraphSegment <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMSVidGraphSegment> {
-        return InterfaceDescriptor<IMSVidGraphSegment>("IMSVidGraphSegment", IMSVidGraphSegment.iid(), Win32__impl_l1.IPersist.iid(), takeIMSVidGraphSegmentFromAbi, viewIMSVidGraphSegment)
+        return InterfaceDescriptor<IMSVidGraphSegment>("IMSVidGraphSegment", IMSVidGraphSegment.iid(), Win32_impl_p2.IPersist.iid(), takeIMSVidGraphSegmentFromAbi, viewIMSVidGraphSegment)
     }
 
     public unsafe func vtbl(): IMSVidGraphSegmentVtbl {
@@ -48739,7 +48755,7 @@ public class ITSDT <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITuneRequestVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var TuningSpace: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Components: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -48781,7 +48797,7 @@ public class ITuneRequest <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITuneRequest> {
-        return InterfaceDescriptor<ITuneRequest>("ITuneRequest", ITuneRequest.iid(), Win32__impl_l2.IDispatch.iid(), takeITuneRequestFromAbi, viewITuneRequest)
+        return InterfaceDescriptor<ITuneRequest>("ITuneRequest", ITuneRequest.iid(), Win32_impl_p2.IDispatch.iid(), takeITuneRequestFromAbi, viewITuneRequest)
     }
 
     public unsafe func vtbl(): ITuneRequestVtbl {
@@ -49094,7 +49110,7 @@ public class ITuner <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITuningSpaceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var UniqueName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetUniqueName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -49152,7 +49168,7 @@ public class ITuningSpace <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITuningSpace> {
-        return InterfaceDescriptor<ITuningSpace>("ITuningSpace", ITuningSpace.iid(), Win32__impl_l2.IDispatch.iid(), takeITuningSpaceFromAbi, viewITuningSpace)
+        return InterfaceDescriptor<ITuningSpace>("ITuningSpace", ITuningSpace.iid(), Win32_impl_p2.IDispatch.iid(), takeITuningSpaceFromAbi, viewITuningSpace)
     }
 
     public unsafe func vtbl(): ITuningSpaceVtbl {
@@ -49279,23 +49295,23 @@ public class ITuningSpace <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITuningSpaceContainerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var put_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    public var put_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var TuningSpacesForCLSID: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var _TuningSpacesForCLSID2: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var TuningSpacesForName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var FindID: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public var EnumTuningSpaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Remove: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi) -> Int32> = { _, _ => 0 }
+    public var Remove: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi) -> Int32> = { _, _ => 0 }
     public var MaxCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMaxCount: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -49334,7 +49350,7 @@ public class ITuningSpaceContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITuningSpaceContainer> {
-        return InterfaceDescriptor<ITuningSpaceContainer>("ITuningSpaceContainer", ITuningSpaceContainer.iid(), Win32__impl_l2.IDispatch.iid(), takeITuningSpaceContainerFromAbi, viewITuningSpaceContainer)
+        return InterfaceDescriptor<ITuningSpaceContainer>("ITuningSpaceContainer", ITuningSpaceContainer.iid(), Win32_impl_p2.IDispatch.iid(), takeITuningSpaceContainerFromAbi, viewITuningSpaceContainer)
     }
 
     public unsafe func vtbl(): ITuningSpaceContainerVtbl {
@@ -49355,14 +49371,14 @@ public class ITuningSpaceContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, TuningSpace: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, TuningSpace: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, TuningSpace)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func put_Item(varIndex: Win32__impl_l2.VARIANTAbi, TuningSpace: CPointer<Unit>): Int32 {
+    public unsafe func put_Item(varIndex: Win32_impl_p2.VARIANTAbi, TuningSpace: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.put_Item(__liveRaw, varIndex, TuningSpace)
@@ -49393,7 +49409,7 @@ public class ITuningSpaceContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Add(TuningSpace: CPointer<Unit>, NewIndex: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Add(TuningSpace: CPointer<Unit>, NewIndex: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Add(__liveRaw, TuningSpace, NewIndex)
@@ -49406,7 +49422,7 @@ public class ITuningSpaceContainer <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Remove(Index: Win32__impl_l2.VARIANTAbi): Int32 {
+    public unsafe func Remove(Index: Win32_impl_p2.VARIANTAbi): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Remove(__liveRaw, Index)
@@ -49428,12 +49444,12 @@ public class ITuningSpaceContainer <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Media_DirectShow_Tv == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITuningSpacesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var get_Item: CFunc<(CPointer<Unit>, Win32__impl_l2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    public var get_Item: CFunc<(CPointer<Unit>, Win32_impl_p2.VARIANTAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var EnumTuningSpaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -49471,7 +49487,7 @@ public class ITuningSpaces <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITuningSpaces> {
-        return InterfaceDescriptor<ITuningSpaces>("ITuningSpaces", ITuningSpaces.iid(), Win32__impl_l2.IDispatch.iid(), takeITuningSpacesFromAbi, viewITuningSpaces)
+        return InterfaceDescriptor<ITuningSpaces>("ITuningSpaces", ITuningSpaces.iid(), Win32_impl_p2.IDispatch.iid(), takeITuningSpacesFromAbi, viewITuningSpaces)
     }
 
     public unsafe func vtbl(): ITuningSpacesVtbl {
@@ -49492,7 +49508,7 @@ public class ITuningSpaces <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func get_Item(varIndex: Win32__impl_l2.VARIANTAbi, TuningSpace: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func get_Item(varIndex: Win32_impl_p2.VARIANTAbi, TuningSpace: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.get_Item(__liveRaw, varIndex, TuningSpace)

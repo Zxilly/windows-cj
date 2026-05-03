@@ -4,7 +4,9 @@
 package windows.ApplicationModel.DataTransfer.DragDrop
 
 import std.collection.*
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 import windows_core as windows_core
 
 

@@ -4,17 +4,28 @@
 package windows.Win32.Media.Audio.DirectMusic
 
 import std.collection.*
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteUIntNative, packedWriteValue}
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Media_Audio_DirectMusic == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_Audio_DirectMusic == "on" && Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows.Win32.Media.Audio.DirectSound as Win32_Media_Audio_DirectSound
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Audio_DirectMusic == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Media_Audio_DirectMusic == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Media_Audio_DirectMusic == "on"]
@@ -1850,7 +1861,7 @@ public struct DMUS_WAVE {
     public var ulFirstExtCkIdx: UInt32 = 0u32
     public var ulCopyrightIdx: UInt32 = 0u32
     public var ulWaveDataIdx: UInt32 = 0u32
-    public var WaveformatEx: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
+    public var WaveformatEx: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
     public init() {}
 }
 
@@ -1860,7 +1871,7 @@ public struct DMUS_WAVEAbi {
     public var ulFirstExtCkIdx: UInt32 = 0u32
     public var ulCopyrightIdx: UInt32 = 0u32
     public var ulWaveDataIdx: UInt32 = 0u32
-    public var WaveformatEx: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
+    public var WaveformatEx: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
     public init() {}
 }
 
@@ -2794,7 +2805,7 @@ public struct IDirectMusicPortVtbl {
     @When[Windows_Win32_Media_Audio_DirectSound == "on"]
     public var SetDirectSound: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -2938,7 +2949,7 @@ public class IDirectMusicPort <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pdwWaveFormatExSize: CPointer<UInt32>, pdwBufferSize: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormat(pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pdwWaveFormatExSize: CPointer<UInt32>, pdwBufferSize: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pWaveFormatEx, pdwWaveFormatExSize, pdwBufferSize)
@@ -3189,13 +3200,13 @@ extend MIDILOCALE <: windows_core.CopyType & windows_core.RuntimeType & windows_
 public struct MIDIOPENDESC {
     public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
 
-    public mut prop hMidi: Win32_Media__impl_l0.HMIDI {
+    public mut prop hMidi: Win32_Media_impl_p0.HMIDI {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32_Media__impl_l0.HMIDI = CPointer<Unit>()
-                return packedReadValue<Win32_Media__impl_l0.HMIDI>(base, 0, defaultValue)
+                let defaultValue: Win32_Media_impl_p0.HMIDI = CPointer<Unit>()
+                return packedReadValue<Win32_Media_impl_p0.HMIDI>(base, 0, defaultValue)
             }
         }
         set(val) {
@@ -3280,13 +3291,13 @@ public struct MIDIOPENDESC {
         }
     }
 
-    public mut prop rgIds: VArray<Win32_Media__impl_l0.MIDIOPENSTRMID, $1> {
+    public mut prop rgIds: VArray<Win32_Media_impl_p0.MIDIOPENSTRMID, $1> {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: VArray<Win32_Media__impl_l0.MIDIOPENSTRMID, $1> = VArray<Win32_Media__impl_l0.MIDIOPENSTRMID, $1>(repeat: Win32_Media__impl_l0.MIDIOPENSTRMID())
-                return packedReadValue<VArray<Win32_Media__impl_l0.MIDIOPENSTRMID, $1>>(base, 36, defaultValue)
+                let defaultValue: VArray<Win32_Media_impl_p0.MIDIOPENSTRMID, $1> = VArray<Win32_Media_impl_p0.MIDIOPENSTRMID, $1>(repeat: Win32_Media_impl_p0.MIDIOPENSTRMID())
+                return packedReadValue<VArray<Win32_Media_impl_p0.MIDIOPENSTRMID, $1>>(base, 36, defaultValue)
             }
         }
         set(val) {
@@ -4242,7 +4253,7 @@ public struct IDirectMusicSynthVtbl {
     public var SetChannelPriority: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
     public var GetChannelPriority: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
+    public var GetFormat: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var GetAppend: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4380,7 +4391,7 @@ public class IDirectMusicSynth <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetFormat(pWaveFormatEx: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, pdwWaveFormatExSize: CPointer<UInt32>): Int32 {
+    public unsafe func GetFormat(pWaveFormatEx: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>, pdwWaveFormatExSize: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFormat(__liveRaw, pWaveFormatEx, pdwWaveFormatExSize)

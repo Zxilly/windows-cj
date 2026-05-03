@@ -4,16 +4,27 @@
 package windows.Networking.Vpn
 
 import std.collection.*
+@When[Windows_Networking_Vpn == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_Vpn == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_Vpn == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_Vpn == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_Vpn == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_Vpn == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_Vpn == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Networking_Vpn == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_Vpn == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_Vpn == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_Vpn == "on"]
 import windows_future as windows_future
 
 
@@ -155,7 +166,7 @@ public class IVpnChannelConfiguration <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnChannelConfiguration", IVpnChannelConfiguration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannelConfigurationVtbl", "IVpnChannelConfiguration", "IVpnChannelConfiguration_Impl", [InterfaceMethodSchema("ServerServiceName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ServerHostNameList", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomField", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnChannelConfiguration", IVpnChannelConfiguration.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannelConfigurationVtbl", "IVpnChannelConfiguration", "IVpnChannelConfiguration_Impl", [InterfaceMethodSchema("ServerServiceName", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ServerHostNameList", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CustomField", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnChannelConfiguration.runtimeType())
         return schema
     }
@@ -193,12 +204,12 @@ public class IVpnChannelConfiguration <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func ServerHostNameList(): windows_collections.IVectorView<_impl_l1.HostName> {
+    public unsafe func ServerHostNameList(): windows_collections.IVectorView<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ServerHostNameList(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVectorView<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVectorView<impl_p1.HostName>.fromAbiTake(result__)
     }
 
     public unsafe func CustomField(): windows_core.HString {
@@ -542,14 +553,14 @@ public interface IVpnCredential_ImplErased {
 
 @When[Windows_Networking_Vpn == "on" && (((Windows_Security_Credentials == "on") && (Windows_Security_Cryptography_Certificates == "on")) && (Windows_Security_Credentials == "on"))]
 public interface IVpnCredential_Impl <: IVpnCredential_ImplErased {
-    public func PasskeyCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func PasskeyCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_PasskeyCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.PasskeyCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -557,19 +568,19 @@ public interface IVpnCredential_Impl <: IVpnCredential_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
 
-    public func CertificateCredential(): windows_core.Result<_impl_l1.Certificate>
+    public func CertificateCredential(): windows_core.Result<impl_p1.Certificate>
 
     public func __winrtThunk_CertificateCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.CertificateCredential()) {
-            case Result<_impl_l1.Certificate>.Ok(value) =>
+            case Result<impl_p1.Certificate>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -577,7 +588,7 @@ public interface IVpnCredential_Impl <: IVpnCredential_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l1.Certificate>.Err(error) =>
+            case Result<impl_p1.Certificate>.Err(error) =>
                 error.code().value
         }
     }
@@ -602,14 +613,14 @@ public interface IVpnCredential_Impl <: IVpnCredential_ImplErased {
         }
     }
 
-    public func OldPasswordCredential(): windows_core.Result<_impl_l0.PasswordCredential>
+    public func OldPasswordCredential(): windows_core.Result<impl_p0.PasswordCredential>
 
     public func __winrtThunk_OldPasswordCredential(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.OldPasswordCredential()) {
-            case Result<_impl_l0.PasswordCredential>.Ok(value) =>
+            case Result<impl_p0.PasswordCredential>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -617,7 +628,7 @@ public interface IVpnCredential_Impl <: IVpnCredential_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<_impl_l0.PasswordCredential>.Err(error) =>
+            case Result<impl_p0.PasswordCredential>.Err(error) =>
                 error.code().value
         }
     }
@@ -659,7 +670,7 @@ public class IVpnCredential <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnCredential", IVpnCredential.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnCredentialVtbl", "IVpnCredential", "IVpnCredential_Impl", [InterfaceMethodSchema("PasskeyCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CertificateCredential", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Certificate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalPin", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OldPasswordCredential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnCredential", IVpnCredential.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnCredentialVtbl", "IVpnCredential", "IVpnCredential_Impl", [InterfaceMethodSchema("PasskeyCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CertificateCredential", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Certificate>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalPin", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OldPasswordCredential", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnCredential.runtimeType())
         return schema
     }
@@ -689,21 +700,21 @@ public class IVpnCredential <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func PasskeyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func PasskeyCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PasskeyCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     @When[Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func CertificateCredential(): _impl_l1.Certificate {
+    public unsafe func CertificateCredential(): impl_p1.Certificate {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CertificateCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Certificate.fromAbiTake(result__)
+        return impl_p1.Certificate.fromAbiTake(result__)
     }
 
     public unsafe func AdditionalPin(): windows_core.HString {
@@ -715,12 +726,12 @@ public class IVpnCredential <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func OldPasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func OldPasswordCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OldPasswordCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 }
 
@@ -2068,7 +2079,7 @@ public class IVpnNamespaceInfo <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnNamespaceInfo", IVpnNamespaceInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnNamespaceInfoVtbl", "IVpnNamespaceInfo", "IVpnNamespaceInfo_Impl", [InterfaceMethodSchema("SetNamespace", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Namespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDnsServers", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DnsServers", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWebProxyServers", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("WebProxyServers", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnNamespaceInfo", IVpnNamespaceInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnNamespaceInfoVtbl", "IVpnNamespaceInfo", "IVpnNamespaceInfo_Impl", [InterfaceMethodSchema("SetNamespace", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Namespace", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDnsServers", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DnsServers", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetWebProxyServers", 10, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("WebProxyServers", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnNamespaceInfo.runtimeType())
         return schema
     }
@@ -2112,35 +2123,35 @@ public class IVpnNamespaceInfo <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func SetDnsServers(value: windows_collections.IVector<_impl_l1.HostName>): Unit {
+    public unsafe func SetDnsServers(value: windows_collections.IVector<impl_p1.HostName>): Unit {
         let v = vtbl()
         let hr = v.SetDnsServers(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func DnsServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func DnsServers(): windows_collections.IVector<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DnsServers(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.HostName>.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func SetWebProxyServers(value: windows_collections.IVector<_impl_l1.HostName>): Unit {
+    public unsafe func SetWebProxyServers(value: windows_collections.IVector<impl_p1.HostName>): Unit {
         let v = vtbl()
         let hr = v.SetWebProxyServers(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func WebProxyServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func WebProxyServers(): windows_collections.IVector<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.WebProxyServers(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.HostName>.fromAbiTake(result__)
     }
 }
 
@@ -2291,7 +2302,7 @@ public class IVpnPickedCredential <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnPickedCredential", IVpnPickedCredential.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnPickedCredentialVtbl", "IVpnPickedCredential", "IVpnPickedCredential_Impl", [InterfaceMethodSchema("PasskeyCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalPin", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OldPasswordCredential", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnPickedCredential", IVpnPickedCredential.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnPickedCredentialVtbl", "IVpnPickedCredential", "IVpnPickedCredential_Impl", [InterfaceMethodSchema("PasskeyCredential", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AdditionalPin", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OldPasswordCredential", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnPickedCredential.runtimeType())
         return schema
     }
@@ -2321,12 +2332,12 @@ public class IVpnPickedCredential <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func PasskeyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func PasskeyCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.PasskeyCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 
     public unsafe func AdditionalPin(): windows_core.HString {
@@ -2338,12 +2349,12 @@ public class IVpnPickedCredential <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func OldPasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func OldPasswordCredential(): impl_p0.PasswordCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.OldPasswordCredential(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.PasswordCredential.fromAbiTake(result__)
+        return impl_p0.PasswordCredential.fromAbiTake(result__)
     }
 }
 
@@ -2403,7 +2414,7 @@ public class IVpnRoute <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnRoute", IVpnRoute.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnRouteVtbl", "IVpnRoute", "IVpnRoute_Impl", [InterfaceMethodSchema("SetAddress", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Address", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrefixSize", 8, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PrefixSize", 9, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnRoute", IVpnRoute.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnRouteVtbl", "IVpnRoute", "IVpnRoute_Impl", [InterfaceMethodSchema("SetAddress", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Address", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPrefixSize", 8, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PrefixSize", 9, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnRoute.runtimeType())
         return schema
     }
@@ -2433,19 +2444,19 @@ public class IVpnRoute <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetAddress(value: _impl_l1.HostName): Unit {
+    public unsafe func SetAddress(value: impl_p1.HostName): Unit {
         let v = vtbl()
         let hr = v.SetAddress(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func Address(): _impl_l1.HostName {
+    public unsafe func Address(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Address(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func SetPrefixSize(value: UInt8): Unit {
@@ -2513,7 +2524,7 @@ public class IVpnSystemHealth <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnSystemHealth", IVpnSystemHealth.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnSystemHealthVtbl", "IVpnSystemHealth", "IVpnSystemHealth_Impl", [InterfaceMethodSchema("StatementOfHealth", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.Buffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnSystemHealth", IVpnSystemHealth.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnSystemHealthVtbl", "IVpnSystemHealth", "IVpnSystemHealth_Impl", [InterfaceMethodSchema("StatementOfHealth", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.Buffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnSystemHealth.runtimeType())
         return schema
     }
@@ -2543,12 +2554,12 @@ public class IVpnSystemHealth <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func StatementOfHealth(): _impl_l0.Buffer {
+    public unsafe func StatementOfHealth(): impl_p0.Buffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.StatementOfHealth(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.Buffer.fromAbiTake(result__)
+        return impl_p0.Buffer.fromAbiTake(result__)
     }
 }
 
@@ -2800,7 +2811,7 @@ public class VpnChannelConfiguration <: InterfaceWrapperBase & ComInterface & wi
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func ServerHostNameList(): windows_collections.IVectorView<_impl_l1.HostName> {
+    public unsafe func ServerHostNameList(): windows_collections.IVectorView<impl_p1.HostName> {
         return defaultInterface().ServerHostNameList()
     }
 
@@ -2968,12 +2979,12 @@ public class VpnCredential <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func PasskeyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func PasskeyCredential(): impl_p0.PasswordCredential {
         return defaultInterface().PasskeyCredential()
     }
 
     @When[Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func CertificateCredential(): _impl_l1.Certificate {
+    public unsafe func CertificateCredential(): impl_p1.Certificate {
         return defaultInterface().CertificateCredential()
     }
 
@@ -2982,7 +2993,7 @@ public class VpnCredential <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func OldPasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func OldPasswordCredential(): impl_p0.PasswordCredential {
         return defaultInterface().OldPasswordCredential()
     }
 }
@@ -4258,7 +4269,7 @@ public class VpnPickedCredential <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func PasskeyCredential(): _impl_l0.PasswordCredential {
+    public unsafe func PasskeyCredential(): impl_p0.PasswordCredential {
         return defaultInterface().PasskeyCredential()
     }
 
@@ -4267,7 +4278,7 @@ public class VpnPickedCredential <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func OldPasswordCredential(): _impl_l0.PasswordCredential {
+    public unsafe func OldPasswordCredential(): impl_p0.PasswordCredential {
         return defaultInterface().OldPasswordCredential()
     }
 }
@@ -4414,7 +4425,7 @@ public class VpnSystemHealth <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func StatementOfHealth(): _impl_l0.Buffer {
+    public unsafe func StatementOfHealth(): impl_p0.Buffer {
         return defaultInterface().StatementOfHealth()
     }
 }
@@ -5340,7 +5351,7 @@ public class IVpnDomainNameInfo <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnDomainNameInfo", IVpnDomainNameInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnDomainNameInfoVtbl", "IVpnDomainNameInfo", "IVpnDomainNameInfo_Impl", [InterfaceMethodSchema("SetDomainName", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainNameType", 8, [InterfaceParameterSchema("value", "VpnDomainNameTypeAbi", "VpnDomainNameType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainNameType", 9, [InterfaceParameterSchema("result", "CPointer<VpnDomainNameTypeAbi>", "OutSlot<VpnDomainNameType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DnsServers", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WebProxyServers", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnDomainNameInfo", IVpnDomainNameInfo.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnDomainNameInfoVtbl", "IVpnDomainNameInfo", "IVpnDomainNameInfo_Impl", [InterfaceMethodSchema("SetDomainName", 6, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DomainName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.HostName>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDomainNameType", 8, [InterfaceParameterSchema("value", "VpnDomainNameTypeAbi", "VpnDomainNameType", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DomainNameType", 9, [InterfaceParameterSchema("result", "CPointer<VpnDomainNameTypeAbi>", "OutSlot<VpnDomainNameType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DnsServers", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("WebProxyServers", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnDomainNameInfo.runtimeType())
         return schema
     }
@@ -5370,19 +5381,19 @@ public class IVpnDomainNameInfo <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetDomainName(value: _impl_l1.HostName): Unit {
+    public unsafe func SetDomainName(value: impl_p1.HostName): Unit {
         let v = vtbl()
         let hr = v.SetDomainName(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func DomainName(): _impl_l1.HostName {
+    public unsafe func DomainName(): impl_p1.HostName {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DomainName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.HostName.fromAbiTake(result__)
+        return impl_p1.HostName.fromAbiTake(result__)
     }
 
     public unsafe func SetDomainNameType(value: VpnDomainNameType): Unit {
@@ -5400,21 +5411,21 @@ public class IVpnDomainNameInfo <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func DnsServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func DnsServers(): windows_collections.IVector<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DnsServers(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.HostName>.fromAbiTake(result__)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func WebProxyServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func WebProxyServers(): windows_collections.IVector<impl_p1.HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.WebProxyServers(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_collections.IVector<_impl_l1.HostName>.fromAbiTake(result__)
+        return windows_collections.IVector<impl_p1.HostName>.fromAbiTake(result__)
     }
 }
 
@@ -5680,7 +5691,7 @@ public class IVpnPacketBuffer <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnPacketBuffer", IVpnPacketBuffer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnPacketBufferVtbl", "IVpnPacketBuffer", "IVpnPacketBuffer_Impl", [InterfaceMethodSchema("get_Buffer", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.Buffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStatus", 7, [InterfaceParameterSchema("value", "VpnPacketBufferStatusAbi", "VpnPacketBufferStatus", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Status", 8, [InterfaceParameterSchema("result", "CPointer<VpnPacketBufferStatusAbi>", "OutSlot<VpnPacketBufferStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransportAffinity", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransportAffinity", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnPacketBuffer", IVpnPacketBuffer.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnPacketBufferVtbl", "IVpnPacketBuffer", "IVpnPacketBuffer_Impl", [InterfaceMethodSchema("get_Buffer", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.Buffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetStatus", 7, [InterfaceParameterSchema("value", "VpnPacketBufferStatusAbi", "VpnPacketBufferStatus", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Status", 8, [InterfaceParameterSchema("result", "CPointer<VpnPacketBufferStatusAbi>", "OutSlot<VpnPacketBufferStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTransportAffinity", 9, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TransportAffinity", 10, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnPacketBuffer.runtimeType())
         return schema
     }
@@ -5710,12 +5721,12 @@ public class IVpnPacketBuffer <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func get_Buffer(): _impl_l0.Buffer {
+    public unsafe func get_Buffer(): impl_p0.Buffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Buffer(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.Buffer.fromAbiTake(result__)
+        return impl_p0.Buffer.fromAbiTake(result__)
     }
 
     public unsafe func SetStatus(value: VpnPacketBufferStatus): Unit {
@@ -6669,7 +6680,7 @@ public class VpnForegroundActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<VpnForegroundActivatedEventArgs> {
-        let ancestors = [IVpnForegroundActivatedEventArgs.iid(), _impl_l0.IActivatedEventArgs.iid(), _impl_l1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
+        let ancestors = [IVpnForegroundActivatedEventArgs.iid(), impl_p0.IActivatedEventArgs.iid(), impl_p1.IActivatedEventArgsWithUser.iid(), IInspectable.iid(), IUnknown.iid()]
         return InterfaceDescriptor<VpnForegroundActivatedEventArgs>("VpnForegroundActivatedEventArgs", IVpnForegroundActivatedEventArgs.iid(), ancestors, { raw => VpnForegroundActivatedEventArgs.fromAbiTake(raw) }, { raw => VpnForegroundActivatedEventArgs.viewOf(raw) })
     }
 
@@ -6711,15 +6722,15 @@ public class VpnForegroundActivatedEventArgs <: InterfaceWrapperBase & ComInterf
         }
     }
 
-    public func asIActivatedEventArgs(): _impl_l0.IActivatedEventArgs {
-        match (unsafe { query(_impl_l0.IActivatedEventArgs.descriptor()) }) {
+    public func asIActivatedEventArgs(): impl_p0.IActivatedEventArgs {
+        match (unsafe { query(impl_p0.IActivatedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIActivatedEventArgsWithUser(): _impl_l1.IActivatedEventArgsWithUser {
-        match (unsafe { query(_impl_l1.IActivatedEventArgsWithUser.descriptor()) }) {
+    public func asIActivatedEventArgsWithUser(): impl_p1.IActivatedEventArgsWithUser {
+        match (unsafe { query(impl_p1.IActivatedEventArgsWithUser.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -6738,20 +6749,20 @@ public class VpnForegroundActivatedEventArgs <: InterfaceWrapperBase & ComInterf
         return defaultInterface().ActivationOperation()
     }
 
-    public unsafe func Kind(): _impl_l0.ActivationKind {
+    public unsafe func Kind(): impl_p0.ActivationKind {
         return asIActivatedEventArgs().Kind()
     }
 
-    public unsafe func PreviousExecutionState(): _impl_l0.ApplicationExecutionState {
+    public unsafe func PreviousExecutionState(): impl_p0.ApplicationExecutionState {
         return asIActivatedEventArgs().PreviousExecutionState()
     }
 
-    public unsafe func get_SplashScreen(): _impl_l0.SplashScreen {
+    public unsafe func get_SplashScreen(): impl_p0.SplashScreen {
         return asIActivatedEventArgs().get_SplashScreen()
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return asIActivatedEventArgsWithUser().get_User()
     }
 }
@@ -6927,7 +6938,7 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnChannel", IVpnChannel.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannelVtbl", "IVpnChannel", "IVpnChannel_Impl", [InterfaceMethodSchema("AssociateTransport", 6, [InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Start", 7, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("routeScope", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("namespaceScope", "CPointer<Unit>", "InParam<VpnNamespaceAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("optimizeForLowCostNetwork", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stop", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RequestCredentials", 9, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("isRetry", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("isSingleSignOnCredential", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("certificate", "CPointer<Unit>", "InParam<_impl_l1.Certificate>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPickedCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestVpnPacketBuffer", 10, [InterfaceParameterSchema("type_", "VpnDataPathTypeAbi", "VpnDataPathType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("vpnPacketBuffer", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogDiagnosticMessage", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Configuration", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnChannelConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityChange", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VpnChannel, VpnChannelActivityEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivityChange", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPlugInContext", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PlugInContext", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SystemHealth", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnSystemHealth>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCustomPrompt", 19, [InterfaceParameterSchema("customPrompt", "CPointer<Unit>", "InParam<windows_collections.IVectorView<IVpnCustomPrompt>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetErrorMessage", 20, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAllowedSslTlsVersions", 21, [InterfaceParameterSchema("tunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("useTls12", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnChannel", IVpnChannel.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannelVtbl", "IVpnChannel", "IVpnChannel_Impl", [InterfaceMethodSchema("AssociateTransport", 6, [InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Start", 7, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("routeScope", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("namespaceScope", "CPointer<Unit>", "InParam<VpnNamespaceAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("optimizeForLowCostNetwork", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Stop", 8, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("RequestCredentials", 9, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("isRetry", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("isSingleSignOnCredential", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("certificate", "CPointer<Unit>", "InParam<impl_p1.Certificate>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPickedCredential>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestVpnPacketBuffer", 10, [InterfaceParameterSchema("type_", "VpnDataPathTypeAbi", "VpnDataPathType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("vpnPacketBuffer", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogDiagnosticMessage", 11, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Id", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Configuration", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnChannelConfiguration>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ActivityChange", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VpnChannel, VpnChannelActivityEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivityChange", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPlugInContext", 16, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("PlugInContext", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SystemHealth", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnSystemHealth>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCustomPrompt", 19, [InterfaceParameterSchema("customPrompt", "CPointer<Unit>", "InParam<windows_collections.IVectorView<IVpnCustomPrompt>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetErrorMessage", 20, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("SetAllowedSslTlsVersions", 21, [InterfaceParameterSchema("tunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("useTls12", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnChannel.runtimeType())
         return schema
     }
@@ -6963,7 +6974,7 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func Start(assignedClientIPv4list: windows_collections.IVectorView<_impl_l1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<_impl_l1.HostName>, vpnInterfaceId: VpnInterfaceId, routeScope: VpnRouteAssignment, namespaceScope: VpnNamespaceAssignment, mtuSize: UInt32, maxFrameSize: UInt32, optimizeForLowCostNetwork: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable): Unit {
+    public unsafe func Start(assignedClientIPv4list: windows_collections.IVectorView<impl_p1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<impl_p1.HostName>, vpnInterfaceId: VpnInterfaceId, routeScope: VpnRouteAssignment, namespaceScope: VpnNamespaceAssignment, mtuSize: UInt32, maxFrameSize: UInt32, optimizeForLowCostNetwork: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable): Unit {
         let v = vtbl()
         let hr = v.Start(asRaw(), assignedClientIPv4list.asRaw(), assignedClientIPv6list.asRaw(), vpnInterfaceId.asRaw(), routeScope.asRaw(), namespaceScope.asRaw(), mtuSize, maxFrameSize, optimizeForLowCostNetwork, mainOuterTunnelTransport.asRaw(), optionalOuterTunnelTransport.asRaw())
         HRESULT(hr).ok()
@@ -6976,7 +6987,7 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     @When[Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func RequestCredentials(credType: VpnCredentialType, isRetry: Bool, isSingleSignOnCredential: Bool, certificate: _impl_l1.Certificate): VpnPickedCredential {
+    public unsafe func RequestCredentials(credType: VpnCredentialType, isRetry: Bool, isSingleSignOnCredential: Bool, certificate: impl_p1.Certificate): VpnPickedCredential {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestCredentials(asRaw(), windows_core.projectTypedAbi(credType, windows_core.typeMarker<VpnCredentialType>()), isRetry, isSingleSignOnCredential, certificate.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7141,7 +7152,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnChannel2", IVpnChannel2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannel2Vtbl", "IVpnChannel2", "IVpnChannel2_Impl", [InterfaceMethodSchema("StartWithMainTransport", 6, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedDomainName", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("Reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartExistingTransports", 7, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedDomainName", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("Reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ActivityStateChange", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VpnChannel, VpnChannelActivityStateChangedArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivityStateChange", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVpnSendPacketBuffer", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPacketBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetVpnReceivePacketBuffer", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPacketBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCustomPromptAsync", 12, [InterfaceParameterSchema("customPromptElement", "CPointer<Unit>", "InParam<windows_collections.IVectorView<IVpnCustomPromptElement>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsWithCertificateAsync", 13, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("credOptions", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("certificate", "CPointer<Unit>", "InParam<_impl_l1.Certificate>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsWithOptionsAsync", 14, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("credOptions", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsSimpleAsync", 15, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TerminateConnection", 16, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartWithTrafficFilter", 17, [InterfaceParameterSchema("assignedClientIpv4List", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIpv6List", "CPointer<Unit>", "InParam<windows_collections.IVectorView<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedNamespace", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedTrafficFilters", "CPointer<Unit>", "InParam<VpnTrafficFilterAssignment>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnChannel2", IVpnChannel2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannel2Vtbl", "IVpnChannel2", "IVpnChannel2_Impl", [InterfaceMethodSchema("StartWithMainTransport", 6, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedDomainName", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("Reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartExistingTransports", 7, [InterfaceParameterSchema("assignedClientIPv4list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIPv6list", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedDomainName", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("Reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ActivityStateChange", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<VpnChannel, VpnChannelActivityStateChangedArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveActivityStateChange", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetVpnSendPacketBuffer", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPacketBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetVpnReceivePacketBuffer", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnPacketBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCustomPromptAsync", 12, [InterfaceParameterSchema("customPromptElement", "CPointer<Unit>", "InParam<windows_collections.IVectorView<IVpnCustomPromptElement>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsWithCertificateAsync", 13, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("credOptions", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("certificate", "CPointer<Unit>", "InParam<impl_p1.Certificate>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsWithOptionsAsync", 14, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("credOptions", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RequestCredentialsSimpleAsync", 15, [InterfaceParameterSchema("credType", "VpnCredentialTypeAbi", "VpnCredentialType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnCredential>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TerminateConnection", 16, [InterfaceParameterSchema("message", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartWithTrafficFilter", 17, [InterfaceParameterSchema("assignedClientIpv4List", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIpv6List", "CPointer<Unit>", "InParam<windows_collections.IVectorView<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpnInterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedNamespace", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("mainOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("optionalOuterTunnelTransport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedTrafficFilters", "CPointer<Unit>", "InParam<VpnTrafficFilterAssignment>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnChannel2.runtimeType())
         return schema
     }
@@ -7171,14 +7182,14 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func StartWithMainTransport(assignedClientIPv4list: windows_collections.IVectorView<_impl_l1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<_impl_l1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedDomainName: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool, mainOuterTunnelTransport: IInspectable): Unit {
+    public unsafe func StartWithMainTransport(assignedClientIPv4list: windows_collections.IVectorView<impl_p1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<impl_p1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedDomainName: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool, mainOuterTunnelTransport: IInspectable): Unit {
         let v = vtbl()
         let hr = v.StartWithMainTransport(asRaw(), assignedClientIPv4list.asRaw(), assignedClientIPv6list.asRaw(), vpnInterfaceId.asRaw(), assignedRoutes.asRaw(), assignedDomainName.asRaw(), mtuSize, maxFrameSize, Reserved, mainOuterTunnelTransport.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func StartExistingTransports(assignedClientIPv4list: windows_collections.IVectorView<_impl_l1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<_impl_l1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedDomainName: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool): Unit {
+    public unsafe func StartExistingTransports(assignedClientIPv4list: windows_collections.IVectorView<impl_p1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<impl_p1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedDomainName: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool): Unit {
         let v = vtbl()
         let hr = v.StartExistingTransports(asRaw(), assignedClientIPv4list.asRaw(), assignedClientIPv6list.asRaw(), vpnInterfaceId.asRaw(), assignedRoutes.asRaw(), assignedDomainName.asRaw(), mtuSize, maxFrameSize, Reserved)
         HRESULT(hr).ok()
@@ -7224,7 +7235,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func RequestCredentialsWithCertificateAsync(credType: VpnCredentialType, credOptions: UInt32, certificate: _impl_l1.Certificate): windows_future.IAsyncOperation<VpnCredential> {
+    public unsafe func RequestCredentialsWithCertificateAsync(credType: VpnCredentialType, credOptions: UInt32, certificate: impl_p1.Certificate): windows_future.IAsyncOperation<VpnCredential> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RequestCredentialsWithCertificateAsync(asRaw(), windows_core.projectTypedAbi(credType, windows_core.typeMarker<VpnCredentialType>()), credOptions, certificate.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7255,7 +7266,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func StartWithTrafficFilter(assignedClientIpv4List: windows_collections.IVectorView<_impl_l1.HostName>, assignedClientIpv6List: windows_collections.IVectorView<_impl_l1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedNamespace: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable, assignedTrafficFilters: VpnTrafficFilterAssignment): Unit {
+    public unsafe func StartWithTrafficFilter(assignedClientIpv4List: windows_collections.IVectorView<impl_p1.HostName>, assignedClientIpv6List: windows_collections.IVectorView<impl_p1.HostName>, vpnInterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedNamespace: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable, assignedTrafficFilters: VpnTrafficFilterAssignment): Unit {
         let v = vtbl()
         let hr = v.StartWithTrafficFilter(asRaw(), assignedClientIpv4List.asRaw(), assignedClientIpv6List.asRaw(), vpnInterfaceId.asRaw(), assignedRoutes.asRaw(), assignedNamespace.asRaw(), mtuSize, maxFrameSize, reserved, mainOuterTunnelTransport.asRaw(), optionalOuterTunnelTransport.asRaw(), assignedTrafficFilters.asRaw())
         HRESULT(hr).ok()
@@ -7277,7 +7288,7 @@ public struct IVpnChannel4Vtbl {
     public var ReplaceAndAssociateTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var StartReconnectingTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets == "on"]
-    public var GetSlotTypeForTransportContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<_impl_l0.ControlChannelTriggerStatusAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetSlotTypeForTransportContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<impl_p0.ControlChannelTriggerStatusAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
     public var GetSlotTypeForTransportContext: UIntNative = UIntNative(0)
     public var CurrentRequestTransportContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7320,7 +7331,7 @@ public class IVpnChannel4 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnChannel4", IVpnChannel4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannel4Vtbl", "IVpnChannel4", "IVpnChannel4_Impl", [InterfaceMethodSchema("AddAndAssociateTransport", 6, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartWithMultipleTransports", 7, [InterfaceParameterSchema("assignedClientIpv4Addresses", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIpv6Addresses", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpninterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedNamespace", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("transports", "CPointer<Unit>", "InParam<windows_collections.IIterable<IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedTrafficFilters", "CPointer<Unit>", "InParam<VpnTrafficFilterAssignment>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ReplaceAndAssociateTransport", 8, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartReconnectingTransport", 9, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetSlotTypeForTransportContext", 10, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<_impl_l0.ControlChannelTriggerStatusAbi>", "OutSlot<_impl_l0.ControlChannelTriggerStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentRequestTransportContext", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnChannel4", IVpnChannel4.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnChannel4Vtbl", "IVpnChannel4", "IVpnChannel4_Impl", [InterfaceMethodSchema("AddAndAssociateTransport", 6, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartWithMultipleTransports", 7, [InterfaceParameterSchema("assignedClientIpv4Addresses", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedClientIpv6Addresses", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("vpninterfaceId", "CPointer<Unit>", "InParam<VpnInterfaceId>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedRoutes", "CPointer<Unit>", "InParam<VpnRouteAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedNamespace", "CPointer<Unit>", "InParam<VpnDomainNameAssignment>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("mtuSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxFrameSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("reserved", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("transports", "CPointer<Unit>", "InParam<windows_collections.IIterable<IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("assignedTrafficFilters", "CPointer<Unit>", "InParam<VpnTrafficFilterAssignment>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("ReplaceAndAssociateTransport", 8, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartReconnectingTransport", 9, [InterfaceParameterSchema("transport", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetSlotTypeForTransportContext", 10, [InterfaceParameterSchema("context", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<impl_p0.ControlChannelTriggerStatusAbi>", "OutSlot<impl_p0.ControlChannelTriggerStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CurrentRequestTransportContext", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnChannel4.runtimeType())
         return schema
     }
@@ -7356,7 +7367,7 @@ public class IVpnChannel4 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func StartWithMultipleTransports(assignedClientIpv4Addresses: windows_collections.IIterable<_impl_l1.HostName>, assignedClientIpv6Addresses: windows_collections.IIterable<_impl_l1.HostName>, vpninterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedNamespace: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, transports: windows_collections.IIterable<IInspectable>, assignedTrafficFilters: VpnTrafficFilterAssignment): Unit {
+    public unsafe func StartWithMultipleTransports(assignedClientIpv4Addresses: windows_collections.IIterable<impl_p1.HostName>, assignedClientIpv6Addresses: windows_collections.IIterable<impl_p1.HostName>, vpninterfaceId: VpnInterfaceId, assignedRoutes: VpnRouteAssignment, assignedNamespace: VpnDomainNameAssignment, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, transports: windows_collections.IIterable<IInspectable>, assignedTrafficFilters: VpnTrafficFilterAssignment): Unit {
         let v = vtbl()
         let hr = v.StartWithMultipleTransports(asRaw(), assignedClientIpv4Addresses.asRaw(), assignedClientIpv6Addresses.asRaw(), vpninterfaceId.asRaw(), assignedRoutes.asRaw(), assignedNamespace.asRaw(), mtuSize, maxFrameSize, reserved, transports.asRaw(), assignedTrafficFilters.asRaw())
         HRESULT(hr).ok()
@@ -7375,12 +7386,12 @@ public class IVpnChannel4 <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     @When[Windows_Networking_Sockets == "on"]
-    public unsafe func GetSlotTypeForTransportContext(context: IInspectable): _impl_l0.ControlChannelTriggerStatus {
+    public unsafe func GetSlotTypeForTransportContext(context: IInspectable): impl_p0.ControlChannelTriggerStatus {
         let v = vtbl()
-        var result__ = _impl_l0.ControlChannelTriggerStatusAbi()
-        let hr = v.GetSlotTypeForTransportContext(asRaw(), context.asRaw(), CPointer<_impl_l0.ControlChannelTriggerStatusAbi>(inout result__))
+        var result__ = impl_p0.ControlChannelTriggerStatusAbi()
+        let hr = v.GetSlotTypeForTransportContext(asRaw(), context.asRaw(), CPointer<impl_p0.ControlChannelTriggerStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.ControlChannelTriggerStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.ControlChannelTriggerStatus>()).unwrap()
     }
 
     public unsafe func CurrentRequestTransportContext(): IInspectable {
@@ -7657,13 +7668,13 @@ public interface IVpnDomainNameInfoFactory_ImplErased {
 
 @When[Windows_Networking_Vpn == "on" && (Windows_Foundation_Collections == "on" && Windows_Networking == "on")]
 public interface IVpnDomainNameInfoFactory_Impl <: IVpnDomainNameInfoFactory_ImplErased {
-    public func CreateVpnDomainNameInfo(name: InParam<windows_core.HString>, nameType: VpnDomainNameType, dnsServerList: InParam<windows_collections.IIterable<_impl_l1.HostName>>, proxyServerList: InParam<windows_collections.IIterable<_impl_l1.HostName>>): windows_core.Result<VpnDomainNameInfo>
+    public func CreateVpnDomainNameInfo(name: InParam<windows_core.HString>, nameType: VpnDomainNameType, dnsServerList: InParam<windows_collections.IIterable<impl_p1.HostName>>, proxyServerList: InParam<windows_collections.IIterable<impl_p1.HostName>>): windows_core.Result<VpnDomainNameInfo>
 
     public func __winrtThunk_CreateVpnDomainNameInfo(arg0: CPointer<Unit>, arg1: VpnDomainNameTypeAbi, arg2: CPointer<Unit>, arg3: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.CreateVpnDomainNameInfo(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<VpnDomainNameType>()), InParam<windows_collections.IIterable<_impl_l1.HostName>>(windows_collections.IIterable<_impl_l1.HostName>.viewOf(arg2)), InParam<windows_collections.IIterable<_impl_l1.HostName>>(windows_collections.IIterable<_impl_l1.HostName>.viewOf(arg3)))) {
+        match (this.CreateVpnDomainNameInfo(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<VpnDomainNameType>()), InParam<windows_collections.IIterable<impl_p1.HostName>>(windows_collections.IIterable<impl_p1.HostName>.viewOf(arg2)), InParam<windows_collections.IIterable<impl_p1.HostName>>(windows_collections.IIterable<impl_p1.HostName>.viewOf(arg3)))) {
             case Result<VpnDomainNameInfo>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -7714,7 +7725,7 @@ public class IVpnDomainNameInfoFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnDomainNameInfoFactory", IVpnDomainNameInfoFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnDomainNameInfoFactoryVtbl", "IVpnDomainNameInfoFactory", "IVpnDomainNameInfoFactory_Impl", [InterfaceMethodSchema("CreateVpnDomainNameInfo", 6, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("nameType", "VpnDomainNameTypeAbi", "VpnDomainNameType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("dnsServerList", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("proxyServerList", "CPointer<Unit>", "InParam<windows_collections.IIterable<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnDomainNameInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnDomainNameInfoFactory", IVpnDomainNameInfoFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnDomainNameInfoFactoryVtbl", "IVpnDomainNameInfoFactory", "IVpnDomainNameInfoFactory_Impl", [InterfaceMethodSchema("CreateVpnDomainNameInfo", 6, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("nameType", "VpnDomainNameTypeAbi", "VpnDomainNameType", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("dnsServerList", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("proxyServerList", "CPointer<Unit>", "InParam<windows_collections.IIterable<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnDomainNameInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnDomainNameInfoFactory.runtimeType())
         return schema
     }
@@ -7744,7 +7755,7 @@ public class IVpnDomainNameInfoFactory <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func CreateVpnDomainNameInfo(name: windows_core.HString, nameType: VpnDomainNameType, dnsServerList: windows_collections.IIterable<_impl_l1.HostName>, proxyServerList: windows_collections.IIterable<_impl_l1.HostName>): VpnDomainNameInfo {
+    public unsafe func CreateVpnDomainNameInfo(name: windows_core.HString, nameType: VpnDomainNameType, dnsServerList: windows_collections.IIterable<impl_p1.HostName>, proxyServerList: windows_collections.IIterable<impl_p1.HostName>): VpnDomainNameInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateVpnDomainNameInfo(asRaw(), name.asRaw(), windows_core.projectTypedAbi(nameType, windows_core.typeMarker<VpnDomainNameType>()), dnsServerList.asRaw(), proxyServerList.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7949,7 +7960,7 @@ public class IVpnManagementAgent <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnManagementAgent", IVpnManagementAgent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnManagementAgentVtbl", "IVpnManagementAgent", "IVpnManagementAgent_Impl", [InterfaceMethodSchema("AddProfileFromXmlAsync", 6, [InterfaceParameterSchema("xml", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddProfileFromObjectAsync", 7, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateProfileFromXmlAsync", 8, [InterfaceParameterSchema("xml", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateProfileFromObjectAsync", 9, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetProfilesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<IVpnProfile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteProfileAsync", 11, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectProfileAsync", 12, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectProfileWithPasswordCredentialAsync", 13, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<_impl_l0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectProfileAsync", 14, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnManagementAgent", IVpnManagementAgent.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnManagementAgentVtbl", "IVpnManagementAgent", "IVpnManagementAgent_Impl", [InterfaceMethodSchema("AddProfileFromXmlAsync", 6, [InterfaceParameterSchema("xml", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddProfileFromObjectAsync", 7, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateProfileFromXmlAsync", 8, [InterfaceParameterSchema("xml", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UpdateProfileFromObjectAsync", 9, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetProfilesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_collections.IVectorView<IVpnProfile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteProfileAsync", 11, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectProfileAsync", 12, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConnectProfileWithPasswordCredentialAsync", 13, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("passwordCredential", "CPointer<Unit>", "InParam<impl_p0.PasswordCredential>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisconnectProfileAsync", 14, [InterfaceParameterSchema("profile", "CPointer<Unit>", "InParam<IVpnProfile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<VpnManagementErrorStatus>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnManagementAgent.runtimeType())
         return schema
     }
@@ -8036,7 +8047,7 @@ public class IVpnManagementAgent <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectProfileWithPasswordCredentialAsync(profile: IVpnProfile, passwordCredential: _impl_l0.PasswordCredential): windows_future.IAsyncOperation<VpnManagementErrorStatus> {
+    public unsafe func ConnectProfileWithPasswordCredentialAsync(profile: IVpnProfile, passwordCredential: impl_p0.PasswordCredential): windows_future.IAsyncOperation<VpnManagementErrorStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ConnectProfileWithPasswordCredentialAsync(asRaw(), profile.asRaw(), passwordCredential.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -8225,13 +8236,13 @@ public interface IVpnNamespaceInfoFactory_ImplErased {
 
 @When[Windows_Networking_Vpn == "on" && (Windows_Foundation_Collections == "on" && Windows_Networking == "on")]
 public interface IVpnNamespaceInfoFactory_Impl <: IVpnNamespaceInfoFactory_ImplErased {
-    public func CreateVpnNamespaceInfo(name: InParam<windows_core.HString>, dnsServerList: InParam<windows_collections.IVector<_impl_l1.HostName>>, proxyServerList: InParam<windows_collections.IVector<_impl_l1.HostName>>): windows_core.Result<VpnNamespaceInfo>
+    public func CreateVpnNamespaceInfo(name: InParam<windows_core.HString>, dnsServerList: InParam<windows_collections.IVector<impl_p1.HostName>>, proxyServerList: InParam<windows_collections.IVector<impl_p1.HostName>>): windows_core.Result<VpnNamespaceInfo>
 
     public func __winrtThunk_CreateVpnNamespaceInfo(arg0: CPointer<Unit>, arg1: CPointer<Unit>, arg2: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.CreateVpnNamespaceInfo(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<windows_collections.IVector<_impl_l1.HostName>>(windows_collections.IVector<_impl_l1.HostName>.viewOf(arg1)), InParam<windows_collections.IVector<_impl_l1.HostName>>(windows_collections.IVector<_impl_l1.HostName>.viewOf(arg2)))) {
+        match (this.CreateVpnNamespaceInfo(InParam<windows_core.HString>(windows_core.HString.viewOf(arg0)), InParam<windows_collections.IVector<impl_p1.HostName>>(windows_collections.IVector<impl_p1.HostName>.viewOf(arg1)), InParam<windows_collections.IVector<impl_p1.HostName>>(windows_collections.IVector<impl_p1.HostName>.viewOf(arg2)))) {
             case Result<VpnNamespaceInfo>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -8282,7 +8293,7 @@ public class IVpnNamespaceInfoFactory <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnNamespaceInfoFactory", IVpnNamespaceInfoFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnNamespaceInfoFactoryVtbl", "IVpnNamespaceInfoFactory", "IVpnNamespaceInfoFactory_Impl", [InterfaceMethodSchema("CreateVpnNamespaceInfo", 6, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dnsServerList", "CPointer<Unit>", "InParam<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("proxyServerList", "CPointer<Unit>", "InParam<windows_collections.IVector<_impl_l1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnNamespaceInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnNamespaceInfoFactory", IVpnNamespaceInfoFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnNamespaceInfoFactoryVtbl", "IVpnNamespaceInfoFactory", "IVpnNamespaceInfoFactory_Impl", [InterfaceMethodSchema("CreateVpnNamespaceInfo", 6, [InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dnsServerList", "CPointer<Unit>", "InParam<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("proxyServerList", "CPointer<Unit>", "InParam<windows_collections.IVector<impl_p1.HostName>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnNamespaceInfo>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnNamespaceInfoFactory.runtimeType())
         return schema
     }
@@ -8312,7 +8323,7 @@ public class IVpnNamespaceInfoFactory <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func CreateVpnNamespaceInfo(name: windows_core.HString, dnsServerList: windows_collections.IVector<_impl_l1.HostName>, proxyServerList: windows_collections.IVector<_impl_l1.HostName>): VpnNamespaceInfo {
+    public unsafe func CreateVpnNamespaceInfo(name: windows_core.HString, dnsServerList: windows_collections.IVector<impl_p1.HostName>, proxyServerList: windows_collections.IVector<impl_p1.HostName>): VpnNamespaceInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateVpnNamespaceInfo(asRaw(), name.asRaw(), dnsServerList.asRaw(), proxyServerList.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -10401,13 +10412,13 @@ public interface IVpnRouteFactory_ImplErased {
 
 @When[Windows_Networking_Vpn == "on" && Windows_Networking == "on"]
 public interface IVpnRouteFactory_Impl <: IVpnRouteFactory_ImplErased {
-    public func CreateVpnRoute(address: InParam<_impl_l1.HostName>, prefixSize: UInt8): windows_core.Result<VpnRoute>
+    public func CreateVpnRoute(address: InParam<impl_p1.HostName>, prefixSize: UInt8): windows_core.Result<VpnRoute>
 
     public func __winrtThunk_CreateVpnRoute(arg0: CPointer<Unit>, arg1: UInt8, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.CreateVpnRoute(InParam<_impl_l1.HostName>(_impl_l1.HostName.viewOf(arg0)), arg1)) {
+        match (this.CreateVpnRoute(InParam<impl_p1.HostName>(impl_p1.HostName.viewOf(arg0)), arg1)) {
             case Result<VpnRoute>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -10458,7 +10469,7 @@ public class IVpnRouteFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVpnRouteFactory", IVpnRouteFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnRouteFactoryVtbl", "IVpnRouteFactory", "IVpnRouteFactory_Impl", [InterfaceMethodSchema("CreateVpnRoute", 6, [InterfaceParameterSchema("address", "CPointer<Unit>", "InParam<_impl_l1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("prefixSize", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnRoute>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVpnRouteFactory", IVpnRouteFactory.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IVpnRouteFactoryVtbl", "IVpnRouteFactory", "IVpnRouteFactory_Impl", [InterfaceMethodSchema("CreateVpnRoute", 6, [InterfaceParameterSchema("address", "CPointer<Unit>", "InParam<impl_p1.HostName>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("prefixSize", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<VpnRoute>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVpnRouteFactory.runtimeType())
         return schema
     }
@@ -10488,7 +10499,7 @@ public class IVpnRouteFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func CreateVpnRoute(address: _impl_l1.HostName, prefixSize: UInt8): VpnRoute {
+    public unsafe func CreateVpnRoute(address: impl_p1.HostName, prefixSize: UInt8): VpnRoute {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateVpnRoute(asRaw(), address.asRaw(), prefixSize, CPointer<CPointer<Unit>>(inout result__))
@@ -11084,7 +11095,7 @@ public class VpnChannel <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func Start(assignedClientIPv4list: windows_collections.IVectorView<_impl_l1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<_impl_l1.HostName>, vpnInterfaceId: VpnInterfaceId, routeScope: VpnRouteAssignment, namespaceScope: VpnNamespaceAssignment, mtuSize: UInt32, maxFrameSize: UInt32, optimizeForLowCostNetwork: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable): Unit {
+    public unsafe func Start(assignedClientIPv4list: windows_collections.IVectorView<impl_p1.HostName>, assignedClientIPv6list: windows_collections.IVectorView<impl_p1.HostName>, vpnInterfaceId: VpnInterfaceId, routeScope: VpnRouteAssignment, namespaceScope: VpnNamespaceAssignment, mtuSize: UInt32, maxFrameSize: UInt32, optimizeForLowCostNetwork: Bool, mainOuterTunnelTransport: IInspectable, optionalOuterTunnelTransport: IInspectable): Unit {
         defaultInterface().Start(assignedClientIPv4list, assignedClientIPv6list, vpnInterfaceId, routeScope, namespaceScope, mtuSize, maxFrameSize, optimizeForLowCostNetwork, mainOuterTunnelTransport, optionalOuterTunnelTransport)
     }
 
@@ -11093,7 +11104,7 @@ public class VpnChannel <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     @When[Windows_Security_Cryptography_Certificates == "on"]
-    public unsafe func RequestCredentials(credType: VpnCredentialType, isRetry: Bool, isSingleSignOnCredential: Bool, certificate: _impl_l1.Certificate): VpnPickedCredential {
+    public unsafe func RequestCredentials(credType: VpnCredentialType, isRetry: Bool, isSingleSignOnCredential: Bool, certificate: impl_p1.Certificate): VpnPickedCredential {
         return defaultInterface().RequestCredentials(credType, isRetry, isSingleSignOnCredential, certificate)
     }
 
@@ -11354,12 +11365,12 @@ public class VpnDomainNameInfo <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetDomainName(value: _impl_l1.HostName): Unit {
+    public unsafe func SetDomainName(value: impl_p1.HostName): Unit {
         defaultInterface().SetDomainName(value)
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func DomainName(): _impl_l1.HostName {
+    public unsafe func DomainName(): impl_p1.HostName {
         return defaultInterface().DomainName()
     }
 
@@ -11372,17 +11383,17 @@ public class VpnDomainNameInfo <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func DnsServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func DnsServers(): windows_collections.IVector<impl_p1.HostName> {
         return defaultInterface().DnsServers()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func WebProxyServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func WebProxyServers(): windows_collections.IVector<impl_p1.HostName> {
         return defaultInterface().WebProxyServers()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public static unsafe func CreateVpnDomainNameInfo(name: windows_core.HString, nameType: VpnDomainNameType, dnsServerList: windows_collections.IIterable<_impl_l1.HostName>, proxyServerList: windows_collections.IIterable<_impl_l1.HostName>): VpnDomainNameInfo {
+    public static unsafe func CreateVpnDomainNameInfo(name: windows_core.HString, nameType: VpnDomainNameType, dnsServerList: windows_collections.IIterable<impl_p1.HostName>, proxyServerList: windows_collections.IIterable<impl_p1.HostName>): VpnDomainNameInfo {
         var result__: Option<VpnDomainNameInfo> = Option<VpnDomainNameInfo>.None
         try (factory__ = windows_core.factory<VpnDomainNameInfo, IVpnDomainNameInfoFactory>().unwrap()) {
             result__ = Some(factory__.CreateVpnDomainNameInfo(name, nameType, dnsServerList, proxyServerList))
@@ -11625,7 +11636,7 @@ public class VpnManagementAgent <: InterfaceWrapperBase & ComInterface & windows
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func ConnectProfileWithPasswordCredentialAsync(profile: IVpnProfile, passwordCredential: _impl_l0.PasswordCredential): windows_future.IAsyncOperation<VpnManagementErrorStatus> {
+    public unsafe func ConnectProfileWithPasswordCredentialAsync(profile: IVpnProfile, passwordCredential: impl_p0.PasswordCredential): windows_future.IAsyncOperation<VpnManagementErrorStatus> {
         return defaultInterface().ConnectProfileWithPasswordCredentialAsync(profile, passwordCredential)
     }
 
@@ -11847,27 +11858,27 @@ public class VpnNamespaceInfo <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func SetDnsServers(value: windows_collections.IVector<_impl_l1.HostName>): Unit {
+    public unsafe func SetDnsServers(value: windows_collections.IVector<impl_p1.HostName>): Unit {
         defaultInterface().SetDnsServers(value)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func DnsServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func DnsServers(): windows_collections.IVector<impl_p1.HostName> {
         return defaultInterface().DnsServers()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func SetWebProxyServers(value: windows_collections.IVector<_impl_l1.HostName>): Unit {
+    public unsafe func SetWebProxyServers(value: windows_collections.IVector<impl_p1.HostName>): Unit {
         defaultInterface().SetWebProxyServers(value)
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public unsafe func WebProxyServers(): windows_collections.IVector<_impl_l1.HostName> {
+    public unsafe func WebProxyServers(): windows_collections.IVector<impl_p1.HostName> {
         return defaultInterface().WebProxyServers()
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
-    public static unsafe func CreateVpnNamespaceInfo(name: windows_core.HString, dnsServerList: windows_collections.IVector<_impl_l1.HostName>, proxyServerList: windows_collections.IVector<_impl_l1.HostName>): VpnNamespaceInfo {
+    public static unsafe func CreateVpnNamespaceInfo(name: windows_core.HString, dnsServerList: windows_collections.IVector<impl_p1.HostName>, proxyServerList: windows_collections.IVector<impl_p1.HostName>): VpnNamespaceInfo {
         var result__: Option<VpnNamespaceInfo> = Option<VpnNamespaceInfo>.None
         try (factory__ = windows_core.factory<VpnNamespaceInfo, IVpnNamespaceInfoFactory>().unwrap()) {
             result__ = Some(factory__.CreateVpnNamespaceInfo(name, dnsServerList, proxyServerList))
@@ -12162,7 +12173,7 @@ public class VpnPacketBuffer <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func get_Buffer(): _impl_l0.Buffer {
+    public unsafe func get_Buffer(): impl_p0.Buffer {
         return defaultInterface().get_Buffer()
     }
 
@@ -12600,12 +12611,12 @@ public class VpnRoute <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func SetAddress(value: _impl_l1.HostName): Unit {
+    public unsafe func SetAddress(value: impl_p1.HostName): Unit {
         defaultInterface().SetAddress(value)
     }
 
     @When[Windows_Networking == "on"]
-    public unsafe func Address(): _impl_l1.HostName {
+    public unsafe func Address(): impl_p1.HostName {
         return defaultInterface().Address()
     }
 
@@ -12618,7 +12629,7 @@ public class VpnRoute <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     @When[Windows_Networking == "on"]
-    public static unsafe func CreateVpnRoute(address: _impl_l1.HostName, prefixSize: UInt8): VpnRoute {
+    public static unsafe func CreateVpnRoute(address: impl_p1.HostName, prefixSize: UInt8): VpnRoute {
         var result__: Option<VpnRoute> = Option<VpnRoute>.None
         try (factory__ = windows_core.factory<VpnRoute, IVpnRouteFactory>().unwrap()) {
             result__ = Some(factory__.CreateVpnRoute(address, prefixSize))

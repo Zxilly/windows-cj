@@ -4,15 +4,24 @@
 package windows.Win32.Media.Audio.Endpoints
 
 import std.collection.*
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Media_Audio_Endpoints == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Media_Audio_Endpoints == "on" && Windows_Win32_Media_Audio_Apo == "on"]
 import windows.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
+@When[Windows_Win32_Media_Audio_Endpoints == "on" && Windows_Win32_Media_KernelStreaming == "on"]
 import windows.Win32.Media.KernelStreaming as Win32_Media_KernelStreaming
-import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-import windows.Win32._impl_l0 as Win32__impl_l0
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
+import windows.Win32.Media.impl.p0 as Win32_Media_impl_p0
+@When[Windows_Win32_Media_Audio_Endpoints == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
 
 
 @When[Windows_Win32_Media_Audio_Endpoints == "on"]
@@ -431,7 +440,7 @@ public class IAudioEndpointOffloadStreamVolume <: InterfaceWrapperBase & ComInte
 public struct IAudioEndpointVolumeCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_Media_Audio == "on"]
-    public var OnNotify: CFunc<(CPointer<Unit>, CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>) -> Int32> = { _, _ => 0 }
+    public var OnNotify: CFunc<(CPointer<Unit>, CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -476,7 +485,7 @@ public class IAudioEndpointVolumeCallback <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func OnNotify(pNotify: CPointer<Win32_Media__impl_l0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>): Int32 {
+    public unsafe func OnNotify(pNotify: CPointer<Win32_Media_impl_p0.AUDIO_VOLUME_NOTIFICATION_DATAAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnNotify(__liveRaw, pNotify)
@@ -627,9 +636,9 @@ public struct IHardwareAudioEngineBaseVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var GetAvailableOffloadConnectorCount: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var GetEngineFormat: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetEngineFormat: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
-    public var SetEngineDeviceFormat: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_Media__impl_l0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
+    public var SetEngineDeviceFormat: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_Media_impl_p0.WAVEFORMATEX>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
     public var SetGfxState: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_Media_Audio == "on"]
@@ -684,14 +693,14 @@ public class IHardwareAudioEngineBase <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func GetEngineFormat(pDevice: CPointer<Unit>, _bRequestDeviceFormat: Int32, _ppwfxFormat: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>): Int32 {
+    public unsafe func GetEngineFormat(pDevice: CPointer<Unit>, _bRequestDeviceFormat: Int32, _ppwfxFormat: CPointer<CPointer<Win32_Media_impl_p0.WAVEFORMATEX>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEngineFormat(__liveRaw, pDevice, _bRequestDeviceFormat, _ppwfxFormat)
     }
 
     @When[Windows_Win32_Media_Audio == "on"]
-    public unsafe func SetEngineDeviceFormat(pDevice: CPointer<Unit>, _pwfxFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>): Int32 {
+    public unsafe func SetEngineDeviceFormat(pDevice: CPointer<Unit>, _pwfxFormat: CPointer<Win32_Media_impl_p0.WAVEFORMATEX>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetEngineDeviceFormat(__liveRaw, pDevice, _pwfxFormat)
@@ -717,7 +726,7 @@ public struct AUDIO_ENDPOINT_SHARED_CREATE_PARAMS {
     public var u32Size: UInt32 = 0u32
     public var u32TSSessionId: UInt32 = 0u32
     public var targetEndpointConnectorType: EndpointConnectorType = EndpointConnectorType()
-    public var wfxDeviceFormat: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
+    public var wfxDeviceFormat: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
     public init() {}
 }
 
@@ -727,7 +736,7 @@ public struct AUDIO_ENDPOINT_SHARED_CREATE_PARAMSAbi {
     public var u32Size: UInt32 = 0u32
     public var u32TSSessionId: UInt32 = 0u32
     public var targetEndpointConnectorType: EndpointConnectorTypeAbi = EndpointConnectorTypeAbi()
-    public var wfxDeviceFormat: Win32_Media__impl_l0.WAVEFORMATEX = Win32_Media__impl_l0.WAVEFORMATEX()
+    public var wfxDeviceFormat: Win32_Media_impl_p0.WAVEFORMATEX = Win32_Media_impl_p0.WAVEFORMATEX()
     public init() {}
 }
 

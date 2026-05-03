@@ -4,16 +4,26 @@
 package windows.Win32.System.DeploymentServices
 
 import std.collection.*
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt32, unionWriteUInt32}
+@When[Windows_Win32_System_DeploymentServices == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_DeploymentServices == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_DeploymentServices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
@@ -76,7 +86,7 @@ extend CPU_ARCHITECTURE <: windows_core.CopyType & windows_core.RuntimeType & wi
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportCacheableVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Dirty: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => 0 }
     public var Discard: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -117,7 +127,7 @@ public class IWdsTransportCacheable <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportCacheable> {
-        return InterfaceDescriptor<IWdsTransportCacheable>("IWdsTransportCacheable", IWdsTransportCacheable.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportCacheableFromAbi, viewIWdsTransportCacheable)
+        return InterfaceDescriptor<IWdsTransportCacheable>("IWdsTransportCacheable", IWdsTransportCacheable.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportCacheableFromAbi, viewIWdsTransportCacheable)
     }
 
     public unsafe func vtbl(): IWdsTransportCacheableVtbl {
@@ -152,7 +162,7 @@ public class IWdsTransportCacheable <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportCollectionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Count: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var get_Item: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -194,7 +204,7 @@ public class IWdsTransportCollection <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportCollection> {
-        return InterfaceDescriptor<IWdsTransportCollection>("IWdsTransportCollection", IWdsTransportCollection.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportCollectionFromAbi, viewIWdsTransportCollection)
+        return InterfaceDescriptor<IWdsTransportCollection>("IWdsTransportCollection", IWdsTransportCollection.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportCollectionFromAbi, viewIWdsTransportCollection)
     }
 
     public unsafe func vtbl(): IWdsTransportCollectionVtbl {
@@ -225,7 +235,7 @@ public class IWdsTransportCollection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportContentProviderVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var FilePath: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -266,7 +276,7 @@ public class IWdsTransportContentProvider <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportContentProvider> {
-        return InterfaceDescriptor<IWdsTransportContentProvider>("IWdsTransportContentProvider", IWdsTransportContentProvider.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportContentProviderFromAbi, viewIWdsTransportContentProvider)
+        return InterfaceDescriptor<IWdsTransportContentProvider>("IWdsTransportContentProvider", IWdsTransportContentProvider.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportContentProviderFromAbi, viewIWdsTransportContentProvider)
     }
 
     public unsafe func vtbl(): IWdsTransportContentProviderVtbl {
@@ -377,7 +387,7 @@ public class IWdsTransportDiagnosticsPolicy <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportSetupManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Version: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public var InstalledFeatures: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Protocols: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -419,7 +429,7 @@ public class IWdsTransportSetupManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportSetupManager> {
-        return InterfaceDescriptor<IWdsTransportSetupManager>("IWdsTransportSetupManager", IWdsTransportSetupManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportSetupManagerFromAbi, viewIWdsTransportSetupManager)
+        return InterfaceDescriptor<IWdsTransportSetupManager>("IWdsTransportSetupManager", IWdsTransportSetupManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportSetupManagerFromAbi, viewIWdsTransportSetupManager)
     }
 
     public unsafe func vtbl(): IWdsTransportSetupManagerVtbl {
@@ -522,7 +532,7 @@ public class IWdsTransportSetupManager2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportTftpClientVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var FileName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var IpAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var Timeout: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -566,7 +576,7 @@ public class IWdsTransportTftpClient <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportTftpClient> {
-        return InterfaceDescriptor<IWdsTransportTftpClient>("IWdsTransportTftpClient", IWdsTransportTftpClient.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportTftpClientFromAbi, viewIWdsTransportTftpClient)
+        return InterfaceDescriptor<IWdsTransportTftpClient>("IWdsTransportTftpClient", IWdsTransportTftpClient.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportTftpClientFromAbi, viewIWdsTransportTftpClient)
     }
 
     public unsafe func vtbl(): IWdsTransportTftpClientVtbl {
@@ -619,7 +629,7 @@ public class IWdsTransportTftpClient <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportTftpManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var RetrieveTftpClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -657,7 +667,7 @@ public class IWdsTransportTftpManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportTftpManager> {
-        return InterfaceDescriptor<IWdsTransportTftpManager>("IWdsTransportTftpManager", IWdsTransportTftpManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportTftpManagerFromAbi, viewIWdsTransportTftpManager)
+        return InterfaceDescriptor<IWdsTransportTftpManager>("IWdsTransportTftpManager", IWdsTransportTftpManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportTftpManagerFromAbi, viewIWdsTransportTftpManager)
     }
 
     public unsafe func vtbl(): IWdsTransportTftpManagerVtbl {
@@ -3169,7 +3179,7 @@ public class IWdsTransportMulticastSessionPolicy <: InterfaceWrapperBase & ComIn
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportNamespaceVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<WDSTRANSPORT_NAMESPACE_TYPEAbi>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -3227,7 +3237,7 @@ public class IWdsTransportNamespace <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportNamespace> {
-        return InterfaceDescriptor<IWdsTransportNamespace>("IWdsTransportNamespace", IWdsTransportNamespace.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportNamespaceFromAbi, viewIWdsTransportNamespace)
+        return InterfaceDescriptor<IWdsTransportNamespace>("IWdsTransportNamespace", IWdsTransportNamespace.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportNamespaceFromAbi, viewIWdsTransportNamespace)
     }
 
     public unsafe func vtbl(): IWdsTransportNamespaceVtbl {
@@ -3412,7 +3422,7 @@ public class IWdsTransportNamespaceAutoCast <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportNamespaceManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var CreateNamespace: CFunc<(CPointer<Unit>, WDSTRANSPORT_NAMESPACE_TYPEAbi, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var RetrieveNamespace: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RetrieveNamespaces: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -3452,7 +3462,7 @@ public class IWdsTransportNamespaceManager <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportNamespaceManager> {
-        return InterfaceDescriptor<IWdsTransportNamespaceManager>("IWdsTransportNamespaceManager", IWdsTransportNamespaceManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportNamespaceManagerFromAbi, viewIWdsTransportNamespaceManager)
+        return InterfaceDescriptor<IWdsTransportNamespaceManager>("IWdsTransportNamespaceManager", IWdsTransportNamespaceManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportNamespaceManagerFromAbi, viewIWdsTransportNamespaceManager)
     }
 
     public unsafe func vtbl(): IWdsTransportNamespaceManagerVtbl {
@@ -5895,7 +5905,7 @@ public let WDS_LOG_LEVEL_INFO: Int32 = 3i32
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportConfigurationManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var ServicePolicy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DiagnosticsPolicy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var get_WdsTransportServicesRunning: CFunc<(CPointer<Unit>, Int16, CPointer<Int16>) -> Int32> = { _, _, _ => 0 }
@@ -5941,7 +5951,7 @@ public class IWdsTransportConfigurationManager <: InterfaceWrapperBase & ComInte
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportConfigurationManager> {
-        return InterfaceDescriptor<IWdsTransportConfigurationManager>("IWdsTransportConfigurationManager", IWdsTransportConfigurationManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportConfigurationManagerFromAbi, viewIWdsTransportConfigurationManager)
+        return InterfaceDescriptor<IWdsTransportConfigurationManager>("IWdsTransportConfigurationManager", IWdsTransportConfigurationManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportConfigurationManagerFromAbi, viewIWdsTransportConfigurationManager)
     }
 
     public unsafe func vtbl(): IWdsTransportConfigurationManagerVtbl {
@@ -6061,7 +6071,7 @@ public class IWdsTransportConfigurationManager2 <: InterfaceWrapperBase & ComInt
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportContentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Namespace: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6103,7 +6113,7 @@ public class IWdsTransportContent <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportContent> {
-        return InterfaceDescriptor<IWdsTransportContent>("IWdsTransportContent", IWdsTransportContent.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportContentFromAbi, viewIWdsTransportContent)
+        return InterfaceDescriptor<IWdsTransportContent>("IWdsTransportContent", IWdsTransportContent.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportContentFromAbi, viewIWdsTransportContent)
     }
 
     public unsafe func vtbl(): IWdsTransportContentVtbl {
@@ -6144,7 +6154,7 @@ public class IWdsTransportContent <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportServerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetupManager: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ConfigurationManager: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -6186,7 +6196,7 @@ public class IWdsTransportServer <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportServer> {
-        return InterfaceDescriptor<IWdsTransportServer>("IWdsTransportServer", IWdsTransportServer.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportServerFromAbi, viewIWdsTransportServer)
+        return InterfaceDescriptor<IWdsTransportServer>("IWdsTransportServer", IWdsTransportServer.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportServerFromAbi, viewIWdsTransportServer)
     }
 
     public unsafe func vtbl(): IWdsTransportServerVtbl {
@@ -6282,7 +6292,7 @@ public class IWdsTransportServer2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportSessionVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Content: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var NetworkInterfaceName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6327,7 +6337,7 @@ public class IWdsTransportSession <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportSession> {
-        return InterfaceDescriptor<IWdsTransportSession>("IWdsTransportSession", IWdsTransportSession.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportSessionFromAbi, viewIWdsTransportSession)
+        return InterfaceDescriptor<IWdsTransportSession>("IWdsTransportSession", IWdsTransportSession.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportSessionFromAbi, viewIWdsTransportSession)
     }
 
     public unsafe func vtbl(): IWdsTransportSessionVtbl {
@@ -6386,7 +6396,7 @@ public class IWdsTransportSession <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportClientVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
@@ -6435,7 +6445,7 @@ public class IWdsTransportClient <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportClient> {
-        return InterfaceDescriptor<IWdsTransportClient>("IWdsTransportClient", IWdsTransportClient.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportClientFromAbi, viewIWdsTransportClient)
+        return InterfaceDescriptor<IWdsTransportClient>("IWdsTransportClient", IWdsTransportClient.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportClientFromAbi, viewIWdsTransportClient)
     }
 
     public unsafe func vtbl(): IWdsTransportClientVtbl {
@@ -6518,7 +6528,7 @@ public class IWdsTransportClient <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_DeploymentServices == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IWdsTransportManagerVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetWdsTransportServer: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -6556,7 +6566,7 @@ public class IWdsTransportManager <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWdsTransportManager> {
-        return InterfaceDescriptor<IWdsTransportManager>("IWdsTransportManager", IWdsTransportManager.iid(), Win32__impl_l2.IDispatch.iid(), takeIWdsTransportManagerFromAbi, viewIWdsTransportManager)
+        return InterfaceDescriptor<IWdsTransportManager>("IWdsTransportManager", IWdsTransportManager.iid(), Win32_impl_p2.IDispatch.iid(), takeIWdsTransportManagerFromAbi, viewIWdsTransportManager)
     }
 
     public unsafe func vtbl(): IWdsTransportManagerVtbl {

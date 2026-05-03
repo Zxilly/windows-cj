@@ -4,13 +4,21 @@
 package windows.Security.Isolation
 
 import std.collection.*
+@When[Windows_Security_Isolation == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+@When[Windows_Security_Isolation == "on"]
 import windows_core as windows_core
+@When[Windows_Security_Isolation == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Security_Isolation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Security_Isolation == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Security_Isolation == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Security_Isolation == "on"]
 import windows_collections as windows_collections
+@When[Windows_Security_Isolation == "on"]
 import windows_future as windows_future
 
 
@@ -93,19 +101,15 @@ public class HostMessageReceivedCallback <: InterfaceWrapperBase & ComInterface 
 extend HostMessageReceivedCallback <: windows_core.Interface<HostMessageReceivedCallback> {}
 
 @When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
-private open class HostMessageReceivedCallbackInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface HostMessageReceivedCallbackInvokerErased {
+    public func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
-private open class HostMessageReceivedCallbackInvoker <: HostMessageReceivedCallbackInvokerErased {
-    public open func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
-        ()
-    }
+private interface HostMessageReceivedCallbackInvoker <: HostMessageReceivedCallbackInvokerErased {
+    public func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
         this.Invoke(GuidValue(arg0), InParam<windows_collections.IVectorView<IInspectable>>(windows_collections.IVectorView<IInspectable>.viewOf(arg1)))
         return S_OK.value
     }
@@ -125,7 +129,7 @@ private class HostMessageReceivedCallbackBox <: HostMessageReceivedCallbackInvok
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
+    public func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
         invoke_(receiverId, message)
     }
 }
@@ -2854,19 +2858,15 @@ public class MessageReceivedCallback <: InterfaceWrapperBase & ComInterface & wi
 extend MessageReceivedCallback <: windows_core.Interface<MessageReceivedCallback> {}
 
 @When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
-private open class MessageReceivedCallbackInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+private interface MessageReceivedCallbackInvokerErased {
+    public func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32
 }
 
 @When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
-private open class MessageReceivedCallbackInvoker <: MessageReceivedCallbackInvokerErased {
-    public open func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
-        ()
-    }
+private interface MessageReceivedCallbackInvoker <: MessageReceivedCallbackInvokerErased {
+    public func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit
 
-    public override func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
         this.Invoke(GuidValue(arg0), InParam<windows_collections.IVectorView<IInspectable>>(windows_collections.IVectorView<IInspectable>.viewOf(arg1)))
         return S_OK.value
     }
@@ -2886,7 +2886,7 @@ private class MessageReceivedCallbackBox <: MessageReceivedCallbackInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
+    public func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
         invoke_(receiverId, message)
     }
 }

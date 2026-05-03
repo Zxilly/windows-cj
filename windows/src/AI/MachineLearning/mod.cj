@@ -4,20 +4,35 @@
 package windows.AI.MachineLearning
 
 import std.collection.*
+@When[Windows_AI_MachineLearning == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_AI_MachineLearning == "on"]
 import windows_core as windows_core
+@When[Windows_AI_MachineLearning == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_AI_MachineLearning == "on"]
 import windows_interface as windows_interface
+@When[Windows_AI_MachineLearning == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_AI_MachineLearning == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_AI_MachineLearning == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_AI_MachineLearning == "on" && Windows_Graphics == "on"]
 import windows.Graphics as Graphics
+@When[Windows_AI_MachineLearning == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
+@When[Windows_AI_MachineLearning == "on" && Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
+@When[Windows_AI_MachineLearning == "on" && Windows_Media == "on"]
 import windows.Media as Media
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_AI_MachineLearning == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_AI_MachineLearning == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_AI_MachineLearning == "on"]
 import windows_collections as windows_collections
+@When[Windows_AI_MachineLearning == "on"]
 import windows_future as windows_future
 
 
@@ -4930,7 +4945,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILearningModelStatics", ILearningModelStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILearningModelStaticsVtbl", "ILearningModelStatics", "ILearningModelStatics_Impl", [InterfaceMethodSchema("LoadFromStorageFileAsync", 6, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamAsync", 7, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFilePath", 8, [InterfaceParameterSchema("filePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStream", 9, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStorageFileWithOperatorProviderAsync", 10, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<_impl_l1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithOperatorProviderAsync", 11, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFilePathWithOperatorProvider", 12, [InterfaceParameterSchema("filePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithOperatorProvider", 13, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILearningModelStatics", ILearningModelStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ILearningModelStaticsVtbl", "ILearningModelStatics", "ILearningModelStatics_Impl", [InterfaceMethodSchema("LoadFromStorageFileAsync", 6, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamAsync", 7, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFilePath", 8, [InterfaceParameterSchema("filePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStream", 9, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStorageFileWithOperatorProviderAsync", 10, [InterfaceParameterSchema("modelFile", "CPointer<Unit>", "InParam<impl_p1.IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithOperatorProviderAsync", 11, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<LearningModel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromFilePathWithOperatorProvider", 12, [InterfaceParameterSchema("filePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromStreamWithOperatorProvider", 13, [InterfaceParameterSchema("modelStream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("operatorProvider", "CPointer<Unit>", "InParam<ILearningModelOperatorProvider>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LearningModel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILearningModelStatics.runtimeType())
         return schema
     }
@@ -4960,7 +4975,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadFromStorageFileAsync(modelFile: _impl_l1.IStorageFile): windows_future.IAsyncOperation<LearningModel> {
+    public unsafe func LoadFromStorageFileAsync(modelFile: impl_p1.IStorageFile): windows_future.IAsyncOperation<LearningModel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStorageFileAsync(asRaw(), modelFile.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4969,7 +4984,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStreamAsync(modelStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModel> {
+    public unsafe func LoadFromStreamAsync(modelStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStreamAsync(asRaw(), modelStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4986,7 +5001,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStream(modelStream: _impl_l1.IRandomAccessStreamReference): LearningModel {
+    public unsafe func LoadFromStream(modelStream: impl_p1.IRandomAccessStreamReference): LearningModel {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStream(asRaw(), modelStream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4995,7 +5010,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage == "on"]
-    public unsafe func LoadFromStorageFileWithOperatorProviderAsync(modelFile: _impl_l1.IStorageFile, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
+    public unsafe func LoadFromStorageFileWithOperatorProviderAsync(modelFile: impl_p1.IStorageFile, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStorageFileWithOperatorProviderAsync(asRaw(), modelFile.asRaw(), operatorProvider.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5004,7 +5019,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStreamWithOperatorProviderAsync(modelStream: _impl_l1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
+    public unsafe func LoadFromStreamWithOperatorProviderAsync(modelStream: impl_p1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStreamWithOperatorProviderAsync(asRaw(), modelStream.asRaw(), operatorProvider.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5021,7 +5036,7 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func LoadFromStreamWithOperatorProvider(modelStream: _impl_l1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): LearningModel {
+    public unsafe func LoadFromStreamWithOperatorProvider(modelStream: impl_p1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): LearningModel {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.LoadFromStreamWithOperatorProvider(asRaw(), modelStream.asRaw(), operatorProvider.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5205,7 +5220,7 @@ public class ITensorBooleanStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorBooleanStatics2", ITensorBooleanStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorBooleanStatics2Vtbl", "ITensorBooleanStatics2", "ITensorBooleanStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorBoolean>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorBoolean>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorBooleanStatics2", ITensorBooleanStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorBooleanStatics2Vtbl", "ITensorBooleanStatics2", "ITensorBooleanStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorBoolean>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorBoolean>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorBooleanStatics2.runtimeType())
         return schema
     }
@@ -5243,7 +5258,7 @@ public class ITensorBooleanStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorBoolean {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorBoolean {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5427,7 +5442,7 @@ public class ITensorDoubleStatics2 <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorDoubleStatics2", ITensorDoubleStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorDoubleStatics2Vtbl", "ITensorDoubleStatics2", "ITensorDoubleStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorDouble>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorDouble>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorDoubleStatics2", ITensorDoubleStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorDoubleStatics2Vtbl", "ITensorDoubleStatics2", "ITensorDoubleStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorDouble>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorDouble>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorDoubleStatics2.runtimeType())
         return schema
     }
@@ -5465,7 +5480,7 @@ public class ITensorDoubleStatics2 <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorDouble {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorDouble {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5649,7 +5664,7 @@ public class ITensorFloat16BitStatics2 <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorFloat16BitStatics2", ITensorFloat16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorFloat16BitStatics2Vtbl", "ITensorFloat16BitStatics2", "ITensorFloat16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorFloat16BitStatics2", ITensorFloat16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorFloat16BitStatics2Vtbl", "ITensorFloat16BitStatics2", "ITensorFloat16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorFloat16BitStatics2.runtimeType())
         return schema
     }
@@ -5687,7 +5702,7 @@ public class ITensorFloat16BitStatics2 <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorFloat16Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorFloat16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5871,7 +5886,7 @@ public class ITensorFloatStatics2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorFloatStatics2", ITensorFloatStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorFloatStatics2Vtbl", "ITensorFloatStatics2", "ITensorFloatStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorFloatStatics2", ITensorFloatStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorFloatStatics2Vtbl", "ITensorFloatStatics2", "ITensorFloatStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorFloat>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorFloatStatics2.runtimeType())
         return schema
     }
@@ -5909,7 +5924,7 @@ public class ITensorFloatStatics2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorFloat {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorFloat {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6093,7 +6108,7 @@ public class ITensorInt16BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorInt16BitStatics2", ITensorInt16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt16BitStatics2Vtbl", "ITensorInt16BitStatics2", "ITensorInt16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorInt16BitStatics2", ITensorInt16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt16BitStatics2Vtbl", "ITensorInt16BitStatics2", "ITensorInt16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorInt16BitStatics2.runtimeType())
         return schema
     }
@@ -6131,7 +6146,7 @@ public class ITensorInt16BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt16Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6315,7 +6330,7 @@ public class ITensorInt32BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorInt32BitStatics2", ITensorInt32BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt32BitStatics2Vtbl", "ITensorInt32BitStatics2", "ITensorInt32BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorInt32BitStatics2", ITensorInt32BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt32BitStatics2Vtbl", "ITensorInt32BitStatics2", "ITensorInt32BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorInt32BitStatics2.runtimeType())
         return schema
     }
@@ -6353,7 +6368,7 @@ public class ITensorInt32BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt32Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6537,7 +6552,7 @@ public class ITensorInt64BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorInt64BitStatics2", ITensorInt64BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt64BitStatics2Vtbl", "ITensorInt64BitStatics2", "ITensorInt64BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorInt64BitStatics2", ITensorInt64BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt64BitStatics2Vtbl", "ITensorInt64BitStatics2", "ITensorInt64BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorInt64BitStatics2.runtimeType())
         return schema
     }
@@ -6575,7 +6590,7 @@ public class ITensorInt64BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt64Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -6759,7 +6774,7 @@ public class ITensorInt8BitStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorInt8BitStatics2", ITensorInt8BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt8BitStatics2Vtbl", "ITensorInt8BitStatics2", "ITensorInt8BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorInt8BitStatics2", ITensorInt8BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorInt8BitStatics2Vtbl", "ITensorInt8BitStatics2", "ITensorInt8BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorInt8BitStatics2.runtimeType())
         return schema
     }
@@ -6797,7 +6812,7 @@ public class ITensorInt8BitStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt8Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7190,7 +7205,7 @@ public class ITensorUInt16BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorUInt16BitStatics2", ITensorUInt16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt16BitStatics2Vtbl", "ITensorUInt16BitStatics2", "ITensorUInt16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorUInt16BitStatics2", ITensorUInt16BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt16BitStatics2Vtbl", "ITensorUInt16BitStatics2", "ITensorUInt16BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt16Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorUInt16BitStatics2.runtimeType())
         return schema
     }
@@ -7228,7 +7243,7 @@ public class ITensorUInt16BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt16Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7412,7 +7427,7 @@ public class ITensorUInt32BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorUInt32BitStatics2", ITensorUInt32BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt32BitStatics2Vtbl", "ITensorUInt32BitStatics2", "ITensorUInt32BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorUInt32BitStatics2", ITensorUInt32BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt32BitStatics2Vtbl", "ITensorUInt32BitStatics2", "ITensorUInt32BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt32Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorUInt32BitStatics2.runtimeType())
         return schema
     }
@@ -7450,7 +7465,7 @@ public class ITensorUInt32BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt32Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7634,7 +7649,7 @@ public class ITensorUInt64BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorUInt64BitStatics2", ITensorUInt64BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt64BitStatics2Vtbl", "ITensorUInt64BitStatics2", "ITensorUInt64BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorUInt64BitStatics2", ITensorUInt64BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt64BitStatics2Vtbl", "ITensorUInt64BitStatics2", "ITensorUInt64BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt64Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorUInt64BitStatics2.runtimeType())
         return schema
     }
@@ -7672,7 +7687,7 @@ public class ITensorUInt64BitStatics2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt64Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -7856,7 +7871,7 @@ public class ITensorUInt8BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITensorUInt8BitStatics2", ITensorUInt8BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt8BitStatics2Vtbl", "ITensorUInt8BitStatics2", "ITensorUInt8BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITensorUInt8BitStatics2", ITensorUInt8BitStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ITensorUInt8BitStatics2Vtbl", "ITensorUInt8BitStatics2", "ITensorUInt8BitStatics2_Impl", [InterfaceMethodSchema("CreateFromShapeArrayAndDataArray", 6, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("data", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFromBuffer", 7, [InterfaceParameterSchema("shape", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TensorUInt8Bit>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITensorUInt8BitStatics2.runtimeType())
         return schema
     }
@@ -7894,7 +7909,7 @@ public class ITensorUInt8BitStatics2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt8Bit {
+    public unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateFromBuffer(asRaw(), shapeSize, shape, buffer.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -8138,7 +8153,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadFromStorageFileAsync(modelFile: _impl_l1.IStorageFile): windows_future.IAsyncOperation<LearningModel> {
+    public static unsafe func LoadFromStorageFileAsync(modelFile: impl_p1.IStorageFile): windows_future.IAsyncOperation<LearningModel> {
         var result__: Option<windows_future.IAsyncOperation<LearningModel>> = Option<windows_future.IAsyncOperation<LearningModel>>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStorageFileAsync(modelFile))
@@ -8150,7 +8165,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStreamAsync(modelStream: _impl_l1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModel> {
+    public static unsafe func LoadFromStreamAsync(modelStream: impl_p1.IRandomAccessStreamReference): windows_future.IAsyncOperation<LearningModel> {
         var result__: Option<windows_future.IAsyncOperation<LearningModel>> = Option<windows_future.IAsyncOperation<LearningModel>>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStreamAsync(modelStream))
@@ -8173,7 +8188,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStream(modelStream: _impl_l1.IRandomAccessStreamReference): LearningModel {
+    public static unsafe func LoadFromStream(modelStream: impl_p1.IRandomAccessStreamReference): LearningModel {
         var result__: Option<LearningModel> = Option<LearningModel>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStream(modelStream))
@@ -8185,7 +8200,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage == "on"]
-    public static unsafe func LoadFromStorageFileWithOperatorProviderAsync(modelFile: _impl_l1.IStorageFile, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
+    public static unsafe func LoadFromStorageFileWithOperatorProviderAsync(modelFile: impl_p1.IStorageFile, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
         var result__: Option<windows_future.IAsyncOperation<LearningModel>> = Option<windows_future.IAsyncOperation<LearningModel>>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStorageFileWithOperatorProviderAsync(modelFile, operatorProvider))
@@ -8197,7 +8212,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStreamWithOperatorProviderAsync(modelStream: _impl_l1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
+    public static unsafe func LoadFromStreamWithOperatorProviderAsync(modelStream: impl_p1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): windows_future.IAsyncOperation<LearningModel> {
         var result__: Option<windows_future.IAsyncOperation<LearningModel>> = Option<windows_future.IAsyncOperation<LearningModel>>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStreamWithOperatorProviderAsync(modelStream, operatorProvider))
@@ -8220,7 +8235,7 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func LoadFromStreamWithOperatorProvider(modelStream: _impl_l1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): LearningModel {
+    public static unsafe func LoadFromStreamWithOperatorProvider(modelStream: impl_p1.IRandomAccessStreamReference, operatorProvider: ILearningModelOperatorProvider): LearningModel {
         var result__: Option<LearningModel> = Option<LearningModel>.None
         try (factory__ = windows_core.factory<LearningModel, ILearningModelStatics>().unwrap()) {
             result__ = Some(factory__.LoadFromStreamWithOperatorProvider(modelStream, operatorProvider))
@@ -8870,7 +8885,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorBoolean {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorBoolean {
         var result__: Option<TensorBoolean> = Option<TensorBoolean>.None
         try (factory__ = windows_core.factory<TensorBoolean, ITensorBooleanStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -9082,7 +9097,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorDouble {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorDouble {
         var result__: Option<TensorDouble> = Option<TensorDouble>.None
         try (factory__ = windows_core.factory<TensorDouble, ITensorDoubleStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -9294,7 +9309,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorFloat {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorFloat {
         var result__: Option<TensorFloat> = Option<TensorFloat>.None
         try (factory__ = windows_core.factory<TensorFloat, ITensorFloatStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -9459,7 +9474,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorFloat16Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorFloat16Bit {
         var result__: Option<TensorFloat16Bit> = Option<TensorFloat16Bit>.None
         try (factory__ = windows_core.factory<TensorFloat16Bit, ITensorFloat16BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -9718,7 +9733,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt16Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt16Bit {
         var result__: Option<TensorInt16Bit> = Option<TensorInt16Bit>.None
         try (factory__ = windows_core.factory<TensorInt16Bit, ITensorInt16BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -9883,7 +9898,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt32Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt32Bit {
         var result__: Option<TensorInt32Bit> = Option<TensorInt32Bit>.None
         try (factory__ = windows_core.factory<TensorInt32Bit, ITensorInt32BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -10142,7 +10157,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt64Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt64Bit {
         var result__: Option<TensorInt64Bit> = Option<TensorInt64Bit>.None
         try (factory__ = windows_core.factory<TensorInt64Bit, ITensorInt64BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -10307,7 +10322,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorInt8Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorInt8Bit {
         var result__: Option<TensorInt8Bit> = Option<TensorInt8Bit>.None
         try (factory__ = windows_core.factory<TensorInt8Bit, ITensorInt8BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -10766,7 +10781,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt16Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt16Bit {
         var result__: Option<TensorUInt16Bit> = Option<TensorUInt16Bit>.None
         try (factory__ = windows_core.factory<TensorUInt16Bit, ITensorUInt16BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -10978,7 +10993,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt32Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt32Bit {
         var result__: Option<TensorUInt32Bit> = Option<TensorUInt32Bit>.None
         try (factory__ = windows_core.factory<TensorUInt32Bit, ITensorUInt32BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -11143,7 +11158,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt64Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt64Bit {
         var result__: Option<TensorUInt64Bit> = Option<TensorUInt64Bit>.None
         try (factory__ = windows_core.factory<TensorUInt64Bit, ITensorUInt64BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))
@@ -11402,7 +11417,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: _impl_l0.IBuffer): TensorUInt8Bit {
+    public static unsafe func CreateFromBuffer(shapeSize: UInt32, shape: CPointer<Int64>, buffer: impl_p0.IBuffer): TensorUInt8Bit {
         var result__: Option<TensorUInt8Bit> = Option<TensorUInt8Bit>.None
         try (factory__ = windows_core.factory<TensorUInt8Bit, ITensorUInt8BitStatics2>().unwrap()) {
             result__ = Some(factory__.CreateFromBuffer(shapeSize, shape, buffer))

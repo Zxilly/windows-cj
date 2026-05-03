@@ -4,19 +4,34 @@
 package windows.Win32.UI.Controls.RichEdit
 
 import std.collection.*
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_polyfill.{packedReadInt16, packedReadInt32, packedReadIntNative, packedReadUInt16, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt16, packedWriteInt32, packedWriteIntNative, packedWriteUInt16, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadInt32, unionReadUInt16, unionReadUInt32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32}
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_Graphics_Direct2D == "on"]
 import windows.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
+@When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_UI_Input_Ime == "on"]
 import windows.Win32.UI.Input.Ime as Win32_UI_Input_Ime
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
+@When[Windows_Win32_UI_Controls_RichEdit == "on"]
+import windows.Win32.impl.p3 as Win32_impl_p3
 
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on"]
@@ -1629,21 +1644,21 @@ extend CHARRANGE <: windows_core.CopyType & windows_core.RuntimeType & windows_c
 public struct CLIPBOARDFORMAT {
     public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -1778,21 +1793,21 @@ extend ENDCOMPOSITIONNOTIFY_CODE <: windows_core.CopyType & windows_core.Runtime
 public struct ENDROPFILES {
     public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -1861,21 +1876,21 @@ public struct ENDROPFILES {
 public struct ENLINK {
     public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -1963,21 +1978,21 @@ public struct ENLINK {
 public struct ENLOWFIRTF {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -2010,21 +2025,21 @@ public struct ENLOWFIRTF {
 public struct ENOLEOPFAILED {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -2092,21 +2107,21 @@ public struct ENOLEOPFAILED {
 public struct ENPROTECTED {
     public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -2194,21 +2209,21 @@ public struct ENPROTECTED {
 public struct ENSAVECLIPBOARD {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -2820,21 +2835,21 @@ extend GETTEXTLENGTHEX_FLAGS <: windows_core.CopyType & windows_core.RuntimeType
 public struct GROUPTYPINGCHANGE {
     public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -2978,7 +2993,7 @@ extend IMECOMPTEXT_FLAGS <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct IRicheditUiaOverridesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var GetPropertyOverrideValue: CFunc<(CPointer<Unit>, Int32, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
+    public var GetPropertyOverrideValue: CFunc<(CPointer<Unit>, Int32, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
 
@@ -3023,7 +3038,7 @@ public class IRicheditUiaOverrides <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func GetPropertyOverrideValue(propertyId: Int32, pRetValue: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func GetPropertyOverrideValue(propertyId: Int32, pRetValue: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPropertyOverrideValue(__liveRaw, propertyId, pRetValue)
@@ -3033,7 +3048,7 @@ public class IRicheditUiaOverrides <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextDisplaysVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public init() {}
 }
 
@@ -3070,7 +3085,7 @@ public class ITextDisplays <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextDisplays> {
-        return InterfaceDescriptor<ITextDisplays>("ITextDisplays", ITextDisplays.iid(), Win32__impl_l2.IDispatch.iid(), takeITextDisplaysFromAbi, viewITextDisplays)
+        return InterfaceDescriptor<ITextDisplays>("ITextDisplays", ITextDisplays.iid(), Win32_impl_p2.IDispatch.iid(), takeITextDisplaysFromAbi, viewITextDisplays)
     }
 
     public unsafe func vtbl(): ITextDisplaysVtbl {
@@ -3084,13 +3099,13 @@ public struct ITextServicesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     public var TxSendMessage: CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative, CPointer<IntNative>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public var TxDraw: CFunc<(CPointer<Unit>, Win32__impl_l0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTLAbi>, CPointer<Win32_Foundation.RECTLAbi>, CPointer<Win32_Foundation.RECTAbi>, IntNative, UInt32, Int32) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var TxDraw: CFunc<(CPointer<Unit>, Win32_impl_p0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTLAbi>, CPointer<Win32_Foundation.RECTLAbi>, CPointer<Win32_Foundation.RECTAbi>, IntNative, UInt32, Int32) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public var TxGetHScroll: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var TxGetVScroll: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public var OnTxSetCursor: CFunc<(CPointer<Unit>, Win32__impl_l0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTAbi>, Int32, Int32) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var OnTxSetCursor: CFunc<(CPointer<Unit>, Win32_impl_p0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTAbi>, Int32, Int32) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public var TxQueryHitPoint: CFunc<(CPointer<Unit>, Win32__impl_l0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTAbi>, Int32, Int32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var TxQueryHitPoint: CFunc<(CPointer<Unit>, Win32_impl_p0.DVASPECTAbi, Int32, CPointer<Unit>, CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_Foundation.RECTAbi>, Int32, Int32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public var OnTxInPlaceActivate: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.RECTAbi>) -> Int32> = { _, _ => 0 }
     public var OnTxInPlaceDeactivate: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var OnTxUIActivate: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -3100,7 +3115,7 @@ public struct ITextServicesVtbl {
     public var TxGetCurTargetX: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var TxGetBaseLinePos: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public var TxGetNaturalSize: CFunc<(CPointer<Unit>, UInt32, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, UInt32, CPointer<Win32_Foundation.SIZEAbi>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
+    public var TxGetNaturalSize: CFunc<(CPointer<Unit>, UInt32, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, UInt32, CPointer<Win32_Foundation.SIZEAbi>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var TxGetDropTarget: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OnTxPropertyBitsChange: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
@@ -3155,7 +3170,7 @@ public class ITextServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func TxDraw(dwDrawAspect: Win32__impl_l0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcBounds: CPointer<Win32_Foundation.RECTLAbi>, lprcWBounds: CPointer<Win32_Foundation.RECTLAbi>, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, pfnContinue: IntNative, dwContinue: UInt32, lViewId: Int32): Int32 {
+    public unsafe func TxDraw(dwDrawAspect: Win32_impl_p0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcBounds: CPointer<Win32_Foundation.RECTLAbi>, lprcWBounds: CPointer<Win32_Foundation.RECTLAbi>, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, pfnContinue: IntNative, dwContinue: UInt32, lViewId: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxDraw(__liveRaw, dwDrawAspect, lindex, pvAspect, ptd, hdcDraw, hicTargetDev, lprcBounds, lprcWBounds, lprcUpdate, pfnContinue, dwContinue, lViewId)
@@ -3174,14 +3189,14 @@ public class ITextServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func OnTxSetCursor(dwDrawAspect: Win32__impl_l0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcClient: CPointer<Win32_Foundation.RECTAbi>, x: Int32, y: Int32): Int32 {
+    public unsafe func OnTxSetCursor(dwDrawAspect: Win32_impl_p0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcClient: CPointer<Win32_Foundation.RECTAbi>, x: Int32, y: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.OnTxSetCursor(__liveRaw, dwDrawAspect, lindex, pvAspect, ptd, hdcDraw, hicTargetDev, lprcClient, x, y)
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func TxQueryHitPoint(dwDrawAspect: Win32__impl_l0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcClient: CPointer<Win32_Foundation.RECTAbi>, x: Int32, y: Int32, pHitResult: CPointer<UInt32>): Int32 {
+    public unsafe func TxQueryHitPoint(dwDrawAspect: Win32_impl_p0.DVASPECTAbi, lindex: Int32, pvAspect: CPointer<Unit>, ptd: CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, lprcClient: CPointer<Win32_Foundation.RECTAbi>, x: Int32, y: Int32, pHitResult: CPointer<UInt32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxQueryHitPoint(__liveRaw, dwDrawAspect, lindex, pvAspect, ptd, hdcDraw, hicTargetDev, lprcClient, x, y, pHitResult)
@@ -3236,7 +3251,7 @@ public class ITextServices <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func TxGetNaturalSize(dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, dwMode: UInt32, psizelExtent: CPointer<Win32_Foundation.SIZEAbi>, pwidth: CPointer<Int32>, pheight: CPointer<Int32>): Int32 {
+    public unsafe func TxGetNaturalSize(dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, ptd: CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, dwMode: UInt32, psizelExtent: CPointer<Win32_Foundation.SIZEAbi>, pwidth: CPointer<Int32>, pheight: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxGetNaturalSize(__liveRaw, dwAspect, hdcDraw, hicTargetDev, ptd, dwMode, psizelExtent, pwidth, pheight)
@@ -3267,7 +3282,7 @@ public class ITextServices <: InterfaceWrapperBase & ComInterface {
 public struct ITextServices2Vtbl {
     public var base_: ITextServicesVtbl = ITextServicesVtbl()
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public var TxGetNaturalSize2: CFunc<(CPointer<Unit>, UInt32, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, UInt32, CPointer<Win32_Foundation.SIZEAbi>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
+    public var TxGetNaturalSize2: CFunc<(CPointer<Unit>, UInt32, Win32_Graphics_Gdi.HDC, Win32_Graphics_Gdi.HDC, CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, UInt32, CPointer<Win32_Foundation.SIZEAbi>, CPointer<Int32>, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct2D == "on"]
     public var TxDrawD2D: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Win32_Foundation.RECTLAbi>, CPointer<Win32_Foundation.RECTAbi>, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
@@ -3314,7 +3329,7 @@ public class ITextServices2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func TxGetNaturalSize2(dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>, dwMode: UInt32, psizelExtent: CPointer<Win32_Foundation.SIZEAbi>, pwidth: CPointer<Int32>, pheight: CPointer<Int32>, pascent: CPointer<Int32>): Int32 {
+    public unsafe func TxGetNaturalSize2(dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, hicTargetDev: Win32_Graphics_Gdi.HDC, ptd: CPointer<Win32_impl_p0.DVTARGETDEVICEAbi>, dwMode: UInt32, psizelExtent: CPointer<Win32_Foundation.SIZEAbi>, pwidth: CPointer<Int32>, pheight: CPointer<Int32>, pascent: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxGetNaturalSize2(__liveRaw, dwAspect, hdcDraw, hicTargetDev, ptd, dwMode, psizelExtent, pwidth, pheight, pascent)
@@ -3499,21 +3514,21 @@ extend MANCODE <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
 public struct MSGFILTER {
     public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -3581,21 +3596,21 @@ public struct MSGFILTER {
 public struct OBJECTPOSITIONS {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -4509,12 +4524,12 @@ extend REOBJECT_FLAGS <: windows_core.CopyType & windows_core.RuntimeType & wind
 public struct REPASTESPECIAL {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public mut prop dwAspect: Win32__impl_l0.DVASPECT {
+    public mut prop dwAspect: Win32_impl_p0.DVASPECT {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                return Win32__impl_l0.DVASPECT(packedReadUInt32(base, 0))
+                return Win32_impl_p0.DVASPECT(packedReadUInt32(base, 0))
             }
         }
         set(val) {
@@ -4553,21 +4568,21 @@ public struct REPASTESPECIAL {
 public struct REQRESIZE {
     public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -4692,14 +4707,14 @@ public struct RICHEDIT_IMAGE_PARAMETERS {
         }
     }
 
-    public mut prop piStream: Win32__impl_l1.IStream {
+    public mut prop piStream: Win32_impl_p2.IStream {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
                 let defaultValue: CPointer<Unit> = CPointer<Unit>()
                 let raw = packedReadValue<CPointer<Unit>>(base, 24, defaultValue)
-                return Win32__impl_l1.IStream.fromAbiTake(raw)
+                return Win32_impl_p2.IStream.fromAbiTake(raw)
             }
         }
         set(val) {
@@ -4877,21 +4892,21 @@ extend RICH_EDIT_GET_OBJECT_FLAGS <: windows_core.CopyType & windows_core.Runtim
 public struct SELCHANGE {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -7717,21 +7732,21 @@ public struct EDITSTREAM {
 public struct ENCORRECTTEXT {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -7783,21 +7798,21 @@ public struct ENCORRECTTEXT {
 public struct ENDCOMPOSITIONNOTIFY {
     public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
 
-    public mut prop nmhdr: Win32__impl_l0.NMHDR {
+    public mut prop nmhdr: Win32_impl_p1.NMHDR {
         get() {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                let defaultValue: Win32__impl_l0.NMHDRAbi = Win32__impl_l0.NMHDRAbi()
-                let raw = packedReadValue<Win32__impl_l0.NMHDRAbi>(base, 0, defaultValue)
-                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32__impl_l0.NMHDR>()).unwrap()
+                let defaultValue: Win32_impl_p1.NMHDRAbi = Win32_impl_p1.NMHDRAbi()
+                let raw = packedReadValue<Win32_impl_p1.NMHDRAbi>(base, 0, defaultValue)
+                return windows_core.fromTypedAbi(raw, windows_core.typeMarker<Win32_impl_p1.NMHDR>()).unwrap()
             }
         }
         set(val) {
             unsafe {
                 var rawStorage = _raw
                 let base = CPointer<UInt8>(inout rawStorage)
-                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32__impl_l0.NMHDR>()))
+                packedWriteValue(base, 0, windows_core.projectTypedAbi(val, windows_core.typeMarker<Win32_impl_p1.NMHDR>()))
                 _raw = rawStorage
             }
         }
@@ -8051,21 +8066,21 @@ public struct IRichEditOleCallbackVtbl {
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
     public var GetNewStorage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetInPlaceContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<Win32__impl_l1.OLEINPLACEFRAMEINFOAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetInPlaceContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<Win32_impl_p2.OLEINPLACEFRAMEINFOAbi>) -> Int32> = { _, _, _, _ => 0 }
     public var ShowContainerUI: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com_StructuredStorage == "on"]
     public var QueryInsertObject: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on"]
     public var DeleteObject: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_SystemServices == "on"]
-    public var QueryAcceptData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, Win32__impl_l0.RECO_FLAGSAbi, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    public var QueryAcceptData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, Win32_impl_p1.RECO_FLAGSAbi, Int32, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var ContextSensitiveHelp: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
     public var GetClipboardData: CFunc<(CPointer<Unit>, CPointer<CHARRANGEAbi>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_System_SystemServices == "on"]
-    public var GetDragDropEffect: CFunc<(CPointer<Unit>, Int32, Win32__impl_l0.MODIFIERKEYS_FLAGSAbi, CPointer<Win32__impl_l0.DROPEFFECTAbi>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetDragDropEffect: CFunc<(CPointer<Unit>, Int32, Win32_impl_p1.MODIFIERKEYS_FLAGSAbi, CPointer<Win32_impl_p0.DROPEFFECTAbi>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var GetContextMenu: CFunc<(CPointer<Unit>, RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPEAbi, CPointer<Unit>, CPointer<CHARRANGEAbi>, CPointer<Win32__impl_l0.HMENU>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var GetContextMenu: CFunc<(CPointer<Unit>, RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPEAbi, CPointer<Unit>, CPointer<CHARRANGEAbi>, CPointer<Win32_impl_p1.HMENU>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -8117,7 +8132,7 @@ public class IRichEditOleCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetInPlaceContext(lplpFrame: CPointer<CPointer<Unit>>, lplpDoc: CPointer<CPointer<Unit>>, lpFrameInfo: CPointer<Win32__impl_l1.OLEINPLACEFRAMEINFOAbi>): Int32 {
+    public unsafe func GetInPlaceContext(lplpFrame: CPointer<CPointer<Unit>>, lplpDoc: CPointer<CPointer<Unit>>, lpFrameInfo: CPointer<Win32_impl_p2.OLEINPLACEFRAMEINFOAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetInPlaceContext(__liveRaw, lplpFrame, lplpDoc, lpFrameInfo)
@@ -8144,7 +8159,7 @@ public class IRichEditOleCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_SystemServices == "on"]
-    public unsafe func QueryAcceptData(lpdataobj: CPointer<Unit>, lpcfFormat: CPointer<UInt16>, reco: Win32__impl_l0.RECO_FLAGSAbi, fReally: Int32, hMetaPict: CPointer<Unit>): Int32 {
+    public unsafe func QueryAcceptData(lpdataobj: CPointer<Unit>, lpcfFormat: CPointer<UInt16>, reco: Win32_impl_p1.RECO_FLAGSAbi, fReally: Int32, hMetaPict: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryAcceptData(__liveRaw, lpdataobj, lpcfFormat, reco, fReally, hMetaPict)
@@ -8164,14 +8179,14 @@ public class IRichEditOleCallback <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_System_SystemServices == "on"]
-    public unsafe func GetDragDropEffect(fDrag: Int32, grfKeyState: Win32__impl_l0.MODIFIERKEYS_FLAGSAbi, pdwEffect: CPointer<Win32__impl_l0.DROPEFFECTAbi>): Int32 {
+    public unsafe func GetDragDropEffect(fDrag: Int32, grfKeyState: Win32_impl_p1.MODIFIERKEYS_FLAGSAbi, pdwEffect: CPointer<Win32_impl_p0.DROPEFFECTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDragDropEffect(__liveRaw, fDrag, grfKeyState, pdwEffect)
     }
 
     @When[Windows_Win32_System_Ole == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func GetContextMenu(seltype: RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPEAbi, lpoleobj: CPointer<Unit>, lpchrg: CPointer<CHARRANGEAbi>, lphmenu: CPointer<Win32__impl_l0.HMENU>): Int32 {
+    public unsafe func GetContextMenu(seltype: RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPEAbi, lpoleobj: CPointer<Unit>, lpchrg: CPointer<CHARRANGEAbi>, lphmenu: CPointer<Win32_impl_p1.HMENU>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetContextMenu(__liveRaw, seltype, lpoleobj, lpchrg, lphmenu)
@@ -8181,7 +8196,7 @@ public class IRichEditOleCallback <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextFontVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetDuplicate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDuplicate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CanChange: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -8273,7 +8288,7 @@ public class ITextFont <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextFont> {
-        return InterfaceDescriptor<ITextFont>("ITextFont", ITextFont.iid(), Win32__impl_l2.IDispatch.iid(), takeITextFontFromAbi, viewITextFont)
+        return InterfaceDescriptor<ITextFont>("ITextFont", ITextFont.iid(), Win32_impl_p2.IDispatch.iid(), takeITextFontFromAbi, viewITextFont)
     }
 
     public unsafe func vtbl(): ITextFontVtbl {
@@ -8984,7 +8999,7 @@ public class ITextFont2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextParaVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetDuplicate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDuplicate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CanChange: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -9069,7 +9084,7 @@ public class ITextPara <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextPara> {
-        return InterfaceDescriptor<ITextPara>("ITextPara", ITextPara.iid(), Win32__impl_l2.IDispatch.iid(), takeITextParaFromAbi, viewITextPara)
+        return InterfaceDescriptor<ITextPara>("ITextPara", ITextPara.iid(), Win32_impl_p2.IDispatch.iid(), takeITextParaFromAbi, viewITextPara)
     }
 
     public unsafe func vtbl(): ITextParaVtbl {
@@ -9530,7 +9545,7 @@ public class ITextPara2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextRangeVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetText: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var SetText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var GetChar: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -9563,29 +9578,29 @@ public struct ITextRangeVtbl {
     public var MoveStart: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var MoveEnd: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveWhile: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveWhile: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveStartWhile: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveStartWhile: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveEndWhile: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveEndWhile: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveUntil: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveUntil: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveStartUntil: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveStartUntil: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var MoveEndUntil: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var MoveEndUntil: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var FindText: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, tomConstantsAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindTextStart: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, tomConstantsAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindTextEnd: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, tomConstantsAbi, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Cut: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Cut: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Copy: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
+    public var Copy: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Paste: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32) -> Int32> = { _, _, _ => 0 }
+    public var Paste: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var CanPaste: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
+    public var CanPaste: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, Int32, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var CanEdit: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ChangeCase: CFunc<(CPointer<Unit>, tomConstantsAbi) -> Int32> = { _, _ => 0 }
     public var GetPoint: CFunc<(CPointer<Unit>, tomConstantsAbi, CPointer<Int32>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
@@ -9629,7 +9644,7 @@ public class ITextRange <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextRange> {
-        return InterfaceDescriptor<ITextRange>("ITextRange", ITextRange.iid(), Win32__impl_l2.IDispatch.iid(), takeITextRangeFromAbi, viewITextRange)
+        return InterfaceDescriptor<ITextRange>("ITextRange", ITextRange.iid(), Win32_impl_p2.IDispatch.iid(), takeITextRangeFromAbi, viewITextRange)
     }
 
     public unsafe func vtbl(): ITextRangeVtbl {
@@ -9823,42 +9838,42 @@ public class ITextRange <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveWhile(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveWhile(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveWhile(__liveRaw, Cset, Count, pDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveStartWhile(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveStartWhile(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveStartWhile(__liveRaw, Cset, Count, pDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveEndWhile(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveEndWhile(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveEndWhile(__liveRaw, Cset, Count, pDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveUntil(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveUntil(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveUntil(__liveRaw, Cset, Count, pDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveStartUntil(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveStartUntil(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveStartUntil(__liveRaw, Cset, Count, pDelta)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func MoveEndUntil(Cset: CPointer<Win32__impl_l2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
+    public unsafe func MoveEndUntil(Cset: CPointer<Win32_impl_p2.VARIANTAbi>, Count: Int32, pDelta: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MoveEndUntil(__liveRaw, Cset, Count, pDelta)
@@ -9889,28 +9904,28 @@ public class ITextRange <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Cut(pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Cut(pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Cut(__liveRaw, pVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Copy(pVar: CPointer<Win32__impl_l2.VARIANTAbi>): Int32 {
+    public unsafe func Copy(pVar: CPointer<Win32_impl_p2.VARIANTAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Copy(__liveRaw, pVar)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Paste(pVar: CPointer<Win32__impl_l2.VARIANTAbi>, Format: Int32): Int32 {
+    public unsafe func Paste(pVar: CPointer<Win32_impl_p2.VARIANTAbi>, Format: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Paste(__liveRaw, pVar, Format)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func CanPaste(pVar: CPointer<Win32__impl_l2.VARIANTAbi>, Format: Int32, pValue: CPointer<Int32>): Int32 {
+    public unsafe func CanPaste(pVar: CPointer<Win32_impl_p2.VARIANTAbi>, Format: Int32, pValue: CPointer<Int32>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CanPaste(__liveRaw, pVar, Format, pValue)
@@ -9957,7 +9972,7 @@ public class ITextRange <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextRowVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetAlignment: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAlignment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var GetCellCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10040,7 +10055,7 @@ public class ITextRow <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextRow> {
-        return InterfaceDescriptor<ITextRow>("ITextRow", ITextRow.iid(), Win32__impl_l2.IDispatch.iid(), takeITextRowFromAbi, viewITextRow)
+        return InterfaceDescriptor<ITextRow>("ITextRow", ITextRow.iid(), Win32_impl_p2.IDispatch.iid(), takeITextRowFromAbi, viewITextRow)
     }
 
     public unsafe func vtbl(): ITextRowVtbl {
@@ -10445,7 +10460,7 @@ public class ITextSelection <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextStoryRangesVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var _NewEnum: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -10486,7 +10501,7 @@ public class ITextStoryRanges <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextStoryRanges> {
-        return InterfaceDescriptor<ITextStoryRanges>("ITextStoryRanges", ITextStoryRanges.iid(), Win32__impl_l2.IDispatch.iid(), takeITextStoryRangesFromAbi, viewITextStoryRanges)
+        return InterfaceDescriptor<ITextStoryRanges>("ITextStoryRanges", ITextStoryRanges.iid(), Win32_impl_p2.IDispatch.iid(), takeITextStoryRangesFromAbi, viewITextStoryRanges)
     }
 
     public unsafe func vtbl(): ITextStoryRangesVtbl {
@@ -10725,9 +10740,9 @@ public struct REOBJECT {
     public var cbStruct: UInt32 = 0u32
     public var cp: Int32 = 0i32
     public var clsid: GuidValue = GuidValue()
-    public var poleobj: Win32__impl_l2.IOleObject = Win32__impl_l2.IOleObject(CPointer<Unit>())
-    public var pstg: Win32__impl_l2.IStorage = Win32__impl_l2.IStorage(CPointer<Unit>())
-    public var polesite: Win32__impl_l2.IOleClientSite = Win32__impl_l2.IOleClientSite(CPointer<Unit>())
+    public var poleobj: Win32_impl_p3.IOleObject = Win32_impl_p3.IOleObject(CPointer<Unit>())
+    public var pstg: Win32_impl_p2.IStorage = Win32_impl_p2.IStorage(CPointer<Unit>())
+    public var polesite: Win32_impl_p3.IOleClientSite = Win32_impl_p3.IOleClientSite(CPointer<Unit>())
     public var sizel: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
     public var dvaspect: UInt32 = 0u32
     public var dwFlags: REOBJECT_FLAGS = REOBJECT_FLAGS()
@@ -10775,9 +10790,9 @@ extend REOBJECT <: windows_core.CopyType & windows_core.RuntimeType & windows_co
         value.cbStruct = abi.cbStruct
         value.cp = abi.cp
         value.clsid = GuidValue(abi.clsid)
-        value.poleobj = Win32__impl_l2.IOleObject.fromAbiTake(abi.poleobj)
-        value.pstg = Win32__impl_l2.IStorage.fromAbiTake(abi.pstg)
-        value.polesite = Win32__impl_l2.IOleClientSite.fromAbiTake(abi.polesite)
+        value.poleobj = Win32_impl_p3.IOleObject.fromAbiTake(abi.poleobj)
+        value.pstg = Win32_impl_p2.IStorage.fromAbiTake(abi.pstg)
+        value.polesite = Win32_impl_p3.IOleClientSite.fromAbiTake(abi.polesite)
         value.sizel = windows_core.fromTypedAbi(abi.sizel, windows_core.typeMarker<Win32_Foundation.SIZE>()).unwrap()
         value.dvaspect = abi.dvaspect
         value.dwFlags = REOBJECT_FLAGS.assumeInitRef(abi.dwFlags)
@@ -10966,7 +10981,7 @@ public class IRichEditOle <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextDocumentVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => 0 }
     public var GetSelection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetStoryCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -10977,9 +10992,9 @@ public struct ITextDocumentVtbl {
     public var SetDefaultTabStop: CFunc<(CPointer<Unit>, Float32) -> Int32> = { _, _ => 0 }
     public var New: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Open: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, tomConstantsAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var Open: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, tomConstantsAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public var Save: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l2.VARIANTAbi>, tomConstantsAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
+    public var Save: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.VARIANTAbi>, tomConstantsAbi, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var Freeze: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Unfreeze: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var BeginEditCollection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -11024,7 +11039,7 @@ public class ITextDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextDocument> {
-        return InterfaceDescriptor<ITextDocument>("ITextDocument", ITextDocument.iid(), Win32__impl_l2.IDispatch.iid(), takeITextDocumentFromAbi, viewITextDocument)
+        return InterfaceDescriptor<ITextDocument>("ITextDocument", ITextDocument.iid(), Win32_impl_p2.IDispatch.iid(), takeITextDocumentFromAbi, viewITextDocument)
     }
 
     public unsafe func vtbl(): ITextDocumentVtbl {
@@ -11086,14 +11101,14 @@ public class ITextDocument <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Open(pVar: CPointer<Win32__impl_l2.VARIANTAbi>, Flags: tomConstantsAbi, CodePage: Int32): Int32 {
+    public unsafe func Open(pVar: CPointer<Win32_impl_p2.VARIANTAbi>, Flags: tomConstantsAbi, CodePage: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Open(__liveRaw, pVar, Flags, CodePage)
     }
 
     @When[Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
-    public unsafe func Save(pVar: CPointer<Win32__impl_l2.VARIANTAbi>, Flags: tomConstantsAbi, CodePage: Int32): Int32 {
+    public unsafe func Save(pVar: CPointer<Win32_impl_p2.VARIANTAbi>, Flags: tomConstantsAbi, CodePage: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Save(__liveRaw, pVar, Flags, CodePage)
@@ -11380,7 +11395,7 @@ public struct ITextHostVtbl {
     public var TxReleaseDC: CFunc<(CPointer<Unit>, Win32_Graphics_Gdi.HDC) -> Int32> = { _, _ => 0 }
     public var TxShowScrollBar: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TxEnableScrollBar: CFunc<(CPointer<Unit>, Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, Int32) -> Int32> = { _, _, _ => 0 }
+    public var TxEnableScrollBar: CFunc<(CPointer<Unit>, Win32_impl_p1.SCROLLBAR_CONSTANTSAbi, Int32) -> Int32> = { _, _, _ => 0 }
     public var TxSetScrollRange: CFunc<(CPointer<Unit>, Int32, Int32, Int32, Int32) -> Int32> = { _, _, _, _, _ => 0 }
     public var TxSetScrollPos: CFunc<(CPointer<Unit>, Int32, Int32, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var TxInvalidateRect: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.RECTAbi>, Int32) -> Unit> = { _, _, _ => () }
@@ -11392,11 +11407,11 @@ public struct ITextHostVtbl {
     public var TxSetTimer: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public var TxKillTimer: CFunc<(CPointer<Unit>, UInt32) -> Unit> = { _, _ => () }
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TxScrollWindowEx: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_Foundation.RECTAbi>, CPointer<Win32_Foundation.RECTAbi>, Win32_Graphics_Gdi.HRGN, CPointer<Win32_Foundation.RECTAbi>, Win32__impl_l0.SCROLL_WINDOW_FLAGSAbi) -> Unit> = { _, _, _, _, _, _, _, _ => () }
+    public var TxScrollWindowEx: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Win32_Foundation.RECTAbi>, CPointer<Win32_Foundation.RECTAbi>, Win32_Graphics_Gdi.HRGN, CPointer<Win32_Foundation.RECTAbi>, Win32_impl_p1.SCROLL_WINDOW_FLAGSAbi) -> Unit> = { _, _, _, _, _, _, _, _ => () }
     public var TxSetCapture: CFunc<(CPointer<Unit>, Int32) -> Unit> = { _, _ => () }
     public var TxSetFocus: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TxSetCursor: CFunc<(CPointer<Unit>, Win32__impl_l1.HCURSOR, Int32) -> Unit> = { _, _, _ => () }
+    public var TxSetCursor: CFunc<(CPointer<Unit>, Win32_impl_p2.HCURSOR, Int32) -> Unit> = { _, _, _ => () }
     public var TxScreenToClient: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.POINTAbi>) -> Int32> = { _, _ => 0 }
     public var TxClientToScreen: CFunc<(CPointer<Unit>, CPointer<Win32_Foundation.POINTAbi>) -> Int32> = { _, _ => 0 }
     public var TxActivate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -11488,7 +11503,7 @@ public class ITextHost <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TxEnableScrollBar(fuSBFlags: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, fuArrowflags: Int32): Int32 {
+    public unsafe func TxEnableScrollBar(fuSBFlags: Win32_impl_p1.SCROLLBAR_CONSTANTSAbi, fuArrowflags: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxEnableScrollBar(__liveRaw, fuSBFlags, fuArrowflags)
@@ -11550,7 +11565,7 @@ public class ITextHost <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TxScrollWindowEx(dx: Int32, dy: Int32, lprcScroll: CPointer<Win32_Foundation.RECTAbi>, lprcClip: CPointer<Win32_Foundation.RECTAbi>, hrgnUpdate: Win32_Graphics_Gdi.HRGN, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, fuScroll: Win32__impl_l0.SCROLL_WINDOW_FLAGSAbi): Unit {
+    public unsafe func TxScrollWindowEx(dx: Int32, dy: Int32, lprcScroll: CPointer<Win32_Foundation.RECTAbi>, lprcClip: CPointer<Win32_Foundation.RECTAbi>, hrgnUpdate: Win32_Graphics_Gdi.HRGN, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, fuScroll: Win32_impl_p1.SCROLL_WINDOW_FLAGSAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.TxScrollWindowEx(__liveRaw, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate, fuScroll)
@@ -11569,7 +11584,7 @@ public class ITextHost <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TxSetCursor(hcur: Win32__impl_l1.HCURSOR, fText: Int32): Unit {
+    public unsafe func TxSetCursor(hcur: Win32_impl_p2.HCURSOR, fText: Int32): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.TxSetCursor(__liveRaw, hcur, fText)
@@ -11724,7 +11739,7 @@ public struct ITextHost2Vtbl {
     public var TxGetPalette: CFunc<(CPointer<Unit>) -> Win32_Graphics_Gdi.HPALETTE> = { _ => CPointer<Unit>() }
     public var TxGetEastAsianFlags: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public var TxSetCursor2: CFunc<(CPointer<Unit>, Win32__impl_l1.HCURSOR, Int32) -> Win32__impl_l1.HCURSOR> = { _, _, _ => CPointer<Unit>() }
+    public var TxSetCursor2: CFunc<(CPointer<Unit>, Win32_impl_p2.HCURSOR, Int32) -> Win32_impl_p2.HCURSOR> = { _, _, _ => CPointer<Unit>() }
     public var TxFreeTextServicesNotification: CFunc<(CPointer<Unit>) -> Unit> = { _ => () }
     public var TxGetEditStyle: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var TxGetWindowStyles: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
@@ -11807,7 +11822,7 @@ public class ITextHost2 <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-    public unsafe func TxSetCursor2(hcur: Win32__impl_l1.HCURSOR, bText: Int32): Win32__impl_l1.HCURSOR {
+    public unsafe func TxSetCursor2(hcur: Win32_impl_p2.HCURSOR, bText: Int32): Win32_impl_p2.HCURSOR {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TxSetCursor2(__liveRaw, hcur, bText)
@@ -12429,7 +12444,7 @@ public class ITextStoryRanges2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ITextStringsVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var Item: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Add: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -12483,7 +12498,7 @@ public class ITextStrings <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ITextStrings> {
-        return InterfaceDescriptor<ITextStrings>("ITextStrings", ITextStrings.iid(), Win32__impl_l2.IDispatch.iid(), takeITextStringsFromAbi, viewITextStrings)
+        return InterfaceDescriptor<ITextStrings>("ITextStrings", ITextStrings.iid(), Win32_impl_p2.IDispatch.iid(), takeITextStringsFromAbi, viewITextStrings)
     }
 
     public unsafe func vtbl(): ITextStringsVtbl {

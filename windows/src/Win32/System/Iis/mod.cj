@@ -4,14 +4,20 @@
 package windows.Win32.System.Iis
 
 import std.collection.*
+@When[Windows_Win32_System_Iis == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_Iis == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_Iis == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_Iis == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_Iis == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_Iis == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_System_Iis == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_Iis == "on"]
@@ -202,7 +208,7 @@ public class AsyncIFtpRoleProvider <: InterfaceWrapperBase & ComInterface {
 
 @When[Windows_Win32_System_Iis == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct CERT_CONTEXT_EX {
-    public var CertContext: Win32__impl_l2.CERT_CONTEXT = Win32__impl_l2.CERT_CONTEXT()
+    public var CertContext: Win32_impl_p2.CERT_CONTEXT = Win32_impl_p2.CERT_CONTEXT()
     public var cbAllocated: UInt32 = 0u32
     public var dwCertificateFlags: UInt32 = 0u32
     public init() {}
@@ -211,7 +217,7 @@ public struct CERT_CONTEXT_EX {
 @When[Windows_Win32_System_Iis == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct CERT_CONTEXT_EXAbi {
-    public var CertContext: Win32__impl_l2.CERT_CONTEXTAbi = Win32__impl_l2.CERT_CONTEXTAbi()
+    public var CertContext: Win32_impl_p2.CERT_CONTEXTAbi = Win32_impl_p2.CERT_CONTEXTAbi()
     public var cbAllocated: UInt32 = 0u32
     public var dwCertificateFlags: UInt32 = 0u32
     public init() {}
@@ -224,14 +230,14 @@ extend CERT_CONTEXT_EX <: windows_core.CopyType & windows_core.RuntimeType & win
     public static func signature(): String { "struct(Windows.Win32.System.Iis.CERT_CONTEXT_EX;struct(Windows.Win32.Security.Cryptography.CERT_CONTEXT;enum(Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE;u4);cinterface(IInspectable);u4;cinterface(IInspectable);struct(Windows.Win32.Security.Cryptography.HCERTSTORE;cinterface(IInspectable)));u4;u4)" }
     public static func projectAbi(value: CERT_CONTEXT_EX): CERT_CONTEXT_EXAbi {
         var abi = CERT_CONTEXT_EXAbi()
-        abi.CertContext = windows_core.projectTypedAbi(value.CertContext, windows_core.typeMarker<Win32__impl_l2.CERT_CONTEXT>())
+        abi.CertContext = windows_core.projectTypedAbi(value.CertContext, windows_core.typeMarker<Win32_impl_p2.CERT_CONTEXT>())
         abi.cbAllocated = value.cbAllocated
         abi.dwCertificateFlags = value.dwCertificateFlags
         return abi
     }
     public static func assumeInitRef(abi: CERT_CONTEXT_EXAbi): CERT_CONTEXT_EX {
         var value = CERT_CONTEXT_EX()
-        value.CertContext = windows_core.fromTypedAbi(abi.CertContext, windows_core.typeMarker<Win32__impl_l2.CERT_CONTEXT>()).unwrap()
+        value.CertContext = windows_core.fromTypedAbi(abi.CertContext, windows_core.typeMarker<Win32_impl_p2.CERT_CONTEXT>()).unwrap()
         value.cbAllocated = abi.cbAllocated
         value.dwCertificateFlags = abi.dwCertificateFlags
         return value
@@ -1849,7 +1855,7 @@ public class IFtpHomeDirectoryProvider <: InterfaceWrapperBase & ComInterface {
 public struct IFtpProviderConstructVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
     @When[Windows_Win32_System_Com == "on"]
-    public var Construct: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l1.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
+    public var Construct: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p2.SAFEARRAYAbi>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
 
@@ -1894,7 +1900,7 @@ public class IFtpProviderConstruct <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func Construct(configurationEntries: CPointer<Win32__impl_l1.SAFEARRAYAbi>): Int32 {
+    public unsafe func Construct(configurationEntries: CPointer<Win32_impl_p2.SAFEARRAYAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Construct(__liveRaw, configurationEntries)

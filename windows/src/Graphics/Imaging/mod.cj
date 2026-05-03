@@ -4,17 +4,29 @@
 package windows.Graphics.Imaging
 
 import std.collection.*
+@When[Windows_Graphics_Imaging == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_Imaging == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_Imaging == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_Imaging == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_Imaging == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_Imaging == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_Imaging == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_Imaging == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Graphics_Imaging == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Graphics_Imaging == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Graphics_Imaging == "on"]
 import windows_collections as windows_collections
+@When[Windows_Graphics_Imaging == "on"]
 import windows_future as windows_future
 
 
@@ -1408,7 +1420,7 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func iid(): GUID {
-        _impl_l1.IRandomAccessStreamWithContentType.iid()
+        impl_p1.IRandomAccessStreamWithContentType.iid()
     }
 
     public static func runtimeName(): String {
@@ -1416,12 +1428,12 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func descriptor(): InterfaceDescriptor<ImageStream> {
-        let ancestors = [_impl_l1.IRandomAccessStreamWithContentType.iid(), _impl_l1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), _impl_l0.IInputStream.iid(), _impl_l0.IOutputStream.iid(), _impl_l0.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<ImageStream>("ImageStream", _impl_l1.IRandomAccessStreamWithContentType.iid(), ancestors, { raw => ImageStream.fromAbiTake(raw) }, { raw => ImageStream.viewOf(raw) })
+        let ancestors = [impl_p1.IRandomAccessStreamWithContentType.iid(), impl_p1.IRandomAccessStream.iid(), Foundation.IClosable.iid(), impl_p0.IInputStream.iid(), impl_p0.IOutputStream.iid(), impl_p0.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<ImageStream>("ImageStream", impl_p1.IRandomAccessStreamWithContentType.iid(), ancestors, { raw => ImageStream.fromAbiTake(raw) }, { raw => ImageStream.viewOf(raw) })
     }
 
-    public func defaultInterface(): _impl_l1.IRandomAccessStreamWithContentType {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamWithContentType.descriptor()) }) {
+    public func defaultInterface(): impl_p1.IRandomAccessStreamWithContentType {
+        match (unsafe { query(impl_p1.IRandomAccessStreamWithContentType.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1436,7 +1448,7 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.Graphics.Imaging.ImageStream", ImageStream.signature(), _impl_l1.IRandomAccessStreamWithContentType.iid())
+        RuntimeTypeContract("Windows.Graphics.Imaging.ImageStream", ImageStream.signature(), impl_p1.IRandomAccessStreamWithContentType.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -1451,15 +1463,15 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
         IInspectable.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamWithContentType(): _impl_l1.IRandomAccessStreamWithContentType {
-        match (unsafe { query(_impl_l1.IRandomAccessStreamWithContentType.descriptor()) }) {
+    public func asIRandomAccessStreamWithContentType(): impl_p1.IRandomAccessStreamWithContentType {
+        match (unsafe { query(impl_p1.IRandomAccessStreamWithContentType.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIRandomAccessStream(): _impl_l1.IRandomAccessStream {
-        match (unsafe { query(_impl_l1.IRandomAccessStream.descriptor()) }) {
+    public func asIRandomAccessStream(): impl_p1.IRandomAccessStream {
+        match (unsafe { query(impl_p1.IRandomAccessStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1472,22 +1484,22 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    public func asIInputStream(): _impl_l0.IInputStream {
-        match (unsafe { query(_impl_l0.IInputStream.descriptor()) }) {
+    public func asIInputStream(): impl_p0.IInputStream {
+        match (unsafe { query(impl_p0.IInputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIOutputStream(): _impl_l0.IOutputStream {
-        match (unsafe { query(_impl_l0.IOutputStream.descriptor()) }) {
+    public func asIOutputStream(): impl_p0.IOutputStream {
+        match (unsafe { query(impl_p0.IOutputStream.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
     }
 
-    public func asIContentTypeProvider(): _impl_l0.IContentTypeProvider {
-        match (unsafe { query(_impl_l0.IContentTypeProvider.descriptor()) }) {
+    public func asIContentTypeProvider(): impl_p0.IContentTypeProvider {
+        match (unsafe { query(impl_p0.IContentTypeProvider.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -1501,11 +1513,11 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
         asIRandomAccessStream().SetSize(value)
     }
 
-    public unsafe func GetInputStreamAt(position: UInt64): _impl_l0.IInputStream {
+    public unsafe func GetInputStreamAt(position: UInt64): impl_p0.IInputStream {
         return asIRandomAccessStream().GetInputStreamAt(position)
     }
 
-    public unsafe func GetOutputStreamAt(position: UInt64): _impl_l0.IOutputStream {
+    public unsafe func GetOutputStreamAt(position: UInt64): impl_p0.IOutputStream {
         return asIRandomAccessStream().GetOutputStreamAt(position)
     }
 
@@ -1517,7 +1529,7 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
         asIRandomAccessStream().Seek(position)
     }
 
-    public unsafe func CloneStream(): _impl_l1.IRandomAccessStream {
+    public unsafe func CloneStream(): impl_p1.IRandomAccessStream {
         return asIRandomAccessStream().CloneStream()
     }
 
@@ -1533,11 +1545,11 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
         asIClosable().Close()
     }
 
-    public unsafe func ReadAsync(buffer: _impl_l0.IBuffer, count: UInt32, options: _impl_l0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<_impl_l0.IBuffer, UInt32> {
+    public unsafe func ReadAsync(buffer: impl_p0.IBuffer, count: UInt32, options: impl_p0.InputStreamOptions): windows_future.IAsyncOperationWithProgress<impl_p0.IBuffer, UInt32> {
         return asIInputStream().ReadAsync(buffer, count, options)
     }
 
-    public unsafe func WriteAsync(buffer: _impl_l0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
+    public unsafe func WriteAsync(buffer: impl_p0.IBuffer): windows_future.IAsyncOperationWithProgress<UInt32, UInt32> {
         return asIOutputStream().WriteAsync(buffer)
     }
 
@@ -2509,7 +2521,7 @@ public class BitmapDecoder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateAsync(stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
+    public static unsafe func CreateAsync(stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapDecoder>> = Option<windows_future.IAsyncOperation<BitmapDecoder>>.None
         try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
             result__ = Some(factory__.CreateAsync(stream))
@@ -2521,7 +2533,7 @@ public class BitmapDecoder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateWithIdAsync(decoderId: GuidValue, stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
+    public static unsafe func CreateWithIdAsync(decoderId: GuidValue, stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapDecoder>> = Option<windows_future.IAsyncOperation<BitmapDecoder>>.None
         try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
             result__ = Some(factory__.CreateWithIdAsync(decoderId, stream))
@@ -2767,7 +2779,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapEncoder> {
+    public static unsafe func CreateAsync(encoderId: GuidValue, stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapEncoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapEncoder>> = Option<windows_future.IAsyncOperation<BitmapEncoder>>.None
         try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
             result__ = Some(factory__.CreateAsync(encoderId, stream))
@@ -2779,7 +2791,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public static unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
+    public static unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: impl_p1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapEncoder>> = Option<windows_future.IAsyncOperation<BitmapEncoder>>.None
         try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
             result__ = Some(factory__.CreateWithEncodingOptionsAsync(encoderId, stream, encodingOptions))
@@ -2791,7 +2803,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateForTranscodingAsync(stream: _impl_l1.IRandomAccessStream, bitmapDecoder: BitmapDecoder): windows_future.IAsyncOperation<BitmapEncoder> {
+    public static unsafe func CreateForTranscodingAsync(stream: impl_p1.IRandomAccessStream, bitmapDecoder: BitmapDecoder): windows_future.IAsyncOperation<BitmapEncoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapEncoder>> = Option<windows_future.IAsyncOperation<BitmapEncoder>>.None
         try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
             result__ = Some(factory__.CreateForTranscodingAsync(stream, bitmapDecoder))
@@ -3626,7 +3638,7 @@ public class IBitmapDecoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBitmapDecoderStatics", IBitmapDecoderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBitmapDecoderStaticsVtbl", "IBitmapDecoderStatics", "IBitmapDecoderStatics_Impl", [InterfaceMethodSchema("BmpDecoderId", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegDecoderId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PngDecoderId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiffDecoderId", 9, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GifDecoderId", 10, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegXRDecoderId", 11, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IcoDecoderId", 12, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDecoderInformationEnumerator", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<BitmapCodecInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateAsync", 14, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapDecoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithIdAsync", 15, [InterfaceParameterSchema("decoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapDecoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBitmapDecoderStatics", IBitmapDecoderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBitmapDecoderStaticsVtbl", "IBitmapDecoderStatics", "IBitmapDecoderStatics_Impl", [InterfaceMethodSchema("BmpDecoderId", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegDecoderId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PngDecoderId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiffDecoderId", 9, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GifDecoderId", 10, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegXRDecoderId", 11, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IcoDecoderId", 12, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDecoderInformationEnumerator", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<BitmapCodecInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateAsync", 14, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapDecoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithIdAsync", 15, [InterfaceParameterSchema("decoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapDecoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBitmapDecoderStatics.runtimeType())
         return schema
     }
@@ -3721,7 +3733,7 @@ public class IBitmapDecoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateAsync(stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
+    public unsafe func CreateAsync(stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateAsync(asRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -3730,7 +3742,7 @@ public class IBitmapDecoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateWithIdAsync(decoderId: GuidValue, stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
+    public unsafe func CreateWithIdAsync(decoderId: GuidValue, stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapDecoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWithIdAsync(asRaw(), decoderId.toRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4006,7 +4018,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBitmapEncoderStatics", IBitmapEncoderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBitmapEncoderStaticsVtbl", "IBitmapEncoderStatics", "IBitmapEncoderStatics_Impl", [InterfaceMethodSchema("BmpEncoderId", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegEncoderId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PngEncoderId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiffEncoderId", 9, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GifEncoderId", 10, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegXREncoderId", 11, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetEncoderInformationEnumerator", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<BitmapCodecInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateAsync", 13, [InterfaceParameterSchema("encoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithEncodingOptionsAsync", 14, [InterfaceParameterSchema("encoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("encodingOptions", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForTranscodingAsync", 15, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("bitmapDecoder", "CPointer<Unit>", "InParam<BitmapDecoder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForInPlacePropertyEncodingAsync", 16, [InterfaceParameterSchema("bitmapDecoder", "CPointer<Unit>", "InParam<BitmapDecoder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBitmapEncoderStatics", IBitmapEncoderStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IBitmapEncoderStaticsVtbl", "IBitmapEncoderStatics", "IBitmapEncoderStatics_Impl", [InterfaceMethodSchema("BmpEncoderId", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegEncoderId", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PngEncoderId", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TiffEncoderId", 9, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GifEncoderId", 10, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("JpegXREncoderId", 11, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GuidValue>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetEncoderInformationEnumerator", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<BitmapCodecInformation>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateAsync", 13, [InterfaceParameterSchema("encoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithEncodingOptionsAsync", 14, [InterfaceParameterSchema("encoderId", "GUID", "GuidValue", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("encodingOptions", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForTranscodingAsync", 15, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("bitmapDecoder", "CPointer<Unit>", "InParam<BitmapDecoder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateForInPlacePropertyEncodingAsync", 16, [InterfaceParameterSchema("bitmapDecoder", "CPointer<Unit>", "InParam<BitmapDecoder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<BitmapEncoder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBitmapEncoderStatics.runtimeType())
         return schema
     }
@@ -4093,7 +4105,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapEncoder> {
+    public unsafe func CreateAsync(encoderId: GuidValue, stream: impl_p1.IRandomAccessStream): windows_future.IAsyncOperation<BitmapEncoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateAsync(asRaw(), encoderId.toRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4102,7 +4114,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
-    public unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
+    public unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: impl_p1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateWithEncodingOptionsAsync(asRaw(), encoderId.toRaw(), stream.asRaw(), encodingOptions.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4111,7 +4123,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateForTranscodingAsync(stream: _impl_l1.IRandomAccessStream, bitmapDecoder: BitmapDecoder): windows_future.IAsyncOperation<BitmapEncoder> {
+    public unsafe func CreateForTranscodingAsync(stream: impl_p1.IRandomAccessStream, bitmapDecoder: BitmapDecoder): windows_future.IAsyncOperation<BitmapEncoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateForTranscodingAsync(asRaw(), stream.asRaw(), bitmapDecoder.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -5568,7 +5580,7 @@ public class ISoftwareBitmap <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISoftwareBitmap", ISoftwareBitmap.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "ISoftwareBitmapVtbl", "ISoftwareBitmap", "ISoftwareBitmap_Impl", [InterfaceMethodSchema("get_BitmapPixelFormat", 7, [InterfaceParameterSchema("result", "CPointer<BitmapPixelFormatAbi>", "OutSlot<BitmapPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BitmapAlphaMode", 8, [InterfaceParameterSchema("result", "CPointer<BitmapAlphaModeAbi>", "OutSlot<BitmapAlphaMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelWidth", 9, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelHeight", 10, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsReadOnly", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDpiX", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DpiX", 13, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDpiY", 14, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DpiY", 15, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LockBuffer", 16, [InterfaceParameterSchema("mode", "BitmapBufferAccessModeAbi", "BitmapBufferAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BitmapBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyTo", 17, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyFromBuffer", 18, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyToBuffer", 19, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetReadOnlyView", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISoftwareBitmap", ISoftwareBitmap.iid(), Foundation.IClosable.descriptorSchema(), ["IClosable"], [Foundation.IClosable.iid()], "ISoftwareBitmapVtbl", "ISoftwareBitmap", "ISoftwareBitmap_Impl", [InterfaceMethodSchema("get_BitmapPixelFormat", 7, [InterfaceParameterSchema("result", "CPointer<BitmapPixelFormatAbi>", "OutSlot<BitmapPixelFormat>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BitmapAlphaMode", 8, [InterfaceParameterSchema("result", "CPointer<BitmapAlphaModeAbi>", "OutSlot<BitmapAlphaMode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelWidth", 9, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PixelHeight", 10, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsReadOnly", 11, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDpiX", 12, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DpiX", 13, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDpiY", 14, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DpiY", 15, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LockBuffer", 16, [InterfaceParameterSchema("mode", "BitmapBufferAccessModeAbi", "BitmapBufferAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<BitmapBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyTo", 17, [InterfaceParameterSchema("bitmap", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyFromBuffer", 18, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CopyToBuffer", 19, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("GetReadOnlyView", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISoftwareBitmap.runtimeType())
         return schema
     }
@@ -5687,14 +5699,14 @@ public class ISoftwareBitmap <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyFromBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func CopyFromBuffer(buffer: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.CopyFromBuffer(asRaw(), buffer.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyToBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func CopyToBuffer(buffer: impl_p0.IBuffer): Unit {
         let v = vtbl()
         let hr = v.CopyToBuffer(asRaw(), buffer.asRaw())
         HRESULT(hr).ok()
@@ -5868,7 +5880,7 @@ public class ISoftwareBitmapStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ISoftwareBitmapStatics", ISoftwareBitmapStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISoftwareBitmapStaticsVtbl", "ISoftwareBitmapStatics", "ISoftwareBitmapStatics_Impl", [InterfaceMethodSchema("Copy", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Convert", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertWithAlpha", 8, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyFromBuffer", 9, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("width", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("height", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyWithAlphaFromBuffer", 10, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("width", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("height", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyFromSurfaceAsync", 11, [InterfaceParameterSchema("surface", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DSurface>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SoftwareBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyWithAlphaFromSurfaceAsync", 12, [InterfaceParameterSchema("surface", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DSurface>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SoftwareBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ISoftwareBitmapStatics", ISoftwareBitmapStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "ISoftwareBitmapStaticsVtbl", "ISoftwareBitmapStatics", "ISoftwareBitmapStatics_Impl", [InterfaceMethodSchema("Copy", 6, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Convert", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ConvertWithAlpha", 8, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<SoftwareBitmap>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyFromBuffer", 9, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("width", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("height", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyWithAlphaFromBuffer", 10, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("format", "BitmapPixelFormatAbi", "BitmapPixelFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("width", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("height", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<SoftwareBitmap>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyFromSurfaceAsync", 11, [InterfaceParameterSchema("surface", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DSurface>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SoftwareBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCopyWithAlphaFromSurfaceAsync", 12, [InterfaceParameterSchema("surface", "CPointer<Unit>", "InParam<Graphics_DirectX_Direct3D11.IDirect3DSurface>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("alpha", "BitmapAlphaModeAbi", "BitmapAlphaMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<SoftwareBitmap>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ISoftwareBitmapStatics.runtimeType())
         return schema
     }
@@ -5922,7 +5934,7 @@ public class ISoftwareBitmapStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateCopyFromBuffer(source: _impl_l0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
+    public unsafe func CreateCopyFromBuffer(source: impl_p0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCopyFromBuffer(asRaw(), source.asRaw(), windows_core.projectTypedAbi(format, windows_core.typeMarker<BitmapPixelFormat>()), width, height, CPointer<CPointer<Unit>>(inout result__))
@@ -5931,7 +5943,7 @@ public class ISoftwareBitmapStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateCopyWithAlphaFromBuffer(source: _impl_l0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
+    public unsafe func CreateCopyWithAlphaFromBuffer(source: impl_p0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateCopyWithAlphaFromBuffer(asRaw(), source.asRaw(), windows_core.projectTypedAbi(format, windows_core.typeMarker<BitmapPixelFormat>()), width, height, windows_core.projectTypedAbi(alpha, windows_core.typeMarker<BitmapAlphaMode>()), CPointer<CPointer<Unit>>(inout result__))
@@ -6082,12 +6094,12 @@ public class SoftwareBitmap <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyFromBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func CopyFromBuffer(buffer: impl_p0.IBuffer): Unit {
         defaultInterface().CopyFromBuffer(buffer)
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CopyToBuffer(buffer: _impl_l0.IBuffer): Unit {
+    public unsafe func CopyToBuffer(buffer: impl_p0.IBuffer): Unit {
         defaultInterface().CopyToBuffer(buffer)
     }
 
@@ -6133,7 +6145,7 @@ public class SoftwareBitmap <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateCopyFromBuffer(source: _impl_l0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
+    public static unsafe func CreateCopyFromBuffer(source: impl_p0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
         var result__: Option<SoftwareBitmap> = Option<SoftwareBitmap>.None
         try (factory__ = windows_core.factory<SoftwareBitmap, ISoftwareBitmapStatics>().unwrap()) {
             result__ = Some(factory__.CreateCopyFromBuffer(source, format, width, height))
@@ -6145,7 +6157,7 @@ public class SoftwareBitmap <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public static unsafe func CreateCopyWithAlphaFromBuffer(source: _impl_l0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
+    public static unsafe func CreateCopyWithAlphaFromBuffer(source: impl_p0.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
         var result__: Option<SoftwareBitmap> = Option<SoftwareBitmap>.None
         try (factory__ = windows_core.factory<SoftwareBitmap, ISoftwareBitmapStatics>().unwrap()) {
             result__ = Some(factory__.CreateCopyWithAlphaFromBuffer(source, format, width, height, alpha))

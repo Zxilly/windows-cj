@@ -4,17 +4,29 @@
 package windows.ApplicationModel.UserActivities
 
 import std.collection.*
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_UserActivities == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_ApplicationModel_UserActivities == "on" && Windows_UI == "on"]
 import windows.UI as UI
+@When[Windows_ApplicationModel_UserActivities == "on" && Windows_UI_Shell == "on"]
 import windows.UI.Shell as UI_Shell
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_UserActivities == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_future as windows_future
 
 
@@ -1412,7 +1424,7 @@ public class IUserActivityChannelStatics2 <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserActivityChannelStatics2", IUserActivityChannelStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserActivityChannelStatics2Vtbl", "IUserActivityChannelStatics2", "IUserActivityChannelStatics2_Impl", [InterfaceMethodSchema("DisableAutoSessionCreation", 6, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TryGetForWebAccount", 7, [InterfaceParameterSchema("account", "CPointer<Unit>", "InParam<_impl_l1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserActivityChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserActivityChannelStatics2", IUserActivityChannelStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserActivityChannelStatics2Vtbl", "IUserActivityChannelStatics2", "IUserActivityChannelStatics2_Impl", [InterfaceMethodSchema("DisableAutoSessionCreation", 6, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("TryGetForWebAccount", 7, [InterfaceParameterSchema("account", "CPointer<Unit>", "InParam<impl_p1.WebAccount>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserActivityChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserActivityChannelStatics2.runtimeType())
         return schema
     }
@@ -1448,7 +1460,7 @@ public class IUserActivityChannelStatics2 <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public unsafe func TryGetForWebAccount(account: _impl_l1.WebAccount): UserActivityChannel {
+    public unsafe func TryGetForWebAccount(account: impl_p1.WebAccount): UserActivityChannel {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.TryGetForWebAccount(asRaw(), account.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1507,7 +1519,7 @@ public class IUserActivityChannelStatics3 <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUserActivityChannelStatics3", IUserActivityChannelStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserActivityChannelStatics3Vtbl", "IUserActivityChannelStatics3", "IUserActivityChannelStatics3_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserActivityChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUserActivityChannelStatics3", IUserActivityChannelStatics3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IUserActivityChannelStatics3Vtbl", "IUserActivityChannelStatics3", "IUserActivityChannelStatics3_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<UserActivityChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUserActivityChannelStatics3.runtimeType())
         return schema
     }
@@ -1537,7 +1549,7 @@ public class IUserActivityChannelStatics3 <: InterfaceWrapperBase & ComInterface
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): UserActivityChannel {
+    public unsafe func GetForUser(user: impl_p1.User): UserActivityChannel {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2869,7 +2881,7 @@ public class UserActivityChannel <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): UserActivityChannel {
+    public static unsafe func GetForUser(user: impl_p1.User): UserActivityChannel {
         var result__: Option<UserActivityChannel> = Option<UserActivityChannel>.None
         try (factory__ = windows_core.factory<UserActivityChannel, IUserActivityChannelStatics3>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -2888,7 +2900,7 @@ public class UserActivityChannel <: InterfaceWrapperBase & ComInterface & window
     }
 
     @When[Windows_Security_Credentials == "on"]
-    public static unsafe func TryGetForWebAccount(account: _impl_l1.WebAccount): UserActivityChannel {
+    public static unsafe func TryGetForWebAccount(account: impl_p1.WebAccount): UserActivityChannel {
         var result__: Option<UserActivityChannel> = Option<UserActivityChannel>.None
         try (factory__ = windows_core.factory<UserActivityChannel, IUserActivityChannelStatics2>().unwrap()) {
             result__ = Some(factory__.TryGetForWebAccount(account))

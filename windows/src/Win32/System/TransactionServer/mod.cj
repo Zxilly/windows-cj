@@ -4,13 +4,18 @@
 package windows.Win32.System.TransactionServer
 
 import std.collection.*
+@When[Windows_Win32_System_TransactionServer == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_System_TransactionServer == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_System_TransactionServer == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_System_TransactionServer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_System_TransactionServer == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_System_TransactionServer == "on"]
@@ -140,7 +145,7 @@ extend ComponentUtil <: windows_core.CopyType & windows_core.RuntimeType & windo
 @When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct ICatalogVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     @When[Windows_Win32_System_Com == "on"]
     public var GetCollection: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
@@ -183,7 +188,7 @@ public class ICatalog <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<ICatalog> {
-        return InterfaceDescriptor<ICatalog>("ICatalog", ICatalog.iid(), Win32__impl_l2.IDispatch.iid(), takeICatalogFromAbi, viewICatalog)
+        return InterfaceDescriptor<ICatalog>("ICatalog", ICatalog.iid(), Win32_impl_p2.IDispatch.iid(), takeICatalogFromAbi, viewICatalog)
     }
 
     public unsafe func vtbl(): ICatalogVtbl {
@@ -220,12 +225,12 @@ public class ICatalog <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IComponentUtilVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InstallComponent: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var ImportComponent: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var ImportComponentByName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Win32_System_Com == "on"]
-    public var GetCLSIDs: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
+    public var GetCLSIDs: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -262,7 +267,7 @@ public class IComponentUtil <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IComponentUtil> {
-        return InterfaceDescriptor<IComponentUtil>("IComponentUtil", IComponentUtil.iid(), Win32__impl_l2.IDispatch.iid(), takeIComponentUtilFromAbi, viewIComponentUtil)
+        return InterfaceDescriptor<IComponentUtil>("IComponentUtil", IComponentUtil.iid(), Win32_impl_p2.IDispatch.iid(), takeIComponentUtilFromAbi, viewIComponentUtil)
     }
 
     public unsafe func vtbl(): IComponentUtilVtbl {
@@ -288,7 +293,7 @@ public class IComponentUtil <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_System_Com == "on"]
-    public unsafe func GetCLSIDs(bstrDLLFile: CPointer<UInt16>, bstrTypelibFile: CPointer<UInt16>, aCLSIDs: CPointer<CPointer<Win32__impl_l1.SAFEARRAYAbi>>): Int32 {
+    public unsafe func GetCLSIDs(bstrDLLFile: CPointer<UInt16>, bstrTypelibFile: CPointer<UInt16>, aCLSIDs: CPointer<CPointer<Win32_impl_p2.SAFEARRAYAbi>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCLSIDs(__liveRaw, bstrDLLFile, bstrTypelibFile, aCLSIDs)
@@ -298,7 +303,7 @@ public class IComponentUtil <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IPackageUtilVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InstallPackage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var ExportPackage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var ShutdownPackage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -338,7 +343,7 @@ public class IPackageUtil <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IPackageUtil> {
-        return InterfaceDescriptor<IPackageUtil>("IPackageUtil", IPackageUtil.iid(), Win32__impl_l2.IDispatch.iid(), takeIPackageUtilFromAbi, viewIPackageUtil)
+        return InterfaceDescriptor<IPackageUtil>("IPackageUtil", IPackageUtil.iid(), Win32_impl_p2.IDispatch.iid(), takeIPackageUtilFromAbi, viewIPackageUtil)
     }
 
     public unsafe func vtbl(): IPackageUtilVtbl {
@@ -367,7 +372,7 @@ public class IPackageUtil <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRemoteComponentUtilVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var InstallRemoteComponent: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public var InstallRemoteComponentByName: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -406,7 +411,7 @@ public class IRemoteComponentUtil <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRemoteComponentUtil> {
-        return InterfaceDescriptor<IRemoteComponentUtil>("IRemoteComponentUtil", IRemoteComponentUtil.iid(), Win32__impl_l2.IDispatch.iid(), takeIRemoteComponentUtilFromAbi, viewIRemoteComponentUtil)
+        return InterfaceDescriptor<IRemoteComponentUtil>("IRemoteComponentUtil", IRemoteComponentUtil.iid(), Win32_impl_p2.IDispatch.iid(), takeIRemoteComponentUtilFromAbi, viewIRemoteComponentUtil)
     }
 
     public unsafe func vtbl(): IRemoteComponentUtilVtbl {
@@ -429,7 +434,7 @@ public class IRemoteComponentUtil <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_TransactionServer == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct IRoleAssociationUtilVtbl {
-    public var base_: Win32__impl_l2.IDispatchVtbl = Win32__impl_l2.IDispatchVtbl()
+    public var base_: Win32_impl_p2.IDispatchVtbl = Win32_impl_p2.IDispatchVtbl()
     public var AssociateRole: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var AssociateRoleByName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -468,7 +473,7 @@ public class IRoleAssociationUtil <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IRoleAssociationUtil> {
-        return InterfaceDescriptor<IRoleAssociationUtil>("IRoleAssociationUtil", IRoleAssociationUtil.iid(), Win32__impl_l2.IDispatch.iid(), takeIRoleAssociationUtilFromAbi, viewIRoleAssociationUtil)
+        return InterfaceDescriptor<IRoleAssociationUtil>("IRoleAssociationUtil", IRoleAssociationUtil.iid(), Win32_impl_p2.IDispatch.iid(), takeIRoleAssociationUtilFromAbi, viewIRoleAssociationUtil)
     }
 
     public unsafe func vtbl(): IRoleAssociationUtilVtbl {

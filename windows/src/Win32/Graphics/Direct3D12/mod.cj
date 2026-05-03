@@ -4,17 +4,28 @@
 package windows.Win32.Graphics.Direct3D12
 
 import std.collection.*
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Graphics_Direct3D12 == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on"]
@@ -5971,8 +5982,8 @@ extend D3D12_FEATURE_DATA_EXISTING_HEAPS <: windows_core.CopyType & windows_core
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
     public var NumFeatureLevels: UInt32 = 0u32
-    public var pFeatureLevelsRequested: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi> = CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>()
-    public var MaxSupportedFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVEL = Win32__impl_l0.D3D_FEATURE_LEVEL()
+    public var pFeatureLevelsRequested: CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi> = CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>()
+    public var MaxSupportedFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVEL = Win32_impl_p0.D3D_FEATURE_LEVEL()
     public init() {}
 }
 
@@ -5980,8 +5991,8 @@ public struct D3D12_FEATURE_DATA_FEATURE_LEVELS {
 @C
 public struct D3D12_FEATURE_DATA_FEATURE_LEVELSAbi {
     public var NumFeatureLevels: UInt32 = 0u32
-    public var pFeatureLevelsRequested: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi> = CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>()
-    public var MaxSupportedFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVELAbi = Win32__impl_l0.D3D_FEATURE_LEVELAbi()
+    public var pFeatureLevelsRequested: CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi> = CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>()
+    public var MaxSupportedFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVELAbi = Win32_impl_p0.D3D_FEATURE_LEVELAbi()
     public init() {}
 }
 
@@ -5994,14 +6005,14 @@ extend D3D12_FEATURE_DATA_FEATURE_LEVELS <: windows_core.CopyType & windows_core
         var abi = D3D12_FEATURE_DATA_FEATURE_LEVELSAbi()
         abi.NumFeatureLevels = value.NumFeatureLevels
         abi.pFeatureLevelsRequested = value.pFeatureLevelsRequested
-        abi.MaxSupportedFeatureLevel = windows_core.projectTypedAbi(value.MaxSupportedFeatureLevel, windows_core.typeMarker<Win32__impl_l0.D3D_FEATURE_LEVEL>())
+        abi.MaxSupportedFeatureLevel = windows_core.projectTypedAbi(value.MaxSupportedFeatureLevel, windows_core.typeMarker<Win32_impl_p0.D3D_FEATURE_LEVEL>())
         return abi
     }
     public static func assumeInitRef(abi: D3D12_FEATURE_DATA_FEATURE_LEVELSAbi): D3D12_FEATURE_DATA_FEATURE_LEVELS {
         var value = D3D12_FEATURE_DATA_FEATURE_LEVELS()
         value.NumFeatureLevels = abi.NumFeatureLevels
         value.pFeatureLevelsRequested = abi.pFeatureLevelsRequested
-        value.MaxSupportedFeatureLevel = windows_core.fromTypedAbi(abi.MaxSupportedFeatureLevel, windows_core.typeMarker<Win32__impl_l0.D3D_FEATURE_LEVEL>()).unwrap()
+        value.MaxSupportedFeatureLevel = windows_core.fromTypedAbi(abi.MaxSupportedFeatureLevel, windows_core.typeMarker<Win32_impl_p0.D3D_FEATURE_LEVEL>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3D12_FEATURE_DATA_FEATURE_LEVELSAbi): Result<D3D12_FEATURE_DATA_FEATURE_LEVELS> { Result<D3D12_FEATURE_DATA_FEATURE_LEVELS>.Ok(D3D12_FEATURE_DATA_FEATURE_LEVELS.assumeInitRef(abi)) }
@@ -7025,7 +7036,7 @@ public struct D3D12_FUNCTION_DESC {
     public var MovcInstructionCount: UInt32 = 0u32
     public var ConversionInstructionCount: UInt32 = 0u32
     public var BitwiseInstructionCount: UInt32 = 0u32
-    public var MinFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVEL = Win32__impl_l0.D3D_FEATURE_LEVEL()
+    public var MinFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVEL = Win32_impl_p0.D3D_FEATURE_LEVEL()
     public var RequiredFeatureFlags: UInt64 = 0u64
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
     public var FunctionParameterCount: Int32 = 0i32
@@ -7064,7 +7075,7 @@ public struct D3D12_FUNCTION_DESCAbi {
     public var MovcInstructionCount: UInt32 = 0u32
     public var ConversionInstructionCount: UInt32 = 0u32
     public var BitwiseInstructionCount: UInt32 = 0u32
-    public var MinFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVELAbi = Win32__impl_l0.D3D_FEATURE_LEVELAbi()
+    public var MinFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVELAbi = Win32_impl_p0.D3D_FEATURE_LEVELAbi()
     public var RequiredFeatureFlags: UInt64 = 0u64
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
     public var FunctionParameterCount: Int32 = 0i32
@@ -7107,7 +7118,7 @@ extend D3D12_FUNCTION_DESC <: windows_core.CopyType & windows_core.RuntimeType &
         abi.MovcInstructionCount = value.MovcInstructionCount
         abi.ConversionInstructionCount = value.ConversionInstructionCount
         abi.BitwiseInstructionCount = value.BitwiseInstructionCount
-        abi.MinFeatureLevel = windows_core.projectTypedAbi(value.MinFeatureLevel, windows_core.typeMarker<Win32__impl_l0.D3D_FEATURE_LEVEL>())
+        abi.MinFeatureLevel = windows_core.projectTypedAbi(value.MinFeatureLevel, windows_core.typeMarker<Win32_impl_p0.D3D_FEATURE_LEVEL>())
         abi.RequiredFeatureFlags = value.RequiredFeatureFlags
         abi.Name = value.Name
         abi.FunctionParameterCount = value.FunctionParameterCount
@@ -7144,7 +7155,7 @@ extend D3D12_FUNCTION_DESC <: windows_core.CopyType & windows_core.RuntimeType &
         value.MovcInstructionCount = abi.MovcInstructionCount
         value.ConversionInstructionCount = abi.ConversionInstructionCount
         value.BitwiseInstructionCount = abi.BitwiseInstructionCount
-        value.MinFeatureLevel = windows_core.fromTypedAbi(abi.MinFeatureLevel, windows_core.typeMarker<Win32__impl_l0.D3D_FEATURE_LEVEL>()).unwrap()
+        value.MinFeatureLevel = windows_core.fromTypedAbi(abi.MinFeatureLevel, windows_core.typeMarker<Win32_impl_p0.D3D_FEATURE_LEVEL>()).unwrap()
         value.RequiredFeatureFlags = abi.RequiredFeatureFlags
         value.Name = abi.Name
         value.FunctionParameterCount = abi.FunctionParameterCount
@@ -13113,12 +13124,12 @@ extend D3D12_PACKED_MIP_INFO <: windows_core.CopyType & windows_core.RuntimeType
 public struct D3D12_PARAMETER_DESC {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
     public var SemanticName: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE = Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE()
-    public var Class: Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS = Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS()
+    public var Type: Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE = Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE()
+    public var Class: Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS = Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS()
     public var Rows: UInt32 = 0u32
     public var Columns: UInt32 = 0u32
-    public var InterpolationMode: Win32__impl_l0.D3D_INTERPOLATION_MODE = Win32__impl_l0.D3D_INTERPOLATION_MODE()
-    public var Flags: Win32__impl_l0.D3D_PARAMETER_FLAGS = Win32__impl_l0.D3D_PARAMETER_FLAGS()
+    public var InterpolationMode: Win32_impl_p0.D3D_INTERPOLATION_MODE = Win32_impl_p0.D3D_INTERPOLATION_MODE()
+    public var Flags: Win32_impl_p0.D3D_PARAMETER_FLAGS = Win32_impl_p0.D3D_PARAMETER_FLAGS()
     public var FirstInRegister: UInt32 = 0u32
     public var FirstInComponent: UInt32 = 0u32
     public var FirstOutRegister: UInt32 = 0u32
@@ -13131,12 +13142,12 @@ public struct D3D12_PARAMETER_DESC {
 public struct D3D12_PARAMETER_DESCAbi {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
     public var SemanticName: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_SHADER_VARIABLE_TYPEAbi = Win32__impl_l0.D3D_SHADER_VARIABLE_TYPEAbi()
-    public var Class: Win32__impl_l0.D3D_SHADER_VARIABLE_CLASSAbi = Win32__impl_l0.D3D_SHADER_VARIABLE_CLASSAbi()
+    public var Type: Win32_impl_p0.D3D_SHADER_VARIABLE_TYPEAbi = Win32_impl_p0.D3D_SHADER_VARIABLE_TYPEAbi()
+    public var Class: Win32_impl_p0.D3D_SHADER_VARIABLE_CLASSAbi = Win32_impl_p0.D3D_SHADER_VARIABLE_CLASSAbi()
     public var Rows: UInt32 = 0u32
     public var Columns: UInt32 = 0u32
-    public var InterpolationMode: Win32__impl_l0.D3D_INTERPOLATION_MODEAbi = Win32__impl_l0.D3D_INTERPOLATION_MODEAbi()
-    public var Flags: Win32__impl_l0.D3D_PARAMETER_FLAGSAbi = Win32__impl_l0.D3D_PARAMETER_FLAGSAbi()
+    public var InterpolationMode: Win32_impl_p0.D3D_INTERPOLATION_MODEAbi = Win32_impl_p0.D3D_INTERPOLATION_MODEAbi()
+    public var Flags: Win32_impl_p0.D3D_PARAMETER_FLAGSAbi = Win32_impl_p0.D3D_PARAMETER_FLAGSAbi()
     public var FirstInRegister: UInt32 = 0u32
     public var FirstInComponent: UInt32 = 0u32
     public var FirstOutRegister: UInt32 = 0u32
@@ -13153,12 +13164,12 @@ extend D3D12_PARAMETER_DESC <: windows_core.CopyType & windows_core.RuntimeType 
         var abi = D3D12_PARAMETER_DESCAbi()
         abi.Name = value.Name
         abi.SemanticName = value.SemanticName
-        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE>())
-        abi.Class = windows_core.projectTypedAbi(value.Class, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS>())
+        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE>())
+        abi.Class = windows_core.projectTypedAbi(value.Class, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS>())
         abi.Rows = value.Rows
         abi.Columns = value.Columns
-        abi.InterpolationMode = windows_core.projectTypedAbi(value.InterpolationMode, windows_core.typeMarker<Win32__impl_l0.D3D_INTERPOLATION_MODE>())
-        abi.Flags = windows_core.projectTypedAbi(value.Flags, windows_core.typeMarker<Win32__impl_l0.D3D_PARAMETER_FLAGS>())
+        abi.InterpolationMode = windows_core.projectTypedAbi(value.InterpolationMode, windows_core.typeMarker<Win32_impl_p0.D3D_INTERPOLATION_MODE>())
+        abi.Flags = windows_core.projectTypedAbi(value.Flags, windows_core.typeMarker<Win32_impl_p0.D3D_PARAMETER_FLAGS>())
         abi.FirstInRegister = value.FirstInRegister
         abi.FirstInComponent = value.FirstInComponent
         abi.FirstOutRegister = value.FirstOutRegister
@@ -13169,12 +13180,12 @@ extend D3D12_PARAMETER_DESC <: windows_core.CopyType & windows_core.RuntimeType 
         var value = D3D12_PARAMETER_DESC()
         value.Name = abi.Name
         value.SemanticName = abi.SemanticName
-        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE>()).unwrap()
-        value.Class = windows_core.fromTypedAbi(abi.Class, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS>()).unwrap()
+        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE>()).unwrap()
+        value.Class = windows_core.fromTypedAbi(abi.Class, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS>()).unwrap()
         value.Rows = abi.Rows
         value.Columns = abi.Columns
-        value.InterpolationMode = windows_core.fromTypedAbi(abi.InterpolationMode, windows_core.typeMarker<Win32__impl_l0.D3D_INTERPOLATION_MODE>()).unwrap()
-        value.Flags = windows_core.fromTypedAbi(abi.Flags, windows_core.typeMarker<Win32__impl_l0.D3D_PARAMETER_FLAGS>()).unwrap()
+        value.InterpolationMode = windows_core.fromTypedAbi(abi.InterpolationMode, windows_core.typeMarker<Win32_impl_p0.D3D_INTERPOLATION_MODE>()).unwrap()
+        value.Flags = windows_core.fromTypedAbi(abi.Flags, windows_core.typeMarker<Win32_impl_p0.D3D_PARAMETER_FLAGS>()).unwrap()
         value.FirstInRegister = abi.FirstInRegister
         value.FirstInComponent = abi.FirstInComponent
         value.FirstOutRegister = abi.FirstOutRegister
@@ -18720,7 +18731,7 @@ extend D3D12_SET_WORK_GRAPH_FLAGS <: windows_core.CopyType & windows_core.Runtim
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct D3D12_SHADER_BUFFER_DESC {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_CBUFFER_TYPE = Win32__impl_l0.D3D_CBUFFER_TYPE()
+    public var Type: Win32_impl_p0.D3D_CBUFFER_TYPE = Win32_impl_p0.D3D_CBUFFER_TYPE()
     public var Variables: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public var uFlags: UInt32 = 0u32
@@ -18731,7 +18742,7 @@ public struct D3D12_SHADER_BUFFER_DESC {
 @C
 public struct D3D12_SHADER_BUFFER_DESCAbi {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_CBUFFER_TYPEAbi = Win32__impl_l0.D3D_CBUFFER_TYPEAbi()
+    public var Type: Win32_impl_p0.D3D_CBUFFER_TYPEAbi = Win32_impl_p0.D3D_CBUFFER_TYPEAbi()
     public var Variables: UInt32 = 0u32
     public var Size: UInt32 = 0u32
     public var uFlags: UInt32 = 0u32
@@ -18746,7 +18757,7 @@ extend D3D12_SHADER_BUFFER_DESC <: windows_core.CopyType & windows_core.RuntimeT
     public static func projectAbi(value: D3D12_SHADER_BUFFER_DESC): D3D12_SHADER_BUFFER_DESCAbi {
         var abi = D3D12_SHADER_BUFFER_DESCAbi()
         abi.Name = value.Name
-        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32__impl_l0.D3D_CBUFFER_TYPE>())
+        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32_impl_p0.D3D_CBUFFER_TYPE>())
         abi.Variables = value.Variables
         abi.Size = value.Size
         abi.uFlags = value.uFlags
@@ -18755,7 +18766,7 @@ extend D3D12_SHADER_BUFFER_DESC <: windows_core.CopyType & windows_core.RuntimeT
     public static func assumeInitRef(abi: D3D12_SHADER_BUFFER_DESCAbi): D3D12_SHADER_BUFFER_DESC {
         var value = D3D12_SHADER_BUFFER_DESC()
         value.Name = abi.Name
-        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32__impl_l0.D3D_CBUFFER_TYPE>()).unwrap()
+        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32_impl_p0.D3D_CBUFFER_TYPE>()).unwrap()
         value.Variables = abi.Variables
         value.Size = abi.Size
         value.uFlags = abi.uFlags
@@ -19316,15 +19327,15 @@ public struct D3D12_SHADER_DESC {
     public var ArrayInstructionCount: UInt32 = 0u32
     public var CutInstructionCount: UInt32 = 0u32
     public var EmitInstructionCount: UInt32 = 0u32
-    public var GSOutputTopology: Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGY = Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGY()
+    public var GSOutputTopology: Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGY = Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGY()
     public var GSMaxOutputVertexCount: UInt32 = 0u32
-    public var InputPrimitive: Win32__impl_l0.D3D_PRIMITIVE = Win32__impl_l0.D3D_PRIMITIVE()
+    public var InputPrimitive: Win32_impl_p0.D3D_PRIMITIVE = Win32_impl_p0.D3D_PRIMITIVE()
     public var PatchConstantParameters: UInt32 = 0u32
     public var cGSInstanceCount: UInt32 = 0u32
     public var cControlPoints: UInt32 = 0u32
-    public var HSOutputPrimitive: Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE = Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE()
-    public var HSPartitioning: Win32__impl_l0.D3D_TESSELLATOR_PARTITIONING = Win32__impl_l0.D3D_TESSELLATOR_PARTITIONING()
-    public var TessellatorDomain: Win32__impl_l0.D3D_TESSELLATOR_DOMAIN = Win32__impl_l0.D3D_TESSELLATOR_DOMAIN()
+    public var HSOutputPrimitive: Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE = Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE()
+    public var HSPartitioning: Win32_impl_p0.D3D_TESSELLATOR_PARTITIONING = Win32_impl_p0.D3D_TESSELLATOR_PARTITIONING()
+    public var TessellatorDomain: Win32_impl_p0.D3D_TESSELLATOR_DOMAIN = Win32_impl_p0.D3D_TESSELLATOR_DOMAIN()
     public var cBarrierInstructions: UInt32 = 0u32
     public var cInterlockedInstructions: UInt32 = 0u32
     public var cTextureStoreInstructions: UInt32 = 0u32
@@ -19360,15 +19371,15 @@ public struct D3D12_SHADER_DESCAbi {
     public var ArrayInstructionCount: UInt32 = 0u32
     public var CutInstructionCount: UInt32 = 0u32
     public var EmitInstructionCount: UInt32 = 0u32
-    public var GSOutputTopology: Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGYAbi = Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGYAbi()
+    public var GSOutputTopology: Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGYAbi = Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGYAbi()
     public var GSMaxOutputVertexCount: UInt32 = 0u32
-    public var InputPrimitive: Win32__impl_l0.D3D_PRIMITIVEAbi = Win32__impl_l0.D3D_PRIMITIVEAbi()
+    public var InputPrimitive: Win32_impl_p0.D3D_PRIMITIVEAbi = Win32_impl_p0.D3D_PRIMITIVEAbi()
     public var PatchConstantParameters: UInt32 = 0u32
     public var cGSInstanceCount: UInt32 = 0u32
     public var cControlPoints: UInt32 = 0u32
-    public var HSOutputPrimitive: Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVEAbi = Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVEAbi()
-    public var HSPartitioning: Win32__impl_l0.D3D_TESSELLATOR_PARTITIONINGAbi = Win32__impl_l0.D3D_TESSELLATOR_PARTITIONINGAbi()
-    public var TessellatorDomain: Win32__impl_l0.D3D_TESSELLATOR_DOMAINAbi = Win32__impl_l0.D3D_TESSELLATOR_DOMAINAbi()
+    public var HSOutputPrimitive: Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVEAbi = Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVEAbi()
+    public var HSPartitioning: Win32_impl_p0.D3D_TESSELLATOR_PARTITIONINGAbi = Win32_impl_p0.D3D_TESSELLATOR_PARTITIONINGAbi()
+    public var TessellatorDomain: Win32_impl_p0.D3D_TESSELLATOR_DOMAINAbi = Win32_impl_p0.D3D_TESSELLATOR_DOMAINAbi()
     public var cBarrierInstructions: UInt32 = 0u32
     public var cInterlockedInstructions: UInt32 = 0u32
     public var cTextureStoreInstructions: UInt32 = 0u32
@@ -19408,15 +19419,15 @@ extend D3D12_SHADER_DESC <: windows_core.CopyType & windows_core.RuntimeType & w
         abi.ArrayInstructionCount = value.ArrayInstructionCount
         abi.CutInstructionCount = value.CutInstructionCount
         abi.EmitInstructionCount = value.EmitInstructionCount
-        abi.GSOutputTopology = windows_core.projectTypedAbi(value.GSOutputTopology, windows_core.typeMarker<Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGY>())
+        abi.GSOutputTopology = windows_core.projectTypedAbi(value.GSOutputTopology, windows_core.typeMarker<Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGY>())
         abi.GSMaxOutputVertexCount = value.GSMaxOutputVertexCount
-        abi.InputPrimitive = windows_core.projectTypedAbi(value.InputPrimitive, windows_core.typeMarker<Win32__impl_l0.D3D_PRIMITIVE>())
+        abi.InputPrimitive = windows_core.projectTypedAbi(value.InputPrimitive, windows_core.typeMarker<Win32_impl_p0.D3D_PRIMITIVE>())
         abi.PatchConstantParameters = value.PatchConstantParameters
         abi.cGSInstanceCount = value.cGSInstanceCount
         abi.cControlPoints = value.cControlPoints
-        abi.HSOutputPrimitive = windows_core.projectTypedAbi(value.HSOutputPrimitive, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE>())
-        abi.HSPartitioning = windows_core.projectTypedAbi(value.HSPartitioning, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_PARTITIONING>())
-        abi.TessellatorDomain = windows_core.projectTypedAbi(value.TessellatorDomain, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_DOMAIN>())
+        abi.HSOutputPrimitive = windows_core.projectTypedAbi(value.HSOutputPrimitive, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE>())
+        abi.HSPartitioning = windows_core.projectTypedAbi(value.HSPartitioning, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_PARTITIONING>())
+        abi.TessellatorDomain = windows_core.projectTypedAbi(value.TessellatorDomain, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_DOMAIN>())
         abi.cBarrierInstructions = value.cBarrierInstructions
         abi.cInterlockedInstructions = value.cInterlockedInstructions
         abi.cTextureStoreInstructions = value.cTextureStoreInstructions
@@ -19450,15 +19461,15 @@ extend D3D12_SHADER_DESC <: windows_core.CopyType & windows_core.RuntimeType & w
         value.ArrayInstructionCount = abi.ArrayInstructionCount
         value.CutInstructionCount = abi.CutInstructionCount
         value.EmitInstructionCount = abi.EmitInstructionCount
-        value.GSOutputTopology = windows_core.fromTypedAbi(abi.GSOutputTopology, windows_core.typeMarker<Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGY>()).unwrap()
+        value.GSOutputTopology = windows_core.fromTypedAbi(abi.GSOutputTopology, windows_core.typeMarker<Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGY>()).unwrap()
         value.GSMaxOutputVertexCount = abi.GSMaxOutputVertexCount
-        value.InputPrimitive = windows_core.fromTypedAbi(abi.InputPrimitive, windows_core.typeMarker<Win32__impl_l0.D3D_PRIMITIVE>()).unwrap()
+        value.InputPrimitive = windows_core.fromTypedAbi(abi.InputPrimitive, windows_core.typeMarker<Win32_impl_p0.D3D_PRIMITIVE>()).unwrap()
         value.PatchConstantParameters = abi.PatchConstantParameters
         value.cGSInstanceCount = abi.cGSInstanceCount
         value.cControlPoints = abi.cControlPoints
-        value.HSOutputPrimitive = windows_core.fromTypedAbi(abi.HSOutputPrimitive, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE>()).unwrap()
-        value.HSPartitioning = windows_core.fromTypedAbi(abi.HSPartitioning, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_PARTITIONING>()).unwrap()
-        value.TessellatorDomain = windows_core.fromTypedAbi(abi.TessellatorDomain, windows_core.typeMarker<Win32__impl_l0.D3D_TESSELLATOR_DOMAIN>()).unwrap()
+        value.HSOutputPrimitive = windows_core.fromTypedAbi(abi.HSOutputPrimitive, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_OUTPUT_PRIMITIVE>()).unwrap()
+        value.HSPartitioning = windows_core.fromTypedAbi(abi.HSPartitioning, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_PARTITIONING>()).unwrap()
+        value.TessellatorDomain = windows_core.fromTypedAbi(abi.TessellatorDomain, windows_core.typeMarker<Win32_impl_p0.D3D_TESSELLATOR_DOMAIN>()).unwrap()
         value.cBarrierInstructions = abi.cBarrierInstructions
         value.cInterlockedInstructions = abi.cInterlockedInstructions
         value.cTextureStoreInstructions = abi.cTextureStoreInstructions
@@ -19474,12 +19485,12 @@ extend D3D12_SHADER_DESC <: windows_core.CopyType & windows_core.RuntimeType & w
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct D3D12_SHADER_INPUT_BIND_DESC {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_SHADER_INPUT_TYPE = Win32__impl_l0.D3D_SHADER_INPUT_TYPE()
+    public var Type: Win32_impl_p0.D3D_SHADER_INPUT_TYPE = Win32_impl_p0.D3D_SHADER_INPUT_TYPE()
     public var BindPoint: UInt32 = 0u32
     public var BindCount: UInt32 = 0u32
     public var uFlags: UInt32 = 0u32
-    public var ReturnType: Win32__impl_l0.D3D_RESOURCE_RETURN_TYPE = Win32__impl_l0.D3D_RESOURCE_RETURN_TYPE()
-    public var Dimension: Win32__impl_l0.D3D_SRV_DIMENSION = Win32__impl_l0.D3D_SRV_DIMENSION()
+    public var ReturnType: Win32_impl_p0.D3D_RESOURCE_RETURN_TYPE = Win32_impl_p0.D3D_RESOURCE_RETURN_TYPE()
+    public var Dimension: Win32_impl_p0.D3D_SRV_DIMENSION = Win32_impl_p0.D3D_SRV_DIMENSION()
     public var NumSamples: UInt32 = 0u32
     public var Space: UInt32 = 0u32
     public var uID: UInt32 = 0u32
@@ -19490,12 +19501,12 @@ public struct D3D12_SHADER_INPUT_BIND_DESC {
 @C
 public struct D3D12_SHADER_INPUT_BIND_DESCAbi {
     public var Name: CPointer<UInt8> = CPointer<UInt8>()
-    public var Type: Win32__impl_l0.D3D_SHADER_INPUT_TYPEAbi = Win32__impl_l0.D3D_SHADER_INPUT_TYPEAbi()
+    public var Type: Win32_impl_p0.D3D_SHADER_INPUT_TYPEAbi = Win32_impl_p0.D3D_SHADER_INPUT_TYPEAbi()
     public var BindPoint: UInt32 = 0u32
     public var BindCount: UInt32 = 0u32
     public var uFlags: UInt32 = 0u32
-    public var ReturnType: Win32__impl_l0.D3D_RESOURCE_RETURN_TYPEAbi = Win32__impl_l0.D3D_RESOURCE_RETURN_TYPEAbi()
-    public var Dimension: Win32__impl_l0.D3D_SRV_DIMENSIONAbi = Win32__impl_l0.D3D_SRV_DIMENSIONAbi()
+    public var ReturnType: Win32_impl_p0.D3D_RESOURCE_RETURN_TYPEAbi = Win32_impl_p0.D3D_RESOURCE_RETURN_TYPEAbi()
+    public var Dimension: Win32_impl_p0.D3D_SRV_DIMENSIONAbi = Win32_impl_p0.D3D_SRV_DIMENSIONAbi()
     public var NumSamples: UInt32 = 0u32
     public var Space: UInt32 = 0u32
     public var uID: UInt32 = 0u32
@@ -19510,12 +19521,12 @@ extend D3D12_SHADER_INPUT_BIND_DESC <: windows_core.CopyType & windows_core.Runt
     public static func projectAbi(value: D3D12_SHADER_INPUT_BIND_DESC): D3D12_SHADER_INPUT_BIND_DESCAbi {
         var abi = D3D12_SHADER_INPUT_BIND_DESCAbi()
         abi.Name = value.Name
-        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_INPUT_TYPE>())
+        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_INPUT_TYPE>())
         abi.BindPoint = value.BindPoint
         abi.BindCount = value.BindCount
         abi.uFlags = value.uFlags
-        abi.ReturnType = windows_core.projectTypedAbi(value.ReturnType, windows_core.typeMarker<Win32__impl_l0.D3D_RESOURCE_RETURN_TYPE>())
-        abi.Dimension = windows_core.projectTypedAbi(value.Dimension, windows_core.typeMarker<Win32__impl_l0.D3D_SRV_DIMENSION>())
+        abi.ReturnType = windows_core.projectTypedAbi(value.ReturnType, windows_core.typeMarker<Win32_impl_p0.D3D_RESOURCE_RETURN_TYPE>())
+        abi.Dimension = windows_core.projectTypedAbi(value.Dimension, windows_core.typeMarker<Win32_impl_p0.D3D_SRV_DIMENSION>())
         abi.NumSamples = value.NumSamples
         abi.Space = value.Space
         abi.uID = value.uID
@@ -19524,12 +19535,12 @@ extend D3D12_SHADER_INPUT_BIND_DESC <: windows_core.CopyType & windows_core.Runt
     public static func assumeInitRef(abi: D3D12_SHADER_INPUT_BIND_DESCAbi): D3D12_SHADER_INPUT_BIND_DESC {
         var value = D3D12_SHADER_INPUT_BIND_DESC()
         value.Name = abi.Name
-        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_INPUT_TYPE>()).unwrap()
+        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_INPUT_TYPE>()).unwrap()
         value.BindPoint = abi.BindPoint
         value.BindCount = abi.BindCount
         value.uFlags = abi.uFlags
-        value.ReturnType = windows_core.fromTypedAbi(abi.ReturnType, windows_core.typeMarker<Win32__impl_l0.D3D_RESOURCE_RETURN_TYPE>()).unwrap()
-        value.Dimension = windows_core.fromTypedAbi(abi.Dimension, windows_core.typeMarker<Win32__impl_l0.D3D_SRV_DIMENSION>()).unwrap()
+        value.ReturnType = windows_core.fromTypedAbi(abi.ReturnType, windows_core.typeMarker<Win32_impl_p0.D3D_RESOURCE_RETURN_TYPE>()).unwrap()
+        value.Dimension = windows_core.fromTypedAbi(abi.Dimension, windows_core.typeMarker<Win32_impl_p0.D3D_SRV_DIMENSION>()).unwrap()
         value.NumSamples = abi.NumSamples
         value.Space = abi.Space
         value.uID = abi.uID
@@ -19615,8 +19626,8 @@ extend D3D12_SHADER_MIN_PRECISION_SUPPORT <: windows_core.CopyType & windows_cor
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public struct D3D12_SHADER_TYPE_DESC {
-    public var Class: Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS = Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS()
-    public var Type: Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE = Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE()
+    public var Class: Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS = Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS()
+    public var Type: Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE = Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE()
     public var Rows: UInt32 = 0u32
     public var Columns: UInt32 = 0u32
     public var Elements: UInt32 = 0u32
@@ -19629,8 +19640,8 @@ public struct D3D12_SHADER_TYPE_DESC {
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 @C
 public struct D3D12_SHADER_TYPE_DESCAbi {
-    public var Class: Win32__impl_l0.D3D_SHADER_VARIABLE_CLASSAbi = Win32__impl_l0.D3D_SHADER_VARIABLE_CLASSAbi()
-    public var Type: Win32__impl_l0.D3D_SHADER_VARIABLE_TYPEAbi = Win32__impl_l0.D3D_SHADER_VARIABLE_TYPEAbi()
+    public var Class: Win32_impl_p0.D3D_SHADER_VARIABLE_CLASSAbi = Win32_impl_p0.D3D_SHADER_VARIABLE_CLASSAbi()
+    public var Type: Win32_impl_p0.D3D_SHADER_VARIABLE_TYPEAbi = Win32_impl_p0.D3D_SHADER_VARIABLE_TYPEAbi()
     public var Rows: UInt32 = 0u32
     public var Columns: UInt32 = 0u32
     public var Elements: UInt32 = 0u32
@@ -19647,8 +19658,8 @@ extend D3D12_SHADER_TYPE_DESC <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func signature(): String { "struct(Windows.Win32.Graphics.Direct3D12.D3D12_SHADER_TYPE_DESC;enum(Windows.Win32.Graphics.Direct3D.D3D_SHADER_VARIABLE_CLASS;i4);enum(Windows.Win32.Graphics.Direct3D.D3D_SHADER_VARIABLE_TYPE;i4);u4;u4;u4;u4;u4;struct(Windows.Win32.Foundation.PSTR;cinterface(IInspectable)))" }
     public static func projectAbi(value: D3D12_SHADER_TYPE_DESC): D3D12_SHADER_TYPE_DESCAbi {
         var abi = D3D12_SHADER_TYPE_DESCAbi()
-        abi.Class = windows_core.projectTypedAbi(value.Class, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS>())
-        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE>())
+        abi.Class = windows_core.projectTypedAbi(value.Class, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS>())
+        abi.Type = windows_core.projectTypedAbi(value.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE>())
         abi.Rows = value.Rows
         abi.Columns = value.Columns
         abi.Elements = value.Elements
@@ -19659,8 +19670,8 @@ extend D3D12_SHADER_TYPE_DESC <: windows_core.CopyType & windows_core.RuntimeTyp
     }
     public static func assumeInitRef(abi: D3D12_SHADER_TYPE_DESCAbi): D3D12_SHADER_TYPE_DESC {
         var value = D3D12_SHADER_TYPE_DESC()
-        value.Class = windows_core.fromTypedAbi(abi.Class, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_CLASS>()).unwrap()
-        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32__impl_l0.D3D_SHADER_VARIABLE_TYPE>()).unwrap()
+        value.Class = windows_core.fromTypedAbi(abi.Class, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_CLASS>()).unwrap()
+        value.Type = windows_core.fromTypedAbi(abi.Type, windows_core.typeMarker<Win32_impl_p0.D3D_SHADER_VARIABLE_TYPE>()).unwrap()
         value.Rows = abi.Rows
         value.Columns = abi.Columns
         value.Elements = abi.Elements
@@ -20108,12 +20119,12 @@ public struct D3D12_SIGNATURE_PARAMETER_DESC {
     public var SemanticName: CPointer<UInt8> = CPointer<UInt8>()
     public var SemanticIndex: UInt32 = 0u32
     public var Register: UInt32 = 0u32
-    public var SystemValueType: Win32__impl_l0.D3D_NAME = Win32__impl_l0.D3D_NAME()
-    public var ComponentType: Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPE = Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPE()
+    public var SystemValueType: Win32_impl_p0.D3D_NAME = Win32_impl_p0.D3D_NAME()
+    public var ComponentType: Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPE = Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPE()
     public var Mask: UInt8 = 0u8
     public var ReadWriteMask: UInt8 = 0u8
     public var Stream: UInt32 = 0u32
-    public var MinPrecision: Win32__impl_l0.D3D_MIN_PRECISION = Win32__impl_l0.D3D_MIN_PRECISION()
+    public var MinPrecision: Win32_impl_p0.D3D_MIN_PRECISION = Win32_impl_p0.D3D_MIN_PRECISION()
     public init() {}
 }
 
@@ -20123,12 +20134,12 @@ public struct D3D12_SIGNATURE_PARAMETER_DESCAbi {
     public var SemanticName: CPointer<UInt8> = CPointer<UInt8>()
     public var SemanticIndex: UInt32 = 0u32
     public var Register: UInt32 = 0u32
-    public var SystemValueType: Win32__impl_l0.D3D_NAMEAbi = Win32__impl_l0.D3D_NAMEAbi()
-    public var ComponentType: Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPEAbi = Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPEAbi()
+    public var SystemValueType: Win32_impl_p0.D3D_NAMEAbi = Win32_impl_p0.D3D_NAMEAbi()
+    public var ComponentType: Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPEAbi = Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPEAbi()
     public var Mask: UInt8 = 0u8
     public var ReadWriteMask: UInt8 = 0u8
     public var Stream: UInt32 = 0u32
-    public var MinPrecision: Win32__impl_l0.D3D_MIN_PRECISIONAbi = Win32__impl_l0.D3D_MIN_PRECISIONAbi()
+    public var MinPrecision: Win32_impl_p0.D3D_MIN_PRECISIONAbi = Win32_impl_p0.D3D_MIN_PRECISIONAbi()
     public init() {}
 }
 
@@ -20142,12 +20153,12 @@ extend D3D12_SIGNATURE_PARAMETER_DESC <: windows_core.CopyType & windows_core.Ru
         abi.SemanticName = value.SemanticName
         abi.SemanticIndex = value.SemanticIndex
         abi.Register = value.Register
-        abi.SystemValueType = windows_core.projectTypedAbi(value.SystemValueType, windows_core.typeMarker<Win32__impl_l0.D3D_NAME>())
-        abi.ComponentType = windows_core.projectTypedAbi(value.ComponentType, windows_core.typeMarker<Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPE>())
+        abi.SystemValueType = windows_core.projectTypedAbi(value.SystemValueType, windows_core.typeMarker<Win32_impl_p0.D3D_NAME>())
+        abi.ComponentType = windows_core.projectTypedAbi(value.ComponentType, windows_core.typeMarker<Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPE>())
         abi.Mask = value.Mask
         abi.ReadWriteMask = value.ReadWriteMask
         abi.Stream = value.Stream
-        abi.MinPrecision = windows_core.projectTypedAbi(value.MinPrecision, windows_core.typeMarker<Win32__impl_l0.D3D_MIN_PRECISION>())
+        abi.MinPrecision = windows_core.projectTypedAbi(value.MinPrecision, windows_core.typeMarker<Win32_impl_p0.D3D_MIN_PRECISION>())
         return abi
     }
     public static func assumeInitRef(abi: D3D12_SIGNATURE_PARAMETER_DESCAbi): D3D12_SIGNATURE_PARAMETER_DESC {
@@ -20155,12 +20166,12 @@ extend D3D12_SIGNATURE_PARAMETER_DESC <: windows_core.CopyType & windows_core.Ru
         value.SemanticName = abi.SemanticName
         value.SemanticIndex = abi.SemanticIndex
         value.Register = abi.Register
-        value.SystemValueType = windows_core.fromTypedAbi(abi.SystemValueType, windows_core.typeMarker<Win32__impl_l0.D3D_NAME>()).unwrap()
-        value.ComponentType = windows_core.fromTypedAbi(abi.ComponentType, windows_core.typeMarker<Win32__impl_l0.D3D_REGISTER_COMPONENT_TYPE>()).unwrap()
+        value.SystemValueType = windows_core.fromTypedAbi(abi.SystemValueType, windows_core.typeMarker<Win32_impl_p0.D3D_NAME>()).unwrap()
+        value.ComponentType = windows_core.fromTypedAbi(abi.ComponentType, windows_core.typeMarker<Win32_impl_p0.D3D_REGISTER_COMPONENT_TYPE>()).unwrap()
         value.Mask = abi.Mask
         value.ReadWriteMask = abi.ReadWriteMask
         value.Stream = abi.Stream
-        value.MinPrecision = windows_core.fromTypedAbi(abi.MinPrecision, windows_core.typeMarker<Win32__impl_l0.D3D_MIN_PRECISION>()).unwrap()
+        value.MinPrecision = windows_core.fromTypedAbi(abi.MinPrecision, windows_core.typeMarker<Win32_impl_p0.D3D_MIN_PRECISION>()).unwrap()
         return value
     }
     public static func fromAbi(abi: D3D12_SIGNATURE_PARAMETER_DESCAbi): Result<D3D12_SIGNATURE_PARAMETER_DESC> { Result<D3D12_SIGNATURE_PARAMETER_DESC>.Ok(D3D12_SIGNATURE_PARAMETER_DESC.assumeInitRef(abi)) }
@@ -24822,7 +24833,7 @@ public struct ID3D12DeviceFactoryVtbl {
     public var GetConfigurationInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var EnableExperimentalFeatures: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on"]
-    public var CreateDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32__impl_l0.D3D_FEATURE_LEVELAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    public var CreateDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, Win32_impl_p0.D3D_FEATURE_LEVELAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
 
@@ -24903,7 +24914,7 @@ public class ID3D12DeviceFactory <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on"]
-    public unsafe func CreateDevice(adapter: CPointer<Unit>, FeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppvDevice: CPointer<CPointer<Unit>>): Int32 {
+    public unsafe func CreateDevice(adapter: CPointer<Unit>, FeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppvDevice: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateDevice(__liveRaw, adapter, FeatureLevel, riid, ppvDevice)
@@ -26400,7 +26411,7 @@ public class ID3D12WorkGraphProperties <: InterfaceWrapperBase & ComInterface {
 public type PFN_D3D12_COMPILER_CREATE_FACTORY = CFunc<(CPointer<UInt16>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on")]
-public type PFN_D3D12_CREATE_DEVICE = CFunc<(CPointer<Unit>, Win32__impl_l0.D3D_FEATURE_LEVELAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
+public type PFN_D3D12_CREATE_DEVICE = CFunc<(CPointer<Unit>, Win32_impl_p0.D3D_FEATURE_LEVELAbi, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on"]
 public type PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER = CFunc<(CPointer<Unit>, UIntNative, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
@@ -27962,7 +27973,7 @@ public struct D3D12_DRED_ALLOCATION_NODE1 {
     public var ObjectNameW: CPointer<UInt16> = CPointer<UInt16>()
     public var AllocationType: D3D12_DRED_ALLOCATION_TYPE = D3D12_DRED_ALLOCATION_TYPE()
     public var pNext: CPointer<D3D12_DRED_ALLOCATION_NODE1Abi> = CPointer<D3D12_DRED_ALLOCATION_NODE1Abi>()
-    public var pObject: Win32__impl_l0.IUnknown = Win32__impl_l0.IUnknown(CPointer<Unit>())
+    public var pObject: Win32_impl_p0.IUnknown = Win32_impl_p0.IUnknown(CPointer<Unit>())
     public init() {}
 }
 
@@ -27997,7 +28008,7 @@ extend D3D12_DRED_ALLOCATION_NODE1 <: windows_core.CopyType & windows_core.Runti
         value.ObjectNameW = abi.ObjectNameW
         value.AllocationType = D3D12_DRED_ALLOCATION_TYPE.assumeInitRef(abi.AllocationType)
         value.pNext = abi.pNext
-        value.pObject = Win32__impl_l0.IUnknown.fromAbiTake(abi.pObject)
+        value.pObject = Win32_impl_p0.IUnknown.fromAbiTake(abi.pObject)
         return value
     }
     public static func fromAbi(abi: D3D12_DRED_ALLOCATION_NODE1Abi): Result<D3D12_DRED_ALLOCATION_NODE1> { Result<D3D12_DRED_ALLOCATION_NODE1>.Ok(D3D12_DRED_ALLOCATION_NODE1.assumeInitRef(abi)) }
@@ -37497,11 +37508,11 @@ public type PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE = CFunc<(CPointer<D3D12
 foreign {
     // param-hint: pAdapter optional
     // param-hint: ppDevice optional
-    func D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32
+    func D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on"]
-public unsafe func Windows_D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Win32__impl_l0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+public unsafe func Windows_D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Win32_impl_p0.D3D_FEATURE_LEVELAbi, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32 {
     return D3D12CreateDevice(pAdapter, MinimumFeatureLevel, riid, ppDevice)
 }
 
@@ -40268,7 +40279,7 @@ public struct ID3D12GraphicsCommandListVtbl {
     @When[Windows_Win32_Graphics_Dxgi_Common == "on"]
     public var ResolveSubresource: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi) -> Unit> = { _, _, _, _, _, _ => () }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var IASetPrimitiveTopology: CFunc<(CPointer<Unit>, Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGYAbi) -> Unit> = { _, _ => () }
+    public var IASetPrimitiveTopology: CFunc<(CPointer<Unit>, Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGYAbi) -> Unit> = { _, _ => () }
     public var RSSetViewports: CFunc<(CPointer<Unit>, UInt32, CPointer<D3D12_VIEWPORTAbi>) -> Unit> = { _, _, _ => () }
     public var RSSetScissorRects: CFunc<(CPointer<Unit>, UInt32, CPointer<Win32_Foundation.RECTAbi>) -> Unit> = { _, _, _ => () }
     public var OMSetBlendFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Unit> = { _, _ => () }
@@ -40421,7 +40432,7 @@ public class ID3D12GraphicsCommandList <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func IASetPrimitiveTopology(PrimitiveTopology: Win32__impl_l0.D3D_PRIMITIVE_TOPOLOGYAbi): Unit {
+    public unsafe func IASetPrimitiveTopology(PrimitiveTopology: Win32_impl_p0.D3D_PRIMITIVE_TOPOLOGYAbi): Unit {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         __vt.IASetPrimitiveTopology(__liveRaw, PrimitiveTopology)
@@ -42789,11 +42800,11 @@ public struct ID3D12ShaderReflectionVtbl {
     public var GetConversionInstructionCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     public var GetBitwiseInstructionCount: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetGSInputPrimitive: CFunc<(CPointer<Unit>) -> Win32__impl_l0.D3D_PRIMITIVEAbi> = { _ => Win32__impl_l0.D3D_PRIMITIVEAbi() }
+    public var GetGSInputPrimitive: CFunc<(CPointer<Unit>) -> Win32_impl_p0.D3D_PRIMITIVEAbi> = { _ => Win32_impl_p0.D3D_PRIMITIVEAbi() }
     public var IsSampleFrequencyShader: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetNumInterfaceSlots: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0 }
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public var GetMinFeatureLevel: CFunc<(CPointer<Unit>, CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>) -> Int32> = { _, _ => 0 }
+    public var GetMinFeatureLevel: CFunc<(CPointer<Unit>, CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>) -> Int32> = { _, _ => 0 }
     public var GetThreadGroupSize: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> UInt32> = { _, _, _, _ => 0 }
     public var GetRequiresFlags: CFunc<(CPointer<Unit>) -> UInt64> = { _ => 0 }
     public init() {}
@@ -42924,7 +42935,7 @@ public class ID3D12ShaderReflection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetGSInputPrimitive(): Win32__impl_l0.D3D_PRIMITIVEAbi {
+    public unsafe func GetGSInputPrimitive(): Win32_impl_p0.D3D_PRIMITIVEAbi {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGSInputPrimitive(__liveRaw)
@@ -42943,7 +42954,7 @@ public class ID3D12ShaderReflection <: InterfaceWrapperBase & ComInterface {
     }
 
     @When[Windows_Win32_Graphics_Direct3D == "on"]
-    public unsafe func GetMinFeatureLevel(pLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>): Int32 {
+    public unsafe func GetMinFeatureLevel(pLevel: CPointer<Win32_impl_p0.D3D_FEATURE_LEVELAbi>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMinFeatureLevel(__liveRaw, pLevel)

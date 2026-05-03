@@ -4,13 +4,21 @@
 package windows.Graphics.DirectX.Direct3D11
 
 import std.collection.*
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_core as windows_core
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_interface as windows_interface
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
 
 

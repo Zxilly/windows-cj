@@ -4,16 +4,27 @@
 package windows.Networking.PushNotifications
 
 import std.collection.*
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_core as windows_core
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_interface as windows_interface
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Networking_PushNotifications == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Networking_PushNotifications == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Networking_PushNotifications == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_collections as windows_collections
+@When[Windows_Networking_PushNotifications == "on"]
 import windows_future as windows_future
 
 
@@ -323,7 +334,7 @@ public class IRawNotification3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRawNotification3", IRawNotification3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRawNotification3Vtbl", "IRawNotification3", "IRawNotification3_Impl", [InterfaceMethodSchema("ContentBytes", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRawNotification3", IRawNotification3.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IRawNotification3Vtbl", "IRawNotification3", "IRawNotification3_Impl", [InterfaceMethodSchema("ContentBytes", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRawNotification3.runtimeType())
         return schema
     }
@@ -353,12 +364,12 @@ public class IRawNotification3 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func ContentBytes(): _impl_l0.IBuffer {
+    public unsafe func ContentBytes(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ContentBytes(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 }
 
@@ -759,7 +770,7 @@ public class IPushNotificationReceivedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPushNotificationReceivedEventArgs", IPushNotificationReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationReceivedEventArgsVtbl", "IPushNotificationReceivedEventArgs", "IPushNotificationReceivedEventArgs_Impl", [InterfaceMethodSchema("SetCancel", 6, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Cancel", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotificationType", 8, [InterfaceParameterSchema("result", "CPointer<PushNotificationTypeAbi>", "OutSlot<PushNotificationType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_ToastNotification", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_TileNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BadgeNotification", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.BadgeNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_RawNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<RawNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPushNotificationReceivedEventArgs", IPushNotificationReceivedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationReceivedEventArgsVtbl", "IPushNotificationReceivedEventArgs", "IPushNotificationReceivedEventArgs_Impl", [InterfaceMethodSchema("SetCancel", 6, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Cancel", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("NotificationType", 8, [InterfaceParameterSchema("result", "CPointer<PushNotificationTypeAbi>", "OutSlot<PushNotificationType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_ToastNotification", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ToastNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_TileNotification", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.TileNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_BadgeNotification", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.BadgeNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_RawNotification", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<RawNotification>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPushNotificationReceivedEventArgs.runtimeType())
         return schema
     }
@@ -811,30 +822,30 @@ public class IPushNotificationReceivedEventArgs <: InterfaceWrapperBase & ComInt
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_ToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func get_ToastNotification(): impl_p1.ToastNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_ToastNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ToastNotification.fromAbiTake(result__)
+        return impl_p1.ToastNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_TileNotification(): _impl_l1.TileNotification {
+    public unsafe func get_TileNotification(): impl_p1.TileNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_TileNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.TileNotification.fromAbiTake(result__)
+        return impl_p1.TileNotification.fromAbiTake(result__)
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_BadgeNotification(): _impl_l1.BadgeNotification {
+    public unsafe func get_BadgeNotification(): impl_p1.BadgeNotification {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_BadgeNotification(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.BadgeNotification.fromAbiTake(result__)
+        return impl_p1.BadgeNotification.fromAbiTake(result__)
     }
 
     public unsafe func get_RawNotification(): RawNotification {
@@ -931,17 +942,17 @@ public class PushNotificationReceivedEventArgs <: InterfaceWrapperBase & ComInte
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_ToastNotification(): _impl_l1.ToastNotification {
+    public unsafe func get_ToastNotification(): impl_p1.ToastNotification {
         return defaultInterface().get_ToastNotification()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_TileNotification(): _impl_l1.TileNotification {
+    public unsafe func get_TileNotification(): impl_p1.TileNotification {
         return defaultInterface().get_TileNotification()
     }
 
     @When[Windows_UI_Notifications == "on"]
-    public unsafe func get_BadgeNotification(): _impl_l1.BadgeNotification {
+    public unsafe func get_BadgeNotification(): impl_p1.BadgeNotification {
         return defaultInterface().get_BadgeNotification()
     }
 
@@ -1135,7 +1146,7 @@ public class IPushNotificationChannelManagerForUser <: InterfaceWrapperBase & Co
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerForUser", IPushNotificationChannelManagerForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerForUserVtbl", "IPushNotificationChannelManagerForUser", "IPushNotificationChannelManagerForUser_Impl", [InterfaceMethodSchema("CreatePushNotificationChannelForApplicationAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePushNotificationChannelForApplicationAsyncWithId", 7, [InterfaceParameterSchema("applicationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePushNotificationChannelForSecondaryTileAsync", 8, [InterfaceParameterSchema("tileId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerForUser", IPushNotificationChannelManagerForUser.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerForUserVtbl", "IPushNotificationChannelManagerForUser", "IPushNotificationChannelManagerForUser_Impl", [InterfaceMethodSchema("CreatePushNotificationChannelForApplicationAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePushNotificationChannelForApplicationAsyncWithId", 7, [InterfaceParameterSchema("applicationId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePushNotificationChannelForSecondaryTileAsync", 8, [InterfaceParameterSchema("tileId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPushNotificationChannelManagerForUser.runtimeType())
         return schema
     }
@@ -1189,12 +1200,12 @@ public class IPushNotificationChannelManagerForUser <: InterfaceWrapperBase & Co
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 }
 
@@ -1252,7 +1263,7 @@ public class IPushNotificationChannelManagerForUser2 <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerForUser2", IPushNotificationChannelManagerForUser2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerForUser2Vtbl", "IPushNotificationChannelManagerForUser2", "IPushNotificationChannelManagerForUser2_Impl", [InterfaceMethodSchema("CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync", 6, [InterfaceParameterSchema("appServerKey", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("channelId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId", 7, [InterfaceParameterSchema("appServerKey", "CPointer<Unit>", "InParam<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("channelId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("appId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerForUser2", IPushNotificationChannelManagerForUser2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerForUser2Vtbl", "IPushNotificationChannelManagerForUser2", "IPushNotificationChannelManagerForUser2_Impl", [InterfaceMethodSchema("CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync", 6, [InterfaceParameterSchema("appServerKey", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("channelId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId", 7, [InterfaceParameterSchema("appServerKey", "CPointer<Unit>", "InParam<impl_p0.IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("channelId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("appId", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<PushNotificationChannel>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPushNotificationChannelManagerForUser2.runtimeType())
         return schema
     }
@@ -1282,7 +1293,7 @@ public class IPushNotificationChannelManagerForUser2 <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(appServerKey: _impl_l0.IBuffer, channelId: windows_core.HString): windows_future.IAsyncOperation<PushNotificationChannel> {
+    public unsafe func CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(appServerKey: impl_p0.IBuffer, channelId: windows_core.HString): windows_future.IAsyncOperation<PushNotificationChannel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(asRaw(), appServerKey.asRaw(), channelId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1291,7 +1302,7 @@ public class IPushNotificationChannelManagerForUser2 <: InterfaceWrapperBase & C
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId(appServerKey: _impl_l0.IBuffer, channelId: windows_core.HString, appId: windows_core.HString): windows_future.IAsyncOperation<PushNotificationChannel> {
+    public unsafe func CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId(appServerKey: impl_p0.IBuffer, channelId: windows_core.HString, appId: windows_core.HString): windows_future.IAsyncOperation<PushNotificationChannel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId(asRaw(), appServerKey.asRaw(), channelId.asRaw(), appId.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1453,7 +1464,7 @@ public class IPushNotificationChannelManagerStatics2 <: InterfaceWrapperBase & C
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerStatics2", IPushNotificationChannelManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerStatics2Vtbl", "IPushNotificationChannelManagerStatics2", "IPushNotificationChannelManagerStatics2_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PushNotificationChannelManagerForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPushNotificationChannelManagerStatics2", IPushNotificationChannelManagerStatics2.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPushNotificationChannelManagerStatics2Vtbl", "IPushNotificationChannelManagerStatics2", "IPushNotificationChannelManagerStatics2_Impl", [InterfaceMethodSchema("GetForUser", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<PushNotificationChannelManagerForUser>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPushNotificationChannelManagerStatics2.runtimeType())
         return schema
     }
@@ -1483,7 +1494,7 @@ public class IPushNotificationChannelManagerStatics2 <: InterfaceWrapperBase & C
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetForUser(user: _impl_l1.User): PushNotificationChannelManagerForUser {
+    public unsafe func GetForUser(user: impl_p1.User): PushNotificationChannelManagerForUser {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetForUser(asRaw(), user.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -1727,7 +1738,7 @@ public class PushNotificationChannelManager <: windows_interface.RuntimeName & w
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetForUser(user: _impl_l1.User): PushNotificationChannelManagerForUser {
+    public static unsafe func GetForUser(user: impl_p1.User): PushNotificationChannelManagerForUser {
         var result__: Option<PushNotificationChannelManagerForUser> = Option<PushNotificationChannelManagerForUser>.None
         try (factory__ = windows_core.factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics2>().unwrap()) {
             result__ = Some(factory__.GetForUser(user))
@@ -1865,7 +1876,7 @@ public class PushNotificationChannelManagerForUser <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 }

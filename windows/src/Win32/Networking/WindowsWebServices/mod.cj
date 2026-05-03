@@ -4,15 +4,24 @@
 package windows.Win32.Networking.WindowsWebServices
 
 import std.collection.*
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
-import windows.Win32._impl_l1 as Win32__impl_l1
-import windows.Win32._impl_l2 as Win32__impl_l2
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Networking_WindowsWebServices == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_System_WinRT == "on"]
@@ -554,11 +563,11 @@ extend WS_CALL_PROPERTY_ID <: windows_core.CopyType & windows_core.RuntimeType &
 }
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>
+public type WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT {
-    public var callback: WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var callback: WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var state: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -566,7 +575,7 @@ public struct WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT {
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXTAbi {
-    public var callback: WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var callback: WS_CERTIFICATE_VALIDATION_CALLBACK = CFunc<(CPointer<Win32_impl_p2.CERT_CONTEXTAbi>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var state: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -12245,9 +12254,9 @@ extend WS_CERT_ENDPOINT_IDENTITY <: windows_core.CopyType & windows_core.Runtime
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WS_CERT_SIGNED_SAML_AUTHENTICATOR {
     public var authenticator: WS_SAML_AUTHENTICATOR = WS_SAML_AUTHENTICATOR()
-    public var trustedIssuerCerts: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var trustedIssuerCerts: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var trustedIssuerCertCount: UInt32 = 0u32
-    public var decryptionCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
+    public var decryptionCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
     public var samlValidator: WS_VALIDATE_SAML_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_XML_BUFFER>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var samlValidatorCallbackState: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -12257,9 +12266,9 @@ public struct WS_CERT_SIGNED_SAML_AUTHENTICATOR {
 @C
 public struct WS_CERT_SIGNED_SAML_AUTHENTICATORAbi {
     public var authenticator: WS_SAML_AUTHENTICATORAbi = WS_SAML_AUTHENTICATORAbi()
-    public var trustedIssuerCerts: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>()
+    public var trustedIssuerCerts: CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>> = CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>()
     public var trustedIssuerCertCount: UInt32 = 0u32
-    public var decryptionCert: CPointer<Win32__impl_l2.CERT_CONTEXTAbi> = CPointer<Win32__impl_l2.CERT_CONTEXTAbi>()
+    public var decryptionCert: CPointer<Win32_impl_p2.CERT_CONTEXTAbi> = CPointer<Win32_impl_p2.CERT_CONTEXTAbi>()
     public var samlValidator: WS_VALIDATE_SAML_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_XML_BUFFER>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var samlValidatorCallbackState: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -12590,7 +12599,7 @@ extend WS_ENDPOINT_ADDRESS <: windows_core.CopyType & windows_core.RuntimeType &
 }
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
-public type WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>
+public type WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on"]
 public struct WS_HEAP_PROPERTIES {
@@ -12900,7 +12909,7 @@ extend WS_MESSAGE_PROPERTIES <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && Windows_Win32_Security_Cryptography == "on"]
 public struct WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE {
     public var keyHandle: WS_SECURITY_KEY_HANDLE = WS_SECURITY_KEY_HANDLE()
-    public var asymmetricKey: Win32__impl_l1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
+    public var asymmetricKey: Win32_impl_p1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
     public init() {}
 }
 
@@ -12908,7 +12917,7 @@ public struct WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE {
 @C
 public struct WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLEAbi {
     public var keyHandle: WS_SECURITY_KEY_HANDLEAbi = WS_SECURITY_KEY_HANDLEAbi()
-    public var asymmetricKey: Win32__impl_l1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
+    public var asymmetricKey: Win32_impl_p1.NCRYPT_KEY_HANDLE = CPointer<Unit>()
     public init() {}
 }
 
@@ -15082,7 +15091,7 @@ extend WS_CHANNEL_ENCODER <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_Networking_WindowsWebServices == "on" && (Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on")]
 public struct WS_CUSTOM_CERT_CREDENTIAL {
     public var credential: WS_CERT_CREDENTIAL = WS_CERT_CREDENTIAL()
-    public var getCertCallback: WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
+    public var getCertCallback: WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var getCertCallbackState: CPointer<Unit> = CPointer<Unit>()
     public var certIssuerListNotificationCallback: WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var certIssuerListNotificationCallbackState: CPointer<Unit> = CPointer<Unit>()
@@ -15093,7 +15102,7 @@ public struct WS_CUSTOM_CERT_CREDENTIAL {
 @C
 public struct WS_CUSTOM_CERT_CREDENTIALAbi {
     public var credential: WS_CERT_CREDENTIALAbi = WS_CERT_CREDENTIALAbi()
-    public var getCertCallback: WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32__impl_l2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
+    public var getCertCallback: WS_GET_CERT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WS_ENDPOINT_ADDRESSAbi>, CPointer<WS_STRINGAbi>, CPointer<CPointer<Win32_impl_p2.CERT_CONTEXTAbi>>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var getCertCallbackState: CPointer<Unit> = CPointer<Unit>()
     public var certIssuerListNotificationCallback: WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoExAbi>, CPointer<WS_ERROR>) -> Int32>(CPointer<Unit>())
     public var certIssuerListNotificationCallbackState: CPointer<Unit> = CPointer<Unit>()

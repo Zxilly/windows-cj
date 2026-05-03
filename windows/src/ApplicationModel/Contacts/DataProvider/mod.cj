@@ -4,16 +4,27 @@
 package windows.ApplicationModel.Contacts.DataProvider
 
 import std.collection.*
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_collections as windows_collections
+@When[Windows_ApplicationModel_Contacts_DataProvider == "on"]
 import windows_future as windows_future
 
 
@@ -70,7 +81,7 @@ public class IContactListCreateOrUpdateContactRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IContactListCreateOrUpdateContactRequest", IContactListCreateOrUpdateContactRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IContactListCreateOrUpdateContactRequestVtbl", "IContactListCreateOrUpdateContactRequest", "IContactListCreateOrUpdateContactRequest_Impl", [InterfaceMethodSchema("ContactListId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Contact", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.Contact>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("createdOrUpdatedContact", "CPointer<Unit>", "InParam<_impl_l1.Contact>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IContactListCreateOrUpdateContactRequest", IContactListCreateOrUpdateContactRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IContactListCreateOrUpdateContactRequestVtbl", "IContactListCreateOrUpdateContactRequest", "IContactListCreateOrUpdateContactRequest_Impl", [InterfaceMethodSchema("ContactListId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_Contact", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.Contact>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 8, [InterfaceParameterSchema("createdOrUpdatedContact", "CPointer<Unit>", "InParam<impl_p1.Contact>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IContactListCreateOrUpdateContactRequest.runtimeType())
         return schema
     }
@@ -108,16 +119,16 @@ public class IContactListCreateOrUpdateContactRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_Contact(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.Contact.fromAbiTake(result__)
+        return impl_p1.Contact.fromAbiTake(result__)
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedContact: _impl_l1.Contact): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedContact: impl_p1.Contact): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ReportCompletedAsync(asRaw(), createdOrUpdatedContact.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -266,7 +277,7 @@ public struct IContactListServerSearchReadBatchRequestVtbl {
     public var SaveContactAsync: UIntNative = UIntNative(0)
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public var ReportFailedAsync: CFunc<(CPointer<Unit>, _impl_l0.ContactBatchStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var ReportFailedAsync: CFunc<(CPointer<Unit>, impl_p0.ContactBatchStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Contacts != "on"]
     public var ReportFailedAsync: UIntNative = UIntNative(0)
     public init() {}
@@ -308,7 +319,7 @@ public class IContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IContactListServerSearchReadBatchRequest", IContactListServerSearchReadBatchRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IContactListServerSearchReadBatchRequestVtbl", "IContactListServerSearchReadBatchRequest", "IContactListServerSearchReadBatchRequest_Impl", [InterfaceMethodSchema("SessionId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContactListId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.ContactQueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SuggestedBatchSize", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveContactAsync", 10, [InterfaceParameterSchema("contact", "CPointer<Unit>", "InParam<_impl_l1.Contact>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 12, [InterfaceParameterSchema("batchStatus", "_impl_l0.ContactBatchStatusAbi", "_impl_l0.ContactBatchStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IContactListServerSearchReadBatchRequest", IContactListServerSearchReadBatchRequest.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IContactListServerSearchReadBatchRequestVtbl", "IContactListServerSearchReadBatchRequest", "IContactListServerSearchReadBatchRequest_Impl", [InterfaceMethodSchema("SessionId", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContactListId", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Options", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.ContactQueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SuggestedBatchSize", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveContactAsync", 10, [InterfaceParameterSchema("contact", "CPointer<Unit>", "InParam<impl_p1.Contact>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportCompletedAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReportFailedAsync", 12, [InterfaceParameterSchema("batchStatus", "impl_p0.ContactBatchStatusAbi", "impl_p0.ContactBatchStatus", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IContactListServerSearchReadBatchRequest.runtimeType())
         return schema
     }
@@ -354,12 +365,12 @@ public class IContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func Options(): _impl_l1.ContactQueryOptions {
+    public unsafe func Options(): impl_p1.ContactQueryOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Options(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.ContactQueryOptions.fromAbiTake(result__)
+        return impl_p1.ContactQueryOptions.fromAbiTake(result__)
     }
 
     public unsafe func SuggestedBatchSize(): UInt32 {
@@ -371,7 +382,7 @@ public class IContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func SaveContactAsync(contact: _impl_l1.Contact): windows_future.IAsyncAction {
+    public unsafe func SaveContactAsync(contact: impl_p1.Contact): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SaveContactAsync(asRaw(), contact.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -388,10 +399,10 @@ public class IContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & 
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func ReportFailedAsync(batchStatus: _impl_l0.ContactBatchStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(batchStatus: impl_p0.ContactBatchStatus): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
-        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(batchStatus, windows_core.typeMarker<_impl_l0.ContactBatchStatus>()), CPointer<CPointer<Unit>>(inout result__))
+        let hr = v.ReportFailedAsync(asRaw(), windows_core.projectTypedAbi(batchStatus, windows_core.typeMarker<impl_p0.ContactBatchStatus>()), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
@@ -577,12 +588,12 @@ public class ContactListCreateOrUpdateContactRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func get_Contact(): _impl_l1.Contact {
+    public unsafe func get_Contact(): impl_p1.Contact {
         return defaultInterface().get_Contact()
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func ReportCompletedAsync(createdOrUpdatedContact: _impl_l1.Contact): windows_future.IAsyncAction {
+    public unsafe func ReportCompletedAsync(createdOrUpdatedContact: impl_p1.Contact): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(createdOrUpdatedContact)
     }
 
@@ -791,7 +802,7 @@ public class ContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func Options(): _impl_l1.ContactQueryOptions {
+    public unsafe func Options(): impl_p1.ContactQueryOptions {
         return defaultInterface().Options()
     }
 
@@ -800,7 +811,7 @@ public class ContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func SaveContactAsync(contact: _impl_l1.Contact): windows_future.IAsyncAction {
+    public unsafe func SaveContactAsync(contact: impl_p1.Contact): windows_future.IAsyncAction {
         return defaultInterface().SaveContactAsync(contact)
     }
 
@@ -809,7 +820,7 @@ public class ContactListServerSearchReadBatchRequest <: InterfaceWrapperBase & C
     }
 
     @When[Windows_ApplicationModel_Contacts == "on"]
-    public unsafe func ReportFailedAsync(batchStatus: _impl_l0.ContactBatchStatus): windows_future.IAsyncAction {
+    public unsafe func ReportFailedAsync(batchStatus: impl_p0.ContactBatchStatus): windows_future.IAsyncAction {
         return defaultInterface().ReportFailedAsync(batchStatus)
     }
 }

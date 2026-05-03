@@ -4,18 +4,31 @@
 package windows.Web.UI
 
 import std.collection.*
+@When[Windows_Web_UI == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Web_UI == "on"]
 import windows_core as windows_core
+@When[Windows_Web_UI == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Web_UI == "on"]
 import windows_interface as windows_interface
+@When[Windows_Web_UI == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Web_UI == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Web_UI == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
+@When[Windows_Web_UI == "on" && Windows_UI == "on"]
 import windows.UI as UI
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
-import windows._impl_l2 as _impl_l2
+@When[Windows_Web_UI == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Web_UI == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Web_UI == "on"]
+import windows.impl.p2 as impl_p2
+@When[Windows_Web_UI == "on"]
 import windows_collections as windows_collections
+@When[Windows_Web_UI == "on"]
 import windows_future as windows_future
 
 
@@ -421,7 +434,7 @@ public struct IWebViewControlNavigationCompletedEventArgsVtbl {
     public var get_Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsSuccess: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web == "on"]
-    public var get_WebErrorStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.WebErrorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_WebErrorStatus: CFunc<(CPointer<Unit>, CPointer<impl_p0.WebErrorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web != "on"]
     public var get_WebErrorStatus: UIntNative = UIntNative(0)
     public init() {}
@@ -463,7 +476,7 @@ public class IWebViewControlNavigationCompletedEventArgs <: InterfaceWrapperBase
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebViewControlNavigationCompletedEventArgs", IWebViewControlNavigationCompletedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlNavigationCompletedEventArgsVtbl", "IWebViewControlNavigationCompletedEventArgs", "IWebViewControlNavigationCompletedEventArgs_Impl", [InterfaceMethodSchema("get_Uri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSuccess", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_WebErrorStatus", 8, [InterfaceParameterSchema("result", "CPointer<_impl_l0.WebErrorStatusAbi>", "OutSlot<_impl_l0.WebErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebViewControlNavigationCompletedEventArgs", IWebViewControlNavigationCompletedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlNavigationCompletedEventArgsVtbl", "IWebViewControlNavigationCompletedEventArgs", "IWebViewControlNavigationCompletedEventArgs_Impl", [InterfaceMethodSchema("get_Uri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsSuccess", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_WebErrorStatus", 8, [InterfaceParameterSchema("result", "CPointer<impl_p0.WebErrorStatusAbi>", "OutSlot<impl_p0.WebErrorStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebViewControlNavigationCompletedEventArgs.runtimeType())
         return schema
     }
@@ -509,12 +522,12 @@ public class IWebViewControlNavigationCompletedEventArgs <: InterfaceWrapperBase
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func get_WebErrorStatus(): _impl_l0.WebErrorStatus {
+    public unsafe func get_WebErrorStatus(): impl_p0.WebErrorStatus {
         let v = vtbl()
-        var result__ = _impl_l0.WebErrorStatusAbi()
-        let hr = v.get_WebErrorStatus(asRaw(), CPointer<_impl_l0.WebErrorStatusAbi>(inout result__))
+        var result__ = impl_p0.WebErrorStatusAbi()
+        let hr = v.get_WebErrorStatus(asRaw(), CPointer<impl_p0.WebErrorStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.WebErrorStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.WebErrorStatus>()).unwrap()
     }
 }
 
@@ -1210,7 +1223,7 @@ public class IWebViewControlWebResourceRequestedEventArgs <: InterfaceWrapperBas
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebViewControlWebResourceRequestedEventArgs", IWebViewControlWebResourceRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlWebResourceRequestedEventArgsVtbl", "IWebViewControlWebResourceRequestedEventArgs", "IWebViewControlWebResourceRequestedEventArgs_Impl", [InterfaceMethodSchema("GetDeferral", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Request", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetResponse", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<_impl_l2.HttpResponseMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Response", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebViewControlWebResourceRequestedEventArgs", IWebViewControlWebResourceRequestedEventArgs.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlWebResourceRequestedEventArgsVtbl", "IWebViewControlWebResourceRequestedEventArgs", "IWebViewControlWebResourceRequestedEventArgs_Impl", [InterfaceMethodSchema("GetDeferral", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Request", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetResponse", 8, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<impl_p2.HttpResponseMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Response", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p2.HttpResponseMessage>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWebViewControlWebResourceRequestedEventArgs.runtimeType())
         return schema
     }
@@ -1248,28 +1261,28 @@ public class IWebViewControlWebResourceRequestedEventArgs <: InterfaceWrapperBas
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Request(): _impl_l2.HttpRequestMessage {
+    public unsafe func Request(): impl_p2.HttpRequestMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Request(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpRequestMessage.fromAbiTake(result__)
+        return impl_p2.HttpRequestMessage.fromAbiTake(result__)
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func SetResponse(value: _impl_l2.HttpResponseMessage): Unit {
+    public unsafe func SetResponse(value: impl_p2.HttpResponseMessage): Unit {
         let v = vtbl()
         let hr = v.SetResponse(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Response(): _impl_l2.HttpResponseMessage {
+    public unsafe func Response(): impl_p2.HttpResponseMessage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Response(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l2.HttpResponseMessage.fromAbiTake(result__)
+        return impl_p2.HttpResponseMessage.fromAbiTake(result__)
     }
 }
 
@@ -1622,7 +1635,7 @@ public class WebViewControlNavigationCompletedEventArgs <: InterfaceWrapperBase 
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func get_WebErrorStatus(): _impl_l0.WebErrorStatus {
+    public unsafe func get_WebErrorStatus(): impl_p0.WebErrorStatus {
         return defaultInterface().get_WebErrorStatus()
     }
 }
@@ -2332,17 +2345,17 @@ public class WebViewControlWebResourceRequestedEventArgs <: InterfaceWrapperBase
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Request(): _impl_l2.HttpRequestMessage {
+    public unsafe func Request(): impl_p2.HttpRequestMessage {
         return defaultInterface().Request()
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func SetResponse(value: _impl_l2.HttpResponseMessage): Unit {
+    public unsafe func SetResponse(value: impl_p2.HttpResponseMessage): Unit {
         defaultInterface().SetResponse(value)
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func Response(): _impl_l2.HttpResponseMessage {
+    public unsafe func Response(): impl_p2.HttpResponseMessage {
         return defaultInterface().Response()
     }
 }
@@ -4006,10 +4019,10 @@ public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
         }
     }
 
-    public func NavigateToLocalStreamUri(source: InParam<Foundation.Uri>, streamResolver: InParam<_impl_l1.IUriToStreamResolver>): windows_core.Result<Unit>
+    public func NavigateToLocalStreamUri(source: InParam<Foundation.Uri>, streamResolver: InParam<impl_p1.IUriToStreamResolver>): windows_core.Result<Unit>
 
     public func __winrtThunk_NavigateToLocalStreamUri(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        match (this.NavigateToLocalStreamUri(InParam<Foundation.Uri>(Foundation.Uri.viewOf(arg0)), InParam<_impl_l1.IUriToStreamResolver>(_impl_l1.IUriToStreamResolver.viewOf(arg1)))) {
+        match (this.NavigateToLocalStreamUri(InParam<Foundation.Uri>(Foundation.Uri.viewOf(arg0)), InParam<impl_p1.IUriToStreamResolver>(impl_p1.IUriToStreamResolver.viewOf(arg1)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4017,10 +4030,10 @@ public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
         }
     }
 
-    public func NavigateWithHttpRequestMessage(requestMessage: InParam<_impl_l2.HttpRequestMessage>): windows_core.Result<Unit>
+    public func NavigateWithHttpRequestMessage(requestMessage: InParam<impl_p2.HttpRequestMessage>): windows_core.Result<Unit>
 
     public func __winrtThunk_NavigateWithHttpRequestMessage(arg0: CPointer<Unit>): Int32 {
-        match (this.NavigateWithHttpRequestMessage(InParam<_impl_l2.HttpRequestMessage>(_impl_l2.HttpRequestMessage.viewOf(arg0)))) {
+        match (this.NavigateWithHttpRequestMessage(InParam<impl_p2.HttpRequestMessage>(impl_p2.HttpRequestMessage.viewOf(arg0)))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -4048,13 +4061,13 @@ public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
         }
     }
 
-    public func CapturePreviewToStreamAsync(stream: InParam<_impl_l1.IRandomAccessStream>): windows_core.Result<windows_future.IAsyncAction>
+    public func CapturePreviewToStreamAsync(stream: InParam<impl_p1.IRandomAccessStream>): windows_core.Result<windows_future.IAsyncAction>
 
     public func __winrtThunk_CapturePreviewToStreamAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.CapturePreviewToStreamAsync(InParam<_impl_l1.IRandomAccessStream>(_impl_l1.IRandomAccessStream.viewOf(arg0)))) {
+        match (this.CapturePreviewToStreamAsync(InParam<impl_p1.IRandomAccessStream>(impl_p1.IRandomAccessStream.viewOf(arg0)))) {
             case Result<windows_future.IAsyncAction>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
@@ -4068,14 +4081,14 @@ public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
         }
     }
 
-    public func CaptureSelectedContentToDataPackageAsync(): windows_core.Result<windows_future.IAsyncOperation<_impl_l2.DataPackage>>
+    public func CaptureSelectedContentToDataPackageAsync(): windows_core.Result<windows_future.IAsyncOperation<impl_p2.DataPackage>>
 
     public func __winrtThunk_CaptureSelectedContentToDataPackageAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
         match (this.CaptureSelectedContentToDataPackageAsync()) {
-            case Result<windows_future.IAsyncOperation<_impl_l2.DataPackage>>.Ok(value) =>
+            case Result<windows_future.IAsyncOperation<impl_p2.DataPackage>>.Ok(value) =>
                 let raw = value.intoAbi()
                 if (raw.isNull()) {
                     E_POINTER.value
@@ -4083,7 +4096,7 @@ public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
                     unsafe { result__.write(raw) }
                     S_OK.value
                 }
-            case Result<windows_future.IAsyncOperation<_impl_l2.DataPackage>>.Err(error) =>
+            case Result<windows_future.IAsyncOperation<impl_p2.DataPackage>>.Err(error) =>
                 error.code().value
         }
     }
@@ -4598,7 +4611,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWebViewControl", IWebViewControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlVtbl", "IWebViewControl", "IWebViewControl_Impl", [InterfaceMethodSchema("Source", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSource", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DocumentTitle", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanGoBack", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanGoForward", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultBackgroundColor", 11, [InterfaceParameterSchema("value", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DefaultBackgroundColor", 12, [InterfaceParameterSchema("result", "CPointer<UI.ColorAbi>", "OutSlot<UI.Color>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContainsFullScreenElement", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Settings", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebViewControlSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeferredPermissionRequests", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<WebViewControlDeferredPermissionRequest>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GoForward", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("GoBack", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Refresh", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Stop", 19, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Navigate", 20, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateToString", 21, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateToLocalStreamUri", 22, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("streamResolver", "CPointer<Unit>", "InParam<_impl_l1.IUriToStreamResolver>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateWithHttpRequestMessage", 23, [InterfaceParameterSchema("requestMessage", "CPointer<Unit>", "InParam<_impl_l2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("InvokeScriptAsync", 24, [InterfaceParameterSchema("scriptName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("arguments", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CapturePreviewToStreamAsync", 25, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<_impl_l1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CaptureSelectedContentToDataPackageAsync", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<_impl_l2.DataPackage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BuildLocalStreamUri", 27, [InterfaceParameterSchema("contentIdentifier", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("relativePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferredPermissionRequestById", 28, [InterfaceParameterSchema("id", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigationStarting", 29, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationStartingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNavigationStarting", 30, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ContentLoading", 31, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlContentLoadingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveContentLoading", 32, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DOMContentLoaded", 33, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlDOMContentLoadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDOMContentLoaded", 34, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigationCompleted", 35, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNavigationCompleted", 36, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameNavigationStarting", 37, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationStartingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameNavigationStarting", 38, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameContentLoading", 39, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlContentLoadingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameContentLoading", 40, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameDOMContentLoaded", 41, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlDOMContentLoadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameDOMContentLoaded", 42, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameNavigationCompleted", 43, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameNavigationCompleted", 44, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScriptNotify", 45, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlScriptNotifyEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveScriptNotify", 46, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LongRunningScriptDetected", 47, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlLongRunningScriptDetectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLongRunningScriptDetected", 48, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnsafeContentWarningDisplaying", 49, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnsafeContentWarningDisplaying", 50, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnviewableContentIdentified", 51, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlUnviewableContentIdentifiedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnviewableContentIdentified", 52, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PermissionRequested", 53, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlPermissionRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePermissionRequested", 54, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnsupportedUriSchemeIdentified", 55, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlUnsupportedUriSchemeIdentifiedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnsupportedUriSchemeIdentified", 56, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NewWindowRequested", 57, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNewWindowRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNewWindowRequested", 58, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ContainsFullScreenElementChanged", 59, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveContainsFullScreenElementChanged", 60, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WebResourceRequested", 61, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlWebResourceRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveWebResourceRequested", 62, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWebViewControl", IWebViewControl.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IWebViewControlVtbl", "IWebViewControl", "IWebViewControl_Impl", [InterfaceMethodSchema("Source", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSource", 7, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("DocumentTitle", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanGoBack", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanGoForward", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDefaultBackgroundColor", 11, [InterfaceParameterSchema("value", "UI.ColorAbi", "UI.Color", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DefaultBackgroundColor", 12, [InterfaceParameterSchema("result", "CPointer<UI.ColorAbi>", "OutSlot<UI.Color>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContainsFullScreenElement", 13, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Settings", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WebViewControlSettings>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeferredPermissionRequests", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_collections.IVectorView<WebViewControlDeferredPermissionRequest>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GoForward", 16, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("GoBack", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Refresh", 18, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Stop", 19, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Navigate", 20, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateToString", 21, [InterfaceParameterSchema("text", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateToLocalStreamUri", 22, [InterfaceParameterSchema("source", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("streamResolver", "CPointer<Unit>", "InParam<impl_p1.IUriToStreamResolver>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("NavigateWithHttpRequestMessage", 23, [InterfaceParameterSchema("requestMessage", "CPointer<Unit>", "InParam<impl_p2.HttpRequestMessage>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("InvokeScriptAsync", 24, [InterfaceParameterSchema("scriptName", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("arguments", "CPointer<Unit>", "InParam<windows_collections.IIterable<windows_core.HString>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<windows_core.HString>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CapturePreviewToStreamAsync", 25, [InterfaceParameterSchema("stream", "CPointer<Unit>", "InParam<impl_p1.IRandomAccessStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CaptureSelectedContentToDataPackageAsync", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperation<impl_p2.DataPackage>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("BuildLocalStreamUri", 27, [InterfaceParameterSchema("contentIdentifier", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("relativePath", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDeferredPermissionRequestById", 28, [InterfaceParameterSchema("id", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigationStarting", 29, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationStartingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNavigationStarting", 30, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ContentLoading", 31, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlContentLoadingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveContentLoading", 32, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("DOMContentLoaded", 33, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlDOMContentLoadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveDOMContentLoaded", 34, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NavigationCompleted", 35, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNavigationCompleted", 36, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameNavigationStarting", 37, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationStartingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameNavigationStarting", 38, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameContentLoading", 39, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlContentLoadingEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameContentLoading", 40, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameDOMContentLoaded", 41, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlDOMContentLoadedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameDOMContentLoaded", 42, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FrameNavigationCompleted", 43, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNavigationCompletedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveFrameNavigationCompleted", 44, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ScriptNotify", 45, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlScriptNotifyEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveScriptNotify", 46, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LongRunningScriptDetected", 47, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlLongRunningScriptDetectedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLongRunningScriptDetected", 48, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnsafeContentWarningDisplaying", 49, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnsafeContentWarningDisplaying", 50, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnviewableContentIdentified", 51, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlUnviewableContentIdentifiedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnviewableContentIdentified", 52, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("PermissionRequested", 53, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlPermissionRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemovePermissionRequested", 54, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UnsupportedUriSchemeIdentified", 55, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlUnsupportedUriSchemeIdentifiedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUnsupportedUriSchemeIdentified", 56, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("NewWindowRequested", 57, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlNewWindowRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveNewWindowRequested", 58, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ContainsFullScreenElementChanged", 59, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveContainsFullScreenElementChanged", 60, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("WebResourceRequested", 61, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IWebViewControl, WebViewControlWebResourceRequestedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveWebResourceRequested", 62, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IWebViewControl.runtimeType())
         return schema
     }
@@ -4743,14 +4756,14 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Web == "on"]
-    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: _impl_l1.IUriToStreamResolver): Unit {
+    public unsafe func NavigateToLocalStreamUri(source: Foundation.Uri, streamResolver: impl_p1.IUriToStreamResolver): Unit {
         let v = vtbl()
         let hr = v.NavigateToLocalStreamUri(asRaw(), source.asRaw(), streamResolver.asRaw())
         HRESULT(hr).ok()
     }
 
     @When[Windows_Web_Http == "on"]
-    public unsafe func NavigateWithHttpRequestMessage(requestMessage: _impl_l2.HttpRequestMessage): Unit {
+    public unsafe func NavigateWithHttpRequestMessage(requestMessage: impl_p2.HttpRequestMessage): Unit {
         let v = vtbl()
         let hr = v.NavigateWithHttpRequestMessage(asRaw(), requestMessage.asRaw())
         HRESULT(hr).ok()
@@ -4766,7 +4779,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func CapturePreviewToStreamAsync(stream: _impl_l1.IRandomAccessStream): windows_future.IAsyncAction {
+    public unsafe func CapturePreviewToStreamAsync(stream: impl_p1.IRandomAccessStream): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CapturePreviewToStreamAsync(asRaw(), stream.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -4775,12 +4788,12 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     @When[Windows_ApplicationModel_DataTransfer == "on"]
-    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<_impl_l2.DataPackage> {
+    public unsafe func CaptureSelectedContentToDataPackageAsync(): windows_future.IAsyncOperation<impl_p2.DataPackage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CaptureSelectedContentToDataPackageAsync(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return windows_future.IAsyncOperation<_impl_l2.DataPackage>.fromAbiTake(result__)
+        return windows_future.IAsyncOperation<impl_p2.DataPackage>.fromAbiTake(result__)
     }
 
     public unsafe func BuildLocalStreamUri(contentIdentifier: windows_core.HString, relativePath: windows_core.HString): Foundation.Uri {

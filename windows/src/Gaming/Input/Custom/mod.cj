@@ -4,14 +4,23 @@
 package windows.Gaming.Input.Custom
 
 import std.collection.*
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_core as windows_core
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_interface as windows_interface
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Gaming_Input_Custom == "on" && Windows_Gaming_Input == "on"]
 import windows.Gaming.Input as Gaming_Input
-import windows._impl_l0 as _impl_l0
+@When[Windows_Gaming_Input_Custom == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Gaming_Input_Custom == "on"]
 import windows_future as windows_future
 
 
@@ -2428,7 +2437,7 @@ public class IGipGameControllerProvider <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGipGameControllerProvider", IGipGameControllerProvider.iid(), IGameControllerProvider.descriptorSchema(), ["IGameControllerProvider"], [IGameControllerProvider.iid()], "IGipGameControllerProviderVtbl", "IGipGameControllerProvider", "IGipGameControllerProvider_Impl", [InterfaceMethodSchema("SendMessage", 11, [InterfaceParameterSchema("messageClass", "GipMessageClassAbi", "GipMessageClass", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageId", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SendReceiveMessage", 12, [InterfaceParameterSchema("messageClass", "GipMessageClassAbi", "GipMessageClass", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageId", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestMessageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("responseMessageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateFirmwareAsync", 13, [InterfaceParameterSchema("firmwareImage", "CPointer<Unit>", "InParam<_impl_l0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGipGameControllerProvider", IGipGameControllerProvider.iid(), IGameControllerProvider.descriptorSchema(), ["IGameControllerProvider"], [IGameControllerProvider.iid()], "IGipGameControllerProviderVtbl", "IGipGameControllerProvider", "IGipGameControllerProvider_Impl", [InterfaceMethodSchema("SendMessage", 11, [InterfaceParameterSchema("messageClass", "GipMessageClassAbi", "GipMessageClass", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageId", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SendReceiveMessage", 12, [InterfaceParameterSchema("messageClass", "GipMessageClassAbi", "GipMessageClass", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("messageId", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestMessageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("responseMessageBuffer", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UpdateFirmwareAsync", 13, [InterfaceParameterSchema("firmwareImage", "CPointer<Unit>", "InParam<impl_p0.IInputStream>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGipGameControllerProvider.runtimeType())
         return schema
     }
@@ -2477,7 +2486,7 @@ public class IGipGameControllerProvider <: InterfaceWrapperBase & ComInterface &
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UpdateFirmwareAsync(firmwareImage: _impl_l0.IInputStream): windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress> {
+    public unsafe func UpdateFirmwareAsync(firmwareImage: impl_p0.IInputStream): windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UpdateFirmwareAsync(asRaw(), firmwareImage.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -2628,7 +2637,7 @@ public class GipGameControllerProvider <: InterfaceWrapperBase & ComInterface & 
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func UpdateFirmwareAsync(firmwareImage: _impl_l0.IInputStream): windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress> {
+    public unsafe func UpdateFirmwareAsync(firmwareImage: impl_p0.IInputStream): windows_future.IAsyncOperationWithProgress<GipFirmwareUpdateResult, GipFirmwareUpdateProgress> {
         return defaultInterface().UpdateFirmwareAsync(firmwareImage)
     }
 

@@ -4,11 +4,17 @@
 package windows.Win32.UI.Magnification
 
 import std.collection.*
+@When[Windows_Win32_UI_Magnification == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_UI_Magnification == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_UI_Magnification == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_UI_Magnification == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_UI_Magnification == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_UI_Magnification == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 
 

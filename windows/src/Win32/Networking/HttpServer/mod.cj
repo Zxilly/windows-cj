@@ -4,15 +4,24 @@
 package windows.Win32.Networking.HttpServer
 
 import std.collection.*
+@When[Windows_Win32_Networking_HttpServer == "on"]
 import windows_libloading
+@When[Windows_Win32_Networking_HttpServer == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Networking_HttpServer == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Networking_HttpServer == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Networking_HttpServer == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Networking_HttpServer == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
 
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
@@ -3429,7 +3438,7 @@ extend HTTP_SERVICE_CONFIG_ID <: windows_core.CopyType & windows_core.RuntimeTyp
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
     public var AddrLength: UInt16 = 0u16
-    public var pAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 
@@ -3437,7 +3446,7 @@ public struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
 @C
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAMAbi {
     public var AddrLength: UInt16 = 0u16
-    public var pAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 
@@ -3468,7 +3477,7 @@ extend HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM <: windows_core.CopyType & windows_co
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
     public var AddrCount: UInt32 = 0u32
-    public var AddrList: VArray<Win32__impl_l1.SOCKADDR_STORAGEAbi, $1> = VArray<Win32__impl_l1.SOCKADDR_STORAGEAbi, $1>(repeat: Win32__impl_l1.SOCKADDR_STORAGEAbi())
+    public var AddrList: VArray<Win32_impl_p1.SOCKADDR_STORAGEAbi, $1> = VArray<Win32_impl_p1.SOCKADDR_STORAGEAbi, $1>(repeat: Win32_impl_p1.SOCKADDR_STORAGEAbi())
     public init() {}
 }
 
@@ -3476,7 +3485,7 @@ public struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
 @C
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERYAbi {
     public var AddrCount: UInt32 = 0u32
-    public var AddrList: VArray<Win32__impl_l1.SOCKADDR_STORAGEAbi, $1> = VArray<Win32__impl_l1.SOCKADDR_STORAGEAbi, $1>(repeat: Win32__impl_l1.SOCKADDR_STORAGEAbi())
+    public var AddrList: VArray<Win32_impl_p1.SOCKADDR_STORAGEAbi, $1> = VArray<Win32_impl_p1.SOCKADDR_STORAGEAbi, $1>(repeat: Win32_impl_p1.SOCKADDR_STORAGEAbi())
     public init() {}
 }
 
@@ -3656,14 +3665,14 @@ extend HTTP_SERVICE_CONFIG_SETTING_SET <: windows_core.CopyType & windows_core.R
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
-    public var LocalAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var LocalAddress: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_CCS_KEYAbi {
-    public var LocalAddress: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var LocalAddress: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public init() {}
 }
 
@@ -3674,12 +3683,12 @@ extend HTTP_SERVICE_CONFIG_SSL_CCS_KEY <: windows_core.CopyType & windows_core.R
     public static func signature(): String { "struct(Windows.Win32.Networking.HttpServer.HTTP_SERVICE_CONFIG_SSL_CCS_KEY;struct(Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);cinterface(IInspectable);i8;cinterface(IInspectable)))" }
     public static func projectAbi(value: HTTP_SERVICE_CONFIG_SSL_CCS_KEY): HTTP_SERVICE_CONFIG_SSL_CCS_KEYAbi {
         var abi = HTTP_SERVICE_CONFIG_SSL_CCS_KEYAbi()
-        abi.LocalAddress = windows_core.projectTypedAbi(value.LocalAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.LocalAddress = windows_core.projectTypedAbi(value.LocalAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         return abi
     }
     public static func assumeInitRef(abi: HTTP_SERVICE_CONFIG_SSL_CCS_KEYAbi): HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
         var value = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
-        value.LocalAddress = windows_core.fromTypedAbi(abi.LocalAddress, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.LocalAddress = windows_core.fromTypedAbi(abi.LocalAddress, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: HTTP_SERVICE_CONFIG_SSL_CCS_KEYAbi): Result<HTTP_SERVICE_CONFIG_SSL_CCS_KEY> { Result<HTTP_SERVICE_CONFIG_SSL_CCS_KEY>.Ok(HTTP_SERVICE_CONFIG_SSL_CCS_KEY.assumeInitRef(abi)) }
@@ -3734,14 +3743,14 @@ extend HTTP_SERVICE_CONFIG_SSL_CCS_QUERY <: windows_core.CopyType & windows_core
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_SSL_KEY {
-    public var pIpPort: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pIpPort: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_KEYAbi {
-    public var pIpPort: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pIpPort: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 
@@ -3769,14 +3778,14 @@ extend HTTP_SERVICE_CONFIG_SSL_KEY <: windows_core.CopyType & windows_core.Runti
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_SSL_KEY_EX {
-    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var IpPort: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_KEY_EXAbi {
-    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var IpPort: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public init() {}
 }
 
@@ -3787,12 +3796,12 @@ extend HTTP_SERVICE_CONFIG_SSL_KEY_EX <: windows_core.CopyType & windows_core.Ru
     public static func signature(): String { "struct(Windows.Win32.Networking.HttpServer.HTTP_SERVICE_CONFIG_SSL_KEY_EX;struct(Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);cinterface(IInspectable);i8;cinterface(IInspectable)))" }
     public static func projectAbi(value: HTTP_SERVICE_CONFIG_SSL_KEY_EX): HTTP_SERVICE_CONFIG_SSL_KEY_EXAbi {
         var abi = HTTP_SERVICE_CONFIG_SSL_KEY_EXAbi()
-        abi.IpPort = windows_core.projectTypedAbi(value.IpPort, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.IpPort = windows_core.projectTypedAbi(value.IpPort, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         return abi
     }
     public static func assumeInitRef(abi: HTTP_SERVICE_CONFIG_SSL_KEY_EXAbi): HTTP_SERVICE_CONFIG_SSL_KEY_EX {
         var value = HTTP_SERVICE_CONFIG_SSL_KEY_EX()
-        value.IpPort = windows_core.fromTypedAbi(abi.IpPort, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.IpPort = windows_core.fromTypedAbi(abi.IpPort, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         return value
     }
     public static func fromAbi(abi: HTTP_SERVICE_CONFIG_SSL_KEY_EXAbi): Result<HTTP_SERVICE_CONFIG_SSL_KEY_EX> { Result<HTTP_SERVICE_CONFIG_SSL_KEY_EX>.Ok(HTTP_SERVICE_CONFIG_SSL_KEY_EX.assumeInitRef(abi)) }
@@ -3957,7 +3966,7 @@ extend HTTP_SERVICE_CONFIG_SSL_SET <: windows_core.CopyType & windows_core.Runti
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
-    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
+    public var IpPort: Win32_impl_p1.SOCKADDR_STORAGE = Win32_impl_p1.SOCKADDR_STORAGE()
     public var Host: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
@@ -3965,7 +3974,7 @@ public struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_SNI_KEYAbi {
-    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGEAbi = Win32__impl_l1.SOCKADDR_STORAGEAbi()
+    public var IpPort: Win32_impl_p1.SOCKADDR_STORAGEAbi = Win32_impl_p1.SOCKADDR_STORAGEAbi()
     public var Host: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
@@ -3977,13 +3986,13 @@ extend HTTP_SERVICE_CONFIG_SSL_SNI_KEY <: windows_core.CopyType & windows_core.R
     public static func signature(): String { "struct(Windows.Win32.Networking.HttpServer.HTTP_SERVICE_CONFIG_SSL_SNI_KEY;struct(Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE;enum(Windows.Win32.Networking.WinSock.ADDRESS_FAMILY;u2);cinterface(IInspectable);i8;cinterface(IInspectable));struct(Windows.Win32.Foundation.PWSTR;cinterface(IInspectable)))" }
     public static func projectAbi(value: HTTP_SERVICE_CONFIG_SSL_SNI_KEY): HTTP_SERVICE_CONFIG_SSL_SNI_KEYAbi {
         var abi = HTTP_SERVICE_CONFIG_SSL_SNI_KEYAbi()
-        abi.IpPort = windows_core.projectTypedAbi(value.IpPort, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>())
+        abi.IpPort = windows_core.projectTypedAbi(value.IpPort, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>())
         abi.Host = value.Host
         return abi
     }
     public static func assumeInitRef(abi: HTTP_SERVICE_CONFIG_SSL_SNI_KEYAbi): HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
         var value = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
-        value.IpPort = windows_core.fromTypedAbi(abi.IpPort, windows_core.typeMarker<Win32__impl_l1.SOCKADDR_STORAGE>()).unwrap()
+        value.IpPort = windows_core.fromTypedAbi(abi.IpPort, windows_core.typeMarker<Win32_impl_p1.SOCKADDR_STORAGE>()).unwrap()
         value.Host = abi.Host
         return value
     }
@@ -4744,16 +4753,16 @@ extend HTTP_TLS_SESSION_TICKET_KEYS_PARAM <: windows_core.CopyType & windows_cor
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 public struct HTTP_TRANSPORT_ADDRESS {
-    public var pRemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
-    public var pLocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pRemoteAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
+    public var pLocalAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_TRANSPORT_ADDRESSAbi {
-    public var pRemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
-    public var pLocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi> = CPointer<Win32__impl_l1.SOCKADDRAbi>()
+    public var pRemoteAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
+    public var pLocalAddress: CPointer<Win32_impl_p1.SOCKADDRAbi> = CPointer<Win32_impl_p1.SOCKADDRAbi>()
     public init() {}
 }
 

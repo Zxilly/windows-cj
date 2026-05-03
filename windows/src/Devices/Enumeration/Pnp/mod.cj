@@ -4,15 +4,25 @@
 package windows.Devices.Enumeration.Pnp
 
 import std.collection.*
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_core as windows_core
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_interface as windows_interface
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Devices_Enumeration_Pnp == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
+@When[Windows_Devices_Enumeration_Pnp == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_collections as windows_collections
+@When[Windows_Devices_Enumeration_Pnp == "on"]
 import windows_future as windows_future
 
 
@@ -572,7 +582,7 @@ public struct IPnpObjectWatcherVtbl {
     public var Stopped: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStopped: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Enumeration == "on"]
-    public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DeviceWatcherStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Status: CFunc<(CPointer<Unit>, CPointer<impl_p0.DeviceWatcherStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Enumeration != "on"]
     public var Status: UIntNative = UIntNative(0)
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -616,7 +626,7 @@ public class IPnpObjectWatcher <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPnpObjectWatcher", IPnpObjectWatcher.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPnpObjectWatcherVtbl", "IPnpObjectWatcher", "IPnpObjectWatcher_Impl", [InterfaceMethodSchema("Added", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObject>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAdded", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Updated", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObjectUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUpdated", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Removed", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObjectUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRemoved", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("EnumerationCompleted", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveEnumerationCompleted", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Stopped", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStopped", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Status", 16, [InterfaceParameterSchema("result", "CPointer<_impl_l0.DeviceWatcherStatusAbi>", "OutSlot<_impl_l0.DeviceWatcherStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Stop", 18, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("IPnpObjectWatcher", IPnpObjectWatcher.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IPnpObjectWatcherVtbl", "IPnpObjectWatcher", "IPnpObjectWatcher_Impl", [InterfaceMethodSchema("Added", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObject>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveAdded", 7, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Updated", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObjectUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveUpdated", 9, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Removed", 10, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, PnpObjectUpdate>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveRemoved", 11, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("EnumerationCompleted", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveEnumerationCompleted", 13, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Stopped", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<PnpObjectWatcher, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveStopped", 15, [InterfaceParameterSchema("token", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Status", 16, [InterfaceParameterSchema("result", "CPointer<impl_p0.DeviceWatcherStatusAbi>", "OutSlot<impl_p0.DeviceWatcherStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Start", 17, Array<InterfaceParameterSchema>(), "Int32"), InterfaceMethodSchema("Stop", 18, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(IPnpObjectWatcher.runtimeType())
         return schema
     }
@@ -716,12 +726,12 @@ public class IPnpObjectWatcher <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Status(): _impl_l0.DeviceWatcherStatus {
+    public unsafe func Status(): impl_p0.DeviceWatcherStatus {
         let v = vtbl()
-        var result__ = _impl_l0.DeviceWatcherStatusAbi()
-        let hr = v.Status(asRaw(), CPointer<_impl_l0.DeviceWatcherStatusAbi>(inout result__))
+        var result__ = impl_p0.DeviceWatcherStatusAbi()
+        let hr = v.Status(asRaw(), CPointer<impl_p0.DeviceWatcherStatusAbi>(inout result__))
         HRESULT(hr).ok()
-        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DeviceWatcherStatus>()).unwrap()
+        return windows_core.fromTypedAbi(result__, windows_core.typeMarker<impl_p0.DeviceWatcherStatus>()).unwrap()
     }
 
     public unsafe func Start(): Unit {
@@ -1138,7 +1148,7 @@ public class PnpObjectWatcher <: InterfaceWrapperBase & ComInterface & windows_i
     }
 
     @When[Windows_Devices_Enumeration == "on"]
-    public unsafe func Status(): _impl_l0.DeviceWatcherStatus {
+    public unsafe func Status(): impl_p0.DeviceWatcherStatus {
         return defaultInterface().Status()
     }
 

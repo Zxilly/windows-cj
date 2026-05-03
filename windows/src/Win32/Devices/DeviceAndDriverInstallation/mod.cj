@@ -4,20 +4,36 @@
 package windows.Win32.Devices.DeviceAndDriverInstallation
 
 import std.collection.*
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_interface.{GUID}
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_interface as windows_interface
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionWriteUInt16}
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_Data_HtmlHelp == "on"]
 import windows.Win32.Data.HtmlHelp as Win32_Data_HtmlHelp
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && Windows_Win32_System_SystemInformation == "on"]
 import windows.Win32.System.SystemInformation as Win32_System_SystemInformation
-import windows.Win32._impl_l0 as Win32__impl_l0
-import windows.Win32._impl_l1 as Win32__impl_l1
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+import windows.Win32.impl.p0 as Win32_impl_p0
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+import windows.Win32.impl.p1 as Win32_impl_p1
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+import windows.Win32.impl.p2 as Win32_impl_p2
 
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
@@ -7437,7 +7453,7 @@ extend SPSVCINST_FLAGS <: windows_core.CopyType & windows_core.RuntimeType & win
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")]
 public struct SP_ALTPLATFORM_INFO_V1 {
     public var cbSize: UInt32 = 0u32
-    public var Platform: Win32__impl_l0.VER_PLATFORM = Win32__impl_l0.VER_PLATFORM()
+    public var Platform: Win32_impl_p0.VER_PLATFORM = Win32_impl_p0.VER_PLATFORM()
     public var MajorVersion: UInt32 = 0u32
     public var MinorVersion: UInt32 = 0u32
     public var ProcessorArchitecture: UInt16 = 0u16
@@ -7449,7 +7465,7 @@ public struct SP_ALTPLATFORM_INFO_V1 {
 @C
 public struct SP_ALTPLATFORM_INFO_V1Abi {
     public var cbSize: UInt32 = 0u32
-    public var Platform: Win32__impl_l0.VER_PLATFORMAbi = Win32__impl_l0.VER_PLATFORMAbi()
+    public var Platform: Win32_impl_p0.VER_PLATFORMAbi = Win32_impl_p0.VER_PLATFORMAbi()
     public var MajorVersion: UInt32 = 0u32
     public var MinorVersion: UInt32 = 0u32
     public var ProcessorArchitecture: UInt16 = 0u16
@@ -7465,7 +7481,7 @@ extend SP_ALTPLATFORM_INFO_V1 <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func projectAbi(value: SP_ALTPLATFORM_INFO_V1): SP_ALTPLATFORM_INFO_V1Abi {
         var abi = SP_ALTPLATFORM_INFO_V1Abi()
         abi.cbSize = value.cbSize
-        abi.Platform = windows_core.projectTypedAbi(value.Platform, windows_core.typeMarker<Win32__impl_l0.VER_PLATFORM>())
+        abi.Platform = windows_core.projectTypedAbi(value.Platform, windows_core.typeMarker<Win32_impl_p0.VER_PLATFORM>())
         abi.MajorVersion = value.MajorVersion
         abi.MinorVersion = value.MinorVersion
         abi.ProcessorArchitecture = value.ProcessorArchitecture
@@ -7475,7 +7491,7 @@ extend SP_ALTPLATFORM_INFO_V1 <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func assumeInitRef(abi: SP_ALTPLATFORM_INFO_V1Abi): SP_ALTPLATFORM_INFO_V1 {
         var value = SP_ALTPLATFORM_INFO_V1()
         value.cbSize = abi.cbSize
-        value.Platform = windows_core.fromTypedAbi(abi.Platform, windows_core.typeMarker<Win32__impl_l0.VER_PLATFORM>()).unwrap()
+        value.Platform = windows_core.fromTypedAbi(abi.Platform, windows_core.typeMarker<Win32_impl_p0.VER_PLATFORM>()).unwrap()
         value.MajorVersion = abi.MajorVersion
         value.MinorVersion = abi.MinorVersion
         value.ProcessorArchitecture = abi.ProcessorArchitecture
@@ -7492,7 +7508,7 @@ extend SP_ALTPLATFORM_INFO_V1 <: windows_core.CopyType & windows_core.RuntimeTyp
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
 public struct SP_ALTPLATFORM_INFO_V2 {
     public var cbSize: UInt32 = 0u32
-    public var Platform: Win32__impl_l0.VER_PLATFORM = Win32__impl_l0.VER_PLATFORM()
+    public var Platform: Win32_impl_p0.VER_PLATFORM = Win32_impl_p0.VER_PLATFORM()
     public var MajorVersion: UInt32 = 0u32
     public var MinorVersion: UInt32 = 0u32
     public var ProcessorArchitecture: Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE = Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE()
@@ -7506,7 +7522,7 @@ public struct SP_ALTPLATFORM_INFO_V2 {
 @C
 public struct SP_ALTPLATFORM_INFO_V2Abi {
     public var cbSize: UInt32 = 0u32
-    public var Platform: Win32__impl_l0.VER_PLATFORMAbi = Win32__impl_l0.VER_PLATFORMAbi()
+    public var Platform: Win32_impl_p0.VER_PLATFORMAbi = Win32_impl_p0.VER_PLATFORMAbi()
     public var MajorVersion: UInt32 = 0u32
     public var MinorVersion: UInt32 = 0u32
     public var ProcessorArchitecture: Win32_System_SystemInformation.PROCESSOR_ARCHITECTUREAbi = Win32_System_SystemInformation.PROCESSOR_ARCHITECTUREAbi()
@@ -7524,7 +7540,7 @@ extend SP_ALTPLATFORM_INFO_V2 <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func projectAbi(value: SP_ALTPLATFORM_INFO_V2): SP_ALTPLATFORM_INFO_V2Abi {
         var abi = SP_ALTPLATFORM_INFO_V2Abi()
         abi.cbSize = value.cbSize
-        abi.Platform = windows_core.projectTypedAbi(value.Platform, windows_core.typeMarker<Win32__impl_l0.VER_PLATFORM>())
+        abi.Platform = windows_core.projectTypedAbi(value.Platform, windows_core.typeMarker<Win32_impl_p0.VER_PLATFORM>())
         abi.MajorVersion = value.MajorVersion
         abi.MinorVersion = value.MinorVersion
         abi.ProcessorArchitecture = windows_core.projectTypedAbi(value.ProcessorArchitecture, windows_core.typeMarker<Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE>())
@@ -7536,7 +7552,7 @@ extend SP_ALTPLATFORM_INFO_V2 <: windows_core.CopyType & windows_core.RuntimeTyp
     public static func assumeInitRef(abi: SP_ALTPLATFORM_INFO_V2Abi): SP_ALTPLATFORM_INFO_V2 {
         var value = SP_ALTPLATFORM_INFO_V2()
         value.cbSize = abi.cbSize
-        value.Platform = windows_core.fromTypedAbi(abi.Platform, windows_core.typeMarker<Win32__impl_l0.VER_PLATFORM>()).unwrap()
+        value.Platform = windows_core.fromTypedAbi(abi.Platform, windows_core.typeMarker<Win32_impl_p0.VER_PLATFORM>()).unwrap()
         value.MajorVersion = abi.MajorVersion
         value.MinorVersion = abi.MinorVersion
         value.ProcessorArchitecture = windows_core.fromTypedAbi(abi.ProcessorArchitecture, windows_core.typeMarker<Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE>()).unwrap()
@@ -7900,7 +7916,7 @@ extend SP_BACKUP_QUEUE_PARAMS_V2_W <: windows_core.CopyType & windows_core.Runti
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_UI_Controls == "on" || arch == "aarch64" && Windows_Win32_UI_Controls == "on")]
 public struct SP_CLASSIMAGELIST_DATA {
     public var cbSize: UInt32 = 0u32
-    public var ImageList: Win32__impl_l0.HIMAGELIST = CPointer<Unit>()
+    public var ImageList: Win32_impl_p1.HIMAGELIST = CPointer<Unit>()
     public var Reserved: UIntNative = 0
     public init() {}
 }
@@ -7909,7 +7925,7 @@ public struct SP_CLASSIMAGELIST_DATA {
 @C
 public struct SP_CLASSIMAGELIST_DATAAbi {
     public var cbSize: UInt32 = 0u32
-    public var ImageList: Win32__impl_l0.HIMAGELIST = CPointer<Unit>()
+    public var ImageList: Win32_impl_p1.HIMAGELIST = CPointer<Unit>()
     public var Reserved: UIntNative = 0
     public init() {}
 }
@@ -9441,7 +9457,7 @@ extend SP_INF_SIGNER_INFO_V2_W <: windows_core.CopyType & windows_core.RuntimeTy
 public struct SP_INSTALLWIZARD_DATA {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
     public var Flags: UInt32 = 0u32
-    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: Win32__impl_l0.HPROPSHEETPAGE())
+    public var DynamicPages: VArray<Win32_impl_p1.HPROPSHEETPAGE, $20> = VArray<Win32_impl_p1.HPROPSHEETPAGE, $20>(repeat: Win32_impl_p1.HPROPSHEETPAGE())
     public var NumDynamicPages: UInt32 = 0u32
     public var DynamicPageFlags: UInt32 = 0u32
     public var PrivateFlags: UInt32 = 0u32
@@ -9455,7 +9471,7 @@ public struct SP_INSTALLWIZARD_DATA {
 public struct SP_INSTALLWIZARD_DATAAbi {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADERAbi = SP_CLASSINSTALL_HEADERAbi()
     public var Flags: UInt32 = 0u32
-    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: Win32__impl_l0.HPROPSHEETPAGE())
+    public var DynamicPages: VArray<Win32_impl_p1.HPROPSHEETPAGE, $20> = VArray<Win32_impl_p1.HPROPSHEETPAGE, $20>(repeat: Win32_impl_p1.HPROPSHEETPAGE())
     public var NumDynamicPages: UInt32 = 0u32
     public var DynamicPageFlags: UInt32 = 0u32
     public var PrivateFlags: UInt32 = 0u32
@@ -9504,7 +9520,7 @@ extend SP_INSTALLWIZARD_DATA <: windows_core.CopyType & windows_core.RuntimeType
 public struct SP_NEWDEVICEWIZARD_DATA {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
     public var Flags: UInt32 = 0u32
-    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: Win32__impl_l0.HPROPSHEETPAGE())
+    public var DynamicPages: VArray<Win32_impl_p1.HPROPSHEETPAGE, $20> = VArray<Win32_impl_p1.HPROPSHEETPAGE, $20>(repeat: Win32_impl_p1.HPROPSHEETPAGE())
     public var NumDynamicPages: UInt32 = 0u32
     public var hwndWizardDlg: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -9515,7 +9531,7 @@ public struct SP_NEWDEVICEWIZARD_DATA {
 public struct SP_NEWDEVICEWIZARD_DATAAbi {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADERAbi = SP_CLASSINSTALL_HEADERAbi()
     public var Flags: UInt32 = 0u32
-    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: Win32__impl_l0.HPROPSHEETPAGE())
+    public var DynamicPages: VArray<Win32_impl_p1.HPROPSHEETPAGE, $20> = VArray<Win32_impl_p1.HPROPSHEETPAGE, $20>(repeat: Win32_impl_p1.HPROPSHEETPAGE())
     public var NumDynamicPages: UInt32 = 0u32
     public var hwndWizardDlg: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -14842,11 +14858,11 @@ foreign {
     // param-hint: DeviceInfoData optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
+    func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32_impl_p2.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
-public unsafe func Windows_SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
+public unsafe func Windows_SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32_impl_p2.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
     return SetupDiGetClassDevPropertySheetsA(DeviceInfoSet, DeviceInfoData, PropertySheetHeader, PropertySheetHeaderPageListSize, RequiredSize, PropertySheetType)
 }
 
@@ -14855,11 +14871,11 @@ foreign {
     // param-hint: DeviceInfoData optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
+    func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32_impl_p2.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
-public unsafe func Windows_SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
+public unsafe func Windows_SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32_impl_p2.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
     return SetupDiGetClassDevPropertySheetsW(DeviceInfoSet, DeviceInfoData, PropertySheetHeader, PropertySheetHeaderPageListSize, RequiredSize, PropertySheetType)
 }
 
@@ -15534,11 +15550,11 @@ public unsafe func Windows_SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, De
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetWizardPage == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
 foreign {
     // param-hint: DeviceInfoData optional
-    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE
+    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32_impl_p1.HPROPSHEETPAGE
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetWizardPage == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
-public unsafe func Windows_SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE {
+public unsafe func Windows_SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32_impl_p1.HPROPSHEETPAGE {
     return SetupDiGetWizardPage(DeviceInfoSet, DeviceInfoData, InstallWizardData, PageType, Flags)
 }
 
@@ -15640,22 +15656,22 @@ foreign {
     // param-hint: LargeIcon optional
     // param-hint: MiniIconIndex optional
     // pinvoke-hint: SetLastError
-    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32
+    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32_impl_p1.HICON>, MiniIconIndex: CPointer<Int32>): Int32
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadClassIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-public unsafe func Windows_SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32 {
+public unsafe func Windows_SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32_impl_p1.HICON>, MiniIconIndex: CPointer<Int32>): Int32 {
     return SetupDiLoadClassIcon(ClassGuid, LargeIcon, MiniIconIndex)
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadDeviceIcon == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
 foreign {
     // pinvoke-hint: SetLastError
-    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32
+    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32_impl_p1.HICON>): Int32
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadDeviceIcon == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
-public unsafe func Windows_SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+public unsafe func Windows_SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32_impl_p1.HICON>): Int32 {
     return SetupDiLoadDeviceIcon(DeviceInfoSet, DeviceInfoData, cxIcon, cyIcon, Flags, hIcon)
 }
 

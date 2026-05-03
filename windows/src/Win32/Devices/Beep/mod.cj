@@ -4,7 +4,9 @@
 package windows.Win32.Devices.Beep
 
 import std.collection.*
+@When[Windows_Win32_Devices_Beep == "on"]
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
+@When[Windows_Win32_Devices_Beep == "on"]
 import windows_core as windows_core
 
 

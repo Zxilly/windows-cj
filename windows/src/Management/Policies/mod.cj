@@ -4,15 +4,25 @@
 package windows.Management.Policies
 
 import std.collection.*
+@When[Windows_Management_Policies == "on"]
 import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_Management_Policies == "on"]
 import windows_core as windows_core
+@When[Windows_Management_Policies == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_Management_Policies == "on"]
 import windows_interface as windows_interface
+@When[Windows_Management_Policies == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_Management_Policies == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_Management_Policies == "on" && Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-import windows._impl_l0 as _impl_l0
-import windows._impl_l1 as _impl_l1
+@When[Windows_Management_Policies == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_Management_Policies == "on"]
+import windows.impl.p1 as impl_p1
+@When[Windows_Management_Policies == "on"]
 import windows_collections as windows_collections
 
 
@@ -144,7 +154,7 @@ public class INamedPolicyData <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INamedPolicyData", INamedPolicyData.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INamedPolicyDataVtbl", "INamedPolicyData", "INamedPolicyData_Impl", [InterfaceMethodSchema("Area", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Kind", 8, [InterfaceParameterSchema("result", "CPointer<NamedPolicyKindAbi>", "OutSlot<NamedPolicyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsManaged", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsUserPolicy", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBoolean", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBinary", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<_impl_l0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt32", 14, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt64", 15, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetString", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Changed", 17, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NamedPolicyData, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveChanged", 18, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INamedPolicyData", INamedPolicyData.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INamedPolicyDataVtbl", "INamedPolicyData", "INamedPolicyData_Impl", [InterfaceMethodSchema("Area", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Kind", 8, [InterfaceParameterSchema("result", "CPointer<NamedPolicyKindAbi>", "OutSlot<NamedPolicyKind>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsManaged", 9, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsUserPolicy", 10, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("get_User", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p1.User>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBoolean", 12, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBinary", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<impl_p0.IBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt32", 14, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt64", 15, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetString", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<windows_core.HString>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Changed", 17, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<NamedPolicyData, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<windows_collections.EventRegistrationTokenAbi>", "OutSlot<windows_collections.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveChanged", 18, [InterfaceParameterSchema("cookie", "windows_collections.EventRegistrationTokenAbi", "windows_collections.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(INamedPolicyData.runtimeType())
         return schema
     }
@@ -214,12 +224,12 @@ public class INamedPolicyData <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.get_User(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l1.User.fromAbiTake(result__)
+        return impl_p1.User.fromAbiTake(result__)
     }
 
     public unsafe func GetBoolean(): Bool {
@@ -231,12 +241,12 @@ public class INamedPolicyData <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetBinary(): _impl_l0.IBuffer {
+    public unsafe func GetBinary(): impl_p0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetBinary(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
-        return _impl_l0.IBuffer.fromAbiTake(result__)
+        return impl_p0.IBuffer.fromAbiTake(result__)
     }
 
     public unsafe func GetInt32(): Int32 {
@@ -329,7 +339,7 @@ public class INamedPolicyStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("INamedPolicyStatics", INamedPolicyStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INamedPolicyStaticsVtbl", "INamedPolicyStatics", "INamedPolicyStatics_Impl", [InterfaceMethodSchema("GetPolicyFromPath", 6, [InterfaceParameterSchema("area", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NamedPolicyData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPolicyFromPathForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<_impl_l1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("area", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NamedPolicyData>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("INamedPolicyStatics", INamedPolicyStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "INamedPolicyStaticsVtbl", "INamedPolicyStatics", "INamedPolicyStatics_Impl", [InterfaceMethodSchema("GetPolicyFromPath", 6, [InterfaceParameterSchema("area", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NamedPolicyData>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPolicyFromPathForUser", 7, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<impl_p1.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("area", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("name", "CPointer<Unit>", "InParam<windows_core.HString>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<NamedPolicyData>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(INamedPolicyStatics.runtimeType())
         return schema
     }
@@ -367,7 +377,7 @@ public class INamedPolicyStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     @When[Windows_System == "on"]
-    public unsafe func GetPolicyFromPathForUser(user: _impl_l1.User, area: windows_core.HString, name: windows_core.HString): NamedPolicyData {
+    public unsafe func GetPolicyFromPathForUser(user: impl_p1.User, area: windows_core.HString, name: windows_core.HString): NamedPolicyData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetPolicyFromPathForUser(asRaw(), user.asRaw(), area.asRaw(), name.asRaw(), CPointer<CPointer<Unit>>(inout result__))
@@ -411,7 +421,7 @@ public class NamedPolicy <: windows_interface.RuntimeName & windows_core.Runtime
     }
 
     @When[Windows_System == "on"]
-    public static unsafe func GetPolicyFromPathForUser(user: _impl_l1.User, area: windows_core.HString, name: windows_core.HString): NamedPolicyData {
+    public static unsafe func GetPolicyFromPathForUser(user: impl_p1.User, area: windows_core.HString, name: windows_core.HString): NamedPolicyData {
         var result__: Option<NamedPolicyData> = Option<NamedPolicyData>.None
         try (factory__ = windows_core.factory<NamedPolicy, INamedPolicyStatics>().unwrap()) {
             result__ = Some(factory__.GetPolicyFromPathForUser(user, area, name))
@@ -513,7 +523,7 @@ public class NamedPolicyData <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_System == "on"]
-    public unsafe func get_User(): _impl_l1.User {
+    public unsafe func get_User(): impl_p1.User {
         return defaultInterface().get_User()
     }
 
@@ -522,7 +532,7 @@ public class NamedPolicyData <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     @When[Windows_Storage_Streams == "on"]
-    public unsafe func GetBinary(): _impl_l0.IBuffer {
+    public unsafe func GetBinary(): impl_p0.IBuffer {
         return defaultInterface().GetBinary()
     }
 

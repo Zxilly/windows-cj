@@ -4,14 +4,23 @@
 package windows.ApplicationModel.Preview.Holographic
 
 import std.collection.*
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_core.{ComObject, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, Result, RuntimeType, S_OK, Type, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker}
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_core as windows_core
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_interface as windows_interface
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_polyfill.{FactoryCache}
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_polyfill as windows_polyfill
+@When[Windows_ApplicationModel_Preview_Holographic == "on" && Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
-import windows._impl_l0 as _impl_l0
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
+import windows.impl.p0 as impl_p0
+@When[Windows_ApplicationModel_Preview_Holographic == "on"]
 import windows_numerics as windows_numerics
 
 
@@ -63,7 +72,7 @@ public class IHolographicApplicationPreviewStatics <: InterfaceWrapperBase & Com
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IHolographicApplicationPreviewStatics", IHolographicApplicationPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHolographicApplicationPreviewStaticsVtbl", "IHolographicApplicationPreviewStatics", "IHolographicApplicationPreviewStatics_Impl", [InterfaceMethodSchema("IsCurrentViewPresentedOnHolographicDisplay", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsHolographicActivation", 7, [InterfaceParameterSchema("activatedEventArgs", "CPointer<Unit>", "InParam<_impl_l0.IActivatedEventArgs>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IHolographicApplicationPreviewStatics", IHolographicApplicationPreviewStatics.iid(), IInspectable.descriptorSchema(), Array<String>(), Array<GUID>(), "IHolographicApplicationPreviewStaticsVtbl", "IHolographicApplicationPreviewStatics", "IHolographicApplicationPreviewStatics_Impl", [InterfaceMethodSchema("IsCurrentViewPresentedOnHolographicDisplay", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsHolographicActivation", 7, [InterfaceParameterSchema("activatedEventArgs", "CPointer<Unit>", "InParam<impl_p0.IActivatedEventArgs>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IHolographicApplicationPreviewStatics.runtimeType())
         return schema
     }
@@ -101,7 +110,7 @@ public class IHolographicApplicationPreviewStatics <: InterfaceWrapperBase & Com
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public unsafe func IsHolographicActivation(activatedEventArgs: _impl_l0.IActivatedEventArgs): Bool {
+    public unsafe func IsHolographicActivation(activatedEventArgs: impl_p0.IActivatedEventArgs): Bool {
         let v = vtbl()
         var result__ = false
         let hr = v.IsHolographicActivation(asRaw(), activatedEventArgs.asRaw(), CPointer<Bool>(inout result__))
@@ -250,7 +259,7 @@ public class HolographicApplicationPreview <: windows_interface.RuntimeName & wi
     }
 
     @When[Windows_ApplicationModel_Activation == "on"]
-    public static unsafe func IsHolographicActivation(activatedEventArgs: _impl_l0.IActivatedEventArgs): Bool {
+    public static unsafe func IsHolographicActivation(activatedEventArgs: impl_p0.IActivatedEventArgs): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<HolographicApplicationPreview, IHolographicApplicationPreviewStatics>().unwrap()) {
             result__ = Some(factory__.IsHolographicActivation(activatedEventArgs))
