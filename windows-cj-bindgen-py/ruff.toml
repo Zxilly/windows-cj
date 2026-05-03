@@ -3,21 +3,21 @@ line-length = 120
 
 [lint]
 select = [
-    "E",
-    "W",
-    "F",
-    "I",
-    "B",
-    "UP",
-    "SIM",
-    "RUF",
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific
 ]
 ignore = [
-    "E501",
+    "E501",  # line too long (line-length 已设置)
 ]
 
 [lint.per-file-ignores]
-"tests/**/*.py" = ["B011"]
+"tests/**/*.py" = ["B011"]  # assert False allowed in tests
 
 [format]
 quote-style = "double"
