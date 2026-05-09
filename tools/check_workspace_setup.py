@@ -1,30 +1,56 @@
 #!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.12"
-# dependencies = []
-# ///
-"""Verify windows-cj/ workspace has all M0/M0.5/M0.7 setup artifacts.
+"""Verify the active windows-cj workspace layout.
 
-The workspace path is derived from this script's own location
-(__file__'s parent.parent), so it can be invoked from any cwd.
-
-Checks:
-- legacy backups exist (windows-bindgen-legacy/, windows-cfggen-legacy/)
-- new project skeletons exist with required files
-- winmd-to-json bin/ exe exists and is executable (plus its build script)
-- CLI entry points (windows-cj-bindgen, windows-cj-cfggen) are on PATH and respond to --version
+This script intentionally checks the current JSON-backed Cangjie generator
+layout. Legacy cfg-era and Python bindgen packages must live outside this
+workspace under the sibling deprecated_windows_cj directory.
 """
 
 from __future__ import annotations
 
-import shutil
-import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 
-def fail(msg: str) -> None:
-    print(f"FAIL: {msg}", file=sys.stderr)
+ACTIVE_WORKSPACE_MEMBERS = {
+    "windows-metadata",
+    "windows-libloading",
+    "windows-result",
+    "windows-strings",
+    "windows-interface",
+    "windows-implement",
+    "windows-core",
+    "windows-polyfill",
+    "windows-future",
+    "windows-collections",
+    "windows-numerics",
+    "windows-threading",
+    "windows-version",
+    "windows-targets",
+    "windows-registry",
+    "windows-services",
+    "windows-common",
+    "windows",
+}
+
+REFERENCE_ONLY_PACKAGES = {
+    "windows-sys",
+    "windows-webview2-sys",
+    "windows-appsdk-sys",
+    "windows-webview2",
+    "windows-appsdk",
+    "windows-bindgen",
+    "windows-bindgen-legacy",
+    "windows-cfggen",
+    "windows-cfggen-legacy",
+    "windows-cj-bindgen-py",
+    "windows-cj-cfggen-py",
+}
+
+
+def fail(message: str) -> None:
+    print(f"FAIL: {message}", file=sys.stderr)
     sys.exit(1)
 
 
@@ -33,85 +59,68 @@ def check_path_exists(path: Path, kind: str) -> None:
         fail(f"missing {kind}: {path}")
 
 
-def check_legacy_backups(workspace: Path) -> None:
-    check_path_exists(workspace / "windows-bindgen-legacy", "legacy bindgen backup")
-    check_path_exists(workspace / "windows-cfggen-legacy", "legacy cfggen backup")
-    check_path_exists(workspace / "windows-bindgen-legacy" / "src", "legacy bindgen src/")
-    check_path_exists(workspace / "windows-cfggen-legacy" / "src", "legacy cfggen src/")
+def load_toml(path: Path) -> dict:
+    with path.open("rb") as f:
+        return tomllib.load(f)
 
 
-def check_bindgen_py(workspace: Path) -> None:
-    root = workspace / "windows-cj-bindgen-py"
-    check_path_exists(root, "bindgen-py root")
-    check_path_exists(root / "pyproject.toml", "bindgen-py pyproject.toml")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "__init__.py", "bindgen-py __init__.py")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "cli.py", "bindgen-py cli.py")
-    check_path_exists(root / "tests" / "test_smoke.py", "bindgen-py smoke tests")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "__init__.py", "bindgen-py winmd_json package")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "runner.py", "bindgen-py winmd_json/runner.py")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "loader.py", "bindgen-py winmd_json/loader.py")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "schema.py", "bindgen-py winmd_json/schema.py")
-    check_path_exists(root / "src" / "windows_cj_bindgen" / "winmd_json" / "cache.py", "bindgen-py winmd_json/cache.py")
+def check_workspace_members(workspace: Path) -> None:
+    config = load_toml(workspace / "cjpm.toml")
+    members = set(config.get("workspace", {}).get("members", []))
+    if members != ACTIVE_WORKSPACE_MEMBERS:
+        missing = sorted(ACTIVE_WORKSPACE_MEMBERS - members)
+        extra = sorted(members - ACTIVE_WORKSPACE_MEMBERS)
+        fail(f"workspace members mismatch; missing={missing}, extra={extra}")
+    for member in sorted(members):
+        root = workspace / member
+        check_path_exists(root / "cjpm.toml", f"{member} cjpm.toml")
+        check_path_exists(root / "src", f"{member} src/")
 
 
-def check_cfggen_py(workspace: Path) -> None:
-    root = workspace / "windows-cj-cfggen-py"
-    check_path_exists(root, "cfggen-py root")
-    check_path_exists(root / "pyproject.toml", "cfggen-py pyproject.toml")
-    check_path_exists(root / "src" / "windows_cj_cfggen" / "__init__.py", "cfggen-py __init__.py")
-    check_path_exists(root / "src" / "windows_cj_cfggen" / "cli.py", "cfggen-py cli.py")
-    check_path_exists(root / "tests" / "test_smoke.py", "cfggen-py smoke tests")
+def check_reference_only_packages(workspace: Path) -> None:
+    deprecated_root = workspace.parent / "deprecated_windows_cj"
+    check_path_exists(deprecated_root, "deprecated_windows_cj root")
+    for name in sorted(REFERENCE_ONLY_PACKAGES):
+        active_root = workspace / name
+        if active_root.exists():
+            fail(f"{name} must be moved out of windows-cj; found {active_root}")
+        archived_root = deprecated_root / name
+        check_path_exists(archived_root, f"{name} deprecated reference root")
+        check_path_exists(archived_root / "REFERENCE_ONLY.md", f"{name} REFERENCE_ONLY.md")
 
 
-def check_winmd_to_json(workspace: Path) -> None:
-    root = workspace / "winmd-to-json"
-    check_path_exists(root, "winmd-to-json root")
-    check_path_exists(root / "Program.cs", "winmd-to-json Program.cs")
-    check_path_exists(root / "winmd-to-json.csproj", "winmd-to-json csproj")
-    check_path_exists(root / "LICENSE", "winmd-to-json LICENSE")
-    check_path_exists(root / "README.md", "winmd-to-json README")
-    check_path_exists(root / "scripts" / "build_and_publish.ps1", "winmd-to-json build script")
-    check_path_exists(root / "bin" / "winmd-to-json.exe", "winmd-to-json published exe")
+def check_generated_common_package(workspace: Path) -> None:
+    generated = workspace / "windows-common"
+    check_path_exists(generated / "cjpm.toml", "windows-common cjpm.toml")
+    check_path_exists(generated / "src" / "support_deps.cj", "windows-common support_deps.cj")
+    check_path_exists(generated / "src" / "mod.cj", "windows-common mod.cj")
+    first_line = (generated / "src" / "mod.cj").read_text(encoding="utf-8").splitlines()[0]
+    if first_line != "// Generated by windows-gen. DO NOT EDIT.":
+        fail("windows-common generated files must start with the generated-by header")
+    config = load_toml(generated / "cjpm.toml")
+    package = config.get("package", {})
+    if package.get("name") != "windows_common":
+        fail(f"windows-common package name must be windows_common, got {package.get('name')!r}")
 
 
-def check_cli_entry_points() -> None:
-    if shutil.which("windows-cj-bindgen") is None:
-        fail("windows-cj-bindgen entry point not on PATH; run pip install -e in bindgen-py")
-    if shutil.which("windows-cj-cfggen") is None:
-        fail("windows-cj-cfggen entry point not on PATH; run pip install -e in cfggen-py")
-
-    for cmd in ("windows-cj-bindgen", "windows-cj-cfggen"):
-        try:
-            result = subprocess.run([cmd, "--version"], check=False, capture_output=True, text=True)
-        except OSError as exc:
-            fail(f"{cmd} --version could not be launched: {exc}")
-            return  # unreachable (fail exits) but satisfies type checkers
-        if result.returncode != 0:
-            fail(f"{cmd} --version exited {result.returncode}: {result.stderr}")
-        if not result.stdout.strip():
-            fail(f"{cmd} --version produced empty stdout: {result.stdout!r}")
+def check_active_tools(workspace: Path) -> None:
+    check_path_exists(workspace / "windows" / "src" / "main.cj", "Cangjie bindgen CLI")
+    check_path_exists(workspace / "windows" / "src" / "json_loader.cj", "JSON loader")
+    check_path_exists(workspace / "winmd-to-json" / "Program.cs", "winmd-to-json source")
+    check_path_exists(workspace / "windows-winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
 
 
 def main() -> None:
     workspace = Path(__file__).resolve().parent.parent
     print(f"workspace = {workspace}")
-
-    check_legacy_backups(workspace)
-    print("OK: legacy backups present")
-
-    check_bindgen_py(workspace)
-    print("OK: windows-cj-bindgen-py skeleton present")
-
-    check_cfggen_py(workspace)
-    print("OK: windows-cj-cfggen-py skeleton present")
-
-    check_winmd_to_json(workspace)
-    print("OK: winmd-to-json vendored and published")
-
-    check_cli_entry_points()
-    print("OK: CLI entry points reachable on PATH")
-
-    print("\nAll M0+M0.5+M0.7 setup checks PASS.")
+    check_workspace_members(workspace)
+    print("OK: active workspace members match JSON-backed layout")
+    check_reference_only_packages(workspace)
+    print("OK: reference-only packages live under deprecated_windows_cj")
+    check_generated_common_package(workspace)
+    print("OK: generated windows-common package is present and marked DO NOT EDIT")
+    check_active_tools(workspace)
+    print("OK: active Cangjie generator and WinUI helper files are present")
 
 
 if __name__ == "__main__":
