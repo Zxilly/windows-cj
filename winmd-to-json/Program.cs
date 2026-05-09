@@ -306,7 +306,7 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
             "Windows.Foundation.Metadata.ThreadingModel" => ((ThreadingModel)val).ToString(),
             "Windows.Win32.Foundation.Metadata.Architecture" => ((Architecture)val).ToString().Split(", "),
             "Windows.Win32.Interop.Architecture" => ((Architecture)val).ToString().Split(", "),
-            _ => val,
+            _ => JsonValueNormalizer.Normalize(val),
         };
     }
 
@@ -314,6 +314,18 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
     public bool IsSystemType(TType type)
     {
         return type.Kind == "System.Type";
+    }
+}
+
+static class JsonValueNormalizer
+{
+    public static object? Normalize(object? value)
+    {
+        return value switch
+        {
+            ulong n when n > long.MaxValue => n.ToString(),
+            _ => value,
+        };
     }
 }
 
@@ -812,7 +824,7 @@ class JsConstant
 
     public string TypeCode { get => _ct.TypeCode.ToString(); }
 
-    public object? Value { get => _reader.GetBlobReader(_ct.Value).ReadConstant(_ct.TypeCode); }
+    public object? Value { get => JsonValueNormalizer.Normalize(_reader.GetBlobReader(_ct.Value).ReadConstant(_ct.TypeCode)); }
 }
 
 class JsInterfaceImplementation
