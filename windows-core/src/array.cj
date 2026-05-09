@@ -1,8 +1,11 @@
 package windows_core
 
-foreign {
-    func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit>
-    func CoTaskMemFree(pv: CPointer<Unit>): Unit
+public func coTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
+    unsafe { CoTaskMemAlloc(cb) }
+}
+
+public func coTaskMemFree(pv: CPointer<Unit>): Unit {
+    unsafe { CoTaskMemFree(pv) }
 }
 
 abstract class AbiArrayStorage<T> {

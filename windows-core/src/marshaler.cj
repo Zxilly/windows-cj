@@ -2,13 +2,6 @@ package windows_core
 
 import windows_implement.{ComBox, comRegistryInsert, comRegistryLookup, comRegistryRemove}
 
-foreign {
-    func CoCreateFreeThreadedMarshaler(
-        punkOuter: CPointer<Unit>,
-        ppunkMarshal: CPointer<CPointer<Unit>>
-    ): Int32
-}
-
 extend IMarshal <: Interface<IMarshal> {}
 
 class AggregatedMarshalerState {

@@ -5,7 +5,7 @@ public interface IWeakReference_Impl {
 }
 
 @C
-func weakReferenceResolveThunk(
+func coreWeakReferenceResolveThunk(
     instanceRaw: CPointer<Unit>,
     riid: CPointer<GUID>,
     objectreference: CPointer<CPointer<Unit>>
@@ -34,7 +34,7 @@ func weakReferenceResolveThunk(
 public func newIWeakReferenceVtbl<T>(offset!: Int64 = 0): IWeakReferenceVtbl where T <: IWeakReference_Impl {
     var vtbl = IWeakReferenceVtbl()
     vtbl.base_ = buildIUnknownVtbl(offset: offset)
-    vtbl.Resolve = weakReferenceResolveThunk
+    vtbl.Resolve = coreWeakReferenceResolveThunk
     vtbl
 }
 
@@ -47,7 +47,7 @@ public interface IWeakReferenceSource_Impl {
 }
 
 @C
-func weakReferenceSourceGetWeakReferenceThunk(
+func coreWeakReferenceSourceGetWeakReferenceThunk(
     instanceRaw: CPointer<Unit>,
     weakreference: CPointer<CPointer<Unit>>
 ): Int32 {
@@ -80,7 +80,7 @@ func weakReferenceSourceGetWeakReferenceThunk(
 public func newIWeakReferenceSourceVtbl<T>(offset!: Int64 = 0): IWeakReferenceSourceVtbl where T <: IWeakReferenceSource_Impl {
     var vtbl = IWeakReferenceSourceVtbl()
     vtbl.base_ = buildIUnknownVtbl(offset: offset)
-    vtbl.GetWeakReference = weakReferenceSourceGetWeakReferenceThunk
+    vtbl.GetWeakReference = coreWeakReferenceSourceGetWeakReferenceThunk
     vtbl
 }
 

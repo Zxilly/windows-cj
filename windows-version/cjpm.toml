@@ -7,3 +7,5 @@
   compile-option = "-Woff unused"
 
 [dependencies]
+  windows_common = { path = "../windows-common" }
+  windows_libloading = { path = "../windows-libloading" }

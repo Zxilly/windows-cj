@@ -1,6 +1,7 @@
 package windows_core
 
 import windows_implement.ComObjectBase
+import windows_implement.{ComObject, ComObjectRuntime}
 import windows_implement.{ImplementationAccess, comRegistryLookup, rootRegistryKeyFromRaw}
 
 public interface IUnknownImpl <: ComObjectBase {

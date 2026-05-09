@@ -1,13 +1,18 @@
 package windows_registry
 
 import std.collection.*
+import windows_common.Win32.Foundation as Win32Foundation
+import windows_common.Win32.System.Registry as Win32Registry
+import windows_libloading as windows_libloading
 import windows_result.Error as WinError
 import windows_result.*
 import windows_strings.*
 
+public type FILETIME = Win32Foundation.FILETIME
+
 public type BOOL = Int32
-public type HANDLE = CPointer<Unit>
-public type HKEY = CPointer<Unit>
+public type HANDLE = Win32Foundation.HANDLE
+public type HKEY = Win32Registry.HKEY
 
 private let ERROR_INVALID_DATA = 13u32
 private let ERROR_NO_MORE_ITEMS = 259u32
@@ -22,127 +27,504 @@ private let REG_DWORD = 4u32
 private let REG_MULTI_SZ = 7u32
 private let REG_QWORD = 11u32
 
-private let INVALID_HANDLE_VALUE: HANDLE = unsafe { CPointer<Unit>(CPointer<UInt8>() + -1) }
-private let HKEY_CLASSES_ROOT_RAW: HKEY = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483648) }
-private let HKEY_CURRENT_USER_RAW: HKEY = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483647) }
-private let HKEY_LOCAL_MACHINE_RAW: HKEY = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483646) }
-private let HKEY_USERS_RAW: HKEY = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483645) }
-private let HKEY_CURRENT_CONFIG_RAW: HKEY = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483643) }
+private let INVALID_HANDLE_VALUE: HANDLE = rawHandle(-1)
+private let HKEY_CLASSES_ROOT_RAW: HKEY = rawHKey(-2147483648)
+private let HKEY_CURRENT_USER_RAW: HKEY = rawHKey(-2147483647)
+private let HKEY_LOCAL_MACHINE_RAW: HKEY = rawHKey(-2147483646)
+private let HKEY_USERS_RAW: HKEY = rawHKey(-2147483645)
+private let HKEY_CURRENT_CONFIG_RAW: HKEY = rawHKey(-2147483643)
 
-@C
-public struct FILETIME {
-    public var dwLowDateTime: UInt32 = 0u32
-    public var dwHighDateTime: UInt32 = 0u32
-    public init() {}
+private func rawHandle(value: Int64): HANDLE {
+    var handle = HANDLE()
+    handle.Value = unsafe { CPointer<Unit>(CPointer<UInt8>() + value) }
+    handle
 }
 
-foreign {
-    func CloseHandle(hObject: HANDLE): BOOL
-    func CommitTransaction(transactionHandle: HANDLE): BOOL
-    func CreateTransaction(
-        lpTransactionAttributes: CPointer<Unit>,
-        uow: CPointer<Unit>,
-        createOptions: UInt32,
-        isolationLevel: UInt32,
-        isolationFlags: UInt32,
-        timeout: UInt32,
-        description: CPointer<UInt16>
-    ): HANDLE
+private func rawHKey(value: Int64): HKEY {
+    var key = HKEY()
+    key.Value = unsafe { CPointer<Unit>(CPointer<UInt8>() + value) }
+    key
+}
 
-    func RegCloseKey(hKey: HKEY): UInt32
-    func RegCreateKeyExW(
-        hKey: HKEY,
-        lpSubKey: CPointer<UInt16>,
-        reserved: UInt32,
-        lpClass: CPointer<UInt16>,
-        dwOptions: UInt32,
-        samDesired: UInt32,
-        lpSecurityAttributes: CPointer<Unit>,
-        phkResult: CPointer<HKEY>,
-        lpdwDisposition: CPointer<UInt32>
-    ): UInt32
-    func RegCreateKeyTransactedW(
-        hKey: HKEY,
-        lpSubKey: CPointer<UInt16>,
-        reserved: UInt32,
-        lpClass: CPointer<UInt16>,
-        dwOptions: UInt32,
-        samDesired: UInt32,
-        lpSecurityAttributes: CPointer<Unit>,
-        phkResult: CPointer<HKEY>,
-        lpdwDisposition: CPointer<UInt32>,
-        hTransaction: HANDLE,
-        pExtendedParemeter: CPointer<Unit>
-    ): UInt32
-    func RegDeleteTreeW(hKey: HKEY, lpSubKey: CPointer<UInt16>): UInt32
-    func RegDeleteValueW(hKey: HKEY, lpValueName: CPointer<UInt16>): UInt32
-    func RegEnumKeyExW(
-        hKey: HKEY,
-        dwIndex: UInt32,
-        lpName: CPointer<UInt16>,
-        lpcchName: CPointer<UInt32>,
-        lpReserved: CPointer<UInt32>,
-        lpClass: CPointer<UInt16>,
-        lpcchClass: CPointer<UInt32>,
-        lpftLastWriteTime: CPointer<FILETIME>
-    ): UInt32
-    func RegEnumValueW(
-        hKey: HKEY,
-        dwIndex: UInt32,
-        lpValueName: CPointer<UInt16>,
-        lpcchValueName: CPointer<UInt32>,
-        lpReserved: CPointer<UInt32>,
-        lpType: CPointer<UInt32>,
-        lpData: CPointer<UInt8>,
-        lpcbData: CPointer<UInt32>
-    ): UInt32
-    func RegOpenKeyExW(
-        hKey: HKEY,
-        lpSubKey: CPointer<UInt16>,
-        ulOptions: UInt32,
-        samDesired: UInt32,
-        phkResult: CPointer<HKEY>
-    ): UInt32
-    func RegOpenKeyTransactedW(
-        hKey: HKEY,
-        lpSubKey: CPointer<UInt16>,
-        ulOptions: UInt32,
-        samDesired: UInt32,
-        phkResult: CPointer<HKEY>,
-        hTransaction: HANDLE,
-        pExtendedParemeter: CPointer<Unit>
-    ): UInt32
-    func RegQueryInfoKeyW(
-        hKey: HKEY,
-        lpClass: CPointer<UInt16>,
-        lpcchClass: CPointer<UInt32>,
-        lpReserved: CPointer<UInt32>,
-        lpcSubKeys: CPointer<UInt32>,
-        lpcbMaxSubKeyLen: CPointer<UInt32>,
-        lpcbMaxClassLen: CPointer<UInt32>,
-        lpcValues: CPointer<UInt32>,
-        lpcbMaxValueNameLen: CPointer<UInt32>,
-        lpcbMaxValueLen: CPointer<UInt32>,
-        lpcbSecurityDescriptor: CPointer<UInt32>,
-        lpftLastWriteTime: CPointer<FILETIME>
-    ): UInt32
-    func RegQueryValueExW(
-        hKey: HKEY,
-        lpValueName: CPointer<UInt16>,
-        lpReserved: CPointer<UInt32>,
-        lpType: CPointer<UInt32>,
-        lpData: CPointer<UInt8>,
-        lpcbData: CPointer<UInt32>
-    ): UInt32
-    func RegRenameKey(hKey: HKEY, lpSubKeyName: CPointer<UInt16>, lpNewKeyName: CPointer<UInt16>): UInt32
-    func RegSetValueExW(
-        hKey: HKEY,
-        lpValueName: CPointer<UInt16>,
-        reserved: UInt32,
-        dwType: UInt32,
-        lpData: CPointer<UInt8>,
-        cbData: UInt32
-    ): UInt32
+private func isInvalidHandle(handle: HANDLE): Bool {
+    handle.Value.isNull() || handle.Value.toUIntNative() == INVALID_HANDLE_VALUE.Value.toUIntNative()
+}
+
+private func kernel32Proc(name: String): CPointer<Unit> {
+    windows_libloading.resolveProc("kernel32.dll", name)
+}
+
+private func ktmw32Proc(name: String): CPointer<Unit> {
+    windows_libloading.resolveProc("ktmw32.dll", name)
+}
+
+private func advapi32Proc(name: String): CPointer<Unit> {
+    windows_libloading.resolveProc("advapi32.dll", name)
+}
+
+func CloseHandle(hObject: HANDLE): BOOL {
+    let proc = CFunc<(CPointer<Unit>) -> BOOL>(kernel32Proc("CloseHandle"))
+    unsafe { proc(hObject.Value) }
+}
+
+func CommitTransaction(transactionHandle: HANDLE): BOOL {
+    let proc = CFunc<(CPointer<Unit>) -> BOOL>(ktmw32Proc("CommitTransaction"))
+    unsafe { proc(transactionHandle.Value) }
+}
+
+func CreateTransaction(
+    lpTransactionAttributes: CPointer<Unit>,
+    uow: CPointer<Unit>,
+    createOptions: UInt32,
+    isolationLevel: UInt32,
+    isolationFlags: UInt32,
+    timeout: UInt32,
+    description: CPointer<UInt16>
+): HANDLE {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<Unit>,
+        UInt32,
+        UInt32,
+        UInt32,
+        UInt32,
+        CPointer<UInt16>
+    ) -> CPointer<Unit>>(ktmw32Proc("CreateTransaction"))
+    var handle = HANDLE()
+    handle.Value = unsafe {
+        proc(lpTransactionAttributes, uow, createOptions, isolationLevel, isolationFlags, timeout, description)
+    }
+    handle
+}
+
+func RegCloseKey(hKey: HKEY): UInt32 {
+    let proc = CFunc<(CPointer<Unit>) -> UInt32>(advapi32Proc("RegCloseKey"))
+    unsafe { proc(hKey.Value) }
+}
+
+func RegCreateKeyExWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    UInt32,
+    CPointer<UInt16>,
+    UInt32,
+    UInt32,
+    CPointer<Unit>,
+    CPointer<HKEY>,
+    CPointer<UInt32>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<Unit>,
+        CPointer<HKEY>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegCreateKeyExW"))
+}
+
+func RegCreateKeyTransactedWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    UInt32,
+    CPointer<UInt16>,
+    UInt32,
+    UInt32,
+    CPointer<Unit>,
+    CPointer<HKEY>,
+    CPointer<UInt32>,
+    CPointer<Unit>,
+    CPointer<Unit>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<Unit>,
+        CPointer<HKEY>,
+        CPointer<UInt32>,
+        CPointer<Unit>,
+        CPointer<Unit>
+    ) -> UInt32>(advapi32Proc("RegCreateKeyTransactedW"))
+}
+
+func RegEnumKeyExWProc(): CFunc<(
+    CPointer<Unit>,
+    UInt32,
+    CPointer<UInt16>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt16>,
+    CPointer<UInt32>,
+    CPointer<FILETIME>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        UInt32,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<FILETIME>
+    ) -> UInt32>(advapi32Proc("RegEnumKeyExW"))
+}
+
+func RegEnumValueWProc(): CFunc<(
+    CPointer<Unit>,
+    UInt32,
+    CPointer<UInt16>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt8>,
+    CPointer<UInt32>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        UInt32,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt8>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegEnumValueW"))
+}
+
+func RegOpenKeyExWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    UInt32,
+    UInt32,
+    CPointer<HKEY>
+) -> UInt32> {
+    CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, UInt32, CPointer<HKEY>) -> UInt32>(
+        advapi32Proc("RegOpenKeyExW")
+    )
+}
+
+func RegOpenKeyTransactedWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    UInt32,
+    UInt32,
+    CPointer<HKEY>,
+    CPointer<Unit>,
+    CPointer<Unit>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<HKEY>,
+        CPointer<Unit>,
+        CPointer<Unit>
+    ) -> UInt32>(advapi32Proc("RegOpenKeyTransactedW"))
+}
+
+func RegQueryInfoKeyWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<FILETIME>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<FILETIME>
+    ) -> UInt32>(advapi32Proc("RegQueryInfoKeyW"))
+}
+
+func RegQueryValueExWProc(): CFunc<(
+    CPointer<Unit>,
+    CPointer<UInt16>,
+    CPointer<UInt32>,
+    CPointer<UInt32>,
+    CPointer<UInt8>,
+    CPointer<UInt32>
+) -> UInt32> {
+    CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt8>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegQueryValueExW"))
+}
+
+func RegCreateKeyExW(
+    hKey: HKEY,
+    lpSubKey: CPointer<UInt16>,
+    reserved: UInt32,
+    lpClass: CPointer<UInt16>,
+    dwOptions: UInt32,
+    samDesired: UInt32,
+    lpSecurityAttributes: CPointer<Unit>,
+    phkResult: CPointer<HKEY>,
+    lpdwDisposition: CPointer<UInt32>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<Unit>,
+        CPointer<HKEY>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegCreateKeyExW"))
+    unsafe { proc(hKey.Value, lpSubKey, reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition) }
+}
+
+func RegCreateKeyTransactedW(
+    hKey: HKEY,
+    lpSubKey: CPointer<UInt16>,
+    reserved: UInt32,
+    lpClass: CPointer<UInt16>,
+    dwOptions: UInt32,
+    samDesired: UInt32,
+    lpSecurityAttributes: CPointer<Unit>,
+    phkResult: CPointer<HKEY>,
+    lpdwDisposition: CPointer<UInt32>,
+    hTransaction: HANDLE,
+    pExtendedParemeter: CPointer<Unit>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<Unit>,
+        CPointer<HKEY>,
+        CPointer<UInt32>,
+        CPointer<Unit>,
+        CPointer<Unit>
+    ) -> UInt32>(advapi32Proc("RegCreateKeyTransactedW"))
+    unsafe {
+        proc(
+            hKey.Value,
+            lpSubKey,
+            reserved,
+            lpClass,
+            dwOptions,
+            samDesired,
+            lpSecurityAttributes,
+            phkResult,
+            lpdwDisposition,
+            hTransaction.Value,
+            pExtendedParemeter
+        )
+    }
+}
+
+func RegDeleteTreeW(hKey: HKEY, lpSubKey: CPointer<UInt16>): UInt32 {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> UInt32>(advapi32Proc("RegDeleteTreeW"))
+    unsafe { proc(hKey.Value, lpSubKey) }
+}
+
+func RegDeleteValueW(hKey: HKEY, lpValueName: CPointer<UInt16>): UInt32 {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> UInt32>(advapi32Proc("RegDeleteValueW"))
+    unsafe { proc(hKey.Value, lpValueName) }
+}
+
+func RegEnumKeyExW(
+    hKey: HKEY,
+    dwIndex: UInt32,
+    lpName: CPointer<UInt16>,
+    lpcchName: CPointer<UInt32>,
+    lpReserved: CPointer<UInt32>,
+    lpClass: CPointer<UInt16>,
+    lpcchClass: CPointer<UInt32>,
+    lpftLastWriteTime: CPointer<FILETIME>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        UInt32,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<FILETIME>
+    ) -> UInt32>(advapi32Proc("RegEnumKeyExW"))
+    unsafe { proc(hKey.Value, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime) }
+}
+
+func RegEnumValueW(
+    hKey: HKEY,
+    dwIndex: UInt32,
+    lpValueName: CPointer<UInt16>,
+    lpcchValueName: CPointer<UInt32>,
+    lpReserved: CPointer<UInt32>,
+    lpType: CPointer<UInt32>,
+    lpData: CPointer<UInt8>,
+    lpcbData: CPointer<UInt32>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        UInt32,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt8>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegEnumValueW"))
+    unsafe { proc(hKey.Value, dwIndex, lpValueName, lpcchValueName, lpReserved, lpType, lpData, lpcbData) }
+}
+
+func RegOpenKeyExW(
+    hKey: HKEY,
+    lpSubKey: CPointer<UInt16>,
+    ulOptions: UInt32,
+    samDesired: UInt32,
+    phkResult: CPointer<HKEY>
+): UInt32 {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, UInt32, CPointer<HKEY>) -> UInt32>(
+        advapi32Proc("RegOpenKeyExW")
+    )
+    unsafe { proc(hKey.Value, lpSubKey, ulOptions, samDesired, phkResult) }
+}
+
+func RegOpenKeyTransactedW(
+    hKey: HKEY,
+    lpSubKey: CPointer<UInt16>,
+    ulOptions: UInt32,
+    samDesired: UInt32,
+    phkResult: CPointer<HKEY>,
+    hTransaction: HANDLE,
+    pExtendedParemeter: CPointer<Unit>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<HKEY>,
+        CPointer<Unit>,
+        CPointer<Unit>
+    ) -> UInt32>(advapi32Proc("RegOpenKeyTransactedW"))
+    unsafe { proc(hKey.Value, lpSubKey, ulOptions, samDesired, phkResult, hTransaction.Value, pExtendedParemeter) }
+}
+
+func RegQueryInfoKeyW(
+    hKey: HKEY,
+    lpClass: CPointer<UInt16>,
+    lpcchClass: CPointer<UInt32>,
+    lpReserved: CPointer<UInt32>,
+    lpcSubKeys: CPointer<UInt32>,
+    lpcbMaxSubKeyLen: CPointer<UInt32>,
+    lpcbMaxClassLen: CPointer<UInt32>,
+    lpcValues: CPointer<UInt32>,
+    lpcbMaxValueNameLen: CPointer<UInt32>,
+    lpcbMaxValueLen: CPointer<UInt32>,
+    lpcbSecurityDescriptor: CPointer<UInt32>,
+    lpftLastWriteTime: CPointer<FILETIME>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<FILETIME>
+    ) -> UInt32>(advapi32Proc("RegQueryInfoKeyW"))
+    unsafe {
+        proc(
+            hKey.Value,
+            lpClass,
+            lpcchClass,
+            lpReserved,
+            lpcSubKeys,
+            lpcbMaxSubKeyLen,
+            lpcbMaxClassLen,
+            lpcValues,
+            lpcbMaxValueNameLen,
+            lpcbMaxValueLen,
+            lpcbSecurityDescriptor,
+            lpftLastWriteTime
+        )
+    }
+}
+
+func RegQueryValueExW(
+    hKey: HKEY,
+    lpValueName: CPointer<UInt16>,
+    lpReserved: CPointer<UInt32>,
+    lpType: CPointer<UInt32>,
+    lpData: CPointer<UInt8>,
+    lpcbData: CPointer<UInt32>
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        CPointer<UInt32>,
+        CPointer<UInt32>,
+        CPointer<UInt8>,
+        CPointer<UInt32>
+    ) -> UInt32>(advapi32Proc("RegQueryValueExW"))
+    unsafe { proc(hKey.Value, lpValueName, lpReserved, lpType, lpData, lpcbData) }
+}
+
+func RegRenameKey(hKey: HKEY, lpSubKeyName: CPointer<UInt16>, lpNewKeyName: CPointer<UInt16>): UInt32 {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> UInt32>(
+        advapi32Proc("RegRenameKey")
+    )
+    unsafe { proc(hKey.Value, lpSubKeyName, lpNewKeyName) }
+}
+
+func RegSetValueExW(
+    hKey: HKEY,
+    lpValueName: CPointer<UInt16>,
+    reserved: UInt32,
+    dwType: UInt32,
+    lpData: CPointer<UInt8>,
+    cbData: UInt32
+): UInt32 {
+    let proc = CFunc<(
+        CPointer<Unit>,
+        CPointer<UInt16>,
+        UInt32,
+        UInt32,
+        CPointer<UInt8>,
+        UInt32
+    ) -> UInt32>(advapi32Proc("RegSetValueExW"))
+    unsafe { proc(hKey.Value, lpValueName, reserved, dwType, lpData, cbData) }
 }
 
 private func win32Result(status: UInt32): Result<Unit> {
@@ -576,7 +958,7 @@ public class Value {
 }
 
 public class Transaction <: Resource {
-    private var handle: HANDLE = CPointer<Unit>()
+    private var handle: HANDLE = HANDLE()
     private var closed = false
 
     private init(handle: HANDLE) {
@@ -584,18 +966,16 @@ public class Transaction <: Resource {
     }
 
     public static func new(): Result<Transaction> {
-        let created = unsafe {
-            CreateTransaction(
-                CPointer<Unit>(),
-                CPointer<Unit>(),
-                0u32,
-                0u32,
-                0u32,
-                0u32,
-                CPointer<UInt16>()
-            )
-        }
-        if (created.isNull() || created.toUIntNative() == INVALID_HANDLE_VALUE.toUIntNative()) {
+        let created = CreateTransaction(
+            CPointer<Unit>(),
+            CPointer<Unit>(),
+            0u32,
+            0u32,
+            0u32,
+            0u32,
+            CPointer<UInt16>()
+        )
+        if (isInvalidHandle(created)) {
             return Result<Transaction>.Err(errorFromThread())
         }
         Result<Transaction>.Ok(Transaction(created))
@@ -607,7 +987,7 @@ public class Transaction <: Resource {
 
     public func asRaw(): HANDLE {
         if (closed) {
-            return CPointer<Unit>()
+            return HANDLE()
         }
         handle
     }
@@ -620,7 +1000,7 @@ public class Transaction <: Resource {
         if (closed) {
             throw IllegalStateException("transaction is closed")
         }
-        let result = unsafe { CommitTransaction(handle) }
+        let result = CommitTransaction(handle)
         if (result == 0i32) {
             return Result<Unit>.Err(errorFromThread())
         }
@@ -633,10 +1013,10 @@ public class Transaction <: Resource {
             return
         }
         closed = true
-        if (handle.isNotNull() && handle.toUIntNative() != INVALID_HANDLE_VALUE.toUIntNative()) {
-            let _ = unsafe { CloseHandle(handle) }
+        if (!isInvalidHandle(handle)) {
+            let _ = CloseHandle(handle)
         }
-        handle = CPointer<Unit>()
+        handle = HANDLE()
     }
 
     ~init() {
@@ -644,10 +1024,10 @@ public class Transaction <: Resource {
             return
         }
         closed = true
-        if (handle.isNotNull() && handle.toUIntNative() != INVALID_HANDLE_VALUE.toUIntNative()) {
-            let _ = unsafe { CloseHandle(handle) }
+        if (!isInvalidHandle(handle)) {
+            let _ = CloseHandle(handle)
         }
-        handle = CPointer<Unit>()
+        handle = HANDLE()
     }
 }
 
@@ -693,7 +1073,7 @@ public class OpenOptions {
     }
 
     public func open(path: String): Result<Key> {
-        var handle = CPointer<Unit>()
+        var handle = HKEY()
         var disposition = 0u32
         let pathWide = encodeUtf16WithNull(path)
         let status = unsafe {
@@ -703,8 +1083,9 @@ public class OpenOptions {
                 match (transaction_) {
                     case Some(transaction) =>
                         if (create_) {
-                            RegCreateKeyTransactedW(
-                                parent_.handleForCalls(),
+                            let proc = RegCreateKeyTransactedWProc()
+                            proc(
+                                parent_.handleForCalls().Value,
                                 pathPtr,
                                 0u32,
                                 CPointer<UInt16>(),
@@ -713,24 +1094,26 @@ public class OpenOptions {
                                 CPointer<Unit>(),
                                 inout handle,
                                 inout disposition,
-                                transaction.asRaw(),
+                                transaction.asRaw().Value,
                                 CPointer<Unit>()
                             )
                         } else {
-                            RegOpenKeyTransactedW(
-                                parent_.handleForCalls(),
+                            let proc = RegOpenKeyTransactedWProc()
+                            proc(
+                                parent_.handleForCalls().Value,
                                 pathPtr,
                                 0u32,
                                 access_,
                                 inout handle,
-                                transaction.asRaw(),
+                                transaction.asRaw().Value,
                                 CPointer<Unit>()
                             )
                         }
                     case None =>
                         if (create_) {
-                            RegCreateKeyExW(
-                                parent_.handleForCalls(),
+                            let proc = RegCreateKeyExWProc()
+                            proc(
+                                parent_.handleForCalls().Value,
                                 pathPtr,
                                 0u32,
                                 CPointer<UInt16>(),
@@ -741,8 +1124,9 @@ public class OpenOptions {
                                 inout disposition
                             )
                         } else {
-                            RegOpenKeyExW(
-                                parent_.handleForCalls(),
+                            let proc = RegOpenKeyExWProc()
+                            proc(
+                                parent_.handleForCalls().Value,
                                 pathPtr,
                                 0u32,
                                 access_,
@@ -765,7 +1149,7 @@ public class OpenOptions {
 }
 
 public class Key <: Resource {
-    private var handle: HKEY = CPointer<Unit>()
+    private var handle: HKEY = HKEY()
     private let ownsHandle: Bool
     private var closed = false
 
@@ -791,7 +1175,7 @@ public class Key <: Resource {
 
     public func asRaw(): HKEY {
         if (ownsHandle && closed) {
-            return CPointer<Unit>()
+            return HKEY()
         }
         handle
     }
@@ -835,9 +1219,10 @@ public class Key <: Resource {
     public func keys(): Result<KeyIterator> {
         var count = 0u32
         var maxLen = 0u32
+        let proc = RegQueryInfoKeyWProc()
         let status = unsafe {
-            RegQueryInfoKeyW(
-                handleForCalls(),
+            proc(
+                handleForCalls().Value,
                 CPointer<UInt16>(),
                 CPointer<UInt32>(),
                 CPointer<UInt32>(),
@@ -863,9 +1248,10 @@ public class Key <: Resource {
         var count = 0u32
         var nameMaxLen = 0u32
         var valueMaxLen = 0u32
+        let proc = RegQueryInfoKeyWProc()
         let status = unsafe {
-            RegQueryInfoKeyW(
-                handleForCalls(),
+            proc(
+                handleForCalls().Value,
                 CPointer<UInt16>(),
                 CPointer<UInt32>(),
                 CPointer<UInt32>(),
@@ -1019,9 +1405,10 @@ public class Key <: Resource {
     public func rawGetInfo(name: CPointer<UInt16>): Result<(Type, Int64)> {
         var ty = 0u32
         var length = 0u32
+        let proc = RegQueryValueExWProc()
         let status = unsafe {
-            RegQueryValueExW(
-                handleForCalls(),
+            proc(
+                handleForCalls().Value,
                 name,
                 CPointer<UInt32>(),
                 inout ty,
@@ -1040,13 +1427,14 @@ public class Key <: Resource {
     public func rawGetBytes(name: CPointer<UInt16>, value: Array<UInt8>): Result<(Type, Int64)> {
         var ty = 0u32
         var length = UInt32(value.size)
+        let proc = RegQueryValueExWProc()
         let status = if (value.isEmpty()) {
             unsafe {
                 let emptyBuffer = Array<UInt8>(1, repeat: 0u8)
                 let valueHandle = acquireArrayRawData(emptyBuffer)
                 try {
-                    RegQueryValueExW(
-                        handleForCalls(),
+                    proc(
+                        handleForCalls().Value,
                         name,
                         CPointer<UInt32>(),
                         inout ty,
@@ -1061,8 +1449,8 @@ public class Key <: Resource {
             unsafe {
                 let valueHandle = acquireArrayRawData(value)
                 try {
-                    RegQueryValueExW(
-                        handleForCalls(),
+                    proc(
+                        handleForCalls().Value,
                         name,
                         CPointer<UInt32>(),
                         inout ty,
@@ -1087,10 +1475,10 @@ public class Key <: Resource {
             return
         }
         closed = true
-        if (handle.isNotNull()) {
-            let _ = unsafe { RegCloseKey(handle) }
+        if (handle.Value.isNotNull()) {
+            let _ = RegCloseKey(handle)
         }
-        handle = CPointer<Unit>()
+        handle = HKEY()
     }
 
     ~init() {
@@ -1098,10 +1486,10 @@ public class Key <: Resource {
             return
         }
         closed = true
-        if (handle.isNotNull()) {
-            let _ = unsafe { RegCloseKey(handle) }
+        if (handle.Value.isNotNull()) {
+            let _ = RegCloseKey(handle)
         }
-        handle = CPointer<Unit>()
+        handle = HKEY()
     }
 }
 
@@ -1123,11 +1511,12 @@ public class KeyIterator <: Iterator<String> {
             return None
         }
         var nameLength = UInt32(nameBuffer.size)
+        let proc = RegEnumKeyExWProc()
         let status = unsafe {
             let nameHandle = acquireArrayRawData(nameBuffer)
             try {
-                RegEnumKeyExW(
-                    key_.handleForCalls(),
+                proc(
+                    key_.handleForCalls().Value,
                     index,
                     nameHandle.pointer,
                     inout nameLength,
@@ -1176,12 +1565,13 @@ public class ValueIterator <: Iterator<(String, Value)> {
         var ty = 0u32
         var nameLength = UInt32(nameBuffer.size)
         var dataLength = UInt32(dataBuffer.size)
+        let proc = RegEnumValueWProc()
         let status = unsafe {
             let nameHandle = acquireArrayRawData(nameBuffer)
             try {
                 if (dataBuffer.isEmpty()) {
-                    RegEnumValueW(
-                        key_.handleForCalls(),
+                    proc(
+                        key_.handleForCalls().Value,
                         index,
                         nameHandle.pointer,
                         inout nameLength,
@@ -1193,8 +1583,8 @@ public class ValueIterator <: Iterator<(String, Value)> {
                 } else {
                     let dataHandle = acquireArrayRawData(dataBuffer)
                     try {
-                        RegEnumValueW(
-                            key_.handleForCalls(),
+                        proc(
+                            key_.handleForCalls().Value,
                             index,
                             nameHandle.pointer,
                             inout nameLength,

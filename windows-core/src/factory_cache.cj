@@ -30,12 +30,6 @@ var cachedRoGetActivationFactoryProc: CPointer<Unit> = CPointer<Unit>()
 var cachedCoIncrementMTAUsageProc: CPointer<Unit> = CPointer<Unit>()
 let combaseInitMutex = Mutex()
 
-foreign {
-    func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
-    func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: CPointer<Unit>, dwFlags: UInt32): CPointer<Unit>
-    func FreeLibrary(hLibModule: CPointer<Unit>): Int32
-}
-
 func combaseModule(): CPointer<Unit> {
     // Double-checked: race between two threads must not call LoadLibraryExA twice
     // and stash conflicting handles into the global slot.
@@ -320,6 +314,13 @@ func loadActivationFactory<I>(
             }
             Result<I>.Err(error)
     }
+}
+
+public func loadFactoryByName<I>(
+    runtimeName: String,
+    descriptor: InterfaceDescriptor<I>
+): Result<I> where I <: ComInterface {
+    loadActivationFactory(runtimeName, descriptor)
 }
 
 public func factory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInterface & Interface<I> {

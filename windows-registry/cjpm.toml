@@ -4,8 +4,10 @@
   description = "Windows registry helpers for Cangjie bindings"
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "-ladvapi32 -lkernel32 -lktmw32"
+  compile-option = "-Woff unused"
 
 [dependencies]
+  windows_common = { path = "../windows-common" }
+  windows_libloading = { path = "../windows-libloading" }
   windows_result = { path = "../windows-result" }
   windows_strings = { path = "../windows-strings" }

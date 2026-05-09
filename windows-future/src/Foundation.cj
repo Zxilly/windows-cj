@@ -13,7 +13,6 @@ import windows_polyfill as windows_polyfill
 import windows_collections as windows_collections
 
 
-@When[Windows_Foundation == "on"]
 public struct AsyncStatus {
     public var value: Int32 = 0
 
@@ -31,7 +30,6 @@ public struct AsyncStatus {
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncStatusAbi {
     public var value: Int32 = 0
@@ -43,19 +41,14 @@ public struct AsyncStatusAbi {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public let AsyncStatus_Canceled: AsyncStatus = AsyncStatus(2)
 
-@When[Windows_Foundation == "on"]
 public let AsyncStatus_Completed: AsyncStatus = AsyncStatus(1)
 
-@When[Windows_Foundation == "on"]
 public let AsyncStatus_Error: AsyncStatus = AsyncStatus(3)
 
-@When[Windows_Foundation == "on"]
 public let AsyncStatus_Started: AsyncStatus = AsyncStatus(0)
 
-@When[Windows_Foundation == "on"]
 extend AsyncStatus <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<AsyncStatus, AsyncStatusAbi, AsyncStatus> & windows_core.WinrtGenericType<AsyncStatus> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "AsyncStatusAbi" }
@@ -73,20 +66,17 @@ extend AsyncStatus <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct DateTime {
     public var UniversalTime: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct DateTimeAbi {
     public var UniversalTime: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend DateTime <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<DateTime, DateTimeAbi, DateTime> & windows_core.WinrtGenericType<DateTime> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "DateTimeAbi" }
@@ -108,7 +98,6 @@ extend DateTime <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct DeferralCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -116,7 +105,6 @@ public struct DeferralCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -181,7 +169,6 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend DeferralCompletedHandler <: windows_core.Interface<DeferralCompletedHandler> {}
 
 private open class DeferralCompletedHandlerInvokerErased {
@@ -233,7 +220,6 @@ func buildDeferralCompletedHandlerBoxVtbl(): DeferralCompletedHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct EventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -241,7 +227,6 @@ public struct EventHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -318,7 +303,6 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<T> EventHandler<T> <: windows_core.Interface<EventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
 private open class EventHandlerInvokerErased {
@@ -370,20 +354,17 @@ func buildEventHandlerBoxVtbl<T>(): EventHandlerVtbl where T <: windows_core.Run
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 public struct EventRegistrationToken {
     public var Value: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct EventRegistrationTokenAbi {
     public var Value: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend EventRegistrationToken <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<EventRegistrationToken, EventRegistrationTokenAbi, EventRegistrationToken> & windows_core.WinrtGenericType<EventRegistrationToken> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "EventRegistrationTokenAbi" }
@@ -405,18 +386,15 @@ extend EventRegistrationToken <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct FoundationContract {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct FoundationContractAbi {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend FoundationContract <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<FoundationContract, FoundationContractAbi, FoundationContract> & windows_core.WinrtGenericType<FoundationContract> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "FoundationContractAbi" }
@@ -436,20 +414,17 @@ extend FoundationContract <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct HResult {
     public var Value: Int32 = 0i32
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct HResultAbi {
     public var Value: Int32 = 0i32
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend HResult <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<HResult, HResultAbi, HResult> & windows_core.WinrtGenericType<HResult> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "HResultAbi" }
@@ -471,7 +446,6 @@ extend HResult <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -537,7 +511,6 @@ public struct IAsyncInfoVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncInfo_ImplErased {
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32
 
@@ -550,7 +523,6 @@ public interface IAsyncInfo_ImplErased {
     public func __winrtThunk_Close(): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased {
     public func Id(): windows_core.Result<UInt32>
 
@@ -620,7 +592,6 @@ public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -722,10 +693,8 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IAsyncInfo <: windows_core.Interface<IAsyncInfo> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IClosableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -755,12 +724,10 @@ public struct IClosableVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IClosable_ImplErased {
     public func __winrtThunk_Close(): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IClosable_Impl <: IClosable_ImplErased {
     public func Close(): windows_core.Result<Unit>
 
@@ -774,7 +741,6 @@ public interface IClosable_Impl <: IClosable_ImplErased {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -846,10 +812,8 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IClosable <: windows_core.Interface<IClosable> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IDeferralVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -857,7 +821,6 @@ public struct IDeferralVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -941,10 +904,8 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IDeferral <: windows_core.Interface<IDeferral> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IGetActivationFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -974,12 +935,10 @@ public struct IGetActivationFactoryVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IGetActivationFactory_ImplErased {
     public func __winrtThunk_GetActivationFactory(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased {
     public func GetActivationFactory(activatableClassId: InParam<windows_core.HString>): windows_core.Result<IInspectable>
 
@@ -1002,7 +961,6 @@ public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased 
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1076,10 +1034,8 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IGetActivationFactory <: windows_core.Interface<IGetActivationFactory> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IGuidHelperStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1089,7 +1045,6 @@ public struct IGuidHelperStaticsVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1179,10 +1134,8 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IGuidHelperStatics <: windows_core.Interface<IGuidHelperStatics> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IStringableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1212,12 +1165,10 @@ public struct IStringableVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IStringable_ImplErased {
     public func __winrtThunk_ToString(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IStringable_Impl <: IStringable_ImplErased {
     public func ToString(): windows_core.Result<windows_core.HString>
 
@@ -1240,7 +1191,6 @@ public interface IStringable_Impl <: IStringable_ImplErased {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1314,10 +1264,8 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IStringable <: windows_core.Interface<IStringable> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IUriEscapeStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1326,7 +1274,6 @@ public struct IUriEscapeStaticsVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1408,10 +1355,8 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IUriEscapeStatics <: windows_core.Interface<IUriEscapeStatics> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1420,7 +1365,6 @@ public struct IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1502,10 +1446,8 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IUriRuntimeClassWithAbsoluteCanonicalUri <: windows_core.Interface<IUriRuntimeClassWithAbsoluteCanonicalUri> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderEntryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1544,14 +1486,12 @@ public struct IWwwFormUrlDecoderEntryVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IWwwFormUrlDecoderEntry_ImplErased {
     public func __winrtThunk_Name(result__: CPointer<CPointer<Unit>>): Int32
 
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IWwwFormUrlDecoderEntry_Impl <: IWwwFormUrlDecoderEntry_ImplErased {
     public func Name(): windows_core.Result<windows_core.HString>
 
@@ -1594,7 +1534,6 @@ public interface IWwwFormUrlDecoderEntry_Impl <: IWwwFormUrlDecoderEntry_ImplEra
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1676,10 +1615,8 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IWwwFormUrlDecoderEntry <: windows_core.Interface<IWwwFormUrlDecoderEntry> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderRuntimeClassVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1687,7 +1624,6 @@ public struct IWwwFormUrlDecoderRuntimeClassVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1788,17 +1724,14 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IWwwFormUrlDecoderRuntimeClass <: windows_core.Interface<IWwwFormUrlDecoderRuntimeClass> {}
 
-@When[Windows_Foundation == "on"]
 public struct Point {
     public var X: Float32 = 0.0f32
     public var Y: Float32 = 0.0f32
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct PointAbi {
     public var X: Float32 = 0.0f32
@@ -1806,7 +1739,6 @@ public struct PointAbi {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend Point <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Point, PointAbi, Point> & windows_core.WinrtGenericType<Point> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "PointAbi" }
@@ -1830,7 +1762,6 @@ extend Point <: windows_core.CopyType & windows_core.RuntimeType & windows_core.
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct PropertyType {
     public var value: Int32 = 0
 
@@ -1848,7 +1779,6 @@ public struct PropertyType {
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct PropertyTypeAbi {
     public var value: Int32 = 0
@@ -1860,130 +1790,88 @@ public struct PropertyTypeAbi {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Empty: PropertyType = PropertyType(0)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt8: PropertyType = PropertyType(1)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int16: PropertyType = PropertyType(2)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt16: PropertyType = PropertyType(3)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int32: PropertyType = PropertyType(4)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt32: PropertyType = PropertyType(5)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int64: PropertyType = PropertyType(6)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt64: PropertyType = PropertyType(7)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Single: PropertyType = PropertyType(8)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Double: PropertyType = PropertyType(9)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Char16: PropertyType = PropertyType(10)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Boolean: PropertyType = PropertyType(11)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_String: PropertyType = PropertyType(12)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Inspectable: PropertyType = PropertyType(13)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_DateTime: PropertyType = PropertyType(14)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_TimeSpan: PropertyType = PropertyType(15)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Guid: PropertyType = PropertyType(16)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Point: PropertyType = PropertyType(17)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Size: PropertyType = PropertyType(18)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Rect: PropertyType = PropertyType(19)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_OtherType: PropertyType = PropertyType(20)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt8Array: PropertyType = PropertyType(1025)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int16Array: PropertyType = PropertyType(1026)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt16Array: PropertyType = PropertyType(1027)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int32Array: PropertyType = PropertyType(1028)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt32Array: PropertyType = PropertyType(1029)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Int64Array: PropertyType = PropertyType(1030)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_UInt64Array: PropertyType = PropertyType(1031)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_SingleArray: PropertyType = PropertyType(1032)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_DoubleArray: PropertyType = PropertyType(1033)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_Char16Array: PropertyType = PropertyType(1034)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_BooleanArray: PropertyType = PropertyType(1035)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_StringArray: PropertyType = PropertyType(1036)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_InspectableArray: PropertyType = PropertyType(1037)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_DateTimeArray: PropertyType = PropertyType(1038)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_TimeSpanArray: PropertyType = PropertyType(1039)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_GuidArray: PropertyType = PropertyType(1040)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_PointArray: PropertyType = PropertyType(1041)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_SizeArray: PropertyType = PropertyType(1042)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_RectArray: PropertyType = PropertyType(1043)
 
-@When[Windows_Foundation == "on"]
 public let PropertyType_OtherTypeArray: PropertyType = PropertyType(1044)
 
-@When[Windows_Foundation == "on"]
 extend PropertyType <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<PropertyType, PropertyTypeAbi, PropertyType> & windows_core.WinrtGenericType<PropertyType> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "PropertyTypeAbi" }
@@ -2001,7 +1889,6 @@ extend PropertyType <: windows_core.CopyType & windows_core.RuntimeType & window
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct Rect {
     public var X: Float32 = 0.0f32
     public var Y: Float32 = 0.0f32
@@ -2010,7 +1897,6 @@ public struct Rect {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct RectAbi {
     public var X: Float32 = 0.0f32
@@ -2020,7 +1906,6 @@ public struct RectAbi {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend Rect <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Rect, RectAbi, Rect> & windows_core.WinrtGenericType<Rect> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "RectAbi" }
@@ -2048,14 +1933,12 @@ extend Rect <: windows_core.CopyType & windows_core.RuntimeType & windows_core.T
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct Size {
     public var Width: Float32 = 0.0f32
     public var Height: Float32 = 0.0f32
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct SizeAbi {
     public var Width: Float32 = 0.0f32
@@ -2063,7 +1946,6 @@ public struct SizeAbi {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend Size <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Size, SizeAbi, Size> & windows_core.WinrtGenericType<Size> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "SizeAbi" }
@@ -2087,20 +1969,17 @@ extend Size <: windows_core.CopyType & windows_core.RuntimeType & windows_core.T
     }
 }
 
-@When[Windows_Foundation == "on"]
 public struct TimeSpan {
     public var Duration: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct TimeSpanAbi {
     public var Duration: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend TimeSpan <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<TimeSpan, TimeSpanAbi, TimeSpan> & windows_core.WinrtGenericType<TimeSpan> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "TimeSpanAbi" }
@@ -2122,7 +2001,6 @@ extend TimeSpan <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct TypedEventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2130,7 +2008,6 @@ public struct TypedEventHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2211,7 +2088,6 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TSender, TResult> TypedEventHandler<TSender, TResult> <: windows_core.Interface<TypedEventHandler<TSender, TResult>> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
 private open class TypedEventHandlerInvokerErased {
@@ -2263,18 +2139,15 @@ func buildTypedEventHandlerBoxVtbl<TSender, TResult>(): TypedEventHandlerVtbl wh
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 public struct UniversalApiContract {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct UniversalApiContractAbi {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend UniversalApiContract <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<UniversalApiContract, UniversalApiContractAbi, UniversalApiContract> & windows_core.WinrtGenericType<UniversalApiContract> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "UniversalApiContractAbi" }
@@ -2294,7 +2167,6 @@ extend UniversalApiContract <: windows_core.CopyType & windows_core.RuntimeType 
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2372,7 +2244,6 @@ public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & win
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend WwwFormUrlDecoderEntry <: windows_core.HandleWinrtType<WwwFormUrlDecoderEntry> {
     public static func intoWinrtHandle(value: WwwFormUrlDecoderEntry): CPointer<Unit> {
         value.asRaw()
@@ -2390,7 +2261,6 @@ extend WwwFormUrlDecoderEntry <: windows_core.HandleWinrtType<WwwFormUrlDecoderE
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class GuidHelper <: windows_interface.RuntimeName & windows_core.RuntimeName {
     private init() {}
 
@@ -2444,7 +2314,6 @@ public class GuidHelper <: windows_interface.RuntimeName & windows_core.RuntimeN
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2497,7 +2366,6 @@ public struct IMemoryBufferReferenceVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IMemoryBufferReference_ImplErased {
     public func __winrtThunk_Capacity(result__: CPointer<UInt32>): Int32
 
@@ -2506,7 +2374,6 @@ public interface IMemoryBufferReference_ImplErased {
     public func __winrtThunk_RemoveClosed(arg0: EventRegistrationTokenAbi): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IMemoryBufferReference_Impl <: IMemoryBufferReference_ImplErased & IClosable_Impl {
     public func Capacity(): windows_core.Result<UInt32>
 
@@ -2559,7 +2426,6 @@ public interface IMemoryBufferReference_Impl <: IMemoryBufferReference_ImplErase
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2659,10 +2525,8 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IMemoryBufferReference <: windows_core.Interface<IMemoryBufferReference> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IPropertyValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3034,7 +2898,6 @@ public struct IPropertyValueVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IPropertyValue_ImplErased {
     public func __winrtThunk_Type(result__: CPointer<PropertyTypeAbi>): Int32
 
@@ -3115,7 +2978,6 @@ public interface IPropertyValue_ImplErased {
     public func __winrtThunk_GetRectArray(arg0: CPointer<CPointer<RectAbi>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IPropertyValue_Impl <: IPropertyValue_ImplErased {
     public func Type(): windows_core.Result<PropertyType>
 
@@ -3632,7 +3494,6 @@ public interface IPropertyValue_Impl <: IPropertyValue_ImplErased {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3972,10 +3833,8 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IPropertyValue <: windows_core.Interface<IPropertyValue> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IPropertyValueStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4021,7 +3880,6 @@ public struct IPropertyValueStaticsVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4399,10 +4257,8 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IPropertyValueStatics <: windows_core.Interface<IPropertyValueStatics> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4437,12 +4293,10 @@ public struct IReferenceVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IReference_ImplErased {
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IReference_Impl<T> <: IReference_ImplErased & IPropertyValue_Impl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func Value(): windows_core.Result<T>
 
@@ -4895,7 +4749,6 @@ public interface IReference_Impl<T> <: IReference_ImplErased & IPropertyValue_Im
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4983,10 +4836,8 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<T> IReference<T> <: windows_core.Interface<IReference<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IReferenceArrayVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5021,12 +4872,10 @@ public struct IReferenceArrayVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IReferenceArray_ImplErased {
     public func __winrtThunk_Value(resultSize__: CPointer<UInt32>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IReferenceArray_Impl<T> <: IReferenceArray_ImplErased & IPropertyValue_Impl where T <: windows_core.RuntimeType {
     public func Value(): windows_core.Result<(UInt32, CPointer<Unit>)>
 
@@ -5482,7 +5331,6 @@ public interface IReferenceArray_Impl<T> <: IReferenceArray_ImplErased & IProper
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5574,10 +5422,8 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<T> IReferenceArray<T> <: windows_core.Interface<IReferenceArray<T>> where T <: windows_core.RuntimeType {}
 
-@When[Windows_Foundation == "on"]
 public class PropertyValue <: windows_interface.RuntimeName & windows_core.RuntimeName {
     private init() {}
 
@@ -6027,7 +5873,6 @@ public class PropertyValue <: windows_interface.RuntimeName & windows_core.Runti
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6062,12 +5907,10 @@ public struct IMemoryBufferVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IMemoryBuffer_ImplErased {
     public func __winrtThunk_CreateReference(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IMemoryBuffer_Impl <: IMemoryBuffer_ImplErased & IClosable_Impl {
     public func CreateReference(): windows_core.Result<IMemoryBufferReference>
 
@@ -6099,7 +5942,6 @@ public interface IMemoryBuffer_Impl <: IMemoryBuffer_ImplErased & IClosable_Impl
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6185,10 +6027,8 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IMemoryBuffer <: windows_core.Interface<IMemoryBuffer> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6196,7 +6036,6 @@ public struct AsyncActionCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6261,7 +6100,6 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend AsyncActionCompletedHandler <: windows_core.Interface<AsyncActionCompletedHandler> {}
 
 private open class AsyncActionCompletedHandlerInvokerErased {
@@ -6313,7 +6151,6 @@ func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl 
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionProgressHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6321,7 +6158,6 @@ public struct AsyncActionProgressHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6398,7 +6234,6 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TProgress> AsyncActionProgressHandler<TProgress> <: windows_core.Interface<AsyncActionProgressHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
 private open class AsyncActionProgressHandlerInvokerErased {
@@ -6450,7 +6285,6 @@ func buildAsyncActionProgressHandlerBoxVtbl<TProgress>(): AsyncActionProgressHan
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionWithProgressCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6458,7 +6292,6 @@ public struct AsyncActionWithProgressCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6528,7 +6361,6 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TProgress> AsyncActionWithProgressCompletedHandler<TProgress> <: windows_core.Interface<AsyncActionWithProgressCompletedHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
 private open class AsyncActionWithProgressCompletedHandlerInvokerErased {
@@ -6580,7 +6412,6 @@ func buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>(): AsyncActi
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6588,7 +6419,6 @@ public struct AsyncOperationCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6658,7 +6488,6 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult> AsyncOperationCompletedHandler<TResult> <: windows_core.Interface<AsyncOperationCompletedHandler<TResult>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
 private open class AsyncOperationCompletedHandlerInvokerErased {
@@ -6710,7 +6539,6 @@ func buildAsyncOperationCompletedHandlerBoxVtbl<TResult>(): AsyncOperationComple
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationProgressHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6718,7 +6546,6 @@ public struct AsyncOperationProgressHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6797,7 +6624,6 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> AsyncOperationProgressHandler<TResult, TProgress> <: windows_core.Interface<AsyncOperationProgressHandler<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
 private open class AsyncOperationProgressHandlerInvokerErased {
@@ -6849,7 +6675,6 @@ func buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>(): AsyncOpera
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationWithProgressCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6857,7 +6682,6 @@ public struct AsyncOperationWithProgressCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6929,7 +6753,6 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: windows_core.Interface<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
 private open class AsyncOperationWithProgressCompletedHandlerInvokerErased {
@@ -6981,7 +6804,6 @@ func buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>(
     return vtbl
 }
 
-@When[Windows_Foundation == "on"]
 public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7077,7 +6899,6 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend Deferral <: windows_core.HandleWinrtType<Deferral> {
     public static func intoWinrtHandle(value: Deferral): CPointer<Unit> {
         value.asRaw()
@@ -7095,7 +6916,6 @@ extend Deferral <: windows_core.HandleWinrtType<Deferral> {
     }
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncActionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -7148,7 +6968,6 @@ public struct IAsyncActionVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncAction_ImplErased {
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32
 
@@ -7157,7 +6976,6 @@ public interface IAsyncAction_ImplErased {
     public func __winrtThunk_GetResults(): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncAction_Impl <: IAsyncAction_ImplErased & IAsyncInfo_Impl {
     public func SetCompleted(handler: InParam<AsyncActionCompletedHandler>): windows_core.Result<Unit>
 
@@ -7259,7 +7077,6 @@ public interface IAsyncAction_Impl <: IAsyncAction_ImplErased & IAsyncInfo_Impl 
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7357,10 +7174,8 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IAsyncAction <: windows_core.Interface<IAsyncAction> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncActionWithProgressVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -7431,7 +7246,6 @@ public struct IAsyncActionWithProgressVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncActionWithProgress_ImplErased {
     public func __winrtThunk_SetProgress(arg0: CPointer<Unit>): Int32
 
@@ -7444,7 +7258,6 @@ public interface IAsyncActionWithProgress_ImplErased {
     public func __winrtThunk_GetResults(): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithProgress_ImplErased & IAsyncInfo_Impl where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public func SetProgress(handler: InParam<AsyncActionProgressHandler<TProgress>>): windows_core.Result<Unit>
 
@@ -7577,7 +7390,6 @@ public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithPro
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7694,10 +7506,8 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TProgress> IAsyncActionWithProgress<TProgress> <: windows_core.Interface<IAsyncActionWithProgress<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncOperationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -7750,7 +7560,6 @@ public struct IAsyncOperationVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncOperation_ImplErased {
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32
 
@@ -7759,7 +7568,6 @@ public interface IAsyncOperation_ImplErased {
     public func __winrtThunk_GetResults(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncOperation_Impl<TResult> <: IAsyncOperation_ImplErased & IAsyncInfo_Impl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public func SetCompleted(handler: InParam<AsyncOperationCompletedHandler<TResult>>): windows_core.Result<Unit>
 
@@ -7864,7 +7672,6 @@ public interface IAsyncOperation_Impl<TResult> <: IAsyncOperation_ImplErased & I
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7966,10 +7773,8 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult> IAsyncOperation<TResult> <: windows_core.Interface<IAsyncOperation<TResult>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncOperationWithProgressVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8040,7 +7845,6 @@ public struct IAsyncOperationWithProgressVtbl {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncOperationWithProgress_ImplErased {
     public func __winrtThunk_SetProgress(arg0: CPointer<Unit>): Int32
 
@@ -8053,7 +7857,6 @@ public interface IAsyncOperationWithProgress_ImplErased {
     public func __winrtThunk_GetResults(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation == "on"]
 public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncOperationWithProgress_ImplErased & IAsyncInfo_Impl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public func SetProgress(handler: InParam<AsyncOperationProgressHandler<TResult, TProgress>>): windows_core.Result<Unit>
 
@@ -8189,7 +7992,6 @@ public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncO
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8307,10 +8109,8 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress> <: windows_core.Interface<IAsyncOperationWithProgress<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IDeferralFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8318,7 +8118,6 @@ public struct IDeferralFactoryVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8392,10 +8191,8 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IDeferralFactory <: windows_core.Interface<IDeferralFactory> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8403,7 +8200,6 @@ public struct IMemoryBufferFactoryVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8477,10 +8273,8 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IMemoryBufferFactory <: windows_core.Interface<IMemoryBufferFactory> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8504,7 +8298,6 @@ public struct IUriRuntimeClassVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8706,10 +8499,8 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IUriRuntimeClass <: windows_core.Interface<IUriRuntimeClass> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8718,7 +8509,6 @@ public struct IUriRuntimeClassFactoryVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8800,10 +8590,8 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IUriRuntimeClassFactory <: windows_core.Interface<IUriRuntimeClassFactory> {}
 
-@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -8811,7 +8599,6 @@ public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8885,10 +8672,8 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend IWwwFormUrlDecoderRuntimeClassFactory <: windows_core.Interface<IWwwFormUrlDecoderRuntimeClassFactory> {}
 
-@When[Windows_Foundation == "on"]
 public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8984,7 +8769,6 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend MemoryBuffer <: windows_core.HandleWinrtType<MemoryBuffer> {
     public static func intoWinrtHandle(value: MemoryBuffer): CPointer<Unit> {
         value.asRaw()
@@ -9002,7 +8786,6 @@ extend MemoryBuffer <: windows_core.HandleWinrtType<MemoryBuffer> {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9195,7 +8978,6 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend Uri <: windows_core.HandleWinrtType<Uri> {
     public static func intoWinrtHandle(value: Uri): CPointer<Unit> {
         value.asRaw()
@@ -9213,7 +8995,6 @@ extend Uri <: windows_core.HandleWinrtType<Uri> {
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9304,7 +9085,6 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
         intoIterator()
     }
 
-    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFirstValueByName(name: windows_core.HString): windows_core.HString {
         return defaultInterface().GetFirstValueByName(name)
     }
@@ -9341,7 +9121,6 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend WwwFormUrlDecoder <: windows_core.HandleWinrtType<WwwFormUrlDecoder> {
     public static func intoWinrtHandle(value: WwwFormUrlDecoder): CPointer<Unit> {
         value.asRaw()

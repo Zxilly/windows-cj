@@ -1,0 +1,54 @@
+package windows_strings
+
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+func testNullPointerStringsAreEmptyAndLossless() {
+    let wide = PCWSTR.null()
+    let narrow = PCSTR.null()
+
+    unsafe {
+        @Expect(wide.isNull(), true)
+        @Expect(wide.length(), 0)
+        @Expect(wide.isEmpty(), true)
+        @Expect(wide.toArray().size, 0)
+        @Expect(wide.toString(), Some(""))
+
+        @Expect(narrow.isNull(), true)
+        @Expect(narrow.length(), 0)
+        @Expect(narrow.isEmpty(), true)
+        @Expect(narrow.toArray().size, 0)
+        @Expect(narrow.toString(), Some(""))
+    }
+}
+
+@Test
+func testMutablePointersConvertToConstPointerViews() {
+    let wide = PWSTR.null()
+    let narrow = PSTR.null()
+
+    @Expect(wide.toPCWSTR().isNull(), true)
+    @Expect(narrow.toPCSTR().isNull(), true)
+    @Expect(wide == PWSTR.default(), true)
+    @Expect(narrow == PSTR.default(), true)
+}
+
+@Test
+func testEmptyBstrDoesNotOwnStorageAndClosesToNull() {
+    let empty = BSTR()
+
+    @Expect(empty.length(), 0)
+    @Expect(empty.byteLength(), 0u32)
+    @Expect(empty.isEmpty(), true)
+    @Expect(empty.ownsStorage(), false)
+    @Expect(empty.asPtr().isNull(), true)
+    @Expect(empty.tryToString(), Some(""))
+    @Expect(empty.toWideArray().size, 0)
+
+    empty.close()
+
+    @Expect(empty.isClosed(), true)
+    @Expect(empty.asPtr().isNull(), true)
+    @Expect(empty.tryToString(), Some(""))
+}

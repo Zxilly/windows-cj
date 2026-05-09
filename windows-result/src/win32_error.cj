@@ -2,10 +2,6 @@ package windows_result
 
 import std.convert.*
 
-// Win32 调用约定由仓颉 FFI 自动处理（Windows x64 ABI 统一）
-@FastNative
-foreign func GetLastError(): UInt32
-
 // WIN32_ERROR — unsigned Win32 error code.
 @C
 public struct WIN32_ERROR {

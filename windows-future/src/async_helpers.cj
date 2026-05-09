@@ -3,23 +3,45 @@ package windows_future
 import std.collection.HashMap
 import std.sync.*
 import std.time.*
+import windows_common.Win32.Foundation as Win32Foundation
 import windows_core
 import windows_core.{ComObject, E_ABORT, E_FAIL, E_POINTER, HRESULT, InParam, Result, S_OK, WinError}
 import windows_interface.ComInterface
+import windows_libloading as windows_libloading
+
+type HANDLE = Win32Foundation.HANDLE
 
 // Win32 event-object APIs used to implement event-driven termination waits for
-// our native IAsync* implementations. Declared locally to keep this package free
-// of a heavy dependency on the full generated Win32 surface.
-foreign {
-    func CreateEventW(
-        lpEventAttributes: CPointer<Unit>,
-        bManualReset: Int32,
-        bInitialState: Int32,
-        lpName: CPointer<UInt16>
-    ): CPointer<Unit>
-    func SetEvent(hEvent: CPointer<Unit>): Int32
-    func CloseHandle(hObject: CPointer<Unit>): Int32
-    func WaitForSingleObject(hHandle: CPointer<Unit>, dwMilliseconds: UInt32): UInt32
+// our native IAsync* implementations.
+func CreateEventW(
+    lpEventAttributes: CPointer<Unit>,
+    bManualReset: Int32,
+    bInitialState: Int32,
+    lpName: CPointer<UInt16>
+): HANDLE {
+    let proc = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<UInt16>) -> CPointer<Unit>>(
+        windows_libloading.resolveProc("kernel32.dll", "CreateEventW")
+    )
+    var handle = HANDLE()
+    handle.Value = unsafe { proc(lpEventAttributes, bManualReset, bInitialState, lpName) }
+    handle
+}
+
+func SetEvent(hEvent: HANDLE): Int32 {
+    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("kernel32.dll", "SetEvent"))
+    unsafe { proc(hEvent.Value) }
+}
+
+func CloseHandle(hObject: HANDLE): Int32 {
+    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("kernel32.dll", "CloseHandle"))
+    unsafe { proc(hObject.Value) }
+}
+
+func WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32 {
+    let proc = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(
+        windows_libloading.resolveProc("kernel32.dll", "WaitForSingleObject")
+    )
+    unsafe { proc(hHandle.Value, dwMilliseconds) }
 }
 
 // TerminalEvent wraps a manual-reset Win32 event used to signal that an async
@@ -27,21 +49,19 @@ foreign {
 // every subsequent waiter returns immediately without blocking.
 class TerminalEvent <: Resource {
     private let mutex = Mutex()
-    private var handle: CPointer<Unit> = CPointer<Unit>()
+    private var handle: HANDLE = HANDLE()
     private var closed: Bool = false
 
     public init() {
-        let h = unsafe {
-            CreateEventW(CPointer<Unit>(), 1i32, 0i32, CPointer<UInt16>())
-        }
+        let h = CreateEventW(CPointer<Unit>(), 1i32, 0i32, CPointer<UInt16>())
         this.handle = h
     }
 
-    public func rawHandle(): CPointer<Unit> {
+    public func rawHandle(): HANDLE {
         mutex.lock()
         try {
             if (closed) {
-                return CPointer<Unit>()
+                return HANDLE()
             }
             return handle
         } finally {
@@ -55,8 +75,8 @@ class TerminalEvent <: Resource {
             if (closed) {
                 return
             }
-            if (handle.isNotNull()) {
-                unsafe { SetEvent(handle) }
+            if (handle.Value.isNotNull()) {
+                SetEvent(handle)
             }
         } finally {
             mutex.unlock()
@@ -80,9 +100,9 @@ class TerminalEvent <: Resource {
             }
             closed = true
             let h = handle
-            handle = CPointer<Unit>()
-            if (h.isNotNull()) {
-                unsafe { CloseHandle(h) }
+            handle = HANDLE()
+            if (h.Value.isNotNull()) {
+                CloseHandle(h)
             }
         } finally {
             mutex.unlock()
@@ -93,9 +113,9 @@ class TerminalEvent <: Resource {
         if (!closed) {
             let h = handle
             closed = true
-            handle = CPointer<Unit>()
-            if (h.isNotNull()) {
-                unsafe { CloseHandle(h) }
+            handle = HANDLE()
+            if (h.Value.isNotNull()) {
+                CloseHandle(h)
             }
         }
     }
@@ -188,7 +208,7 @@ private func waitForTerminalStatus(info: IAsyncInfo): AsyncStatus {
     }
     if (let Some(event) <- eventOpt) {
         let handle = event.rawHandle()
-        if (handle.isNotNull()) {
+        if (handle.Value.isNotNull()) {
             while (true) {
                 if (Thread.currentThread.hasPendingCancellation) {
                     try {
@@ -204,7 +224,7 @@ private func waitForTerminalStatus(info: IAsyncInfo): AsyncStatus {
                 }
                 // Wake periodically to honour cooperative cancellation while
                 // still avoiding the original 1ms busy-wait CPU burn.
-                unsafe { WaitForSingleObject(handle, 250u32) }
+                WaitForSingleObject(handle, 250u32)
             }
             return AsyncStatus_Error
         }
@@ -257,7 +277,6 @@ private func checkedHandler<T>(handler: InParam<T>): Result<T> where T <: ComInt
     }
 }
 
-@When[Windows_Foundation == "on"]
 public class ProgressReporter<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     private let report_: (TProgress) -> Unit
 
@@ -274,6 +293,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
+    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
     private let vtblHandle: CPointerHandle<IAsyncActionVtbl>
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
@@ -284,6 +304,9 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     public init(status!: AsyncStatus = AsyncStatus_Started, errorCode!: HResult = asyncOkCode) {
         this.status = status
         this.errorCode = errorCode
+        this.infoVtblHandle = unsafe {
+            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncActionImpl>() }))
+        }
         this.vtblHandle = unsafe {
             acquireArrayRawData(Array<IAsyncActionVtbl>(1, { _ => IAsyncActionVtbl.new<NativeAsyncActionImpl>() }))
         }
@@ -295,6 +318,10 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
 
     ~init() {
         unregisterTerminalEvent(this.id)
+        unsafe {
+            releaseArrayRawData(this.vtblHandle)
+            releaseArrayRawData(this.infoVtblHandle)
+        }
     }
 
     public func bindView(view: IAsyncAction): Unit {
@@ -317,6 +344,10 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func vtblPtrs(): Array<CPointer<Unit>> {
+        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
     }
 
     private func finish(status: AsyncStatus, errorCode!: HResult = asyncOkCode): Unit {
@@ -446,6 +477,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
+    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
     private let vtblHandle: CPointerHandle<IAsyncOperationVtbl>
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
@@ -462,6 +494,9 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
         this.status = status
         this.errorCode = errorCode
         this.result = result
+        this.infoVtblHandle = unsafe {
+            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncOperationImpl<TResult>>() }))
+        }
         this.vtblHandle = unsafe {
             acquireArrayRawData(
                 Array<IAsyncOperationVtbl>(1, { _ => IAsyncOperationVtbl.new<NativeAsyncOperationImpl<TResult>, TResult>() })
@@ -475,6 +510,10 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
 
     ~init() {
         unregisterTerminalEvent(this.id)
+        unsafe {
+            releaseArrayRawData(this.vtblHandle)
+            releaseArrayRawData(this.infoVtblHandle)
+        }
     }
 
     public func bindView(view: IAsyncOperation<TResult>): Unit {
@@ -497,6 +536,10 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func vtblPtrs(): Array<CPointer<Unit>> {
+        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
     }
 
     private func finish(
@@ -634,6 +677,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
+    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
     private let vtblHandle: CPointerHandle<IAsyncActionWithProgressVtbl>
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
@@ -651,6 +695,9 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
         this.status = status
         this.errorCode = errorCode
         this.lastProgress = lastProgress
+        this.infoVtblHandle = unsafe {
+            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncActionWithProgressImpl<TProgress>>() }))
+        }
         this.vtblHandle = unsafe {
             acquireArrayRawData(
                 Array<IAsyncActionWithProgressVtbl>(
@@ -667,6 +714,10 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
 
     ~init() {
         unregisterTerminalEvent(this.id)
+        unsafe {
+            releaseArrayRawData(this.vtblHandle)
+            releaseArrayRawData(this.infoVtblHandle)
+        }
     }
 
     public func bindView(view: IAsyncActionWithProgress<TProgress>): Unit {
@@ -689,6 +740,10 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func vtblPtrs(): Array<CPointer<Unit>> {
+        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
     }
 
     public func reportProgress(progress: TProgress): Unit {
@@ -867,6 +922,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
+    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
     private let vtblHandle: CPointerHandle<IAsyncOperationWithProgressVtbl>
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
@@ -887,6 +943,9 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
         this.errorCode = errorCode
         this.result = result
         this.lastProgress = lastProgress
+        this.infoVtblHandle = unsafe {
+            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncOperationWithProgressImpl<TResult, TProgress>>() }))
+        }
         this.vtblHandle = unsafe {
             acquireArrayRawData(
                 Array<IAsyncOperationWithProgressVtbl>(
@@ -909,6 +968,10 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
 
     ~init() {
         unregisterTerminalEvent(this.id)
+        unsafe {
+            releaseArrayRawData(this.vtblHandle)
+            releaseArrayRawData(this.infoVtblHandle)
+        }
     }
 
     public func bindView(view: IAsyncOperationWithProgress<TResult, TProgress>): Unit {
@@ -931,6 +994,10 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func vtblPtrs(): Array<CPointer<Unit>> {
+        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
     }
 
     public func reportProgress(progress: TProgress): Unit {
@@ -1112,7 +1179,11 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
 }
 
 private func createAsyncActionImpl(impl: NativeAsyncActionImpl): IAsyncAction {
-    let object = ComObject<NativeAsyncActionImpl>.new(impl, [IAsyncAction.descriptorSchema()], impl.vtblPtr())
+    let object = ComObject<NativeAsyncActionImpl>.new(
+        impl,
+        [IAsyncInfo.descriptorSchema(), IAsyncAction.descriptorSchema()],
+        impl.vtblPtrs()
+    )
     let view = object.intoInterface(IAsyncAction.descriptor())
     impl.bindView(view)
     view
@@ -1122,8 +1193,8 @@ private func createAsyncOperationImpl<TResult>(impl: NativeAsyncOperationImpl<TR
     where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     let object = ComObject<NativeAsyncOperationImpl<TResult>>.new(
         impl,
-        [IAsyncOperation<TResult>.descriptorSchema()],
-        impl.vtblPtr()
+        [IAsyncInfo.descriptorSchema(), IAsyncOperation<TResult>.descriptorSchema()],
+        impl.vtblPtrs()
     )
     let view = object.intoInterface(IAsyncOperation<TResult>.descriptor())
     impl.bindView(view)
@@ -1135,8 +1206,8 @@ private func createAsyncActionWithProgressImpl<TProgress>(
 ): IAsyncActionWithProgress<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     let object = ComObject<NativeAsyncActionWithProgressImpl<TProgress>>.new(
         impl,
-        [IAsyncActionWithProgress<TProgress>.descriptorSchema()],
-        impl.vtblPtr()
+        [IAsyncInfo.descriptorSchema(), IAsyncActionWithProgress<TProgress>.descriptorSchema()],
+        impl.vtblPtrs()
     )
     let view = object.intoInterface(IAsyncActionWithProgress<TProgress>.descriptor())
     impl.bindView(view)
@@ -1150,15 +1221,14 @@ private func createAsyncOperationWithProgressImpl<TResult, TProgress>(
         TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     let object = ComObject<NativeAsyncOperationWithProgressImpl<TResult, TProgress>>.new(
         impl,
-        [IAsyncOperationWithProgress<TResult, TProgress>.descriptorSchema()],
-        impl.vtblPtr()
+        [IAsyncInfo.descriptorSchema(), IAsyncOperationWithProgress<TResult, TProgress>.descriptorSchema()],
+        impl.vtblPtrs()
     )
     let view = object.intoInterface(IAsyncOperationWithProgress<TResult, TProgress>.descriptor())
     impl.bindView(view)
     view
 }
 
-@When[Windows_Foundation == "on"]
 extend IAsyncAction {
     public func join(): Result<Unit> {
         try {
@@ -1210,7 +1280,6 @@ extend IAsyncAction {
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public func join(): Result<TResult> {
         try {
@@ -1261,7 +1330,6 @@ extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeTy
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TProgress> IAsyncActionWithProgress<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public func join(): Result<Unit> {
         try {
@@ -1319,7 +1387,6 @@ extend<TProgress> IAsyncActionWithProgress<TProgress> where TProgress <: windows
     }
 }
 
-@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress>
     where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>,
         TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {

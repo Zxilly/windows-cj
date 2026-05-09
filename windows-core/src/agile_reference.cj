@@ -23,15 +23,6 @@ public struct AgileReferenceOptions {
     }
 }
 
-foreign {
-    func RoGetAgileReference(
-        options: Int32,
-        riid: CPointer<GUID>,
-        pUnk: CPointer<Unit>,
-        ppAgileReference: CPointer<CPointer<Unit>>
-    ): Int32
-}
-
 public interface IAgileObject_Impl {}
 
 public func newIAgileObjectVtbl<T>(offset!: Int64 = 0): IAgileObjectVtbl where T <: IAgileObject_Impl {

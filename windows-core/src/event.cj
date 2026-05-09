@@ -7,8 +7,24 @@ let RPC_E_DISCONNECTED_EVENT = -2147417848i32
 let RPC_E_SERVER_UNAVAILABLE_EVENT = -2147023174i32
 let JSCRIPT_E_CANTEXECUTE_EVENT = -1996357631i32
 
-foreign {
-    func EncodePointer(ptr: CPointer<Unit>): CPointer<Unit>
+func eventHighBitMask(): UInt64 {
+    var value = 1u64
+    var shift = 0
+    while (shift < 63) {
+        value = value << 1
+        shift += 1
+    }
+    value
+}
+
+func eventInt64Min(): Int64 {
+    var value = -1i64
+    var shift = 0
+    while (shift < 63) {
+        value = value << 1
+        shift += 1
+    }
+    value
 }
 
 public struct EventToken {
@@ -69,11 +85,12 @@ func encodeEventToken(raw: CPointer<Unit>): EventToken {
         return EventToken()
     }
     let encoded = UInt64(unsafe { EncodePointer(raw).toUIntNative() })
-    if ((encoded & 0x8000000000000000u64) == 0u64) {
+    let highBit = eventHighBitMask()
+    if ((encoded & highBit) == 0u64) {
         return EventToken(Int64(encoded))
     }
-    if (encoded == 0x8000000000000000u64) {
-        return EventToken(-9223372036854775808i64)
+    if (encoded == highBit) {
+        return EventToken(eventInt64Min())
     }
     EventToken(-Int64((!encoded) + 1u64))
 }

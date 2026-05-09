@@ -263,8 +263,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, CPointer<T>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, result__.borrowMut<T>()) }
+            let hr = unsafe { slot(instanceRaw, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
@@ -284,8 +283,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, UInt32, CPointer<T>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, arg0, result__.borrowMut<T>()) }
+            let hr = unsafe { slot(instanceRaw, arg0, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
@@ -305,8 +303,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<T>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, inputRaw, result__.borrowMut<T>()) }
+            let hr = unsafe { slot(instanceRaw, inputRaw, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
@@ -326,8 +323,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
-        let method = CFunc<(CPointer<Unit>, UInt32, CPointer<T>, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
-        let hr = unsafe { method(instanceRaw, size, CPointer<T>(items), CPointer<UInt32>(inout result)) }
+        let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
         HRESULT(hr).ok()
         result
     }
@@ -340,8 +336,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
-        let method = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<T>, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
-        let hr = unsafe { method(instanceRaw, arg0, size, CPointer<T>(items), CPointer<UInt32>(inout result)) }
+        let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
         HRESULT(hr).ok()
         result
     }
@@ -425,8 +420,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, CPointer<A>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, result__.borrowMut<A>()) }
+            let hr = unsafe { slot(instanceRaw, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
@@ -446,8 +440,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, UInt32, CPointer<A>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, arg0, result__.borrowMut<A>()) }
+            let hr = unsafe { slot(instanceRaw, arg0, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
@@ -467,8 +460,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let method = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<A>) -> Int32>(CPointer<Unit>(slot))
-            let hr = unsafe { method(instanceRaw, inputRaw, result__.borrowMut<A>()) }
+            let hr = unsafe { slot(instanceRaw, inputRaw, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
             HRESULT(hr).ok()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
@@ -488,8 +480,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
-        let method = CFunc<(CPointer<Unit>, UInt32, CPointer<A>, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
-        let hr = unsafe { method(instanceRaw, size, CPointer<A>(items), CPointer<UInt32>(inout result)) }
+        let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
         HRESULT(hr).ok()
         result
     }
@@ -502,8 +493,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
-        let method = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<A>, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
-        let hr = unsafe { method(instanceRaw, arg0, size, CPointer<A>(items), CPointer<UInt32>(inout result)) }
+        let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
         HRESULT(hr).ok()
         result
     }

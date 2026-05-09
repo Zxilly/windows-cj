@@ -4,7 +4,6 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import std.sync.*
 import std.collection.*
-import std.time.*
 
 // Test: factory is called exactly once across 10 sequential get() calls.
 @Test

@@ -1,5 +1,7 @@
 package windows_result
 
+import windows_libloading as windows_libloading
+
 type IntPtr = CPointer<Unit>
 type BSTR = CPointer<UInt16>
 type FORMAT_MESSAGE_OPTIONS = UInt32
@@ -12,27 +14,43 @@ type PCWSTR = CPointer<UInt16>
 type PWSTR = CPointer<UInt16>
 public type LOAD_LIBRARY_FLAGS = UInt32
 
-// Win32 调用约定由仓颉 FFI 自动处理（Windows x64 ABI 统一）
-foreign {
-    @FastNative
-    func FormatMessageW(
-        dwFlags: UInt32,
-        lpSource: CPointer<Unit>,
-        dwMessageId: UInt32,
-        dwLanguageId: UInt32,
-        lpBuffer: CPointer<CPointer<UInt16>>,
-        nSize: UInt32,
-        arguments: CPointer<Unit>
-    ): UInt32
+func FormatMessageW(
+    dwFlags: UInt32,
+    lpSource: CPointer<Unit>,
+    dwMessageId: UInt32,
+    dwLanguageId: UInt32,
+    lpBuffer: CPointer<CPointer<UInt16>>,
+    nSize: UInt32,
+    arguments: CPointer<Unit>
+): UInt32 {
+    let proc = CFunc<(UInt32, CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<UInt16>>, UInt32, CPointer<Unit>) -> UInt32>(
+        windows_libloading.resolveProc("kernel32.dll", "FormatMessageW")
+    )
+    unsafe { proc(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments) }
+}
 
-    @FastNative
-    func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: IntPtr, dwFlags: LOAD_LIBRARY_FLAGS): IntPtr
+func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: IntPtr, dwFlags: LOAD_LIBRARY_FLAGS): IntPtr {
+    let proc = CFunc<(CPointer<UInt8>, IntPtr, LOAD_LIBRARY_FLAGS) -> IntPtr>(
+        windows_libloading.resolveProc("kernel32.dll", "LoadLibraryExA")
+    )
+    unsafe { proc(lpLibFileName, hFile, dwFlags) }
+}
 
-    @FastNative
-    func GetProcessHeap(): IntPtr
+func GetProcessHeap(): IntPtr {
+    let proc = CFunc<() -> IntPtr>(windows_libloading.resolveProc("kernel32.dll", "GetProcessHeap"))
+    unsafe { proc() }
+}
 
-    @FastNative
-    func HeapFree(hHeap: IntPtr, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32
+func HeapFree(hHeap: IntPtr, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32 {
+    let proc = CFunc<(IntPtr, UInt32, CPointer<Unit>) -> Int32>(
+        windows_libloading.resolveProc("kernel32.dll", "HeapFree")
+    )
+    unsafe { proc(hHeap, dwFlags, lpMem) }
+}
+
+func GetLastError(): UInt32 {
+    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("kernel32.dll", "GetLastError"))
+    unsafe { proc() }
 }
 
 let FORMAT_MESSAGE_ALLOCATE_BUFFER: FORMAT_MESSAGE_OPTIONS = 0x00000100u32
@@ -225,21 +243,46 @@ struct IRestrictedErrorInfoVtbl {
 }
 type IRestrictedErrorInfo_Vtbl = IRestrictedErrorInfoVtbl
 
-@When[os == "Windows"]
-// Win32 调用约定由仓颉 FFI 自动处理（Windows x64 ABI 统一）
-foreign {
-    @FastNative
-    func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<IErrorInfo>>): Int32
-    @FastNative
-    func SetErrorInfo(dwReserved: UInt32, perrinfo: CPointer<Unit>): Int32
-    @FastNative
-    func SysAllocStringLen(strIn: CPointer<UInt16>, ui: UInt32): CPointer<UInt16>
-    @FastNative
-    func SysFreeString(bstrString: CPointer<UInt16>): Unit
-    @FastNative
-    func SysStringLen(pbstr: CPointer<UInt16>): UInt32
-    @FastNative
-    func RoOriginateErrorW(error: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32
+func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<IErrorInfo>>): Int32 {
+    let proc = CFunc<(UInt32, CPointer<CPointer<IErrorInfo>>) -> Int32>(
+        windows_libloading.resolveProc("oleaut32.dll", "GetErrorInfo")
+    )
+    unsafe { proc(dwReserved, pperrinfo) }
+}
+
+func SetErrorInfo(dwReserved: UInt32, perrinfo: CPointer<Unit>): Int32 {
+    let proc = CFunc<(UInt32, CPointer<Unit>) -> Int32>(
+        windows_libloading.resolveProc("oleaut32.dll", "SetErrorInfo")
+    )
+    unsafe { proc(dwReserved, perrinfo) }
+}
+
+func SysAllocStringLen(strIn: CPointer<UInt16>, ui: UInt32): CPointer<UInt16> {
+    let proc = CFunc<(CPointer<UInt16>, UInt32) -> CPointer<UInt16>>(
+        windows_libloading.resolveProc("oleaut32.dll", "SysAllocStringLen")
+    )
+    unsafe { proc(strIn, ui) }
+}
+
+func SysFreeString(bstrString: CPointer<UInt16>): Unit {
+    let proc = CFunc<(CPointer<UInt16>) -> Unit>(
+        windows_libloading.resolveProc("oleaut32.dll", "SysFreeString")
+    )
+    unsafe { proc(bstrString) }
+}
+
+func SysStringLen(pbstr: CPointer<UInt16>): UInt32 {
+    let proc = CFunc<(CPointer<UInt16>) -> UInt32>(
+        windows_libloading.resolveProc("oleaut32.dll", "SysStringLen")
+    )
+    unsafe { proc(pbstr) }
+}
+
+func RoOriginateErrorW(error: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32 {
+    let proc = CFunc<(Int32, UInt32, CPointer<UInt16>) -> Int32>(
+        windows_libloading.resolveProc("combase.dll", "RoOriginateErrorW")
+    )
+    unsafe { proc(error, cchMax, message) }
 }
 
 @When[os == "Windows"]

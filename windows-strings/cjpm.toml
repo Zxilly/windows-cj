@@ -6,3 +6,4 @@
   cjc-version = "1.1.0"
 
 [dependencies]
+  windows_libloading = { path = "../windows-libloading" }

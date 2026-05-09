@@ -4,12 +4,12 @@
   description = "WinRT async projections and future helpers for Cangjie"
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "--cfg . -Woff unused -Woff parser -Woff package-import"
+  compile-option = "-Woff unused -Woff parser -Woff package-import"
 
 [dependencies]
   windows_collections = { path = "../windows-collections" }
+  windows_common = { path = "../windows-common" }
   windows_core = { path = "../windows-core" }
   windows_interface = { path = "../windows-interface" }
+  windows_libloading = { path = "../windows-libloading" }
   windows_polyfill = { path = "../windows-polyfill" }
-  windows_result = { path = "../windows-result" }
-  windows_strings = { path = "../windows-strings" }

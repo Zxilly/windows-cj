@@ -1,13 +1,14 @@
 package windows_core
 
 import windows_implement.IInspectableBase
+import windows_implement.ComObjectRuntime
 
 public interface IInspectableImpl <: IUnknownImpl & IInspectableBase {}
 
 extend<T> ComObjectRuntime<T> <: IInspectableImpl {}
 
 @C
-func iinspectableGetIidsThunk(
+func coreIInspectableGetIidsThunk(
     instanceRaw: CPointer<Unit>,
     count: CPointer<UInt32>,
     values: CPointer<CPointer<GUID>>
@@ -29,7 +30,7 @@ func iinspectableGetIidsThunk(
 }
 
 @C
-func iinspectableGetRuntimeClassNameThunk(
+func coreIInspectableGetRuntimeClassNameThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<CPointer<Unit>>
 ): Int32 {
@@ -49,7 +50,7 @@ func iinspectableGetRuntimeClassNameThunk(
 }
 
 @C
-func iinspectableGetTrustLevelThunk(
+func coreIInspectableGetTrustLevelThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<Int32>
 ): Int32 {
@@ -72,8 +73,8 @@ public func newIInspectableVtbl<T>(offset!: Int64 = 0): IInspectableVtbl where T
     let _ = offset
     var vtbl = IInspectableVtbl()
     vtbl.base_ = newIUnknownVtbl<T>(offset: offset)
-    vtbl.GetIids = iinspectableGetIidsThunk
-    vtbl.GetRuntimeClassName = iinspectableGetRuntimeClassNameThunk
-    vtbl.GetTrustLevel = iinspectableGetTrustLevelThunk
+    vtbl.GetIids = coreIInspectableGetIidsThunk
+    vtbl.GetRuntimeClassName = coreIInspectableGetRuntimeClassNameThunk
+    vtbl.GetTrustLevel = coreIInspectableGetTrustLevelThunk
     vtbl
 }

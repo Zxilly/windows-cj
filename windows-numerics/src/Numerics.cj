@@ -6,9 +6,9 @@ package windows_numerics
 import std.collection.*
 import std.math.*
 import windows_core as windows_core
+import windows_libloading as windows_libloading
 
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Matrix3x2 {
     public var M11: Float32 = 0.0
     public var M12: Float32 = 0.0
@@ -19,7 +19,6 @@ public struct Matrix3x2 {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Matrix4x4 {
     public var M11: Float32 = 0.0
     public var M12: Float32 = 0.0
@@ -40,7 +39,6 @@ public struct Matrix4x4 {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Quaternion {
     public var X: Float32 = 0.0
     public var Y: Float32 = 0.0
@@ -49,21 +47,18 @@ public struct Quaternion {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Rational {
     public var Numerator: UInt32 = 0
     public var Denominator: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Vector2 {
     public var X: Float32 = 0.0
     public var Y: Float32 = 0.0
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Vector3 {
     public var X: Float32 = 0.0
     public var Y: Float32 = 0.0
@@ -71,7 +66,6 @@ public struct Vector3 {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Vector4 {
     public var X: Float32 = 0.0
     public var Y: Float32 = 0.0
@@ -80,14 +74,12 @@ public struct Vector4 {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 public struct Plane {
     public var Normal: Vector3 = Vector3()
     public var D: Float32 = 0.0
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Matrix3x2Abi {
     public var M11: Float32 = 0.0
@@ -99,7 +91,6 @@ public struct Matrix3x2Abi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Matrix3x2 <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Matrix3x2, Matrix3x2Abi, Matrix3x2> & windows_core.WinrtGenericType<Matrix3x2> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "Matrix3x2Abi" }
@@ -131,7 +122,6 @@ extend Matrix3x2 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Matrix4x4Abi {
     public var M11: Float32 = 0.0
@@ -153,7 +143,6 @@ public struct Matrix4x4Abi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Matrix4x4 <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Matrix4x4, Matrix4x4Abi, Matrix4x4> & windows_core.WinrtGenericType<Matrix4x4> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "Matrix4x4Abi" }
@@ -205,7 +194,6 @@ extend Matrix4x4 <: windows_core.CopyType & windows_core.RuntimeType & windows_c
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct QuaternionAbi {
     public var X: Float32 = 0.0
@@ -215,7 +203,6 @@ public struct QuaternionAbi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Quaternion <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Quaternion, QuaternionAbi, Quaternion> & windows_core.WinrtGenericType<Quaternion> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "QuaternionAbi" }
@@ -243,7 +230,6 @@ extend Quaternion <: windows_core.CopyType & windows_core.RuntimeType & windows_
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct RationalAbi {
     public var Numerator: UInt32 = 0
@@ -251,7 +237,6 @@ public struct RationalAbi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Rational <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Rational, RationalAbi, Rational> & windows_core.WinrtGenericType<Rational> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "RationalAbi" }
@@ -275,7 +260,6 @@ extend Rational <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector2Abi {
     public var X: Float32 = 0.0
@@ -283,7 +267,6 @@ public struct Vector2Abi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Vector2 <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Vector2, Vector2Abi, Vector2> & windows_core.WinrtGenericType<Vector2> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "Vector2Abi" }
@@ -307,7 +290,6 @@ extend Vector2 <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector3Abi {
     public var X: Float32 = 0.0
@@ -316,7 +298,6 @@ public struct Vector3Abi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Vector3 <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Vector3, Vector3Abi, Vector3> & windows_core.WinrtGenericType<Vector3> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "Vector3Abi" }
@@ -342,7 +323,6 @@ extend Vector3 <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector4Abi {
     public var X: Float32 = 0.0
@@ -352,7 +332,6 @@ public struct Vector4Abi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Vector4 <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Vector4, Vector4Abi, Vector4> & windows_core.WinrtGenericType<Vector4> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "Vector4Abi" }
@@ -380,7 +359,6 @@ extend Vector4 <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
     }
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct PlaneAbi {
     public var Normal: Vector3Abi = Vector3Abi()
@@ -388,7 +366,6 @@ public struct PlaneAbi {
     public init() {}
 }
 
-@When[Windows_Foundation_Numerics == "on"]
 extend Plane <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<Plane, PlaneAbi, Plane> & windows_core.WinrtGenericType<Plane> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "PlaneAbi" }
@@ -532,11 +509,23 @@ public struct Vector4Math {
 
 // D2D1 helpers used by rotation/skew/sincos. The ABI structs have the same
 // field layout as the high-level numerics structs (sequential f32 fields), so
-// we round-trip through the @C variants when crossing the FFI boundary.
-foreign {
-    func D2D1MakeRotateMatrix(angle: Float32, center: Vector2Abi, matrix: CPointer<Matrix3x2Abi>): Unit
-    func D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Vector2Abi, matrix: CPointer<Matrix3x2Abi>): Unit
-    func D2D1SinCos(angle: Float32, sinValue: CPointer<Float32>, cosValue: CPointer<Float32>): Unit
+// we round-trip through the @C variants when crossing the ABI boundary.
+func D2D1MakeRotateMatrixProc(): CFunc<(Float32, Vector2Abi, CPointer<Matrix3x2Abi>) -> Unit> {
+    CFunc<(Float32, Vector2Abi, CPointer<Matrix3x2Abi>) -> Unit>(
+        windows_libloading.resolveProc("d2d1.dll", "D2D1MakeRotateMatrix")
+    )
+}
+
+func D2D1MakeSkewMatrixProc(): CFunc<(Float32, Float32, Vector2Abi, CPointer<Matrix3x2Abi>) -> Unit> {
+    CFunc<(Float32, Float32, Vector2Abi, CPointer<Matrix3x2Abi>) -> Unit>(
+        windows_libloading.resolveProc("d2d1.dll", "D2D1MakeSkewMatrix")
+    )
+}
+
+func D2D1SinCosProc(): CFunc<(Float32, CPointer<Float32>, CPointer<Float32>) -> Unit> {
+    CFunc<(Float32, CPointer<Float32>, CPointer<Float32>) -> Unit>(
+        windows_libloading.resolveProc("d2d1.dll", "D2D1SinCos")
+    )
 }
 
 func vector2Abi(value: Vector2): Vector2Abi {
@@ -564,8 +553,9 @@ public struct Matrix3x2Math {
     public static func rotationAround(angle: Float32, center: Vector2): Matrix3x2 {
         var matrixAbi = Matrix3x2Abi()
         let centerAbi = vector2Abi(center)
+        let proc = D2D1MakeRotateMatrixProc()
         unsafe {
-            D2D1MakeRotateMatrix(angle, centerAbi, inout matrixAbi)
+            proc(angle, centerAbi, inout matrixAbi)
         }
         return matrix3x2FromAbi(matrixAbi)
     }
@@ -575,8 +565,9 @@ public struct Matrix3x2Math {
     public static func skewAround(angleX: Float32, angleY: Float32, center: Vector2): Matrix3x2 {
         var matrixAbi = Matrix3x2Abi()
         let centerAbi = vector2Abi(center)
+        let proc = D2D1MakeSkewMatrixProc()
         unsafe {
-            D2D1MakeSkewMatrix(angleX, angleY, centerAbi, inout matrixAbi)
+            proc(angleX, angleY, centerAbi, inout matrixAbi)
         }
         return matrix3x2FromAbi(matrixAbi)
     }
@@ -596,8 +587,9 @@ public struct Matrix4x4Math {
         let angle = degree * Float32(Float64.getPI() / 180.0)
         var sinValue: Float32 = 0.0
         var cosValue: Float32 = 0.0
+        let proc = D2D1SinCosProc()
         unsafe {
-            D2D1SinCos(angle, inout sinValue, inout cosValue)
+            proc(angle, inout sinValue, inout cosValue)
         }
         return matrix4x4(
             cosValue, 0.0, -sinValue, 0.0,

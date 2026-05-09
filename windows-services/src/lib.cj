@@ -2,11 +2,15 @@ package windows_services
 
 import std.collection.HashMap
 import std.sync.Mutex
+import windows_common.Win32.System.Services as Win32Services
+import windows_libloading as windows_libloading
 
 public type BOOL = Int32
-public type SERVICE_STATUS_HANDLE = CPointer<Unit>
-public type LPHANDLER_FUNCTION_EX = CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
-public type LPSERVICE_MAIN_FUNCTIONW = CFunc<(UInt32, CPointer<CPointer<UInt16>>) -> Unit>
+public type SERVICE_STATUS_HANDLE = Win32Services.SERVICE_STATUS_HANDLE
+public type LPHANDLER_FUNCTION_EX = Win32Services.LPHANDLER_FUNCTION_EX
+public type LPSERVICE_MAIN_FUNCTIONW = Win32Services.LPSERVICE_MAIN_FUNCTIONW
+public type SERVICE_STATUS = Win32Services.SERVICE_STATUS
+public type SERVICE_TABLE_ENTRYW = Win32Services.SERVICE_TABLE_ENTRYW
 
 private let NO_ERROR = 0u32
 private let SERVICE_ACCEPT_STOP = 1u32
@@ -25,33 +29,33 @@ private let SERVICE_CONTINUE_PENDING = 5u32
 private let SERVICE_PAUSE_PENDING = 6u32
 private let SERVICE_PAUSED = 7u32
 
-@C
-public struct SERVICE_STATUS {
-    public var dwServiceType: UInt32 = 0u32
-    public var dwCurrentState: UInt32 = 0u32
-    public var dwControlsAccepted: UInt32 = 0u32
-    public var dwWin32ExitCode: UInt32 = 0u32
-    public var dwServiceSpecificExitCode: UInt32 = 0u32
-    public var dwCheckPoint: UInt32 = 0u32
-    public var dwWaitHint: UInt32 = 0u32
-    public init() {}
+func RegisterServiceCtrlHandlerExW(
+    lpServiceName: CPointer<UInt16>,
+    lpHandlerProc: LPHANDLER_FUNCTION_EX,
+    lpContext: CPointer<Unit>
+): SERVICE_STATUS_HANDLE {
+    let proc = CFunc<(CPointer<UInt16>, LPHANDLER_FUNCTION_EX, CPointer<Unit>) -> SERVICE_STATUS_HANDLE>(
+        windows_libloading.resolveProc("advapi32.dll", "RegisterServiceCtrlHandlerExW")
+    )
+    unsafe { proc(lpServiceName, lpHandlerProc, lpContext) }
 }
 
-@C
-public struct SERVICE_TABLE_ENTRYW {
-    public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpServiceProc: LPSERVICE_MAIN_FUNCTIONW = { _, _ => () }
-    public init() {}
+func SetServiceStatusProc(): CFunc<(SERVICE_STATUS_HANDLE, CPointer<SERVICE_STATUS>) -> BOOL> {
+    CFunc<(SERVICE_STATUS_HANDLE, CPointer<SERVICE_STATUS>) -> BOOL>(
+        windows_libloading.resolveProc("advapi32.dll", "SetServiceStatus")
+    )
 }
 
-foreign {
-    func RegisterServiceCtrlHandlerExW(
-        lpServiceName: CPointer<UInt16>,
-        lpHandlerProc: LPHANDLER_FUNCTION_EX,
-        lpContext: CPointer<Unit>
-    ): SERVICE_STATUS_HANDLE
-    func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): BOOL
-    func StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYW>): BOOL
+func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): BOOL {
+    let proc = SetServiceStatusProc()
+    unsafe { proc(hServiceStatus, lpServiceStatus) }
+}
+
+func StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYW>): BOOL {
+    let proc = CFunc<(CPointer<SERVICE_TABLE_ENTRYW>) -> BOOL>(
+        windows_libloading.resolveProc("advapi32.dll", "StartServiceCtrlDispatcherW")
+    )
+    unsafe { proc(lpServiceStartTable) }
 }
 
 public enum ServiceResult<T> {
@@ -170,7 +174,7 @@ public class Service {
     private let callbackMutex = Mutex()
     private var accept_: UInt32 = 0u32
     private var fallback_: Option<(Service) -> Unit> = None
-    private var handle_: SERVICE_STATUS_HANDLE = CPointer<Unit>()
+    private var handle_: SERVICE_STATUS_HANDLE = SERVICE_STATUS_HANDLE()
     private var callback_: Option<(Service, Command) -> Unit> = None
     private var status_ = SERVICE_STATUS()
 
@@ -226,7 +230,7 @@ public class Service {
             let tableHandle = acquireArrayRawData(table)
             try {
                 var entry = SERVICE_TABLE_ENTRYW()
-                entry.lpServiceName = nameHandle.pointer
+                entry.lpServiceName.Value = CPointer<Unit>(nameHandle.pointer)
                 entry.lpServiceProc = serviceMainThunk
                 table[0] = entry
                 table[1] = SERVICE_TABLE_ENTRYW()
@@ -266,9 +270,10 @@ public class Service {
         let handle = handle_
         stateMutex.unlock()
 
-        if (handle.isNotNull()) {
+        if (handle.Value.isNotNull()) {
+            let proc = SetServiceStatusProc()
             unsafe {
-                let _ = SetServiceStatus(handle, inout statusCopy)
+                let _ = proc(handle, inout statusCopy)
             }
         }
     }
@@ -416,7 +421,7 @@ private func dispatchServiceControl(
 }
 
 @C
-private func serviceMainThunk(_: UInt32, _: CPointer<CPointer<UInt16>>): Unit {
+private func serviceMainThunk(_: UInt32, _: CPointer<Unit>): Unit {
     match (currentActiveService()) {
         case Some(service) =>
             let handle = unsafe {

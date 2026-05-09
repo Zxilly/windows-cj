@@ -8,20 +8,17 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 
 
-@When[Windows_Foundation == "on"]
 public struct EventRegistrationToken {
     public var Value: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 @C
 public struct EventRegistrationTokenAbi {
     public var Value: Int64 = 0i64
     public init() {}
 }
 
-@When[Windows_Foundation == "on"]
 extend EventRegistrationToken <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<EventRegistrationToken, EventRegistrationTokenAbi, EventRegistrationToken> & windows_core.WinrtGenericType<EventRegistrationToken> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "EventRegistrationTokenAbi" }

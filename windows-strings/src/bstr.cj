@@ -1,12 +1,7 @@
 package windows_strings
 
 import std.sync.AtomicInt32
-
-foreign {
-    @FastNative
-    func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
-    func LoadLibraryW(lpLibFileName: CPointer<UInt16>): CPointer<Unit>
-}
+import windows_libloading as windows_libloading
 
 class BStrAllocationException <: Exception {
     public init(msg: String) {
@@ -20,41 +15,11 @@ class BStrAbiException <: Exception {
     }
 }
 
-// Cached oleaut32.dll module handle — loaded once on first use.
-var cachedOleaut32Module: CPointer<Unit> = CPointer<Unit>()
-
-func oleaut32Module(): CPointer<Unit> {
-    if (cachedOleaut32Module.isNotNull()) {
-        return cachedOleaut32Module
-    }
-    let dllName = CWideString("oleaut32.dll")
+func oleaut32Proc(name: String): CPointer<Unit> {
     try {
-        let module = dllName.withPtr { ptr: CPointer<UInt16> =>
-            unsafe { LoadLibraryW(ptr) }
-        }
-        if (module.isNull()) {
-            throw BStrAbiException("failed to load oleaut32.dll")
-        }
-        cachedOleaut32Module = module
-        module
-    } finally {
-        dllName.close()
-    }
-}
-
-func oleaut32Proc(name: Array<UInt8>): CPointer<Unit> {
-    let module = oleaut32Module()
-    unsafe {
-        let handle = acquireArrayRawData(name)
-        try {
-            let proc = GetProcAddress(module, handle.pointer)
-            if (proc.isNull()) {
-                throw BStrAbiException("failed to resolve OleAut32 BSTR ABI")
-            }
-            proc
-        } finally {
-            releaseArrayRawData(handle)
-        }
+        windows_libloading.resolveProc("oleaut32.dll", name)
+    } catch (_: Exception) {
+        throw BStrAbiException("failed to resolve OleAut32 BSTR ABI")
     }
 }
 
@@ -73,11 +38,7 @@ func getSysAllocStringLen(): CPointer<Unit> {
     if (cachedSysAllocStringLen.isNotNull()) {
         return cachedSysAllocStringLen
     }
-    let proc = oleaut32Proc([
-        0x53u8, 0x79u8, 0x73u8, 0x41u8, 0x6Cu8, 0x6Cu8, 0x6Fu8, 0x63u8,
-        0x53u8, 0x74u8, 0x72u8, 0x69u8, 0x6Eu8, 0x67u8, 0x4Cu8, 0x65u8,
-        0x6Eu8, 0x00u8
-    ])
+    let proc = oleaut32Proc("SysAllocStringLen")
     cachedSysAllocStringLen = proc
     proc
 }
@@ -86,10 +47,7 @@ func getSysFreeString(): CPointer<Unit> {
     if (cachedSysFreeString.isNotNull()) {
         return cachedSysFreeString
     }
-    let proc = oleaut32Proc([
-        0x53u8, 0x79u8, 0x73u8, 0x46u8, 0x72u8, 0x65u8, 0x65u8, 0x53u8,
-        0x74u8, 0x72u8, 0x69u8, 0x6Eu8, 0x67u8, 0x00u8
-    ])
+    let proc = oleaut32Proc("SysFreeString")
     cachedSysFreeString = proc
     proc
 }
@@ -98,10 +56,7 @@ func getSysStringLen(): CPointer<Unit> {
     if (cachedSysStringLen.isNotNull()) {
         return cachedSysStringLen
     }
-    let proc = oleaut32Proc([
-        0x53u8, 0x79u8, 0x73u8, 0x53u8, 0x74u8, 0x72u8, 0x69u8, 0x6Eu8,
-        0x67u8, 0x4Cu8, 0x65u8, 0x6Eu8, 0x00u8
-    ])
+    let proc = oleaut32Proc("SysStringLen")
     cachedSysStringLen = proc
     proc
 }
@@ -110,11 +65,7 @@ func getSysStringByteLen(): CPointer<Unit> {
     if (cachedSysStringByteLen.isNotNull()) {
         return cachedSysStringByteLen
     }
-    let proc = oleaut32Proc([
-        0x53u8, 0x79u8, 0x73u8, 0x53u8, 0x74u8, 0x72u8, 0x69u8, 0x6Eu8,
-        0x67u8, 0x42u8, 0x79u8, 0x74u8, 0x65u8, 0x4Cu8, 0x65u8, 0x6Eu8,
-        0x00u8
-    ])
+    let proc = oleaut32Proc("SysStringByteLen")
     cachedSysStringByteLen = proc
     proc
 }

@@ -1,22 +1,10 @@
 package windows_interface
 
+import windows_libloading as windows_libloading
 import windows_result.{Result, E_INVALIDARG}
 import windows_result.Error as WinErrorResult
 
-foreign {
-    func LoadLibraryW(lpLibFileName: CPointer<UInt16>): CPointer<Unit>
-    func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
-}
-
 let UUID_CREATE_LOCAL_ONLY_STATUS: Int32 = 1824i32
-let RPCRT4_DLL_NAME: Array<UInt16> = [
-    0x0072u16, 0x0070u16, 0x0063u16, 0x0072u16, 0x0074u16, 0x0034u16,
-    0x002Eu16, 0x0064u16, 0x006Cu16, 0x006Cu16, 0u16
-]
-let UUID_CREATE_PROC_NAME: Array<UInt8> = [
-    0x55u8, 0x75u8, 0x69u8, 0x64u8, 0x43u8, 0x72u8,
-    0x65u8, 0x61u8, 0x74u8, 0x65u8, 0u8
-]
 let GUID_SIGNATURE_NAMESPACE: Array<UInt8> = [
     0x11u8, 0xF4u8, 0x7Au8, 0xD5u8,
     0x7Bu8, 0x73u8, 0x42u8, 0xC0u8,
@@ -24,7 +12,6 @@ let GUID_SIGNATURE_NAMESPACE: Array<UInt8> = [
     0x1Eu8, 0x16u8, 0xADu8, 0xEEu8
 ]
 
-var cachedRpcrt4Module: CPointer<Unit> = CPointer<Unit>()
 var cachedUuidCreateProc: CPointer<Unit> = CPointer<Unit>()
 
 public struct UInt128 {
@@ -344,41 +331,9 @@ func uuidCreateProc(): CPointer<Unit> {
     if (cachedUuidCreateProc.isNotNull()) {
         return cachedUuidCreateProc
     }
-
-    let module = rpcrt4Module()
-    unsafe {
-        let handle = acquireArrayRawData(UUID_CREATE_PROC_NAME)
-        try {
-            let proc = GetProcAddress(module, handle.pointer)
-            if (proc.isNull()) {
-                throw Exception("failed to resolve UuidCreate")
-            }
-            cachedUuidCreateProc = proc
-            return proc
-        } finally {
-            releaseArrayRawData(handle)
-        }
-    }
-}
-
-func rpcrt4Module(): CPointer<Unit> {
-    if (cachedRpcrt4Module.isNotNull()) {
-        return cachedRpcrt4Module
-    }
-
-    unsafe {
-        let handle = acquireArrayRawData(RPCRT4_DLL_NAME)
-        try {
-            let module = LoadLibraryW(handle.pointer)
-            if (module.isNull()) {
-                throw Exception("failed to load rpcrt4.dll")
-            }
-            cachedRpcrt4Module = module
-            return module
-        } finally {
-            releaseArrayRawData(handle)
-        }
-    }
+    let proc = windows_libloading.resolveProc("rpcrt4.dll", "UuidCreate")
+    cachedUuidCreateProc = proc
+    proc
 }
 
 func guid_from_signature_bytes(signature: Array<UInt8>): GUID {

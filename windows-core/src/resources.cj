@@ -21,7 +21,7 @@ public interface Free {
 }
 
 // Owned<T> gives deterministic close semantics to raw resources without
-// importing foreign ownership models into the projected API surface.
+// importing external ownership models into the projected API surface.
 public class Owned<T> <: Resource where T <: Free & CloneResource<T> {
     private var inner: ?T
     private var closed: Bool = false

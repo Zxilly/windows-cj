@@ -7,5 +7,6 @@
 
 [dependencies]
   windows_interface = { path = "../windows-interface" }
+  windows_libloading = { path = "../windows-libloading" }
   windows_result = { path = "../windows-result" }
   windows_strings = { path = "../windows-strings" }

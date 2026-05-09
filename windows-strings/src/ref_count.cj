@@ -1,12 +1,25 @@
 package windows_strings
 
 import std.sync.{AtomicInt32, Mutex}
+import windows_libloading as windows_libloading
 
-foreign {
-    @FastNative
-    func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit>
-    func HeapFree(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32
-    func GetProcessHeap(): CPointer<Unit>
+func GetProcessHeap(): CPointer<Unit> {
+    let proc = CFunc<() -> CPointer<Unit>>(windows_libloading.resolveProc("kernel32.dll", "GetProcessHeap"))
+    unsafe { proc() }
+}
+
+func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit> {
+    let proc = CFunc<(CPointer<Unit>, UInt32, UIntNative) -> CPointer<Unit>>(
+        windows_libloading.resolveProc("kernel32.dll", "HeapAlloc")
+    )
+    unsafe { proc(hHeap, dwFlags, dwBytes) }
+}
+
+func HeapFree(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32 {
+    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(
+        windows_libloading.resolveProc("kernel32.dll", "HeapFree")
+    )
+    unsafe { proc(hHeap, dwFlags, lpMem) }
 }
 
 public let HSTRING_REFERENCE_FLAG: UInt32 = 1u32

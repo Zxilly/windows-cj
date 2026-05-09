@@ -12,7 +12,6 @@ import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
 
 
-@When[Windows_Foundation_Collections == "on"]
 public struct CollectionChange {
     public var value: Int32 = 0
 
@@ -30,7 +29,6 @@ public struct CollectionChange {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct CollectionChangeAbi {
     public var value: Int32 = 0
@@ -42,19 +40,14 @@ public struct CollectionChangeAbi {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public let CollectionChange_Reset: CollectionChange = CollectionChange(0)
 
-@When[Windows_Foundation_Collections == "on"]
 public let CollectionChange_ItemInserted: CollectionChange = CollectionChange(1)
 
-@When[Windows_Foundation_Collections == "on"]
 public let CollectionChange_ItemRemoved: CollectionChange = CollectionChange(2)
 
-@When[Windows_Foundation_Collections == "on"]
 public let CollectionChange_ItemChanged: CollectionChange = CollectionChange(3)
 
-@When[Windows_Foundation_Collections == "on"]
 extend CollectionChange <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<CollectionChange, CollectionChangeAbi, CollectionChange> & windows_core.WinrtGenericType<CollectionChange> {
     public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }
     public static func abiType(): String { "CollectionChangeAbi" }
@@ -72,7 +65,6 @@ extend CollectionChange <: windows_core.CopyType & windows_core.RuntimeType & wi
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IIteratorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -129,7 +121,6 @@ public struct IIteratorVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IIterator_ImplErased {
     public func __winrtThunk_Current(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -140,7 +131,6 @@ public interface IIterator_ImplErased {
     public func __winrtThunk_GetMany(arg0Size: UInt32, arg0: CPointer<Unit>, result__: CPointer<UInt32>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func Current(): windows_core.Result<T>
 
@@ -202,7 +192,6 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -310,10 +299,8 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> IIterator<T> <: windows_core.Interface<IIterator<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation_Collections == "on"]
 public class IIteratorIterator<T> <: Iterator<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     private let source_: IIterator<T>
 
@@ -339,7 +326,6 @@ public class IIteratorIterator<T> <: Iterator<T> where T <: windows_core.Runtime
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IKeyValuePairVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -378,14 +364,12 @@ public struct IKeyValuePairVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IKeyValuePair_ImplErased {
     public func __winrtThunk_Key(result__: CPointer<CPointer<Unit>>): Int32
 
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IKeyValuePair_Impl<K, V> <: IKeyValuePair_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public func Key(): windows_core.Result<K>
 
@@ -416,7 +400,6 @@ public interface IKeyValuePair_Impl<K, V> <: IKeyValuePair_ImplErased where K <:
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IKeyValuePair<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -499,10 +482,8 @@ public class IKeyValuePair<K, V> <: InterfaceWrapperBase & ComInterface & Runtim
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K, V> IKeyValuePair<K, V> <: windows_core.Interface<IKeyValuePair<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IMapChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -541,14 +522,12 @@ public struct IMapChangedEventArgsVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMapChangedEventArgs_ImplErased {
     public func __winrtThunk_get_CollectionChange(result__: CPointer<CollectionChangeAbi>): Int32
 
     public func __winrtThunk_Key(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMapChangedEventArgs_Impl<K> <: IMapChangedEventArgs_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
     public func get_CollectionChange(): windows_core.Result<CollectionChange>
 
@@ -580,7 +559,6 @@ public interface IMapChangedEventArgs_Impl<K> <: IMapChangedEventArgs_ImplErased
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -664,10 +642,8 @@ public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K> IMapChangedEventArgs<K> <: windows_core.Interface<IMapChangedEventArgs<K>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IVectorChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -706,14 +682,12 @@ public struct IVectorChangedEventArgsVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVectorChangedEventArgs_ImplErased {
     public func __winrtThunk_get_CollectionChange(result__: CPointer<CollectionChangeAbi>): Int32
 
     public func __winrtThunk_Index(result__: CPointer<UInt32>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVectorChangedEventArgs_Impl <: IVectorChangedEventArgs_ImplErased {
     public func get_CollectionChange(): windows_core.Result<CollectionChange>
 
@@ -746,7 +720,6 @@ public interface IVectorChangedEventArgs_Impl <: IVectorChangedEventArgs_ImplEra
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -828,10 +801,8 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend IVectorChangedEventArgs <: windows_core.Interface<IVectorChangedEventArgs> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IIterableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -861,12 +832,10 @@ public struct IIterableVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IIterable_ImplErased {
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IIterable_Impl<T> <: IIterable_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func First(): windows_core.Result<IIterator<T>>
 
@@ -889,7 +858,6 @@ public interface IIterable_Impl<T> <: IIterable_ImplErased where T <: windows_co
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -976,10 +944,8 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> IIterable<T> <: windows_core.Interface<IIterable<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IMapViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1041,7 +1007,6 @@ public struct IMapViewVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMapView_ImplErased {
     public func __winrtThunk_Lookup(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -1052,7 +1017,6 @@ public interface IMapView_ImplErased {
     public func __winrtThunk_Split(arg0: CPointer<CPointer<Unit>>, arg1: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKeyValuePair<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public func Lookup(key: K): windows_core.Result<V>
 
@@ -1128,7 +1092,6 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1255,10 +1218,8 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K, V> IMapView<K, V> <: windows_core.Interface<IMapView<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IVectorViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1320,7 +1281,6 @@ public struct IVectorViewVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVectorView_ImplErased {
     public func __winrtThunk_GetAt(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -1331,7 +1291,6 @@ public interface IVectorView_ImplErased {
     public func __winrtThunk_GetMany(arg0: UInt32, arg1Size: UInt32, arg1: CPointer<Unit>, result__: CPointer<UInt32>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func GetAt(index: UInt32): windows_core.Result<T>
 
@@ -1411,7 +1370,6 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1538,10 +1496,8 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> IVectorView<T> <: windows_core.Interface<IVectorView<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IMapVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1630,7 +1586,6 @@ public struct IMapVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMap_ImplErased {
     public func __winrtThunk_Lookup(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -1647,7 +1602,6 @@ public interface IMap_ImplErased {
     public func __winrtThunk_Clear(): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePair<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public func Lookup(key: K): windows_core.Result<V>
 
@@ -1769,7 +1723,6 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1934,10 +1887,8 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K, V> IMap<K, V> <: windows_core.Interface<IMap<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IVectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2071,7 +2022,6 @@ public struct IVectorVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVector_ImplErased {
     public func __winrtThunk_GetAt(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -2098,7 +2048,6 @@ public interface IVector_ImplErased {
     public func __winrtThunk_ReplaceAll(arg0Size: UInt32, arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func GetAt(index: UInt32): windows_core.Result<T>
 
@@ -2275,7 +2224,6 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2473,10 +2421,8 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> IVector<T> <: windows_core.Interface<IVector<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IObservableMapVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2520,14 +2466,12 @@ public struct IObservableMapVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IObservableMap_ImplErased {
     public func __winrtThunk_MapChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32
 
     public func __winrtThunk_RemoveMapChanged(arg0: EventRegistrationTokenAbi): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_Impl<K, V> & IIterable_Impl<IKeyValuePair<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public func MapChanged(vhnd: InParam<MapChangedEventHandler<K, V>>): windows_core.Result<EventRegistrationToken>
 
@@ -2661,7 +2605,6 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2775,10 +2718,8 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K, V> IObservableMap<K, V> <: windows_core.Interface<IObservableMap<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IObservableVectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2822,14 +2763,12 @@ public struct IObservableVectorVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IObservableVector_ImplErased {
     public func __winrtThunk_VectorChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32
 
     public func __winrtThunk_RemoveVectorChanged(arg0: EventRegistrationTokenAbi): Int32
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVector_Impl<T> & IIterable_Impl<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public func VectorChanged(vhnd: InParam<VectorChangedEventHandler<T>>): windows_core.Result<EventRegistrationToken>
 
@@ -3008,7 +2947,6 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3120,10 +3058,8 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> IObservableVector<T> <: windows_core.Interface<IObservableVector<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct IPropertySetVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3149,11 +3085,9 @@ public struct IPropertySetVtbl {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IPropertySet_ImplErased {
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_Impl<windows_core.HString, IInspectable> & IMap_Impl<windows_core.HString, IInspectable> & IIterable_Impl<IKeyValuePair<windows_core.HString, IInspectable>> {
     public func __winrtThunk_MapChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32 {
         if (result__.isNull()) {
@@ -3289,7 +3223,6 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3389,10 +3322,8 @@ public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend IPropertySet <: windows_core.Interface<IPropertySet> {}
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct MapChangedEventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3400,7 +3331,6 @@ public struct MapChangedEventHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3472,7 +3402,6 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<K, V> MapChangedEventHandler<K, V> <: windows_core.Interface<MapChangedEventHandler<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
 private open class MapChangedEventHandlerInvokerErased {
@@ -3524,7 +3453,6 @@ func buildMapChangedEventHandlerBoxVtbl<K, V>(): MapChangedEventHandlerVtbl wher
     return vtbl
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class PropertySet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3674,7 +3602,6 @@ public class PropertySet <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend PropertySet <: windows_core.HandleWinrtType<PropertySet> {
     public static func intoWinrtHandle(value: PropertySet): CPointer<Unit> {
         value.asRaw()
@@ -3692,7 +3619,6 @@ extend PropertySet <: windows_core.HandleWinrtType<PropertySet> {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class StringMap <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3835,7 +3761,6 @@ public class StringMap <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend StringMap <: windows_core.HandleWinrtType<StringMap> {
     public static func intoWinrtHandle(value: StringMap): CPointer<Unit> {
         value.asRaw()
@@ -3853,7 +3778,6 @@ extend StringMap <: windows_core.HandleWinrtType<StringMap> {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class ValueSet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4003,7 +3927,6 @@ public class ValueSet <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend ValueSet <: windows_core.HandleWinrtType<ValueSet> {
     public static func intoWinrtHandle(value: ValueSet): CPointer<Unit> {
         value.asRaw()
@@ -4021,7 +3944,6 @@ extend ValueSet <: windows_core.HandleWinrtType<ValueSet> {
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 @C
 public struct VectorChangedEventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4029,7 +3951,6 @@ public struct VectorChangedEventHandlerVtbl {
     public init() {}
 }
 
-@When[Windows_Foundation_Collections == "on"]
 public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4099,7 +4020,6 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[Windows_Foundation_Collections == "on"]
 extend<T> VectorChangedEventHandler<T> <: windows_core.Interface<VectorChangedEventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
 private open class VectorChangedEventHandlerInvokerErased {

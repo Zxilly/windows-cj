@@ -1,32 +1,11 @@
 package windows_interface
 
 import std.sync.Mutex
+import windows_libloading as windows_libloading
 import windows_result.*
 import windows_result.Error as WinResultError
 import windows_strings.*
 
-let COMBASE_DLL_NAME: Array<UInt16> = [
-    0x0063u16, 0x006Fu16, 0x006Du16, 0x0062u16, 0x0061u16, 0x0073u16,
-    0x0065u16, 0x002Eu16, 0x0064u16, 0x006Cu16, 0x006Cu16, 0u16
-]
-let WINDOWS_GET_STRING_RAW_BUFFER_PROC_NAME: Array<UInt8> = [
-    0x57u8, 0x69u8, 0x6Eu8, 0x64u8, 0x6Fu8, 0x77u8, 0x73u8, 0x47u8,
-    0x65u8, 0x74u8, 0x53u8, 0x74u8, 0x72u8, 0x69u8, 0x6Eu8, 0x67u8,
-    0x52u8, 0x61u8, 0x77u8, 0x42u8, 0x75u8, 0x66u8, 0x66u8, 0x65u8,
-    0x72u8, 0u8
-]
-let WINDOWS_DELETE_STRING_PROC_NAME: Array<UInt8> = [
-    0x57u8, 0x69u8, 0x6Eu8, 0x64u8, 0x6Fu8, 0x77u8, 0x73u8, 0x44u8,
-    0x65u8, 0x6Cu8, 0x65u8, 0x74u8, 0x65u8, 0x53u8, 0x74u8, 0x72u8,
-    0x69u8, 0x6Eu8, 0x67u8, 0u8
-]
-let RO_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
-    0x52u8, 0x6Fu8, 0x47u8, 0x65u8, 0x74u8, 0x41u8, 0x63u8, 0x74u8,
-    0x69u8, 0x76u8, 0x61u8, 0x74u8, 0x69u8, 0x6Fu8, 0x6Eu8, 0x46u8,
-    0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0u8
-]
-
-var cachedCombaseModule: CPointer<Unit> = CPointer<Unit>()
 var cachedWindowsGetStringRawBufferProc: CPointer<Unit> = CPointer<Unit>()
 var cachedWindowsDeleteStringProc: CPointer<Unit> = CPointer<Unit>()
 var cachedRoGetActivationFactoryProc: CPointer<Unit> = CPointer<Unit>()
@@ -823,47 +802,15 @@ func copyWideUnits(ptr: CPointer<UInt16>, length: UInt32): Array<UInt16> {
     })
 }
 
-func combaseModule(): CPointer<Unit> {
-    if (cachedCombaseModule.isNotNull()) {
-        return cachedCombaseModule
-    }
-
-    unsafe {
-        let handle = acquireArrayRawData(COMBASE_DLL_NAME)
-        try {
-            let module = LoadLibraryW(handle.pointer)
-            if (module.isNull()) {
-                throw Exception("failed to load combase.dll")
-            }
-            cachedCombaseModule = module
-            return module
-        } finally {
-            releaseArrayRawData(handle)
-        }
-    }
-}
-
-func resolveCombaseProc(name: Array<UInt8>): CPointer<Unit> {
-    let module = combaseModule()
-    unsafe {
-        let handle = acquireArrayRawData(name)
-        try {
-            let proc = GetProcAddress(module, handle.pointer)
-            if (proc.isNull()) {
-                throw Exception("failed to resolve combase proc")
-            }
-            proc
-        } finally {
-            releaseArrayRawData(handle)
-        }
-    }
+func resolveCombaseProc(name: String): CPointer<Unit> {
+    windows_libloading.resolveProc("combase.dll", name)
 }
 
 func windowsGetStringRawBufferProc(): CPointer<Unit> {
     if (cachedWindowsGetStringRawBufferProc.isNotNull()) {
         return cachedWindowsGetStringRawBufferProc
     }
-    let proc = resolveCombaseProc(WINDOWS_GET_STRING_RAW_BUFFER_PROC_NAME)
+    let proc = resolveCombaseProc("WindowsGetStringRawBuffer")
     cachedWindowsGetStringRawBufferProc = proc
     proc
 }
@@ -872,7 +819,7 @@ func windowsDeleteStringProc(): CPointer<Unit> {
     if (cachedWindowsDeleteStringProc.isNotNull()) {
         return cachedWindowsDeleteStringProc
     }
-    let proc = resolveCombaseProc(WINDOWS_DELETE_STRING_PROC_NAME)
+    let proc = resolveCombaseProc("WindowsDeleteString")
     cachedWindowsDeleteStringProc = proc
     proc
 }
@@ -881,7 +828,7 @@ func roGetActivationFactoryProc(): CPointer<Unit> {
     if (cachedRoGetActivationFactoryProc.isNotNull()) {
         return cachedRoGetActivationFactoryProc
     }
-    let proc = resolveCombaseProc(RO_GET_ACTIVATION_FACTORY_PROC_NAME)
+    let proc = resolveCombaseProc("RoGetActivationFactory")
     cachedRoGetActivationFactoryProc = proc
     proc
 }

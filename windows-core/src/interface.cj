@@ -1,5 +1,7 @@
 package windows_core
 
+import windows_implement.ComObject
+
 public interface Interface<T> <: InterfaceType & RuntimeType & Type<T, CPointer<Unit>, Option<T>> & HandleWinrtType<T> where T <: ComInterface & HandleWinrtType<T> {
     static func descriptor(): InterfaceDescriptor<T>
     static func fromAbiTake(raw: CPointer<Unit>): T

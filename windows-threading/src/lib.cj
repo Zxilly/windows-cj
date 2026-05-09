@@ -2,52 +2,97 @@ package windows_threading
 
 import std.collection.HashMap
 import std.sync.Mutex
+import windows_common.Win32.System.Threading as Win32Threading
+import windows_libloading as windows_libloading
 
 public type BOOL = Int32
-public type PTP_CALLBACK_INSTANCE = CPointer<Unit>
-public type PTP_CLEANUP_GROUP = CPointer<Unit>
-public type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>
-public type PTP_POOL = CPointer<Unit>
-public type PTP_SIMPLE_CALLBACK = CFunc<(PTP_CALLBACK_INSTANCE, CPointer<Unit>) -> Unit>
+public type PTP_CALLBACK_INSTANCE = Win32Threading.PTP_CALLBACK_INSTANCE
+public type PTP_CLEANUP_GROUP = Win32Threading.PTP_CLEANUP_GROUP
+public type PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Win32Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK
+public type PTP_POOL = Win32Threading.PTP_POOL
+public type PTP_SIMPLE_CALLBACK = Win32Threading.PTP_SIMPLE_CALLBACK
+public type TP_CALLBACK_ENVIRON_V3 = Win32Threading.TP_CALLBACK_ENVIRON_V3
 
 private let TP_CALLBACK_PRIORITY_NORMAL = 1i32
 
-// Minimal ABI slice used by windows-threading.
-// Keep these declarations aligned with the native threadpool ABI.
-@C
-public struct TP_CALLBACK_ENVIRON_V3 {
-    public var Version: UInt32 = 0
-    public var Pool: PTP_POOL = CPointer<Unit>()
-    public var CleanupGroup: PTP_CLEANUP_GROUP = CPointer<Unit>()
-    public var CleanupGroupCancelCallback: PTP_CLEANUP_GROUP_CANCEL_CALLBACK = { _, _ => () }
-    public var RaceDll: CPointer<Unit> = CPointer<Unit>()
-    public var ActivationContext: IntNative = 0
-    public var FinalizationCallback: PTP_SIMPLE_CALLBACK = { _, _ => () }
-    public var Flags: UInt32 = 0
-    public var CallbackPriority: Int32 = 0
-    public var Size: UInt32 = 0
-    public init() {}
+func CloseThreadpool(ptpp: PTP_POOL): Unit {
+    let proc = CFunc<(PTP_POOL) -> Unit>(windows_libloading.resolveProc("kernel32.dll", "CloseThreadpool"))
+    unsafe { proc(ptpp) }
 }
 
-foreign {
-    func CloseThreadpool(ptpp: PTP_POOL): Unit
-    func CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP): Unit
-    func CloseThreadpoolCleanupGroupMembers(
-        ptpcg: PTP_CLEANUP_GROUP,
-        fCancelPendingCallbacks: BOOL,
-        pvCleanupContext: CPointer<Unit>
-    ): Unit
-    func CreateThreadpool(reserved: CPointer<Unit>): PTP_POOL
-    func CreateThreadpoolCleanupGroup(): PTP_CLEANUP_GROUP
-    func GetCurrentThreadId(): UInt32
-    func SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: UInt32): Unit
-    func SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: UInt32): BOOL
-    func Sleep(dwMilliseconds: UInt32): Unit
-    func TrySubmitThreadpoolCallback(
-        pfns: PTP_SIMPLE_CALLBACK,
-        pv: CPointer<Unit>,
-        pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>
-    ): BOOL
+func CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP): Unit {
+    let proc = CFunc<(PTP_CLEANUP_GROUP) -> Unit>(
+        windows_libloading.resolveProc("kernel32.dll", "CloseThreadpoolCleanupGroup")
+    )
+    unsafe { proc(ptpcg) }
+}
+
+func CloseThreadpoolCleanupGroupMembers(
+    ptpcg: PTP_CLEANUP_GROUP,
+    fCancelPendingCallbacks: BOOL,
+    pvCleanupContext: CPointer<Unit>
+): Unit {
+    let proc = CFunc<(PTP_CLEANUP_GROUP, BOOL, CPointer<Unit>) -> Unit>(
+        windows_libloading.resolveProc("kernel32.dll", "CloseThreadpoolCleanupGroupMembers")
+    )
+    unsafe { proc(ptpcg, fCancelPendingCallbacks, pvCleanupContext) }
+}
+
+func CreateThreadpool(reserved: CPointer<Unit>): PTP_POOL {
+    let proc = CFunc<(CPointer<Unit>) -> PTP_POOL>(
+        windows_libloading.resolveProc("kernel32.dll", "CreateThreadpool")
+    )
+    unsafe { proc(reserved) }
+}
+
+func CreateThreadpoolCleanupGroup(): PTP_CLEANUP_GROUP {
+    let proc = CFunc<() -> PTP_CLEANUP_GROUP>(
+        windows_libloading.resolveProc("kernel32.dll", "CreateThreadpoolCleanupGroup")
+    )
+    unsafe { proc() }
+}
+
+func GetCurrentThreadId(): UInt32 {
+    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("kernel32.dll", "GetCurrentThreadId"))
+    unsafe { proc() }
+}
+
+func SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: UInt32): Unit {
+    let proc = CFunc<(PTP_POOL, UInt32) -> Unit>(
+        windows_libloading.resolveProc("kernel32.dll", "SetThreadpoolThreadMaximum")
+    )
+    unsafe { proc(ptpp, cthrdMost) }
+}
+
+func SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: UInt32): BOOL {
+    let proc = CFunc<(PTP_POOL, UInt32) -> BOOL>(
+        windows_libloading.resolveProc("kernel32.dll", "SetThreadpoolThreadMinimum")
+    )
+    unsafe { proc(ptpp, cthrdMic) }
+}
+
+func Sleep(dwMilliseconds: UInt32): Unit {
+    let proc = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("kernel32.dll", "Sleep"))
+    unsafe { proc(dwMilliseconds) }
+}
+
+func TrySubmitThreadpoolCallbackProc(): CFunc<(
+    PTP_SIMPLE_CALLBACK,
+    CPointer<Unit>,
+    CPointer<TP_CALLBACK_ENVIRON_V3>
+) -> BOOL> {
+    CFunc<(PTP_SIMPLE_CALLBACK, CPointer<Unit>, CPointer<TP_CALLBACK_ENVIRON_V3>) -> BOOL>(
+        windows_libloading.resolveProc("kernel32.dll", "TrySubmitThreadpoolCallback")
+    )
+}
+
+func TrySubmitThreadpoolCallback(
+    pfns: PTP_SIMPLE_CALLBACK,
+    pv: CPointer<Unit>,
+    pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>
+): BOOL {
+    let proc = TrySubmitThreadpoolCallbackProc()
+    unsafe { proc(pfns, pv, pcbe) }
 }
 
 private let taskMutex = Mutex()
@@ -233,8 +278,9 @@ private func submitToPool(
     let key = registerTask(work, sink: sink)
     let context = unsafe { createTaskContext(key) }
     var env = makeEnvironment(pool, cleanupGroup)
+    let proc = TrySubmitThreadpoolCallbackProc()
     let success = unsafe {
-        TrySubmitThreadpoolCallback(
+        proc(
             taskThunk,
             context,
             inout env
@@ -297,19 +343,19 @@ public func sleep(milliseconds: UInt32): Unit {
 public class Pool <: Resource {
     private let lifecycleMutex = Mutex()
     private let state = PoolState()
-    private var poolHandle: PTP_POOL = CPointer<Unit>()
-    private var cleanupGroup: PTP_CLEANUP_GROUP = CPointer<Unit>()
+    private var poolHandle: PTP_POOL = PTP_POOL()
+    private var cleanupGroup: PTP_CLEANUP_GROUP = PTP_CLEANUP_GROUP()
     private var closed = false
 
     public init() {
         assertTpCallbackEnvironV3SizeMatches()
         let createdPool = unsafe { CreateThreadpool(CPointer<Unit>()) }
-        if (createdPool.isNull()) {
+        if (createdPool.Value.isNull()) {
             allocationFailed()
         }
 
         let createdCleanupGroup = unsafe { CreateThreadpoolCleanupGroup() }
-        if (createdCleanupGroup.isNull()) {
+        if (createdCleanupGroup.Value.isNull()) {
             unsafe { CloseThreadpool(createdPool) }
             allocationFailed()
         }
@@ -439,15 +485,15 @@ public class Pool <: Resource {
         }
 
         unsafe {
-            if (cleanupGroup.isNotNull()) {
+            if (cleanupGroup.Value.isNotNull()) {
                 CloseThreadpoolCleanupGroup(cleanupGroup)
             }
-            if (poolHandle.isNotNull()) {
+            if (poolHandle.Value.isNotNull()) {
                 CloseThreadpool(poolHandle)
             }
         }
-        cleanupGroup = CPointer<Unit>()
-        poolHandle = CPointer<Unit>()
+        cleanupGroup = PTP_CLEANUP_GROUP()
+        poolHandle = PTP_POOL()
 
         if (reportFailures) {
             if (let Some(message) <- failure) {
@@ -484,15 +530,15 @@ public class Pool <: Resource {
         }
 
         unsafe {
-            if (cleanupGroup.isNotNull()) {
+            if (cleanupGroup.Value.isNotNull()) {
                 CloseThreadpoolCleanupGroup(cleanupGroup)
             }
-            if (poolHandle.isNotNull()) {
+            if (poolHandle.Value.isNotNull()) {
                 CloseThreadpool(poolHandle)
             }
         }
-        cleanupGroup = CPointer<Unit>()
-        poolHandle = CPointer<Unit>()
+        cleanupGroup = PTP_CLEANUP_GROUP()
+        poolHandle = PTP_POOL()
     }
 }
 
