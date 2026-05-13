@@ -1242,3 +1242,27 @@
   - `cjpm test -m windows-runtime --no-progress`: 33/33 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), mixed scalar/HString map combinations such as `UInt32 -> HString`, event args review, and generator-emitted collection projections still need focused passes.
+
+### Round97 - UInt32 HString map input ABI
+
+- Completed at `2026-05-14 02:11:27 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, can be cast from `CPointer`, and calls require `unsafe`.
+  - Type patterns and `u32` literals are the supported way to specialize generic wrapper calls for `UInt32` without adding Rust-style ABI associated types.
+- Extended mixed scalar/HSTRING map coverage:
+  - Added direct `UInt32` key + HSTRING output slot dispatch for `IMapView<UInt32, HString>.Lookup` and `HasKey`.
+  - Added direct `UInt32` key + HSTRING value slot dispatch for mutable `IMap<UInt32, HString>.Lookup`, `HasKey`, `Insert`, and `Remove`.
+  - Added `IMapViewVtbl.newUInt32HString` and `IMapVtbl.newUInt32HString`, both delegating through the generic builders now that the generic specialization emits direct ABI slots.
+  - Preserved HSTRING ownership through `winrtStoreGenericOut`, `fromSystemHandleTake`, and scoped `winrtBorrowGenericIn`.
+- Added TDD coverage:
+  - `testGenericUInt32HStringMapViewBuilderUsesDirectKeyAbiForSpecialization` covers wrapper lookup plus direct vtable calls with `CFunc<(CPointer<Unit>, UInt32, ...)>`.
+  - `testUInt32HStringMapUsesDirectKeyAndHStringValueAbiForMutableSlots` first failed because `IMapVtbl.newUInt32HString` was missing, then validated lookup, has-key, insert, remove, and HSTRING handle ownership.
+  - `testGenericUInt32HStringMapBuilderUsesDirectAbiForSpecialization` verifies the generic mutable map builder emits the same direct ABI slots.
+- Debugging notes:
+  - After the first implementation, mutable `Remove` still used the generic path for `V=HString` because the `UInt32` key wrapper branch was placed under `V=Int32`; moving that branch under the HSTRING specialization fixed the failed `HasKey` / `Size` assertions.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 36/36 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 315/315 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), additional mixed scalar/HSTRING combinations, stock helper specializations, event args review, and generator-emitted collection projections still need focused passes.
