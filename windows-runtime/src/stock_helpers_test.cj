@@ -42,6 +42,35 @@ func testStockVectorViewIndexOfClearsMissingIndex() {
 }
 
 @Test
+func testStockCopyVectorViewIndexOfUsesDirectValueAbi() {
+    let view = toVectorView([0i32, 2i32])
+    var wrapperIndex = 99u32
+
+    @Expect(unsafe { view.Size() }, 2u32)
+    @Expect(unsafe { view.IndexOf(2i32, CPointer<UInt32>(inout wrapperIndex)) }, true)
+    @Expect(wrapperIndex, 1u32)
+
+    var directIndex = 99u32
+    var directFound = false
+    let vtbl = unsafe { view.vtbl() }
+    let directIndexOf = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
+        CPointer<Unit>(vtbl.IndexOf)
+    )
+    let directHr = unsafe { directIndexOf(
+        view.asRaw(),
+        0i32,
+        CPointer<UInt32>(inout directIndex),
+        CPointer<Bool>(inout directFound)
+    ) }
+
+    @Expect(directHr, S_OK.value)
+    @Expect(directFound, true)
+    @Expect(directIndex, 0u32)
+
+    view.close()
+}
+
+@Test
 func testStockGetManyRejectsNullBufferWithNonZeroCapacity() {
     let first = HString("first")
     let vectorView = toVectorView<HString>([first])

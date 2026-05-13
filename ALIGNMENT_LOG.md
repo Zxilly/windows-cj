@@ -969,3 +969,28 @@
   - `cjpm test -m windows-libloading --no-progress`: 9/9 passed with `cjHeapSize=32GB`.
   - Full `cjpm test --no-progress`: 292/292 passed with `cjHeapSize=32GB` before the coverage-only edit.
   - `cjpm test -m windows-runtime --no-progress`: 13/13 passed with `cjHeapSize=32GB` after the coverage edit.
+
+### Round84 - Stock Int32 vector view direct input ABI
+
+- Completed at `2026-05-13 21:38:28 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` represents C ABI function pointers, supports both `CFunc` to `CPointer<T>` and `CPointer<T>` to concrete `CFunc` conversion, and all CFunc parameter/return types must satisfy `CType`.
+  - `@C struct` cannot have generic parameters, so collection vtables cannot be made generic over ABI argument types.
+  - Generic function overload constraints do not participate in overload identity, so a second generic `toVectorView<T>` cannot be distinguished only by `CopyWinrtType` vs `HandleWinrtType` constraints.
+- Fixed the first concrete scalar input ABI path:
+  - Added `IVectorViewVtbl.newInt32`, whose `IndexOf` slot stores a direct-value `CFunc<(this, Int32, index*, found*) -> HRESULT>` behind the existing non-generic vtable field.
+  - Added `StockInt32VectorViewImpl` and a concrete `toVectorView(source: Iterable<Int32>)` overload, preserving the existing handle-based generic `toVectorView<T>` path for `HString` and other handle WinRT types.
+  - Updated `IVectorView<T>.IndexOf` to dispatch `Int32` values through the direct-value ABI function pointer, while other types continue through the existing generic input borrow path.
+- Added TDD coverage:
+  - `testStockCopyVectorViewIndexOfUsesDirectValueAbi` creates a stock `IVectorView<Int32>`, verifies the normal wrapper `IndexOf` path, then casts the vtable slot to a direct `Int32` CFunc and verifies an external ABI-style call returns `S_OK`, `found == true`, and index `0`.
+- Debugging note:
+  - A generic core-level `WinrtOutputBridge.callIndexOf` attempt triggered a reproducible `windows_core` compiler ICE (`std::out_of_range: stoi: out of range`).
+  - The root cause was narrowed to the new core generic virtual CFunc shape by rebuilding `windows-core` alone; that approach was removed and replaced with a runtime-side concrete `Int32` ABI branch.
+  - A second attempt to make the vtable builder generic over `A <: CType` failed normally because `CFunc` argument positions require concrete `CType` instantiations, not constrained type parameters.
+- Verification:
+  - `git diff --check`: passed.
+  - `cjpm build -m windows-core`: passed with `cjHeapSize=32GB` after removing the ICE-triggering core path.
+  - `cjpm test -m windows-runtime --no-progress`: 14/14 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 293/293 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar collection inputs still need concrete ABI thunks (`Bool`, integer widths, floats, projected-copy structs) and map/vector mutable slots (`IMapView.Lookup`, `IMap.HasKey/Insert/Remove`, `IVector.SetAt/InsertAt/Append`, observable variants). The generic CFunc restriction means these should be generated as concrete ABI bridges rather than modeled with a single generic vtable.

@@ -201,7 +201,7 @@ public class StockIterableImpl<T> <: IIterable_Impl<T> where T <: RuntimeType & 
 }
 
 public class StockVectorViewImpl<T> <: IVectorView_Impl<T>
-where T <: RuntimeType & HandleWinrtType<T> & Equatable<T> {
+where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -266,6 +266,71 @@ where T <: RuntimeType & HandleWinrtType<T> & Equatable<T> {
         // IVectorView::GetMany: copy up to `itemsSize` elements starting at
         // `startIndex`. The view does not have a cursor so nothing advances.
         writeGenericManyRange<T>(itemsSize, itemsBuffer, this.items, Int64(startIndex))
+    }
+}
+
+public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
+    private let items: ArrayList<Int32>
+    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+
+    public init(items: ArrayList<Int32>) {
+        this.items = items
+        this.vtblHandle = unsafe {
+            acquireArrayRawData(
+                Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.newInt32<StockInt32VectorViewImpl>() }))
+        }
+        this.iterableVtblHandle = unsafe {
+            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32VectorViewImpl, Int32>() }))
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func iterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func First(): Result<IIterator<Int32>> {
+        Result<IIterator<Int32>>.Ok(createStockIterator<Int32>(items))
+    }
+
+    public func GetAt(index: UInt32): Result<Int32> {
+        let resolvedIndex = Int64(index)
+        if (resolvedIndex < 0 || resolvedIndex >= items.size) {
+            return Result<Int32>.Err(stockBoundsError())
+        }
+        match (items.get(resolvedIndex)) {
+            case Some(value) => Result<Int32>.Ok(value)
+            case None => Result<Int32>.Err(stockBoundsError())
+        }
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(UInt32(items.size))
+    }
+
+    public func IndexOf(value: Int32, indexSlot: CPointer<UInt32>): Result<Bool> {
+        var offset = 0
+        while (offset < items.size) {
+            match (items.get(offset)) {
+                case Some(candidate) =>
+                    if (candidate == value) {
+                        writeIndexSlot(indexSlot, UInt32(offset))
+                        return Result<Bool>.Ok(true)
+                    }
+                case None => ()
+            }
+            offset += 1
+        }
+        writeIndexSlot(indexSlot, 0u32)
+        Result<Bool>.Ok(false)
+    }
+
+    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
+        writeGenericManyRange<Int32>(itemsSize, itemsBuffer, this.items, Int64(startIndex))
     }
 }
 
@@ -391,6 +456,19 @@ where T <: RuntimeType & HandleWinrtType<T> & Equatable<T> {
         impl,
         schemas,
         IVectorView<T>.descriptor(),
+        vtbls
+    )
+}
+
+public func toVectorView(source: Iterable<Int32>): IVectorView<Int32> {
+    let items = snapshotList<Int32>(source)
+    let impl = StockInt32VectorViewImpl(items)
+    let schemas = [IIterable<Int32>.descriptorSchema(), IVectorView<Int32>.descriptorSchema()]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
+    createStockInterfaceMulti<StockInt32VectorViewImpl, IVectorView<Int32>>(
+        impl,
+        schemas,
+        IVectorView<Int32>.descriptor(),
         vtbls
     )
 }

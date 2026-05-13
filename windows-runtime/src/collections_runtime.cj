@@ -1217,6 +1217,19 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
 
 extend<K, V> IMapView<K, V> <: windows_core.Interface<IMapView<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+func callVectorViewIndexOfInt32(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: Int32,
+    index: CPointer<UInt32>
+): Bool {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = false
+    let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
+    HRESULT(hr).ok()
+    result__
+}
+
 @C
 public struct IVectorViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1254,6 +1267,57 @@ public struct IVectorViewVtbl {
                     E_NOINTERFACE.value
             }
         }
+        vtbl.GetMany = { instanceRaw, arg0, arg1Size, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IVectorView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return vtbl
+    }
+
+    public static func newInt32<Identity>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<Int32> {
+        let _ = offset
+        var vtbl = IVectorViewVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.GetAt = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IVectorView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetAt(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IVectorView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Size(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+            instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IVectorView_Impl<Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.IndexOf(arg0, arg1)) {
+                            case Result<Bool>.Ok(value) =>
+                                unsafe { result__.write(value) }
+                                S_OK.value
+                            case Result<Bool>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
         vtbl.GetMany = { instanceRaw, arg0, arg1Size, arg1, result__ =>
             match (unsafe { asImplFromRaw<IVectorView_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -1463,13 +1527,17 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
 
     public unsafe func IndexOf(value: T, index: CPointer<UInt32>): Bool {
         let v = vtbl()
+        match (value) {
+            case abiValue: Int32 => return callVectorViewIndexOfInt32(v.IndexOf, asRaw(), abiValue, index)
+            case _ => ()
+        }
         var result__ = false
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(value)) {
             hr__ = Some(v.IndexOf(asRaw(), __genericBorrow0.asRaw(), index, CPointer<Bool>(inout result__)))
         }
         let hr = match (hr__) {
-            case Some(value) => value
+            case Some(value__) => value__
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
         HRESULT(hr).ok()
