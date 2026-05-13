@@ -1310,3 +1310,25 @@
   - Full `cjpm test --no-progress`: 321/321 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar input families (`Int8`/`UInt8`/`Int16`/`UInt16`/`Int64`/`UInt64`, `Float64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
+
+### Round100 - Float64 vector input ABI
+
+- Completed at `2026-05-14 02:42:04 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, can be cast from `CPointer`, and calls require `unsafe`.
+  - `Float64` literals use the `f64` suffix, and floating-point types are valid in C-callable signatures that satisfy `CType`.
+- Extended vector scalar-input ABI coverage for `Float64`:
+  - Added direct `Float64` slot dispatch for `IVectorView<Float64>.IndexOf`.
+  - Added direct `Float64` slot dispatch for mutable `IVector<Float64>.IndexOf`, `SetAt`, `InsertAt`, and `Append`.
+  - Added `IVectorViewVtbl.newFloat64` and `IVectorVtbl.newFloat64`, and made generic `new<..., Float64>` builders emit the same direct ABI slots.
+  - Kept non-`Float64` cases on the existing generic borrow/project path.
+- Added TDD coverage:
+  - `testFloat64VectorUsesDirectValueAbiForMutableSlots` first failed because `IVectorVtbl.newFloat64` did not exist, then validated wrapper calls and direct vtable calls with concrete `Float64` CFunc signatures.
+  - `testGenericFloat64VectorBuilderUsesDirectValueAbiForSpecialization` verifies the mutable generic builder emits direct `Float64` input slots.
+  - `testGenericFloat64VectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the vector-view generic builder emits direct `Float64` input slots for `IndexOf`.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 45/45 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 324/324 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar input families (`Int8`/`UInt8`/`Int16`/`UInt16`/`Int64`/`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
