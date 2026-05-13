@@ -1033,3 +1033,23 @@
   - Full `cjpm test --no-progress`: 294/294 passed with `cjHeapSize=32GB`.
 - Residual risk:
   - Finalizer cleanup is compile-verified and reviewable, but deterministic GC/finalizer execution is not asserted by the local test.
+
+### Round87 - Int32-to-HString map view key ABI
+
+- Completed at `2026-05-13 22:40:25 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` represents C-callable function pointers, its parameter and return types must satisfy `CType`, and invoking it requires `unsafe`.
+  - `CPointer<T>.write` is unsafe and requires the pointer to be valid.
+  - Function overloads depend on non-generic parameter shape; generic constraints do not create overloads.
+- Extended the scalar collection input bridge:
+  - Added `IMapViewVtbl.newInt32HString` so `IMapView<Int32, HString>.Lookup` accepts the key as direct `Int32` ABI and returns an `HSTRING` handle out-param.
+  - Updated `IMapView<K, V>.Lookup` / `HasKey` dispatch to use the direct `Int32` key path for `V == HString`, matching the concrete vtable.
+  - Added `StockInt32HStringMapViewImpl` plus `toMapView(source: Iterable<(Int32, HString)>)`, including the independent `IIterable<IKeyValuePair<Int32, HString>>` ancestor slot and finalizer-only vtable handle release.
+- Added coverage:
+  - `testStockInt32HStringMapViewUsesDirectKeyAbi` verifies wrapper `Lookup`/`HasKey`, then casts the vtable slots to direct `Int32` ABI signatures and validates external ABI-style calls.
+- Verification:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 16/16 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 295/295 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar key/value combinations still need concrete ABI thunks, especially non-`Int32` scalar keys, copy-struct values, mutable `IMap`, mutable/observable `IVector`, and generator-emitted collection projections.

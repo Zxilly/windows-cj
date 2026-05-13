@@ -5,6 +5,7 @@ import std.sync.AtomicInt64
 import windows_core.{
     ComInterface,
     E_POINTER,
+    HString,
     HandleWinrtType,
     HRESULT,
     Result,
@@ -567,6 +568,84 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> {
     }
 }
 
+public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> {
+    private let entries: ArrayList<(Int32, HString)>
+    private let pairViews: ArrayList<IKeyValuePair<Int32, HString>>
+    private let vtblHandle: CPointerHandle<IMapViewVtbl>
+    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private var closed: Bool = false
+
+    public init(entries: ArrayList<(Int32, HString)>) {
+        this.entries = entries
+        this.pairViews = materializePairViews<Int32, HString>(entries)
+        this.vtblHandle = unsafe {
+            acquireArrayRawData(
+                Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32HString<StockInt32HStringMapViewImpl>() }))
+        }
+        this.iterableVtblHandle = unsafe {
+            acquireArrayRawData(
+                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32HStringMapViewImpl, IKeyValuePair<Int32, HString>>() }))
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func iterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
+        Result<IIterator<IKeyValuePair<Int32, HString>>>.Ok(
+            createStockIterator<IKeyValuePair<Int32, HString>>(pairViews)
+        )
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func Lookup(key: Int32): Result<HString> {
+        for ((candidateKey, candidateValue) in entries) {
+            if (candidateKey == key) {
+                return Result<HString>.Ok(candidateValue)
+            }
+        }
+        Result<HString>.Err(stockBoundsError())
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(UInt32(entries.size))
+    }
+
+    public func HasKey(key: Int32): Result<Bool> {
+        for ((candidateKey, _) in entries) {
+            if (candidateKey == key) {
+                return Result<Bool>.Ok(true)
+            }
+        }
+        Result<Bool>.Ok(false)
+    }
+
+    public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Result<Unit> {
+        if (first.isNotNull()) {
+            unsafe { first.write(CPointer<Unit>()) }
+        }
+        if (second.isNotNull()) {
+            unsafe { second.write(CPointer<Unit>()) }
+        }
+        Result<Unit>.Ok(())
+    }
+}
+
 public func toIterator<T>(source: Iterable<T>): IIterator<T> where T <: RuntimeType & WinrtGenericType<T> {
     let items = snapshotList<T>(source)
     createStockIterator<T>(items)
@@ -649,6 +728,22 @@ public func toMapView(source: Iterable<(Int32, Int32)>): IMapView<Int32, Int32> 
         impl,
         schemas,
         IMapView<Int32, Int32>.descriptor(),
+        vtbls
+    )
+}
+
+public func toMapView(source: Iterable<(Int32, HString)>): IMapView<Int32, HString> {
+    let entries = snapshotList<(Int32, HString)>(source)
+    let impl = StockInt32HStringMapViewImpl(entries)
+    let schemas = [
+        IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(),
+        IMapView<Int32, HString>.descriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
+    createStockInterfaceMulti<StockInt32HStringMapViewImpl, IMapView<Int32, HString>>(
+        impl,
+        schemas,
+        IMapView<Int32, HString>.descriptor(),
         vtbls
     )
 }

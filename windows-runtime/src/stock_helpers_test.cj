@@ -184,3 +184,40 @@ func testStockInt32MapViewUsesDirectKeyAbi() {
 
     view.close()
 }
+
+@Test
+func testStockInt32HStringMapViewUsesDirectKeyAbi() {
+    let one = HString("one")
+    let two = HString("two")
+    let entries = ArrayList<(Int32, HString)>([(1i32, one), (2i32, two)])
+    let view = toMapView(entries)
+
+    @Expect(unsafe { view.Size() }, 2u32)
+    @Expect(unsafe { view.HasKey(2i32) }, true)
+    let wrapperValue = unsafe { view.Lookup(2i32) }
+    @Expect(wrapperValue.get(), "two")
+    wrapperValue.close()
+
+    var directRaw = CPointer<Unit>()
+    let vtbl = unsafe { view.vtbl() }
+    let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(
+        CPointer<Unit>(vtbl.Lookup)
+    )
+    let lookupHr = unsafe {
+        directLookup(view.asRaw(), 1i32, CPointer<CPointer<Unit>>(inout directRaw))
+    }
+    @Expect(lookupHr, S_OK.value)
+    let directValue = HString.fromSystemHandleTake(directRaw)
+    @Expect(directValue.get(), "one")
+    directValue.close()
+
+    var directFound = false
+    let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+    let hasKeyHr = unsafe { directHasKey(view.asRaw(), 3i32, CPointer<Bool>(inout directFound)) }
+    @Expect(hasKeyHr, S_OK.value)
+    @Expect(directFound, false)
+
+    view.close()
+    one.close()
+    two.close()
+}

@@ -955,6 +955,18 @@ func callMapViewLookupInt32Int32(
     result__
 }
 
+func callMapViewLookupInt32HString(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    key: Int32
+): windows_core.HString {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = CPointer<Unit>()
+    let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
+    HRESULT(hr).ok()
+    windows_core.HString.fromSystemHandleTake(result__)
+}
+
 func callMapViewHasKeyInt32(
     slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -1050,6 +1062,68 @@ public struct IMapViewVtbl {
         let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
             instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IMapView_Impl<Int32, Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.HasKey(arg0)) {
+                            case Result<Bool>.Ok(value) =>
+                                unsafe { result__.write(value) }
+                                S_OK.value
+                            case Result<Bool>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
+        vtbl.Split = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<IMapView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Split(arg0, arg1)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return vtbl
+    }
+
+    public static func newInt32HString<Identity>(offset!: Int64 = 0): IMapViewVtbl where Identity <: IMapView_Impl<Int32, windows_core.HString> {
+        let _ = offset
+        var vtbl = IMapViewVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {
+            instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IMapView_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.Lookup(arg0)) {
+                            case Result<windows_core.HString>.Ok(value) =>
+                                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
+                            case Result<windows_core.HString>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IMapView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Size(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
+            instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IMapView_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
                 case Some(impl) =>
                     if (result__.isNull()) {
                         E_POINTER.value
@@ -1274,6 +1348,19 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
                 }
             case _ => ()
         }
+        match (windows_core.HString() as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 =>
+                        let directValue = callMapViewLookupInt32HString(v.Lookup, asRaw(), abiKey)
+                        match (directValue as V) {
+                            case Some(value) => return value
+                            case None => ()
+                        }
+                    case _ => ()
+                }
+            case _ => ()
+        }
         return windows_core.winrtCallGenericOutFromGenericInput<V, K>(v.Lookup, asRaw(), key)
     }
 
@@ -1288,6 +1375,14 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     public unsafe func HasKey(key: K): Bool {
         let v = vtbl()
         match (0i32 as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 => return callMapViewHasKeyInt32(v.HasKey, asRaw(), abiKey)
+                    case _ => ()
+                }
+            case _ => ()
+        }
+        match (windows_core.HString() as V) {
             case Some(_) =>
                 match (key) {
                     case abiKey: Int32 => return callMapViewHasKeyInt32(v.HasKey, asRaw(), abiKey)
