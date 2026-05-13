@@ -1332,3 +1332,24 @@
   - Full `cjpm test --no-progress`: 324/324 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar input families (`Int8`/`UInt8`/`Int16`/`UInt16`/`Int64`/`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
+
+### Round101 - Int64 vector-view input ABI
+
+- Completed at `2026-05-14 02:51:25 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, can be cast from `CPointer`, and calls require `unsafe`.
+  - Integer literal suffixes include `i64`, and integer types are valid in C-callable signatures that satisfy `CType`.
+- Extended vector-view scalar-input ABI coverage for `Int64`:
+  - Added direct `Int64` slot dispatch for `IVectorView<Int64>.IndexOf`.
+  - Added `IVectorViewVtbl.newInt64`, and made generic `new<..., Int64>` builders emit the same direct ABI slot.
+  - Kept non-`Int64` cases on the existing generic borrow/project path.
+  - Deliberately kept this round view-only because the reference scan found real `IVectorView<i64>` projections but no matching mutable `IVector<i64>` use to justify adding mutable slots mechanically.
+- Added TDD coverage:
+  - `testInt64VectorViewUsesDirectValueAbiForIndexOf` first failed because `IVectorViewVtbl.newInt64` did not exist, then validated wrapper calls and direct vtable calls with a concrete `Int64` CFunc signature.
+  - `testGenericInt64VectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the generic vector-view builder emits the same direct `Int64` input slot for `IndexOf`.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 47/47 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 326/326 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other view scalar families (`Int16`/`UInt8`/`UInt16`/`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.

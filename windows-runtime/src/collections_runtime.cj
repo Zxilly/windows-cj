@@ -1696,6 +1696,19 @@ func callVectorViewIndexOfUInt32(
     result__
 }
 
+func callVectorViewIndexOfInt64(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: Int64,
+    index: CPointer<UInt32>
+): Bool {
+    let typedSlot = CFunc<(CPointer<Unit>, Int64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = false
+    let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
+    HRESULT(hr).ok()
+    result__
+}
+
 func callVectorViewIndexOfBool(
     slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -1809,6 +1822,30 @@ public struct IVectorViewVtbl {
                 let indexOfAbi: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<UInt32>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(arg0, arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+            case None => ()
+        }
+        match (0i64 as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, Int64, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVectorView_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
                             if (result__.isNull()) {
                                 E_POINTER.value
@@ -2003,6 +2040,10 @@ public struct IVectorViewVtbl {
             }
         }
         return vtbl
+    }
+
+    public static func newInt64<Identity>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<Int64> {
+        IVectorViewVtbl.new<Identity, Int64>(offset: offset)
     }
 
     public static func newBool<Identity>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<Bool> {
@@ -2218,6 +2259,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
         match (value) {
             case int32Value: Int32 => return callVectorViewIndexOfInt32(v.IndexOf, asRaw(), int32Value, index)
             case uint32Value: UInt32 => return callVectorViewIndexOfUInt32(v.IndexOf, asRaw(), uint32Value, index)
+            case int64Value: Int64 => return callVectorViewIndexOfInt64(v.IndexOf, asRaw(), int64Value, index)
             case boolValue: Bool => return callVectorViewIndexOfBool(v.IndexOf, asRaw(), boolValue, index)
             case float32Value: Float32 => return callVectorViewIndexOfFloat32(v.IndexOf, asRaw(), float32Value, index)
             case float64Value: Float64 => return callVectorViewIndexOfFloat64(v.IndexOf, asRaw(), float64Value, index)
