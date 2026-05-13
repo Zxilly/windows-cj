@@ -69,7 +69,7 @@ public unsafe func queryInterfaceResult<U>(
     QueryResult<InterfaceHandle<U>>.Err(hr)
 }
 
-// 比较两个 COM 包装是否指向同一个 IUnknown 身份。
+// Compare whether two COM wrappers point at the same IUnknown identity.
 public unsafe func sameComIdentity(left: ComInterface, right: ComInterface): Bool {
     let leftRaw = left.asRaw()
     let rightRaw = right.asRaw()
@@ -95,7 +95,7 @@ public unsafe func sameComIdentity(left: ComInterface, right: ComInterface): Boo
 }
 
 extend IUnknown <: IUnknownIdentity {
-    // 通过 QI 到 IUnknown 后比较指针地址，判断是否为同一 COM 身份。
+    // Query both wrappers to IUnknown and compare the canonical identity pointer.
     public unsafe func hasSameIdentity(other: ComInterface): Bool {
         sameComIdentity(this, other)
     }

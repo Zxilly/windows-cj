@@ -11,10 +11,8 @@ func nullAbiValue<A>(): A where A <: CType {
 public func projectAbiValue<T, A>(value: T): A where A <: CType {
     match (value) {
         case hstring: HString =>
-            match (hstring.asRaw() as A) {
-                case Some(abi) => return abi
-                case None => ()
-            }
+            let _ = hstring
+            throw IllegalStateException("InParam<HString>.borrow cannot publish a raw HSTRING; use winrtBorrowGenericIn")
         case _ => ()
     }
 
@@ -34,8 +32,8 @@ public func projectAbiValue<T, A>(value: T): A where A <: CType {
     }
 }
 
-// InParam<T> 表示 ABI 边界上的调用期输入视图。
-// 该值本身不拥有底层资源；如果要跨调用持有句柄，需要显式 retain。
+// InParam<T> is a call-scoped input view for ABI boundaries.
+// It does not own the underlying resource; retain explicitly to hold a handle across calls.
 public struct InParam<T> <: Param<T> {
     private let value: ?T
 

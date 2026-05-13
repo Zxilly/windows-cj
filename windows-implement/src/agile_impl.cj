@@ -1,33 +1,15 @@
 package windows_implement
 
 import windows_interface.*
-import windows_libloading as windows_libloading
-
-var cachedCoCreateFreeThreadedMarshalerProc: CPointer<Unit> = CPointer<Unit>()
-
-func coCreateFreeThreadedMarshalerProc(): CPointer<Unit> {
-    if (cachedCoCreateFreeThreadedMarshalerProc.isNotNull()) {
-        return cachedCoCreateFreeThreadedMarshalerProc
-    }
-    let proc = windows_libloading.resolveProc("ole32.dll", "CoCreateFreeThreadedMarshaler")
-    cachedCoCreateFreeThreadedMarshalerProc = proc
-    proc
-}
 
 public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal> {
     if (outer.isNull()) {
         return None
     }
 
-    let proc = coCreateFreeThreadedMarshalerProc()
-    if (proc.isNull()) {
-        return None
-    }
-
-    let create = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(proc)
     var marshalerRaw = CPointer<Unit>()
     let hr = unsafe {
-        create(outer, CPointer<CPointer<Unit>>(inout marshalerRaw))
+        CoCreateFreeThreadedMarshaler(outer, CPointer<CPointer<Unit>>(inout marshalerRaw))
     }
     if (hr != S_OK || marshalerRaw.isNull()) {
         return None

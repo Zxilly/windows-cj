@@ -52,3 +52,23 @@ func testEmptyBstrDoesNotOwnStorageAndClosesToNull() {
     @Expect(empty.asPtr().isNull(), true)
     @Expect(empty.tryToString(), Some(""))
 }
+
+@When[os == "Windows"]
+@Test
+func testBstrRawConstructorsExposeOwnershipSemantics() {
+    let source = BSTR("raw")
+    let raw = source.intoRaw()
+    let taken = BSTR.fromRawTake(raw)
+
+    @Expect(source.isClosed(), true)
+    @Expect(taken.ownsStorage(), true)
+    @Expect(taken.get(), "raw")
+    taken.close()
+
+    let owner = BSTR("view")
+    let view = BSTR.fromRawView(owner.asPtr())
+    @Expect(view.ownsStorage(), false)
+    @Expect(view.get(), "view")
+    view.close()
+    owner.close()
+}

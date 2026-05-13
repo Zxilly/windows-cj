@@ -106,7 +106,3 @@ public enum Result<T> {
         }
     }
 }
-
-// Type aliases for code that uses different names for the HRESULT type.
-type HResult = HRESULT
-type ResultCode = HRESULT

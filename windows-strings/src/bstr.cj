@@ -1,7 +1,6 @@
 package windows_strings
 
 import std.sync.AtomicInt32
-import windows_libloading as windows_libloading
 
 class BStrAllocationException <: Exception {
     public init(msg: String) {
@@ -15,88 +14,27 @@ class BStrAbiException <: Exception {
     }
 }
 
-func oleaut32Proc(name: String): CPointer<Unit> {
-    try {
-        windows_libloading.resolveProc("oleaut32.dll", name)
-    } catch (_: Exception) {
-        throw BStrAbiException("failed to resolve OleAut32 BSTR ABI")
-    }
-}
-
-// Cached proc pointers for oleaut32 functions.
-var cachedSysAllocStringLen: CPointer<Unit> = CPointer<Unit>()
-var cachedSysFreeString: CPointer<Unit> = CPointer<Unit>()
-var cachedSysStringLen: CPointer<Unit> = CPointer<Unit>()
-var cachedSysStringByteLen: CPointer<Unit> = CPointer<Unit>()
 let observedSysFreeStringCount = AtomicInt32(0)
 
 public func debugObservedSysFreeStringCount(): Int32 {
     observedSysFreeStringCount.load()
 }
 
-func getSysAllocStringLen(): CPointer<Unit> {
-    if (cachedSysAllocStringLen.isNotNull()) {
-        return cachedSysAllocStringLen
-    }
-    let proc = oleaut32Proc("SysAllocStringLen")
-    cachedSysAllocStringLen = proc
-    proc
-}
-
-func getSysFreeString(): CPointer<Unit> {
-    if (cachedSysFreeString.isNotNull()) {
-        return cachedSysFreeString
-    }
-    let proc = oleaut32Proc("SysFreeString")
-    cachedSysFreeString = proc
-    proc
-}
-
-func getSysStringLen(): CPointer<Unit> {
-    if (cachedSysStringLen.isNotNull()) {
-        return cachedSysStringLen
-    }
-    let proc = oleaut32Proc("SysStringLen")
-    cachedSysStringLen = proc
-    proc
-}
-
-func getSysStringByteLen(): CPointer<Unit> {
-    if (cachedSysStringByteLen.isNotNull()) {
-        return cachedSysStringByteLen
-    }
-    let proc = oleaut32Proc("SysStringByteLen")
-    cachedSysStringByteLen = proc
-    proc
-}
-
 func sysAllocStringLen(ptr: CPointer<UInt16>, unitLength: UInt32): CPointer<UInt16> {
-    let alloc = CFunc<(CPointer<UInt16>, UInt32) -> CPointer<UInt16>>(getSysAllocStringLen())
-    unsafe {
-        alloc(ptr, unitLength)
-    }
+    sysAllocStringLenAbi(ptr, unitLength)
 }
 
 func sysFreeString(ptr: CPointer<UInt16>): Unit {
-    let freeFn = CFunc<(CPointer<UInt16>) -> Unit>(getSysFreeString())
-    unsafe {
-        freeFn(ptr)
-    }
+    sysFreeStringAbi(ptr)
     observedSysFreeStringCount.fetchAdd(1)
 }
 
 func sysStringLen(ptr: CPointer<UInt16>): UInt32 {
-    let lenFn = CFunc<(CPointer<UInt16>) -> UInt32>(getSysStringLen())
-    unsafe {
-        lenFn(ptr)
-    }
+    sysStringLenAbi(ptr)
 }
 
 func sysStringByteLen(ptr: CPointer<UInt16>): UInt32 {
-    let lenFn = CFunc<(CPointer<UInt16>) -> UInt32>(getSysStringByteLen())
-    unsafe {
-        lenFn(ptr)
-    }
+    sysStringByteLenAbi(ptr)
 }
 
 func allocateBstr(units: Array<UInt16>): CPointer<UInt16> {
@@ -170,24 +108,18 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         BSTR(allocateBstr(units), true)
     }
 
-    /// Unsafe: caller must guarantee `ptr` is a live BSTR allocation whose ownership
+    /// Caller must guarantee `ptr` is a live BSTR allocation whose ownership
     /// is transferred to the returned wrapper.
-    public static func unsafeFromRaw(ptr: CPointer<UInt16>): BSTR {
+    public static func fromRawTake(ptr: CPointer<UInt16>): BSTR {
         BSTR(ptr, ptr.isNotNull())
     }
 
-    /// Unsafe: caller must guarantee `ptr` remains valid for all uses of the returned wrapper.
-    public static func unsafeFromRawView(ptr: CPointer<UInt16>): BSTR {
+    /// Caller must guarantee `ptr` remains valid for all uses of the returned wrapper.
+    public static func fromRawView(ptr: CPointer<UInt16>): BSTR {
         BSTR(ptr, false)
     }
 
-    /// Unsafe: caller must guarantee `ptr` is a live BSTR allocation whose ownership
-    /// is transferred to the returned wrapper.
-    public static func unsafeAttach(ptr: CPointer<UInt16>): BSTR {
-        BSTR(ptr, ptr.isNotNull())
-    }
-
-/// Create an independent copy of this BSTR.
+    /// Create an independent copy of this BSTR.
     public func clone(): BSTR {
         if (closed || ptr.isNull()) {
             return BSTR()

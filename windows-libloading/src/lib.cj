@@ -6,37 +6,33 @@ import std.sync.*
 let libraryCache = HashMap<String, CPointer<Unit>>()
 let symbolCache = HashMap<String, CPointer<Unit>>()
 let cacheMutex = Mutex()
+let LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR: UInt32 = 0x00000100u32
+let LOAD_LIBRARY_SEARCH_SYSTEM32: UInt32 = 0x00000800u32
+let LOAD_LIBRARY_SEARCH_DEFAULT_DIRS: UInt32 = 0x00001000u32
 
 foreign {
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
-    func LoadLibraryA(lpLibFileName: CPointer<UInt8>): CPointer<Unit>
+    func FreeLibrary(hLibModule: CPointer<Unit>): Int32
+    func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: CPointer<Unit>, dwFlags: UInt32): CPointer<Unit>
 }
 
 public func loadLibrary(moduleName: String): CPointer<Unit> {
+    let moduleKey = systemModuleKey(moduleName)
     synchronized(cacheMutex) {
-        if (libraryCache.contains(moduleName)) {
-            return libraryCache[moduleName]
+        if (libraryCache.contains(moduleKey)) {
+            return libraryCache[moduleKey]
         }
 
         let moduleNameBytes = nullTerminatedUtf8(moduleName)
-        unsafe {
-            let moduleNameHandle = acquireArrayRawData(moduleNameBytes)
-            try {
-                let module = LoadLibraryA(moduleNameHandle.pointer)
-                if (module.isNull()) {
-                    throw Exception("failed to load ${moduleName}")
-                }
-                libraryCache[moduleName] = module
-                return module
-            } finally {
-                releaseArrayRawData(moduleNameHandle)
-            }
-        }
+        let module = loadSystemLibraryUncached(moduleNameBytes)
+        libraryCache[moduleKey] = module
+        return module
     }
 }
 
 public func resolveProc(moduleName: String, procName: String): CPointer<Unit> {
-    let cacheKey = "${moduleName}\n${procName}"
+    let moduleKey = systemModuleKey(moduleName)
+    let cacheKey = "${moduleKey}\n${procName}"
     synchronized(cacheMutex) {
         if (symbolCache.contains(cacheKey)) {
             return symbolCache[cacheKey]
@@ -44,24 +40,31 @@ public func resolveProc(moduleName: String, procName: String): CPointer<Unit> {
 
         let module = loadLibraryLocked(moduleName)
         let procNameBytes = nullTerminatedUtf8(procName)
-        unsafe {
-            let procNameHandle = acquireArrayRawData(procNameBytes)
-            try {
-                let proc = GetProcAddress(module, procNameHandle.pointer)
-                if (proc.isNull()) {
-                    throw Exception("failed to resolve ${procName} from ${moduleName}")
-                }
-                symbolCache[cacheKey] = proc
-                return proc
-            } finally {
-                releaseArrayRawData(procNameHandle)
-            }
+        let proc = resolveProcUncached(module, procNameBytes)
+        symbolCache[cacheKey] = proc
+        return proc
+    }
+}
+
+public func resolveProcFromSearchPath(moduleName: String, procName: String): CPointer<Unit> {
+    let moduleKey = searchPathModuleKey(moduleName)
+    let cacheKey = "${moduleKey}\n${procName}"
+    synchronized(cacheMutex) {
+        if (symbolCache.contains(cacheKey)) {
+            return symbolCache[cacheKey]
         }
+
+        let module = loadLibraryFromSearchPathLocked(moduleName)
+        let procNameBytes = nullTerminatedUtf8(procName)
+        let proc = resolveProcUncached(module, procNameBytes)
+        symbolCache[cacheKey] = proc
+        return proc
     }
 }
 
 public func resolveProcByOrdinal(moduleName: String, ordinal: Int64): CPointer<Unit> {
-    let cacheKey = "${moduleName}\n#${ordinal}"
+    let moduleKey = systemModuleKey(moduleName)
+    let cacheKey = "${moduleKey}\n#${ordinal}"
     synchronized(cacheMutex) {
         if (symbolCache.contains(cacheKey)) {
             return symbolCache[cacheKey]
@@ -78,25 +81,150 @@ public func resolveProcByOrdinal(moduleName: String, ordinal: Int64): CPointer<U
     }
 }
 
-func loadLibraryLocked(moduleName: String): CPointer<Unit> {
-    if (libraryCache.contains(moduleName)) {
-        return libraryCache[moduleName]
-    }
+public func loadSystemLibraryUncached(moduleNameBytes: Array<UInt8>): CPointer<Unit> {
+    ensureSystemModuleNameBytes(moduleNameBytes)
+    loadLibraryWithFlags(moduleNameBytes, LOAD_LIBRARY_SEARCH_SYSTEM32)
+}
 
+public func loadLibraryUncached(moduleNameBytes: Array<UInt8>): CPointer<Unit> {
+    loadLibraryWithFlags(moduleNameBytes, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS)
+}
+
+public func loadLibraryFromSearchPathUncached(moduleName: String): CPointer<Unit> {
     let moduleNameBytes = nullTerminatedUtf8(moduleName)
+    loadLibraryWithFlags(moduleNameBytes, searchPathLoadFlags(moduleName))
+}
+
+func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointer<Unit> {
     unsafe {
         let moduleNameHandle = acquireArrayRawData(moduleNameBytes)
         try {
-            let module = LoadLibraryA(moduleNameHandle.pointer)
+            let module = LoadLibraryExA(moduleNameHandle.pointer, CPointer<Unit>(), flags)
             if (module.isNull()) {
-                throw Exception("failed to load ${moduleName}")
+                throw Exception("failed to load module")
             }
-            libraryCache[moduleName] = module
-            return module
+            module
         } finally {
             releaseArrayRawData(moduleNameHandle)
         }
     }
+}
+
+public func resolveProcUncached(module: CPointer<Unit>, procNameBytes: Array<UInt8>): CPointer<Unit> {
+    unsafe {
+        let procNameHandle = acquireArrayRawData(procNameBytes)
+        try {
+            let proc = GetProcAddress(module, procNameHandle.pointer)
+            if (proc.isNull()) {
+                throw Exception("failed to resolve proc")
+            }
+            proc
+        } finally {
+            releaseArrayRawData(procNameHandle)
+        }
+    }
+}
+
+public func freeLibrary(module: CPointer<Unit>): Int32 {
+    unsafe { FreeLibrary(module) }
+}
+
+func loadLibraryLocked(moduleName: String): CPointer<Unit> {
+    let moduleKey = systemModuleKey(moduleName)
+    if (libraryCache.contains(moduleKey)) {
+        return libraryCache[moduleKey]
+    }
+
+    let moduleNameBytes = nullTerminatedUtf8(moduleName)
+    let module = loadSystemLibraryUncached(moduleNameBytes)
+    libraryCache[moduleKey] = module
+    return module
+}
+
+func loadLibraryFromSearchPathLocked(moduleName: String): CPointer<Unit> {
+    let moduleKey = searchPathModuleKey(moduleName)
+    if (libraryCache.contains(moduleKey)) {
+        return libraryCache[moduleKey]
+    }
+
+    let module = loadLibraryFromSearchPathUncached(moduleName)
+    libraryCache[moduleKey] = module
+    return module
+}
+
+func systemModuleKey(moduleName: String): String {
+    ensureSystemModuleName(moduleName)
+    "system:${canonicalModuleName(moduleName)}"
+}
+
+func searchPathModuleKey(moduleName: String): String {
+    "search:${canonicalModuleName(moduleName)}"
+}
+
+func canonicalModuleName(moduleName: String): String {
+    let bytes = moduleName.toArray()
+    let length = Int64(bytes.size)
+    let normalized = Array<UInt8>(length, { index =>
+        let byte = bytes[index]
+        if (byte >= 0x41u8 && byte <= 0x5Au8) {
+            byte + 0x20u8
+        } else {
+            byte
+        }
+    })
+    String.fromUtf8(normalized)
+}
+
+func searchPathLoadFlags(moduleName: String): UInt32 {
+    if (isAbsoluteModulePath(moduleName)) {
+        return LOAD_LIBRARY_SEARCH_DEFAULT_DIRS + LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR
+    }
+    LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
+}
+
+func ensureSystemModuleName(moduleName: String): Unit {
+    if (isPathLikeModuleName(moduleName)) {
+        throw Exception("system module loads require a bare DLL name")
+    }
+}
+
+func ensureSystemModuleNameBytes(moduleNameBytes: Array<UInt8>): Unit {
+    var index: Int64 = 0
+    while (index < moduleNameBytes.size) {
+        let byte = moduleNameBytes[index]
+        if (byte == 0u8) {
+            return
+        }
+        if (isPathSeparator(byte) || byte == 0x3Au8) {
+            throw Exception("system module loads require a bare DLL name")
+        }
+        index += 1
+    }
+}
+
+func isPathLikeModuleName(moduleName: String): Bool {
+    let bytes = moduleName.toArray()
+    for (byte in bytes) {
+        if (isPathSeparator(byte) || byte == 0x3Au8) {
+            return true
+        }
+    }
+    false
+}
+
+func isAbsoluteModulePath(moduleName: String): Bool {
+    let bytes = moduleName.toArray()
+    if (bytes.size >= 3 && bytes[1] == 0x3Au8 && isPathSeparator(bytes[2])) {
+        return true
+    }
+    if (bytes.size >= 2 && isPathSeparator(bytes[0]) && isPathSeparator(bytes[1])) {
+        return true
+    }
+    false
+}
+
+func isPathSeparator(value: UInt8): Bool {
+    value == 0x5Cu8 || value == 0x2Fu8
 }
 
 func nullTerminatedUtf8(value: String): Array<UInt8> {

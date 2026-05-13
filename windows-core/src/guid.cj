@@ -1,7 +1,38 @@
 package windows_core
 
+import windows_libloading as windows_libloading
 import windows_interface.GUID as RawGUID
 public import windows_interface.{GUID, GUID_ZERO, UInt128}
+
+let UUID_CREATE_LOCAL_ONLY_STATUS: Int32 = 1824i32
+
+func uuidCreateProc(): CPointer<Unit> {
+    windows_libloading.resolveProc("rpcrt4.dll", "UuidCreate")
+}
+
+func uuidCreateStatusSucceeded(status: Int32): Bool {
+    status == 0i32 || status == UUID_CREATE_LOCAL_ONLY_STATUS
+}
+
+func createGuidOrThrow(): RawGUID {
+    var guid = RawGUID.zeroed()
+    let uuidCreate = CFunc<(CPointer<RawGUID>) -> Int32>(uuidCreateProc())
+    let status = unsafe { uuidCreate(CPointer<RawGUID>(inout guid)) }
+    if (uuidCreateStatusSucceeded(status)) {
+        return guid
+    }
+    throw Exception("UuidCreate failed with status ${status}")
+}
+
+func createGuidResult(): Result<RawGUID> {
+    var guid = RawGUID.zeroed()
+    let uuidCreate = CFunc<(CPointer<RawGUID>) -> Int32>(uuidCreateProc())
+    let status = unsafe { uuidCreate(CPointer<RawGUID>(inout guid)) }
+    if (uuidCreateStatusSucceeded(status)) {
+        return Result<RawGUID>.Ok(guid)
+    }
+    Result<RawGUID>.Err(WinError.fromWin32(UInt32(status)))
+}
 
 public struct GuidValue {
     public var raw: RawGUID = RawGUID()
@@ -57,11 +88,11 @@ public struct GuidValue {
     }
 
     public static func generate(): GuidValue {
-        GuidValue(RawGUID.generate())
+        GuidValue(createGuidOrThrow())
     }
 
     public static func new(): Result<GuidValue> {
-        match (RawGUID.new()) {
+        match (createGuidResult()) {
             case Result<RawGUID>.Ok(value) => Result<GuidValue>.Ok(GuidValue(value))
             case Result<RawGUID>.Err(error) => Result<GuidValue>.Err(error)
         }

@@ -1,5 +1,6 @@
 package windows_result
 
+import windows_libloading as windows_libloading
 import std.convert.*
 
 let NTDLL_MODULE_NAME: Array<UInt8> = [
@@ -163,24 +164,26 @@ public struct HRESULT <: ToString & Hashable & Comparable<HRESULT> {
         let code = int32ToUInt32(value)
         if ((code & FACILITY_NT_BIT) != 0u32) {
             let ntStatusCode = code ^ FACILITY_NT_BIT
-            let module = unsafe {
-                let handle = acquireArrayRawData(NTDLL_MODULE_NAME)
-                try {
-                    LoadLibraryExA(handle.pointer, IntPtr(), LOAD_LIBRARY_SEARCH_DEFAULT_DIRS)
-                } finally {
-                    releaseArrayRawData(handle)
-                }
+            var module = IntPtr()
+            try {
+                module = windows_libloading.loadSystemLibraryUncached(NTDLL_MODULE_NAME)
+            } catch (_: Exception) {
+                module = IntPtr()
             }
             if (module.isNotNull()) {
-                if (let Some(msg) <- formatWindowsMessage(
-                    ntStatusCode,
-                    FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                        FORMAT_MESSAGE_FROM_HMODULE |
-                        FORMAT_MESSAGE_FROM_SYSTEM |
-                        FORMAT_MESSAGE_IGNORE_INSERTS,
-                    source: module
-                )) {
-                    return msg
+                try {
+                    if (let Some(msg) <- formatWindowsMessage(
+                        ntStatusCode,
+                        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+                            FORMAT_MESSAGE_FROM_HMODULE |
+                            FORMAT_MESSAGE_FROM_SYSTEM |
+                            FORMAT_MESSAGE_IGNORE_INSERTS,
+                        source: module
+                    )) {
+                        return msg
+                    }
+                } finally {
+                    windows_libloading.freeLibrary(module)
                 }
             }
             return ""

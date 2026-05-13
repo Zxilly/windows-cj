@@ -176,8 +176,8 @@ struct ErrorInfo {
         match (ptr) {
             case Some(info) =>
                 if (HRESULT(setErrorInfoAbi(0u32, CPointer<Unit>(info.asRaw()))).failed()) {
-                    // SetErrorInfo 失败：SetErrorInfo 未接管引用计数，需手动释放。
-                    // 调用 close() 而非 comReleaseRaw，避免 GC 析构器再次 Release（double free）。
+                    // SetErrorInfo failed, so it did not take over the reference count.
+                    // Close the wrapper instead of calling comReleaseRaw so the finalizer cannot release twice.
                     info.close()
                 }
             case None =>
@@ -413,16 +413,6 @@ public open class WindowsException <: Exception {
         super(Error.fromHRESULT(hr).toString())
         this.error = Error.fromHRESULT(hr)
         this.hr = hr
-    }
-}
-
-class ComException <: WindowsException {
-    public init(error: Error) {
-        super(error)
-    }
-
-    public init(hr: HRESULT) {
-        super(hr)
     }
 }
 

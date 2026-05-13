@@ -24,8 +24,8 @@ public interface CopyType {
     }
 }
 
-// 仓颉只支持顶层类型别名，无法用一元别名表达关联类型映射。
-// 因此 Type<TProjected, TAbi, TDefault> 本身就是 ABI/Default 的权威来源。
+// Cangjie only supports top-level type aliases, so a unary alias cannot model an associated type.
+// Type<TProjected, TAbi, TDefault> is therefore the source of truth for ABI/default mapping.
 public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
     static func typeKind(): TypeKind
 

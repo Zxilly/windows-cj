@@ -19,6 +19,25 @@ func allocateUnitPointerSlots(length: Int64): CPointer<CPointer<Unit>> {
     CPointer<CPointer<Unit>>(raw)
 }
 
+func releasePublishedObjectSlots<T>(
+    values: Array<T>,
+    slots: CPointer<CPointer<Unit>>,
+    count: Int64
+): Unit {
+    var index = 0
+    while (index < count) {
+        let raw = unsafe { (slots + index).read() }
+        match (values[index]) {
+            case _: HString =>
+                releaseSystemHStringHandle(raw)
+            case _: ComInterface =>
+                interfaceHandleReleaseRaw(raw)
+            case _ => ()
+        }
+        index += 1
+    }
+}
+
 func publishCopyArray<T>(
     staged: AbiArray<T>,
     dataTarget: CPointer<CPointer<T>>,
@@ -49,20 +68,26 @@ func publishObjectArray<T>(
 
         let slots = allocateUnitPointerSlots(values.size)
         var index = 0
-        while (index < values.size) {
-            match (values[index]) {
-                case value: HString =>
-                    unsafe { (slots + index).write(value.intoRaw()) }
-                case value: ComInterface =>
-                    let raw = value.asRaw()
-                    if (raw.isNotNull()) {
-                        interfaceHandleAddRefRaw(raw)
+        try {
+            while (index < values.size) {
+                match (values[index]) {
+                    case value: HString =>
+                        unsafe { (slots + index).write(value.toSystemHandleCopy()) }
+                    case value: ComInterface =>
+                        let raw = value.asRaw()
+                        if (raw.isNotNull()) {
+                            interfaceHandleAddRefRaw(raw)
+                        }
+                        unsafe { (slots + index).write(raw) }
+                    case _ =>
+                        throw Exception("ArrayProxy object marshaller only supports HString and COM interface elements")
                     }
-                    unsafe { (slots + index).write(raw) }
-                case _ =>
-                    throw Exception("ArrayProxy object marshaller only supports HString and COM interface elements")
+                index += 1
             }
-            index += 1
+        } catch (error: Exception) {
+            releasePublishedObjectSlots(values, slots, index)
+            unsafe { CoTaskMemFree(CPointer<Unit>(slots)) }
+            throw error
         }
         unsafe { dataTarget.write(CPointer<Unit>(slots)) }
     }

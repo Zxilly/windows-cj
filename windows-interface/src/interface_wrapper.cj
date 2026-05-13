@@ -1,14 +1,9 @@
 package windows_interface
 
 import std.sync.Mutex
-import windows_libloading as windows_libloading
 import windows_result.*
 import windows_result.Error as WinResultError
 import windows_strings.*
-
-var cachedWindowsGetStringRawBufferProc: CPointer<Unit> = CPointer<Unit>()
-var cachedWindowsDeleteStringProc: CPointer<Unit> = CPointer<Unit>()
-var cachedRoGetActivationFactoryProc: CPointer<Unit> = CPointer<Unit>()
 
 class OwnedHandleState {
     private let mutex = Mutex()
@@ -447,11 +442,7 @@ public open class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeN
             return HString()
         }
 
-        var length = 0u32
-        let buffer = windowsGetStringRawBufferAbi(rawValue, CPointer<UInt32>(inout length))
-        let copied = copyWideUnits(buffer, length)
-        windowsDeleteStringAbi(rawValue)
-        HString.fromWide(copied, length: Int64(length))
+        HString.fromSystemHandleTake(rawValue)
     }
 
     public unsafe func getTrustLevel(value: CPointer<Int32>): HRESULT {
@@ -791,105 +782,4 @@ public unsafe func queryInterfaceAs<T>(source: CPointer<Unit>, descriptor: Inter
 
 public unsafe func queryInterfaceAs<T>(source: ComInterface, descriptor: InterfaceDescriptor<T>): Option<T> {
     queryInterfaceAs(source.asRaw(), descriptor)
-}
-
-func copyWideUnits(ptr: CPointer<UInt16>, length: UInt32): Array<UInt16> {
-    if (ptr.isNull() || length == 0u32) {
-        return Array<UInt16>(0, { _ => 0u16 })
-    }
-    Array<UInt16>(Int64(length), { index =>
-        unsafe { (ptr + index).read() }
-    })
-}
-
-func resolveCombaseProc(name: String): CPointer<Unit> {
-    windows_libloading.resolveProc("combase.dll", name)
-}
-
-func windowsGetStringRawBufferProc(): CPointer<Unit> {
-    if (cachedWindowsGetStringRawBufferProc.isNotNull()) {
-        return cachedWindowsGetStringRawBufferProc
-    }
-    let proc = resolveCombaseProc("WindowsGetStringRawBuffer")
-    cachedWindowsGetStringRawBufferProc = proc
-    proc
-}
-
-func windowsDeleteStringProc(): CPointer<Unit> {
-    if (cachedWindowsDeleteStringProc.isNotNull()) {
-        return cachedWindowsDeleteStringProc
-    }
-    let proc = resolveCombaseProc("WindowsDeleteString")
-    cachedWindowsDeleteStringProc = proc
-    proc
-}
-
-func roGetActivationFactoryProc(): CPointer<Unit> {
-    if (cachedRoGetActivationFactoryProc.isNotNull()) {
-        return cachedRoGetActivationFactoryProc
-    }
-    let proc = resolveCombaseProc("RoGetActivationFactory")
-    cachedRoGetActivationFactoryProc = proc
-    proc
-}
-
-func windowsGetStringRawBufferAbi(handle: CPointer<Unit>, length: CPointer<UInt32>): CPointer<UInt16> {
-    let proc = windowsGetStringRawBufferProc()
-    let funcPtr = CFunc<(CPointer<Unit>, CPointer<UInt32>) -> CPointer<UInt16>>(proc)
-    unsafe {
-        funcPtr(handle, length)
-    }
-}
-
-func windowsDeleteStringAbi(handle: CPointer<Unit>): Unit {
-    if (handle.isNull()) {
-        return
-    }
-    let proc = windowsDeleteStringProc()
-    let funcPtr = CFunc<(CPointer<Unit>) -> Int32>(proc)
-    unsafe {
-        funcPtr(handle)
-    }
-}
-
-public func getActivationFactoryByName<T>(
-    runtimeName: String,
-    descriptor: InterfaceDescriptor<T>
-): Result<T> where T <: ComInterface {
-    let classId = HString(runtimeName)
-    try {
-        getActivationFactory(classId, descriptor)
-    } finally {
-        classId.close()
-    }
-}
-
-public func getActivationFactory<T>(
-    classId: HString,
-    descriptor: InterfaceDescriptor<T>
-): Result<T> where T <: ComInterface {
-    let proc = roGetActivationFactoryProc()
-    if (proc.isNull()) {
-        return Result<T>.Err(WinResultError.fromHRESULT(E_NOINTERFACE))
-    }
-
-    var iid = descriptor.iid
-    var raw = CPointer<Unit>()
-    let call = CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(proc)
-    let hr = unsafe {
-        HRESULT(
-            call(
-                classId.asRaw(),
-                CPointer<GUID>(inout iid),
-                CPointer<CPointer<Unit>>(inout raw)
-            )
-        )
-    }
-    if (hr.failed()) {
-        return Result<T>.Err(WinResultError.fromHRESULT(hr))
-    }
-    if (raw.isNull()) {
-        return Result<T>.Err(WinResultError.fromHRESULT(E_POINTER))
-    }
-    Result<T>.Ok(descriptor.takeFromAbi(raw))
 }

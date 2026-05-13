@@ -34,6 +34,55 @@ func directBaseIidFromDescriptor<I>(descriptor: InterfaceDescriptor<I>): Option<
     descriptor.baseIid
 }
 
+func appendUniqueGuid(values: ArrayList<GUID>, candidate: GUID): Unit {
+    if (!containsGuid(values, candidate)) {
+        values.add(candidate)
+    }
+}
+
+func appendDirectSchemaBaseIids(values: ArrayList<GUID>, schema: InterfaceDescriptorSchema): Unit {
+    match (schema.directBaseSchema) {
+        case Some(baseSchema) =>
+            appendUniqueGuid(values, baseSchema.iid)
+            appendDirectSchemaBaseIids(values, baseSchema)
+        case None =>
+            for (ancestor in schema.ancestorIids) {
+                appendUniqueGuid(values, ancestor)
+            }
+    }
+}
+
+func directVtableAncestorIidsFromSchema(schema: InterfaceDescriptorSchema): Array<GUID> {
+    let values = ArrayList<GUID>()
+    appendDirectSchemaBaseIids(values, schema)
+    values.toArray()
+}
+
+func appendDescriptorBaseIids(values: ArrayList<GUID>, descriptor: InterfaceDescriptorBase): Unit {
+    appendUniqueGuid(values, descriptor.descriptorIid())
+    match (descriptor.descriptorDirectBase()) {
+        case Some(baseDescriptor) =>
+            appendDescriptorBaseIids(values, baseDescriptor)
+        case None =>
+            for (ancestor in descriptor.descriptorAncestorIids()) {
+                appendUniqueGuid(values, ancestor)
+            }
+    }
+}
+
+func directVtableAncestorIidsFromDescriptor<I>(descriptor: InterfaceDescriptor<I>): Array<GUID> {
+    let values = ArrayList<GUID>()
+    match (descriptor.descriptorDirectBase()) {
+        case Some(baseDescriptor) =>
+            appendDescriptorBaseIids(values, baseDescriptor)
+        case None =>
+            for (ancestor in descriptor.ancestorIids) {
+                appendUniqueGuid(values, ancestor)
+            }
+    }
+    values.toArray()
+}
+
 func isComDescriptor(iid: GUID, ancestorIids: Array<GUID>): Bool {
     iid == IID_IUNKNOWN ||
         iid == IID_IINSPECTABLE ||
@@ -253,6 +302,7 @@ public struct ResolvedDescriptor {
     public let directBaseIid: Option<GUID>
     public let ancestorInterfaceNames: Array<String>
     public let ancestorIids: Array<GUID>
+    public let vtableAncestorIids: Array<GUID>
     public let slotIndex: Int64
     public let abiPrefixSlotCount: Int64
     public let isComInterface: Bool
@@ -270,6 +320,7 @@ public struct ResolvedDescriptor {
         directBaseIid: Option<GUID>,
         ancestorInterfaceNames: Array<String>,
         ancestorIids: Array<GUID>,
+        vtableAncestorIids: Array<GUID>,
         slotIndex: Int64,
         abiPrefixSlotCount: Int64,
         isComInterface: Bool,
@@ -286,6 +337,7 @@ public struct ResolvedDescriptor {
         this.directBaseIid = directBaseIid
         this.ancestorInterfaceNames = ancestorInterfaceNames
         this.ancestorIids = ancestorIids
+        this.vtableAncestorIids = vtableAncestorIids
         this.slotIndex = slotIndex
         this.abiPrefixSlotCount = abiPrefixSlotCount
         this.isComInterface = isComInterface
@@ -305,6 +357,7 @@ public struct ResolvedDescriptor {
             directBaseIid,
             ancestorInterfaceNames,
             ancestorIids,
+            vtableAncestorIids,
             slotIndex,
             abiPrefixSlotCount,
             isComInterface,
@@ -373,6 +426,7 @@ func resolveSchemaCore(schema: InterfaceDescriptorSchema): ResolvedDescriptor {
         schema.baseIid,
         schema.ancestorInterfaceNames,
         schema.ancestorIids,
+        directVtableAncestorIidsFromSchema(schema),
         0,
         abiPrefixSlotCount,
         isComDescriptor(schema.iid, schema.ancestorIids),
@@ -403,6 +457,7 @@ func resolveDescriptorCore<I>(descriptor: InterfaceDescriptor<I>): ResolvedDescr
         directBaseIidFromDescriptor(descriptor),
         emptyStrings(),
         descriptor.ancestorIids,
+        directVtableAncestorIidsFromDescriptor(descriptor),
         0,
         abiPrefixSlotCount,
         isComDescriptor(descriptor.iid, descriptor.ancestorIids),
@@ -419,31 +474,91 @@ func resolvedDescriptorKey(value: ResolvedDescriptor): String {
     value.iid.toString()
 }
 
-func findDirectChildIndex(values: Array<ResolvedDescriptor>, parentIid: GUID): Int64 {
+func findResolvedDescriptorIndexByIid(values: Array<ResolvedDescriptor>, candidate: GUID): Option<Int64> {
     var index: Int64 = 0
     while (index < values.size) {
-        match (values[index].directBaseIid) {
-            case Some(baseIid) =>
-                if (baseIid == parentIid) {
-                    return index
-                }
-            case None => ()
+        if (values[index].iid == candidate) {
+            return Some(index)
         }
         index += 1
     }
-    -1
+    None
 }
 
-func findChainLeafIndex(values: Array<ResolvedDescriptor>, startIndex: Int64): Int64 {
-    var currentIndex = startIndex
-    while (true) {
-        let childIndex = findDirectChildIndex(values, values[currentIndex].iid)
-        if (childIndex < 0) {
-            return currentIndex
-        }
-        currentIndex = childIndex
+func appendEffectiveVtableAncestors(
+    values: Array<ResolvedDescriptor>,
+    descriptorIndex: Int64,
+    result: ArrayList<GUID>,
+    visiting: ArrayList<GUID>
+): Unit {
+    let descriptor = values[descriptorIndex]
+    if (containsGuid(visiting, descriptor.iid)) {
+        return
     }
-    return currentIndex
+    visiting.add(descriptor.iid)
+
+    for (ancestor in descriptor.vtableAncestorIids) {
+        appendUniqueGuid(result, ancestor)
+        match (findResolvedDescriptorIndexByIid(values, ancestor)) {
+            case Some(ancestorIndex) =>
+                appendEffectiveVtableAncestors(values, ancestorIndex, result, visiting)
+            case None => ()
+        }
+    }
+}
+
+func effectiveVtableAncestorIids(values: Array<ResolvedDescriptor>, descriptorIndex: Int64): Array<GUID> {
+    let result = ArrayList<GUID>()
+    appendEffectiveVtableAncestors(values, descriptorIndex, result, ArrayList<GUID>())
+    result.toArray()
+}
+
+func resolvedDescriptorVtableAncestorDepth(values: Array<ResolvedDescriptor>, descriptorIndex: Int64): Int64 {
+    effectiveVtableAncestorIids(values, descriptorIndex).size
+}
+
+func descriptorContainsVtableAncestor(
+    values: Array<ResolvedDescriptor>,
+    descriptorIndex: Int64,
+    ancestorIid: GUID
+): Bool {
+    for (candidate in effectiveVtableAncestorIids(values, descriptorIndex)) {
+        if (candidate == ancestorIid) {
+            return true
+        }
+    }
+    false
+}
+
+func resolvedDescriptorIsComInterface(values: Array<ResolvedDescriptor>, descriptorIndex: Int64): Bool {
+    let descriptor = values[descriptorIndex]
+    if (descriptor.isComInterface) {
+        return true
+    }
+    for (ancestor in effectiveVtableAncestorIids(values, descriptorIndex)) {
+        if (ancestor == IID_IUNKNOWN || ancestor == IID_IINSPECTABLE) {
+            return true
+        }
+    }
+    false
+}
+
+func findDeepestDescendantIndex(values: Array<ResolvedDescriptor>, parentIndex: Int64): Int64 {
+    let parent = values[parentIndex]
+    var deepestIndex = parentIndex
+    var deepestDepth = resolvedDescriptorVtableAncestorDepth(values, parentIndex)
+    var index: Int64 = 0
+    while (index < values.size) {
+        if (resolvedDescriptorIsComInterface(values, index) && descriptorContainsVtableAncestor(values, index, parent.iid)) {
+            let candidateDepth = resolvedDescriptorVtableAncestorDepth(values, index)
+            if (candidateDepth > deepestDepth) {
+                deepestIndex = index
+                deepestDepth = candidateDepth
+            }
+        }
+        index += 1
+    }
+    deepestIndex
 }
 
 func assignSlotIndices(values: Array<ResolvedDescriptor>): Array<ResolvedDescriptor> {
@@ -461,6 +576,7 @@ func assignSlotIndices(values: Array<ResolvedDescriptor>): Array<ResolvedDescrip
             None,
             emptyStrings(),
             emptyGuids(),
+            emptyGuids(),
             0,
             0,
             false,
@@ -476,13 +592,13 @@ func assignSlotIndices(values: Array<ResolvedDescriptor>): Array<ResolvedDescrip
     var index: Int64 = 0
     while (index < values.size) {
         let value = values[index]
-        if (!value.isComInterface || value.iid == IID_IUNKNOWN || value.iid == IID_IINSPECTABLE) {
+        if (!resolvedDescriptorIsComInterface(values, index) || value.iid == IID_IUNKNOWN || value.iid == IID_IINSPECTABLE) {
             result[index] = value.withSlotIndex(0)
             index += 1
             continue
         }
 
-        let leafIndex = findChainLeafIndex(values, index)
+        let leafIndex = findDeepestDescendantIndex(values, index)
         let chainKey = resolvedDescriptorKey(values[leafIndex])
         let slotIndex = if (chainSlots.contains(chainKey)) {
             chainSlots[chainKey]
@@ -536,6 +652,7 @@ public func resolveSupportedIids(supportedIids: Array<GUID>): Array<ResolvedDesc
                 None,
                 None,
                 emptyStrings(),
+                emptyGuids(),
                 emptyGuids(),
                 slotIndex,
                 if (iid == IID_IUNKNOWN) {
@@ -625,7 +742,7 @@ func toGuidArray(values: ArrayList<GUID>): Array<GUID> {
 
 func toResolvedDescriptorArray(values: ArrayList<ResolvedDescriptor>): Array<ResolvedDescriptor> {
     var result = Array<ResolvedDescriptor>(values.size, { _ =>
-        ResolvedDescriptor("", GUID_ZERO, None, None, emptyStrings(), emptyGuids(), 0, 0, false, None, "", "", None, "", emptyMethodSchemas())
+        ResolvedDescriptor("", GUID_ZERO, None, None, emptyStrings(), emptyGuids(), emptyGuids(), 0, 0, false, None, "", "", None, "", emptyMethodSchemas())
     })
     var index: Int64 = 0
     for (value in values) {

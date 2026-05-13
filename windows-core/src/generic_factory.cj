@@ -23,16 +23,16 @@ public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
         super(raw)
     }
 
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        super(raw, takeOwnership: takeOwnership)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
     }
 
     public static func fromAbiTake(raw: CPointer<Unit>): IGenericFactory {
-        IGenericFactory(raw, takeOwnership: true)
+        IGenericFactory(raw, takeOwnership: true, allowManualRelease: false)
     }
 
     public static func viewOf(raw: CPointer<Unit>): IGenericFactory {
-        IGenericFactory(raw)
+        IGenericFactory(raw, takeOwnership: false, allowManualRelease: false)
     }
 
     public static func iid(): GUID {

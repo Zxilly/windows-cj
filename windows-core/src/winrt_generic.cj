@@ -92,10 +92,49 @@ class HandleWinrtInputBorrow <: WinrtInputBorrow {
     }
 }
 
+class SystemHStringWinrtInputBorrow <: WinrtInputBorrow {
+    private var raw: CPointer<Unit> = CPointer<Unit>()
+    private var closed: Bool = false
+
+    public init(value: HString) {
+        raw = value.toSystemHandleCopy()
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let handle = raw
+        raw = CPointer<Unit>()
+        closed = true
+        releaseSystemHStringHandle(handle)
+    }
+}
+
+func borrowedWinrtInputHandle<T>(value: T): WinrtInputBorrow where T <: HandleWinrtType<T> {
+    match (value) {
+        case hstring: HString =>
+            SystemHStringWinrtInputBorrow(hstring)
+        case _ =>
+            HandleWinrtInputBorrow(T.intoWinrtHandle(value))
+    }
+}
+
 func ownedWinrtOutHandle<T>(value: T): CPointer<Unit> where T <: HandleWinrtType<T> {
     match (value) {
         case hstring: HString =>
-            hstring.clone().intoRaw()
+            hstring.toSystemHandleCopy()
         case wrapper: InterfaceWrapperBase =>
             wrapper.retainRaw()
         case _ =>
@@ -559,7 +598,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     public override func borrowInput(
         value: T
     ): WinrtInputBorrow {
-        HandleWinrtInputBorrow(T.intoWinrtHandle(value))
+        borrowedWinrtInputHandle<T>(value)
     }
 
     public override func projectInput(

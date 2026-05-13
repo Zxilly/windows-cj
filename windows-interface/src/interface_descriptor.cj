@@ -28,9 +28,8 @@ func expandedAncestorIids(baseDescriptor: InterfaceDescriptorBase): Array<GUID> 
 
 // Same as expandedAncestorIids but appends a list of "extra" ancestor IIDs
 // after the base chain. Used by WinRT interfaces whose required interfaces
-// are reached via QueryInterface (not inlined into the vtbl): the direct
-// base remains IInspectable, but the required interface IIDs still need to
-// participate in QI matching.
+// are not inlined into the vtbl: the direct base remains IInspectable, while
+// the required interface IIDs remain available as descriptor metadata.
 func expandedAncestorIidsWithExtras(
     baseDescriptor: InterfaceDescriptorBase,
     extraAncestorIids: Array<GUID>
@@ -284,9 +283,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
 
     // Variant used by WinRT interface descriptors: the direct base is always
     // IInspectable so own-method slot counting via descriptorOwnMethodCount
-    // remains correct, but the required-interface IIDs still need to take
-    // part in QI matching. extraAncestorIids carries those IIDs and is
-    // appended after the IInspectable chain expansion.
+    // remains correct, while extraAncestorIids keeps required-interface
+    // metadata separate from the direct vtbl chain.
     public init(
         name: String,
         iid: GUID,

@@ -1,6 +1,7 @@
 package windows_core
 
 import windows_interface
+import windows_libloading as windows_libloading
 import std.sync.*
 
 let DLL_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
@@ -8,100 +9,14 @@ let DLL_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
     0x74u8, 0x69u8, 0x76u8, 0x61u8, 0x74u8, 0x69u8, 0x6Fu8, 0x6Eu8,
     0x46u8, 0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0u8
 ]
-let COMBASE_DLL_NAME: Array<UInt8> = [
-    0x63u8, 0x6Fu8, 0x6Du8, 0x62u8, 0x61u8, 0x73u8, 0x65u8, 0x2Eu8,
-    0x64u8, 0x6Cu8, 0x6Cu8, 0u8
-]
 let DLL_SUFFIX: Array<UInt8> = [0x2Eu8, 0x64u8, 0x6Cu8, 0x6Cu8, 0u8]
-let LOAD_LIBRARY_SEARCH_DEFAULT_DIRS: UInt32 = 0x00001000u32
-let RO_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
-    0x52u8, 0x6Fu8, 0x47u8, 0x65u8, 0x74u8, 0x41u8, 0x63u8, 0x74u8,
-    0x69u8, 0x76u8, 0x61u8, 0x74u8, 0x69u8, 0x6Fu8, 0x6Eu8, 0x46u8,
-    0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0u8
-]
-let CO_INCREMENT_MTA_USAGE_PROC_NAME: Array<UInt8> = [
-    0x43u8, 0x6Fu8, 0x49u8, 0x6Eu8, 0x63u8, 0x72u8, 0x65u8, 0x6Du8,
-    0x65u8, 0x6Eu8, 0x74u8, 0x4Du8, 0x54u8, 0x41u8, 0x55u8, 0x73u8,
-    0x61u8, 0x67u8, 0x65u8, 0u8
-]
-
-var cachedCombaseModule: CPointer<Unit> = CPointer<Unit>()
-var cachedRoGetActivationFactoryProc: CPointer<Unit> = CPointer<Unit>()
-var cachedCoIncrementMTAUsageProc: CPointer<Unit> = CPointer<Unit>()
-let combaseInitMutex = Mutex()
-
-func combaseModule(): CPointer<Unit> {
-    // Double-checked: race between two threads must not call LoadLibraryExA twice
-    // and stash conflicting handles into the global slot.
-    if (cachedCombaseModule.isNotNull()) {
-        return cachedCombaseModule
-    }
-    synchronized(combaseInitMutex) {
-        if (cachedCombaseModule.isNotNull()) {
-            return cachedCombaseModule
-        }
-        unsafe {
-            let libraryHandle = acquireArrayRawData(COMBASE_DLL_NAME)
-            try {
-                let module = LoadLibraryExA(
-                    libraryHandle.pointer,
-                    CPointer<Unit>(),
-                    LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
-                )
-                if (module.isNull()) {
-                    throw Exception("failed to load combase.dll")
-                }
-                cachedCombaseModule = module
-                return module
-            } finally {
-                releaseArrayRawData(libraryHandle)
-            }
-        }
-    }
-}
-
-func resolveCombaseProc(name: Array<UInt8>): CPointer<Unit> {
-    let module = combaseModule()
-    unsafe {
-        let procHandle = acquireArrayRawData(name)
-        try {
-            let proc = GetProcAddress(module, procHandle.pointer)
-            if (proc.isNull()) {
-                throw Exception("failed to resolve combase proc")
-            }
-            proc
-        } finally {
-            releaseArrayRawData(procHandle)
-        }
-    }
-}
 
 func roGetActivationFactoryProc(): CPointer<Unit> {
-    if (cachedRoGetActivationFactoryProc.isNotNull()) {
-        return cachedRoGetActivationFactoryProc
-    }
-    synchronized(combaseInitMutex) {
-        if (cachedRoGetActivationFactoryProc.isNotNull()) {
-            return cachedRoGetActivationFactoryProc
-        }
-        let proc = resolveCombaseProc(RO_GET_ACTIVATION_FACTORY_PROC_NAME)
-        cachedRoGetActivationFactoryProc = proc
-        return proc
-    }
+    windows_libloading.resolveProc("combase.dll", "RoGetActivationFactory")
 }
 
 func coIncrementMTAUsageProc(): CPointer<Unit> {
-    if (cachedCoIncrementMTAUsageProc.isNotNull()) {
-        return cachedCoIncrementMTAUsageProc
-    }
-    synchronized(combaseInitMutex) {
-        if (cachedCoIncrementMTAUsageProc.isNotNull()) {
-            return cachedCoIncrementMTAUsageProc
-        }
-        let proc = resolveCombaseProc(CO_INCREMENT_MTA_USAGE_PROC_NAME)
-        cachedCoIncrementMTAUsageProc = proc
-        return proc
-    }
+    windows_libloading.resolveProc("combase.dll", "CoIncrementMTAUsage")
 }
 
 func callRoGetActivationFactory(
@@ -114,6 +29,18 @@ func callRoGetActivationFactory(
     unsafe {
         funcPtr(activatableClassId, iid, factory)
     }
+}
+
+func callRoGetActivationFactoryWithClassId(
+    classId: HString,
+    iid: CPointer<GUID>,
+    factory: CPointer<CPointer<Unit>>
+): Int32 {
+    var result = E_POINTER.value
+    try (borrow = winrtBorrowGenericIn<HString>(classId)) {
+        result = callRoGetActivationFactory(borrow.asRaw(), iid, factory)
+    }
+    result
 }
 
 func callCoIncrementMTAUsage(cookie: CPointer<CPointer<Unit>>): Int32 {
@@ -155,8 +82,8 @@ func loadSystemActivationFactory<I>(
         var raw = CPointer<Unit>()
         var hr = unsafe {
             HRESULT(
-                callRoGetActivationFactory(
-                    classId.asRaw(),
+                callRoGetActivationFactoryWithClassId(
+                    classId,
                     CPointer<GUID>(inout iid),
                     CPointer<CPointer<Unit>>(inout raw)
                 )
@@ -170,8 +97,8 @@ func loadSystemActivationFactory<I>(
             raw = CPointer<Unit>()
             hr = unsafe {
                 HRESULT(
-                    callRoGetActivationFactory(
-                        classId.asRaw(),
+                    callRoGetActivationFactoryWithClassId(
+                        classId,
                         CPointer<GUID>(inout iid),
                         CPointer<CPointer<Unit>>(inout raw)
                     )
@@ -220,59 +147,62 @@ func makeDllName(runtimeNameBytes: Array<UInt8>, prefixLength: Int64): Array<UIn
     })
 }
 
+func callDllGetActivationFactory(
+    getActivationFactory: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
+    classId: HString,
+    factory: CPointer<CPointer<Unit>>
+): Int32 {
+    var result = E_POINTER.value
+    try (borrow = winrtBorrowGenericIn<HString>(classId)) {
+        result = unsafe { getActivationFactory(borrow.asRaw(), factory) }
+    }
+    result
+}
+
 func loadRegFreeFactoryFromDll<I>(
     runtimeName: String,
     libraryName: Array<UInt8>,
     descriptor: InterfaceDescriptor<I>
 ): Result<I> where I <: ComInterface {
-    unsafe {
-        let libraryHandle = acquireArrayRawData(libraryName)
-        try {
-            let module = LoadLibraryExA(
-                libraryHandle.pointer,
-                CPointer<Unit>(),
-                LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
+    var module = CPointer<Unit>()
+    try {
+        module = windows_libloading.loadLibraryUncached(libraryName)
+    } catch (_: Exception) {
+        return Result<I>.Err(WinError(E_NOINTERFACE))
+    }
+
+    var address = CPointer<Unit>()
+    try {
+        address = windows_libloading.resolveProcUncached(module, DLL_GET_ACTIVATION_FACTORY_PROC_NAME)
+    } catch (_: Exception) {
+        windows_libloading.freeLibrary(module)
+        return Result<I>.Err(WinError(E_NOINTERFACE))
+    }
+
+    let classId = HString(runtimeName)
+    try {
+        let getActivationFactory = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(address)
+        var rawFactory = CPointer<Unit>()
+        let hr = unsafe {
+            HRESULT(
+                callDllGetActivationFactory(
+                    getActivationFactory,
+                    classId,
+                    CPointer<CPointer<Unit>>(inout rawFactory)
+                )
             )
-            if (module.isNull()) {
-                return Result<I>.Err(WinError(E_NOINTERFACE))
-            }
-
-            let procHandle = acquireArrayRawData(DLL_GET_ACTIVATION_FACTORY_PROC_NAME)
-            try {
-                let address = GetProcAddress(module, procHandle.pointer)
-                if (address.isNull()) {
-                    FreeLibrary(module)
-                    return Result<I>.Err(WinError(E_NOINTERFACE))
-                }
-
-                let classId = HString(runtimeName)
-                try {
-                    let getActivationFactory = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(address)
-                    var rawFactory = CPointer<Unit>()
-                    let hr = HRESULT(
-                        getActivationFactory(
-                            classId.asRaw(),
-                            CPointer<CPointer<Unit>>(inout rawFactory)
-                        )
-                    )
-                    if (hr.failed() || rawFactory.isNull()) {
-                        FreeLibrary(module)
-                        if (hr.failed()) {
-                            return Result<I>.Err(WinError.fromHRESULT(hr))
-                        }
-                        return Result<I>.Err(WinError(E_POINTER))
-                    }
-
-                    queryFactoryInterface(rawFactory, descriptor)
-                } finally {
-                    classId.close()
-                }
-            } finally {
-                releaseArrayRawData(procHandle)
-            }
-        } finally {
-            releaseArrayRawData(libraryHandle)
         }
+        if (hr.failed() || rawFactory.isNull()) {
+            windows_libloading.freeLibrary(module)
+            if (hr.failed()) {
+                return Result<I>.Err(WinError.fromHRESULT(hr))
+            }
+            return Result<I>.Err(WinError(E_POINTER))
+        }
+
+        queryFactoryInterface(rawFactory, descriptor)
+    } finally {
+        classId.close()
     }
 }
 

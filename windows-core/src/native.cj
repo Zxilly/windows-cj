@@ -1,10 +1,17 @@
 package windows_core
 
+import windows_interface as windows_interface
+import windows_implement as windows_implement
 import windows_libloading as windows_libloading
 
 func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
     let proc = CFunc<(UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("ole32.dll", "CoTaskMemAlloc"))
     unsafe { proc(cb) }
+}
+
+func CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
+    let proc = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("ole32.dll", "CoTaskMemRealloc"))
+    unsafe { proc(pv, cb) }
 }
 
 func CoTaskMemFree(pv: CPointer<Unit>): Unit {
@@ -29,31 +36,9 @@ func EncodePointer(ptr: CPointer<Unit>): CPointer<Unit> {
     unsafe { proc(ptr) }
 }
 
-func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> CPointer<Unit>>(
-        windows_libloading.resolveProc("kernel32.dll", "GetProcAddress")
-    )
-    unsafe { proc(hModule, lpProcName) }
-}
-
-func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: CPointer<Unit>, dwFlags: UInt32): CPointer<Unit> {
-    let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, UInt32) -> CPointer<Unit>>(
-        windows_libloading.resolveProc("kernel32.dll", "LoadLibraryExA")
-    )
-    unsafe { proc(lpLibFileName, hFile, dwFlags) }
-}
-
-func FreeLibrary(hLibModule: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("kernel32.dll", "FreeLibrary"))
-    unsafe { proc(hLibModule) }
-}
-
 func CoCreateFreeThreadedMarshaler(
     punkOuter: CPointer<Unit>,
     ppunkMarshal: CPointer<CPointer<Unit>>
 ): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(
-        windows_libloading.resolveProc("ole32.dll", "CoCreateFreeThreadedMarshaler")
-    )
-    unsafe { proc(punkOuter, ppunkMarshal) }
+    windows_implement.CoCreateFreeThreadedMarshaler(punkOuter, ppunkMarshal)
 }

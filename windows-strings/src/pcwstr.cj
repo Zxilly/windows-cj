@@ -63,7 +63,7 @@ public struct PCWSTR <: Equatable<PCWSTR> {
     }
 
     /// Decode the UTF-16 string pointed to by this pointer.
-    /// Unsafe: the pointer must be valid and null-terminated.
+    /// Caller must guarantee the pointer is valid and null-terminated.
     /// Returns None when the UTF-16 sequence is invalid.
     public unsafe func toString(): Option<String> {
         tryDecodeWideFromPointer(Value, length: length())

@@ -2,7 +2,7 @@ package windows_core
 
 import std.sync.*
 
-// RefCount 封装基础的原子引用计数语义。
+// RefCount wraps basic atomic reference-counting behavior.
 public struct RefCount {
     private let count: AtomicInt32
 

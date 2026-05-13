@@ -48,6 +48,40 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
         HString(raw)
     }
 
+    public static func fromSystemHandleTake(raw: CPointer<Unit>): HString {
+        if (raw.isNull()) {
+            return HString()
+        }
+        try {
+            var length = 0u32
+            let buffer = windowsGetStringRawBufferAbi(raw, CPointer<UInt32>(inout length))
+            let copied = copyWideFromPointer(buffer, Int64(length))
+            HString.fromWide(copied, length: Int64(length))
+        } finally {
+            windowsDeleteStringAbi(raw)
+        }
+    }
+
+    public static func fromSystemHandleCopy(raw: CPointer<Unit>): HString {
+        if (raw.isNull()) {
+            return HString()
+        }
+        var length = 0u32
+        let buffer = windowsGetStringRawBufferAbi(raw, CPointer<UInt32>(inout length))
+        let copied = copyWideFromPointer(buffer, Int64(length))
+        HString.fromWide(copied, length: Int64(length))
+    }
+
+    /// Returns a Windows-owned HSTRING copy of this value.
+    /// The returned handle must be consumed by releaseSystemHStringHandle or
+    /// HString.fromSystemHandleTake.
+    public func toSystemHandleCopy(): CPointer<Unit> {
+        if (closed || handle.isNull()) {
+            return CPointer<Unit>()
+        }
+        windowsCreateStringAbi(currentBuffer(), currentLengthValue())
+    }
+
     public static func viewOf(raw: CPointer<Unit>): HString {
         if (raw.isNull()) {
             return HString()

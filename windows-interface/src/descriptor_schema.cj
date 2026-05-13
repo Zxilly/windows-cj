@@ -189,8 +189,8 @@ public class InterfaceDescriptorSchema {
     // Variant used by WinRT interface schemas: the direct base is always the
     // IInspectable schema (so vtable own-method counting via the schema chain
     // remains correct), and `extraAncestorInterfaceNames`/`extraAncestorIids`
-    // carry the required-interface contracts that participate in QI matching
-    // but are NOT inlined into the vtbl.
+    // carry required-interface metadata without inlining those contracts into
+    // this interface's vtbl.
     public init(
         interfaceName: String,
         iid: GUID,

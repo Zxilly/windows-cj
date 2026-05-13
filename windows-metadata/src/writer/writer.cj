@@ -313,9 +313,6 @@ public class WinmdWriter {
     let params: ArrayList<ParamRow>
     let moduleRefs: ArrayList<ModuleRefRow>
     let memberRefs: ArrayList<MemberRefRow>
-    let attributes: ArrayList<AttributeRow>
-    let constants: ArrayList<ConstantRow>
-    let genericParams: ArrayList<GenericParamRow>
     let interfaceImpls: ArrayList<InterfaceImplRow>
     let classLayouts: ArrayList<ClassLayoutRow>
     let nestedClasses: ArrayList<NestedClassRow>
@@ -345,9 +342,6 @@ public class WinmdWriter {
         this.params = ArrayList<ParamRow>()
         this.moduleRefs = ArrayList<ModuleRefRow>()
         this.memberRefs = ArrayList<MemberRefRow>()
-        this.attributes = ArrayList<AttributeRow>()
-        this.constants = ArrayList<ConstantRow>()
-        this.genericParams = ArrayList<GenericParamRow>()
         this.interfaceImpls = ArrayList<InterfaceImplRow>()
         this.classLayouts = ArrayList<ClassLayoutRow>()
         this.nestedClasses = ArrayList<NestedClassRow>()
@@ -826,8 +820,8 @@ public class WinmdWriter {
             } else {
                 writeCode(buffer, encodeCodedIndex(row.extendsTag, row.extendsRow, CODED_TYPE_DEF_OR_REF_BITS), typeDefOrRefSize)
             }
-            writeIndex(buffer, row.fieldList, Int64(fields.size), fieldIndexSize)
-            writeIndex(buffer, row.methodList, Int64(methodDefs.size), methodIndexSize)
+            writeIndex(buffer, row.fieldList, fieldIndexSize)
+            writeIndex(buffer, row.methodList, methodIndexSize)
         }
 
         for (row in fields) {
@@ -842,7 +836,7 @@ public class WinmdWriter {
             writeU16(buffer, row.flags)
             writeU32(buffer, UInt32(row.name))
             writeU32(buffer, UInt32(row.signature))
-            writeIndex(buffer, row.paramList, Int64(params.size), paramIndexSize)
+            writeIndex(buffer, row.paramList, paramIndexSize)
         }
 
         for (row in params) {
@@ -852,7 +846,7 @@ public class WinmdWriter {
         }
 
         for (row in interfaceImpls) {
-            writeIndex(buffer, row.classRow, Int64(typeDefs.size), typeDefIndexSize)
+            writeIndex(buffer, row.classRow, typeDefIndexSize)
             writeCode(buffer, encodeCodedIndex(row.interfaceTag, row.interfaceRow, CODED_TYPE_DEF_OR_REF_BITS), typeDefOrRefSize)
         }
 
@@ -879,12 +873,12 @@ public class WinmdWriter {
         for (row in classLayouts) {
             writeU16(buffer, row.packingSize)
             writeU32(buffer, row.classSize)
-            writeIndex(buffer, row.parent, Int64(typeDefs.size), typeDefIndexSize)
+            writeIndex(buffer, row.parent, typeDefIndexSize)
         }
 
         for (row in fieldLayouts) {
             writeU32(buffer, row.offset)
-            writeIndex(buffer, row.field, Int64(fields.size), fieldIndexSize)
+            writeIndex(buffer, row.field, fieldIndexSize)
         }
 
         for (row in moduleRefs) {
@@ -899,7 +893,7 @@ public class WinmdWriter {
             writeU16(buffer, row.mappingFlags)
             writeCode(buffer, encodeCodedIndex(memberForwardedTag(row.memberTable), row.memberRow, CODED_MEMBER_FORWARDED_BITS), memberForwardedSize)
             writeU32(buffer, UInt32(row.importName))
-            writeIndex(buffer, row.importScope, Int64(moduleRefs.size), moduleRefIndexSize)
+            writeIndex(buffer, row.importScope, moduleRefIndexSize)
         }
 
         for (row in assemblies) {
@@ -927,8 +921,8 @@ public class WinmdWriter {
         }
 
         for (row in nestedClasses) {
-            writeIndex(buffer, row.nestedClass, Int64(typeDefs.size), typeDefIndexSize)
-            writeIndex(buffer, row.enclosingClass, Int64(typeDefs.size), typeDefIndexSize)
+            writeIndex(buffer, row.nestedClass, typeDefIndexSize)
+            writeIndex(buffer, row.enclosingClass, typeDefIndexSize)
         }
 
         for (row in orderedGenericParams) {
@@ -1620,8 +1614,7 @@ func writeCode(buffer: ArrayList<Byte>, value: Int64, size: Int64): Unit {
     }
 }
 
-func writeIndex(buffer: ArrayList<Byte>, index: Int64, len: Int64, size: Int64): Unit {
-    let _ = len
+func writeIndex(buffer: ArrayList<Byte>, index: Int64, size: Int64): Unit {
     let value = index + 1
     if (size == 2) {
         writeU16(buffer, UInt16(value))

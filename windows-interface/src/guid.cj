@@ -1,18 +1,14 @@
 package windows_interface
 
-import windows_libloading as windows_libloading
 import windows_result.{Result, E_INVALIDARG}
 import windows_result.Error as WinErrorResult
 
-let UUID_CREATE_LOCAL_ONLY_STATUS: Int32 = 1824i32
 let GUID_SIGNATURE_NAMESPACE: Array<UInt8> = [
     0x11u8, 0xF4u8, 0x7Au8, 0xD5u8,
     0x7Bu8, 0x73u8, 0x42u8, 0xC0u8,
     0xABu8, 0xAEu8, 0x87u8, 0x8Bu8,
     0x1Eu8, 0x16u8, 0xADu8, 0xEEu8
 ]
-
-var cachedUuidCreateProc: CPointer<Unit> = CPointer<Unit>()
 
 public struct UInt128 {
     public let high: UInt64
@@ -95,32 +91,11 @@ public struct GUID {
         )
     }
 
-    // 调用系统 UUID 生成器创建一个新的 GUID。
-    public static func generate(): GUID {
-        var guid = GUID.zeroed()
-        let uuidCreate = CFunc<(CPointer<GUID>) -> Int32>(uuidCreateProc())
-        let status = unsafe { uuidCreate(CPointer<GUID>(inout guid)) }
-        if (status == 0i32 || status == UUID_CREATE_LOCAL_ONLY_STATUS) {
-            return guid
-        }
-        throw Exception("UuidCreate failed with status ${status}")
-    }
-
-    public static func new(): Result<GUID> {
-        var guid = GUID.zeroed()
-        let uuidCreate = CFunc<(CPointer<GUID>) -> Int32>(uuidCreateProc())
-        let status = unsafe { uuidCreate(CPointer<GUID>(inout guid)) }
-        if (status == 0i32 || status == UUID_CREATE_LOCAL_ONLY_STATUS) {
-            return Result<GUID>.Ok(guid)
-        }
-        Result<GUID>.Err(WinErrorResult.fromWin32(UInt32(status)))
-    }
-
     public static func from_signature(signature: String): GUID {
         guid_from_signature_bytes(signature.toArray())
     }
 
-    // 解析标准 xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 形式的 GUID 字符串。
+    // Parse the standard xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx GUID form.
     public static func fromString(s: String): Option<GUID> {
         let bytes = s.toArray()
         if (bytes.size != 36) {
@@ -325,15 +300,6 @@ func parseGuidHexDigit(digit: Byte): Option<Int64> {
         return Some(10 + Int64(digit - b'a'))
     }
     None
-}
-
-func uuidCreateProc(): CPointer<Unit> {
-    if (cachedUuidCreateProc.isNotNull()) {
-        return cachedUuidCreateProc
-    }
-    let proc = windows_libloading.resolveProc("rpcrt4.dll", "UuidCreate")
-    cachedUuidCreateProc = proc
-    proc
 }
 
 func guid_from_signature_bytes(signature: Array<UInt8>): GUID {

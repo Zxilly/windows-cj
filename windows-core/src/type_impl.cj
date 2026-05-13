@@ -156,9 +156,9 @@ extend HString <: CloneType & RuntimeType & Type<HString, HString, HString> & Ha
     public static func abiType(): String { "HString" }
     public static func projectAbi(value: HString): HString { value }
     public static func signature(): String { "string" }
-    public static func intoWinrtHandle(value: HString): CPointer<Unit> { value.asRaw() }
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HString { HString.fromAbiTake(raw) }
-    public static func viewWinrtHandle(raw: CPointer<Unit>): HString { HString.viewOf(raw) }
+    public static func intoWinrtHandle(value: HString): CPointer<Unit> { value.toSystemHandleCopy() }
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HString { HString.fromSystemHandleTake(raw) }
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HString { HString.fromSystemHandleCopy(raw) }
     public static func allowNullWinrtHandle(): Bool { true }
     public static func isNullAbi(abi: HString): Bool { abi.isEmpty() }
     public static func assumeInitRef(abi: HString): HString { cloneProjectedValue(abi) }

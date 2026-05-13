@@ -2,6 +2,7 @@ package windows_implement
 
 import std.collection.*
 import std.reflect.*
+import std.sync.AtomicBool
 import std.sync.AtomicInt64
 import windows_interface.*
 import windows_result.{Result, HRESULT}
@@ -37,6 +38,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     private let interfacePointers: ArrayList<CPointer<Unit>> = ArrayList<CPointer<Unit>>()
     private let registrationKeys: ArrayList<UIntNative> = ArrayList<UIntNative>()
     private let refCount = AtomicInt64(1)
+    private let destroyed = AtomicBool(false)
     private let weakRefCount = WeakRefCount(CPointer<Unit>())
     private var registered: Bool = false
     private var identityKey: UIntNative = UIntNative(0)
@@ -45,6 +47,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     private var queryInterfaceFallback: Option<(GUID, CPointer<CPointer<Unit>>) -> Int32> = None
     private var runtimeType: Option<RuntimeTypeContract> = None
     private var runtimeClassName: Option<HString> = None
+    private var trustLevel: Int32 = 0i32
     private var agileEnabled: Bool = false
     private var runtimePinned: Bool = false
 
@@ -136,13 +139,24 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         }
     }
 
+    public func setTrustLevel(value: Int32): Unit {
+        trustLevel = value
+    }
+
     public func addRefBase(): UInt32 {
+        if (isDestroyed()) {
+            return 0u32
+        }
         let oldCount = refCount.fetchAdd(1)
         UInt32(oldCount + 1)
     }
 
     public func isReferenceCountOne(): Bool {
         refCount.load() == 1
+    }
+
+    public func isDestroyed(): Bool {
+        destroyed.load()
     }
 
     public func setAgileEnabled(value: Bool): Unit {
@@ -154,7 +168,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     }
 
     public func getMut(): Option<T> {
-        if (runtimePinned || !isReferenceCountOne()) {
+        if (isDestroyed() || runtimePinned || !isReferenceCountOne()) {
             return None
         }
         inner
@@ -180,7 +194,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     }
 
     public func takeInner(): Option<T> {
-        if (runtimePinned || !isReferenceCountOne()) {
+        if (isDestroyed() || runtimePinned || !isReferenceCountOne()) {
             return None
         }
         let value = inner
@@ -193,6 +207,9 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     }
 
     public func releaseBase(_: UIntNative): UInt32 {
+        if (isDestroyed()) {
+            return 0u32
+        }
         if (runtimePinned) {
             while (true) {
                 let current = refCount.load()
@@ -211,28 +228,39 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         }
         let count = oldCount - 1
 
-        if (count == 0 && registered) {
-            for (key in registrationKeys) {
-                comSlotRegistryRemove(key)
-            }
-            comRegistryRemove(identityKey)
-            registered = false
-            weakRefCount.onObjectDestroyed()
-            match (runtimeClassName) {
-                case Some(value) =>
-                    value.close()
-                    runtimeClassName = None
-                case None => ()
-            }
-            match (onDestroy) {
-                case Some(cb) => cb()
-                case None => ()
+        if (count == 0) {
+            let wasDestroyed = destroyed.swap(true)
+            if (!wasDestroyed) {
+                if (registered) {
+                    for (key in registrationKeys) {
+                        comSlotRegistryRemove(key)
+                    }
+                    comRegistryRemove(identityKey)
+                    registered = false
+                    weakRefCount.onObjectDestroyed()
+                }
+                match (runtimeClassName) {
+                    case Some(value) =>
+                        value.close()
+                        runtimeClassName = None
+                    case None => ()
+                }
+                match (onDestroy) {
+                    case Some(cb) => cb()
+                    case None => ()
+                }
             }
         }
         UInt32(count)
     }
 
     public func queryInterfaceBase(_: CPointer<Unit>, iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (isDestroyed()) {
+            if (resultSlot.isNotNull()) {
+                unsafe { resultSlot.write(CPointer<Unit>()) }
+            }
+            return E_NOINTERFACE
+        }
         if (iid == IID_IUNKNOWN) {
             return writeInterfacePointer(0, resultSlot)
         }
@@ -249,7 +277,12 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             return weakRefCount.writeObjectMarshaler(resultSlot)
         }
         for (descriptor in resolvedDescriptors) {
-            if (descriptor.matchesNonIdentity(iid)) {
+            if (descriptor.iid == iid) {
+                return writeInterfacePointer(descriptor.slotIndex, resultSlot)
+            }
+        }
+        for (descriptor in resolvedDescriptors) {
+            if (descriptorAncestorMatchesNonIdentity(descriptor, iid)) {
                 return writeInterfacePointer(descriptor.slotIndex, resultSlot)
             }
         }
@@ -287,8 +320,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             }
             match (runtimeClassName) {
                 case Some(cached) =>
-                    let fresh = cached.clone()
-                    value.write(fresh.intoRaw())
+                    value.write(cached.toSystemHandleCopy())
                 case None =>
                     value.write(CPointer<Unit>())
             }
@@ -301,7 +333,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             if (value.isNull()) {
                 return E_POINTER
             }
-            value.write(0i32)
+            value.write(trustLevel)
         }
         S_OK
     }
@@ -321,6 +353,10 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     private func writeInterfacePointer(slotIndex: Int64, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         if (resultSlot.isNull()) {
             return E_POINTER
+        }
+        if (isDestroyed()) {
+            unsafe { resultSlot.write(CPointer<Unit>()) }
+            return E_NOINTERFACE
         }
         if (slotIndex < 0 || slotIndex >= interfacePointers.size) {
             unsafe { resultSlot.write(CPointer<Unit>()) }
@@ -401,18 +437,23 @@ func hasMissingCustomVtbl(slotCount: Int64, explicitCustomVtbls: Array<CPointer<
     false
 }
 
-func defaultCustomVtblArray(
-    slotCount: Int64,
-    explicitCustomVtbls: Array<CPointer<Unit>>,
-    fallbackCustomVtbl: CPointer<Unit>
-): Array<CPointer<Unit>> {
-    Array<CPointer<Unit>>(slotCount, { index =>
-        if (index < explicitCustomVtbls.size && explicitCustomVtbls[index].isNotNull()) {
-            explicitCustomVtbls[index]
-        } else {
-            fallbackCustomVtbl
+func descriptorAncestorMatchesNonIdentity(descriptor: ResolvedDescriptor, candidate: GUID): Bool {
+    if (candidate == IID_IUNKNOWN || candidate == IID_IINSPECTABLE) {
+        return false
+    }
+    for (ancestor in descriptor.vtableAncestorIids) {
+        if (ancestor == candidate) {
+            return true
         }
-    })
+    }
+    false
+}
+
+func resolvedCustomVtblArray(
+    slotCount: Int64,
+    explicitCustomVtbls: Array<CPointer<Unit>>
+): Array<CPointer<Unit>> {
+    Array<CPointer<Unit>>(slotCount, { index => explicitCustomVtbls[index] })
 }
 
 func reflectedWrapperVtblPtr(descriptor: ResolvedDescriptor): Option<CPointer<Unit>> {
@@ -436,48 +477,31 @@ func reflectedWrapperVtblPtr(descriptor: ResolvedDescriptor): Option<CPointer<Un
     None
 }
 
-func resolvedDescriptorInheritanceDepth(descriptor: ResolvedDescriptor): Int64 {
-    descriptor.ancestorIids.size
+func resolvedDescriptorInheritanceDepth(
+    resolvedDescriptors: Array<ResolvedDescriptor>,
+    descriptorIndex: Int64
+): Int64 {
+    resolvedDescriptorVtableAncestorDepth(resolvedDescriptors, descriptorIndex)
 }
 
-func shouldWriteCustomVtblBefore(left: ResolvedDescriptor, right: ResolvedDescriptor): Bool {
-    if (left.slotIndex != right.slotIndex) {
-        return left.slotIndex < right.slotIndex
-    }
-
-    let leftDepth = resolvedDescriptorInheritanceDepth(left)
-    let rightDepth = resolvedDescriptorInheritanceDepth(right)
-    if (leftDepth != rightDepth) {
-        return leftDepth < rightDepth
-    }
-
-    left.iid.toString() < right.iid.toString()
-}
-
-func copyResolvedDescriptors(values: Array<ResolvedDescriptor>): Array<ResolvedDescriptor> {
-    Array<ResolvedDescriptor>(values.size, { index => values[index] })
-}
-
-func sortDescriptorsForCustomVtblWrite(values: Array<ResolvedDescriptor>): Array<ResolvedDescriptor> {
-    var sorted = copyResolvedDescriptors(values)
-    var left: Int64 = 0
-    while (left < sorted.size) {
-        var minIndex = left
-        var right = left + 1
-        while (right < sorted.size) {
-            if (shouldWriteCustomVtblBefore(sorted[right], sorted[minIndex])) {
-                minIndex = right
+func requiredDescriptorIndicesForCustomSlots(resolvedDescriptors: Array<ResolvedDescriptor>): Array<Int64> {
+    let slotCount = customSlotCount(resolvedDescriptors)
+    let requiredIndices = Array<Int64>(slotCount, { _ => -1 })
+    let depths = Array<Int64>(slotCount, { _ => -1 })
+    var index: Int64 = 0
+    while (index < resolvedDescriptors.size) {
+        let descriptor = resolvedDescriptors[index]
+        if (descriptor.slotIndex > 0) {
+            let slot = descriptor.slotIndex - 1
+            let depth = resolvedDescriptorInheritanceDepth(resolvedDescriptors, index)
+            if (requiredIndices[slot] < 0 || depth >= depths[slot]) {
+                requiredIndices[slot] = index
+                depths[slot] = depth
             }
-            right += 1
         }
-        if (minIndex != left) {
-            let current = sorted[left]
-            sorted[left] = sorted[minIndex]
-            sorted[minIndex] = current
-        }
-        left += 1
+        index += 1
     }
-    sorted
+    requiredIndices
 }
 
 func descriptorCustomVtblArray(resolvedDescriptors: Array<ResolvedDescriptor>): Array<CPointer<Unit>> {
@@ -486,18 +510,73 @@ func descriptorCustomVtblArray(resolvedDescriptors: Array<ResolvedDescriptor>): 
         return emptyUnitPointerArray()
     }
 
+    let requiredIndices = requiredDescriptorIndicesForCustomSlots(resolvedDescriptors)
     var vtblPtrs = Array<CPointer<Unit>>(slotCount, { _ => CPointer<Unit>() })
-    for (descriptor in sortDescriptorsForCustomVtblWrite(resolvedDescriptors)) {
-        if (descriptor.slotIndex == 0) {
-            continue
+    var slot: Int64 = 0
+    while (slot < slotCount) {
+        let descriptorIndex = requiredIndices[slot]
+        if (descriptorIndex >= 0) {
+            match (reflectedWrapperVtblPtr(resolvedDescriptors[descriptorIndex])) {
+                case Some(vtblPtr) =>
+                    vtblPtrs[slot] = vtblPtr
+                case None => ()
+            }
         }
-        match (reflectedWrapperVtblPtr(descriptor)) {
-            case Some(vtblPtr) =>
-                vtblPtrs[descriptor.slotIndex - 1] = vtblPtr
-            case None => ()
-        }
+        slot += 1
     }
     vtblPtrs
+}
+
+func explicitCustomVtblArray(
+    resolvedDescriptors: Array<ResolvedDescriptor>,
+    descriptorVtblPtrs: Array<CPointer<Unit>>
+): Array<CPointer<Unit>> {
+    let slotCount = customSlotCount(resolvedDescriptors)
+    if (slotCount == 0) {
+        return emptyUnitPointerArray()
+    }
+
+    var vtblPtrs = Array<CPointer<Unit>>(slotCount, { _ => CPointer<Unit>() })
+    let requiredIndices = requiredDescriptorIndicesForCustomSlots(resolvedDescriptors)
+    var slot: Int64 = 0
+    while (slot < slotCount) {
+        let descriptorIndex = requiredIndices[slot]
+        if (descriptorIndex >= 0 && descriptorIndex < descriptorVtblPtrs.size && descriptorVtblPtrs[descriptorIndex].isNotNull()) {
+            vtblPtrs[slot] = descriptorVtblPtrs[descriptorIndex]
+        }
+        slot += 1
+    }
+    vtblPtrs
+}
+
+func requireExplicitSchemaCustomVtbls(resolvedDescriptors: Array<ResolvedDescriptor>): Unit {
+    if (customSlotCount(resolvedDescriptors) > 0) {
+        throw Exception("schema-backed custom interfaces require explicit vtable pointers")
+    }
+}
+
+func requireCompleteCustomVtbls(
+    resolvedDescriptors: Array<ResolvedDescriptor>,
+    customVtbls: Array<CPointer<Unit>>
+): Unit {
+    let slotCount = customSlotCount(resolvedDescriptors)
+    if (hasMissingCustomVtbl(slotCount, customVtbls)) {
+        throw Exception("custom interfaces require explicit vtable pointers for every resolved slot")
+    }
+}
+
+func singleCustomVtblArray(
+    resolvedDescriptors: Array<ResolvedDescriptor>,
+    vtblPtr: CPointer<Unit>
+): Array<CPointer<Unit>> {
+    let slotCount = customSlotCount(resolvedDescriptors)
+    if (slotCount == 0) {
+        return emptyUnitPointerArray()
+    }
+    if (slotCount != 1 || vtblPtr.isNull()) {
+        throw Exception("single custom vtable pointer requires exactly one resolved custom slot")
+    }
+    Array<CPointer<Unit>>(1, { _ => vtblPtr })
 }
 
 func createInlineSlotHandle(vtables: Array<CPointer<Unit>>): CPointerHandle<CPointer<Unit>> {
@@ -534,11 +613,12 @@ func applyRuntimeTypeFromDescriptors<T, I>(
     }
 }
 
-public class ComObject<T> {
+public class ComObject<T> <: Resource {
     private var slotHandle: Option<CPointerHandle<CPointer<Unit>>> = None
     private var identityUnknownVtblHandle: Option<CPointerHandle<IUnknownVtbl>> = None
     private var identityInspectableVtblHandle: Option<CPointerHandle<IInspectableVtbl>> = None
     private var rawView: CPointer<Unit> = CPointer<Unit>()
+    private var closed: Bool = false
     public let runtime: ComObjectRuntime<T>
 
     public init(inner: T, supportedIids: Array<GUID>, agile!: Bool = true) {
@@ -557,7 +637,8 @@ public class ComObject<T> {
         if (slotCount == 0) {
             attachRuntime(vtblPtr, emptyUnitPointerArray(), resolvedDescriptors)
         } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), Array<CPointer<Unit>>(1, { _ => vtblPtr }), resolvedDescriptors)
+            let customVtblPtrs = singleCustomVtblArray(resolvedDescriptors, vtblPtr)
+            attachRuntime(defaultIdentityVtblPtr(supportedIids), customVtblPtrs, resolvedDescriptors)
         }
     }
 
@@ -569,6 +650,7 @@ public class ComObject<T> {
         if (slotCount == 0 && vtblPtrs.size > 0) {
             attachRuntime(vtblPtrs[0], emptyUnitPointerArray(), resolvedDescriptors)
         } else {
+            requireCompleteCustomVtbls(resolvedDescriptors, vtblPtrs)
             attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
         }
     }
@@ -598,7 +680,8 @@ public class ComObject<T> {
         if (slotCount == 0) {
             attachRuntime(vtblPtr, emptyUnitPointerArray(), resolvedDescriptors)
         } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), Array<CPointer<Unit>>(1, { _ => vtblPtr }), resolvedDescriptors)
+            let customVtblPtrs = singleCustomVtblArray(resolvedDescriptors, vtblPtr)
+            attachRuntime(defaultIdentityVtblPtr(supportedIids), customVtblPtrs, resolvedDescriptors)
         }
     }
 
@@ -612,10 +695,12 @@ public class ComObject<T> {
         runtime = ComObjectRuntime<T>(inner, supportedIids, resolvedDescriptors)
         runtime.setAgileEnabled(agile)
         let slotCount = customSlotCount(resolvedDescriptors)
+        let customVtblPtrs = explicitCustomVtblArray(resolvedDescriptors, vtblPtrs)
         if (slotCount == 0 && vtblPtrs.size > 0) {
             attachRuntime(vtblPtrs[0], emptyUnitPointerArray(), resolvedDescriptors)
         } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
+            requireCompleteCustomVtbls(resolvedDescriptors, customVtblPtrs)
+            attachRuntime(defaultIdentityVtblPtr(supportedIids), customVtblPtrs, resolvedDescriptors)
         }
     }
 
@@ -625,6 +710,7 @@ public class ComObject<T> {
         runtime = ComObjectRuntime<T>(inner, supportedIids, resolvedDescriptors)
         runtime.setAgileEnabled(agile)
         applyRuntimeTypeFromSchemas(runtime, schemas)
+        requireExplicitSchemaCustomVtbls(resolvedDescriptors)
         let vtblPtrs = descriptorCustomVtblArray(resolvedDescriptors)
         attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
     }
@@ -639,7 +725,8 @@ public class ComObject<T> {
         if (slotCount == 0) {
             attachRuntime(vtblPtr, emptyUnitPointerArray(), resolvedDescriptors)
         } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), Array<CPointer<Unit>>(1, { _ => vtblPtr }), resolvedDescriptors)
+            let customVtblPtrs = singleCustomVtblArray(resolvedDescriptors, vtblPtr)
+            attachRuntime(defaultIdentityVtblPtr(supportedIids), customVtblPtrs, resolvedDescriptors)
         }
     }
 
@@ -650,10 +737,12 @@ public class ComObject<T> {
         runtime.setAgileEnabled(agile)
         applyRuntimeTypeFromSchemas(runtime, schemas)
         let slotCount = customSlotCount(resolvedDescriptors)
+        let customVtblPtrs = explicitCustomVtblArray(resolvedDescriptors, vtblPtrs)
         if (slotCount == 0 && vtblPtrs.size > 0) {
             attachRuntime(vtblPtrs[0], emptyUnitPointerArray(), resolvedDescriptors)
         } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
+            requireCompleteCustomVtbls(resolvedDescriptors, customVtblPtrs)
+            attachRuntime(defaultIdentityVtblPtr(supportedIids), customVtblPtrs, resolvedDescriptors)
         }
     }
 
@@ -772,12 +861,9 @@ public class ComObject<T> {
         resolvedDescriptors: Array<ResolvedDescriptor>
     ): Unit {
         let slotCount = customSlotCount(resolvedDescriptors)
-        var fallbackCustomVtbl = CPointer<Unit>()
-        if (slotCount > 0 && hasMissingCustomVtbl(slotCount, explicitCustomVtbls)) {
-            fallbackCustomVtbl = ensureIdentityIUnknownVtblPtr()
-        }
+        requireCompleteCustomVtbls(resolvedDescriptors, explicitCustomVtbls)
 
-        let customVtables = defaultCustomVtblArray(slotCount, explicitCustomVtbls, fallbackCustomVtbl)
+        let customVtables = resolvedCustomVtblArray(slotCount, explicitCustomVtbls)
         let allVtables = Array<CPointer<Unit>>(slotCount + 1, { index =>
             if (index == 0) {
                 identityVtblPtr
@@ -820,7 +906,7 @@ public class ComObject<T> {
         })
     }
 
-    public func asRaw(): CPointer<Unit> {
+    private func liveRaw(): CPointer<Unit> {
         if (rawView.isNotNull()) {
             return rawView
         }
@@ -830,15 +916,72 @@ public class ComObject<T> {
         }
     }
 
+    public func asRaw(): CPointer<Unit> {
+        if (isClosed()) {
+            return CPointer<Unit>()
+        }
+        liveRaw()
+    }
+
     public func addRefBase(): UInt32 {
+        if (isClosed()) {
+            closed = true
+            return 0u32
+        }
         runtime.addRefBase()
     }
 
     public func releaseBase(): UInt32 {
-        runtime.releaseBase(asRaw().toUIntNative())
+        if (isClosed()) {
+            closed = true
+            return 0u32
+        }
+        let count = runtime.releaseBase(liveRaw().toUIntNative())
+        if (count == 0u32) {
+            closed = true
+        }
+        count
+    }
+
+    public func isClosed(): Bool {
+        closed || runtime.isDestroyed()
+    }
+
+    public func close(): Unit {
+        if (isClosed()) {
+            closed = true
+            return
+        }
+        let _ = runtime.releaseBase(liveRaw().toUIntNative())
+        closed = true
+    }
+
+    ~init() {
+        if (closed || runtime.isDestroyed()) {
+            return
+        }
+        let raw = if (rawView.isNotNull()) {
+            rawView
+        } else {
+            match (slotHandle) {
+                case Some(handle) => CPointer<Unit>(handle.pointer)
+                case None => CPointer<Unit>()
+            }
+        }
+        let _ = runtime.releaseBase(raw.toUIntNative())
+        closed = true
     }
 
     public func queryInterfaceBase(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (isClosed()) {
+            closed = true
+            unsafe {
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
+                }
+            }
+            return E_NOINTERFACE
+        }
         runtime.queryInterfaceBase(asRaw(), iid, resultSlot)
     }
 
@@ -858,7 +1001,12 @@ public class ComObject<T> {
         match (comRegistryLookup(lookupKey)) {
             case Some(obj) =>
                 match (obj as ComObjectRuntime<T>) {
-                    case Some(runtime) => Some(ComObject<T>(runtime, runtime.identityPointer()))
+                    case Some(runtime) =>
+                        if (runtime.isDestroyed()) {
+                            return None
+                        }
+                        let _ = runtime.addRefBase()
+                        Some(ComObject<T>(runtime, runtime.identityPointer()))
                     case None => None
                 }
             case None => None
@@ -874,11 +1022,10 @@ public class ComObject<T> {
     }
 
     public func asInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface {
-        match (unsafe { cast(descriptor) }) {
-            case Some(value) =>
-                let raw = value.asRaw()
+        match (unsafe { queryInterfaceRaw(asRaw(), descriptor.iid) }) {
+            case Some(raw) =>
                 let view = descriptor.viewOf(raw)
-                IUnknown(raw).release()
+                let _ = descriptor.releasePointer(raw)
                 view
             case None =>
                 throw Exception("ComObject.asInterface: requested interface is not implemented")
@@ -893,8 +1040,7 @@ public class ComObject<T> {
     }
 
     public func intoInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface {
-        let view = asInterface(descriptor)
-        descriptor.takeFromAbi(view.asRaw())
+        toInterface(descriptor)
     }
 }
 

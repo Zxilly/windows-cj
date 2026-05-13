@@ -17,6 +17,7 @@ public import windows_implement.{
     buildIUnknownVtbl,
     buildIInspectableVtbl,
     createComObject,
+    createImplementedComObject,
     createComObjectFromSchemas,
     createComObjectFromDescriptors,
     createResolvedDescriptor,

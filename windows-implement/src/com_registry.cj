@@ -8,46 +8,43 @@ var comRegistry = HashMap<UIntNative, Object>()
 var comSlotRegistry = HashMap<UIntNative, UIntNative>()
 
 public func comRegistryInsert(key: UIntNative, obj: Object): Unit {
-    comRegistryMutex.lock()
-    comRegistry.add(key, obj)
-    comRegistryMutex.unlock()
+    synchronized(comRegistryMutex) {
+        comRegistry.add(key, obj)
+    }
 }
 
 public func comRegistryLookup(key: UIntNative): Option<Object> {
-    comRegistryMutex.lock()
-    let result = comRegistry.get(key)
-    comRegistryMutex.unlock()
-    result
+    synchronized(comRegistryMutex) {
+        comRegistry.get(key)
+    }
 }
 
 public func comRegistryRemove(key: UIntNative): Unit {
-    comRegistryMutex.lock()
-    comRegistry.remove(key)
-    comRegistryMutex.unlock()
+    synchronized(comRegistryMutex) {
+        comRegistry.remove(key)
+    }
 }
 
 public func comSlotRegistryInsert(slotKey: UIntNative, rootKey: UIntNative): Unit {
-    comRegistryMutex.lock()
-    comSlotRegistry.add(slotKey, rootKey)
-    comRegistryMutex.unlock()
+    synchronized(comRegistryMutex) {
+        comSlotRegistry.add(slotKey, rootKey)
+    }
 }
 
 public func comSlotRegistryLookup(slotKey: UIntNative): Option<UIntNative> {
-    comRegistryMutex.lock()
-    let result = comSlotRegistry.get(slotKey)
-    comRegistryMutex.unlock()
-    result
+    synchronized(comRegistryMutex) {
+        comSlotRegistry.get(slotKey)
+    }
 }
 
 public func comSlotRegistryContains(slotKey: UIntNative): Bool {
-    comRegistryMutex.lock()
-    let present = comSlotRegistry.contains(slotKey)
-    comRegistryMutex.unlock()
-    present
+    synchronized(comRegistryMutex) {
+        comSlotRegistry.contains(slotKey)
+    }
 }
 
 public func comSlotRegistryRemove(slotKey: UIntNative): Unit {
-    comRegistryMutex.lock()
-    comSlotRegistry.remove(slotKey)
-    comRegistryMutex.unlock()
+    synchronized(comRegistryMutex) {
+        comSlotRegistry.remove(slotKey)
+    }
 }

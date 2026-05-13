@@ -29,6 +29,33 @@ public func createComObjectFromSchemas<T>(inner: T, schemas: Array<InterfaceDesc
     ComObject<T>(inner, schemas, vtblPtrs, agile: agile)
 }
 
+public func createImplementedComObject<T>(
+    inner: T,
+    schema: InterfaceDescriptorSchema,
+    vtblPtr: CPointer<Unit>,
+    agile!: Bool = true
+): ComObject<T> {
+    createComObjectFromSchemas(inner, [schema], vtblPtr, agile: agile)
+}
+
+public func createImplementedComObject<T>(
+    inner: T,
+    schemas: Array<InterfaceDescriptorSchema>,
+    vtblPtr: CPointer<Unit>,
+    agile!: Bool = true
+): ComObject<T> {
+    createComObjectFromSchemas(inner, schemas, vtblPtr, agile: agile)
+}
+
+public func createImplementedComObject<T>(
+    inner: T,
+    schemas: Array<InterfaceDescriptorSchema>,
+    vtblPtrs: Array<CPointer<Unit>>,
+    agile!: Bool = true
+): ComObject<T> {
+    createComObjectFromSchemas(inner, schemas, vtblPtrs, agile: agile)
+}
+
 public func createComObjectFromDescriptors<T, I>(inner: T, descriptors: Array<InterfaceDescriptor<I>>, agile!: Bool = true): ComObject<T> where I <: ComInterface {
     let supportedIids = supportedIidsFromDescriptors(descriptors)
     let resolvedDescriptors = resolveDescriptors(descriptors)

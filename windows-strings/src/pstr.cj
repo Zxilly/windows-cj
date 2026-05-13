@@ -67,7 +67,7 @@ public struct PSTR <: Equatable<PSTR> {
     }
 
     /// Decode the ANSI/UTF-8 string pointed to by this pointer.
-    /// Unsafe: the pointer must be valid and null-terminated.
+    /// Caller must guarantee the pointer is valid and null-terminated.
     /// Returns None when the byte sequence is not valid UTF-8.
     public unsafe func toString(): Option<String> {
         tryDecodeAnsiFromPointer(Value, length: length())

@@ -3,16 +3,7 @@ package windows_result
 import windows_libloading as windows_libloading
 
 type IntPtr = CPointer<Unit>
-type BSTR = CPointer<UInt16>
 type FORMAT_MESSAGE_OPTIONS = UInt32
-type HANDLE = IntPtr
-type HMODULE = IntPtr
-type HINSTANCE = IntPtr
-type HEAP_FLAGS = UInt32
-type PCSTR = CPointer<UInt8>
-type PCWSTR = CPointer<UInt16>
-type PWSTR = CPointer<UInt16>
-public type LOAD_LIBRARY_FLAGS = UInt32
 
 func FormatMessageW(
     dwFlags: UInt32,
@@ -27,13 +18,6 @@ func FormatMessageW(
         windows_libloading.resolveProc("kernel32.dll", "FormatMessageW")
     )
     unsafe { proc(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments) }
-}
-
-func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: IntPtr, dwFlags: LOAD_LIBRARY_FLAGS): IntPtr {
-    let proc = CFunc<(CPointer<UInt8>, IntPtr, LOAD_LIBRARY_FLAGS) -> IntPtr>(
-        windows_libloading.resolveProc("kernel32.dll", "LoadLibraryExA")
-    )
-    unsafe { proc(lpLibFileName, hFile, dwFlags) }
 }
 
 func GetProcessHeap(): IntPtr {
@@ -57,7 +41,6 @@ let FORMAT_MESSAGE_ALLOCATE_BUFFER: FORMAT_MESSAGE_OPTIONS = 0x00000100u32
 let FORMAT_MESSAGE_IGNORE_INSERTS: FORMAT_MESSAGE_OPTIONS = 0x00000200u32
 let FORMAT_MESSAGE_FROM_HMODULE: FORMAT_MESSAGE_OPTIONS = 0x00000800u32
 let FORMAT_MESSAGE_FROM_SYSTEM: FORMAT_MESSAGE_OPTIONS = 0x00001000u32
-public let LOAD_LIBRARY_SEARCH_DEFAULT_DIRS: LOAD_LIBRARY_FLAGS = 0x00001000u32
 public let ERROR_INVALID_DATA: WIN32_ERROR = WIN32_ERROR(13u32)
 public let ERROR_NO_UNICODE_TRANSLATION: WIN32_ERROR = WIN32_ERROR(1113u32)
 let FACILITY_NT_BIT: UInt32 = 0x10000000u32
@@ -112,34 +95,6 @@ struct GUID {
         GUID()
     }
 
-    static func fromValues(
-        data1: UInt32,
-        data2: UInt16,
-        data3: UInt16,
-        data4_0: UInt8,
-        data4_1: UInt8,
-        data4_2: UInt8,
-        data4_3: UInt8,
-        data4_4: UInt8,
-        data4_5: UInt8,
-        data4_6: UInt8,
-        data4_7: UInt8
-    ): GUID {
-        GUID(
-            data1,
-            data2,
-            data3,
-            data4_0,
-            data4_1,
-            data4_2,
-            data4_3,
-            data4_4,
-            data4_5,
-            data4_6,
-            data4_7
-        )
-    }
-
     static func from_u128(value: UInt128): GUID {
         GUID(
             UInt32(value.high >> 32),
@@ -154,14 +109,6 @@ struct GUID {
             UInt8((value.low >> 8) & 0xFFu64),
             UInt8(value.low & 0xFFu64)
         )
-    }
-
-    static func fromU128(high: UInt64, low: UInt64): GUID {
-        from_u128(UInt128(high, low))
-    }
-
-    func isZero(): Bool {
-        this == GUID.zeroed()
     }
 
     public operator func ==(other: GUID): Bool {
@@ -184,7 +131,6 @@ struct GUID {
     }
 }
 
-let GUID_ZERO = GUID.zeroed()
 let IID_IUNKNOWN = GUID.from_u128(UInt128(0x0000000000000000u64, 0xC000000000000046u64))
 let IID_IERRORINFO = GUID.from_u128(UInt128(0x1CF2B120547D101Bu64, 0x8E6508002B2BD119u64))
 let IID_IRESTRICTEDERRORINFO = GUID.from_u128(UInt128(0x82BA70924C88427Du64, 0xA7BC16DD93FEB67Eu64))
@@ -218,7 +164,6 @@ struct IUnknownVtbl {
 
     init() {}
 }
-type IUnknown_Vtbl = IUnknownVtbl
 
 @C
 struct IErrorInfoVtbl {
@@ -231,7 +176,6 @@ struct IErrorInfoVtbl {
 
     init() {}
 }
-type IErrorInfo_Vtbl = IErrorInfoVtbl
 
 @C
 struct IRestrictedErrorInfoVtbl {
@@ -241,7 +185,6 @@ struct IRestrictedErrorInfoVtbl {
 
     init() {}
 }
-type IRestrictedErrorInfo_Vtbl = IRestrictedErrorInfoVtbl
 
 func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<IErrorInfo>>): Int32 {
     let proc = CFunc<(UInt32, CPointer<CPointer<IErrorInfo>>) -> Int32>(

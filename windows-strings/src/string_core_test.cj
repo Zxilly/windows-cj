@@ -38,3 +38,34 @@ func testHStringCloneAndBuilderRoundTrip() {
     @Expect(clone.isClosed(), true)
     @Expect(source.isClosed(), true)
 }
+
+@When[os == "Windows"]
+@Test
+func testHStringSystemHandleCopyRoundTripsThroughSystemOwnership() {
+    let source = HString("system")
+    let raw = source.toSystemHandleCopy()
+    let projected = HString.fromSystemHandleTake(raw)
+
+    @Expect(projected.get(), "system")
+    @Expect(source.get(), "system")
+
+    projected.close()
+    source.close()
+}
+
+@When[os == "Windows"]
+@Test
+func testHStringSystemHandleBorrowCopyLeavesSourceHandleLive() {
+    let source = HString("borrowed")
+    let raw = source.toSystemHandleCopy()
+    let borrowed = HString.fromSystemHandleCopy(raw)
+    let consumed = HString.fromSystemHandleTake(raw)
+
+    @Expect(borrowed.get(), "borrowed")
+    @Expect(consumed.get(), "borrowed")
+    @Expect(source.get(), "borrowed")
+
+    consumed.close()
+    borrowed.close()
+    source.close()
+}

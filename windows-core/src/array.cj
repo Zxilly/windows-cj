@@ -4,6 +4,10 @@ public func coTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
     unsafe { CoTaskMemAlloc(cb) }
 }
 
+public func coTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
+    unsafe { CoTaskMemRealloc(pv, cb) }
+}
+
 public func coTaskMemFree(pv: CPointer<Unit>): Unit {
     unsafe { CoTaskMemFree(pv) }
 }

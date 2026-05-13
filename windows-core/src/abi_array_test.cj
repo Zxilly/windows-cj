@@ -46,3 +46,53 @@ func testPublicCoTaskMemHelpersAllocateAndFree() {
     @Expect(raw.isNotNull(), true)
     coTaskMemFree(raw)
 }
+
+@Test
+func testPublicCoTaskMemReallocPreservesPrefixBytes() {
+    let raw = coTaskMemAlloc(UIntNative(2))
+    if (raw.isNull()) {
+        throw Exception("coTaskMemAlloc returned null")
+    }
+    let bytes = CPointer<UInt8>(raw)
+    unsafe {
+        bytes.write(0x41u8)
+        (bytes + 1).write(0x42u8)
+    }
+
+    let resized = coTaskMemRealloc(raw, UIntNative(4))
+    if (resized.isNull()) {
+        coTaskMemFree(raw)
+        throw Exception("coTaskMemRealloc returned null")
+    }
+    let resizedBytes = CPointer<UInt8>(resized)
+    unsafe {
+        @Expect(resizedBytes.read(), 0x41u8)
+        @Expect((resizedBytes + 1).read(), 0x42u8)
+    }
+    coTaskMemFree(resized)
+}
+
+@When[os == "Windows"]
+@Test
+func testArrayProxyPublishesHStringElementsAsSystemHandles() {
+    var rawItems = CPointer<Unit>()
+    var length = 0u32
+
+    try (proxy = unsafe { arrayProxy<HString>(CPointer<CPointer<Unit>>(inout rawItems), CPointer<UInt32>(inout length)) }) {
+        proxy.value().replaceWith([HString("one"), HString("two")])
+    }
+
+    @Expect(length, 2u32)
+    @Expect(rawItems.isNotNull(), true)
+
+    let slots = CPointer<CPointer<Unit>>(rawItems)
+    let first = HString.fromSystemHandleTake(unsafe { slots.read() })
+    let second = HString.fromSystemHandleTake(unsafe { (slots + 1).read() })
+
+    @Expect(first.get(), "one")
+    @Expect(second.get(), "two")
+
+    first.close()
+    second.close()
+    unsafe { CoTaskMemFree(rawItems) }
+}

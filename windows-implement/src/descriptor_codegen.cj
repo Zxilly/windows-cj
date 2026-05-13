@@ -488,8 +488,8 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append("        super(raw)\n")
     sb.append("    }\n\n")
 
-    sb.append("    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {\n")
-    sb.append("        super(raw, takeOwnership: takeOwnership)\n")
+    sb.append("    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {\n")
+    sb.append("        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)\n")
     sb.append("    }\n\n")
 
     sb.append("    public static func viewOf(raw: CPointer<Unit>): ")
@@ -497,7 +497,7 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append(" {\n")
     sb.append("        ")
     sb.append(descriptor.wrapperTypeName)
-    sb.append("(raw)\n")
+    sb.append("(raw, takeOwnership: false, allowManualRelease: false)\n")
     sb.append("    }\n\n")
 
     sb.append("    public static func fromAbiTake(raw: CPointer<Unit>): ")
@@ -505,7 +505,7 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append(" {\n")
     sb.append("        ")
     sb.append(descriptor.wrapperTypeName)
-    sb.append("(raw, takeOwnership: true)\n")
+    sb.append("(raw, takeOwnership: true, allowManualRelease: false)\n")
     sb.append("    }\n\n")
 
     sb.append("    public static func iid(): GUID {\n")
@@ -708,7 +708,7 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
             sb.append(" {\n")
             sb.append("        ")
             sb.append(name)
-            sb.append("(asRaw())\n")
+            sb.append(".viewOf(asRaw())\n")
             sb.append("    }\n\n")
         case None => ()
     }

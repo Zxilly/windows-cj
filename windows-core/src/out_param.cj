@@ -68,7 +68,7 @@ class OutParamState<T> {
     }
 }
 
-// OutSlot<T> 表示一个真正的 ABI 输出槽位，负责管理临时缓冲与结果接管。
+// OutSlot<T> is a real ABI output slot that owns temporary storage until the result is taken.
 public class OutSlot<T> <: Resource {
     private let state: OutParamState<T>
     private var closed: Bool = false
