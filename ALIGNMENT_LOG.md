@@ -1179,3 +1179,22 @@
   - `cjpm test -m windows-runtime --no-progress`: 26/26 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - `IObservableMap<K, V>` still needs direct inherited map operation forwarding, and observable event args may need scalar/HString direct ABI specializations.
+
+### Round94 - Observable map inherited operation forwarding
+
+- Completed at `2026-05-14 00:33:47 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Public generic class member functions are the right shape for inherited convenience methods.
+  - `try` resource scopes require `Resource` implementations and close them when the scope exits, matching the existing COM wrapper lifetime model.
+- Fixed the matching observable map surface gap:
+  - `IObservableMap<K, V>` already supported `asIMap()` and advertises `IMap<K, V>` as an ancestor interface through descriptors/QI.
+  - The wrapper only exposed event subscription methods, so callers could not call inherited `IMap` operations directly from an `IObservableMap` value.
+  - Added forwarding methods for `Lookup`, `Size`, `HasKey`, `GetView`, `Insert`, `Remove`, and `Clear`.
+  - Each forwarding call uses a scoped `asIMap()` wrapper and preserves the already-correct concrete map ABI paths underneath, including `IMap<Int32, HString>`.
+- Added TDD coverage:
+  - `testObservableMapForwardsInheritedMapOperations` first failed because `IObservableMap<Int32, HString>` had no `HasKey`, `Lookup`, `Insert`, `Size`, `GetView`, `Remove`, or `Clear` members.
+  - After the forwarding methods were added, the test validates direct calls on `IObservableMap<Int32, HString>` for lookup, insert/replace, view retrieval, removal, and clear.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-progress`: 27/27 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Observable event args direct ABI specializations, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need focused passes.

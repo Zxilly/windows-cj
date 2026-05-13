@@ -3881,6 +3881,57 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    public unsafe func Lookup(key: K): V {
+        try (map = asIMap()) {
+            return map.Lookup(key)
+        }
+        throw IllegalStateException("IObservableMap.Lookup ancestor call did not execute")
+    }
+
+    public unsafe func Size(): UInt32 {
+        try (map = asIMap()) {
+            return map.Size()
+        }
+        throw IllegalStateException("IObservableMap.Size ancestor call did not execute")
+    }
+
+    public unsafe func HasKey(key: K): Bool {
+        try (map = asIMap()) {
+            return map.HasKey(key)
+        }
+        throw IllegalStateException("IObservableMap.HasKey ancestor call did not execute")
+    }
+
+    public unsafe func GetView(): IMapView<K, V> {
+        try (map = asIMap()) {
+            return map.GetView()
+        }
+        throw IllegalStateException("IObservableMap.GetView ancestor call did not execute")
+    }
+
+    public unsafe func Insert(key: K, value: V): Bool {
+        try (map = asIMap()) {
+            return map.Insert(key, value)
+        }
+        throw IllegalStateException("IObservableMap.Insert ancestor call did not execute")
+    }
+
+    public unsafe func Remove(key: K): Unit {
+        try (map = asIMap()) {
+            map.Remove(key)
+            return
+        }
+        throw IllegalStateException("IObservableMap.Remove ancestor call did not execute")
+    }
+
+    public unsafe func Clear(): Unit {
+        try (map = asIMap()) {
+            map.Clear()
+            return
+        }
+        throw IllegalStateException("IObservableMap.Clear ancestor call did not execute")
+    }
+
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
         asIIterable().intoIterator()
     }
