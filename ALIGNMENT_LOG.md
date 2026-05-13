@@ -1424,3 +1424,24 @@
   - Full `cjpm test --no-progress --timeout-each=30s --no-capture-output`: 332/332 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other view scalar family (`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
+
+### Round105 - UInt64 vector-view input ABI
+
+- Completed at `2026-05-14 04:10:38 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Integer literal suffixes include `u64`, and integer literals are range-checked against their contextual type.
+  - `CFunc` maps to C-callable function pointers, its parameter and return types must satisfy `CType`, `CPointer<T>` can be cast to a concrete `CFunc`, and calling it requires `unsafe`.
+- Extended vector-view scalar-input ABI coverage for `UInt64`:
+  - Added direct `UInt64` slot dispatch for `IVectorView<UInt64>.IndexOf`.
+  - Added `IVectorViewVtbl.newUInt64`, and made generic `new<..., UInt64>` builders emit the same direct ABI slot.
+  - Kept non-`UInt64` cases on the existing generic borrow/project path.
+  - Deliberately kept this round view-only because the reference scan found a real `IVectorView<u64>` projection but no matching mutable `IVector<u64>` use.
+- Added TDD coverage:
+  - `testUInt64VectorViewUsesDirectValueAbiForIndexOf` first failed because `IVectorViewVtbl.newUInt64` did not exist, then validated wrapper calls and direct vtable calls with a concrete `UInt64` CFunc signature.
+  - `testGenericUInt64VectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the generic vector-view builder emits the same direct `UInt64` input slot for `IndexOf`.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress --parallel 1 --timeout-each=30s`: 55/55 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress --timeout-each=30s --no-capture-output`: 334/334 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
