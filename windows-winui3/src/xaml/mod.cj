@@ -33,7 +33,8 @@ import windows_core.{
     coTaskMemAlloc,
     coTaskMemFree,
     loadFactoryByName,
-    queryInterfaceRaw
+    queryInterfaceRaw,
+    winrtBorrowGenericIn
 }
 
 let IID_BUTTON_BASE = GUID.from_values(1701921385u32, 9331u16, 21287u16, 166u8, 82u8, 14u8, 166u8, 188u8, 231u8, 244u8, 3u8)
@@ -201,7 +202,9 @@ public class WindowHandle <: Resource {
         let title = HString(value)
         try {
             let table = readWinuiVtbl<WindowVtbl>(raw)
-            checkHRESULT(HRESULT(unsafe { table.SetTitle(raw, title.asRaw()) }), "IWindow.put_Title")
+            try (borrow = winrtBorrowGenericIn<HString>(title)) {
+                checkHRESULT(HRESULT(unsafe { table.SetTitle(raw, borrow.asRaw()) }), "IWindow.put_Title")
+            }
         } finally {
             title.close()
         }
@@ -286,9 +289,12 @@ public class UIElementHandle <: Resource {
             try {
                 let table = readWinuiVtbl<IFrameworkElementVtbl>(framework)
                 var result = CPointer<Unit>()
-                let hr = HRESULT(unsafe {
-                    table.FindName(framework, text.asRaw(), CPointer<CPointer<Unit>>(inout result))
-                })
+                var hr = E_POINTER
+                try (borrow = winrtBorrowGenericIn<HString>(text)) {
+                    hr = HRESULT(unsafe {
+                        table.FindName(framework, borrow.asRaw(), CPointer<CPointer<Unit>>(inout result))
+                    })
+                }
                 checkHRESULT(hr, "IFrameworkElement.FindName(${name})")
                 if (result.isNull()) {
                     throw Exception("IFrameworkElement.FindName(${name}) returned null")
@@ -493,13 +499,13 @@ class RoutedEventHandlerHandle <: Resource {
 public class ClickSubscription <: Resource {
     private var target: Option<ButtonBaseHandle> = None
     private var handler: Option<RoutedEventHandlerHandle> = None
-    private var token: EventRegistrationToken = EventRegistrationToken()
+    private var token: EventRegistrationToken = 0
     private var closed: Bool = false
 
     init(target: ButtonBaseHandle, handler: () -> Unit) {
         let routed = RoutedEventHandlerHandle(handler)
         let table = readWinuiVtbl<ButtonBaseVtbl>(target.asRaw())
-        var registeredToken = EventRegistrationToken()
+        var registeredToken: EventRegistrationToken = 0
         try {
             checkHRESULT(
                 HRESULT(unsafe {
@@ -569,9 +575,12 @@ func loadXamlInspectable(xaml: HString): CPointer<Unit> {
     try {
         let table = readWinuiVtbl<IXamlReaderStaticsVtbl>(statics.asRaw())
         var result = CPointer<Unit>()
-        let hr = HRESULT(unsafe {
-            table.Load(statics.asRaw(), xaml.asRaw(), CPointer<CPointer<Unit>>(inout result))
-        })
+        var hr = E_POINTER
+        try (borrow = winrtBorrowGenericIn<HString>(xaml)) {
+            hr = HRESULT(unsafe {
+                table.Load(statics.asRaw(), borrow.asRaw(), CPointer<CPointer<Unit>>(inout result))
+            })
+        }
         checkHRESULT(hr, "IXamlReaderStatics.Load")
         if (result.isNull()) {
             throw Exception("IXamlReaderStatics.Load returned null")

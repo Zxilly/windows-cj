@@ -3,7 +3,7 @@ package windows_services
 import std.collection.HashMap
 import std.sync.Mutex
 import windows_common.Win32.System.Services as Win32Services
-import windows_libloading as windows_libloading
+import windows_strings.PWSTR
 
 public type BOOL = Int32
 public type SERVICE_STATUS_HANDLE = Win32Services.SERVICE_STATUS_HANDLE
@@ -28,35 +28,6 @@ private let SERVICE_RUNNING = 4u32
 private let SERVICE_CONTINUE_PENDING = 5u32
 private let SERVICE_PAUSE_PENDING = 6u32
 private let SERVICE_PAUSED = 7u32
-
-func RegisterServiceCtrlHandlerExW(
-    lpServiceName: CPointer<UInt16>,
-    lpHandlerProc: LPHANDLER_FUNCTION_EX,
-    lpContext: CPointer<Unit>
-): SERVICE_STATUS_HANDLE {
-    let proc = CFunc<(CPointer<UInt16>, LPHANDLER_FUNCTION_EX, CPointer<Unit>) -> SERVICE_STATUS_HANDLE>(
-        windows_libloading.resolveProc("advapi32.dll", "RegisterServiceCtrlHandlerExW")
-    )
-    unsafe { proc(lpServiceName, lpHandlerProc, lpContext) }
-}
-
-func SetServiceStatusProc(): CFunc<(SERVICE_STATUS_HANDLE, CPointer<SERVICE_STATUS>) -> BOOL> {
-    CFunc<(SERVICE_STATUS_HANDLE, CPointer<SERVICE_STATUS>) -> BOOL>(
-        windows_libloading.resolveProc("advapi32.dll", "SetServiceStatus")
-    )
-}
-
-func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): BOOL {
-    let proc = SetServiceStatusProc()
-    unsafe { proc(hServiceStatus, lpServiceStatus) }
-}
-
-func StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYW>): BOOL {
-    let proc = CFunc<(CPointer<SERVICE_TABLE_ENTRYW>) -> BOOL>(
-        windows_libloading.resolveProc("advapi32.dll", "StartServiceCtrlDispatcherW")
-    )
-    unsafe { proc(lpServiceStartTable) }
-}
 
 public enum ServiceResult<T> {
     | Ok(T)
@@ -213,31 +184,30 @@ public class Service {
     }
 
     public func run(callback: (Service, Command) -> Unit): ServiceResult<Unit> {
-        stateMutex.lock()
-        if (callback_.isSome()) {
-            stateMutex.unlock()
-            throw IllegalStateException("run was already called")
+        synchronized(stateMutex) {
+            if (callback_.isSome()) {
+                throw IllegalStateException("run was already called")
+            }
+            callback_ = Some(callback)
+            status_.dwControlsAccepted = accept_
         }
-        callback_ = Some(callback)
-        status_.dwControlsAccepted = accept_
-        stateMutex.unlock()
 
         let serviceId = registerService(this)
         var table = Array<SERVICE_TABLE_ENTRYW>(2, repeat: SERVICE_TABLE_ENTRYW())
         let serviceName = Array<UInt16>(1, repeat: 0u16)
         let started = unsafe {
             let nameHandle = acquireArrayRawData(serviceName)
-            let tableHandle = acquireArrayRawData(table)
-            try {
-                var entry = SERVICE_TABLE_ENTRYW()
-                entry.lpServiceName.Value = CPointer<Unit>(nameHandle.pointer)
-                entry.lpServiceProc = serviceMainThunk
-                table[0] = entry
-                table[1] = SERVICE_TABLE_ENTRYW()
-                StartServiceCtrlDispatcherW(tableHandle.pointer) != 0i32
-            } finally {
-                releaseArrayRawData(tableHandle)
-                releaseArrayRawData(nameHandle)
+                let tableHandle = acquireArrayRawData(table)
+                try {
+                    var entry = SERVICE_TABLE_ENTRYW()
+                    entry.lpServiceName = nameHandle.pointer
+                    entry.lpServiceProc = serviceMainThunk
+                    table[0] = entry
+                    table[1] = SERVICE_TABLE_ENTRYW()
+                    Win32Services.StartServiceCtrlDispatcherW(tableHandle.pointer)
+                } finally {
+                    releaseArrayRawData(tableHandle)
+                    releaseArrayRawData(nameHandle)
             }
         }
 
@@ -264,43 +234,38 @@ public class Service {
     }
 
     public func setState(state: State): Unit {
-        stateMutex.lock()
-        status_.dwCurrentState = stateToRaw(state)
-        var statusCopy = status_
-        let handle = handle_
-        stateMutex.unlock()
+        var handle = SERVICE_STATUS_HANDLE()
+        var statusCopy = SERVICE_STATUS()
+        synchronized(stateMutex) {
+            status_.dwCurrentState = stateToRaw(state)
+            handle = handle_
+            statusCopy = status_
+        }
 
         if (handle.Value.isNotNull()) {
-            let proc = SetServiceStatusProc()
-            unsafe {
-                let _ = proc(handle, inout statusCopy)
-            }
+            let _ = Win32Services.SetServiceStatus(handle, CPointer<SERVICE_STATUS>(inout statusCopy))
         }
     }
 
     public func handle(): SERVICE_STATUS_HANDLE {
-        stateMutex.lock()
-        let value = handle_
-        stateMutex.unlock()
-        value
+        synchronized(stateMutex) {
+            handle_
+        }
     }
 
     public func state(): State {
-        stateMutex.lock()
-        let raw = status_.dwCurrentState
-        stateMutex.unlock()
-        rawToState(raw)
+        let raw = synchronized(stateMutex) {
+            status_.dwCurrentState
+        }
+        return rawToState(raw)
     }
 
     public func command(command: Command): Unit {
-        callbackMutex.lock()
-        try {
+        synchronized(callbackMutex) {
             match (callback_) {
                 case Some(callback) => callback(this, command)
                 case None => ()
             }
-        } finally {
-            callbackMutex.unlock()
         }
     }
 
@@ -309,9 +274,9 @@ public class Service {
     }
 
     func storeHandle(handle: SERVICE_STATUS_HANDLE): Unit {
-        stateMutex.lock()
-        handle_ = handle
-        stateMutex.unlock()
+        synchronized(stateMutex) {
+            handle_ = handle
+        }
     }
 
     private func takeFallback(): Option<(Service) -> Unit> {
@@ -331,48 +296,36 @@ private func contextPointer(id: UIntNative): CPointer<Unit> {
 }
 
 private func registerService(service: Service): UIntNative {
-    registryMutex.lock()
-    try {
+    synchronized(registryMutex) {
         let id = nextServiceId
         nextServiceId += 1
         activeServiceId = id
         serviceRegistry.add(id, service)
         return id
-    } finally {
-        registryMutex.unlock()
     }
 }
 
 private func unregisterService(id: UIntNative): Unit {
-    registryMutex.lock()
-    try {
+    synchronized(registryMutex) {
         if (activeServiceId == id) {
             activeServiceId = 0
         }
         serviceRegistry.remove(id)
-    } finally {
-        registryMutex.unlock()
     }
 }
 
 private func currentActiveServiceId(): UIntNative {
-    registryMutex.lock()
-    try {
+    synchronized(registryMutex) {
         activeServiceId
-    } finally {
-        registryMutex.unlock()
     }
 }
 
 private func currentActiveService(): Option<Service> {
-    registryMutex.lock()
-    try {
+    synchronized(registryMutex) {
         if (activeServiceId == 0) {
             return None
         }
         serviceRegistry.get(activeServiceId)
-    } finally {
-        registryMutex.unlock()
     }
 }
 
@@ -381,11 +334,8 @@ private func serviceFromContext(context: CPointer<Unit>): Option<Service> {
     if (id == 0) {
         return None
     }
-    registryMutex.lock()
-    try {
+    synchronized(registryMutex) {
         serviceRegistry.get(id)
-    } finally {
-        registryMutex.unlock()
     }
 }
 
@@ -421,12 +371,12 @@ private func dispatchServiceControl(
 }
 
 @C
-private func serviceMainThunk(_: UInt32, _: CPointer<Unit>): Unit {
+private func serviceMainThunk(_: UInt32, _: CPointer<CPointer<UInt16>>): Unit {
     match (currentActiveService()) {
         case Some(service) =>
             let handle = unsafe {
-                RegisterServiceCtrlHandlerExW(
-                    CPointer<UInt16>(),
+                Win32Services.RegisterServiceCtrlHandlerExW(
+                    PWSTR(),
                     handlerThunk,
                     contextPointer(currentActiveServiceId())
                 )

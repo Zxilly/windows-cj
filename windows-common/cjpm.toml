@@ -10,4 +10,7 @@
 
 [dependencies]
   windows_core = { path = "../windows-core" }
+  windows_interface = { path = "../windows-interface" }
+  windows_libloading = { path = "../windows-libloading" }
   windows_polyfill = { path = "../windows-polyfill" }
+  windows_strings = { path = "../windows-strings" }

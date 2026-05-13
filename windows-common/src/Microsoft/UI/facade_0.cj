@@ -2,11 +2,8 @@
 
 package windows_common.Microsoft.UI
 
-import windows_common.impl.{Microsoft_UI_ClosableNotifierHandler, Microsoft_UI_DisplayId, Microsoft_UI_IClosableNotifier, Microsoft_UI_IClosableNotifierVtbl, Microsoft_UI_IconId, Microsoft_UI_WindowId}
+import windows_common.impl.{Microsoft_UI_DisplayId, Microsoft_UI_IconId, Microsoft_UI_WindowId}
 
-public type ClosableNotifierHandler = Microsoft_UI_ClosableNotifierHandler
 public type DisplayId = Microsoft_UI_DisplayId
-public type IClosableNotifier = Microsoft_UI_IClosableNotifier
-public type IClosableNotifierVtbl = Microsoft_UI_IClosableNotifierVtbl
 public type IconId = Microsoft_UI_IconId
 public type WindowId = Microsoft_UI_WindowId

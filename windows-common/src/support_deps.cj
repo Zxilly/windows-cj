@@ -3,4 +3,7 @@
 package windows_common
 
 import windows_core as windows_core
+import windows_interface as windows_interface
+import windows_libloading as windows_libloading
 import windows_polyfill as windows_polyfill
+import windows_strings as windows_strings

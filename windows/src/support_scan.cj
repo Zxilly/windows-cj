@@ -23,52 +23,118 @@ func supportSourceDir(supportDir: String): String {
     if (directoryExists(direct)) {
         return direct
     }
-    return "../${supportDir}/src"
+    let sibling = "../${supportDir}/src"
+    if (directoryExists(sibling)) {
+        return sibling
+    }
+    throw Exception("support package src not found: ${supportDir}")
 }
 
 func scanCjSources(dir: String, namespaces: ArrayList<String>): Unit {
-    try {
-        let entries = Directory.readFrom(dir)
-        for (entry in entries) {
-            let child = "${dir}/${entry.name}"
-            if (endsWith(child, ".cj")) {
-                collectFeatureNamesFromSource(child, namespaces)
-            } else {
-                scanCjSources(child, namespaces)
-            }
+    let entries = Directory.readFrom(dir)
+    for (entry in entries) {
+        let child = "${dir}/${entry.name}"
+        if (endsWith(child, ".cj")) {
+            collectFeatureNamesFromSource(child, namespaces)
+        } else if (directoryExists(child)) {
+            scanCjSources(child, namespaces)
         }
-    } catch (_: Exception) {
-        return
     }
 }
 
 func collectFeatureNamesFromSource(path: String, namespaces: ArrayList<String>): Unit {
     let text = String.fromUtf8(File.readFrom(path))
     let lines = splitString(text, b'\n')
+    var groupedImportBase = ""
+    var inGroupedImport = false
     for (line in lines) {
-        match (featureNameFromImportLine(line)) {
-            case Some(feature) => addUnique(namespaces, feature)
+        if (inGroupedImport) {
+            collectGroupedImportFeatures(groupedImportBase, line, namespaces)
+            if (containsByte(line, b'}')) {
+                inGroupedImport = false
+                groupedImportBase = ""
+            }
+            continue
+        }
+        match (windowsImportPayload(line)) {
+            case Some(payload) =>
+                match (collectImportPayloadFeatures(payload, namespaces)) {
+                    case Some(base) =>
+                        groupedImportBase = base
+                        inGroupedImport = true
+                    case None => ()
+                }
             case None => ()
         }
     }
 }
 
-func featureNameFromImportLine(line: String): Option<String> {
+func windowsImportPayload(line: String): Option<String> {
     var text = trimAscii(line)
     if (startsWith(text, "public ")) {
         text = stripPrefix(text, "public ")
         text = trimAscii(text)
     }
     if (startsWith(text, "import windows_common.")) {
-        return featureNameFromWindowsImport(readImportNamespace(stripPrefix(text, "import windows_common.")))
+        return Some(stripPrefix(text, "import windows_common."))
     }
     if (startsWith(text, "import windows_gen.")) {
-        return featureNameFromWindowsImport(readImportNamespace(stripPrefix(text, "import windows_gen.")))
+        return Some(stripPrefix(text, "import windows_gen."))
     }
     if (startsWith(text, "import windows.")) {
-        return featureNameFromWindowsImport(readImportNamespace(stripPrefix(text, "import windows.")))
+        return Some(stripPrefix(text, "import windows."))
     }
     return None
+}
+
+func collectImportPayloadFeatures(payload: String, namespaces: ArrayList<String>): Option<String> {
+    let bytes = payload.toArray()
+    let brace = indexOfByte(payload, b'{')
+    if (brace < 0) {
+        match (featureNameFromWindowsImport(readImportNamespace(payload))) {
+            case Some(feature) => addUnique(namespaces, feature)
+            case None => ()
+        }
+        return None
+    }
+
+    let base = trimTrailingDot(trimAscii(String.fromUtf8(bytes[0..brace])))
+    let close = indexOfByteFrom(payload, b'}', brace + 1)
+    if (close >= 0) {
+        collectGroupedImportFeatures(base, String.fromUtf8(bytes[(brace + 1)..close]), namespaces)
+        return None
+    }
+
+    collectGroupedImportFeatures(base, String.fromUtf8(bytes[(brace + 1)..Int64(bytes.size)]), namespaces)
+    return Some(base)
+}
+
+func collectGroupedImportFeatures(base: String, line: String, namespaces: ArrayList<String>): Unit {
+    let beforeClose = beforeFirstByte(line, b'}')
+    for (item in splitString(beforeClose, b',')) {
+        let name = groupedImportItemName(item)
+        if (name.isEmpty()) {
+            continue
+        }
+        let imported = if (base.isEmpty()) {
+            name
+        } else {
+            "${base}.${name}"
+        }
+        match (featureNameFromWindowsImport(imported)) {
+            case Some(feature) => addUnique(namespaces, feature)
+            case None => ()
+        }
+    }
+}
+
+func groupedImportItemName(item: String): String {
+    var name = readImportNamespace(trimAscii(item))
+    if (endsWith(name, "Vtbl")) {
+        let bytes = name.toArray()
+        name = String.fromUtf8(bytes[0..(Int64(bytes.size) - 4)])
+    }
+    return name
 }
 
 func featureNameFromWindowsImport(namespace: String): Option<String> {
@@ -78,7 +144,7 @@ func featureNameFromWindowsImport(namespace: String): Option<String> {
     }
     let parts = splitString(normalized, b'.')
     for (part in parts) {
-        if (part == "impl") {
+        if (part == "impl" || part == "Native") {
             return None
         }
     }
@@ -93,7 +159,7 @@ func readImportNamespace(text: String): String {
     var end: Int64 = 0
     while (end < Int64(bytes.size)) {
         let byte = bytes[end]
-        if (byte == b' ' || byte == b'\t' || byte == b'\r' || byte == b'{' || byte == b';') {
+        if (byte == b' ' || byte == b'\t' || byte == b'\r' || byte == b'{' || byte == b'}' || byte == b';') {
             break
         }
         end += 1
@@ -134,6 +200,35 @@ func trimTrailingDot(value: String): String {
 
 func isAsciiWhitespace(byte: Byte): Bool {
     return byte == b' ' || byte == b'\t' || byte == b'\r' || byte == b'\n'
+}
+
+func containsByte(value: String, needle: Byte): Bool {
+    return indexOfByte(value, needle) >= 0
+}
+
+func indexOfByte(value: String, needle: Byte): Int64 {
+    indexOfByteFrom(value, needle, 0)
+}
+
+func indexOfByteFrom(value: String, needle: Byte, start: Int64): Int64 {
+    let bytes = value.toArray()
+    var i = start
+    while (i < Int64(bytes.size)) {
+        if (bytes[i] == needle) {
+            return i
+        }
+        i += 1
+    }
+    return -1
+}
+
+func beforeFirstByte(value: String, needle: Byte): String {
+    let index = indexOfByte(value, needle)
+    if (index < 0) {
+        return value
+    }
+    let bytes = value.toArray()
+    return String.fromUtf8(bytes[0..index])
 }
 
 func endsWith(value: String, suffix: String): Bool {

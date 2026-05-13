@@ -1,65 +1,26 @@
 package windows_version
 
 import windows_common.Win32.System.SystemInformation as Win32SystemInformation
-import windows_libloading as windows_libloading
+import windows_common.Win32.System.Registry as Win32Registry
+import windows_strings.PSTR
 
 type OSVERSIONINFOEXW = Win32SystemInformation.OSVERSIONINFOEXW
+type HKEY = Win32Registry.HKEY
 
-let HKEY_LOCAL_MACHINE: CPointer<Unit> = unsafe { CPointer<Unit>(CPointer<UInt8>() + -2147483646) }
+let HKEY_LOCAL_MACHINE: HKEY = rawHKey(-2147483646)
 let RRF_RT_REG_DWORD: UInt32 = 16u32
 let VER_NT_WORKSTATION: UInt8 = 1u8
 
-func RtlGetVersionProc(): CFunc<(CPointer<OSVERSIONINFOEXW>) -> Int32> {
-    CFunc<(CPointer<OSVERSIONINFOEXW>) -> Int32>(
-        windows_libloading.resolveProc("ntdll.dll", "RtlGetVersion")
-    )
-}
-
-func RtlGetVersion(lpVersionInformation: CPointer<OSVERSIONINFOEXW>): Int32 {
-    let proc = RtlGetVersionProc()
-    unsafe { proc(lpVersionInformation) }
-}
-
-func RegGetValueAProc(): CFunc<(
-    CPointer<Unit>,
-    CString,
-    CString,
-    UInt32,
-    CPointer<UInt32>,
-    CPointer<UInt32>,
-    CPointer<UInt32>
-) -> UInt32> {
-    CFunc<(
-        CPointer<Unit>,
-        CString,
-        CString,
-        UInt32,
-        CPointer<UInt32>,
-        CPointer<UInt32>,
-        CPointer<UInt32>
-    ) -> UInt32>(windows_libloading.resolveProc("advapi32.dll", "RegGetValueA"))
-}
-
-func RegGetValueA(
-    hkey: CPointer<Unit>,
-    lpsubkey: CString,
-    lpvalue: CString,
-    dwflags: UInt32,
-    pdwtype: CPointer<UInt32>,
-    pvdata: CPointer<UInt32>,
-    pcbdata: CPointer<UInt32>
-): UInt32 {
-    let proc = RegGetValueAProc()
-    unsafe { proc(hkey, lpsubkey, lpvalue, dwflags, pdwtype, pvdata, pcbdata) }
+private func rawHKey(value: Int64): HKEY {
+    var key = HKEY()
+    key.Value = unsafe { CPointer<Unit>(CPointer<UInt8>() + value) }
+    key
 }
 
 func readVersionInfo(): OSVERSIONINFOEXW {
     var info = OSVERSIONINFOEXW()
     info.dwOSVersionInfoSize = UInt32(sizeOf<OSVERSIONINFOEXW>())
-    let proc = RtlGetVersionProc()
-    unsafe {
-        let _ = proc(inout info)
-    }
+    let _ = Win32SystemInformation.RtlGetVersion(CPointer<OSVERSIONINFOEXW>(inout info))
     info
 }
 
@@ -111,18 +72,15 @@ public func revision(): UInt32 {
     var length = UInt32(sizeOf<UInt32>())
     try (subKeyResource = subKey.asResource()) {
         try (valueNameResource = valueName.asResource()) {
-            let proc = RegGetValueAProc()
-            let status = unsafe {
-                proc(
-                    HKEY_LOCAL_MACHINE,
-                    subKeyResource.value,
-                    valueNameResource.value,
-                    RRF_RT_REG_DWORD,
-                    CPointer<UInt32>(),
-                    inout value,
-                    inout length
-                )
-            }
+            let status = Win32Registry.RegGetValueA(
+                HKEY_LOCAL_MACHINE,
+                PSTR.fromRaw(subKeyResource.value.getChars()),
+                PSTR.fromRaw(valueNameResource.value.getChars()),
+                RRF_RT_REG_DWORD,
+                CPointer<UInt32>(),
+                CPointer<Unit>(CPointer<UInt32>(inout value)),
+                CPointer<UInt32>(inout length)
+            )
             if (status == 0u32 && length == UInt32(sizeOf<UInt32>())) {
                 return value
             }

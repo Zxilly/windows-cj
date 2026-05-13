@@ -162,23 +162,29 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
     if (typeDef.hasBaseType) {
         addUnique(dependencies, typeDef.baseType)
     }
+    addCustomAttributeTypeDependencies(dependencies, selfFullName, typeDef.customAttributes)
     for (field in typeDef.fields) {
         addSignatureDependencies(dependencies, field.signature, selfFullName)
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, field.customAttributes)
     }
     for (method in typeDef.methods) {
         addMethodSignatureDependencies(dependencies, method.signature, selfFullName)
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, method.customAttributes)
         for (parameter in method.parameters) {
             match (parameter.signature) {
                 case Some(signature) => addSignatureDependencies(dependencies, signature, selfFullName)
                 case None => ()
             }
+            addCustomAttributeTypeDependencies(dependencies, selfFullName, parameter.customAttributes)
         }
     }
     for (property in typeDef.properties) {
         addMethodSignatureDependencies(dependencies, property.signature, selfFullName)
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, property.customAttributes)
     }
     for (event in typeDef.events) {
         addSignatureDependencies(dependencies, event.typeSig, selfFullName)
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, event.customAttributes)
     }
     for (impl in typeDef.interfaceImplementations) {
         match (impl.interfaceSignature) {
@@ -193,6 +199,7 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
             case Some(metadataType) => addMetadataTypeDependency(dependencies, metadataType, selfFullName)
             case None => ()
         }
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, impl.customAttributes)
     }
     let filtered = ArrayList<String>()
     for (dependency in dependencies) {
@@ -202,6 +209,44 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
     }
     sortStrings(filtered)
     return filtered
+}
+
+func addCustomAttributeTypeDependencies(
+    dependencies: ArrayList<String>,
+    ownerFullName: String,
+    attributes: ArrayList<CustomAttributeRecord>
+): Unit {
+    for (attribute in attributes) {
+        for (fullName in customAttributeTypeNameArgumentFullNames(attribute)) {
+            addCustomAttributeTypeDependency(dependencies, ownerFullName, fullName)
+        }
+        addAssociatedEnumStringAttributeDependency(dependencies, ownerFullName, attribute)
+    }
+}
+
+func addAssociatedEnumStringAttributeDependency(
+    dependencies: ArrayList<String>,
+    ownerFullName: String,
+    attribute: CustomAttributeRecord
+): Unit {
+    if (!hasAttributeName(attribute, "AssociatedEnumAttribute")) {
+        return
+    }
+    for (argument in attribute.fixedArguments) {
+        if (isStringSignature(argument.typeSig)) {
+            match (fixedArgumentString(argument)) {
+                case Some(fullName) => addCustomAttributeTypeDependency(dependencies, ownerFullName, fullName)
+                case None => ()
+            }
+        }
+    }
+}
+
+func isStringSignature(signature: SignatureRecord): Bool {
+    if (signature.kind == "Primitive" && signature.name == "String") {
+        return true
+    }
+    return signature.kind == "Type" && signature.namespace == "System" && signature.name == "String"
 }
 
 func addMethodSignatureDependencies(
@@ -222,7 +267,7 @@ func addSignatureDependencies(
 ): Unit {
     if (signature.kind == "Type" && !signature.name.isEmpty()) {
         if (signature.hasNamespace && !signature.namespace.isEmpty()) {
-            addUnique(dependencies, "${signature.namespace}.${signature.name}")
+            addUnique(dependencies, remapKnownTypeFullName("${signature.namespace}.${signature.name}"))
         } else {
             addRelativeDependencyCandidates(dependencies, ownerFullName, signature.name)
         }
@@ -256,6 +301,18 @@ func addSignatureDependencies(
     }
 }
 
+func addCustomAttributeTypeDependency(
+    dependencies: ArrayList<String>,
+    ownerFullName: String,
+    fullName: String
+): Unit {
+    if (containsByte(fullName, b'.')) {
+        addUnique(dependencies, remapKnownTypeFullName(fullName))
+    } else {
+        addRelativeDependencyCandidates(dependencies, ownerFullName, fullName)
+    }
+}
+
 func addMetadataTypeDependency(
     dependencies: ArrayList<String>,
     metadataType: MetadataTypeRecord,
@@ -264,17 +321,17 @@ func addMetadataTypeDependency(
     if (metadataType.namespace.isEmpty()) {
         addRelativeDependencyCandidates(dependencies, ownerFullName, metadataType.name)
     } else {
-        addUnique(dependencies, metadataType.fullName())
+        addUnique(dependencies, remapKnownTypeFullName(metadataType.fullName()))
     }
 }
 
 func addRelativeDependencyCandidates(dependencies: ArrayList<String>, ownerFullName: String, name: String): Unit {
     var current = ownerFullName
     while (!current.isEmpty()) {
-        addUnique(dependencies, "${current}.${name}")
+        addUnique(dependencies, remapKnownTypeFullName("${current}.${name}"))
         current = parentFullNameForDependencies(current)
     }
-    addUnique(dependencies, name)
+    addUnique(dependencies, remapKnownTypeFullName(name))
 }
 
 func parentFullNameForDependencies(fullName: String): String {

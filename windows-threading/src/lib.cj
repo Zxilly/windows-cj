@@ -3,7 +3,6 @@ package windows_threading
 import std.collection.HashMap
 import std.sync.Mutex
 import windows_common.Win32.System.Threading as Win32Threading
-import windows_libloading as windows_libloading
 
 public type BOOL = Int32
 public type PTP_CALLBACK_INSTANCE = Win32Threading.PTP_CALLBACK_INSTANCE
@@ -15,86 +14,6 @@ public type TP_CALLBACK_ENVIRON_V3 = Win32Threading.TP_CALLBACK_ENVIRON_V3
 
 private let TP_CALLBACK_PRIORITY_NORMAL = 1i32
 
-func CloseThreadpool(ptpp: PTP_POOL): Unit {
-    let proc = CFunc<(PTP_POOL) -> Unit>(windows_libloading.resolveProc("kernel32.dll", "CloseThreadpool"))
-    unsafe { proc(ptpp) }
-}
-
-func CloseThreadpoolCleanupGroup(ptpcg: PTP_CLEANUP_GROUP): Unit {
-    let proc = CFunc<(PTP_CLEANUP_GROUP) -> Unit>(
-        windows_libloading.resolveProc("kernel32.dll", "CloseThreadpoolCleanupGroup")
-    )
-    unsafe { proc(ptpcg) }
-}
-
-func CloseThreadpoolCleanupGroupMembers(
-    ptpcg: PTP_CLEANUP_GROUP,
-    fCancelPendingCallbacks: BOOL,
-    pvCleanupContext: CPointer<Unit>
-): Unit {
-    let proc = CFunc<(PTP_CLEANUP_GROUP, BOOL, CPointer<Unit>) -> Unit>(
-        windows_libloading.resolveProc("kernel32.dll", "CloseThreadpoolCleanupGroupMembers")
-    )
-    unsafe { proc(ptpcg, fCancelPendingCallbacks, pvCleanupContext) }
-}
-
-func CreateThreadpool(reserved: CPointer<Unit>): PTP_POOL {
-    let proc = CFunc<(CPointer<Unit>) -> PTP_POOL>(
-        windows_libloading.resolveProc("kernel32.dll", "CreateThreadpool")
-    )
-    unsafe { proc(reserved) }
-}
-
-func CreateThreadpoolCleanupGroup(): PTP_CLEANUP_GROUP {
-    let proc = CFunc<() -> PTP_CLEANUP_GROUP>(
-        windows_libloading.resolveProc("kernel32.dll", "CreateThreadpoolCleanupGroup")
-    )
-    unsafe { proc() }
-}
-
-func GetCurrentThreadId(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("kernel32.dll", "GetCurrentThreadId"))
-    unsafe { proc() }
-}
-
-func SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: UInt32): Unit {
-    let proc = CFunc<(PTP_POOL, UInt32) -> Unit>(
-        windows_libloading.resolveProc("kernel32.dll", "SetThreadpoolThreadMaximum")
-    )
-    unsafe { proc(ptpp, cthrdMost) }
-}
-
-func SetThreadpoolThreadMinimum(ptpp: PTP_POOL, cthrdMic: UInt32): BOOL {
-    let proc = CFunc<(PTP_POOL, UInt32) -> BOOL>(
-        windows_libloading.resolveProc("kernel32.dll", "SetThreadpoolThreadMinimum")
-    )
-    unsafe { proc(ptpp, cthrdMic) }
-}
-
-func Sleep(dwMilliseconds: UInt32): Unit {
-    let proc = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("kernel32.dll", "Sleep"))
-    unsafe { proc(dwMilliseconds) }
-}
-
-func TrySubmitThreadpoolCallbackProc(): CFunc<(
-    PTP_SIMPLE_CALLBACK,
-    CPointer<Unit>,
-    CPointer<TP_CALLBACK_ENVIRON_V3>
-) -> BOOL> {
-    CFunc<(PTP_SIMPLE_CALLBACK, CPointer<Unit>, CPointer<TP_CALLBACK_ENVIRON_V3>) -> BOOL>(
-        windows_libloading.resolveProc("kernel32.dll", "TrySubmitThreadpoolCallback")
-    )
-}
-
-func TrySubmitThreadpoolCallback(
-    pfns: PTP_SIMPLE_CALLBACK,
-    pv: CPointer<Unit>,
-    pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>
-): BOOL {
-    let proc = TrySubmitThreadpoolCallbackProc()
-    unsafe { proc(pfns, pv, pcbe) }
-}
-
 private let taskMutex = Mutex()
 private var nextTaskKey: UIntNative = 1
 private var taskRegistry = HashMap<UIntNative, WorkItem>()
@@ -104,24 +23,18 @@ private class PoolState {
     private var firstFailure: Option<String> = None
 
     public func recordFailure(message: String): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (firstFailure.isNone()) {
                 firstFailure = Some(message)
             }
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func takeFailure(): Option<String> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             let result = firstFailure
             firstFailure = None
             result
-        } finally {
-            mutex.unlock()
         }
     }
 }
@@ -153,37 +66,28 @@ private func allocationFailed(): Nothing {
 }
 
 private func allocateTaskKey(): UIntNative {
-    taskMutex.lock()
-    try {
+    synchronized(taskMutex) {
         let key = nextTaskKey
         nextTaskKey += 1
         return key
-    } finally {
-        taskMutex.unlock()
     }
 }
 
 private func registerTask(work: () -> Unit, sink!: Option<PoolState> = None): UIntNative {
     let key = allocateTaskKey()
-    taskMutex.lock()
-    try {
+    synchronized(taskMutex) {
         taskRegistry.add(key, WorkItem(work, sink: sink))
-    } finally {
-        taskMutex.unlock()
     }
     key
 }
 
 private func takeTask(key: UIntNative): Option<WorkItem> {
-    taskMutex.lock()
-    try {
+    synchronized(taskMutex) {
         let result = taskRegistry.get(key)
         if (result.isSome()) {
             taskRegistry.remove(key)
         }
         return result
-    } finally {
-        taskMutex.unlock()
     }
 }
 
@@ -216,8 +120,7 @@ private let abiSizeMutex = Mutex()
 private var abiSizeChecked: Bool = false
 
 private func assertTpCallbackEnvironV3SizeMatches(): Unit {
-    abiSizeMutex.lock()
-    try {
+    synchronized(abiSizeMutex) {
         if (abiSizeChecked) {
             return
         }
@@ -228,8 +131,6 @@ private func assertTpCallbackEnvironV3SizeMatches(): Unit {
             )
         }
         abiSizeChecked = true
-    } finally {
-        abiSizeMutex.unlock()
     }
 }
 
@@ -256,13 +157,13 @@ private func submitDefault(work: () -> Unit): Unit {
     let key = registerTask(work)
     let context = unsafe { createTaskContext(key) }
     let success = unsafe {
-        TrySubmitThreadpoolCallback(
+        Win32Threading.TrySubmitThreadpoolCallback(
             taskThunk,
             context,
             CPointer<TP_CALLBACK_ENVIRON_V3>()
         )
     }
-    if (success == 0) {
+    if (!success) {
         let _ = takeTask(key)
         unsafe { destroyTaskContext(context) }
         allocationFailed()
@@ -278,15 +179,12 @@ private func submitToPool(
     let key = registerTask(work, sink: sink)
     let context = unsafe { createTaskContext(key) }
     var env = makeEnvironment(pool, cleanupGroup)
-    let proc = TrySubmitThreadpoolCallbackProc()
-    let success = unsafe {
-        proc(
-            taskThunk,
-            context,
-            inout env
-        )
-    }
-    if (success == 0) {
+    let success = Win32Threading.TrySubmitThreadpoolCallback(
+        taskThunk,
+        context,
+        CPointer<TP_CALLBACK_ENVIRON_V3>(inout env)
+    )
+    if (!success) {
         let _ = takeTask(key)
         unsafe { destroyTaskContext(context) }
         allocationFailed()
@@ -295,7 +193,7 @@ private func submitToPool(
 
 @C
 private func taskThunk(
-    _: PTP_CALLBACK_INSTANCE,
+    _: CPointer<Unit>,
     context: CPointer<Unit>
 ): Unit {
     if (context.isNull()) {
@@ -331,12 +229,12 @@ public func forEach<T>(source: Iterable<T>, work: (T) -> Unit): Unit {
 }
 
 public func threadId(): UInt32 {
-    unsafe { GetCurrentThreadId() }
+    unsafe { Win32Threading.GetCurrentThreadId() }
 }
 
 public func sleep(milliseconds: UInt32): Unit {
     unsafe {
-        Sleep(milliseconds)
+        Win32Threading.Sleep(milliseconds)
     }
 }
 
@@ -349,14 +247,14 @@ public class Pool <: Resource {
 
     public init() {
         assertTpCallbackEnvironV3SizeMatches()
-        let createdPool = unsafe { CreateThreadpool(CPointer<Unit>()) }
+        let createdPool = unsafe { Win32Threading.CreateThreadpool() }
         if (createdPool.Value.isNull()) {
             allocationFailed()
         }
 
-        let createdCleanupGroup = unsafe { CreateThreadpoolCleanupGroup() }
+        let createdCleanupGroup = unsafe { Win32Threading.CreateThreadpoolCleanupGroup() }
         if (createdCleanupGroup.Value.isNull()) {
-            unsafe { CloseThreadpool(createdPool) }
+            unsafe { Win32Threading.CloseThreadpool(createdPool) }
             allocationFailed()
         }
 
@@ -381,44 +279,32 @@ public class Pool <: Resource {
     }
 
     public func isClosed(): Bool {
-        lifecycleMutex.lock()
-        try {
+        synchronized(lifecycleMutex) {
             closed
-        } finally {
-            lifecycleMutex.unlock()
         }
     }
 
     public func setThreadLimits(min: UInt32, max: UInt32): Unit {
-        lifecycleMutex.lock()
-        try {
+        synchronized(lifecycleMutex) {
             throwIfClosed(closed)
-            let success = unsafe { SetThreadpoolThreadMinimum(poolHandle, min) }
-            if (success == 0) {
+            let success = unsafe { Win32Threading.SetThreadpoolThreadMinimum(poolHandle, min) }
+            if (!success) {
                 allocationFailed()
             }
-            unsafe { SetThreadpoolThreadMaximum(poolHandle, max) }
-        } finally {
-            lifecycleMutex.unlock()
+            unsafe { Win32Threading.SetThreadpoolThreadMaximum(poolHandle, max) }
         }
     }
 
     public func submit(work: () -> Unit): Unit {
-        lifecycleMutex.lock()
-        try {
+        synchronized(lifecycleMutex) {
             throwIfClosed(closed)
             submitToPool(poolHandle, cleanupGroup, work, sink: Some(state))
-        } finally {
-            lifecycleMutex.unlock()
         }
     }
 
     public func scope<R>(body: (Scope) -> R): R {
-        lifecycleMutex.lock()
-        try {
+        synchronized(lifecycleMutex) {
             throwIfClosed(closed)
-        } finally {
-            lifecycleMutex.unlock()
         }
 
         let scope = Scope(this)
@@ -437,16 +323,13 @@ public class Pool <: Resource {
     }
 
     public func join(): Unit {
-        lifecycleMutex.lock()
-        try {
+        synchronized(lifecycleMutex) {
             throwIfClosed(closed)
-        } finally {
-            lifecycleMutex.unlock()
         }
         unsafe {
-            CloseThreadpoolCleanupGroupMembers(
+            Win32Threading.CloseThreadpoolCleanupGroupMembers(
                 cleanupGroup,
-                0,
+                false,
                 CPointer<Unit>()
             )
         }
@@ -458,12 +341,13 @@ public class Pool <: Resource {
     }
 
     private func closeInternal(reportFailures: Bool): Unit {
-        lifecycleMutex.lock()
-        let alreadyClosed = closed
-        if (!alreadyClosed) {
-            closed = true
+        var alreadyClosed = false
+        synchronized(lifecycleMutex) {
+            alreadyClosed = closed
+            if (!alreadyClosed) {
+                closed = true
+            }
         }
-        lifecycleMutex.unlock()
         if (alreadyClosed) {
             return
         }
@@ -471,9 +355,9 @@ public class Pool <: Resource {
         var failure: Option<String> = None
         try {
             unsafe {
-                CloseThreadpoolCleanupGroupMembers(
+                Win32Threading.CloseThreadpoolCleanupGroupMembers(
                     cleanupGroup,
-                    0,
+                    false,
                     CPointer<Unit>()
                 )
             }
@@ -486,10 +370,10 @@ public class Pool <: Resource {
 
         unsafe {
             if (cleanupGroup.Value.isNotNull()) {
-                CloseThreadpoolCleanupGroup(cleanupGroup)
+                Win32Threading.CloseThreadpoolCleanupGroup(cleanupGroup)
             }
             if (poolHandle.Value.isNotNull()) {
-                CloseThreadpool(poolHandle)
+                Win32Threading.CloseThreadpool(poolHandle)
             }
         }
         cleanupGroup = PTP_CLEANUP_GROUP()
@@ -507,21 +391,22 @@ public class Pool <: Resource {
     }
 
     ~init() {
-        lifecycleMutex.lock()
-        let alreadyClosed = closed
-        if (!alreadyClosed) {
-            closed = true
+        var alreadyClosed = false
+        synchronized(lifecycleMutex) {
+            alreadyClosed = closed
+            if (!alreadyClosed) {
+                closed = true
+            }
         }
-        lifecycleMutex.unlock()
         if (alreadyClosed) {
             return
         }
 
         try {
             unsafe {
-                CloseThreadpoolCleanupGroupMembers(
+                Win32Threading.CloseThreadpoolCleanupGroupMembers(
                     cleanupGroup,
-                    0,
+                    false,
                     CPointer<Unit>()
                 )
             }
@@ -531,10 +416,10 @@ public class Pool <: Resource {
 
         unsafe {
             if (cleanupGroup.Value.isNotNull()) {
-                CloseThreadpoolCleanupGroup(cleanupGroup)
+                Win32Threading.CloseThreadpoolCleanupGroup(cleanupGroup)
             }
             if (poolHandle.Value.isNotNull()) {
-                CloseThreadpool(poolHandle)
+                Win32Threading.CloseThreadpool(poolHandle)
             }
         }
         cleanupGroup = PTP_CLEANUP_GROUP()

@@ -1,28 +1,20 @@
 package windows_winui3.win32
 
 import windows_core.HRESULT
-import windows_libloading.resolveProc
+import windows_common.Win32.System.Com as Win32Com
 
-public let COINIT_APARTMENTTHREADED = 2u32
+public let COINIT_APARTMENTTHREADED: Int32 = 2
 
-let OLE32_DLL = "ole32.dll"
-let CO_INITIALIZE_EX = "CoInitializeEx"
-let CO_UNINITIALIZE = "CoUninitialize"
-
-public func CoInitializeEx(reserved: CPointer<Unit>, coInit: UInt32): HRESULT {
-    let proc = resolveProc(OLE32_DLL, CO_INITIALIZE_EX)
-    let call = CFunc<(CPointer<Unit>, UInt32) -> Int32>(proc)
-    HRESULT(unsafe { call(reserved, coInit) })
+public func CoInitializeEx(coInit: Int32): HRESULT {
+    HRESULT(Win32Com.CoInitializeEx(coInit))
 }
 
 public func CoUninitialize(): Unit {
-    let proc = resolveProc(OLE32_DLL, CO_UNINITIALIZE)
-    let call = CFunc<() -> Unit>(proc)
-    unsafe { call() }
+    Win32Com.CoUninitialize()
 }
 
 public func initializeApartmentThreaded(): HRESULT {
-    CoInitializeEx(CPointer<Unit>(), COINIT_APARTMENTTHREADED)
+    CoInitializeEx(COINIT_APARTMENTTHREADED)
 }
 
 public func uninitializeApartment(): Unit {

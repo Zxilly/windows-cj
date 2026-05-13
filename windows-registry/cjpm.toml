@@ -8,6 +8,5 @@
 
 [dependencies]
   windows_common = { path = "../windows-common" }
-  windows_libloading = { path = "../windows-libloading" }
   windows_result = { path = "../windows-result" }
   windows_strings = { path = "../windows-strings" }
