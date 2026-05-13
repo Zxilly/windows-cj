@@ -1218,3 +1218,27 @@
   - `cjpm test -m windows-runtime --no-progress`: 30/30 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), map key/value scalar combinations, event args review, and generator-emitted collection projections still need focused passes.
+
+### Round96 - UInt32 map input ABI
+
+- Completed at `2026-05-14 01:08:33 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` slots can be cast through `CPointer` to concrete C-callable signatures and must be invoked from `unsafe`.
+  - `UInt32` literals use the `u32` suffix, and pattern/type matching is the current way to specialize generic wrappers by concrete scalar type.
+- Extended map scalar-input ABI coverage beyond `Int32`:
+  - Added direct `UInt32 -> UInt32` slot dispatch for `IMapView<UInt32, UInt32>.Lookup` and `HasKey`.
+  - Added direct `UInt32 -> UInt32` slot dispatch for mutable `IMap<UInt32, UInt32>.Lookup`, `HasKey`, `Insert`, and `Remove`.
+  - Added `IMapVtbl.newUInt32UInt32`, and made generic `IMapViewVtbl.new<..., UInt32, UInt32>` / `IMapVtbl.new<..., UInt32, UInt32>` emit the same direct ABI slots.
+  - Kept all other map instantiations on the existing generic borrow/project path.
+- Added TDD coverage:
+  - `testGenericUInt32MapViewBuilderUsesDirectValueAbiForSpecialization` verifies the map-view generic builder exposes direct `UInt32` key and result ABI.
+  - `testUInt32MapUsesDirectValueAbiForMutableSlots` first failed because `IMapVtbl.newUInt32UInt32` did not exist, then validated wrapper and external ABI-style calls for mutable operations.
+  - `testGenericUInt32MapBuilderUsesDirectValueAbiForSpecialization` verifies the mutable generic builder emits direct `UInt32` value ABI for lookup and insert.
+- Debugging notes:
+  - One intermediate run timed out after a builder-specialization block was accidentally placed on the map-view builder instead of the mutable map builder.
+  - The follow-up failure where wrapper lookup returned the default value traced to `IMap<K, V>.Lookup` missing the matching direct dispatch branch.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 33/33 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), mixed scalar/HString map combinations such as `UInt32 -> HString`, event args review, and generator-emitted collection projections still need focused passes.
