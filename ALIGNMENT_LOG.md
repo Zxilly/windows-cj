@@ -1097,3 +1097,24 @@
   - Full `cjpm test --no-progress`: 298/298 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other mutable map scalar combinations (`Int32 -> HString`, non-`Int32` keys, copy-struct values), observable collection surfaces, and generator-emitted collection projections still need concrete ABI thunks.
+
+### Round90 - Generic Int32 map view builder direct ABI
+
+- Completed at `2026-05-13 23:46:58 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values are C-compatible function pointers; parameter and return types must satisfy `CType`; calls and pointer casts require `unsafe` care.
+  - Type patterns and `Option` pattern matching are the supported way to branch on concrete runtime/generic values in this codebase.
+- Fixed a construction consistency bug left by earlier map-view direct ABI work:
+  - `IMapView<K, V>.Lookup` / `HasKey` already dispatch `Int32 -> Int32` and `Int32 -> HString` through direct ABI slots.
+  - Generic `IMapViewVtbl.new<Identity, K, V>` could still construct erased slots for those exact specializations, so wrapper or external direct calls could pass an `Int32` where the erased thunk expected `CPointer<Unit>`.
+  - The generic builder now overrides `Lookup` and `HasKey` with concrete direct slots for `IMapView<Int32, Int32>` and `IMapView<Int32, HString>`, while leaving other generic instantiations on the erased path.
+- Added TDD coverage:
+  - `testGenericInt32MapViewBuilderUsesDirectValueAbiForSpecialization`.
+  - `testGenericInt32HStringMapViewBuilderUsesDirectKeyAbiForSpecialization`.
+  - The red run timed out with a stuck `windows_runtime` test process, matching the ABI-corruption failure mode; after the fix, both wrapper calls and direct slot casts pass.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 21/21 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 300/300 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Mutable `IMap<Int32, HString>`, observable collection surfaces, non-`Int32` scalar keys, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
