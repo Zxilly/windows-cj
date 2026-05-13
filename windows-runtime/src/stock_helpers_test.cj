@@ -158,3 +158,29 @@ func testStockMapViewLookupAndPairIterationUseSnapshot() {
     two.close()
     three.close()
 }
+
+@Test
+func testStockInt32MapViewUsesDirectKeyAbi() {
+    let entries = ArrayList<(Int32, Int32)>([(1i32, 10i32), (2i32, 20i32)])
+    let view = toMapView(entries)
+    entries.add((3i32, 30i32))
+
+    @Expect(unsafe { view.Size() }, 2u32)
+    @Expect(unsafe { view.HasKey(2i32) }, true)
+    @Expect(unsafe { view.Lookup(2i32) }, 20i32)
+
+    var directValue = 0i32
+    let vtbl = unsafe { view.vtbl() }
+    let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+    let lookupHr = unsafe { directLookup(view.asRaw(), 1i32, CPointer<Int32>(inout directValue)) }
+    @Expect(lookupHr, S_OK.value)
+    @Expect(directValue, 10i32)
+
+    var directFound = true
+    let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+    let hasKeyHr = unsafe { directHasKey(view.asRaw(), 3i32, CPointer<Bool>(inout directFound)) }
+    @Expect(hasKeyHr, S_OK.value)
+    @Expect(directFound, false)
+
+    view.close()
+}

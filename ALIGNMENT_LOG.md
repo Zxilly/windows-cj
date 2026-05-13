@@ -994,3 +994,24 @@
   - Full `cjpm test --no-progress`: 293/293 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar collection inputs still need concrete ABI thunks (`Bool`, integer widths, floats, projected-copy structs) and map/vector mutable slots (`IMapView.Lookup`, `IMap.HasKey/Insert/Remove`, `IVector.SetAt/InsertAt/Append`, observable variants). The generic CFunc restriction means these should be generated as concrete ABI bridges rather than modeled with a single generic vtable.
+
+### Round85 - Stock Int32 map view direct key ABI
+
+- Completed at `2026-05-13 21:47:04 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-compatible function pointer representation; calls require `unsafe`, arguments/returns must satisfy `CType`, and conversions through `CPointer<T>` are supported for concrete function signatures.
+  - Function overload identity is based on parameter shapes; generic constraints alone do not distinguish overloads, so concrete scalar overloads are used for stock helpers.
+- Fixed another concrete scalar collection ABI path:
+  - Added `IMapViewVtbl.newInt32Int32`, whose `Lookup` slot is a direct `CFunc<(this, Int32, Int32*) -> HRESULT>` and whose `HasKey` slot is a direct `CFunc<(this, Int32, Bool*) -> HRESULT>`, stored behind the existing non-generic vtable fields.
+  - Added `StockInt32MapViewImpl` plus `toMapView(source: Iterable<(Int32, Int32)>)`, with a distinct `IIterable<IKeyValuePair<Int32, Int32>>` required-ancestor vtable.
+  - Updated `IMapView<K, V>.Lookup` / `HasKey` to use the direct key path only for the concrete `Int32 -> Int32` map view surface added in this round; other map views keep the existing generic input path until their concrete ABI bridges exist.
+- Added TDD coverage:
+  - `testStockInt32MapViewUsesDirectKeyAbi` verifies normal wrapper `Size`, `HasKey`, and `Lookup`, then casts `Lookup` and `HasKey` vtable slots to direct `Int32` CFunc signatures and validates external ABI-style calls.
+- Review fix:
+  - Added a closed-flagged `~init()` cleanup path to `StockInt32MapViewImpl` so both `acquireArrayRawData` vtable handles are released with `releaseArrayRawData` when the implementation object is collected.
+- Verification:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 15/15 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 294/294 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - `IMapView<Int32, V>` for non-`Int32` values, other scalar key/value types, mutable `IMap`, mutable/observable `IVector`, and generated WinRT collection projections still require concrete ABI bridge generation.
