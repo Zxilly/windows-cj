@@ -944,3 +944,28 @@
   - Full `cjpm build`: passed with `cjHeapSize=32GB`.
 - Review:
   - Review agent `Hegel`: Round82 review clean. No ABI, lifetime, HRESULT, scalar-reversion, or log accuracy issues found. Residual risk noted: zero-capacity null-buffer success is asserted directly for `IVectorView`; `IIterator` reaches the same shared helper but does not have a separate zero-capacity assertion.
+
+### Round83 - Stock iterator zero-capacity null-buffer coverage
+
+- Completed at `2026-05-13 21:22:24 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `@When[test]` is the test conditional compilation flag.
+  - `CFunc` represents C-compatible function pointers, supports CFunc-to-`CPointer<T>` conversion, and all CFunc parameter/return types must satisfy `CType`.
+  - `@C struct` fields must satisfy `CType`; `@C struct` cannot implement interfaces and cannot have generic parameters.
+- Stabilization after batching commits:
+  - The pre-existing working tree was split into four commits before this round:
+    - `be83be9b Build core WinRT runtime infrastructure`
+    - `75131dda Consolidate WinRT support into runtime package`
+    - `261d54c9 Regenerate common helpers and call sites`
+    - `52a66b6d Record alignment progress`
+  - A first post-commit full test run had reported `windows-libloading` undeclared-helper compile errors plus cascading link errors, but the failure did not reproduce after rerunning the targeted package and full workspace tests.
+- Closed the Round82 residual test gap:
+  - `windows-runtime/src/stock_helpers_test.cj` now directly calls `IIterator<HString>.GetMany` with `itemsSize == 0`, `items == null`, and a live count slot.
+  - The assertion requires `S_OK` and count `0`, matching the shared `writeGenericManyRange` zero-capacity behavior already covered for `IVectorView`.
+- Analysis note:
+  - The remaining collection scalar-input gap is real but larger: current generated generic input vtable slots erase inputs as `CPointer<Unit>`, while the reference ABI uses the type-specific ABI value for inputs such as `IVectorView<T>.IndexOf` and `IMapView<K, V>.Lookup`.
+  - Because Cangjie `@C struct` cannot be generic, fixing this correctly requires a raw function-pointer or generated type-specific bridge design rather than mechanically adding Rust-style associated ABI types.
+- Verification:
+  - `cjpm test -m windows-libloading --no-progress`: 9/9 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 292/292 passed with `cjHeapSize=32GB` before the coverage-only edit.
+  - `cjpm test -m windows-runtime --no-progress`: 13/13 passed with `cjHeapSize=32GB` after the coverage edit.

@@ -81,6 +81,16 @@ func testStockGetManyRejectsNullBufferWithNonZeroCapacity() {
     @Expect(iteratorHr, E_POINTER.value)
     @Expect(iteratorCount, 99u32)
 
+    iteratorCount = 99u32
+    let iteratorEmptyHr = unsafe { iteratorVtbl.GetMany(
+        iterator.asRaw(),
+        0u32,
+        CPointer<Unit>(),
+        CPointer<UInt32>(inout iteratorCount)
+    ) }
+    @Expect(iteratorEmptyHr, S_OK.value)
+    @Expect(iteratorCount, 0u32)
+
     iterator.close()
     vectorView.close()
     first.close()
