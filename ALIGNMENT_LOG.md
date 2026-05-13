@@ -1139,3 +1139,24 @@
   - Full `cjpm test --no-progress`: 302/302 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Observable vector/map surfaces, mutable `IMap<Int32, HString>`, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
+
+### Round92 - Int32 HString map mutable input ABI
+
+- Completed at `2026-05-14 00:15:20 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values are C-compatible function pointers, require `CType` parameters/returns, can be cast through `CPointer`, and must be invoked from `unsafe`.
+  - Type patterns and `Option` matching are the supported way to branch on concrete runtime/generic values without introducing Rust-style associated ABI types.
+- Extended the mutable map `Int32 -> HString` bridge:
+  - Added `IMapVtbl.newInt32HString`, whose `Lookup`, `HasKey`, `Insert`, and `Remove` slots use direct `Int32` key ABI while preserving HSTRING ownership through the existing HString generic bridges.
+  - Updated generic `IMapVtbl.new<..., Int32, HString>` to build the same direct slots so wrapper dispatch and vtable construction stay consistent.
+  - Updated `IMap<K, V>.Lookup`, `HasKey`, `Insert`, and `Remove` to use the direct path only for `IMap<Int32, HString>`; all other map instantiations retain the erased generic input/output bridge.
+- Added TDD coverage:
+  - `testInt32HStringMapUsesDirectKeyAndHStringValueAbiForMutableSlots` first failed because `IMapVtbl.newInt32HString` did not exist, then passed after the implementation.
+  - `testGenericInt32HStringMapBuilderUsesDirectAbiForSpecialization` verifies the generic builder also emits direct ABI slots for this specialization.
+  - Both tests validate wrapper calls and external ABI-style calls by casting slots to concrete `Int32`/HSTRING CFunc signatures.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 25/25 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 304/304 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Observable vector/map surfaces, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.

@@ -1893,6 +1893,18 @@ func callMapLookupInt32Int32(
     result__
 }
 
+func callMapLookupInt32HString(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    key: Int32
+): windows_core.HString {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = CPointer<Unit>()
+    let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
+    HRESULT(hr).ok()
+    windows_core.HString.fromSystemHandleTake(result__)
+}
+
 func callMapHasKeyInt32(
     slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -1914,6 +1926,26 @@ func callMapInsertInt32Int32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, value, CPointer<Bool>(inout result__)) }
+    HRESULT(hr).ok()
+    result__
+}
+
+func callMapInsertInt32HString(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    key: Int32,
+    value: windows_core.HString
+): Bool {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = false
+    var hr__: ?Int32 = None
+    try (borrow = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+        hr__ = Some(unsafe { typedSlot(instanceRaw, key, borrow.asRaw(), CPointer<Bool>(inout result__)) })
+    }
+    let hr = match (hr__) {
+        case Some(value) => value
+        case None => throw IllegalStateException("HString WinRT input borrow did not execute")
+    }
     HRESULT(hr).ok()
     result__
 }
@@ -2078,7 +2110,84 @@ public struct IMapVtbl {
                             }
                         }
                         vtbl.Remove = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(removeAbi))
-                    case None => ()
+                    case None =>
+                        match (windows_core.HString() as V) {
+                            case Some(_) =>
+                                let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {
+                                    instanceRaw, arg0, result__ =>
+                                    match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                                        case Some(impl) =>
+                                            if (result__.isNull()) {
+                                                E_POINTER.value
+                                            } else {
+                                                match (impl.Lookup(arg0)) {
+                                                    case Result<windows_core.HString>.Ok(value) =>
+                                                        windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
+                                                    case Result<windows_core.HString>.Err(error) =>
+                                                        error.code().value
+                                                }
+                                            }
+                                        case None =>
+                                            E_NOINTERFACE.value
+                                    }
+                                }
+                                vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
+                                let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
+                                    instanceRaw, arg0, result__ =>
+                                    match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                                        case Some(impl) =>
+                                            if (result__.isNull()) {
+                                                E_POINTER.value
+                                            } else {
+                                                match (impl.HasKey(arg0)) {
+                                                    case Result<Bool>.Ok(value) =>
+                                                        unsafe { result__.write(value) }
+                                                        S_OK.value
+                                                    case Result<Bool>.Err(error) =>
+                                                        error.code().value
+                                                }
+                                            }
+                                        case None =>
+                                            E_NOINTERFACE.value
+                                    }
+                                }
+                                vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
+                                let insertAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32> = {
+                                    instanceRaw, arg0, arg1, result__ =>
+                                    match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                                        case Some(impl) =>
+                                            if (result__.isNull()) {
+                                                E_POINTER.value
+                                            } else {
+                                                match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
+                                                    case Result<Bool>.Ok(replaced) =>
+                                                        unsafe { result__.write(replaced) }
+                                                        S_OK.value
+                                                    case Result<Bool>.Err(error) =>
+                                                        error.code().value
+                                                }
+                                            }
+                                        case None =>
+                                            E_NOINTERFACE.value
+                                    }
+                                }
+                                vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
+                                let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
+                                    match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                                        case Some(impl) =>
+                                            match (impl.Remove(arg0)) {
+                                                case Result<Unit>.Ok(_) =>
+                                                    S_OK.value
+                                                case Result<Unit>.Err(error) =>
+                                                    error.code().value
+                                            }
+                                        case None =>
+                                            E_NOINTERFACE.value
+                                    }
+                                }
+                                vtbl.Remove = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(removeAbi))
+                            case None => ()
+                        }
                 }
             case None => ()
         }
@@ -2167,6 +2276,110 @@ public struct IMapVtbl {
         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
         let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
             match (unsafe { asImplFromRaw<IMap_Impl<Int32, Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    match (impl.Remove(arg0)) {
+                        case Result<Unit>.Ok(_) =>
+                            S_OK.value
+                        case Result<Unit>.Err(error) =>
+                            error.code().value
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Remove = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(removeAbi))
+        vtbl.Clear = { instanceRaw =>
+            match (unsafe { asImplFromRaw<IMap_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Clear()
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return vtbl
+    }
+
+    public static func newInt32HString<Identity>(offset!: Int64 = 0): IMapVtbl where Identity <: IMap_Impl<Int32, windows_core.HString> {
+        let _ = offset
+        var vtbl = IMapVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {
+            instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.Lookup(arg0)) {
+                            case Result<windows_core.HString>.Ok(value) =>
+                                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
+                            case Result<windows_core.HString>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IMap_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Size(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
+            instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.HasKey(arg0)) {
+                            case Result<Bool>.Ok(value) =>
+                                unsafe { result__.write(value) }
+                                S_OK.value
+                            case Result<Bool>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
+        vtbl.GetView = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IMap_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetView(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let insertAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32> = {
+            instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
+                            case Result<Bool>.Ok(value) =>
+                                unsafe { result__.write(value) }
+                                S_OK.value
+                            case Result<Bool>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
+        let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Remove(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -2438,6 +2651,19 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 }
             case _ => ()
         }
+        match (windows_core.HString() as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 =>
+                        let directValue = callMapLookupInt32HString(v.Lookup, asRaw(), abiKey)
+                        match (directValue as V) {
+                            case Some(value) => return value
+                            case None => ()
+                        }
+                    case _ => ()
+                }
+            case _ => ()
+        }
         return windows_core.winrtCallGenericOutFromGenericInput<V, K>(v.Lookup, asRaw(), key)
     }
 
@@ -2452,6 +2678,14 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     public unsafe func HasKey(key: K): Bool {
         let v = vtbl()
         match (0i32 as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 => return callMapHasKeyInt32(v.HasKey, asRaw(), abiKey)
+                    case _ => ()
+                }
+            case _ => ()
+        }
+        match (windows_core.HString() as V) {
             case Some(_) =>
                 match (key) {
                     case abiKey: Int32 => return callMapHasKeyInt32(v.HasKey, asRaw(), abiKey)
@@ -2494,6 +2728,18 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 }
             case _ => ()
         }
+        match (windows_core.HString() as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 =>
+                        match (value) {
+                            case abiValue: windows_core.HString => return callMapInsertInt32HString(v.Insert, asRaw(), abiKey, abiValue)
+                            case _ => ()
+                        }
+                    case _ => ()
+                }
+            case _ => ()
+        }
         var result__ = false
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<K>(key)) {
@@ -2512,6 +2758,16 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     public unsafe func Remove(key: K): Unit {
         let v = vtbl()
         match (0i32 as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 =>
+                        callMapRemoveInt32(v.Remove, asRaw(), abiKey)
+                        return
+                    case _ => ()
+                }
+            case _ => ()
+        }
+        match (windows_core.HString() as V) {
             case Some(_) =>
                 match (key) {
                     case abiKey: Int32 =>
