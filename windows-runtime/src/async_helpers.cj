@@ -1,48 +1,18 @@
-package windows_future
+package windows_runtime
 
 import std.collection.HashMap
 import std.sync.*
 import std.time.*
 import windows_common.Win32.Foundation as Win32Foundation
+import windows_common.Win32.Security as Win32Security
+import windows_common.Win32.System.Threading as Win32Threading
 import windows_core
 import windows_core.{ComObject, E_ABORT, E_FAIL, E_POINTER, HRESULT, InParam, Result, S_OK, WinError}
 import windows_interface.ComInterface
-import windows_libloading as windows_libloading
+import windows_strings
 
 type HANDLE = Win32Foundation.HANDLE
-
-// Win32 event-object APIs used to implement event-driven termination waits for
-// our native IAsync* implementations.
-func CreateEventW(
-    lpEventAttributes: CPointer<Unit>,
-    bManualReset: Int32,
-    bInitialState: Int32,
-    lpName: CPointer<UInt16>
-): HANDLE {
-    let proc = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<UInt16>) -> CPointer<Unit>>(
-        windows_libloading.resolveProc("kernel32.dll", "CreateEventW")
-    )
-    var handle = HANDLE()
-    handle.Value = unsafe { proc(lpEventAttributes, bManualReset, bInitialState, lpName) }
-    handle
-}
-
-func SetEvent(hEvent: HANDLE): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("kernel32.dll", "SetEvent"))
-    unsafe { proc(hEvent.Value) }
-}
-
-func CloseHandle(hObject: HANDLE): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("kernel32.dll", "CloseHandle"))
-    unsafe { proc(hObject.Value) }
-}
-
-func WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(
-        windows_libloading.resolveProc("kernel32.dll", "WaitForSingleObject")
-    )
-    unsafe { proc(hHandle.Value, dwMilliseconds) }
-}
+type SECURITY_ATTRIBUTES = Win32Security.SECURITY_ATTRIBUTES
 
 // TerminalEvent wraps a manual-reset Win32 event used to signal that an async
 // operation has reached a terminal status. Manual reset means once signalled
@@ -53,48 +23,38 @@ class TerminalEvent <: Resource {
     private var closed: Bool = false
 
     public init() {
-        let h = CreateEventW(CPointer<Unit>(), 1i32, 0i32, CPointer<UInt16>())
+        let h = Win32Threading.CreateEventW(CPointer<SECURITY_ATTRIBUTES>(), true, false, windows_strings.PWSTR())
         this.handle = h
     }
 
     public func rawHandle(): HANDLE {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (closed) {
                 return HANDLE()
             }
             return handle
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func signal(): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (closed) {
                 return
             }
             if (handle.Value.isNotNull()) {
-                SetEvent(handle)
+                Win32Threading.SetEvent(handle)
             }
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func isClosed(): Bool {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             closed
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func close(): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (closed) {
                 return
             }
@@ -102,10 +62,8 @@ class TerminalEvent <: Resource {
             let h = handle
             handle = HANDLE()
             if (h.Value.isNotNull()) {
-                CloseHandle(h)
+                Win32Foundation.CloseHandle(h)
             }
-        } finally {
-            mutex.unlock()
         }
     }
 
@@ -115,7 +73,7 @@ class TerminalEvent <: Resource {
             closed = true
             handle = HANDLE()
             if (h.Value.isNotNull()) {
-                CloseHandle(h)
+                Win32Foundation.CloseHandle(h)
             }
         }
     }
@@ -129,29 +87,20 @@ private let terminalRegistryMutex = Mutex()
 private let terminalRegistry = HashMap<UInt32, TerminalEvent>()
 
 private func registerTerminalEvent(id: UInt32, event: TerminalEvent): Unit {
-    terminalRegistryMutex.lock()
-    try {
+    synchronized(terminalRegistryMutex) {
         terminalRegistry.add(id, event)
-    } finally {
-        terminalRegistryMutex.unlock()
     }
 }
 
 private func unregisterTerminalEvent(id: UInt32): Unit {
-    terminalRegistryMutex.lock()
-    try {
+    synchronized(terminalRegistryMutex) {
         terminalRegistry.remove(id)
-    } finally {
-        terminalRegistryMutex.unlock()
     }
 }
 
 private func lookupTerminalEvent(id: UInt32): Option<TerminalEvent> {
-    terminalRegistryMutex.lock()
-    try {
+    synchronized(terminalRegistryMutex) {
         terminalRegistry.get(id)
-    } finally {
-        terminalRegistryMutex.unlock()
     }
 }
 
@@ -159,13 +108,10 @@ private let asyncIdMutex = Mutex()
 private var nextAsyncId: UInt32 = 1u32
 
 private func allocateAsyncId(): UInt32 {
-    asyncIdMutex.lock()
-    try {
+    synchronized(asyncIdMutex) {
         let id = nextAsyncId
         nextAsyncId += 1u32
         return id
-    } finally {
-        asyncIdMutex.unlock()
     }
 }
 
@@ -185,7 +131,7 @@ private let asyncFailureCode: HResult = toFoundationHResult(E_FAIL)
 // HRESULT codes returned to callers that mimic the WinRT async runtime semantics. These
 // values match `E_ILLEGAL_DELEGATE_ASSIGNMENT` (0x80000018) and `E_ILLEGAL_METHOD_CALL`
 // (0x8000000E) in the Win32 SDK, but are kept inline here to avoid taking a dependency on
-// generated `windows-sys` headers from the `windows-future` package.
+// generated native headers from the runtime package.
 private let E_ILLEGAL_DELEGATE_ASSIGNMENT: HRESULT = HRESULT(-2147483624i32)
 private let E_ILLEGAL_METHOD_CALL: HRESULT = HRESULT(-2147483634i32)
 
@@ -224,7 +170,7 @@ private func waitForTerminalStatus(info: IAsyncInfo): AsyncStatus {
                 }
                 // Wake periodically to honour cooperative cancellation while
                 // still avoiding the original 1ms busy-wait CPU burn.
-                WaitForSingleObject(handle, 250u32)
+                Win32Threading.WaitForSingleObject(handle, 250u32)
             }
             return AsyncStatus_Error
         }
@@ -325,25 +271,15 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 
     public func bindView(view: IAsyncAction): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.view = Some(view)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func attachWorker(worker: Future<Unit>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.worker = Some(worker)
-        } finally {
-            mutex.unlock()
         }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
@@ -353,8 +289,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     private func finish(status: AsyncStatus, errorCode!: HResult = asyncOkCode): Unit {
         var handler: Option<AsyncActionCompletedHandler> = None
         var view: Option<IAsyncAction> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (this.status != AsyncStatus_Started) {
                 return
             }
@@ -362,8 +297,6 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
             this.errorCode = errorCode
             handler = completedHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         terminal.signal()
         if (let Some(callback) <- handler) {
@@ -390,24 +323,26 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 
     public func Status(): Result<AsyncStatus> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<AsyncStatus>.Ok(status)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func ErrorCode(): Result<HResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<HResult>.Ok(errorCode)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func Cancel(): Result<Unit> {
+        var workerCopy: Option<Future<Unit>> = None
+        synchronized(mutex) {
+            workerCopy = worker
+        }
+        if (let Some(value) <- workerCopy) {
+            value.cancel()
+        }
+        finish(AsyncStatus_Canceled, errorCode: asyncCanceledCode)
         Result<Unit>.Ok(())
     }
 
@@ -420,8 +355,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
         var view: Option<IAsyncAction> = None
         var status = AsyncStatus_Started
         var invokeNow = false
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (completedHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -435,8 +369,6 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
             view = this.view
             status = this.status
             invokeNow = status != AsyncStatus_Started
-        } finally {
-            mutex.unlock()
         }
         if (invokeNow) {
             if (let Some(value) <- callback) {
@@ -453,8 +385,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 
     public func GetResults(): Result<Unit> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (status == AsyncStatus_Completed) {
                 return Result<Unit>.Ok(())
             }
@@ -466,8 +397,6 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
             }
             // status is AsyncStatus_Started: GetResults must not be called before completion.
             Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_METHOD_CALL))
-        } finally {
-            mutex.unlock()
         }
     }
 }
@@ -517,25 +446,15 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func bindView(view: IAsyncOperation<TResult>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.view = Some(view)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func attachWorker(worker: Future<Unit>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.worker = Some(worker)
-        } finally {
-            mutex.unlock()
         }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
@@ -549,8 +468,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     ): Unit {
         var handler: Option<AsyncOperationCompletedHandler<TResult>> = None
         var view: Option<IAsyncOperation<TResult>> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (this.status != AsyncStatus_Started) {
                 return
             }
@@ -559,8 +477,6 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
             this.result = result
             handler = completedHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         terminal.signal()
         if (let Some(callback) <- handler) {
@@ -587,24 +503,26 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func Status(): Result<AsyncStatus> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<AsyncStatus>.Ok(status)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func ErrorCode(): Result<HResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<HResult>.Ok(errorCode)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func Cancel(): Result<Unit> {
+        var workerCopy: Option<Future<Unit>> = None
+        synchronized(mutex) {
+            workerCopy = worker
+        }
+        if (let Some(value) <- workerCopy) {
+            value.cancel()
+        }
+        finish(AsyncStatus_Canceled, errorCode: asyncCanceledCode)
         Result<Unit>.Ok(())
     }
 
@@ -617,8 +535,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
         var view: Option<IAsyncOperation<TResult>> = None
         var status = AsyncStatus_Started
         var invokeNow = false
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (completedHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -632,8 +549,6 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
             view = this.view
             status = this.status
             invokeNow = status != AsyncStatus_Started
-        } finally {
-            mutex.unlock()
         }
         if (invokeNow) {
             if (let Some(value) <- callback) {
@@ -650,8 +565,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func GetResults(): Result<TResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (status == AsyncStatus_Completed) {
                 match (result) {
                     case Some(value) => return Result<TResult>.Ok(value)
@@ -666,8 +580,6 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
             }
             // status is AsyncStatus_Started: GetResults must not be called before completion.
             Result<TResult>.Err(WinError.fromHRESULT(E_ILLEGAL_METHOD_CALL))
-        } finally {
-            mutex.unlock()
         }
     }
 }
@@ -721,25 +633,15 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func bindView(view: IAsyncActionWithProgress<TProgress>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.view = Some(view)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func attachWorker(worker: Future<Unit>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.worker = Some(worker)
-        } finally {
-            mutex.unlock()
         }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
@@ -749,13 +651,10 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     public func reportProgress(progress: TProgress): Unit {
         var handler: Option<AsyncActionProgressHandler<TProgress>> = None
         var view: Option<IAsyncActionWithProgress<TProgress>> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             lastProgress = Some(progress)
             handler = progressHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
@@ -767,8 +666,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     private func finish(status: AsyncStatus, errorCode!: HResult = asyncOkCode): Unit {
         var handler: Option<AsyncActionWithProgressCompletedHandler<TProgress>> = None
         var view: Option<IAsyncActionWithProgress<TProgress>> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (this.status != AsyncStatus_Started) {
                 return
             }
@@ -776,8 +674,6 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
             this.errorCode = errorCode
             handler = completedHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         terminal.signal()
         if (let Some(callback) <- handler) {
@@ -804,24 +700,26 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func Status(): Result<AsyncStatus> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<AsyncStatus>.Ok(status)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func ErrorCode(): Result<HResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<HResult>.Ok(errorCode)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func Cancel(): Result<Unit> {
+        var workerCopy: Option<Future<Unit>> = None
+        synchronized(mutex) {
+            workerCopy = worker
+        }
+        if (let Some(value) <- workerCopy) {
+            value.cancel()
+        }
+        finish(AsyncStatus_Canceled, errorCode: asyncCanceledCode)
         Result<Unit>.Ok(())
     }
 
@@ -830,8 +728,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func SetProgress(handler: InParam<AsyncActionProgressHandler<TProgress>>): Result<Unit> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (progressHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -841,21 +738,16 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
                 case Result<AsyncActionProgressHandler<TProgress>>.Err(error) =>
                     return Result<Unit>.Err(error)
             }
-        } finally {
-            mutex.unlock()
         }
         Result<Unit>.Ok(())
     }
 
     public func Progress(): Result<AsyncActionProgressHandler<TProgress>> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             match (progressHandler) {
                 case Some(value) => Result<AsyncActionProgressHandler<TProgress>>.Ok(value)
                 case None => Result<AsyncActionProgressHandler<TProgress>>.Err(emptyError())
             }
-        } finally {
-            mutex.unlock()
         }
     }
 
@@ -864,8 +756,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
         var view: Option<IAsyncActionWithProgress<TProgress>> = None
         var status = AsyncStatus_Started
         var invokeNow = false
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (completedHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -879,8 +770,6 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
             view = this.view
             status = this.status
             invokeNow = status != AsyncStatus_Started
-        } finally {
-            mutex.unlock()
         }
         if (invokeNow) {
             if (let Some(value) <- callback) {
@@ -897,8 +786,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func GetResults(): Result<Unit> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (status == AsyncStatus_Completed) {
                 return Result<Unit>.Ok(())
             }
@@ -910,8 +798,6 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
             }
             // status is AsyncStatus_Started: GetResults must not be called before completion.
             Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_METHOD_CALL))
-        } finally {
-            mutex.unlock()
         }
     }
 }
@@ -975,25 +861,15 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func bindView(view: IAsyncOperationWithProgress<TResult, TProgress>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.view = Some(view)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func attachWorker(worker: Future<Unit>): Unit {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             this.worker = Some(worker)
-        } finally {
-            mutex.unlock()
         }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
@@ -1003,13 +879,10 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     public func reportProgress(progress: TProgress): Unit {
         var handler: Option<AsyncOperationProgressHandler<TResult, TProgress>> = None
         var view: Option<IAsyncOperationWithProgress<TResult, TProgress>> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             lastProgress = Some(progress)
             handler = progressHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
@@ -1025,8 +898,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     ): Unit {
         var handler: Option<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> = None
         var view: Option<IAsyncOperationWithProgress<TResult, TProgress>> = None
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (this.status != AsyncStatus_Started) {
                 return
             }
@@ -1035,8 +907,6 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
             this.result = result
             handler = completedHandler
             view = this.view
-        } finally {
-            mutex.unlock()
         }
         terminal.signal()
         if (let Some(callback) <- handler) {
@@ -1063,24 +933,26 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func Status(): Result<AsyncStatus> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<AsyncStatus>.Ok(status)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func ErrorCode(): Result<HResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             Result<HResult>.Ok(errorCode)
-        } finally {
-            mutex.unlock()
         }
     }
 
     public func Cancel(): Result<Unit> {
+        var workerCopy: Option<Future<Unit>> = None
+        synchronized(mutex) {
+            workerCopy = worker
+        }
+        if (let Some(value) <- workerCopy) {
+            value.cancel()
+        }
+        finish(AsyncStatus_Canceled, errorCode: asyncCanceledCode)
         Result<Unit>.Ok(())
     }
 
@@ -1089,8 +961,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func SetProgress(handler: InParam<AsyncOperationProgressHandler<TResult, TProgress>>): Result<Unit> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (progressHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -1100,21 +971,16 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
                 case Result<AsyncOperationProgressHandler<TResult, TProgress>>.Err(error) =>
                     return Result<Unit>.Err(error)
             }
-        } finally {
-            mutex.unlock()
         }
         Result<Unit>.Ok(())
     }
 
     public func Progress(): Result<AsyncOperationProgressHandler<TResult, TProgress>> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             match (progressHandler) {
                 case Some(value) => Result<AsyncOperationProgressHandler<TResult, TProgress>>.Ok(value)
                 case None => Result<AsyncOperationProgressHandler<TResult, TProgress>>.Err(emptyError())
             }
-        } finally {
-            mutex.unlock()
         }
     }
 
@@ -1123,8 +989,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
         var view: Option<IAsyncOperationWithProgress<TResult, TProgress>> = None
         var status = AsyncStatus_Started
         var invokeNow = false
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (completedHandler.isSome()) {
                 return Result<Unit>.Err(WinError.fromHRESULT(E_ILLEGAL_DELEGATE_ASSIGNMENT))
             }
@@ -1138,8 +1003,6 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
             view = this.view
             status = this.status
             invokeNow = status != AsyncStatus_Started
-        } finally {
-            mutex.unlock()
         }
         if (invokeNow) {
             if (let Some(value) <- callback) {
@@ -1156,8 +1019,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func GetResults(): Result<TResult> {
-        mutex.lock()
-        try {
+        synchronized(mutex) {
             if (status == AsyncStatus_Completed) {
                 match (result) {
                     case Some(value) => return Result<TResult>.Ok(value)
@@ -1172,8 +1034,6 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
             }
             // status is AsyncStatus_Started: GetResults must not be called before completion.
             Result<TResult>.Err(WinError.fromHRESULT(E_ILLEGAL_METHOD_CALL))
-        } finally {
-            mutex.unlock()
         }
     }
 }

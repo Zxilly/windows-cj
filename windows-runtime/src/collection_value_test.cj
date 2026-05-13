@@ -1,4 +1,4 @@
-package windows_collections
+package windows_runtime
 
 import std.unittest.*
 import std.unittest.testmacro.*

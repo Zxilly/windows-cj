@@ -8,14 +8,13 @@ members = [
     "windows-implement",
     "windows-core",
     "windows-polyfill",
-    "windows-future",
-    "windows-collections",
-    "windows-numerics",
+    "windows-runtime",
     "windows-threading",
     "windows-version",
     "windows-targets",
     "windows-registry",
     "windows-services",
     "windows-common",
+    "windows-winui3",
     "windows"
 ]

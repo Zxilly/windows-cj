@@ -1,9 +1,9 @@
-package windows_collections
+package windows_runtime
 
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.HString
+import windows_core.{E_POINTER, HString, S_OK}
 
 @Test
 func testStockIteratorSnapshotsSourceAndAdvancesCursor() {
@@ -39,6 +39,51 @@ func testStockVectorViewIndexOfClearsMissingIndex() {
     first.close()
     second.close()
     missing.close()
+}
+
+@Test
+func testStockGetManyRejectsNullBufferWithNonZeroCapacity() {
+    let first = HString("first")
+    let vectorView = toVectorView<HString>([first])
+    let iterator = toIterator<HString>([first])
+
+    var vectorCount = 99u32
+    let vectorVtbl = unsafe { vectorView.vtbl() }
+    let vectorHr = unsafe { vectorVtbl.GetMany(
+        vectorView.asRaw(),
+        0u32,
+        1u32,
+        CPointer<Unit>(),
+        CPointer<UInt32>(inout vectorCount)
+    ) }
+    @Expect(vectorHr, E_POINTER.value)
+    @Expect(vectorCount, 99u32)
+
+    vectorCount = 99u32
+    let vectorEmptyHr = unsafe { vectorVtbl.GetMany(
+        vectorView.asRaw(),
+        0u32,
+        0u32,
+        CPointer<Unit>(),
+        CPointer<UInt32>(inout vectorCount)
+    ) }
+    @Expect(vectorEmptyHr, S_OK.value)
+    @Expect(vectorCount, 0u32)
+
+    var iteratorCount = 99u32
+    let iteratorVtbl = unsafe { iterator.vtbl() }
+    let iteratorHr = unsafe { iteratorVtbl.GetMany(
+        iterator.asRaw(),
+        1u32,
+        CPointer<Unit>(),
+        CPointer<UInt32>(inout iteratorCount)
+    ) }
+    @Expect(iteratorHr, E_POINTER.value)
+    @Expect(iteratorCount, 99u32)
+
+    iterator.close()
+    vectorView.close()
+    first.close()
 }
 
 @Test

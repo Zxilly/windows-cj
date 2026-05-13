@@ -1,9 +1,10 @@
-package windows_collections
+package windows_runtime
 
 import std.collection.*
 import std.sync.AtomicInt64
 import windows_core.{
     ComInterface,
+    E_POINTER,
     HandleWinrtType,
     HRESULT,
     Result,
@@ -11,7 +12,6 @@ import windows_core.{
     WinrtGenericType,
     WinError,
     createComObjectFromSchemas,
-    winrtStoreGenericOut,
     winrtStoreGenericOutAt
 }
 import windows_interface.{InterfaceDescriptor, InterfaceDescriptorSchema}
@@ -98,8 +98,11 @@ func writeGenericManyRange<T>(
     startIndex: Int64
 ): Result<UInt32>
 where T <: RuntimeType & WinrtGenericType<T> {
-    if (itemsSize == 0u32 || items.isNull()) {
+    if (itemsSize == 0u32) {
         return Result<UInt32>.Ok(0u32)
+    }
+    if (items.isNull()) {
+        return Result<UInt32>.Err(WinError(E_POINTER))
     }
     if (startIndex < 0 || startIndex >= source.size) {
         return Result<UInt32>.Ok(0u32)

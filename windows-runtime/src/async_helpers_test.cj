@@ -1,9 +1,9 @@
-package windows_future
+package windows_runtime
 
 import std.time.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.Result
+import windows_core.{E_ABORT, Result}
 
 @Test
 func testReadyActionJoinAndWhenCompleteSuccessfully() {
@@ -12,6 +12,22 @@ func testReadyActionJoinAndWhenCompleteSuccessfully() {
     @Expect(unsafe { action.asIAsyncInfo().Status() } == AsyncStatus_Completed, true)
     @Expect(action.join().isOk(), true)
     @Expect(action.when().get(Duration.second * 2).isOk(), true)
+}
+
+@Test
+func testSpawnedActionCancelTransitionsToCanceled() {
+    let action = IAsyncAction.spawnAsync({ =>
+        sleep(Duration.millisecond * 100)
+    })
+    let info = action.asIAsyncInfo()
+
+    unsafe { info.Cancel() }
+
+    @Expect(unsafe { info.Status() } == AsyncStatus_Canceled, true)
+    match (action.join()) {
+        case Result<Unit>.Err(error) => @Expect(error.code(), E_ABORT)
+        case Result<Unit>.Ok(_) => @Expect(false, true)
+    }
 }
 
 @Test
