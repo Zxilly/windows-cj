@@ -1266,3 +1266,25 @@
   - Full `cjpm test --no-progress`: 315/315 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), additional mixed scalar/HSTRING combinations, stock helper specializations, event args review, and generator-emitted collection projections still need focused passes.
+
+### Round98 - Bool vector input ABI
+
+- Completed at `2026-05-14 02:23:16 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, can be cast from `CPointer`, and calls require `unsafe`.
+  - `Bool` literals are `true` / `false`, and type patterns are the supported way to specialize generic wrapper calls by concrete runtime type.
+- Extended vector scalar-input ABI coverage for `Bool`:
+  - Added direct `Bool` slot dispatch for `IVectorView<Bool>.IndexOf`.
+  - Added direct `Bool` slot dispatch for mutable `IVector<Bool>.IndexOf`, `SetAt`, `InsertAt`, and `Append`.
+  - Added `IVectorViewVtbl.newBool` and `IVectorVtbl.newBool`, and made generic `new<..., Bool>` builders emit the same direct ABI slots.
+  - Kept non-`Bool` cases on the existing generic borrow/project path.
+- Added TDD coverage:
+  - `testBoolVectorUsesDirectValueAbiForMutableSlots` first failed because `IVectorVtbl.newBool` did not exist, then validated wrapper calls and direct vtable calls with concrete `Bool` CFunc signatures.
+  - `testGenericBoolVectorBuilderUsesDirectValueAbiForSpecialization` verifies the mutable generic builder emits direct `Bool` input slots.
+  - `testGenericBoolVectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the vector-view generic builder emits direct `Bool` input slots for `IndexOf`.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 39/39 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 318/318 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar input families (`Int8`/`UInt8`/`Int16`/`UInt16`/`Int64`/`UInt64`, `Float32`/`Float64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
