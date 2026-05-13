@@ -4221,6 +4221,97 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    public unsafe func GetAt(index: UInt32): T {
+        try (vector = asIVector()) {
+            return vector.GetAt(index)
+        }
+        throw IllegalStateException("IObservableVector.GetAt ancestor call did not execute")
+    }
+
+    public unsafe func Size(): UInt32 {
+        try (vector = asIVector()) {
+            return vector.Size()
+        }
+        throw IllegalStateException("IObservableVector.Size ancestor call did not execute")
+    }
+
+    public unsafe func GetView(): IVectorView<T> {
+        try (vector = asIVector()) {
+            return vector.GetView()
+        }
+        throw IllegalStateException("IObservableVector.GetView ancestor call did not execute")
+    }
+
+    public unsafe func IndexOf(value: T, index: CPointer<UInt32>): Bool {
+        try (vector = asIVector()) {
+            return vector.IndexOf(value, index)
+        }
+        throw IllegalStateException("IObservableVector.IndexOf ancestor call did not execute")
+    }
+
+    public unsafe func SetAt(index: UInt32, value: T): Unit {
+        try (vector = asIVector()) {
+            vector.SetAt(index, value)
+            return
+        }
+        throw IllegalStateException("IObservableVector.SetAt ancestor call did not execute")
+    }
+
+    public unsafe func InsertAt(index: UInt32, value: T): Unit {
+        try (vector = asIVector()) {
+            vector.InsertAt(index, value)
+            return
+        }
+        throw IllegalStateException("IObservableVector.InsertAt ancestor call did not execute")
+    }
+
+    public unsafe func RemoveAt(index: UInt32): Unit {
+        try (vector = asIVector()) {
+            vector.RemoveAt(index)
+            return
+        }
+        throw IllegalStateException("IObservableVector.RemoveAt ancestor call did not execute")
+    }
+
+    public unsafe func Append(value: T): Unit {
+        try (vector = asIVector()) {
+            vector.Append(value)
+            return
+        }
+        throw IllegalStateException("IObservableVector.Append ancestor call did not execute")
+    }
+
+    public unsafe func RemoveAtEnd(): Unit {
+        try (vector = asIVector()) {
+            vector.RemoveAtEnd()
+            return
+        }
+        throw IllegalStateException("IObservableVector.RemoveAtEnd ancestor call did not execute")
+    }
+
+    public unsafe func Clear(): Unit {
+        try (vector = asIVector()) {
+            vector.Clear()
+            return
+        }
+        throw IllegalStateException("IObservableVector.Clear ancestor call did not execute")
+    }
+
+    public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): UInt32 {
+        try (vector = asIVector()) {
+            return vector.GetMany(startIndex, itemsSize, items)
+        }
+        throw IllegalStateException("IObservableVector.GetMany ancestor call did not execute")
+    }
+
+    public unsafe func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Unit {
+        try (vector = asIVector()) {
+            vector.ReplaceAll(itemsSize, items)
+            return
+        }
+        throw IllegalStateException("IObservableVector.ReplaceAll ancestor call did not execute")
+    }
+
     public func intoIterator(): Iterator<T> {
         asIIterable().intoIterator()
     }

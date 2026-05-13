@@ -1160,3 +1160,22 @@
   - Full `cjpm test --no-progress`: 304/304 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Observable vector/map surfaces, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
+
+### Round93 - Observable vector inherited operation forwarding
+
+- Completed at `2026-05-14 00:26:26 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Public class member functions are the normal way to expose inherited convenience operations on wrapper classes.
+  - Interfaces use `<:` implementation syntax, and type-safe wrapper forwarding can stay within Cangjie object/resource semantics.
+- Fixed an observable collection surface gap:
+  - `IObservableVector<T>` already supported `asIVector()` and the COM object model already exposes `IVector<T>` as an ancestor interface.
+  - The wrapper itself only exposed `VectorChanged` / `RemoveVectorChanged`, so callers could not use inherited vector operations directly from an `IObservableVector<T>` value.
+  - Added forwarding methods for `GetAt`, `Size`, `GetView`, `IndexOf`, `SetAt`, `InsertAt`, `RemoveAt`, `Append`, `RemoveAtEnd`, `Clear`, `GetMany`, and `ReplaceAll`.
+  - Each forwarding call queries `asIVector()` and scopes the temporary wrapper with `try` resource cleanup instead of changing vtable layout or inventing Rust-style trait machinery.
+- Added TDD coverage:
+  - `testObservableVectorForwardsInheritedVectorOperations` first failed because `IObservableVector<Int32>` had no inherited vector operation members.
+  - After the forwarding methods were added, the test validates direct calls on `IObservableVector<Int32>` for mutation, lookup, index search, size, and clear.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-progress`: 26/26 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - `IObservableMap<K, V>` still needs direct inherited map operation forwarding, and observable event args may need scalar/HString direct ABI specializations.
