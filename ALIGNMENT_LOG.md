@@ -1198,3 +1198,23 @@
   - `cjpm test -m windows-runtime --no-progress`: 27/27 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Observable event args direct ABI specializations, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need focused passes.
+
+### Round95 - UInt32 vector mutable input ABI
+
+- Completed at `2026-05-14 00:49:31 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, can be cast through `CPointer`, and calls require `unsafe`.
+  - `UInt32` literals use the `u32` suffix, and type patterns are the supported way to branch generic wrapper calls by concrete scalar type.
+- Extended vector scalar-input ABI coverage beyond `Int32`:
+  - Added direct `UInt32` slot dispatch for `IVectorView<UInt32>.IndexOf`.
+  - Added direct `UInt32` slot dispatch for `IVector<UInt32>.IndexOf`, `SetAt`, `InsertAt`, and `Append`.
+  - Added `IVectorViewVtbl.newUInt32` and `IVectorVtbl.newUInt32`, and made the generic `new<..., UInt32>` builders override the same direct ABI slots.
+  - Kept non-`UInt32` cases on the existing generic borrow/project path.
+- Added TDD coverage:
+  - `testUInt32VectorUsesDirectValueAbiForMutableSlots` first failed because `IVectorVtbl.newUInt32` did not exist.
+  - `testGenericUInt32VectorBuilderUsesDirectValueAbiForSpecialization` verifies the generic mutable vector builder emits direct `UInt32` value ABI.
+  - `testGenericUInt32VectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the vector-view builder emits direct `UInt32` value ABI for `IndexOf`.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-progress`: 30/30 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other scalar input families (`Bool`, signed/unsigned 8/16/64-bit, floating point), map key/value scalar combinations, event args review, and generator-emitted collection projections still need focused passes.
