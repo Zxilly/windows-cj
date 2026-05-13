@@ -1118,3 +1118,24 @@
   - Full `cjpm test --no-progress`: 300/300 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Mutable `IMap<Int32, HString>`, observable collection surfaces, non-`Int32` scalar keys, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
+
+### Round91 - Generic Int32 vector builder direct ABI
+
+- Completed at `2026-05-13 23:58:59 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values are concrete C-callable function pointers, can be stored behind erased field types through `CPointer` casts, and must be invoked in `unsafe`.
+  - `ArrayList` supports indexed assignment, insert, append, remove, clear, and size, which is enough for mutable vector test doubles.
+- Fixed the same construction consistency issue for vectors:
+  - `IVectorView<T>.IndexOf` and `IVector<T>.IndexOf` / `SetAt` / `InsertAt` / `Append` already dispatch `Int32` values through direct ABI slots.
+  - Generic `IVectorViewVtbl.new<Identity, T>` and `IVectorVtbl.new<Identity, T>` could still build erased slots for `T == Int32`, so wrapper or external direct calls could pass `Int32` where the erased thunk expected `CPointer<Unit>`.
+  - The generic builders now override the relevant slots with concrete `Int32` direct ABI when `T == Int32`; all other generic instantiations retain the erased path.
+- Added TDD coverage:
+  - `testGenericInt32VectorBuilderUsesDirectValueAbiForSpecialization`.
+  - `testGenericInt32VectorViewBuilderUsesDirectValueAbiForSpecialization`.
+  - The red run timed out with a stuck `windows_runtime` process; after the fix, wrapper calls and direct slot casts both pass.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 23/23 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 302/302 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Observable vector/map surfaces, mutable `IMap<Int32, HString>`, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
