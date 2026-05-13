@@ -1053,3 +1053,23 @@
   - Full `cjpm test --no-progress`: 295/295 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other scalar key/value combinations still need concrete ABI thunks, especially non-`Int32` scalar keys, copy-struct values, mutable `IMap`, mutable/observable `IVector`, and generator-emitted collection projections.
+
+### Round88 - Int32 vector mutable input ABI
+
+- Completed at `2026-05-13 22:55:12 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values model C function pointers, require `CType` parameters/returns, and calls are `unsafe`.
+  - `ArrayList` supports indexed assignment, `get`, `add(value, at:)`, `remove(at:)`, `clear`, and `size`.
+  - Generic constraints do not distinguish overloaded functions, so scalar ABI variants must use distinct concrete helpers.
+- Extended the mutable vector scalar input bridge:
+  - Added `IVectorVtbl.newInt32`, whose `IndexOf`, `SetAt`, `InsertAt`, and `Append` slots accept direct `Int32` values behind the existing erased vtable field types.
+  - Updated `IVector<T>.IndexOf`, `SetAt`, `InsertAt`, and `Append` to dispatch `Int32` values through those direct-value ABI slots.
+  - Left non-input and array-buffer slots (`GetAt`, `GetMany`, `ReplaceAll`) on the existing erased pointer fields because their current bridge already writes/reads the concrete `Int32` buffer representation through typed pointers.
+- Added coverage:
+  - `testInt32VectorUsesDirectValueAbiForMutableSlots` builds a minimal `IVector_Impl<Int32>` with `IVectorVtbl.newInt32`, verifies wrapper calls, then casts `IndexOf`, `SetAt`, `InsertAt`, and `Append` to direct `Int32` CFunc signatures and validates external ABI-style calls.
+- Verification:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 17/17 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 296/296 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Mutable `IMap` direct scalar key/value slots, observable vector/map ancestor vtables, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.

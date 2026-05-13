@@ -2157,6 +2157,38 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
 extend<K, V> IMap<K, V> <: windows_core.Interface<IMap<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+func callVectorSetAtInt32(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: Int32
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorInsertAtInt32(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: Int32
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendInt32(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: Int32
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
 @C
 public struct IVectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2242,6 +2274,142 @@ public struct IVectorVtbl {
                     E_NOINTERFACE.value
             }
         }
+        vtbl.RemoveAtEnd = { instanceRaw =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_RemoveAtEnd()
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Clear = { instanceRaw =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Clear()
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.GetMany = { instanceRaw, arg0, arg1Size, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.ReplaceAll = { instanceRaw, arg0Size, arg0 =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_ReplaceAll(arg0Size, arg0)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return vtbl
+    }
+
+    public static func newInt32<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<Int32> {
+        let _ = offset
+        var vtbl = IVectorVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.GetAt = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetAt(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Size(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.GetView = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetView(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+            instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result__.isNull()) {
+                        E_POINTER.value
+                    } else {
+                        match (impl.IndexOf(arg0, arg1)) {
+                            case Result<Bool>.Ok(value) =>
+                                unsafe { result__.write(value) }
+                                S_OK.value
+                            case Result<Bool>.Err(error) =>
+                                error.code().value
+                        }
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+        let setAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = {
+            instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    match (impl.SetAt(arg0, arg1)) {
+                        case Result<Unit>.Ok(_) =>
+                            S_OK.value
+                        case Result<Unit>.Err(error) =>
+                            error.code().value
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+        let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = {
+            instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    match (impl.InsertAt(arg0, arg1)) {
+                        case Result<Unit>.Ok(_) =>
+                            S_OK.value
+                        case Result<Unit>.Err(error) =>
+                            error.code().value
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+        vtbl.RemoveAt = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_RemoveAt(arg0)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        let appendAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = {
+            instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
+                case Some(impl) =>
+                    match (impl.Append(arg0)) {
+                        case Result<Unit>.Ok(_) =>
+                            S_OK.value
+                        case Result<Unit>.Err(error) =>
+                            error.code().value
+                    }
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
         vtbl.RemoveAtEnd = { instanceRaw =>
             match (unsafe { asImplFromRaw<IVector_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -2596,6 +2764,10 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public unsafe func IndexOf(value: T, index: CPointer<UInt32>): Bool {
         let v = vtbl()
+        match (value) {
+            case abiValue: Int32 => return callVectorViewIndexOfInt32(v.IndexOf, asRaw(), abiValue, index)
+            case _ => ()
+        }
         var result__ = false
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(value)) {
@@ -2611,6 +2783,12 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public unsafe func SetAt(index: UInt32, value: T): Unit {
         let v = vtbl()
+        match (value) {
+            case abiValue: Int32 =>
+                callVectorSetAtInt32(v.SetAt, asRaw(), index, abiValue)
+                return
+            case _ => ()
+        }
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(value)) {
             hr__ = Some(v.SetAt(asRaw(), index, __genericBorrow0.asRaw()))
@@ -2624,6 +2802,12 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public unsafe func InsertAt(index: UInt32, value: T): Unit {
         let v = vtbl()
+        match (value) {
+            case abiValue: Int32 =>
+                callVectorInsertAtInt32(v.InsertAt, asRaw(), index, abiValue)
+                return
+            case _ => ()
+        }
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(value)) {
             hr__ = Some(v.InsertAt(asRaw(), index, __genericBorrow0.asRaw()))
@@ -2643,6 +2827,12 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public unsafe func Append(value: T): Unit {
         let v = vtbl()
+        match (value) {
+            case abiValue: Int32 =>
+                callVectorAppendInt32(v.Append, asRaw(), abiValue)
+                return
+            case _ => ()
+        }
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(value)) {
             hr__ = Some(v.Append(asRaw(), __genericBorrow0.asRaw()))
