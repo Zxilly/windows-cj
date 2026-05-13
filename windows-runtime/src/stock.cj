@@ -129,6 +129,7 @@ where T <: RuntimeType & WinrtGenericType<T> {
 public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IIteratorVtbl>
+    private var closed: Bool = false
     private let index = AtomicInt64(0)
 
     public init(items: ArrayList<T>) {
@@ -140,6 +141,14 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & 
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
     }
 
     public func Current(): Result<T> {
@@ -183,6 +192,7 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & 
 public class StockIterableImpl<T> <: IIterable_Impl<T> where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IIterableVtbl>
+    private var closed: Bool = false
 
     public init(items: ArrayList<T>) {
         this.items = items
@@ -195,6 +205,14 @@ public class StockIterableImpl<T> <: IIterable_Impl<T> where T <: RuntimeType & 
         CPointer<Unit>(vtblHandle.pointer)
     }
 
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+
     public func First(): Result<IIterator<T>> {
         Result<IIterator<T>>.Ok(createStockIterator<T>(items))
     }
@@ -205,6 +223,7 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private var closed: Bool = false
 
     public init(items: ArrayList<T>) {
         this.items = items
@@ -222,6 +241,17 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
     }
 
     public func First(): Result<IIterator<T>> {
@@ -273,6 +303,7 @@ public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
     private let items: ArrayList<Int32>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
@@ -291,6 +322,17 @@ public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
     }
 
     public func First(): Result<IIterator<Int32>> {
@@ -339,6 +381,7 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
     private let key_: K
     private let value_: V
     private let vtblHandle: CPointerHandle<IKeyValuePairVtbl>
+    private var closed: Bool = false
 
     public init(key: K, value: V) {
         this.key_ = key
@@ -350,6 +393,14 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
     }
 
     public func Key(): Result<K> {
@@ -367,6 +418,7 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
     private let pairViews: ArrayList<IKeyValuePair<K, V>>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private var closed: Bool = false
 
     public init(entries: ArrayList<(K, V)>) {
         this.entries = entries
@@ -386,6 +438,17 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
     }
 
     public func First(): Result<IIterator<IKeyValuePair<K, V>>> {
@@ -458,17 +521,6 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> {
         Result<IIterator<IKeyValuePair<Int32, Int32>>>.Ok(
             createStockIterator<IKeyValuePair<Int32, Int32>>(pairViews)
         )
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
-        }
-        closed = true
     }
 
     ~init() {

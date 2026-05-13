@@ -1015,3 +1015,21 @@
   - Full `cjpm test --no-progress`: 294/294 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - `IMapView<Int32, V>` for non-`Int32` values, other scalar key/value types, mutable `IMap`, mutable/observable `IVector`, and generated WinRT collection projections still require concrete ABI bridge generation.
+
+### Round86 - Stock vtable handle finalization
+
+- Completed at `2026-05-13 22:27:59 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `acquireArrayRawData<T>` returns a `CPointerHandle<T>` that must be paired with `releaseArrayRawData`.
+  - Not releasing acquired array raw data can cause GC/runtime diagnostics.
+  - Class finalizers use `~init()` to release resources during GC.
+- Fixed the stock helper lifecycle pattern exposed by Round85 review:
+  - Every stock impl that owns vtable raw-array handles now releases those handles in `~init()`.
+  - The stock impls intentionally do not expose `Resource.close()`: COM slots copy these vtable pointers at object creation, so external manual close could free storage while live interface pointers still route through it.
+  - Covered single-handle implementations (`StockIteratorImpl`, `StockIterableImpl`, `StockKeyValuePairImpl`) and two-handle implementations (`StockVectorViewImpl`, `StockInt32VectorViewImpl`, `StockMapViewImpl`, `StockInt32MapViewImpl`).
+- Verification:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 15/15 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 294/294 passed with `cjHeapSize=32GB`.
+- Residual risk:
+  - Finalizer cleanup is compile-verified and reviewable, but deterministic GC/finalizer execution is not asserted by the local test.
