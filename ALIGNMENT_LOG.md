@@ -1073,3 +1073,27 @@
   - Full `cjpm test --no-progress`: 296/296 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Mutable `IMap` direct scalar key/value slots, observable vector/map ancestor vtables, non-`Int32` scalar inputs, copy-struct values, and generator-emitted collection projections still need concrete ABI thunks.
+
+### Round89 - Int32 map mutable input ABI
+
+- Completed at `2026-05-13 23:12:03 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values are C-compatible function pointers, require `CType` parameters/returns, can be cast through `CPointer`, and must be called in `unsafe`.
+  - `ArrayList` supports indexed assignment, `get`, `add`, `remove(at:)`, `clear`, and `size`, which is enough for a mutable map test double.
+- Extended the mutable map scalar bridge:
+  - Added `IMapVtbl.newInt32Int32`, whose `Lookup`, `HasKey`, `Insert`, and `Remove` slots accept direct `Int32` key/value ABI behind the existing erased vtable field types.
+  - Updated `IMap<K, V>.Lookup`, `HasKey`, `Insert`, and `Remove` to use the direct path only when the wrapper is `IMap<Int32, Int32>`; all other maps retain the generic borrow/project path.
+  - Kept `Size`, `GetView`, and `Clear` on the existing erased thunks because they do not take generic input values.
+- Added TDD coverage:
+  - `testInt32MapUsesDirectValueAbiForMutableSlots` first failed because `IMapVtbl.newInt32Int32` did not exist, then passed after the implementation.
+  - The test verifies wrapper calls and external ABI-style direct calls by casting `Lookup`, `HasKey`, `Insert`, and `Remove` slots to concrete `Int32` CFunc signatures.
+- Review fix:
+  - Added `testGenericInt32MapBuilderUsesDirectValueAbiForSpecialization` after review found that `IMapVtbl.new<..., Int32, Int32>` could still create erased slots that the wrapper would later call as direct ABI.
+  - Updated the generic `IMapVtbl.new` construction path to override `Lookup`, `HasKey`, `Insert`, and `Remove` with concrete direct `Int32` slots whenever `K/V` are `Int32/Int32`, keeping old erased slots only for other generic instantiations.
+  - Avoided generic `CFunc` closure casts after they triggered a Cangjie compiler ICE; the final bridge uses concrete `IMap_Impl<Int32, Int32>` slot bodies.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress`: 19/19 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 298/298 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other mutable map scalar combinations (`Int32 -> HString`, non-`Int32` keys, copy-struct values), observable collection surfaces, and generator-emitted collection projections still need concrete ABI thunks.
