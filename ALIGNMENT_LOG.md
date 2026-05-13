@@ -1353,3 +1353,26 @@
   - Full `cjpm test --no-progress`: 326/326 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Other view scalar families (`Int16`/`UInt8`/`UInt16`/`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
+
+### Round102 - Int16 vector-view input ABI
+
+- Completed at `2026-05-14 03:07:10 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Integer literal suffixes include `i16`, `u8`, `u16`, and `u64`, and integer literals are range-checked against their contextual type.
+  - `CFunc` maps to C-callable function pointers, its parameter and return types must satisfy `CType`, `CPointer<T>` can be cast to a concrete `CFunc`, and calling it requires `unsafe`.
+- Extended vector-view scalar-input ABI coverage for `Int16`:
+  - Added direct `Int16` slot dispatch for `IVectorView<Int16>.IndexOf`.
+  - Added `IVectorViewVtbl.newInt16`, and made generic `new<..., Int16>` builders emit the same direct ABI slot.
+  - Kept non-`Int16` cases on the existing generic borrow/project path.
+  - Deliberately kept this round view-only because the reference scan found real `IVectorView<i16>` projections but no matching mutable `IVector<i16>` use.
+- Added TDD coverage:
+  - `testInt16VectorViewUsesDirectValueAbiForIndexOf` first failed because `IVectorViewVtbl.newInt16` did not exist, then validated wrapper calls and direct vtable calls with a concrete `Int16` CFunc signature.
+  - `testGenericInt16VectorViewBuilderUsesDirectValueAbiForSpecialization` verifies the generic vector-view builder emits the same direct `Int16` input slot for `IndexOf`.
+- Debugging notes:
+  - One module-test run timed out and left `std.testrunner.exe` / `windows_runtime.exe` locking `target/release/unittest_bin`; after cleaning the stale processes, the implementation compiled and tests ran normally.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-progress --parallel 1 --timeout-each=30s --no-capture-output`: 49/49 passed with `cjHeapSize=32GB`.
+  - Full `cjpm test --no-progress`: 328/328 passed with `cjHeapSize=32GB`.
+- Remaining related gap:
+  - Other view scalar families (`UInt8`/`UInt16`/`UInt64`), additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
