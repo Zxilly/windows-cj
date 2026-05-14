@@ -2021,3 +2021,30 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+### Round124 - IReference property value forwarding
+
+- Started at `2026-05-15 02:44:10 +08:00`; implementation recorded at `2026-05-15 02:50:51 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at the end of the block and is the local pattern for temporary interface wrappers.
+  - `@C` functions must be invoked from unsafe context; C function pointer thunks cannot rely on captured state.
+  - Conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - `IReference<T>` exposes `Value()` directly, and the reference implementation also forwards `IPropertyValue` scalar/array readers through an interface cast.
+  - Cangjie already modeled `IReference<T>` as queryable to `IPropertyValue` via `asIPropertyValue()`, but callers had to manually cast before using property-value readers.
+  - Local generated patterns such as `IObservableMap` / `IObservableVector` forward ancestor interface methods directly through `try (ancestor = as...)`.
+- Added forwarding:
+  - `IReference<T>` now forwards `Type`, `IsNumericScalar`, scalar `Get*` methods, raw array `Get*Array(size, value)` methods, and high-level no-arg array `Get*Array()` methods through `asIPropertyValue()`.
+  - Each forwarding method uses `try (propertyValue = asIPropertyValue())` so the temporary queried wrapper is released after the call.
+  - No vtable layout changes were made; this is a high-level ancestor convenience surface over the existing ABI.
+- Added coverage:
+  - `testIReferenceForwardsScalarPropertyValueReads` verifies scalar forwarding reaches the `IPropertyValue` vtable through `QueryInterface`, calls `GetSingle`, and releases the temporary wrapper.
+  - `testIReferenceForwardsArrayPropertyValueReads` verifies high-level array forwarding reaches `GetInt32Array`, takes the returned CoTaskMem array, and releases the temporary wrapper.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIReferenceForwardsScalarPropertyValueReads --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIReferenceForwardsArrayPropertyValueReads --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 112/112.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.

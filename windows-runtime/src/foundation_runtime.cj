@@ -5596,6 +5596,431 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
         let v = vtbl()
         return windows_core.winrtCallGenericOut<T>(v.Value, asRaw())
     }
+
+    public unsafe func Type(): PropertyType {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.Type()
+        }
+        throw IllegalStateException("IReference.Type ancestor call did not execute")
+    }
+
+    public unsafe func IsNumericScalar(): Bool {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.IsNumericScalar()
+        }
+        throw IllegalStateException("IReference.IsNumericScalar ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt8(): UInt8 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt8()
+        }
+        throw IllegalStateException("IReference.GetUInt8 ancestor call did not execute")
+    }
+
+    public unsafe func GetInt16(): Int16 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt16()
+        }
+        throw IllegalStateException("IReference.GetInt16 ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt16(): UInt16 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt16()
+        }
+        throw IllegalStateException("IReference.GetUInt16 ancestor call did not execute")
+    }
+
+    public unsafe func GetInt32(): Int32 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt32()
+        }
+        throw IllegalStateException("IReference.GetInt32 ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt32(): UInt32 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt32()
+        }
+        throw IllegalStateException("IReference.GetUInt32 ancestor call did not execute")
+    }
+
+    public unsafe func GetInt64(): Int64 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt64()
+        }
+        throw IllegalStateException("IReference.GetInt64 ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt64(): UInt64 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt64()
+        }
+        throw IllegalStateException("IReference.GetUInt64 ancestor call did not execute")
+    }
+
+    public unsafe func GetSingle(): Float32 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetSingle()
+        }
+        throw IllegalStateException("IReference.GetSingle ancestor call did not execute")
+    }
+
+    public unsafe func GetDouble(): Float64 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetDouble()
+        }
+        throw IllegalStateException("IReference.GetDouble ancestor call did not execute")
+    }
+
+    public unsafe func GetChar16(): UInt16 {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetChar16()
+        }
+        throw IllegalStateException("IReference.GetChar16 ancestor call did not execute")
+    }
+
+    public unsafe func GetBoolean(): Bool {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetBoolean()
+        }
+        throw IllegalStateException("IReference.GetBoolean ancestor call did not execute")
+    }
+
+    public unsafe func GetString(): windows_core.HString {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetString()
+        }
+        throw IllegalStateException("IReference.GetString ancestor call did not execute")
+    }
+
+    public unsafe func GetGuid(): GuidValue {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetGuid()
+        }
+        throw IllegalStateException("IReference.GetGuid ancestor call did not execute")
+    }
+
+    public unsafe func GetDateTime(): DateTime {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetDateTime()
+        }
+        throw IllegalStateException("IReference.GetDateTime ancestor call did not execute")
+    }
+
+    public unsafe func GetTimeSpan(): TimeSpan {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetTimeSpan()
+        }
+        throw IllegalStateException("IReference.GetTimeSpan ancestor call did not execute")
+    }
+
+    public unsafe func GetPoint(): Point {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetPoint()
+        }
+        throw IllegalStateException("IReference.GetPoint ancestor call did not execute")
+    }
+
+    public unsafe func GetSize(): Size {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetSize()
+        }
+        throw IllegalStateException("IReference.GetSize ancestor call did not execute")
+    }
+
+    public unsafe func GetRect(): Rect {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetRect()
+        }
+        throw IllegalStateException("IReference.GetRect ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt8Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt8>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetUInt8Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetUInt8Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int16>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetInt16Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetInt16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetUInt16Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetUInt16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int32>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetInt32Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetInt32Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt32>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetUInt32Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetUInt32Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int64>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetInt64Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetInt64Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt64>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetUInt64Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetUInt64Array ancestor call did not execute")
+    }
+
+    public unsafe func GetSingleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float32>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetSingleArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetSingleArray ancestor call did not execute")
+    }
+
+    public unsafe func GetDoubleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float64>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetDoubleArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetDoubleArray ancestor call did not execute")
+    }
+
+    public unsafe func GetChar16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetChar16Array(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetChar16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetBooleanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Bool>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetBooleanArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetBooleanArray ancestor call did not execute")
+    }
+
+    public unsafe func GetStringArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetStringArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetStringArray ancestor call did not execute")
+    }
+
+    public unsafe func GetInspectableArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetInspectableArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetInspectableArray ancestor call did not execute")
+    }
+
+    public unsafe func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetGuidArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetGuidArray ancestor call did not execute")
+    }
+
+    public unsafe func GetDateTimeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<DateTimeAbi>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetDateTimeArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetDateTimeArray ancestor call did not execute")
+    }
+
+    public unsafe func GetTimeSpanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<TimeSpanAbi>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetTimeSpanArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetTimeSpanArray ancestor call did not execute")
+    }
+
+    public unsafe func GetPointArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<PointAbi>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetPointArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetPointArray ancestor call did not execute")
+    }
+
+    public unsafe func GetSizeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<SizeAbi>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetSizeArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetSizeArray ancestor call did not execute")
+    }
+
+    public unsafe func GetRectArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<RectAbi>>): Unit {
+        try (propertyValue = asIPropertyValue()) {
+            propertyValue.GetRectArray(valueSize, value)
+            return
+        }
+        throw IllegalStateException("IReference.GetRectArray ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt8Array(): Array<UInt8> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt8Array()
+        }
+        throw IllegalStateException("IReference.GetUInt8Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt16Array(): Array<Int16> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt16Array()
+        }
+        throw IllegalStateException("IReference.GetInt16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt16Array(): Array<UInt16> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt16Array()
+        }
+        throw IllegalStateException("IReference.GetUInt16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt32Array(): Array<Int32> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt32Array()
+        }
+        throw IllegalStateException("IReference.GetInt32Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt32Array(): Array<UInt32> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt32Array()
+        }
+        throw IllegalStateException("IReference.GetUInt32Array ancestor call did not execute")
+    }
+
+    public unsafe func GetInt64Array(): Array<Int64> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInt64Array()
+        }
+        throw IllegalStateException("IReference.GetInt64Array ancestor call did not execute")
+    }
+
+    public unsafe func GetUInt64Array(): Array<UInt64> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetUInt64Array()
+        }
+        throw IllegalStateException("IReference.GetUInt64Array ancestor call did not execute")
+    }
+
+    public unsafe func GetSingleArray(): Array<Float32> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetSingleArray()
+        }
+        throw IllegalStateException("IReference.GetSingleArray ancestor call did not execute")
+    }
+
+    public unsafe func GetDoubleArray(): Array<Float64> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetDoubleArray()
+        }
+        throw IllegalStateException("IReference.GetDoubleArray ancestor call did not execute")
+    }
+
+    public unsafe func GetChar16Array(): Array<UInt16> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetChar16Array()
+        }
+        throw IllegalStateException("IReference.GetChar16Array ancestor call did not execute")
+    }
+
+    public unsafe func GetBooleanArray(): Array<Bool> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetBooleanArray()
+        }
+        throw IllegalStateException("IReference.GetBooleanArray ancestor call did not execute")
+    }
+
+    public unsafe func GetStringArray(): Array<windows_core.HString> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetStringArray()
+        }
+        throw IllegalStateException("IReference.GetStringArray ancestor call did not execute")
+    }
+
+    public unsafe func GetInspectableArray(): Array<Option<IInspectable>> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetInspectableArray()
+        }
+        throw IllegalStateException("IReference.GetInspectableArray ancestor call did not execute")
+    }
+
+    public unsafe func GetGuidArray(): Array<GuidValue> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetGuidArray()
+        }
+        throw IllegalStateException("IReference.GetGuidArray ancestor call did not execute")
+    }
+
+    public unsafe func GetDateTimeArray(): Array<DateTime> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetDateTimeArray()
+        }
+        throw IllegalStateException("IReference.GetDateTimeArray ancestor call did not execute")
+    }
+
+    public unsafe func GetTimeSpanArray(): Array<TimeSpan> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetTimeSpanArray()
+        }
+        throw IllegalStateException("IReference.GetTimeSpanArray ancestor call did not execute")
+    }
+
+    public unsafe func GetPointArray(): Array<Point> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetPointArray()
+        }
+        throw IllegalStateException("IReference.GetPointArray ancestor call did not execute")
+    }
+
+    public unsafe func GetSizeArray(): Array<Size> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetSizeArray()
+        }
+        throw IllegalStateException("IReference.GetSizeArray ancestor call did not execute")
+    }
+
+    public unsafe func GetRectArray(): Array<Rect> {
+        try (propertyValue = asIPropertyValue()) {
+            return propertyValue.GetRectArray()
+        }
+        throw IllegalStateException("IReference.GetRectArray ancestor call did not execute")
+    }
 }
 
 extend<T> IReference<T> <: windows_core.Interface<IReference<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
