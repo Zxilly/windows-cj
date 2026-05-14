@@ -169,6 +169,29 @@ func bridgeArgumentExpr(parameter: InterfaceParameterSchema): String {
     }
 }
 
+func inParamProjectionExpr(innerType: String, parameterName: String): String {
+    if (innerType == "windows_core.HString" || innerType == "HString") {
+        return "${innerType}.fromSystemHandleCopy(${parameterName})"
+    }
+    "${innerType}.viewOf(${parameterName})"
+}
+
+func dispatchArgumentExpr(parameter: InterfaceParameterSchema): String {
+    match (parameter.bridgeKind) {
+        case InterfaceParameterBridgeKind.InParam =>
+            match (unwrapGenericType(parameter.callerType, "InParam")) {
+                case Some(innerType) =>
+                    if (parameter.abiType == "CPointer<Unit>") {
+                        let projected = inParamProjectionExpr(innerType, parameter.name)
+                        return "if (${parameter.name}.isNull()) { InParam<${innerType}>() } else { InParam<${innerType}>(${projected}) }"
+                    }
+                    "InParam<${innerType}>(windows_core.assumeInitTypedAbi(${parameter.name}, windows_core.typeMarker<${innerType}>()))"
+                case None => parameter.name
+            }
+        case _ => parameter.name
+    }
+}
+
 func substringBetween(value: String, start: Int64, end: Int64): String {
     let arr = value.toArray()
     let boundedEnd = if (end > Int64(arr.size)) {
@@ -317,7 +340,8 @@ func appendImplMethodCall(
     sb: StringBuilder,
     receiverName: String,
     method: InterfaceMethodSchema,
-    visibleOnly!: Bool = false
+    visibleOnly!: Bool = false,
+    bridgeForDispatch!: Bool = false
 ): Unit {
     sb.append(receiverName)
     sb.append(".")
@@ -333,7 +357,12 @@ func appendImplMethodCall(
         if (index > 0) {
             sb.append(", ")
         }
-        sb.append(method.parameters[index].name)
+        let parameter = method.parameters[index]
+        if (bridgeForDispatch) {
+            sb.append(dispatchArgumentExpr(parameter))
+        } else {
+            sb.append(parameter.name)
+        }
         index += 1
     }
     sb.append(")")
@@ -769,7 +798,7 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
     if (hasResultReturnBridge(method)) {
         appendQualifiedImplDispatchOpen(sb, descriptor)
         sb.append("                    match (")
-        appendImplMethodCall(sb, "qualifiedImpl", method, visibleOnly: true)
+        appendImplMethodCall(sb, "qualifiedImpl", method, visibleOnly: true, bridgeForDispatch: true)
         sb.append(") {\n")
         match (resultAbiValueType(method)) {
             case Some(abiValueType) =>
@@ -814,7 +843,7 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
     } else {
         appendQualifiedImplDispatchOpen(sb, descriptor)
         sb.append("                    ")
-        appendImplMethodCall(sb, "qualifiedImpl", method)
+        appendImplMethodCall(sb, "qualifiedImpl", method, bridgeForDispatch: true)
         sb.append("\n")
         appendQualifiedImplDispatchClose(sb, method)
     }

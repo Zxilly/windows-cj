@@ -25,3 +25,62 @@ func testGeneratedWrapperViewOfDisablesManualRelease() {
     @Expect(source.contains("public func asIUnknown(): IUnknown {\n        IUnknown.viewOf(asRaw())\n    }"), true)
     @Expect(source.contains("public func asIUnknown(): IUnknown {\n        IUnknown(asRaw())\n    }"), false)
 }
+
+@Test
+func testGeneratedThunkProjectsInParamBeforeDispatch() {
+    let schema = InterfaceDescriptorSchema(
+        "Fixture.IInput",
+        GUID.parse("22222222-3434-5656-7878-909090909090"),
+        IUnknown.descriptorSchema(),
+        "Fixture_IInputVtbl",
+        "Fixture_IInput",
+        "Fixture_IInput_Impl",
+        [
+            InterfaceMethodSchema(
+                "Input",
+                3,
+                [
+                    InterfaceParameterSchema(
+                        "input",
+                        "CPointer<Unit>",
+                        "InParam<Fixture_IInput>",
+                        InterfaceParameterBridgeKind.InParam
+                    ),
+                    InterfaceParameterSchema(
+                        "result",
+                        "CPointer<Int32>",
+                        "OutSlot<Int32>",
+                        InterfaceParameterBridgeKind.OutSlot
+                    )
+                ],
+                "Int32"
+            ),
+            InterfaceMethodSchema(
+                "InputStatus",
+                4,
+                [
+                    InterfaceParameterSchema(
+                        "status",
+                        "Fixture_StatusAbi",
+                        "InParam<Fixture_Status>",
+                        InterfaceParameterBridgeKind.InParam
+                    ),
+                    InterfaceParameterSchema(
+                        "result",
+                        "CPointer<Int32>",
+                        "OutSlot<Int32>",
+                        InterfaceParameterBridgeKind.OutSlot
+                    )
+                ],
+                "Int32"
+            )
+        ]
+    )
+
+    let source = renderDescriptor(resolveSchema(schema))
+
+    @Expect(source.contains("qualifiedImpl.Input(input)"), false)
+    @Expect(source.contains("qualifiedImpl.Input(if (input.isNull()) { InParam<Fixture_IInput>() } else { InParam<Fixture_IInput>(Fixture_IInput.viewOf(input)) })"), true)
+    @Expect(source.contains("qualifiedImpl.InputStatus(status)"), false)
+    @Expect(source.contains("qualifiedImpl.InputStatus(InParam<Fixture_Status>(windows_core.assumeInitTypedAbi(status, windows_core.typeMarker<Fixture_Status>())))"), true)
+}
