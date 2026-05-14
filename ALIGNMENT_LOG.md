@@ -1505,3 +1505,32 @@
   - Review agent `Gauss`: Round107 review clean; no blocking `IMapView<Int32, UInt64>` ABI, stock helper, test, or log issues found.
 - Remaining related gap:
   - Other real reference map surfaces still need focused passes, notably `IMapView<Int32, Float32>`, `IMap<Int32, Float32>`, and `IMapView<HString, Int32>`.
+
+### Round108 - Int32 to Float32 map ABI
+
+- Completed at `2026-05-14 17:35:28 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` maps to C-callable function pointers, parameter/return types must satisfy `CType`, `CPointer<T>` can be cast to a concrete `CFunc`, and calls require `unsafe`.
+  - `@Test` / `@TestCase` / `@Expect` are the supported local unittest forms.
+- Reference scan:
+  - Found real reference coverage for `IMapView<Int32, Float32>` and `IMap<Int32, Float32>`, including `Lookup`, `HasKey`, `Insert`, `Remove`, `GetView`, and inherited iteration.
+- Fixed map and map-view ABI specialization:
+  - Added direct `Int32` key + `Float32` value output dispatch for `IMapView<Int32, Float32>.Lookup` and `IMap<Int32, Float32>.Lookup`.
+  - Added direct `Int32` key dispatch for `HasKey` on both interfaces.
+  - Added direct `Int32` key + `Float32` value input dispatch for `IMap<Int32, Float32>.Insert`, plus direct `Int32` remove dispatch for this specialization.
+  - Added `IMapViewVtbl.newInt32Float32` and `IMapVtbl.newInt32Float32`, and made the generic vtable builders emit the same concrete ABI slots.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --parallel 1 --timeout-each=5s --no-capture-output` failed before implementation because `newInt32Float32` was missing on both `IMapViewVtbl` and `IMapVtbl`.
+  - `testInt32Float32MapViewUsesDirectValueAbi` verifies wrapper and direct vtable calls for `Lookup` / `HasKey`.
+  - `testGenericInt32Float32MapViewBuilderUsesDirectValueAbiForSpecialization` verifies the generic map-view builder emits direct ABI slots.
+  - `testInt32Float32MapUsesDirectValueAbiForMutableSlots` verifies wrapper and direct vtable calls for `Lookup`, `HasKey`, `Insert`, and `Remove`.
+  - `testGenericInt32Float32MapBuilderUsesDirectValueAbiForSpecialization` verifies the generic map builder emits direct ABI slots.
+- Debugging notes:
+  - Initial production patch had two nested-`match` brace mistakes; the compiler reported the first bad `case` / function body location, and the fix was limited to restoring the intended match nesting.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 74/74 passed with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Godel`: Round108 review clean; no blocking `IMapView<Int32, Float32>` / `IMap<Int32, Float32>` ABI, wrapper dispatch, direct vtable test, or log issues found.
