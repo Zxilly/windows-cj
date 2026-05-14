@@ -1773,3 +1773,32 @@
   - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 95/95 with `cjHeapSize=32GB`.
 - Review:
   - Review agent `Erdos`: Round115 review clean; confirmed `DateTimeAbi` is passed by value for vector/view `IndexOf`, vector `SetAt` / `InsertAt` / `Append`, wrapper dispatch and generic builder specialization are coherent, test `Resource` cleanup uses the closed-flag pattern, and direct vtable casts cover the ABI behavior.
+
+### Round116 - Remaining copy-type vector direct ABI
+
+- Started at `2026-05-14 23:39:29 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` is the C-callable function pointer representation, `CFunc` parameters/returns must satisfy `CType`, `CPointer` can cast to concrete `CFunc`, and calls require `unsafe`.
+  - Top-level type aliases use `type Alias = OriginalType`; this round uses `WinrtSize = Size` only to avoid the `IVector*Vtbl.Size` member shadowing the WinRT `Size` type in nested scopes.
+- Reference scan:
+  - Rechecked `IVector<T>` / `IVectorView<T>` reference vtables: input slots use `AbiType<T>` by value.
+  - `TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect` are WinRT copy types in Cangjie; direct external vtable callers must pass `TimeSpanAbi`, `GUID`, `PointAbi`, `SizeAbi`, and `RectAbi` by value rather than a borrowed pointer.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `newTimeSpan`, `newGuidValue`, `newPoint`, `newSize`, and `newRect` did not exist on `IVectorVtbl` / `IVectorViewVtbl`.
+  - `testRemainingCopyVectorViewsUseDirectValueAbiForSpecializations` covers direct vtable `IndexOf` for `TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect`.
+  - `testRemainingCopyVectorsUseDirectValueAbiForMutableSlots` covers direct vtable `SetAt`, `InsertAt`, and `Append` for `TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect`.
+- Fixed remaining copy-type vector ABI:
+  - Added direct ABI dispatch helpers for remaining copy-type vector-view `IndexOf` and vector `SetAt` / `InsertAt` / `Append`.
+  - `IVectorViewVtbl.new<Identity, T>` and `IVectorVtbl.new<Identity, T>` now specialize `T == TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect` to concrete by-value ABI CFunc signatures.
+  - Added per-type single-specialization constructors `newTimeSpan`, `newGuidValue`, `newPoint`, `newSize`, and `newRect` on both vector vtables.
+  - Public `IVectorView<T>` / `IVector<T>` wrappers now route those copy-type inputs through direct ABI helpers.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testRemainingCopyVectorViewsUseDirectValueAbiForSpecializations --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testRemainingCopyVectorsUseDirectValueAbiForMutableSlots --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 97/97 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Banach`: Round116 review clean; confirmed by-value ABI specialization for `TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect`, including `GUID`/`GuidValue` mapping, `WinrtSize` alias shadow workaround, direct vtable casts, wrapper dispatch, test `Resource` cleanup, and log consistency.
