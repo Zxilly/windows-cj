@@ -6168,13 +6168,21 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IReferenceArrayVtbl>(IReferenceArrayVtbl())
     }
 
-    public unsafe func Value(): (UInt32, CPointer<Unit>) {
+    public unsafe func ValueRaw(): (UInt32, CPointer<Unit>) {
         let v = vtbl()
         var resultSize__: UInt32 = 0u32
         var result__: CPointer<Unit> = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<UInt32>(inout resultSize__), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return (resultSize__, result__)
+    }
+
+}
+
+extend<T> IReferenceArray<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public unsafe func Value(): Array<T> {
+        let (resultSize__, result__) = ValueRaw()
+        return windows_core.winrtTakeGenericArrayOut<T>(result__, resultSize__)
     }
 }
 

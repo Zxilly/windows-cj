@@ -1982,3 +1982,42 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+### Round123 - IReferenceArray generic Value array projection
+
+- Started at `2026-05-15 01:56:21 +08:00`; implementation recorded at `2026-05-15 02:31:14 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` values model C-callable function pointers; calls and pointer casts are `unsafe`.
+  - `CPointer` arithmetic, reads, writes, and casts require `unsafe`.
+  - `try` / `catch` / `finally` is the deterministic cleanup pattern; type-pattern matching is supported for `Resource` cleanup.
+  - Non-generic methods cannot add a `where` clause, so the high-level `Value()` lives in a constrained `extend<T> IReferenceArray<T>`.
+- Reference scan:
+  - `IReferenceArray<T>.Value` returns a WinRT-owned array through `u32*` length plus data pointer out slots.
+  - Existing Cangjie `IReference<T>.Value()` already projects through `WinrtGenericType`; `IReferenceArray<T>` only exposed the raw `(UInt32, CPointer<Unit>)` ABI pair.
+- Added generic bridge support:
+  - Added `WinrtOutputBridge.takeArrayOut` and public `winrtTakeGenericArrayOut<T>()`.
+  - `CopyWinrtOutputBridge<T>` now wraps owned ABI arrays with `AbiArray<T>.fromRawParts`, copies to managed `Array<T>`, and frees the CoTaskMem buffer in `finally`.
+  - `ProjectedCopyWinrtOutputBridge<T, A, D>` does the same for ABI element type `A`, then projects elements with `T.assumeInitRef`.
+  - `HandleWinrtOutputBridge<T>` now consumes handle slot arrays into `Array<T>`, closes partially materialized `Resource` values on failure, releases remaining raw slots, and always frees the CoTaskMem slot buffer.
+  - Added `HandleWinrtType.takeWinrtHandleSlot` / `releaseWinrtHandle` hooks so raw slot ownership can be released without forcing Rust-style associated ABI abstractions.
+  - HSTRING overrides clear the slot before `fromSystemHandleTake` and release remaining raw handles through `releaseSystemHStringHandle`; COM-like handles use direct raw `IUnknown::Release`.
+- Fixed `IReferenceArray<T>`:
+  - Renamed the raw ABI accessor to `ValueRaw(): (UInt32, CPointer<Unit>)`.
+  - Added constrained high-level `Value(): Array<T>` for `T <: RuntimeType & WinrtGenericType<T>`.
+- Added coverage:
+  - `testIReferenceArrayValueReturnsCopyArray` covers direct copy ABI values.
+  - `testIReferenceArrayValueReturnsProjectedCopyArray` covers projected copy structs (`DateTime`).
+  - `testIReferenceArrayValueReturnsHStringArray` covers owned HSTRING handles, null-as-empty HSTRING, and raw handle deletion.
+  - `testIReferenceArrayValueReturnsInspectableArray` covers owned COM interface slots and caller-side release of returned wrappers.
+- Review fixes:
+  - Review agent `Volta` found HSTRING failure cleanup could double-release when the slot still held a raw handle, and remaining slot cleanup should not reconstruct managed HSTRING values just to release raw handles.
+  - Added per-type handle slot take/release hooks and HSTRING-specific raw release to fix those cleanup gaps.
+  - Review agent `Goodall` found `ArrayList` allocation happened before the cleanup-covered `try`, so allocation failure could leak the ABI-owned slot array.
+  - Moved `ArrayList` allocation inside the cleanup-covered `try` and tracks it with `Option<ArrayList<T>>`.
+- Verification after fixes:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - Four targeted `testIReferenceArrayValueReturns*` tests passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 110/110.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.

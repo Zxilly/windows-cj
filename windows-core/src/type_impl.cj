@@ -160,6 +160,14 @@ extend HString <: CloneType & RuntimeType & Type<HString, HString, HString> & Ha
     public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HString { HString.fromSystemHandleTake(raw) }
     public static func viewWinrtHandle(raw: CPointer<Unit>): HString { HString.fromSystemHandleCopy(raw) }
     public static func allowNullWinrtHandle(): Bool { true }
+    public static func takeWinrtHandleSlot(slot: CPointer<CPointer<Unit>>): HString {
+        let raw = unsafe { slot.read() }
+        unsafe { slot.write(CPointer<Unit>()) }
+        HString.fromSystemHandleTake(raw)
+    }
+    public static func releaseWinrtHandle(raw: CPointer<Unit>): Unit {
+        releaseSystemHStringHandle(raw)
+    }
     public static func isNullAbi(abi: HString): Bool { abi.isEmpty() }
     public static func assumeInitRef(abi: HString): HString { cloneProjectedValue(abi) }
     public static func fromAbi(abi: HString): Result<HString> { Result<HString>.Ok(cloneProjectedValue(abi)) }
