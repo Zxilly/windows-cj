@@ -991,6 +991,18 @@ func callMapViewLookupInt32Float32(
     result__
 }
 
+func callMapViewLookupInt32VectorViewInt32(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    key: Int32
+): IVectorView<Int32> {
+    let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = CPointer<Unit>()
+    let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
+    HRESULT(hr).ok()
+    IVectorView<Int32>.fromAbiTake(result__)
+}
+
 func callMapViewLookupUInt32UInt32(
     slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -1256,7 +1268,50 @@ public struct IMapViewVtbl {
                                             }
                                         }
                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
-                                    case None => ()
+                                    case None =>
+                                        match (IVectorView<Int32>.viewOf(CPointer<Unit>()) as V) {
+                                            case Some(_) =>
+                                                let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {
+                                                    instanceRaw, arg0, result__ =>
+                                                    match (unsafe { asImplFromRaw<IMapView_Impl<Int32, IVectorView<Int32>>>(instanceRaw) }) {
+                                                        case Some(impl) =>
+                                                            if (result__.isNull()) {
+                                                                E_POINTER.value
+                                                            } else {
+                                                                match (impl.Lookup(arg0)) {
+                                                                    case Result<IVectorView<Int32>>.Ok(value) =>
+                                                                        windows_core.winrtStoreGenericOut<IVectorView<Int32>>(result__, value)
+                                                                    case Result<IVectorView<Int32>>.Err(error) =>
+                                                                        error.code().value
+                                                                }
+                                                            }
+                                                        case None =>
+                                                            E_NOINTERFACE.value
+                                                    }
+                                                }
+                                                vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
+                                                let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
+                                                    instanceRaw, arg0, result__ =>
+                                                    match (unsafe { asImplFromRaw<IMapView_Impl<Int32, IVectorView<Int32>>>(instanceRaw) }) {
+                                                        case Some(impl) =>
+                                                            if (result__.isNull()) {
+                                                                E_POINTER.value
+                                                            } else {
+                                                                match (impl.HasKey(arg0)) {
+                                                                    case Result<Bool>.Ok(value) =>
+                                                                        unsafe { result__.write(value) }
+                                                                        S_OK.value
+                                                                    case Result<Bool>.Err(error) =>
+                                                                        error.code().value
+                                                                }
+                                                            }
+                                                        case None =>
+                                                            E_NOINTERFACE.value
+                                                    }
+                                                }
+                                                vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
+                                            case None => ()
+                                        }
                                 }
                         }
                         }
@@ -1494,6 +1549,10 @@ public struct IMapViewVtbl {
         IMapViewVtbl.new<Identity, Int32, Float32>(offset: offset)
     }
 
+    public static func newInt32VectorViewInt32<Identity>(offset!: Int64 = 0): IMapViewVtbl where Identity <: IMapView_Impl<Int32, IVectorView<Int32>> {
+        IMapViewVtbl.new<Identity, Int32, IVectorView<Int32>>(offset: offset)
+    }
+
     public static func matches<K, V>(iid: GUID): Bool where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
         if (iid == IMapView<K, V>.iid()) {
             return true
@@ -1690,6 +1749,19 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
                 }
             case _ => ()
         }
+        match (IVectorView<Int32>.viewOf(CPointer<Unit>()) as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 =>
+                        let directValue = callMapViewLookupInt32VectorViewInt32(v.Lookup, asRaw(), abiKey)
+                        match (directValue as V) {
+                            case Some(value) => return value
+                            case None => ()
+                        }
+                    case _ => ()
+                }
+            case _ => ()
+        }
         match (0.0f32 as V) {
             case Some(_) =>
                 match (key) {
@@ -1762,6 +1834,14 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     public unsafe func HasKey(key: K): Bool {
         let v = vtbl()
         match (0i32 as V) {
+            case Some(_) =>
+                match (key) {
+                    case abiKey: Int32 => return callMapViewHasKeyInt32(v.HasKey, asRaw(), abiKey)
+                    case _ => ()
+                }
+            case _ => ()
+        }
+        match (IVectorView<Int32>.viewOf(CPointer<Unit>()) as V) {
             case Some(_) =>
                 match (key) {
                     case abiKey: Int32 => return callMapViewHasKeyInt32(v.HasKey, asRaw(), abiKey)

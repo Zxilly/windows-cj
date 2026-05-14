@@ -1534,3 +1534,33 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Godel`: Round108 review clean; no blocking `IMapView<Int32, Float32>` / `IMap<Int32, Float32>` ABI, wrapper dispatch, direct vtable test, or log issues found.
+
+### Round109 - Int32 to Int32-vector-view map-view ABI
+
+- Completed at `2026-05-14 17:52:44 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Reused the current round's official Cangjie documentation checks for `CFunc`, `CPointer`, `unsafe`, `@Test`, `@TestCase`, and `@Expect`.
+- Reference scan:
+  - Found real reference coverage for `IMapView<Int32, IVectorView<Int32>>` in collection interop tests, where map keys are scalar `Int32` and values are WinRT vector-view handles.
+  - Considered `IMapView<HString, Int32>` from stock map-view tests, but did not specialize it this round because `HString` keys already use the handle-pointer ABI and existing generic bridges cover the typed `Int32` out slot safely; existing stock tests cover wrapper behavior.
+- Fixed map-view ABI specialization:
+  - Added direct `Int32` key dispatch for `IMapView<Int32, IVectorView<Int32>>.Lookup`, returning the value through the existing handle out slot.
+  - Added direct `Int32` key dispatch for `HasKey` on the same specialization.
+  - Added `IMapViewVtbl.newInt32VectorViewInt32` and made generic `IMapViewVtbl.new<..., Int32, IVectorView<Int32>>` emit the same direct ABI slots.
+  - Added a stock `toMapView(Iterable<(Int32, IVectorView<Int32>)>)` overload backed by `StockInt32VectorViewInt32MapViewImpl`.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --parallel 1 --timeout-each=5s --no-capture-output` failed before implementation because `IMapViewVtbl.newInt32VectorViewInt32` did not exist and stock `toMapView` could not infer a generic overload for scalar `Int32` keys.
+  - `testInt32VectorViewMapViewUsesDirectKeyAbi` verifies wrapper lookup and direct vtable lookup/HasKey calls.
+  - `testGenericInt32VectorViewMapViewBuilderUsesDirectKeyAbiForSpecialization` verifies the generic vtable builder emits direct slots.
+  - `testStockInt32VectorViewMapViewUsesDirectKeyAbi` verifies the public stock helper overload uses the same ABI behavior.
+- Debugging notes:
+  - The first full `windows-runtime` run timed out and left stale `cjpm` / `cjv` / `std.testrunner` / `windows_runtime` processes; after stopping them, all new tests passed individually and the full module run completed successfully.
+  - Avoided further parallel `cjpm` runs after that cleanup to reduce tool-state risk.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - Targeted new tests passed individually with `--skip-build --parallel 1 --timeout-each=5s --no-capture-output`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 77/77 passed with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Euler`: Round109 review clean; no blocking `IMapView<Int32, IVectorView<Int32>>` direct key ABI, wrapper dispatch, stock overload, direct vtable test, or log issues found.
