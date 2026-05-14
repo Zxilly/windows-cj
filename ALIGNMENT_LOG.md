@@ -1802,3 +1802,27 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Banach`: Round116 review clean; confirmed by-value ABI specialization for `TimeSpan`, `GuidValue`, `Point`, `Size`, and `Rect`, including `GUID`/`GuidValue` mapping, `WinrtSize` alias shadow workaround, direct vtable casts, wrapper dispatch, test `Resource` cleanup, and log consistency.
+
+### Round117 - GuidHelper Equals value projection
+
+- Started at `2026-05-14 23:50:09 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` maps to C-callable function pointers, its parameter/return types must satisfy `CType`, `CFunc` lambdas cannot capture variables, `CPointer` can be cast to concrete `CFunc`, and Cangjie calls to `CFunc` require `unsafe`.
+- Reference scan:
+  - Rechecked `GuidHelper.Equals` and `IGuidHelperStatics_Vtbl.Equals`.
+  - The high-level method accepts GUID values, while the ABI slot takes borrowed `GUID` pointers (`&GUID` in the reference vtable). Therefore the correct Cangjie shape is to expose `GuidValue` at the wrapper/static surface and internally stage local `GUID` values before calling the pointer ABI slot.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IGuidHelperStatics.Equals` still required `CPointer<GUID>` arguments.
+  - `testGuidHelperEqualsProjectsGuidValuesToAbiPointers` verifies the public wrapper accepts `GuidValue`, projects both values to non-null `GUID` ABI pointers, and reaches the direct vtable thunk.
+- Fixed GuidHelper projection:
+  - Kept `IGuidHelperStaticsVtbl.Equals` as `CPointer<GUID>, CPointer<GUID>, CPointer<Bool>` to match the WinRT ABI.
+  - Changed `IGuidHelperStatics.Equals` and `GuidHelper.Equals` to accept `GuidValue` and pass pointers to local raw `GUID` copies into the ABI slot.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testGuidHelperEqualsProjectsGuidValuesToAbiPointers --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 98/98 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Hegel`: Round117 review clean; confirmed `IGuidHelperStaticsVtbl.Equals` keeps the borrowed `GUID` pointer ABI, public/static wrappers accept `GuidValue`, local raw `GUID` pointers do not escape the call, test coverage exercises the projection, and log entries match the implementation and reference scan.

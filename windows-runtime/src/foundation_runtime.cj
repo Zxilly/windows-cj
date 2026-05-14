@@ -1138,10 +1138,12 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
         return GuidValue(result__)
     }
 
-    public unsafe func Equals(target: CPointer<GUID>, value: CPointer<GUID>): Bool {
+    public unsafe func Equals(target: GuidValue, value: GuidValue): Bool {
         let v = vtbl()
         var result__ = false
-        let hr = v.Equals(asRaw(), target, value, CPointer<Bool>(inout result__))
+        var targetRaw = target.toRaw()
+        var valueRaw = value.toRaw()
+        let hr = v.Equals(asRaw(), CPointer<GUID>(inout targetRaw), CPointer<GUID>(inout valueRaw), CPointer<Bool>(inout result__))
         HRESULT(hr).ok()
         return result__
     }
@@ -2304,7 +2306,7 @@ public class GuidHelper <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
-    public static unsafe func Equals(target: CPointer<GUID>, value: CPointer<GUID>): Bool {
+    public static unsafe func Equals(target: GuidValue, value: GuidValue): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<GuidHelper, IGuidHelperStatics>().unwrap()) {
             result__ = Some(factory__.Equals(target, value))
