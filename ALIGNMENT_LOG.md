@@ -1674,6 +1674,36 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Planck`: no findings; confirmed no ABI/vtable layout, HRESULT propagation, refcount, double-free, or array out-memory issues. Residual test risk is representative coverage only, not one test per forwarded method.
+
+### Round126 - IPropertySet ancestor forwarding
+
+- Started at `2026-05-15 03:02:05 +08:00`; implementation recorded at `2026-05-15 03:17:02 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the local pattern for temporary queried interface wrappers.
+  - `CPointer` reads/writes and `CFunc` calls require `unsafe`.
+  - `CFunc` callbacks cannot capture state, so tests use top-level thunks and atomic counters.
+- Reference scan:
+  - `IPropertySet` has required ancestors `IIterable<IKeyValuePair<HString, IInspectable>>`, `IMap<HString, IInspectable>`, and `IObservableMap<HString, IInspectable>`.
+  - Rust exposes `First`, map operations, and `MapChanged` methods directly on `IPropertySet`; Cangjie had only `asIIterable/asIMap/asIObservableMap` plus iterator wrappers.
+  - `PropertySet` and `ValueSet` runtime classes already had these direct methods, so the missing behavior was at the `IPropertySet` interface wrapper layer.
+- Added forwarding:
+  - `IPropertySet` now forwards `MapChanged`, `RemoveMapChanged`, `Lookup`, `Size`, `HasKey`, `GetView`, `Insert`, `Remove`, `Clear`, and `First` through the appropriate ancestor interface.
+  - Each forwarding method uses `try (ancestor = as...)` so the temporary QI wrapper is released after the ancestor call.
+  - No vtable layout changes were made; `IPropertySetVtbl` remains an empty extension of `IInspectableVtbl`.
+- Added coverage:
+  - `testIPropertySetForwardsMapReadsThroughQueryInterface` verifies `Size` forwards through `IMap` and releases the temporary wrapper.
+  - `testIPropertySetForwardsObservableMapRemoveThroughQueryInterface` verifies `RemoveMapChanged` forwards the projected `EventRegistrationToken` ABI and releases the temporary wrapper.
+  - `testIPropertySetForwardsIterableFirstThroughQueryInterface` verifies `First` forwards through `IIterable`, returns an owned iterator wrapper, and releases both the temporary queried wrapper and returned iterator.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*testIPropertySetForwards* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 3/117.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 117/117.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Anscombe`: no findings in ABI/vtable layout, QueryInterface/refcount behavior, `Resource` cleanup, returned iterator ownership, HRESULT handling, or Cangjie syntax/API usage.
+  - Residual test risk: representative fake-vtable tests do not call methods on the returned iterator after `First()`.
 - Review:
   - Review agent `Franklin`: Round122 re-review clean; confirmed the prior cleanup gaps are fixed, raw COM slots are cleared only after successful materialization, raw HSTRING/COM arrays are covered by cleanup if managed allocation fails, HRESULT propagation remains through the raw method, and the test covers nullable projection plus caller-owned release.
 - Review:

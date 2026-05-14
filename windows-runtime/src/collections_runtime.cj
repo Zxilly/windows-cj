@@ -7834,6 +7834,79 @@ public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IPropertySetVtbl>(IPropertySetVtbl())
     }
 
+    public unsafe func MapChanged(vhnd: MapChangedEventHandler<windows_core.HString, IInspectable>): EventRegistrationToken {
+        try (observableMap = asIObservableMap()) {
+            return observableMap.MapChanged(vhnd)
+        }
+        throw IllegalStateException("IPropertySet.MapChanged ancestor call did not execute")
+    }
+
+    public unsafe func RemoveMapChanged(token: EventRegistrationToken): Unit {
+        try (observableMap = asIObservableMap()) {
+            observableMap.RemoveMapChanged(token)
+            return
+        }
+        throw IllegalStateException("IPropertySet.RemoveMapChanged ancestor call did not execute")
+    }
+
+    public unsafe func Lookup(key: windows_core.HString): IInspectable {
+        try (map = asIMap()) {
+            return map.Lookup(key)
+        }
+        throw IllegalStateException("IPropertySet.Lookup ancestor call did not execute")
+    }
+
+    public unsafe func Size(): UInt32 {
+        try (map = asIMap()) {
+            return map.Size()
+        }
+        throw IllegalStateException("IPropertySet.Size ancestor call did not execute")
+    }
+
+    public unsafe func HasKey(key: windows_core.HString): Bool {
+        try (map = asIMap()) {
+            return map.HasKey(key)
+        }
+        throw IllegalStateException("IPropertySet.HasKey ancestor call did not execute")
+    }
+
+    public unsafe func GetView(): IMapView<windows_core.HString, IInspectable> {
+        try (map = asIMap()) {
+            return map.GetView()
+        }
+        throw IllegalStateException("IPropertySet.GetView ancestor call did not execute")
+    }
+
+    public unsafe func Insert(key: windows_core.HString, value: IInspectable): Bool {
+        try (map = asIMap()) {
+            return map.Insert(key, value)
+        }
+        throw IllegalStateException("IPropertySet.Insert ancestor call did not execute")
+    }
+
+    public unsafe func Remove(key: windows_core.HString): Unit {
+        try (map = asIMap()) {
+            map.Remove(key)
+            return
+        }
+        throw IllegalStateException("IPropertySet.Remove ancestor call did not execute")
+    }
+
+    public unsafe func Clear(): Unit {
+        try (map = asIMap()) {
+            map.Clear()
+            return
+        }
+        throw IllegalStateException("IPropertySet.Clear ancestor call did not execute")
+    }
+
+    public unsafe func First(): IIterator<IKeyValuePair<windows_core.HString, IInspectable>> {
+        try (iterable = asIIterable()) {
+            return iterable.First()
+        }
+        throw IllegalStateException("IPropertySet.First ancestor call did not execute")
+    }
+
     public func intoIterator(): Iterator<IKeyValuePair<windows_core.HString, IInspectable>> {
         asIIterable().intoIterator()
     }
