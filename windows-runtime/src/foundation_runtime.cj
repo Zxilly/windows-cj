@@ -2536,6 +2536,30 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
 
 extend IMemoryBufferReference <: windows_core.Interface<IMemoryBufferReference> {}
 
+func projectPropertyValueGuidArray(values: Array<GuidValue>): Array<GUID> {
+    Array<GUID>(values.size, { index => values[index].toRaw() })
+}
+
+func projectPropertyValueDateTimeArray(values: Array<DateTime>): Array<DateTimeAbi> {
+    Array<DateTimeAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<DateTime>()) })
+}
+
+func projectPropertyValueTimeSpanArray(values: Array<TimeSpan>): Array<TimeSpanAbi> {
+    Array<TimeSpanAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<TimeSpan>()) })
+}
+
+func projectPropertyValuePointArray(values: Array<Point>): Array<PointAbi> {
+    Array<PointAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<Point>()) })
+}
+
+func projectPropertyValueSizeArray(values: Array<Size>): Array<SizeAbi> {
+    Array<SizeAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<Size>()) })
+}
+
+func projectPropertyValueRectArray(values: Array<Rect>): Array<RectAbi> {
+    Array<RectAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<Rect>()) })
+}
+
 @C
 public struct IPropertyValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4261,6 +4285,318 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         HRESULT(hr).ok()
         return IInspectable.fromAbiTake(result__)
     }
+
+    public unsafe func CreateUInt8Array(value: Array<UInt8>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateUInt8Array(asRaw(), 0u32, CPointer<UInt8>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateUInt8Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateInt16Array(value: Array<Int16>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateInt16Array(asRaw(), 0u32, CPointer<Int16>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateInt16Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateUInt16Array(value: Array<UInt16>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateUInt16Array(asRaw(), 0u32, CPointer<UInt16>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateUInt16Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateInt32Array(value: Array<Int32>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateInt32Array(asRaw(), 0u32, CPointer<Int32>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateInt32Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateUInt32Array(value: Array<UInt32>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateUInt32Array(asRaw(), 0u32, CPointer<UInt32>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateUInt32Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateInt64Array(value: Array<Int64>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateInt64Array(asRaw(), 0u32, CPointer<Int64>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateInt64Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateUInt64Array(value: Array<UInt64>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateUInt64Array(asRaw(), 0u32, CPointer<UInt64>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateUInt64Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateSingleArray(value: Array<Float32>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateSingleArray(asRaw(), 0u32, CPointer<Float32>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateSingleArray(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateDoubleArray(value: Array<Float64>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateDoubleArray(asRaw(), 0u32, CPointer<Float64>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateDoubleArray(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateChar16Array(value: Array<UInt16>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateChar16Array(asRaw(), 0u32, CPointer<UInt16>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateChar16Array(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateBooleanArray(value: Array<Bool>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (value.size == 0) {
+            hr__ = v.CreateBooleanArray(asRaw(), 0u32, CPointer<Bool>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(value) }
+            try {
+                hr__ = v.CreateBooleanArray(asRaw(), UInt32(value.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateGuidArray(value: Array<GuidValue>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValueGuidArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreateGuidArray(asRaw(), 0u32, CPointer<GUID>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreateGuidArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateDateTimeArray(value: Array<DateTime>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValueDateTimeArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreateDateTimeArray(asRaw(), 0u32, CPointer<DateTimeAbi>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreateDateTimeArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateTimeSpanArray(value: Array<TimeSpan>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValueTimeSpanArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreateTimeSpanArray(asRaw(), 0u32, CPointer<TimeSpanAbi>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreateTimeSpanArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreatePointArray(value: Array<Point>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValuePointArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreatePointArray(asRaw(), 0u32, CPointer<PointAbi>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreatePointArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateSizeArray(value: Array<Size>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValueSizeArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreateSizeArray(asRaw(), 0u32, CPointer<SizeAbi>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreateSizeArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateRectArray(value: Array<Rect>): IInspectable {
+        let v = vtbl()
+        let abiValues = projectPropertyValueRectArray(value)
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        if (abiValues.size == 0) {
+            hr__ = v.CreateRectArray(asRaw(), 0u32, CPointer<RectAbi>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let valueHandle = unsafe { acquireArrayRawData(abiValues) }
+            try {
+                hr__ = v.CreateRectArray(asRaw(), UInt32(abiValues.size), valueHandle.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(valueHandle) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
 }
 
 extend IPropertyValueStatics <: windows_core.Interface<IPropertyValueStatics> {}
@@ -5865,6 +6201,194 @@ public class PropertyValue <: windows_interface.RuntimeName & windows_core.Runti
             case None => throw IllegalStateException("Activation factory call `CreateRectArray` did not return a value")
         }
     }
+
+    public static unsafe func CreateUInt8Array(value: Array<UInt8>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateUInt8Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateUInt8Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateInt16Array(value: Array<Int16>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateInt16Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateInt16Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateUInt16Array(value: Array<UInt16>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateUInt16Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateUInt16Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateInt32Array(value: Array<Int32>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateInt32Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateInt32Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateUInt32Array(value: Array<UInt32>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateUInt32Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateUInt32Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateInt64Array(value: Array<Int64>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateInt64Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateInt64Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateUInt64Array(value: Array<UInt64>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateUInt64Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateUInt64Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateSingleArray(value: Array<Float32>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateSingleArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateSingleArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateDoubleArray(value: Array<Float64>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateDoubleArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateDoubleArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateChar16Array(value: Array<UInt16>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateChar16Array(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateChar16Array` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateBooleanArray(value: Array<Bool>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateBooleanArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateBooleanArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateGuidArray(value: Array<GuidValue>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateGuidArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateGuidArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateDateTimeArray(value: Array<DateTime>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateDateTimeArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateDateTimeArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateTimeSpanArray(value: Array<TimeSpan>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateTimeSpanArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateTimeSpanArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreatePointArray(value: Array<Point>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreatePointArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreatePointArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateSizeArray(value: Array<Size>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateSizeArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateSizeArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateRectArray(value: Array<Rect>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateRectArray(value))
+        }
+        match (result__) {
+            case Some(created) => return created
+            case None => throw IllegalStateException("Activation factory call `CreateRectArray` did not return a value")
+        }
+    }
+
 }
 
 @C

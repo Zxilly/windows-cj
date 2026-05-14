@@ -1648,6 +1648,8 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `Wegener`: Round118 review clean; no WinRT ABI mismatch, raw array handle lifetime issue, copy-type projection issue, test cleanup problem, or implementable capability gap found in the added `PropertyValue` / `IPropertyValueStatics` array overloads.
+- Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
 
 ### Round112 - Stock helper returned-interface lifetime
@@ -1826,3 +1828,31 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Hegel`: Round117 review clean; confirmed `IGuidHelperStaticsVtbl.Equals` keeps the borrowed `GUID` pointer ABI, public/static wrappers accept `GuidValue`, local raw `GUID` pointers do not escape the call, test coverage exercises the projection, and log entries match the implementation and reference scan.
+
+### Round118 - PropertyValue copy array creation overloads
+
+- Started at `2026-05-15 00:05:45 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Function overloading is valid when parameter counts or parameter types differ.
+  - `acquireArrayRawData(Array<T>)` requires `T <: CType`, returns a raw pointer handle, and must be paired with `releaseArrayRawData`.
+  - `CPointer.read(index)` and pointer casts/calls remain `unsafe`; conditions require parentheses and same-scope shadowing is not allowed.
+- Reference scan:
+  - Rechecked `IPropertyValueStatics_Vtbl`: `Create*Array` ABI slots take `(u32, *const T, out)` while Cangjie represents the pointer as `CPointer<T>`.
+  - The ABI was already correct; the missing capability was the safe high-level staging path from Cangjie `Array<T>` inputs into the existing length + pointer ABI slots.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IPropertyValueStatics.CreateInt32Array`, `CreateGuidArray`, `CreateDateTimeArray`, and `CreateRectArray` only accepted `(UInt32, CPointer<...>)`.
+  - `testPropertyValueStaticsCreateArrayOverloadsStagePrimitiveArrays` verifies `Array<Int32>` is pinned and passed as size + pointer.
+  - `testPropertyValueStaticsCreateArrayOverloadsProjectCopyStructArrays` verifies `Array<GuidValue>`, `Array<DateTime>`, and `Array<Rect>` are projected to `GUID`, `DateTimeAbi`, and `RectAbi` arrays before the ABI call.
+- Fixed copy array creation:
+  - Added `Array<T>` overloads on `IPropertyValueStatics` and matching `PropertyValue` static convenience overloads for numeric, Boolean, GUID, DateTime, TimeSpan, Point, Size, and Rect arrays.
+  - Retained the raw `(UInt32, CPointer<T>)` overloads for direct ABI callers.
+  - Projected public copy types into temporary ABI arrays and released raw array handles immediately after the ABI call, before constructing the returned `IInspectable`.
+  - Avoided a generic helper taking `CFunc<(CPointer<Unit>, UInt32, CPointer<T>, ...)>` because it triggered a Cangjie compiler ICE (`std::out_of_range: stoi`); explicit per-type implementations compile reliably and match the current Cangjie limitation around generic CFunc specialization.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStagePrimitiveArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsProjectCopyStructArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 100/100 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
