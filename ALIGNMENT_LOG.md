@@ -1648,6 +1648,8 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `McClintock`: Round113 review clean; confirmed `stockCloneValue`, `snapshotList`, `snapshotPairList`, and direct key-value pair construction clone HString values, and generic HString outputs still publish fresh system handle copies.
+- Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
 
 ### Round112 - Stock helper returned-interface lifetime
@@ -1675,3 +1677,30 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Laplace`: Round112 review clean; confirmed `toInterface` obtains an owned QI reference before `object.close()`, QI AddRefs before publishing the pointer, wrapper `takeFromAbi` owns the returned reference, and `ComObject.close()` releases only the temporary creation reference.
+
+### Round113 - Stock HString value snapshot ownership
+
+- Started at `2026-05-14 21:33:48 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Type patterns bind matched values as the matched type.
+  - Classes are reference types, and generic overload constraints alone do not distinguish overloads; this round uses explicit value cloning instead of overload-by-constraint tricks.
+- Reference scan:
+  - Rechecked stock collection tests where string values are moved into WinRT collection wrappers and then read back through WinRT ABI calls.
+  - In Cangjie, `HString` is a `Resource` class, so storing the same object reference lets caller-side `close()` invalidate collection contents; the behavior equivalent is to snapshot the HSTRING value.
+- Added TDD coverage:
+  - Red: `testStockHStringValuesAreIndependentOfSourceHandles` closes the source `HString` values after constructing a stock `IVectorView<HString>` and expects `GetAt` to still return the original strings.
+  - `testStockHStringMapEntriesAreIndependentOfSourceHandles` closes source key/value `HString` handles after constructing a stock `IMapView<HString, HString>` and expects lookup with an equivalent key to still return the original value.
+- Fixed stock value snapshotting:
+  - `snapshotList` now clones `HString` elements so vector/iterable/iterator helpers own independent string values instead of caller-owned resource objects.
+  - Added `snapshotPairList` and routed stock map-view helpers through it so key/value `HString` entries are independently captured.
+  - `createStockKeyValuePair` now snapshots its key/value as well, keeping pair helpers independent when constructed directly or through map iteration.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockHStringValuesAreIndependentOfSourceHandles --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockHStringMapEntriesAreIndependentOfSourceHandles --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output`: passed 86/86 with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output`: passed 19/19 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.

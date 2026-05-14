@@ -31,6 +31,43 @@ func testStockReturnedInterfaceCloseRemovesRegistryEntry() {
 }
 
 @Test
+func testStockHStringValuesAreIndependentOfSourceHandles() {
+    let first = HString("first")
+    let second = HString("second")
+    let view = toVectorView<HString>([first, second])
+
+    first.close()
+    second.close()
+
+    let firstFromView = unsafe { view.GetAt(0u32) }
+    let secondFromView = unsafe { view.GetAt(1u32) }
+    @Expect(firstFromView.get(), "first")
+    @Expect(secondFromView.get(), "second")
+
+    firstFromView.close()
+    secondFromView.close()
+    view.close()
+}
+
+@Test
+func testStockHStringMapEntriesAreIndependentOfSourceHandles() {
+    let key = HString("key")
+    let value = HString("value")
+    let view = toMapView<HString, HString>([(key, value)])
+
+    key.close()
+    value.close()
+
+    let lookupKey = HString("key")
+    let valueFromView = unsafe { view.Lookup(lookupKey) }
+    @Expect(valueFromView.get(), "value")
+
+    valueFromView.close()
+    lookupKey.close()
+    view.close()
+}
+
+@Test
 func testStockVectorViewIndexOfClearsMissingIndex() {
     let first = HString("first")
     let second = HString("second")

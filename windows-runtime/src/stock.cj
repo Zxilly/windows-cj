@@ -23,8 +23,32 @@ func stockBoundsError(): WinError {
     WinError(STOCK_E_BOUNDS)
 }
 
+func stockCloneValue<T>(value: T): T {
+    match (value) {
+        case hstring: HString =>
+            match (hstring.clone() as T) {
+                case Some(cloned) => cloned
+                case None => value
+            }
+        case _ => value
+    }
+}
+
 func snapshotList<T>(source: Iterable<T>): ArrayList<T> {
-    collectArrayList<T>(source)
+    let values = collectArrayList<T>(source)
+    let result = ArrayList<T>()
+    for (value in values) {
+        result.add(stockCloneValue<T>(value))
+    }
+    result
+}
+
+func snapshotPairList<K, V>(source: Iterable<(K, V)>): ArrayList<(K, V)> {
+    let result = ArrayList<(K, V)>()
+    for ((key, value) in source) {
+        result.add((stockCloneValue<K>(key), stockCloneValue<V>(value)))
+    }
+    result
 }
 
 func createStockInterface<Inner, I>(
@@ -68,7 +92,7 @@ func createStockIterator<T>(items: ArrayList<T>): IIterator<T> where T <: Runtim
 
 func createStockKeyValuePair<K, V>(key: K, value: V): IKeyValuePair<K, V>
 where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericType<V> {
-    let impl = StockKeyValuePairImpl<K, V>(key, value)
+    let impl = StockKeyValuePairImpl<K, V>(stockCloneValue<K>(key), stockCloneValue<V>(value))
     createStockInterface<StockKeyValuePairImpl<K, V>, IKeyValuePair<K, V>>(
         impl,
         IKeyValuePair<K, V>.descriptorSchema(),
@@ -859,7 +883,7 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
 
 public func toMapView<K, V>(source: Iterable<(K, V)>): IMapView<K, V>
 where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & WinrtGenericType<V> {
-    let entries = snapshotList<(K, V)>(source)
+    let entries = snapshotPairList<K, V>(source)
     let impl = StockMapViewImpl<K, V>(entries)
     // Register IIterable<IKeyValuePair<K, V>> as an independent slot so QI to the iterable
     // ancestor returns a distinct vtbl from the IMapView vtbl.
@@ -877,7 +901,7 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
 }
 
 public func toMapView(source: Iterable<(Int32, Int32)>): IMapView<Int32, Int32> {
-    let entries = snapshotList<(Int32, Int32)>(source)
+    let entries = snapshotPairList<Int32, Int32>(source)
     let impl = StockInt32MapViewImpl(entries)
     let schemas = [
         IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(),
@@ -893,7 +917,7 @@ public func toMapView(source: Iterable<(Int32, Int32)>): IMapView<Int32, Int32> 
 }
 
 public func toMapView(source: Iterable<(Int32, HString)>): IMapView<Int32, HString> {
-    let entries = snapshotList<(Int32, HString)>(source)
+    let entries = snapshotPairList<Int32, HString>(source)
     let impl = StockInt32HStringMapViewImpl(entries)
     let schemas = [
         IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(),
@@ -909,7 +933,7 @@ public func toMapView(source: Iterable<(Int32, HString)>): IMapView<Int32, HStri
 }
 
 public func toMapView(source: Iterable<(Int32, UInt64)>): IMapView<Int32, UInt64> {
-    let entries = snapshotList<(Int32, UInt64)>(source)
+    let entries = snapshotPairList<Int32, UInt64>(source)
     let impl = StockInt32UInt64MapViewImpl(entries)
     let schemas = [
         IIterable<IKeyValuePair<Int32, UInt64>>.descriptorSchema(),
@@ -925,7 +949,7 @@ public func toMapView(source: Iterable<(Int32, UInt64)>): IMapView<Int32, UInt64
 }
 
 public func toMapView(source: Iterable<(Int32, IVectorView<Int32>)>): IMapView<Int32, IVectorView<Int32>> {
-    let entries = snapshotList<(Int32, IVectorView<Int32>)>(source)
+    let entries = snapshotPairList<Int32, IVectorView<Int32>>(source)
     let impl = StockInt32VectorViewInt32MapViewImpl(entries)
     let schemas = [
         IIterable<IKeyValuePair<Int32, IVectorView<Int32>>>.descriptorSchema(),
