@@ -1647,6 +1647,33 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+### Round125 - IReferenceArray property value forwarding
+
+- Started at `2026-05-15 02:55:21 +08:00`; implementation recorded at `2026-05-15 03:01:19 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` is the deterministic cleanup form for temporary `Resource` interface wrappers.
+  - `@C` callbacks and pointer reads/writes require `unsafe`.
+  - Conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - `IReferenceArray<T>` is also queryable to `IPropertyValue`; the reference surface exposes property-value readers alongside `Value`.
+  - Cangjie already had `IReferenceArray<T>.asIPropertyValue()` and high-level `Value(): Array<T>`, but callers still had to manually cast before using property-value readers.
+  - This is a behavior/API convenience alignment over the existing QI path; no vtable layout changes were needed.
+- Added forwarding:
+  - `IReferenceArray<T>` now forwards `Type`, `IsNumericScalar`, scalar `Get*` methods, raw array `Get*Array(size, value)` methods, and high-level no-arg array `Get*Array()` methods through `asIPropertyValue()`.
+  - Each forwarding method uses `try (propertyValue = asIPropertyValue())` so the temporary QI wrapper is released after the call.
+- Added coverage:
+  - `testIReferenceArrayForwardsScalarPropertyValueReads` verifies scalar forwarding reaches the `IPropertyValue` vtable through `QueryInterface`, calls `GetSingle`, and releases the temporary wrapper.
+  - `testIReferenceArrayForwardsArrayPropertyValueReads` verifies high-level array forwarding reaches `GetInt32Array`, takes the returned CoTaskMem array, and releases the temporary wrapper.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*testIReferenceArrayForwards* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 2/114.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 114/114.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Planck`: no findings; confirmed no ABI/vtable layout, HRESULT propagation, refcount, double-free, or array out-memory issues. Residual test risk is representative coverage only, not one test per forwarded method.
 - Review:
   - Review agent `Franklin`: Round122 re-review clean; confirmed the prior cleanup gaps are fixed, raw COM slots are cleared only after successful materialization, raw HSTRING/COM arrays are covered by cleanup if managed allocation fails, HRESULT propagation remains through the raw method, and the test covers nullable projection plus caller-owned release.
 - Review:
