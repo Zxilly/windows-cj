@@ -1564,3 +1564,55 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Euler`: Round109 review clean; no blocking `IMapView<Int32, IVectorView<Int32>>` direct key ABI, wrapper dispatch, stock overload, direct vtable test, or log issues found.
+
+### Round110 - WinRT delegate ABI base and null InParam projection
+
+- Completed at `2026-05-14 20:34:42 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` lambdas are C-callable function pointers, must use `CType` parameters/returns, cannot capture variables, and require `unsafe` when called from Cangjie.
+  - `@C struct` members must satisfy `CType`, cannot implement interfaces, and are appropriate for ABI vtables.
+  - Lambda bodies use the normal function body return rules, `if` is an expression with parenthesized conditions, and `CPointer<T>()` creates a null pointer checked by `isNull()`.
+- Reference scan:
+  - Found delegate coverage for `AsyncActionCompletedHandler::new`, direct `Invoke(None, AsyncStatus::Completed)`, typed event handlers, and collection changed handlers.
+  - Treated delegates as COM callable function interfaces with `IUnknown` base slots; did not model Rust-only delegate traits or borrow abstractions.
+- Fixed delegate ABI dispatch:
+  - Changed WinRT delegate vtables from `IInspectableVtbl` to `IUnknownVtbl`.
+  - Changed delegate descriptors and schemas to use `IUnknown` as the base and `Invoke` slot index `3` instead of `6`.
+  - Built delegate box vtables with `buildIUnknownVtbl()`.
+  - Reworked delegate erased invokers from open classes with default `E_NOTIMPL` bodies into erased interfaces matching the existing `*_ImplErased` pattern, so registry lookup dispatches to the concrete box thunk.
+  - Removed `return` statements from `CFunc` lambda branch bodies and used expression returns.
+- Fixed null input projection:
+  - Delegate `Invoke` thunks now project null COM interface parameters to empty `InParam<T>()` instead of wrapping a null interface view.
+  - Async `SetCompleted`/`SetProgress`, `IMemoryBufferReference.Closed`, `IObservableMap.MapChanged`, `IObservableVector.VectorChanged`, and `IPropertySet.MapChanged` thunks now preserve null handler pointers as empty `InParam`.
+- Fixed delegate agility:
+  - Initial review found that IUnknown-base delegate boxes lost `IAgileObject` / `IMarshal` QueryInterface behavior because `ComObjectRuntime.setAgileEnabled` only enabled agility for objects containing `IInspectable`.
+  - Relaxed the runtime agility flag to follow the explicit `agile` constructor option for IUnknown-only COM objects as well; `IWeakReferenceSource` remains gated on `IInspectable`.
+- Fixed delegate `asIInspectable()` safety:
+  - Second review found that IUnknown-base delegate wrappers still exposed direct `IInspectable.viewOf(asRaw())`, which could interpret the delegate `Invoke` slot as `IInspectable.GetIids`.
+  - Delegate `asIInspectable()` now uses QueryInterface and throws if the object does not implement `IInspectable`, avoiding synthetic views over an incompatible vtable layout.
+- Added TDD coverage:
+  - Red: `testAsyncActionCompletedHandlerNullInfoProjectsToEmptyInParam` first failed because the direct delegate vtable call returned `E_NOTIMPL` and the callback was not invoked.
+  - The same test now verifies direct vtable `Invoke` succeeds with `S_OK`, receives an empty `InParam<IAsyncAction>`, and receives `AsyncStatus_Completed`.
+  - Red: `testDelegateBoxKeepsAgileInterfacesWithIUnknownBase` failed after the IUnknown-base delegate change because `IAgileObject` and `IMarshal` queries returned `None`.
+  - The same test now verifies delegate boxes remain agile and expose the marshaler path.
+  - Red: `testDelegateBoxDoesNotExposeSyntheticIInspectableView` failed because `asIInspectable()` still returned a direct wrapper while `QueryInterface(IInspectable)` returned none.
+  - The same test now verifies delegate boxes do not expose `IInspectable` and `asIInspectable()` fails instead of producing an ABI-incompatible wrapper.
+- Debugging notes:
+  - Temporary instrumentation showed `asImplFromRaw<AsyncActionCompletedHandlerInvokerErased>` found the box instance, but the class-based erased thunk still returned `E_NOTIMPL`.
+  - Matching the established interface-based erased implementation pattern fixed dispatch.
+  - Full `windows-runtime` runs twice timed out and left stale `cjpm` / `cjv` / `std.testrunner` / `windows_runtime` processes; after stopping them, the same module run completed successfully.
+  - `windows-runtime --no-run` also timed out once while compiling after the agility fix; after stopping the stale compiler process and rerunning with a longer timeout, compilation completed successfully.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testAsyncActionCompletedHandlerNullInfoProjectsToEmptyInParam --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testDelegateBoxKeepsAgileInterfacesWithIUnknownBase --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testDelegateBoxDoesNotExposeSyntheticIInspectableView --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 80/80 passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 19/19 passed with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `git diff --check`: passed.
+- Review:
+  - Initial review agent `Huygens`: found the delegate `IAgileObject` / `IMarshal` QI regression after switching delegate vtables to `IUnknown`.
+  - Second review agent `Poincare`: found the direct delegate `asIInspectable()` synthetic wrapper risk after switching delegate vtables to `IUnknown`.
+  - Final review agent `Parfit`: Round110 review clean; no blocking delegate ABI, lifecycle, QueryInterface, vtable, test, or log issues found.

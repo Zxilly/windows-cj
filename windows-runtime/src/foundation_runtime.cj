@@ -4,11 +4,19 @@
 package windows_runtime
 
 import std.collection.*
-import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
 import windows_core as windows_core
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
 
+func delegateAsInspectable(raw: CPointer<Unit>, typeName: String): IInspectable {
+    match (unsafe { windows_interface.queryInterfaceAs(raw, IInspectable.descriptor()) }) {
+        case Some(value) =>
+            value
+        case None =>
+            throw Exception("${typeName} does not implement IInspectable")
+    }
+}
 
 public struct AsyncStatus {
     public var value: Int32 = 0
@@ -97,7 +105,7 @@ extend DateTime <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 
 @C
 public struct DeferralCompletedHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -124,11 +132,11 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<DeferralCompletedHandler> {
-        return InterfaceDescriptor<DeferralCompletedHandler>("DeferralCompletedHandler", DeferralCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => DeferralCompletedHandler.fromAbiTake(raw) }, { raw => DeferralCompletedHandler.viewOf(raw) })
+        return InterfaceDescriptor<DeferralCompletedHandler>("DeferralCompletedHandler", DeferralCompletedHandler.iid(), [IUnknown.iid()], { raw => DeferralCompletedHandler.fromAbiTake(raw) }, { raw => DeferralCompletedHandler.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("DeferralCompletedHandler", DeferralCompletedHandler.iid(), IInspectable.descriptorSchema(), "DeferralCompletedHandlerVtbl", "DeferralCompletedHandler", "DeferralCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, Array<InterfaceParameterSchema>(), "Int32")])
+        var schema = InterfaceDescriptorSchema("DeferralCompletedHandler", DeferralCompletedHandler.iid(), IUnknown.descriptorSchema(), "DeferralCompletedHandlerVtbl", "DeferralCompletedHandler", "DeferralCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, Array<InterfaceParameterSchema>(), "Int32")])
         schema.runtimeTypeContract = Some(DeferralCompletedHandler.runtimeType())
         return schema
     }
@@ -146,7 +154,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "DeferralCompletedHandler")
     }
 
     public unsafe func vtbl(): DeferralCompletedHandlerVtbl {
@@ -168,18 +176,16 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
 
 extend DeferralCompletedHandler <: windows_core.Interface<DeferralCompletedHandler> {}
 
-private open class DeferralCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(): Int32 {
-        E_NOTIMPL.value
-    }
+public interface DeferralCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(): Int32
 }
 
-private open class DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvokerErased {
-    public open func Invoke(): Unit {
+public interface DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvokerErased {
+    public func Invoke(): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(): Int32 {
+    public func __winrtThunk_Invoke(): Int32 {
         this.Invoke()
         return S_OK.value
     }
@@ -198,20 +204,20 @@ private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(): Unit {
+    public func Invoke(): Unit {
         invoke_()
     }
 }
 
 func buildDeferralCompletedHandlerBoxVtbl(): DeferralCompletedHandlerVtbl {
     var vtbl = DeferralCompletedHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<DeferralCompletedHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke()
+                invoker.__winrtThunk_Invoke()
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -219,7 +225,7 @@ func buildDeferralCompletedHandlerBoxVtbl(): DeferralCompletedHandlerVtbl {
 
 @C
 public struct EventHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -246,11 +252,11 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public static func descriptor(): InterfaceDescriptor<EventHandler<T>> {
-        return InterfaceDescriptor<EventHandler<T>>("EventHandler", EventHandler<T>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => EventHandler<T>.fromAbiTake(raw) }, { raw => EventHandler<T>.viewOf(raw) })
+        return InterfaceDescriptor<EventHandler<T>>("EventHandler", EventHandler<T>.iid(), [IUnknown.iid()], { raw => EventHandler<T>.fromAbiTake(raw) }, { raw => EventHandler<T>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("EventHandler", EventHandler<T>.iid(), IInspectable.descriptorSchema(), "EventHandlerVtbl", "EventHandler", "EventHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("args", "CPointer<Unit>", "T", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("EventHandler", EventHandler<T>.iid(), IUnknown.descriptorSchema(), "EventHandlerVtbl", "EventHandler", "EventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("args", "CPointer<Unit>", "T", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(EventHandler<T>.runtimeType())
         return schema
     }
@@ -273,7 +279,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "EventHandler")
     }
 
     public unsafe func vtbl(): EventHandlerVtbl {
@@ -302,19 +308,22 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
 
 extend<T> EventHandler<T> <: windows_core.Interface<EventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-private open class EventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface EventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    public open func Invoke(sender: InParam<IInspectable>, args: T): Unit {
+public interface EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), windows_core.winrtProjectGenericIn<T>(arg1))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        let sender = if (arg0.isNull()) {
+            InParam<IInspectable>()
+        } else {
+            InParam<IInspectable>(IInspectable.viewOf(arg0))
+        }
+        this.Invoke(sender, windows_core.winrtProjectGenericIn<T>(arg1))
         return S_OK.value
     }
 }
@@ -332,20 +341,20 @@ private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_co
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IInspectable>, args: T): Unit {
+    public func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         invoke_(sender, args)
     }
 }
 
 func buildEventHandlerBoxVtbl<T>(): EventHandlerVtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     var vtbl = EventHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<EventHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -1994,7 +2003,7 @@ extend TimeSpan <: windows_core.CopyType & windows_core.RuntimeType & windows_co
 
 @C
 public struct TypedEventHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2021,11 +2030,11 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<TypedEventHandler<TSender, TResult>> {
-        return InterfaceDescriptor<TypedEventHandler<TSender, TResult>>("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => TypedEventHandler<TSender, TResult>.fromAbiTake(raw) }, { raw => TypedEventHandler<TSender, TResult>.viewOf(raw) })
+        return InterfaceDescriptor<TypedEventHandler<TSender, TResult>>("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), [IUnknown.iid()], { raw => TypedEventHandler<TSender, TResult>.fromAbiTake(raw) }, { raw => TypedEventHandler<TSender, TResult>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), IInspectable.descriptorSchema(), "TypedEventHandlerVtbl", "TypedEventHandler", "TypedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("sender", "CPointer<Unit>", "TSender", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("args", "CPointer<Unit>", "TResult", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), IUnknown.descriptorSchema(), "TypedEventHandlerVtbl", "TypedEventHandler", "TypedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "TSender", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("args", "CPointer<Unit>", "TResult", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(TypedEventHandler<TSender, TResult>.runtimeType())
         return schema
     }
@@ -2050,7 +2059,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "TypedEventHandler")
     }
 
     public unsafe func vtbl(): TypedEventHandlerVtbl {
@@ -2081,18 +2090,16 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
 
 extend<TSender, TResult> TypedEventHandler<TSender, TResult> <: windows_core.Interface<TypedEventHandler<TSender, TResult>> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
-private open class TypedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface TypedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandlerInvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
-    public open func Invoke(sender: TSender, args: TResult): Unit {
+public interface TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandlerInvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
+    public func Invoke(sender: TSender, args: TResult): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         this.Invoke(windows_core.winrtProjectGenericIn<TSender>(arg0), windows_core.winrtProjectGenericIn<TResult>(arg1))
         return S_OK.value
     }
@@ -2111,20 +2118,20 @@ private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: TSender, args: TResult): Unit {
+    public func Invoke(sender: TSender, args: TResult): Unit {
         invoke_(sender, args)
     }
 }
 
 func buildTypedEventHandlerBoxVtbl<TSender, TResult>(): TypedEventHandlerVtbl where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     var vtbl = TypedEventHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<TypedEventHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -2387,7 +2394,12 @@ public interface IMemoryBufferReference_Impl <: IMemoryBufferReference_ImplErase
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Closed(InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>(TypedEventHandler<IMemoryBufferReference, IInspectable>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>()
+        } else {
+            InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>(TypedEventHandler<IMemoryBufferReference, IInspectable>.viewOf(arg0))
+        }
+        match (this.Closed(handler)) {
             case Result<EventRegistrationToken>.Ok(value) =>
                 unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
                 S_OK.value
@@ -6007,7 +6019,7 @@ extend IMemoryBuffer <: windows_core.Interface<IMemoryBuffer> {}
 
 @C
 public struct AsyncActionCompletedHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, AsyncStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6034,11 +6046,11 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionCompletedHandler> {
-        return InterfaceDescriptor<AsyncActionCompletedHandler>("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionCompletedHandler.fromAbiTake(raw) }, { raw => AsyncActionCompletedHandler.viewOf(raw) })
+        return InterfaceDescriptor<AsyncActionCompletedHandler>("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), [IUnknown.iid()], { raw => AsyncActionCompletedHandler.fromAbiTake(raw) }, { raw => AsyncActionCompletedHandler.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), IInspectable.descriptorSchema(), "AsyncActionCompletedHandlerVtbl", "AsyncActionCompletedHandler", "AsyncActionCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncAction>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), IUnknown.descriptorSchema(), "AsyncActionCompletedHandlerVtbl", "AsyncActionCompletedHandler", "AsyncActionCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncAction>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncActionCompletedHandler.runtimeType())
         return schema
     }
@@ -6056,7 +6068,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncActionCompletedHandler")
     }
 
     public unsafe func vtbl(): AsyncActionCompletedHandlerVtbl {
@@ -6078,19 +6090,22 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
 
 extend AsyncActionCompletedHandler <: windows_core.Interface<AsyncActionCompletedHandler> {}
 
-private open class AsyncActionCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncActionCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32
 }
 
-private open class AsyncActionCompletedHandlerInvoker <: AsyncActionCompletedHandlerInvokerErased {
-    public open func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
+public interface AsyncActionCompletedHandlerInvoker <: AsyncActionCompletedHandlerInvokerErased {
+    public func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        this.Invoke(InParam<IAsyncAction>(IAsyncAction.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncAction>()
+        } else {
+            InParam<IAsyncAction>(IAsyncAction.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
         return S_OK.value
     }
 }
@@ -6108,20 +6123,20 @@ private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvok
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
 func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl {
     var vtbl = AsyncActionCompletedHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatusAbi =>
         match (unsafe { asImplFromRaw<AsyncActionCompletedHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6129,7 +6144,7 @@ func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl 
 
 @C
 public struct AsyncActionProgressHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6156,11 +6171,11 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionProgressHandler<TProgress>> {
-        return InterfaceDescriptor<AsyncActionProgressHandler<TProgress>>("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionProgressHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionProgressHandler<TProgress>.viewOf(raw) })
+        return InterfaceDescriptor<AsyncActionProgressHandler<TProgress>>("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), [IUnknown.iid()], { raw => AsyncActionProgressHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionProgressHandler<TProgress>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), IInspectable.descriptorSchema(), "AsyncActionProgressHandlerVtbl", "AsyncActionProgressHandler", "AsyncActionProgressHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncActionWithProgress<TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("progressInfo", "CPointer<Unit>", "TProgress", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), IUnknown.descriptorSchema(), "AsyncActionProgressHandlerVtbl", "AsyncActionProgressHandler", "AsyncActionProgressHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncActionWithProgress<TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("progressInfo", "CPointer<Unit>", "TProgress", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncActionProgressHandler<TProgress>.runtimeType())
         return schema
     }
@@ -6183,7 +6198,7 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncActionProgressHandler")
     }
 
     public unsafe func vtbl(): AsyncActionProgressHandlerVtbl {
@@ -6212,19 +6227,22 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
 
 extend<TProgress> AsyncActionProgressHandler<TProgress> <: windows_core.Interface<AsyncActionProgressHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-private open class AsyncActionProgressHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncActionProgressHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class AsyncActionProgressHandlerInvoker<TProgress> <: AsyncActionProgressHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
-    public open func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
+public interface AsyncActionProgressHandlerInvoker<TProgress> <: AsyncActionProgressHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0)), windows_core.winrtProjectGenericIn<TProgress>(arg1))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncActionWithProgress<TProgress>>()
+        } else {
+            InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
         return S_OK.value
     }
 }
@@ -6242,20 +6260,20 @@ private class AsyncActionProgressHandlerBox<TProgress> <: AsyncActionProgressHan
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
         invoke_(asyncInfo, progressInfo)
     }
 }
 
 func buildAsyncActionProgressHandlerBoxVtbl<TProgress>(): AsyncActionProgressHandlerVtbl where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = AsyncActionProgressHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<AsyncActionProgressHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6263,7 +6281,7 @@ func buildAsyncActionProgressHandlerBoxVtbl<TProgress>(): AsyncActionProgressHan
 
 @C
 public struct AsyncActionWithProgressCompletedHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, AsyncStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6290,11 +6308,11 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>> {
-        return InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>>("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(raw) })
+        return InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>>("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), [IUnknown.iid()], { raw => AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), IInspectable.descriptorSchema(), "AsyncActionWithProgressCompletedHandlerVtbl", "AsyncActionWithProgressCompletedHandler", "AsyncActionWithProgressCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncActionWithProgress<TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), IUnknown.descriptorSchema(), "AsyncActionWithProgressCompletedHandlerVtbl", "AsyncActionWithProgressCompletedHandler", "AsyncActionWithProgressCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncActionWithProgress<TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncActionWithProgressCompletedHandler<TProgress>.runtimeType())
         return schema
     }
@@ -6317,7 +6335,7 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncActionWithProgressCompletedHandler")
     }
 
     public unsafe func vtbl(): AsyncActionWithProgressCompletedHandlerVtbl {
@@ -6339,19 +6357,22 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
 
 extend<TProgress> AsyncActionWithProgressCompletedHandler<TProgress> <: windows_core.Interface<AsyncActionWithProgressCompletedHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-private open class AsyncActionWithProgressCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncActionWithProgressCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32
 }
 
-private open class AsyncActionWithProgressCompletedHandlerInvoker<TProgress> <: AsyncActionWithProgressCompletedHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
-    public open func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
+public interface AsyncActionWithProgressCompletedHandlerInvoker<TProgress> <: AsyncActionWithProgressCompletedHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        this.Invoke(InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncActionWithProgress<TProgress>>()
+        } else {
+            InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
         return S_OK.value
     }
 }
@@ -6369,20 +6390,20 @@ private class AsyncActionWithProgressCompletedHandlerBox<TProgress> <: AsyncActi
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
 func buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>(): AsyncActionWithProgressCompletedHandlerVtbl where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = AsyncActionWithProgressCompletedHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatusAbi =>
         match (unsafe { asImplFromRaw<AsyncActionWithProgressCompletedHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6390,7 +6411,7 @@ func buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>(): AsyncActi
 
 @C
 public struct AsyncOperationCompletedHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, AsyncStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6417,11 +6438,11 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>> {
-        return InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>>("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationCompletedHandler<TResult>.fromAbiTake(raw) }, { raw => AsyncOperationCompletedHandler<TResult>.viewOf(raw) })
+        return InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>>("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), [IUnknown.iid()], { raw => AsyncOperationCompletedHandler<TResult>.fromAbiTake(raw) }, { raw => AsyncOperationCompletedHandler<TResult>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), IInspectable.descriptorSchema(), "AsyncOperationCompletedHandlerVtbl", "AsyncOperationCompletedHandler", "AsyncOperationCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperation<TResult>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), IUnknown.descriptorSchema(), "AsyncOperationCompletedHandlerVtbl", "AsyncOperationCompletedHandler", "AsyncOperationCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperation<TResult>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncOperationCompletedHandler<TResult>.runtimeType())
         return schema
     }
@@ -6444,7 +6465,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncOperationCompletedHandler")
     }
 
     public unsafe func vtbl(): AsyncOperationCompletedHandlerVtbl {
@@ -6466,19 +6487,22 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
 
 extend<TResult> AsyncOperationCompletedHandler<TResult> <: windows_core.Interface<AsyncOperationCompletedHandler<TResult>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
-private open class AsyncOperationCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncOperationCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32
 }
 
-private open class AsyncOperationCompletedHandlerInvoker<TResult> <: AsyncOperationCompletedHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
-    public open func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
+public interface AsyncOperationCompletedHandlerInvoker<TResult> <: AsyncOperationCompletedHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
+    public func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        this.Invoke(InParam<IAsyncOperation<TResult>>(IAsyncOperation<TResult>.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncOperation<TResult>>()
+        } else {
+            InParam<IAsyncOperation<TResult>>(IAsyncOperation<TResult>.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
         return S_OK.value
     }
 }
@@ -6496,20 +6520,20 @@ private class AsyncOperationCompletedHandlerBox<TResult> <: AsyncOperationComple
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
 func buildAsyncOperationCompletedHandlerBoxVtbl<TResult>(): AsyncOperationCompletedHandlerVtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     var vtbl = AsyncOperationCompletedHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatusAbi =>
         match (unsafe { asImplFromRaw<AsyncOperationCompletedHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6517,7 +6541,7 @@ func buildAsyncOperationCompletedHandlerBoxVtbl<TResult>(): AsyncOperationComple
 
 @C
 public struct AsyncOperationProgressHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6544,11 +6568,11 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>> {
-        return InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>>("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationProgressHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationProgressHandler<TResult, TProgress>.viewOf(raw) })
+        return InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>>("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), [IUnknown.iid()], { raw => AsyncOperationProgressHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationProgressHandler<TResult, TProgress>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), IInspectable.descriptorSchema(), "AsyncOperationProgressHandlerVtbl", "AsyncOperationProgressHandler", "AsyncOperationProgressHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperationWithProgress<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("progressInfo", "CPointer<Unit>", "TProgress", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), IUnknown.descriptorSchema(), "AsyncOperationProgressHandlerVtbl", "AsyncOperationProgressHandler", "AsyncOperationProgressHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperationWithProgress<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("progressInfo", "CPointer<Unit>", "TProgress", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncOperationProgressHandler<TResult, TProgress>.runtimeType())
         return schema
     }
@@ -6573,7 +6597,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncOperationProgressHandler")
     }
 
     public unsafe func vtbl(): AsyncOperationProgressHandlerVtbl {
@@ -6602,19 +6626,22 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
 
 extend<TResult, TProgress> AsyncOperationProgressHandler<TResult, TProgress> <: windows_core.Interface<AsyncOperationProgressHandler<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-private open class AsyncOperationProgressHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncOperationProgressHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class AsyncOperationProgressHandlerInvoker<TResult, TProgress> <: AsyncOperationProgressHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
-    public open func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
+public interface AsyncOperationProgressHandlerInvoker<TResult, TProgress> <: AsyncOperationProgressHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0)), windows_core.winrtProjectGenericIn<TProgress>(arg1))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
+        } else {
+            InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
         return S_OK.value
     }
 }
@@ -6632,20 +6659,20 @@ private class AsyncOperationProgressHandlerBox<TResult, TProgress> <: AsyncOpera
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
         invoke_(asyncInfo, progressInfo)
     }
 }
 
 func buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>(): AsyncOperationProgressHandlerVtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = AsyncOperationProgressHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<AsyncOperationProgressHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6653,7 +6680,7 @@ func buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>(): AsyncOpera
 
 @C
 public struct AsyncOperationWithProgressCompletedHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, AsyncStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6680,11 +6707,11 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> {
-        return InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(raw) })
+        return InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), [IUnknown.iid()], { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), IInspectable.descriptorSchema(), "AsyncOperationWithProgressCompletedHandlerVtbl", "AsyncOperationWithProgressCompletedHandler", "AsyncOperationWithProgressCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperationWithProgress<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), IUnknown.descriptorSchema(), "AsyncOperationWithProgressCompletedHandlerVtbl", "AsyncOperationWithProgressCompletedHandler", "AsyncOperationWithProgressCompletedHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "InParam<IAsyncOperationWithProgress<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("asyncStatus", "AsyncStatusAbi", "InParam<AsyncStatus>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.runtimeType())
         return schema
     }
@@ -6709,7 +6736,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "AsyncOperationWithProgressCompletedHandler")
     }
 
     public unsafe func vtbl(): AsyncOperationWithProgressCompletedHandlerVtbl {
@@ -6731,19 +6758,22 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
 
 extend<TResult, TProgress> AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: windows_core.Interface<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
-private open class AsyncOperationWithProgressCompletedHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        E_NOTIMPL.value
-    }
+public interface AsyncOperationWithProgressCompletedHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32
 }
 
-private open class AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> <: AsyncOperationWithProgressCompletedHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
-    public open func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
+public interface AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> <: AsyncOperationWithProgressCompletedHandlerInvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        this.Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0)), windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
+        let asyncInfo = if (arg0.isNull()) {
+            InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
+        } else {
+            InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+        }
+        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
         return S_OK.value
     }
 }
@@ -6761,20 +6791,20 @@ private class AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress> 
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
+    public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
 func buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>(): AsyncOperationWithProgressCompletedHandlerVtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = AsyncOperationWithProgressCompletedHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatusAbi =>
         match (unsafe { asImplFromRaw<AsyncOperationWithProgressCompletedHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -6956,7 +6986,12 @@ public interface IAsyncAction_Impl <: IAsyncAction_ImplErased & IAsyncInfo_Impl 
     public func SetCompleted(handler: InParam<AsyncActionCompletedHandler>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32 {
-        match (this.SetCompleted(InParam<AsyncActionCompletedHandler>(AsyncActionCompletedHandler.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncActionCompletedHandler>()
+        } else {
+            InParam<AsyncActionCompletedHandler>(AsyncActionCompletedHandler.viewOf(arg0))
+        }
+        match (this.SetCompleted(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -7238,7 +7273,12 @@ public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithPro
     public func SetProgress(handler: InParam<AsyncActionProgressHandler<TProgress>>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetProgress(arg0: CPointer<Unit>): Int32 {
-        match (this.SetProgress(InParam<AsyncActionProgressHandler<TProgress>>(AsyncActionProgressHandler<TProgress>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncActionProgressHandler<TProgress>>()
+        } else {
+            InParam<AsyncActionProgressHandler<TProgress>>(AsyncActionProgressHandler<TProgress>.viewOf(arg0))
+        }
+        match (this.SetProgress(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -7269,7 +7309,12 @@ public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithPro
     public func SetCompleted(handler: InParam<AsyncActionWithProgressCompletedHandler<TProgress>>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32 {
-        match (this.SetCompleted(InParam<AsyncActionWithProgressCompletedHandler<TProgress>>(AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncActionWithProgressCompletedHandler<TProgress>>()
+        } else {
+            InParam<AsyncActionWithProgressCompletedHandler<TProgress>>(AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(arg0))
+        }
+        match (this.SetCompleted(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -7548,7 +7593,12 @@ public interface IAsyncOperation_Impl<TResult> <: IAsyncOperation_ImplErased & I
     public func SetCompleted(handler: InParam<AsyncOperationCompletedHandler<TResult>>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32 {
-        match (this.SetCompleted(InParam<AsyncOperationCompletedHandler<TResult>>(AsyncOperationCompletedHandler<TResult>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncOperationCompletedHandler<TResult>>()
+        } else {
+            InParam<AsyncOperationCompletedHandler<TResult>>(AsyncOperationCompletedHandler<TResult>.viewOf(arg0))
+        }
+        match (this.SetCompleted(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -7837,7 +7887,12 @@ public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncO
     public func SetProgress(handler: InParam<AsyncOperationProgressHandler<TResult, TProgress>>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetProgress(arg0: CPointer<Unit>): Int32 {
-        match (this.SetProgress(InParam<AsyncOperationProgressHandler<TResult, TProgress>>(AsyncOperationProgressHandler<TResult, TProgress>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncOperationProgressHandler<TResult, TProgress>>()
+        } else {
+            InParam<AsyncOperationProgressHandler<TResult, TProgress>>(AsyncOperationProgressHandler<TResult, TProgress>.viewOf(arg0))
+        }
+        match (this.SetProgress(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
@@ -7868,7 +7923,12 @@ public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncO
     public func SetCompleted(handler: InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>): windows_core.Result<Unit>
 
     public func __winrtThunk_SetCompleted(arg0: CPointer<Unit>): Int32 {
-        match (this.SetCompleted(InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>()
+        } else {
+            InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(arg0))
+        }
+        match (this.SetCompleted(handler)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>

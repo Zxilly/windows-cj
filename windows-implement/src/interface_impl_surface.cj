@@ -160,7 +160,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     }
 
     public func setAgileEnabled(value: Bool): Unit {
-        agileEnabled = value && containsIid(IID_IINSPECTABLE)
+        agileEnabled = value
     }
 
     public func pinStaticReference(): Unit {

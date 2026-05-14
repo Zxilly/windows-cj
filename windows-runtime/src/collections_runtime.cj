@@ -4,7 +4,7 @@
 package windows_runtime
 
 import std.collection.*
-import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
+import windows_core.{ComObject, CopyType, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, IGenericFactory, InParam, OutSlot, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, S_OK, Type, WinrtGenericType, WinrtOutputBridge, asImplFromRaw, assumeInitRef, assumeInitTypedAbi, borrowOutSlotTypedAbi, buildIInspectableVtbl, buildIUnknownVtbl, fromAbi, fromTypedAbi, projectAbiValue, projectTypedAbi, takeOutSlotTypedAbi, typeMarker, winrtStoreGenericOut}
 import windows_core as windows_core
 import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivationFactory, IInspectable, IInspectableVtbl, IUnknown, IUnknownVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema, InterfaceWrapperBase, RuntimeName, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
@@ -5948,7 +5948,12 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.MapChanged(InParam<MapChangedEventHandler<K, V>>(MapChangedEventHandler<K, V>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<MapChangedEventHandler<K, V>>()
+        } else {
+            InParam<MapChangedEventHandler<K, V>>(MapChangedEventHandler<K, V>.viewOf(arg0))
+        }
+        match (this.MapChanged(handler)) {
             case Result<EventRegistrationToken>.Ok(value) =>
                 unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
                 S_OK.value
@@ -6296,7 +6301,12 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.VectorChanged(InParam<VectorChangedEventHandler<T>>(VectorChangedEventHandler<T>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<VectorChangedEventHandler<T>>()
+        } else {
+            InParam<VectorChangedEventHandler<T>>(VectorChangedEventHandler<T>.viewOf(arg0))
+        }
+        match (this.VectorChanged(handler)) {
             case Result<EventRegistrationToken>.Ok(value) =>
                 unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
                 S_OK.value
@@ -6704,7 +6714,12 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.MapChanged(InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>(MapChangedEventHandler<windows_core.HString, IInspectable>.viewOf(arg0)))) {
+        let handler = if (arg0.isNull()) {
+            InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>()
+        } else {
+            InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>(MapChangedEventHandler<windows_core.HString, IInspectable>.viewOf(arg0))
+        }
+        match (this.MapChanged(handler)) {
             case Result<EventRegistrationToken>.Ok(value) =>
                 unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
                 S_OK.value
@@ -6937,7 +6952,7 @@ extend IPropertySet <: windows_core.Interface<IPropertySet> {}
 
 @C
 public struct MapChangedEventHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6964,11 +6979,11 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<MapChangedEventHandler<K, V>> {
-        return InterfaceDescriptor<MapChangedEventHandler<K, V>>("MapChangedEventHandler", MapChangedEventHandler<K, V>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => MapChangedEventHandler<K, V>.fromAbiTake(raw) }, { raw => MapChangedEventHandler<K, V>.viewOf(raw) })
+        return InterfaceDescriptor<MapChangedEventHandler<K, V>>("MapChangedEventHandler", MapChangedEventHandler<K, V>.iid(), [IUnknown.iid()], { raw => MapChangedEventHandler<K, V>.fromAbiTake(raw) }, { raw => MapChangedEventHandler<K, V>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("MapChangedEventHandler", MapChangedEventHandler<K, V>.iid(), IInspectable.descriptorSchema(), "MapChangedEventHandlerVtbl", "MapChangedEventHandler", "MapChangedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IObservableMap<K, V>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("event", "CPointer<Unit>", "InParam<IMapChangedEventArgs<K>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("MapChangedEventHandler", MapChangedEventHandler<K, V>.iid(), IUnknown.descriptorSchema(), "MapChangedEventHandlerVtbl", "MapChangedEventHandler", "MapChangedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IObservableMap<K, V>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("event", "CPointer<Unit>", "InParam<IMapChangedEventArgs<K>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(MapChangedEventHandler<K, V>.runtimeType())
         return schema
     }
@@ -6993,7 +7008,7 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "MapChangedEventHandler")
     }
 
     public unsafe func vtbl(): MapChangedEventHandlerVtbl {
@@ -7015,19 +7030,27 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
 
 extend<K, V> MapChangedEventHandler<K, V> <: windows_core.Interface<MapChangedEventHandler<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
-private open class MapChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface MapChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class MapChangedEventHandlerInvoker<K, V> <: MapChangedEventHandlerInvokerErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
-    public open func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
+public interface MapChangedEventHandlerInvoker<K, V> <: MapChangedEventHandlerInvokerErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
+    public func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IObservableMap<K, V>>(IObservableMap<K, V>.viewOf(arg0)), InParam<IMapChangedEventArgs<K>>(IMapChangedEventArgs<K>.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        let sender = if (arg0.isNull()) {
+            InParam<IObservableMap<K, V>>()
+        } else {
+            InParam<IObservableMap<K, V>>(IObservableMap<K, V>.viewOf(arg0))
+        }
+        let event = if (arg1.isNull()) {
+            InParam<IMapChangedEventArgs<K>>()
+        } else {
+            InParam<IMapChangedEventArgs<K>>(IMapChangedEventArgs<K>.viewOf(arg1))
+        }
+        this.Invoke(sender, event)
         return S_OK.value
     }
 }
@@ -7045,20 +7068,20 @@ private class MapChangedEventHandlerBox<K, V> <: MapChangedEventHandlerInvoker<K
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
+    public func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
         invoke_(sender, event)
     }
 }
 
 func buildMapChangedEventHandlerBoxVtbl<K, V>(): MapChangedEventHandlerVtbl where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     var vtbl = MapChangedEventHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<MapChangedEventHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
@@ -7557,7 +7580,7 @@ extend ValueSet <: windows_core.HandleWinrtType<ValueSet> {
 
 @C
 public struct VectorChangedEventHandlerVtbl {
-    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var base_: IUnknownVtbl = IUnknownVtbl()
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -7584,11 +7607,11 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<VectorChangedEventHandler<T>> {
-        return InterfaceDescriptor<VectorChangedEventHandler<T>>("VectorChangedEventHandler", VectorChangedEventHandler<T>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => VectorChangedEventHandler<T>.fromAbiTake(raw) }, { raw => VectorChangedEventHandler<T>.viewOf(raw) })
+        return InterfaceDescriptor<VectorChangedEventHandler<T>>("VectorChangedEventHandler", VectorChangedEventHandler<T>.iid(), [IUnknown.iid()], { raw => VectorChangedEventHandler<T>.fromAbiTake(raw) }, { raw => VectorChangedEventHandler<T>.viewOf(raw) })
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("VectorChangedEventHandler", VectorChangedEventHandler<T>.iid(), IInspectable.descriptorSchema(), "VectorChangedEventHandlerVtbl", "VectorChangedEventHandler", "VectorChangedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 6, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IObservableVector<T>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("event", "CPointer<Unit>", "InParam<IVectorChangedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
+        var schema = InterfaceDescriptorSchema("VectorChangedEventHandler", VectorChangedEventHandler<T>.iid(), IUnknown.descriptorSchema(), "VectorChangedEventHandlerVtbl", "VectorChangedEventHandler", "VectorChangedEventHandlerInvoker", [InterfaceMethodSchema("Invoke", 3, [InterfaceParameterSchema("sender", "CPointer<Unit>", "InParam<IObservableVector<T>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("event", "CPointer<Unit>", "InParam<IVectorChangedEventArgs>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(VectorChangedEventHandler<T>.runtimeType())
         return schema
     }
@@ -7611,7 +7634,7 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable.viewOf(asRaw())
+        delegateAsInspectable(asRaw(), "VectorChangedEventHandler")
     }
 
     public unsafe func vtbl(): VectorChangedEventHandlerVtbl {
@@ -7633,19 +7656,27 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
 
 extend<T> VectorChangedEventHandler<T> <: windows_core.Interface<VectorChangedEventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
-private open class VectorChangedEventHandlerInvokerErased {
-    public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        E_NOTIMPL.value
-    }
+public interface VectorChangedEventHandlerInvokerErased {
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-private open class VectorChangedEventHandlerInvoker<T> <: VectorChangedEventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    public open func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
+public interface VectorChangedEventHandlerInvoker<T> <: VectorChangedEventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
         ()
     }
 
-    public override func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(InParam<IObservableVector<T>>(IObservableVector<T>.viewOf(arg0)), InParam<IVectorChangedEventArgs>(IVectorChangedEventArgs.viewOf(arg1)))
+    public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
+        let sender = if (arg0.isNull()) {
+            InParam<IObservableVector<T>>()
+        } else {
+            InParam<IObservableVector<T>>(IObservableVector<T>.viewOf(arg0))
+        }
+        let event = if (arg1.isNull()) {
+            InParam<IVectorChangedEventArgs>()
+        } else {
+            InParam<IVectorChangedEventArgs>(IVectorChangedEventArgs.viewOf(arg1))
+        }
+        this.Invoke(sender, event)
         return S_OK.value
     }
 }
@@ -7663,20 +7694,20 @@ private class VectorChangedEventHandlerBox<T> <: VectorChangedEventHandlerInvoke
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
+    public func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
         invoke_(sender, event)
     }
 }
 
 func buildVectorChangedEventHandlerBoxVtbl<T>(): VectorChangedEventHandlerVtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     var vtbl = VectorChangedEventHandlerVtbl()
-    vtbl.base_ = buildIInspectableVtbl()
+    vtbl.base_ = buildIUnknownVtbl()
     vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
         match (unsafe { asImplFromRaw<VectorChangedEventHandlerInvokerErased>(instanceRaw) }) {
             case Some(invoker) =>
-                return invoker.__winrtThunk_Invoke(arg0, arg1)
+                invoker.__winrtThunk_Invoke(arg0, arg1)
             case None =>
-                return E_NOTIMPL.value
+                E_NOTIMPL.value
         }
     }
     return vtbl
