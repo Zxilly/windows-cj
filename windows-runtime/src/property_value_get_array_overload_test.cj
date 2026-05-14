@@ -5,13 +5,15 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, GuidValue, S_OK}
 import windows_core as windows_core
-import windows_interface.GUID
+import windows_interface.{GUID, IInspectable}
 
 let propertyValueGetArrayInt32Calls = AtomicInt64(0)
 let propertyValueGetArrayGuidCalls = AtomicInt64(0)
 let propertyValueGetArrayDateTimeCalls = AtomicInt64(0)
 let propertyValueGetArrayRectCalls = AtomicInt64(0)
 let propertyValueGetArrayStringCalls = AtomicInt64(0)
+let propertyValueGetArrayInspectableCalls = AtomicInt64(0)
+let propertyValueGetArrayInspectableReleaseCalls = AtomicInt64(0)
 
 func propertyValueGetArrayGuidExpected(offset: UInt32): GUID {
     GUID.from_values(0xB0C0D000u32 + offset, 0x2211u16, 0x4433u16, 0x66u8, 0x55u8, 0x88u8, 0x77u8, 0xAAu8, 0x99u8, 0xCCu8, 0xBBu8)
@@ -54,6 +56,50 @@ func closePropertyValueGetArrayStrings(values: Array<windows_core.HString>): Uni
         values[index].close()
         index += 1
     }
+}
+
+func closePropertyValueGetArrayInspectables(values: Array<Option<IInspectable>>): Unit {
+    var index = 0
+    while (index < values.size) {
+        match (values[index]) {
+            case Some(value) => value.close()
+            case None => ()
+        }
+        index += 1
+    }
+}
+
+func expectPropertyValueGetArrayInspectableSome(value: Option<IInspectable>): IInspectable {
+    match (value) {
+        case Some(item) => item
+        case None => throw Exception("expected inspectable value")
+    }
+}
+
+func expectPropertyValueGetArrayInspectableNone(value: Option<IInspectable>): Unit {
+    match (value) {
+        case Some(_) => throw Exception("expected null inspectable value")
+        case None => ()
+    }
+}
+
+@C
+func propertyValueGetArrayInspectableReleaseThunk(raw: CPointer<Unit>): UInt32 {
+    let oldCount = propertyValueGetArrayInspectableReleaseCalls.fetchAdd(1)
+    windows_core.coTaskMemFree(raw)
+    UInt32(oldCount + 1)
+}
+
+func propertyValueGetArrayInspectableObject(instanceRaw: CPointer<Unit>): CPointer<Unit> {
+    let objectRaw = windows_core.coTaskMemAlloc(sizeOf<CPointer<Unit>>())
+    if (objectRaw.isNull()) {
+        return CPointer<Unit>()
+    }
+    unsafe {
+        let vtbl = CPointer<CPointer<Unit>>(instanceRaw).read()
+        CPointer<CPointer<Unit>>(objectRaw).write(vtbl)
+    }
+    objectRaw
 }
 
 @C
@@ -101,6 +147,42 @@ func propertyValueGetStringArrayHighLevelThunk(
         value.write(data)
     }
     propertyValueGetArrayStringCalls.fetchAdd(1)
+    S_OK.value
+}
+
+@C
+func propertyValueGetInspectableArrayHighLevelThunk(
+    instanceRaw: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocatePropertyValueGetArray<CPointer<Unit>>(3)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    let first = propertyValueGetArrayInspectableObject(instanceRaw)
+    let third = propertyValueGetArrayInspectableObject(instanceRaw)
+    if (first.isNull() || third.isNull()) {
+        if (first.isNotNull()) {
+            windows_core.coTaskMemFree(first)
+        }
+        if (third.isNotNull()) {
+            windows_core.coTaskMemFree(third)
+        }
+        windows_core.coTaskMemFree(CPointer<Unit>(data))
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(first)
+        (data + 1).write(CPointer<Unit>())
+        (data + 2).write(third)
+        size.write(3u32)
+        value.write(data)
+    }
+    propertyValueGetArrayInspectableCalls.fetchAdd(1)
     S_OK.value
 }
 
@@ -175,8 +257,10 @@ func propertyValueGetRectArrayThunk(
 
 func propertyValueGetArrayOverloadVtbl(): IPropertyValueVtbl {
     var vtbl = IPropertyValueVtbl()
+    vtbl.base_.base_.Release = propertyValueGetArrayInspectableReleaseThunk
     vtbl.GetInt32Array = propertyValueGetInt32ArrayThunk
     vtbl.GetStringArray = propertyValueGetStringArrayHighLevelThunk
+    vtbl.GetInspectableArray = propertyValueGetInspectableArrayHighLevelThunk
     vtbl.GetGuidArray = propertyValueGetGuidArrayHighLevelThunk
     vtbl.GetDateTimeArray = propertyValueGetDateTimeArrayThunk
     vtbl.GetRectArray = propertyValueGetRectArrayThunk
@@ -232,6 +316,31 @@ func testIPropertyValueGetArrayOverloadsReturnStringManagedArrays() {
         } finally {
             closePropertyValueGetArrayStrings(values)
         }
+    })
+}
+
+@Test
+func testIPropertyValueGetArrayOverloadsReturnInspectableOptionArrays() {
+    propertyValueGetArrayInspectableCalls.store(0)
+    propertyValueGetArrayInspectableReleaseCalls.store(0)
+    withPropertyValueGetArrayOverloadRaw({ raw: CPointer<Unit> =>
+        let propertyValue = IPropertyValue.viewOf(raw)
+
+        let values = unsafe { propertyValue.GetInspectableArray() }
+        try {
+            @Expect(values.size, 3)
+            let first = expectPropertyValueGetArrayInspectableSome(values[0])
+            expectPropertyValueGetArrayInspectableNone(values[1])
+            let third = expectPropertyValueGetArrayInspectableSome(values[2])
+            @Expect(first.asRaw().isNotNull(), true)
+            @Expect(third.asRaw().isNotNull(), true)
+            @Expect(first.asRaw().toUIntNative() == third.asRaw().toUIntNative(), false)
+            @Expect(propertyValueGetArrayInspectableCalls.load(), 1)
+            @Expect(propertyValueGetArrayInspectableReleaseCalls.load(), 0)
+        } finally {
+            closePropertyValueGetArrayInspectables(values)
+        }
+        @Expect(propertyValueGetArrayInspectableReleaseCalls.load(), 2)
     })
 }
 

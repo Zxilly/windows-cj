@@ -1648,6 +1648,8 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `Franklin`: Round122 re-review clean; confirmed the prior cleanup gaps are fixed, raw COM slots are cleared only after successful materialization, raw HSTRING/COM arrays are covered by cleanup if managed allocation fails, HRESULT propagation remains through the raw method, and the test covers nullable projection plus caller-owned release.
+- Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
 
 ### Round112 - Stock helper returned-interface lifetime
@@ -1943,3 +1945,40 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Schrodinger`: Round121 review clean; confirmed the no-arg overload preserves raw ABI/HRESULT propagation through the existing method, takes owned HSTRING handles exactly once, handles null HSTRING as empty, closes materialized values and remaining raw handles on failure, and frees the CoTaskMem slot buffer in `finally`.
+
+### Round122 - PropertyValue inspectable get array overload
+
+- Started at `2026-05-15 01:43:23 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CPointer` casts, pointer arithmetic, reads, and writes require `unsafe`.
+  - `try` / `catch` / `finally` is the deterministic cleanup pattern used for partially materialized arrays.
+  - `Option<T>` represents nullable values; conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - Rechecked `IPropertyValue.GetInspectableArray`: the ABI returns an owned WinRT array through `u32*` size and `IInspectable**` data out slots.
+  - Unlike the Rust reference surface, Cangjie projects nullable COM elements as `Option<IInspectable>` rather than forcing null into a non-null interface wrapper.
+- Added coverage:
+  - `testIPropertyValueGetArrayOverloadsReturnInspectableOptionArrays` verifies the no-arg overload calls the raw ABI slot, preserves null elements as `None`, wraps non-null elements as owned `IInspectable` values, and releases the owned interface pointers when callers close the returned values.
+- Fixed inspectable array retrieval:
+  - Added `IPropertyValue.GetInspectableArray(): Array<Option<IInspectable>>` beside the raw `(size, pointer)` ABI method.
+  - Added helpers to take returned COM pointers into owned `IInspectable.fromAbiTake` wrappers, close already-materialized wrappers on failure, release remaining raw slots, and always free the CoTaskMem slot array.
+  - Kept raw `GetInspectableArray(size, value)` available for direct ABI callers.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsReturnInspectableOptionArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 106/106 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review fix:
+  - Review agent `Averroes` found two real cleanup gaps: managed result allocation happened before the cleanup `try`, and a non-null COM slot could be cleared before owned wrapper materialization completed.
+  - Moved string and inspectable result-array allocation under the cleanup `try` so raw arrays are released even if managed array allocation throws.
+  - Added direct raw `IUnknown::Release` cleanup for remaining inspectable slots, and clear slots only after the returned pointer has been materialized into the result array.
+  - Rechecked the analogous HSTRING path in the same helper group so raw HSTRING arrays are also covered by cleanup if managed array allocation throws.
+- Verification after review fix:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsReturnInspectableOptionArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsReturnStringManagedArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 106/106 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.

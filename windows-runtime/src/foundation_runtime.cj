@@ -2627,6 +2627,17 @@ func releasePropertyValueStringRawSlots(data: CPointer<CPointer<Unit>>, length: 
     }
 }
 
+func releasePropertyValueInspectableRaw(raw: CPointer<Unit>): Unit {
+    if (raw.isNull()) {
+        return
+    }
+    unsafe {
+        let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(raw).read()
+        let vtbl = vtblPtr.read()
+        let _ = vtbl.Release(raw)
+    }
+}
+
 func closePropertyValueStringArray(values: Array<windows_core.HString>): Unit {
     var index = 0
     while (index < values.size) {
@@ -2644,24 +2655,126 @@ func takePropertyValueStringArray(data: CPointer<CPointer<Unit>>, length: UInt32
         throw windows_core.WindowsException(windows_core.E_POINTER)
     }
 
-    let result = Array<windows_core.HString>(Int64(length), { _ => windows_core.HString() })
+    var result: Option<Array<windows_core.HString>> = None
     try {
+        let values = Array<windows_core.HString>(Int64(length), { _ => windows_core.HString() })
+        result = Some(values)
         var index = 0
-        while (index < result.size) {
+        while (index < values.size) {
             let slot = unsafe { data + index }
             let raw = unsafe { slot.read() }
             unsafe { slot.write(CPointer<Unit>()) }
-            result[index] = windows_core.HString.fromSystemHandleTake(raw)
+            var pending: Option<windows_core.HString> = None
+            try {
+                let value = windows_core.HString.fromSystemHandleTake(raw)
+                pending = Some(value)
+                values[index] = value
+                pending = None
+            } catch (error: Exception) {
+                match (pending) {
+                    case Some(value) => value.close()
+                    case None => ()
+                }
+                throw error
+            }
             index += 1
         }
     } catch (error: Exception) {
-        closePropertyValueStringArray(result)
+        match (result) {
+            case Some(values) => closePropertyValueStringArray(values)
+            case None => ()
+        }
         releasePropertyValueStringRawSlots(data, length)
         throw error
     } finally {
         freePropertyValueHandleArraySlots(data)
     }
-    result
+    match (result) {
+        case Some(values) => values
+        case None => throw IllegalStateException("GetStringArray did not produce an array")
+    }
+}
+
+func releasePropertyValueInspectableRawSlots(data: CPointer<CPointer<Unit>>, length: UInt32): Unit {
+    if (data.isNull()) {
+        return
+    }
+    var index = 0
+    while (index < Int64(length)) {
+        let slot = unsafe { data + index }
+        let raw = unsafe { slot.read() }
+        if (raw.isNotNull()) {
+            releasePropertyValueInspectableRaw(raw)
+            unsafe { slot.write(CPointer<Unit>()) }
+        }
+        index += 1
+    }
+}
+
+func closePropertyValueInspectableArray(values: Array<Option<IInspectable>>): Unit {
+    var index = 0
+    while (index < values.size) {
+        match (values[index]) {
+            case Some(value) => value.close()
+            case None => ()
+        }
+        index += 1
+    }
+}
+
+func takePropertyValueInspectableArray(data: CPointer<CPointer<Unit>>, length: UInt32): Array<Option<IInspectable>> {
+    if (length == 0u32) {
+        freePropertyValueHandleArraySlots(data)
+        return Array<Option<IInspectable>>()
+    }
+    if (data.isNull()) {
+        throw windows_core.WindowsException(windows_core.E_POINTER)
+    }
+
+    var result: Option<Array<Option<IInspectable>>> = None
+    try {
+        let values = Array<Option<IInspectable>>(Int64(length), { _ => None })
+        result = Some(values)
+        var index = 0
+        while (index < values.size) {
+            let slot = unsafe { data + index }
+            let raw = unsafe { slot.read() }
+            if (raw.isNull()) {
+                values[index] = None
+            } else {
+                var pending: Option<IInspectable> = None
+                try {
+                    let value = IInspectable.fromAbiTake(raw)
+                    pending = Some(value)
+                    values[index] = Some(value)
+                    unsafe { slot.write(CPointer<Unit>()) }
+                    pending = None
+                } catch (error: Exception) {
+                    match (pending) {
+                        case Some(value) =>
+                            value.close()
+                            unsafe { slot.write(CPointer<Unit>()) }
+                        case None => ()
+                    }
+                    throw error
+                }
+            }
+            index += 1
+        }
+    } catch (error: Exception) {
+        match (result) {
+            case Some(values) => closePropertyValueInspectableArray(values)
+            case None => ()
+        }
+        releasePropertyValueInspectableRawSlots(data, length)
+        throw error
+    } finally {
+        freePropertyValueHandleArraySlots(data)
+    }
+    match (result) {
+        case Some(values) => values
+        case None => throw IllegalStateException("GetInspectableArray did not produce an array")
+    }
 }
 
 func takePropertyValueGuidArray(data: CPointer<GUID>, length: UInt32): Array<GuidValue> {
@@ -3962,6 +4075,13 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         var value__ = CPointer<CPointer<Unit>>()
         GetStringArray(CPointer<UInt32>(inout size__), CPointer<CPointer<CPointer<Unit>>>(inout value__))
         takePropertyValueStringArray(value__, size__)
+    }
+
+    public unsafe func GetInspectableArray(): Array<Option<IInspectable>> {
+        var size__ = 0u32
+        var value__ = CPointer<CPointer<Unit>>()
+        GetInspectableArray(CPointer<UInt32>(inout size__), CPointer<CPointer<CPointer<Unit>>>(inout value__))
+        takePropertyValueInspectableArray(value__, size__)
     }
 
     public unsafe func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): Unit {
