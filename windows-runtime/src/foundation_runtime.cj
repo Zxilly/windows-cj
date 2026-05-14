@@ -287,10 +287,14 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public unsafe func Invoke(sender: IInspectable, args: T): Unit {
+        Invoke(InParam<IInspectable>(sender), args)
+    }
+
+    public unsafe func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         let v = vtbl()
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<T>(args)) {
-            hr__ = Some(v.Invoke(asRaw(), sender.asRaw(), __genericBorrow0.asRaw()))
+            hr__ = Some(v.Invoke(asRaw(), sender.borrow<CPointer<Unit>>(), __genericBorrow0.asRaw()))
         }
         let hr = match (hr__) {
             case Some(value) => value
@@ -6076,8 +6080,12 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncAction, asyncStatus: AsyncStatus): Unit {
+        Invoke(InParam<IAsyncAction>(asyncInfo), asyncStatus)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
+        let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
         HRESULT(hr).ok()
     }
 
@@ -6206,10 +6214,14 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncActionWithProgress<TProgress>, progressInfo: TProgress): Unit {
+        Invoke(InParam<IAsyncActionWithProgress<TProgress>>(asyncInfo), progressInfo)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
         let v = vtbl()
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<TProgress>(progressInfo)) {
-            hr__ = Some(v.Invoke(asRaw(), asyncInfo.asRaw(), __genericBorrow0.asRaw()))
+            hr__ = Some(v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), __genericBorrow0.asRaw()))
         }
         let hr = match (hr__) {
             case Some(value) => value
@@ -6343,8 +6355,12 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncActionWithProgress<TProgress>, asyncStatus: AsyncStatus): Unit {
+        Invoke(InParam<IAsyncActionWithProgress<TProgress>>(asyncInfo), asyncStatus)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
+        let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
         HRESULT(hr).ok()
     }
 
@@ -6473,8 +6489,12 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncOperation<TResult>, asyncStatus: AsyncStatus): Unit {
+        Invoke(InParam<IAsyncOperation<TResult>>(asyncInfo), asyncStatus)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
+        let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
         HRESULT(hr).ok()
     }
 
@@ -6605,10 +6625,14 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncOperationWithProgress<TResult, TProgress>, progressInfo: TProgress): Unit {
+        Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(asyncInfo), progressInfo)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
         let v = vtbl()
         var hr__: ?Int32 = None
         try (__genericBorrow0 = windows_core.winrtBorrowGenericIn<TProgress>(progressInfo)) {
-            hr__ = Some(v.Invoke(asRaw(), asyncInfo.asRaw(), __genericBorrow0.asRaw()))
+            hr__ = Some(v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), __genericBorrow0.asRaw()))
         }
         let hr = match (hr__) {
             case Some(value) => value
@@ -6744,8 +6768,12 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 
     public unsafe func Invoke(asyncInfo: IAsyncOperationWithProgress<TResult, TProgress>, asyncStatus: AsyncStatus): Unit {
+        Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(asyncInfo), asyncStatus)
+    }
+
+    public unsafe func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
+        let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
         HRESULT(hr).ok()
     }
 

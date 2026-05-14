@@ -1616,3 +1616,36 @@
   - Initial review agent `Huygens`: found the delegate `IAgileObject` / `IMarshal` QI regression after switching delegate vtables to `IUnknown`.
   - Second review agent `Poincare`: found the direct delegate `asIInspectable()` synthetic wrapper risk after switching delegate vtables to `IUnknown`.
   - Final review agent `Parfit`: Round110 review clean; no blocking delegate ABI, lifecycle, QueryInterface, vtable, test, or log issues found.
+
+### Round111 - Delegate public Invoke null InParam surface
+
+- Started at `2026-05-14 20:46:00 +08:00`; implementation recorded at `2026-05-14 20:57:52 +08:00`.
+- Documentation check:
+  - Initial `mcp__cangjie__cangjie_search_docs` attempts for `CFunc`, `CPointer`, `unsafe`, lambda, `@C struct`, and resource syntax returned HTTP transport errors.
+  - Retried successfully after implementation:
+    - Confirmed `CFunc` maps to C-callable function pointers, `CFunc` parameters/returns must satisfy `CType`, `CPointer<T>` can be cast to a concrete `CFunc`, and Cangjie calls to `CFunc` require `unsafe`.
+    - Confirmed function overloads are valid when same-name functions have different parameter counts or parameter types.
+- Reference scan:
+  - Rechecked reference delegate surfaces where public `Invoke` accepts `Param<T>` and therefore permits null COM interface inputs such as `EventHandler<Int32>.Invoke(None, 123)`.
+  - Scoped the fix to delegates whose first/paired nullable parameters are concrete COM interfaces; did not force Rust's generic `Param<T>` abstraction into Cangjie.
+- Fixed delegate public wrappers:
+  - Added `InParam<IInspectable>` public `Invoke` overload for `EventHandler<T>`.
+  - Added `InParam` public `Invoke` overloads for `AsyncActionCompletedHandler`, async progress/completed handlers, and async operation progress/completed handlers.
+  - Added `InParam` public `Invoke` overloads for `MapChangedEventHandler<K, V>` and `VectorChangedEventHandler<T>`.
+  - Kept existing non-null interface overloads so existing internal async helper calls remain source-compatible and route through the `InParam` path.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `Invoke(InParam<...>)` did not exist for `EventHandler`, `AsyncActionCompletedHandler`, `MapChangedEventHandler`, and `VectorChangedEventHandler`.
+  - `testEventHandlerInvokeAcceptsEmptySenderInParam` verifies public `EventHandler<Int32>.Invoke(InParam<IInspectable>(), 123)` reaches the callback with an empty sender.
+  - `testAsyncActionCompletedHandlerInvokeAcceptsEmptyInfoInParam` verifies public async completed delegate invocation with empty async info.
+  - `testCollectionDelegateInvokeAcceptsEmptyInParams` verifies public map/vector changed delegate invocation with empty sender/event params.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - Targeted new tests passed individually with `--skip-build --parallel 1 --no-capture-output`.
+  - A `Start-Process` redirected full `windows-runtime` run timed out without output, but an immediate direct rerun of `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output` passed 83/83 with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output`: passed 19/19 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.

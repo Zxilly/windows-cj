@@ -7016,8 +7016,12 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
     }
 
     public unsafe func Invoke(sender: IObservableMap<K, V>, event: IMapChangedEventArgs<K>): Unit {
+        Invoke(InParam<IObservableMap<K, V>>(sender), InParam<IMapChangedEventArgs<K>>(event))
+    }
+
+    public unsafe func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), sender.asRaw(), event.asRaw())
+        let hr = v.Invoke(asRaw(), sender.borrow<CPointer<Unit>>(), event.borrow<CPointer<Unit>>())
         HRESULT(hr).ok()
     }
 
@@ -7642,8 +7646,12 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
     }
 
     public unsafe func Invoke(sender: IObservableVector<T>, event: IVectorChangedEventArgs): Unit {
+        Invoke(InParam<IObservableVector<T>>(sender), InParam<IVectorChangedEventArgs>(event))
+    }
+
+    public unsafe func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), sender.asRaw(), event.asRaw())
+        let hr = v.Invoke(asRaw(), sender.borrow<CPointer<Unit>>(), event.borrow<CPointer<Unit>>())
         HRESULT(hr).ok()
     }
 
