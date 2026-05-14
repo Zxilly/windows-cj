@@ -2532,6 +2532,14 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
         let hr = v.RemoveClosed(asRaw(), windows_core.projectTypedAbi(cookie, windows_core.typeMarker<EventRegistrationToken>()))
         HRESULT(hr).ok()
     }
+
+    public unsafe func Close(): Unit {
+        try (closable = asIClosable()) {
+            closable.Close()
+            return
+        }
+        throw IllegalStateException("IMemoryBufferReference.Close ancestor call did not execute")
+    }
 }
 
 extend IMemoryBufferReference <: windows_core.Interface<IMemoryBufferReference> {}
@@ -7852,6 +7860,14 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
         let hr = v.CreateReference(asRaw(), CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return IMemoryBufferReference.fromAbiTake(result__)
+    }
+
+    public unsafe func Close(): Unit {
+        try (closable = asIClosable()) {
+            closable.Close()
+            return
+        }
+        throw IllegalStateException("IMemoryBuffer.Close ancestor call did not execute")
     }
 }
 

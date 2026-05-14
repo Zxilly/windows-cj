@@ -1704,6 +1704,36 @@
 - Review:
   - Review agent `Anscombe`: no findings in ABI/vtable layout, QueryInterface/refcount behavior, `Resource` cleanup, returned iterator ownership, HRESULT handling, or Cangjie syntax/API usage.
   - Residual test risk: representative fake-vtable tests do not call methods on the returned iterator after `First()`.
+
+### Round127 - Memory buffer closable forwarding
+
+- Started at `2026-05-15 03:18:57 +08:00`; implementation recorded at `2026-05-15 03:28:54 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the local pattern for temporary queried interface wrappers.
+  - `CPointer` reads/writes and `CFunc` calls require `unsafe`.
+  - `CFunc` callbacks cannot capture state, so tests use top-level thunks and atomic counters.
+- Reference scan:
+  - `IMemoryBuffer` and `IMemoryBufferReference` both require `IClosable` and the reference surface exposes `Close()` directly through an interface cast.
+  - Cangjie already modeled both descriptors as queryable to `IClosable` via `asIClosable()`, and `MemoryBuffer` runtime class already had direct `Close()`.
+  - The missing behavior was interface-wrapper convenience on `IMemoryBuffer` and `IMemoryBufferReference`, not a vtable or ownership model change.
+- Added forwarding:
+  - `IMemoryBuffer.Close()` and `IMemoryBufferReference.Close()` now forward through `asIClosable()`.
+  - Each method uses `try (closable = asIClosable())` so the temporary QI wrapper is released after the `Close` call.
+  - No vtable layout changes were made.
+- Added coverage:
+  - `testIMemoryBufferForwardsCloseThroughIClosable` verifies `IMemoryBuffer.Close()` performs one QI, calls `IClosable.Close`, and releases the temporary wrapper.
+  - `testIMemoryBufferReferenceForwardsCloseThroughIClosable` verifies the same path for `IMemoryBufferReference.Close()`.
+- Verification:
+  - First `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` attempt timed out after 120s while `cjc` was still running; the compile finished shortly afterward with output lost to the timeout. Re-running with a wider timeout passed.
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*testIMemoryBuffer*ForwardsCloseThroughIClosable --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 2/119.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 119/119.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Jason`: no findings in ABI/vtable layout, QueryInterface/AddRef/Release balance, try-resource cleanup, HRESULT propagation, or Cangjie syntax/API usage.
+  - Review-side filter did not execute the new tests, but local direct `cjv exec` verification did run them.
 - Review:
   - Review agent `Franklin`: Round122 re-review clean; confirmed the prior cleanup gaps are fixed, raw COM slots are cleared only after successful materialization, raw HSTRING/COM arrays are covered by cleanup if managed allocation fails, HRESULT propagation remains through the raw method, and the test covers nullable projection plus caller-owned release.
 - Review:
