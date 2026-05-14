@@ -1747,3 +1747,29 @@
   - Review agent `Socrates`: found two P2 lifecycle issues: partial snapshot failure leaked already-retained values, and temporary materialized pair wrappers were no longer deterministically closed after `createStockIterator` began snapshotting. Both were fixed in this round.
   - Review agent `Kepler`: found one P3 test gap for failed `toInterface` cleanup after `createComObjectFromSchemas` succeeds. Added single- and multi-schema mismatch tests that assert the inner stock `Resource` is closed.
   - Review agent `Leibniz`: final Round114 review clean; no vtable ABI, COM lifetime, double free, QueryInterface/reference-counting, stock behavior, or test gap issues found.
+
+### Round115 - DateTime vector direct ABI
+
+- Started at `2026-05-14 23:18:59 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` represents a C-callable function pointer, its parameters and return type must satisfy `CType`, `CFunc` lambdas cannot capture variables, and calling/casting through `CFunc` requires `unsafe`.
+  - `Resource` provides `isClosed()` / `close()` for deterministic cleanup; test COM impls keep the existing closed flag pattern.
+- Reference scan:
+  - Rechecked `IVector<T>` and `IVectorView<T>` reference vtables: input slots use `AbiType<T>` by value.
+  - For copy types, `AbiType<T>` is the value itself; therefore `DateTime` input slots should carry `DateTimeAbi` directly, not a borrowed pointer.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IVectorVtbl.newDateTime` and `IVectorViewVtbl.newDateTime` did not exist.
+  - `testDateTimeVectorViewUsesDirectValueAbiForSpecialization` verifies wrapper and direct vtable `IndexOf(DateTimeAbi, ...)`.
+  - `testDateTimeVectorUsesDirectValueAbiForMutableSlots` verifies wrapper and direct vtable `IndexOf`, `SetAt`, `InsertAt`, and `Append` with `DateTimeAbi` by value.
+- Fixed DateTime vector ABI:
+  - Added direct `DateTimeAbi` dispatch helpers for vector-view `IndexOf` and vector `SetAt` / `InsertAt` / `Append`.
+  - `IVectorViewVtbl.new<Identity, DateTime>` and `IVectorVtbl.new<Identity, DateTime>` now override the erased pointer input slots with concrete `DateTimeAbi` CFunc signatures.
+  - Added `newDateTime` convenience constructors mirroring the existing per-type specialization pattern.
+  - Public `IVectorView<T>` / `IVector<T>` wrappers now route `DateTime` inputs through the direct ABI helpers.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testDateTimeVectorViewUsesDirectValueAbiForSpecialization --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testDateTimeVectorUsesDirectValueAbiForMutableSlots --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 95/95 with `cjHeapSize=32GB`.
+- Review:
+  - Review agent `Erdos`: Round115 review clean; confirmed `DateTimeAbi` is passed by value for vector/view `IndexOf`, vector `SetAt` / `InsertAt` / `Append`, wrapper dispatch and generic builder specialization are coherent, test `Resource` cleanup uses the closed-flag pattern, and direct vtable casts cover the ABI behavior.

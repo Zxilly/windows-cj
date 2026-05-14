@@ -2042,6 +2042,19 @@ func callVectorViewIndexOfFloat64(
     result__
 }
 
+func callVectorViewIndexOfDateTime(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: DateTime,
+    index: CPointer<UInt32>
+): Bool {
+    let typedSlot = CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
+    var result__ = false
+    let hr = unsafe { typedSlot(instanceRaw, DateTime.projectAbi(value), index, CPointer<Bool>(inout result__)) }
+    HRESULT(hr).ok()
+    result__
+}
+
 @C
 public struct IVectorViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2327,6 +2340,30 @@ public struct IVectorViewVtbl {
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
             case None => ()
         }
+        match (DateTime() as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVectorView_Impl<DateTime>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+            case None => ()
+        }
         return vtbl
     }
 
@@ -2462,6 +2499,10 @@ public struct IVectorViewVtbl {
 
     public static func newFloat64<Identity>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<Float64> {
         IVectorViewVtbl.new<Identity, Float64>(offset: offset)
+    }
+
+    public static func newDateTime<Identity>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<DateTime> {
+        IVectorViewVtbl.new<Identity, DateTime>(offset: offset)
     }
 
     public static func matches<T>(iid: GUID): Bool where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -2673,6 +2714,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
             case boolValue: Bool => return callVectorViewIndexOfBool(v.IndexOf, asRaw(), boolValue, index)
             case float32Value: Float32 => return callVectorViewIndexOfFloat32(v.IndexOf, asRaw(), float32Value, index)
             case float64Value: Float64 => return callVectorViewIndexOfFloat64(v.IndexOf, asRaw(), float64Value, index)
+            case dateTimeValue: DateTime => return callVectorViewIndexOfDateTime(v.IndexOf, asRaw(), dateTimeValue, index)
             case _ => ()
         }
         var result__ = false
@@ -4195,6 +4237,17 @@ func callVectorSetAtFloat64(
     HRESULT(hr).ok()
 }
 
+func callVectorSetAtDateTime(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: DateTime
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, DateTime.projectAbi(value)) }
+    HRESULT(hr).ok()
+}
+
 func callVectorInsertAtInt32(
     slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -4305,6 +4358,17 @@ func callVectorInsertAtFloat64(
     HRESULT(hr).ok()
 }
 
+func callVectorInsertAtDateTime(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: DateTime
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, DateTime.projectAbi(value)) }
+    HRESULT(hr).ok()
+}
+
 func callVectorAppendInt32(
     slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -4402,6 +4466,16 @@ func callVectorAppendFloat64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Float64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendDateTime(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: DateTime
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, DateTime.projectAbi(value)) }
     HRESULT(hr).ok()
 }
 
@@ -5191,6 +5265,73 @@ public struct IVectorVtbl {
                 vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
             case None => ()
         }
+        match (DateTime() as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+                let setAtAbi: CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32> = {
+                    instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.SetAt(arg0, DateTime.assumeInitRef(arg1))) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+                let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.InsertAt(arg0, DateTime.assumeInitRef(arg1))) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+                let appendAbi: CFunc<(CPointer<Unit>, DateTimeAbi) -> Int32> = { instanceRaw, arg0 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.Append(DateTime.assumeInitRef(arg0))) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
+            case None => ()
+        }
         return vtbl
     }
 
@@ -5364,6 +5505,10 @@ public struct IVectorVtbl {
 
     public static func newFloat64<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<Float64> {
         IVectorVtbl.new<Identity, Float64>(offset: offset)
+    }
+
+    public static func newDateTime<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<DateTime> {
+        IVectorVtbl.new<Identity, DateTime>(offset: offset)
     }
 
     public static func matches<T>(iid: GUID): Bool where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -5696,6 +5841,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case boolValue: Bool => return callVectorViewIndexOfBool(v.IndexOf, asRaw(), boolValue, index)
             case float32Value: Float32 => return callVectorViewIndexOfFloat32(v.IndexOf, asRaw(), float32Value, index)
             case float64Value: Float64 => return callVectorViewIndexOfFloat64(v.IndexOf, asRaw(), float64Value, index)
+            case dateTimeValue: DateTime => return callVectorViewIndexOfDateTime(v.IndexOf, asRaw(), dateTimeValue, index)
             case _ => ()
         }
         var result__ = false
@@ -5744,6 +5890,9 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case float64Value: Float64 =>
                 callVectorSetAtFloat64(v.SetAt, asRaw(), index, float64Value)
                 return
+            case dateTimeValue: DateTime =>
+                callVectorSetAtDateTime(v.SetAt, asRaw(), index, dateTimeValue)
+                return
             case _ => ()
         }
         var hr__: ?Int32 = None
@@ -5789,6 +5938,9 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 return
             case float64Value: Float64 =>
                 callVectorInsertAtFloat64(v.InsertAt, asRaw(), index, float64Value)
+                return
+            case dateTimeValue: DateTime =>
+                callVectorInsertAtDateTime(v.InsertAt, asRaw(), index, dateTimeValue)
                 return
             case _ => ()
         }
@@ -5841,6 +5993,9 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 return
             case float64Value: Float64 =>
                 callVectorAppendFloat64(v.Append, asRaw(), float64Value)
+                return
+            case dateTimeValue: DateTime =>
+                callVectorAppendDateTime(v.Append, asRaw(), dateTimeValue)
                 return
             case _ => ()
         }
