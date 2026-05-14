@@ -11,6 +11,7 @@ let propertyValueGetArrayInt32Calls = AtomicInt64(0)
 let propertyValueGetArrayGuidCalls = AtomicInt64(0)
 let propertyValueGetArrayDateTimeCalls = AtomicInt64(0)
 let propertyValueGetArrayRectCalls = AtomicInt64(0)
+let propertyValueGetArrayStringCalls = AtomicInt64(0)
 
 func propertyValueGetArrayGuidExpected(offset: UInt32): GUID {
     GUID.from_values(0xB0C0D000u32 + offset, 0x2211u16, 0x4433u16, 0x66u8, 0x55u8, 0x88u8, 0x77u8, 0xAAu8, 0x99u8, 0xCCu8, 0xBBu8)
@@ -36,6 +37,25 @@ func allocatePropertyValueGetArray<T>(length: Int64): CPointer<T> where T <: CTy
     CPointer<T>(raw)
 }
 
+func propertyValueGetArraySystemString(value: String): CPointer<Unit> {
+    let text = windows_core.HString(value)
+    var raw = CPointer<Unit>()
+    try {
+        raw = text.toSystemHandleCopy()
+    } finally {
+        text.close()
+    }
+    raw
+}
+
+func closePropertyValueGetArrayStrings(values: Array<windows_core.HString>): Unit {
+    var index = 0
+    while (index < values.size) {
+        values[index].close()
+        index += 1
+    }
+}
+
 @C
 func propertyValueGetInt32ArrayThunk(
     _: CPointer<Unit>,
@@ -57,6 +77,30 @@ func propertyValueGetInt32ArrayThunk(
         value.write(data)
     }
     propertyValueGetArrayInt32Calls.fetchAdd(1)
+    S_OK.value
+}
+
+@C
+func propertyValueGetStringArrayHighLevelThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocatePropertyValueGetArray<CPointer<Unit>>(3)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(propertyValueGetArraySystemString("left"))
+        (data + 1).write(CPointer<Unit>())
+        (data + 2).write(propertyValueGetArraySystemString("right"))
+        size.write(3u32)
+        value.write(data)
+    }
+    propertyValueGetArrayStringCalls.fetchAdd(1)
     S_OK.value
 }
 
@@ -132,6 +176,7 @@ func propertyValueGetRectArrayThunk(
 func propertyValueGetArrayOverloadVtbl(): IPropertyValueVtbl {
     var vtbl = IPropertyValueVtbl()
     vtbl.GetInt32Array = propertyValueGetInt32ArrayThunk
+    vtbl.GetStringArray = propertyValueGetStringArrayHighLevelThunk
     vtbl.GetGuidArray = propertyValueGetGuidArrayHighLevelThunk
     vtbl.GetDateTimeArray = propertyValueGetDateTimeArrayThunk
     vtbl.GetRectArray = propertyValueGetRectArrayThunk
@@ -166,6 +211,27 @@ func testIPropertyValueGetArrayOverloadsReturnPrimitiveManagedArrays() {
         @Expect(values[1], 20i32)
         @Expect(values[2], 30i32)
         @Expect(propertyValueGetArrayInt32Calls.load(), 1)
+    })
+}
+
+@Test
+func testIPropertyValueGetArrayOverloadsReturnStringManagedArrays() {
+    propertyValueGetArrayStringCalls.store(0)
+    withPropertyValueGetArrayOverloadRaw({ raw: CPointer<Unit> =>
+        let propertyValue = IPropertyValue.viewOf(raw)
+        let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
+
+        let values = unsafe { propertyValue.GetStringArray() }
+        try {
+            @Expect(values.size, 3)
+            @Expect(values[0].get(), "left")
+            @Expect(values[1].get(), "")
+            @Expect(values[2].get(), "right")
+            @Expect(propertyValueGetArrayStringCalls.load(), 1)
+            @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore >= 2, true)
+        } finally {
+            closePropertyValueGetArrayStrings(values)
+        }
     })
 }
 

@@ -1648,41 +1648,6 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
-  - Review agent `Aquinas`: Round119 review clean; confirmed the no-arg overloads preserve raw vtable ABI/HRESULT handling through the existing methods, copy CoTaskMem arrays before releasing them with `AbiArray.close()` in `finally`, and project GUID/DateTime/Rect ABI structs after the native storage has been copied.
-
-### Round120 - PropertyValue string and inspectable array creation overloads
-
-- Started at `2026-05-15 01:15:43 +08:00`.
-- Confirmed Cangjie docs before editing:
-  - `Resource` exposes `isClosed()` / `close()` and try-with-resource / `try` + `finally` are the supported deterministic cleanup patterns.
-  - `Option<T>` uses `Some(value)` / `None`; conditions require parentheses and same-scope `let` shadowing is not allowed.
-- Reference scan:
-  - Rechecked `PropertyValue.CreateStringArray` and `CreateInspectableArray`: ABI slots take `(u32, *const HSTRING/IInspectable, out)`.
-  - The copy-value arrays were handled in Round118; the remaining gap was the handle-array staging path for string and inspectable values.
-- Added TDD coverage:
-  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IPropertyValueStatics.CreateStringArray` and `CreateInspectableArray` still required raw `(UInt32, CPointer<CPointer<Unit>>)` arguments.
-  - `testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles` verifies `Array<HString>` is converted to temporary system HSTRING handles, including null handle for the empty string, and that the temporary system handles are deleted after the call.
-  - `testPropertyValueStaticsCreateArrayOverloadsStageInspectableOptionArray` verifies `Array<Option<IInspectable>>` stages non-null raw interface pointers and null elements.
-- Fixed handle array creation:
-  - Added `Array<HString>` overloads on `IPropertyValueStatics` and `PropertyValue` that stage a temporary pointer array of system HSTRING handle copies and release those handles in `finally`.
-  - `projectPropertyValueStringHandleArray` rolls back already-created system HSTRING handles if handle-array construction throws before the ABI call.
-  - Added `Array<Option<IInspectable>>` overloads on `IPropertyValueStatics` and `PropertyValue` that stage borrowed raw interface pointers, preserving `None` as a null ABI element.
-  - Added `Array<IInspectable>` convenience overloads that delegate through the option-array path.
-  - Kept the raw `(UInt32, CPointer<CPointer<Unit>>)` overloads for direct ABI callers.
-- Verification so far:
-  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
-  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
-  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStageInspectableOptionArray --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
-  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 104/104 with `cjHeapSize=32GB`.
-  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 104/104 after the partial-construction rollback patch; used `cjv exec` per workspace rules.
-  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB` after clearing stale orphaned test processes from an earlier timed-out run.
-  - `python scripts/check_workspace_setup.py`: passed.
-  - `git diff --check`: passed.
-- Review:
-  - Review agent `Avicenna`: Round120 review clean; confirmed the string handle staging path releases normal and partially-created system HSTRING handles, inspectable arrays stage borrowed `asRaw()` pointers while preserving `None` as null, and there are no vtable ABI, HRESULT propagation, or refcount regressions.
-- Review:
-  - Review agent `Wegener`: Round118 review clean; no WinRT ABI mismatch, raw array handle lifetime issue, copy-type projection issue, test cleanup problem, or implementable capability gap found in the added `PropertyValue` / `IPropertyValueStatics` array overloads.
-- Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
 
 ### Round112 - Stock helper returned-interface lifetime
@@ -1918,3 +1883,63 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+- Review:
+  - Review agent `Aquinas`: Round119 review clean; confirmed the no-arg overloads preserve raw vtable ABI/HRESULT handling through the existing methods, copy CoTaskMem arrays before releasing them with `AbiArray.close()` in `finally`, and project GUID/DateTime/Rect ABI structs after the native storage has been copied.
+
+### Round120 - PropertyValue string and inspectable array creation overloads
+
+- Started at `2026-05-15 01:15:43 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `Resource` exposes `isClosed()` / `close()` and try-with-resource / `try` + `finally` are the supported deterministic cleanup patterns.
+  - `Option<T>` uses `Some(value)` / `None`; conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - Rechecked `PropertyValue.CreateStringArray` and `CreateInspectableArray`: ABI slots take `(u32, *const HSTRING/IInspectable, out)`.
+  - The copy-value arrays were handled in Round118; the remaining gap was the handle-array staging path for string and inspectable values.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IPropertyValueStatics.CreateStringArray` and `CreateInspectableArray` still required raw `(UInt32, CPointer<CPointer<Unit>>)` arguments.
+  - `testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles` verifies `Array<HString>` is converted to temporary system HSTRING handles, including null handle for the empty string, and that the temporary system handles are deleted after the call.
+  - `testPropertyValueStaticsCreateArrayOverloadsStageInspectableOptionArray` verifies `Array<Option<IInspectable>>` stages non-null raw interface pointers and null elements.
+- Fixed handle array creation:
+  - Added `Array<HString>` overloads on `IPropertyValueStatics` and `PropertyValue` that stage a temporary pointer array of system HSTRING handle copies and release those handles in `finally`.
+  - `projectPropertyValueStringHandleArray` rolls back already-created system HSTRING handles if handle-array construction throws before the ABI call.
+  - Added `Array<Option<IInspectable>>` overloads on `IPropertyValueStatics` and `PropertyValue` that stage borrowed raw interface pointers, preserving `None` as a null ABI element.
+  - Added `Array<IInspectable>` convenience overloads that delegate through the option-array path.
+  - Kept the raw `(UInt32, CPointer<CPointer<Unit>>)` overloads for direct ABI callers.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStageInspectableOptionArray --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 104/104 with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 104/104 after the partial-construction rollback patch; used `cjv exec` per workspace rules.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB` after clearing stale orphaned test processes from an earlier timed-out run.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Avicenna`: Round120 review clean; confirmed the string handle staging path releases normal and partially-created system HSTRING handles, inspectable arrays stage borrowed `asRaw()` pointers while preserving `None` as null, and there are no vtable ABI, HRESULT propagation, or refcount regressions.
+
+### Round121 - PropertyValue string get array overload
+
+- Implementation recorded at `2026-05-15 01:28:13 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CPointer` pointer arithmetic, reads, writes, and casts require `unsafe`.
+  - `try` / `catch` / `finally` is the deterministic cleanup shape for this path; conditions require parentheses and same-scope `let` shadowing is not allowed.
+  - `Resource.close()` / finalizer double-free avoidance remains the ownership pattern for managed wrappers.
+- Reference scan:
+  - Rechecked `IPropertyValue.GetStringArray`: the ABI returns an owned WinRT array through `u32*` size and `HSTRING**` data out slots.
+  - Copy-value arrays were handled in Round119; string arrays need per-element HSTRING ownership transfer plus CoTaskMem slot-buffer release.
+  - Inspectable output arrays remain separate because COM pointer ownership and null projection need different release tests.
+- Added coverage:
+  - `testIPropertyValueGetArrayOverloadsReturnStringManagedArrays` verifies the no-arg overload calls the raw ABI slot, maps null HSTRING to empty string, returns managed `Array<HString>`, and deletes the owned native HSTRING handles.
+- Fixed string array retrieval:
+  - Added `IPropertyValue.GetStringArray(): Array<HString>` beside the raw `(size, pointer)` ABI method.
+  - Added helpers to take returned HSTRING handles into `HString.fromSystemHandleTake`, close already-materialized values on failure, release remaining raw handles, and always free the CoTaskMem slot array.
+  - Kept raw `GetStringArray(size, value)` available for direct ABI callers.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsReturnStringManagedArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 105/105 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Schrodinger`: Round121 review clean; confirmed the no-arg overload preserves raw ABI/HRESULT propagation through the existing method, takes owned HSTRING handles exactly once, handles null HSTRING as empty, closes materialized values and remaining raw handles on failure, and frees the CoTaskMem slot buffer in `finally`.

@@ -2605,6 +2605,65 @@ func takePropertyValueAbiArray<T>(data: CPointer<T>, length: UInt32): Array<T> w
     }
 }
 
+func freePropertyValueHandleArraySlots(data: CPointer<CPointer<Unit>>): Unit {
+    if (data.isNotNull()) {
+        windows_core.coTaskMemFree(CPointer<Unit>(data))
+    }
+}
+
+func releasePropertyValueStringRawSlots(data: CPointer<CPointer<Unit>>, length: UInt32): Unit {
+    if (data.isNull()) {
+        return
+    }
+    var index = 0
+    while (index < Int64(length)) {
+        let slot = unsafe { data + index }
+        let raw = unsafe { slot.read() }
+        if (raw.isNotNull()) {
+            windows_core.releaseSystemHStringHandle(raw)
+            unsafe { slot.write(CPointer<Unit>()) }
+        }
+        index += 1
+    }
+}
+
+func closePropertyValueStringArray(values: Array<windows_core.HString>): Unit {
+    var index = 0
+    while (index < values.size) {
+        values[index].close()
+        index += 1
+    }
+}
+
+func takePropertyValueStringArray(data: CPointer<CPointer<Unit>>, length: UInt32): Array<windows_core.HString> {
+    if (length == 0u32) {
+        freePropertyValueHandleArraySlots(data)
+        return Array<windows_core.HString>()
+    }
+    if (data.isNull()) {
+        throw windows_core.WindowsException(windows_core.E_POINTER)
+    }
+
+    let result = Array<windows_core.HString>(Int64(length), { _ => windows_core.HString() })
+    try {
+        var index = 0
+        while (index < result.size) {
+            let slot = unsafe { data + index }
+            let raw = unsafe { slot.read() }
+            unsafe { slot.write(CPointer<Unit>()) }
+            result[index] = windows_core.HString.fromSystemHandleTake(raw)
+            index += 1
+        }
+    } catch (error: Exception) {
+        closePropertyValueStringArray(result)
+        releasePropertyValueStringRawSlots(data, length)
+        throw error
+    } finally {
+        freePropertyValueHandleArraySlots(data)
+    }
+    result
+}
+
 func takePropertyValueGuidArray(data: CPointer<GUID>, length: UInt32): Array<GuidValue> {
     let abiValues = takePropertyValueAbiArray<GUID>(data, length)
     Array<GuidValue>(abiValues.size, { index => GuidValue(abiValues[index]) })
@@ -3896,6 +3955,13 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         let hr = v.GetInspectableArray(asRaw(), valueSize, value)
         HRESULT(hr).ok()
+    }
+
+    public unsafe func GetStringArray(): Array<windows_core.HString> {
+        var size__ = 0u32
+        var value__ = CPointer<CPointer<Unit>>()
+        GetStringArray(CPointer<UInt32>(inout size__), CPointer<CPointer<CPointer<Unit>>>(inout value__))
+        takePropertyValueStringArray(value__, size__)
     }
 
     public unsafe func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): Unit {
