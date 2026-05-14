@@ -30,6 +30,15 @@ func testGuidSignatureIsDeterministicAndVersioned() {
 }
 
 @Test
+func testGuidFromSignatureCanonicalizesGuidCase() {
+    let lower = GUID.from_signature("pinterface({61c17706-2d65-11e0-9ae8-d48564015472};b1)")
+    let upper = GUID.from_signature("pinterface({61C17706-2D65-11E0-9AE8-D48564015472};b1)")
+
+    @Expect(upper == lower, true)
+    @Expect(lower.toString(), "3C00FD60-2950-5939-A21A-2D12C5A01B8A")
+}
+
+@Test
 func testGuidTryFromRejectsMalformedStrings() {
     @Expect(GUID.tryFrom("00112233-4455-6677-8899-AABBCCDDEEFF").isOk(), true)
     @Expect(GUID.tryFrom("00112233-4455-6677-8899-AABBCCDDEEF").isErr(), true)

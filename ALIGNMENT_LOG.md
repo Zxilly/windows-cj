@@ -1445,3 +1445,32 @@
   - Full `cjpm test --no-progress --timeout-each=30s --no-capture-output`: 334/334 passed with `cjHeapSize=32GB`.
 - Remaining related gap:
   - Additional map scalar/HSTRING combinations, stock helper specializations, event args verification, and generator-emitted collection projections still need focused passes.
+
+### Round106 - WinRT generic signature GUID canonicalization
+
+- Completed at `2026-05-14 16:55:29 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `String.toArray()` exposes UTF-8 bytes, and `String.fromUtf8(Array<UInt8>)` rebuilds strings from byte arrays.
+  - Array indexing and mutation are supported, and conditions require parentheses.
+  - `@Test` / `@TestCase` style unit tests are the supported local test shape.
+- Fixed WinRT signature/IID canonicalization:
+  - `GUID.from_signature` now normalizes only hex digits inside `{GUID}` signature segments before hashing, so equivalent uppercase/lowercase WinRT signatures derive the same version-5 IID.
+  - Added `GUID.toSignatureString()` and used it for default `Interface<T>.signature()` so default interface signatures are canonical lowercase without changing display-oriented `GUID.toString()`.
+  - Lowercased generated `windows-runtime` signature GUID fragments for Foundation and Collections interfaces/classes/delegates, including nested `pinterface(...)` signatures.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-interface --parallel 1 --timeout-each=5s --no-capture-output` failed on `testGuidFromSignatureCanonicalizesGuidCase` before implementation because uppercase and lowercase signatures produced different GUIDs.
+  - `testReferenceBoolUsesCanonicalGenericSignature` verifies `IReference<Bool>` signature text and its known WinRT IID.
+  - `testNestedGenericInterfaceIidsUseCanonicalSignatures` verifies nested `IIterable<IStringable>`, `IVector<IIterable<IStringable>>`, `IReference<IIterable<IStringable>>`, and `IReferenceArray<IIterable<IStringable>>` known IIDs.
+  - `testInterfaceDefaultSignatureUsesCanonicalGuidCase` covers the `Interface<T>` default signature path.
+- Debugging notes:
+  - Running multiple `cjpm test` commands in parallel corrupted/read an empty cjpm incremental dependency cache JSON; rerunning affected tests serially avoided the tool-state issue.
+  - One full workspace `cjpm test --skip-build` run timed out and left multiple unittest executables alive; the stale processes were stopped. Affected modules passed individually.
+- Verification so far:
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-interface --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 7/7 passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-core --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 17/17 passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 67/67 passed with `cjHeapSize=32GB`.
+- Review:
+  - Review agent `Ampere`: Round106 review clean; no blocking WinRT signature canonicalization, IID derivation, runtime signature, test, or log issues found.
+- Remaining related gap:
+  - Full workspace test runner timeout still needs separate investigation if it reproduces without concurrent/stale unittest processes.

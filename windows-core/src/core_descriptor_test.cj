@@ -148,6 +148,11 @@ func testIUnknownDescriptorAndNullAbiBasics() {
 }
 
 @Test
+func testInterfaceDefaultSignatureUsesCanonicalGuidCase() {
+    @Expect(CoreRequiredInterface.signature(), "{a1111111-1111-1111-1111-111111111111}")
+}
+
+@Test
 func testQueryRequiredForUsesOnlyVtableBaseChain() {
     @Expect(queryRequiredFor<IUnknown, CoreOwnerInterface>(), false)
     @Expect(queryRequiredFor<IInspectable, CoreOwnerInterface>(), false)

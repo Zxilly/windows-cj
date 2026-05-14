@@ -138,7 +138,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func signature(): String {
-        "delegate({ED32A372-F3C8-4FAA-9CFB-470148DA3888})"
+        "delegate({ed32a372-f3c8-4faa-9cfb-470148da3888})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -261,7 +261,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({9DE1C535-6AE1-11E0-84E1-18A905BCC53F}")
+        sb.append("pinterface({9de1c535-6ae1-11e0-84e1-18a905bcc53f}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -634,7 +634,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func signature(): String {
-        "{00000036-0000-0000-C000-000000000046}"
+        "{00000036-0000-0000-c000-000000000046}"
     }
 
     public static func runtimeName(): String {
@@ -783,7 +783,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func signature(): String {
-        "{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}"
+        "{30d5a829-7fa4-4026-83bb-d75bae4ea99e}"
     }
 
     public static func runtimeName(): String {
@@ -868,7 +868,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func signature(): String {
-        "{D6269732-3B7F-46A7-B40B-4FDCA2A2C693}"
+        "{d6269732-3b7f-46a7-b40b-4fdca2a2c693}"
     }
 
     public static func runtimeName(): String {
@@ -1003,7 +1003,7 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func signature(): String {
-        "{4EDB8EE2-96DD-49A7-94F7-4607DDAB8E3C}"
+        "{4edb8ee2-96dd-49a7-94f7-4607ddab8e3c}"
     }
 
     public static func runtimeName(): String {
@@ -1090,7 +1090,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func signature(): String {
-        "{59C7966B-AE52-5283-AD7F-A1B9E9678ADD}"
+        "{59c7966b-ae52-5283-ad7f-a1b9e9678add}"
     }
 
     public static func runtimeName(): String {
@@ -1230,7 +1230,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func signature(): String {
-        "{96369F54-8EB6-48F0-ABCE-C1B211E627C3}"
+        "{96369f54-8eb6-48f0-abce-c1b211e627c3}"
     }
 
     public static func runtimeName(): String {
@@ -1313,7 +1313,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func signature(): String {
-        "{C1D432BA-C824-4452-A7FD-512BC3BBE9A1}"
+        "{c1d432ba-c824-4452-a7fd-512bc3bbe9a1}"
     }
 
     public static func runtimeName(): String {
@@ -1410,7 +1410,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 
     public static func signature(): String {
-        "{758D9661-221C-480F-A339-50656673F46F}"
+        "{758d9661-221c-480f-a339-50656673f46f}"
     }
 
     public static func runtimeName(): String {
@@ -1567,7 +1567,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func signature(): String {
-        "{125E7431-F678-4E8E-B670-20A9B06C512D}"
+        "{125e7431-f678-4e8e-b670-20a9b06c512d}"
     }
 
     public static func runtimeName(): String {
@@ -1662,7 +1662,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func signature(): String {
-        "{D45A0451-F225-4542-9296-0E1DF5D254DF}"
+        "{d45a0451-f225-4542-9296-0e1df5d254df}"
     }
 
     public static func runtimeName(): String {
@@ -2036,7 +2036,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({9DE1C534-6AE1-11E0-84E1-18A905BCC53F}")
+        sb.append("pinterface({9de1c534-6ae1-11e0-84e1-18a905bcc53f}")
         sb.append(";")
         sb.append(TSender.signature())
         sb.append(";")
@@ -2200,7 +2200,7 @@ public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & win
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.WwwFormUrlDecoderEntry;{125E7431-F678-4E8E-B670-20A9B06C512D})"
+        "rc(Windows.Foundation.WwwFormUrlDecoderEntry;{125e7431-f678-4e8e-b670-20a9b06c512d})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -2467,7 +2467,7 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func signature(): String {
-        "{FBC4DD29-245B-11E4-AF98-689423260CF8}"
+        "{fbc4dd29-245b-11e4-af98-689423260cf8}"
     }
 
     public static func runtimeName(): String {
@@ -3524,7 +3524,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func signature(): String {
-        "{4BD682DD-7554-40E9-9A9B-82654EDE7E62}"
+        "{4bd682dd-7554-40e9-9a9b-82654ede7e62}"
     }
 
     public static func runtimeName(): String {
@@ -3910,7 +3910,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func signature(): String {
-        "{629BDBC8-D932-4FF4-96B9-8D96C5C1E858}"
+        "{629bdbc8-d932-4ff4-96b9-8d96c5c1e858}"
     }
 
     public static func runtimeName(): String {
@@ -4782,7 +4782,7 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({61C17706-2D65-11E0-9AE8-D48564015472}")
+        sb.append("pinterface({61c17706-2d65-11e0-9ae8-d48564015472}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -5358,7 +5358,7 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({61C17707-2D65-11E0-9AE8-D48564015472}")
+        sb.append("pinterface({61c17707-2d65-11e0-9ae8-d48564015472}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -5968,7 +5968,7 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func signature(): String {
-        "{FBC4DD2A-245B-11E4-AF98-689423260CF8}"
+        "{fbc4dd2a-245b-11e4-af98-689423260cf8}"
     }
 
     public static func runtimeName(): String {
@@ -6048,7 +6048,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func signature(): String {
-        "delegate({A4ED5C81-76C9-40BD-8BE6-B1D90FB20AE7})"
+        "delegate({a4ed5c81-76c9-40bd-8be6-b1d90fb20ae7})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -6171,7 +6171,7 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({6D844858-0CFF-4590-AE89-95A5A5C8B4B8}")
+        sb.append("pinterface({6d844858-0cff-4590-ae89-95a5a5c8b4b8}")
         sb.append(";")
         sb.append(TProgress.signature())
         sb.append(")")
@@ -6305,7 +6305,7 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({9C029F91-CC84-44FD-AC26-0A6C4E555281}")
+        sb.append("pinterface({9c029f91-cc84-44fd-ac26-0a6c4e555281}")
         sb.append(";")
         sb.append(TProgress.signature())
         sb.append(")")
@@ -6432,7 +6432,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({FCDCF02C-E5D8-4478-915A-4D90B74B83A5}")
+        sb.append("pinterface({fcdcf02c-e5d8-4478-915a-4d90b74b83a5}")
         sb.append(";")
         sb.append(TResult.signature())
         sb.append(")")
@@ -6559,7 +6559,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({55690902-0AAB-421A-8778-F8CE5026D758}")
+        sb.append("pinterface({55690902-0aab-421a-8778-f8ce5026d758}")
         sb.append(";")
         sb.append(TResult.signature())
         sb.append(";")
@@ -6695,7 +6695,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({E85DF41D-6AA7-46E3-A8E2-F009D840C627}")
+        sb.append("pinterface({e85df41d-6aa7-46e3-a8e2-f009d840c627}")
         sb.append(";")
         sb.append(TResult.signature())
         sb.append(";")
@@ -6822,7 +6822,7 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.Deferral;{D6269732-3B7F-46A7-B40B-4FDCA2A2C693})"
+        "rc(Windows.Foundation.Deferral;{d6269732-3b7f-46a7-b40b-4fdca2a2c693})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -7103,7 +7103,7 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func signature(): String {
-        "{5A648006-843A-4DA9-865B-9D26E5DFAD7B}"
+        "{5a648006-843a-4da9-865b-9d26e5dfad7b}"
     }
 
     public static func runtimeName(): String {
@@ -7417,7 +7417,7 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({1F6DB258-E803-48A1-9546-EB7353398884}")
+        sb.append("pinterface({1f6db258-e803-48a1-9546-eb7353398884}")
         sb.append(";")
         sb.append(TProgress.signature())
         sb.append(")")
@@ -7699,7 +7699,7 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({9FC2B0BB-E446-44E2-AA61-9CAB8F636AF2}")
+        sb.append("pinterface({9fc2b0bb-e446-44e2-aa61-9cab8f636af2}")
         sb.append(";")
         sb.append(TResult.signature())
         sb.append(")")
@@ -8019,7 +8019,7 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({B5D036D7-E297-498F-BA60-0289E76E23DD}")
+        sb.append("pinterface({b5d036d7-e297-498f-ba60-0289e76e23dd}")
         sb.append(";")
         sb.append(TResult.signature())
         sb.append(";")
@@ -8139,7 +8139,7 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func signature(): String {
-        "{65A1ECC5-3FB5-4832-8CA9-F061B281D13A}"
+        "{65a1ecc5-3fb5-4832-8ca9-f061b281d13a}"
     }
 
     public static func runtimeName(): String {
@@ -8221,7 +8221,7 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func signature(): String {
-        "{FBC4DD2B-245B-11E4-AF98-689423260CF8}"
+        "{fbc4dd2b-245b-11e4-af98-689423260cf8}"
     }
 
     public static func runtimeName(): String {
@@ -8319,7 +8319,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func signature(): String {
-        "{9E365E57-48B2-4160-956F-C7385120BBFC}"
+        "{9e365e57-48b2-4160-956f-c7385120bbfc}"
     }
 
     public static func runtimeName(): String {
@@ -8533,7 +8533,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func signature(): String {
-        "{44A9796F-723E-4FDF-A218-033E75B0C084}"
+        "{44a9796f-723e-4fdf-a218-033e75b0c084}"
     }
 
     public static func runtimeName(): String {
@@ -8631,7 +8631,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
     }
 
     public static func signature(): String {
-        "{5B8C6B3D-24AE-41B5-A1BF-F0C3D544845B}"
+        "{5b8c6b3d-24ae-41b5-a1bf-f0c3d544845b}"
     }
 
     public static func runtimeName(): String {
@@ -8706,7 +8706,7 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.MemoryBuffer;{FBC4DD2A-245B-11E4-AF98-689423260CF8})"
+        "rc(Windows.Foundation.MemoryBuffer;{fbc4dd2a-245b-11e4-af98-689423260cf8})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -8818,7 +8818,7 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.Uri;{9E365E57-48B2-4160-956F-C7385120BBFC})"
+        "rc(Windows.Foundation.Uri;{9e365e57-48b2-4160-956f-c7385120bbfc})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -9027,7 +9027,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.WwwFormUrlDecoder;{D45A0451-F225-4542-9296-0E1DF5D254DF})"
+        "rc(Windows.Foundation.WwwFormUrlDecoder;{d45a0451-f225-4542-9296-0e1df5d254df})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {

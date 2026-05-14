@@ -92,7 +92,7 @@ public struct GUID {
     }
 
     public static func from_signature(signature: String): GUID {
-        guid_from_signature_bytes(signature.toArray())
+        guid_from_signature_bytes(normalizeSignatureGuidCase(signature.toArray()))
     }
 
     // Parse the standard xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx GUID form.
@@ -236,6 +236,20 @@ public struct GUID {
         "${d1}-${d2}-${d3}-${d4a}-${d4b}"
     }
 
+    public func toSignatureString(): String {
+        let d1 = padHexLower(UInt64(data1), 8)
+        let d2 = padHexLower(UInt64(data2), 4)
+        let d3 = padHexLower(UInt64(data3), 4)
+        let d4a = padHexLower(UInt64(data4[0]), 2) + padHexLower(UInt64(data4[1]), 2)
+        var d4b = ""
+        var i: Int64 = 2
+        while (i < 8) {
+            d4b += padHexLower(UInt64(data4[i]), 2)
+            i += 1
+        }
+        "${d1}-${d2}-${d3}-${d4a}-${d4b}"
+    }
+
     public func to_u128(): UInt128 {
         let high = (UInt64(data1) << 32) | (UInt64(data2) << 16) | UInt64(data3)
         var low = UInt64(data4[0]) << 56
@@ -262,6 +276,19 @@ public let IID_IWEAKREFERENCESOURCE = GUID.from_values(0x00000038u32, 0x0000u16,
 
 func padHexUpper(value: UInt64, width: Int64): String {
     let digits = "0123456789ABCDEF".toArray()
+    var result = Array<Byte>(width, { _ => b'0' })
+    var v = value
+    var i = width - 1
+    while (i >= 0 && v > 0u64) {
+        result[i] = digits[Int64(v & 0xFu64)]
+        v = v >> 4
+        i -= 1
+    }
+    String.fromUtf8(result)
+}
+
+func padHexLower(value: UInt64, width: Int64): String {
+    let digits = "0123456789abcdef".toArray()
     var result = Array<Byte>(width, { _ => b'0' })
     var v = value
     var i = width - 1
@@ -300,6 +327,41 @@ func parseGuidHexDigit(digit: Byte): Option<Int64> {
         return Some(10 + Int64(digit - b'a'))
     }
     None
+}
+
+func normalizeSignatureGuidCase(signature: Array<UInt8>): Array<UInt8> {
+    let normalized = Array<UInt8>(signature.size, repeat: 0u8)
+    var index = 0
+    var insideGuid = false
+    while (index < signature.size) {
+        let source = signature[index]
+        let value = if (source == b'{') {
+            insideGuid = true
+            source
+        } else if (source == b'}') {
+            insideGuid = false
+            source
+        } else if (insideGuid) {
+            lowerGuidHexByte(source)
+        } else {
+            source
+        }
+        normalized[index] = value
+        index += 1
+    }
+    normalized
+}
+
+func lowerGuidHexByte(value: UInt8): UInt8 {
+    match (value) {
+        case b'A' => b'a'
+        case b'B' => b'b'
+        case b'C' => b'c'
+        case b'D' => b'd'
+        case b'E' => b'e'
+        case b'F' => b'f'
+        case _ => value
+    }
 }
 
 func guid_from_signature_bytes(signature: Array<UInt8>): GUID {

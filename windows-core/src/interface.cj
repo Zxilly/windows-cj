@@ -12,7 +12,7 @@ public interface Interface<T> <: InterfaceType & RuntimeType & Type<T, CPointer<
     }
 
     static func signature(): String {
-        "{${descriptor().iid.toString()}}"
+        "{${descriptor().iid.toSignatureString()}}"
     }
 
     static func UNKNOWN(): Bool {

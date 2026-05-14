@@ -235,7 +235,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({6A79E863-4300-459A-9966-CBB660963EE1}")
+        sb.append("pinterface({6a79e863-4300-459a-9966-cbb660963ee1}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -443,7 +443,7 @@ public class IKeyValuePair<K, V> <: InterfaceWrapperBase & ComInterface & Runtim
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({02B51929-C1C4-4A7E-8940-0312B5C18500}")
+        sb.append("pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(";")
@@ -602,7 +602,7 @@ public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & Ru
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({9939F4DF-050A-4C0F-AA60-77075F9C4777}")
+        sb.append("pinterface({9939f4df-050a-4c0f-aa60-77075f9c4777}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(")")
@@ -762,7 +762,7 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func signature(): String {
-        "{575933DF-34FE-4480-AF15-07691F3D5D9B}"
+        "{575933df-34fe-4480-af15-07691f3d5d9b}"
     }
 
     public static func runtimeName(): String {
@@ -901,7 +901,7 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({FAA585EA-6214-4217-AFDA-7F46DE5869B3}")
+        sb.append("pinterface({faa585ea-6214-4217-afda-7f46de5869b3}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -1523,7 +1523,7 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({E480CE40-A338-4ADA-ADCF-272272E48CB9}")
+        sb.append("pinterface({e480ce40-a338-4ada-adcf-272272e48cb9}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(";")
@@ -2375,7 +2375,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}")
+        sb.append("pinterface({bbe1fa4c-b0e3-4583-baef-1f1b2e483e56}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -3434,7 +3434,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({3C2925FE-8519-45C1-AA79-197B6718C1C1}")
+        sb.append("pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(";")
@@ -5240,7 +5240,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({913337E9-11A1-4345-A3A2-4E7F956E222D}")
+        sb.append("pinterface({913337e9-11a1-4345-a3a2-4e7f956e222d}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -5733,7 +5733,7 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({65DF2BF5-BF39-41B5-AEBC-5A9D865E472B}")
+        sb.append("pinterface({65df2bf5-bf39-41b5-aebc-5a9d865e472b}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(";")
@@ -6126,7 +6126,7 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({5917EB53-50B4-4A0D-B309-65862B3F1DBC}")
+        sb.append("pinterface({5917eb53-50b4-4a0d-b309-65862b3f1dbc}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
@@ -6492,7 +6492,7 @@ public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func signature(): String {
-        "{8A43ED9F-F4E6-4421-ACF9-1DAB2986820C}"
+        "{8a43ed9f-f4e6-4421-acf9-1dab2986820c}"
     }
 
     public static func runtimeName(): String {
@@ -6587,7 +6587,7 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({179517F3-94EE-41F8-BDDC-768A895544F3}")
+        sb.append("pinterface({179517f3-94ee-41f8-bddc-768a895544f3}")
         sb.append(";")
         sb.append(K.signature())
         sb.append(";")
@@ -6714,7 +6714,7 @@ public class PropertySet <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.Collections.PropertySet;{8A43ED9F-F4E6-4421-ACF9-1DAB2986820C})"
+        "rc(Windows.Foundation.Collections.PropertySet;{8a43ed9f-f4e6-4421-acf9-1dab2986820c})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -6880,7 +6880,7 @@ public class StringMap <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.Collections.StringMap;pinterface({3C2925FE-8519-45C1-AA79-197B6718C1C1};string;string))"
+        "rc(Windows.Foundation.Collections.StringMap;pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};string;string))"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -7039,7 +7039,7 @@ public class ValueSet <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     public static func signature(): String {
-        "rc(Windows.Foundation.Collections.ValueSet;{8A43ED9F-F4E6-4421-ACF9-1DAB2986820C})"
+        "rc(Windows.Foundation.Collections.ValueSet;{8a43ed9f-f4e6-4421-acf9-1dab2986820c})"
     }
 
     public static func runtimeType(): RuntimeTypeContract {
@@ -7207,7 +7207,7 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
 
     public static func signature(): String {
         var sb = StringBuilder()
-        sb.append("pinterface({0C051752-9FBF-4C70-AA0C-0E4C82D9A761}")
+        sb.append("pinterface({0c051752-9fbf-4c70-aa0c-0e4c82d9a761}")
         sb.append(";")
         sb.append(T.signature())
         sb.append(")")
