@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{HString, Result, S_OK, createComObjectFromSchemas, winrtBorrowGenericIn}
 
-class Int32HStringMapAbiTestImpl <: IMap_Impl<Int32, HString> {
+class Int32HStringMapAbiTestImpl <: IMap_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
     private let vtblHandle: CPointerHandle<IMapVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -47,6 +47,21 @@ class Int32HStringMapAbiTestImpl <: IMap_Impl<Int32, HString> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -139,7 +154,9 @@ func createInt32HStringMapAbiTest(entries: ArrayList<(Int32, HString)>): IMap<In
     let schemas = [IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(), IMap<Int32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<Int32, HString>.descriptor())
+    let result = object.toInterface(IMap<Int32, HString>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderInt32HStringMapAbiTest(entries: ArrayList<(Int32, HString)>): IMap<Int32, HString> {
@@ -147,7 +164,9 @@ func createGenericBuilderInt32HStringMapAbiTest(entries: ArrayList<(Int32, HStri
     let schemas = [IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(), IMap<Int32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<Int32, HString>.descriptor())
+    let result = object.toInterface(IMap<Int32, HString>.descriptor())
+    object.close()
+    result
 }
 
 @Test

@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
 
-class BoolVectorAbiTestImpl <: IVector_Impl<Bool> {
+class BoolVectorAbiTestImpl <: IVector_Impl<Bool> & Resource {
     private let items: ArrayList<Bool>
     private let vtblHandle: CPointerHandle<IVectorVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -45,6 +45,21 @@ class BoolVectorAbiTestImpl <: IVector_Impl<Bool> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -166,7 +181,7 @@ class BoolVectorAbiTestImpl <: IVector_Impl<Bool> {
     }
 }
 
-class GenericBuilderBoolVectorViewAbiTestImpl <: IVectorView_Impl<Bool> {
+class GenericBuilderBoolVectorViewAbiTestImpl <: IVectorView_Impl<Bool> & Resource {
     private let items: ArrayList<Bool>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -188,6 +203,21 @@ class GenericBuilderBoolVectorViewAbiTestImpl <: IVectorView_Impl<Bool> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -251,7 +281,9 @@ func createBoolVectorAbiTest(items: ArrayList<Bool>): IVector<Bool> {
     let schemas = [IIterable<Bool>.descriptorSchema(), IVector<Bool>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVector<Bool>.descriptor())
+    let result = object.toInterface(IVector<Bool>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderBoolVectorAbiTest(items: ArrayList<Bool>): IVector<Bool> {
@@ -259,7 +291,9 @@ func createGenericBuilderBoolVectorAbiTest(items: ArrayList<Bool>): IVector<Bool
     let schemas = [IIterable<Bool>.descriptorSchema(), IVector<Bool>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVector<Bool>.descriptor())
+    let result = object.toInterface(IVector<Bool>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderBoolVectorViewAbiTest(items: ArrayList<Bool>): IVectorView<Bool> {
@@ -267,7 +301,9 @@ func createGenericBuilderBoolVectorViewAbiTest(items: ArrayList<Bool>): IVectorV
     let schemas = [IIterable<Bool>.descriptorSchema(), IVectorView<Bool>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<Bool>.descriptor())
+    let result = object.toInterface(IVectorView<Bool>.descriptor())
+    object.close()
+    result
 }
 
 @Test

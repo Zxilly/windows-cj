@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{HString, Result, S_OK, createComObjectFromSchemas, winrtBorrowGenericIn}
 
-class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HString> {
+class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HString> & Resource {
     private let entries: ArrayList<(UInt32, HString)>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -28,6 +28,21 @@ class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HSt
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -80,7 +95,7 @@ class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HSt
     }
 }
 
-class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> {
+class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> & Resource {
     private let entries: ArrayList<(UInt32, HString)>
     private let vtblHandle: CPointerHandle<IMapVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -122,6 +137,21 @@ class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -214,7 +244,9 @@ func createGenericBuilderUInt32HStringMapViewAbiTest(entries: ArrayList<(UInt32,
     let schemas = [IIterable<IKeyValuePair<UInt32, HString>>.descriptorSchema(), IMapView<UInt32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMapView<UInt32, HString>.descriptor())
+    let result = object.toInterface(IMapView<UInt32, HString>.descriptor())
+    object.close()
+    result
 }
 
 func createUInt32HStringMapAbiTest(entries: ArrayList<(UInt32, HString)>): IMap<UInt32, HString> {
@@ -222,7 +254,9 @@ func createUInt32HStringMapAbiTest(entries: ArrayList<(UInt32, HString)>): IMap<
     let schemas = [IIterable<IKeyValuePair<UInt32, HString>>.descriptorSchema(), IMap<UInt32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<UInt32, HString>.descriptor())
+    let result = object.toInterface(IMap<UInt32, HString>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderUInt32HStringMapAbiTest(entries: ArrayList<(UInt32, HString)>): IMap<UInt32, HString> {
@@ -230,7 +264,9 @@ func createGenericBuilderUInt32HStringMapAbiTest(entries: ArrayList<(UInt32, HSt
     let schemas = [IIterable<IKeyValuePair<UInt32, HString>>.descriptorSchema(), IMap<UInt32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<UInt32, HString>.descriptor())
+    let result = object.toInterface(IMap<UInt32, HString>.descriptor())
+    object.close()
+    result
 }
 
 @Test

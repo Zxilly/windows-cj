@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{HString, Result, S_OK, createComObjectFromSchemas}
 
-class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> {
+class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -33,6 +33,21 @@ class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -85,7 +100,7 @@ class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> {
     }
 }
 
-class GenericBuilderInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HString> {
+class GenericBuilderInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -117,6 +132,21 @@ class GenericBuilderInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HStri
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -174,7 +204,9 @@ func createGenericBuilderInt32MapViewAbiTest(entries: ArrayList<(Int32, Int32)>)
     let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMapView<Int32, Int32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMapView<Int32, Int32>.descriptor())
+    let result = object.toInterface(IMapView<Int32, Int32>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderInt32HStringMapViewAbiTest(entries: ArrayList<(Int32, HString)>): IMapView<Int32, HString> {
@@ -182,7 +214,9 @@ func createGenericBuilderInt32HStringMapViewAbiTest(entries: ArrayList<(Int32, H
     let schemas = [IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(), IMapView<Int32, HString>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMapView<Int32, HString>.descriptor())
+    let result = object.toInterface(IMapView<Int32, HString>.descriptor())
+    object.close()
+    result
 }
 
 @Test

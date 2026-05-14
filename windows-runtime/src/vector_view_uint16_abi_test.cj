@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{Result, S_OK, createComObjectFromSchemas}
 
-class UInt16VectorViewAbiTestImpl <: IVectorView_Impl<UInt16> {
+class UInt16VectorViewAbiTestImpl <: IVectorView_Impl<UInt16> & Resource {
     private let items: ArrayList<UInt16>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -45,6 +45,21 @@ class UInt16VectorViewAbiTestImpl <: IVectorView_Impl<UInt16> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -108,7 +123,9 @@ func createUInt16VectorViewAbiTest(items: ArrayList<UInt16>): IVectorView<UInt16
     let schemas = [IIterable<UInt16>.descriptorSchema(), IVectorView<UInt16>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<UInt16>.descriptor())
+    let result = object.toInterface(IVectorView<UInt16>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderUInt16VectorViewAbiTest(items: ArrayList<UInt16>): IVectorView<UInt16> {
@@ -116,7 +133,9 @@ func createGenericBuilderUInt16VectorViewAbiTest(items: ArrayList<UInt16>): IVec
     let schemas = [IIterable<UInt16>.descriptorSchema(), IVectorView<UInt16>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<UInt16>.descriptor())
+    let result = object.toInterface(IVectorView<UInt16>.descriptor())
+    object.close()
+    result
 }
 
 @Test

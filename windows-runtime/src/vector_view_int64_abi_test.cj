@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{Result, S_OK, createComObjectFromSchemas}
 
-class Int64VectorViewAbiTestImpl <: IVectorView_Impl<Int64> {
+class Int64VectorViewAbiTestImpl <: IVectorView_Impl<Int64> & Resource {
     private let items: ArrayList<Int64>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -45,6 +45,21 @@ class Int64VectorViewAbiTestImpl <: IVectorView_Impl<Int64> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -108,7 +123,9 @@ func createInt64VectorViewAbiTest(items: ArrayList<Int64>): IVectorView<Int64> {
     let schemas = [IIterable<Int64>.descriptorSchema(), IVectorView<Int64>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<Int64>.descriptor())
+    let result = object.toInterface(IVectorView<Int64>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderInt64VectorViewAbiTest(items: ArrayList<Int64>): IVectorView<Int64> {
@@ -116,7 +133,9 @@ func createGenericBuilderInt64VectorViewAbiTest(items: ArrayList<Int64>): IVecto
     let schemas = [IIterable<Int64>.descriptorSchema(), IVectorView<Int64>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<Int64>.descriptor())
+    let result = object.toInterface(IVectorView<Int64>.descriptor())
+    object.close()
+    result
 }
 
 @Test

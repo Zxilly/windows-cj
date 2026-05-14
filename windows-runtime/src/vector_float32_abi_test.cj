@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
 
-class Float32VectorAbiTestImpl <: IVector_Impl<Float32> {
+class Float32VectorAbiTestImpl <: IVector_Impl<Float32> & Resource {
     private let items: ArrayList<Float32>
     private let vtblHandle: CPointerHandle<IVectorVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -45,6 +45,21 @@ class Float32VectorAbiTestImpl <: IVector_Impl<Float32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -166,7 +181,7 @@ class Float32VectorAbiTestImpl <: IVector_Impl<Float32> {
     }
 }
 
-class GenericBuilderFloat32VectorViewAbiTestImpl <: IVectorView_Impl<Float32> {
+class GenericBuilderFloat32VectorViewAbiTestImpl <: IVectorView_Impl<Float32> & Resource {
     private let items: ArrayList<Float32>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -188,6 +203,21 @@ class GenericBuilderFloat32VectorViewAbiTestImpl <: IVectorView_Impl<Float32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -251,7 +281,9 @@ func createFloat32VectorAbiTest(items: ArrayList<Float32>): IVector<Float32> {
     let schemas = [IIterable<Float32>.descriptorSchema(), IVector<Float32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVector<Float32>.descriptor())
+    let result = object.toInterface(IVector<Float32>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderFloat32VectorAbiTest(items: ArrayList<Float32>): IVector<Float32> {
@@ -259,7 +291,9 @@ func createGenericBuilderFloat32VectorAbiTest(items: ArrayList<Float32>): IVecto
     let schemas = [IIterable<Float32>.descriptorSchema(), IVector<Float32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVector<Float32>.descriptor())
+    let result = object.toInterface(IVector<Float32>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderFloat32VectorViewAbiTest(items: ArrayList<Float32>): IVectorView<Float32> {
@@ -267,7 +301,9 @@ func createGenericBuilderFloat32VectorViewAbiTest(items: ArrayList<Float32>): IV
     let schemas = [IIterable<Float32>.descriptorSchema(), IVectorView<Float32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVectorView<Float32>.descriptor())
+    let result = object.toInterface(IVectorView<Float32>.descriptor())
+    object.close()
+    result
 }
 
 @Test

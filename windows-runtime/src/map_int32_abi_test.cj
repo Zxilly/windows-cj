@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{Result, S_OK, createComObjectFromSchemas}
 
-class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> {
+class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
     private let vtblHandle: CPointerHandle<IMapVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -47,6 +47,21 @@ class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -139,7 +154,9 @@ func createInt32MapAbiTest(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int3
     let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMap<Int32, Int32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<Int32, Int32>.descriptor())
+    let result = object.toInterface(IMap<Int32, Int32>.descriptor())
+    object.close()
+    result
 }
 
 func createGenericBuilderInt32MapAbiTest(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int32> {
@@ -147,7 +164,9 @@ func createGenericBuilderInt32MapAbiTest(entries: ArrayList<(Int32, Int32)>): IM
     let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMap<Int32, Int32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IMap<Int32, Int32>.descriptor())
+    let result = object.toInterface(IMap<Int32, Int32>.descriptor())
+    object.close()
+    result
 }
 
 @Test

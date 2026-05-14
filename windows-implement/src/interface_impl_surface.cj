@@ -206,6 +206,20 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         identityRaw
     }
 
+    private func closeInnerResource(): Unit {
+        match (inner) {
+            case Some(value) =>
+                match (value) {
+                    case resource: Resource =>
+                        resource.close()
+                        inner = None
+                        outerObject = None
+                    case _ => ()
+                }
+            case None => ()
+        }
+    }
+
     public func releaseBase(_: UIntNative): UInt32 {
         if (isDestroyed()) {
             return 0u32
@@ -239,6 +253,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
                     registered = false
                     weakRefCount.onObjectDestroyed()
                 }
+                closeInnerResource()
                 match (runtimeClassName) {
                     case Some(value) =>
                         value.close()

@@ -5,7 +5,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
 
-class Int32VectorAbiTestImpl <: IVector_Impl<Int32> {
+class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
     private let vtblHandle: CPointerHandle<IVectorVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -27,6 +27,21 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> {
 
     public func iterableVtblPtr(): CPointer<Unit> {
         CPointer<Unit>(iterableVtblHandle.pointer)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     ~init() {
@@ -153,7 +168,9 @@ func createInt32VectorAbiTest(values: ArrayList<Int32>): IVector<Int32> {
     let schemas = [IIterable<Int32>.descriptorSchema(), IVector<Int32>.descriptorSchema()]
     let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IVector<Int32>.descriptor())
+    let result = object.toInterface(IVector<Int32>.descriptor())
+    object.close()
+    result
 }
 
 @Test
