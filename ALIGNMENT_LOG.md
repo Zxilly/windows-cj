@@ -1474,3 +1474,34 @@
   - Review agent `Ampere`: Round106 review clean; no blocking WinRT signature canonicalization, IID derivation, runtime signature, test, or log issues found.
 - Remaining related gap:
   - Full workspace test runner timeout still needs separate investigation if it reproduces without concurrent/stale unittest processes.
+
+### Round107 - Int32 to UInt64 map-view ABI
+
+- Completed at `2026-05-14 17:14:35 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CFunc` maps to C-callable function pointers, parameter/return types must satisfy `CType`, `CPointer<T>` can be cast to a concrete `CFunc`, and calls require `unsafe`.
+  - Type-pattern matching can bind a value as a concrete type, and `match` remains exhaustive with `_` / `None` fallbacks.
+- Reference scan:
+  - Found real reference coverage for `IMapView<i32, u64>` in stock map-view tests, so this round targets a concrete ABI surface rather than filling a purely theoretical matrix entry.
+- Fixed map-view ABI specialization:
+  - Added direct `Int32` key + `UInt64` value output dispatch for `IMapView<Int32, UInt64>.Lookup`.
+  - Added matching direct `Int32` key dispatch for `IMapView<Int32, UInt64>.HasKey`.
+  - Added `IMapViewVtbl.newInt32UInt64` and made the generic `IMapViewVtbl.new<..., Int32, UInt64>` path emit the same direct ABI slots.
+  - Added a stock `toMapView(Iterable<(Int32, UInt64)>)` overload backed by `StockInt32UInt64MapViewImpl`.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --parallel 1 --timeout-each=5s --no-capture-output` failed before implementation because `IMapViewVtbl.newInt32UInt64` did not exist and `toMapView(ArrayList<(Int32, UInt64)>)` could not satisfy the generic `HandleWinrtType` key constraint.
+  - `testInt32UInt64MapViewUsesDirectValueAbi` verifies direct specialized vtable lookup and `HasKey` ABI calls.
+  - `testGenericInt32UInt64MapViewBuilderUsesDirectValueAbiForSpecialization` verifies the generic vtable builder emits the direct slots for this concrete instantiation.
+  - `testStockInt32UInt64MapViewUsesDirectValueAbi` verifies the public stock helper overload uses the same ABI behavior.
+- Debugging notes:
+  - The first full `windows-runtime` module run timed out and left stale `std.testrunner.exe` / `windows_runtime.exe`; after stopping them, the same module test completed successfully.
+- Verification so far:
+  - `git diff --check`: passed.
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - Targeted new tests passed individually with `--skip-build --parallel 1 --timeout-each=5s --no-capture-output`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-capture-output`: 70/70 passed with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+- Review:
+  - Review agent `Gauss`: Round107 review clean; no blocking `IMapView<Int32, UInt64>` ABI, stock helper, test, or log issues found.
+- Remaining related gap:
+  - Other real reference map surfaces still need focused passes, notably `IMapView<Int32, Float32>`, `IMap<Int32, Float32>`, and `IMapView<HString, Int32>`.
