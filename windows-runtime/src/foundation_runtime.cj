@@ -2560,6 +2560,42 @@ func projectPropertyValueRectArray(values: Array<Rect>): Array<RectAbi> {
     Array<RectAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<Rect>()) })
 }
 
+func projectPropertyValueStringHandleArray(values: Array<windows_core.HString>): Array<CPointer<Unit>> {
+    let handles = Array<CPointer<Unit>>(values.size, { _ => CPointer<Unit>() })
+    var index = 0
+    try {
+        while (index < values.size) {
+            handles[index] = values[index].toSystemHandleCopy()
+            index += 1
+        }
+    } catch (error: Exception) {
+        var releaseIndex = 0
+        while (releaseIndex < index) {
+            windows_core.releaseSystemHStringHandle(handles[releaseIndex])
+            releaseIndex += 1
+        }
+        throw error
+    }
+    handles
+}
+
+func releasePropertyValueStringHandleArray(handles: Array<CPointer<Unit>>): Unit {
+    var index = 0
+    while (index < handles.size) {
+        windows_core.releaseSystemHStringHandle(handles[index])
+        index += 1
+    }
+}
+
+func projectPropertyValueInspectableHandleArray(values: Array<Option<IInspectable>>): Array<CPointer<Unit>> {
+    Array<CPointer<Unit>>(values.size, { index =>
+        match (values[index]) {
+            case Some(value) => value.asRaw()
+            case None => CPointer<Unit>()
+        }
+    })
+}
+
 func takePropertyValueAbiArray<T>(data: CPointer<T>, length: UInt32): Array<T> where T <: CType {
     let owned = unsafe { windows_core.AbiArray<T>.fromRawParts(data, length) }
     try {
@@ -4394,6 +4430,52 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let hr = v.CreateInspectableArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
         HRESULT(hr).ok()
         return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateStringArray(value: Array<windows_core.HString>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        let handles = projectPropertyValueStringHandleArray(value)
+        try {
+            if (handles.size == 0) {
+                hr__ = v.CreateStringArray(asRaw(), 0u32, CPointer<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__))
+            } else {
+                let handleData = unsafe { acquireArrayRawData(handles) }
+                try {
+                    hr__ = v.CreateStringArray(asRaw(), UInt32(handles.size), handleData.pointer, CPointer<CPointer<Unit>>(inout result__))
+                } finally {
+                    unsafe { releaseArrayRawData(handleData) }
+                }
+            }
+        } finally {
+            releasePropertyValueStringHandleArray(handles)
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateInspectableArray(value: Array<Option<IInspectable>>): IInspectable {
+        let v = vtbl()
+        var result__ = CPointer<Unit>()
+        var hr__ = E_POINTER.value
+        let handles = projectPropertyValueInspectableHandleArray(value)
+        if (handles.size == 0) {
+            hr__ = v.CreateInspectableArray(asRaw(), 0u32, CPointer<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__))
+        } else {
+            let handleData = unsafe { acquireArrayRawData(handles) }
+            try {
+                hr__ = v.CreateInspectableArray(asRaw(), UInt32(handles.size), handleData.pointer, CPointer<CPointer<Unit>>(inout result__))
+            } finally {
+                unsafe { releaseArrayRawData(handleData) }
+            }
+        }
+        HRESULT(hr__).ok()
+        return IInspectable.fromAbiTake(result__)
+    }
+
+    public unsafe func CreateInspectableArray(value: Array<IInspectable>): IInspectable {
+        CreateInspectableArray(Array<Option<IInspectable>>(value.size, { index => Some(value[index]) }))
     }
 
     public unsafe func CreateGuidArray(valueSize: UInt32, value: CPointer<GUID>): IInspectable {
@@ -6292,6 +6374,32 @@ public class PropertyValue <: windows_interface.RuntimeName & windows_core.Runti
             case Some(value) => return value
             case None => throw IllegalStateException("Activation factory call `CreateInspectableArray` did not return a value")
         }
+    }
+
+    public static unsafe func CreateStringArray(value: Array<windows_core.HString>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateStringArray(value))
+        }
+        match (result__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory call `CreateStringArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateInspectableArray(value: Array<Option<IInspectable>>): IInspectable {
+        var result__: Option<IInspectable> = Option<IInspectable>.None
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            result__ = Some(factory__.CreateInspectableArray(value))
+        }
+        match (result__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory call `CreateInspectableArray` did not return a value")
+        }
+    }
+
+    public static unsafe func CreateInspectableArray(value: Array<IInspectable>): IInspectable {
+        CreateInspectableArray(Array<Option<IInspectable>>(value.size, { index => Some(value[index]) }))
     }
 
     public static unsafe func CreateGuidArray(valueSize: UInt32, value: CPointer<GUID>): IInspectable {
