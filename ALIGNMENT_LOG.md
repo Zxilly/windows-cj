@@ -1648,6 +1648,8 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `Aquinas`: Round119 review clean; confirmed the no-arg overloads preserve raw vtable ABI/HRESULT handling through the existing methods, copy CoTaskMem arrays before releasing them with `AbiArray.close()` in `finally`, and project GUID/DateTime/Rect ABI structs after the native storage has been copied.
+- Review:
   - Review agent `Wegener`: Round118 review clean; no WinRT ABI mismatch, raw array handle lifetime issue, copy-type projection issue, test cleanup problem, or implementable capability gap found in the added `PropertyValue` / `IPropertyValueStatics` array overloads.
 - Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
@@ -1853,6 +1855,35 @@
   - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsStagePrimitiveArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testPropertyValueStaticsCreateArrayOverloadsProjectCopyStructArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 100/100 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Wegener`: Round118 review clean; confirmed the public `Array<T>` overloads stage temporary ABI arrays only for the duration of the call, retain the raw length+pointer ABI slots for direct callers, and do not introduce vtable layout or ownership regressions.
+
+### Round119 - PropertyValue get copy array overloads
+
+- Started at `2026-05-15 00:53:46 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Generic functions can use `where T <: ...` constraints and `let` must not be redeclared in the same scope.
+  - Function overloads can vary by arity or parameter types; this round uses no-arg overloads beside the raw `(size, pointer)` ABI methods.
+  - `try` / `finally` supports deterministic cleanup and `CPointer` / `CFunc` operations remain `unsafe`.
+- Reference scan:
+  - Rechecked `IPropertyValue.Get*Array`: the ABI returns an owned WinRT array through `u32*` size and `T**` data out slots.
+  - Cangjie already exposed the raw out-slot methods; the missing behavior-equivalent surface was a high-level `Array<T>` return path that copies into a managed Cangjie array and releases the native CoTaskMem array.
+- Added TDD coverage:
+  - Red: `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress` failed because `IPropertyValue.GetInt32Array`, `GetGuidArray`, `GetDateTimeArray`, and `GetRectArray` only accepted raw `(CPointer<UInt32>, CPointer<CPointer<T>>)` out slots.
+  - `testIPropertyValueGetArrayOverloadsReturnPrimitiveManagedArrays` verifies a native `Int32` ABI array is copied into a managed `Array<Int32>`.
+  - `testIPropertyValueGetArrayOverloadsProjectCopyStructArrays` verifies `GUID`, `DateTimeAbi`, and `RectAbi` arrays project to `GuidValue`, `DateTime`, and `Rect`.
+- Fixed copy array retrieval:
+  - Added no-arg `Get*Array(): Array<T>` overloads on `IPropertyValue` for numeric, Boolean, GUID, DateTime, TimeSpan, Point, Size, and Rect arrays.
+  - Added a small `AbiArray.fromRawParts` ownership helper that copies returned CoTaskMem arrays with `toArray()` and closes the `AbiArray` in `finally`.
+  - Projected copy-struct ABI arrays into Cangjie value arrays after the native array has been copied; string and inspectable arrays remain separate because HSTRING and COM element ownership require different handling.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsReturnPrimitiveManagedArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testIPropertyValueGetArrayOverloadsProjectCopyStructArrays --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 102/102 with `cjHeapSize=32GB`.
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.

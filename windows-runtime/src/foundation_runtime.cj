@@ -2560,6 +2560,45 @@ func projectPropertyValueRectArray(values: Array<Rect>): Array<RectAbi> {
     Array<RectAbi>(values.size, { index => windows_core.projectTypedAbi(values[index], windows_core.typeMarker<Rect>()) })
 }
 
+func takePropertyValueAbiArray<T>(data: CPointer<T>, length: UInt32): Array<T> where T <: CType {
+    let owned = unsafe { windows_core.AbiArray<T>.fromRawParts(data, length) }
+    try {
+        owned.toArray()
+    } finally {
+        owned.close()
+    }
+}
+
+func takePropertyValueGuidArray(data: CPointer<GUID>, length: UInt32): Array<GuidValue> {
+    let abiValues = takePropertyValueAbiArray<GUID>(data, length)
+    Array<GuidValue>(abiValues.size, { index => GuidValue(abiValues[index]) })
+}
+
+func takePropertyValueDateTimeArray(data: CPointer<DateTimeAbi>, length: UInt32): Array<DateTime> {
+    let abiValues = takePropertyValueAbiArray<DateTimeAbi>(data, length)
+    Array<DateTime>(abiValues.size, { index => windows_core.fromTypedAbi(abiValues[index], windows_core.typeMarker<DateTime>()).unwrap() })
+}
+
+func takePropertyValueTimeSpanArray(data: CPointer<TimeSpanAbi>, length: UInt32): Array<TimeSpan> {
+    let abiValues = takePropertyValueAbiArray<TimeSpanAbi>(data, length)
+    Array<TimeSpan>(abiValues.size, { index => windows_core.fromTypedAbi(abiValues[index], windows_core.typeMarker<TimeSpan>()).unwrap() })
+}
+
+func takePropertyValuePointArray(data: CPointer<PointAbi>, length: UInt32): Array<Point> {
+    let abiValues = takePropertyValueAbiArray<PointAbi>(data, length)
+    Array<Point>(abiValues.size, { index => windows_core.fromTypedAbi(abiValues[index], windows_core.typeMarker<Point>()).unwrap() })
+}
+
+func takePropertyValueSizeArray(data: CPointer<SizeAbi>, length: UInt32): Array<Size> {
+    let abiValues = takePropertyValueAbiArray<SizeAbi>(data, length)
+    Array<Size>(abiValues.size, { index => windows_core.fromTypedAbi(abiValues[index], windows_core.typeMarker<Size>()).unwrap() })
+}
+
+func takePropertyValueRectArray(data: CPointer<RectAbi>, length: UInt32): Array<Rect> {
+    let abiValues = takePropertyValueAbiArray<RectAbi>(data, length)
+    Array<Rect>(abiValues.size, { index => windows_core.fromTypedAbi(abiValues[index], windows_core.typeMarker<Rect>()).unwrap() })
+}
+
 @C
 public struct IPropertyValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3857,6 +3896,125 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         let hr = v.GetRectArray(asRaw(), valueSize, value)
         HRESULT(hr).ok()
+    }
+
+    public unsafe func GetUInt8Array(): Array<UInt8> {
+        var size__ = 0u32
+        var value__ = CPointer<UInt8>()
+        GetUInt8Array(CPointer<UInt32>(inout size__), CPointer<CPointer<UInt8>>(inout value__))
+        takePropertyValueAbiArray<UInt8>(value__, size__)
+    }
+
+    public unsafe func GetInt16Array(): Array<Int16> {
+        var size__ = 0u32
+        var value__ = CPointer<Int16>()
+        GetInt16Array(CPointer<UInt32>(inout size__), CPointer<CPointer<Int16>>(inout value__))
+        takePropertyValueAbiArray<Int16>(value__, size__)
+    }
+
+    public unsafe func GetUInt16Array(): Array<UInt16> {
+        var size__ = 0u32
+        var value__ = CPointer<UInt16>()
+        GetUInt16Array(CPointer<UInt32>(inout size__), CPointer<CPointer<UInt16>>(inout value__))
+        takePropertyValueAbiArray<UInt16>(value__, size__)
+    }
+
+    public unsafe func GetInt32Array(): Array<Int32> {
+        var size__ = 0u32
+        var value__ = CPointer<Int32>()
+        GetInt32Array(CPointer<UInt32>(inout size__), CPointer<CPointer<Int32>>(inout value__))
+        takePropertyValueAbiArray<Int32>(value__, size__)
+    }
+
+    public unsafe func GetUInt32Array(): Array<UInt32> {
+        var size__ = 0u32
+        var value__ = CPointer<UInt32>()
+        GetUInt32Array(CPointer<UInt32>(inout size__), CPointer<CPointer<UInt32>>(inout value__))
+        takePropertyValueAbiArray<UInt32>(value__, size__)
+    }
+
+    public unsafe func GetInt64Array(): Array<Int64> {
+        var size__ = 0u32
+        var value__ = CPointer<Int64>()
+        GetInt64Array(CPointer<UInt32>(inout size__), CPointer<CPointer<Int64>>(inout value__))
+        takePropertyValueAbiArray<Int64>(value__, size__)
+    }
+
+    public unsafe func GetUInt64Array(): Array<UInt64> {
+        var size__ = 0u32
+        var value__ = CPointer<UInt64>()
+        GetUInt64Array(CPointer<UInt32>(inout size__), CPointer<CPointer<UInt64>>(inout value__))
+        takePropertyValueAbiArray<UInt64>(value__, size__)
+    }
+
+    public unsafe func GetSingleArray(): Array<Float32> {
+        var size__ = 0u32
+        var value__ = CPointer<Float32>()
+        GetSingleArray(CPointer<UInt32>(inout size__), CPointer<CPointer<Float32>>(inout value__))
+        takePropertyValueAbiArray<Float32>(value__, size__)
+    }
+
+    public unsafe func GetDoubleArray(): Array<Float64> {
+        var size__ = 0u32
+        var value__ = CPointer<Float64>()
+        GetDoubleArray(CPointer<UInt32>(inout size__), CPointer<CPointer<Float64>>(inout value__))
+        takePropertyValueAbiArray<Float64>(value__, size__)
+    }
+
+    public unsafe func GetChar16Array(): Array<UInt16> {
+        var size__ = 0u32
+        var value__ = CPointer<UInt16>()
+        GetChar16Array(CPointer<UInt32>(inout size__), CPointer<CPointer<UInt16>>(inout value__))
+        takePropertyValueAbiArray<UInt16>(value__, size__)
+    }
+
+    public unsafe func GetBooleanArray(): Array<Bool> {
+        var size__ = 0u32
+        var value__ = CPointer<Bool>()
+        GetBooleanArray(CPointer<UInt32>(inout size__), CPointer<CPointer<Bool>>(inout value__))
+        takePropertyValueAbiArray<Bool>(value__, size__)
+    }
+
+    public unsafe func GetGuidArray(): Array<GuidValue> {
+        var size__ = 0u32
+        var value__ = CPointer<GUID>()
+        GetGuidArray(CPointer<UInt32>(inout size__), CPointer<CPointer<GUID>>(inout value__))
+        takePropertyValueGuidArray(value__, size__)
+    }
+
+    public unsafe func GetDateTimeArray(): Array<DateTime> {
+        var size__ = 0u32
+        var value__ = CPointer<DateTimeAbi>()
+        GetDateTimeArray(CPointer<UInt32>(inout size__), CPointer<CPointer<DateTimeAbi>>(inout value__))
+        takePropertyValueDateTimeArray(value__, size__)
+    }
+
+    public unsafe func GetTimeSpanArray(): Array<TimeSpan> {
+        var size__ = 0u32
+        var value__ = CPointer<TimeSpanAbi>()
+        GetTimeSpanArray(CPointer<UInt32>(inout size__), CPointer<CPointer<TimeSpanAbi>>(inout value__))
+        takePropertyValueTimeSpanArray(value__, size__)
+    }
+
+    public unsafe func GetPointArray(): Array<Point> {
+        var size__ = 0u32
+        var value__ = CPointer<PointAbi>()
+        GetPointArray(CPointer<UInt32>(inout size__), CPointer<CPointer<PointAbi>>(inout value__))
+        takePropertyValuePointArray(value__, size__)
+    }
+
+    public unsafe func GetSizeArray(): Array<Size> {
+        var size__ = 0u32
+        var value__ = CPointer<SizeAbi>()
+        GetSizeArray(CPointer<UInt32>(inout size__), CPointer<CPointer<SizeAbi>>(inout value__))
+        takePropertyValueSizeArray(value__, size__)
+    }
+
+    public unsafe func GetRectArray(): Array<Rect> {
+        var size__ = 0u32
+        var value__ = CPointer<RectAbi>()
+        GetRectArray(CPointer<UInt32>(inout size__), CPointer<CPointer<RectAbi>>(inout value__))
+        takePropertyValueRectArray(value__, size__)
     }
 }
 
