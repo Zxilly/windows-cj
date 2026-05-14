@@ -1648,8 +1648,6 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
-  - Review agent `McClintock`: Round113 review clean; confirmed `stockCloneValue`, `snapshotList`, `snapshotPairList`, and direct key-value pair construction clone HString values, and generic HString outputs still publish fresh system handle copies.
-- Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
 
 ### Round112 - Stock helper returned-interface lifetime
@@ -1704,3 +1702,48 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+- Review:
+  - Review agent `McClintock`: Round113 review clean; confirmed `stockCloneValue`, `snapshotList`, `snapshotPairList`, and direct key-value pair construction clone HString values, and generic HString outputs still publish fresh system handle copies.
+
+### Round114 - Stock interface value snapshot ownership
+
+- Started at `2026-05-14 21:39:21 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Interfaces support static functions with default implementations and subinterfaces can redefine static functions.
+  - Function overloads cannot be distinguished by generic constraints alone, so this round extends the existing WinRT generic bridge instead of adding constraint-only overloads.
+  - `Resource` provides `isClosed()` / `close()` for deterministic resource cleanup.
+  - `try` / `catch` / `finally` supports cleanup on exception paths; this is used for partial snapshot rollback.
+- Reference scan:
+  - Rechecked stock iterable reference coverage for interface values such as `IIterable<IStringable>`.
+  - In Cangjie, interface wrappers are `Resource` class objects; saving the same wrapper object in a stock collection lets caller-side `close()` invalidate the collection element. The behavior-equivalent fix is to retain the underlying COM interface and publish a new owned wrapper.
+- Added TDD coverage:
+  - Red: `testStockInterfaceValuesRetainIndependentReference` constructs a stock `IIterator<IStringable>`, closes the original `IStringable` wrapper, and expects `Current().ToString()` to still succeed.
+  - The red run reached `E_POINTER` from generic handle output because the saved wrapper was closed by the caller before `Current()`.
+- Fixed generic stock value snapshotting:
+  - Added `WinrtGenericType.cloneWinrtValue` with a copy-value default.
+  - `HandleWinrtType.cloneWinrtValue` now uses the existing owned WinRT output handle bridge, so HString values are copied and COM interface wrappers are retained into a fresh owned wrapper.
+  - `stockCloneValue` now delegates to `T.cloneWinrtValue`, covering interface values without per-interface special cases.
+  - Stock iterator/iterable/vector/map/key-value-pair impls now implement `Resource` and deterministically close owned snapshot values on `close()`, avoiding retained interface wrappers outliving the returned stock object.
+  - Snapshot construction now rolls back already-cloned list/pair values when a later clone throws.
+  - `createStockInterface` and `createStockInterfaceMulti` close their temporary `ComObject` in a `finally` block, so failed `toInterface` calls still release inner stock `Resource` state.
+  - Test helper map `First()` implementations now use `createStockIteratorFromOwnedList` so temporary materialized pair wrappers are closed after the iterator snapshots them.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockInterfaceValuesRetainIndependentReference --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockInterfaceCreationFailureClosesInnerResource --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockMultiInterfaceCreationFailureClosesInnerResource --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockIterableCloseReleasesInterfaceSnapshot --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockMapViewCloseReleasesInterfaceSnapshots --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockListSnapshotFailureReleasesPartialInterfaceClones --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockPairSnapshotFailureReleasesPartialInterfaceClone --no-capture-output --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=10s --no-capture-output --no-color --no-progress`: passed 93/93 with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --verbose --no-capture-output --no-color --progress-brief`: passed 93/93 with `cjHeapSize=32GB` and no residual test processes.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --skip-build --parallel 1 --no-capture-output --no-color --no-progress`: passed 19/19 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Socrates`: found two P2 lifecycle issues: partial snapshot failure leaked already-retained values, and temporary materialized pair wrappers were no longer deterministically closed after `createStockIterator` began snapshotting. Both were fixed in this round.
+  - Review agent `Kepler`: found one P3 test gap for failed `toInterface` cleanup after `createComObjectFromSchemas` succeeds. Added single- and multi-schema mismatch tests that assert the inner stock `Resource` is closed.
+  - Review agent `Leibniz`: final Round114 review clean; no vtable ABI, COM lifetime, double free, QueryInterface/reference-counting, stock behavior, or test gap issues found.

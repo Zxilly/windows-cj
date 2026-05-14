@@ -80,7 +80,7 @@ class Int32VectorViewMapViewAbiTestImpl <: IMapView_Impl<Int32, IVectorView<Int3
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, IVectorView<Int32>>>> {
         Result<IIterator<IKeyValuePair<Int32, IVectorView<Int32>>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, IVectorView<Int32>>>(
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, IVectorView<Int32>>>(
                 materializePairViews<Int32, IVectorView<Int32>>(entries)
             )
         )

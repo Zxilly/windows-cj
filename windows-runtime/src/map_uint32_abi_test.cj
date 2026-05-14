@@ -58,7 +58,7 @@ class GenericBuilderUInt32MapViewAbiTestImpl <: IMapView_Impl<UInt32, UInt32> & 
 
     public func First(): Result<IIterator<IKeyValuePair<UInt32, UInt32>>> {
         Result<IIterator<IKeyValuePair<UInt32, UInt32>>>.Ok(
-            createStockIterator<IKeyValuePair<UInt32, UInt32>>(materializePairViews<UInt32, UInt32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<UInt32, UInt32>>(materializePairViews<UInt32, UInt32>(entries))
         )
     }
 
@@ -182,7 +182,7 @@ class UInt32MapAbiTestImpl <: IMap_Impl<UInt32, UInt32> & Resource {
 
     public func First(): Result<IIterator<IKeyValuePair<UInt32, UInt32>>> {
         Result<IIterator<IKeyValuePair<UInt32, UInt32>>>.Ok(
-            createStockIterator<IKeyValuePair<UInt32, UInt32>>(materializePairViews<UInt32, UInt32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<UInt32, UInt32>>(materializePairViews<UInt32, UInt32>(entries))
         )
     }
 

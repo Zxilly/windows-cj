@@ -75,7 +75,7 @@ class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, 
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
         Result<IIterator<IKeyValuePair<Int32, HString>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, HString>>(materializePairViews<Int32, HString>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, HString>>(materializePairViews<Int32, HString>(entries))
         )
     }
 

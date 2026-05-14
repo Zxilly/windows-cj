@@ -3,7 +3,60 @@ package windows_runtime
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, HString, S_OK, comRegistryLookup, rootRegistryKeyFromRaw}
+import windows_core.{E_POINTER, HString, Result, S_OK, comRegistryLookup, rootRegistryKeyFromRaw}
+
+class StockTestStringableImpl <: IStringable_Impl & Resource {
+    private let value: HString
+    private let vtblHandle: CPointerHandle<IStringableVtbl>
+    private var closed: Bool = false
+
+    public init(text: String) {
+        this.value = HString(text)
+        this.vtblHandle = unsafe {
+            acquireArrayRawData(Array<IStringableVtbl>(1, { _ => IStringableVtbl.new<StockTestStringableImpl>() }))
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle.pointer)
+    }
+
+    public func ToString(): Result<HString> {
+        Result<HString>.Ok(value)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        value.close()
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        value.close()
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+}
+
+func createStockTestStringable(text: String): IStringable {
+    let impl = StockTestStringableImpl(text)
+    createStockInterface<StockTestStringableImpl, IStringable>(
+        impl,
+        IStringable.descriptorSchema(),
+        IStringable.descriptor(),
+        impl.vtblPtr()
+    )
+}
 
 @Test
 func testStockIteratorSnapshotsSourceAndAdvancesCursor() {
@@ -28,6 +81,46 @@ func testStockReturnedInterfaceCloseRemovesRegistryEntry() {
     @Expect(comRegistryLookup(key).isSome(), true)
     iterator.close()
     @Expect(comRegistryLookup(key).isNone(), true)
+}
+
+@Test
+func testStockInterfaceCreationFailureClosesInnerResource() {
+    let impl = StockTestStringableImpl("failed")
+
+    try {
+        let iterator = createStockInterface<StockTestStringableImpl, IIterator<IStringable>>(
+            impl,
+            IStringable.descriptorSchema(),
+            IIterator<IStringable>.descriptor(),
+            impl.vtblPtr()
+        )
+        iterator.close()
+        @Expect(true, false)
+    } catch (e: Exception) {
+        let _ = e
+    }
+
+    @Expect(impl.isClosed(), true)
+}
+
+@Test
+func testStockMultiInterfaceCreationFailureClosesInnerResource() {
+    let impl = StockTestStringableImpl("failed")
+
+    try {
+        let iterator = createStockInterfaceMulti<StockTestStringableImpl, IIterator<IStringable>>(
+            impl,
+            [IStringable.descriptorSchema()],
+            IIterator<IStringable>.descriptor(),
+            [impl.vtblPtr()]
+        )
+        iterator.close()
+        @Expect(true, false)
+    } catch (e: Exception) {
+        let _ = e
+    }
+
+    @Expect(impl.isClosed(), true)
 }
 
 @Test
@@ -65,6 +158,90 @@ func testStockHStringMapEntriesAreIndependentOfSourceHandles() {
     valueFromView.close()
     lookupKey.close()
     view.close()
+}
+
+@Test
+func testStockInterfaceValuesRetainIndependentReference() {
+    let source = createStockTestStringable("stable")
+    let iterator = toIterator<IStringable>([source])
+
+    source.close()
+
+    let current = unsafe { iterator.Current() }
+    let text = unsafe { current.ToString() }
+    @Expect(text.get(), "stable")
+
+    text.close()
+    current.close()
+    iterator.close()
+}
+
+@Test
+func testStockIterableCloseReleasesInterfaceSnapshot() {
+    let source = createStockTestStringable("iterable")
+    let key = unsafe { rootRegistryKeyFromRaw(source.asRaw()) }
+    let iterable = toIterable<IStringable>([source])
+
+    source.close()
+    @Expect(comRegistryLookup(key).isSome(), true)
+
+    iterable.close()
+    @Expect(comRegistryLookup(key).isNone(), true)
+}
+
+@Test
+func testStockMapViewCloseReleasesInterfaceSnapshots() {
+    let sourceKey = HString("key")
+    let sourceValue = createStockTestStringable("mapped")
+    let valueRegistryKey = unsafe { rootRegistryKeyFromRaw(sourceValue.asRaw()) }
+    let view = toMapView<HString, IStringable>([(sourceKey, sourceValue)])
+
+    sourceKey.close()
+    sourceValue.close()
+    @Expect(comRegistryLookup(valueRegistryKey).isSome(), true)
+
+    view.close()
+    @Expect(comRegistryLookup(valueRegistryKey).isNone(), true)
+}
+
+@Test
+func testStockListSnapshotFailureReleasesPartialInterfaceClones() {
+    let first = createStockTestStringable("first")
+    let second = createStockTestStringable("second")
+    let firstRegistryKey = unsafe { rootRegistryKeyFromRaw(first.asRaw()) }
+
+    second.close()
+
+    try {
+        let iterator = toIterator<IStringable>([first, second])
+        iterator.close()
+        @Expect(true, false)
+    } catch (e: Exception) {
+        let _ = e
+    }
+
+    first.close()
+    @Expect(comRegistryLookup(firstRegistryKey).isNone(), true)
+}
+
+@Test
+func testStockPairSnapshotFailureReleasesPartialInterfaceClone() {
+    let key = createStockTestStringable("key")
+    let value = createStockTestStringable("value")
+    let keyRegistryKey = unsafe { rootRegistryKeyFromRaw(key.asRaw()) }
+
+    value.close()
+
+    try {
+        let pair = toKeyValuePair<IStringable, IStringable>(key, value)
+        pair.close()
+        @Expect(true, false)
+    } catch (e: Exception) {
+        let _ = e
+    }
+
+    key.close()
+    @Expect(comRegistryLookup(keyRegistryKey).isNone(), true)
 }
 
 @Test

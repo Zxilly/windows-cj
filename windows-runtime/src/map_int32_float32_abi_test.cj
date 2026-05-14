@@ -77,7 +77,7 @@ class Int32Float32MapViewAbiTestImpl <: IMapView_Impl<Int32, Float32> & Resource
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Float32>>> {
         Result<IIterator<IKeyValuePair<Int32, Float32>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, Float32>>(materializePairViews<Int32, Float32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, Float32>>(materializePairViews<Int32, Float32>(entries))
         )
     }
 
@@ -258,7 +258,7 @@ class Int32Float32MapAbiTestImpl <: IMap_Impl<Int32, Float32> & Resource {
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Float32>>> {
         Result<IIterator<IKeyValuePair<Int32, Float32>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, Float32>>(materializePairViews<Int32, Float32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, Float32>>(materializePairViews<Int32, Float32>(entries))
         )
     }
 

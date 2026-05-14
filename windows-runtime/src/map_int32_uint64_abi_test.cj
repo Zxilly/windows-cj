@@ -77,7 +77,7 @@ class Int32UInt64MapViewAbiTestImpl <: IMapView_Impl<Int32, UInt64> & Resource {
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, UInt64>>> {
         Result<IIterator<IKeyValuePair<Int32, UInt64>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, UInt64>>(materializePairViews<Int32, UInt64>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, UInt64>>(materializePairViews<Int32, UInt64>(entries))
         )
     }
 

@@ -63,7 +63,7 @@ class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> & Res
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
         Result<IIterator<IKeyValuePair<Int32, Int32>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, Int32>>(materializePairViews<Int32, Int32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, Int32>>(materializePairViews<Int32, Int32>(entries))
         )
     }
 
@@ -162,7 +162,7 @@ class GenericBuilderInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HStri
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
         Result<IIterator<IKeyValuePair<Int32, HString>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, HString>>(materializePairViews<Int32, HString>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, HString>>(materializePairViews<Int32, HString>(entries))
         )
     }
 

@@ -92,7 +92,7 @@ class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> & Resource {
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
         Result<IIterator<IKeyValuePair<Int32, Int32>>>.Ok(
-            createStockIterator<IKeyValuePair<Int32, Int32>>(materializePairViews<Int32, Int32>(entries))
+            createStockIteratorFromOwnedList<IKeyValuePair<Int32, Int32>>(materializePairViews<Int32, Int32>(entries))
         )
     }
 

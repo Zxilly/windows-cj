@@ -5,6 +5,10 @@ import windows_strings.*
 
 public interface WinrtGenericType<T> {
     static func winrtOutputBridge(): WinrtOutputBridge<T>
+
+    static func cloneWinrtValue(value: T): T {
+        value
+    }
 }
 
 public interface CopyWinrtType<T> <: WinrtGenericType<T> where T <: CType {
@@ -24,6 +28,14 @@ public interface HandleWinrtType<T> <: WinrtGenericType<T> where T <: HandleWinr
 
     static func winrtOutputBridge(): WinrtOutputBridge<T> {
         HandleWinrtOutputBridge<T>()
+    }
+
+    static func cloneWinrtValue(value: T): T {
+        let raw = ownedWinrtOutHandle<T>(value)
+        if (raw.isNull() && !T.allowNullWinrtHandle()) {
+            throw WindowsException(E_POINTER)
+        }
+        T.fromAbiTakeWinrtHandle(raw)
     }
 }
 

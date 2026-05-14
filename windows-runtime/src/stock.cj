@@ -23,32 +23,75 @@ func stockBoundsError(): WinError {
     WinError(STOCK_E_BOUNDS)
 }
 
-func stockCloneValue<T>(value: T): T {
-    match (value) {
-        case hstring: HString =>
-            match (hstring.clone() as T) {
-                case Some(cloned) => cloned
-                case None => value
-            }
-        case _ => value
-    }
+func stockCloneValue<T>(value: T): T where T <: WinrtGenericType<T> {
+    T.cloneWinrtValue(value)
 }
 
-func snapshotList<T>(source: Iterable<T>): ArrayList<T> {
+func snapshotList<T>(source: Iterable<T>): ArrayList<T> where T <: WinrtGenericType<T> {
     let values = collectArrayList<T>(source)
     let result = ArrayList<T>()
-    for (value in values) {
-        result.add(stockCloneValue<T>(value))
+    var completed = false
+    try {
+        for (value in values) {
+            result.add(stockCloneValue<T>(value))
+        }
+        completed = true
+    } finally {
+        if (!completed) {
+            closeStockList<T>(result)
+        }
     }
     result
 }
 
-func snapshotPairList<K, V>(source: Iterable<(K, V)>): ArrayList<(K, V)> {
+func stockClonePair<K, V>(key: K, value: V): (K, V)
+where K <: WinrtGenericType<K>, V <: WinrtGenericType<V> {
+    let keyClone = stockCloneValue<K>(key)
+    try {
+        let valueClone = stockCloneValue<V>(value)
+        return (keyClone, valueClone)
+    } catch (e: Exception) {
+        closeStockValue<K>(keyClone)
+        throw e
+    }
+}
+
+func snapshotPairList<K, V>(source: Iterable<(K, V)>): ArrayList<(K, V)>
+where K <: WinrtGenericType<K>, V <: WinrtGenericType<V> {
     let result = ArrayList<(K, V)>()
-    for ((key, value) in source) {
-        result.add((stockCloneValue<K>(key), stockCloneValue<V>(value)))
+    var completed = false
+    try {
+        for ((key, value) in source) {
+            result.add(stockClonePair<K, V>(key, value))
+        }
+        completed = true
+    } finally {
+        if (!completed) {
+            closeStockPairList<K, V>(result)
+        }
     }
     result
+}
+
+func closeStockValue<T>(value: T): Unit {
+    match (value) {
+        case resource: Resource =>
+            resource.close()
+        case _ => ()
+    }
+}
+
+func closeStockList<T>(items: ArrayList<T>): Unit {
+    for (value in items) {
+        closeStockValue<T>(value)
+    }
+}
+
+func closeStockPairList<K, V>(items: ArrayList<(K, V)>): Unit {
+    for ((key, value) in items) {
+        closeStockValue<K>(key)
+        closeStockValue<V>(value)
+    }
 }
 
 func createStockInterface<Inner, I>(
@@ -59,9 +102,11 @@ func createStockInterface<Inner, I>(
 ): I where I <: ComInterface {
     let schemas = Array<InterfaceDescriptorSchema>(1, { _ => schema })
     let object = createComObjectFromSchemas(inner, schemas, vtblPtr)
-    let result = object.toInterface(descriptor)
-    object.close()
-    result
+    try {
+        object.toInterface(descriptor)
+    } finally {
+        object.close()
+    }
 }
 
 // Multi-schema variant: register N schemas and N vtbls (one per schema, in matching order).
@@ -75,12 +120,15 @@ func createStockInterfaceMulti<Inner, I>(
     vtblPtrs: Array<CPointer<Unit>>
 ): I where I <: ComInterface {
     let object = createComObjectFromSchemas(inner, schemas, vtblPtrs)
-    let result = object.toInterface(descriptor)
-    object.close()
-    result
+    try {
+        object.toInterface(descriptor)
+    } finally {
+        object.close()
+    }
 }
 
-func createStockIterator<T>(items: ArrayList<T>): IIterator<T> where T <: RuntimeType & WinrtGenericType<T> {
+func createStockIterator<T>(source: Iterable<T>): IIterator<T> where T <: RuntimeType & WinrtGenericType<T> {
+    let items = snapshotList<T>(source)
     let impl = StockIteratorImpl<T>(items)
     createStockInterface<StockIteratorImpl<T>, IIterator<T>>(
         impl,
@@ -90,9 +138,19 @@ func createStockIterator<T>(items: ArrayList<T>): IIterator<T> where T <: Runtim
     )
 }
 
+func createStockIteratorFromOwnedList<T>(items: ArrayList<T>): IIterator<T>
+where T <: RuntimeType & WinrtGenericType<T> {
+    try {
+        createStockIterator<T>(items)
+    } finally {
+        closeStockList<T>(items)
+    }
+}
+
 func createStockKeyValuePair<K, V>(key: K, value: V): IKeyValuePair<K, V>
 where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericType<V> {
-    let impl = StockKeyValuePairImpl<K, V>(stockCloneValue<K>(key), stockCloneValue<V>(value))
+    let (keyClone, valueClone) = stockClonePair<K, V>(key, value)
+    let impl = StockKeyValuePairImpl<K, V>(keyClone, valueClone)
     createStockInterface<StockKeyValuePairImpl<K, V>, IKeyValuePair<K, V>>(
         impl,
         IKeyValuePair<K, V>.descriptorSchema(),
@@ -104,8 +162,16 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
 func materializePairViews<K, V>(entries: ArrayList<(K, V)>): ArrayList<IKeyValuePair<K, V>>
 where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericType<V> {
     let result = ArrayList<IKeyValuePair<K, V>>()
-    for ((key, value) in entries) {
-        result.add(createStockKeyValuePair<K, V>(key, value))
+    var completed = false
+    try {
+        for ((key, value) in entries) {
+            result.add(createStockKeyValuePair<K, V>(key, value))
+        }
+        completed = true
+    } finally {
+        if (!completed) {
+            closeStockList<IKeyValuePair<K, V>>(result)
+        }
     }
     result
 }
@@ -155,7 +221,7 @@ where T <: RuntimeType & WinrtGenericType<T> {
     Result<UInt32>.Ok(UInt32(written))
 }
 
-public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & WinrtGenericType<T> {
+public class StockIteratorImpl<T> <: IIterator_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IIteratorVtbl>
     private var closed: Bool = false
@@ -176,6 +242,19 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & 
         if (closed) {
             return
         }
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockList<T>(items)
         unsafe { releaseArrayRawData(vtblHandle) }
         closed = true
     }
@@ -218,7 +297,7 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> where T <: RuntimeType & 
     }
 }
 
-public class StockIterableImpl<T> <: IIterable_Impl<T> where T <: RuntimeType & WinrtGenericType<T> {
+public class StockIterableImpl<T> <: IIterable_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IIterableVtbl>
     private var closed: Bool = false
@@ -242,12 +321,25 @@ public class StockIterableImpl<T> <: IIterable_Impl<T> where T <: RuntimeType & 
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockList<T>(items)
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+
     public func First(): Result<IIterator<T>> {
         Result<IIterator<T>>.Ok(createStockIterator<T>(items))
     }
 }
 
-public class StockVectorViewImpl<T> <: IVectorView_Impl<T>
+public class StockVectorViewImpl<T> <: IVectorView_Impl<T> & Resource
 where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
     private let items: ArrayList<T>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
@@ -276,6 +368,22 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
         if (closed) {
             return
         }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockList<T>(items)
         unsafe {
             releaseArrayRawData(iterableVtblHandle)
             releaseArrayRawData(vtblHandle)
@@ -328,7 +436,7 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
     }
 }
 
-public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
+public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
     private let vtblHandle: CPointerHandle<IVectorViewVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
@@ -354,6 +462,21 @@ public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
     }
 
     ~init() {
+        if (closed) {
+            return
+        }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
         if (closed) {
             return
         }
@@ -405,7 +528,7 @@ public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> {
     }
 }
 
-public class StockKeyValuePairImpl<K, V> <: IKeyValuePair_Impl<K, V>
+public class StockKeyValuePairImpl<K, V> <: IKeyValuePair_Impl<K, V> & Resource
 where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericType<V> {
     private let key_: K
     private let value_: V
@@ -432,6 +555,20 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockValue<K>(key_)
+        closeStockValue<V>(value_)
+        unsafe { releaseArrayRawData(vtblHandle) }
+        closed = true
+    }
+
     public func Key(): Result<K> {
         Result<K>.Ok(key_)
     }
@@ -441,7 +578,7 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
     }
 }
 
-public class StockMapViewImpl<K, V> <: IMapView_Impl<K, V>
+public class StockMapViewImpl<K, V> <: IMapView_Impl<K, V> & Resource
 where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & WinrtGenericType<V> {
     private let entries: ArrayList<(K, V)>
     private let pairViews: ArrayList<IKeyValuePair<K, V>>
@@ -473,6 +610,23 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
         if (closed) {
             return
         }
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockPairList<K, V>(entries)
+        closeStockList<IKeyValuePair<K, V>>(pairViews)
         unsafe {
             releaseArrayRawData(iterableVtblHandle)
             releaseArrayRawData(vtblHandle)
@@ -519,7 +673,7 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
     }
 }
 
-public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> {
+public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, Int32>>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
@@ -563,6 +717,23 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> {
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockPairList<Int32, Int32>(entries)
+        closeStockList<IKeyValuePair<Int32, Int32>>(pairViews)
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
     public func Lookup(key: Int32): Result<Int32> {
         for ((candidateKey, candidateValue) in entries) {
             if (candidateKey == key) {
@@ -596,7 +767,7 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> {
     }
 }
 
-public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> {
+public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, HString>>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
@@ -641,6 +812,23 @@ public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> {
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockPairList<Int32, HString>(entries)
+        closeStockList<IKeyValuePair<Int32, HString>>(pairViews)
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
     public func Lookup(key: Int32): Result<HString> {
         for ((candidateKey, candidateValue) in entries) {
             if (candidateKey == key) {
@@ -674,7 +862,7 @@ public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> {
     }
 }
 
-public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> {
+public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> & Resource {
     private let entries: ArrayList<(Int32, UInt64)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, UInt64>>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
@@ -719,6 +907,23 @@ public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> {
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockPairList<Int32, UInt64>(entries)
+        closeStockList<IKeyValuePair<Int32, UInt64>>(pairViews)
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
     public func Lookup(key: Int32): Result<UInt64> {
         for ((candidateKey, candidateValue) in entries) {
             if (candidateKey == key) {
@@ -752,7 +957,7 @@ public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> {
     }
 }
 
-public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVectorView<Int32>> {
+public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVectorView<Int32>> & Resource {
     private let entries: ArrayList<(Int32, IVectorView<Int32>)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, IVectorView<Int32>>>
     private let vtblHandle: CPointerHandle<IMapViewVtbl>
@@ -797,6 +1002,23 @@ public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVecto
         closed = true
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeStockPairList<Int32, IVectorView<Int32>>(entries)
+        closeStockList<IKeyValuePair<Int32, IVectorView<Int32>>>(pairViews)
+        unsafe {
+            releaseArrayRawData(iterableVtblHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+        closed = true
+    }
+
     public func Lookup(key: Int32): Result<IVectorView<Int32>> {
         for ((candidateKey, candidateValue) in entries) {
             if (candidateKey == key) {
@@ -831,8 +1053,7 @@ public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVecto
 }
 
 public func toIterator<T>(source: Iterable<T>): IIterator<T> where T <: RuntimeType & WinrtGenericType<T> {
-    let items = snapshotList<T>(source)
-    createStockIterator<T>(items)
+    createStockIterator<T>(source)
 }
 
 public func toIterable<T>(source: Iterable<T>): IIterable<T> where T <: RuntimeType & WinrtGenericType<T> {
