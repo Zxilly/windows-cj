@@ -3726,6 +3726,50 @@ func callVectorSetAtInt64(
     HRESULT(hr).ok()
 }
 
+func callVectorSetAtUInt8(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt8
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorSetAtUInt16(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorSetAtInt16(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: Int16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorSetAtUInt64(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt64
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
 func callVectorSetAtBool(
     slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -3792,6 +3836,50 @@ func callVectorInsertAtInt64(
     HRESULT(hr).ok()
 }
 
+func callVectorInsertAtUInt8(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt8
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorInsertAtUInt16(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorInsertAtInt16(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: Int16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorInsertAtUInt64(
+    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    index: UInt32,
+    value: UInt64
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, index, value) }
+    HRESULT(hr).ok()
+}
+
 func callVectorInsertAtBool(
     slot: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>,
     instanceRaw: CPointer<Unit>,
@@ -3851,6 +3939,46 @@ func callVectorAppendInt64(
     value: Int64
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Int64) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendUInt8(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: UInt8
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt8) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendUInt16(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: UInt16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendInt16(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: Int16
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>(slot))
+    let hr = unsafe { typedSlot(instanceRaw, value) }
+    HRESULT(hr).ok()
+}
+
+func callVectorAppendUInt64(
+    slot: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>,
+    instanceRaw: CPointer<Unit>,
+    value: UInt64
+): Unit {
+    let typedSlot = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
     HRESULT(hr).ok()
 }
@@ -4188,6 +4316,274 @@ public struct IVectorVtbl {
                 vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
                 let appendAbi: CFunc<(CPointer<Unit>, Int64) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int64>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.Append(arg0)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
+            case None => ()
+        }
+        match (0u8 as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, UInt8, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(arg0, arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+                let setAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32> = {
+                    instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.SetAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+                let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32> = { instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.InsertAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+                let appendAbi: CFunc<(CPointer<Unit>, UInt8) -> Int32> = { instanceRaw, arg0 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.Append(arg0)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
+            case None => ()
+        }
+        match (0u16 as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, UInt16, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(arg0, arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+                let setAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32> = {
+                    instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.SetAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+                let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32> = { instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.InsertAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+                let appendAbi: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { instanceRaw, arg0 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.Append(arg0)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
+            case None => ()
+        }
+        match (0i16 as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, Int16, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(arg0, arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+                let setAtAbi: CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32> = {
+                    instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.SetAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+                let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32> = { instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.InsertAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+                let appendAbi: CFunc<(CPointer<Unit>, Int16) -> Int32> = { instanceRaw, arg0 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.Append(arg0)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))
+            case None => ()
+        }
+        match (0u64 as T) {
+            case Some(_) =>
+                let indexOfAbi: CFunc<(CPointer<Unit>, UInt64, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
+                    instanceRaw, arg0, arg1, result__ =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            if (result__.isNull()) {
+                                E_POINTER.value
+                            } else {
+                                match (impl.IndexOf(arg0, arg1)) {
+                                    case Result<Bool>.Ok(value) =>
+                                        unsafe { result__.write(value) }
+                                        S_OK.value
+                                    case Result<Bool>.Err(error) =>
+                                        error.code().value
+                                }
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
+                let setAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32> = {
+                    instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.SetAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))
+                let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32> = { instanceRaw, arg0, arg1 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
+                        case Some(impl) =>
+                            match (impl.InsertAt(arg0, arg1)) {
+                                case Result<Unit>.Ok(_) =>
+                                    S_OK.value
+                                case Result<Unit>.Err(error) =>
+                                    error.code().value
+                            }
+                        case None =>
+                            E_NOINTERFACE.value
+                    }
+                }
+                vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))
+                let appendAbi: CFunc<(CPointer<Unit>, UInt64) -> Int32> = { instanceRaw, arg0 =>
+                    match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
                             match (impl.Append(arg0)) {
                                 case Result<Unit>.Ok(_) =>
@@ -4550,6 +4946,22 @@ public struct IVectorVtbl {
         IVectorVtbl.new<Identity, Int64>(offset: offset)
     }
 
+    public static func newUInt8<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<UInt8> {
+        IVectorVtbl.new<Identity, UInt8>(offset: offset)
+    }
+
+    public static func newUInt16<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<UInt16> {
+        IVectorVtbl.new<Identity, UInt16>(offset: offset)
+    }
+
+    public static func newInt16<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<Int16> {
+        IVectorVtbl.new<Identity, Int16>(offset: offset)
+    }
+
+    public static func newUInt64<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<UInt64> {
+        IVectorVtbl.new<Identity, UInt64>(offset: offset)
+    }
+
     public static func newBool<Identity>(offset!: Int64 = 0): IVectorVtbl where Identity <: IVector_Impl<Bool> {
         IVectorVtbl.new<Identity, Bool>(offset: offset)
     }
@@ -4885,6 +5297,10 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case int32Value: Int32 => return callVectorViewIndexOfInt32(v.IndexOf, asRaw(), int32Value, index)
             case uint32Value: UInt32 => return callVectorViewIndexOfUInt32(v.IndexOf, asRaw(), uint32Value, index)
             case int64Value: Int64 => return callVectorViewIndexOfInt64(v.IndexOf, asRaw(), int64Value, index)
+            case int16Value: Int16 => return callVectorViewIndexOfInt16(v.IndexOf, asRaw(), int16Value, index)
+            case uint8Value: UInt8 => return callVectorViewIndexOfUInt8(v.IndexOf, asRaw(), uint8Value, index)
+            case uint16Value: UInt16 => return callVectorViewIndexOfUInt16(v.IndexOf, asRaw(), uint16Value, index)
+            case uint64Value: UInt64 => return callVectorViewIndexOfUInt64(v.IndexOf, asRaw(), uint64Value, index)
             case boolValue: Bool => return callVectorViewIndexOfBool(v.IndexOf, asRaw(), boolValue, index)
             case float32Value: Float32 => return callVectorViewIndexOfFloat32(v.IndexOf, asRaw(), float32Value, index)
             case float64Value: Float64 => return callVectorViewIndexOfFloat64(v.IndexOf, asRaw(), float64Value, index)
@@ -4914,6 +5330,18 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 return
             case int64Value: Int64 =>
                 callVectorSetAtInt64(v.SetAt, asRaw(), index, int64Value)
+                return
+            case uint8Value: UInt8 =>
+                callVectorSetAtUInt8(v.SetAt, asRaw(), index, uint8Value)
+                return
+            case uint16Value: UInt16 =>
+                callVectorSetAtUInt16(v.SetAt, asRaw(), index, uint16Value)
+                return
+            case int16Value: Int16 =>
+                callVectorSetAtInt16(v.SetAt, asRaw(), index, int16Value)
+                return
+            case uint64Value: UInt64 =>
+                callVectorSetAtUInt64(v.SetAt, asRaw(), index, uint64Value)
                 return
             case boolValue: Bool =>
                 callVectorSetAtBool(v.SetAt, asRaw(), index, boolValue)
@@ -4948,6 +5376,18 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 return
             case int64Value: Int64 =>
                 callVectorInsertAtInt64(v.InsertAt, asRaw(), index, int64Value)
+                return
+            case uint8Value: UInt8 =>
+                callVectorInsertAtUInt8(v.InsertAt, asRaw(), index, uint8Value)
+                return
+            case uint16Value: UInt16 =>
+                callVectorInsertAtUInt16(v.InsertAt, asRaw(), index, uint16Value)
+                return
+            case int16Value: Int16 =>
+                callVectorInsertAtInt16(v.InsertAt, asRaw(), index, int16Value)
+                return
+            case uint64Value: UInt64 =>
+                callVectorInsertAtUInt64(v.InsertAt, asRaw(), index, uint64Value)
                 return
             case boolValue: Bool =>
                 callVectorInsertAtBool(v.InsertAt, asRaw(), index, boolValue)
@@ -4988,6 +5428,18 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
                 return
             case int64Value: Int64 =>
                 callVectorAppendInt64(v.Append, asRaw(), int64Value)
+                return
+            case uint8Value: UInt8 =>
+                callVectorAppendUInt8(v.Append, asRaw(), uint8Value)
+                return
+            case uint16Value: UInt16 =>
+                callVectorAppendUInt16(v.Append, asRaw(), uint16Value)
+                return
+            case int16Value: Int16 =>
+                callVectorAppendInt16(v.Append, asRaw(), int16Value)
+                return
+            case uint64Value: UInt64 =>
+                callVectorAppendUInt64(v.Append, asRaw(), uint64Value)
                 return
             case boolValue: Bool =>
                 callVectorAppendBool(v.Append, asRaw(), boolValue)

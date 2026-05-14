@@ -5,37 +5,37 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
 
-class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
-    private let items: ArrayList<Int64>
+class Int16VectorAbiTestImpl <: IVector_Impl<Int16> & Resource {
+    private let items: ArrayList<Int16>
     private let vtblHandle: CPointerHandle<IVectorVtbl>
     private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
     private var closed: Bool = false
 
-    public init(items: ArrayList<Int64>) {
+    public init(items: ArrayList<Int16>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt64<Int64VectorAbiTestImpl>() }))
+            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt16<Int16VectorAbiTestImpl>() }))
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int64VectorAbiTestImpl, Int64>() }))
+            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int16VectorAbiTestImpl, Int16>() }))
         }
     }
 
-    public static func withGenericVtbl(items: ArrayList<Int64>): Int64VectorAbiTestImpl {
-        Int64VectorAbiTestImpl(items, genericVtbl: true)
+    public static func withGenericVtbl(items: ArrayList<Int16>): Int16VectorAbiTestImpl {
+        Int16VectorAbiTestImpl(items, genericVtbl: true)
     }
 
-    private init(items: ArrayList<Int64>, genericVtbl!: Bool) {
+    private init(items: ArrayList<Int16>, genericVtbl!: Bool) {
         this.items = items
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<Int64VectorAbiTestImpl, Int64>() }))
+                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<Int16VectorAbiTestImpl, Int16>() }))
             } else {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt64<Int64VectorAbiTestImpl>() }))
+                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt16<Int16VectorAbiTestImpl>() }))
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int64VectorAbiTestImpl, Int64>() }))
+            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int16VectorAbiTestImpl, Int16>() }))
         }
     }
 
@@ -73,18 +73,18 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
         closed = true
     }
 
-    public func First(): Result<IIterator<Int64>> {
-        Result<IIterator<Int64>>.Ok(toIterator<Int64>(items))
+    public func First(): Result<IIterator<Int16>> {
+        Result<IIterator<Int16>>.Ok(toIterator<Int16>(items))
     }
 
-    public func GetAt(index: UInt32): Result<Int64> {
+    public func GetAt(index: UInt32): Result<Int16> {
         let resolved = Int64(index)
         if (resolved < 0 || resolved >= items.size) {
-            return Result<Int64>.Err(stockBoundsError())
+            return Result<Int16>.Err(stockBoundsError())
         }
         match (items.get(resolved)) {
-            case Some(value) => Result<Int64>.Ok(value)
-            case None => Result<Int64>.Err(stockBoundsError())
+            case Some(value) => Result<Int16>.Ok(value)
+            case None => Result<Int16>.Err(stockBoundsError())
         }
     }
 
@@ -92,11 +92,11 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
         Result<UInt32>.Ok(UInt32(items.size))
     }
 
-    public func GetView(): Result<IVectorView<Int64>> {
-        Result<IVectorView<Int64>>.Ok(createInt64VectorViewAbiTest(items))
+    public func GetView(): Result<IVectorView<Int16>> {
+        Result<IVectorView<Int16>>.Ok(createInt16VectorViewAbiTest(items))
     }
 
-    public func IndexOf(value: Int64, indexSlot: CPointer<UInt32>): Result<Bool> {
+    public func IndexOf(value: Int16, indexSlot: CPointer<UInt32>): Result<Bool> {
         var offset = 0
         while (offset < items.size) {
             match (items.get(offset)) {
@@ -117,7 +117,7 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
         Result<Bool>.Ok(false)
     }
 
-    public func SetAt(index: UInt32, value: Int64): Result<Unit> {
+    public func SetAt(index: UInt32, value: Int16): Result<Unit> {
         let resolved = Int64(index)
         if (resolved < 0 || resolved >= items.size) {
             return Result<Unit>.Err(stockBoundsError())
@@ -126,7 +126,7 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
         Result<Unit>.Ok(())
     }
 
-    public func InsertAt(index: UInt32, value: Int64): Result<Unit> {
+    public func InsertAt(index: UInt32, value: Int16): Result<Unit> {
         let resolved = Int64(index)
         if (resolved < 0 || resolved > items.size) {
             return Result<Unit>.Err(stockBoundsError())
@@ -144,7 +144,7 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
         Result<Unit>.Ok(())
     }
 
-    public func Append(value: Int64): Result<Unit> {
+    public func Append(value: Int16): Result<Unit> {
         items.add(value)
         Result<Unit>.Ok(())
     }
@@ -163,7 +163,7 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Int64>(itemsSize, itemsBuffer, items, Int64(startIndex))
+        writeGenericManyRange<Int16>(itemsSize, itemsBuffer, items, Int64(startIndex))
     }
 
     public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
@@ -171,7 +171,7 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
             return Result<Unit>.Err(WinError(E_POINTER))
         }
         items.clear()
-        let typed = CPointer<Int64>(itemsBuffer)
+        let typed = CPointer<Int16>(itemsBuffer)
         var offset = 0u32
         while (offset < itemsSize) {
             items.add(unsafe { (typed + Int64(offset)).read() })
@@ -181,22 +181,22 @@ class Int64VectorAbiTestImpl <: IVector_Impl<Int64> & Resource {
     }
 }
 
-class Int64VectorAbiTestFixture <: Resource {
-    public let vector: IVector<Int64>
-    private let impl: Int64VectorAbiTestImpl
+class Int16VectorAbiTestFixture <: Resource {
+    public let vector: IVector<Int16>
+    private let impl: Int16VectorAbiTestImpl
     private var closed: Bool = false
 
-    public init(items: ArrayList<Int64>, useGenericVtbl!: Bool = false) {
+    public init(items: ArrayList<Int16>, useGenericVtbl!: Bool = false) {
         impl = if (useGenericVtbl) {
-            Int64VectorAbiTestImpl.withGenericVtbl(items)
+            Int16VectorAbiTestImpl.withGenericVtbl(items)
         } else {
-            Int64VectorAbiTestImpl(items)
+            Int16VectorAbiTestImpl(items)
         }
 
-        let schemas = [IIterable<Int64>.descriptorSchema(), IVector<Int64>.descriptorSchema()]
+        let schemas = [IIterable<Int16>.descriptorSchema(), IVector<Int16>.descriptorSchema()]
         let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
         let object = createComObjectFromSchemas(impl, schemas, vtbls)
-        vector = object.toInterface(IVector<Int64>.descriptor())
+        vector = object.toInterface(IVector<Int16>.descriptor())
         object.close()
     }
 
@@ -216,34 +216,34 @@ class Int64VectorAbiTestFixture <: Resource {
     }
 }
 
-func createInt64VectorAbiTest(items: ArrayList<Int64>): Int64VectorAbiTestFixture {
-    Int64VectorAbiTestFixture(items)
+func createInt16VectorAbiTest(items: ArrayList<Int16>): Int16VectorAbiTestFixture {
+    Int16VectorAbiTestFixture(items)
 }
 
-func createGenericBuilderInt64VectorAbiTest(items: ArrayList<Int64>): Int64VectorAbiTestFixture {
-    Int64VectorAbiTestFixture(items, useGenericVtbl: true)
+func createGenericBuilderInt16VectorAbiTest(items: ArrayList<Int16>): Int16VectorAbiTestFixture {
+    Int16VectorAbiTestFixture(items, useGenericVtbl: true)
 }
 
 @Test
-func testInt64VectorUsesDirectValueAbiForMutableSlots() {
-    let fixture = createInt64VectorAbiTest(ArrayList<Int64>([4i64, 6i64]))
+func testInt16VectorUsesDirectValueAbiForMutableSlots() {
+    let fixture = createInt16VectorAbiTest(ArrayList<Int16>([4i16, 6i16]))
     let vector = fixture.vector
     @Expect(fixture.innerClosed(), false)
 
-    @Expect(unsafe { vector.GetAt(1u32) }, 6i64)
+    @Expect(unsafe { vector.GetAt(1u32) }, 6i16)
     var wrapperIndex = 99u32
-    @Expect(unsafe { vector.IndexOf(4i64, CPointer<UInt32>(inout wrapperIndex)) }, true)
+    @Expect(unsafe { vector.IndexOf(4i16, CPointer<UInt32>(inout wrapperIndex)) }, true)
     @Expect(wrapperIndex, 0u32)
 
     let vtbl = unsafe { vector.vtbl() }
     var directIndex = 99u32
     var directFound = false
-    let directIndexOf = CFunc<(CPointer<Unit>, Int64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
+    let directIndexOf = CFunc<(CPointer<Unit>, Int16, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
         CPointer<Unit>(vtbl.IndexOf)
     )
     let indexOfHr = unsafe { directIndexOf(
         vector.asRaw(),
-        6i64,
+        6i16,
         CPointer<UInt32>(inout directIndex),
         CPointer<Bool>(inout directFound)
     ) }
@@ -251,40 +251,40 @@ func testInt64VectorUsesDirectValueAbiForMutableSlots() {
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
-    let directSetAt = CFunc<(CPointer<Unit>, UInt32, Int64) -> Int32>(CPointer<Unit>(vtbl.SetAt))
-    let setAtHr = unsafe { directSetAt(vector.asRaw(), 0u32, 40i64) }
+    let directSetAt = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(vtbl.SetAt))
+    let setAtHr = unsafe { directSetAt(vector.asRaw(), 0u32, 40i16) }
     @Expect(setAtHr, S_OK.value)
-    @Expect(unsafe { vector.GetAt(0u32) }, 40i64)
+    @Expect(unsafe { vector.GetAt(0u32) }, 40i16)
 
-    let directInsertAt = CFunc<(CPointer<Unit>, UInt32, Int64) -> Int32>(CPointer<Unit>(vtbl.InsertAt))
-    let insertAtHr = unsafe { directInsertAt(vector.asRaw(), 1u32, 50i64) }
+    let directInsertAt = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(vtbl.InsertAt))
+    let insertAtHr = unsafe { directInsertAt(vector.asRaw(), 1u32, 50i16) }
     @Expect(insertAtHr, S_OK.value)
-    @Expect(unsafe { vector.GetAt(1u32) }, 50i64)
+    @Expect(unsafe { vector.GetAt(1u32) }, 50i16)
 
-    let directAppend = CFunc<(CPointer<Unit>, Int64) -> Int32>(CPointer<Unit>(vtbl.Append))
-    let appendHr = unsafe { directAppend(vector.asRaw(), 60i64) }
+    let directAppend = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>(vtbl.Append))
+    let appendHr = unsafe { directAppend(vector.asRaw(), 60i16) }
     @Expect(appendHr, S_OK.value)
-    @Expect(unsafe { vector.GetAt(3u32) }, 60i64)
+    @Expect(unsafe { vector.GetAt(3u32) }, 60i16)
 
     fixture.close()
     @Expect(fixture.innerClosed(), true)
 }
 
 @Test
-func testGenericInt64VectorBuilderUsesDirectValueAbiForSpecialization() {
-    let fixture = createGenericBuilderInt64VectorAbiTest(ArrayList<Int64>([4i64, 6i64]))
+func testGenericInt16VectorBuilderUsesDirectValueAbiForSpecialization() {
+    let fixture = createGenericBuilderInt16VectorAbiTest(ArrayList<Int16>([4i16, 6i16]))
     let vector = fixture.vector
     @Expect(fixture.innerClosed(), false)
 
     let vtbl = unsafe { vector.vtbl() }
     var directIndex = 99u32
     var directFound = false
-    let directIndexOf = CFunc<(CPointer<Unit>, Int64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
+    let directIndexOf = CFunc<(CPointer<Unit>, Int16, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
         CPointer<Unit>(vtbl.IndexOf)
     )
     let indexOfHr = unsafe { directIndexOf(
         vector.asRaw(),
-        6i64,
+        6i16,
         CPointer<UInt32>(inout directIndex),
         CPointer<Bool>(inout directFound)
     ) }
@@ -292,10 +292,10 @@ func testGenericInt64VectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
-    let directAppend = CFunc<(CPointer<Unit>, Int64) -> Int32>(CPointer<Unit>(vtbl.Append))
-    let appendHr = unsafe { directAppend(vector.asRaw(), 7i64) }
+    let directAppend = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>(vtbl.Append))
+    let appendHr = unsafe { directAppend(vector.asRaw(), 7i16) }
     @Expect(appendHr, S_OK.value)
-    @Expect(unsafe { vector.GetAt(2u32) }, 7i64)
+    @Expect(unsafe { vector.GetAt(2u32) }, 7i16)
 
     fixture.close()
     @Expect(fixture.innerClosed(), true)
