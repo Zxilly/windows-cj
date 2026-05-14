@@ -3,7 +3,7 @@ package windows_runtime
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, HString, S_OK}
+import windows_core.{E_POINTER, HString, S_OK, comRegistryLookup, rootRegistryKeyFromRaw}
 
 @Test
 func testStockIteratorSnapshotsSourceAndAdvancesCursor() {
@@ -17,6 +17,17 @@ func testStockIteratorSnapshotsSourceAndAdvancesCursor() {
     @Expect(unsafe { iterator.Current() }, 2i32)
     @Expect(unsafe { iterator.MoveNext() }, false)
     @Expect(unsafe { iterator.HasCurrent() }, false)
+}
+
+@Test
+func testStockReturnedInterfaceCloseRemovesRegistryEntry() {
+    let iterator = toIterator<Int32>([1i32])
+    let raw = iterator.asRaw()
+    let key = unsafe { rootRegistryKeyFromRaw(raw) }
+
+    @Expect(comRegistryLookup(key).isSome(), true)
+    iterator.close()
+    @Expect(comRegistryLookup(key).isNone(), true)
 }
 
 @Test

@@ -1649,3 +1649,29 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Pauli`: Round111 review clean; no blocking delegate public `Invoke(InParam<...>)`, null input, vtable ABI, lifecycle, or test issues found.
+
+### Round112 - Stock helper returned-interface lifetime
+
+- Started after Round111 commit; implementation recorded at `2026-05-14 21:13:15 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `Resource` provides `isClosed()` and `close()` for deterministic resource management and is the mechanism used by try-with-resource.
+- Reference scan:
+  - Rechecked stock iterable/vector/map-view reference tests for deterministic COM collection behavior.
+  - Treated deterministic COM reference release as a real lifecycle requirement, not a Rust-only API surface concern.
+- Fixed stock helper lifecycle:
+  - `createStockInterface` and `createStockInterfaceMulti` now close the temporary `ComObject` after `toInterface` obtains the returned owned interface reference.
+  - This releases the creation reference immediately; closing the returned interface can now destroy the stock object and remove its registry entry.
+- Added TDD coverage:
+  - Red: `testStockReturnedInterfaceCloseRemovesRegistryEntry` failed because `toIterator<Int32>(...)` left the COM registry entry alive after `iterator.close()`.
+  - The test now verifies stock returned interfaces hold only the returned owned reference.
+- Verification so far:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --filter testStockReturnedInterfaceCloseRemovesRegistryEntry --no-capture-output`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output`: passed 84/84 with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --skip-build --parallel 1 --timeout-each=5s --no-color --no-progress --no-capture-output`: passed 19/19 with `cjHeapSize=32GB`.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Laplace`: Round112 review clean; confirmed `toInterface` obtains an owned QI reference before `object.close()`, QI AddRefs before publishing the pointer, wrapper `takeFromAbi` owns the returned reference, and `ComObject.close()` releases only the temporary creation reference.

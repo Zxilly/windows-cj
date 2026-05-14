@@ -35,7 +35,9 @@ func createStockInterface<Inner, I>(
 ): I where I <: ComInterface {
     let schemas = Array<InterfaceDescriptorSchema>(1, { _ => schema })
     let object = createComObjectFromSchemas(inner, schemas, vtblPtr)
-    object.toInterface(descriptor)
+    let result = object.toInterface(descriptor)
+    object.close()
+    result
 }
 
 // Multi-schema variant: register N schemas and N vtbls (one per schema, in matching order).
@@ -49,7 +51,9 @@ func createStockInterfaceMulti<Inner, I>(
     vtblPtrs: Array<CPointer<Unit>>
 ): I where I <: ComInterface {
     let object = createComObjectFromSchemas(inner, schemas, vtblPtrs)
-    object.toInterface(descriptor)
+    let result = object.toInterface(descriptor)
+    object.close()
+    result
 }
 
 func createStockIterator<T>(items: ArrayList<T>): IIterator<T> where T <: RuntimeType & WinrtGenericType<T> {
