@@ -127,7 +127,7 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 | `windows-implement` | Production-ready | 19 | Schema vtable resolution、深继承 slot 数、QI ancestor fallback、custom vtable 必填 | smoke：真实 ComObject 注册 / WinRT activation |
 | `windows-core` | Production-ready | 24 | AbiArray owned semantics（红测固化）、HString winrt out/in 边界、null owned 拒绝、generic factory borrow view | 类型类别矩阵补齐（见下） |
 | `windows-polyfill` | Production-ready | 60 | factory_cache、reflective COM 接入、polyfill 形态 | — |
-| `windows-runtime` | Candidate | 144 | Vector/VectorView/Map/MapView scalar + copy struct + 部分 HString；async finish/cancel/fail；collection null-buffer guard | 矩阵：COM interface 集合 / iterator 全表面 / HString vector view |
+| `windows-runtime` | Candidate | 146 | Vector/VectorView/Map/MapView scalar + copy struct + 部分 HString；async finish/cancel/fail；collection null-buffer guard | 矩阵：COM interface 集合 / iterator 全表面 / HString vector view |
 | `windows-threading` | Candidate | 6 | submit / submitDefault / closeInternal | smoke：真实线程池调度 |
 | `windows-version` | Needs tests | 2 | 版本字符串解析 | 增加 OS 包装的 ABI 边界测试 |
 | `windows-targets` | Needs tests | 2 | 链接 target 选择 | smoke：实际链接到三种 dll search policy |
@@ -172,7 +172,7 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 
 | 表面 | Copy scalar | Copy struct | HString | COM interface |
 | --- | --- | --- | --- | --- |
-| Vector | ✅ `vector_int32_abi_test.cj` 等每个标量宽度一个 | ✅ `vector_copy_struct_abi_test.cj`, `vector_datetime_abi_test.cj` | ✅ `vector_hstring_abi_test.cj` | ❌ |
+| Vector | ✅ `vector_int32_abi_test.cj` 等每个标量宽度一个 | ✅ `vector_copy_struct_abi_test.cj`, `vector_datetime_abi_test.cj` | ✅ `vector_hstring_abi_test.cj` | ✅ `vector_interface_abi_test.cj` |
 | Vector view | ✅ `vector_view_uint8_abi_test.cj` 等 | ❌ | ❌ | ❌ |
 | Map | ✅ `map_int32_abi_test.cj` 等 | partial (`map_int32_vector_view_abi_test.cj` 嵌套) | ✅ `map_int32_hstring_abi_test.cj`, `map_uint32_hstring_abi_test.cj` | ❌ |
 | Map view | partial (`map_view_int32_generic_abi_test.cj`) | ❌ | ❌ | ❌ |
@@ -182,7 +182,7 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 ### 推荐顺序
 
 1. ~~`vector_hstring_abi_test.cj`~~（已完成）：直接走泛型 `IVectorVtbl.new<Identity, HString>` + `IIterableVtbl.new<Identity, HString>`。覆盖 wrapper 路径（SetAt/InsertAt/Append/IndexOf）和直接 vtable 路径（HSTRING raw handle in/out，含 GetAt out-slot）。
-2. `vector_interface_abi_test.cj` — IVector<IInspectable>，覆盖 owned/borrowed slot 转换。
+2. ~~`vector_interface_abi_test.cj`~~（已完成）：`IVector<IInspectable>` 覆盖 wrapper 路径和直接 vtable 路径，包含 borrowed input、owned output、`GetMany` out buffer、`ReplaceAll` input buffer、null handle 拒绝。
 3. `vector_view_hstring_abi_test.cj`、`vector_view_interface_abi_test.cj`。
 4. `map_hstring_*_abi_test.cj` — HString key。
 5. `iterator_*_abi_test.cj` — 每个类型类别一个。当前 iterator 表面完全无覆盖。
