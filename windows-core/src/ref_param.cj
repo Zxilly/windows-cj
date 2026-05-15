@@ -32,6 +32,16 @@ public func projectAbiValue<T, A>(value: T): A where A <: CType {
     }
 }
 
+public func withHStringInParam<R>(raw: CPointer<Unit>, action: (InParam<HString>) -> R): R {
+    if (raw.isNull()) {
+        return action(InParam<HString>())
+    }
+    try (value = HString.fromSystemHandleCopy(raw)) {
+        return action(InParam<HString>(value))
+    }
+    throw IllegalStateException("withHStringInParam action did not execute")
+}
+
 // InParam<T> is a call-scoped input view for ABI boundaries.
 // It does not own the underlying resource; retain explicitly to hold a handle across calls.
 public struct InParam<T> <: Param<T> {

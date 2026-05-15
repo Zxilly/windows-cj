@@ -2327,3 +2327,33 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Anscombe`: no findings; confirmed borrowed input HSTRING ownership, deterministic copied-HString cleanup on `Ok` and `Err` paths, preserved returned `IInspectable` ownership transfer, and meaningful free-count coverage.
+
+### Round135 - Generated HString InParam cleanup
+
+- Started at `2026-05-15 12:23:02 +08:00`; implementation recorded at `2026-05-15 12:33:37 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Try-with-resource deterministically closes `Resource` values.
+  - Interface implementation uses `<:`, conditions require parentheses, and enum comparisons should follow supported pattern matching rather than unsupported `!=`.
+- Reference scan:
+  - Round134 fixed one generated thunk manually, but `windows-implement` codegen still emitted `InParam<HString>(HString.fromSystemHandleCopy(raw))` for generated `CPointer<Unit>` HSTRING inputs.
+  - Regenerating future implementation thunks could therefore reintroduce GC-delayed cleanup for copied input strings.
+- Cleanup fix:
+  - Added `windows_core.withHStringInParam(raw, action)` to copy a borrowed system HSTRING only for the duration of a dispatch callback and close it immediately afterward.
+  - Updated descriptor codegen to detect `InParam<HString>` and `InParam<windows_core.HString>` over `CPointer<Unit>` ABI parameters.
+  - Generated dispatch now wraps implementation calls with nested `windows_core.withHStringInParam(...)` closures and passes local `*_inParam` values into the impl method.
+  - Non-HSTRING `InParam` generation remains on the existing projection path.
+- Added coverage:
+  - `testWithHStringInParamClosesCopiedInput` verifies the helper does not consume the borrowed raw input but frees the copied `HString` at callback exit.
+  - Extended descriptor codegen tests to assert generated single and paired HSTRING inputs use `withHStringInParam` and no longer inline `fromSystemHandleCopy` inside `InParam`.
+- Verification:
+  - `cjpm test -m windows-core --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_core.exe --parallel 1 --filter=*WithHStringInParamClosesCopiedInput --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 1/19.
+  - `cjv exec target\release\unittest_bin\windows_implement.exe --parallel 1 --filter=*GeneratedThunkProjectsInParamBeforeDispatch --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 1/19.
+  - `cjv exec target\release\unittest_bin\windows_core.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 19/19.
+  - `cjv exec target\release\unittest_bin\windows_implement.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 19/19.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Russell`: no findings; confirmed borrowed/raw ownership, deterministic copied-HSTRING cleanup, result and non-result thunk generation, nested multi-HSTRING ordering, unchanged non-HSTRING generation, and meaningful coverage.

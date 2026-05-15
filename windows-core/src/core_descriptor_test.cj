@@ -241,3 +241,26 @@ func testHStringInParamBorrowRejectsRawAbiProjection() {
     }), true)
     source.close()
 }
+
+@When[os == "Windows"]
+@Test
+func testWithHStringInParamClosesCopiedInput() {
+    let source = HString("dispatch-input")
+    let raw = source.toSystemHandleCopy()
+    let freeBefore = debugObservedHStringFreeCount()
+
+    try {
+        let value = withHStringInParam(raw, { param =>
+            if (param.isNull()) {
+                throw Exception("expected non-null HString input")
+            }
+            param.get().get()
+        })
+
+        @Expect(value, "dispatch-input")
+        @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+    } finally {
+        releaseSystemHStringHandle(raw)
+        source.close()
+    }
+}

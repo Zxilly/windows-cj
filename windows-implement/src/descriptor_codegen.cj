@@ -176,7 +176,31 @@ func inParamProjectionExpr(innerType: String, parameterName: String): String {
     "${innerType}.viewOf(${parameterName})"
 }
 
+func isHStringInParam(parameter: InterfaceParameterSchema): Bool {
+    match (parameter.bridgeKind) {
+        case InterfaceParameterBridgeKind.InParam =>
+            if (parameter.abiType != "CPointer<Unit>") {
+                return false
+            }
+            match (unwrapGenericType(parameter.callerType, "InParam")) {
+                case Some(innerType) => innerType == "windows_core.HString" || innerType == "HString"
+                case None => false
+            }
+        case _ => false
+    }
+}
+
+func dispatchArgumentName(parameter: InterfaceParameterSchema): String {
+    if (isHStringInParam(parameter)) {
+        return "${parameter.name}__inParam"
+    }
+    parameter.name
+}
+
 func dispatchArgumentExpr(parameter: InterfaceParameterSchema): String {
+    if (isHStringInParam(parameter)) {
+        return dispatchArgumentName(parameter)
+    }
     match (parameter.bridgeKind) {
         case InterfaceParameterBridgeKind.InParam =>
             match (unwrapGenericType(parameter.callerType, "InParam")) {
@@ -189,6 +213,54 @@ func dispatchArgumentExpr(parameter: InterfaceParameterSchema): String {
                 case None => parameter.name
             }
         case _ => parameter.name
+    }
+}
+
+func appendHStringInParamDispatchOpen(
+    sb: StringBuilder,
+    method: InterfaceMethodSchema,
+    indent: String,
+    visibleOnly!: Bool = false
+): Unit {
+    let parameterCount = if (visibleOnly) {
+        visibleParameterCount(method)
+    } else {
+        method.parameters.size
+    }
+    var index: Int64 = 0
+    while (index < parameterCount) {
+        let parameter = method.parameters[index]
+        if (isHStringInParam(parameter)) {
+            sb.append(indent)
+            sb.append("windows_core.withHStringInParam(")
+            sb.append(parameter.name)
+            sb.append(", { ")
+            sb.append(dispatchArgumentName(parameter))
+            sb.append(" =>\n")
+        }
+        index += 1
+    }
+}
+
+func appendHStringInParamDispatchClose(
+    sb: StringBuilder,
+    method: InterfaceMethodSchema,
+    indent: String,
+    visibleOnly!: Bool = false
+): Unit {
+    let parameterCount = if (visibleOnly) {
+        visibleParameterCount(method)
+    } else {
+        method.parameters.size
+    }
+    var index: Int64 = parameterCount - 1
+    while (index >= 0) {
+        let parameter = method.parameters[index]
+        if (isHStringInParam(parameter)) {
+            sb.append(indent)
+            sb.append("})\n")
+        }
+        index -= 1
     }
 }
 
@@ -797,6 +869,7 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
     sb.append("        case Some(impl) =>\n")
     if (hasResultReturnBridge(method)) {
         appendQualifiedImplDispatchOpen(sb, descriptor)
+        appendHStringInParamDispatchOpen(sb, method, "                    ", visibleOnly: true)
         sb.append("                    match (")
         appendImplMethodCall(sb, "qualifiedImpl", method, visibleOnly: true, bridgeForDispatch: true)
         sb.append(") {\n")
@@ -839,12 +912,15 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
                 sb.append("                        E_NOINTERFACE\n")
         }
         sb.append("                    }\n")
+        appendHStringInParamDispatchClose(sb, method, "                    ", visibleOnly: true)
         appendQualifiedImplDispatchClose(sb, method)
     } else {
         appendQualifiedImplDispatchOpen(sb, descriptor)
+        appendHStringInParamDispatchOpen(sb, method, "                    ")
         sb.append("                    ")
         appendImplMethodCall(sb, "qualifiedImpl", method, bridgeForDispatch: true)
         sb.append("\n")
+        appendHStringInParamDispatchClose(sb, method, "                    ")
         appendQualifiedImplDispatchClose(sb, method)
     }
     sb.append("        case None =>\n")

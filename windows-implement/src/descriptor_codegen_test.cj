@@ -73,6 +73,50 @@ func testGeneratedThunkProjectsInParamBeforeDispatch() {
                     )
                 ],
                 "Int32"
+            ),
+            InterfaceMethodSchema(
+                "InputString",
+                5,
+                [
+                    InterfaceParameterSchema(
+                        "text",
+                        "CPointer<Unit>",
+                        "InParam<windows_core.HString>",
+                        InterfaceParameterBridgeKind.InParam
+                    ),
+                    InterfaceParameterSchema(
+                        "result",
+                        "CPointer<Int32>",
+                        "OutSlot<Int32>",
+                        InterfaceParameterBridgeKind.OutSlot
+                    )
+                ],
+                "Int32"
+            ),
+            InterfaceMethodSchema(
+                "InputStringPair",
+                6,
+                [
+                    InterfaceParameterSchema(
+                        "left",
+                        "CPointer<Unit>",
+                        "InParam<windows_core.HString>",
+                        InterfaceParameterBridgeKind.InParam
+                    ),
+                    InterfaceParameterSchema(
+                        "right",
+                        "CPointer<Unit>",
+                        "InParam<windows_core.HString>",
+                        InterfaceParameterBridgeKind.InParam
+                    ),
+                    InterfaceParameterSchema(
+                        "result",
+                        "CPointer<Int32>",
+                        "OutSlot<Int32>",
+                        InterfaceParameterBridgeKind.OutSlot
+                    )
+                ],
+                "Int32"
             )
         ]
     )
@@ -83,4 +127,10 @@ func testGeneratedThunkProjectsInParamBeforeDispatch() {
     @Expect(source.contains("qualifiedImpl.Input(if (input.isNull()) { InParam<Fixture_IInput>() } else { InParam<Fixture_IInput>(Fixture_IInput.viewOf(input)) })"), true)
     @Expect(source.contains("qualifiedImpl.InputStatus(status)"), false)
     @Expect(source.contains("qualifiedImpl.InputStatus(InParam<Fixture_Status>(windows_core.assumeInitTypedAbi(status, windows_core.typeMarker<Fixture_Status>())))"), true)
+    @Expect(source.contains("qualifiedImpl.InputString(InParam<windows_core.HString>(windows_core.HString.fromSystemHandleCopy(text)))"), false)
+    @Expect(source.contains("windows_core.withHStringInParam(text, { text__inParam =>"), true)
+    @Expect(source.contains("qualifiedImpl.InputString(text__inParam)"), true)
+    @Expect(source.contains("windows_core.withHStringInParam(left, { left__inParam =>"), true)
+    @Expect(source.contains("windows_core.withHStringInParam(right, { right__inParam =>"), true)
+    @Expect(source.contains("qualifiedImpl.InputStringPair(left__inParam, right__inParam)"), true)
 }
