@@ -123,19 +123,50 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 
 ## 下一任 agent 的第一批任务
 
-1. 确认 worktree 除本文档新增和旧日志删除外没有其他变更。
-2. 跑基线验证：
-   - `$env:cjHeapSize='32GB'; cjpm test --no-run --parallel 1 --no-color --no-progress`
-   - `cjv exec target\release\unittest_bin\windows_core.exe`
-   - `cjv exec target\release\unittest_bin\windows_runtime.exe`
-   - `python scripts/check_workspace_setup.py`
-   - `git diff --check`
-3. 重新评估 `AbiArray<HString>.get()` 所有权候选问题：
-   - 添加红测，证明返回的 HSTRING 值是否应该是独立资源。
-   - 如果测试暴露真实所有权 bug，只修 `ProjectedAbiArrayStorage.get()` 或最小共享 helper。
-   - 提交前必须跑 review。
-4. 添加第一条静态审计检查，优先处理被忽略的 HRESULT 结果或 unsafe owned null 路径。
-5. 启动 array 和 collection thunk 的类型类别测试矩阵。
+1. ~~确认 worktree 除本文档新增和旧日志删除外没有其他变更。~~（已完成）
+2. ~~跑基线验证。~~（已完成）
+3. ~~重新评估 `AbiArray<HString>.get()` 所有权候选问题。~~（已修，提交 `ba017c29`：`ProjectedAbiArrayStorage.get()` 现在返回独立 owned clone；红测固化契约。）
+4. ~~添加第一条静态审计检查。~~（已完成，提交 `1846e803`：`scripts/check_ignored_results.py` 检测忽略的 `Result.ok()`，由 `check_workspace_setup.py` 调用。已记录的盲点：if/else 分支末尾、match 分支末尾。）
+5. 启动 array 和 collection thunk 的类型类别测试矩阵。**当前进度：见下文"类型类别测试矩阵"小节。** 第一个推荐目标：`vector_hstring_abi_test.cj`。
+
+## 类型类别测试矩阵
+
+跟踪 `NEXT_AGENT_TASKS.md` 列出的类型类别覆盖。目标：每个集合表面 × 每个类型类别 至少一个单类型特化测试。失败应能指向唯一 ABI 形态。
+
+### 类型类别
+
+- **Copy scalar**：`Int32`、`UInt32`、`Bool`、`Int16`、`UInt16`、`Int64`、`UInt64`、`Float32`、`Float64`、`UInt8` — direct value ABI。
+- **Copy struct**：`GuidValue`、`DateTime`、`TimeSpan`、`Rect`、`Point`、`Size` — direct value ABI。
+- **Clone handle**：`HString` — handle (`CPointer<Unit>`) ABI。
+- **COM interface**：owned、borrowed、nullable — handle ABI。
+
+### 表面覆盖（2026-05-15 快照）
+
+| 表面 | Copy scalar | Copy struct | HString | COM interface |
+| --- | --- | --- | --- | --- |
+| Vector | ✅ `vector_int32_abi_test.cj` 等每个标量宽度一个 | ✅ `vector_copy_struct_abi_test.cj`, `vector_datetime_abi_test.cj` | ❌ | ❌ |
+| Vector view | ✅ `vector_view_uint8_abi_test.cj` 等 | ❌ | ❌ | ❌ |
+| Map | ✅ `map_int32_abi_test.cj` 等 | partial (`map_int32_vector_view_abi_test.cj` 嵌套) | ✅ `map_int32_hstring_abi_test.cj`, `map_uint32_hstring_abi_test.cj` | ❌ |
+| Map view | partial (`map_view_int32_generic_abi_test.cj`) | ❌ | ❌ | ❌ |
+| Iterator | ❌ | ❌ | ❌ | ❌ |
+| Array (in/out/replace) | partial (`vector_int32_generic_abi_test.cj` GetMany/ReplaceAll；`property_value_array_abi_test.cj`) | ❌ | ❌ | ❌ |
+
+### 推荐顺序
+
+1. `vector_hstring_abi_test.cj` — IVector<HString> 直接 vtable 往返。最高价值：HString slot ABI 是最近所有权不变量的集中区域。注意 `IVectorVtbl` 当前没有 `newHString` 工厂方法；要么走泛型 `new<Identity, HString>`（验证是否走 handle 投影路径），要么按需添加 typed factory。
+2. `vector_interface_abi_test.cj` — IVector<IInspectable>，覆盖 owned/borrowed slot 转换。
+3. `vector_view_hstring_abi_test.cj`、`vector_view_interface_abi_test.cj`。
+4. `map_hstring_*_abi_test.cj` — HString key。
+5. `iterator_*_abi_test.cj` — 每个类型类别一个。当前 iterator 表面完全无覆盖。
+
+### 模板
+
+参照 `vector_int32_abi_test.cj` 的结构：一个自定义 `_Impl` 类经 `createComObjectFromSchemas` 串起，helper 函数构造投影接口，`@Test` 同时验证投影 wrapper 和直接 vtable 调用。
+
+### 维护
+
+- 新增一个测试 → 更新表中对应单元格，并从"推荐顺序"中划除。
+- 出现新类别 → 扩表，每个类别只加一个代表测试，覆盖 ABI 形态而非 API 表面。
 
 ## 完成标准
 
