@@ -85,6 +85,13 @@ func releaseRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
+func requireOwnedInterfaceRaw(raw: CPointer<Unit>): CPointer<Unit> {
+    if (raw.isNull()) {
+        throw WindowsException(E_POINTER)
+    }
+    raw
+}
+
 func takeIUnknownFromAbi(raw: CPointer<Unit>): IUnknown {
     IUnknown.fromAbiTake(raw)
 }
@@ -192,17 +199,19 @@ public open class InterfaceWrapperBase <: Resource {
     }
 
     public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        this.raw_ = raw
+        let liveRaw = if (takeOwnership) { requireOwnedInterfaceRaw(raw) } else { raw }
+        this.raw_ = liveRaw
         this.ownsHandle_ = takeOwnership
         this.allowManualRelease_ = false
-        this.ownedHandleState_ = if (takeOwnership) { Some(OwnedHandleState(raw)) } else { None }
+        this.ownedHandleState_ = if (takeOwnership) { Some(OwnedHandleState(liveRaw)) } else { None }
     }
 
     protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        this.raw_ = raw
+        let liveRaw = if (takeOwnership) { requireOwnedInterfaceRaw(raw) } else { raw }
+        this.raw_ = liveRaw
         this.ownsHandle_ = takeOwnership
         this.allowManualRelease_ = allowManualRelease
-        this.ownedHandleState_ = if (takeOwnership) { Some(OwnedHandleState(raw)) } else { None }
+        this.ownedHandleState_ = if (takeOwnership) { Some(OwnedHandleState(liveRaw)) } else { None }
     }
 
     public func asRaw(): CPointer<Unit> {

@@ -13,6 +13,8 @@ let propertyValueArrayDateTimeCalls = AtomicInt64(0)
 let propertyValueArrayRectCalls = AtomicInt64(0)
 let propertyValueArrayStringCalls = AtomicInt64(0)
 let propertyValueArrayInspectableCalls = AtomicInt64(0)
+let propertyValueArrayReturnAddRefCalls = AtomicInt64(0)
+let propertyValueArrayReturnReleaseCalls = AtomicInt64(0)
 
 func propertyValueArrayGuidExpected(offset: UInt32): GUID {
     GUID.from_values(0xA0B0C000u32 + offset, 0x1122u16, 0x3344u16, 0x55u8, 0x66u8, 0x77u8, 0x88u8, 0x99u8, 0xAAu8, 0xBBu8, 0xCCu8)
@@ -34,8 +36,30 @@ func propertyValueArrayRect(x: Float32, y: Float32, width: Float32, height: Floa
 }
 
 @C
+func propertyValueArrayAddRefThunk(_: CPointer<Unit>): UInt32 {
+    let oldCount = propertyValueArrayReturnAddRefCalls.fetchAdd(1)
+    UInt32(oldCount + 1)
+}
+
+@C
+func propertyValueArrayReleaseThunk(_: CPointer<Unit>): UInt32 {
+    let oldCount = propertyValueArrayReturnReleaseCalls.fetchAdd(1)
+    UInt32(oldCount + 1)
+}
+
+func resetPropertyValueArrayReturnCounts(): Unit {
+    propertyValueArrayReturnAddRefCalls.store(0)
+    propertyValueArrayReturnReleaseCalls.store(0)
+}
+
+func propertyValuePublishInspectableResult(instanceRaw: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Unit {
+    let _ = unsafe { propertyValueArrayAddRefThunk(instanceRaw) }
+    unsafe { result__.write(instanceRaw) }
+}
+
+@C
 func propertyValueCreateInt32ArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<Int32>,
     result__: CPointer<CPointer<Unit>>
@@ -47,14 +71,14 @@ func propertyValueCreateInt32ArrayThunk(
     @Expect(unsafe { value.read(0) }, 10i32)
     @Expect(unsafe { value.read(1) }, 20i32)
     @Expect(unsafe { value.read(2) }, 30i32)
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayInt32Calls.fetchAdd(1)
     S_OK.value
 }
 
 @C
 func propertyValueCreateGuidArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<GUID>,
     result__: CPointer<CPointer<Unit>>
@@ -65,14 +89,14 @@ func propertyValueCreateGuidArrayThunk(
     @Expect(valueSize, 2u32)
     @Expect(unsafe { value.read(0) } == propertyValueArrayGuidExpected(1u32), true)
     @Expect(unsafe { value.read(1) } == propertyValueArrayGuidExpected(2u32), true)
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayGuidCalls.fetchAdd(1)
     S_OK.value
 }
 
 @C
 func propertyValueCreateDateTimeArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<DateTimeAbi>,
     result__: CPointer<CPointer<Unit>>
@@ -83,14 +107,14 @@ func propertyValueCreateDateTimeArrayThunk(
     @Expect(valueSize, 2u32)
     @Expect(unsafe { value.read(0) }.UniversalTime, 111i64)
     @Expect(unsafe { value.read(1) }.UniversalTime, 222i64)
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayDateTimeCalls.fetchAdd(1)
     S_OK.value
 }
 
 @C
 func propertyValueCreateRectArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<RectAbi>,
     result__: CPointer<CPointer<Unit>>
@@ -109,14 +133,14 @@ func propertyValueCreateRectArrayThunk(
     @Expect(second.Y, 6.0f32)
     @Expect(second.Width, 7.0f32)
     @Expect(second.Height, 8.0f32)
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayRectCalls.fetchAdd(1)
     S_OK.value
 }
 
 @C
 func propertyValueCreateStringArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<CPointer<Unit>>,
     result__: CPointer<CPointer<Unit>>
@@ -137,14 +161,14 @@ func propertyValueCreateStringArrayThunk(
         second.close()
         third.close()
     }
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayStringCalls.fetchAdd(1)
     S_OK.value
 }
 
 @C
 func propertyValueCreateInspectableArrayThunk(
-    _: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     valueSize: UInt32,
     value: CPointer<CPointer<Unit>>,
     result__: CPointer<CPointer<Unit>>
@@ -159,13 +183,15 @@ func propertyValueCreateInspectableArrayThunk(
     @Expect(first.isNotNull(), true)
     @Expect(second.isNull(), true)
     @Expect(third.isNotNull(), true)
-    unsafe { result__.write(CPointer<Unit>()) }
+    propertyValuePublishInspectableResult(instanceRaw, result__)
     propertyValueArrayInspectableCalls.fetchAdd(1)
     S_OK.value
 }
 
 func propertyValueArrayOverloadVtbl(): IPropertyValueStaticsVtbl {
     var vtbl = IPropertyValueStaticsVtbl()
+    vtbl.base_.base_.AddRef = propertyValueArrayAddRefThunk
+    vtbl.base_.base_.Release = propertyValueArrayReleaseThunk
     vtbl.CreateInt32Array = propertyValueCreateInt32ArrayThunk
     vtbl.CreateGuidArray = propertyValueCreateGuidArrayThunk
     vtbl.CreateDateTimeArray = propertyValueCreateDateTimeArrayThunk
@@ -207,13 +233,17 @@ func withPropertyValueInspectableArrayInputs(action: (IInspectable, IInspectable
 @Test
 func testPropertyValueStaticsCreateArrayOverloadsStagePrimitiveArrays() {
     propertyValueArrayInt32Calls.store(0)
+    resetPropertyValueArrayReturnCounts()
     withPropertyValueArrayOverloadRaw({ raw: CPointer<Unit> =>
         let statics = IPropertyValueStatics.viewOf(raw)
         let values: Array<Int32> = [10i32, 20i32, 30i32]
 
-        let _ = unsafe { statics.CreateInt32Array(values) }
+        let result = unsafe { statics.CreateInt32Array(values) }
+        result.close()
 
         @Expect(propertyValueArrayInt32Calls.load(), 1)
+        @Expect(propertyValueArrayReturnAddRefCalls.load(), 1)
+        @Expect(propertyValueArrayReturnReleaseCalls.load(), 1)
     })
 }
 
@@ -222,6 +252,7 @@ func testPropertyValueStaticsCreateArrayOverloadsProjectCopyStructArrays() {
     propertyValueArrayGuidCalls.store(0)
     propertyValueArrayDateTimeCalls.store(0)
     propertyValueArrayRectCalls.store(0)
+    resetPropertyValueArrayReturnCounts()
 
     withPropertyValueArrayOverloadRaw({ raw: CPointer<Unit> =>
         let statics = IPropertyValueStatics.viewOf(raw)
@@ -238,19 +269,25 @@ func testPropertyValueStaticsCreateArrayOverloadsProjectCopyStructArrays() {
             propertyValueArrayRect(5.0f32, 6.0f32, 7.0f32, 8.0f32)
         ]
 
-        let _ = unsafe { statics.CreateGuidArray(guidValues) }
-        let _ = unsafe { statics.CreateDateTimeArray(dateTimeValues) }
-        let _ = unsafe { statics.CreateRectArray(rectValues) }
+        let guidResult = unsafe { statics.CreateGuidArray(guidValues) }
+        let dateTimeResult = unsafe { statics.CreateDateTimeArray(dateTimeValues) }
+        let rectResult = unsafe { statics.CreateRectArray(rectValues) }
+        guidResult.close()
+        dateTimeResult.close()
+        rectResult.close()
 
         @Expect(propertyValueArrayGuidCalls.load(), 1)
         @Expect(propertyValueArrayDateTimeCalls.load(), 1)
         @Expect(propertyValueArrayRectCalls.load(), 1)
+        @Expect(propertyValueArrayReturnAddRefCalls.load(), 3)
+        @Expect(propertyValueArrayReturnReleaseCalls.load(), 3)
     })
 }
 
 @Test
 func testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles() {
     propertyValueArrayStringCalls.store(0)
+    resetPropertyValueArrayReturnCounts()
     withPropertyValueArrayOverloadRaw({ raw: CPointer<Unit> =>
         let statics = IPropertyValueStatics.viewOf(raw)
         let first = windows_core.HString("alpha")
@@ -259,7 +296,8 @@ func testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles() {
         let createBefore = windows_core.debugObservedWindowsCreateStringCount()
         let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
         try {
-            let _ = unsafe { statics.CreateStringArray([first, second, third]) }
+            let result = unsafe { statics.CreateStringArray([first, second, third]) }
+            result.close()
         } finally {
             first.close()
             second.close()
@@ -267,6 +305,8 @@ func testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles() {
         }
 
         @Expect(propertyValueArrayStringCalls.load(), 1)
+        @Expect(propertyValueArrayReturnAddRefCalls.load(), 1)
+        @Expect(propertyValueArrayReturnReleaseCalls.load(), 1)
         @Expect(windows_core.debugObservedWindowsCreateStringCount() - createBefore >= 2, true)
         @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore >= 2, true)
     })
@@ -275,14 +315,18 @@ func testPropertyValueStaticsCreateArrayOverloadsStageStringArrayHandles() {
 @Test
 func testPropertyValueStaticsCreateArrayOverloadsStageInspectableOptionArray() {
     propertyValueArrayInspectableCalls.store(0)
+    resetPropertyValueArrayReturnCounts()
     withPropertyValueArrayOverloadRaw({ raw: CPointer<Unit> =>
         let statics = IPropertyValueStatics.viewOf(raw)
         withPropertyValueInspectableArrayInputs({ first: IInspectable, third: IInspectable =>
             let values: Array<Option<IInspectable>> = [Some(first), None, Some(third)]
 
-            let _ = unsafe { statics.CreateInspectableArray(values) }
+            let result = unsafe { statics.CreateInspectableArray(values) }
+            result.close()
 
             @Expect(propertyValueArrayInspectableCalls.load(), 1)
+            @Expect(propertyValueArrayReturnAddRefCalls.load(), 1)
+            @Expect(propertyValueArrayReturnReleaseCalls.load(), 1)
         })
     })
 }

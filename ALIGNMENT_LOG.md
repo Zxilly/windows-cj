@@ -1647,6 +1647,8 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+- Review:
+  - Review agent `Avicenna`: no findings; confirmed the centralized owned-path null rejection only affects `takeOwnership` wrappers, borrowed `viewOf(null)` remains available for optional/probe paths, and the property-value array tests now simulate and balance owned out-interface `AddRef`/`Release`.
 
 ### Round129 - Property set runtime ancestor cleanup
 
@@ -2357,3 +2359,32 @@
   - `git diff --check`: passed.
 - Review:
   - Review agent `Russell`: no findings; confirmed borrowed/raw ownership, deterministic copied-HSTRING cleanup, result and non-result thunk generation, nested multi-HSTRING ordering, unchanged non-HSTRING generation, and meaningful coverage.
+
+### Round136 - Null owned interface ABI rejection
+
+- Started at `2026-05-15 12:37:10 +08:00`; implementation recorded at `2026-05-15 13:04:37 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Exceptions are thrown with `throw` and caught with `try`/`catch`.
+  - Class constructors must initialize all fields, and conditions require parentheses.
+- Reference scan:
+  - The reference interface `from_abi` path rejects successful interface outputs whose ABI pointer is null with `E_POINTER`.
+  - The Cangjie call side already has some explicit null checks, but many generated/manual methods call `fromAbiTake` directly after a successful `HRESULT`.
+  - `viewOf(null)` is still used for type probing and optional/borrowed input handling, so borrowed views cannot reject null globally.
+- ABI fix:
+  - Added a single `requireOwnedInterfaceRaw` check in `InterfaceWrapperBase` ownership-taking constructors.
+  - All hand-written and generated `fromAbiTake` wrappers that construct owned interface wrappers now throw `WindowsException(E_POINTER)` for null ABI pointers.
+  - Borrowed `viewOf(null)` remains allowed so existing generic type probes and nullable input paths keep working.
+- Test fix:
+  - Added interface-level coverage for `IUnknown.fromAbiTake(CPointer<Unit>())` throwing while `IUnknown.viewOf(CPointer<Unit>())` remains a null borrowed view.
+  - Added generated-wrapper coverage for `IAsyncInfo.fromAbiTake(CPointer<Unit>())`.
+  - Updated property-value array overload tests to return a non-null test object, simulate `AddRef` before publishing it, close returned wrappers, and assert `Release` balances the returned references; those tests were previously using invalid `S_OK + null` returns while only intending to validate array input staging.
+- Verification so far:
+  - Initial `cjpm test -m windows-interface` failed on the new null-owned-pointer test before the implementation.
+  - `cjpm test -m windows-interface`: passed 8/8 with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --no-run`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --filter=*RuntimeFromAbiTakeRejectsNullOwnedPointer*`: passed 1/136.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --filter=*PropertyValueStaticsCreateArrayOverloads*,*RuntimeFromAbiTakeRejectsNullOwnedPointer* --no-color --no-progress`: passed 5/136.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --no-color --no-progress`: passed 136/136.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.

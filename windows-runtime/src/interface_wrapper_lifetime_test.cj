@@ -3,6 +3,7 @@ package windows_runtime
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
+import windows_core.WindowsException
 import windows_interface.*
 
 let runtimeWrapperReleaseCount = AtomicInt64(0)
@@ -15,6 +16,17 @@ func runtimeWrapperReleaseThunk(_: CPointer<Unit>): UInt32 {
 
 func resetRuntimeWrapperReleaseCount(): Unit {
     runtimeWrapperReleaseCount.store(0)
+}
+
+func runtimeWrapperThrowsWindowsException(action: () -> Unit): Bool {
+    try {
+        action()
+        false
+    } catch (_: WindowsException) {
+        true
+    } catch (_: Exception) {
+        false
+    }
 }
 
 func runtimeWrapperTestVtbl(): IUnknownVtbl {
@@ -34,6 +46,15 @@ func withRuntimeWrapperRaw(action: (CPointer<Unit>) -> Unit): Unit {
         releaseArrayRawData(objectHandle)
         releaseArrayRawData(vtblHandle)
     }
+}
+
+@Test
+func testRuntimeFromAbiTakeRejectsNullOwnedPointer() {
+    @Expect(runtimeWrapperThrowsWindowsException({ =>
+        let _ = IAsyncInfo.fromAbiTake(CPointer<Unit>())
+    }), true)
+
+    @Expect(IAsyncInfo.viewOf(CPointer<Unit>()).asRaw().isNull(), true)
 }
 
 @Test

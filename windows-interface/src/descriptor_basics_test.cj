@@ -2,6 +2,7 @@ package windows_interface
 
 import std.unittest.*
 import std.unittest.testmacro.*
+import windows_result.WindowsException
 
 func optionGuidEquals(value: Option<GUID>, expected: GUID): Bool {
     match (value) {
@@ -17,6 +18,17 @@ func bridgeKindIsValue(value: InterfaceParameterBridgeKind): Bool {
     }
 }
 
+func interfaceTestThrowsWindowsException(action: () -> Unit): Bool {
+    try {
+        action()
+        false
+    } catch (_: WindowsException) {
+        true
+    } catch (_: Exception) {
+        false
+    }
+}
+
 @Test
 func testGuidSignatureIsDeterministicAndVersioned() {
     let first = GUID.from_signature("rc(Windows.Foundation.IAsyncAction;{5A648006-843A-4DA9-865B-9D26E5DFAD7B})")
@@ -27,6 +39,15 @@ func testGuidSignatureIsDeterministicAndVersioned() {
     @Expect(first != different, true)
     @Expect(UInt16(first.data3 & 0xF000u16), 0x5000u16)
     @Expect(UInt8(first.data4[0] & 0xC0u8), 0x80u8)
+}
+
+@Test
+func testInterfaceFromAbiTakeRejectsNullOwnedPointer() {
+    @Expect(interfaceTestThrowsWindowsException({ =>
+        let _ = IUnknown.fromAbiTake(CPointer<Unit>())
+    }), true)
+
+    @Expect(IUnknown.viewOf(CPointer<Unit>()).asRaw().isNull(), true)
 }
 
 @Test
