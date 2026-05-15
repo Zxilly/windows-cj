@@ -9,6 +9,7 @@ workspace under the sibling deprecated_windows_cj directory.
 from __future__ import annotations
 
 import sys
+import subprocess
 import tomllib
 import ast
 import hashlib
@@ -663,6 +664,18 @@ def check_active_tools(workspace: Path) -> None:
     check_path_exists(workspace / "windows-winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
 
 
+def check_ignored_results(workspace: Path) -> None:
+    script = workspace / "scripts" / "check_ignored_results.py"
+    check_path_exists(script, "ignored-results audit script")
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"check_ignored_results.py failed:\n{result.stdout}{result.stderr}")
+
+
 def main() -> None:
     workspace = Path(__file__).resolve().parent.parent
     print(f"workspace = {workspace}")
@@ -678,6 +691,8 @@ def main() -> None:
     print("OK: package dependency and native helper boundaries are explicit")
     check_active_tools(workspace)
     print("OK: active Cangjie generator and WinUI helper files are present")
+    check_ignored_results(workspace)
+    print("OK: no ignored HRESULT/Result.ok() values in active .cj sources")
 
 
 if __name__ == "__main__":
