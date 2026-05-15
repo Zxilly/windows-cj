@@ -36,7 +36,7 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
 
     public func get(index: Int64): T {
         ensureProjectedIndex(index, len())
-        values[index]
+        cloneProjectedElement(values[index])
     }
 
     public func set(index: Int64, value: T): Unit {

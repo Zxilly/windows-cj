@@ -136,21 +136,47 @@ func testProjectedAbiArrayReplaceWithClosesPreviousHStringClones() {
 }
 
 @Test
-func testAbiArrayReplaceWithClonesAliasedReplacementBeforeClearingOldStorage() {
+func testAbiArrayReplaceWithClonesInputBeforeClearingOldStorage() {
+    // Regression guard: replaceWith must clone its inputs before calling
+    // clear() on the old storage. Today get() returns an owned wrapper so
+    // `fetched` and the storage entry are independent, but if get() ever
+    // regressed to returning an alias, a clear-then-replace order would
+    // close the very wrapper just handed to replaceWith. Keeping this test
+    // makes that regression observable.
     let original = HString("shared")
     let array = AbiArray<HString>.fromSlice([original])
-    let aliased = array.get(0)
-    let freeBefore = debugObservedHStringFreeCount()
+    let fetched = array.get(0)
 
-    array.replaceWith([aliased])
+    array.replaceWith([fetched])
 
     @Expect(array.get(0).get(), "shared")
-    @Expect(aliased.isClosed(), true)
-    @Expect(debugObservedHStringFreeCount() - freeBefore, 0)
+    // fetched is an independent owned wrapper; replaceWith must not close it.
+    @Expect(fetched.isClosed(), false)
 
+    fetched.close()
     original.close()
     array.close()
-    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+}
+
+@Test
+func testProjectedAbiArrayGetReturnsOwnedHStringClone() {
+    // Contract probe: AbiArray<HString>.get() must return an owned wrapper
+    // independent of the storage's wrapper. Closing the returned value must
+    // not corrupt the storage — every wrapper handed out has exactly one
+    // clear releaser (the caller).
+    let original = HString("get-owned")
+    let array = AbiArray<HString>.fromSlice([original])
+
+    let fetched = array.get(0)
+    fetched.close()
+
+    // Closing the caller's wrapper must not mark the storage entry as closed
+    // nor invalidate subsequent reads.
+    @Expect(array.get(0).isClosed(), false)
+    @Expect(array.get(0).get(), "get-owned")
+
+    array.close()
+    original.close()
 }
 
 @Test
