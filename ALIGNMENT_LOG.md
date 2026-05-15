@@ -1731,6 +1731,31 @@
 - Review:
   - Review agent `Aquinas`: no findings; confirmed queried default/closable interfaces are released through `try` and returned HSTRING/COM ownership semantics are unchanged.
 
+### Round132 - Async join IAsyncInfo cleanup
+
+- Started at `2026-05-15 11:52:09 +08:00`; implementation recorded at `2026-05-15 12:08:00 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` requires a `Resource` value and calls `close()` at block exit.
+  - Try-with-resource bindings share normal block scope, so the implementation avoids redeclaring the same name.
+- Reference scan:
+  - `IAsyncAction.join`, `IAsyncOperation.join`, `IAsyncActionWithProgress.join`, and `IAsyncOperationWithProgress.join` all call `asIAsyncInfo()` to wait and read terminal failure state.
+  - The queried `IAsyncInfo` wrapper was only needed for the duration of `join()` and should be deterministically released on completed, error, and canceled return paths.
+- Cleanup fix:
+  - Wrapped all four `join()` methods in `try (info = asIAsyncInfo())` while preserving existing status handling, `GetResults()`, and fallback-error behavior.
+  - No vtable layout or public ABI changes were made.
+- Added coverage:
+  - `testAsyncActionJoinReleasesTemporaryAsyncInfo` creates a fake `IAsyncAction` with `IAsyncInfo` and `IAsyncAction` schemas, calls `join()`, then closes the returned action.
+  - The test asserts the fake implementation is destroyed after `action.close()`, proving the temporary `IAsyncInfo` QI reference was released before closing the public action wrapper.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*AsyncActionJoinReleasesTemporaryAsyncInfo,*ReadyActionJoinAndWhenCompleteSuccessfully,*ReadyOperation* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 4/134.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 134/134.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Maxwell`: no findings; confirmed the four `join()` wrappers release the owned `asIAsyncInfo()` QI reference and the fake COM cleanup path validates the lifetime.
+
 ### Round125 - IReferenceArray property value forwarding
 
 - Started at `2026-05-15 02:55:21 +08:00`; implementation recorded at `2026-05-15 03:01:19 +08:00`.

@@ -1092,16 +1092,18 @@ private func createAsyncOperationWithProgressImpl<TResult, TProgress>(
 extend IAsyncAction {
     public func join(): Result<Unit> {
         try {
-            let info = asIAsyncInfo()
-            let status = waitForTerminalStatus(info)
-            if (status == AsyncStatus_Completed) {
-                unsafe { GetResults() }
-                return Result<Unit>.Ok(())
+            try (info = asIAsyncInfo()) {
+                let status = waitForTerminalStatus(info)
+                if (status == AsyncStatus_Completed) {
+                    unsafe { GetResults() }
+                    return Result<Unit>.Ok(())
+                }
+                if (status == AsyncStatus_Error) {
+                    return Result<Unit>.Err(failureFromInfo(info))
+                }
+                return Result<Unit>.Err(canceledError())
             }
-            if (status == AsyncStatus_Error) {
-                return Result<Unit>.Err(failureFromInfo(info))
-            }
-            Result<Unit>.Err(canceledError())
+            throw IllegalStateException("IAsyncAction.join async-info call did not execute")
         } catch (_: Exception) {
             Result<Unit>.Err(fallbackError())
         }
@@ -1143,15 +1145,17 @@ extend IAsyncAction {
 extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public func join(): Result<TResult> {
         try {
-            let info = asIAsyncInfo()
-            let status = waitForTerminalStatus(info)
-            if (status == AsyncStatus_Completed) {
-                return Result<TResult>.Ok(unsafe { GetResults() })
+            try (info = asIAsyncInfo()) {
+                let status = waitForTerminalStatus(info)
+                if (status == AsyncStatus_Completed) {
+                    return Result<TResult>.Ok(unsafe { GetResults() })
+                }
+                if (status == AsyncStatus_Error) {
+                    return Result<TResult>.Err(failureFromInfo(info))
+                }
+                return Result<TResult>.Err(canceledError())
             }
-            if (status == AsyncStatus_Error) {
-                return Result<TResult>.Err(failureFromInfo(info))
-            }
-            Result<TResult>.Err(canceledError())
+            throw IllegalStateException("IAsyncOperation.join async-info call did not execute")
         } catch (_: Exception) {
             Result<TResult>.Err(fallbackError())
         }
@@ -1193,16 +1197,18 @@ extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeTy
 extend<TProgress> IAsyncActionWithProgress<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public func join(): Result<Unit> {
         try {
-            let info = asIAsyncInfo()
-            let status = waitForTerminalStatus(info)
-            if (status == AsyncStatus_Completed) {
-                unsafe { GetResults() }
-                return Result<Unit>.Ok(())
+            try (info = asIAsyncInfo()) {
+                let status = waitForTerminalStatus(info)
+                if (status == AsyncStatus_Completed) {
+                    unsafe { GetResults() }
+                    return Result<Unit>.Ok(())
+                }
+                if (status == AsyncStatus_Error) {
+                    return Result<Unit>.Err(failureFromInfo(info))
+                }
+                return Result<Unit>.Err(canceledError())
             }
-            if (status == AsyncStatus_Error) {
-                return Result<Unit>.Err(failureFromInfo(info))
-            }
-            Result<Unit>.Err(canceledError())
+            throw IllegalStateException("IAsyncActionWithProgress.join async-info call did not execute")
         } catch (_: Exception) {
             Result<Unit>.Err(fallbackError())
         }
@@ -1252,15 +1258,17 @@ extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress>
         TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public func join(): Result<TResult> {
         try {
-            let info = asIAsyncInfo()
-            let status = waitForTerminalStatus(info)
-            if (status == AsyncStatus_Completed) {
-                return Result<TResult>.Ok(unsafe { GetResults() })
+            try (info = asIAsyncInfo()) {
+                let status = waitForTerminalStatus(info)
+                if (status == AsyncStatus_Completed) {
+                    return Result<TResult>.Ok(unsafe { GetResults() })
+                }
+                if (status == AsyncStatus_Error) {
+                    return Result<TResult>.Err(failureFromInfo(info))
+                }
+                return Result<TResult>.Err(canceledError())
             }
-            if (status == AsyncStatus_Error) {
-                return Result<TResult>.Err(failureFromInfo(info))
-            }
-            Result<TResult>.Err(canceledError())
+            throw IllegalStateException("IAsyncOperationWithProgress.join async-info call did not execute")
         } catch (_: Exception) {
             Result<TResult>.Err(fallbackError())
         }
