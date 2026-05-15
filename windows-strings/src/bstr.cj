@@ -74,14 +74,14 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         this.storageOwned = ownsStorage
     }
 
-    func currentLength(): Int64 {
+    public func length(): Int64 {
         if (closed || ptr.isNull()) {
             return 0
         }
         Int64(sysStringLenAbi(ptr))
     }
 
-    func currentByteLength(): UInt32 {
+    public func byteLength(): UInt32 {
         if (closed || ptr.isNull()) {
             return 0u32
         }
@@ -119,7 +119,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         if (closed) {
             return ""
         }
-        decodeWideFromPointer(ptr, length: currentLength())
+        decodeWideFromPointer(ptr, length: length())
     }
 
     /// Attempt a lossless decode of the BSTR content.
@@ -128,16 +128,9 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         if (closed) {
             return Some("")
         }
-        tryDecodeWideFromPointer(ptr, length: currentLength())
+        tryDecodeWideFromPointer(ptr, length: length())
     }
 
-    public func length(): Int64 {
-        currentLength()
-    }
-
-    public func byteLength(): UInt32 {
-        currentByteLength()
-    }
 
     public func isEmpty(): Bool {
         length() == 0
@@ -158,14 +151,14 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         if (closed) {
             return Array<UInt16>(0, repeat: 0u16)
         }
-        copyWideFromPointer(ptr, currentLength())
+        copyWideFromPointer(ptr, length())
     }
 
     public func asSlice(): PointerSliceView<UInt16> {
         if (closed) {
             return PointerSliceView<UInt16>(CPointer<UInt16>(), 0)
         }
-        PointerSliceView<UInt16>(ptr, currentLength(), owner: Some(this))
+        PointerSliceView<UInt16>(ptr, length(), owner: Some(this))
     }
 
     public func withPtr<R>(action: (CPointer<UInt16>) -> R): R {
