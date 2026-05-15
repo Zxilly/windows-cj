@@ -41,7 +41,9 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
 
     public func set(index: Int64, value: T): Unit {
         ensureProjectedIndex(index, len())
-        values[index] = cloneProjectedElement(value)
+        let cloned = cloneProjectedElement(value)
+        closeProjectedElement(values[index])
+        values[index] = cloned
     }
 
     public func toArray(): Array<T> {
@@ -49,10 +51,13 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
     }
 
     public func replaceWith(values: Array<T>): Unit {
-        this.values = cloneProjectedArray(values)
+        let replacement = cloneProjectedArray(values)
+        clear()
+        this.values = replacement
     }
 
     public func clear(): Unit {
+        closeProjectedElements(values)
         values = Array<T>()
     }
 }
@@ -180,6 +185,22 @@ func cloneProjectedElement<T>(value: T): T {
     value
 }
 
+func closeProjectedElement<T>(value: T): Unit {
+    match (value) {
+        case hstring: HString =>
+            hstring.close()
+        case _ => ()
+    }
+}
+
+func closeProjectedElements<T>(values: Array<T>): Unit {
+    var index = 0
+    while (index < values.size) {
+        closeProjectedElement(values[index])
+        index += 1
+    }
+}
+
 func cloneProjectedArray<T>(values: Array<T>): Array<T> {
     if (values.size == 0) {
         return Array<T>()
@@ -245,10 +266,12 @@ public class AbiArray<T> <: Resource {
     }
 
     public func replaceWith(values: Array<T>): Unit {
-        if (closed) {
-            closed = false
+        let replacement = ProjectedAbiArrayStorage<T>(values)
+        if (!closed) {
+            storage.clear()
         }
-        storage = ProjectedAbiArrayStorage<T>(values)
+        storage = replacement
+        closed = false
     }
 
     public func clear(): Unit {

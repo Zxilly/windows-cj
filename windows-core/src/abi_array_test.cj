@@ -107,6 +107,53 @@ class TrackingInt32AbiArrayStorage <: AbiArrayStorage<Int32> {
 }
 
 @Test
+func testAbiArrayReplaceWithClearsPreviousStorage() {
+    let tracking = TrackingInt32AbiArrayStorage([1i32, 2i32])
+    let array = AbiArray<Int32>(tracking)
+
+    array.replaceWith([7i32])
+
+    @Expect(tracking.clearCount, 1)
+    @Expect(array.len(), 1)
+    @Expect(array.get(0), 7i32)
+    array.close()
+}
+
+@Test
+func testProjectedAbiArrayReplaceWithClosesPreviousHStringClones() {
+    let first = HString("first")
+    let second = HString("second")
+    let array = AbiArray<HString>.fromSlice([first])
+    let freeBefore = debugObservedHStringFreeCount()
+
+    array.replaceWith([second])
+    first.close()
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+
+    array.close()
+    second.close()
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 2)
+}
+
+@Test
+func testAbiArrayReplaceWithClonesAliasedReplacementBeforeClearingOldStorage() {
+    let original = HString("shared")
+    let array = AbiArray<HString>.fromSlice([original])
+    let aliased = array.get(0)
+    let freeBefore = debugObservedHStringFreeCount()
+
+    array.replaceWith([aliased])
+
+    @Expect(array.get(0).get(), "shared")
+    @Expect(aliased.isClosed(), true)
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 0)
+
+    original.close()
+    array.close()
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+}
+
+@Test
 func testArrayProxyCopyArrayNullDataTargetClosesStagedStorage() {
     var length = 0u32
     let tracking = TrackingInt32AbiArrayStorage([10i32, 20i32])

@@ -2451,4 +2451,39 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `Hume`: no P0/P1/P2 findings; confirmed clone-before-clear ordering covers aliased replacement, projected HString cleanup does not double-close stored clones, the tests cover previous storage clearing and HString release, and the log matches the implementation.
+  - Residual non-blocking risk: `AbiArray.get()` returns a storage-owned projected object reference, so callers can observe it closed after replacement/close; this follows the current Cangjie class reference semantics and is not an ABI leak or double-free in this patch.
+- Review:
   - Review agent `Cicero`: no findings; confirmed nonzero null buffers return `E_POINTER` before dispatch, zero-size null buffers still dispatch, vector and observable-vector `ReplaceAll` follow the same contract, and tests/log are consistent.
+
+### Round139 - AbiArray replacement cleanup
+
+- Started at `2026-05-15 13:52:03 +08:00`; implementation recorded at `2026-05-15 13:55:57 +08:00`; review follow-up recorded at `2026-05-15 14:05:19 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `Resource.close()` is the deterministic cleanup surface for resource-owning objects.
+  - Conditions require parentheses and interface/type pattern matching is supported.
+- Reference scan:
+  - WinRT arrays own CoTaskMem buffers and clear/drop releases the old buffer before replacing or discarding it.
+  - Cangjie `AbiArray.replaceWith` replaced the storage field directly, so a live native/custom storage could be abandoned without `clear()`.
+  - Projected `AbiArray<HString>` stores cloned HString values; projected storage `clear()` only dropped the managed array reference and left release to GC finalization.
+- Cleanup fix:
+  - `AbiArray.replaceWith` now clears the existing live storage before installing the new projected storage and reopens closed arrays only after replacement.
+  - `ProjectedAbiArrayStorage.set`, `replaceWith`, and `clear` now close HString clones owned by the storage before overwriting or dropping them.
+  - The close helper is intentionally limited to HString clones, avoiding accidental closure of caller-owned interface/resource values that were not cloned by the storage.
+- Added coverage:
+  - `testAbiArrayReplaceWithClearsPreviousStorage` verifies replacement calls `clear()` on the previous storage.
+  - `testProjectedAbiArrayReplaceWithClosesPreviousHStringClones` verifies replacing and closing a projected HString array releases storage-owned cloned handles before the original values close.
+  - `testAbiArrayReplaceWithClonesAliasedReplacementBeforeClearingOldStorage` verifies an aliased replacement value is cloned before old storage cleanup.
+- Review fix:
+  - Review agent `Dalton` found that the first `AbiArray.replaceWith` patch cleared old storage before cloning replacement values, breaking `array.replaceWith([array.get(0)])` and weakening failure ordering.
+  - `AbiArray.replaceWith` now constructs the replacement storage before clearing the previous live storage, then installs it and marks the array open.
+- Verification:
+  - Red: `cjv exec target\release\unittest_bin\windows_core.exe` first failed on `testAbiArrayReplaceWithClearsPreviousStorage` before storage clearing.
+  - Red: after storage clearing, the HString clone test failed until projected storage closed its owned clones.
+  - `cjpm test -m windows-core --no-run --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_core.exe`: passed 23/23.
+  - `cjpm test -m windows-runtime --no-run --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe`: passed 142/142.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
