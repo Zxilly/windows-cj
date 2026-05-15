@@ -28,8 +28,11 @@ func propertySetForwardingQueryInterfaceThunk(
     if (
         target == IPropertySet.iid() ||
         target == IMap<windows_core.HString, IInspectable>.iid() ||
+        target == IMap<windows_core.HString, windows_core.HString>.iid() ||
         target == IObservableMap<windows_core.HString, IInspectable>.iid() ||
+        target == IObservableMap<windows_core.HString, windows_core.HString>.iid() ||
         target == IIterable<IKeyValuePair<windows_core.HString, IInspectable>>.iid() ||
+        target == IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>>.iid() ||
         target == IInspectable.iid() ||
         target == IUnknown.iid()
     ) {
@@ -187,6 +190,54 @@ func testIPropertySetForwardsMapReadsThroughQueryInterface() {
 }
 
 @Test
+func testPropertySetRuntimeForwardsMapReadsThroughQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingMapRaw({ raw: CPointer<Unit> =>
+        let propertySet = PropertySet.viewOf(raw)
+
+        let value = unsafe { propertySet.Size() }
+
+        @Expect(value, 9u32)
+        @Expect(propertySetForwardingSizeCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 1)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
+    })
+}
+
+@Test
+func testValueSetRuntimeForwardsMapReadsThroughQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingMapRaw({ raw: CPointer<Unit> =>
+        let valueSet = ValueSet.viewOf(raw)
+
+        let value = unsafe { valueSet.Size() }
+
+        @Expect(value, 9u32)
+        @Expect(propertySetForwardingSizeCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 1)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
+    })
+}
+
+@Test
+func testStringMapRuntimeForwardsMapReadsThroughQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingMapRaw({ raw: CPointer<Unit> =>
+        let stringMap = StringMap.viewOf(raw)
+
+        let value = unsafe { stringMap.Size() }
+
+        @Expect(value, 9u32)
+        @Expect(propertySetForwardingSizeCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 1)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
+    })
+}
+
+@Test
 func testIPropertySetForwardsObservableMapRemoveThroughQueryInterface() {
     resetPropertySetForwardingCounters()
     withPropertySetForwardingObservableMapRaw({ raw: CPointer<Unit> =>
@@ -217,5 +268,20 @@ func testIPropertySetForwardsIterableFirstThroughQueryInterface() {
         @Expect(propertySetForwardingQueryCalls.load(), 1)
         @Expect(propertySetForwardingAddRefCalls.load(), 2)
         @Expect(propertySetForwardingReleaseCalls.load(), 2)
+    })
+}
+
+@Test
+func testPropertySetRuntimeIteratorReleasesIterableQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingIterableRaw({ raw: CPointer<Unit> =>
+        let propertySet = PropertySet.viewOf(raw)
+
+        let _ = propertySet.intoIterator()
+
+        @Expect(propertySetForwardingFirstCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 2)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
     })
 }

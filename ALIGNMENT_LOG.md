@@ -1648,6 +1648,35 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 
+### Round129 - Property set runtime ancestor cleanup
+
+- Started at `2026-05-15 11:20:58 +08:00`; implementation recorded at `2026-05-15 11:39:00 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the local deterministic cleanup pattern for temporary queried interface wrappers.
+  - `CPointer` reads/writes and `CFunc` calls require `unsafe`.
+  - Conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - `PropertySet`, `ValueSet`, and `StringMap` expose ancestor collection operations through `IMap`, `IIterable`, and `IObservableMap`.
+  - Cangjie already modeled those ancestors through `QueryInterface`; the gap was deterministic release of the temporary queried wrappers used only to forward a single call.
+- Cleanup fix:
+  - `PropertySet`, `ValueSet`, and `StringMap` now wrap forwarded `IMap`, `IIterable`, and `IObservableMap` calls in `try (ancestor = as...)`.
+  - Their `intoIterator()` methods now construct `IIteratorIterator` from `First()`, so the temporary iterable wrapper is released while the returned iterator remains independently owned.
+  - `IPropertySet.intoIterator()` was also routed through `First()` for the same temporary-wrapper cleanup behavior.
+  - No vtable layout changes were made.
+- Added coverage:
+  - `testPropertySetRuntimeForwardsMapReadsThroughQueryInterface`, `testValueSetRuntimeForwardsMapReadsThroughQueryInterface`, and `testStringMapRuntimeForwardsMapReadsThroughQueryInterface` verify runtime-class map forwarding reaches the ancestor vtable through `QueryInterface` and releases the temporary wrapper.
+  - `testPropertySetRuntimeIteratorReleasesIterableQueryInterface` verifies `PropertySet.intoIterator()` calls `First()` through the iterable ancestor and releases the temporary queried wrapper while retaining the returned iterator reference.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*PropertySet*QueryInterface --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 5/126.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 126/126.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Galileo` found one real cleanup gap: `PropertySet.intoIterator()` still used `asIIterable().intoIterator()` after the first patch. That was fixed and covered by `testPropertySetRuntimeIteratorReleasesIterableQueryInterface`.
+  - Review agent `James`: no findings after the fix; confirmed ancestor forwarding balances temporary QI wrappers and returned iterator ownership is preserved.
+
 ### Round125 - IReferenceArray property value forwarding
 
 - Started at `2026-05-15 02:55:21 +08:00`; implementation recorded at `2026-05-15 03:01:19 +08:00`.
