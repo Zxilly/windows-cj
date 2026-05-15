@@ -956,18 +956,21 @@ public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased 
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.GetActivationFactory(InParam<windows_core.HString>(windows_core.HString.fromSystemHandleCopy(arg0)))) {
-            case Result<IInspectable>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IInspectable>.Err(error) =>
-                error.code().value
+        try (classId = windows_core.HString.fromSystemHandleCopy(arg0)) {
+            match (this.GetActivationFactory(InParam<windows_core.HString>(classId))) {
+                case Result<IInspectable>.Ok(value) =>
+                    let raw = value.intoAbi()
+                    if (raw.isNull()) {
+                        return E_POINTER.value
+                    } else {
+                        unsafe { result__.write(raw) }
+                        return S_OK.value
+                    }
+                case Result<IInspectable>.Err(error) =>
+                    return error.code().value
+            }
         }
+        E_POINTER.value
     }
 }
 

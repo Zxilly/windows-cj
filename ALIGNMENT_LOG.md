@@ -2301,3 +2301,29 @@
 - Review:
   - Review agent `Ampere` found the first test only asserted length and would not catch the leak regression.
   - After adding tracking storage coverage, review agent `Kierkegaard` reported no findings and confirmed null-target cleanup, non-null ownership transfer, and same-package white-box test validity.
+
+### Round134 - Activation factory class-id input cleanup
+
+- Started at `2026-05-15 12:14:04 +08:00`; implementation recorded at `2026-05-15 12:22:05 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `Resource` values can be closed deterministically with try-with-resource.
+  - C interop and pointer operations require `unsafe`; conditions require parentheses.
+- Reference scan:
+  - `IGetActivationFactory_Impl.__winrtThunk_GetActivationFactory` receives a borrowed HSTRING input and passes an `InParam<HString>` to the implementation surface.
+  - The thunk copied `arg0` with `HString.fromSystemHandleCopy(arg0)` but did not close the copied `HString` at thunk exit, leaving the native string header to GC finalization.
+- Cleanup fix:
+  - Wrapped the copied class-id `HString` in `try (classId = ...)` and passed that value through `InParam`.
+  - The thunk still treats the original ABI HSTRING as borrowed and does not delete `arg0`.
+  - Existing `IInspectable` result ownership transfer via `value.intoAbi()` is preserved.
+- Added coverage:
+  - Added `testGetActivationFactoryThunkClosesTemporaryClassIdHString`.
+  - The test calls the thunk with a system HSTRING, returns `E_NOTIMPL`, and asserts `debugObservedHStringFreeCount()` increments exactly once for the copied class-id `HString` before the caller releases the original input handle.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*GetActivationFactoryThunkClosesTemporaryClassIdHString --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 1/135.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 135/135.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Anscombe`: no findings; confirmed borrowed input HSTRING ownership, deterministic copied-HString cleanup on `Ok` and `Err` paths, preserved returned `IInspectable` ownership transfer, and meaningful free-count coverage.
