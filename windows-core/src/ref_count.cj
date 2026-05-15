@@ -37,7 +37,4 @@ public struct RefCount {
         remaining
     }
 
-    public func isOne(): Bool {
-        count.load() == 1
-    }
 }

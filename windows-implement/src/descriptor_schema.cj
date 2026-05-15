@@ -408,12 +408,6 @@ public struct ResolvedDescriptor {
         false
     }
 
-    public func matchesNonIdentity(candidate: GUID): Bool {
-        if (candidate == IID_IUNKNOWN || candidate == IID_IINSPECTABLE) {
-            return false
-        }
-        matches(candidate)
-    }
 }
 
 func resolveSchemaCore(schema: InterfaceDescriptorSchema): ResolvedDescriptor {

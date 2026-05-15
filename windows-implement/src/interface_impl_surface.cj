@@ -132,13 +132,6 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         runtimeType
     }
 
-    public func runtimeClassNameRaw(): CPointer<Unit> {
-        match (runtimeClassName) {
-            case Some(value) => value.asRaw()
-            case None => CPointer<Unit>()
-        }
-    }
-
     public func setTrustLevel(value: Int32): Unit {
         trustLevel = value
     }

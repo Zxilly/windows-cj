@@ -330,10 +330,6 @@ class LocalWeakReferenceTearOff {
         UInt32(weakCount.fetchAdd(1) + 1)
     }
 
-    public func isWeakCountOne(): Bool {
-        weakCount.load() == 1
-    }
-
     public func releaseWeakRef(): UInt32 {
         let oldValue = weakCount.fetchSub(1)
         if (oldValue <= 0) {
@@ -646,15 +642,6 @@ public class WeakRefCount {
 
     public func isAlive(): Bool {
         raw.isNotNull()
-    }
-
-    public func isOne(): Bool {
-        synchronized(stateMutex) {
-            match (tearOff) {
-                case Some(value) => value.isWeakCountOne()
-                case None => true
-            }
-        }
     }
 
     public func query<T>(descriptor: InterfaceDescriptor<T>): Option<T> where T <: ComInterface {

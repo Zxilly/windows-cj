@@ -42,12 +42,6 @@ class OwnedHandleState {
         }
     }
 
-    public func isReleased(): Bool {
-        synchronized(mutex) {
-            released || raw.isNull()
-        }
-    }
-
     ~init() {
         synchronized(mutex) {
             if (released || raw.isNull()) {
