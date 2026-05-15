@@ -10860,7 +10860,10 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 
     public unsafe func ToString(): windows_core.HString {
-        return asIStringable().ToString()
+        try (stringable = asIStringable()) {
+            return stringable.ToString()
+        }
+        throw IllegalStateException("Uri.ToString ancestor call did not execute")
     }
 
     public static unsafe func UnescapeComponent(toUnescape: windows_core.HString): windows_core.HString {
@@ -11008,7 +11011,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public func intoIterator(): Iterator<IWwwFormUrlDecoderEntry> {
-        asIIterable().intoIterator()
+        IIteratorIterator<IWwwFormUrlDecoderEntry>(unsafe { First() })
     }
 
     public func iterator(): Iterator<IWwwFormUrlDecoderEntry> {
@@ -11020,23 +11023,38 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public unsafe func First(): IIterator<IWwwFormUrlDecoderEntry> {
-        return asIIterable().First()
+        try (iterable = asIIterable()) {
+            return iterable.First()
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.First ancestor call did not execute")
     }
 
     public unsafe func GetAt(index: UInt32): IWwwFormUrlDecoderEntry {
-        return asIVectorView().GetAt(index)
+        try (view = asIVectorView()) {
+            return view.GetAt(index)
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.GetAt ancestor call did not execute")
     }
 
     public unsafe func Size(): UInt32 {
-        return asIVectorView().Size()
+        try (view = asIVectorView()) {
+            return view.Size()
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.Size ancestor call did not execute")
     }
 
     public unsafe func IndexOf(value: IWwwFormUrlDecoderEntry, index: CPointer<UInt32>): Bool {
-        return asIVectorView().IndexOf(value, index)
+        try (view = asIVectorView()) {
+            return view.IndexOf(value, index)
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.IndexOf ancestor call did not execute")
     }
 
     public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<CPointer<Unit>>): UInt32 {
-        return asIVectorView().GetMany(startIndex, itemsSize, CPointer<Unit>(items))
+        try (view = asIVectorView()) {
+            return view.GetMany(startIndex, itemsSize, CPointer<Unit>(items))
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.GetMany ancestor call did not execute")
     }
 
     public static unsafe func CreateWwwFormUrlDecoder(query: windows_core.HString): WwwFormUrlDecoder {

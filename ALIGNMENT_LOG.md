@@ -1734,6 +1734,36 @@
 - Review:
   - Review agent `Jason`: no findings in ABI/vtable layout, QueryInterface/AddRef/Release balance, try-resource cleanup, HRESULT propagation, or Cangjie syntax/API usage.
   - Review-side filter did not execute the new tests, but local direct `cjv exec` verification did run them.
+
+### Round128 - Uri and decoder ancestor cleanup
+
+- Started at `2026-05-15 03:29:46 +08:00`; implementation recorded at `2026-05-15 11:19:56 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the local pattern for temporary queried interface wrappers.
+  - `CPointer` reads/writes and `CFunc` calls require `unsafe`.
+  - `CFunc` callbacks cannot capture state, so tests use top-level thunks and atomic counters.
+- Reference scan:
+  - `Uri` requires `IStringable`, and `WwwFormUrlDecoder` requires `IIterable<IWwwFormUrlDecoderEntry>` plus `IVectorView<IWwwFormUrlDecoderEntry>`.
+  - Cangjie already exposed the same forwarding surface, but runtime-class methods called `asIStringable()/asIIterable()/asIVectorView()` inline, leaving temporary QI wrappers for GC instead of releasing them deterministically at method exit.
+- Cleanup fix:
+  - `Uri.ToString()` now wraps `asIStringable()` in `try (stringable = ...)`.
+  - `WwwFormUrlDecoder.First`, `GetAt`, `Size`, `IndexOf`, and `GetMany` now wrap the corresponding ancestor interface in `try`.
+  - `WwwFormUrlDecoder.intoIterator()` now constructs the iterator from `First()` so it uses the same cleanup path.
+  - No vtable layout changes were made; returned HSTRINGs and returned iterator wrappers remain independently owned.
+- Added coverage:
+  - `testUriToStringReleasesTemporaryIStringable` verifies `Uri.ToString()` releases the temporary `IStringable` wrapper while preserving the returned HSTRING.
+  - `testWwwFormUrlDecoderSizeReleasesTemporaryVectorView` verifies vector-view forwarding releases the temporary queried wrapper.
+  - `testWwwFormUrlDecoderFirstReleasesTemporaryIterable` verifies iterable forwarding releases the temporary queried wrapper and the returned iterator remains separately owned.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*testUriToStringReleasesTemporaryIStringable,*testWwwFormUrlDecoder*ReleasesTemporary* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 3/122.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 122/122.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Arendt`: no findings; confirmed temporary QI wrappers are owned `fromAbiTake` wrappers, `try` closes them, and returned HSTRINGs/iterators remain independently owned.
+  - Residual test risk: fake-vtable coverage does not directly exercise `GetAt`, `IndexOf`, `GetMany`, or `intoIterator`; no concrete bug found from that gap.
 - Review:
   - Review agent `Franklin`: Round122 re-review clean; confirmed the prior cleanup gaps are fixed, raw COM slots are cleared only after successful materialization, raw HSTRING/COM arrays are covered by cleanup if managed allocation fails, HRESULT propagation remains through the raw method, and the test covers nullable projection plus caller-owned release.
 - Review:
