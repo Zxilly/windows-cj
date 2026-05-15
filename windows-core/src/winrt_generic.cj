@@ -956,33 +956,6 @@ public func winrtCallGenericOutAfterUInt32<T>(
     T.winrtOutputBridge().callOutAfterUInt32(slot, instanceRaw, arg0)
 }
 
-public func winrtCallGenericOutFromHandleInput<T>(
-    slot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>,
-    instanceRaw: CPointer<Unit>,
-    inputRaw: CPointer<Unit>
-): T where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().callOutFromHandleInput(slot, instanceRaw, inputRaw)
-}
-
-public func winrtCallGenericArrayOut<T>(
-    slot: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>,
-    instanceRaw: CPointer<Unit>,
-    size: UInt32,
-    items: CPointer<Unit>
-): UInt32 where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().callArrayOut(slot, instanceRaw, size, items)
-}
-
-public func winrtCallGenericArrayOutAfterUInt32<T>(
-    slot: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>,
-    instanceRaw: CPointer<Unit>,
-    arg0: UInt32,
-    size: UInt32,
-    items: CPointer<Unit>
-): UInt32 where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().callArrayOutAfterUInt32(slot, instanceRaw, arg0, size, items)
-}
-
 public func winrtTakeGenericArrayOut<T>(
     data: CPointer<Unit>,
     length: UInt32
@@ -1036,32 +1009,3 @@ public func winrtStoreGenericOutAt<T>(
     T.winrtOutputBridge().storeOutAt(buffer, index, value)
 }
 
-public func winrtEraseGenericOut<T>(
-    action: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
-): CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().eraseOut(action)
-}
-
-public func winrtEraseGenericOutAfterUInt32<T>(
-    action: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
-): CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().eraseOutAfterUInt32(action)
-}
-
-public func winrtEraseGenericOutFromHandleInput<T>(
-    action: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
-): CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().eraseOutFromHandleInput(action)
-}
-
-public func winrtEraseGenericArrayOut<T>(
-    action: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>
-): CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32> where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().eraseArrayOut(action)
-}
-
-public func winrtEraseGenericArrayOutAfterUInt32<T>(
-    action: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>
-): CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32> where T <: WinrtGenericType<T> {
-    T.winrtOutputBridge().eraseArrayOutAfterUInt32(action)
-}
