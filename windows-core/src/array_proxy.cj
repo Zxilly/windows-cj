@@ -43,10 +43,14 @@ func publishCopyArray<T>(
     dataTarget: CPointer<CPointer<T>>,
     lengthTarget: CPointer<UInt32>
 ): Unit where T <: CType {
-    let (raw, length) = staged.intoAbi()
-    if (dataTarget.isNotNull()) {
-        unsafe { dataTarget.write(raw) }
+    if (dataTarget.isNull()) {
+        writePublishedLength(lengthTarget, UInt32(staged.len()))
+        staged.close()
+        return
     }
+
+    let (raw, length) = staged.intoAbi()
+    unsafe { dataTarget.write(raw) }
     writePublishedLength(lengthTarget, length)
 }
 

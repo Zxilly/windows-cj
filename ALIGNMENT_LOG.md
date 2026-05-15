@@ -2273,3 +2273,31 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+### Round133 - Array proxy null target cleanup
+
+- Started at `2026-05-15 12:00:53 +08:00`; implementation recorded at `2026-05-15 12:12:54 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `Resource` values are closed by try-with-resource at block exit.
+  - `CPointer` reads/writes and C interop calls require `unsafe`.
+  - Classes implement interfaces with `<:`, conditions require parentheses, and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - Array proxy close publishes an ABI array through data and length out slots.
+  - The object-array Cangjie path already keeps ownership local when the data out slot is null, but the copy-array path detached `AbiArray` storage with `intoAbi()` before checking whether a receiver existed.
+- Cleanup fix:
+  - `publishCopyArray<T>` now checks `dataTarget.isNull()` before `intoAbi()`.
+  - Null data targets still publish the staged length, then close staged storage locally and return.
+  - Non-null data targets continue to transfer ownership through `intoAbi()` and write the raw pointer to the caller-owned slot.
+- Added coverage:
+  - Added `TrackingInt32AbiArrayStorage` in `abi_array_test.cj` and `testArrayProxyCopyArrayNullDataTargetClosesStagedStorage`.
+  - The test replaces the proxy's staged storage with tracking storage, closes through try-with-resource, and asserts the length is published and `clear()` is called once; the old detach path would not satisfy this.
+- Verification:
+  - `cjpm test -m windows-core --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_core.exe --parallel 1 --filter=*ArrayProxy* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 2/18.
+  - `cjv exec target\release\unittest_bin\windows_core.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 18/18.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Ampere` found the first test only asserted length and would not catch the leak regression.
+  - After adding tracking storage coverage, review agent `Kierkegaard` reported no findings and confirmed null-target cleanup, non-null ownership transfer, and same-package white-box test validity.

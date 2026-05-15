@@ -72,6 +72,53 @@ func testPublicCoTaskMemReallocPreservesPrefixBytes() {
     coTaskMemFree(resized)
 }
 
+class TrackingInt32AbiArrayStorage <: AbiArrayStorage<Int32> {
+    private var values: Array<Int32>
+    public var clearCount: Int64 = 0
+
+    public init(values: Array<Int32>) {
+        this.values = values
+    }
+
+    public func len(): UInt32 {
+        UInt32(values.size)
+    }
+
+    public func get(index: Int64): Int32 {
+        values[index]
+    }
+
+    public func set(index: Int64, value: Int32): Unit {
+        values[index] = value
+    }
+
+    public func toArray(): Array<Int32> {
+        values
+    }
+
+    public func replaceWith(values: Array<Int32>): Unit {
+        this.values = values
+    }
+
+    public func clear(): Unit {
+        clearCount += 1
+        values = Array<Int32>()
+    }
+}
+
+@Test
+func testArrayProxyCopyArrayNullDataTargetClosesStagedStorage() {
+    var length = 0u32
+    let tracking = TrackingInt32AbiArrayStorage([10i32, 20i32])
+
+    try (proxy = unsafe { arrayProxy<Int32>(CPointer<CPointer<Int32>>(), CPointer<UInt32>(inout length)) }) {
+        proxy.value().storage = tracking
+    }
+
+    @Expect(length, 2u32)
+    @Expect(tracking.clearCount, 1)
+}
+
 @When[os == "Windows"]
 @Test
 func testArrayProxyPublishesHStringElementsAsSystemHandles() {
