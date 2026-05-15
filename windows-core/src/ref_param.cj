@@ -66,10 +66,6 @@ public struct InParam<T> <: Param<T> {
         value
     }
 
-    public func as_ref(): ?T {
-        value
-    }
-
     public func get(): T {
         if (let Some(inner) <- value) {
             return inner
@@ -86,10 +82,6 @@ public struct InParam<T> <: Param<T> {
 
     public func unwrap(): T {
         get()
-    }
-
-    public func cloned(): ?T {
-        value
     }
 
     public func abi(): T {

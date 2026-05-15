@@ -31,10 +31,6 @@ public func newIAgileObjectVtbl<T>(offset!: Int64 = 0): IAgileObjectVtbl where T
     vtbl
 }
 
-public func matchesIAgileObjectVtbl(iid: GUID): Bool {
-    iid == IAgileObject.iid()
-}
-
 public interface IAgileReference_Impl {
     func Resolve(riid: CPointer<GUID>, ppvobjectreference: CPointer<CPointer<Unit>>): Result<Unit>
 }
@@ -71,10 +67,6 @@ public func newIAgileReferenceVtbl<T>(offset!: Int64 = 0): IAgileReferenceVtbl w
     vtbl.base_ = buildIUnknownVtbl(offset: offset)
     vtbl.Resolve = agileReferenceResolveThunk
     vtbl
-}
-
-public func matchesIAgileReferenceVtbl(iid: GUID): Bool {
-    iid == IAgileReference.iid()
 }
 
 public class AgileReference<T> <: Resource where T <: ComInterface {

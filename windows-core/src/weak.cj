@@ -38,10 +38,6 @@ public func newIWeakReferenceVtbl<T>(offset!: Int64 = 0): IWeakReferenceVtbl whe
     vtbl
 }
 
-public func matchesIWeakReferenceVtbl(iid: GUID): Bool {
-    iid == IWeakReference.iid()
-}
-
 public interface IWeakReferenceSource_Impl {
     func GetWeakReference(): Result<IWeakReference>
 }
@@ -82,10 +78,6 @@ public func newIWeakReferenceSourceVtbl<T>(offset!: Int64 = 0): IWeakReferenceSo
     vtbl.base_ = buildIUnknownVtbl(offset: offset)
     vtbl.GetWeakReference = coreWeakReferenceSourceGetWeakReferenceThunk
     vtbl
-}
-
-public func matchesIWeakReferenceSourceVtbl(iid: GUID): Bool {
-    iid == IWeakReferenceSource.iid()
 }
 
 public class Weak<T> <: Resource where T <: ComInterface {
