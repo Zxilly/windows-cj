@@ -20,21 +20,9 @@ public func debugObservedSysFreeStringCount(): Int32 {
     observedSysFreeStringCount.load()
 }
 
-func sysAllocStringLen(ptr: CPointer<UInt16>, unitLength: UInt32): CPointer<UInt16> {
-    sysAllocStringLenAbi(ptr, unitLength)
-}
-
 func sysFreeString(ptr: CPointer<UInt16>): Unit {
     sysFreeStringAbi(ptr)
     observedSysFreeStringCount.fetchAdd(1)
-}
-
-func sysStringLen(ptr: CPointer<UInt16>): UInt32 {
-    sysStringLenAbi(ptr)
-}
-
-func sysStringByteLen(ptr: CPointer<UInt16>): UInt32 {
-    sysStringByteLenAbi(ptr)
 }
 
 func allocateBstr(units: Array<UInt16>): CPointer<UInt16> {
@@ -45,7 +33,7 @@ func allocateBstr(units: Array<UInt16>): CPointer<UInt16> {
     unsafe {
         let handle = acquireArrayRawData(units)
         try {
-            let value = sysAllocStringLen(handle.pointer, UInt32(units.size))
+            let value = sysAllocStringLenAbi(handle.pointer, UInt32(units.size))
             if (value.isNull()) {
                 throw BStrAllocationException("failed to allocate BSTR storage")
             }
@@ -90,14 +78,14 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         if (closed || ptr.isNull()) {
             return 0
         }
-        Int64(sysStringLen(ptr))
+        Int64(sysStringLenAbi(ptr))
     }
 
     func currentByteLength(): UInt32 {
         if (closed || ptr.isNull()) {
             return 0u32
         }
-        sysStringByteLen(ptr)
+        sysStringByteLenAbi(ptr)
     }
 
     public static func fromWide(data: Array<UInt16>, length!: Int64 = -1): BSTR {
