@@ -189,6 +189,9 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        if (arg0Size > 0u32 && arg0.isNull()) {
+            return E_POINTER.value
+        }
         match (this.GetMany(arg0Size, CPointer<Unit>(arg0))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
@@ -2795,6 +2798,9 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
 
     public func __winrtThunk_GetMany(arg0: UInt32, arg1Size: UInt32, arg1: CPointer<Unit>, result__: CPointer<UInt32>): Int32 {
         if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        if (arg1Size > 0u32 && arg1.isNull()) {
             return E_POINTER.value
         }
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
@@ -6386,6 +6392,9 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        if (arg1Size > 0u32 && arg1.isNull()) {
+            return E_POINTER.value
+        }
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
@@ -6398,6 +6407,9 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): windows_core.Result<Unit>
 
     public func __winrtThunk_ReplaceAll(arg0Size: UInt32, arg0: CPointer<Unit>): Int32 {
+        if (arg0Size > 0u32 && arg0.isNull()) {
+            return E_POINTER.value
+        }
         match (this.ReplaceAll(arg0Size, CPointer<Unit>(arg0))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
@@ -7350,6 +7362,9 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        if (arg1Size > 0u32 && arg1.isNull()) {
+            return E_POINTER.value
+        }
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
@@ -7360,6 +7375,9 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
     }
 
     public func __winrtThunk_ReplaceAll(arg0Size: UInt32, arg0: CPointer<Unit>): Int32 {
+        if (arg0Size > 0u32 && arg0.isNull()) {
+            return E_POINTER.value
+        }
         match (this.ReplaceAll(arg0Size, CPointer<Unit>(arg0))) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value

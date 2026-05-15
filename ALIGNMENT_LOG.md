@@ -1647,6 +1647,8 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+
 - Review:
   - Review agent `Boole`: no findings; confirmed `HRESULT.check()` only replaces ignored `HRESULT(...).ok()` paths that previously continued after failure, while intentional `Result`/`Option` `.ok()` uses remain unchanged.
 - Review:
@@ -2422,3 +2424,31 @@
   - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
+
+### Round138 - Collection null buffer thunk guards
+
+- Started at `2026-05-15 13:11:00 +08:00`; implementation recorded at `2026-05-15 13:36:41 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `CPointer()` creates a null pointer and `isNull()` checks it.
+  - Pointer reads, writes, casts, and offsets are unsafe and require the caller to guarantee pointer validity.
+  - Conditions require parentheses.
+- Reference scan:
+  - Collection `GetMany` / `ReplaceAll` vtable thunks receive a caller-provided buffer plus explicit capacity.
+  - The Cangjie stock helpers already reject `itemsSize > 0 && items.isNull()` with `E_POINTER` while allowing zero-capacity null buffers.
+  - Generated `IIterator_Impl`, `IVectorView_Impl`, `IVector_Impl`, and `IObservableVector_Impl` thunks only checked result slots and could call user implementations with a nonzero null buffer.
+- ABI fix:
+  - Added thunk-level `E_POINTER` guards for nonzero null `GetMany` buffers on iterator, vector view, vector, and observable vector implementations.
+  - Added the same guard for `ReplaceAll` on vector and observable vector implementations.
+  - Kept zero-capacity null buffers valid and dispatched to the implementation, matching the existing stock helper contract.
+- Added coverage:
+  - Added generated-thunk tests that use implementations which would otherwise return `S_OK` and mutate counters when called with null buffers.
+  - Tests cover `IIterator.GetMany`, `IVectorView.GetMany`, `IVector.GetMany`, `IVector.ReplaceAll`, and the observable-vector inherited thunk path.
+- Verification:
+  - Red: `cjv exec target\release\unittest_bin\windows_runtime.exe` failed 137/142 before the guard, proving the new tests caught the missing thunk-level rejection.
+  - `cjpm test -m windows-runtime --no-run --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe`: passed 142/142.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+- Review:
+  - Review agent `Cicero`: no findings; confirmed nonzero null buffers return `E_POINTER` before dispatch, zero-size null buffers still dispatch, vector and observable-vector `ReplaceAll` follow the same contract, and tests/log are consistent.
