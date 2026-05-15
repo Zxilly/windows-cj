@@ -36,12 +36,12 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
 
     public func get(index: Int64): T {
         ensureProjectedIndex(index, len())
-        cloneProjectedElement(values[index])
+        cloneProjectedValue(values[index])
     }
 
     public func set(index: Int64, value: T): Unit {
         ensureProjectedIndex(index, len())
-        let cloned = cloneProjectedElement(value)
+        let cloned = cloneProjectedValue(value)
         closeProjectedElement(values[index])
         values[index] = cloned
     }
@@ -173,18 +173,6 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
     }
 }
 
-func cloneProjectedElement<T>(value: T): T {
-    match (value) {
-        case hstring: HString =>
-            match (hstring.clone() as T) {
-                case Some(cloned) => return cloned
-                case None => ()
-            }
-        case _ => ()
-    }
-    value
-}
-
 func closeProjectedElement<T>(value: T): Unit {
     match (value) {
         case hstring: HString =>
@@ -205,7 +193,7 @@ func cloneProjectedArray<T>(values: Array<T>): Array<T> {
     if (values.size == 0) {
         return Array<T>()
     }
-    let cloned = Array<T>(values.size, { index => cloneProjectedElement(values[index]) })
+    let cloned = Array<T>(values.size, { index => cloneProjectedValue(values[index]) })
     cloned
 }
 
