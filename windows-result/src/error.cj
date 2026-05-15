@@ -370,10 +370,6 @@ public func errorFromHRESULT(code: HRESULT): Error {
     Error.from(code)
 }
 
-public func errorFromHRESULTWithInfo(code: HRESULT): Error {
-    Error.fromHRESULTWithInfo(code)
-}
-
 public func errorFromWin32(code: UInt32): Error {
     Error.from(WIN32_ERROR(code))
 }

@@ -47,10 +47,6 @@ public interface RuntimeName <: RuntimeType {
     }
 }
 
-public func runtimeTypeFromName<T>(): RuntimeTypeContract where T <: RuntimeName {
-    T.runtimeType()
-}
-
 public func runtimeClassNameOf<T>(): HString where T <: RuntimeName {
     HString(T.runtimeName())
 }

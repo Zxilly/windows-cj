@@ -85,6 +85,3 @@ public func fromDefault<T, A, D>(defaultValue: D): Result<T> where T <: Type<T, 
     T.fromDefault(defaultValue)
 }
 
-public func assumeInitCopy<T>(abi: T): T where T <: CopyType {
-    abi
-}

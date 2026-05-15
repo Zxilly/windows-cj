@@ -26,23 +26,3 @@ public func queryRequiredFor<T, U>(): Bool where T <: ComInterface & Interface<T
     !descriptorVtableMatches(U.descriptor(), T.iid())
 }
 
-public func coerceInterfaceValue<T, U>(
-    value: U,
-    target: InterfaceDescriptor<T>
-): Result<T> where T <: ComInterface & Interface<T>, U <: ComInterface & Interface<U> {
-    let raw = value.asRaw()
-    if (raw.isNull()) {
-        return Result<T>.Err(WinError(E_POINTER))
-    }
-
-    if (!queryRequiredFor<T, U>()) {
-        return Result<T>.Ok(target.viewOf(raw))
-    }
-
-    match (unsafe { queryInterfaceRaw(raw, target.iid) }) {
-        case Some(resolved) =>
-            Result<T>.Ok(target.takeFromAbi(resolved))
-        case None =>
-            Result<T>.Err(WinError(E_NOINTERFACE))
-    }
-}

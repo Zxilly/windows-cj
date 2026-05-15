@@ -23,14 +23,3 @@ public struct ParamValue<T> <: Param<T> {
     }
 }
 
-public func paramFromInterface<T, U>(
-    value: U,
-    target: InterfaceDescriptor<T>
-): Result<ParamValue<T>> where T <: ComInterface & Interface<T>, U <: ComInterface & Interface<U> {
-    match (coerceInterfaceValue(value, target)) {
-        case Result<T>.Ok(resolved) =>
-            Result<ParamValue<T>>.Ok(ParamValue<T>(resolved))
-        case Result<T>.Err(error) =>
-            Result<ParamValue<T>>.Err(error)
-    }
-}
