@@ -2243,11 +2243,17 @@ public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & win
     }
 
     public unsafe func Name(): windows_core.HString {
-        return defaultInterface().Name()
+        try (entry = asIWwwFormUrlDecoderEntry()) {
+            return entry.Name()
+        }
+        throw IllegalStateException("WwwFormUrlDecoderEntry.Name ancestor call did not execute")
     }
 
     public unsafe func Value(): windows_core.HString {
-        return defaultInterface().Value()
+        try (entry = asIWwwFormUrlDecoderEntry()) {
+            return entry.Value()
+        }
+        throw IllegalStateException("WwwFormUrlDecoderEntry.Value ancestor call did not execute")
     }
 }
 
@@ -8769,11 +8775,19 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     public unsafe func Complete(): Unit {
-        defaultInterface().Complete()
+        try (deferral = asIDeferral()) {
+            deferral.Complete()
+            return
+        }
+        throw IllegalStateException("Deferral.Complete ancestor call did not execute")
     }
 
     public unsafe func Close(): Unit {
-        asIClosable().Close()
+        try (closable = asIClosable()) {
+            closable.Close()
+            return
+        }
+        throw IllegalStateException("Deferral.Close ancestor call did not execute")
     }
 
     public static unsafe func Create(handler: DeferralCompletedHandler): Deferral {
@@ -10683,11 +10697,18 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public unsafe func CreateReference(): IMemoryBufferReference {
-        return defaultInterface().CreateReference()
+        try (buffer = asIMemoryBuffer()) {
+            return buffer.CreateReference()
+        }
+        throw IllegalStateException("MemoryBuffer.CreateReference ancestor call did not execute")
     }
 
     public unsafe func Close(): Unit {
-        asIClosable().Close()
+        try (closable = asIClosable()) {
+            closable.Close()
+            return
+        }
+        throw IllegalStateException("MemoryBuffer.Close ancestor call did not execute")
     }
 
     public static unsafe func Create(capacity: UInt32): MemoryBuffer {
@@ -10795,71 +10816,122 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 
     public unsafe func AbsoluteUri(): windows_core.HString {
-        return defaultInterface().AbsoluteUri()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.AbsoluteUri()
+        }
+        throw IllegalStateException("Uri.AbsoluteUri ancestor call did not execute")
     }
 
     public unsafe func DisplayUri(): windows_core.HString {
-        return defaultInterface().DisplayUri()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.DisplayUri()
+        }
+        throw IllegalStateException("Uri.DisplayUri ancestor call did not execute")
     }
 
     public unsafe func Domain(): windows_core.HString {
-        return defaultInterface().Domain()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Domain()
+        }
+        throw IllegalStateException("Uri.Domain ancestor call did not execute")
     }
 
     public unsafe func Extension(): windows_core.HString {
-        return defaultInterface().Extension()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Extension()
+        }
+        throw IllegalStateException("Uri.Extension ancestor call did not execute")
     }
 
     public unsafe func Fragment(): windows_core.HString {
-        return defaultInterface().Fragment()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Fragment()
+        }
+        throw IllegalStateException("Uri.Fragment ancestor call did not execute")
     }
 
     public unsafe func Host(): windows_core.HString {
-        return defaultInterface().Host()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Host()
+        }
+        throw IllegalStateException("Uri.Host ancestor call did not execute")
     }
 
     public unsafe func Password(): windows_core.HString {
-        return defaultInterface().Password()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Password()
+        }
+        throw IllegalStateException("Uri.Password ancestor call did not execute")
     }
 
     public unsafe func Path(): windows_core.HString {
-        return defaultInterface().Path()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Path()
+        }
+        throw IllegalStateException("Uri.Path ancestor call did not execute")
     }
 
     public unsafe func Query(): windows_core.HString {
-        return defaultInterface().Query()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Query()
+        }
+        throw IllegalStateException("Uri.Query ancestor call did not execute")
     }
 
     public unsafe func QueryParsed(): WwwFormUrlDecoder {
-        return defaultInterface().QueryParsed()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.QueryParsed()
+        }
+        throw IllegalStateException("Uri.QueryParsed ancestor call did not execute")
     }
 
     public unsafe func RawUri(): windows_core.HString {
-        return defaultInterface().RawUri()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.RawUri()
+        }
+        throw IllegalStateException("Uri.RawUri ancestor call did not execute")
     }
 
     public unsafe func SchemeName(): windows_core.HString {
-        return defaultInterface().SchemeName()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.SchemeName()
+        }
+        throw IllegalStateException("Uri.SchemeName ancestor call did not execute")
     }
 
     public unsafe func UserName(): windows_core.HString {
-        return defaultInterface().UserName()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.UserName()
+        }
+        throw IllegalStateException("Uri.UserName ancestor call did not execute")
     }
 
     public unsafe func Port(): Int32 {
-        return defaultInterface().Port()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Port()
+        }
+        throw IllegalStateException("Uri.Port ancestor call did not execute")
     }
 
     public unsafe func Suspicious(): Bool {
-        return defaultInterface().Suspicious()
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Suspicious()
+        }
+        throw IllegalStateException("Uri.Suspicious ancestor call did not execute")
     }
 
     public unsafe func Equals(pUri: Uri): Bool {
-        return defaultInterface().Equals(pUri)
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.Equals(pUri)
+        }
+        throw IllegalStateException("Uri.Equals ancestor call did not execute")
     }
 
     public unsafe func CombineUri(relativeUri: windows_core.HString): Uri {
-        return defaultInterface().CombineUri(relativeUri)
+        try (uriRuntime = asIUriRuntimeClass()) {
+            return uriRuntime.CombineUri(relativeUri)
+        }
+        throw IllegalStateException("Uri.CombineUri ancestor call did not execute")
     }
 
     public unsafe func ToString(): windows_core.HString {
@@ -11022,7 +11094,10 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public unsafe func GetFirstValueByName(name: windows_core.HString): windows_core.HString {
-        return defaultInterface().GetFirstValueByName(name)
+        try (decoderRuntime = asIWwwFormUrlDecoderRuntimeClass()) {
+            return decoderRuntime.GetFirstValueByName(name)
+        }
+        throw IllegalStateException("WwwFormUrlDecoder.GetFirstValueByName ancestor call did not execute")
     }
 
     public unsafe func First(): IIterator<IWwwFormUrlDecoderEntry> {

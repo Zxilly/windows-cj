@@ -114,3 +114,18 @@ func testIMemoryBufferReferenceForwardsCloseThroughIClosable() {
         @Expect(memoryBufferCloseForwardingReleaseCalls.load(), 1)
     })
 }
+
+@Test
+func testMemoryBufferRuntimeForwardsCloseThroughIClosable() {
+    resetMemoryBufferCloseForwardingCounters()
+    withMemoryBufferCloseForwardingRaw({ raw: CPointer<Unit> =>
+        let buffer = MemoryBuffer.viewOf(raw)
+
+        unsafe { buffer.Close() }
+
+        @Expect(memoryBufferCloseForwardingCloseCalls.load(), 1)
+        @Expect(memoryBufferCloseForwardingQueryCalls.load(), 1)
+        @Expect(memoryBufferCloseForwardingAddRefCalls.load(), 1)
+        @Expect(memoryBufferCloseForwardingReleaseCalls.load(), 1)
+    })
+}

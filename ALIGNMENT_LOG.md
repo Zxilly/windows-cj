@@ -1704,6 +1704,33 @@
 - Review:
   - Review agent `Averroes`: no findings; confirmed the temporary queried `IIterable` is released and the `IIterator` returned from `First()` remains owned by the returned iterator wrapper.
 
+### Round131 - Foundation runtime default-interface cleanup
+
+- Started at `2026-05-15 11:43:41 +08:00`; implementation recorded at `2026-05-15 11:57:00 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the deterministic cleanup pattern for temporary queried interface wrappers.
+  - `CPointer` and `CFunc` operations require `unsafe`.
+- Reference scan:
+  - `WwwFormUrlDecoderEntry`, `Deferral`, `MemoryBuffer`, `Uri`, and `WwwFormUrlDecoder` runtime classes still forwarded through `defaultInterface().method()` or `asIClosable().Close()` directly.
+  - Those calls query an owned wrapper only for a single call; returned HSTRINGs and returned COM interfaces are independently owned by their ABI out slots and should survive closing the temporary queried wrapper.
+- Cleanup fix:
+  - Wrapped `WwwFormUrlDecoderEntry.Name/Value`, `Deferral.Complete/Close`, `MemoryBuffer.CreateReference/Close`, all `Uri` default-interface methods, and `WwwFormUrlDecoder.GetFirstValueByName` in `try (ancestor = as...)`.
+  - No vtable layout or ABI changes were made.
+- Added representative coverage:
+  - `testUriRuntimeAbsoluteUriReleasesTemporaryDefaultInterface` verifies a returned HSTRING survives closing the temporary `IUriRuntimeClass` wrapper.
+  - `testWwwFormUrlDecoderEntryNameReleasesTemporaryDefaultInterface` and `testWwwFormUrlDecoderGetFirstValueReleasesTemporaryDefaultInterface` cover decoder runtime default-interface forwarding.
+  - `testMemoryBufferRuntimeForwardsCloseThroughIClosable` covers runtime-class `IClosable` forwarding.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*ReleasesTemporaryDefaultInterface,*MemoryBufferRuntimeForwardsCloseThroughIClosable --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 4/133.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 133/133.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+  - `rg "defaultInterface\\(\\)\\.[A-Za-z0-9_]+\\(|asIClosable\\(\\)\\.Close\\(" windows-runtime/src/foundation_runtime.cj`: no matches.
+- Review:
+  - Review agent `Aquinas`: no findings; confirmed queried default/closable interfaces are released through `try` and returned HSTRING/COM ownership semantics are unchanged.
+
 ### Round125 - IReferenceArray property value forwarding
 
 - Started at `2026-05-15 02:55:21 +08:00`; implementation recorded at `2026-05-15 03:01:19 +08:00`.
