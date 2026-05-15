@@ -3,6 +3,17 @@ package windows_result
 import std.unittest.*
 import std.unittest.testmacro.*
 
+func resultTestThrowsWindowsException(action: () -> Unit): Bool {
+    try {
+        action()
+        false
+    } catch (_: WindowsException) {
+        true
+    } catch (_: Exception) {
+        false
+    }
+}
+
 @Test
 func testHResultAndWin32ErrorConversions() {
     @Expect(S_OK.isOk(), true)
@@ -11,6 +22,15 @@ func testHResultAndWin32ErrorConversions() {
     @Expect(E_ACCESSDENIED.toString(), "0x80070005")
     @Expect(WIN32_ERROR(0u32).isOk(), true)
     @Expect(WIN32_ERROR(5u32).toHRESULT(), E_ACCESSDENIED)
+}
+
+@Test
+func testHResultCheckThrowsWindowsExceptionOnFailure() {
+    S_OK.check()
+
+    @Expect(resultTestThrowsWindowsException({ =>
+        E_FAIL.check()
+    }), true)
 }
 
 @Test

@@ -391,7 +391,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
                 case None => throw WindowsException(E_POINTER)
@@ -411,7 +411,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, arg0, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
                 case None => throw WindowsException(E_POINTER)
@@ -431,7 +431,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, inputRaw, CPointer<CPointer<Unit>>(result__.borrowMut<T>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<T>()) {
                 case Some(raw) => value__ = Some(raw)
                 case None => throw WindowsException(E_POINTER)
@@ -451,7 +451,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 
@@ -464,7 +464,7 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 
@@ -570,7 +570,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -590,7 +590,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, arg0, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -610,7 +610,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, inputRaw, CPointer<CPointer<Unit>>(result__.borrowMut<A>())) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<A>()) {
                 case Some(raw) => value__ = Some(T.assumeInitRef(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -630,7 +630,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 
@@ -643,7 +643,7 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 
@@ -747,7 +747,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -767,7 +767,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, arg0, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -787,7 +787,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
             let hr = unsafe { slot(instanceRaw, inputRaw, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).ok()
+            HRESULT(hr).check()
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -807,7 +807,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 
@@ -820,7 +820,7 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     ): UInt32 {
         var result = 0u32
         let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         result
     }
 

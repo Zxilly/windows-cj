@@ -105,6 +105,13 @@ public struct HRESULT <: ToString & Hashable & Comparable<HRESULT> {
         Result<Unit>.Ok(())
     }
 
+    // Throws WindowsException on failure; returns normally on success.
+    public func check(): Unit {
+        if (isErr()) {
+            throw WindowsException(this)
+        }
+    }
+
     // Calls op() and wraps the result in Ok if this code is successful.
     // Returns Err(Error) without calling op() if this code is a failure.
     public func map<T>(op: () -> T): Result<T> {

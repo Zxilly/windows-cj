@@ -164,7 +164,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     public unsafe func Invoke(): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: () -> Unit): DeferralCompletedHandler {
@@ -300,7 +300,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IInspectable>, T) -> Unit): EventHandler<T> {
@@ -670,7 +670,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Id(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -678,7 +678,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = AsyncStatusAbi()
         let hr = v.Status(asRaw(), CPointer<AsyncStatusAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<AsyncStatus>()).unwrap()
     }
 
@@ -686,20 +686,20 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = HResultAbi()
         let hr = v.ErrorCode(asRaw(), CPointer<HResultAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<HResult>()).unwrap()
     }
 
     public unsafe func Cancel(): Unit {
         let v = vtbl()
         let hr = v.Cancel(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Close(): Unit {
         let v = vtbl()
         let hr = v.Close(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 }
 
@@ -818,7 +818,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     public unsafe func Close(): Unit {
         let v = vtbl()
         let hr = v.Close(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 }
 
@@ -910,7 +910,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     public unsafe func Complete(): Unit {
         let v = vtbl()
         let hr = v.Complete(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 }
 
@@ -1045,7 +1045,7 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(activatableClassId)) {
             hr__ = v.GetActivationFactory(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 }
@@ -1129,7 +1129,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
         let v = vtbl()
         var result__ = GUID()
         let hr = v.CreateNewGuid(asRaw(), CPointer<GUID>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return GuidValue(result__)
     }
 
@@ -1137,7 +1137,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
         let v = vtbl()
         var result__ = GUID()
         let hr = v.Empty(asRaw(), CPointer<GUID>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return GuidValue(result__)
     }
 
@@ -1147,7 +1147,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
         var targetRaw = target.toRaw()
         var valueRaw = value.toRaw()
         let hr = v.Equals(asRaw(), CPointer<GUID>(inout targetRaw), CPointer<GUID>(inout valueRaw), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 }
@@ -1271,7 +1271,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.ToString(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 }
@@ -1357,7 +1357,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(toUnescape)) {
             hr__ = v.UnescapeComponent(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -1368,7 +1368,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(toEscape)) {
             hr__ = v.EscapeComponent(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 }
@@ -1451,7 +1451,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AbsoluteCanonicalUri(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -1459,7 +1459,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DisplayIri(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 }
@@ -1608,7 +1608,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Name(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -1616,7 +1616,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 }
@@ -1720,7 +1720,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
             hr__ = v.GetFirstValueByName(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -2090,7 +2090,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (TSender, TResult) -> Unit): TypedEventHandler<TSender, TResult> {
@@ -2527,7 +2527,7 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Capacity(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -2535,14 +2535,14 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
         let v = vtbl()
         var result__ = EventRegistrationTokenAbi()
         let hr = v.Closed(asRaw(), handler.asRaw(), CPointer<EventRegistrationTokenAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<EventRegistrationToken>()).unwrap()
     }
 
     public unsafe func RemoveClosed(cookie: EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveClosed(asRaw(), windows_core.projectTypedAbi(cookie, windows_core.typeMarker<EventRegistrationToken>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Close(): Unit {
@@ -3856,7 +3856,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = PropertyTypeAbi()
         let hr = v.Type(asRaw(), CPointer<PropertyTypeAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<PropertyType>()).unwrap()
     }
 
@@ -3864,7 +3864,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = false
         let hr = v.IsNumericScalar(asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3872,7 +3872,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u8
         let hr = v.GetUInt8(asRaw(), CPointer<UInt8>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3880,7 +3880,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0i16
         let hr = v.GetInt16(asRaw(), CPointer<Int16>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3888,7 +3888,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u16
         let hr = v.GetUInt16(asRaw(), CPointer<UInt16>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3896,7 +3896,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0i32
         let hr = v.GetInt32(asRaw(), CPointer<Int32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3904,7 +3904,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u32
         let hr = v.GetUInt32(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3912,7 +3912,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0i64
         let hr = v.GetInt64(asRaw(), CPointer<Int64>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3920,7 +3920,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u64
         let hr = v.GetUInt64(asRaw(), CPointer<UInt64>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3928,7 +3928,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0.0f32
         let hr = v.GetSingle(asRaw(), CPointer<Float32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3936,7 +3936,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0.0f64
         let hr = v.GetDouble(asRaw(), CPointer<Float64>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3944,7 +3944,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u16
         let hr = v.GetChar16(asRaw(), CPointer<UInt16>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3952,7 +3952,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = false
         let hr = v.GetBoolean(asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -3960,7 +3960,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetString(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -3968,7 +3968,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = GUID()
         let hr = v.GetGuid(asRaw(), CPointer<GUID>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return GuidValue(result__)
     }
 
@@ -3976,7 +3976,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = DateTimeAbi()
         let hr = v.GetDateTime(asRaw(), CPointer<DateTimeAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<DateTime>()).unwrap()
     }
 
@@ -3984,7 +3984,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = TimeSpanAbi()
         let hr = v.GetTimeSpan(asRaw(), CPointer<TimeSpanAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<TimeSpan>()).unwrap()
     }
 
@@ -3992,7 +3992,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = PointAbi()
         let hr = v.GetPoint(asRaw(), CPointer<PointAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Point>()).unwrap()
     }
 
@@ -4000,7 +4000,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = SizeAbi()
         let hr = v.GetSize(asRaw(), CPointer<SizeAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Size>()).unwrap()
     }
 
@@ -4008,86 +4008,86 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = RectAbi()
         let hr = v.GetRect(asRaw(), CPointer<RectAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<Rect>()).unwrap()
     }
 
     public unsafe func GetUInt8Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt8>>): Unit {
         let v = vtbl()
         let hr = v.GetUInt8Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int16>>): Unit {
         let v = vtbl()
         let hr = v.GetInt16Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetUInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Unit {
         let v = vtbl()
         let hr = v.GetUInt16Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int32>>): Unit {
         let v = vtbl()
         let hr = v.GetInt32Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetUInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt32>>): Unit {
         let v = vtbl()
         let hr = v.GetUInt32Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int64>>): Unit {
         let v = vtbl()
         let hr = v.GetInt64Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetUInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt64>>): Unit {
         let v = vtbl()
         let hr = v.GetUInt64Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetSingleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float32>>): Unit {
         let v = vtbl()
         let hr = v.GetSingleArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetDoubleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float64>>): Unit {
         let v = vtbl()
         let hr = v.GetDoubleArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetChar16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Unit {
         let v = vtbl()
         let hr = v.GetChar16Array(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetBooleanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Bool>>): Unit {
         let v = vtbl()
         let hr = v.GetBooleanArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetStringArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Unit {
         let v = vtbl()
         let hr = v.GetStringArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetInspectableArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Unit {
         let v = vtbl()
         let hr = v.GetInspectableArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetStringArray(): Array<windows_core.HString> {
@@ -4107,37 +4107,37 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     public unsafe func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): Unit {
         let v = vtbl()
         let hr = v.GetGuidArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetDateTimeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<DateTimeAbi>>): Unit {
         let v = vtbl()
         let hr = v.GetDateTimeArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetTimeSpanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<TimeSpanAbi>>): Unit {
         let v = vtbl()
         let hr = v.GetTimeSpanArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetPointArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<PointAbi>>): Unit {
         let v = vtbl()
         let hr = v.GetPointArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetSizeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<SizeAbi>>): Unit {
         let v = vtbl()
         let hr = v.GetSizeArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetRectArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<RectAbi>>): Unit {
         let v = vtbl()
         let hr = v.GetRectArray(asRaw(), valueSize, value)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetUInt8Array(): Array<UInt8> {
@@ -4375,7 +4375,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateEmpty(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4383,7 +4383,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt8(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4391,7 +4391,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt16(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4399,7 +4399,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt16(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4407,7 +4407,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt32(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4415,7 +4415,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt32(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4423,7 +4423,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt64(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4431,7 +4431,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt64(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4439,7 +4439,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSingle(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4447,7 +4447,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDouble(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4455,7 +4455,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateChar16(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4463,7 +4463,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateBoolean(asRaw(), value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4474,7 +4474,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
             hr__ = v.CreateString(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4482,7 +4482,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInspectable(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4490,7 +4490,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateGuid(asRaw(), value.toRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4498,7 +4498,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDateTime(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<DateTime>()), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4506,7 +4506,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateTimeSpan(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<TimeSpan>()), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4514,7 +4514,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreatePoint(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Point>()), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4522,7 +4522,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSize(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Size>()), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4530,7 +4530,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateRect(asRaw(), windows_core.projectTypedAbi(value, windows_core.typeMarker<Rect>()), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4538,7 +4538,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt8Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4546,7 +4546,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt16Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4554,7 +4554,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt16Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4562,7 +4562,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt32Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4570,7 +4570,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt32Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4578,7 +4578,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInt64Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4586,7 +4586,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateUInt64Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4594,7 +4594,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSingleArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4602,7 +4602,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDoubleArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4610,7 +4610,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateChar16Array(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4618,7 +4618,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateBooleanArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4626,7 +4626,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateStringArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4634,7 +4634,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateInspectableArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4657,7 +4657,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         } finally {
             releasePropertyValueStringHandleArray(handles)
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4676,7 +4676,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(handleData) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4688,7 +4688,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateGuidArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4696,7 +4696,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateDateTimeArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4704,7 +4704,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateTimeSpanArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4712,7 +4712,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreatePointArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4720,7 +4720,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateSizeArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4728,7 +4728,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateRectArray(asRaw(), valueSize, value, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4746,7 +4746,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4764,7 +4764,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4782,7 +4782,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4800,7 +4800,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4818,7 +4818,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4836,7 +4836,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4854,7 +4854,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4872,7 +4872,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4890,7 +4890,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4908,7 +4908,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4926,7 +4926,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4945,7 +4945,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4964,7 +4964,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -4983,7 +4983,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -5002,7 +5002,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -5021,7 +5021,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 
@@ -5040,7 +5040,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
                 unsafe { releaseArrayRawData(valueHandle) }
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return IInspectable.fromAbiTake(result__)
     }
 }
@@ -6618,7 +6618,7 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
         var resultSize__: UInt32 = 0u32
         var result__: CPointer<Unit> = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<UInt32>(inout resultSize__), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return (resultSize__, result__)
     }
 
@@ -7870,7 +7870,7 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.CreateReference(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IMemoryBufferReference.fromAbiTake(result__)
     }
 
@@ -7950,7 +7950,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     public unsafe func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncAction>, AsyncStatus) -> Unit): AsyncActionCompletedHandler {
@@ -8091,7 +8091,7 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit): AsyncActionProgressHandler<TProgress> {
@@ -8225,7 +8225,7 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     public unsafe func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit): AsyncActionWithProgressCompletedHandler<TProgress> {
@@ -8359,7 +8359,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     public unsafe func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit): AsyncOperationCompletedHandler<TResult> {
@@ -8502,7 +8502,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit): AsyncOperationProgressHandler<TResult, TProgress> {
@@ -8638,7 +8638,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     public unsafe func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), asyncInfo.borrow<CPointer<Unit>>(), windows_core.projectTypedAbi(asyncStatus, windows_core.typeMarker<AsyncStatus>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
@@ -9067,21 +9067,21 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     public unsafe func SetCompleted(handler: AsyncActionCompletedHandler): Unit {
         let v = vtbl()
         let hr = v.SetCompleted(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Completed(): AsyncActionCompletedHandler {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncActionCompletedHandler.fromAbiTake(result__)
     }
 
     public unsafe func GetResults(): Unit {
         let v = vtbl()
         let hr = v.GetResults(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 }
 
@@ -9395,35 +9395,35 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     public unsafe func SetProgress(handler: AsyncActionProgressHandler<TProgress>): Unit {
         let v = vtbl()
         let hr = v.SetProgress(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Progress(): AsyncActionProgressHandler<TProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Progress(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncActionProgressHandler<TProgress>.fromAbiTake(result__)
     }
 
     public unsafe func SetCompleted(handler: AsyncActionWithProgressCompletedHandler<TProgress>): Unit {
         let v = vtbl()
         let hr = v.SetCompleted(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Completed(): AsyncActionWithProgressCompletedHandler<TProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(result__)
     }
 
     public unsafe func GetResults(): Unit {
         let v = vtbl()
         let hr = v.GetResults(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 }
 
@@ -9682,14 +9682,14 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     public unsafe func SetCompleted(handler: AsyncOperationCompletedHandler<TResult>): Unit {
         let v = vtbl()
         let hr = v.SetCompleted(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Completed(): AsyncOperationCompletedHandler<TResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncOperationCompletedHandler<TResult>.fromAbiTake(result__)
     }
 
@@ -10014,28 +10014,28 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     public unsafe func SetProgress(handler: AsyncOperationProgressHandler<TResult, TProgress>): Unit {
         let v = vtbl()
         let hr = v.SetProgress(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Progress(): AsyncOperationProgressHandler<TResult, TProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Progress(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncOperationProgressHandler<TResult, TProgress>.fromAbiTake(result__)
     }
 
     public unsafe func SetCompleted(handler: AsyncOperationWithProgressCompletedHandler<TResult, TProgress>): Unit {
         let v = vtbl()
         let hr = v.SetCompleted(asRaw(), handler.asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Completed(): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.fromAbiTake(result__)
     }
 
@@ -10122,7 +10122,7 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), handler.asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return Deferral.fromAbiTake(result__)
     }
 }
@@ -10204,7 +10204,7 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Create(asRaw(), capacity, CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return MemoryBuffer.fromAbiTake(result__)
     }
 }
@@ -10302,7 +10302,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.AbsoluteUri(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10310,7 +10310,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.DisplayUri(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10318,7 +10318,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Domain(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10326,7 +10326,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Extension(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10334,7 +10334,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Fragment(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10342,7 +10342,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Host(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10350,7 +10350,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Password(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10358,7 +10358,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Path(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10366,7 +10366,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.Query(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10374,7 +10374,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.QueryParsed(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return WwwFormUrlDecoder.fromAbiTake(result__)
     }
 
@@ -10382,7 +10382,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.RawUri(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10390,7 +10390,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.SchemeName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10398,7 +10398,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.UserName(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.HString.fromSystemHandleTake(result__)
     }
 
@@ -10406,7 +10406,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = 0i32
         let hr = v.Port(asRaw(), CPointer<Int32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -10414,7 +10414,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = false
         let hr = v.Suspicious(asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -10422,7 +10422,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         let v = vtbl()
         var result__ = false
         let hr = v.Equals(asRaw(), pUri.asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -10433,7 +10433,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(relativeUri)) {
             hr__ = v.CombineUri(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return Uri.fromAbiTake(result__)
     }
 }
@@ -10519,7 +10519,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(uri)) {
             hr__ = v.CreateUri(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return Uri.fromAbiTake(result__)
     }
 
@@ -10532,7 +10532,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
                 hr__ = v.CreateWithRelativeUri(asRaw(), __hstringBorrow0.asRaw(), __hstringBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__))
             }
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return Uri.fromAbiTake(result__)
     }
 }
@@ -10617,7 +10617,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
         try (__hstringBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(query)) {
             hr__ = v.CreateWwwFormUrlDecoder(asRaw(), __hstringBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__))
         }
-        HRESULT(hr__).ok()
+        HRESULT(hr__).check()
         return WwwFormUrlDecoder.fromAbiTake(result__)
     }
 }

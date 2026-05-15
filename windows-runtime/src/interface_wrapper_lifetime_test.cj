@@ -3,7 +3,7 @@ package windows_runtime
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.WindowsException
+import windows_core.{E_FAIL, WindowsException}
 import windows_interface.*
 
 let runtimeWrapperReleaseCount = AtomicInt64(0)
@@ -35,6 +35,21 @@ func runtimeWrapperTestVtbl(): IUnknownVtbl {
     vtbl
 }
 
+@C
+func runtimeWrapperFailingIdThunk(_: CPointer<Unit>, result: CPointer<UInt32>): Int32 {
+    if (!result.isNull()) {
+        unsafe { result.write(99u32) }
+    }
+    E_FAIL.value
+}
+
+func runtimeWrapperFailingAsyncInfoVtbl(): IAsyncInfoVtbl {
+    var vtbl = IAsyncInfoVtbl()
+    vtbl.Id = runtimeWrapperFailingIdThunk
+    vtbl.base_.base_.Release = runtimeWrapperReleaseThunk
+    vtbl
+}
+
 func withRuntimeWrapperRaw(action: (CPointer<Unit>) -> Unit): Unit {
     let vtblHandle = unsafe { acquireArrayRawData(Array<IUnknownVtbl>(1, { _ => runtimeWrapperTestVtbl() })) }
     let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IUnknownVtbl>>(1, { _ => vtblHandle.pointer })) }
@@ -48,6 +63,21 @@ func withRuntimeWrapperRaw(action: (CPointer<Unit>) -> Unit): Unit {
     }
 }
 
+func withRuntimeWrapperFailingAsyncInfoRaw(action: (CPointer<Unit>) -> Unit): Unit {
+    let vtblHandle = unsafe { acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => runtimeWrapperFailingAsyncInfoVtbl() })) }
+    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IAsyncInfoVtbl>>(1, { _ => vtblHandle.pointer })) }
+    let raw = CPointer<Unit>(objectHandle.pointer)
+
+    try {
+        action(raw)
+    } finally {
+        unsafe {
+            releaseArrayRawData(objectHandle)
+            releaseArrayRawData(vtblHandle)
+        }
+    }
+}
+
 @Test
 func testRuntimeFromAbiTakeRejectsNullOwnedPointer() {
     @Expect(runtimeWrapperThrowsWindowsException({ =>
@@ -55,6 +85,17 @@ func testRuntimeFromAbiTakeRejectsNullOwnedPointer() {
     }), true)
 
     @Expect(IAsyncInfo.viewOf(CPointer<Unit>()).asRaw().isNull(), true)
+}
+
+@Test
+func testRuntimeWrapperThrowsOnFailedHRESULT() {
+    withRuntimeWrapperFailingAsyncInfoRaw({ raw: CPointer<Unit> =>
+        let info = IAsyncInfo.viewOf(raw)
+
+        @Expect(runtimeWrapperThrowsWindowsException({ =>
+            let _ = unsafe { info.Id() }
+        }), true)
+    })
 }
 
 @Test

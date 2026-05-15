@@ -1648,7 +1648,41 @@
   - `python scripts/check_workspace_setup.py`: passed.
   - `git diff --check`: passed.
 - Review:
+  - Review agent `Boole`: no findings; confirmed `HRESULT.check()` only replaces ignored `HRESULT(...).ok()` paths that previously continued after failure, while intentional `Result`/`Option` `.ok()` uses remain unchanged.
+- Review:
   - Review agent `Avicenna`: no findings; confirmed the centralized owned-path null rejection only affects `takeOwnership` wrappers, borrowed `viewOf(null)` remains available for optional/probe paths, and the property-value array tests now simulate and balance owned out-interface `AddRef`/`Release`.
+
+### Round137 - Propagate failed HRESULT caller paths
+
+- Started at `2026-05-15 13:10:06 +08:00`; implementation recorded at `2026-05-15 13:22:33 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - Exceptions are thrown with `throw` and caught with `try`/`catch`.
+  - Generic functions and pattern matching over enum results are supported; conditions require parentheses.
+- Reference scan:
+  - The Rust caller-side `.ok()` converts an HRESULT into a `Result` and is returned/propagated by the generated method.
+  - Cangjie `HRESULT.ok()` also returns `Result<Unit>`, but generated/manual wrapper methods were calling `HRESULT(hr).ok()` as a statement and then continuing, which silently ignored failed HRESULTs.
+- ABI fix:
+  - Added `HRESULT.check()` in `windows_result` to preserve existing `ok()` semantics while providing a throwing check for call sites that return projected values or `Unit`.
+  - Replaced ignored `HRESULT(...).ok()` call-side checks in `windows-runtime` generated projections and `windows-core` generic WinRT bridge with `HRESULT(...).check()`.
+  - Updated `windows-implement` descriptor codegen and `scripts/generate_vector_input_abi.py` so future generated caller paths use `check()`.
+  - Left `activationFactory(...).ok()`, `handler.ok()`, and NTSTATUS/WIN32/RPC `ok()` paths unchanged because those results are intentionally returned or matched.
+- Added coverage:
+  - `testHResultCheckThrowsWindowsExceptionOnFailure` verifies `S_OK.check()` returns normally and a failed HRESULT throws `WindowsException`.
+  - `testRuntimeWrapperThrowsOnFailedHRESULT` verifies a generated runtime method does not return an out value after `E_FAIL`.
+  - `testWinrtGenericOutThrowsOnFailedHRESULT` verifies the generic WinRT out bridge propagates `E_FAIL` instead of consuming the staged value.
+- Verification:
+  - Before replacement, `testRuntimeWrapperThrowsOnFailedHRESULT` failed because `IAsyncInfo.Id()` returned the staged value after `E_FAIL`.
+  - `cjpm test -m windows-result --no-run`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-core --no-run`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-runtime --no-run`: passed with `cjHeapSize=32GB`.
+  - `cjpm test -m windows-implement --no-run`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_result.exe --no-color --no-progress`: passed 13/13.
+  - `cjv exec target\release\unittest_bin\windows_core.exe --no-color --no-progress`: passed 20/20.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --no-color --no-progress`: passed 137/137.
+  - `cjv exec target\release\unittest_bin\windows_implement.exe --no-color --no-progress`: passed 19/19.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
 
 ### Round129 - Property set runtime ancestor cleanup
 

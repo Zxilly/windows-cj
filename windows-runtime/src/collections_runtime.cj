@@ -277,7 +277,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         let v = vtbl()
         var result__ = false
         let hr = v.HasCurrent(asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -285,7 +285,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         let v = vtbl()
         var result__ = false
         let hr = v.MoveNext(asRaw(), CPointer<Bool>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -293,7 +293,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         let v = vtbl()
         var result__ = 0u32
         let hr = v.GetMany(asRaw(), itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -639,7 +639,7 @@ public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & Ru
         let v = vtbl()
         var result__ = CollectionChangeAbi()
         let hr = v.get_CollectionChange(asRaw(), CPointer<CollectionChangeAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<CollectionChange>()).unwrap()
     }
 
@@ -795,7 +795,7 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         let v = vtbl()
         var result__ = CollectionChangeAbi()
         let hr = v.get_CollectionChange(asRaw(), CPointer<CollectionChangeAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<CollectionChange>()).unwrap()
     }
 
@@ -803,7 +803,7 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Index(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 }
@@ -938,7 +938,7 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.First(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IIterator<T>.fromAbiTake(result__)
     }
 
@@ -961,7 +961,7 @@ func callMapViewLookupInt32Int32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0i32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Int32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -973,7 +973,7 @@ func callMapViewLookupInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -985,7 +985,7 @@ func callMapViewLookupInt32UInt64(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<UInt64>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0u64
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<UInt64>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -997,7 +997,7 @@ func callMapViewLookupInt32Float32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Float32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0.0f32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Float32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1009,7 +1009,7 @@ func callMapViewLookupInt32VectorViewInt32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     IVectorView<Int32>.fromAbiTake(result__)
 }
 
@@ -1021,7 +1021,7 @@ func callMapViewLookupUInt32UInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0u32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<UInt32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1033,7 +1033,7 @@ func callMapViewLookupUInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -1045,7 +1045,7 @@ func callMapViewHasKeyInt32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1057,7 +1057,7 @@ func callMapViewHasKeyUInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1837,7 +1837,7 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Size(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -1901,14 +1901,14 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
     public unsafe func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Unit {
         let v = vtbl()
         let hr = v.Split(asRaw(), first, second)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
@@ -1934,7 +1934,7 @@ func callVectorViewIndexOfInt32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1947,7 +1947,7 @@ func callVectorViewIndexOfUInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1960,7 +1960,7 @@ func callVectorViewIndexOfInt64(
     let typedSlot = CFunc<(CPointer<Unit>, Int64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1973,7 +1973,7 @@ func callVectorViewIndexOfInt16(
     let typedSlot = CFunc<(CPointer<Unit>, Int16, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1986,7 +1986,7 @@ func callVectorViewIndexOfUInt8(
     let typedSlot = CFunc<(CPointer<Unit>, UInt8, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -1999,7 +1999,7 @@ func callVectorViewIndexOfUInt16(
     let typedSlot = CFunc<(CPointer<Unit>, UInt16, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2012,7 +2012,7 @@ func callVectorViewIndexOfUInt64(
     let typedSlot = CFunc<(CPointer<Unit>, UInt64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2025,7 +2025,7 @@ func callVectorViewIndexOfBool(
     let typedSlot = CFunc<(CPointer<Unit>, Bool, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2038,7 +2038,7 @@ func callVectorViewIndexOfFloat32(
     let typedSlot = CFunc<(CPointer<Unit>, Float32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2051,7 +2051,7 @@ func callVectorViewIndexOfFloat64(
     let typedSlot = CFunc<(CPointer<Unit>, Float64, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, value, index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2064,7 +2064,7 @@ func callVectorViewIndexOfDateTime(
     let typedSlot = CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, DateTime.projectAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2077,7 +2077,7 @@ func callVectorViewIndexOfTimeSpan(
     let typedSlot = CFunc<(CPointer<Unit>, TimeSpanAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, TimeSpan.projectAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2090,7 +2090,7 @@ func callVectorViewIndexOfGuidValue(
     let typedSlot = CFunc<(CPointer<Unit>, GUID, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, GuidValue.projectAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2103,7 +2103,7 @@ func callVectorViewIndexOfPoint(
     let typedSlot = CFunc<(CPointer<Unit>, PointAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, Point.projectAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2116,7 +2116,7 @@ func callVectorViewIndexOfSize(
     let typedSlot = CFunc<(CPointer<Unit>, SizeAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, projectWinrtSizeAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2129,7 +2129,7 @@ func callVectorViewIndexOfRect(
     let typedSlot = CFunc<(CPointer<Unit>, RectAbi, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, Rect.projectAbi(value), index, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2915,7 +2915,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Size(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -2949,7 +2949,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
             case Some(value__) => value__
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -2957,7 +2957,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
         let v = vtbl()
         var result__ = 0u32
         let hr = v.GetMany(asRaw(), startIndex, itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -2983,7 +2983,7 @@ func callMapLookupInt32Int32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0i32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Int32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -2995,7 +2995,7 @@ func callMapLookupInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -3007,7 +3007,7 @@ func callMapLookupInt32Float32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Float32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0.0f32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Float32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3019,7 +3019,7 @@ func callMapLookupUInt32UInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(CPointer<Unit>(slot))
     var result__ = 0u32
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<UInt32>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3031,7 +3031,7 @@ func callMapLookupUInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -3043,7 +3043,7 @@ func callMapHasKeyInt32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3055,7 +3055,7 @@ func callMapHasKeyUInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3068,7 +3068,7 @@ func callMapInsertInt32Int32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, value, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3081,7 +3081,7 @@ func callMapInsertUInt32UInt32(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, value, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3094,7 +3094,7 @@ func callMapInsertInt32Float32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, Float32, CPointer<Bool>) -> Int32>(CPointer<Unit>(slot))
     var result__ = false
     let hr = unsafe { typedSlot(instanceRaw, key, value, CPointer<Bool>(inout result__)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3114,7 +3114,7 @@ func callMapInsertInt32HString(
         case Some(value) => value
         case None => throw IllegalStateException("HString WinRT input borrow did not execute")
     }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3134,7 +3134,7 @@ func callMapInsertUInt32HString(
         case Some(value) => value
         case None => throw IllegalStateException("HString WinRT input borrow did not execute")
     }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
     result__
 }
 
@@ -3145,7 +3145,7 @@ func callMapRemoveUInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, key) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callMapRemoveInt32(
@@ -3155,7 +3155,7 @@ func callMapRemoveInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, key) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 @C
@@ -4150,7 +4150,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Size(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -4198,7 +4198,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -4206,7 +4206,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetView(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IMapView<K, V>.fromAbiTake(result__)
     }
 
@@ -4276,7 +4276,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -4333,13 +4333,13 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Clear(): Unit {
         let v = vtbl()
         let hr = v.Clear(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
@@ -4364,7 +4364,7 @@ func callVectorSetAtInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtUInt32(
@@ -4375,7 +4375,7 @@ func callVectorSetAtUInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtInt64(
@@ -4386,7 +4386,7 @@ func callVectorSetAtInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtUInt8(
@@ -4397,7 +4397,7 @@ func callVectorSetAtUInt8(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtUInt16(
@@ -4408,7 +4408,7 @@ func callVectorSetAtUInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtInt16(
@@ -4419,7 +4419,7 @@ func callVectorSetAtInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtUInt64(
@@ -4430,7 +4430,7 @@ func callVectorSetAtUInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtBool(
@@ -4441,7 +4441,7 @@ func callVectorSetAtBool(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Bool) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtFloat32(
@@ -4452,7 +4452,7 @@ func callVectorSetAtFloat32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Float32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtFloat64(
@@ -4463,7 +4463,7 @@ func callVectorSetAtFloat64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Float64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtDateTime(
@@ -4474,7 +4474,7 @@ func callVectorSetAtDateTime(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, DateTime.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtTimeSpan(
@@ -4485,7 +4485,7 @@ func callVectorSetAtTimeSpan(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, TimeSpanAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, TimeSpan.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtGuidValue(
@@ -4496,7 +4496,7 @@ func callVectorSetAtGuidValue(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, GUID) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, GuidValue.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtPoint(
@@ -4507,7 +4507,7 @@ func callVectorSetAtPoint(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, PointAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, Point.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtSize(
@@ -4518,7 +4518,7 @@ func callVectorSetAtSize(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, SizeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, projectWinrtSizeAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorSetAtRect(
@@ -4529,7 +4529,7 @@ func callVectorSetAtRect(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, RectAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, Rect.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtInt32(
@@ -4540,7 +4540,7 @@ func callVectorInsertAtInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtUInt32(
@@ -4551,7 +4551,7 @@ func callVectorInsertAtUInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtInt64(
@@ -4562,7 +4562,7 @@ func callVectorInsertAtInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtUInt8(
@@ -4573,7 +4573,7 @@ func callVectorInsertAtUInt8(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtUInt16(
@@ -4584,7 +4584,7 @@ func callVectorInsertAtUInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtInt16(
@@ -4595,7 +4595,7 @@ func callVectorInsertAtInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtUInt64(
@@ -4606,7 +4606,7 @@ func callVectorInsertAtUInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtBool(
@@ -4617,7 +4617,7 @@ func callVectorInsertAtBool(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Bool) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtFloat32(
@@ -4628,7 +4628,7 @@ func callVectorInsertAtFloat32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Float32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtFloat64(
@@ -4639,7 +4639,7 @@ func callVectorInsertAtFloat64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, Float64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtDateTime(
@@ -4650,7 +4650,7 @@ func callVectorInsertAtDateTime(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, DateTime.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtTimeSpan(
@@ -4661,7 +4661,7 @@ func callVectorInsertAtTimeSpan(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, TimeSpanAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, TimeSpan.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtGuidValue(
@@ -4672,7 +4672,7 @@ func callVectorInsertAtGuidValue(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, GUID) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, GuidValue.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtPoint(
@@ -4683,7 +4683,7 @@ func callVectorInsertAtPoint(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, PointAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, Point.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtSize(
@@ -4694,7 +4694,7 @@ func callVectorInsertAtSize(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, SizeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, projectWinrtSizeAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorInsertAtRect(
@@ -4705,7 +4705,7 @@ func callVectorInsertAtRect(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, RectAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, index, Rect.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendInt32(
@@ -4715,7 +4715,7 @@ func callVectorAppendInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendUInt32(
@@ -4725,7 +4725,7 @@ func callVectorAppendUInt32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendInt64(
@@ -4735,7 +4735,7 @@ func callVectorAppendInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Int64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendUInt8(
@@ -4745,7 +4745,7 @@ func callVectorAppendUInt8(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt8) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendUInt16(
@@ -4755,7 +4755,7 @@ func callVectorAppendUInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendInt16(
@@ -4765,7 +4765,7 @@ func callVectorAppendInt16(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendUInt64(
@@ -4775,7 +4775,7 @@ func callVectorAppendUInt64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendBool(
@@ -4785,7 +4785,7 @@ func callVectorAppendBool(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Bool) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendFloat32(
@@ -4795,7 +4795,7 @@ func callVectorAppendFloat32(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Float32) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendFloat64(
@@ -4805,7 +4805,7 @@ func callVectorAppendFloat64(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, Float64) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, value) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendDateTime(
@@ -4815,7 +4815,7 @@ func callVectorAppendDateTime(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, DateTimeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, DateTime.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendTimeSpan(
@@ -4825,7 +4825,7 @@ func callVectorAppendTimeSpan(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, TimeSpanAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, TimeSpan.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendGuidValue(
@@ -4835,7 +4835,7 @@ func callVectorAppendGuidValue(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, GuidValue.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendPoint(
@@ -4845,7 +4845,7 @@ func callVectorAppendPoint(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, PointAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, Point.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendSize(
@@ -4855,7 +4855,7 @@ func callVectorAppendSize(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, SizeAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, projectWinrtSizeAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 func callVectorAppendRect(
@@ -4865,7 +4865,7 @@ func callVectorAppendRect(
 ): Unit {
     let typedSlot = CFunc<(CPointer<Unit>, RectAbi) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe { typedSlot(instanceRaw, Rect.projectAbi(value)) }
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }
 
 @C
@@ -6515,7 +6515,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = 0u32
         let hr = v.Size(asRaw(), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -6523,7 +6523,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetView(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return IVectorView<T>.fromAbiTake(result__)
     }
 
@@ -6557,7 +6557,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
@@ -6622,7 +6622,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func InsertAt(index: UInt32, value: T): Unit {
@@ -6686,13 +6686,13 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func RemoveAt(index: UInt32): Unit {
         let v = vtbl()
         let hr = v.RemoveAt(asRaw(), index)
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Append(value: T): Unit {
@@ -6756,33 +6756,33 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
             case Some(value) => value
             case None => throw IllegalStateException("generic WinRT input borrow did not execute")
         }
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func RemoveAtEnd(): Unit {
         let v = vtbl()
         let hr = v.RemoveAtEnd(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Clear(): Unit {
         let v = vtbl()
         let hr = v.Clear(asRaw())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): UInt32 {
         let v = vtbl()
         var result__ = 0u32
         let hr = v.GetMany(asRaw(), startIndex, itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return result__
     }
 
     public unsafe func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Unit {
         let v = vtbl()
         let hr = v.ReplaceAll(asRaw(), itemsSize, CPointer<Unit>(items))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public func intoIterator(): Iterator<T> {
@@ -7080,14 +7080,14 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
         let v = vtbl()
         var result__ = EventRegistrationTokenAbi()
         let hr = v.MapChanged(asRaw(), vhnd.asRaw(), CPointer<EventRegistrationTokenAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<EventRegistrationToken>()).unwrap()
     }
 
     public unsafe func RemoveMapChanged(token: EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveMapChanged(asRaw(), windows_core.projectTypedAbi(token, windows_core.typeMarker<EventRegistrationToken>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func Lookup(key: K): V {
@@ -7479,14 +7479,14 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
         let v = vtbl()
         var result__ = EventRegistrationTokenAbi()
         let hr = v.VectorChanged(asRaw(), vhnd.asRaw(), CPointer<EventRegistrationTokenAbi>(inout result__))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<EventRegistrationToken>()).unwrap()
     }
 
     public unsafe func RemoveVectorChanged(token: EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveVectorChanged(asRaw(), windows_core.projectTypedAbi(token, windows_core.typeMarker<EventRegistrationToken>()))
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public unsafe func GetAt(index: UInt32): T {
@@ -8008,7 +8008,7 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
     public unsafe func Invoke(sender: InParam<IObservableMap<K, V>>, event: InParam<IMapChangedEventArgs<K>>): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.borrow<CPointer<Unit>>(), event.borrow<CPointer<Unit>>())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IObservableMap<K, V>>, InParam<IMapChangedEventArgs<K>>) -> Unit): MapChangedEventHandler<K, V> {
@@ -8737,7 +8737,7 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
     public unsafe func Invoke(sender: InParam<IObservableVector<T>>, event: InParam<IVectorChangedEventArgs>): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.borrow<CPointer<Unit>>(), event.borrow<CPointer<Unit>>())
-        HRESULT(hr).ok()
+        HRESULT(hr).check()
     }
 
     public static func new(invoke: (InParam<IObservableVector<T>>, InParam<IVectorChangedEventArgs>) -> Unit): VectorChangedEventHandler<T> {

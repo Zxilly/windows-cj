@@ -543,7 +543,7 @@ func appendCallerMethod(sb: StringBuilder, _: ResolvedDescriptor, method: Interf
                 sb.append(", CPointer<")
                 sb.append(abiValueType)
                 sb.append(">(inout result))\n")
-                sb.append("        windows_result.HRESULT(hr).ok()\n")
+                sb.append("        windows_result.HRESULT(hr).check()\n")
                 sb.append("        return ")
                 sb.append(callerResultReturnExpr(method, abiValueType, "result"))
                 sb.append("\n")

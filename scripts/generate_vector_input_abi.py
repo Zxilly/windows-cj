@@ -60,7 +60,7 @@ def render_set_at_helper(spec: TypeSpec) -> str:
 ): Unit {{
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe {{ typedSlot(instanceRaw, index, value) }}
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }}
 
 """
@@ -75,7 +75,7 @@ def render_insert_at_helper(spec: TypeSpec) -> str:
 ): Unit {{
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe {{ typedSlot(instanceRaw, index, value) }}
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }}
 
 """
@@ -89,7 +89,7 @@ def render_append_helper(spec: TypeSpec) -> str:
 ): Unit {{
     let typedSlot = CFunc<(CPointer<Unit>, {spec.name}) -> Int32>(CPointer<Unit>(slot))
     let hr = unsafe {{ typedSlot(instanceRaw, value) }}
-    HRESULT(hr).ok()
+    HRESULT(hr).check()
 }}
 
 """

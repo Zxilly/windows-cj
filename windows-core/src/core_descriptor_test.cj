@@ -159,6 +159,20 @@ func testQueryRequiredForUsesOnlyVtableBaseChain() {
     @Expect(queryRequiredFor<CoreRequiredInterface, CoreOwnerInterface>(), true)
 }
 
+@Test
+func testWinrtGenericOutThrowsOnFailedHRESULT() {
+    let slot: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ =>
+        if (!result__.isNull()) {
+            unsafe { CPointer<Int32>(result__).write(123i32) }
+        }
+        E_FAIL.value
+    }
+
+    @Expect(coreTestThrows({ =>
+        let _ = winrtCallGenericOut<Int32>(slot, CPointer<Unit>())
+    }), true)
+}
+
 @When[os == "Windows"]
 @Test
 func testHStringGenericOutBridgeUsesSystemHandleOwnership() {
