@@ -108,18 +108,46 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 
 ### 5. 维护 package readiness 矩阵
 
-在本文档或后续生产就绪文档中维护 readiness 表：
+状态定义：
 
-- `windows-strings`：handle 生命周期、pointer view、BSTR/HSTRING 覆盖。
-- `windows-core`：COM identity、array、factory、generic ABI bridge。
-- `windows-runtime`：WinRT collection、delegate、async、property value。
-- `windows`：生成的 Win32 签名和类型 alias。
-- `windows-services`、`windows-threading`、`windows-registry`、`windows-version`：smoke 与基础 ABI 覆盖。
+- **Production-ready**：核心 ABI/所有权不变量有自动测试或静态审计覆盖；当前无开放 P0/P1/P2；下一步只剩工具改进。
+- **Candidate**：测试覆盖核心 ABI 路径但还缺真实 Windows smoke 或类型类别完成度；无活跃 P0/P1。
+- **Needs tests**：编译通过但单元覆盖明显不足；P0/P1 可能潜伏未发现。
+- **Blocked**：依赖未交付或上游约束未解。
 
-验收标准：
+最近一次刷新：2026-05-15（target/verify-readiness，435 tests passed，0 failed）。
 
-- 每个 package 都有状态：`Blocked`、`Needs tests`、`Candidate` 或 `Production-ready`。
-- 每个未 ready 的 package 都必须有具体的下一步测试或修复任务。
+| Package | 状态 | 测试数 | 关键不变量覆盖 | 下一步 |
+| --- | --- | --- | --- | --- |
+| `windows-libloading` | Production-ready | 9 | System32-only / explicit search-path 双策略；DLL 缓存；path-like 模块名拒绝 | 工具：审计扩展到泛 native helper 调用 |
+| `windows-result` | Production-ready | 13 | HRESULT / NTSTATUS / RPC_STATUS / WIN32_ERROR `.ok()`/`.unwrap()`/`.check()` 三栏；公开符号 surface 测试 | — |
+| `windows-strings` | Production-ready | 8 | HSTRING handle 生命周期、ref-backed vs alloc-backed clone、BSTR `fromRaw*` 视图 | smoke：WindowsCreateString / DeleteString 真实调用 |
+| `windows-result/BSTR` 与 `windows-strings/BSTR` 重叠 | Candidate | — | 两套 BSTR 包装，待审 | 评估去重路径（合并到 windows-strings） |
+| `windows-interface` | Production-ready | 8 | Macro 生成 vtable 形态；descriptor 基础约束；继承链覆盖 fixture | — |
+| `windows-implement` | Production-ready | 19 | Schema vtable resolution、深继承 slot 数、QI ancestor fallback、custom vtable 必填 | smoke：真实 ComObject 注册 / WinRT activation |
+| `windows-core` | Production-ready | 24 | AbiArray owned semantics（红测固化）、HString winrt out/in 边界、null owned 拒绝、generic factory borrow view | 类型类别矩阵补齐（见下） |
+| `windows-polyfill` | Production-ready | 60 | factory_cache、reflective COM 接入、polyfill 形态 | — |
+| `windows-runtime` | Candidate | 144 | Vector/VectorView/Map/MapView scalar + copy struct + 部分 HString；async finish/cancel/fail；collection null-buffer guard | 矩阵：COM interface 集合 / iterator 全表面 / HString vector view |
+| `windows-threading` | Candidate | 6 | submit / submitDefault / closeInternal | smoke：真实线程池调度 |
+| `windows-version` | Needs tests | 2 | 版本字符串解析 | 增加 OS 包装的 ABI 边界测试 |
+| `windows-targets` | Needs tests | 2 | 链接 target 选择 | smoke：实际链接到三种 dll search policy |
+| `windows-registry` | Candidate | 6 | 字节↔宽字符转换、ABI types 委托给 windows-common | smoke：真实 HKLM/HKCU 读写 |
+| `windows-services` | Candidate | 5 | dispatch / 状态守护 synchronized 块 | smoke：真实 SCM dispatcher 启动 |
+| `windows-metadata` | Production-ready | 5 | JSON 元数据加载 | — |
+| `windows-common` | Production-ready | 0 (generated) | 由 `check_workspace_setup.py` 强校验：DO NOT EDIT 头、SHA256 哈希、`@When` 禁用、依赖闭包 | — |
+| `windows-winui3` | Candidate | 0 | XAML / Markup / Controls 手写 helper；HSTRING 输入借用形态由静态审计强制 | smoke：`windows-cj-demo` 启动并截图（已在主 progress 文档验收） |
+| `windows` (CLI) | Production-ready | 124 | render_symbol / interface / runtime class / collection thunk 模板；生成 manifest file_hashes | — |
+
+不变量覆盖（向量化清单）：
+
+- ✅ owned ABI 拒绝 null owned pointer：`windows-core` 静态规则 + 集合 buffer guard。
+- ✅ HSTRING 唯一释放方：`windows-strings` + `windows-core` ABI 边界 + AbiArray.get() owned clone。
+- ✅ HRESULT 失败不被静默 `.ok()` 吞：`scripts/check_ignored_results.py` 审计。
+- ✅ `Resource.close()` 与析构器 closed flag 防 double free：`windows-core` / `windows-runtime` impl 测试。
+- ⚠️ generated vtable thunk 非零容量 null buffer guard：`windows-runtime/collection_null_buffer_thunk_test.cj` 覆盖部分接口；尚需类型类别矩阵推进。
+- ⚠️ owned QueryInterface 结果确定性关闭：散落 review 强制；待静态审计加固。
+
+下一批应优先解决的 ⚠️ 项目：扩展 `check_ignored_results.py` 或新增 helper-driven 检测，把 QueryInterface 结果跟踪、`fromAbiTake` null-on-success 拒绝两条不变量从 review-only 升为自动审计。
 
 ## 下一任 agent 的第一批任务
 
