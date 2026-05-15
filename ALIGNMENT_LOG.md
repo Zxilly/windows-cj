@@ -1677,6 +1677,33 @@
   - Review agent `Galileo` found one real cleanup gap: `PropertySet.intoIterator()` still used `asIIterable().intoIterator()` after the first patch. That was fixed and covered by `testPropertySetRuntimeIteratorReleasesIterableQueryInterface`.
   - Review agent `James`: no findings after the fix; confirmed ancestor forwarding balances temporary QI wrappers and returned iterator ownership is preserved.
 
+### Round130 - Iterable iterator temporary wrapper cleanup
+
+- Started at `2026-05-15 11:37:09 +08:00`; implementation recorded at `2026-05-15 11:45:00 +08:00`.
+- Confirmed Cangjie docs before editing:
+  - `try-with-resource` closes `Resource` values at block exit and is the deterministic cleanup pattern for temporary interface wrappers.
+  - `CPointer` and `CFunc` operations require `unsafe`.
+  - Conditions require parentheses and same-scope `let` shadowing is not allowed.
+- Reference scan:
+  - Remaining collection `intoIterator()` methods in `IMapView`, `IVectorView`, `IMap`, `IVector`, `IObservableMap`, `IObservableVector`, and `IWwwFormUrlDecoderRuntimeClass` were implemented as `asIIterable().intoIterator()`.
+  - That path kept the temporary queried `IIterable` wrapper alive for GC even though only the returned `IIterator` should remain owned by the iterator adapter.
+- Cleanup fix:
+  - Each remaining `intoIterator()` now wraps `asIIterable()` in `try (iterable = ...)`, calls `iterable.First()`, and returns `IIteratorIterator` over the owned iterator.
+  - No vtable layout or public WinRT ABI changes were made.
+- Added representative coverage:
+  - `testIMapIteratorReleasesIterableQueryInterface` and `testIVectorIteratorReleasesIterableQueryInterface` verify generic collection interface iterator forwarding releases the temporary iterable wrapper while retaining the returned iterator reference.
+  - `testIWwwFormUrlDecoderRuntimeClassIteratorReleasesTemporaryIterable` verifies the same cleanup path for the decoder runtime-class interface.
+- Verification:
+  - `cjpm test -m windows-runtime --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --filter=*IteratorReleases* --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 4/129.
+  - `cjv exec target\release\unittest_bin\windows_runtime.exe --parallel 1 --timeout-each=5s --no-capture-output --no-color --no-progress`: passed 129/129.
+  - `cjpm test --no-run --parallel 1 --no-color --no-progress`: passed with `cjHeapSize=32GB`.
+  - `python scripts/check_workspace_setup.py`: passed.
+  - `git diff --check`: passed.
+  - `rg "asIIterable\\(\\)\\.intoIterator\\(" windows-runtime/src/collections_runtime.cj windows-runtime/src/foundation_runtime.cj`: no matches.
+- Review:
+  - Review agent `Averroes`: no findings; confirmed the temporary queried `IIterable` is released and the `IIterator` returned from `First()` remains owned by the returned iterator wrapper.
+
 ### Round125 - IReferenceArray property value forwarding
 
 - Started at `2026-05-15 02:55:21 +08:00`; implementation recorded at `2026-05-15 03:01:19 +08:00`.

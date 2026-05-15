@@ -1912,7 +1912,10 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<IKeyValuePair<K, V>>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IMapView.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<IKeyValuePair<K, V>> {
@@ -2959,7 +2962,10 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func intoIterator(): Iterator<T> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<T>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IVectorView.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<T> {
@@ -4337,7 +4343,10 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<IKeyValuePair<K, V>>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IMap.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<IKeyValuePair<K, V>> {
@@ -6777,7 +6786,10 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public func intoIterator(): Iterator<T> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<T>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IVector.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<T> {
@@ -7130,7 +7142,10 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<IKeyValuePair<K, V>>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IObservableMap.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<IKeyValuePair<K, V>> {
@@ -7566,7 +7581,10 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func intoIterator(): Iterator<T> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<T>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IObservableVector.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<T> {

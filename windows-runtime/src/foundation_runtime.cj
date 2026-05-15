@@ -1722,7 +1722,10 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 
     public func intoIterator(): Iterator<IWwwFormUrlDecoderEntry> {
-        asIIterable().intoIterator()
+        try (iterable = asIIterable()) {
+            return IIteratorIterator<IWwwFormUrlDecoderEntry>(unsafe { iterable.First() })
+        }
+        throw IllegalStateException("IWwwFormUrlDecoderRuntimeClass.intoIterator ancestor call did not execute")
     }
 
     public func iterator(): Iterator<IWwwFormUrlDecoderEntry> {

@@ -223,3 +223,18 @@ func testWwwFormUrlDecoderFirstReleasesTemporaryIterable() {
         @Expect(uriDecoderForwardingReleaseCalls.load(), 2)
     })
 }
+
+@Test
+func testIWwwFormUrlDecoderRuntimeClassIteratorReleasesTemporaryIterable() {
+    resetUriDecoderForwardingCounters()
+    withDecoderIterableForwardingRaw({ raw: CPointer<Unit> =>
+        let decoder = IWwwFormUrlDecoderRuntimeClass.viewOf(raw)
+
+        let _ = decoder.intoIterator()
+
+        @Expect(uriDecoderForwardingFirstCalls.load(), 1)
+        @Expect(uriDecoderForwardingQueryCalls.load(), 1)
+        @Expect(uriDecoderForwardingAddRefCalls.load(), 2)
+        @Expect(uriDecoderForwardingReleaseCalls.load(), 1)
+    })
+}

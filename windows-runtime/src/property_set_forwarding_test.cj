@@ -31,6 +31,7 @@ func propertySetForwardingQueryInterfaceThunk(
         target == IMap<windows_core.HString, windows_core.HString>.iid() ||
         target == IObservableMap<windows_core.HString, IInspectable>.iid() ||
         target == IObservableMap<windows_core.HString, windows_core.HString>.iid() ||
+        target == IIterable<Int32>.iid() ||
         target == IIterable<IKeyValuePair<windows_core.HString, IInspectable>>.iid() ||
         target == IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>>.iid() ||
         target == IInspectable.iid() ||
@@ -278,6 +279,36 @@ func testPropertySetRuntimeIteratorReleasesIterableQueryInterface() {
         let propertySet = PropertySet.viewOf(raw)
 
         let _ = propertySet.intoIterator()
+
+        @Expect(propertySetForwardingFirstCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 2)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
+    })
+}
+
+@Test
+func testIMapIteratorReleasesIterableQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingIterableRaw({ raw: CPointer<Unit> =>
+        let map = IMap<windows_core.HString, IInspectable>.viewOf(raw)
+
+        let _ = map.intoIterator()
+
+        @Expect(propertySetForwardingFirstCalls.load(), 1)
+        @Expect(propertySetForwardingQueryCalls.load(), 1)
+        @Expect(propertySetForwardingAddRefCalls.load(), 2)
+        @Expect(propertySetForwardingReleaseCalls.load(), 1)
+    })
+}
+
+@Test
+func testIVectorIteratorReleasesIterableQueryInterface() {
+    resetPropertySetForwardingCounters()
+    withPropertySetForwardingIterableRaw({ raw: CPointer<Unit> =>
+        let vector = IVector<Int32>.viewOf(raw)
+
+        let _ = vector.intoIterator()
 
         @Expect(propertySetForwardingFirstCalls.load(), 1)
         @Expect(propertySetForwardingQueryCalls.load(), 1)
