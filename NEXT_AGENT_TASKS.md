@@ -144,7 +144,7 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 
 | 表面 | Copy scalar | Copy struct | HString | COM interface |
 | --- | --- | --- | --- | --- |
-| Vector | ✅ `vector_int32_abi_test.cj` 等每个标量宽度一个 | ✅ `vector_copy_struct_abi_test.cj`, `vector_datetime_abi_test.cj` | ❌ | ❌ |
+| Vector | ✅ `vector_int32_abi_test.cj` 等每个标量宽度一个 | ✅ `vector_copy_struct_abi_test.cj`, `vector_datetime_abi_test.cj` | ✅ `vector_hstring_abi_test.cj` | ❌ |
 | Vector view | ✅ `vector_view_uint8_abi_test.cj` 等 | ❌ | ❌ | ❌ |
 | Map | ✅ `map_int32_abi_test.cj` 等 | partial (`map_int32_vector_view_abi_test.cj` 嵌套) | ✅ `map_int32_hstring_abi_test.cj`, `map_uint32_hstring_abi_test.cj` | ❌ |
 | Map view | partial (`map_view_int32_generic_abi_test.cj`) | ❌ | ❌ | ❌ |
@@ -153,7 +153,7 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 
 ### 推荐顺序
 
-1. `vector_hstring_abi_test.cj` — IVector<HString> 直接 vtable 往返。最高价值：HString slot ABI 是最近所有权不变量的集中区域。注意 `IVectorVtbl` 当前没有 `newHString` 工厂方法；要么走泛型 `new<Identity, HString>`（验证是否走 handle 投影路径），要么按需添加 typed factory。
+1. ~~`vector_hstring_abi_test.cj`~~（已完成）：直接走泛型 `IVectorVtbl.new<Identity, HString>` + `IIterableVtbl.new<Identity, HString>`。覆盖 wrapper 路径（SetAt/InsertAt/Append/IndexOf）和直接 vtable 路径（HSTRING raw handle in/out，含 GetAt out-slot）。
 2. `vector_interface_abi_test.cj` — IVector<IInspectable>，覆盖 owned/borrowed slot 转换。
 3. `vector_view_hstring_abi_test.cj`、`vector_view_interface_abi_test.cj`。
 4. `map_hstring_*_abi_test.cj` — HString key。
