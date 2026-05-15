@@ -257,10 +257,6 @@ public func factory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInterface
     loadActivationFactory(C.runtimeName(), I.descriptor())
 }
 
-public func loadFactory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInterface & Interface<I> {
-    loadActivationFactory(C.runtimeName(), I.descriptor())
-}
-
 public func activationFactory<C>(): Result<windows_interface.IActivationFactory> where C <: RuntimeName {
     loadActivationFactory(C.runtimeName(), windows_interface.IActivationFactory.descriptor())
 }
@@ -330,10 +326,6 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
         }
 
         loadFactory(loader)
-    }
-
-    public func loadFactory(): Result<I> {
-        loadActivationFactory(C.runtimeName(), descriptor)
     }
 
     public func loadFactory(loader: () -> Result<I>): Result<I> {
