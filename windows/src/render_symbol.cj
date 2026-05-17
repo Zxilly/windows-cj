@@ -74,6 +74,14 @@ class RuntimeClassInterfaceSpec {
 }
 
 public func renderSymbolImpl(symbol: SymbolRecord, symbolsByName: HashMap<String, SymbolRecord>): String {
+    return renderSymbolImpl(symbol, symbolsByName, RenderOptions.defaults())
+}
+
+public func renderSymbolImpl(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): String {
     if (!symbol.implSource.isEmpty()) {
         return symbol.implSource
     }
@@ -110,15 +118,15 @@ public func renderSymbolImpl(symbol: SymbolRecord, symbolsByName: HashMap<String
                 return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName)}"
             }
             if (hasPInvokeMethods(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options)}"
             }
             if (isApisLikeClass(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options)}"
             }
             if (isInterfaceType(typeDef)) {
                 match (guidAttributeString(typeDef)) {
                     case Some(guidValue) =>
-                        return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue)}"
+                        return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options)}"
                     case None => ()
                 }
                 return "${header}\n${renderRawHandleSymbol(symbol, "interface")}"
@@ -1239,7 +1247,8 @@ func renderFlagsEnumHelpers(typeName: String): String {
 func renderPInvokeSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
 ): String {
     var content = "public struct ${symbol.implName} {\n"
     content += "    public init() {}\n"
@@ -1261,12 +1270,301 @@ func renderPInvokeSymbol(
                     content += "        return unsafe { proc(${args}) }\n"
                 }
                 content += "    }\n"
+                if (options.ergonomicWrappers && !options.sys) {
+                    content += renderPInvokeErgonomicWrapper(symbol.implName, method, methodImport, symbolsByName)
+                }
             case None => ()
         }
     }
     content += renderApisFieldConstants(typeDef, symbolsByName)
     content += "}"
     return content
+}
+
+func renderPInvokeErgonomicWrapper(
+    ownerImplName: String,
+    method: MethodRecord,
+    methodImport: MethodImportRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let hint = pinvokeReturnHint(method, symbolsByName)
+    match (hint) {
+        case PInvokeReturnHint.None => return ""
+        case _ => ()
+    }
+    let sysName = cjIdentifier(method.name)
+    let wrapperName = ergonomicWrapperName(sysName)
+    if (wrapperName == sysName) {
+        return ""
+    }
+    match (hint) {
+        case PInvokeReturnHint.Query =>
+            return renderPInvokeQueryWrapper(ownerImplName, method, sysName, wrapperName, symbolsByName)
+        case PInvokeReturnHint.ResultValue =>
+            return renderPInvokeResultValueWrapper(ownerImplName, method, sysName, wrapperName, symbolsByName)
+        case PInvokeReturnHint.ResultVoid =>
+            return renderPInvokeResultVoidWrapper(ownerImplName, method, sysName, wrapperName, symbolsByName)
+        case PInvokeReturnHint.LastErrorBool =>
+            return renderPInvokeLastErrorWrapper(ownerImplName, method, sysName, wrapperName, symbolsByName)
+        case PInvokeReturnHint.None => return ""
+    }
+}
+
+enum PInvokeReturnHint {
+    | None
+    | Query
+    | ResultValue
+    | ResultVoid
+    | LastErrorBool
+}
+
+func ergonomicWrapperName(sysName: String): String {
+    return "${sysName}Checked"
+}
+
+func pinvokeReturnHint(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): PInvokeReturnHint {
+    let returnFullName = signatureFullNameInContext(method.signature.returnType, symbolsByName, "")
+    let returnIsHresult = match (returnFullName) {
+        case Some(name) =>
+            hresultRawAbiTypeByFullName(name).isSome()
+        case None => false
+    }
+    if (returnIsHresult) {
+        if (pinvokeMethodLooksLikeQuery(method)) {
+            return PInvokeReturnHint.Query
+        }
+        if (pinvokeMethodHasRetValOut(method)) {
+            return PInvokeReturnHint.ResultValue
+        }
+        return PInvokeReturnHint.ResultVoid
+    }
+    let returnIsBool = match (returnFullName) {
+        case Some(name) => name == "Windows.Win32.Foundation.BOOL"
+        case None => false
+    }
+    if (returnIsBool && methodSupportsLastError(method)) {
+        return PInvokeReturnHint.LastErrorBool
+    }
+    return PInvokeReturnHint.None
+}
+
+func methodSupportsLastError(method: MethodRecord): Bool {
+    match (method.methodImport) {
+        case Some(methodImport) =>
+            for (attribute in methodImport.attributes) {
+                if (attribute == "SupportsLastError" || attribute == "SetLastError") {
+                    return true
+                }
+            }
+        case None => ()
+    }
+    return false
+}
+
+func pinvokeMethodHasRetValOut(method: MethodRecord): Bool {
+    if (method.signature.parameters.isEmpty()) {
+        return false
+    }
+    let lastIndex = Int64(method.signature.parameters.size) - 1
+    let lastSig = method.signature.parameters[lastIndex]
+    if (lastSig.kind != "Pointer" && !isByReferenceSignature(lastSig)) {
+        return false
+    }
+    let metadataParameters = metadataMethodParameters(method)
+    match (metadataParameterAt(metadataParameters, lastIndex)) {
+        case Some(parameter) =>
+            if (contains(parameter.attributes, "Out") && contains(parameter.attributes, "Retval")) {
+                return true
+            }
+        case None => ()
+    }
+    return false
+}
+
+func pinvokeMethodLooksLikeQuery(method: MethodRecord): Bool {
+    let count = Int64(method.signature.parameters.size)
+    if (count < 2) {
+        return false
+    }
+    let metadataParameters = metadataMethodParameters(method)
+    let guidIndex = count - 2
+    let objectIndex = count - 1
+    let guidSig = method.signature.parameters[guidIndex]
+    if (!signatureIsGuidPointer(guidSig)) {
+        return false
+    }
+    let objectSig = method.signature.parameters[objectIndex]
+    if (!signatureIsPointerToPointerUnit(objectSig)) {
+        return false
+    }
+    match (metadataParameterAt(metadataParameters, objectIndex)) {
+        case Some(parameter) =>
+            for (attribute in parameter.customAttributes) {
+                if (hasAttributeName(attribute, "ComOutPtrAttribute")) {
+                    return true
+                }
+            }
+        case None => ()
+    }
+    return false
+}
+
+func signatureIsGuidPointer(signature: SignatureRecord): Bool {
+    if (signature.kind != "Pointer" && !isByReferenceSignature(signature)) {
+        return false
+    }
+    match (signature.typeSig) {
+        case Some(nested) =>
+            match (signatureFullNameInContext(nested, HashMap<String, SymbolRecord>(), "")) {
+                case Some(fullName) => return fullName == "System.Guid"
+                case None => return false
+            }
+        case None => return false
+    }
+}
+
+func signatureIsPointerToPointerUnit(signature: SignatureRecord): Bool {
+    if (signature.kind != "Pointer" && !isByReferenceSignature(signature)) {
+        return false
+    }
+    match (signature.typeSig) {
+        case Some(nested) =>
+            if (nested.kind != "Pointer" && !isByReferenceSignature(nested)) {
+                return false
+            }
+            return true
+        case None => return false
+    }
+}
+
+func renderPInvokeResultVoidWrapper(
+    ownerImplName: String,
+    method: MethodRecord,
+    sysName: String,
+    wrapperName: String,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let params = methodParameterText(method, true, symbolsByName)
+    let args = methodArgumentText(method, true, symbolsByName)
+    var content = "    public static func ${wrapperName}(${params}): Unit {\n"
+    content += "        let hr__ = ${ownerImplName}.${sysName}(${args})\n"
+    content += "        windows_core.HRESULT(hr__).check()\n"
+    content += "    }\n"
+    return content
+}
+
+func renderPInvokeResultValueWrapper(
+    ownerImplName: String,
+    method: MethodRecord,
+    sysName: String,
+    wrapperName: String,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let pairs = methodParameterPairs(method, true, symbolsByName)
+    if (pairs.isEmpty()) {
+        return ""
+    }
+    let lastIndex = Int64(pairs.size) - 1
+    let lastPair = pairs[lastIndex]
+    let valueType = pointerElementType(lastPair.typeName)
+    if (valueType.isEmpty()) {
+        return ""
+    }
+    let leadingPairs = ArrayList<ParameterPair>()
+    var idx: Int64 = 0
+    while (idx < lastIndex) {
+        leadingPairs.add(pairs[idx])
+        idx += 1
+    }
+    let paramsText = parameterPairListText(leadingPairs)
+    var content = "    public static func ${wrapperName}(${paramsText}): ${valueType} {\n"
+    content += "        var result__: ${valueType} = ${cjDefaultValue(valueType)}\n"
+    var callArgs = ArrayList<String>()
+    for (pair in leadingPairs) {
+        callArgs.add(pair.name)
+    }
+    callArgs.add("CPointer<${valueType}>(inout result__)")
+    content += "        let hr__ = ${ownerImplName}.${sysName}(${joinStrings(callArgs, ", ")})\n"
+    content += "        windows_core.HRESULT(hr__).check()\n"
+    content += "        return result__\n"
+    content += "    }\n"
+    return content
+}
+
+func renderPInvokeQueryWrapper(
+    ownerImplName: String,
+    method: MethodRecord,
+    sysName: String,
+    wrapperName: String,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let pairs = methodParameterPairs(method, true, symbolsByName)
+    let count = Int64(pairs.size)
+    if (count < 2) {
+        return ""
+    }
+    let leadingPairs = ArrayList<ParameterPair>()
+    var idx: Int64 = 0
+    while (idx < count - 2) {
+        leadingPairs.add(pairs[idx])
+        idx += 1
+    }
+    let paramsText = parameterPairListText(leadingPairs)
+    let separator = if (paramsText.isEmpty()) { "" } else { ", " }
+    var content = "    public static func ${wrapperName}<T>(${paramsText}${separator}descriptor: windows_interface.InterfaceDescriptor<T>): T where T <: windows_interface.ComInterface {\n"
+    content += "        var iid__ = descriptor.iid\n"
+    content += "        var raw__: CPointer<Unit> = CPointer<Unit>()\n"
+    let callArgs = ArrayList<String>()
+    for (pair in leadingPairs) {
+        callArgs.add(pair.name)
+    }
+    callArgs.add("CPointer<windows_interface.GUID>(inout iid__)")
+    callArgs.add("CPointer<CPointer<Unit>>(inout raw__)")
+    content += "        let hr__ = ${ownerImplName}.${sysName}(${joinStrings(callArgs, ", ")})\n"
+    content += "        windows_core.HRESULT(hr__).check()\n"
+    content += "        if (raw__.isNull()) {\n"
+    content += "            throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "        }\n"
+    content += "        return descriptor.takeFromAbi(raw__)\n"
+    content += "    }\n"
+    return content
+}
+
+func renderPInvokeLastErrorWrapper(
+    ownerImplName: String,
+    method: MethodRecord,
+    sysName: String,
+    wrapperName: String,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let params = methodParameterText(method, true, symbolsByName)
+    let args = methodArgumentText(method, true, symbolsByName)
+    var content = "    public static func ${wrapperName}(${params}): Unit {\n"
+    content += "        let ok__ = ${ownerImplName}.${sysName}(${args})\n"
+    content += "        if (ok__ == 0) {\n"
+    content += "            throw windows_core.WindowsException(windows_core.errorFromThread())\n"
+    content += "        }\n"
+    content += "    }\n"
+    return content
+}
+
+func pointerElementType(typeName: String): String {
+    let prefix = "CPointer<"
+    if (!startsWith(typeName, prefix)) {
+        return ""
+    }
+    let bytes = typeName.toArray()
+    let prefixSize = Int64(prefix.toArray().size)
+    if (Int64(bytes.size) <= prefixSize + 1) {
+        return ""
+    }
+    if (bytes[Int64(bytes.size) - 1] != b'>') {
+        return ""
+    }
+    return String.fromUtf8(bytes[prefixSize..Int64(bytes.size) - 1])
 }
 
 func pinvokeCFuncType(method: MethodRecord, returnType: String, symbolsByName: HashMap<String, SymbolRecord>): String {
@@ -1285,10 +1583,11 @@ func renderInterfaceSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    guidValue: String
+    guidValue: String,
+    options: RenderOptions
 ): String {
     if (isGenericWinrtType(typeDef)) {
-        return renderGenericWinrtInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue)
+        return renderGenericWinrtInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options)
     }
     var content = "@Interface[\"${guidValue}\", \"${cjStringContent(symbol.fullName)}\"]\n"
     content += "public interface ${symbol.implName} <: IInspectable {\n"
@@ -1297,6 +1596,27 @@ func renderInterfaceSymbol(
         let slotName = uniqueInterfaceSlotName(method, slotNames)
         slotNames.add(slotName)
         content += "    func ${slotName}(${interfaceMethodMacroParams(method, symbolsByName, symbol.fullName)}): Int32\n"
+    }
+    content += "}"
+    if (options.implement) {
+        content += "\n\n"
+        content += renderInterfaceImplTrait(symbol, typeDef, symbolsByName)
+    }
+    return content
+}
+
+func renderInterfaceImplTrait(
+    symbol: SymbolRecord,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    var content = "public interface ${symbol.implName}_Impl {\n"
+    let slotNames = ArrayList<String>()
+    for (method in typeDef.methods) {
+        let slotName = uniqueInterfaceSlotName(method, slotNames)
+        slotNames.add(slotName)
+        let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
+        content += "    func ${slotName}(${parameterPairListText(pairs)}): Int32\n"
     }
     content += "}"
     return content
@@ -1310,8 +1630,10 @@ func renderGenericWinrtInterfaceSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    guidValue: String
+    guidValue: String,
+    options: RenderOptions
 ): String {
+    let _ = options
     let genericNames = genericParameterNames(typeDef)
     var content = renderGenericWinrtInterfaceVtbl(symbol, typeDef, symbolsByName)
     content += renderGenericWinrtInterfaceImplSurfaces(symbol, typeDef, symbolsByName, genericNames)

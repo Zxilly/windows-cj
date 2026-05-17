@@ -22,6 +22,11 @@ class CliConfig {
     public var printLinkOptions: Bool = false
     public var help: Bool = false
     public var common: Bool = false
+    public var sys: Bool = false
+    public var implement: Bool = false
+    public var noComment: Bool = false
+    public let derives: ArrayList<String> = ArrayList<String>()
+    public let referenceArgs: ArrayList<String> = ArrayList<String>()
 }
 
 public class BindgenConfig {
@@ -36,6 +41,11 @@ public class BindgenConfig {
     public let clean: Bool
     public let dryRun: Bool
     public let common: Bool
+    public let sys: Bool
+    public let implement: Bool
+    public let noComment: Bool
+    public let derives: Array<String>
+    public let referenceArgs: Array<String>
 
     init(config: CliConfig) {
         this.features = copyStrings(config.features)
@@ -49,6 +59,11 @@ public class BindgenConfig {
         this.clean = config.clean
         this.dryRun = config.dryRun
         this.common = config.common
+        this.sys = config.sys
+        this.implement = config.implement
+        this.noComment = config.noComment
+        this.derives = copyStrings(config.derives)
+        this.referenceArgs = copyStrings(config.referenceArgs)
     }
 }
 
@@ -116,6 +131,36 @@ public class BindgenBuilder {
         return this
     }
 
+    public func sys(): BindgenBuilder {
+        config.sys = true
+        return this
+    }
+
+    public func implement(): BindgenBuilder {
+        config.implement = true
+        return this
+    }
+
+    public func noComment(): BindgenBuilder {
+        config.noComment = true
+        return this
+    }
+
+    public func derive(value: String): BindgenBuilder {
+        for (entry in splitString(value, b',')) {
+            let trimmed = trimAscii(entry)
+            if (!trimmed.isEmpty()) {
+                addUnique(config.derives, trimmed)
+            }
+        }
+        return this
+    }
+
+    public func reference(value: String): BindgenBuilder {
+        addUnique(config.referenceArgs, value)
+        return this
+    }
+
     public func configSnapshot(): BindgenConfig {
         finalizeConfigDefaults(config)
         return BindgenConfig(config)
@@ -147,16 +192,28 @@ public class BindgenBuilder {
 class GeneratedPackageWriter {
     let outputDir: String
     let dryRun: Bool
+    let noComment: Bool
     let writtenFiles: ArrayList<String> = ArrayList<String>()
     let writtenFileContent: HashMap<String, String> = HashMap<String, String>()
 
     public init(outputDir: String, dryRun: Bool) {
         this.outputDir = outputDir
         this.dryRun = dryRun
+        this.noComment = false
+    }
+
+    public init(outputDir: String, dryRun: Bool, noComment!: Bool) {
+        this.outputDir = outputDir
+        this.dryRun = dryRun
+        this.noComment = noComment
     }
 
     public func writeFile(relativePath: String, content: String): Unit {
-        let rendered = normalizeGeneratedFileContent(addGeneratedFileHeader(relativePath, content))
+        let rendered = if (noComment) {
+            normalizeGeneratedFileContent(content)
+        } else {
+            normalizeGeneratedFileContent(addGeneratedFileHeader(relativePath, content))
+        }
         match (writtenFileContent.get(relativePath)) {
             case Some(previous) =>
                 if (previous != rendered) {
@@ -316,6 +373,26 @@ func parseArgs(args: Array<String>): CliConfig {
             case "--list-features" => config.listFeatures = true
             case "--print-link-options" => config.printLinkOptions = true
             case "--print-link-option" => config.printLinkOptions = true
+            case "--sys" => config.sys = true
+            case "--implement" => config.implement = true
+            case "--no-comment" => config.noComment = true
+            case "--derive" =>
+                i += 1
+                if (i >= Int64(args.size)) {
+                    throw Exception("--derive requires a value")
+                }
+                for (entry in splitString(args[i], b',')) {
+                    let trimmed = trimAscii(entry)
+                    if (!trimmed.isEmpty()) {
+                        addUnique(config.derives, trimmed)
+                    }
+                }
+            case "--reference" =>
+                i += 1
+                if (i >= Int64(args.size)) {
+                    throw Exception("--reference requires a value")
+                }
+                addUnique(config.referenceArgs, args[i])
             case "--help" =>
                 config.help = true
             case _ => throw Exception("unknown argument: ${arg}")
@@ -377,15 +454,20 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         removeIfExists(config.outputDir, recursive: true)
     }
 
+    let renderOptions = renderOptionsFromCliConfig(config)
     let selectionRules = requestedSelectionRules(config)
     let nativeSelected = selectSymbols(selectionRules, records)
     var selected = nativeSelected
     if (config.common) {
         selected = filterCommonSymbols(nativeSelected)
     }
+    if (!renderOptions.references.isEmpty()) {
+        selected = filterReferencedSymbols(selected, renderOptions.references)
+    }
     let selectedByName = recordsByFullName(selected)
     let nativeSelectedByName = recordsByFullName(nativeSelected)
-    let supportDeps = collectSupportDependencyNames(config.packageName, selected, selectedByName)
+    let supportDeps = collectSupportDependencyNames(config.packageName, selected, selectedByName, renderOptions)
+    addReferencePackagesToSupportDeps(supportDeps, renderOptions.references, config.packageName)
     let commonHelperFiles = ArrayList<GeneratedNativeHelperFile>()
     if (config.common) {
         for (file in commonNativeHelperFiles(nativeSelected, config.packageName, nativeSelectedByName)) {
@@ -393,7 +475,7 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         }
         collectSupportDependencyNamesFromGeneratedNativeHelpers(config.packageName, supportDeps, commonHelperFiles)
     }
-    let writer = GeneratedPackageWriter(config.outputDir, config.dryRun)
+    let writer = GeneratedPackageWriter(config.outputDir, config.dryRun, noComment: renderOptions.noComment)
     writer.writeFile("cjpm.toml", renderCjpmToml(config.packageName, supportDeps: supportDeps))
     writer.writeFile("src/mod.cj", "package ${config.packageName}\n")
     if (!supportDeps.isEmpty()) {
@@ -403,7 +485,7 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         writeCommonNativeHelperFiles(writer, commonHelperFiles)
     }
     writer.writeFile("src/impl/mod.cj", "package ${config.packageName}.impl\n")
-    writeImplFiles(writer, selected, config.packageName, selectedByName)
+    writeImplFiles(writer, selected, config.packageName, selectedByName, renderOptions)
     let namespaces = selectedNamespaces(selected)
     writeIntermediateNamespaceModules(writer, namespaces, config.packageName)
     for (namespace in namespaces) {
@@ -419,6 +501,47 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         }
     } else {
         writer.writeFile("codegen-manifest.json", manifest)
+    }
+}
+
+func renderOptionsFromCliConfig(config: CliConfig): RenderOptions {
+    let options = RenderOptions()
+    options.sys = config.sys
+    options.implement = config.implement
+    options.noComment = config.noComment
+    options.ergonomicWrappers = !config.sys
+    for (entry in config.derives) {
+        options.derives.add(entry)
+    }
+    for (arg in config.referenceArgs) {
+        options.references.add(ReferenceStage.parse(arg))
+    }
+    return options
+}
+
+func filterReferencedSymbols(
+    symbols: ArrayList<SymbolRecord>,
+    references: ArrayList<ReferenceStage>
+): ArrayList<SymbolRecord> {
+    let result = ArrayList<SymbolRecord>()
+    for (symbol in symbols) {
+        match (referenceContainsRecord(references, symbol)) {
+            case Some(_) => ()
+            case None => result.add(symbol)
+        }
+    }
+    return result
+}
+
+func addReferencePackagesToSupportDeps(
+    supportDeps: ArrayList<String>,
+    references: ArrayList<ReferenceStage>,
+    packageName: String
+): Unit {
+    for (stage in references) {
+        if (stage.name != packageName) {
+            addUnique(supportDeps, stage.name)
+        }
     }
 }
 
@@ -788,9 +911,18 @@ func collectSupportDependencyNames(
     symbols: ArrayList<SymbolRecord>,
     symbolsByName: HashMap<String, SymbolRecord>
 ): ArrayList<String> {
+    return collectSupportDependencyNames(packageName, symbols, symbolsByName, RenderOptions.defaults())
+}
+
+func collectSupportDependencyNames(
+    packageName: String,
+    symbols: ArrayList<SymbolRecord>,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): ArrayList<String> {
     let dependencies = ArrayList<String>()
     for (symbol in symbols) {
-        let source = renderImplSource(symbol, symbolsByName)
+        let source = renderImplSource(symbol, symbolsByName, options)
         collectSupportDependencyNamesFromSource(packageName, dependencies, source)
     }
     return dependencies
@@ -851,6 +983,16 @@ func writeImplFiles(
     packageName: String,
     symbolsByName: HashMap<String, SymbolRecord>
 ): Unit {
+    writeImplFiles(writer, symbols, packageName, symbolsByName, RenderOptions.defaults())
+}
+
+func writeImplFiles(
+    writer: GeneratedPackageWriter,
+    symbols: ArrayList<SymbolRecord>,
+    packageName: String,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): Unit {
     var chunkIndex: Int64 = 0
     var count: Int64 = 0
     var body = ""
@@ -862,7 +1004,7 @@ func writeImplFiles(
     var importsInterfaceMacros = false
     var importsStrings = false
     for (symbol in symbols) {
-        let rendered = renderImplSource(symbol, symbolsByName)
+        let rendered = renderImplSource(symbol, symbolsByName, options)
         if (rendered.contains("windows_polyfill.")) {
             importsPolyfill = true
         }
@@ -957,7 +1099,15 @@ func renderImplChunk(
 }
 
 func renderImplSource(symbol: SymbolRecord, symbolsByName: HashMap<String, SymbolRecord>): String {
-    return renderSymbolImpl(symbol, symbolsByName)
+    return renderSymbolImpl(symbol, symbolsByName, RenderOptions.defaults())
+}
+
+func renderImplSource(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): String {
+    return renderSymbolImpl(symbol, symbolsByName, options)
 }
 
 func writeFacadeFiles(
@@ -1148,7 +1298,26 @@ func printFeatures(records: ArrayList<SymbolRecord>): Unit {
 
 func printUsage(): Unit {
     println("windows bindgen CLI")
-    println("Usage: windows --input-json <winmd.json> [--input-json more.json] [--input-dir <dir>] [--common] [--support-package-dir <dir>] [--feature <namespace|all>] [--filter <rule>] [--out .generated/windows] [--clean] [--dry-run] [--print-link-options]")
+    println("Usage: windows --input-json <winmd.json> [--input-json more.json] [--input-dir <dir>] [--common]")
+    println("               [--support-package-dir <dir>] [--feature <namespace|all>] [--filter <rule>]")
+    println("               [--out .generated/windows] [--clean] [--dry-run] [--print-link-options]")
+    println("               [--sys] [--implement] [--no-comment] [--derive <list>] [--reference <spec>]")
+    println("")
+    println("Flag detail:")
+    println("  --sys             Generate raw sys-style bindings only (no ergonomic throws wrappers).")
+    println("  --implement       Emit interface_Impl trait for @Implement consumers (WinRT interfaces).")
+    println("  --no-comment      Suppress 'Generated by windows-gen. DO NOT EDIT.' file headers.")
+    println("  --derive <list>   Comma-separated helper traits to emit (forward-compatible; currently no-op).")
+    println("  --reference <s>   <pkg>,<style>,<namespace> — types matching are imported, not regenerated.")
+    println("                    style is one of flat|full|skip-root.")
+    println("")
+    println("Skipped vs windows-rs (no Cangjie equivalent or already implicit):")
+    println("  --rustfmt / --no-allow         Cangjie has no rustfmt or #[allow] equivalent.")
+    println("  --no-deps / --no-toml          manifest.json + auto deps closure replace these.")
+    println("  --link                         Cangjie resolves dlls via LoadLibrary at runtime.")
+    println("  --sys-fn-ptrs / --sys-fn-extern  cjc has no raw-dylib; all PInvoke is dynamic dispatch.")
+    println("  --package / --specific-deps    --common + auto support-deps closure cover this.")
+    println("  --index                        Dependency closure auto-computed; no separate index file.")
 }
 
 func addUnique(values: ArrayList<String>, value: String): Unit {

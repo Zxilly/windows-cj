@@ -15322,3 +15322,639 @@ func testApisClassRendersLiteralGuidAndConstantAttributeFieldConstants() {
         "public static func SAMPLE_AUTH(): Sample_Foundation_AUTH {"), true)
     @Expect(apisSource.contains("        value.Value[5] = 15u8\n"), true)
 }
+
+@Test
+func testParseArgsAcceptsSysImplementNoCommentFlags() {
+    let config = parseArgs([
+        "--input-json", "metadata.json",
+        "--feature", "Example.Foundation",
+        "--sys",
+        "--implement",
+        "--no-comment"
+    ])
+
+    @Expect(config.sys, true)
+    @Expect(config.implement, true)
+    @Expect(config.noComment, true)
+}
+
+@Test
+func testParseArgsCollectsDeriveAndReferenceFlags() {
+    let config = parseArgs([
+        "--input-json", "metadata.json",
+        "--feature", "Example.Foundation",
+        "--derive", "guid_access,flags_ops",
+        "--derive", "extra",
+        "--reference", "windows_collections,flat,Windows.Foundation.Collections",
+        "--reference", "windows_numerics,flat,Windows.Foundation.Numerics"
+    ])
+
+    @Expect(config.derives.size, 3)
+    @Expect(config.derives[0], "guid_access")
+    @Expect(config.derives[1], "flags_ops")
+    @Expect(config.derives[2], "extra")
+    @Expect(config.referenceArgs.size, 2)
+    @Expect(config.referenceArgs[0], "windows_collections,flat,Windows.Foundation.Collections")
+}
+
+@Test
+func testParseArgsRejectsMissingValuesForNewFlags() {
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--derive"]) }), true)
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--reference"]) }), true)
+}
+
+@Test
+func testReferenceStageParsesAndValidates() {
+    let stage = ReferenceStage.parse("windows_collections,flat,Windows.Foundation.Collections")
+    @Expect(stage.name, "windows_collections")
+    @Expect(stage.style, "flat")
+    @Expect(stage.path, "Windows.Foundation.Collections")
+
+    let windowsStage = ReferenceStage.parse("windows")
+    @Expect(windowsStage.name, "windows")
+    @Expect(windowsStage.style, "skip-root")
+    @Expect(windowsStage.path, "Windows")
+
+    @Expect(cliTestThrows({ => let _ = ReferenceStage.parse("only-two,parts") }), true)
+    @Expect(cliTestThrows({ => let _ = ReferenceStage.parse("name,bogus,Namespace") }), true)
+}
+
+@Test
+func testRenderOptionsFromCliConfigDefaultsToErgonomicWrappers() {
+    let config = parseArgs(["--input-json", "metadata.json", "--feature", "Example.Foundation"])
+    let options = renderOptionsFromCliConfig(config)
+
+    @Expect(options.ergonomicWrappers, true)
+    @Expect(options.sys, false)
+    @Expect(options.implement, false)
+    @Expect(options.noComment, false)
+}
+
+@Test
+func testRenderOptionsFromCliConfigSysDisablesErgonomicWrappers() {
+    let config = parseArgs([
+        "--input-json", "metadata.json",
+        "--feature", "Example.Foundation",
+        "--sys"
+    ])
+    let options = renderOptionsFromCliConfig(config)
+
+    @Expect(options.sys, true)
+    @Expect(options.ergonomicWrappers, false)
+}
+
+@Test
+func testPInvokeErgonomicResultVoidWrapperIsGeneratedFromHresult() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Pwrap",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CoInitializeEx",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "CoInitializeEx",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "ole32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "HRESULT", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}},
+                  {"Kind": "Primitive", "Name": "UInt32"}
+                ],
+                "RequiredParameterCount": 2
+              },
+              "Parameters": [
+                {"Name": "reserved", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": []},
+                {"Name": "flags", "SequenceNumber": 2, "Attributes": ["In"], "CustomAttributes": []}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let options = RenderOptions.cliDefaults()
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Pwrap.Apis") {
+            source = renderSymbolImpl(record, symbolsByName, options)
+        }
+    }
+
+    @Expect(source.contains("public static func CoInitializeEx(reserved: CPointer<Unit>, flags: UInt32): Int32"), true)
+    @Expect(source.contains("public static func CoInitializeExChecked(reserved: CPointer<Unit>, flags: UInt32): Unit {"), true)
+    @Expect(source.contains("let hr__ = Example_Pwrap_Apis.CoInitializeEx(reserved, flags)"), true)
+    @Expect(source.contains("windows_core.HRESULT(hr__).check()"), true)
+}
+
+@Test
+func testPInvokeErgonomicResultValueWrapperIsGeneratedFromRetval() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Retval",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "GetCount",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "GetCount",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "ole32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "HRESULT", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "BOOL", "Comment": "TypeReference"}}
+                ],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "count", "SequenceNumber": 1, "Attributes": ["Out", "Retval"], "CustomAttributes": []}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let options = RenderOptions.cliDefaults()
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Retval.Apis") {
+            source = renderSymbolImpl(record, symbolsByName, options)
+        }
+    }
+
+    @Expect(source.contains("public static func GetCount(count: CPointer<Int32>): Int32"), true)
+    @Expect(source.contains("public static func GetCountChecked(): Int32 {"), true)
+    @Expect(source.contains("Example_Retval_Apis.GetCount(CPointer<Int32>(inout result__))"), true)
+    @Expect(source.contains("return result__"), true)
+}
+
+@Test
+func testPInvokeErgonomicQueryWrapperHandlesIidPlusComOutPtr() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Query",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CoCreateInstance",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "CoCreateInstance",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "ole32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "HRESULT", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Type", "Namespace": "System", "Name": "Guid", "Comment": "TypeReference"}},
+                  {"Kind": "Pointer", "Type": {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}}}
+                ],
+                "RequiredParameterCount": 2
+              },
+              "Parameters": [
+                {"Name": "rclsid", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": []},
+                {"Name": "ppv", "SequenceNumber": 2, "Attributes": ["Out"], "CustomAttributes": [
+                  {"Type": "Windows.Win32.Foundation.Metadata.ComOutPtrAttribute", "FixedArguments": [], "NamedArguments": []}
+                ]}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let options = RenderOptions.cliDefaults()
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Query.Apis") {
+            source = renderSymbolImpl(record, symbolsByName, options)
+        }
+    }
+
+    @Expect(source.contains("public static func CoCreateInstance("), true)
+    @Expect(source.contains("public static func CoCreateInstanceChecked<T>"), true)
+    @Expect(source.contains(": T where T <: windows_interface.ComInterface"), true)
+    @Expect(source.contains("var iid__ = descriptor.iid"), true)
+    @Expect(source.contains("var raw__: CPointer<Unit> = CPointer<Unit>()"), true)
+    @Expect(source.contains("descriptor.takeFromAbi(raw__)"), true)
+}
+
+@Test
+func testPInvokeErgonomicLastErrorWrapperWrapsBoolWithErrorFromThread() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.LastErr",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CloseHandle",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "CloseHandle",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi", "SetLastError"],
+                "Module": {"Name": "kernel32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "BOOL", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}}
+                ],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "handle", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": []}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let options = RenderOptions.cliDefaults()
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.LastErr.Apis") {
+            source = renderSymbolImpl(record, symbolsByName, options)
+        }
+    }
+
+    @Expect(source.contains("public static func CloseHandle(handle: CPointer<Unit>): Int32"), true)
+    @Expect(source.contains("public static func CloseHandleChecked(handle: CPointer<Unit>): Unit {"), true)
+    @Expect(source.contains("let ok__ = Example_LastErr_Apis.CloseHandle(handle)"), true)
+    @Expect(source.contains("if (ok__ == 0) {"), true)
+    @Expect(source.contains("throw windows_core.WindowsException(windows_core.errorFromThread())"), true)
+}
+
+@Test
+func testRenderOptionsDefaultsDoNotEmitErgonomicWrappers() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Sys",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CoInitializeEx",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "CoInitializeEx",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "ole32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "HRESULT", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}}
+                ],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "reserved", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": []}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Sys.Apis") {
+            source = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(source.contains("public static func CoInitializeEx("), true)
+    @Expect(source.contains("CoInitializeExChecked"), false)
+}
+
+@Test
+func testImplementOptionEmitsInterfaceImplTrait() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Impl",
+          "Name": "IThing",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "Ping",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "GenericParameterCount": 0,
+                "Header": {"Attributes": ["Instance"], "CallingConvention": "Default", "HasExplicitThis": false, "IsGeneric": false, "IsInstance": true, "Kind": "Method"},
+                "ParameterTypes": [],
+                "RequiredParameterCount": 0,
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"}
+              },
+              "Parameters": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let defaultOptions = RenderOptions.defaults()
+    let withImpl = RenderOptions()
+    withImpl.implement = true
+
+    let defaultSource = renderSymbolImpl(records[0], symbolsByName, defaultOptions)
+    let implSource = renderSymbolImpl(records[0], symbolsByName, withImpl)
+
+    @Expect(defaultSource.contains("public interface Example_Impl_IThing"), true)
+    @Expect(defaultSource.contains("Example_Impl_IThing_Impl"), false)
+
+    @Expect(implSource.contains("public interface Example_Impl_IThing"), true)
+    @Expect(implSource.contains("public interface Example_Impl_IThing_Impl {"), true)
+    @Expect(implSource.contains("    func Ping(): Int32"), true)
+}
+
+@Test
+func testFilterReferencedSymbolsRemovesMatchingNamespace() {
+    let symbols = ArrayList<SymbolRecord>()
+    symbols.add(SymbolRecord("Windows.Foundation.IThing", "Windows.Foundation", "IThing", "Windows_Foundation_IThing", []))
+    symbols.add(SymbolRecord("Windows.Foundation.Collections.IVector", "Windows.Foundation.Collections", "IVector", "Windows_Foundation_Collections_IVector", []))
+    symbols.add(SymbolRecord("Windows.Foundation.Numerics.Vector2", "Windows.Foundation.Numerics", "Vector2", "Windows_Foundation_Numerics_Vector2", []))
+    let references = ArrayList<ReferenceStage>()
+    references.add(ReferenceStage.parse("windows_collections,flat,Windows.Foundation.Collections"))
+    references.add(ReferenceStage.parse("windows_numerics,flat,Windows.Foundation.Numerics"))
+
+    let remaining = filterReferencedSymbols(symbols, references)
+
+    @Expect(remaining.size, 1)
+    @Expect(remaining[0].fullName, "Windows.Foundation.IThing")
+}
+
+@Test
+func testNoCommentWriterSkipsGeneratedFileHeader() {
+    let outDir = ".generated/no-comment-test"
+    removeIfExists(outDir, recursive: true)
+    let noCommentWriter = GeneratedPackageWriter(outDir, false, noComment: true)
+    noCommentWriter.writeFile("src/sample.cj", "package sample\n")
+    let written = String.fromUtf8(File.readFrom("${outDir}/src/sample.cj"))
+    removeIfExists(outDir, recursive: true)
+
+    @Expect(written.contains(GENERATED_FILE_MARKER), false)
+    @Expect(written.contains("package sample"), true)
+
+    let outDir2 = ".generated/with-comment-test"
+    removeIfExists(outDir2, recursive: true)
+    let normalWriter = GeneratedPackageWriter(outDir2, false)
+    normalWriter.writeFile("src/sample.cj", "package sample\n")
+    let withComment = String.fromUtf8(File.readFrom("${outDir2}/src/sample.cj"))
+    removeIfExists(outDir2, recursive: true)
+
+    @Expect(withComment.contains(GENERATED_FILE_MARKER), true)
+}
