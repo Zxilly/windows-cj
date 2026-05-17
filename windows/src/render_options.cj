@@ -80,7 +80,7 @@ public func referenceMatchesFullName(stage: ReferenceStage, namespace: String, n
     if (fullName == pattern || name == pattern) {
         return true
     }
-    return namespaceMatchesPrefix(namespace, pattern)
+    return namespace == pattern
 }
 
 public func referenceContainsRecord(references: ArrayList<ReferenceStage>, record: SymbolRecord): Option<ReferenceStage> {

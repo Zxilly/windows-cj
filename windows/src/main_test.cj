@@ -15938,6 +15938,127 @@ func testFilterReferencedSymbolsRemovesMatchingNamespace() {
 }
 
 @Test
+func testFilterReferencedSymbolsDoesNotFilterSubNamespaces() {
+    let symbols = ArrayList<SymbolRecord>()
+    symbols.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
+    symbols.add(SymbolRecord("Windows.Win32.Security.Cryptography.ALG_ID", "Windows.Win32.Security.Cryptography", "ALG_ID", "Windows_Win32_Security_Cryptography_ALG_ID", []))
+    let references = ArrayList<ReferenceStage>()
+    references.add(ReferenceStage.parse("windows_common,skip-root,Windows.Win32.Security"))
+
+    let remaining = filterReferencedSymbols(symbols, references)
+
+    @Expect(remaining.size, 1)
+    @Expect(remaining[0].fullName, "Windows.Win32.Security.Cryptography.ALG_ID")
+}
+
+@Test
+func testFilterReferencedSymbolsSupportsWildcardForNamespacePrefix() {
+    let symbols = ArrayList<SymbolRecord>()
+    symbols.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
+    symbols.add(SymbolRecord("Windows.Win32.Security.Cryptography.ALG_ID", "Windows.Win32.Security.Cryptography", "ALG_ID", "Windows_Win32_Security_Cryptography_ALG_ID", []))
+    let references = ArrayList<ReferenceStage>()
+    references.add(ReferenceStage.parse("windows_common,skip-root,Windows.Win32.Security*"))
+
+    let remaining = filterReferencedSymbols(symbols, references)
+
+    @Expect(remaining.size, 0)
+}
+
+@Test
+func testWin32GuidAttributeIsRecognizedOnInterface() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Win32.System.Com",
+          "Name": "IClassFactory",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "AnsiClass"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Win32.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 1},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 192},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 70}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CreateInstance",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "GenericParameterCount": 0,
+                "Header": {"Attributes": ["Instance"], "CallingConvention": "Default", "HasExplicitThis": false, "IsGeneric": false, "IsInstance": true, "Kind": "Method"},
+                "ParameterTypes": [],
+                "RequiredParameterCount": 0,
+                "ReturnType": {"Kind": "Primitive", "Name": "Int32"}
+              },
+              "Parameters": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Win32.System.Com.IClassFactory") {
+            source = renderSymbolImpl(record, symbolsByName)
+            break
+        }
+    }
+
+    @Expect(source.contains("@Interface[\"00000001-0000-0000-c000-000000000046\", \"Example.Win32.System.Com.IClassFactory\"]"), true)
+    @Expect(source.contains("public interface Example_Win32_System_Com_IClassFactory <: IInspectable {"), true)
+}
+
+@Test
 func testNoCommentWriterSkipsGeneratedFileHeader() {
     let outDir = ".generated/no-comment-test"
     removeIfExists(outDir, recursive: true)

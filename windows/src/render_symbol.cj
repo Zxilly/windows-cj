@@ -2267,8 +2267,7 @@ func guidAttributeString(typeDef: TypeDefinitionRecord): Option<String> {
 
 func guidAttributeValues(typeDef: TypeDefinitionRecord): Option<ArrayList<Int64>> {
     for (attr in typeDef.customAttributes) {
-        if (attr.typeName == "Windows.Foundation.Metadata.GuidAttribute" &&
-            attr.fixedArguments.size >= 11) {
+        if (hasAttributeName(attr, "GuidAttribute") && attr.fixedArguments.size >= 11) {
             let rawValues = ArrayList<Int64>()
             var i: Int64 = 0
             while (i < 11) {
