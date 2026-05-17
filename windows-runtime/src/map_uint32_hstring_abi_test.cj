@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,27 +8,26 @@ import windows_core.{HString, Result, S_OK, createComObjectFromSchemas, winrtBor
 
 class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HString> & Resource {
     private let entries: ArrayList<(UInt32, HString)>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(UInt32, HString)>) {
         this.entries = entries
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.new<GenericBuilderUInt32HStringMapViewAbiTestImpl, UInt32, HString>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.new<GenericBuilderUInt32HStringMapViewAbiTestImpl, UInt32, HString>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<GenericBuilderUInt32HStringMapViewAbiTestImpl, IKeyValuePair<UInt32, HString>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderUInt32HStringMapViewAbiTestImpl, IKeyValuePair<UInt32, HString>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -35,8 +35,8 @@ class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HSt
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -48,10 +48,6 @@ class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HSt
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -97,18 +93,17 @@ class GenericBuilderUInt32HStringMapViewAbiTestImpl <: IMapView_Impl<UInt32, HSt
 
 class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> & Resource {
     private let entries: ArrayList<(UInt32, HString)>
-    private let vtblHandle: CPointerHandle<IMapVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(UInt32, HString)>) {
         this.entries = entries
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.newUInt32HString<UInt32HStringMapAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newUInt32HString<UInt32HStringMapAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<UInt32HStringMapAbiTestImpl, IKeyValuePair<UInt32, HString>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<UInt32HStringMapAbiTestImpl, IKeyValuePair<UInt32, HString>>())
         }
     }
 
@@ -120,23 +115,22 @@ class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> & Resource {
         this.entries = entries
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.new<UInt32HStringMapAbiTestImpl, UInt32, HString>() }))
+                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.new<UInt32HStringMapAbiTestImpl, UInt32, HString>())
             } else {
-                acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.newUInt32HString<UInt32HStringMapAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newUInt32HString<UInt32HStringMapAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<UInt32HStringMapAbiTestImpl, IKeyValuePair<UInt32, HString>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<UInt32HStringMapAbiTestImpl, IKeyValuePair<UInt32, HString>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -144,8 +138,8 @@ class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -157,10 +151,6 @@ class UInt32HStringMapAbiTestImpl <: IMap_Impl<UInt32, HString> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

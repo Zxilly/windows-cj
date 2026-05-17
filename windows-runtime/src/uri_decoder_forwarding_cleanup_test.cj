@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -217,85 +218,85 @@ func resetUriDecoderForwardingCounters(): Unit {
 }
 
 func withUriStringableForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IStringableVtbl>(1, { _ => uriDecoderForwardingStringableVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IStringableVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IStringableVtbl>(uriDecoderForwardingStringableVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IStringableVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withUriRuntimeForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IUriRuntimeClassVtbl>(1, { _ => uriDecoderForwardingUriRuntimeVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IUriRuntimeClassVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IUriRuntimeClassVtbl>(uriDecoderForwardingUriRuntimeVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUriRuntimeClassVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withDecoderEntryForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IWwwFormUrlDecoderEntryVtbl>(1, { _ => uriDecoderForwardingEntryVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IWwwFormUrlDecoderEntryVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IWwwFormUrlDecoderEntryVtbl>(uriDecoderForwardingEntryVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IWwwFormUrlDecoderEntryVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withDecoderRuntimeForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IWwwFormUrlDecoderRuntimeClassVtbl>(1, { _ => uriDecoderForwardingDecoderRuntimeVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IWwwFormUrlDecoderRuntimeClassVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IWwwFormUrlDecoderRuntimeClassVtbl>(uriDecoderForwardingDecoderRuntimeVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IWwwFormUrlDecoderRuntimeClassVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withDecoderVectorForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IVectorViewVtbl>(1, { _ => uriDecoderForwardingVectorViewVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IVectorViewVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IVectorViewVtbl>(uriDecoderForwardingVectorViewVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IVectorViewVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withDecoderIterableForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IIterableVtbl>(1, { _ => uriDecoderForwardingIterableVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IIterableVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IIterableVtbl>(uriDecoderForwardingIterableVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IIterableVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }

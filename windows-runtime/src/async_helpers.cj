@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.HashMap
 import std.sync.*
 import std.time.*
@@ -69,12 +70,8 @@ class TerminalEvent <: Resource {
 
     ~init() {
         if (!closed) {
-            let h = handle
             closed = true
             handle = HANDLE()
-            if (h.Value.isNotNull()) {
-                Win32Foundation.CloseHandle(h)
-            }
         }
     }
 }
@@ -101,6 +98,27 @@ private func unregisterTerminalEvent(id: UInt32): Unit {
 private func lookupTerminalEvent(id: UInt32): Option<TerminalEvent> {
     synchronized(terminalRegistryMutex) {
         terminalRegistry.get(id)
+    }
+}
+
+private class TerminalEventRegistration <: Resource {
+    private let id: UInt32
+    private let active = AtomicBool(false)
+
+    public init(id: UInt32, event: TerminalEvent) {
+        this.id = id
+        registerTerminalEvent(id, event)
+        active.store(true)
+    }
+
+    public func close(): Unit {
+        if (active.compareAndSwap(true, false)) {
+            unregisterTerminalEvent(id)
+        }
+    }
+
+    public func isClosed(): Bool {
+        !active.load()
     }
 }
 
@@ -235,12 +253,14 @@ public class ProgressReporter<TProgress> where TProgress <: windows_core.Runtime
     }
 }
 
-private class NativeAsyncActionImpl <: IAsyncAction_Impl {
+private class NativeAsyncActionImpl <: IAsyncAction_Impl & Resource {
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
-    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
-    private let vtblHandle: CPointerHandle<IAsyncActionVtbl>
+    private let terminalRegistration: TerminalEventRegistration
+    private let infoVtblHandle: CPointer<IAsyncInfoVtbl>
+    private let vtblHandle: CPointer<IAsyncActionVtbl>
+    private var closed: Bool = false
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
     private var completedHandler: Option<AsyncActionCompletedHandler> = None
@@ -251,22 +271,21 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
         this.status = status
         this.errorCode = errorCode
         this.infoVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncActionImpl>() }))
+            windows_interface.allocateNativeValue<IAsyncInfoVtbl>(IAsyncInfoVtbl.new<NativeAsyncActionImpl>())
         }
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncActionVtbl>(1, { _ => IAsyncActionVtbl.new<NativeAsyncActionImpl>() }))
+            windows_interface.allocateNativeValue<IAsyncActionVtbl>(IAsyncActionVtbl.new<NativeAsyncActionImpl>())
         }
-        registerTerminalEvent(this.id, this.terminal)
+        this.terminalRegistration = TerminalEventRegistration(this.id, this.terminal)
         if (status != AsyncStatus_Started) {
             this.terminal.signal()
+            this.terminalRegistration.close()
         }
     }
 
     ~init() {
-        unregisterTerminalEvent(this.id)
-        unsafe {
-            releaseArrayRawData(this.vtblHandle)
-            releaseArrayRawData(this.infoVtblHandle)
+        if (!closed) {
+            closed = true
         }
     }
 
@@ -283,7 +302,24 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
-        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
+        [CPointer<Unit>(infoVtblHandle), CPointer<Unit>(vtblHandle)]
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        terminalRegistration.close()
+        terminal.close()
+        unsafe {
+            windows_interface.freeNativeValue(vtblHandle)
+            windows_interface.freeNativeValue(infoVtblHandle)
+        }
+        closed = true
     }
 
     private func finish(status: AsyncStatus, errorCode!: HResult = asyncOkCode): Unit {
@@ -299,6 +335,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
             view = this.view
         }
         terminal.signal()
+        terminalRegistration.close()
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
                 unsafe { callback.Invoke(asyncView, status) }
@@ -347,6 +384,7 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 
     public func Close(): Result<Unit> {
+        terminalRegistration.close()
         Result<Unit>.Ok(())
     }
 
@@ -401,13 +439,15 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl {
     }
 }
 
-private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
+private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult> & Resource
     where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
-    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
-    private let vtblHandle: CPointerHandle<IAsyncOperationVtbl>
+    private let terminalRegistration: TerminalEventRegistration
+    private let infoVtblHandle: CPointer<IAsyncInfoVtbl>
+    private let vtblHandle: CPointer<IAsyncOperationVtbl>
+    private var closed: Bool = false
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
     private var completedHandler: Option<AsyncOperationCompletedHandler<TResult>> = None
@@ -424,24 +464,21 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
         this.errorCode = errorCode
         this.result = result
         this.infoVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncOperationImpl<TResult>>() }))
+            windows_interface.allocateNativeValue<IAsyncInfoVtbl>(IAsyncInfoVtbl.new<NativeAsyncOperationImpl<TResult>>())
         }
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IAsyncOperationVtbl>(1, { _ => IAsyncOperationVtbl.new<NativeAsyncOperationImpl<TResult>, TResult>() })
-            )
+            windows_interface.allocateNativeValue<IAsyncOperationVtbl>(IAsyncOperationVtbl.new<NativeAsyncOperationImpl<TResult>, TResult>())
         }
-        registerTerminalEvent(this.id, this.terminal)
+        this.terminalRegistration = TerminalEventRegistration(this.id, this.terminal)
         if (status != AsyncStatus_Started) {
             this.terminal.signal()
+            this.terminalRegistration.close()
         }
     }
 
     ~init() {
-        unregisterTerminalEvent(this.id)
-        unsafe {
-            releaseArrayRawData(this.vtblHandle)
-            releaseArrayRawData(this.infoVtblHandle)
+        if (!closed) {
+            closed = true
         }
     }
 
@@ -458,7 +495,24 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
-        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
+        [CPointer<Unit>(infoVtblHandle), CPointer<Unit>(vtblHandle)]
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        terminalRegistration.close()
+        terminal.close()
+        unsafe {
+            windows_interface.freeNativeValue(vtblHandle)
+            windows_interface.freeNativeValue(infoVtblHandle)
+        }
+        closed = true
     }
 
     private func finish(
@@ -479,6 +533,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
             view = this.view
         }
         terminal.signal()
+        terminalRegistration.close()
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
                 unsafe { callback.Invoke(asyncView, status) }
@@ -527,6 +582,7 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func Close(): Result<Unit> {
+        terminalRegistration.close()
         Result<Unit>.Ok(())
     }
 
@@ -584,13 +640,15 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 }
 
-private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithProgress_Impl<TProgress>
+private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithProgress_Impl<TProgress> & Resource
     where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
-    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
-    private let vtblHandle: CPointerHandle<IAsyncActionWithProgressVtbl>
+    private let terminalRegistration: TerminalEventRegistration
+    private let infoVtblHandle: CPointer<IAsyncInfoVtbl>
+    private let vtblHandle: CPointer<IAsyncActionWithProgressVtbl>
+    private var closed: Bool = false
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
     private var progressHandler: Option<AsyncActionProgressHandler<TProgress>> = None
@@ -608,27 +666,23 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
         this.errorCode = errorCode
         this.lastProgress = lastProgress
         this.infoVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncActionWithProgressImpl<TProgress>>() }))
+            windows_interface.allocateNativeValue<IAsyncInfoVtbl>(IAsyncInfoVtbl.new<NativeAsyncActionWithProgressImpl<TProgress>>())
         }
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IAsyncActionWithProgressVtbl>(
-                    1,
-                    { _ => IAsyncActionWithProgressVtbl.new<NativeAsyncActionWithProgressImpl<TProgress>, TProgress>() }
-                )
+            windows_interface.allocateNativeValue<IAsyncActionWithProgressVtbl>(
+                IAsyncActionWithProgressVtbl.new<NativeAsyncActionWithProgressImpl<TProgress>, TProgress>()
             )
         }
-        registerTerminalEvent(this.id, this.terminal)
+        this.terminalRegistration = TerminalEventRegistration(this.id, this.terminal)
         if (status != AsyncStatus_Started) {
             this.terminal.signal()
+            this.terminalRegistration.close()
         }
     }
 
     ~init() {
-        unregisterTerminalEvent(this.id)
-        unsafe {
-            releaseArrayRawData(this.vtblHandle)
-            releaseArrayRawData(this.infoVtblHandle)
+        if (!closed) {
+            closed = true
         }
     }
 
@@ -645,7 +699,24 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
-        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
+        [CPointer<Unit>(infoVtblHandle), CPointer<Unit>(vtblHandle)]
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        terminalRegistration.close()
+        terminal.close()
+        unsafe {
+            windows_interface.freeNativeValue(vtblHandle)
+            windows_interface.freeNativeValue(infoVtblHandle)
+        }
+        closed = true
     }
 
     public func reportProgress(progress: TProgress): Unit {
@@ -676,6 +747,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
             view = this.view
         }
         terminal.signal()
+        terminalRegistration.close()
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
                 unsafe { callback.Invoke(asyncView, status) }
@@ -724,6 +796,7 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func Close(): Result<Unit> {
+        terminalRegistration.close()
         Result<Unit>.Ok(())
     }
 
@@ -802,14 +875,16 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 }
 
-private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsyncOperationWithProgress_Impl<TResult, TProgress>
+private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsyncOperationWithProgress_Impl<TResult, TProgress> & Resource
     where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>,
         TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     private let mutex = Mutex()
     private let id: UInt32 = allocateAsyncId()
     private let terminal: TerminalEvent = TerminalEvent()
-    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
-    private let vtblHandle: CPointerHandle<IAsyncOperationWithProgressVtbl>
+    private let terminalRegistration: TerminalEventRegistration
+    private let infoVtblHandle: CPointer<IAsyncInfoVtbl>
+    private let vtblHandle: CPointer<IAsyncOperationWithProgressVtbl>
+    private var closed: Bool = false
     private var status: AsyncStatus = AsyncStatus_Started
     private var errorCode: HResult = asyncOkCode
     private var progressHandler: Option<AsyncOperationProgressHandler<TResult, TProgress>> = None
@@ -830,33 +905,27 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
         this.result = result
         this.lastProgress = lastProgress
         this.infoVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<NativeAsyncOperationWithProgressImpl<TResult, TProgress>>() }))
+            windows_interface.allocateNativeValue<IAsyncInfoVtbl>(IAsyncInfoVtbl.new<NativeAsyncOperationWithProgressImpl<TResult, TProgress>>())
         }
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IAsyncOperationWithProgressVtbl>(
-                    1,
-                    {
-                        _ => IAsyncOperationWithProgressVtbl.new<
-                            NativeAsyncOperationWithProgressImpl<TResult, TProgress>,
-                            TResult,
-                            TProgress
-                        >()
-                    }
-                )
+            windows_interface.allocateNativeValue<IAsyncOperationWithProgressVtbl>(
+                IAsyncOperationWithProgressVtbl.new<
+                    NativeAsyncOperationWithProgressImpl<TResult, TProgress>,
+                    TResult,
+                    TProgress
+                >()
             )
         }
-        registerTerminalEvent(this.id, this.terminal)
+        this.terminalRegistration = TerminalEventRegistration(this.id, this.terminal)
         if (status != AsyncStatus_Started) {
             this.terminal.signal()
+            this.terminalRegistration.close()
         }
     }
 
     ~init() {
-        unregisterTerminalEvent(this.id)
-        unsafe {
-            releaseArrayRawData(this.vtblHandle)
-            releaseArrayRawData(this.infoVtblHandle)
+        if (!closed) {
+            closed = true
         }
     }
 
@@ -873,7 +942,24 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func vtblPtrs(): Array<CPointer<Unit>> {
-        [CPointer<Unit>(infoVtblHandle.pointer), CPointer<Unit>(vtblHandle.pointer)]
+        [CPointer<Unit>(infoVtblHandle), CPointer<Unit>(vtblHandle)]
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        terminalRegistration.close()
+        terminal.close()
+        unsafe {
+            windows_interface.freeNativeValue(vtblHandle)
+            windows_interface.freeNativeValue(infoVtblHandle)
+        }
+        closed = true
     }
 
     public func reportProgress(progress: TProgress): Unit {
@@ -909,6 +995,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
             view = this.view
         }
         terminal.signal()
+        terminalRegistration.close()
         if (let Some(callback) <- handler) {
             if (let Some(asyncView) <- view) {
                 unsafe { callback.Invoke(asyncView, status) }
@@ -957,6 +1044,7 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func Close(): Result<Unit> {
+        terminalRegistration.close()
         Result<Unit>.Ok(())
     }
 

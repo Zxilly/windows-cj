@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -32,15 +33,15 @@ func propertyValueArrayAbiVtbl(): IPropertyValueVtbl {
 }
 
 func withPropertyValueArrayAbiRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IPropertyValueVtbl>(1, { _ => propertyValueArrayAbiVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IPropertyValueVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IPropertyValueVtbl>(propertyValueArrayAbiVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IPropertyValueVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
 
     action(raw)
 
     unsafe {
-        releaseArrayRawData(objectHandle)
-        releaseArrayRawData(vtblHandle)
+        windows_interface.freeNativeValue(objectHandle)
+        windows_interface.freeNativeValue(vtblHandle)
     }
 }
 

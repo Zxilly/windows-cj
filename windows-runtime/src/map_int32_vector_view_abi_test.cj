@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,19 +8,17 @@ import windows_core.{Result, S_OK, createComObjectFromSchemas}
 
 class Int32VectorViewMapViewAbiTestImpl <: IMapView_Impl<Int32, IVectorView<Int32>> & Resource {
     private let entries: ArrayList<(Int32, IVectorView<Int32>)>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, IVectorView<Int32>)>) {
         this.entries = entries
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32VectorViewInt32<Int32VectorViewMapViewAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32VectorViewInt32<Int32VectorViewMapViewAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32VectorViewMapViewAbiTestImpl, IKeyValuePair<Int32, IVectorView<Int32>>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32VectorViewMapViewAbiTestImpl, IKeyValuePair<Int32, IVectorView<Int32>>>())
         }
     }
 
@@ -31,25 +30,22 @@ class Int32VectorViewMapViewAbiTestImpl <: IMapView_Impl<Int32, IVectorView<Int3
         this.entries = entries
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(
-                    Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.new<Int32VectorViewMapViewAbiTestImpl, Int32, IVectorView<Int32>>() }))
+                windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.new<Int32VectorViewMapViewAbiTestImpl, Int32, IVectorView<Int32>>())
             } else {
-                acquireArrayRawData(
-                    Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32VectorViewInt32<Int32VectorViewMapViewAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32VectorViewInt32<Int32VectorViewMapViewAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32VectorViewMapViewAbiTestImpl, IKeyValuePair<Int32, IVectorView<Int32>>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32VectorViewMapViewAbiTestImpl, IKeyValuePair<Int32, IVectorView<Int32>>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -57,8 +53,8 @@ class Int32VectorViewMapViewAbiTestImpl <: IMapView_Impl<Int32, IVectorView<Int3
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -70,10 +66,6 @@ class Int32VectorViewMapViewAbiTestImpl <: IMapView_Impl<Int32, IVectorView<Int3
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

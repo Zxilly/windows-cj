@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,18 +8,18 @@ import windows_core.{E_POINTER, HString, Result, S_OK, comRegistryLookup, rootRe
 
 class StockTestStringableImpl <: IStringable_Impl & Resource {
     private let value: HString
-    private let vtblHandle: CPointerHandle<IStringableVtbl>
+    private let vtblHandle: CPointer<IStringableVtbl>
     private var closed: Bool = false
 
     public init(text: String) {
         this.value = HString(text)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IStringableVtbl>(1, { _ => IStringableVtbl.new<StockTestStringableImpl>() }))
+            windows_interface.allocateNativeValue<IStringableVtbl>(IStringableVtbl.new<StockTestStringableImpl>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func ToString(): Result<HString> {
@@ -34,7 +35,7 @@ class StockTestStringableImpl <: IStringable_Impl & Resource {
             return
         }
         value.close()
-        unsafe { releaseArrayRawData(vtblHandle) }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
         closed = true
     }
 
@@ -42,8 +43,6 @@ class StockTestStringableImpl <: IStringable_Impl & Resource {
         if (closed) {
             return
         }
-        value.close()
-        unsafe { releaseArrayRawData(vtblHandle) }
         closed = true
     }
 }

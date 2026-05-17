@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,17 +8,17 @@ import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchem
 
 class UInt16VectorAbiTestImpl <: IVector_Impl<UInt16> & Resource {
     private let items: ArrayList<UInt16>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<UInt16>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newUInt16<UInt16VectorAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newUInt16<UInt16VectorAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<UInt16VectorAbiTestImpl, UInt16>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<UInt16VectorAbiTestImpl, UInt16>())
         }
     }
 
@@ -29,22 +30,22 @@ class UInt16VectorAbiTestImpl <: IVector_Impl<UInt16> & Resource {
         this.items = items
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<UInt16VectorAbiTestImpl, UInt16>() }))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<UInt16VectorAbiTestImpl, UInt16>())
             } else {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newUInt16<UInt16VectorAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newUInt16<UInt16VectorAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<UInt16VectorAbiTestImpl, UInt16>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<UInt16VectorAbiTestImpl, UInt16>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -52,8 +53,8 @@ class UInt16VectorAbiTestImpl <: IVector_Impl<UInt16> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -65,10 +66,6 @@ class UInt16VectorAbiTestImpl <: IVector_Impl<UInt16> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -51,29 +52,29 @@ func runtimeWrapperFailingAsyncInfoVtbl(): IAsyncInfoVtbl {
 }
 
 func withRuntimeWrapperRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IUnknownVtbl>(1, { _ => runtimeWrapperTestVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IUnknownVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(runtimeWrapperTestVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
 
     action(raw)
 
     unsafe {
-        releaseArrayRawData(objectHandle)
-        releaseArrayRawData(vtblHandle)
+        windows_interface.freeNativeValue(objectHandle)
+        windows_interface.freeNativeValue(vtblHandle)
     }
 }
 
 func withRuntimeWrapperFailingAsyncInfoRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => runtimeWrapperFailingAsyncInfoVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IAsyncInfoVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IAsyncInfoVtbl>(runtimeWrapperFailingAsyncInfoVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IAsyncInfoVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
 
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }

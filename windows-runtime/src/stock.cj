@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.sync.AtomicInt64
 import windows_core.{
@@ -223,26 +224,25 @@ where T <: RuntimeType & WinrtGenericType<T> {
 
 public class StockIteratorImpl<T> <: IIterator_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
-    private let vtblHandle: CPointerHandle<IIteratorVtbl>
+    private let vtblHandle: CPointer<IIteratorVtbl>
     private var closed: Bool = false
     private let index = AtomicInt64(0)
 
     public init(items: ArrayList<T>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IIteratorVtbl>(1, { _ => IIteratorVtbl.new<StockIteratorImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IIteratorVtbl>(IIteratorVtbl.new<StockIteratorImpl<T>, T>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
         }
-        unsafe { releaseArrayRawData(vtblHandle) }
         closed = true
     }
 
@@ -255,7 +255,7 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> & Resource where T <: Run
             return
         }
         closeStockList<T>(items)
-        unsafe { releaseArrayRawData(vtblHandle) }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
         closed = true
     }
 
@@ -299,25 +299,24 @@ public class StockIteratorImpl<T> <: IIterator_Impl<T> & Resource where T <: Run
 
 public class StockIterableImpl<T> <: IIterable_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
-    private let vtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<T>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockIterableImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockIterableImpl<T>, T>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
         }
-        unsafe { releaseArrayRawData(vtblHandle) }
         closed = true
     }
 
@@ -330,7 +329,7 @@ public class StockIterableImpl<T> <: IIterable_Impl<T> & Resource where T <: Run
             return
         }
         closeStockList<T>(items)
-        unsafe { releaseArrayRawData(vtblHandle) }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
         closed = true
     }
 
@@ -342,35 +341,31 @@ public class StockIterableImpl<T> <: IIterable_Impl<T> & Resource where T <: Run
 public class StockVectorViewImpl<T> <: IVectorView_Impl<T> & Resource
 where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
     private let items: ArrayList<T>
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<T>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.new<StockVectorViewImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<StockVectorViewImpl<T>, T>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockVectorViewImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockVectorViewImpl<T>, T>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -385,8 +380,8 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
         }
         closeStockList<T>(items)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -438,36 +433,31 @@ where T <: RuntimeType & WinrtGenericType<T> & Equatable<T> {
 
 public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.newInt32<StockInt32VectorViewImpl>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.newInt32<StockInt32VectorViewImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32VectorViewImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInt32VectorViewImpl, Int32>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -481,8 +471,8 @@ public class StockInt32VectorViewImpl <: IVectorView_Impl<Int32> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -532,26 +522,25 @@ public class StockKeyValuePairImpl<K, V> <: IKeyValuePair_Impl<K, V> & Resource
 where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericType<V> {
     private let key_: K
     private let value_: V
-    private let vtblHandle: CPointerHandle<IKeyValuePairVtbl>
+    private let vtblHandle: CPointer<IKeyValuePairVtbl>
     private var closed: Bool = false
 
     public init(key: K, value: V) {
         this.key_ = key
         this.value_ = value
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IKeyValuePairVtbl>(1, { _ => IKeyValuePairVtbl.new<StockKeyValuePairImpl<K, V>, K, V>() }))
+            windows_interface.allocateNativeValue<IKeyValuePairVtbl>(IKeyValuePairVtbl.new<StockKeyValuePairImpl<K, V>, K, V>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
         }
-        unsafe { releaseArrayRawData(vtblHandle) }
         closed = true
     }
 
@@ -565,7 +554,7 @@ where K <: RuntimeType & WinrtGenericType<K>, V <: RuntimeType & WinrtGenericTyp
         }
         closeStockValue<K>(key_)
         closeStockValue<V>(value_)
-        unsafe { releaseArrayRawData(vtblHandle) }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
         closed = true
     }
 
@@ -582,37 +571,32 @@ public class StockMapViewImpl<K, V> <: IMapView_Impl<K, V> & Resource
 where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & WinrtGenericType<V> {
     private let entries: ArrayList<(K, V)>
     private let pairViews: ArrayList<IKeyValuePair<K, V>>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(K, V)>) {
         this.entries = entries
         this.pairViews = materializePairViews<K, V>(entries)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.new<StockMapViewImpl<K, V>, K, V>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.new<StockMapViewImpl<K, V>, K, V>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockMapViewImpl<K, V>, IKeyValuePair<K, V>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockMapViewImpl<K, V>, IKeyValuePair<K, V>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -628,8 +612,8 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
         closeStockPairList<K, V>(entries)
         closeStockList<IKeyValuePair<K, V>>(pairViews)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -676,28 +660,27 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
 public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, Int32>>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, Int32)>) {
         this.entries = entries
         this.pairViews = materializePairViews<Int32, Int32>(entries)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32Int32<StockInt32MapViewImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32Int32<StockInt32MapViewImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32MapViewImpl, IKeyValuePair<Int32, Int32>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInt32MapViewImpl, IKeyValuePair<Int32, Int32>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
@@ -709,10 +692,6 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -728,8 +707,8 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
         closeStockPairList<Int32, Int32>(entries)
         closeStockList<IKeyValuePair<Int32, Int32>>(pairViews)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -770,29 +749,27 @@ public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
 public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, HString>>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, HString)>) {
         this.entries = entries
         this.pairViews = materializePairViews<Int32, HString>(entries)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32HString<StockInt32HStringMapViewImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32HString<StockInt32HStringMapViewImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32HStringMapViewImpl, IKeyValuePair<Int32, HString>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInt32HStringMapViewImpl, IKeyValuePair<Int32, HString>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
@@ -804,10 +781,6 @@ public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> & Res
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -823,8 +796,8 @@ public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> & Res
         closeStockPairList<Int32, HString>(entries)
         closeStockList<IKeyValuePair<Int32, HString>>(pairViews)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -865,29 +838,27 @@ public class StockInt32HStringMapViewImpl <: IMapView_Impl<Int32, HString> & Res
 public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> & Resource {
     private let entries: ArrayList<(Int32, UInt64)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, UInt64>>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, UInt64)>) {
         this.entries = entries
         this.pairViews = materializePairViews<Int32, UInt64>(entries)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32UInt64<StockInt32UInt64MapViewImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32UInt64<StockInt32UInt64MapViewImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32UInt64MapViewImpl, IKeyValuePair<Int32, UInt64>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInt32UInt64MapViewImpl, IKeyValuePair<Int32, UInt64>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, UInt64>>> {
@@ -899,10 +870,6 @@ public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> & Resou
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -918,8 +885,8 @@ public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> & Resou
         closeStockPairList<Int32, UInt64>(entries)
         closeStockList<IKeyValuePair<Int32, UInt64>>(pairViews)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -960,29 +927,27 @@ public class StockInt32UInt64MapViewImpl <: IMapView_Impl<Int32, UInt64> & Resou
 public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVectorView<Int32>> & Resource {
     private let entries: ArrayList<(Int32, IVectorView<Int32>)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, IVectorView<Int32>>>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, IVectorView<Int32>)>) {
         this.entries = entries
         this.pairViews = materializePairViews<Int32, IVectorView<Int32>>(entries)
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32VectorViewInt32<StockInt32VectorViewInt32MapViewImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32VectorViewInt32<StockInt32VectorViewInt32MapViewImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<StockInt32VectorViewInt32MapViewImpl, IKeyValuePair<Int32, IVectorView<Int32>>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInt32VectorViewInt32MapViewImpl, IKeyValuePair<Int32, IVectorView<Int32>>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, IVectorView<Int32>>>> {
@@ -994,10 +959,6 @@ public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVecto
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -1013,8 +974,8 @@ public class StockInt32VectorViewInt32MapViewImpl <: IMapView_Impl<Int32, IVecto
         closeStockPairList<Int32, IVectorView<Int32>>(entries)
         closeStockList<IKeyValuePair<Int32, IVectorView<Int32>>>(pairViews)
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }

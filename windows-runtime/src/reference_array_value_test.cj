@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -189,18 +190,16 @@ func withReferenceArrayValueRaw(
     vtbl: IReferenceArrayVtbl,
     action: (CPointer<Unit>) -> Unit
 ): Unit {
-    let vtblArray = Array<IReferenceArrayVtbl>(1, { _ => IReferenceArrayVtbl() })
-    vtblArray[0] = vtbl
-    let vtblHandle = unsafe { acquireArrayRawData(vtblArray) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IReferenceArrayVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IReferenceArrayVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IReferenceArrayVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
 
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }

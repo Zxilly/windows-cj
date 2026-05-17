@@ -191,17 +191,36 @@ public interface DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvo
     }
 }
 
-private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
+private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker & Resource {
     public let invoke_: () -> Unit
-    private let vtblHandle: CPointerHandle<DeferralCompletedHandlerVtbl>
+    private let vtblHandle: CPointer<DeferralCompletedHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: () -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<DeferralCompletedHandlerVtbl>(1, { _ => buildDeferralCompletedHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<DeferralCompletedHandlerVtbl>(buildDeferralCompletedHandlerBoxVtbl()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(): Unit {
@@ -332,17 +351,36 @@ public interface EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: 
     }
 }
 
-private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+private class EventHandlerBox<T> <: EventHandlerInvoker<T> & Resource where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public let invoke_: (InParam<IInspectable>, T) -> Unit
-    private let vtblHandle: CPointerHandle<EventHandlerVtbl>
+    private let vtblHandle: CPointer<EventHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IInspectable>, T) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<EventHandlerVtbl>(1, { _ => buildEventHandlerBoxVtbl<T>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<EventHandlerVtbl>(buildEventHandlerBoxVtbl<T>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(sender: InParam<IInspectable>, args: T): Unit {
@@ -2117,17 +2155,36 @@ public interface TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandler
     }
 }
 
-private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker<TSender, TResult> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
+private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker<TSender, TResult> & Resource where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public let invoke_: (TSender, TResult) -> Unit
-    private let vtblHandle: CPointerHandle<TypedEventHandlerVtbl>
+    private let vtblHandle: CPointer<TypedEventHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (TSender, TResult) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<TypedEventHandlerVtbl>(1, { _ => buildTypedEventHandlerBoxVtbl<TSender, TResult>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<TypedEventHandlerVtbl>(buildTypedEventHandlerBoxVtbl<TSender, TResult>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(sender: TSender, args: TResult): Unit {
@@ -7982,17 +8039,36 @@ public interface AsyncActionCompletedHandlerInvoker <: AsyncActionCompletedHandl
     }
 }
 
-private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvoker {
+private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvoker & Resource {
     public let invoke_: (InParam<IAsyncAction>, AsyncStatus) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncActionCompletedHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncActionCompletedHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncAction>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionCompletedHandlerVtbl>(1, { _ => buildAsyncActionCompletedHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncActionCompletedHandlerVtbl>(buildAsyncActionCompletedHandlerBoxVtbl()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
@@ -8123,17 +8199,36 @@ public interface AsyncActionProgressHandlerInvoker<TProgress> <: AsyncActionProg
     }
 }
 
-private class AsyncActionProgressHandlerBox<TProgress> <: AsyncActionProgressHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+private class AsyncActionProgressHandlerBox<TProgress> <: AsyncActionProgressHandlerInvoker<TProgress> & Resource where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncActionProgressHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncActionProgressHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionProgressHandlerVtbl>(1, { _ => buildAsyncActionProgressHandlerBoxVtbl<TProgress>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncActionProgressHandlerVtbl>(buildAsyncActionProgressHandlerBoxVtbl<TProgress>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
@@ -8257,17 +8352,36 @@ public interface AsyncActionWithProgressCompletedHandlerInvoker<TProgress> <: As
     }
 }
 
-private class AsyncActionWithProgressCompletedHandlerBox<TProgress> <: AsyncActionWithProgressCompletedHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+private class AsyncActionWithProgressCompletedHandlerBox<TProgress> <: AsyncActionWithProgressCompletedHandlerInvoker<TProgress> & Resource where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncActionWithProgressCompletedHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncActionWithProgressCompletedHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncActionWithProgressCompletedHandlerVtbl>(buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
@@ -8391,17 +8505,36 @@ public interface AsyncOperationCompletedHandlerInvoker<TResult> <: AsyncOperatio
     }
 }
 
-private class AsyncOperationCompletedHandlerBox<TResult> <: AsyncOperationCompletedHandlerInvoker<TResult> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
+private class AsyncOperationCompletedHandlerBox<TResult> <: AsyncOperationCompletedHandlerInvoker<TResult> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public let invoke_: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncOperationCompletedHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncOperationCompletedHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationCompletedHandlerVtbl>(1, { _ => buildAsyncOperationCompletedHandlerBoxVtbl<TResult>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncOperationCompletedHandlerVtbl>(buildAsyncOperationCompletedHandlerBoxVtbl<TResult>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
@@ -8534,17 +8667,36 @@ public interface AsyncOperationProgressHandlerInvoker<TResult, TProgress> <: Asy
     }
 }
 
-private class AsyncOperationProgressHandlerBox<TResult, TProgress> <: AsyncOperationProgressHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+private class AsyncOperationProgressHandlerBox<TResult, TProgress> <: AsyncOperationProgressHandlerInvoker<TResult, TProgress> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncOperationProgressHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncOperationProgressHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationProgressHandlerVtbl>(1, { _ => buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncOperationProgressHandlerVtbl>(buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
@@ -8670,17 +8822,36 @@ public interface AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TPro
     }
 }
 
-private class AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress> <: AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+private class AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress> <: AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit
-    private let vtblHandle: CPointerHandle<AsyncOperationWithProgressCompletedHandlerVtbl>
+    private let vtblHandle: CPointer<AsyncOperationWithProgressCompletedHandlerVtbl>
+    private var closed: Bool = false
 
     public init(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>() })) }
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncOperationWithProgressCompletedHandlerVtbl>(buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>()) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
     }
 
     public func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {

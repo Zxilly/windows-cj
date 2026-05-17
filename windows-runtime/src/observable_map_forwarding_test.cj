@@ -1,59 +1,62 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{HString, InParam, Result, createComObjectFromSchemas}
 
-class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, HString> {
+class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
-    private let observableVtblHandle: CPointerHandle<IObservableMapVtbl>
-    private let mapVtblHandle: CPointerHandle<IMapVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let observableVtblHandle: CPointer<IObservableMapVtbl>
+    private let mapVtblHandle: CPointer<IMapVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, HString)>) {
         this.entries = entries
         this.observableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IObservableMapVtbl>(
-                    1,
-                    { _ => IObservableMapVtbl.new<ObservableInt32HStringMapForwardingTestImpl, Int32, HString>() }
-                )
-            )
+            windows_interface.allocateNativeValue<IObservableMapVtbl>(IObservableMapVtbl.new<ObservableInt32HStringMapForwardingTestImpl, Int32, HString>())
         }
         this.mapVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IMapVtbl>(1, { _ => IMapVtbl.newInt32HString<ObservableInt32HStringMapForwardingTestImpl>() })
-            )
+            windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32HString<ObservableInt32HStringMapForwardingTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<ObservableInt32HStringMapForwardingTestImpl, IKeyValuePair<Int32, HString>>() })
-            )
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<ObservableInt32HStringMapForwardingTestImpl, IKeyValuePair<Int32, HString>>())
         }
     }
 
     public func observableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(observableVtblHandle.pointer)
+        CPointer<Unit>(observableVtblHandle)
     }
 
     public func mapVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(mapVtblHandle.pointer)
+        CPointer<Unit>(mapVtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(mapVtblHandle)
+            windows_interface.freeNativeValue(observableVtblHandle)
+        }
+        closed = true
     }
 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(mapVtblHandle)
-            releaseArrayRawData(observableVtblHandle)
         }
         closed = true
     }
@@ -152,7 +155,9 @@ func createObservableInt32HStringMapForwardingTest(entries: ArrayList<(Int32, HS
     ]
     let vtbls = [impl.iterableVtblPtr(), impl.mapVtblPtr(), impl.observableVtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IObservableMap<Int32, HString>.descriptor())
+    let map = object.toInterface(IObservableMap<Int32, HString>.descriptor())
+    object.close()
+    map
 }
 
 @Test
@@ -164,30 +169,41 @@ func testObservableMapForwardsInheritedMapOperations() {
     let source = ArrayList<(Int32, HString)>([(1i32, one), (2i32, two)])
     let map = createObservableInt32HStringMapForwardingTest(source)
 
-    @Expect(unsafe { map.HasKey(1i32) }, true)
-    let firstValue = unsafe { map.Lookup(1i32) }
-    @Expect(firstValue.get(), "one")
-    firstValue.close()
+    try {
+        @Expect(unsafe { map.HasKey(1i32) }, true)
+        let firstValue = unsafe { map.Lookup(1i32) }
+        try {
+            @Expect(firstValue.get(), "one")
+        } finally {
+            firstValue.close()
+        }
 
-    @Expect(unsafe { map.Insert(2i32, replacement) }, true)
-    let replacedValue = unsafe { map.Lookup(2i32) }
-    @Expect(replacedValue.get(), "two-updated")
-    replacedValue.close()
+        @Expect(unsafe { map.Insert(2i32, replacement) }, true)
+        let replacedValue = unsafe { map.Lookup(2i32) }
+        try {
+            @Expect(replacedValue.get(), "two-updated")
+        } finally {
+            replacedValue.close()
+        }
 
-    @Expect(unsafe { map.Insert(3i32, three) }, false)
-    @Expect(unsafe { map.Size() }, 3u32)
-    let view = unsafe { map.GetView() }
-    @Expect(unsafe { view.HasKey(3i32) }, true)
-    view.close()
+        @Expect(unsafe { map.Insert(3i32, three) }, false)
+        @Expect(unsafe { map.Size() }, 3u32)
+        let view = unsafe { map.GetView() }
+        try {
+            @Expect(unsafe { view.HasKey(3i32) }, true)
+        } finally {
+            view.close()
+        }
 
-    unsafe { map.Remove(1i32) }
-    @Expect(unsafe { map.HasKey(1i32) }, false)
-    unsafe { map.Clear() }
-    @Expect(unsafe { map.Size() }, 0u32)
-
-    map.close()
-    one.close()
-    two.close()
-    replacement.close()
-    three.close()
+        unsafe { map.Remove(1i32) }
+        @Expect(unsafe { map.HasKey(1i32) }, false)
+        unsafe { map.Clear() }
+        @Expect(unsafe { map.Size() }, 0u32)
+    } finally {
+        map.close()
+        one.close()
+        two.close()
+        replacement.close()
+        three.close()
+    }
 }

@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,26 +8,26 @@ import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchem
 
 class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt32<Int32VectorAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newInt32<Int32VectorAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32VectorAbiTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32VectorAbiTestImpl, Int32>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -34,8 +35,8 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -47,10 +48,6 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

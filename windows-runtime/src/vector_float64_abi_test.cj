@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,17 +8,17 @@ import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchem
 
 class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
     private let items: ArrayList<Float64>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Float64>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>())
         }
     }
 
@@ -29,22 +30,22 @@ class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
         this.items = items
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<Float64VectorAbiTestImpl, Float64>() }))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<Float64VectorAbiTestImpl, Float64>())
             } else {
-                acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -52,8 +53,8 @@ class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -65,10 +66,6 @@ class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -183,26 +180,26 @@ class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
 
 class GenericBuilderFloat64VectorViewAbiTestImpl <: IVectorView_Impl<Float64> & Resource {
     private let items: ArrayList<Float64>
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Float64>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -210,8 +207,8 @@ class GenericBuilderFloat64VectorViewAbiTestImpl <: IVectorView_Impl<Float64> & 
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -223,10 +220,6 @@ class GenericBuilderFloat64VectorViewAbiTestImpl <: IVectorView_Impl<Float64> & 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

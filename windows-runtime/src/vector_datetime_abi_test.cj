@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -17,26 +18,26 @@ func sameDateTimeValue(left: DateTime, right: DateTime): Bool {
 
 class DateTimeVectorAbiTestImpl <: IVector_Impl<DateTime> & Resource {
     private let items: ArrayList<DateTime>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<DateTime>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newDateTime<DateTimeVectorAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newDateTime<DateTimeVectorAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<DateTimeVectorAbiTestImpl, DateTime>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<DateTimeVectorAbiTestImpl, DateTime>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -44,8 +45,8 @@ class DateTimeVectorAbiTestImpl <: IVector_Impl<DateTime> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -57,10 +58,6 @@ class DateTimeVectorAbiTestImpl <: IVector_Impl<DateTime> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -175,26 +172,26 @@ class DateTimeVectorAbiTestImpl <: IVector_Impl<DateTime> & Resource {
 
 class DateTimeVectorViewAbiTestImpl <: IVectorView_Impl<DateTime> & Resource {
     private let items: ArrayList<DateTime>
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<DateTime>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.newDateTime<DateTimeVectorViewAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.newDateTime<DateTimeVectorViewAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<DateTimeVectorViewAbiTestImpl, DateTime>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<DateTimeVectorViewAbiTestImpl, DateTime>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -202,8 +199,8 @@ class DateTimeVectorViewAbiTestImpl <: IVectorView_Impl<DateTime> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -215,10 +212,6 @@ class DateTimeVectorViewAbiTestImpl <: IVectorView_Impl<DateTime> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -310,6 +303,24 @@ func testDateTimeVectorViewUsesDirectValueAbiForSpecialization() {
     @Expect(directFound, true)
     @Expect(directIndex, 2u32)
 
+    let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
+        CPointer<Unit>(vtbl.GetMany)
+    )
+    let outputHandle = unsafe { acquireArrayRawData(Array<DateTimeAbi>(2, { _ => DateTimeAbi() })) }
+    try {
+        let output = CPointer<DateTimeAbi>(outputHandle.pointer)
+        var copied = 99u32
+        let getManyHr = unsafe {
+            directGetMany(view.asRaw(), 1u32, 2u32, CPointer<Unit>(output), CPointer<UInt32>(inout copied))
+        }
+        @Expect(getManyHr, S_OK.value)
+        @Expect(copied, 2u32)
+        @Expect(DateTime.assumeInitRef(unsafe { output.read() }).UniversalTime, 20i64)
+        @Expect(DateTime.assumeInitRef(unsafe { (output + 1).read() }).UniversalTime, 30i64)
+    } finally {
+        unsafe { releaseArrayRawData(outputHandle) }
+    }
+
     view.close()
 }
 
@@ -352,6 +363,41 @@ func testDateTimeVectorUsesDirectValueAbiForMutableSlots() {
     let appendHr = unsafe { directAppend(vector.asRaw(), DateTime.projectAbi(dateTimeTestValue(8i64))) }
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(5u32) }.UniversalTime, 8i64)
+
+    let directReplaceAll = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(vtbl.ReplaceAll))
+    let replaceHandle = unsafe {
+        acquireArrayRawData(Array<DateTimeAbi>(2, { i => DateTime.projectAbi(dateTimeTestValue(Int64(i) + 21i64)) }))
+    }
+    try {
+        let replaceHr = unsafe { directReplaceAll(vector.asRaw(), 2u32, CPointer<Unit>(replaceHandle.pointer)) }
+        @Expect(replaceHr, S_OK.value)
+    } finally {
+        unsafe { releaseArrayRawData(replaceHandle) }
+    }
+    @Expect(unsafe { vector.Size() }, 2u32)
+    @Expect(unsafe { vector.GetAt(0u32) }.UniversalTime, 21i64)
+    @Expect(unsafe { vector.GetAt(1u32) }.UniversalTime, 22i64)
+
+    let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
+        CPointer<Unit>(vtbl.GetMany)
+    )
+    let outputHandle = unsafe { acquireArrayRawData(Array<DateTimeAbi>(2, { _ => DateTimeAbi() })) }
+    try {
+        let output = CPointer<DateTimeAbi>(outputHandle.pointer)
+        var copied = 99u32
+        let getManyHr = unsafe {
+            directGetMany(vector.asRaw(), 0u32, 2u32, CPointer<Unit>(output), CPointer<UInt32>(inout copied))
+        }
+        @Expect(getManyHr, S_OK.value)
+        @Expect(copied, 2u32)
+        @Expect(DateTime.assumeInitRef(unsafe { output.read() }).UniversalTime, 21i64)
+        @Expect(DateTime.assumeInitRef(unsafe { (output + 1).read() }).UniversalTime, 22i64)
+    } finally {
+        unsafe { releaseArrayRawData(outputHandle) }
+    }
+
+    let nullReplaceHr = unsafe { directReplaceAll(vector.asRaw(), 1u32, CPointer<Unit>()) }
+    @Expect(nullReplaceHr, E_POINTER.value)
 
     vector.close()
 }

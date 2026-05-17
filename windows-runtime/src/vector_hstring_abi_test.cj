@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -8,8 +9,8 @@ import windows_strings.releaseSystemHStringHandle
 
 class HStringVectorAbiTestImpl <: IVector_Impl<HString> & Resource {
     private let items: ArrayList<HString>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(seed: ArrayList<HString>) {
@@ -18,10 +19,10 @@ class HStringVectorAbiTestImpl <: IVector_Impl<HString> & Resource {
         // every HString slot in `items` with a unique releaser (the impl).
         this.items = ArrayList<HString>(seed.size, { i => seed[i].clone() })
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<HStringVectorAbiTestImpl, HString>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<HStringVectorAbiTestImpl, HString>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<HStringVectorAbiTestImpl, HString>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<HStringVectorAbiTestImpl, HString>())
         }
     }
 
@@ -38,11 +39,11 @@ class HStringVectorAbiTestImpl <: IVector_Impl<HString> & Resource {
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -51,8 +52,8 @@ class HStringVectorAbiTestImpl <: IVector_Impl<HString> & Resource {
         }
         drainItems()
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -64,14 +65,6 @@ class HStringVectorAbiTestImpl <: IVector_Impl<HString> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        // Cangjie finalizers cannot invoke instance methods. Items are owned
-        // by their HString wrappers' own finalizers, which release the
-        // underlying HSTRING handles in turn. We only release the native
-        // vtbl raw data that the GC cannot otherwise reach.
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -293,6 +286,77 @@ func testHStringVectorDirectVtableUsesHandleAbi() {
     @Expect(owned.get(), "one")
     owned.close()
 
+    let directReplaceAll = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(vtbl.ReplaceAll))
+    let replaceOne = HString("replace-one")
+    let replaceTwo = HString("replace-two")
+    let replaceHandle = unsafe {
+        acquireArrayRawData(
+            Array<CPointer<Unit>>(
+                2,
+                { i => if (i == 0) { replaceOne.toSystemHandleCopy() } else { replaceTwo.toSystemHandleCopy() } }
+            )
+        )
+    }
+    try {
+        let replaceHr = unsafe { directReplaceAll(vector.asRaw(), 2u32, CPointer<Unit>(replaceHandle.pointer)) }
+        @Expect(replaceHr, S_OK.value)
+    } finally {
+        let replaceSlots = CPointer<CPointer<Unit>>(replaceHandle.pointer)
+        releaseSystemHStringHandle(unsafe { replaceSlots.read() })
+        releaseSystemHStringHandle(unsafe { (replaceSlots + 1).read() })
+        unsafe { releaseArrayRawData(replaceHandle) }
+    }
+    @Expect(unsafe { vector.Size() }, 2u32)
+    let replacedFirst = unsafe { vector.GetAt(0u32) }
+    try {
+        @Expect(replacedFirst.get(), "replace-one")
+    } finally {
+        replacedFirst.close()
+    }
+    let replacedSecond = unsafe { vector.GetAt(1u32) }
+    try {
+        @Expect(replacedSecond.get(), "replace-two")
+    } finally {
+        replacedSecond.close()
+    }
+
+    let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
+        CPointer<Unit>(vtbl.GetMany)
+    )
+    let getManyHandle = unsafe { acquireArrayRawData(Array<CPointer<Unit>>(2, { _ => CPointer<Unit>() })) }
+    try {
+        let getManySlots = CPointer<CPointer<Unit>>(getManyHandle.pointer)
+        var copied = 99u32
+        let getManyHr = unsafe {
+            directGetMany(vector.asRaw(), 0u32, 2u32, CPointer<Unit>(getManySlots), CPointer<UInt32>(inout copied))
+        }
+        @Expect(getManyHr, S_OK.value)
+        @Expect(copied, 2u32)
+        let firstOutRaw = unsafe { getManySlots.read() }
+        unsafe { getManySlots.write(CPointer<Unit>()) }
+        let secondOutRaw = unsafe { (getManySlots + 1).read() }
+        unsafe { (getManySlots + 1).write(CPointer<Unit>()) }
+        let firstOut = HString.fromSystemHandleTake(firstOutRaw)
+        let secondOut = HString.fromSystemHandleTake(secondOutRaw)
+        try {
+            @Expect(firstOut.get(), "replace-one")
+            @Expect(secondOut.get(), "replace-two")
+        } finally {
+            firstOut.close()
+            secondOut.close()
+        }
+    } finally {
+        let getManySlots = CPointer<CPointer<Unit>>(getManyHandle.pointer)
+        releaseSystemHStringHandle(unsafe { getManySlots.read() })
+        releaseSystemHStringHandle(unsafe { (getManySlots + 1).read() })
+        unsafe { releaseArrayRawData(getManyHandle) }
+    }
+
+    let nullReplaceHr = unsafe { directReplaceAll(vector.asRaw(), 1u32, CPointer<Unit>()) }
+    @Expect(nullReplaceHr, E_POINTER.value)
+
+    replaceTwo.close()
+    replaceOne.close()
     needle.close()
     replacement.close()
     vector.close()

@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,18 +8,17 @@ import windows_core.{Result, S_OK, createComObjectFromSchemas}
 
 class Int32Float32MapViewAbiTestImpl <: IMapView_Impl<Int32, Float32> & Resource {
     private let entries: ArrayList<(Int32, Float32)>
-    private let vtblHandle: CPointerHandle<IMapViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, Float32)>) {
         this.entries = entries
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32Float32<Int32Float32MapViewAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32Float32<Int32Float32MapViewAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32Float32MapViewAbiTestImpl, IKeyValuePair<Int32, Float32>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32Float32MapViewAbiTestImpl, IKeyValuePair<Int32, Float32>>())
         }
     }
 
@@ -30,23 +30,22 @@ class Int32Float32MapViewAbiTestImpl <: IMapView_Impl<Int32, Float32> & Resource
         this.entries = entries
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.new<Int32Float32MapViewAbiTestImpl, Int32, Float32>() }))
+                windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.new<Int32Float32MapViewAbiTestImpl, Int32, Float32>())
             } else {
-                acquireArrayRawData(Array<IMapViewVtbl>(1, { _ => IMapViewVtbl.newInt32Float32<Int32Float32MapViewAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32Float32<Int32Float32MapViewAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32Float32MapViewAbiTestImpl, IKeyValuePair<Int32, Float32>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32Float32MapViewAbiTestImpl, IKeyValuePair<Int32, Float32>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -54,8 +53,8 @@ class Int32Float32MapViewAbiTestImpl <: IMapView_Impl<Int32, Float32> & Resource
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -67,10 +66,6 @@ class Int32Float32MapViewAbiTestImpl <: IMapView_Impl<Int32, Float32> & Resource
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -173,18 +168,17 @@ func testGenericInt32Float32MapViewBuilderUsesDirectValueAbiForSpecialization() 
 
 class Int32Float32MapAbiTestImpl <: IMap_Impl<Int32, Float32> & Resource {
     private let entries: ArrayList<(Int32, Float32)>
-    private let vtblHandle: CPointerHandle<IMapVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IMapVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(entries: ArrayList<(Int32, Float32)>) {
         this.entries = entries
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.newInt32Float32<Int32Float32MapAbiTestImpl>() }))
+            windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32Float32<Int32Float32MapAbiTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32Float32MapAbiTestImpl, IKeyValuePair<Int32, Float32>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32Float32MapAbiTestImpl, IKeyValuePair<Int32, Float32>>())
         }
     }
 
@@ -196,23 +190,22 @@ class Int32Float32MapAbiTestImpl <: IMap_Impl<Int32, Float32> & Resource {
         this.entries = entries
         this.vtblHandle = unsafe {
             if (genericVtbl) {
-                acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.new<Int32Float32MapAbiTestImpl, Int32, Float32>() }))
+                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.new<Int32Float32MapAbiTestImpl, Int32, Float32>())
             } else {
-                acquireArrayRawData(Array<IMapVtbl>(1, { _ => IMapVtbl.newInt32Float32<Int32Float32MapAbiTestImpl>() }))
+                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32Float32<Int32Float32MapAbiTestImpl>())
             }
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<Int32Float32MapAbiTestImpl, IKeyValuePair<Int32, Float32>>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32Float32MapAbiTestImpl, IKeyValuePair<Int32, Float32>>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -220,8 +213,8 @@ class Int32Float32MapAbiTestImpl <: IMap_Impl<Int32, Float32> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -233,10 +226,6 @@ class Int32Float32MapAbiTestImpl <: IMap_Impl<Int32, Float32> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

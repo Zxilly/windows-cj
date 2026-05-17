@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -62,27 +63,27 @@ func sameGuidValue(left: GuidValue, right: GuidValue): Bool {
 class CopyStructVectorAbiTestImpl<T> <: IVector_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let equals: (T, T) -> Bool
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<T>, equals: (T, T) -> Bool) {
         this.items = items
         this.equals = equals
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => copyStructVectorVtbl<T>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(copyStructVectorVtbl<T>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<CopyStructVectorAbiTestImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<CopyStructVectorAbiTestImpl<T>, T>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -90,8 +91,8 @@ class CopyStructVectorAbiTestImpl<T> <: IVector_Impl<T> & Resource where T <: Ru
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -103,10 +104,6 @@ class CopyStructVectorAbiTestImpl<T> <: IVector_Impl<T> & Resource where T <: Ru
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -216,27 +213,27 @@ class CopyStructVectorAbiTestImpl<T> <: IVector_Impl<T> & Resource where T <: Ru
 class CopyStructVectorViewAbiTestImpl<T> <: IVectorView_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>
     private let equals: (T, T) -> Bool
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<T>, equals: (T, T) -> Bool) {
         this.items = items
         this.equals = equals
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorViewVtbl>(1, { _ => copyStructVectorViewVtbl<T>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(copyStructVectorViewVtbl<T>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<CopyStructVectorViewAbiTestImpl<T>, T>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<CopyStructVectorViewAbiTestImpl<T>, T>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -244,8 +241,8 @@ class CopyStructVectorViewAbiTestImpl<T> <: IVectorView_Impl<T> & Resource where
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -257,10 +254,6 @@ class CopyStructVectorViewAbiTestImpl<T> <: IVectorView_Impl<T> & Resource where
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }

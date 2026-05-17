@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.time.*
 import std.unittest.*
@@ -10,25 +11,25 @@ let asyncJoinInfoCleanupCloseCalls = AtomicInt64(0)
 let asyncJoinInfoCleanupResultsCalls = AtomicInt64(0)
 
 class AsyncJoinInfoCleanupActionImpl <: IAsyncAction_Impl & Resource {
-    private let infoVtblHandle: CPointerHandle<IAsyncInfoVtbl>
-    private let actionVtblHandle: CPointerHandle<IAsyncActionVtbl>
+    private let infoVtblHandle: CPointer<IAsyncInfoVtbl>
+    private let actionVtblHandle: CPointer<IAsyncActionVtbl>
     private var closed = false
 
     public init() {
         this.infoVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncInfoVtbl>(1, { _ => IAsyncInfoVtbl.new<AsyncJoinInfoCleanupActionImpl>() }))
+            windows_interface.allocateNativeValue<IAsyncInfoVtbl>(IAsyncInfoVtbl.new<AsyncJoinInfoCleanupActionImpl>())
         }
         this.actionVtblHandle = unsafe {
-            acquireArrayRawData(Array<IAsyncActionVtbl>(1, { _ => IAsyncActionVtbl.new<AsyncJoinInfoCleanupActionImpl>() }))
+            windows_interface.allocateNativeValue<IAsyncActionVtbl>(IAsyncActionVtbl.new<AsyncJoinInfoCleanupActionImpl>())
         }
     }
 
     public func infoVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(infoVtblHandle.pointer)
+        CPointer<Unit>(infoVtblHandle)
     }
 
     public func actionVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(actionVtblHandle.pointer)
+        CPointer<Unit>(actionVtblHandle)
     }
 
     public func isClosed(): Bool {
@@ -40,8 +41,8 @@ class AsyncJoinInfoCleanupActionImpl <: IAsyncAction_Impl & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(actionVtblHandle)
-            releaseArrayRawData(infoVtblHandle)
+            windows_interface.freeNativeValue(actionVtblHandle)
+            windows_interface.freeNativeValue(infoVtblHandle)
         }
         asyncJoinInfoCleanupCloseCalls.fetchAdd(1)
         closed = true
@@ -51,11 +52,6 @@ class AsyncJoinInfoCleanupActionImpl <: IAsyncAction_Impl & Resource {
         if (closed) {
             return
         }
-        unsafe {
-            releaseArrayRawData(actionVtblHandle)
-            releaseArrayRawData(infoVtblHandle)
-        }
-        asyncJoinInfoCleanupCloseCalls.fetchAdd(1)
         closed = true
     }
 
@@ -109,10 +105,16 @@ func createAsyncJoinInfoCleanupAction(): IAsyncAction {
 @Test
 func testReadyActionJoinAndWhenCompleteSuccessfully() {
     let action = IAsyncAction.ready()
+    let info = action.asIAsyncInfo()
 
-    @Expect(unsafe { action.asIAsyncInfo().Status() } == AsyncStatus_Completed, true)
-    @Expect(action.join().isOk(), true)
-    @Expect(action.when().get(Duration.second * 2).isOk(), true)
+    try {
+        @Expect(unsafe { info.Status() } == AsyncStatus_Completed, true)
+        @Expect(action.join().isOk(), true)
+        @Expect(action.when().get(Duration.second * 2).isOk(), true)
+    } finally {
+        info.close()
+        action.close()
+    }
 }
 
 @Test
@@ -121,9 +123,12 @@ func testAsyncActionJoinReleasesTemporaryAsyncInfo() {
     asyncJoinInfoCleanupResultsCalls.store(0)
     let action = createAsyncJoinInfoCleanupAction()
 
-    @Expect(action.join().isOk(), true)
-    @Expect(asyncJoinInfoCleanupResultsCalls.load(), 1)
-    action.close()
+    try {
+        @Expect(action.join().isOk(), true)
+        @Expect(asyncJoinInfoCleanupResultsCalls.load(), 1)
+    } finally {
+        action.close()
+    }
     @Expect(asyncJoinInfoCleanupCloseCalls.load(), 1)
 }
 
@@ -134,37 +139,54 @@ func testSpawnedActionCancelTransitionsToCanceled() {
     })
     let info = action.asIAsyncInfo()
 
-    unsafe { info.Cancel() }
+    try {
+        unsafe { info.Cancel() }
 
-    @Expect(unsafe { info.Status() } == AsyncStatus_Canceled, true)
-    match (action.join()) {
-        case Result<Unit>.Err(error) => @Expect(error.code(), E_ABORT)
-        case Result<Unit>.Ok(_) => @Expect(false, true)
+        @Expect(unsafe { info.Status() } == AsyncStatus_Canceled, true)
+        match (action.join()) {
+            case Result<Unit>.Err(error) => @Expect(error.code(), E_ABORT)
+            case Result<Unit>.Ok(_) => @Expect(false, true)
+        }
+    } finally {
+        info.close()
+        action.close()
     }
 }
 
 @Test
 func testReadyOperationJoinAndWhenReturnValue() {
     let operation = IAsyncOperation<Int32>.ready(42i32)
+    let info = operation.asIAsyncInfo()
 
-    @Expect(unsafe { operation.asIAsyncInfo().Status() } == AsyncStatus_Completed, true)
-    match (operation.join()) {
-        case Result<Int32>.Ok(value) => @Expect(value, 42i32)
-        case Result<Int32>.Err(_) => @Expect(false, true)
-    }
-    match (operation.when().get(Duration.second * 2)) {
-        case Result<Int32>.Ok(value) => @Expect(value, 42i32)
-        case Result<Int32>.Err(_) => @Expect(false, true)
+    try {
+        @Expect(unsafe { info.Status() } == AsyncStatus_Completed, true)
+        match (operation.join()) {
+            case Result<Int32>.Ok(value) => @Expect(value, 42i32)
+            case Result<Int32>.Err(_) => @Expect(false, true)
+        }
+        match (operation.when().get(Duration.second * 2)) {
+            case Result<Int32>.Ok(value) => @Expect(value, 42i32)
+            case Result<Int32>.Err(_) => @Expect(false, true)
+        }
+    } finally {
+        info.close()
+        operation.close()
     }
 }
 
 @Test
 func testReadyOperationWithProgressReturnsResultAndTerminalStatus() {
     let operation = IAsyncOperationWithProgress<Int32, UInt32>.ready(7i32, 3u32)
+    let info = operation.asIAsyncInfo()
 
-    @Expect(unsafe { operation.asIAsyncInfo().Status() } == AsyncStatus_Completed, true)
-    match (operation.join()) {
-        case Result<Int32>.Ok(value) => @Expect(value, 7i32)
-        case Result<Int32>.Err(_) => @Expect(false, true)
+    try {
+        @Expect(unsafe { info.Status() } == AsyncStatus_Completed, true)
+        match (operation.join()) {
+            case Result<Int32>.Ok(value) => @Expect(value, 7i32)
+            case Result<Int32>.Err(_) => @Expect(false, true)
+        }
+    } finally {
+        info.close()
+        operation.close()
     }
 }

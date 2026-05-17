@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -133,43 +134,43 @@ func resetPropertySetForwardingCounters(): Unit {
 }
 
 func withPropertySetForwardingMapRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IMapVtbl>(1, { _ => propertySetForwardingMapVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IMapVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IMapVtbl>(propertySetForwardingMapVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IMapVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withPropertySetForwardingObservableMapRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IObservableMapVtbl>(1, { _ => propertySetForwardingObservableMapVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IObservableMapVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IObservableMapVtbl>(propertySetForwardingObservableMapVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IObservableMapVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }
 
 func withPropertySetForwardingIterableRaw(action: (CPointer<Unit>) -> Unit): Unit {
-    let vtblHandle = unsafe { acquireArrayRawData(Array<IIterableVtbl>(1, { _ => propertySetForwardingIterableVtbl() })) }
-    let objectHandle = unsafe { acquireArrayRawData(Array<CPointer<IIterableVtbl>>(1, { _ => vtblHandle.pointer })) }
-    let raw = CPointer<Unit>(objectHandle.pointer)
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IIterableVtbl>(propertySetForwardingIterableVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IIterableVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
     try {
         action(raw)
     } finally {
         unsafe {
-            releaseArrayRawData(objectHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
     }
 }

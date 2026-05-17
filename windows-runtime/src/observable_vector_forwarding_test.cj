@@ -1,55 +1,62 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_core.{E_POINTER, InParam, Result, WinError, createComObjectFromSchemas}
 
-class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> {
+class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
-    private let observableVtblHandle: CPointerHandle<IObservableVectorVtbl>
-    private let vectorVtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let observableVtblHandle: CPointer<IObservableVectorVtbl>
+    private let vectorVtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
         this.observableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IObservableVectorVtbl>(
-                    1,
-                    { _ => IObservableVectorVtbl.new<ObservableInt32VectorForwardingTestImpl, Int32>() }
-                )
-            )
+            windows_interface.allocateNativeValue<IObservableVectorVtbl>(IObservableVectorVtbl.new<ObservableInt32VectorForwardingTestImpl, Int32>())
         }
         this.vectorVtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.newInt32<ObservableInt32VectorForwardingTestImpl>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newInt32<ObservableInt32VectorForwardingTestImpl>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<ObservableInt32VectorForwardingTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<ObservableInt32VectorForwardingTestImpl, Int32>())
         }
     }
 
     public func observableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(observableVtblHandle.pointer)
+        CPointer<Unit>(observableVtblHandle)
     }
 
     public func vectorVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vectorVtblHandle.pointer)
+        CPointer<Unit>(vectorVtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe {
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vectorVtblHandle)
+            windows_interface.freeNativeValue(observableVtblHandle)
+        }
+        closed = true
     }
 
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vectorVtblHandle)
-            releaseArrayRawData(observableVtblHandle)
         }
         closed = true
     }
@@ -183,7 +190,9 @@ func createObservableInt32VectorForwardingTest(values: ArrayList<Int32>): IObser
     ]
     let vtbls = [impl.iterableVtblPtr(), impl.vectorVtblPtr(), impl.observableVtblPtr()]
     let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    object.toInterface(IObservableVector<Int32>.descriptor())
+    let vector = object.toInterface(IObservableVector<Int32>.descriptor())
+    object.close()
+    vector
 }
 
 @Test
@@ -191,23 +200,26 @@ func testObservableVectorForwardsInheritedVectorOperations() {
     let source = ArrayList<Int32>([2i32, 4i32])
     let vector = createObservableInt32VectorForwardingTest(source)
 
-    unsafe { vector.Append(6i32) }
-    unsafe { vector.InsertAt(1u32, 3i32) }
-    unsafe { vector.SetAt(0u32, 1i32) }
-    @Expect(unsafe { vector.GetAt(0u32) }, 1i32)
-    @Expect(unsafe { vector.GetAt(1u32) }, 3i32)
-    @Expect(unsafe { vector.GetAt(3u32) }, 6i32)
-    @Expect(unsafe { vector.Size() }, 4u32)
+    try {
+        unsafe { vector.Append(6i32) }
+        unsafe { vector.InsertAt(1u32, 3i32) }
+        unsafe { vector.SetAt(0u32, 1i32) }
+        @Expect(unsafe { vector.GetAt(0u32) }, 1i32)
+        @Expect(unsafe { vector.GetAt(1u32) }, 3i32)
+        @Expect(unsafe { vector.GetAt(3u32) }, 6i32)
+        @Expect(unsafe { vector.Size() }, 4u32)
 
-    var index = 99u32
-    @Expect(unsafe { vector.IndexOf(6i32, CPointer<UInt32>(inout index)) }, true)
-    @Expect(index, 3u32)
+        var index = 99u32
+        @Expect(unsafe { vector.IndexOf(6i32, CPointer<UInt32>(inout index)) }, true)
+        @Expect(index, 3u32)
 
-    unsafe { vector.RemoveAt(1u32) }
-    unsafe { vector.RemoveAtEnd() }
-    @Expect(unsafe { vector.Size() }, 2u32)
+        unsafe { vector.RemoveAt(1u32) }
+        unsafe { vector.RemoveAtEnd() }
+        @Expect(unsafe { vector.Size() }, 2u32)
 
-    unsafe { vector.Clear() }
-    @Expect(unsafe { vector.Size() }, 0u32)
-    vector.close()
+        unsafe { vector.Clear() }
+        @Expect(unsafe { vector.Size() }, 0u32)
+    } finally {
+        vector.close()
+    }
 }

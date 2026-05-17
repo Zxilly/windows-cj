@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -7,26 +8,26 @@ import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchem
 
 class GenericBuilderInt32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<GenericBuilderInt32VectorAbiTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<GenericBuilderInt32VectorAbiTestImpl, Int32>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<GenericBuilderInt32VectorAbiTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderInt32VectorAbiTestImpl, Int32>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -34,8 +35,8 @@ class GenericBuilderInt32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -47,10 +48,6 @@ class GenericBuilderInt32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -165,28 +162,26 @@ class GenericBuilderInt32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
 
 class GenericBuilderInt32VectorViewAbiTestImpl <: IVectorView_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
-    private let vtblHandle: CPointerHandle<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
         this.vtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IVectorViewVtbl>(1, { _ => IVectorViewVtbl.new<GenericBuilderInt32VectorViewAbiTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<GenericBuilderInt32VectorViewAbiTestImpl, Int32>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(
-                Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<GenericBuilderInt32VectorViewAbiTestImpl, Int32>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderInt32VectorViewAbiTestImpl, Int32>())
         }
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -194,8 +189,8 @@ class GenericBuilderInt32VectorViewAbiTestImpl <: IVectorView_Impl<Int32> & Reso
             return
         }
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -207,10 +202,6 @@ class GenericBuilderInt32VectorViewAbiTestImpl <: IVectorView_Impl<Int32> & Reso
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
@@ -320,6 +311,41 @@ func testGenericInt32VectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(5u32) }, 8i32)
 
+    let directReplaceAll = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(vtbl.ReplaceAll))
+    let replaceHandle = unsafe { acquireArrayRawData(Array<Int32>(3, { i => Int32(i) + 11i32 })) }
+    try {
+        let replaceHr = unsafe { directReplaceAll(vector.asRaw(), 3u32, CPointer<Unit>(replaceHandle.pointer)) }
+        @Expect(replaceHr, S_OK.value)
+    } finally {
+        unsafe { releaseArrayRawData(replaceHandle) }
+    }
+    @Expect(unsafe { vector.Size() }, 3u32)
+    @Expect(unsafe { vector.GetAt(0u32) }, 11i32)
+    @Expect(unsafe { vector.GetAt(1u32) }, 12i32)
+    @Expect(unsafe { vector.GetAt(2u32) }, 13i32)
+
+    let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
+        CPointer<Unit>(vtbl.GetMany)
+    )
+    let outputHandle = unsafe { acquireArrayRawData(Array<Int32>(3, { _ => 0i32 })) }
+    try {
+        let output = CPointer<Int32>(outputHandle.pointer)
+        var copied = 99u32
+        let getManyHr = unsafe {
+            directGetMany(vector.asRaw(), 0u32, 3u32, CPointer<Unit>(output), CPointer<UInt32>(inout copied))
+        }
+        @Expect(getManyHr, S_OK.value)
+        @Expect(copied, 3u32)
+        @Expect(unsafe { output.read() }, 11i32)
+        @Expect(unsafe { (output + 1).read() }, 12i32)
+        @Expect(unsafe { (output + 2).read() }, 13i32)
+    } finally {
+        unsafe { releaseArrayRawData(outputHandle) }
+    }
+
+    let nullReplaceHr = unsafe { directReplaceAll(vector.asRaw(), 1u32, CPointer<Unit>()) }
+    @Expect(nullReplaceHr, E_POINTER.value)
+
     vector.close()
 }
 
@@ -344,6 +370,24 @@ func testGenericInt32VectorViewBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(indexHr, S_OK.value)
     @Expect(directFound, true)
     @Expect(directIndex, 2u32)
+
+    let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
+        CPointer<Unit>(vtbl.GetMany)
+    )
+    let outputHandle = unsafe { acquireArrayRawData(Array<Int32>(2, { _ => 0i32 })) }
+    try {
+        let output = CPointer<Int32>(outputHandle.pointer)
+        var copied = 99u32
+        let getManyHr = unsafe {
+            directGetMany(view.asRaw(), 1u32, 2u32, CPointer<Unit>(output), CPointer<UInt32>(inout copied))
+        }
+        @Expect(getManyHr, S_OK.value)
+        @Expect(copied, 2u32)
+        @Expect(unsafe { output.read() }, 3i32)
+        @Expect(unsafe { (output + 1).read() }, 5i32)
+    } finally {
+        unsafe { releaseArrayRawData(outputHandle) }
+    }
 
     view.close()
 }

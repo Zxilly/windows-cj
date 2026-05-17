@@ -1,5 +1,6 @@
 package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -48,17 +49,17 @@ func closeInterfaceVectorElements(values: ArrayList<IInspectable>): Unit {
 
 class InterfaceVectorAbiTestImpl <: IVector_Impl<IInspectable> & Resource {
     private let items: ArrayList<IInspectable>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(seed: ArrayList<IInspectable>) {
         this.items = ArrayList<IInspectable>(seed.size, { i => mustRetainInterfaceVectorElement(seed[i]) })
         this.vtblHandle = unsafe {
-            acquireArrayRawData(Array<IVectorVtbl>(1, { _ => IVectorVtbl.new<InterfaceVectorAbiTestImpl, IInspectable>() }))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<InterfaceVectorAbiTestImpl, IInspectable>())
         }
         this.iterableVtblHandle = unsafe {
-            acquireArrayRawData(Array<IIterableVtbl>(1, { _ => IIterableVtbl.new<InterfaceVectorAbiTestImpl, IInspectable>() }))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<InterfaceVectorAbiTestImpl, IInspectable>())
         }
     }
 
@@ -67,11 +68,11 @@ class InterfaceVectorAbiTestImpl <: IVector_Impl<IInspectable> & Resource {
     }
 
     public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }
 
     public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }
 
     public func close(): Unit {
@@ -80,8 +81,8 @@ class InterfaceVectorAbiTestImpl <: IVector_Impl<IInspectable> & Resource {
         }
         drainItems()
         unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }
         closed = true
     }
@@ -93,10 +94,6 @@ class InterfaceVectorAbiTestImpl <: IVector_Impl<IInspectable> & Resource {
     ~init() {
         if (closed) {
             return
-        }
-        unsafe {
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }
         closed = true
     }
