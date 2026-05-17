@@ -11,6 +11,8 @@ members = [
     "windows-runtime",
     "windows-threading",
     "windows-version",
+    "windows-numerics",
+    "windows-variant",
     "windows-targets",
     "windows-registry",
     "windows-services",
