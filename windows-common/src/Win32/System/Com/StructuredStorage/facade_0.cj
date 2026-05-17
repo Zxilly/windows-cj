@@ -2,7 +2,8 @@
 
 package windows_common.Win32.System.Com.StructuredStorage
 
-import windows_common.impl.{Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG, Windows_Win32_System_Com_StructuredStorage_IStorage}
+import windows_common.impl.{Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG, Windows_Win32_System_Com_StructuredStorage_IStorage, Windows_Win32_System_Com_StructuredStorage_STGMOVE}
 
 public type IEnumSTATSTG = Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG
 public type IStorage = Windows_Win32_System_Com_StructuredStorage_IStorage
+public type STGMOVE = Windows_Win32_System_Com_StructuredStorage_STGMOVE

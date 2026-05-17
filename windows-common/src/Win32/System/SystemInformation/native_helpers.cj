@@ -332,4 +332,3 @@ public func VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXW>,
     let proc = CFunc<(CPointer<OSVERSIONINFOEXW>, UInt32, UInt64) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "VerifyVersionInfoW"))
     return unsafe { proc(lpVersionInformation, dwTypeMask, dwlConditionMask) } != 0
 }
-

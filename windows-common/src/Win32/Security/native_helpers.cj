@@ -673,4 +673,3 @@ public func RtlConvertSidToUnicodeString(UnicodeString: CPointer<UNICODE_STRING>
     let proc = CFunc<(CPointer<UNICODE_STRING>, CPointer<Unit>, UInt8) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlConvertSidToUnicodeString"))
     return unsafe { proc(UnicodeString, Sid.Value, if (AllocateDestinationString) { 1u8 } else { 0u8 }) }
 }
-

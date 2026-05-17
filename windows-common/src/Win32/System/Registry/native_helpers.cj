@@ -423,4 +423,3 @@ public func GetRegistryValueWithFallbackW(hkeyPrimary: HKEY, pwszPrimarySubKey: 
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-state-helpers-l1-1-0.dll", "GetRegistryValueWithFallbackW"))
     return unsafe { proc(hkeyPrimary.Value, pwszPrimarySubKey.asPtr(), hkeyFallback.Value, pwszFallbackSubKey.asPtr(), pwszValue.asPtr(), dwFlags, pdwType, pvData, cbDataIn, pcbDataOut) }
 }
-

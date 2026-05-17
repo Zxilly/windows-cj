@@ -17,13 +17,13 @@ import windows_interface as windows_interface
 import windows_interface.GUID
 import windows_strings as windows_strings
 
-public func GetProcessWorkingSetSize(hProcess: HANDLE, lpMinimumWorkingSetSize: CPointer<CPointer<Unit>>, lpMaximumWorkingSetSize: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessWorkingSetSize"))
+public func GetProcessWorkingSetSize(hProcess: HANDLE, lpMinimumWorkingSetSize: CPointer<UIntNative>, lpMaximumWorkingSetSize: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessWorkingSetSize"))
     return unsafe { proc(hProcess.Value, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize) } != 0
 }
 
-public func SetProcessWorkingSetSize(hProcess: HANDLE, dwMinimumWorkingSetSize: CPointer<Unit>, dwMaximumWorkingSetSize: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessWorkingSetSize"))
+public func SetProcessWorkingSetSize(hProcess: HANDLE, dwMinimumWorkingSetSize: UIntNative, dwMaximumWorkingSetSize: UIntNative): Bool {
+    let proc = CFunc<(CPointer<Unit>, UIntNative, UIntNative) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessWorkingSetSize"))
     return unsafe { proc(hProcess.Value, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize) } != 0
 }
 
@@ -357,8 +357,8 @@ public func Sleep(dwMilliseconds: UInt32): Unit {
     unsafe { proc(dwMilliseconds) }
 }
 
-public func WaitOnAddress(Address: CPointer<Unit>, CompareAddress: CPointer<Unit>, AddressSize: CPointer<Unit>, dwMilliseconds: UInt32): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-synch-l1-2-0.dll", "WaitOnAddress"))
+public func WaitOnAddress(Address: CPointer<Unit>, CompareAddress: CPointer<Unit>, AddressSize: UIntNative, dwMilliseconds: UInt32): Bool {
+    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, UIntNative, UInt32) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-synch-l1-2-0.dll", "WaitOnAddress"))
     return unsafe { proc(Address, CompareAddress, AddressSize, dwMilliseconds) } != 0
 }
 
@@ -421,13 +421,13 @@ public func QueryDepthSList(ListHead: CPointer<SLIST_HEADER>): UInt16 {
     return unsafe { proc(ListHead) }
 }
 
-public func QueueUserAPC(pfnAPC: CFunc<(CPointer<Unit>) -> Unit>, hThread: HANDLE, dwData: CPointer<Unit>): UInt32 {
-    let proc = CFunc<(CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "QueueUserAPC"))
+public func QueueUserAPC(pfnAPC: CFunc<(UIntNative) -> Unit>, hThread: HANDLE, dwData: UIntNative): UInt32 {
+    let proc = CFunc<(CFunc<(UIntNative) -> Unit>, CPointer<Unit>, UIntNative) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "QueueUserAPC"))
     return unsafe { proc(pfnAPC, hThread.Value, dwData) }
 }
 
-public func QueueUserAPC2(ApcRoutine: CFunc<(CPointer<Unit>) -> Unit>, Thread: HANDLE, Data: CPointer<Unit>, Flags: Int32): Bool {
-    let proc = CFunc<(CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "QueueUserAPC2"))
+public func QueueUserAPC2(ApcRoutine: CFunc<(UIntNative) -> Unit>, Thread: HANDLE, Data: UIntNative, Flags: Int32): Bool {
+    let proc = CFunc<(CFunc<(UIntNative) -> Unit>, CPointer<Unit>, UIntNative, Int32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "QueueUserAPC2"))
     return unsafe { proc(ApcRoutine, Thread.Value, Data, Flags) } != 0
 }
 
@@ -468,15 +468,15 @@ public func SwitchToThread(): Bool {
     return unsafe { proc() } != 0
 }
 
-public func CreateThread(lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: CPointer<Unit>, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): HANDLE {
-    let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, CPointer<Unit>, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateThread"))
+public func CreateThread(lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): HANDLE {
+    let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, UIntNative, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateThread"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId) }
     result
 }
 
-public func CreateRemoteThread(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: CPointer<Unit>, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<SECURITY_ATTRIBUTES>, CPointer<Unit>, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateRemoteThread"))
+public func CreateRemoteThread(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): HANDLE {
+    let proc = CFunc<(CPointer<Unit>, CPointer<SECURITY_ATTRIBUTES>, UIntNative, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateRemoteThread"))
     var result = HANDLE()
     result.Value = unsafe { proc(hProcess.Value, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId) }
     result
@@ -646,8 +646,8 @@ public func GetProcessIdOfThread(Thread: HANDLE): UInt32 {
     return unsafe { proc(Thread.Value) }
 }
 
-public func InitializeProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount: UInt32, lpSize: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "InitializeProcThreadAttributeList"))
+public func InitializeProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount: UInt32, lpSize: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "InitializeProcThreadAttributeList"))
     return unsafe { proc(lpAttributeList.Value, dwAttributeCount, 0, lpSize) } != 0
 }
 
@@ -656,8 +656,8 @@ public func DeleteProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBU
     unsafe { proc(lpAttributeList.Value) }
 }
 
-public func UpdateProcThreadAttribute(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags: UInt32, Attribute: CPointer<Unit>, lpValue: CPointer<Unit>, cbSize: CPointer<Unit>, lpPreviousValue: CPointer<Unit>, lpReturnSize: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "UpdateProcThreadAttribute"))
+public func UpdateProcThreadAttribute(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags: UInt32, Attribute: UIntNative, lpValue: CPointer<Unit>, cbSize: UIntNative, lpPreviousValue: CPointer<Unit>, lpReturnSize: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<Unit>, UInt32, UIntNative, CPointer<Unit>, UIntNative, CPointer<Unit>, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "UpdateProcThreadAttribute"))
     return unsafe { proc(lpAttributeList.Value, dwFlags, Attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize) } != 0
 }
 
@@ -681,25 +681,25 @@ public func QueryProcessAffinityUpdateMode(hProcess: HANDLE, lpdwFlags: CPointer
     return unsafe { proc(hProcess.Value, lpdwFlags) } != 0
 }
 
-public func CreateRemoteThreadEx(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: CPointer<Unit>, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId: CPointer<UInt32>): HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<SECURITY_ATTRIBUTES>, CPointer<Unit>, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateRemoteThreadEx"))
+public func CreateRemoteThreadEx(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId: CPointer<UInt32>): HANDLE {
+    let proc = CFunc<(CPointer<Unit>, CPointer<SECURITY_ATTRIBUTES>, UIntNative, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateRemoteThreadEx"))
     var result = HANDLE()
     result.Value = unsafe { proc(hProcess.Value, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpAttributeList.Value, lpThreadId) }
     result
 }
 
-public func GetCurrentThreadStackLimits(LowLimit: CPointer<CPointer<Unit>>, HighLimit: CPointer<CPointer<Unit>>): Unit {
-    let proc = CFunc<(CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetCurrentThreadStackLimits"))
+public func GetCurrentThreadStackLimits(LowLimit: CPointer<UIntNative>, HighLimit: CPointer<UIntNative>): Unit {
+    let proc = CFunc<(CPointer<UIntNative>, CPointer<UIntNative>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetCurrentThreadStackLimits"))
     unsafe { proc(LowLimit, HighLimit) }
 }
 
-public func GetProcessMitigationPolicy(hProcess: HANDLE, MitigationPolicy: Int32, lpBuffer: CPointer<Unit>, dwLength: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessMitigationPolicy"))
+public func GetProcessMitigationPolicy(hProcess: HANDLE, MitigationPolicy: Int32, lpBuffer: CPointer<Unit>, dwLength: UIntNative): Bool {
+    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UIntNative) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessMitigationPolicy"))
     return unsafe { proc(hProcess.Value, MitigationPolicy, lpBuffer, dwLength) } != 0
 }
 
-public func SetProcessMitigationPolicy(MitigationPolicy: Int32, lpBuffer: CPointer<Unit>, dwLength: CPointer<Unit>): Bool {
-    let proc = CFunc<(Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessMitigationPolicy"))
+public func SetProcessMitigationPolicy(MitigationPolicy: Int32, lpBuffer: CPointer<Unit>, dwLength: UIntNative): Bool {
+    let proc = CFunc<(Int32, CPointer<Unit>, UIntNative) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessMitigationPolicy"))
     return unsafe { proc(MitigationPolicy, lpBuffer, dwLength) } != 0
 }
 
@@ -780,13 +780,13 @@ public func IsProcessCritical(hProcess: HANDLE, Critical: CPointer<Int32>): Bool
     return unsafe { proc(hProcess.Value, Critical) } != 0
 }
 
-public func SetProtectedPolicy(PolicyGuid: CPointer<GUID>, PolicyValue: CPointer<Unit>, OldPolicyValue: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProtectedPolicy"))
+public func SetProtectedPolicy(PolicyGuid: CPointer<GUID>, PolicyValue: UIntNative, OldPolicyValue: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<GUID>, UIntNative, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProtectedPolicy"))
     return unsafe { proc(PolicyGuid, PolicyValue, OldPolicyValue) } != 0
 }
 
-public func QueryProtectedPolicy(PolicyGuid: CPointer<GUID>, PolicyValue: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "QueryProtectedPolicy"))
+public func QueryProtectedPolicy(PolicyGuid: CPointer<GUID>, PolicyValue: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<GUID>, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "QueryProtectedPolicy"))
     return unsafe { proc(PolicyGuid, PolicyValue) } != 0
 }
 
@@ -1077,8 +1077,8 @@ public func CloseThreadpoolWait(pwa: PTP_WAIT): Unit {
     unsafe { proc(pwa.Value) }
 }
 
-public func CreateThreadpoolIo(fl: HANDLE, pfnio: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): PTP_IO {
-    let proc = CFunc<(CPointer<Unit>, CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<TP_CALLBACK_ENVIRON_V3>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateThreadpoolIo"))
+public func CreateThreadpoolIo(fl: HANDLE, pfnio: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UIntNative, CPointer<Unit>) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): PTP_IO {
+    let proc = CFunc<(CPointer<Unit>, CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UIntNative, CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<TP_CALLBACK_ENVIRON_V3>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateThreadpoolIo"))
     var result = PTP_IO()
     result.Value = unsafe { proc(fl.Value, pfnio, pv, pcbe) }
     result
@@ -1480,13 +1480,13 @@ public func SetProcessRestrictionExemption(fEnableExemption: Bool): Bool {
     return unsafe { proc(if (fEnableExemption) { 1 } else { 0 }) } != 0
 }
 
-public func GetProcessAffinityMask(hProcess: HANDLE, lpProcessAffinityMask: CPointer<CPointer<Unit>>, lpSystemAffinityMask: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessAffinityMask"))
+public func GetProcessAffinityMask(hProcess: HANDLE, lpProcessAffinityMask: CPointer<UIntNative>, lpSystemAffinityMask: CPointer<UIntNative>): Bool {
+    let proc = CFunc<(CPointer<Unit>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessAffinityMask"))
     return unsafe { proc(hProcess.Value, lpProcessAffinityMask, lpSystemAffinityMask) } != 0
 }
 
-public func SetProcessAffinityMask(hProcess: HANDLE, dwProcessAffinityMask: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessAffinityMask"))
+public func SetProcessAffinityMask(hProcess: HANDLE, dwProcessAffinityMask: UIntNative): Bool {
+    let proc = CFunc<(CPointer<Unit>, UIntNative) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessAffinityMask"))
     return unsafe { proc(hProcess.Value, dwProcessAffinityMask) } != 0
 }
 
@@ -1510,8 +1510,8 @@ public func ConvertFiberToThread(): Bool {
     return unsafe { proc() } != 0
 }
 
-public func CreateFiberEx(dwStackCommitSize: CPointer<Unit>, dwStackReserveSize: CPointer<Unit>, dwFlags: UInt32, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateFiberEx"))
+public func CreateFiberEx(dwStackCommitSize: UIntNative, dwStackReserveSize: UIntNative, dwFlags: UInt32, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): CPointer<Unit> {
+    let proc = CFunc<(UIntNative, UIntNative, UInt32, CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateFiberEx"))
     return unsafe { proc(dwStackCommitSize, dwStackReserveSize, dwFlags, lpStartAddress, lpParameter) }
 }
 
@@ -1520,8 +1520,8 @@ public func ConvertThreadToFiberEx(lpParameter: CPointer<Unit>, dwFlags: UInt32)
     return unsafe { proc(lpParameter, dwFlags) }
 }
 
-public func CreateFiber(dwStackSize: CPointer<Unit>, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateFiber"))
+public func CreateFiber(dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): CPointer<Unit> {
+    let proc = CFunc<(UIntNative, CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateFiber"))
     return unsafe { proc(dwStackSize, lpStartAddress, lpParameter) }
 }
 
@@ -1600,8 +1600,8 @@ public func GetUmsSystemThreadInformation(ThreadHandle: HANDLE, SystemThreadInfo
     return unsafe { proc(ThreadHandle.Value, SystemThreadInfo) } != 0
 }
 
-public func SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: CPointer<Unit>): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "SetThreadAffinityMask"))
+public func SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: UIntNative): UIntNative {
+    let proc = CFunc<(CPointer<Unit>, UIntNative) -> UIntNative>(windows_libloading.resolveProc("KERNEL32.dll", "SetThreadAffinityMask"))
     return unsafe { proc(hThread.Value, dwThreadAffinityMask) }
 }
 
@@ -1792,4 +1792,3 @@ public func GetNumaProximityNode(ProximityId: UInt32, NodeNumber: CPointer<UInt8
     let proc = CFunc<(UInt32, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetNumaProximityNode"))
     return unsafe { proc(ProximityId, NodeNumber) } != 0
 }
-

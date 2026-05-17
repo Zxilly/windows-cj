@@ -563,4 +563,3 @@ public func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<Unit>>
     let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLEAUT32.dll", "GetErrorInfo"))
     return unsafe { proc(dwReserved, pperrinfo) }
 }
-

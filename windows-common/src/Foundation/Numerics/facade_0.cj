@@ -2,11 +2,8 @@
 
 package windows_common.Foundation.Numerics
 
-import windows_common.impl.{Windows_Foundation_Numerics_Matrix3x2, Windows_Foundation_Numerics_Matrix4x4, Windows_Foundation_Numerics_Quaternion, Windows_Foundation_Numerics_Vector2, Windows_Foundation_Numerics_Vector3, Windows_Foundation_Numerics_Vector4}
+import windows_common.impl.{Windows_Foundation_Numerics_Matrix4x4, Windows_Foundation_Numerics_Vector2, Windows_Foundation_Numerics_Vector3}
 
-public type Matrix3x2 = Windows_Foundation_Numerics_Matrix3x2
 public type Matrix4x4 = Windows_Foundation_Numerics_Matrix4x4
-public type Quaternion = Windows_Foundation_Numerics_Quaternion
 public type Vector2 = Windows_Foundation_Numerics_Vector2
 public type Vector3 = Windows_Foundation_Numerics_Vector3
-public type Vector4 = Windows_Foundation_Numerics_Vector4

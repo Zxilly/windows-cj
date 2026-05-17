@@ -317,4 +317,3 @@ public func GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: I
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-5.dll", "GetSharedServiceDirectory"))
     return unsafe { proc(ServiceHandle.Value, DirectoryType, PathBuffer.asPtr(), PathBufferLength, RequiredBufferLength) }
 }
-
