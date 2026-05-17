@@ -1,0 +1,189 @@
+package windows_propvariant
+
+import std.unittest.*
+import std.unittest.testmacro.*
+import windows_interface.GUID
+import windows_strings.BSTR
+
+@Test
+func scalarPropVariantsRoundTrip(): Unit {
+    let boolValue = propVariantFromBool(true)
+    @Expect(propVariantVt(boolValue), VT_BOOL)
+    @Expect(propVariantAsBool(boolValue), Some(true))
+    @Expect(propVariantAsInt32(boolValue), None)
+
+    let i4Value = propVariantFromInt32(-7i32)
+    @Expect(propVariantVt(i4Value), VT_I4)
+    @Expect(propVariantAsInt32(i4Value), Some(-7i32))
+
+    let ui4Value = propVariantFromUInt32(42u32)
+    @Expect(propVariantVt(ui4Value), VT_UI4)
+    @Expect(propVariantAsUInt32(ui4Value), Some(42u32))
+
+    let i8Value = propVariantFromInt64(-9000i64)
+    @Expect(propVariantVt(i8Value), VT_I8)
+    @Expect(propVariantAsInt64(i8Value), Some(-9000i64))
+
+    let r4Value = propVariantFromFloat32(1.25f32)
+    @Expect(propVariantVt(r4Value), VT_R4)
+    @Expect(propVariantAsFloat32(r4Value), Some(1.25f32))
+
+    let r8Value = propVariantFromFloat64(2.5)
+    @Expect(propVariantVt(r8Value), VT_R8)
+    @Expect(propVariantAsFloat64(r8Value), Some(2.5))
+}
+
+@Test
+func additionalScalarPropVariantsRoundTrip(): Unit {
+    @Expect(propVariantAsInt8(propVariantFromInt8(-8i8)), Some(-8i8))
+    @Expect(propVariantAsUInt8(propVariantFromUInt8(8u8)), Some(8u8))
+    @Expect(propVariantAsInt16(propVariantFromInt16(-16i16)), Some(-16i16))
+    @Expect(propVariantAsUInt16(propVariantFromUInt16(16u16)), Some(16u16))
+    @Expect(propVariantAsUInt64(propVariantFromUInt64(64u64)), Some(64u64))
+    @Expect(propVariantAsError(propVariantFromError(-1i32)), Some(-1i32))
+    @Expect(propVariantIsEmpty(emptyPropVariant()), true)
+    @Expect(propVariantIsNull(nullPropVariant()), true)
+    @Expect(propVariantIsScalar(propVariantFromUInt64(64u64)), true)
+}
+
+@Test
+func extendedPropVtConstantsAreExposed(): Unit {
+    @Expect(VT_LPSTR, 30u16)
+    @Expect(VT_LPWSTR, 31u16)
+    @Expect(VT_FILETIME, 64u16)
+    @Expect(VT_BLOB, 65u16)
+    @Expect(VT_STREAM, 66u16)
+    @Expect(VT_STORAGE, 67u16)
+    @Expect(VT_STREAMED_OBJECT, 68u16)
+    @Expect(VT_STORED_OBJECT, 69u16)
+    @Expect(VT_BLOB_OBJECT, 70u16)
+    @Expect(VT_CF, 71u16)
+    @Expect(VT_CLSID, 72u16)
+    @Expect(VT_VECTOR, 4096u16)
+    @Expect(VT_ARRAY, 8192u16)
+}
+
+@Test
+func fileTimePropVariantRoundTrips(): Unit {
+    let pv = propVariantFromFileTimeParts(0x12345678u32, 0xABCDEF01u32)
+    @Expect(propVariantVt(pv), VT_FILETIME)
+    let result = propVariantAsFileTime(pv).getOrThrow()
+    @Expect(result.dwLowDateTime, 0x12345678u32)
+    @Expect(result.dwHighDateTime, 0xABCDEF01u32)
+}
+
+@Test
+func clsidPropVariantRoundTrips(): Unit {
+    let original = GUID(0x12345678u32, 0xABCDu16, 0xEF01u16,
+        0x01u8, 0x02u8, 0x03u8, 0x04u8, 0x05u8, 0x06u8, 0x07u8, 0x08u8)
+    var holder = PropVariant(propVariantFromClsid(original))
+    @Expect(holder.vt(), VT_CLSID)
+    let read = propVariantAsClsid(holder.get()).getOrThrow()
+    @Expect(read.data1, 0x12345678u32)
+    @Expect(read.data2, 0xABCDu16)
+    @Expect(read.data3, 0xEF01u16)
+    @Expect(read.data4[0], 0x01u8)
+    @Expect(read.data4[7], 0x08u8)
+    holder.close()
+    @Expect(holder.isClosed(), true)
+}
+
+@Test
+func wideStringPropVariantRoundTrips(): Unit {
+    var owned = PropVariant(propVariantFromString("hello-shell-property"))
+    @Expect(owned.vt(), VT_LPWSTR)
+    let text = propVariantAsString(owned.get()).getOrThrow()
+    @Expect(text, "hello-shell-property")
+    owned.close()
+    @Expect(owned.isClosed(), true)
+}
+
+@Test
+func ansiStringPropVariantRoundTrips(): Unit {
+    let bytes = [0x70u8, 0x6Bu8, 0x65u8, 0x79u8] // "pkey"
+    var owned = PropVariant(propVariantFromStringAnsi(bytes))
+    @Expect(owned.vt(), VT_LPSTR)
+    let text = propVariantAsString(owned.get()).getOrThrow()
+    @Expect(text, "pkey")
+    owned.close()
+}
+
+@Test
+func blobPropVariantRoundTrips(): Unit {
+    let payload = [0xDEu8, 0xADu8, 0xBEu8, 0xEFu8]
+    var owned = PropVariant(propVariantFromBytes(payload))
+    @Expect(owned.vt(), VT_BLOB)
+    let read = propVariantAsBytes(owned.get()).getOrThrow()
+    @Expect(read.size, 4)
+    @Expect(read[0], 0xDEu8)
+    @Expect(read[1], 0xADu8)
+    @Expect(read[2], 0xBEu8)
+    @Expect(read[3], 0xEFu8)
+    owned.close()
+}
+
+@Test
+func bstrPropVariantRoundTrips(): Unit {
+    let bstrValue = propVariantFromBstrString("hello-bstr")
+    @Expect(propVariantVt(bstrValue), VT_BSTR)
+    let view = propVariantAsBstr(bstrValue).getOrThrow()
+    @Expect(view.get(), "hello-bstr")
+    var owned = PropVariant(bstrValue)
+    @Expect(owned.vt(), VT_BSTR)
+    owned.close()
+    @Expect(owned.isClosed(), true)
+}
+
+@Test
+func propVariantResourceRoundTripsScalar(): Unit {
+    var owned = PropVariant(propVariantFromInt32(42i32))
+    @Expect(owned.vt(), VT_I4)
+    @Expect(propVariantAsInt32(owned.get()), Some(42i32))
+    let cloned = owned.cloneSelf()
+    @Expect(cloned.vt(), VT_I4)
+    @Expect(propVariantAsInt32(cloned.get()), Some(42i32))
+    owned.close()
+    cloned.close()
+    @Expect(owned.isClosed(), true)
+    @Expect(cloned.isClosed(), true)
+}
+
+@Test
+func propVariantCopyDeepCopiesLpwstr(): Unit {
+    var source = PropVariant(propVariantFromString("payload"))
+    let cloneCount = debugObservedPropVariantCopyCount()
+    let dup = source.cloneSelf()
+    @Expect(dup.vt(), VT_LPWSTR)
+    @Expect(debugObservedPropVariantCopyCount() > cloneCount, true)
+    @Expect(propVariantAsString(dup.get()).getOrThrow(), "payload")
+    @Expect(propVariantAsString(source.get()).getOrThrow(), "payload")
+    source.close()
+    dup.close()
+}
+
+@Test
+func propVariantClearReleasesLpwstrAllocation(): Unit {
+    let before = debugObservedPropVariantClearCount()
+    var owned = PropVariant(propVariantFromString("transient"))
+    owned.close()
+    @Expect(debugObservedPropVariantClearCount() > before, true)
+}
+
+@Test
+func unknownDispatchStreamStoragePayloadsRoundTripRawPointers(): Unit {
+    let unkPayload = propVariantFromUnknownRaw(CPointer<Unit>())
+    @Expect(propVariantVt(unkPayload), VT_UNKNOWN)
+    @Expect(propVariantAsUnknownRaw(unkPayload).getOrThrow().isNull(), true)
+
+    let dispPayload = propVariantFromDispatchRaw(CPointer<Unit>())
+    @Expect(propVariantVt(dispPayload), VT_DISPATCH)
+    @Expect(propVariantAsDispatchRaw(dispPayload).getOrThrow().isNull(), true)
+
+    let streamPayload = propVariantFromStreamRaw(CPointer<Unit>())
+    @Expect(propVariantVt(streamPayload), VT_STREAM)
+    @Expect(propVariantAsStreamRaw(streamPayload).getOrThrow().isNull(), true)
+
+    let storagePayload = propVariantFromStorageRaw(CPointer<Unit>())
+    @Expect(propVariantVt(storagePayload), VT_STORAGE)
+    @Expect(propVariantAsStorageRaw(storagePayload).getOrThrow().isNull(), true)
+}
