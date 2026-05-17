@@ -108,10 +108,6 @@ func hStringFlags(handle: CPointer<Unit>): UInt32 {
     unsafe { hStringHeaderFromHandle(handle).read().flags }
 }
 
-func hStringCountSlot(header: CPointer<HStringHeader>): CPointer<Int32> {
-    unsafe { CPointer<Int32>(CPointer<UInt8>(header) + hStringCountOffset()) }
-}
-
 public func hStringIsReferenceBacked(handle: CPointer<Unit>): Bool {
     (hStringFlags(handle) & HSTRING_REFERENCE_FLAG) != 0u32
 }
