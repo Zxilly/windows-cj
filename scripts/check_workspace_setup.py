@@ -19,7 +19,6 @@ from pathlib import Path
 
 
 ACTIVE_WORKSPACE_MEMBERS = {
-    "windows-metadata",
     "windows-libloading",
     "windows-result",
     "windows-strings",
@@ -81,7 +80,6 @@ PACKAGE_DEPENDENCIES = {
         "windows_strings",
     },
     "windows_libloading": set(),
-    "windows_metadata": set(),
     "windows_numerics": {"windows_common"},
     "windows_polyfill": set(),
     "windows_registry": {

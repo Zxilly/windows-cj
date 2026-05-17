@@ -1,6 +1,5 @@
 [workspace]
 members = [
-    "windows-metadata",
     "windows-libloading",
     "windows-result",
     "windows-strings",

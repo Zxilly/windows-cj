@@ -21,7 +21,6 @@ from pathlib import Path
 
 
 ACTIVE_WORKSPACE_MEMBERS = (
-    "windows-metadata",
     "windows-libloading",
     "windows-result",
     "windows-strings",

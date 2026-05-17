@@ -136,7 +136,6 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 | `windows-targets` | Production-ready | 2 | 链接 target 选择；bundled GNU archive 元数据；`check_workspace_setup.py` 校验 archive 名称、存在性和非空 payload | — |
 | `windows-registry` | Production-ready | 7 | 字节↔宽字符转换、ABI types 委托给 windows-common；真实 HKCU volatile key roundtrip smoke | — |
 | `windows-services` | Production-ready | 6 | dispatch / 状态守护 synchronized 块；dispatcher failure smoke；fallback path 覆盖 start/stop 状态序列 | 可选：单独的管理员/服务宿主集成 harness，不作为常规单测门禁 |
-| `windows-metadata` | Production-ready | 5 | JSON 元数据加载 | — |
 | `windows-common` | Production-ready | 0 (generated) | 由 `check_workspace_setup.py` 强校验：DO NOT EDIT 头、SHA256 哈希、WinUI3 delegate raw COM pointer、delegate `HandleWinrtType`、依赖闭包 | — |
 | `windows-winui3` | Production-ready | 5 | XAML / Markup / Controls 手写 helper；HSTRING 输入借用；`Application.Start` 真实 WinRT delegate COM object；demo smoke 激活窗口 | — |
 | `windows` (CLI) | Production-ready | 125 | render_symbol / interface / runtime class / collection thunk 模板；生成 manifest file_hashes；`--input-dir`；生成文件 EOF 规范化 | — |
