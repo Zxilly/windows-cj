@@ -14,7 +14,9 @@ result, or `.unwrap()` / `.check()` for the throwing variants.
 
 This audit runs over the active workspace `.cj` sources and reports
 any standalone `.ok()` statement that is followed by another statement
-inside the same block (so it cannot be the implicit return).
+inside the same block (so it cannot be the implicit return). It also
+rejects `let _ = value.ok()`, which explicitly discards the returned
+`Result`.
 
 The heuristic is intentionally conservative: tail expressions are
 allowed, expressions inside `match (...)`, `if (...)`, etc. are not
@@ -62,6 +64,7 @@ _GENERIC = r"<(?:[^<>]|<[^<>]*>)*>"
 STATEMENT_OK_RE = re.compile(
     rf"^([A-Za-z_][\w]*(?:{_GENERIC})?(?:\.[A-Za-z_]\w*(?:{_GENERIC})?(?:\([^()]*\))?)*)\.ok\(\)\s*(?://.*)?$"
 )
+IGNORED_OK_ASSIGN_RE = re.compile(r"^let\s+_\s*=.*\.ok\(\)\s*(?://.*)?$")
 
 
 def next_meaningful_line(lines: list[str], start: int) -> str:
@@ -75,14 +78,12 @@ def next_meaningful_line(lines: list[str], start: int) -> str:
     return ""
 
 
-def scan_file(path: Path) -> list[str]:
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
+def scan_lines(label: str, lines: list[str]) -> list[str]:
     findings: list[str] = []
     for index, raw in enumerate(lines):
         stripped = raw.strip()
-        if not stripped.endswith(".ok()"):
-            # accept "</ comment.ok())" etc. without further work
+        if IGNORED_OK_ASSIGN_RE.match(stripped):
+            findings.append(f"{label}:{index + 1}: ignored Result.ok() value")
             continue
         if not STATEMENT_OK_RE.match(stripped):
             continue
@@ -90,8 +91,22 @@ def scan_file(path: Path) -> list[str]:
         # Tail expression: the next meaningful character closes the block.
         if successor.startswith("}"):
             continue
-        findings.append(f"{path}:{index + 1}: ignored Result.ok() value")
+        findings.append(f"{label}:{index + 1}: ignored Result.ok() value")
     return findings
+
+
+def scan_file(path: Path) -> list[str]:
+    text = path.read_text(encoding="utf-8")
+    return scan_lines(str(path), text.splitlines())
+
+
+def self_check() -> None:
+    if not scan_lines("<self>", ["hr.ok() // ignored", "println(\"after\")"]):
+        raise AssertionError("standalone .ok() with trailing comment must be rejected")
+    if not scan_lines("<self>", ["let _ = hr.ok() // ignored"]):
+        raise AssertionError("discarded .ok() assignment with trailing comment must be rejected")
+    if scan_lines("<self>", ["hr.ok() // tail", "}"]):
+        raise AssertionError("tail-position standalone .ok() should remain allowed")
 
 
 def audit_workspace(workspace: Path) -> list[str]:
@@ -106,6 +121,11 @@ def audit_workspace(workspace: Path) -> list[str]:
 
 
 def main() -> None:
+    try:
+        self_check()
+    except AssertionError as error:
+        print(f"FAIL: check_ignored_results self-check failed: {error}", file=sys.stderr)
+        sys.exit(1)
     workspace = Path(__file__).resolve().parent.parent
     findings = audit_workspace(workspace)
     if findings:
