@@ -12,6 +12,8 @@ members = [
     "windows-version",
     "windows-numerics",
     "windows-variant",
+    "windows-propvariant",
+    "windows-safearray",
     "windows-targets",
     "windows-registry",
     "windows-services",
