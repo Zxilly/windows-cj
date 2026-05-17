@@ -230,8 +230,8 @@ public unsafe func createInterfaceResourceFromTarget<T, U>(
     vtablePtr: CPointer<Unit>
 ): InterfaceResource<T> where U <: Object {
     let slots = Array<CPointer<Unit>>(1, { _ => vtablePtr })
-    let handle = acquireArrayRawData(slots)
-    let raw = CPointer<Unit>(handle.pointer)
+    let handle = allocateNativeArray<CPointer<Unit>>(slots)
+    let raw = CPointer<Unit>(handle)
     let targetIdentity = acquireInterfaceTargetIdentity(target)
     interfaceTargetRegistryInsert(raw, target)
     InterfaceResource<T>(
@@ -242,7 +242,7 @@ public unsafe func createInterfaceResourceFromTarget<T, U>(
         onClose: Some({ =>
             interfaceTargetRegistryRemove(raw)
             releaseInterfaceTargetIdentity(targetIdentity)
-            unsafe { releaseArrayRawData(handle) }
+            unsafe { freeNativeValue(handle) }
         })
     )
 }

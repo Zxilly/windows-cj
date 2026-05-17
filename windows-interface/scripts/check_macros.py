@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import os
 import shutil
+import signal
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -13,6 +15,8 @@ WORK = PACKAGE / "target" / "macro-check"
 DEPS_TARGET = WORK / "deps"
 MACRO_SRC = PACKAGE / "src" / "macros" / "windows_interface_macros.cj"
 FIXTURE_DIR = PACKAGE / "tests" / "macros"
+COMMAND_TIMEOUT_SECONDS = int(os.environ.get("WINDOWS_CJ_MACRO_CHECK_TIMEOUT_SECONDS", "300"))
+MACRO_DEPENDENCY_ROOT = "windows_core"
 
 
 IMPORT_PACKAGES = [
@@ -47,9 +51,43 @@ def cjv_exec_args(executable: Path) -> list[str]:
     return ["cjv", "exec", cjv_toolchain_arg(), str(executable)]
 
 
+def kill_process_tree(pid: int) -> None:
+    if os.name == "nt":
+        subprocess.run(
+            ["taskkill", "/F", "/T", "/PID", str(pid)],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        return
+    try:
+        os.killpg(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+
+
 def run(args: list[str], *, env: dict[str, str] | None = None) -> None:
     print("+ " + " ".join(args), flush=True)
-    subprocess.run(args, cwd=ROOT, env=env, check=True)
+    started = time.perf_counter()
+    kwargs = {
+        "cwd": ROOT,
+        "env": env,
+    }
+    if os.name != "nt":
+        kwargs["start_new_session"] = True
+    process = subprocess.Popen(args, **kwargs)
+    try:
+        returncode = process.wait(timeout=COMMAND_TIMEOUT_SECONDS)
+    except subprocess.TimeoutExpired as exc:
+        kill_process_tree(process.pid)
+        elapsed = time.perf_counter() - started
+        raise RuntimeError(
+            f"command timed out after {elapsed:.1f}s (limit {COMMAND_TIMEOUT_SECONDS}s): {' '.join(args)}"
+        ) from exc
+    elapsed = time.perf_counter() - started
+    if returncode != 0:
+        raise subprocess.CalledProcessError(returncode, args)
+    print(f"# done in {elapsed:.2f}s", flush=True)
 
 
 def member_name(package: str) -> str:
@@ -61,7 +99,19 @@ def package_output(package: str) -> Path:
 
 
 def build_import_packages(env: dict[str, str]) -> None:
-    for package in IMPORT_PACKAGES:
+    run(
+        [
+            "cjpm",
+            "build",
+            "-m",
+            member_name(MACRO_DEPENDENCY_ROOT),
+            "--target-dir",
+            str(DEPS_TARGET),
+        ],
+        env=env,
+    )
+    missing = [package for package in IMPORT_PACKAGES if not package_output(package).exists()]
+    for package in missing:
         run(
             [
                 "cjpm",
@@ -84,9 +134,16 @@ def clean_work_dir() -> None:
     package_target = (PACKAGE / "target").resolve()
     if package_target not in resolved.parents:
         raise RuntimeError(f"refusing to remove unexpected path: {resolved}")
-    if WORK.exists():
-        shutil.rmtree(WORK)
-    WORK.mkdir(parents=True)
+    clean_deps = os.environ.get("WINDOWS_CJ_MACRO_CHECK_CLEAN_DEPS", "") == "1"
+    WORK.mkdir(parents=True, exist_ok=True)
+    deps_resolved = DEPS_TARGET.resolve()
+    for child in WORK.iterdir():
+        if child.resolve() == deps_resolved and not clean_deps:
+            continue
+        if child.is_dir() and not child.is_symlink():
+            shutil.rmtree(child)
+        else:
+            child.unlink()
 
 
 def import_args() -> list[str]:

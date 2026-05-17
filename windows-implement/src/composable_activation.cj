@@ -116,7 +116,7 @@ public class ComposableActivation<TOuter, TBase> <: Resource where TBase <: ComI
     }
 
     ~init() {
-        closed = closeComposableActivationState(outer, baseObject, innerObject, closed)
+        closed = true
     }
 }
 

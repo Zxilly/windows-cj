@@ -1,59 +1,36 @@
 package windows_interface
 
-import std.sync.Mutex
+import std.sync.AtomicBool
 import windows_result.*
 import windows_result.Error as WinResultError
 import windows_strings.*
 
 class OwnedHandleState {
-    private let mutex = Mutex()
-    private var raw: CPointer<Unit>
-    private var released = false
+    private let raw: CPointer<Unit>
+    private let released = AtomicBool(false)
 
     public init(raw: CPointer<Unit>) {
         this.raw = raw
     }
 
     public func releaseHandle(): UInt32 {
-        synchronized(mutex) {
-            if (released || raw.isNull()) {
-                raw = CPointer<Unit>()
-                released = true
-                return 0u32
-            }
-            let liveRaw = raw
-            raw = CPointer<Unit>()
-            released = true
-            releaseRaw(liveRaw)
+        if (!released.compareAndSwap(false, true) || raw.isNull()) {
+            return 0u32
         }
+        releaseRaw(raw)
     }
 
     public func detachHandle(): CPointer<Unit> {
-        synchronized(mutex) {
-            if (released || raw.isNull()) {
-                raw = CPointer<Unit>()
-                released = true
-                return CPointer<Unit>()
-            }
-            let liveRaw = raw
-            raw = CPointer<Unit>()
-            released = true
-            liveRaw
+        if (!released.compareAndSwap(false, true) || raw.isNull()) {
+            return CPointer<Unit>()
         }
+        raw
     }
 
     ~init() {
-        synchronized(mutex) {
-            if (released || raw.isNull()) {
-                raw = CPointer<Unit>()
-                released = true
-                return
-            }
-            let liveRaw = raw
-            raw = CPointer<Unit>()
-            released = true
-            let _ = releaseRaw(liveRaw)
-        }
+        // COM Release can re-enter registry-backed Cangjie code. Finalizers
+        // cannot use synchronization, so owned interface wrappers require
+        // deterministic close/release by their Resource owner.
     }
 }
 
@@ -177,13 +154,51 @@ public struct IWeakReferenceSourceVtbl {
     public init() {}
 }
 
+func iunknownDescriptorMethods(): Array<InterfaceMethodSchema> {
+    let qiParams = [
+        InterfaceParameterSchema("riid", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.InParam),
+        InterfaceParameterSchema("ppvObject", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.OutSlot)
+    ]
+    [
+        InterfaceMethodSchema("QueryInterface", 0, qiParams, "Int32"),
+        InterfaceMethodSchema("AddRef", 1, Array<InterfaceParameterSchema>(), "UInt32"),
+        InterfaceMethodSchema("Release", 2, Array<InterfaceParameterSchema>(), "UInt32")
+    ]
+}
+
+func iinspectableDescriptorMethods(): Array<InterfaceMethodSchema> {
+    let iidsParams = [
+        InterfaceParameterSchema("iidCount", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.OutSlot),
+        InterfaceParameterSchema("iids", "CPointer<CPointer<GUID>>", "CPointer<CPointer<GUID>>", InterfaceParameterBridgeKind.OutSlot)
+    ]
+    let nameParams = [
+        InterfaceParameterSchema("className", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.OutSlot)
+    ]
+    let trustParams = [
+        InterfaceParameterSchema("trustLevel", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.OutSlot)
+    ]
+    [
+        InterfaceMethodSchema("GetIids", 3, iidsParams, "Int32"),
+        InterfaceMethodSchema("GetRuntimeClassName", 4, nameParams, "Int32"),
+        InterfaceMethodSchema("GetTrustLevel", 5, trustParams, "Int32")
+    ]
+}
+
+func iactivationFactoryDescriptorMethods(): Array<InterfaceMethodSchema> {
+    let activateParams = [
+        InterfaceParameterSchema("instance", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.OutSlot)
+    ]
+    [
+        InterfaceMethodSchema("ActivateInstance", 6, activateParams, "Int32")
+    ]
+}
+
 public open class InterfaceWrapperBase <: Resource {
     protected let raw_: CPointer<Unit>
     protected let ownsHandle_: Bool
     protected let allowManualRelease_: Bool
     private let ownedHandleState_: Option<OwnedHandleState>
     protected var closed_: Bool = false
-    private var retainBudget_: UInt32 = 0u32
 
     public init(raw: CPointer<Unit>) {
         this.raw_ = raw
@@ -224,9 +239,7 @@ public open class InterfaceWrapperBase <: Resource {
         if (liveRaw.isNull()) {
             return 0u32
         }
-        let count = addRefRaw(liveRaw)
-        retainBudget_ += 1u32
-        count
+        addRefRaw(liveRaw)
     }
 
     public func retainRaw(): CPointer<Unit> {
@@ -258,16 +271,7 @@ public open class InterfaceWrapperBase <: Resource {
         if (liveRaw.isNull()) {
             return 0u32
         }
-        if (retainBudget_ > 0u32) {
-            retainBudget_ -= 1u32
-            return releaseRaw(liveRaw)
-        }
-        if (ownsHandle_) {
-            let count = releaseOwnedHandle()
-            closed_ = true
-            return count
-        }
-        if (allowManualRelease_) {
+        if (ownsHandle_ || allowManualRelease_) {
             return releaseRaw(liveRaw)
         }
         0u32
@@ -344,11 +348,7 @@ public open class IUnknown <: InterfaceWrapperBase & ComInterface & RuntimeName 
             "IUnknownVtbl",
             "IUnknown",
             "IUnknown_Impl",
-            Array<InterfaceMethodSchema>(0, { _ =>
-                InterfaceMethodSchema("", 0, Array<InterfaceParameterSchema>(0, { _ =>
-                    InterfaceParameterSchema("", "", "", InterfaceParameterBridgeKind.Value)
-                }), "")
-            })
+            iunknownDescriptorMethods()
         )
     }
 
@@ -401,11 +401,7 @@ public open class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeN
             "IInspectableVtbl",
             "IInspectable",
             "IInspectable_Impl",
-            Array<InterfaceMethodSchema>(0, { _ =>
-                InterfaceMethodSchema("", 0, Array<InterfaceParameterSchema>(0, { _ =>
-                    InterfaceParameterSchema("", "", "", InterfaceParameterBridgeKind.Value)
-                }), "")
-            })
+            iinspectableDescriptorMethods()
         )
     }
 
@@ -684,11 +680,7 @@ public open class IActivationFactory <: InterfaceWrapperBase & ComInterface & Ru
             "IActivationFactoryVtbl",
             "IActivationFactory",
             "IActivationFactory_Impl",
-            Array<InterfaceMethodSchema>(0, { _ =>
-                InterfaceMethodSchema("", 0, Array<InterfaceParameterSchema>(0, { _ =>
-                    InterfaceParameterSchema("", "", "", InterfaceParameterBridgeKind.Value)
-                }), "")
-            })
+            iactivationFactoryDescriptorMethods()
         )
     }
 
@@ -707,6 +699,34 @@ public open class IActivationFactory <: InterfaceWrapperBase & ComInterface & Ru
         }
         let v = vtbl()
         HRESULT(v.ActivateInstance(liveRaw, result))
+    }
+
+    public unsafe func activateInstance<T>(descriptor: InterfaceDescriptor<T>): Result<T> where T <: ComInterface {
+        var raw = CPointer<Unit>()
+        let hr = activateInstance(CPointer<CPointer<Unit>>(inout raw))
+        if (hr.failed()) {
+            return Result<T>.Err(WinResultError.fromHRESULT(hr))
+        }
+        if (raw.isNull()) {
+            return Result<T>.Err(WinResultError.fromHRESULT(E_POINTER))
+        }
+        if (descriptor.iid == IInspectable.iid()) {
+            return Result<T>.Ok(descriptor.takeFromAbi(raw))
+        }
+
+        var iid = descriptor.iid
+        var projectedRaw = CPointer<Unit>()
+        let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(raw).read()
+        let vtbl = vtblPtr.read()
+        let queryHr = HRESULT(vtbl.QueryInterface(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout projectedRaw)))
+        let _ = releaseRaw(raw)
+        if (queryHr.failed()) {
+            return Result<T>.Err(WinResultError.fromHRESULT(queryHr))
+        }
+        if (projectedRaw.isNull()) {
+            return Result<T>.Err(WinResultError.fromHRESULT(E_POINTER))
+        }
+        Result<T>.Ok(descriptor.takeFromAbi(projectedRaw))
     }
 }
 

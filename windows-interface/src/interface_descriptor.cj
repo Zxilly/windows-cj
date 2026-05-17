@@ -395,6 +395,9 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         if (this.iid == iid) {
             return true
         }
+        if (iid == IID_IUNKNOWN || iid == IID_IINSPECTABLE) {
+            return false
+        }
         for (ancestor in ancestorIids) {
             if (ancestor == iid) {
                 return true

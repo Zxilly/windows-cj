@@ -13,3 +13,12 @@ public func CoCreateFreeThreadedMarshaler(
     let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(coCreateFreeThreadedMarshalerProc())
     unsafe { proc(punkOuter, ppunkMarshal) }
 }
+
+func coTaskMemAllocProc(): CPointer<Unit> {
+    windows_libloading.resolveProc("ole32.dll", "CoTaskMemAlloc")
+}
+
+public func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
+    let proc = CFunc<(UIntNative) -> CPointer<Unit>>(coTaskMemAllocProc())
+    unsafe { proc(cb) }
+}

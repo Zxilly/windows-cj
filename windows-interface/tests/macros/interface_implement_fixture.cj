@@ -133,46 +133,86 @@ main(): Int64 {
         return 1
     }
     let object = createFixtureCounter()
-    let counter = object.toInterface(IFixtureCounter.descriptor())
-    let hr = unsafe { counter.Count(7u32) }
-    counter.close()
-    let _ = object.releaseBase()
+    var hr = S_OK
+    try {
+        let counter = object.toInterface(IFixtureCounter.descriptor())
+        try {
+            hr = unsafe { counter.Count(7u32) }
+        } finally {
+            counter.close()
+        }
+    } finally {
+        let _ = object.releaseBase()
+    }
     if (hr != S_FALSE) {
         return 1
     }
 
     let compositeObject = createCompositeFixtureCounter()
-    let compositeCounter = compositeObject.toInterface(IFixtureCounter.descriptor())
-    let compositeLabel = compositeObject.toInterface(IFixtureLabel.descriptor())
-    let counterHr = unsafe { compositeCounter.Count(7u32) }
-    let labelHr = unsafe { compositeLabel.Label(3u32) }
-    compositeCounter.close()
-    compositeLabel.close()
-    let _ = compositeObject.releaseBase()
+    var counterHr = S_OK
+    var labelHr = S_OK
+    try {
+        let compositeCounter = compositeObject.toInterface(IFixtureCounter.descriptor())
+        try {
+            let compositeLabel = compositeObject.toInterface(IFixtureLabel.descriptor())
+            try {
+                counterHr = unsafe { compositeCounter.Count(7u32) }
+                labelHr = unsafe { compositeLabel.Label(3u32) }
+            } finally {
+                compositeLabel.close()
+            }
+        } finally {
+            compositeCounter.close()
+        }
+    } finally {
+        let _ = compositeObject.releaseBase()
+    }
     if (counterHr != S_FALSE || labelHr != S_OK) {
         return 1
     }
 
     let inheritedObject = createInheritedFixture()
-    let inheritedBase = inheritedObject.toInterface(IFixtureBase.descriptor())
-    let inheritedDerived = inheritedObject.toInterface(IFixtureDerived.descriptor())
-    let baseHr = unsafe { inheritedBase.BaseValue(11u32) }
-    let derivedHr = unsafe { inheritedDerived.DerivedValue(13u32) }
-    inheritedBase.close()
-    inheritedDerived.close()
-    let _ = inheritedObject.releaseBase()
+    var baseHr = S_OK
+    var derivedHr = S_OK
+    try {
+        let inheritedBase = inheritedObject.toInterface(IFixtureBase.descriptor())
+        try {
+            let inheritedDerived = inheritedObject.toInterface(IFixtureDerived.descriptor())
+            try {
+                baseHr = unsafe { inheritedBase.BaseValue(11u32) }
+                derivedHr = unsafe { inheritedDerived.DerivedValue(13u32) }
+            } finally {
+                inheritedDerived.close()
+            }
+        } finally {
+            inheritedBase.close()
+        }
+    } finally {
+        let _ = inheritedObject.releaseBase()
+    }
     if (baseHr != S_OK || derivedHr != S_FALSE) {
         return 1
     }
 
     let inheritedDefaultObject = createInheritedDefaultThunkFixture()
-    let inheritedDefaultBase = inheritedDefaultObject.toInterface(IFixtureSecondBase.descriptor())
-    let inheritedDefaultDerived = inheritedDefaultObject.toInterface(IFixtureSecondDerived.descriptor())
-    let secondBaseHr = unsafe { inheritedDefaultBase.SecondBaseValue(17u32) }
-    let secondDerivedHr = unsafe { inheritedDefaultDerived.SecondDerivedValue(19u32) }
-    inheritedDefaultBase.close()
-    inheritedDefaultDerived.close()
-    let _ = inheritedDefaultObject.releaseBase()
+    var secondBaseHr = S_OK
+    var secondDerivedHr = S_OK
+    try {
+        let inheritedDefaultBase = inheritedDefaultObject.toInterface(IFixtureSecondBase.descriptor())
+        try {
+            let inheritedDefaultDerived = inheritedDefaultObject.toInterface(IFixtureSecondDerived.descriptor())
+            try {
+                secondBaseHr = unsafe { inheritedDefaultBase.SecondBaseValue(17u32) }
+                secondDerivedHr = unsafe { inheritedDefaultDerived.SecondDerivedValue(19u32) }
+            } finally {
+                inheritedDefaultDerived.close()
+            }
+        } finally {
+            inheritedDefaultBase.close()
+        }
+    } finally {
+        let _ = inheritedDefaultObject.releaseBase()
+    }
     if (secondBaseHr != S_OK || secondDerivedHr != S_FALSE) {
         return 1
     }

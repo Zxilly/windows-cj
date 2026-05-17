@@ -2,7 +2,97 @@ package windows_interface
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_result.WindowsException
+import std.sync.AtomicInt64
+import windows_result.{E_NOINTERFACE, Result, S_OK, WindowsException}
+
+let typedActivationTestIid = GUID.parse("00000031-0000-0000-C000-000000000046")
+let typedActivationQueryCount = AtomicInt64(0)
+let typedActivationReleaseCount = AtomicInt64(0)
+var typedActivationRaw = CPointer<Unit>()
+var typedActivationProjectedRaw = CPointer<Unit>()
+
+class TypedActivationTestInterface <: InterfaceWrapperBase & ComInterface {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TypedActivationTestInterface {
+        TypedActivationTestInterface(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TypedActivationTestInterface {
+        TypedActivationTestInterface(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): GUID {
+        typedActivationTestIid
+    }
+
+    public static func descriptor(): InterfaceDescriptor<TypedActivationTestInterface> {
+        InterfaceDescriptor<TypedActivationTestInterface>(
+            "TypedActivationTestInterface",
+            typedActivationTestIid,
+            IInspectable.descriptor(),
+            { raw => TypedActivationTestInterface.fromAbiTake(raw) },
+            { raw => TypedActivationTestInterface.viewOf(raw) }
+        )
+    }
+}
+
+@C
+func typedActivationQueryInterfaceThunk(
+    _: CPointer<Unit>,
+    iid: CPointer<GUID>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    let _ = typedActivationQueryCount.fetchAdd(1)
+    let requestedIid = unsafe { iid.read() }
+    if (requestedIid == typedActivationTestIid) {
+        unsafe { result.write(typedActivationProjectedRaw) }
+        return S_OK.value
+    }
+    unsafe { result.write(CPointer<Unit>()) }
+    E_NOINTERFACE.value
+}
+
+@C
+func typedActivationReleaseThunk(_: CPointer<Unit>): UInt32 {
+    let previous = typedActivationReleaseCount.fetchAdd(1)
+    UInt32(previous + 1)
+}
+
+@C
+func typedActivationActivateInstanceThunk(
+    _: CPointer<Unit>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe { result.write(typedActivationRaw) }
+    S_OK.value
+}
+
+func resetTypedActivationTestState(): Unit {
+    typedActivationQueryCount.store(0)
+    typedActivationReleaseCount.store(0)
+    typedActivationRaw = CPointer<Unit>()
+    typedActivationProjectedRaw = CPointer<Unit>()
+}
+
+func typedActivationFactoryVtbl(): IActivationFactoryVtbl {
+    var vtbl = IActivationFactoryVtbl()
+    vtbl.ActivateInstance = typedActivationActivateInstanceThunk
+    vtbl
+}
+
+func typedActivationObjectVtbl(): IInspectableVtbl {
+    var vtbl = IInspectableVtbl()
+    vtbl.base_.QueryInterface = typedActivationQueryInterfaceThunk
+    vtbl.base_.Release = typedActivationReleaseThunk
+    vtbl
+}
 
 func optionGuidEquals(value: Option<GUID>, expected: GUID): Bool {
     match (value) {
@@ -92,6 +182,42 @@ func testInterfaceDescriptorMatchesOwnAndAncestorIids() {
     @Expect(descriptor.matches(extraIid), true)
     @Expect(descriptor.matches(GUID_ZERO), false)
     @Expect(optionStringEquals(descriptor.descriptorDirectBaseName(), "IBase"), true)
+}
+
+@Test
+func testActivationFactoryTypedActivateUsesDescriptorQueryAndReleasesInspectable() {
+    resetTypedActivationTestState()
+    let factoryVtblHandle = unsafe { allocateNativeValue<IActivationFactoryVtbl>(typedActivationFactoryVtbl()) }
+    let factoryObjectHandle = unsafe { allocateNativeValue<CPointer<IActivationFactoryVtbl>>(factoryVtblHandle) }
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationRaw = CPointer<Unit>(objectHandle)
+    typedActivationProjectedRaw = CPointer<Unit>(objectHandle)
+
+    try {
+        let factory = IActivationFactory.viewOf(CPointer<Unit>(factoryObjectHandle))
+        let result = unsafe {
+            factory.activateInstance<TypedActivationTestInterface>(TypedActivationTestInterface.descriptor())
+        }
+        match (result) {
+            case Result<TypedActivationTestInterface>.Ok(value) =>
+                @Expect(value.asRaw().toUIntNative(), CPointer<Unit>(objectHandle).toUIntNative())
+                @Expect(typedActivationQueryCount.load(), 1)
+                @Expect(typedActivationReleaseCount.load(), 1)
+                value.close()
+                @Expect(typedActivationReleaseCount.load(), 2)
+            case Result<TypedActivationTestInterface>.Err(error) =>
+                throw Exception("typed activation failed: ${error}")
+        }
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+            freeNativeValue<CPointer<IActivationFactoryVtbl>>(factoryObjectHandle)
+            freeNativeValue<IActivationFactoryVtbl>(factoryVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
 }
 
 @Test

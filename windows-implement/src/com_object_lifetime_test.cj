@@ -118,7 +118,9 @@ func testComObjectIntoInterfaceKeepsOwnedQueryInterfaceReference() {
     let owned = owner.intoInterface(descriptor)
 
     @Expect(asInterfaceTakeFromAbiCount.load(), 1)
-    @Expect(owned.release(), 1u32)
+    @Expect(owner.isClosed(), true)
     @Expect(owner.runtime.isReferenceCountOne(), true)
+    @Expect(owned.release(), 0u32)
+    @Expect(owner.runtime.isDestroyed(), true)
     owner.close()
 }

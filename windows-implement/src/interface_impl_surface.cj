@@ -1,5 +1,6 @@
 package windows_implement
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.reflect.*
 import std.sync.AtomicBool
@@ -13,6 +14,17 @@ public let S_OK: Int32 = 0i32
 public let E_POINTER: Int32 = -2147467261i32
 public let E_NOINTERFACE: Int32 = -2147467262i32
 public let E_NOTIMPL: Int32 = -2147467263i32
+public let E_OUTOFMEMORY: Int32 = -2147024882i32
+
+func isSystemTearOffIid(iid: GUID): Bool {
+    iid == IID_IUNKNOWN ||
+        iid == IID_IINSPECTABLE ||
+        iid == IID_IAGILEOBJECT ||
+        iid == IID_IMARSHAL ||
+        iid == IID_IWEAKREFERENCE ||
+        iid == IID_IWEAKREFERENCESOURCE ||
+        iid == IID_IAGILEREFERENCE
+}
 
 public interface ComObjectBase {
     func addRefBase(): UInt32
@@ -315,8 +327,34 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             if (count.isNull() || values.isNull()) {
                 return E_POINTER
             }
-            count.write(0u32)
-            values.write(CPointer<GUID>())
+        }
+        let projected = ArrayList<GUID>()
+        for (iid in supportedIids) {
+            if (isSystemTearOffIid(iid)) {
+                continue
+            }
+            projected.add(iid)
+        }
+        unsafe {
+            if (projected.size == 0) {
+                count.write(0u32)
+                values.write(CPointer<GUID>())
+                return S_OK
+            }
+            let bytes = UIntNative(projected.size) * sizeOf<GUID>()
+            let buffer = CPointer<GUID>(CoTaskMemAlloc(bytes))
+            if (buffer.isNull()) {
+                count.write(0u32)
+                values.write(CPointer<GUID>())
+                return E_OUTOFMEMORY
+            }
+            var index: Int64 = 0
+            while (index < projected.size) {
+                (buffer + index).write(projected[index])
+                index += 1
+            }
+            count.write(UInt32(projected.size))
+            values.write(buffer)
         }
         S_OK
     }
@@ -587,9 +625,9 @@ func singleCustomVtblArray(
     Array<CPointer<Unit>>(1, { _ => vtblPtr })
 }
 
-func createInlineSlotHandle(vtables: Array<CPointer<Unit>>): CPointerHandle<CPointer<Unit>> {
+func createInlineSlotHandle(vtables: Array<CPointer<Unit>>): CPointer<CPointer<Unit>> {
     unsafe {
-        acquireArrayRawData(vtables)
+        windows_interface.allocateNativeArray<CPointer<Unit>>(vtables)
     }
 }
 
@@ -622,9 +660,9 @@ func applyRuntimeTypeFromDescriptors<T, I>(
 }
 
 public class ComObject<T> <: Resource {
-    private var slotHandle: Option<CPointerHandle<CPointer<Unit>>> = None
-    private var identityUnknownVtblHandle: Option<CPointerHandle<IUnknownVtbl>> = None
-    private var identityInspectableVtblHandle: Option<CPointerHandle<IInspectableVtbl>> = None
+    private var slotHandle: Option<CPointer<CPointer<Unit>>> = None
+    private var identityUnknownVtblHandle: Option<CPointer<IUnknownVtbl>> = None
+    private var identityInspectableVtblHandle: Option<CPointer<IInspectableVtbl>> = None
     private var rawView: CPointer<Unit> = CPointer<Unit>()
     private var closed: Bool = false
     public let runtime: ComObjectRuntime<T>
@@ -838,22 +876,22 @@ public class ComObject<T> <: Resource {
 
     private func ensureIdentityIUnknownVtblPtr(): CPointer<Unit> {
         match (identityUnknownVtblHandle) {
-            case Some(handle) => return CPointer<Unit>(handle.pointer)
+            case Some(handle) => return CPointer<Unit>(handle)
             case None => ()
         }
-        let handle = unsafe { acquireArrayRawData(Array<IUnknownVtbl>(1, { _ => buildIUnknownVtbl() })) }
+        let handle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(buildIUnknownVtbl()) }
         identityUnknownVtblHandle = Some(handle)
-        CPointer<Unit>(handle.pointer)
+        CPointer<Unit>(handle)
     }
 
     private func ensureIdentityIInspectableVtblPtr(): CPointer<Unit> {
         match (identityInspectableVtblHandle) {
-            case Some(handle) => return CPointer<Unit>(handle.pointer)
+            case Some(handle) => return CPointer<Unit>(handle)
             case None => ()
         }
-        let handle = unsafe { acquireArrayRawData(Array<IInspectableVtbl>(1, { _ => buildIInspectableVtbl() })) }
+        let handle = unsafe { windows_interface.allocateNativeValue<IInspectableVtbl>(buildIInspectableVtbl()) }
         identityInspectableVtblHandle = Some(handle)
-        CPointer<Unit>(handle.pointer)
+        CPointer<Unit>(handle)
     }
 
     private func defaultIdentityVtblPtr(supportedIids: Array<GUID>): CPointer<Unit> {
@@ -884,7 +922,7 @@ public class ComObject<T> <: Resource {
         slotHandle = Some(handle)
 
         let rawPointers = Array<CPointer<Unit>>(allVtables.size, { index =>
-            CPointer<Unit>(unsafe { handle.pointer + index })
+            CPointer<Unit>(unsafe { handle + index })
         })
         rawView = rawPointers[0]
         runtime.setIdentityPointer(rawPointers[0])
@@ -898,17 +936,17 @@ public class ComObject<T> <: Resource {
         runtime.setOnDestroy({ =>
             match (finalIdentityInspectableVtblHandle) {
                 case Some(vtblHandle) =>
-                    unsafe { releaseArrayRawData(vtblHandle) }
+                    unsafe { windows_interface.freeNativeValue(vtblHandle) }
                 case None => ()
             }
             match (finalIdentityUnknownVtblHandle) {
                 case Some(vtblHandle) =>
-                    unsafe { releaseArrayRawData(vtblHandle) }
+                    unsafe { windows_interface.freeNativeValue(vtblHandle) }
                 case None => ()
             }
             match (finalSlotHandle) {
                 case Some(inlineHandle) =>
-                    unsafe { releaseArrayRawData(inlineHandle) }
+                    unsafe { windows_interface.freeNativeValue(inlineHandle) }
                 case None => ()
             }
         })
@@ -919,7 +957,7 @@ public class ComObject<T> <: Resource {
             return rawView
         }
         match (slotHandle) {
-            case Some(handle) => CPointer<Unit>(handle.pointer)
+            case Some(handle) => CPointer<Unit>(handle)
             case None => CPointer<Unit>()
         }
     }
@@ -968,15 +1006,6 @@ public class ComObject<T> <: Resource {
         if (closed || runtime.isDestroyed()) {
             return
         }
-        let raw = if (rawView.isNotNull()) {
-            rawView
-        } else {
-            match (slotHandle) {
-                case Some(handle) => CPointer<Unit>(handle.pointer)
-                case None => CPointer<Unit>()
-            }
-        }
-        let _ = runtime.releaseBase(raw.toUIntNative())
         closed = true
     }
 
@@ -1048,7 +1077,9 @@ public class ComObject<T> <: Resource {
     }
 
     public func intoInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface {
-        toInterface(descriptor)
+        let value = toInterface(descriptor)
+        close()
+        value
     }
 }
 

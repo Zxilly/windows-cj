@@ -90,11 +90,14 @@ func isComDescriptor(iid: GUID, ancestorIids: Array<GUID>): Bool {
         containsGuid(ancestorIids, IID_IINSPECTABLE)
 }
 
-func builtInOwnMethodSlotCount(iid: GUID): Int64 {
-    if (iid == IID_IUNKNOWN) {
+func builtInOwnMethodSlotCount(schema: InterfaceDescriptorSchema): Int64 {
+    if (schema.methods.size > 0) {
+        return 0
+    }
+    if (schema.iid == IID_IUNKNOWN) {
         return 3
     }
-    if (iid == IID_IINSPECTABLE) {
+    if (schema.iid == IID_IINSPECTABLE) {
         return 3
     }
     0
@@ -152,7 +155,7 @@ func abiPrefixSlotCountForSchema(schema: InterfaceDescriptorSchema): Int64 {
 }
 
 func totalAbiSlotCountForSchema(schema: InterfaceDescriptorSchema): Int64 {
-    abiPrefixSlotCountForSchema(schema) + builtInOwnMethodSlotCount(schema.iid) + schema.methods.size
+    abiPrefixSlotCountForSchema(schema) + builtInOwnMethodSlotCount(schema) + schema.methods.size
 }
 
 func totalAbiSlotCountForDescriptorBase(base: InterfaceDescriptorBase): Int64 {

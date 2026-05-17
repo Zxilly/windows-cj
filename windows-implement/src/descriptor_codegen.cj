@@ -766,14 +766,14 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append(descriptor.vtableTypeName)
     sb.append("()\n\n")
 
-    sb.append("    public static let VTABLE_HANDLE: CPointerHandle<")
+    sb.append("    public static let VTABLE_HANDLE: CPointer<")
     sb.append(descriptor.vtableTypeName)
-    sb.append("> = unsafe { acquireArrayRawData(Array<")
+    sb.append("> = unsafe { windows_interface.allocateNativeValue<")
     sb.append(descriptor.vtableTypeName)
-    sb.append(">(1, { _ => VTABLE })) }\n\n")
+    sb.append(">(VTABLE) }\n\n")
 
     sb.append("    public static func vtablePtr(): CPointer<Unit> {\n")
-    sb.append("        CPointer<Unit>(VTABLE_HANDLE.pointer)\n")
+    sb.append("        CPointer<Unit>(VTABLE_HANDLE)\n")
     sb.append("    }\n\n")
 
     if (!descriptor.isComInterface) {
