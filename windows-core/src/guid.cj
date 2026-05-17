@@ -1,5 +1,6 @@
 package windows_core
 
+import windows_interface as windows_interface
 import windows_libloading as windows_libloading
 import windows_interface.GUID as RawGUID
 public import windows_interface.{GUID, GUID_ZERO, UInt128}

@@ -74,9 +74,9 @@ public class Owned<T> <: Resource where T <: Free & CloneResource<T> {
     }
 
     ~init() {
-        let (nextValue, nextClosed) = closeOwnedState(inner, closed)
-        inner = nextValue
-        closed = nextClosed
+        if (!closed) {
+            closed = true
+        }
     }
 
     public func close(): Unit {

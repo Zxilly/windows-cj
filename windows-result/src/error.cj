@@ -175,10 +175,15 @@ struct ErrorInfo {
         }
         match (ptr) {
             case Some(info) =>
-                if (HRESULT(setErrorInfoAbi(0u32, CPointer<Unit>(info.asRaw()))).failed()) {
-                    // SetErrorInfo failed, so it did not take over the reference count.
-                    // Close the wrapper instead of calling comReleaseRaw so the finalizer cannot release twice.
-                    info.close()
+                // Detach the raw pointer before calling SetErrorInfo so the ComHandle
+                // finalizer never releases it. SetErrorInfo takes ownership on success;
+                // on failure we must Release the detached raw to avoid a leak.
+                let raw = info.intoAbi()
+                if (raw.isNull()) {
+                    return
+                }
+                if (HRESULT(setErrorInfoAbi(0u32, CPointer<Unit>(raw))).failed()) {
+                    comReleaseRaw(raw)
                 }
             case None =>
                 ()

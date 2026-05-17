@@ -1,6 +1,6 @@
 package windows_strings
 
-import std.sync.{AtomicInt32, Mutex}
+import std.sync.{AtomicBool, AtomicInt32}
 
 public let HSTRING_REFERENCE_FLAG: UInt32 = 1u32
 public let HSTRING_FAST_PASS_FLAG: UInt32 = 0x10u32
@@ -26,14 +26,37 @@ public struct HStringHeader {
     public init() {}
 }
 
-// Global lock that serialises atomic-style access to the inline `count` field
-// of every HStringHeader. Cangjie does not expose a portable intrinsic for an
-// atomic load/store/CAS over a raw `CPointer<Int32>` slot, so we emulate the
-// semantics with a single mutex. Refcount mutations are short critical
-// sections so the contention impact is acceptable, while behaviour stays
-// correct under multi-threaded access from foreign callers.
-let hStringCountMutex = Mutex()
 let observedHStringFreeCount = AtomicInt32(0)
+
+class HStringStorage {
+    private let refCount = AtomicInt32(1)
+    private let released = AtomicBool(false)
+    private let header: CPointer<HStringHeader>
+
+    init(header: CPointer<HStringHeader>) {
+        this.header = header
+    }
+
+    func raw(): CPointer<Unit> {
+        CPointer<Unit>(header)
+    }
+
+    func retain(): HStringStorage {
+        refCount.fetchAdd(1)
+        this
+    }
+
+    func release(): Unit {
+        let oldCount = refCount.fetchSub(1)
+        if (oldCount <= 0) {
+            refCount.fetchAdd(1)
+            return
+        }
+        if (oldCount == 1 && released.compareAndSwap(false, true)) {
+            hStringFree(header)
+        }
+    }
+}
 
 public func debugObservedHStringFreeCount(): Int32 {
     observedHStringFreeCount.load()
@@ -87,17 +110,6 @@ func hStringFlags(handle: CPointer<Unit>): UInt32 {
 
 func hStringCountSlot(header: CPointer<HStringHeader>): CPointer<Int32> {
     unsafe { CPointer<Int32>(CPointer<UInt8>(header) + hStringCountOffset()) }
-}
-
-// Atomically apply `delta` to the in-header refcount, returning the new value.
-func adjustHStringCount(header: CPointer<HStringHeader>, delta: Int32): Int32 {
-    let slot = hStringCountSlot(header)
-    synchronized(hStringCountMutex) {
-        let current = unsafe { slot.read() }
-        let updated = current + delta
-        unsafe { slot.write(updated) }
-        return updated
-    }
 }
 
 public func hStringIsReferenceBacked(handle: CPointer<Unit>): Bool {
@@ -169,51 +181,9 @@ public func hStringFree(header: CPointer<HStringHeader>): Unit {
     heapFreeBytes(CPointer<Unit>(header))
 }
 
-public func hStringAddRef(handle: CPointer<Unit>): UInt32 {
-    if (handle.isNull()) {
-        return 0u32
-    }
-    if (hStringIsReferenceBacked(handle)) {
-        return 1u32
-    }
-
-    let header = hStringHeaderFromHandle(handle)
-    let updated = adjustHStringCount(header, 1i32)
-    if (updated <= 0) {
-        // Wrap-around or corruption: report previous value as zero rather than
-        // reinterpreting a negative count as a huge unsigned value.
-        return 0u32
-    }
-    UInt32(updated)
-}
-
-public func hStringRelease(handle: CPointer<Unit>): UInt32 {
-    if (handle.isNull()) {
-        return 0u32
-    }
-    if (hStringIsReferenceBacked(handle)) {
-        return 0u32
-    }
-
-    let header = hStringHeaderFromHandle(handle)
-    let updated = adjustHStringCount(header, -1i32)
-    if (updated < 0) {
-        // Over-release: clamp to zero so callers do not observe a wrapped
-        // value. The header is left in a non-positive state which downstream
-        // free paths can detect if they want to assert.
-        return 0u32
-    }
-    UInt32(updated)
-}
-
 public func hStringDuplicate(handle: CPointer<Unit>): CPointer<Unit> {
     if (handle.isNull()) {
         return CPointer<Unit>()
-    }
-
-    if (!hStringIsReferenceBacked(handle)) {
-        hStringAddRef(handle)
-        return handle
     }
 
     let len = Int64(hStringLength(handle))

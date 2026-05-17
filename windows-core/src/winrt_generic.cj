@@ -20,6 +20,11 @@ public interface CopyWinrtType<T> <: WinrtGenericType<T> where T <: CType {
 
 public interface HandleWinrtType<T> <: WinrtGenericType<T> where T <: HandleWinrtType<T> {
     static func intoWinrtHandle(value: T): CPointer<Unit>
+
+    static func intoOwnedWinrtHandle(value: T): CPointer<Unit> {
+        intoWinrtHandle(value)
+    }
+
     static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): T
     static func viewWinrtHandle(raw: CPointer<Unit>): T
 
@@ -171,7 +176,7 @@ func ownedWinrtOutHandle<T>(value: T): CPointer<Unit> where T <: HandleWinrtType
         case wrapper: InterfaceWrapperBase =>
             wrapper.retainRaw()
         case _ =>
-            T.intoWinrtHandle(value)
+            T.intoOwnedWinrtHandle(value)
     }
 }
 

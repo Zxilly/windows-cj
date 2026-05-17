@@ -25,6 +25,15 @@ func sysFreeString(ptr: CPointer<UInt16>): Unit {
     observedSysFreeStringCount.fetchAdd(1)
 }
 
+func releaseBstrStorageNoThrow(ptr: CPointer<UInt16>, ownsStorage: Bool, closed: Bool): Unit {
+    if (closed || !ownsStorage || ptr.isNull()) {
+        return
+    }
+    try {
+        sysFreeString(ptr)
+    } catch (_: Exception) {}
+}
+
 func allocateBstr(units: Array<UInt16>): CPointer<UInt16> {
     if (units.isEmpty()) {
         return CPointer<UInt16>()
@@ -44,14 +53,12 @@ func allocateBstr(units: Array<UInt16>): CPointer<UInt16> {
     }
 }
 
-func closeBstrState(
+func closeBstrStateNoThrow(
     ptr: CPointer<UInt16>,
     ownsStorage: Bool,
     closed: Bool
 ): (CPointer<UInt16>, Bool, Bool) {
-    if (!closed && ownsStorage && ptr.isNotNull()) {
-        sysFreeString(ptr)
-    }
+    releaseBstrStorageNoThrow(ptr, ownsStorage, closed)
     (CPointer<UInt16>(), false, true)
 }
 
@@ -67,11 +74,17 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         let units = encodeUtf16Units(s)
         ptr = allocateBstr(units)
         storageOwned = ptr.isNotNull()
+        if (storageOwned) {
+            ensureSysFreeStringAbiResolved()
+        }
     }
 
     init(ptr: CPointer<UInt16>, ownsStorage: Bool) {
         this.ptr = ptr
         this.storageOwned = ownsStorage
+        if (ownsStorage) {
+            ensureSysFreeStringAbiResolved()
+        }
     }
 
     public func length(): Int64 {
@@ -181,7 +194,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     ~init() {
-        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, storageOwned, closed)
+        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrStateNoThrow(ptr, storageOwned, closed)
         ptr = nextPtr
         storageOwned = nextOwnsStorage
         closed = nextClosed
@@ -192,7 +205,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     public func close(): Unit {
-        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, storageOwned, closed)
+        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrStateNoThrow(ptr, storageOwned, closed)
         ptr = nextPtr
         storageOwned = nextOwnsStorage
         closed = nextClosed

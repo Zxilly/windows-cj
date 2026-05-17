@@ -193,6 +193,15 @@ public struct HRESULT <: ToString & Hashable & Comparable<HRESULT> {
                     windows_libloading.freeLibrary(module)
                 }
             }
+            // Fall back to the system message table if ntdll could not be loaded
+            // or the NT-specific lookup returned nothing. FormatMessageW accepts
+            // a null module when FORMAT_MESSAGE_FROM_SYSTEM is set.
+            if (let Some(msg) <- formatWindowsMessage(
+                ntStatusCode,
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS
+            )) {
+                return msg
+            }
             return ""
         }
 

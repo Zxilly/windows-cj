@@ -125,6 +125,16 @@ public class ArrayProxy<T> <: Resource {
         publish(staged)
         closed = true
     }
+
+    ~init() {
+        // If the user never closed the proxy, do not invoke the publish callback —
+        // its capture (dataTarget/lengthTarget) may already be unreachable. Just
+        // clear the staged buffer so its CoTaskMem allocation is freed.
+        if (!closed) {
+            staged.clear()
+            closed = true
+        }
+    }
 }
 
 public unsafe func arrayProxy<T>(

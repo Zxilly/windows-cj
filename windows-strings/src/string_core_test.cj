@@ -26,17 +26,48 @@ func testHStringCloneAndBuilderRoundTrip() {
 
     builder.set(0, 0x41u16)
     builder.set(1, 0x42u16)
+    let built = builder.toHString()
 
     @Expect(source.get(), "Cangjie")
     @Expect(clone.get(), "Cangjie")
     @Expect(source == clone, true)
-    @Expect(builder.toHString().get(), "AB")
+    @Expect(built.get(), "AB")
 
+    built.close()
     clone.close()
     source.close()
     builder.close()
+    @Expect(built.isClosed(), true)
     @Expect(clone.isClosed(), true)
     @Expect(source.isClosed(), true)
+}
+
+@Test
+func testHStringCloseReleasesOwnedStorageOnce() {
+    let before = debugObservedHStringFreeCount()
+    let value = HString("owned")
+
+    value.close()
+    let afterClose = debugObservedHStringFreeCount()
+    value.close()
+
+    @Expect(afterClose, before + 1i32)
+    @Expect(debugObservedHStringFreeCount(), afterClose)
+    @Expect(value.isClosed(), true)
+}
+
+@Test
+func testHStringBuilderCloseReleasesOwnedStorageOnce() {
+    let before = debugObservedHStringFreeCount()
+    let builder = HStringBuilder(1)
+
+    builder.close()
+    let afterClose = debugObservedHStringFreeCount()
+    builder.close()
+
+    @Expect(afterClose, before + 1i32)
+    @Expect(debugObservedHStringFreeCount(), afterClose)
+    @Expect(builder.isClosed(), true)
 }
 
 @When[os == "Windows"]

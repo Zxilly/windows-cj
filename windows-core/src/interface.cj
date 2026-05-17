@@ -31,6 +31,18 @@ public interface Interface<T> <: InterfaceType & RuntimeType & Type<T, CPointer<
         value.asRaw()
     }
 
+    static func intoOwnedWinrtHandle(value: T): CPointer<Unit> {
+        match (value as InterfaceWrapperBase) {
+            case Some(wrapper) => wrapper.retainRaw()
+            case None =>
+                let raw = value.asRaw()
+                if (raw.isNull()) {
+                    return CPointer<Unit>()
+                }
+                throw IllegalStateException("Interface<T>.intoOwnedWinrtHandle requires an InterfaceWrapperBase value")
+        }
+    }
+
     static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): T {
         if (raw.isNull()) {
             throw WindowsException(E_POINTER)

@@ -72,3 +72,19 @@ func testBstrRawConstructorsExposeOwnershipSemantics() {
     view.close()
     owner.close()
 }
+
+@When[os == "Windows"]
+@Test
+func testBstrCloseReleasesOwnedStorageOnce() {
+    let before = debugObservedSysFreeStringCount()
+    let value = BSTR("owned")
+
+    value.close()
+    let afterClose = debugObservedSysFreeStringCount()
+    value.close()
+
+    @Expect(afterClose, before + 1i32)
+    @Expect(debugObservedSysFreeStringCount(), afterClose)
+    @Expect(value.isClosed(), true)
+    @Expect(value.ownsStorage(), false)
+}

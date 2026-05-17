@@ -150,6 +150,14 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
         length = 0u32
     }
 
+    ~init() {
+        if (data.isNotNull()) {
+            unsafe { CoTaskMemFree(CPointer<Unit>(data)) }
+            data = CPointer<T>()
+            length = 0u32
+        }
+    }
+
     public func rawOrNull(): CPointer<T> {
         data
     }
@@ -272,6 +280,13 @@ public class AbiArray<T> <: Resource {
     public func close(): Unit {
         if (!closed) {
             clear()
+            closed = true
+        }
+    }
+
+    ~init() {
+        if (!closed) {
+            storage.clear()
             closed = true
         }
     }

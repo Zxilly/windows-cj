@@ -14,11 +14,19 @@ public func debugObservedWindowsDeleteStringCount(): Int32 {
     observedWindowsDeleteStringCount.load()
 }
 
-func resolveKernel32Proc(name: String): CPointer<Unit> {
-    windows_libloading.resolveProc("kernel32.dll", name)
+@When[os != "Windows"]
+func ensureDynamicWin32CFuncAbiSupported(): Unit {}
+
+@When[os == "Windows" && arch == "x86_64"]
+func ensureDynamicWin32CFuncAbiSupported(): Unit {}
+
+@When[os == "Windows" && arch != "x86_64"]
+func ensureDynamicWin32CFuncAbiSupported(): Unit {
+    throw HStringAbiException("dynamic Win32 CFunc ABI is only supported on Windows x86_64")
 }
 
 func resolveOleaut32Proc(name: String): CPointer<Unit> {
+    ensureDynamicWin32CFuncAbiSupported()
     try {
         windows_libloading.resolveProc("oleaut32.dll", name)
     } catch (_: Exception) {
@@ -27,29 +35,29 @@ func resolveOleaut32Proc(name: String): CPointer<Unit> {
 }
 
 func resolveWinrtStringProc(name: String): CPointer<Unit> {
+    ensureDynamicWin32CFuncAbiSupported()
     windows_libloading.resolveProc("combase.dll", name)
 }
 
-func GetProcessHeap(): CPointer<Unit> {
-    let proc = CFunc<() -> CPointer<Unit>>(resolveKernel32Proc("GetProcessHeap"))
-    unsafe { proc() }
+@CallingConv[STDCALL]
+foreign {
+    func GetProcessHeap(): CPointer<Unit>
+    func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit>
+    func HeapFree(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32
 }
 
-func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UIntNative) -> CPointer<Unit>>(
-        resolveKernel32Proc("HeapAlloc")
-    )
-    unsafe { proc(hHeap, dwFlags, dwBytes) }
-}
+let sysFreeStringProc = windows_libloading.FinalizerSafeProc("oleaut32.dll", "SysFreeString")
 
-func HeapFree(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(
-        resolveKernel32Proc("HeapFree")
-    )
-    unsafe { proc(hHeap, dwFlags, lpMem) }
+func ensureSysFreeStringAbiResolved(): Unit {
+    try {
+        let _ = sysFreeStringProc.ensureResolved()
+    } catch (_: Exception) {
+        throw BStrAbiException("failed to resolve OleAut32 BSTR ABI")
+    }
 }
 
 func sysAllocStringLenAbi(ptr: CPointer<UInt16>, unitLength: UInt32): CPointer<UInt16> {
+    ensureSysFreeStringAbiResolved()
     let alloc = CFunc<(CPointer<UInt16>, UInt32) -> CPointer<UInt16>>(resolveOleaut32Proc("SysAllocStringLen"))
     unsafe {
         alloc(ptr, unitLength)
@@ -57,7 +65,11 @@ func sysAllocStringLenAbi(ptr: CPointer<UInt16>, unitLength: UInt32): CPointer<U
 }
 
 func sysFreeStringAbi(ptr: CPointer<UInt16>): Unit {
-    let freeFn = CFunc<(CPointer<UInt16>) -> Unit>(resolveOleaut32Proc("SysFreeString"))
+    let proc = sysFreeStringProc.rawIfResolvedForFinalizer()
+    if (proc.isNull()) {
+        throw BStrAbiException("SysFreeString ABI was not resolved before finalizer-safe release")
+    }
+    let freeFn = CFunc<(CPointer<UInt16>) -> Unit>(proc)
     unsafe {
         freeFn(ptr)
     }

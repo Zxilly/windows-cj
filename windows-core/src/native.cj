@@ -1,6 +1,5 @@
 package windows_core
 
-import windows_interface as windows_interface
 import windows_implement as windows_implement
 import windows_libloading as windows_libloading
 

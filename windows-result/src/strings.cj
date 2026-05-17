@@ -270,9 +270,9 @@ class HeapString <: Resource & ToString {
             unsafe {
                 HeapFree(GetProcessHeap(), 0u32, CPointer<Unit>(ptr))
             }
+            ptr = CPointer<UInt16>()
+            closed = true
         }
-        ptr = CPointer<UInt16>()
-        closed = true
     }
 
     public func close(): Unit {

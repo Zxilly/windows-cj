@@ -1,5 +1,6 @@
 package windows_core
 
+import windows_interface as windows_interface
 import windows_implement.{ComBox, comRegistryInsert, comRegistryLookup, comRegistryRemove}
 
 extend IMarshal <: Interface<IMarshal> {}
@@ -8,8 +9,8 @@ class AggregatedMarshalerState {
     private let outer: IUnknown
     private let innerMarshaler: IMarshal
     private let count = RefCount()
-    private let vtblHandle: CPointerHandle<IMarshalVtbl>
-    private let slotHandle: CPointerHandle<ComBox>
+    private let vtblHandle: CPointer<IMarshalVtbl>
+    private let slotHandle: CPointer<ComBox>
     private let rawPointer: CPointer<Unit>
     private var registered: Bool = false
 
@@ -17,16 +18,15 @@ class AggregatedMarshalerState {
         this.outer = outer
         this.innerMarshaler = innerMarshaler
 
-        let vtblArray = Array<IMarshalVtbl>(1, { _ => buildAggregatedMarshalerVtbl() })
-        vtblHandle = unsafe { acquireArrayRawData(vtblArray) }
+        vtblHandle = unsafe { windows_interface.allocateNativeValue<IMarshalVtbl>(buildAggregatedMarshalerVtbl()) }
 
-        let rawVtbl = CPointer<Unit>(vtblHandle.pointer)
+        let rawVtbl = CPointer<Unit>(vtblHandle)
         let slots = Array<ComBox>(1, { _ => ComBox(rawVtbl, rootOffset: 0, slotIndex: 0, slotCount: 1) })
-        slotHandle = unsafe { acquireArrayRawData(slots) }
-        rawPointer = CPointer<Unit>(slotHandle.pointer)
+        slotHandle = unsafe { windows_interface.allocateNativeArray<ComBox>(slots) }
+        rawPointer = CPointer<Unit>(slotHandle)
 
         unsafe {
-            let slotPtr = slotHandle.pointer
+            let slotPtr = slotHandle
             var slot = slotPtr.read()
             slot.rootOffset = 0
             slot.slotIndex = 0
@@ -159,8 +159,8 @@ class AggregatedMarshalerState {
         }
         innerMarshaler.close()
         outer.close()
-        unsafe { releaseArrayRawData(slotHandle) }
-        unsafe { releaseArrayRawData(vtblHandle) }
+        unsafe { windows_interface.freeNativeValue(slotHandle) }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
     }
 }
 

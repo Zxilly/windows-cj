@@ -1,5 +1,6 @@
 package windows_core
 
+import windows_interface as windows_interface
 import std.collection.HashMap
 import std.sync.*
 import windows_result.Result
@@ -63,7 +64,9 @@ class LocalAggregatedMarshalerHandle <: Resource {
         if (closed) {
             return
         }
-        wrapper.close()
+        // IMarshal.close may call COM Release and re-enter synchronized local
+        // registry code. Finalizers only mark the handle closed; Resource
+        // owners must close deterministic COM references explicitly.
         closed = true
     }
 }
@@ -175,9 +178,9 @@ func getOrCreateWeakReferenceTearOff(ownerRaw: CPointer<Unit>): LocalWeakReferen
 }
 
 class LocalWeakReferenceTearOff {
-    private let strongVtblHandle: CPointerHandle<IWeakReferenceSourceVtbl>
-    private let weakVtblHandle: CPointerHandle<IWeakReferenceVtbl>
-    private let slotHandle: CPointerHandle<ComBox>
+    private let strongVtblHandle: CPointer<IWeakReferenceSourceVtbl>
+    private let weakVtblHandle: CPointer<IWeakReferenceVtbl>
+    private let slotHandle: CPointer<ComBox>
     private let strongCount = AtomicInt64(0)
     private let weakCount = AtomicInt64(1)
     private let rootKeyValue: UIntNative
@@ -193,13 +196,15 @@ class LocalWeakReferenceTearOff {
         this.ownerKeyValue = ownerKey
         this.alive = ownerRaw.isNotNull()
 
-        let strongVtblArray = Array<IWeakReferenceSourceVtbl>(1, { _ => buildLocalIWeakReferenceSourceVtbl() })
-        let weakVtblArray = Array<IWeakReferenceVtbl>(1, { _ => buildLocalIWeakReferenceVtbl() })
-        strongVtblHandle = unsafe { acquireArrayRawData(strongVtblArray) }
-        weakVtblHandle = unsafe { acquireArrayRawData(weakVtblArray) }
+        strongVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IWeakReferenceSourceVtbl>(buildLocalIWeakReferenceSourceVtbl())
+        }
+        weakVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IWeakReferenceVtbl>(buildLocalIWeakReferenceVtbl())
+        }
 
-        let strongRaw = CPointer<Unit>(strongVtblHandle.pointer)
-        let weakRaw = CPointer<Unit>(weakVtblHandle.pointer)
+        let strongRaw = CPointer<Unit>(strongVtblHandle)
+        let weakRaw = CPointer<Unit>(weakVtblHandle)
         let slots = Array<ComBox>(2, { index =>
             if (index == 0) {
                 ComBox(strongRaw, rootOffset: 0, slotIndex: 0, slotCount: 2)
@@ -207,19 +212,19 @@ class LocalWeakReferenceTearOff {
                 ComBox(weakRaw, rootOffset: 1, slotIndex: 1, slotCount: 2)
             }
         })
-        slotHandle = unsafe { acquireArrayRawData(slots) }
+        slotHandle = unsafe { windows_interface.allocateNativeArray<ComBox>(slots) }
 
-        rootKeyValue = CPointer<Unit>(slotHandle.pointer).toUIntNative()
-        weakKeyValue = CPointer<Unit>(unsafe { slotHandle.pointer + 1 }).toUIntNative()
+        rootKeyValue = CPointer<Unit>(slotHandle).toUIntNative()
+        weakKeyValue = CPointer<Unit>(unsafe { slotHandle + 1 }).toUIntNative()
 
         unsafe {
-            let strongSlotPtr = slotHandle.pointer
+            let strongSlotPtr = slotHandle
             var strongSlot = strongSlotPtr.read()
             strongSlot.rootOffset = 0
             strongSlot.rootKey = rootKeyValue
             strongSlotPtr.write(strongSlot)
 
-            let weakSlotPtr = slotHandle.pointer + 1
+            let weakSlotPtr = slotHandle + 1
             var weakSlot = weakSlotPtr.read()
             weakSlot.rootOffset = 1
             weakSlot.rootKey = rootKeyValue
@@ -237,11 +242,11 @@ class LocalWeakReferenceTearOff {
     }
 
     public func strongRaw(): CPointer<Unit> {
-        CPointer<Unit>(slotHandle.pointer)
+        CPointer<Unit>(slotHandle)
     }
 
     public func weakRaw(): CPointer<Unit> {
-        CPointer<Unit>(unsafe { slotHandle.pointer + 1 })
+        CPointer<Unit>(unsafe { slotHandle + 1 })
     }
 
     public func writeStrongReference(resultSlot: CPointer<CPointer<Unit>>): Int32 {
@@ -444,9 +449,9 @@ class LocalWeakReferenceTearOff {
             comSlotRegistryRemove(weakKeyValue)
             comRegistryRemove(rootKeyValue)
             registered = false
-            unsafe { releaseArrayRawData(slotHandle) }
-            unsafe { releaseArrayRawData(weakVtblHandle) }
-            unsafe { releaseArrayRawData(strongVtblHandle) }
+            unsafe { windows_interface.freeNativeValue(slotHandle) }
+            unsafe { windows_interface.freeNativeValue(weakVtblHandle) }
+            unsafe { windows_interface.freeNativeValue(strongVtblHandle) }
         }
     }
 }
@@ -782,10 +787,8 @@ public class TearOff<T> <: Resource where T <: ComInterface {
         if (closed) {
             return
         }
-        match (weakReference) {
-            case Some(reference) => reference.close()
-            case None => ()
-        }
+        // IWeakReference.close may call COM Release and re-enter synchronized
+        // local registry code, which is not finalizer-safe.
         closed = true
     }
 }

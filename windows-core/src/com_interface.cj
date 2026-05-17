@@ -1,5 +1,6 @@
 package windows_core
 
+import windows_interface as windows_interface
 // Intentional public compatibility surface for COM interface APIs that now live
 // in windows_interface. Keep these re-exports so existing windows_core users do
 // not need to change imports while the implementation remains split.

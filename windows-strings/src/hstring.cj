@@ -1,24 +1,39 @@
 package windows_strings
 
-func closeHStringState(handle: CPointer<Unit>, closed: Bool): (CPointer<Unit>, Bool) {
-    if (!closed && handle.isNotNull()) {
-        // Reference-backed (fast-pass) strings are not heap-managed here; skip free.
-        if (!hStringIsReferenceBacked(handle)) {
-            if (hStringRelease(handle) == 0u32) {
-                hStringFree(hStringHeaderFromHandle(handle))
-            }
-        }
+func releaseHStringStorageNoThrow(storage: ?HStringStorage, closed: Bool): Unit {
+    if (closed) {
+        return
     }
-    (CPointer<Unit>(), true)
+    try {
+        match (storage) {
+            case Some(value) => value.release()
+            case None => ()
+        }
+    } catch (_: Exception) {}
 }
 
-func closeHStringBuilderState(
+func closeHStringStateNoThrow(
+    storage: ?HStringStorage,
+    closed: Bool
+): (?HStringStorage, CPointer<Unit>, Bool) {
+    releaseHStringStorageNoThrow(storage, closed)
+    (None, CPointer<Unit>(), true)
+}
+
+func releaseHStringBuilderNoThrow(header: CPointer<HStringHeader>, closed: Bool): Unit {
+    if (closed || header.isNull()) {
+        return
+    }
+    try {
+        hStringFree(header)
+    } catch (_: Exception) {}
+}
+
+func closeHStringBuilderStateNoThrow(
     header: CPointer<HStringHeader>,
     closed: Bool
 ): (CPointer<HStringHeader>, Int64, Bool) {
-    if (!closed && header.isNotNull()) {
-        hStringFree(header)
-    }
+    releaseHStringBuilderNoThrow(header, closed)
     (CPointer<HStringHeader>(), 0, true)
 }
 
@@ -28,16 +43,33 @@ func closeHStringBuilderState(
 /// header and UTF-16 buffer in a single heap allocation.
 public class HString <: Resource & Equatable<HString> & ToString & Hashable & Comparable<HString> {
     private var handle: CPointer<Unit> = CPointer<Unit>()
+    private var storage: ?HStringStorage = None
     private var closed: Bool = false
 
     public init() {}
 
     public init(s: String) {
-        handle = CPointer<Unit>(hStringAllocFromWide(encodeUtf16Units(s)))
+        initOwnedHeader(hStringAllocFromWide(encodeUtf16Units(s)))
     }
 
     init(handle: CPointer<Unit>) {
-        this.handle = handle
+        initOwnedHeader(hStringHeaderFromHandle(handle))
+    }
+
+    init(storage: HStringStorage) {
+        this.storage = Some(storage)
+        this.handle = storage.raw()
+    }
+
+    private func initOwnedHeader(header: CPointer<HStringHeader>): Unit {
+        if (header.isNull()) {
+            handle = CPointer<Unit>()
+            storage = None
+            return
+        }
+        let value = HStringStorage(header)
+        storage = Some(value)
+        handle = value.raw()
     }
 
     public static func default(): HString {
@@ -182,7 +214,10 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
         if (closed || handle.isNull()) {
             return HString()
         }
-        HString(hStringDuplicate(handle))
+        match (storage) {
+            case Some(value) => HString(value.retain())
+            case None => HString(hStringDuplicate(handle))
+        }
     }
 
     public func isReferenceBacked(): Bool {
@@ -194,20 +229,27 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
     }
 
     ~init() {
-        let (nextHandle, nextClosed) = closeHStringState(handle, closed)
+        let (nextStorage, nextHandle, nextClosed) = closeHStringStateNoThrow(storage, closed)
+        storage = nextStorage
         handle = nextHandle
         closed = nextClosed
     }
 
     public func intoRaw(): CPointer<Unit> {
-        let raw = handle
-        handle = CPointer<Unit>()
-        closed = true
+        if (closed || handle.isNull()) {
+            return CPointer<Unit>()
+        }
+        let raw = hStringDuplicate(handle)
+        let (nextStorage, nextHandle, nextClosed) = closeHStringStateNoThrow(storage, closed)
+        storage = nextStorage
+        handle = nextHandle
+        closed = nextClosed
         raw
     }
 
     public func close(): Unit {
-        let (nextHandle, nextClosed) = closeHStringState(handle, closed)
+        let (nextStorage, nextHandle, nextClosed) = closeHStringStateNoThrow(storage, closed)
+        storage = nextStorage
         handle = nextHandle
         closed = nextClosed
     }
@@ -437,14 +479,14 @@ public class HStringBuilder <: Resource {
     }
 
     ~init() {
-        let (nextHeader, nextLogicalLen, nextClosed) = closeHStringBuilderState(header, closed)
+        let (nextHeader, nextLogicalLen, nextClosed) = closeHStringBuilderStateNoThrow(header, closed)
         header = nextHeader
         logicalLen = nextLogicalLen
         closed = nextClosed
     }
 
     public func close(): Unit {
-        let (nextHeader, nextLogicalLen, nextClosed) = closeHStringBuilderState(header, closed)
+        let (nextHeader, nextLogicalLen, nextClosed) = closeHStringBuilderStateNoThrow(header, closed)
         header = nextHeader
         logicalLen = nextLogicalLen
         closed = nextClosed
