@@ -52,6 +52,24 @@ private func isInvalidHandle(handle: HANDLE): Bool {
     handle.Value.isNull() || handle.Value.toUIntNative() == INVALID_HANDLE_VALUE.Value.toUIntNative()
 }
 
+private func closeHandleNoThrow(handle: HANDLE): Unit {
+    if (isInvalidHandle(handle)) {
+        return
+    }
+    try {
+        let _ = Win32Foundation.CloseHandle(handle)
+    } catch (_: Exception) {}
+}
+
+private func closeRegistryKeyNoThrow(handle: HKEY): Unit {
+    if (handle.Value.isNull()) {
+        return
+    }
+    try {
+        let _ = Win32Registry.RegCloseKey(handle)
+    } catch (_: Exception) {}
+}
+
 private func win32Result(status: UInt32): Result<Unit> {
     if (status == 0u32) {
         return Result<Unit>.Ok(())
@@ -200,7 +218,14 @@ private func encodeMultiStringBytes(values: Array<String>): Array<UInt8> {
 }
 
 private func decodeRegistryString(bytes: Array<UInt8>): Result<String> {
-    Result<String>.Ok(decodeUtf16(trimTrailingWideNulls(bytesToWideUnits(bytes))))
+    if ((Int64(bytes.size) % 2) != 0) {
+        return Result<String>.Err(invalidDataError())
+    }
+
+    match (tryDecodeUtf16(trimTrailingWideNulls(bytesToWideUnits(bytes)))) {
+        case Some(value) => Result<String>.Ok(value)
+        case None => Result<String>.Err(invalidDataError())
+    }
 }
 
 private func decodeRegistryMultiString(bytes: Array<UInt8>): Array<String> {
@@ -523,10 +548,8 @@ public class Transaction <: Resource {
         if (closed) {
             return
         }
+        closeHandleNoThrow(handle)
         closed = true
-        if (!isInvalidHandle(handle)) {
-            let _ = Win32Foundation.CloseHandle(handle)
-        }
         handle = HANDLE()
     }
 
@@ -534,10 +557,8 @@ public class Transaction <: Resource {
         if (closed) {
             return
         }
+        closeHandleNoThrow(handle)
         closed = true
-        if (!isInvalidHandle(handle)) {
-            let _ = Win32Foundation.CloseHandle(handle)
-        }
         handle = HANDLE()
     }
 }
@@ -870,8 +891,53 @@ public class Key <: Resource {
     }
 
     public func getHString(name: String): Result<HString> {
-        getValue(name).andThen { value =>
-            value.toHString()
+        withWideString(name) { namePtr =>
+            getHStringRaw(namePtr)
+        }
+    }
+
+    private func getHStringRaw(namePtr: PWSTR): Result<HString> {
+        let infoResult = rawGetInfo(namePtr)
+        var ty = Type.U32
+        var byteLen: Int64 = 0
+        match (infoResult) {
+            case Result<(Type, Int64)>.Ok((t, l)) =>
+                ty = t
+                byteLen = l
+            case Result<(Type, Int64)>.Err(error) =>
+                return Result<HString>.Err(error)
+        }
+        match (ty) {
+            case Type.String => ()
+            case Type.ExpandString => ()
+            case _ => return Result<HString>.Err(invalidDataError())
+        }
+        if ((byteLen % 2) != 0) {
+            return Result<HString>.Err(invalidDataError())
+        }
+        let unitLen = byteLen / 2
+        let builder = HStringBuilder(unitLen)
+        if (unitLen == 0) {
+            return Result<HString>.Ok(builder.intoHString())
+        }
+        let header = unsafe { CPointer<HStringHeader>(builder.asRaw()) }
+        let bytePtr = unsafe { CPointer<UInt8>(hStringHeaderInlineBuffer(header)) }
+        var ty2 = 0u32
+        var lenIo = UInt32(byteLen)
+        let status = Win32Registry.RegQueryValueExW(
+            handleForCalls(),
+            namePtr,
+            CPointer<UInt32>(inout ty2),
+            bytePtr,
+            CPointer<UInt32>(inout lenIo)
+        )
+        match (win32Result(status)) {
+            case Result<Unit>.Ok(_) =>
+                builder.trimEnd()
+                Result<HString>.Ok(builder.intoHString())
+            case Result<Unit>.Err(error) =>
+                builder.close()
+                Result<HString>.Err(error)
         }
     }
 
@@ -910,21 +976,13 @@ public class Key <: Resource {
         var ty = 0u32
         var length = UInt32(value.size)
         let status = if (value.isEmpty()) {
-            unsafe {
-                let emptyBuffer = Array<UInt8>(1, repeat: 0u8)
-                let valueHandle = acquireArrayRawData(emptyBuffer)
-                try {
-                    Win32Registry.RegQueryValueExW(
-                        handleForCalls(),
-                        name,
-                        CPointer<UInt32>(inout ty),
-                        valueHandle.pointer,
-                        CPointer<UInt32>(inout length)
-                    )
-                } finally {
-                    releaseArrayRawData(valueHandle)
-                }
-            }
+            Win32Registry.RegQueryValueExW(
+                handleForCalls(),
+                name,
+                CPointer<UInt32>(inout ty),
+                CPointer<UInt8>(),
+                CPointer<UInt32>(inout length)
+            )
         } else {
             unsafe {
                 let valueHandle = acquireArrayRawData(value)
@@ -953,10 +1011,8 @@ public class Key <: Resource {
         if (!ownsHandle || closed) {
             return
         }
+        closeRegistryKeyNoThrow(handle)
         closed = true
-        if (handle.Value.isNotNull()) {
-            let _ = Win32Registry.RegCloseKey(handle)
-        }
         handle = HKEY()
     }
 
@@ -964,10 +1020,8 @@ public class Key <: Resource {
         if (!ownsHandle || closed) {
             return
         }
+        closeRegistryKeyNoThrow(handle)
         closed = true
-        if (handle.Value.isNotNull()) {
-            let _ = Win32Registry.RegCloseKey(handle)
-        }
         handle = HKEY()
     }
 }
@@ -981,8 +1035,7 @@ public class KeyIterator <: Iterator<String> {
     init(key: Key, count: UInt32, maxNameLen: UInt32) {
         this.key_ = key
         this.count_ = count
-        let length = if (maxNameLen == 0u32) { 1 } else { Int64(maxNameLen) }
-        this.nameBuffer = Array<UInt16>(length, repeat: 0u16)
+        this.nameBuffer = Array<UInt16>(Int64(maxNameLen), repeat: 0u16)
     }
 
     public func next(): Option<String> {
@@ -1010,13 +1063,11 @@ public class KeyIterator <: Iterator<String> {
             index = count_
             return None
         }
-        match (win32Result(status)) {
-            case Result<Unit>.Ok(_) =>
-                index += 1u32
-                Some(decodeUtf16(copyWideArray(nameBuffer, length: Int64(nameLength))))
-            case Result<Unit>.Err(error) =>
-                throw WindowsException(error)
+        if (status == 0u32) {
+            index += 1u32
+            return Some(decodeUtf16(copyWideArray(nameBuffer, length: Int64(nameLength))))
         }
+        throw Win32Exception(status)
     }
 }
 
@@ -1030,8 +1081,7 @@ public class ValueIterator <: Iterator<(String, Value)> {
     init(key: Key, count: UInt32, maxNameLen: UInt32, maxValueLen: UInt32) {
         this.key_ = key
         this.count_ = count
-        let nameLength = if (maxNameLen == 0u32) { 1 } else { Int64(maxNameLen) }
-        this.nameBuffer = Array<UInt16>(nameLength, repeat: 0u16)
+        this.nameBuffer = Array<UInt16>(Int64(maxNameLen), repeat: 0u16)
         this.dataBuffer = Array<UInt8>(Int64(maxValueLen), repeat: 0u8)
     }
 
@@ -1079,15 +1129,13 @@ public class ValueIterator <: Iterator<(String, Value)> {
             index = count_
             return None
         }
-        match (win32Result(status)) {
-            case Result<Unit>.Ok(_) =>
-                index += 1u32
-                let name = decodeUtf16(copyWideArray(nameBuffer, length: Int64(nameLength)))
-                let value = Value(sliceBytes(dataBuffer, Int64(dataLength)), Type.fromRaw(ty))
-                Some((name, value))
-            case Result<Unit>.Err(error) =>
-                throw WindowsException(error)
+        if (status == 0u32) {
+            index += 1u32
+            let name = decodeUtf16(copyWideArray(nameBuffer, length: Int64(nameLength)))
+            let value = Value(sliceBytes(dataBuffer, Int64(dataLength)), Type.fromRaw(ty))
+            return Some((name, value))
         }
+        throw Win32Exception(status)
     }
 }
 
