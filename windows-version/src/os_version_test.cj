@@ -20,3 +20,18 @@ func testOsVersionComparisonAndFormatting() {
 func testOsVersionInfoAbiComesFromWindowsCommon() {
     @Expect(sizeOf<OSVERSIONINFOEXW>(), UIntNative(284))
 }
+
+@When[os == "Windows"]
+@Test
+func testCurrentOsVersionUsesWindowsVersionInfoSmoke() {
+    let raw = readVersionInfo()
+    let current = OsVersion.current()
+
+    @Expect(raw.dwOSVersionInfoSize, UInt32(sizeOf<OSVERSIONINFOEXW>()))
+    @Expect(current.major, raw.dwMajorVersion)
+    @Expect(current.minor, raw.dwMinorVersion)
+    @Expect(current.pack, UInt32(raw.wServicePackMajor))
+    @Expect(current.build, raw.dwBuildNumber)
+    @Expect(current.major >= 6u32, true)
+    @Expect(current.toString().isEmpty(), false)
+}

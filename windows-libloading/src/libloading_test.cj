@@ -31,3 +31,29 @@ func testLoadLibraryAndResolveProcCacheStablePointers() {
 func testResolveProcReportsMissingSymbol() {
     @Expect(testThrows({ => let _ = resolveProc("kernel32.dll", "__missing_windows_cj_symbol__") }), true)
 }
+
+@When[os == "Windows"]
+@Test
+func testFinalizerSafeProcUsesExplicitPreResolveStep() {
+    let proc = FinalizerSafeProc("kernel32.dll", "GetCurrentThreadId")
+
+    @Expect(proc.rawIfResolvedForFinalizer().isNull(), true)
+
+    let resolved = proc.ensureResolved()
+    let cached = proc.rawIfResolvedForFinalizer()
+    let ordinary = resolveProc("kernel32.dll", "GetCurrentThreadId")
+
+    @Expect(resolved.isNotNull(), true)
+    @Expect(cached.toUIntNative(), resolved.toUIntNative())
+    @Expect(cached.toUIntNative(), ordinary.toUIntNative())
+    @Expect(proc.ensureResolved().toUIntNative(), resolved.toUIntNative())
+}
+
+@When[os == "Windows"]
+@Test
+func testFinalizerSafeProcMissDoesNotPublishRawPointer() {
+    let proc = FinalizerSafeProc("kernel32.dll", "__missing_windows_cj_symbol__")
+
+    @Expect(testThrows({ => let _ = proc.ensureResolved() }), true)
+    @Expect(proc.rawIfResolvedForFinalizer().isNull(), true)
+}

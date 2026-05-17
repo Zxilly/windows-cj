@@ -4,7 +4,6 @@ import std.collection.ArrayList
 import windows_common.Foundation.{EventRegistrationToken}
 import windows_common.Microsoft.UI.Xaml.{
     Application,
-    ApplicationInitializationCallback,
     IFrameworkElement,
     IFrameworkElementVtbl,
     IApplicationStatics,
@@ -26,6 +25,7 @@ import windows_core.{
     HString,
     HRESULT,
     IInspectableVtbl,
+    IUnknownVtbl,
     IID_IUNKNOWN,
     IUnknown,
     Result,
@@ -37,8 +37,24 @@ import windows_core.{
     winrtBorrowGenericIn
 }
 
+let IID_APPLICATION_INITIALIZATION_CALLBACK = GUID.from_values(3639538121u32, 4660u16, 22257u16, 153u8, 99u8, 69u8, 221u8, 156u8, 128u8, 166u8, 97u8)
 let IID_BUTTON_BASE = GUID.from_values(1701921385u32, 9331u16, 21287u16, 166u8, 82u8, 14u8, 166u8, 188u8, 231u8, 244u8, 3u8)
 let IID_ROUTED_EVENT_HANDLER = GUID.from_values(3672259973u32, 27082u16, 23519u16, 128u8, 91u8, 97u8, 97u8, 163u8, 162u8, 21u8, 204u8)
+
+@C
+struct ApplicationInitializationCallbackVtbl {
+    public var base_: IUnknownVtbl = IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public init() {}
+}
+
+@C
+struct ApplicationInitializationCallbackObject {
+    public var vtbl: CPointer<ApplicationInitializationCallbackVtbl> = CPointer<ApplicationInitializationCallbackVtbl>()
+    public var refCount: UInt32 = 1u32
+    public var slot: Int64 = -1
+    public init() {}
+}
 
 @C
 struct ButtonBaseVtbl {
@@ -107,24 +123,99 @@ struct RoutedEventHandlerObject {
     public init() {}
 }
 
-var activeApplicationInitializationCallbackHandler: () -> Unit = { => () }
+var applicationInitializationCallbackVtblStorage: CPointer<ApplicationInitializationCallbackVtbl> = CPointer<ApplicationInitializationCallbackVtbl>()
+var applicationInitializationCallbackSlots: ArrayList<Option<() -> Unit>> = ArrayList<Option<() -> Unit>>()
 var routedEventHandlerVtblStorage: CPointer<RoutedEventHandlerVtbl> = CPointer<RoutedEventHandlerVtbl>()
 var routedEventHandlerSlots: ArrayList<Option<() -> Unit>> = ArrayList<Option<() -> Unit>>()
 
+func closeApplicationCallbackStateNoThrow(
+    rawObject: CPointer<Unit>,
+    slot: Int64,
+    closed: Bool
+): (CPointer<Unit>, Int64, Bool) {
+    if (!closed) {
+        let raw = rawObject
+        if (slot >= 0) {
+            try {
+                clearApplicationInitializationCallbackSlot(slot)
+            } catch (_: Exception) {
+                ()
+            }
+        }
+        if (raw.isNotNull()) {
+            try {
+                deactivateApplicationInitializationCallbackObject(raw)
+                let _ = unsafe { applicationInitializationCallbackRelease(raw) }
+            } catch (_: Exception) {
+                ()
+            }
+        }
+    }
+    return (CPointer<Unit>(), -1, true)
+}
+
+func closeWinuiRawStateNoThrow(raw: CPointer<Unit>, closed: Bool): (CPointer<Unit>, Bool) {
+    if (!closed && raw.isNotNull()) {
+        try {
+            releaseRaw(raw)
+        } catch (_: Exception) {
+            ()
+        }
+    }
+    return (CPointer<Unit>(), true)
+}
+
+func closeRoutedEventHandlerStateNoThrow(
+    rawObject: CPointer<Unit>,
+    slot: Int64,
+    closed: Bool
+): (CPointer<Unit>, Int64, Bool) {
+    if (!closed) {
+        if (slot >= 0) {
+            try {
+                clearRoutedEventHandlerSlot(slot)
+            } catch (_: Exception) {
+                ()
+            }
+        }
+        if (rawObject.isNotNull()) {
+            try {
+                deactivateRoutedEventHandlerObject(rawObject)
+                let _ = unsafe { routedEventHandlerRelease(rawObject) }
+            } catch (_: Exception) {
+                ()
+            }
+        }
+    }
+    return (CPointer<Unit>(), -1, true)
+}
+
 public class ApplicationCallback <: Resource {
-    private var callback: Option<ApplicationInitializationCallback> = None
+    private var rawObject: CPointer<Unit> = CPointer<Unit>()
+    private var slot: Int64 = -1
     private var closed: Bool = false
 
     public init(handler: () -> Unit) {
-        activeApplicationInitializationCallbackHandler = handler
-        callback = Some(applicationInitializationCallbackThunk)
+        slot = addApplicationInitializationCallbackSlot(handler)
+        let raw = coTaskMemAlloc(sizeOf<ApplicationInitializationCallbackObject>())
+        if (raw.isNull()) {
+            clearApplicationInitializationCallbackSlot(slot)
+            throw Exception("failed to allocate ApplicationInitializationCallback object")
+        }
+        var object = ApplicationInitializationCallbackObject()
+        object.vtbl = applicationInitializationCallbackVtbl()
+        object.refCount = 1u32
+        object.slot = slot
+        let typed = CPointer<ApplicationInitializationCallbackObject>(raw)
+        unsafe { typed.write(object) }
+        rawObject = raw
     }
 
-    public func value(): ApplicationInitializationCallback {
-        match (callback) {
-            case Some(value) => return value
-            case None => throw Exception("ApplicationInitializationCallback is closed")
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
         }
+        rawObject
     }
 
     public func isClosed(): Bool {
@@ -132,19 +223,17 @@ public class ApplicationCallback <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            callback = None
-            activeApplicationInitializationCallbackHandler = { => () }
-            closed = true
-        }
+        let (nextRawObject, nextSlot, nextClosed) = closeApplicationCallbackStateNoThrow(rawObject, slot, closed)
+        rawObject = nextRawObject
+        slot = nextSlot
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            callback = None
-            activeApplicationInitializationCallbackHandler = { => () }
-            closed = true
-        }
+        let (nextRawObject, nextSlot, nextClosed) = closeApplicationCallbackStateNoThrow(rawObject, slot, closed)
+        rawObject = nextRawObject
+        slot = nextSlot
+        closed = nextClosed
     }
 }
 
@@ -225,25 +314,17 @@ public class WindowHandle <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            valueObject = None
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        valueObject = None
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            valueObject = None
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        valueObject = None
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 }
 
@@ -322,25 +403,17 @@ public class UIElementHandle <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            valueObject = None
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        valueObject = None
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            valueObject = None
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        valueObject = None
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 }
 
@@ -371,23 +444,15 @@ public class XamlObjectHandle <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 }
 
@@ -419,23 +484,15 @@ public class ButtonBaseHandle <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            if (raw.isNotNull()) {
-                releaseRaw(raw)
-                raw = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        raw = nextRaw
+        closed = nextClosed
     }
 }
 
@@ -472,27 +529,17 @@ class RoutedEventHandlerHandle <: Resource {
     }
 
     public func close(): Unit {
-        if (!closed) {
-            clearRoutedEventHandlerSlot(slot)
-            slot = -1
-            if (rawObject.isNotNull()) {
-                coTaskMemFree(rawObject)
-                rawObject = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRawObject, nextSlot, nextClosed) = closeRoutedEventHandlerStateNoThrow(rawObject, slot, closed)
+        rawObject = nextRawObject
+        slot = nextSlot
+        closed = nextClosed
     }
 
     ~init() {
-        if (!closed) {
-            clearRoutedEventHandlerSlot(slot)
-            slot = -1
-            if (rawObject.isNotNull()) {
-                coTaskMemFree(rawObject)
-                rawObject = CPointer<Unit>()
-            }
-            closed = true
-        }
+        let (nextRawObject, nextSlot, nextClosed) = closeRoutedEventHandlerStateNoThrow(rawObject, slot, closed)
+        rawObject = nextRawObject
+        slot = nextSlot
+        closed = nextClosed
     }
 }
 
@@ -533,22 +580,28 @@ public class ClickSubscription <: Resource {
 
     public func close(): Unit {
         if (!closed) {
-            match (target) {
-                case Some(targetHandle) =>
-                    if (targetHandle.asRaw().isNotNull()) {
-                        let table = readWinuiVtbl<ButtonBaseVtbl>(targetHandle.asRaw())
-                        let _ = HRESULT(unsafe { table.RemoveClick(targetHandle.asRaw(), token) })
-                    }
-                    targetHandle.close()
-                case None => ()
+            try {
+                match (target) {
+                    case Some(removeTarget) =>
+                        if (removeTarget.asRaw().isNotNull()) {
+                            let table = readWinuiVtbl<ButtonBaseVtbl>(removeTarget.asRaw())
+                            checkHRESULT(HRESULT(unsafe { table.RemoveClick(removeTarget.asRaw(), token) }), "IButtonBase.remove_Click")
+                        }
+                    case None => ()
+                }
+            } finally {
+                match (handler) {
+                    case Some(routed) => routed.close()
+                    case None => ()
+                }
+                match (target) {
+                    case Some(ownedTarget) => ownedTarget.close()
+                    case None => ()
+                }
+                target = None
+                handler = None
+                closed = true
             }
-            match (handler) {
-                case Some(routed) => routed.close()
-                case None => ()
-            }
-            target = None
-            handler = None
-            closed = true
         }
     }
 
@@ -561,7 +614,7 @@ public func startApplication(callback: ApplicationCallback): Unit {
     )
     try {
         let table = readWinuiVtbl<IApplicationStaticsVtbl>(statics.asRaw())
-        checkHRESULT(HRESULT(unsafe { table.Start(statics.asRaw(), callback.value()) }), "IApplicationStatics.Start")
+        checkHRESULT(HRESULT(unsafe { table.Start(statics.asRaw(), callback.asRaw()) }), "IApplicationStatics.Start")
     } finally {
         statics.close()
     }
@@ -628,6 +681,30 @@ func queryRequired(raw: CPointer<Unit>, iid: GUID, name: String): CPointer<Unit>
     }
 }
 
+func addApplicationInitializationCallbackSlot(handler: () -> Unit): Int64 {
+    let index = applicationInitializationCallbackSlots.size
+    applicationInitializationCallbackSlots.add(Some(handler))
+    return index
+}
+
+func clearApplicationInitializationCallbackSlot(slot: Int64): Unit {
+    if (slot >= 0 && slot < applicationInitializationCallbackSlots.size) {
+        applicationInitializationCallbackSlots[slot] = None
+    }
+}
+
+func invokeApplicationInitializationCallbackSlot(slot: Int64): Bool {
+    if (slot >= 0 && slot < applicationInitializationCallbackSlots.size) {
+        match (applicationInitializationCallbackSlots[slot]) {
+            case Some(handler) =>
+                handler()
+                return true
+            case None => return false
+        }
+    }
+    false
+}
+
 func addRoutedEventHandlerSlot(handler: () -> Unit): Int64 {
     let index = routedEventHandlerSlots.size
     routedEventHandlerSlots.add(Some(handler))
@@ -640,22 +717,131 @@ func clearRoutedEventHandlerSlot(slot: Int64): Unit {
     }
 }
 
-func invokeRoutedEventHandlerSlot(slot: Int64): Unit {
+func invokeRoutedEventHandlerSlot(slot: Int64): Bool {
     if (slot >= 0 && slot < routedEventHandlerSlots.size) {
         match (routedEventHandlerSlots[slot]) {
-            case Some(handler) => handler()
-            case None => ()
+            case Some(handler) =>
+                handler()
+                return true
+            case None => return false
         }
+    }
+    false
+}
+
+func deactivateApplicationInitializationCallbackObject(raw: CPointer<Unit>): Unit {
+    if (raw.isNull()) {
+        return
+    }
+    let obj = CPointer<ApplicationInitializationCallbackObject>(raw)
+    var value = unsafe { obj.read() }
+    if (value.slot >= 0) {
+        clearApplicationInitializationCallbackSlot(value.slot)
+        value.slot = -1
+        unsafe { obj.write(value) }
+    }
+}
+
+func deactivateRoutedEventHandlerObject(raw: CPointer<Unit>): Unit {
+    if (raw.isNull()) {
+        return
+    }
+    let obj = CPointer<RoutedEventHandlerObject>(raw)
+    var value = unsafe { obj.read() }
+    if (value.slot >= 0) {
+        clearRoutedEventHandlerSlot(value.slot)
+        value.slot = -1
+        unsafe { obj.write(value) }
     }
 }
 
 @C
-func applicationInitializationCallbackThunk(_: CPointer<Unit>): Unit {
+func applicationInitializationCallbackQueryInterface(thisPtr: CPointer<Unit>, iidPtr: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Int32 {
+    if (thisPtr.isNull() || iidPtr.isNull() || result.isNull()) {
+        return E_POINTER.value
+    }
+    let iid = unsafe { iidPtr.read() }
+    if (iid == IID_IUNKNOWN || iid == IID_APPLICATION_INITIALIZATION_CALLBACK) {
+        unsafe { result.write(thisPtr) }
+        unsafe { applicationInitializationCallbackAddRef(thisPtr) }
+        return S_OK.value
+    }
+    unsafe { result.write(CPointer<Unit>()) }
+    return E_NOINTERFACE.value
+}
+
+@C
+func applicationInitializationCallbackAddRef(thisPtr: CPointer<Unit>): UInt32 {
+    if (thisPtr.isNull()) {
+        return 0u32
+    }
+    let obj = CPointer<ApplicationInitializationCallbackObject>(thisPtr)
+    var value = unsafe { obj.read() }
+    value.refCount += 1u32
+    unsafe { obj.write(value) }
+    return value.refCount
+}
+
+@C
+func applicationInitializationCallbackRelease(thisPtr: CPointer<Unit>): UInt32 {
+    if (thisPtr.isNull()) {
+        return 0u32
+    }
+    let obj = CPointer<ApplicationInitializationCallbackObject>(thisPtr)
+    var value = unsafe { obj.read() }
+    if (value.refCount == 0u32) {
+        return 0u32
+    }
+    value.refCount -= 1u32
+    let refCount = value.refCount
+    if (refCount == 0u32) {
+        if (value.slot >= 0) {
+            clearApplicationInitializationCallbackSlot(value.slot)
+            value.slot = -1
+        }
+        unsafe { obj.write(value) }
+        coTaskMemFree(thisPtr)
+        return 0u32
+    }
+    unsafe { obj.write(value) }
+    return refCount
+}
+
+@C
+func applicationInitializationCallbackInvoke(thisPtr: CPointer<Unit>, _: CPointer<Unit>): Int32 {
+    if (thisPtr.isNull()) {
+        return E_POINTER.value
+    }
+    let obj = CPointer<ApplicationInitializationCallbackObject>(thisPtr)
+    let value = unsafe { obj.read() }
     try {
-        activeApplicationInitializationCallbackHandler()
+        if (!invokeApplicationInitializationCallbackSlot(value.slot)) {
+            return E_POINTER.value
+        }
+        return S_OK.value
     } catch (err: Exception) {
         println("ApplicationInitializationCallback failed: ${err}")
+        return E_FAIL.value
     }
+}
+
+func applicationInitializationCallbackVtbl(): CPointer<ApplicationInitializationCallbackVtbl> {
+    if (applicationInitializationCallbackVtblStorage.isNotNull()) {
+        return applicationInitializationCallbackVtblStorage
+    }
+    let raw = coTaskMemAlloc(sizeOf<ApplicationInitializationCallbackVtbl>())
+    if (raw.isNull()) {
+        throw Exception("failed to allocate ApplicationInitializationCallback vtable")
+    }
+    var table = ApplicationInitializationCallbackVtbl()
+    table.base_.QueryInterface = applicationInitializationCallbackQueryInterface
+    table.base_.AddRef = applicationInitializationCallbackAddRef
+    table.base_.Release = applicationInitializationCallbackRelease
+    table.Invoke = applicationInitializationCallbackInvoke
+    let typed = CPointer<ApplicationInitializationCallbackVtbl>(raw)
+    unsafe { typed.write(table) }
+    applicationInitializationCallbackVtblStorage = typed
+    return typed
 }
 
 @C
@@ -692,11 +878,22 @@ func routedEventHandlerRelease(thisPtr: CPointer<Unit>): UInt32 {
     }
     let obj = CPointer<RoutedEventHandlerObject>(thisPtr)
     var value = unsafe { obj.read() }
-    if (value.refCount > 1u32) {
-        value.refCount -= 1u32
+    if (value.refCount == 0u32) {
+        return 0u32
+    }
+    value.refCount -= 1u32
+    let refCount = value.refCount
+    if (refCount == 0u32) {
+        if (value.slot >= 0) {
+            clearRoutedEventHandlerSlot(value.slot)
+            value.slot = -1
+        }
+        unsafe { obj.write(value) }
+        coTaskMemFree(thisPtr)
+        return 0u32
     }
     unsafe { obj.write(value) }
-    return value.refCount
+    return refCount
 }
 
 @C
@@ -707,7 +904,9 @@ func routedEventHandlerInvoke(thisPtr: CPointer<Unit>, _: CPointer<Unit>, _: CPo
     let obj = CPointer<RoutedEventHandlerObject>(thisPtr)
     let value = unsafe { obj.read() }
     try {
-        invokeRoutedEventHandlerSlot(value.slot)
+        if (!invokeRoutedEventHandlerSlot(value.slot)) {
+            return E_POINTER.value
+        }
         return S_OK.value
     } catch (err: Exception) {
         println("RoutedEventHandler failed: ${err}")

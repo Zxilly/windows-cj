@@ -11,6 +11,31 @@ Two pipeline stages locate the archive by relative path; therefore no
   freeing consumers from depending on whatever subset of import libraries
   ships with the local MinGW installation.
 
-Current contents:
+Support matrix:
 
-- `x86_64_gnu/lib/libwindows.0.53.0.a`
+| Target key | OS | Architecture | Toolchain | Cangjie `env` | Status | Payload |
+| --- | --- | --- | --- | --- | --- | --- |
+| `x86_64_gnu` | Windows | `x86_64` | GNU | `gnu` | supported | `x86_64_gnu/lib/libwindows.0.53.0.a` |
+| `i686_gnu` | Windows | `i686` | GNU | `gnu` | planned | none |
+| `aarch64_gnu` | Windows | `aarch64` | GNU | `gnu` | planned | none |
+| `x86_64_msvc` | Windows | `x86_64` | MSVC | empty | planned | none |
+| `i686_msvc` | Windows | `i686` | MSVC | empty | planned | none |
+| `aarch64_msvc` | Windows | `aarch64` | MSVC | empty | planned | none |
+
+Planned targets intentionally do not publish placeholder archive files.
+Callers must resolve a target through `requireSupportedImportLibTarget` or
+`requireCurrentImportLibTarget` so unsupported targets fail before link flags
+or ABI assumptions are used.
+
+Helper APIs:
+
+- `ImportLibTarget.archiveRelativePath()` returns the bundled archive path
+  relative to the package root, such as
+  `x86_64_gnu/lib/libwindows.0.53.0.a`.
+- `ImportLibTarget.archivePath(root)` prefixes that relative path with a
+  caller-provided package root.
+- `ImportLibTarget.gnuLinkOptions(root)` returns the two linker flags needed
+  by GNU-style linkers: `-L<root>/<target-lib-dir>` and
+  `-l:<archive-name>`.
+- `findSupportedImportLibTarget(name)` returns `None` instead of throwing
+  when callers want probing behavior.

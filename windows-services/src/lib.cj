@@ -20,6 +20,7 @@ private let SERVICE_CONTROL_STOP = 1u32
 private let SERVICE_CONTROL_PAUSE = 2u32
 private let SERVICE_CONTROL_CONTINUE = 3u32
 private let SERVICE_CONTROL_SHUTDOWN = 5u32
+private let ERROR_INVALID_STATE = 5023u32
 private let SERVICE_WIN32_OWN_PROCESS = 16u32
 private let SERVICE_STOPPED = 1u32
 private let SERVICE_START_PENDING = 2u32
@@ -118,7 +119,7 @@ private func stateToRaw(state: State): UInt32 {
     }
 }
 
-private func rawToState(raw: UInt32): State {
+func rawToState(raw: UInt32): State {
     if (raw == SERVICE_CONTINUE_PENDING) {
         return State.ContinuePending
     }
@@ -137,7 +138,10 @@ private func rawToState(raw: UInt32): State {
     if (raw == SERVICE_STOP_PENDING) {
         return State.StopPending
     }
-    State.Stopped
+    if (raw == SERVICE_STOPPED) {
+        return State.Stopped
+    }
+    throw IllegalStateException("unknown service state: ${raw}")
 }
 
 public class Service {
@@ -264,7 +268,7 @@ public class Service {
         synchronized(callbackMutex) {
             match (callback_) {
                 case Some(callback) => callback(this, command)
-                case None => ()
+                case None => throw IllegalStateException("service callback is not registered")
             }
         }
     }
@@ -276,6 +280,12 @@ public class Service {
     func storeHandle(handle: SERVICE_STATUS_HANDLE): Unit {
         synchronized(stateMutex) {
             handle_ = handle
+        }
+    }
+
+    func hasCallback(): Bool {
+        synchronized(callbackMutex) {
+            callback_.isSome()
         }
     }
 
@@ -345,14 +355,24 @@ private func dispatchServiceControl(
     eventType: UInt32,
     eventData: CPointer<Unit>
 ): UInt32 {
-    if (control == SERVICE_CONTROL_CONTINUE && service.state() == State.Paused) {
+    if (!service.hasCallback()) {
+        return ERROR_INVALID_STATE
+    }
+
+    let currentState = try {
+        service.state()
+    } catch (_: IllegalStateException) {
+        return ERROR_INVALID_STATE
+    }
+
+    if (control == SERVICE_CONTROL_CONTINUE && currentState == State.Paused) {
         service.setState(State.ContinuePending)
         service.command(Command.Resume)
         service.setState(State.Running)
         return NO_ERROR
     }
 
-    if (control == SERVICE_CONTROL_PAUSE && service.state() == State.Running) {
+    if (control == SERVICE_CONTROL_PAUSE && currentState == State.Running) {
         service.setState(State.PausePending)
         service.command(Command.Pause)
         service.setState(State.Paused)
@@ -399,6 +419,6 @@ private func handlerThunk(
 ): UInt32 {
     match (serviceFromContext(context)) {
         case Some(service) => dispatchServiceControl(service, control, eventType, eventData)
-        case None => NO_ERROR
+        case None => ERROR_INVALID_STATE
     }
 }

@@ -50,3 +50,12 @@ func testServiceAbiTypesComeFromWindowsCommon() {
     @Expect(sizeOf<SERVICE_STATUS>(), sizeOf<Win32Services.SERVICE_STATUS>())
     @Expect(sizeOf<SERVICE_TABLE_ENTRYW>(), sizeOf<Win32Services.SERVICE_TABLE_ENTRYW>())
 }
+
+@When[os == "Windows"]
+@Test
+func testServiceRunWithoutFallbackReportsDispatcherFailureSmoke() {
+    let service = Service.new()
+    let result = service.run({ _, _ => () })
+
+    @Expect(result.isErr(), true)
+}

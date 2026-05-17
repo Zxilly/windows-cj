@@ -10,6 +10,30 @@ let LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR: UInt32 = 0x00000100u32
 let LOAD_LIBRARY_SEARCH_SYSTEM32: UInt32 = 0x00000800u32
 let LOAD_LIBRARY_SEARCH_DEFAULT_DIRS: UInt32 = 0x00001000u32
 
+public class FinalizerSafeProc {
+    private let moduleName: String
+    private let procName: String
+    private var proc: CPointer<Unit> = CPointer<Unit>()
+
+    public init(moduleName: String, procName: String) {
+        ensureSystemModuleName(moduleName)
+        this.moduleName = moduleName
+        this.procName = procName
+    }
+
+    public func ensureResolved(): CPointer<Unit> {
+        if (proc.isNull()) {
+            proc = resolveProc(moduleName, procName)
+        }
+        proc
+    }
+
+    public func rawIfResolvedForFinalizer(): CPointer<Unit> {
+        proc
+    }
+}
+
+@CallingConv[STDCALL]
 foreign {
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
     func FreeLibrary(hLibModule: CPointer<Unit>): Int32

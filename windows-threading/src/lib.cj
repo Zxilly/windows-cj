@@ -1,7 +1,7 @@
 package windows_threading
 
 import std.collection.HashMap
-import std.sync.Mutex
+import std.sync.{AtomicBool, Mutex}
 import windows_common.Win32.System.Threading as Win32Threading
 
 public type BOOL = Int32
@@ -106,28 +106,42 @@ private unsafe func destroyTaskContext(context: CPointer<Unit>): Unit {
     }
 }
 
-// Expected x64 layout for TP_CALLBACK_ENVIRON_V3:
+// Expected x86_64 Windows layout for TP_CALLBACK_ENVIRON_V3:
 //   Version u32(4) + 4 padding +
 //   Pool, CleanupGroup, CleanupGroupCancelCallback, RaceDll, ActivationContext,
 //   FinalizationCallback (6 * 8 = 48) +
 //   Flags u32(4) + CallbackPriority i32(4) + Size u32(4) +
 //   4 trailing padding (struct alignment = 8) = 72 bytes.
-// Windows kernel rejects callback submission if the struct layout disagrees
-// with what the threadpool ABI expects, so we verify once before submission.
-private const EXPECTED_TP_CALLBACK_ENVIRON_V3_SIZE: UInt64 = 72
+// Windows rejects callback submission if the struct layout disagrees with
+// what the threadpool ABI expects, so unsupported targets fail before use.
+@When[os == "Windows" && arch == "x86_64"]
+private let tpCallbackEnvironV3ExpectedSize: Option<UInt64> = Some(72u64)
+
+@When[os != "Windows" || arch != "x86_64"]
+private let tpCallbackEnvironV3ExpectedSize: Option<UInt64> = None
 
 private let abiSizeMutex = Mutex()
 private var abiSizeChecked: Bool = false
+
+private func expectedTpCallbackEnvironV3Size(): UInt64 {
+    match (tpCallbackEnvironV3ExpectedSize) {
+        case Some(size) => size
+        case None => throw Exception(
+            "windows_threading TP_CALLBACK_ENVIRON_V3 is only validated for x86_64 Windows"
+        )
+    }
+}
 
 private func assertTpCallbackEnvironV3SizeMatches(): Unit {
     synchronized(abiSizeMutex) {
         if (abiSizeChecked) {
             return
         }
+        let expected = expectedTpCallbackEnvironV3Size()
         let actual = UInt64(sizeOf<TP_CALLBACK_ENVIRON_V3>())
-        if (actual != EXPECTED_TP_CALLBACK_ENVIRON_V3_SIZE) {
+        if (actual != expected) {
             throw Exception(
-                "TP_CALLBACK_ENVIRON_V3 ABI mismatch: expected ${EXPECTED_TP_CALLBACK_ENVIRON_V3_SIZE} bytes, got ${actual}"
+                "TP_CALLBACK_ENVIRON_V3 ABI mismatch: expected ${expected} bytes, got ${actual}"
             )
         }
         abiSizeChecked = true
@@ -243,7 +257,7 @@ public class Pool <: Resource {
     private let state = PoolState()
     private var poolHandle: PTP_POOL = PTP_POOL()
     private var cleanupGroup: PTP_CLEANUP_GROUP = PTP_CLEANUP_GROUP()
-    private var closed = false
+    private let closed = AtomicBool(false)
 
     public init() {
         assertTpCallbackEnvironV3SizeMatches()
@@ -279,14 +293,12 @@ public class Pool <: Resource {
     }
 
     public func isClosed(): Bool {
-        synchronized(lifecycleMutex) {
-            closed
-        }
+        closed.load()
     }
 
     public func setThreadLimits(min: UInt32, max: UInt32): Unit {
         synchronized(lifecycleMutex) {
-            throwIfClosed(closed)
+            throwIfClosed(closed.load())
             let success = unsafe { Win32Threading.SetThreadpoolThreadMinimum(poolHandle, min) }
             if (!success) {
                 allocationFailed()
@@ -297,14 +309,14 @@ public class Pool <: Resource {
 
     public func submit(work: () -> Unit): Unit {
         synchronized(lifecycleMutex) {
-            throwIfClosed(closed)
+            throwIfClosed(closed.load())
             submitToPool(poolHandle, cleanupGroup, work, sink: Some(state))
         }
     }
 
     public func scope<R>(body: (Scope) -> R): R {
         synchronized(lifecycleMutex) {
-            throwIfClosed(closed)
+            throwIfClosed(closed.load())
         }
 
         let scope = Scope(this)
@@ -324,7 +336,7 @@ public class Pool <: Resource {
 
     public func join(): Unit {
         synchronized(lifecycleMutex) {
-            throwIfClosed(closed)
+            throwIfClosed(closed.load())
         }
         unsafe {
             Win32Threading.CloseThreadpoolCleanupGroupMembers(
@@ -341,14 +353,11 @@ public class Pool <: Resource {
     }
 
     private func closeInternal(reportFailures: Bool): Unit {
-        var alreadyClosed = false
+        var shouldClose = false
         synchronized(lifecycleMutex) {
-            alreadyClosed = closed
-            if (!alreadyClosed) {
-                closed = true
-            }
+            shouldClose = closed.compareAndSwap(false, true)
         }
-        if (alreadyClosed) {
+        if (!shouldClose) {
             return
         }
 
@@ -391,39 +400,7 @@ public class Pool <: Resource {
     }
 
     ~init() {
-        var alreadyClosed = false
-        synchronized(lifecycleMutex) {
-            alreadyClosed = closed
-            if (!alreadyClosed) {
-                closed = true
-            }
-        }
-        if (alreadyClosed) {
-            return
-        }
-
-        try {
-            unsafe {
-                Win32Threading.CloseThreadpoolCleanupGroupMembers(
-                    cleanupGroup,
-                    false,
-                    CPointer<Unit>()
-                )
-            }
-        } catch (_: Exception) {
-            ()
-        }
-
-        unsafe {
-            if (cleanupGroup.Value.isNotNull()) {
-                Win32Threading.CloseThreadpoolCleanupGroup(cleanupGroup)
-            }
-            if (poolHandle.Value.isNotNull()) {
-                Win32Threading.CloseThreadpool(poolHandle)
-            }
-        }
-        cleanupGroup = PTP_CLEANUP_GROUP()
-        poolHandle = PTP_POOL()
+        // Threadpool shutdown can block. Pools must be closed explicitly.
     }
 }
 

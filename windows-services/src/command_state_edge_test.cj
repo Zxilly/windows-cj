@@ -56,6 +56,15 @@ func testServiceHandlerStateTransitionsAndIgnoredPauseResume() {
 }
 
 @Test
+func testServiceRejectsUnknownStateAndMissingCallback() {
+    let service = Service.new()
+
+    @AssertThrows[IllegalStateException](rawToState(0u32))
+    @AssertThrows[IllegalStateException](service.command(Command.Start))
+    @Expect(service.handler(128u32, 0u32, CPointer<Unit>()), 5023u32)
+}
+
+@Test
 func testServiceExtendedCommandPreservesEventPayload() {
     let service = Service.new()
     let probe = CommandProbe()
